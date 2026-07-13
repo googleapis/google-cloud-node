@@ -60,6 +60,11 @@
                 "deleteLineageEvent"
               ]
             },
+            "SearchLineageStreaming": {
+              "methods": [
+                "searchLineageStreaming"
+              ]
+            },
             "DeleteProcess": {
               "methods": [
                 "deleteProcess"

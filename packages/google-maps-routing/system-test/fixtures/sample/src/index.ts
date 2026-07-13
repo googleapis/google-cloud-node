@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {RoutesClient} from '@googlemaps/routing';
+import { RoutesClient } from '@googlemaps/routing';
 
 // check that the client class type name can be used
 function doStuffWithRoutesClient(client: RoutesClient) {

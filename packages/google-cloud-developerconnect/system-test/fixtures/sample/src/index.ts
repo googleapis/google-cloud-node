@@ -16,13 +16,18 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DeveloperConnectClient, InsightsConfigServiceClient} from '@google-cloud/developerconnect';
+import {
+  DeveloperConnectClient,
+  InsightsConfigServiceClient,
+} from '@google-cloud/developerconnect';
 
 // check that the client class type name can be used
 function doStuffWithDeveloperConnectClient(client: DeveloperConnectClient) {
   client.close();
 }
-function doStuffWithInsightsConfigServiceClient(client: InsightsConfigServiceClient) {
+function doStuffWithInsightsConfigServiceClient(
+  client: InsightsConfigServiceClient,
+) {
   client.close();
 }
 

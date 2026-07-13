@@ -16,7 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DataAgentServiceClient, DataChatServiceClient} from '@google-cloud/geminidataanalytics';
+import {
+  DataAgentServiceClient,
+  DataChatServiceClient,
+} from '@google-cloud/geminidataanalytics';
 
 // check that the client class type name can be used
 function doStuffWithDataAgentServiceClient(client: DataAgentServiceClient) {

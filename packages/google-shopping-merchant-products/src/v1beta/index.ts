@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ProductInputsServiceClient} from './product_inputs_service_client';
-export {ProductsServiceClient} from './products_service_client';
+export { ProductInputsServiceClient } from './product_inputs_service_client';
+export { ProductsServiceClient } from './products_service_client';

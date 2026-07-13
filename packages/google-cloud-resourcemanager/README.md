@@ -96,7 +96,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.test_iam_permissions.js) |
 | undelete project | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.undelete_project.js) |
 | update project | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/projects.update_project.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/snippet_metadata_google.cloud.resourcemanager.v3.json) |
 | create tag binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.create_tag_binding.js) |
 | delete tag binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.delete_tag_binding.js) |
 | list effective tags | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/samples/generated/v3/tag_bindings.list_effective_tags.js) |
@@ -155,7 +154,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -165,7 +164,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-resourcemanager/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

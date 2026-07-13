@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class ReferenceListServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('chronicle');
@@ -57,9 +64,9 @@ export class ReferenceListServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  referenceListServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  referenceListServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ReferenceListServiceClient.
@@ -100,21 +107,42 @@ export class ReferenceListServiceClient {
    *     const client = new ReferenceListServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ReferenceListServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'chronicle.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +167,7 @@ export class ReferenceListServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +181,7 @@ export class ReferenceListServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,58 +203,69 @@ export class ReferenceListServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       bigQueryExportPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/bigQueryExport'
+        'projects/{project}/locations/{location}/instances/{instance}/bigQueryExport',
       ),
       dashboardChartPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dashboardCharts/{chart}'
+        'projects/{project}/locations/{location}/instances/{instance}/dashboardCharts/{chart}',
       ),
       dashboardQueryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dashboardQueries/{query}'
+        'projects/{project}/locations/{location}/instances/{instance}/dashboardQueries/{query}',
       ),
       dataAccessLabelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}',
       ),
       dataAccessScopePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}',
       ),
       dataTablePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}',
       ),
       dataTableOperationErrorsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataTableOperationErrors/{data_table_operation_errors}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataTableOperationErrors/{data_table_operation_errors}',
       ),
       dataTableRowPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}',
       ),
-      featuredContentNativeDashboardPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}'
+      featuredContentNativeDashboardPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}',
+        ),
+      findingsRefinementPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/findingsRefinements/{findings_refinement}',
       ),
+      findingsRefinementDeploymentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/findingsRefinements/{findings_refinement}/deployment',
+        ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}'
+        'projects/{project}/locations/{location}/instances/{instance}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       nativeDashboardPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}'
+        'projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       referenceListPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/referenceLists/{reference_list}'
+        'projects/{project}/locations/{location}/instances/{instance}/referenceLists/{reference_list}',
       ),
       retrohuntPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/retrohunts/{retrohunt}'
+        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/retrohunts/{retrohunt}',
       ),
       rulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}'
+        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}',
       ),
       ruleDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment'
+        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment',
+      ),
+      ruleExecutionErrorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/ruleExecutionErrors/{rule_execution_error}',
       ),
       watchlistPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}'
+        'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}',
       ),
     };
 
@@ -237,14 +273,20 @@ export class ReferenceListServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listReferenceLists:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'referenceLists')
+      listReferenceLists: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'referenceLists',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.chronicle.v1.ReferenceListService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.chronicle.v1.ReferenceListService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -275,37 +317,46 @@ export class ReferenceListServiceClient {
     // Put together the "service stub" for
     // google.cloud.chronicle.v1.ReferenceListService.
     this.referenceListServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.chronicle.v1.ReferenceListService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.chronicle.v1.ReferenceListService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.chronicle.v1.ReferenceListService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const referenceListServiceStubMethods =
-        ['getReferenceList', 'listReferenceLists', 'createReferenceList', 'updateReferenceList'];
+    const referenceListServiceStubMethods = [
+      'getReferenceList',
+      'listReferenceLists',
+      'createReferenceList',
+      'updateReferenceList',
+      'verifyReferenceList',
+    ];
     for (const methodName of referenceListServiceStubMethods) {
       const callPromise = this.referenceListServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -320,8 +371,14 @@ export class ReferenceListServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'chronicle.googleapis.com';
   }
@@ -332,8 +389,14 @@ export class ReferenceListServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'chronicle.googleapis.com';
   }
@@ -365,7 +428,9 @@ export class ReferenceListServiceClient {
    */
   static get scopes() {
     return [
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/chronicle',
+      'https://www.googleapis.com/auth/chronicle.readonly',
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -375,8 +440,9 @@ export class ReferenceListServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -387,405 +453,700 @@ export class ReferenceListServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets a single reference list.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the reference list to retrieve.
- *   Format:
- *   `projects/{project}/locations/{locations}/instances/{instance}/referenceLists/{reference_list}`
- * @param {google.cloud.chronicle.v1.ReferenceListView} request.view
- *   How much of the ReferenceList to view. Defaults to
- *   REFERENCE_LIST_VIEW_FULL.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/reference_list_service.get_reference_list.js</caption>
- * region_tag:chronicle_v1_generated_ReferenceListService_GetReferenceList_async
- */
+  /**
+   * Gets a single reference list.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the reference list to retrieve.
+   *   Format:
+   *   `projects/{project}/locations/{locations}/instances/{instance}/referenceLists/{reference_list}`
+   * @param {google.cloud.chronicle.v1.ReferenceListView} request.view
+   *   How much of the ReferenceList to view. Defaults to
+   *   REFERENCE_LIST_VIEW_FULL.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reference_list_service.get_reference_list.js</caption>
+   * region_tag:chronicle_v1_generated_ReferenceListService_GetReferenceList_async
+   */
   getReferenceList(
-      request?: protos.google.cloud.chronicle.v1.IGetReferenceListRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.IGetReferenceListRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IGetReferenceListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      protos.google.cloud.chronicle.v1.IGetReferenceListRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getReferenceList(
-      request: protos.google.cloud.chronicle.v1.IGetReferenceListRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.IGetReferenceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IGetReferenceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      | protos.google.cloud.chronicle.v1.IGetReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getReferenceList(
-      request: protos.google.cloud.chronicle.v1.IGetReferenceListRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.IGetReferenceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IGetReferenceListRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      | protos.google.cloud.chronicle.v1.IGetReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getReferenceList(
-      request?: protos.google.cloud.chronicle.v1.IGetReferenceListRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IGetReferenceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.IGetReferenceListRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.IGetReferenceListRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.IGetReferenceListRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IGetReferenceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      | protos.google.cloud.chronicle.v1.IGetReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      protos.google.cloud.chronicle.v1.IGetReferenceListRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getReferenceList request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.IGetReferenceListRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IReferenceList,
+          | protos.google.cloud.chronicle.v1.IGetReferenceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getReferenceList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getReferenceList(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.IGetReferenceListRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getReferenceList response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getReferenceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IReferenceList,
+          protos.google.cloud.chronicle.v1.IGetReferenceListRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getReferenceList response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a new reference list.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this reference list will be created.
- *   Format: `projects/{project}/locations/{location}/instances/{instance}`
- * @param {google.cloud.chronicle.v1.ReferenceList} request.referenceList
- *   Required. The reference list to create.
- * @param {string} request.referenceListId
- *   Required. The ID to use for the reference list. This is also the display
- *   name for the reference list. It must satisfy the following requirements:
- *   - Starts with letter.
- *   - Contains only letters, numbers and underscore.
- *   - Has length less than 256.
- *   - Must be unique.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/reference_list_service.create_reference_list.js</caption>
- * region_tag:chronicle_v1_generated_ReferenceListService_CreateReferenceList_async
- */
+  /**
+   * Creates a new reference list.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this reference list will be created.
+   *   Format: `projects/{project}/locations/{location}/instances/{instance}`
+   * @param {google.cloud.chronicle.v1.ReferenceList} request.referenceList
+   *   Required. The reference list to create.
+   * @param {string} request.referenceListId
+   *   Required. The ID to use for the reference list. This is also the display
+   *   name for the reference list. It must satisfy the following requirements:
+   *   - Starts with letter.
+   *   - Contains only letters, numbers and underscore.
+   *   - Has length less than 256.
+   *   - Must be unique.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reference_list_service.create_reference_list.js</caption>
+   * region_tag:chronicle_v1_generated_ReferenceListService_CreateReferenceList_async
+   */
   createReferenceList(
-      request?: protos.google.cloud.chronicle.v1.ICreateReferenceListRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.ICreateReferenceListRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.ICreateReferenceListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      protos.google.cloud.chronicle.v1.ICreateReferenceListRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createReferenceList(
-      request: protos.google.cloud.chronicle.v1.ICreateReferenceListRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.ICreateReferenceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.ICreateReferenceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      | protos.google.cloud.chronicle.v1.ICreateReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createReferenceList(
-      request: protos.google.cloud.chronicle.v1.ICreateReferenceListRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.ICreateReferenceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.ICreateReferenceListRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      | protos.google.cloud.chronicle.v1.ICreateReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createReferenceList(
-      request?: protos.google.cloud.chronicle.v1.ICreateReferenceListRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.ICreateReferenceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.ICreateReferenceListRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.ICreateReferenceListRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.ICreateReferenceListRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.ICreateReferenceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      | protos.google.cloud.chronicle.v1.ICreateReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      protos.google.cloud.chronicle.v1.ICreateReferenceListRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createReferenceList request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.ICreateReferenceListRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IReferenceList,
+          | protos.google.cloud.chronicle.v1.ICreateReferenceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createReferenceList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createReferenceList(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.ICreateReferenceListRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createReferenceList response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createReferenceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IReferenceList,
+          (
+            | protos.google.cloud.chronicle.v1.ICreateReferenceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createReferenceList response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates an existing reference list.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.chronicle.v1.ReferenceList} request.referenceList
- *   Required. The reference list to update.
- *
- *   The reference list's `name` field is used to identify the reference list to
- *   update.
- *   Format:
- *   `projects/{project}/locations/{locations}/instances/{instance}/referenceLists/{reference_list}`
- * @param {google.protobuf.FieldMask} request.updateMask
- *   The list of fields to update.
- *   When no field mask is supplied, all non-empty fields will be updated.
- *   A field mask of "*" will update all fields, whether empty or not.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/reference_list_service.update_reference_list.js</caption>
- * region_tag:chronicle_v1_generated_ReferenceListService_UpdateReferenceList_async
- */
+  /**
+   * Updates an existing reference list.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.chronicle.v1.ReferenceList} request.referenceList
+   *   Required. The reference list to update.
+   *
+   *   The reference list's `name` field is used to identify the reference list to
+   *   update.
+   *   Format:
+   *   `projects/{project}/locations/{locations}/instances/{instance}/referenceLists/{reference_list}`
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to update.
+   *   When no field mask is supplied, all non-empty fields will be updated.
+   *   A field mask of "*" will update all fields, whether empty or not.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reference_list_service.update_reference_list.js</caption>
+   * region_tag:chronicle_v1_generated_ReferenceListService_UpdateReferenceList_async
+   */
   updateReferenceList(
-      request?: protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateReferenceList(
-      request: protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      | protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateReferenceList(
-      request: protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      | protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateReferenceList(
-      request?: protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.IReferenceList,
-          protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      | protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IReferenceList,
+      protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'reference_list.name': request.referenceList!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'reference_list.name': request.referenceList!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateReferenceList request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IReferenceList,
+          | protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateReferenceList response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateReferenceList(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.IReferenceList,
-        protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateReferenceList response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateReferenceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IReferenceList,
+          (
+            | protos.google.cloud.chronicle.v1.IUpdateReferenceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateReferenceList response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-
- /**
- * Lists a collection of reference lists.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of reference lists.
- *   Format:
- *   `projects/{project}/locations/{location}/instances/{instance}`
- * @param {number} request.pageSize
- *   The maximum number of reference lists to return.
- *   The service may return fewer than this value.
- *   If unspecified, at most 100 reference lists will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListReferenceLists` call.
- *   Provide this to retrieve the subsequent page.
- *   When paginating, all other parameters provided to `ListReferenceLists` must
- *   match the call that provided the page token.
- * @param {google.cloud.chronicle.v1.ReferenceListView} request.view
- *   How much of each ReferenceList to view. Defaults to
- *   REFERENCE_LIST_VIEW_BASIC.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listReferenceListsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
-  listReferenceLists(
-      request?: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IReferenceList[],
-        protos.google.cloud.chronicle.v1.IListReferenceListsRequest|null,
-        protos.google.cloud.chronicle.v1.IListReferenceListsResponse
-      ]>;
-  listReferenceLists(
-      request: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
-          protos.google.cloud.chronicle.v1.IListReferenceListsResponse|null|undefined,
-          protos.google.cloud.chronicle.v1.IReferenceList>): void;
-  listReferenceLists(
-      request: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
-          protos.google.cloud.chronicle.v1.IListReferenceListsResponse|null|undefined,
-          protos.google.cloud.chronicle.v1.IReferenceList>): void;
-  listReferenceLists(
-      request?: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
-          protos.google.cloud.chronicle.v1.IListReferenceListsResponse|null|undefined,
-          protos.google.cloud.chronicle.v1.IReferenceList>,
-      callback?: PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
-          protos.google.cloud.chronicle.v1.IListReferenceListsResponse|null|undefined,
-          protos.google.cloud.chronicle.v1.IReferenceList>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IReferenceList[],
-        protos.google.cloud.chronicle.v1.IListReferenceListsRequest|null,
-        protos.google.cloud.chronicle.v1.IListReferenceListsResponse
-      ]>|void {
+  /**
+   * VerifyReferenceList validates list content and returns line errors, if any.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Required. The name of the parent resource, which is the SecOps instance
+   *   associated with the request. Format:
+   *   `projects/{project}/locations/{location}/instances/{instance}`
+   * @param {google.cloud.chronicle.v1.ReferenceListSyntaxType} request.syntaxType
+   *   Required. Type (format) of list lines.
+   * @param {number[]} request.entries
+   *   Required. The entries of the reference list.
+   *   Each line may be either an item in the list or a comment.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.VerifyReferenceListResponse|VerifyReferenceListResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reference_list_service.verify_reference_list.js</caption>
+   * region_tag:chronicle_v1_generated_ReferenceListService_VerifyReferenceList_async
+   */
+  verifyReferenceList(
+    request?: protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  verifyReferenceList(
+    request: protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+      | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  verifyReferenceList(
+    request: protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+      | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  verifyReferenceList(
+    request?: protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+          | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+      | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+      protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        instance: request.instance ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
+    this._log.info('verifyReferenceList request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+          | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('verifyReferenceList response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .verifyReferenceList(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IVerifyReferenceListResponse,
+          (
+            | protos.google.cloud.chronicle.v1.IVerifyReferenceListRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('verifyReferenceList response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+
+  /**
+   * Lists a collection of reference lists.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of reference lists.
+   *   Format:
+   *   `projects/{project}/locations/{location}/instances/{instance}`
+   * @param {number} request.pageSize
+   *   The maximum number of reference lists to return.
+   *   The service may return fewer than this value.
+   *   If unspecified, at most 100 reference lists will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListReferenceLists` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListReferenceLists` must
+   *   match the call that provided the page token.
+   * @param {google.cloud.chronicle.v1.ReferenceListView} request.view
+   *   How much of each ReferenceList to view. Defaults to
+   *   REFERENCE_LIST_VIEW_BASIC.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listReferenceListsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listReferenceLists(
+    request?: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IReferenceList[],
+      protos.google.cloud.chronicle.v1.IListReferenceListsRequest | null,
+      protos.google.cloud.chronicle.v1.IListReferenceListsResponse,
+    ]
+  >;
+  listReferenceLists(
+    request: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
       protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
-      protos.google.cloud.chronicle.v1.IListReferenceListsResponse|null|undefined,
-      protos.google.cloud.chronicle.v1.IReferenceList>|undefined = callback
+      | protos.google.cloud.chronicle.v1.IListReferenceListsResponse
+      | null
+      | undefined,
+      protos.google.cloud.chronicle.v1.IReferenceList
+    >,
+  ): void;
+  listReferenceLists(
+    request: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
+      | protos.google.cloud.chronicle.v1.IListReferenceListsResponse
+      | null
+      | undefined,
+      protos.google.cloud.chronicle.v1.IReferenceList
+    >,
+  ): void;
+  listReferenceLists(
+    request?: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
+          | protos.google.cloud.chronicle.v1.IListReferenceListsResponse
+          | null
+          | undefined,
+          protos.google.cloud.chronicle.v1.IReferenceList
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
+      | protos.google.cloud.chronicle.v1.IListReferenceListsResponse
+      | null
+      | undefined,
+      protos.google.cloud.chronicle.v1.IReferenceList
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IReferenceList[],
+      protos.google.cloud.chronicle.v1.IListReferenceListsRequest | null,
+      protos.google.cloud.chronicle.v1.IListReferenceListsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
+          | protos.google.cloud.chronicle.v1.IListReferenceListsResponse
+          | null
+          | undefined,
+          protos.google.cloud.chronicle.v1.IReferenceList
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReferenceLists values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -794,128 +1155,132 @@ export class ReferenceListServiceClient {
     this._log.info('listReferenceLists request %j', request);
     return this.innerApiCalls
       .listReferenceLists(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.chronicle.v1.IReferenceList[],
-        protos.google.cloud.chronicle.v1.IListReferenceListsRequest|null,
-        protos.google.cloud.chronicle.v1.IListReferenceListsResponse
-      ]) => {
-        this._log.info('listReferenceLists values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.chronicle.v1.IReferenceList[],
+          protos.google.cloud.chronicle.v1.IListReferenceListsRequest | null,
+          protos.google.cloud.chronicle.v1.IListReferenceListsResponse,
+        ]) => {
+          this._log.info('listReferenceLists values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listReferenceLists`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of reference lists.
- *   Format:
- *   `projects/{project}/locations/{location}/instances/{instance}`
- * @param {number} request.pageSize
- *   The maximum number of reference lists to return.
- *   The service may return fewer than this value.
- *   If unspecified, at most 100 reference lists will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListReferenceLists` call.
- *   Provide this to retrieve the subsequent page.
- *   When paginating, all other parameters provided to `ListReferenceLists` must
- *   match the call that provided the page token.
- * @param {google.cloud.chronicle.v1.ReferenceListView} request.view
- *   How much of each ReferenceList to view. Defaults to
- *   REFERENCE_LIST_VIEW_BASIC.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listReferenceListsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listReferenceLists`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of reference lists.
+   *   Format:
+   *   `projects/{project}/locations/{location}/instances/{instance}`
+   * @param {number} request.pageSize
+   *   The maximum number of reference lists to return.
+   *   The service may return fewer than this value.
+   *   If unspecified, at most 100 reference lists will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListReferenceLists` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListReferenceLists` must
+   *   match the call that provided the page token.
+   * @param {google.cloud.chronicle.v1.ReferenceListView} request.view
+   *   How much of each ReferenceList to view. Defaults to
+   *   REFERENCE_LIST_VIEW_BASIC.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listReferenceListsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listReferenceListsStream(
-      request?: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listReferenceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listReferenceLists stream %j', request);
     return this.descriptors.page.listReferenceLists.createStream(
       this.innerApiCalls.listReferenceLists as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listReferenceLists`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of reference lists.
- *   Format:
- *   `projects/{project}/locations/{location}/instances/{instance}`
- * @param {number} request.pageSize
- *   The maximum number of reference lists to return.
- *   The service may return fewer than this value.
- *   If unspecified, at most 100 reference lists will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListReferenceLists` call.
- *   Provide this to retrieve the subsequent page.
- *   When paginating, all other parameters provided to `ListReferenceLists` must
- *   match the call that provided the page token.
- * @param {google.cloud.chronicle.v1.ReferenceListView} request.view
- *   How much of each ReferenceList to view. Defaults to
- *   REFERENCE_LIST_VIEW_BASIC.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/reference_list_service.list_reference_lists.js</caption>
- * region_tag:chronicle_v1_generated_ReferenceListService_ListReferenceLists_async
- */
+  /**
+   * Equivalent to `listReferenceLists`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of reference lists.
+   *   Format:
+   *   `projects/{project}/locations/{location}/instances/{instance}`
+   * @param {number} request.pageSize
+   *   The maximum number of reference lists to return.
+   *   The service may return fewer than this value.
+   *   If unspecified, at most 100 reference lists will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListReferenceLists` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListReferenceLists` must
+   *   match the call that provided the page token.
+   * @param {google.cloud.chronicle.v1.ReferenceListView} request.view
+   *   How much of each ReferenceList to view. Defaults to
+   *   REFERENCE_LIST_VIEW_BASIC.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.chronicle.v1.ReferenceList|ReferenceList}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reference_list_service.list_reference_lists.js</caption>
+   * region_tag:chronicle_v1_generated_ReferenceListService_ListReferenceLists_async
+   */
   listReferenceListsAsync(
-      request?: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.chronicle.v1.IReferenceList>{
+    request?: protos.google.cloud.chronicle.v1.IListReferenceListsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.chronicle.v1.IReferenceList> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listReferenceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listReferenceLists iterate %j', request);
     return this.descriptors.page.listReferenceLists.asyncIterate(
       this.innerApiCalls['listReferenceLists'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.chronicle.v1.IReferenceList>;
   }
   // --------------------
@@ -930,7 +1295,7 @@ export class ReferenceListServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  bigQueryExportPath(project:string,location:string,instance:string) {
+  bigQueryExportPath(project: string, location: string, instance: string) {
     return this.pathTemplates.bigQueryExportPathTemplate.render({
       project: project,
       location: location,
@@ -946,7 +1311,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBigQueryExportName(bigQueryExportName: string) {
-    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).project;
+    return this.pathTemplates.bigQueryExportPathTemplate.match(
+      bigQueryExportName,
+    ).project;
   }
 
   /**
@@ -957,7 +1324,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBigQueryExportName(bigQueryExportName: string) {
-    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).location;
+    return this.pathTemplates.bigQueryExportPathTemplate.match(
+      bigQueryExportName,
+    ).location;
   }
 
   /**
@@ -968,7 +1337,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromBigQueryExportName(bigQueryExportName: string) {
-    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).instance;
+    return this.pathTemplates.bigQueryExportPathTemplate.match(
+      bigQueryExportName,
+    ).instance;
   }
 
   /**
@@ -980,7 +1351,12 @@ export class ReferenceListServiceClient {
    * @param {string} chart
    * @returns {string} Resource name string.
    */
-  dashboardChartPath(project:string,location:string,instance:string,chart:string) {
+  dashboardChartPath(
+    project: string,
+    location: string,
+    instance: string,
+    chart: string,
+  ) {
     return this.pathTemplates.dashboardChartPathTemplate.render({
       project: project,
       location: location,
@@ -997,7 +1373,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).project;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).project;
   }
 
   /**
@@ -1008,7 +1386,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).location;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).location;
   }
 
   /**
@@ -1019,7 +1399,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).instance;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).instance;
   }
 
   /**
@@ -1030,7 +1412,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the chart.
    */
   matchChartFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).chart;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).chart;
   }
 
   /**
@@ -1042,7 +1426,12 @@ export class ReferenceListServiceClient {
    * @param {string} query
    * @returns {string} Resource name string.
    */
-  dashboardQueryPath(project:string,location:string,instance:string,query:string) {
+  dashboardQueryPath(
+    project: string,
+    location: string,
+    instance: string,
+    query: string,
+  ) {
     return this.pathTemplates.dashboardQueryPathTemplate.render({
       project: project,
       location: location,
@@ -1059,7 +1448,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).project;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).project;
   }
 
   /**
@@ -1070,7 +1461,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).location;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).location;
   }
 
   /**
@@ -1081,7 +1474,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).instance;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).instance;
   }
 
   /**
@@ -1092,7 +1487,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the query.
    */
   matchQueryFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).query;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).query;
   }
 
   /**
@@ -1104,7 +1501,12 @@ export class ReferenceListServiceClient {
    * @param {string} data_access_label
    * @returns {string} Resource name string.
    */
-  dataAccessLabelPath(project:string,location:string,instance:string,dataAccessLabel:string) {
+  dataAccessLabelPath(
+    project: string,
+    location: string,
+    instance: string,
+    dataAccessLabel: string,
+  ) {
     return this.pathTemplates.dataAccessLabelPathTemplate.render({
       project: project,
       location: location,
@@ -1121,7 +1523,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).project;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).project;
   }
 
   /**
@@ -1132,7 +1536,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).location;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).location;
   }
 
   /**
@@ -1143,7 +1549,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).instance;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).instance;
   }
 
   /**
@@ -1154,7 +1562,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the data_access_label.
    */
   matchDataAccessLabelFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).data_access_label;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).data_access_label;
   }
 
   /**
@@ -1166,7 +1576,12 @@ export class ReferenceListServiceClient {
    * @param {string} data_access_scope
    * @returns {string} Resource name string.
    */
-  dataAccessScopePath(project:string,location:string,instance:string,dataAccessScope:string) {
+  dataAccessScopePath(
+    project: string,
+    location: string,
+    instance: string,
+    dataAccessScope: string,
+  ) {
     return this.pathTemplates.dataAccessScopePathTemplate.render({
       project: project,
       location: location,
@@ -1183,7 +1598,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).project;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).project;
   }
 
   /**
@@ -1194,7 +1611,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).location;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).location;
   }
 
   /**
@@ -1205,7 +1624,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).instance;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).instance;
   }
 
   /**
@@ -1216,7 +1637,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the data_access_scope.
    */
   matchDataAccessScopeFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).data_access_scope;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).data_access_scope;
   }
 
   /**
@@ -1228,7 +1651,12 @@ export class ReferenceListServiceClient {
    * @param {string} data_table
    * @returns {string} Resource name string.
    */
-  dataTablePath(project:string,location:string,instance:string,dataTable:string) {
+  dataTablePath(
+    project: string,
+    location: string,
+    instance: string,
+    dataTable: string,
+  ) {
     return this.pathTemplates.dataTablePathTemplate.render({
       project: project,
       location: location,
@@ -1245,7 +1673,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).project;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .project;
   }
 
   /**
@@ -1256,7 +1685,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).location;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .location;
   }
 
   /**
@@ -1267,7 +1697,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).instance;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .instance;
   }
 
   /**
@@ -1278,7 +1709,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the data_table.
    */
   matchDataTableFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).data_table;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .data_table;
   }
 
   /**
@@ -1290,7 +1722,12 @@ export class ReferenceListServiceClient {
    * @param {string} data_table_operation_errors
    * @returns {string} Resource name string.
    */
-  dataTableOperationErrorsPath(project:string,location:string,instance:string,dataTableOperationErrors:string) {
+  dataTableOperationErrorsPath(
+    project: string,
+    location: string,
+    instance: string,
+    dataTableOperationErrors: string,
+  ) {
     return this.pathTemplates.dataTableOperationErrorsPathTemplate.render({
       project: project,
       location: location,
@@ -1306,8 +1743,12 @@ export class ReferenceListServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).project;
+  matchProjectFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).project;
   }
 
   /**
@@ -1317,8 +1758,12 @@ export class ReferenceListServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).location;
+  matchLocationFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).location;
   }
 
   /**
@@ -1328,8 +1773,12 @@ export class ReferenceListServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the instance.
    */
-  matchInstanceFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).instance;
+  matchInstanceFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).instance;
   }
 
   /**
@@ -1339,8 +1788,12 @@ export class ReferenceListServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the data_table_operation_errors.
    */
-  matchDataTableOperationErrorsFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).data_table_operation_errors;
+  matchDataTableOperationErrorsFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).data_table_operation_errors;
   }
 
   /**
@@ -1353,7 +1806,13 @@ export class ReferenceListServiceClient {
    * @param {string} data_table_row
    * @returns {string} Resource name string.
    */
-  dataTableRowPath(project:string,location:string,instance:string,dataTable:string,dataTableRow:string) {
+  dataTableRowPath(
+    project: string,
+    location: string,
+    instance: string,
+    dataTable: string,
+    dataTableRow: string,
+  ) {
     return this.pathTemplates.dataTableRowPathTemplate.render({
       project: project,
       location: location,
@@ -1371,7 +1830,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).project;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .project;
   }
 
   /**
@@ -1382,7 +1842,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).location;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .location;
   }
 
   /**
@@ -1393,7 +1854,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).instance;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .instance;
   }
 
   /**
@@ -1404,7 +1866,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the data_table.
    */
   matchDataTableFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).data_table;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .data_table;
   }
 
   /**
@@ -1415,7 +1878,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the data_table_row.
    */
   matchDataTableRowFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).data_table_row;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .data_table_row;
   }
 
   /**
@@ -1427,13 +1891,20 @@ export class ReferenceListServiceClient {
    * @param {string} featured_content_native_dashboard
    * @returns {string} Resource name string.
    */
-  featuredContentNativeDashboardPath(project:string,location:string,instance:string,featuredContentNativeDashboard:string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.render({
-      project: project,
-      location: location,
-      instance: instance,
-      featured_content_native_dashboard: featuredContentNativeDashboard,
-    });
+  featuredContentNativeDashboardPath(
+    project: string,
+    location: string,
+    instance: string,
+    featuredContentNativeDashboard: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        featured_content_native_dashboard: featuredContentNativeDashboard,
+      },
+    );
   }
 
   /**
@@ -1443,8 +1914,12 @@ export class ReferenceListServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).project;
+  matchProjectFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).project;
   }
 
   /**
@@ -1454,8 +1929,12 @@ export class ReferenceListServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).location;
+  matchLocationFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).location;
   }
 
   /**
@@ -1465,8 +1944,12 @@ export class ReferenceListServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the instance.
    */
-  matchInstanceFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).instance;
+  matchInstanceFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).instance;
   }
 
   /**
@@ -1476,8 +1959,172 @@ export class ReferenceListServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the featured_content_native_dashboard.
    */
-  matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).featured_content_native_dashboard;
+  matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).featured_content_native_dashboard;
+  }
+
+  /**
+   * Return a fully-qualified findingsRefinement resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} findings_refinement
+   * @returns {string} Resource name string.
+   */
+  findingsRefinementPath(
+    project: string,
+    location: string,
+    instance: string,
+    findingsRefinement: string,
+  ) {
+    return this.pathTemplates.findingsRefinementPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      findings_refinement: findingsRefinement,
+    });
+  }
+
+  /**
+   * Parse the project from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFindingsRefinementName(findingsRefinementName: string) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFindingsRefinementName(findingsRefinementName: string) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromFindingsRefinementName(findingsRefinementName: string) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).instance;
+  }
+
+  /**
+   * Parse the findings_refinement from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the findings_refinement.
+   */
+  matchFindingsRefinementFromFindingsRefinementName(
+    findingsRefinementName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).findings_refinement;
+  }
+
+  /**
+   * Return a fully-qualified findingsRefinementDeployment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} findings_refinement
+   * @returns {string} Resource name string.
+   */
+  findingsRefinementDeploymentPath(
+    project: string,
+    location: string,
+    instance: string,
+    findingsRefinement: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      findings_refinement: findingsRefinement,
+    });
+  }
+
+  /**
+   * Parse the project from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).instance;
+  }
+
+  /**
+   * Parse the findings_refinement from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the findings_refinement.
+   */
+  matchFindingsRefinementFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).findings_refinement;
   }
 
   /**
@@ -1488,7 +2135,7 @@ export class ReferenceListServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project:string,location:string,instance:string) {
+  instancePath(project: string, location: string, instance: string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -1536,7 +2183,7 @@ export class ReferenceListServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1574,7 +2221,12 @@ export class ReferenceListServiceClient {
    * @param {string} dashboard
    * @returns {string} Resource name string.
    */
-  nativeDashboardPath(project:string,location:string,instance:string,dashboard:string) {
+  nativeDashboardPath(
+    project: string,
+    location: string,
+    instance: string,
+    dashboard: string,
+  ) {
     return this.pathTemplates.nativeDashboardPathTemplate.render({
       project: project,
       location: location,
@@ -1591,7 +2243,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).project;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).project;
   }
 
   /**
@@ -1602,7 +2256,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).location;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).location;
   }
 
   /**
@@ -1613,7 +2269,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).instance;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).instance;
   }
 
   /**
@@ -1624,7 +2282,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the dashboard.
    */
   matchDashboardFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).dashboard;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).dashboard;
   }
 
   /**
@@ -1633,7 +2293,7 @@ export class ReferenceListServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1659,7 +2319,12 @@ export class ReferenceListServiceClient {
    * @param {string} reference_list
    * @returns {string} Resource name string.
    */
-  referenceListPath(project:string,location:string,instance:string,referenceList:string) {
+  referenceListPath(
+    project: string,
+    location: string,
+    instance: string,
+    referenceList: string,
+  ) {
     return this.pathTemplates.referenceListPathTemplate.render({
       project: project,
       location: location,
@@ -1676,7 +2341,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).project;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .project;
   }
 
   /**
@@ -1687,7 +2353,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).location;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .location;
   }
 
   /**
@@ -1698,7 +2365,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).instance;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .instance;
   }
 
   /**
@@ -1709,7 +2377,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the reference_list.
    */
   matchReferenceListFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).reference_list;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .reference_list;
   }
 
   /**
@@ -1722,7 +2391,13 @@ export class ReferenceListServiceClient {
    * @param {string} retrohunt
    * @returns {string} Resource name string.
    */
-  retrohuntPath(project:string,location:string,instance:string,rule:string,retrohunt:string) {
+  retrohuntPath(
+    project: string,
+    location: string,
+    instance: string,
+    rule: string,
+    retrohunt: string,
+  ) {
     return this.pathTemplates.retrohuntPathTemplate.render({
       project: project,
       location: location,
@@ -1740,7 +2415,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).project;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .project;
   }
 
   /**
@@ -1751,7 +2427,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).location;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .location;
   }
 
   /**
@@ -1762,7 +2439,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).instance;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .instance;
   }
 
   /**
@@ -1784,7 +2462,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the retrohunt.
    */
   matchRetrohuntFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).retrohunt;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .retrohunt;
   }
 
   /**
@@ -1796,7 +2475,7 @@ export class ReferenceListServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  rulePath(project:string,location:string,instance:string,rule:string) {
+  rulePath(project: string, location: string, instance: string, rule: string) {
     return this.pathTemplates.rulePathTemplate.render({
       project: project,
       location: location,
@@ -1858,7 +2537,12 @@ export class ReferenceListServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  ruleDeploymentPath(project:string,location:string,instance:string,rule:string) {
+  ruleDeploymentPath(
+    project: string,
+    location: string,
+    instance: string,
+    rule: string,
+  ) {
     return this.pathTemplates.ruleDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1875,7 +2559,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).project;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).project;
   }
 
   /**
@@ -1886,7 +2572,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).location;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).location;
   }
 
   /**
@@ -1897,7 +2585,9 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).instance;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).instance;
   }
 
   /**
@@ -1908,7 +2598,86 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the rule.
    */
   matchRuleFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).rule;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).rule;
+  }
+
+  /**
+   * Return a fully-qualified ruleExecutionError resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} rule_execution_error
+   * @returns {string} Resource name string.
+   */
+  ruleExecutionErrorPath(
+    project: string,
+    location: string,
+    instance: string,
+    ruleExecutionError: string,
+  ) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      rule_execution_error: ruleExecutionError,
+    });
+  }
+
+  /**
+   * Parse the project from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRuleExecutionErrorName(ruleExecutionErrorName: string) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRuleExecutionErrorName(ruleExecutionErrorName: string) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromRuleExecutionErrorName(ruleExecutionErrorName: string) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).instance;
+  }
+
+  /**
+   * Parse the rule_execution_error from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the rule_execution_error.
+   */
+  matchRuleExecutionErrorFromRuleExecutionErrorName(
+    ruleExecutionErrorName: string,
+  ) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).rule_execution_error;
   }
 
   /**
@@ -1920,7 +2689,12 @@ export class ReferenceListServiceClient {
    * @param {string} watchlist
    * @returns {string} Resource name string.
    */
-  watchlistPath(project:string,location:string,instance:string,watchlist:string) {
+  watchlistPath(
+    project: string,
+    location: string,
+    instance: string,
+    watchlist: string,
+  ) {
     return this.pathTemplates.watchlistPathTemplate.render({
       project: project,
       location: location,
@@ -1937,7 +2711,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).project;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .project;
   }
 
   /**
@@ -1948,7 +2723,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).location;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .location;
   }
 
   /**
@@ -1959,7 +2735,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).instance;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .instance;
   }
 
   /**
@@ -1970,7 +2747,8 @@ export class ReferenceListServiceClient {
    * @returns {string} A string representing the watchlist.
    */
   matchWatchlistFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).watchlist;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .watchlist;
   }
 
   /**
@@ -1981,7 +2759,7 @@ export class ReferenceListServiceClient {
    */
   close(): Promise<void> {
     if (this.referenceListServiceStub && !this._terminated) {
-      return this.referenceListServiceStub.then(stub => {
+      return this.referenceListServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

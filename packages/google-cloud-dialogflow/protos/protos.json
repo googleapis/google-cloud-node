@@ -2037,6 +2037,18 @@
                       }
                     },
                     "CesAppSpec": {
+                      "oneofs": {
+                        "_proactiveEnabled": {
+                          "oneof": [
+                            "proactiveEnabled"
+                          ]
+                        },
+                        "_reactiveEnabled": {
+                          "oneof": [
+                            "reactiveEnabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "cesApp": {
                           "type": "string",
@@ -2051,6 +2063,22 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "proactiveEnabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "reactiveEnabled": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -2956,15 +2984,24 @@
                         },
                         "error": {
                           "type": "Error",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "rawContent": {
                           "type": "bytes",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "content": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -4275,6 +4312,14 @@
                         "contextSize": {
                           "type": "int32",
                           "id": 3
+                        },
+                        "additionalSuggestedQueryResults": {
+                          "rule": "repeated",
+                          "type": "KnowledgeAssistAnswer.AdditionalSuggestedQueryResult",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4378,6 +4423,14 @@
                         "serviceLatency": {
                           "type": "ServiceLatency",
                           "id": 6
+                        },
+                        "queryGenerationDebugInfo": {
+                          "type": "QueryGenerationDebugInfo",
+                          "id": 7
+                        },
+                        "cesDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -4475,6 +4528,22 @@
                               "id": 18
                             }
                           }
+                        },
+                        "QueryGenerationDebugInfo": {
+                          "fields": {
+                            "promptTokenCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "candidatesTokenCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "totalTokenCount": {
+                              "type": "int32",
+                              "id": 3
+                            }
+                          }
                         }
                       }
                     },
@@ -4503,6 +4572,53 @@
                             "queryText": {
                               "type": "string",
                               "id": 1
+                            },
+                            "searchContexts": {
+                              "rule": "repeated",
+                              "type": "SearchContext",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SearchContext": {
+                              "fields": {
+                                "key": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AdditionalSuggestedQueryResult": {
+                          "fields": {
+                            "suggestedQuery": {
+                              "type": "SuggestedQuery",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "answerRecord": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
+                              }
                             }
                           }
                         },
@@ -4511,7 +4627,9 @@
                             "source": {
                               "oneof": [
                                 "faqSource",
-                                "generativeSource"
+                                "generativeSource",
+                                "playbookSource",
+                                "eventSource"
                               ]
                             }
                           },
@@ -4527,6 +4645,14 @@
                             "generativeSource": {
                               "type": "GenerativeSource",
                               "id": 4
+                            },
+                            "playbookSource": {
+                              "type": "GenerativeSource",
+                              "id": 7
+                            },
+                            "eventSource": {
+                              "type": "EventSource",
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -4566,6 +4692,18 @@
                                       "id": 5
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "EventSource": {
+                              "fields": {
+                                "event": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "snippets": {
+                                  "type": "GenerativeSource",
+                                  "id": 2
                                 }
                               }
                             }
@@ -4677,6 +4815,13 @@
                         "singleUtterance": {
                           "type": "bool",
                           "id": 8
+                        },
+                        "enableVoiceActivityEvents": {
+                          "type": "bool",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "disableNoSpeechRecognizedEvent": {
                           "type": "bool",
@@ -4910,6 +5055,11 @@
                       }
                     },
                     "OutputAudioEncoding": {
+                      "valuesOptions": {
+                        "OUTPUT_AUDIO_ENCODING_MP3": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
                         "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
@@ -5362,7 +5512,11 @@
                           "values": {
                             "MESSAGE_TYPE_UNSPECIFIED": 0,
                             "TRANSCRIPT": 1,
-                            "END_OF_SINGLE_UTTERANCE": 2
+                            "DTMF_DIGITS": 3,
+                            "END_OF_SINGLE_UTTERANCE": 2,
+                            "PARTIAL_DTMF_DIGITS": 4,
+                            "SPEECH_ACTIVITY_BEGIN": 5,
+                            "SPEECH_ACTIVITY_END": 6
                           }
                         }
                       }
@@ -9545,6 +9699,13 @@
                         "serviceLatency": {
                           "type": "ServiceLatency",
                           "id": 4
+                        },
+                        "cesDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -9612,7 +9773,9 @@
                             "ANSWER_TYPE_UNSPECIFIED": 0,
                             "FAQ": 1,
                             "GENERATIVE": 2,
-                            "INTENT": 3
+                            "INTENT": 3,
+                            "PLAYBOOK": 4,
+                            "EVENT": 5
                           }
                         },
                         "AnswerSource": {
@@ -9935,6 +10098,13 @@
                           "type": "string",
                           "id": 10
                         },
+                        "sipConfig": {
+                          "type": "SipConfig",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "timeZone": {
                           "type": "string",
                           "id": 14
@@ -10145,6 +10315,20 @@
                             "raiSettings": {
                               "type": "RaiSettings",
                               "id": 19,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "suggestionTriggerEvent": {
+                              "type": "TriggerEvent",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disableQuerySearchContext": {
+                              "type": "bool",
+                              "id": 21,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -10502,6 +10686,39 @@
                         "enableStackdriverLogging": {
                           "type": "bool",
                           "id": 3
+                        }
+                      }
+                    },
+                    "SipConfig": {
+                      "fields": {
+                        "createConversationOnTheFly": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "inactiveStart": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "maxAudioRecordingDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "allowVirtualAgentInteraction": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "keepConversationRunning": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "copyInboundCallLegHeaders": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "ignoreReinviteMediaDirection": {
+                          "type": "bool",
+                          "id": 9
                         }
                       }
                     },
@@ -17231,6 +17448,18 @@
                       }
                     },
                     "CesAppSpec": {
+                      "oneofs": {
+                        "_proactiveEnabled": {
+                          "oneof": [
+                            "proactiveEnabled"
+                          ]
+                        },
+                        "_reactiveEnabled": {
+                          "oneof": [
+                            "reactiveEnabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "cesApp": {
                           "type": "string",
@@ -17245,6 +17474,22 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "proactiveEnabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "reactiveEnabled": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -18150,15 +18395,24 @@
                         },
                         "error": {
                           "type": "Error",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "rawContent": {
                           "type": "bytes",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "content": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -19931,6 +20185,14 @@
                         "contextSize": {
                           "type": "int32",
                           "id": 3
+                        },
+                        "additionalSuggestedQueryResults": {
+                          "rule": "repeated",
+                          "type": "KnowledgeAssistAnswer.AdditionalSuggestedQueryResult",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -20034,6 +20296,14 @@
                         "serviceLatency": {
                           "type": "ServiceLatency",
                           "id": 6
+                        },
+                        "queryGenerationDebugInfo": {
+                          "type": "QueryGenerationDebugInfo",
+                          "id": 7
+                        },
+                        "cesDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -20131,6 +20401,22 @@
                               "id": 18
                             }
                           }
+                        },
+                        "QueryGenerationDebugInfo": {
+                          "fields": {
+                            "promptTokenCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "candidatesTokenCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "totalTokenCount": {
+                              "type": "int32",
+                              "id": 3
+                            }
+                          }
                         }
                       }
                     },
@@ -20159,6 +20445,53 @@
                             "queryText": {
                               "type": "string",
                               "id": 1
+                            },
+                            "searchContexts": {
+                              "rule": "repeated",
+                              "type": "SearchContext",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SearchContext": {
+                              "fields": {
+                                "key": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AdditionalSuggestedQueryResult": {
+                          "fields": {
+                            "suggestedQuery": {
+                              "type": "SuggestedQuery",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "answerRecord": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
+                              }
                             }
                           }
                         },
@@ -20167,7 +20500,9 @@
                             "source": {
                               "oneof": [
                                 "faqSource",
-                                "generativeSource"
+                                "generativeSource",
+                                "playbookSource",
+                                "eventSource"
                               ]
                             }
                           },
@@ -20183,6 +20518,14 @@
                             "generativeSource": {
                               "type": "GenerativeSource",
                               "id": 4
+                            },
+                            "playbookSource": {
+                              "type": "GenerativeSource",
+                              "id": 7
+                            },
+                            "eventSource": {
+                              "type": "EventSource",
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -20222,6 +20565,18 @@
                                       "id": 5
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "EventSource": {
+                              "fields": {
+                                "event": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "snippets": {
+                                  "type": "GenerativeSource",
+                                  "id": 2
                                 }
                               }
                             }
@@ -20360,6 +20715,52 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "toolResponses": {
+                              "type": "ToolResponses",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ToolResponse": {
+                              "fields": {
+                                "id": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "tool": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "response": {
+                                  "type": "google.protobuf.Struct",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "ToolResponses": {
+                              "fields": {
+                                "toolResponses": {
+                                  "rule": "repeated",
+                                  "type": "ToolResponse",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -20397,7 +20798,8 @@
                             "recognitionResult",
                             "bargeInSignal",
                             "analyzeContentResponse",
-                            "turnComplete"
+                            "turnComplete",
+                            "toolCalls"
                           ]
                         }
                       },
@@ -20417,6 +20819,10 @@
                         "turnComplete": {
                           "type": "TurnComplete",
                           "id": 4
+                        },
+                        "toolCalls": {
+                          "type": "ToolCalls",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -20425,6 +20831,31 @@
                         },
                         "TurnComplete": {
                           "fields": {}
+                        },
+                        "ToolCall": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "tool": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "args": {
+                              "type": "google.protobuf.Struct",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ToolCalls": {
+                          "fields": {
+                            "toolCalls": {
+                              "rule": "repeated",
+                              "type": "ToolCall",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
@@ -20544,6 +20975,13 @@
                         "singleUtterance": {
                           "type": "bool",
                           "id": 8
+                        },
+                        "enableVoiceActivityEvents": {
+                          "type": "bool",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "disableNoSpeechRecognizedEvent": {
                           "type": "bool",
@@ -20782,6 +21220,11 @@
                       }
                     },
                     "OutputAudioEncoding": {
+                      "valuesOptions": {
+                        "OUTPUT_AUDIO_ENCODING_MP3": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
                         "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
@@ -21321,7 +21764,9 @@
                             "TRANSCRIPT": 1,
                             "END_OF_SINGLE_UTTERANCE": 2,
                             "DTMF_DIGITS": 3,
-                            "PARTIAL_DTMF_DIGITS": 4
+                            "PARTIAL_DTMF_DIGITS": 4,
+                            "SPEECH_ACTIVITY_BEGIN": 5,
+                            "SPEECH_ACTIVITY_END": 6
                           }
                         }
                       }
@@ -25606,6 +26051,13 @@
                         "serviceLatency": {
                           "type": "ServiceLatency",
                           "id": 4
+                        },
+                        "cesDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -25673,7 +26125,9 @@
                             "ANSWER_TYPE_UNSPECIFIED": 0,
                             "FAQ": 1,
                             "GENERATIVE": 2,
-                            "INTENT": 3
+                            "INTENT": 3,
+                            "PLAYBOOK": 4,
+                            "EVENT": 5
                           }
                         },
                         "AnswerSource": {
@@ -26003,6 +26457,13 @@
                           "type": "string",
                           "id": 10
                         },
+                        "sipConfig": {
+                          "type": "SipConfig",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "timeZone": {
                           "type": "string",
                           "id": 14
@@ -26123,6 +26584,20 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "suggestionTriggerEvent": {
+                              "type": "TriggerEvent",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disableQuerySearchContext": {
+                              "type": "bool",
+                              "id": 21,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "suggestionTriggerSettings": {
                               "type": "SuggestionTriggerSettings",
                               "id": 10
@@ -26130,10 +26605,6 @@
                             "queryConfig": {
                               "type": "SuggestionQueryConfig",
                               "id": 6
-                            },
-                            "conversationModelConfig": {
-                              "type": "ConversationModelConfig",
-                              "id": 7
                             },
                             "conversationProcessConfig": {
                               "type": "ConversationProcessConfig",
@@ -26338,21 +26809,6 @@
                             }
                           }
                         },
-                        "ConversationModelConfig": {
-                          "fields": {
-                            "model": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/ConversationModel"
-                              }
-                            },
-                            "baselineModelVersion": {
-                              "type": "string",
-                              "id": 8
-                            }
-                          }
-                        },
                         "ConversationProcessConfig": {
                           "fields": {
                             "recentSentencesCount": {
@@ -26473,6 +26929,39 @@
                         "enableStackdriverLogging": {
                           "type": "bool",
                           "id": 3
+                        }
+                      }
+                    },
+                    "SipConfig": {
+                      "fields": {
+                        "createConversationOnTheFly": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "inactiveStart": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "maxAudioRecordingDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "allowVirtualAgentInteraction": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "keepConversationRunning": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "copyInboundCallLegHeaders": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "ignoreReinviteMediaDirection": {
+                          "type": "bool",
+                          "id": 9
                         }
                       }
                     },
@@ -30293,8 +30782,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "http": {
@@ -30418,6 +30906,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -30558,6 +31050,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -30615,6 +31129,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -30674,6 +31193,19 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
+              }
+            },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
               }
             },
             "LaunchStage": {
@@ -30808,12 +31340,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -30851,6 +31390,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -30940,6 +31484,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -31165,6 +31713,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -31215,7 +31767,14 @@
                   "type": "ServiceOptions",
                   "id": 3
                 }
-              }
+              },
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                "stream"
+              ]
             },
             "MethodDescriptorProto": {
               "edition": "proto2",
@@ -31379,6 +31938,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -31514,7 +32074,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -31541,6 +32102,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -31609,6 +32174,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -31698,6 +32283,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -31841,6 +32430,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -31851,6 +32441,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -31861,6 +32452,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -31871,6 +32463,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -31881,7 +32474,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -31891,27 +32485,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -31956,7 +32561,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -31970,6 +32581,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -31998,11 +32636,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -32015,6 +32668,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -32098,6 +32757,14 @@
                     }
                   }
                 }
+              }
+            },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {
@@ -32221,6 +32888,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
+            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {

@@ -45,26 +45,26 @@ if staging.is_dir():
     for version in ['v1']:
         library = staging / 'admin' / 'database' / version
         _tracked_paths.add(library)
-        s.copy([library], excludes=excludes)
+        s.copy([library], destination="handwritten/spanner", excludes=excludes)
 
     # Copy the admin/instance library.
     for version in ['v1']:
         library = staging / 'admin' / 'instance' / version
         _tracked_paths.add(library)
-        s.copy([library], excludes=excludes)
+        s.copy([library], destination="handwritten/spanner", excludes=excludes)
 
     # Copy the spanner/executor library.
     for version in ['v1']:
         library = staging / 'executor' / version
         _tracked_paths.add(library)
-        s.copy([library], excludes=excludes)
+        s.copy([library], destination="handwritten/spanner", excludes=excludes)
 
     # The staging directory should never be merged into the main branch.
     shutil.rmtree(staging)
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_mono_repo_library(relative_dir="handwritten/spanner", source_location='build/src')
-s.copy(templates, destination="handwritten/spanner", excludes=[".kokoro/samples-test.sh", ".kokoro/trampoline_v2.sh", ".github/release-trigger.yml", ".github/sync-repo-settings.yaml", "README.md"])
+s.copy(templates, destination="handwritten/spanner", excludes=[".kokoro/samples-test.sh", ".kokoro/trampoline_v2.sh", ".github/release-trigger.yml", ".github/sync-repo-settings.yaml", "README.md", ".eslintignore", ".eslintrc.json"])
 
 node.postprocess_gapic_library_hermetic(relative_dir="handwritten/spanner")
 

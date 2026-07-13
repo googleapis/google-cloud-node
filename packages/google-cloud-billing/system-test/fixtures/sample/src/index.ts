@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CloudBillingClient, CloudCatalogClient} from '@google-cloud/billing';
+import { CloudBillingClient, CloudCatalogClient } from '@google-cloud/billing';
 
 // check that the client class type name can be used
 function doStuffWithCloudBillingClient(client: CloudBillingClient) {

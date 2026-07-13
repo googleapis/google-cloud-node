@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {SecretManagerServiceClient} from '@google-cloud/secret-manager';
+import { SecretManagerServiceClient } from '@google-cloud/secret-manager';
 
 // check that the client class type name can be used
-function doStuffWithSecretManagerServiceClient(client: SecretManagerServiceClient) {
+function doStuffWithSecretManagerServiceClient(
+  client: SecretManagerServiceClient,
+) {
   client.close();
 }
 

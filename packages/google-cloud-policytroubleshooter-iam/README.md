@@ -58,9 +58,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
 | troubleshoot iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/generated/v3/policy_troubleshooter.troubleshoot_iam_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/generated/v3/snippet_metadata_google.cloud.policytroubleshooter.iam.v3.json) |
 | troubleshoot iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/generated/v3beta/policy_troubleshooter.troubleshoot_iam_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/samples/generated/v3beta/snippet_metadata_google.cloud.policytroubleshooter.iam.v3beta.json) |
 
 
 ## Supported Node.js Versions
@@ -94,7 +92,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -104,7 +102,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter-iam/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {OrderTrackingSignalsServiceClient} from './order_tracking_signals_service_client';
+export { OrderTrackingSignalsServiceClient } from './order_tracking_signals_service_client';

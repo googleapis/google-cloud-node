@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ option java_package = "com.google.ads.admanager.v1";
 option php_namespace = "Google\\Ads\\AdManager\\V1";
 option ruby_package = "Google::Ads::AdManager::V1";
 
-// A piece of content from a Publisher's CMS.
+// A piece of `Content` from a Publisher's CMS.
 message Content {
   option (google.api.resource) = {
     type: "admanager.googleapis.com/Content"

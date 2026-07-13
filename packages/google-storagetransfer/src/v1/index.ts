@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {StorageTransferServiceClient} from './storage_transfer_service_client';
+export { StorageTransferServiceClient } from './storage_transfer_service_client';

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DeliveryServiceClient} from '@googlemaps/fleetengine-delivery';
+import { DeliveryServiceClient } from '@googlemaps/fleetengine-delivery';
 
 // check that the client class type name can be used
 function doStuffWithDeliveryServiceClient(client: DeliveryServiceClient) {

@@ -286,6 +286,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public batchSearchLinkProcesses(request: google.cloud.datacatalog.lineage.v1.IBatchSearchLinkProcessesRequest): Promise<google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesResponse>;
+
+                        /**
+                         * Calls SearchLineageStreaming.
+                         * @param request SearchLineageStreamingRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and SearchLineageStreamingResponse
+                         */
+                        public searchLineageStreaming(request: google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest, callback: google.cloud.datacatalog.lineage.v1.Lineage.SearchLineageStreamingCallback): void;
+
+                        /**
+                         * Calls SearchLineageStreaming.
+                         * @param request SearchLineageStreamingRequest message or plain object
+                         * @returns Promise
+                         */
+                        public searchLineageStreaming(request: google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest): Promise<google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse>;
                     }
 
                     namespace Lineage {
@@ -408,6 +422,13 @@ export namespace google {
                          * @param [response] BatchSearchLinkProcessesResponse
                          */
                         type BatchSearchLinkProcessesCallback = (error: (Error|null), response?: google.cloud.datacatalog.lineage.v1.BatchSearchLinkProcessesResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.datacatalog.lineage.v1.Lineage|searchLineageStreaming}.
+                         * @param error Error, if any
+                         * @param [response] SearchLineageStreamingResponse
+                         */
+                        type SearchLineageStreamingCallback = (error: (Error|null), response?: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse) => void;
                     }
 
                     /** Properties of a Process. */
@@ -787,6 +808,9 @@ export namespace google {
 
                         /** EventLink target */
                         target?: (google.cloud.datacatalog.lineage.v1.IEntityReference|null);
+
+                        /** EventLink dependencyInfo */
+                        dependencyInfo?: (google.cloud.datacatalog.lineage.v1.IDependencyInfo|null);
                     }
 
                     /** Represents an EventLink. */
@@ -803,6 +827,9 @@ export namespace google {
 
                         /** EventLink target. */
                         public target?: (google.cloud.datacatalog.lineage.v1.IEntityReference|null);
+
+                        /** EventLink dependencyInfo. */
+                        public dependencyInfo?: (google.cloud.datacatalog.lineage.v1.IDependencyInfo|null);
 
                         /**
                          * Creates a new EventLink instance using the specified properties.
@@ -882,11 +909,111 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a DependencyInfo. */
+                    interface IDependencyInfo {
+
+                        /** DependencyInfo dependencyType */
+                        dependencyType?: (google.cloud.datacatalog.lineage.v1.DependencyType|keyof typeof google.cloud.datacatalog.lineage.v1.DependencyType|null);
+                    }
+
+                    /** Represents a DependencyInfo. */
+                    class DependencyInfo implements IDependencyInfo {
+
+                        /**
+                         * Constructs a new DependencyInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.lineage.v1.IDependencyInfo);
+
+                        /** DependencyInfo dependencyType. */
+                        public dependencyType: (google.cloud.datacatalog.lineage.v1.DependencyType|keyof typeof google.cloud.datacatalog.lineage.v1.DependencyType);
+
+                        /**
+                         * Creates a new DependencyInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DependencyInfo instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.lineage.v1.IDependencyInfo): google.cloud.datacatalog.lineage.v1.DependencyInfo;
+
+                        /**
+                         * Encodes the specified DependencyInfo message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.DependencyInfo.verify|verify} messages.
+                         * @param message DependencyInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.lineage.v1.IDependencyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DependencyInfo message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.DependencyInfo.verify|verify} messages.
+                         * @param message DependencyInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.IDependencyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DependencyInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DependencyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.DependencyInfo;
+
+                        /**
+                         * Decodes a DependencyInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DependencyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.DependencyInfo;
+
+                        /**
+                         * Verifies a DependencyInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DependencyInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DependencyInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.DependencyInfo;
+
+                        /**
+                         * Creates a plain object from a DependencyInfo message. Also converts values to other types if specified.
+                         * @param message DependencyInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.lineage.v1.DependencyInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DependencyInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DependencyInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of an EntityReference. */
                     interface IEntityReference {
 
                         /** EntityReference fullyQualifiedName */
                         fullyQualifiedName?: (string|null);
+
+                        /** EntityReference field */
+                        field?: (string[]|null);
                     }
 
                     /** Represents an EntityReference. */
@@ -900,6 +1027,9 @@ export namespace google {
 
                         /** EntityReference fullyQualifiedName. */
                         public fullyQualifiedName: string;
+
+                        /** EntityReference field. */
+                        public field: string[];
 
                         /**
                          * Creates a new EntityReference instance using the specified properties.
@@ -1463,6 +1593,9 @@ export namespace google {
 
                         /** UpdateProcessRequest allowMissing */
                         allowMissing?: (boolean|null);
+
+                        /** UpdateProcessRequest requestId */
+                        requestId?: (string|null);
                     }
 
                     /** Represents an UpdateProcessRequest. */
@@ -1482,6 +1615,9 @@ export namespace google {
 
                         /** UpdateProcessRequest allowMissing. */
                         public allowMissing: boolean;
+
+                        /** UpdateProcessRequest requestId. */
+                        public requestId: string;
 
                         /**
                          * Creates a new UpdateProcessRequest instance using the specified properties.
@@ -3136,6 +3272,12 @@ export namespace google {
                         /** SearchLinksRequest target */
                         target?: (google.cloud.datacatalog.lineage.v1.IEntityReference|null);
 
+                        /** SearchLinksRequest sources */
+                        sources?: (google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null);
+
+                        /** SearchLinksRequest targets */
+                        targets?: (google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null);
+
                         /** SearchLinksRequest pageSize */
                         pageSize?: (number|null);
 
@@ -3161,6 +3303,12 @@ export namespace google {
                         /** SearchLinksRequest target. */
                         public target?: (google.cloud.datacatalog.lineage.v1.IEntityReference|null);
 
+                        /** SearchLinksRequest sources. */
+                        public sources?: (google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null);
+
+                        /** SearchLinksRequest targets. */
+                        public targets?: (google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null);
+
                         /** SearchLinksRequest pageSize. */
                         public pageSize: number;
 
@@ -3168,7 +3316,7 @@ export namespace google {
                         public pageToken: string;
 
                         /** SearchLinksRequest criteria. */
-                        public criteria?: ("source"|"target");
+                        public criteria?: ("source"|"target"|"sources"|"targets");
 
                         /**
                          * Creates a new SearchLinksRequest instance using the specified properties.
@@ -3242,6 +3390,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for SearchLinksRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MultipleEntityReference. */
+                    interface IMultipleEntityReference {
+
+                        /** MultipleEntityReference entities */
+                        entities?: (google.cloud.datacatalog.lineage.v1.IEntityReference[]|null);
+                    }
+
+                    /** Represents a MultipleEntityReference. */
+                    class MultipleEntityReference implements IMultipleEntityReference {
+
+                        /**
+                         * Constructs a new MultipleEntityReference.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.lineage.v1.IMultipleEntityReference);
+
+                        /** MultipleEntityReference entities. */
+                        public entities: google.cloud.datacatalog.lineage.v1.IEntityReference[];
+
+                        /**
+                         * Creates a new MultipleEntityReference instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MultipleEntityReference instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.lineage.v1.IMultipleEntityReference): google.cloud.datacatalog.lineage.v1.MultipleEntityReference;
+
+                        /**
+                         * Encodes the specified MultipleEntityReference message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.MultipleEntityReference.verify|verify} messages.
+                         * @param message MultipleEntityReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.lineage.v1.IMultipleEntityReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MultipleEntityReference message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.MultipleEntityReference.verify|verify} messages.
+                         * @param message MultipleEntityReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.IMultipleEntityReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MultipleEntityReference message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MultipleEntityReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.MultipleEntityReference;
+
+                        /**
+                         * Decodes a MultipleEntityReference message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MultipleEntityReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.MultipleEntityReference;
+
+                        /**
+                         * Verifies a MultipleEntityReference message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MultipleEntityReference message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MultipleEntityReference
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.MultipleEntityReference;
+
+                        /**
+                         * Creates a plain object from a MultipleEntityReference message. Also converts values to other types if specified.
+                         * @param message MultipleEntityReference
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.lineage.v1.MultipleEntityReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MultipleEntityReference to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MultipleEntityReference
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -3368,6 +3613,9 @@ export namespace google {
 
                         /** Link endTime */
                         endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Link dependencyInfo */
+                        dependencyInfo?: (google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo[]|null);
                     }
 
                     /** Represents a Link. */
@@ -3393,6 +3641,9 @@ export namespace google {
 
                         /** Link endTime. */
                         public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Link dependencyInfo. */
+                        public dependencyInfo: google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo[];
 
                         /**
                          * Creates a new Link instance using the specified properties.
@@ -3470,6 +3721,106 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Link {
+
+                        /** Properties of a DependencyInfo. */
+                        interface IDependencyInfo {
+
+                            /** DependencyInfo dependencyType */
+                            dependencyType?: (google.cloud.datacatalog.lineage.v1.DependencyType|keyof typeof google.cloud.datacatalog.lineage.v1.DependencyType|null);
+                        }
+
+                        /** Represents a DependencyInfo. */
+                        class DependencyInfo implements IDependencyInfo {
+
+                            /**
+                             * Constructs a new DependencyInfo.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo);
+
+                            /** DependencyInfo dependencyType. */
+                            public dependencyType: (google.cloud.datacatalog.lineage.v1.DependencyType|keyof typeof google.cloud.datacatalog.lineage.v1.DependencyType);
+
+                            /**
+                             * Creates a new DependencyInfo instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DependencyInfo instance
+                             */
+                            public static create(properties?: google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo): google.cloud.datacatalog.lineage.v1.Link.DependencyInfo;
+
+                            /**
+                             * Encodes the specified DependencyInfo message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.Link.DependencyInfo.verify|verify} messages.
+                             * @param message DependencyInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DependencyInfo message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.Link.DependencyInfo.verify|verify} messages.
+                             * @param message DependencyInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DependencyInfo message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DependencyInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.Link.DependencyInfo;
+
+                            /**
+                             * Decodes a DependencyInfo message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DependencyInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.Link.DependencyInfo;
+
+                            /**
+                             * Verifies a DependencyInfo message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DependencyInfo message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DependencyInfo
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.Link.DependencyInfo;
+
+                            /**
+                             * Creates a plain object from a DependencyInfo message. Also converts values to other types if specified.
+                             * @param message DependencyInfo
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.datacatalog.lineage.v1.Link.DependencyInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DependencyInfo to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DependencyInfo
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a BatchSearchLinkProcessesRequest. */
@@ -4015,8 +4366,906 @@ export namespace google {
                             DATA_FUSION = 3,
                             COMPOSER = 4,
                             LOOKER_STUDIO = 5,
-                            DATAPROC = 6
+                            DATAPROC = 6,
+                            VERTEX_AI = 7,
+                            DATAFLOW = 8,
+                            LOOKER_CORE = 9
                         }
+                    }
+
+                    /** Properties of a LineageLink. */
+                    interface ILineageLink {
+
+                        /** LineageLink source */
+                        source?: (google.cloud.datacatalog.lineage.v1.IEntityReference|null);
+
+                        /** LineageLink target */
+                        target?: (google.cloud.datacatalog.lineage.v1.IEntityReference|null);
+
+                        /** LineageLink processes */
+                        processes?: (google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess[]|null);
+
+                        /** LineageLink dependencyInfo */
+                        dependencyInfo?: (google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo[]|null);
+
+                        /** LineageLink depth */
+                        depth?: (number|null);
+
+                        /** LineageLink location */
+                        location?: (string|null);
+                    }
+
+                    /** Represents a LineageLink. */
+                    class LineageLink implements ILineageLink {
+
+                        /**
+                         * Constructs a new LineageLink.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.lineage.v1.ILineageLink);
+
+                        /** LineageLink source. */
+                        public source?: (google.cloud.datacatalog.lineage.v1.IEntityReference|null);
+
+                        /** LineageLink target. */
+                        public target?: (google.cloud.datacatalog.lineage.v1.IEntityReference|null);
+
+                        /** LineageLink processes. */
+                        public processes: google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess[];
+
+                        /** LineageLink dependencyInfo. */
+                        public dependencyInfo: google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo[];
+
+                        /** LineageLink depth. */
+                        public depth: number;
+
+                        /** LineageLink location. */
+                        public location: string;
+
+                        /**
+                         * Creates a new LineageLink instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LineageLink instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.lineage.v1.ILineageLink): google.cloud.datacatalog.lineage.v1.LineageLink;
+
+                        /**
+                         * Encodes the specified LineageLink message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.verify|verify} messages.
+                         * @param message LineageLink message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.lineage.v1.ILineageLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LineageLink message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.verify|verify} messages.
+                         * @param message LineageLink message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.ILineageLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LineageLink message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LineageLink
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.LineageLink;
+
+                        /**
+                         * Decodes a LineageLink message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LineageLink
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.LineageLink;
+
+                        /**
+                         * Verifies a LineageLink message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LineageLink message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LineageLink
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.LineageLink;
+
+                        /**
+                         * Creates a plain object from a LineageLink message. Also converts values to other types if specified.
+                         * @param message LineageLink
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.lineage.v1.LineageLink, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LineageLink to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for LineageLink
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace LineageLink {
+
+                        /** Properties of a LineageProcess. */
+                        interface ILineageProcess {
+
+                            /** LineageProcess process */
+                            process?: (google.cloud.datacatalog.lineage.v1.IProcess|null);
+                        }
+
+                        /** Represents a LineageProcess. */
+                        class LineageProcess implements ILineageProcess {
+
+                            /**
+                             * Constructs a new LineageProcess.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess);
+
+                            /** LineageProcess process. */
+                            public process?: (google.cloud.datacatalog.lineage.v1.IProcess|null);
+
+                            /**
+                             * Creates a new LineageProcess instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LineageProcess instance
+                             */
+                            public static create(properties?: google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess): google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess;
+
+                            /**
+                             * Encodes the specified LineageProcess message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess.verify|verify} messages.
+                             * @param message LineageProcess message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LineageProcess message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess.verify|verify} messages.
+                             * @param message LineageProcess message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LineageProcess message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LineageProcess
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess;
+
+                            /**
+                             * Decodes a LineageProcess message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LineageProcess
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess;
+
+                            /**
+                             * Verifies a LineageProcess message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LineageProcess message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LineageProcess
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess;
+
+                            /**
+                             * Creates a plain object from a LineageProcess message. Also converts values to other types if specified.
+                             * @param message LineageProcess
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LineageProcess to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LineageProcess
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DependencyInfo. */
+                        interface IDependencyInfo {
+
+                            /** DependencyInfo dependencyType */
+                            dependencyType?: (google.cloud.datacatalog.lineage.v1.DependencyType|keyof typeof google.cloud.datacatalog.lineage.v1.DependencyType|null);
+                        }
+
+                        /** Represents a DependencyInfo. */
+                        class DependencyInfo implements IDependencyInfo {
+
+                            /**
+                             * Constructs a new DependencyInfo.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo);
+
+                            /** DependencyInfo dependencyType. */
+                            public dependencyType: (google.cloud.datacatalog.lineage.v1.DependencyType|keyof typeof google.cloud.datacatalog.lineage.v1.DependencyType);
+
+                            /**
+                             * Creates a new DependencyInfo instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DependencyInfo instance
+                             */
+                            public static create(properties?: google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo): google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo;
+
+                            /**
+                             * Encodes the specified DependencyInfo message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo.verify|verify} messages.
+                             * @param message DependencyInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DependencyInfo message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo.verify|verify} messages.
+                             * @param message DependencyInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DependencyInfo message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DependencyInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo;
+
+                            /**
+                             * Decodes a DependencyInfo message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DependencyInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo;
+
+                            /**
+                             * Verifies a DependencyInfo message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DependencyInfo message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DependencyInfo
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo;
+
+                            /**
+                             * Creates a plain object from a DependencyInfo message. Also converts values to other types if specified.
+                             * @param message DependencyInfo
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DependencyInfo to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DependencyInfo
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a SearchLineageStreamingRequest. */
+                    interface ISearchLineageStreamingRequest {
+
+                        /** SearchLineageStreamingRequest parent */
+                        parent?: (string|null);
+
+                        /** SearchLineageStreamingRequest locations */
+                        locations?: (string[]|null);
+
+                        /** SearchLineageStreamingRequest rootCriteria */
+                        rootCriteria?: (google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria|null);
+
+                        /** SearchLineageStreamingRequest direction */
+                        direction?: (google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchDirection|keyof typeof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchDirection|null);
+
+                        /** SearchLineageStreamingRequest filters */
+                        filters?: (google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters|null);
+
+                        /** SearchLineageStreamingRequest limits */
+                        limits?: (google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits|null);
+                    }
+
+                    /** Represents a SearchLineageStreamingRequest. */
+                    class SearchLineageStreamingRequest implements ISearchLineageStreamingRequest {
+
+                        /**
+                         * Constructs a new SearchLineageStreamingRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest);
+
+                        /** SearchLineageStreamingRequest parent. */
+                        public parent: string;
+
+                        /** SearchLineageStreamingRequest locations. */
+                        public locations: string[];
+
+                        /** SearchLineageStreamingRequest rootCriteria. */
+                        public rootCriteria?: (google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria|null);
+
+                        /** SearchLineageStreamingRequest direction. */
+                        public direction: (google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchDirection|keyof typeof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchDirection);
+
+                        /** SearchLineageStreamingRequest filters. */
+                        public filters?: (google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters|null);
+
+                        /** SearchLineageStreamingRequest limits. */
+                        public limits?: (google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits|null);
+
+                        /**
+                         * Creates a new SearchLineageStreamingRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchLineageStreamingRequest instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest;
+
+                        /**
+                         * Encodes the specified SearchLineageStreamingRequest message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.verify|verify} messages.
+                         * @param message SearchLineageStreamingRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchLineageStreamingRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.verify|verify} messages.
+                         * @param message SearchLineageStreamingRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchLineageStreamingRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchLineageStreamingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest;
+
+                        /**
+                         * Decodes a SearchLineageStreamingRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchLineageStreamingRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest;
+
+                        /**
+                         * Verifies a SearchLineageStreamingRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchLineageStreamingRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchLineageStreamingRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest;
+
+                        /**
+                         * Creates a plain object from a SearchLineageStreamingRequest message. Also converts values to other types if specified.
+                         * @param message SearchLineageStreamingRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchLineageStreamingRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SearchLineageStreamingRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SearchLineageStreamingRequest {
+
+                        /** SearchDirection enum. */
+                        enum SearchDirection {
+                            SEARCH_DIRECTION_UNSPECIFIED = 0,
+                            DOWNSTREAM = 1,
+                            UPSTREAM = 2
+                        }
+
+                        /** EntitySet enum. */
+                        enum EntitySet {
+                            ENTITY_SET_UNSPECIFIED = 0,
+                            ENTITIES = 1
+                        }
+
+                        /** Properties of a SearchFilters. */
+                        interface ISearchFilters {
+
+                            /** SearchFilters dependencyTypes */
+                            dependencyTypes?: (google.cloud.datacatalog.lineage.v1.DependencyType[]|null);
+
+                            /** SearchFilters entitySet */
+                            entitySet?: (google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.EntitySet|keyof typeof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.EntitySet|null);
+
+                            /** SearchFilters timeRange */
+                            timeRange?: (google.type.IInterval|null);
+                        }
+
+                        /** Represents a SearchFilters. */
+                        class SearchFilters implements ISearchFilters {
+
+                            /**
+                             * Constructs a new SearchFilters.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters);
+
+                            /** SearchFilters dependencyTypes. */
+                            public dependencyTypes: google.cloud.datacatalog.lineage.v1.DependencyType[];
+
+                            /** SearchFilters entitySet. */
+                            public entitySet: (google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.EntitySet|keyof typeof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.EntitySet);
+
+                            /** SearchFilters timeRange. */
+                            public timeRange?: (google.type.IInterval|null);
+
+                            /**
+                             * Creates a new SearchFilters instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SearchFilters instance
+                             */
+                            public static create(properties?: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters;
+
+                            /**
+                             * Encodes the specified SearchFilters message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters.verify|verify} messages.
+                             * @param message SearchFilters message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SearchFilters message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters.verify|verify} messages.
+                             * @param message SearchFilters message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SearchFilters message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SearchFilters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters;
+
+                            /**
+                             * Decodes a SearchFilters message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SearchFilters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters;
+
+                            /**
+                             * Verifies a SearchFilters message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SearchFilters message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SearchFilters
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters;
+
+                            /**
+                             * Creates a plain object from a SearchFilters message. Also converts values to other types if specified.
+                             * @param message SearchFilters
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SearchFilters to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SearchFilters
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a SearchLimits. */
+                        interface ISearchLimits {
+
+                            /** SearchLimits maxDepth */
+                            maxDepth?: (number|null);
+
+                            /** SearchLimits maxResults */
+                            maxResults?: (number|null);
+
+                            /** SearchLimits maxProcessPerLink */
+                            maxProcessPerLink?: (number|null);
+                        }
+
+                        /** Represents a SearchLimits. */
+                        class SearchLimits implements ISearchLimits {
+
+                            /**
+                             * Constructs a new SearchLimits.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits);
+
+                            /** SearchLimits maxDepth. */
+                            public maxDepth: number;
+
+                            /** SearchLimits maxResults. */
+                            public maxResults: number;
+
+                            /** SearchLimits maxProcessPerLink. */
+                            public maxProcessPerLink: number;
+
+                            /**
+                             * Creates a new SearchLimits instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SearchLimits instance
+                             */
+                            public static create(properties?: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits;
+
+                            /**
+                             * Encodes the specified SearchLimits message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits.verify|verify} messages.
+                             * @param message SearchLimits message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SearchLimits message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits.verify|verify} messages.
+                             * @param message SearchLimits message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SearchLimits message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SearchLimits
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits;
+
+                            /**
+                             * Decodes a SearchLimits message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SearchLimits
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits;
+
+                            /**
+                             * Verifies a SearchLimits message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SearchLimits message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SearchLimits
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits;
+
+                            /**
+                             * Creates a plain object from a SearchLimits message. Also converts values to other types if specified.
+                             * @param message SearchLimits
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SearchLimits to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SearchLimits
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a RootCriteria. */
+                        interface IRootCriteria {
+
+                            /** RootCriteria entities */
+                            entities?: (google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null);
+                        }
+
+                        /** Represents a RootCriteria. */
+                        class RootCriteria implements IRootCriteria {
+
+                            /**
+                             * Constructs a new RootCriteria.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria);
+
+                            /** RootCriteria entities. */
+                            public entities?: (google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null);
+
+                            /** RootCriteria criteria. */
+                            public criteria?: "entities";
+
+                            /**
+                             * Creates a new RootCriteria instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RootCriteria instance
+                             */
+                            public static create(properties?: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria;
+
+                            /**
+                             * Encodes the specified RootCriteria message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria.verify|verify} messages.
+                             * @param message RootCriteria message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RootCriteria message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria.verify|verify} messages.
+                             * @param message RootCriteria message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RootCriteria message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RootCriteria
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria;
+
+                            /**
+                             * Decodes a RootCriteria message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RootCriteria
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria;
+
+                            /**
+                             * Verifies a RootCriteria message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RootCriteria message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RootCriteria
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria;
+
+                            /**
+                             * Creates a plain object from a RootCriteria message. Also converts values to other types if specified.
+                             * @param message RootCriteria
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RootCriteria to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RootCriteria
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a SearchLineageStreamingResponse. */
+                    interface ISearchLineageStreamingResponse {
+
+                        /** SearchLineageStreamingResponse links */
+                        links?: (google.cloud.datacatalog.lineage.v1.ILineageLink[]|null);
+
+                        /** SearchLineageStreamingResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a SearchLineageStreamingResponse. */
+                    class SearchLineageStreamingResponse implements ISearchLineageStreamingResponse {
+
+                        /**
+                         * Constructs a new SearchLineageStreamingResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingResponse);
+
+                        /** SearchLineageStreamingResponse links. */
+                        public links: google.cloud.datacatalog.lineage.v1.ILineageLink[];
+
+                        /** SearchLineageStreamingResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new SearchLineageStreamingResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchLineageStreamingResponse instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingResponse): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse;
+
+                        /**
+                         * Encodes the specified SearchLineageStreamingResponse message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse.verify|verify} messages.
+                         * @param message SearchLineageStreamingResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchLineageStreamingResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse.verify|verify} messages.
+                         * @param message SearchLineageStreamingResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchLineageStreamingResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchLineageStreamingResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse;
+
+                        /**
+                         * Decodes a SearchLineageStreamingResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchLineageStreamingResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse;
+
+                        /**
+                         * Verifies a SearchLineageStreamingResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchLineageStreamingResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchLineageStreamingResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse;
+
+                        /**
+                         * Creates a plain object from a SearchLineageStreamingResponse message. Also converts values to other types if specified.
+                         * @param message SearchLineageStreamingResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchLineageStreamingResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SearchLineageStreamingResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** DependencyType enum. */
+                    enum DependencyType {
+                        DEPENDENCY_TYPE_UNSPECIFIED = 0,
+                        EXACT_COPY = 1,
+                        OTHER = 3
                     }
                 }
             }
@@ -4394,6 +5643,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -4410,6 +5662,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -5111,6 +6366,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -5124,6 +6382,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -5201,6 +6462,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -5529,6 +6902,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -5542,6 +6918,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -5867,6 +7246,109 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -5890,6 +7372,218 @@ export namespace google {
             UNORDERED_LIST = 6,
             NON_EMPTY_DEFAULT = 7,
             IDENTIFIER = 8
+        }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -6248,6 +7942,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -6277,6 +7972,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -6326,6 +8024,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -6461,6 +8162,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -6501,6 +8205,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -7349,6 +9056,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -7374,6 +9084,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -8309,11 +10022,17 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
 
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);
@@ -8363,6 +10082,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -8579,6 +10301,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -8822,6 +10659,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -8843,6 +10683,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9436,6 +11279,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -9464,6 +11313,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -9587,6 +11442,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -9706,8 +11671,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -9722,8 +11690,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -10254,6 +12225,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */
@@ -12161,6 +14139,113 @@ export namespace google {
 
             /**
              * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of an Interval. */
+        interface IInterval {
+
+            /** Interval startTime */
+            startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime */
+            endTime?: (google.protobuf.ITimestamp|null);
+        }
+
+        /** Represents an Interval. */
+        class Interval implements IInterval {
+
+            /**
+             * Constructs a new Interval.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IInterval);
+
+            /** Interval startTime. */
+            public startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime. */
+            public endTime?: (google.protobuf.ITimestamp|null);
+
+            /**
+             * Creates a new Interval instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Interval instance
+             */
+            public static create(properties?: google.type.IInterval): google.type.Interval;
+
+            /**
+             * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Interval;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Interval;
+
+            /**
+             * Verifies an Interval message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Interval
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Interval;
+
+            /**
+             * Creates a plain object from an Interval message. Also converts values to other types if specified.
+             * @param message Interval
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Interval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Interval to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Interval
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

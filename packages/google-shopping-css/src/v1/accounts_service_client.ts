@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class AccountsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('css');
@@ -57,9 +64,9 @@ export class AccountsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  accountsServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  accountsServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of AccountsServiceClient.
@@ -100,21 +107,42 @@ export class AccountsServiceClient {
    *     const client = new AccountsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AccountsServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'css.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +167,7 @@ export class AccountsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +181,7 @@ export class AccountsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,19 +203,19 @@ export class AccountsServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       accountPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}'
+        'accounts/{account}',
       ),
       accountLabelPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/labels/{label}'
+        'accounts/{account}/labels/{label}',
       ),
       cssProductPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/cssProducts/{css_product}'
+        'accounts/{account}/cssProducts/{css_product}',
       ),
       cssProductInputPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/cssProductInputs/{css_product_input}'
+        'accounts/{account}/cssProductInputs/{css_product_input}',
       ),
       quotaGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/quotaGroups/{quota_group}'
+        'accounts/{account}/quotaGroups/{quota_group}',
       ),
     };
 
@@ -198,14 +223,20 @@ export class AccountsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listChildAccounts:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'accounts')
+      listChildAccounts: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'accounts',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.shopping.css.v1.AccountsService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.shopping.css.v1.AccountsService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -236,37 +267,44 @@ export class AccountsServiceClient {
     // Put together the "service stub" for
     // google.shopping.css.v1.AccountsService.
     this.accountsServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.shopping.css.v1.AccountsService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.shopping.css.v1.AccountsService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.shopping.css.v1.AccountsService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const accountsServiceStubMethods =
-        ['listChildAccounts', 'getAccount', 'updateLabels'];
+    const accountsServiceStubMethods = [
+      'listChildAccounts',
+      'getAccount',
+      'updateLabels',
+    ];
     for (const methodName of accountsServiceStubMethods) {
       const callPromise = this.accountsServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -281,8 +319,14 @@ export class AccountsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'css.googleapis.com';
   }
@@ -293,8 +337,14 @@ export class AccountsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'css.googleapis.com';
   }
@@ -325,9 +375,7 @@ export class AccountsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/content'
-    ];
+    return ['https://www.googleapis.com/auth/content'];
   }
 
   getProjectId(): Promise<string>;
@@ -336,8 +384,9 @@ export class AccountsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -348,303 +397,398 @@ export class AccountsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Retrieves a single CSS/MC account by ID.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the managed CSS/MC account.
- *   Format: accounts/{account}
- * @param {string} [request.parent]
- *   Optional. Only required when retrieving MC account information.
- *   The CSS domain that is the parent resource of the MC account.
- *   Format: accounts/{account}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.shopping.css.v1.Account|Account}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/accounts_service.get_account.js</caption>
- * region_tag:css_v1_generated_AccountsService_GetAccount_async
- */
+  /**
+   * Retrieves a single CSS/MC account by ID.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the managed CSS/MC account.
+   *   Format: accounts/{account}
+   * @param {string} [request.parent]
+   *   Optional. Only required when retrieving MC account information.
+   *   The CSS domain that is the parent resource of the MC account.
+   *   Format: accounts/{account}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.css.v1.Account|Account}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/accounts_service.get_account.js</caption>
+   * region_tag:css_v1_generated_AccountsService_GetAccount_async
+   */
   getAccount(
-      request?: protos.google.shopping.css.v1.IGetAccountRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.css.v1.IAccount,
-        protos.google.shopping.css.v1.IGetAccountRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.shopping.css.v1.IGetAccountRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.css.v1.IAccount,
+      protos.google.shopping.css.v1.IGetAccountRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getAccount(
-      request: protos.google.shopping.css.v1.IGetAccountRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.shopping.css.v1.IAccount,
-          protos.google.shopping.css.v1.IGetAccountRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.css.v1.IGetAccountRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.css.v1.IAccount,
+      protos.google.shopping.css.v1.IGetAccountRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAccount(
-      request: protos.google.shopping.css.v1.IGetAccountRequest,
-      callback: Callback<
-          protos.google.shopping.css.v1.IAccount,
-          protos.google.shopping.css.v1.IGetAccountRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.css.v1.IGetAccountRequest,
+    callback: Callback<
+      protos.google.shopping.css.v1.IAccount,
+      protos.google.shopping.css.v1.IGetAccountRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAccount(
-      request?: protos.google.shopping.css.v1.IGetAccountRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.shopping.css.v1.IGetAccountRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.shopping.css.v1.IAccount,
-          protos.google.shopping.css.v1.IGetAccountRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.shopping.css.v1.IAccount,
-          protos.google.shopping.css.v1.IGetAccountRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.shopping.css.v1.IAccount,
-        protos.google.shopping.css.v1.IGetAccountRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.shopping.css.v1.IGetAccountRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.css.v1.IAccount,
+      protos.google.shopping.css.v1.IGetAccountRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.css.v1.IAccount,
+      protos.google.shopping.css.v1.IGetAccountRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getAccount request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.shopping.css.v1.IAccount,
-        protos.google.shopping.css.v1.IGetAccountRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.css.v1.IAccount,
+          protos.google.shopping.css.v1.IGetAccountRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAccount response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAccount(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.shopping.css.v1.IAccount,
-        protos.google.shopping.css.v1.IGetAccountRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAccount response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAccount(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.css.v1.IAccount,
+          protos.google.shopping.css.v1.IGetAccountRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAccount response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates labels assigned to CSS/MC accounts by a CSS domain.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The label resource name.
- *   Format: accounts/{account}
- * @param {number[]} request.labelIds
- *   The list of label IDs to overwrite the existing account label IDs.
- *   If the list is empty, all currently assigned label IDs will be deleted.
- * @param {string} [request.parent]
- *   Optional. Only required when updating MC account labels.
- *   The CSS domain that is the parent resource of the MC account.
- *   Format: accounts/{account}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.shopping.css.v1.Account|Account}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/accounts_service.update_labels.js</caption>
- * region_tag:css_v1_generated_AccountsService_UpdateLabels_async
- */
+  /**
+   * Updates labels assigned to CSS/MC accounts by a CSS domain.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The label resource name.
+   *   Format: accounts/{account}
+   * @param {number[]} request.labelIds
+   *   The list of label IDs to overwrite the existing account label IDs.
+   *   If the list is empty, all currently assigned label IDs will be deleted.
+   * @param {string} [request.parent]
+   *   Optional. Only required when updating MC account labels.
+   *   The CSS domain that is the parent resource of the MC account.
+   *   Format: accounts/{account}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.css.v1.Account|Account}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/accounts_service.update_labels.js</caption>
+   * region_tag:css_v1_generated_AccountsService_UpdateLabels_async
+   */
   updateLabels(
-      request?: protos.google.shopping.css.v1.IUpdateAccountLabelsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.css.v1.IAccount,
-        protos.google.shopping.css.v1.IUpdateAccountLabelsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.shopping.css.v1.IUpdateAccountLabelsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.css.v1.IAccount,
+      protos.google.shopping.css.v1.IUpdateAccountLabelsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateLabels(
-      request: protos.google.shopping.css.v1.IUpdateAccountLabelsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.shopping.css.v1.IAccount,
-          protos.google.shopping.css.v1.IUpdateAccountLabelsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.css.v1.IUpdateAccountLabelsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.css.v1.IAccount,
+      | protos.google.shopping.css.v1.IUpdateAccountLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateLabels(
-      request: protos.google.shopping.css.v1.IUpdateAccountLabelsRequest,
-      callback: Callback<
-          protos.google.shopping.css.v1.IAccount,
-          protos.google.shopping.css.v1.IUpdateAccountLabelsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.css.v1.IUpdateAccountLabelsRequest,
+    callback: Callback<
+      protos.google.shopping.css.v1.IAccount,
+      | protos.google.shopping.css.v1.IUpdateAccountLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateLabels(
-      request?: protos.google.shopping.css.v1.IUpdateAccountLabelsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.shopping.css.v1.IUpdateAccountLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.shopping.css.v1.IAccount,
-          protos.google.shopping.css.v1.IUpdateAccountLabelsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.shopping.css.v1.IAccount,
-          protos.google.shopping.css.v1.IUpdateAccountLabelsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.shopping.css.v1.IAccount,
-        protos.google.shopping.css.v1.IUpdateAccountLabelsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.shopping.css.v1.IUpdateAccountLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.css.v1.IAccount,
+      | protos.google.shopping.css.v1.IUpdateAccountLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.css.v1.IAccount,
+      protos.google.shopping.css.v1.IUpdateAccountLabelsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateLabels request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.shopping.css.v1.IAccount,
-        protos.google.shopping.css.v1.IUpdateAccountLabelsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.css.v1.IAccount,
+          | protos.google.shopping.css.v1.IUpdateAccountLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateLabels response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateLabels(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.shopping.css.v1.IAccount,
-        protos.google.shopping.css.v1.IUpdateAccountLabelsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateLabels response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.css.v1.IAccount,
+          protos.google.shopping.css.v1.IUpdateAccountLabelsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLabels response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists all the accounts under the specified CSS account ID, and
- * optionally filters by label ID and account name.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent account. Must be a CSS group or domain.
- *   Format: accounts/{account}
- * @param {number} request.labelId
- *   If set, only the MC accounts with the given label ID will be returned.
- * @param {string} request.fullName
- *   If set, only the MC accounts with the given name (case sensitive) will be
- *   returned.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of accounts to return. The service may return
- *   fewer than this value. If unspecified, at most 50 accounts will be
- *   returned. The maximum value is 100; values above 100 will be coerced to
- *   100.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListChildAccounts` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListChildAccounts` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.shopping.css.v1.Account|Account}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listChildAccountsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all the accounts under the specified CSS account ID, and
+   * optionally filters by label ID and account name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent account. Must be a CSS group or domain.
+   *   Format: accounts/{account}
+   * @param {number} request.labelId
+   *   If set, only the MC accounts with the given label ID will be returned.
+   * @param {string} request.fullName
+   *   If set, only the MC accounts with the given name (case sensitive) will be
+   *   returned.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of accounts to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 accounts will be
+   *   returned. The maximum value is 100; values above 100 will be coerced to
+   *   100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListChildAccounts` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChildAccounts` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.shopping.css.v1.Account|Account}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listChildAccountsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listChildAccounts(
-      request?: protos.google.shopping.css.v1.IListChildAccountsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.css.v1.IAccount[],
-        protos.google.shopping.css.v1.IListChildAccountsRequest|null,
-        protos.google.shopping.css.v1.IListChildAccountsResponse
-      ]>;
+    request?: protos.google.shopping.css.v1.IListChildAccountsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.css.v1.IAccount[],
+      protos.google.shopping.css.v1.IListChildAccountsRequest | null,
+      protos.google.shopping.css.v1.IListChildAccountsResponse,
+    ]
+  >;
   listChildAccounts(
-      request: protos.google.shopping.css.v1.IListChildAccountsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.shopping.css.v1.IListChildAccountsRequest,
-          protos.google.shopping.css.v1.IListChildAccountsResponse|null|undefined,
-          protos.google.shopping.css.v1.IAccount>): void;
+    request: protos.google.shopping.css.v1.IListChildAccountsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.shopping.css.v1.IListChildAccountsRequest,
+      | protos.google.shopping.css.v1.IListChildAccountsResponse
+      | null
+      | undefined,
+      protos.google.shopping.css.v1.IAccount
+    >,
+  ): void;
   listChildAccounts(
-      request: protos.google.shopping.css.v1.IListChildAccountsRequest,
-      callback: PaginationCallback<
-          protos.google.shopping.css.v1.IListChildAccountsRequest,
-          protos.google.shopping.css.v1.IListChildAccountsResponse|null|undefined,
-          protos.google.shopping.css.v1.IAccount>): void;
+    request: protos.google.shopping.css.v1.IListChildAccountsRequest,
+    callback: PaginationCallback<
+      protos.google.shopping.css.v1.IListChildAccountsRequest,
+      | protos.google.shopping.css.v1.IListChildAccountsResponse
+      | null
+      | undefined,
+      protos.google.shopping.css.v1.IAccount
+    >,
+  ): void;
   listChildAccounts(
-      request?: protos.google.shopping.css.v1.IListChildAccountsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.shopping.css.v1.IListChildAccountsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.shopping.css.v1.IListChildAccountsRequest,
-          protos.google.shopping.css.v1.IListChildAccountsResponse|null|undefined,
-          protos.google.shopping.css.v1.IAccount>,
-      callback?: PaginationCallback<
-          protos.google.shopping.css.v1.IListChildAccountsRequest,
-          protos.google.shopping.css.v1.IListChildAccountsResponse|null|undefined,
-          protos.google.shopping.css.v1.IAccount>):
-      Promise<[
-        protos.google.shopping.css.v1.IAccount[],
-        protos.google.shopping.css.v1.IListChildAccountsRequest|null,
-        protos.google.shopping.css.v1.IListChildAccountsResponse
-      ]>|void {
+          | protos.google.shopping.css.v1.IListChildAccountsResponse
+          | null
+          | undefined,
+          protos.google.shopping.css.v1.IAccount
+        >,
+    callback?: PaginationCallback<
+      protos.google.shopping.css.v1.IListChildAccountsRequest,
+      | protos.google.shopping.css.v1.IListChildAccountsResponse
+      | null
+      | undefined,
+      protos.google.shopping.css.v1.IAccount
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.css.v1.IAccount[],
+      protos.google.shopping.css.v1.IListChildAccountsRequest | null,
+      protos.google.shopping.css.v1.IListChildAccountsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.shopping.css.v1.IListChildAccountsRequest,
-      protos.google.shopping.css.v1.IListChildAccountsResponse|null|undefined,
-      protos.google.shopping.css.v1.IAccount>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.css.v1.IListChildAccountsRequest,
+          | protos.google.shopping.css.v1.IListChildAccountsResponse
+          | null
+          | undefined,
+          protos.google.shopping.css.v1.IAccount
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listChildAccounts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -653,132 +797,136 @@ export class AccountsServiceClient {
     this._log.info('listChildAccounts request %j', request);
     return this.innerApiCalls
       .listChildAccounts(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.shopping.css.v1.IAccount[],
-        protos.google.shopping.css.v1.IListChildAccountsRequest|null,
-        protos.google.shopping.css.v1.IListChildAccountsResponse
-      ]) => {
-        this._log.info('listChildAccounts values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.css.v1.IAccount[],
+          protos.google.shopping.css.v1.IListChildAccountsRequest | null,
+          protos.google.shopping.css.v1.IListChildAccountsResponse,
+        ]) => {
+          this._log.info('listChildAccounts values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listChildAccounts`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent account. Must be a CSS group or domain.
- *   Format: accounts/{account}
- * @param {number} request.labelId
- *   If set, only the MC accounts with the given label ID will be returned.
- * @param {string} request.fullName
- *   If set, only the MC accounts with the given name (case sensitive) will be
- *   returned.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of accounts to return. The service may return
- *   fewer than this value. If unspecified, at most 50 accounts will be
- *   returned. The maximum value is 100; values above 100 will be coerced to
- *   100.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListChildAccounts` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListChildAccounts` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.shopping.css.v1.Account|Account} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listChildAccountsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listChildAccounts`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent account. Must be a CSS group or domain.
+   *   Format: accounts/{account}
+   * @param {number} request.labelId
+   *   If set, only the MC accounts with the given label ID will be returned.
+   * @param {string} request.fullName
+   *   If set, only the MC accounts with the given name (case sensitive) will be
+   *   returned.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of accounts to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 accounts will be
+   *   returned. The maximum value is 100; values above 100 will be coerced to
+   *   100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListChildAccounts` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChildAccounts` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.shopping.css.v1.Account|Account} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listChildAccountsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listChildAccountsStream(
-      request?: protos.google.shopping.css.v1.IListChildAccountsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.shopping.css.v1.IListChildAccountsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listChildAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listChildAccounts stream %j', request);
     return this.descriptors.page.listChildAccounts.createStream(
       this.innerApiCalls.listChildAccounts as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listChildAccounts`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent account. Must be a CSS group or domain.
- *   Format: accounts/{account}
- * @param {number} request.labelId
- *   If set, only the MC accounts with the given label ID will be returned.
- * @param {string} request.fullName
- *   If set, only the MC accounts with the given name (case sensitive) will be
- *   returned.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of accounts to return. The service may return
- *   fewer than this value. If unspecified, at most 50 accounts will be
- *   returned. The maximum value is 100; values above 100 will be coerced to
- *   100.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListChildAccounts` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListChildAccounts` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.shopping.css.v1.Account|Account}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/accounts_service.list_child_accounts.js</caption>
- * region_tag:css_v1_generated_AccountsService_ListChildAccounts_async
- */
+  /**
+   * Equivalent to `listChildAccounts`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent account. Must be a CSS group or domain.
+   *   Format: accounts/{account}
+   * @param {number} request.labelId
+   *   If set, only the MC accounts with the given label ID will be returned.
+   * @param {string} request.fullName
+   *   If set, only the MC accounts with the given name (case sensitive) will be
+   *   returned.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of accounts to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 accounts will be
+   *   returned. The maximum value is 100; values above 100 will be coerced to
+   *   100.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListChildAccounts` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListChildAccounts` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.shopping.css.v1.Account|Account}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/accounts_service.list_child_accounts.js</caption>
+   * region_tag:css_v1_generated_AccountsService_ListChildAccounts_async
+   */
   listChildAccountsAsync(
-      request?: protos.google.shopping.css.v1.IListChildAccountsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.shopping.css.v1.IAccount>{
+    request?: protos.google.shopping.css.v1.IListChildAccountsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.shopping.css.v1.IAccount> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listChildAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listChildAccounts iterate %j', request);
     return this.descriptors.page.listChildAccounts.asyncIterate(
       this.innerApiCalls['listChildAccounts'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.shopping.css.v1.IAccount>;
   }
   // --------------------
@@ -791,7 +939,7 @@ export class AccountsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account:string) {
+  accountPath(account: string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -815,7 +963,7 @@ export class AccountsServiceClient {
    * @param {string} label
    * @returns {string} Resource name string.
    */
-  accountLabelPath(account:string,label:string) {
+  accountLabelPath(account: string, label: string) {
     return this.pathTemplates.accountLabelPathTemplate.render({
       account: account,
       label: label,
@@ -830,7 +978,8 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAccountLabelName(accountLabelName: string) {
-    return this.pathTemplates.accountLabelPathTemplate.match(accountLabelName).account;
+    return this.pathTemplates.accountLabelPathTemplate.match(accountLabelName)
+      .account;
   }
 
   /**
@@ -841,7 +990,8 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the label.
    */
   matchLabelFromAccountLabelName(accountLabelName: string) {
-    return this.pathTemplates.accountLabelPathTemplate.match(accountLabelName).label;
+    return this.pathTemplates.accountLabelPathTemplate.match(accountLabelName)
+      .label;
   }
 
   /**
@@ -851,7 +1001,7 @@ export class AccountsServiceClient {
    * @param {string} css_product
    * @returns {string} Resource name string.
    */
-  cssProductPath(account:string,cssProduct:string) {
+  cssProductPath(account: string, cssProduct: string) {
     return this.pathTemplates.cssProductPathTemplate.render({
       account: account,
       css_product: cssProduct,
@@ -866,7 +1016,8 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromCssProductName(cssProductName: string) {
-    return this.pathTemplates.cssProductPathTemplate.match(cssProductName).account;
+    return this.pathTemplates.cssProductPathTemplate.match(cssProductName)
+      .account;
   }
 
   /**
@@ -877,7 +1028,8 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the css_product.
    */
   matchCssProductFromCssProductName(cssProductName: string) {
-    return this.pathTemplates.cssProductPathTemplate.match(cssProductName).css_product;
+    return this.pathTemplates.cssProductPathTemplate.match(cssProductName)
+      .css_product;
   }
 
   /**
@@ -887,7 +1039,7 @@ export class AccountsServiceClient {
    * @param {string} css_product_input
    * @returns {string} Resource name string.
    */
-  cssProductInputPath(account:string,cssProductInput:string) {
+  cssProductInputPath(account: string, cssProductInput: string) {
     return this.pathTemplates.cssProductInputPathTemplate.render({
       account: account,
       css_product_input: cssProductInput,
@@ -902,7 +1054,9 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromCssProductInputName(cssProductInputName: string) {
-    return this.pathTemplates.cssProductInputPathTemplate.match(cssProductInputName).account;
+    return this.pathTemplates.cssProductInputPathTemplate.match(
+      cssProductInputName,
+    ).account;
   }
 
   /**
@@ -913,7 +1067,9 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the css_product_input.
    */
   matchCssProductInputFromCssProductInputName(cssProductInputName: string) {
-    return this.pathTemplates.cssProductInputPathTemplate.match(cssProductInputName).css_product_input;
+    return this.pathTemplates.cssProductInputPathTemplate.match(
+      cssProductInputName,
+    ).css_product_input;
   }
 
   /**
@@ -923,7 +1079,7 @@ export class AccountsServiceClient {
    * @param {string} quota_group
    * @returns {string} Resource name string.
    */
-  quotaGroupPath(account:string,quotaGroup:string) {
+  quotaGroupPath(account: string, quotaGroup: string) {
     return this.pathTemplates.quotaGroupPathTemplate.render({
       account: account,
       quota_group: quotaGroup,
@@ -938,7 +1094,8 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromQuotaGroupName(quotaGroupName: string) {
-    return this.pathTemplates.quotaGroupPathTemplate.match(quotaGroupName).account;
+    return this.pathTemplates.quotaGroupPathTemplate.match(quotaGroupName)
+      .account;
   }
 
   /**
@@ -949,7 +1106,8 @@ export class AccountsServiceClient {
    * @returns {string} A string representing the quota_group.
    */
   matchQuotaGroupFromQuotaGroupName(quotaGroupName: string) {
-    return this.pathTemplates.quotaGroupPathTemplate.match(quotaGroupName).quota_group;
+    return this.pathTemplates.quotaGroupPathTemplate.match(quotaGroupName)
+      .quota_group;
   }
 
   /**
@@ -960,7 +1118,7 @@ export class AccountsServiceClient {
    */
   close(): Promise<void> {
     if (this.accountsServiceStub && !this._terminated) {
-      return this.accountsServiceStub.then(stub => {
+      return this.accountsServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

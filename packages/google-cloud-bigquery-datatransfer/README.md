@@ -74,7 +74,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | start manual transfer runs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.start_manual_transfer_runs.js) |
 | unenroll data sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.unenroll_data_sources.js) |
 | update transfer config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.update_transfer_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/snippet_metadata_google.cloud.bigquery.datatransfer.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -108,7 +107,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -118,7 +117,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

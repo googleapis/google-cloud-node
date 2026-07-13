@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DataAgentServiceClient} from './data_agent_service_client';
-export {DataChatServiceClient} from './data_chat_service_client';
+export { DataAgentServiceClient } from './data_agent_service_client';
+export { DataChatServiceClient } from './data_chat_service_client';

@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -92,7 +99,7 @@ export class ManagedSchemaRegistryClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('managedkafka-schemaregistry');
@@ -105,10 +112,10 @@ export class ManagedSchemaRegistryClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  managedSchemaRegistryStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  managedSchemaRegistryStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ManagedSchemaRegistryClient.
@@ -149,21 +156,43 @@ export class ManagedSchemaRegistryClient {
    *     const client = new ManagedSchemaRegistryClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof ManagedSchemaRegistryClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof ManagedSchemaRegistryClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'managedkafka.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -188,7 +217,7 @@ export class ManagedSchemaRegistryClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -202,15 +231,11 @@ export class ManagedSchemaRegistryClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -231,60 +256,77 @@ export class ManagedSchemaRegistryClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/compatibility/subjects/{subject}/versions/{version}'
-      ),
-      projectLocationSchemaRegistryConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config'
-      ),
-      projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/compatibility/subjects/{subject}/versions/{version}'
-      ),
-      projectLocationSchemaRegistryContextConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/config'
-      ),
-      projectLocationSchemaRegistryContextModePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/mode'
-      ),
-      projectLocationSchemaRegistryContextSchemasPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/schemas/ids/{schema}'
-      ),
-      projectLocationSchemaRegistryContextSubjectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/mode/{subject}'
-      ),
-      projectLocationSchemaRegistryContextSubjectVersionsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}/versions/{version}'
-      ),
-      projectLocationSchemaRegistryContextSubjectsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}'
-      ),
-      projectLocationSchemaRegistryModePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/mode'
-      ),
-      projectLocationSchemaRegistrySchemasPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/schemas/ids/{schema}'
-      ),
-      projectLocationSchemaRegistrySubjectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/mode/{subject}'
-      ),
-      projectLocationSchemaRegistrySubjectVersionsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}/versions/{version}'
-      ),
-      projectLocationSchemaRegistrySubjectsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}'
-      ),
+      projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/compatibility/subjects/{subject}/versions/{version}',
+        ),
+      projectLocationSchemaRegistryConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config',
+        ),
+      projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/compatibility/subjects/{subject}/versions/{version}',
+        ),
+      projectLocationSchemaRegistryContextConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/config',
+        ),
+      projectLocationSchemaRegistryContextModePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/mode',
+        ),
+      projectLocationSchemaRegistryContextSchemasPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/schemas/ids/{schema}',
+        ),
+      projectLocationSchemaRegistryContextSubjectPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/mode/{subject}',
+        ),
+      projectLocationSchemaRegistryContextSubjectVersionsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}/versions/{version}',
+        ),
+      projectLocationSchemaRegistryContextSubjectsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}',
+        ),
+      projectLocationSchemaRegistryModePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/mode',
+        ),
+      projectLocationSchemaRegistrySchemasPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/schemas/ids/{schema}',
+        ),
+      projectLocationSchemaRegistrySubjectPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/mode/{subject}',
+        ),
+      projectLocationSchemaRegistrySubjectVersionsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}/versions/{version}',
+        ),
+      projectLocationSchemaRegistrySubjectsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}',
+        ),
       schemaContextPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}'
+        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}',
       ),
       schemaRegistryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}'
+        'projects/{project}/locations/{location}/schemaRegistries/{schema_registry}',
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -315,36 +357,69 @@ export class ManagedSchemaRegistryClient {
     // Put together the "service stub" for
     // google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.
     this.managedSchemaRegistryStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.managedkafka.schemaregistry.v1
+            .ManagedSchemaRegistry,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const managedSchemaRegistryStubMethods =
-        ['getSchemaRegistry', 'listSchemaRegistries', 'createSchemaRegistry', 'deleteSchemaRegistry', 'getContext', 'listContexts', 'getSchema', 'getRawSchema', 'listSchemaVersions', 'listSchemaTypes', 'listSubjects', 'listSubjectsBySchemaId', 'deleteSubject', 'lookupVersion', 'getVersion', 'getRawSchemaVersion', 'listVersions', 'createVersion', 'deleteVersion', 'listReferencedSchemas', 'checkCompatibility', 'getSchemaConfig', 'updateSchemaConfig', 'deleteSchemaConfig', 'getSchemaMode', 'updateSchemaMode', 'deleteSchemaMode'];
+    const managedSchemaRegistryStubMethods = [
+      'getSchemaRegistry',
+      'listSchemaRegistries',
+      'createSchemaRegistry',
+      'deleteSchemaRegistry',
+      'getContext',
+      'listContexts',
+      'getSchema',
+      'getRawSchema',
+      'listSchemaVersions',
+      'listSchemaTypes',
+      'listSubjects',
+      'listSubjectsBySchemaId',
+      'deleteSubject',
+      'lookupVersion',
+      'getVersion',
+      'getRawSchemaVersion',
+      'listVersions',
+      'createVersion',
+      'deleteVersion',
+      'listReferencedSchemas',
+      'checkCompatibility',
+      'getSchemaConfig',
+      'updateSchemaConfig',
+      'deleteSchemaConfig',
+      'getSchemaMode',
+      'updateSchemaMode',
+      'deleteSchemaMode',
+    ];
     for (const methodName of managedSchemaRegistryStubMethods) {
       const callPromise = this.managedSchemaRegistryStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -359,8 +434,14 @@ export class ManagedSchemaRegistryClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'managedkafka.googleapis.com';
   }
@@ -371,8 +452,14 @@ export class ManagedSchemaRegistryClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'managedkafka.googleapis.com';
   }
@@ -403,9 +490,7 @@ export class ManagedSchemaRegistryClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -414,8 +499,9 @@ export class ManagedSchemaRegistryClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -426,2741 +512,4064 @@ export class ManagedSchemaRegistryClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Get the schema registry instance.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the schema registry instance to return. Structured
- *   like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry|SchemaRegistry}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.get_schema_registry.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaRegistry_async
- */
+  /**
+   * Get the schema registry instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the schema registry instance to return. Structured
+   *   like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry|SchemaRegistry}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.get_schema_registry.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaRegistry_async
+   */
   getSchemaRegistry(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getSchemaRegistry(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSchemaRegistry(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSchemaRegistry(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSchemaRegistry request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSchemaRegistry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSchemaRegistry(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSchemaRegistry response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSchemaRegistry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRegistryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSchemaRegistry response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * List schema registries.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent whose schema registry instances are to be listed.
- *   Structured like: `projects/{project}/locations/{location}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.ListSchemaRegistriesResponse|ListSchemaRegistriesResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.list_schema_registries.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaRegistries_async
- */
+  /**
+   * List schema registries.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent whose schema registry instances are to be listed.
+   *   Structured like: `projects/{project}/locations/{location}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.ListSchemaRegistriesResponse|ListSchemaRegistriesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.list_schema_registries.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaRegistries_async
+   */
   listSchemaRegistries(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   listSchemaRegistries(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listSchemaRegistries(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listSchemaRegistries(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('listSchemaRegistries request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listSchemaRegistries response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.listSchemaRegistries(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('listSchemaRegistries response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .listSchemaRegistries(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesResponse,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaRegistriesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listSchemaRegistries response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Create a schema registry instance.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent whose schema registry instance is to be created.
- *   Structured like: `projects/{project}/locations/{location}`
- * @param {string} request.schemaRegistryId
- *   Required. The schema registry instance ID to use for this schema registry.
- *   The ID must contain only letters (a-z, A-Z), numbers (0-9), and underscores
- *   (-). The maximum length is 63 characters.
- *   The ID must not start with a number.
- * @param {google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry} request.schemaRegistry
- *   Required. The schema registry instance to create.
- *   The name field is ignored.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry|SchemaRegistry}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.create_schema_registry.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_CreateSchemaRegistry_async
- */
+  /**
+   * Create a schema registry instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent whose schema registry instance is to be created.
+   *   Structured like: `projects/{project}/locations/{location}`
+   * @param {string} request.schemaRegistryId
+   *   Required. The schema registry instance ID to use for this schema registry.
+   *   The ID must contain only letters (a-z, A-Z), numbers (0-9), and underscores
+   *   (-). The maximum length is 63 characters.
+   *   The ID must not start with a number.
+   * @param {google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry} request.schemaRegistry
+   *   Required. The schema registry instance to create.
+   *   The name field is ignored.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry|SchemaRegistry}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.create_schema_registry.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_CreateSchemaRegistry_async
+   */
   createSchemaRegistry(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createSchemaRegistry(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSchemaRegistry(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSchemaRegistry(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createSchemaRegistry request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createSchemaRegistry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createSchemaRegistry(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createSchemaRegistry response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createSchemaRegistry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaRegistry,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateSchemaRegistryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSchemaRegistry response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a schema registry instance.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the schema registry instance to delete. Structured
- *   like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.delete_schema_registry.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaRegistry_async
- */
+  /**
+   * Delete a schema registry instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the schema registry instance to delete. Structured
+   *   like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.delete_schema_registry.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaRegistry_async
+   */
   deleteSchemaRegistry(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteSchemaRegistry(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSchemaRegistry(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSchemaRegistry(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteSchemaRegistry request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteSchemaRegistry response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteSchemaRegistry(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteSchemaRegistry response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteSchemaRegistry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaRegistryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSchemaRegistry response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get the context.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the context to return. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.Context|Context}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.get_context.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetContext_async
- */
+  /**
+   * Get the context.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the context to return. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.Context|Context}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.get_context.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetContext_async
+   */
   getContext(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getContext(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getContext(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getContext(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getContext request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getContext response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getContext(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getContext response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getContext(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.IContext,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IGetContextRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getContext response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * List contexts for a schema registry.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the contexts. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.list_contexts.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListContexts_async
- */
+  /**
+   * List contexts for a schema registry.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the contexts. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.list_contexts.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListContexts_async
+   */
   listContexts(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   listContexts(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listContexts(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listContexts(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('listContexts request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listContexts response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.listContexts(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('listContexts response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .listContexts(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IListContextsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listContexts response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get the schema for the given schema id.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the schema to return. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/schemas/ids/{schema}`
- * @param {string} [request.subject]
- *   Optional. Used to limit the search for the schema ID to a specific subject,
- *   otherwise the schema ID will be searched for in all subjects in the given
- *   specified context.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.Schema|Schema}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.get_schema.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetSchema_async
- */
+  /**
+   * Get the schema for the given schema id.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the schema to return. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/schemas/ids/{schema}`
+   * @param {string} [request.subject]
+   *   Optional. Used to limit the search for the schema ID to a specific subject,
+   *   otherwise the schema ID will be searched for in all subjects in the given
+   *   specified context.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.Schema|Schema}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.get_schema.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetSchema_async
+   */
   getSchema(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getSchema(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSchema(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSchema(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSchema request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSchema(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSchema response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchema,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSchema response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get the schema string for the given schema id.
- * The response will be the schema string.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the schema to return. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/schemas/ids/{schema}`
- * @param {string} [request.subject]
- *   Optional. Used to limit the search for the schema ID to a specific subject,
- *   otherwise the schema ID will be searched for in all subjects in the given
- *   specified context.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.get_raw_schema.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetRawSchema_async
- */
+  /**
+   * Get the schema string for the given schema id.
+   * The response will be the schema string.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the schema to return. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/schemas/ids/{schema}`
+   * @param {string} [request.subject]
+   *   Optional. Used to limit the search for the schema ID to a specific subject,
+   *   otherwise the schema ID will be searched for in all subjects in the given
+   *   specified context.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.get_raw_schema.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetRawSchema_async
+   */
   getRawSchema(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getRawSchema(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRawSchema(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRawSchema(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getRawSchema request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRawSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getRawSchema(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getRawSchema response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getRawSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRawSchema response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * List the schema versions for the given schema id.
- * The response will be an array of subject-version pairs as:
- * [{"subject":"subject1", "version":1}, {"subject":"subject2", "version":2}].
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The schema whose schema versions are to be listed. Structured
- *   like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/schemas/ids/{schema}`
- *   or
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/schemas/ids/{schema}`
- * @param {string} [request.subject]
- *   Optional. The subject to filter the subjects by.
- * @param {boolean} [request.deleted]
- *   Optional. If true, the response will include soft-deleted versions of the
- *   schema, even if the subject is soft-deleted. The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.list_schema_versions.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaVersions_async
- */
+  /**
+   * List the schema versions for the given schema id.
+   * The response will be an array of subject-version pairs as:
+   * [{"subject":"subject1", "version":1}, {"subject":"subject2", "version":2}].
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The schema whose schema versions are to be listed. Structured
+   *   like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/schemas/ids/{schema}`
+   *   or
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/schemas/ids/{schema}`
+   * @param {string} [request.subject]
+   *   Optional. The subject to filter the subjects by.
+   * @param {boolean} [request.deleted]
+   *   Optional. If true, the response will include soft-deleted versions of the
+   *   schema, even if the subject is soft-deleted. The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.list_schema_versions.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaVersions_async
+   */
   listSchemaVersions(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   listSchemaVersions(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listSchemaVersions(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listSchemaVersions(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('listSchemaVersions request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listSchemaVersions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.listSchemaVersions(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('listSchemaVersions response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .listSchemaVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaVersionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listSchemaVersions response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * List the supported schema types.
- * The response will be an array of schema types.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent schema registry whose schema types are to be listed.
- *   Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.list_schema_types.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaTypes_async
- */
+  /**
+   * List the supported schema types.
+   * The response will be an array of schema types.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent schema registry whose schema types are to be listed.
+   *   Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.list_schema_types.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaTypes_async
+   */
   listSchemaTypes(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   listSchemaTypes(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listSchemaTypes(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listSchemaTypes(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('listSchemaTypes request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listSchemaTypes response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.listSchemaTypes(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('listSchemaTypes response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .listSchemaTypes(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IListSchemaTypesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listSchemaTypes response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * List subjects in the schema registry.
- * The response will be an array of subject names.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent schema registry/context whose subjects are to be
- *   listed. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}`
- *   or
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}`
- * @param {string} [request.subjectPrefix]
- *   Optional. The context to filter the subjects by, in the format of
- *   `:.{context}:`. If unset, all subjects in the registry are returned. Set to
- *   empty string or add as
- *   '?subjectPrefix=' at the end of this request to list subjects in the
- *   default context.
- * @param {boolean} [request.deleted]
- *   Optional. If true, the response will include soft-deleted subjects. The
- *   default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.list_subjects.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListSubjects_async
- */
+  /**
+   * List subjects in the schema registry.
+   * The response will be an array of subject names.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent schema registry/context whose subjects are to be
+   *   listed. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}`
+   *   or
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}`
+   * @param {string} [request.subjectPrefix]
+   *   Optional. The context to filter the subjects by, in the format of
+   *   `:.{context}:`. If unset, all subjects in the registry are returned. Set to
+   *   empty string or add as
+   *   '?subjectPrefix=' at the end of this request to list subjects in the
+   *   default context.
+   * @param {boolean} [request.deleted]
+   *   Optional. If true, the response will include soft-deleted subjects. The
+   *   default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.list_subjects.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListSubjects_async
+   */
   listSubjects(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   listSubjects(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listSubjects(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listSubjects(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('listSubjects request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listSubjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.listSubjects(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('listSubjects response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .listSubjects(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listSubjects response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * List subjects which reference a particular schema id.
- * The response will be an array of subject names.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The schema resource whose associated subjects are to be listed.
- *   Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/schemas/ids/{schema}`
- *   or
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/schemas/ids/{schema}`
- * @param {string} [request.subject]
- *   Optional. The subject to filter the subjects by.
- * @param {boolean} [request.deleted]
- *   Optional. If true, the response will include soft-deleted subjects. The
- *   default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.list_subjects_by_schema_id.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListSubjectsBySchemaId_async
- */
+  /**
+   * List subjects which reference a particular schema id.
+   * The response will be an array of subject names.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The schema resource whose associated subjects are to be listed.
+   *   Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/schemas/ids/{schema}`
+   *   or
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/schemas/ids/{schema}`
+   * @param {string} [request.subject]
+   *   Optional. The subject to filter the subjects by.
+   * @param {boolean} [request.deleted]
+   *   Optional. If true, the response will include soft-deleted subjects. The
+   *   default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.list_subjects_by_schema_id.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListSubjectsBySchemaId_async
+   */
   listSubjectsBySchemaId(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   listSubjectsBySchemaId(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listSubjectsBySchemaId(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listSubjectsBySchemaId(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('listSubjectsBySchemaId request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listSubjectsBySchemaId response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.listSubjectsBySchemaId(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('listSubjectsBySchemaId response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .listSubjectsBySchemaId(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IListSubjectsBySchemaIdRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listSubjectsBySchemaId response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a subject.
- * The response will be an array of versions of the deleted subject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the subject to delete. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}`
- *   or
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}`
- * @param {boolean} [request.permanent]
- *   Optional. If true, the subject and all associated metadata including the
- *   schema ID will be deleted permanently. Otherwise, only the subject is
- *   soft-deleted. The default is false. Soft-deleted subjects can still be
- *   searched in ListSubjects API call with deleted=true query parameter. A
- *   soft-delete of a subject must be performed before a hard-delete.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.delete_subject.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSubject_async
- */
+  /**
+   * Delete a subject.
+   * The response will be an array of versions of the deleted subject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the subject to delete. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}`
+   *   or
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}`
+   * @param {boolean} [request.permanent]
+   *   Optional. If true, the subject and all associated metadata including the
+   *   schema ID will be deleted permanently. Otherwise, only the subject is
+   *   soft-deleted. The default is false. Soft-deleted subjects can still be
+   *   searched in ListSubjects API call with deleted=true query parameter. A
+   *   soft-delete of a subject must be performed before a hard-delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.delete_subject.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSubject_async
+   */
   deleteSubject(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteSubject(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSubject(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSubject(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteSubject request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteSubject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteSubject(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteSubject response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteSubject(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSubjectRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSubject response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Lookup a schema under the specified subject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The subject to lookup the schema in. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}`
- *   or
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}`
- * @param {google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType} [request.schemaType]
- *   Optional. The schema type of the schema.
- * @param {string} request.schema
- *   Required. The schema payload
- * @param {number[]} [request.references]
- *   Optional. The schema references used by the schema.
- * @param {boolean} [request.normalize]
- *   Optional. If true, the schema will be normalized before being looked up.
- *   The default is false.
- * @param {boolean} [request.deleted]
- *   Optional. If true, soft-deleted versions will be included in lookup, no
- *   matter if the subject is active or soft-deleted. If false, soft-deleted
- *   versions will be excluded. The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaVersion|SchemaVersion}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.lookup_version.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_LookupVersion_async
- */
+  /**
+   * Lookup a schema under the specified subject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The subject to lookup the schema in. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}`
+   *   or
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}`
+   * @param {google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType} [request.schemaType]
+   *   Optional. The schema type of the schema.
+   * @param {string} request.schema
+   *   Required. The schema payload
+   * @param {number[]} [request.references]
+   *   Optional. The schema references used by the schema.
+   * @param {boolean} [request.normalize]
+   *   Optional. If true, the schema will be normalized before being looked up.
+   *   The default is false.
+   * @param {boolean} [request.deleted]
+   *   Optional. If true, soft-deleted versions will be included in lookup, no
+   *   matter if the subject is active or soft-deleted. If false, soft-deleted
+   *   versions will be excluded. The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaVersion|SchemaVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.lookup_version.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_LookupVersion_async
+   */
   lookupVersion(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   lookupVersion(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   lookupVersion(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   lookupVersion(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('lookupVersion request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('lookupVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.lookupVersion(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('lookupVersion response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .lookupVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.ILookupVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('lookupVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get a versioned schema (schema with subject/version) of a subject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the subject to return versions. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}/versions/{version}`
- *   or
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}/versions/{version}`
- * @param {boolean} [request.deleted]
- *   Optional. If true, no matter if the subject/version is soft-deleted or not,
- *   it returns the version details. If false, it returns NOT_FOUND error if the
- *   subject/version is soft-deleted. The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaVersion|SchemaVersion}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.get_version.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetVersion_async
- */
+  /**
+   * Get a versioned schema (schema with subject/version) of a subject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the subject to return versions. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}/versions/{version}`
+   *   or
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}/versions/{version}`
+   * @param {boolean} [request.deleted]
+   *   Optional. If true, no matter if the subject/version is soft-deleted or not,
+   *   it returns the version details. If false, it returns NOT_FOUND error if the
+   *   subject/version is soft-deleted. The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaVersion|SchemaVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.get_version.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetVersion_async
+   */
   getVersion(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getVersion(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getVersion(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getVersion(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getVersion request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getVersion(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getVersion response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaVersion,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get the schema string only for a version of a subject.
- * The response will be the schema string.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the subject to return versions. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}/versions/{version}`
- *   or
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}/versions/{version}`
- * @param {boolean} [request.deleted]
- *   Optional. If true, no matter if the subject/version is soft-deleted or not,
- *   it returns the version details. If false, it returns NOT_FOUND error if the
- *   subject/version is soft-deleted. The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.get_raw_schema_version.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetRawSchemaVersion_async
- */
+  /**
+   * Get the schema string only for a version of a subject.
+   * The response will be the schema string.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the subject to return versions. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}/versions/{version}`
+   *   or
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}/versions/{version}`
+   * @param {boolean} [request.deleted]
+   *   Optional. If true, no matter if the subject/version is soft-deleted or not,
+   *   it returns the version details. If false, it returns NOT_FOUND error if the
+   *   subject/version is soft-deleted. The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.get_raw_schema_version.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetRawSchemaVersion_async
+   */
   getRawSchemaVersion(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getRawSchemaVersion(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRawSchemaVersion(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRawSchemaVersion(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getRawSchemaVersion request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRawSchemaVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getRawSchemaVersion(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getRawSchemaVersion response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getRawSchemaVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IGetVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRawSchemaVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get all versions of a subject.
- * The response will be an array of versions of the subject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The subject whose versions are to be listed. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}`
- *   or
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}`
- * @param {boolean} [request.deleted]
- *   Optional. If true, the response will include soft-deleted versions of an
- *   active or soft-deleted subject. The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.list_versions.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListVersions_async
- */
+  /**
+   * Get all versions of a subject.
+   * The response will be an array of versions of the subject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The subject whose versions are to be listed. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}`
+   *   or
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}`
+   * @param {boolean} [request.deleted]
+   *   Optional. If true, the response will include soft-deleted versions of an
+   *   active or soft-deleted subject. The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.list_versions.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListVersions_async
+   */
   listVersions(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   listVersions(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listVersions(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listVersions(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('listVersions request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listVersions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.listVersions(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('listVersions response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .listVersions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IListVersionsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listVersions response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Register a new version under a given subject with the given schema.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The subject to create the version for. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}`
- *   or
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}`
- * @param {number} [request.version]
- *   Optional. The version to create. It is optional. If not specified, the
- *   version will be created with the max version ID of the subject increased
- *   by 1. If the version ID is specified, it will be used as the new version ID
- *   and must not be used by an existing version of the subject.
- * @param {number} [request.id]
- *   Optional. The schema ID of the schema. If not specified, the schema ID will
- *   be generated by the server. If the schema ID is specified, it must not be
- *   used by an existing schema that is different from the schema to be created.
- * @param {google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType} [request.schemaType]
- *   Optional. The type of the schema. It is optional. If not specified, the
- *   schema type will be AVRO.
- * @param {string} request.schema
- *   Required. The schema payload
- * @param {number[]} [request.references]
- *   Optional. The schema references used by the schema.
- * @param {boolean} [request.normalize]
- *   Optional. If true, the schema will be normalized before being stored. The
- *   default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.CreateVersionResponse|CreateVersionResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.create_version.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_CreateVersion_async
- */
+  /**
+   * Register a new version under a given subject with the given schema.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The subject to create the version for. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}`
+   *   or
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}`
+   * @param {number} [request.version]
+   *   Optional. The version to create. It is optional. If not specified, the
+   *   version will be created with the max version ID of the subject increased
+   *   by 1. If the version ID is specified, it will be used as the new version ID
+   *   and must not be used by an existing version of the subject.
+   * @param {number} [request.id]
+   *   Optional. The schema ID of the schema. If not specified, the schema ID will
+   *   be generated by the server. If the schema ID is specified, it must not be
+   *   used by an existing schema that is different from the schema to be created.
+   * @param {google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType} [request.schemaType]
+   *   Optional. The type of the schema. It is optional. If not specified, the
+   *   schema type will be AVRO.
+   * @param {string} request.schema
+   *   Required. The schema payload
+   * @param {number[]} [request.references]
+   *   Optional. The schema references used by the schema.
+   * @param {boolean} [request.normalize]
+   *   Optional. If true, the schema will be normalized before being stored. The
+   *   default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.CreateVersionResponse|CreateVersionResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.create_version.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_CreateVersion_async
+   */
   createVersion(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createVersion(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createVersion(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createVersion(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createVersion request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createVersion(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createVersion response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionResponse,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.ICreateVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a version of a subject.
- * The response will be the deleted version id.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the subject version to delete. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}/versions/{version}`
- *   or
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}/versions/{version}`
- * @param {boolean} [request.permanent]
- *   Optional. If true, both the version and the referenced schema ID will be
- *   permanently deleted. The default is false. If false, the version will be
- *   deleted but the schema ID will be retained. Soft-deleted versions can still
- *   be searched in ListVersions API call with deleted=true query parameter. A
- *   soft-delete of a version must be performed before a hard-delete.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.delete_version.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_DeleteVersion_async
- */
+  /**
+   * Delete a version of a subject.
+   * The response will be the deleted version id.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the subject version to delete. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}/versions/{version}`
+   *   or
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}/versions/{version}`
+   * @param {boolean} [request.permanent]
+   *   Optional. If true, both the version and the referenced schema ID will be
+   *   permanently deleted. The default is false. If false, the version will be
+   *   deleted but the schema ID will be retained. Soft-deleted versions can still
+   *   be searched in ListVersions API call with deleted=true query parameter. A
+   *   soft-delete of a version must be performed before a hard-delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.delete_version.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_DeleteVersion_async
+   */
   deleteVersion(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteVersion(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteVersion(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteVersion(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteVersion request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteVersion(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteVersion response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get a list of IDs of schemas that reference the schema with the given
- * subject and version.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The version to list referenced by. Structured like:
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}/versions/{version}`
- *   or
- *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}/versions/{version}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.list_referenced_schemas.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListReferencedSchemas_async
- */
+  /**
+   * Get a list of IDs of schemas that reference the schema with the given
+   * subject and version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The version to list referenced by. Structured like:
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/subjects/{subject}/versions/{version}`
+   *   or
+   *   `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/subjects/{subject}/versions/{version}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.api.HttpBody|HttpBody}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.list_referenced_schemas.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_ListReferencedSchemas_async
+   */
   listReferencedSchemas(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   listReferencedSchemas(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listReferencedSchemas(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest,
-      callback: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   listReferencedSchemas(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.api.IHttpBody,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('listReferencedSchemas request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('listReferencedSchemas response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.listReferencedSchemas(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.api.IHttpBody,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('listReferencedSchemas response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .listReferencedSchemas(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.api.IHttpBody,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IListReferencedSchemasRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('listReferencedSchemas response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Check compatibility of a schema with all versions or a specific version of
- * a subject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the resource to check compatibility for. The format
- *   is either of following:
- *   * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/compatibility/subjects/* /versions: Check compatibility with one or
- *     more versions of the specified subject.
- *   * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/compatibility/subjects/{subject}/versions/{version}: Check
- *     compatibility with a specific version of the subject.
- * @param {google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType} [request.schemaType]
- *   Optional. The schema type of the schema.
- * @param {string} request.schema
- *   Required. The schema payload
- * @param {number[]} [request.references]
- *   Optional. The schema references used by the schema.
- * @param {boolean} [request.verbose]
- *   Optional. If true, the response will contain the compatibility check result
- *   with reasons for failed checks. The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.CheckCompatibilityResponse|CheckCompatibilityResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.check_compatibility.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_CheckCompatibility_async
- */
+  /**
+   * Check compatibility of a schema with all versions or a specific version of
+   * a subject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the resource to check compatibility for. The format
+   *   is either of following:
+   *   * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/compatibility/subjects/* /versions: Check compatibility with one or
+   *     more versions of the specified subject.
+   *   * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/compatibility/subjects/{subject}/versions/{version}: Check
+   *     compatibility with a specific version of the subject.
+   * @param {google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType} [request.schemaType]
+   *   Optional. The schema type of the schema.
+   * @param {string} request.schema
+   *   Required. The schema payload
+   * @param {number[]} [request.references]
+   *   Optional. The schema references used by the schema.
+   * @param {boolean} [request.verbose]
+   *   Optional. If true, the response will contain the compatibility check result
+   *   with reasons for failed checks. The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.CheckCompatibilityResponse|CheckCompatibilityResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.check_compatibility.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_CheckCompatibility_async
+   */
   checkCompatibility(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   checkCompatibility(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   checkCompatibility(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   checkCompatibility(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
-          protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('checkCompatibility request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('checkCompatibility response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.checkCompatibility(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
-        protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('checkCompatibility response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .checkCompatibility(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityResponse,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.ICheckCompatibilityRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('checkCompatibility response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get schema config at global level or for a subject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name to get the config for. It can be either of
- *   following:
- *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config: Get config at global level.
- *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config/{subject}: Get config for a specific subject.
- * @param {boolean} [request.defaultToGlobal]
- *   Optional. If true, the config will fall back to the config at the global
- *   level if no subject level config is found.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaConfig|SchemaConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.get_schema_config.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaConfig_async
- */
+  /**
+   * Get schema config at global level or for a subject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name to get the config for. It can be either of
+   *   following:
+   *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config: Get config at global level.
+   *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config/{subject}: Get config for a specific subject.
+   * @param {boolean} [request.defaultToGlobal]
+   *   Optional. If true, the config will fall back to the config at the global
+   *   level if no subject level config is found.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaConfig|SchemaConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.get_schema_config.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaConfig_async
+   */
   getSchemaConfig(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getSchemaConfig(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSchemaConfig(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSchemaConfig(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSchemaConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSchemaConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSchemaConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSchemaConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSchemaConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSchemaConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update config at global level or for a subject.
- * Creates a SchemaSubject-level SchemaConfig if it does not exist.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name to update the config for. It can be either of
- *   following:
- *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config: Update config at global level.
- *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config/{subject}: Update config for a specific subject.
- * @param {google.cloud.managedkafka.schemaregistry.v1.SchemaConfig.CompatibilityType} request.compatibility
- *   Required. The compatibility type of the schemas.
- *   Cannot be unset for a SchemaRegistry-level SchemaConfig.
- *   If unset on a SchemaSubject-level SchemaConfig, removes the compatibility
- *   field for the SchemaConfig.
- * @param {boolean} [request.normalize]
- *   Optional. If true, the schema will be normalized before being stored or
- *   looked up. The default is false. Cannot be unset for a SchemaRegistry-level
- *   SchemaConfig. If unset on a SchemaSubject-level SchemaConfig, removes the
- *   normalize field for the SchemaConfig.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaConfig|SchemaConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.update_schema_config.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_UpdateSchemaConfig_async
- */
+  /**
+   * Update config at global level or for a subject.
+   * Creates a SchemaSubject-level SchemaConfig if it does not exist.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name to update the config for. It can be either of
+   *   following:
+   *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config: Update config at global level.
+   *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config/{subject}: Update config for a specific subject.
+   * @param {google.cloud.managedkafka.schemaregistry.v1.SchemaConfig.CompatibilityType} request.compatibility
+   *   Required. The compatibility type of the schemas.
+   *   Cannot be unset for a SchemaRegistry-level SchemaConfig.
+   *   If unset on a SchemaSubject-level SchemaConfig, removes the compatibility
+   *   field for the SchemaConfig.
+   * @param {boolean} [request.normalize]
+   *   Optional. If true, the schema will be normalized before being stored or
+   *   looked up. The default is false. Cannot be unset for a SchemaRegistry-level
+   *   SchemaConfig. If unset on a SchemaSubject-level SchemaConfig, removes the
+   *   normalize field for the SchemaConfig.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaConfig|SchemaConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.update_schema_config.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_UpdateSchemaConfig_async
+   */
   updateSchemaConfig(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateSchemaConfig(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSchemaConfig(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSchemaConfig(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateSchemaConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSchemaConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateSchemaConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateSchemaConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateSchemaConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSchemaConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete schema config for a subject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of subject to delete the config for. The format
- *   is
- *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config/{subject}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaConfig|SchemaConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.delete_schema_config.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaConfig_async
- */
+  /**
+   * Delete schema config for a subject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of subject to delete the config for. The format
+   *   is
+   *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/config/{subject}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaConfig|SchemaConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.delete_schema_config.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaConfig_async
+   */
   deleteSchemaConfig(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteSchemaConfig(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSchemaConfig(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSchemaConfig(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteSchemaConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteSchemaConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteSchemaConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteSchemaConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteSchemaConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaConfig,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSchemaConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get mode at global level or for a subject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the mode. The format is
- *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/mode/{subject}: mode for a schema registry, or
- *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/mode/{subject}: mode for a specific subject in a specific context
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaMode|SchemaMode}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.get_schema_mode.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaMode_async
- */
+  /**
+   * Get mode at global level or for a subject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the mode. The format is
+   *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/mode/{subject}: mode for a schema registry, or
+   *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/mode/{subject}: mode for a specific subject in a specific context
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaMode|SchemaMode}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.get_schema_mode.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaMode_async
+   */
   getSchemaMode(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getSchemaMode(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSchemaMode(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSchemaMode(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSchemaMode request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSchemaMode response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSchemaMode(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSchemaMode response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSchemaMode(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IGetSchemaModeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSchemaMode response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update mode at global level or for a subject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the mode. The format is
- *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/mode/{subject}: mode for a schema registry, or
- *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/mode/{subject}: mode for a specific subject in a specific context
- * @param {google.cloud.managedkafka.schemaregistry.v1.SchemaMode.ModeType} request.mode
- *   Required. The mode type.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaMode|SchemaMode}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.update_schema_mode.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_UpdateSchemaMode_async
- */
+  /**
+   * Update mode at global level or for a subject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the mode. The format is
+   *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/mode/{subject}: mode for a schema registry, or
+   *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/mode/{subject}: mode for a specific subject in a specific context
+   * @param {google.cloud.managedkafka.schemaregistry.v1.SchemaMode.ModeType} request.mode
+   *   Required. The mode type.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaMode|SchemaMode}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.update_schema_mode.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_UpdateSchemaMode_async
+   */
   updateSchemaMode(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateSchemaMode(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSchemaMode(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSchemaMode(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateSchemaMode request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSchemaMode response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateSchemaMode(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateSchemaMode response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateSchemaMode(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IUpdateSchemaModeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSchemaMode response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete schema mode for a subject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of subject to delete the mode for. The format
- *   is
- *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/mode/{subject}
- *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/mode/{subject}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaMode|SchemaMode}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/managed_schema_registry.delete_schema_mode.js</caption>
- * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaMode_async
- */
+  /**
+   * Delete schema mode for a subject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of subject to delete the mode for. The format
+   *   is
+   *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/mode/{subject}
+   *     * projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/mode/{subject}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.managedkafka.schemaregistry.v1.SchemaMode|SchemaMode}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/managed_schema_registry.delete_schema_mode.js</caption>
+   * region_tag:managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaMode_async
+   */
   deleteSchemaMode(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteSchemaMode(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSchemaMode(
-      request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest,
-      callback: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest,
+    callback: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSchemaMode(
-      request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-          protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+      (
+        | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteSchemaMode request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+          | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteSchemaMode response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteSchemaMode(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
-        protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteSchemaMode response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteSchemaMode(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.managedkafka.schemaregistry.v1.ISchemaMode,
+          (
+            | protos.google.cloud.managedkafka.schemaregistry.v1.IDeleteSchemaModeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSchemaMode response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -3195,12 +4604,11 @@ export class ManagedSchemaRegistryClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3233,7 +4641,7 @@ export class ManagedSchemaRegistryClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -3252,14 +4660,22 @@ export class ManagedSchemaRegistryClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistryCompatibilitySubjectVersionsPath(project:string,location:string,schemaRegistry:string,subject:string,version:string) {
-    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      subject: subject,
-      version: version,
-    });
+  projectLocationSchemaRegistryCompatibilitySubjectVersionsPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    subject: string,
+    version: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        subject: subject,
+        version: version,
+      },
+    );
   }
 
   /**
@@ -3269,8 +4685,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_compatibility_subject_versions resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistryCompatibilitySubjectVersionsName(projectLocationSchemaRegistryCompatibilitySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.match(projectLocationSchemaRegistryCompatibilitySubjectVersionsName).project;
+  matchProjectFromProjectLocationSchemaRegistryCompatibilitySubjectVersionsName(
+    projectLocationSchemaRegistryCompatibilitySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryCompatibilitySubjectVersionsName,
+    ).project;
   }
 
   /**
@@ -3280,8 +4700,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_compatibility_subject_versions resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistryCompatibilitySubjectVersionsName(projectLocationSchemaRegistryCompatibilitySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.match(projectLocationSchemaRegistryCompatibilitySubjectVersionsName).location;
+  matchLocationFromProjectLocationSchemaRegistryCompatibilitySubjectVersionsName(
+    projectLocationSchemaRegistryCompatibilitySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryCompatibilitySubjectVersionsName,
+    ).location;
   }
 
   /**
@@ -3291,8 +4715,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_compatibility_subject_versions resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistryCompatibilitySubjectVersionsName(projectLocationSchemaRegistryCompatibilitySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.match(projectLocationSchemaRegistryCompatibilitySubjectVersionsName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistryCompatibilitySubjectVersionsName(
+    projectLocationSchemaRegistryCompatibilitySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryCompatibilitySubjectVersionsName,
+    ).schema_registry;
   }
 
   /**
@@ -3302,8 +4730,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_compatibility_subject_versions resource.
    * @returns {string} A string representing the subject.
    */
-  matchSubjectFromProjectLocationSchemaRegistryCompatibilitySubjectVersionsName(projectLocationSchemaRegistryCompatibilitySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.match(projectLocationSchemaRegistryCompatibilitySubjectVersionsName).subject;
+  matchSubjectFromProjectLocationSchemaRegistryCompatibilitySubjectVersionsName(
+    projectLocationSchemaRegistryCompatibilitySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryCompatibilitySubjectVersionsName,
+    ).subject;
   }
 
   /**
@@ -3313,8 +4745,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_compatibility_subject_versions resource.
    * @returns {string} A string representing the version.
    */
-  matchVersionFromProjectLocationSchemaRegistryCompatibilitySubjectVersionsName(projectLocationSchemaRegistryCompatibilitySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.match(projectLocationSchemaRegistryCompatibilitySubjectVersionsName).version;
+  matchVersionFromProjectLocationSchemaRegistryCompatibilitySubjectVersionsName(
+    projectLocationSchemaRegistryCompatibilitySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryCompatibilitySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryCompatibilitySubjectVersionsName,
+    ).version;
   }
 
   /**
@@ -3325,12 +4761,18 @@ export class ManagedSchemaRegistryClient {
    * @param {string} schema_registry
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistryConfigPath(project:string,location:string,schemaRegistry:string) {
-    return this.pathTemplates.projectLocationSchemaRegistryConfigPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-    });
+  projectLocationSchemaRegistryConfigPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+      },
+    );
   }
 
   /**
@@ -3340,8 +4782,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistryConfigName(projectLocationSchemaRegistryConfigName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryConfigPathTemplate.match(projectLocationSchemaRegistryConfigName).project;
+  matchProjectFromProjectLocationSchemaRegistryConfigName(
+    projectLocationSchemaRegistryConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryConfigPathTemplate.match(
+      projectLocationSchemaRegistryConfigName,
+    ).project;
   }
 
   /**
@@ -3351,8 +4797,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_config resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistryConfigName(projectLocationSchemaRegistryConfigName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryConfigPathTemplate.match(projectLocationSchemaRegistryConfigName).location;
+  matchLocationFromProjectLocationSchemaRegistryConfigName(
+    projectLocationSchemaRegistryConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryConfigPathTemplate.match(
+      projectLocationSchemaRegistryConfigName,
+    ).location;
   }
 
   /**
@@ -3362,8 +4812,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_config resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistryConfigName(projectLocationSchemaRegistryConfigName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryConfigPathTemplate.match(projectLocationSchemaRegistryConfigName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistryConfigName(
+    projectLocationSchemaRegistryConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryConfigPathTemplate.match(
+      projectLocationSchemaRegistryConfigName,
+    ).schema_registry;
   }
 
   /**
@@ -3377,15 +4831,24 @@ export class ManagedSchemaRegistryClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPath(project:string,location:string,schemaRegistry:string,context:string,subject:string,version:string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      context: context,
-      subject: subject,
-      version: version,
-    });
+  projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    context: string,
+    subject: string,
+    version: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        context: context,
+        subject: subject,
+        version: version,
+      },
+    );
   }
 
   /**
@@ -3395,8 +4858,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_compatibility_subject_versions resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName).project;
+  matchProjectFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(
+    projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName,
+    ).project;
   }
 
   /**
@@ -3406,8 +4873,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_compatibility_subject_versions resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName).location;
+  matchLocationFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(
+    projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName,
+    ).location;
   }
 
   /**
@@ -3417,8 +4888,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_compatibility_subject_versions resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(
+    projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName,
+    ).schema_registry;
   }
 
   /**
@@ -3428,8 +4903,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_compatibility_subject_versions resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName).context;
+  matchContextFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(
+    projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName,
+    ).context;
   }
 
   /**
@@ -3439,8 +4918,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_compatibility_subject_versions resource.
    * @returns {string} A string representing the subject.
    */
-  matchSubjectFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName).subject;
+  matchSubjectFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(
+    projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName,
+    ).subject;
   }
 
   /**
@@ -3450,8 +4933,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_compatibility_subject_versions resource.
    * @returns {string} A string representing the version.
    */
-  matchVersionFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName).version;
+  matchVersionFromProjectLocationSchemaRegistryContextCompatibilitySubjectVersionsName(
+    projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextCompatibilitySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextCompatibilitySubjectVersionsName,
+    ).version;
   }
 
   /**
@@ -3463,13 +4950,20 @@ export class ManagedSchemaRegistryClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistryContextConfigPath(project:string,location:string,schemaRegistry:string,context:string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextConfigPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      context: context,
-    });
+  projectLocationSchemaRegistryContextConfigPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    context: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextConfigPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        context: context,
+      },
+    );
   }
 
   /**
@@ -3479,8 +4973,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistryContextConfigName(projectLocationSchemaRegistryContextConfigName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextConfigPathTemplate.match(projectLocationSchemaRegistryContextConfigName).project;
+  matchProjectFromProjectLocationSchemaRegistryContextConfigName(
+    projectLocationSchemaRegistryContextConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextConfigPathTemplate.match(
+      projectLocationSchemaRegistryContextConfigName,
+    ).project;
   }
 
   /**
@@ -3490,8 +4988,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_config resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistryContextConfigName(projectLocationSchemaRegistryContextConfigName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextConfigPathTemplate.match(projectLocationSchemaRegistryContextConfigName).location;
+  matchLocationFromProjectLocationSchemaRegistryContextConfigName(
+    projectLocationSchemaRegistryContextConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextConfigPathTemplate.match(
+      projectLocationSchemaRegistryContextConfigName,
+    ).location;
   }
 
   /**
@@ -3501,8 +5003,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_config resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistryContextConfigName(projectLocationSchemaRegistryContextConfigName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextConfigPathTemplate.match(projectLocationSchemaRegistryContextConfigName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistryContextConfigName(
+    projectLocationSchemaRegistryContextConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextConfigPathTemplate.match(
+      projectLocationSchemaRegistryContextConfigName,
+    ).schema_registry;
   }
 
   /**
@@ -3512,8 +5018,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_config resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectLocationSchemaRegistryContextConfigName(projectLocationSchemaRegistryContextConfigName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextConfigPathTemplate.match(projectLocationSchemaRegistryContextConfigName).context;
+  matchContextFromProjectLocationSchemaRegistryContextConfigName(
+    projectLocationSchemaRegistryContextConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextConfigPathTemplate.match(
+      projectLocationSchemaRegistryContextConfigName,
+    ).context;
   }
 
   /**
@@ -3525,13 +5035,20 @@ export class ManagedSchemaRegistryClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistryContextModePath(project:string,location:string,schemaRegistry:string,context:string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextModePathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      context: context,
-    });
+  projectLocationSchemaRegistryContextModePath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    context: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextModePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        context: context,
+      },
+    );
   }
 
   /**
@@ -3541,8 +5058,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_mode resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistryContextModeName(projectLocationSchemaRegistryContextModeName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextModePathTemplate.match(projectLocationSchemaRegistryContextModeName).project;
+  matchProjectFromProjectLocationSchemaRegistryContextModeName(
+    projectLocationSchemaRegistryContextModeName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextModePathTemplate.match(
+      projectLocationSchemaRegistryContextModeName,
+    ).project;
   }
 
   /**
@@ -3552,8 +5073,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_mode resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistryContextModeName(projectLocationSchemaRegistryContextModeName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextModePathTemplate.match(projectLocationSchemaRegistryContextModeName).location;
+  matchLocationFromProjectLocationSchemaRegistryContextModeName(
+    projectLocationSchemaRegistryContextModeName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextModePathTemplate.match(
+      projectLocationSchemaRegistryContextModeName,
+    ).location;
   }
 
   /**
@@ -3563,8 +5088,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_mode resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistryContextModeName(projectLocationSchemaRegistryContextModeName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextModePathTemplate.match(projectLocationSchemaRegistryContextModeName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistryContextModeName(
+    projectLocationSchemaRegistryContextModeName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextModePathTemplate.match(
+      projectLocationSchemaRegistryContextModeName,
+    ).schema_registry;
   }
 
   /**
@@ -3574,8 +5103,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_mode resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectLocationSchemaRegistryContextModeName(projectLocationSchemaRegistryContextModeName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextModePathTemplate.match(projectLocationSchemaRegistryContextModeName).context;
+  matchContextFromProjectLocationSchemaRegistryContextModeName(
+    projectLocationSchemaRegistryContextModeName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextModePathTemplate.match(
+      projectLocationSchemaRegistryContextModeName,
+    ).context;
   }
 
   /**
@@ -3588,14 +5121,22 @@ export class ManagedSchemaRegistryClient {
    * @param {string} schema
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistryContextSchemasPath(project:string,location:string,schemaRegistry:string,context:string,schema:string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      context: context,
-      schema: schema,
-    });
+  projectLocationSchemaRegistryContextSchemasPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    context: string,
+    schema: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        context: context,
+        schema: schema,
+      },
+    );
   }
 
   /**
@@ -3605,8 +5146,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_schemas resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistryContextSchemasName(projectLocationSchemaRegistryContextSchemasName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.match(projectLocationSchemaRegistryContextSchemasName).project;
+  matchProjectFromProjectLocationSchemaRegistryContextSchemasName(
+    projectLocationSchemaRegistryContextSchemasName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.match(
+      projectLocationSchemaRegistryContextSchemasName,
+    ).project;
   }
 
   /**
@@ -3616,8 +5161,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_schemas resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistryContextSchemasName(projectLocationSchemaRegistryContextSchemasName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.match(projectLocationSchemaRegistryContextSchemasName).location;
+  matchLocationFromProjectLocationSchemaRegistryContextSchemasName(
+    projectLocationSchemaRegistryContextSchemasName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.match(
+      projectLocationSchemaRegistryContextSchemasName,
+    ).location;
   }
 
   /**
@@ -3627,8 +5176,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_schemas resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistryContextSchemasName(projectLocationSchemaRegistryContextSchemasName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.match(projectLocationSchemaRegistryContextSchemasName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistryContextSchemasName(
+    projectLocationSchemaRegistryContextSchemasName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.match(
+      projectLocationSchemaRegistryContextSchemasName,
+    ).schema_registry;
   }
 
   /**
@@ -3638,8 +5191,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_schemas resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectLocationSchemaRegistryContextSchemasName(projectLocationSchemaRegistryContextSchemasName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.match(projectLocationSchemaRegistryContextSchemasName).context;
+  matchContextFromProjectLocationSchemaRegistryContextSchemasName(
+    projectLocationSchemaRegistryContextSchemasName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.match(
+      projectLocationSchemaRegistryContextSchemasName,
+    ).context;
   }
 
   /**
@@ -3649,8 +5206,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_schemas resource.
    * @returns {string} A string representing the schema.
    */
-  matchSchemaFromProjectLocationSchemaRegistryContextSchemasName(projectLocationSchemaRegistryContextSchemasName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.match(projectLocationSchemaRegistryContextSchemasName).schema;
+  matchSchemaFromProjectLocationSchemaRegistryContextSchemasName(
+    projectLocationSchemaRegistryContextSchemasName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSchemasPathTemplate.match(
+      projectLocationSchemaRegistryContextSchemasName,
+    ).schema;
   }
 
   /**
@@ -3663,14 +5224,22 @@ export class ManagedSchemaRegistryClient {
    * @param {string} subject
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistryContextSubjectPath(project:string,location:string,schemaRegistry:string,context:string,subject:string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      context: context,
-      subject: subject,
-    });
+  projectLocationSchemaRegistryContextSubjectPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    context: string,
+    subject: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        context: context,
+        subject: subject,
+      },
+    );
   }
 
   /**
@@ -3680,8 +5249,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subject resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistryContextSubjectName(projectLocationSchemaRegistryContextSubjectName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.match(projectLocationSchemaRegistryContextSubjectName).project;
+  matchProjectFromProjectLocationSchemaRegistryContextSubjectName(
+    projectLocationSchemaRegistryContextSubjectName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectName,
+    ).project;
   }
 
   /**
@@ -3691,8 +5264,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subject resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistryContextSubjectName(projectLocationSchemaRegistryContextSubjectName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.match(projectLocationSchemaRegistryContextSubjectName).location;
+  matchLocationFromProjectLocationSchemaRegistryContextSubjectName(
+    projectLocationSchemaRegistryContextSubjectName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectName,
+    ).location;
   }
 
   /**
@@ -3702,8 +5279,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subject resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistryContextSubjectName(projectLocationSchemaRegistryContextSubjectName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.match(projectLocationSchemaRegistryContextSubjectName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistryContextSubjectName(
+    projectLocationSchemaRegistryContextSubjectName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectName,
+    ).schema_registry;
   }
 
   /**
@@ -3713,8 +5294,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subject resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectLocationSchemaRegistryContextSubjectName(projectLocationSchemaRegistryContextSubjectName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.match(projectLocationSchemaRegistryContextSubjectName).context;
+  matchContextFromProjectLocationSchemaRegistryContextSubjectName(
+    projectLocationSchemaRegistryContextSubjectName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectName,
+    ).context;
   }
 
   /**
@@ -3724,8 +5309,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subject resource.
    * @returns {string} A string representing the subject.
    */
-  matchSubjectFromProjectLocationSchemaRegistryContextSubjectName(projectLocationSchemaRegistryContextSubjectName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.match(projectLocationSchemaRegistryContextSubjectName).subject;
+  matchSubjectFromProjectLocationSchemaRegistryContextSubjectName(
+    projectLocationSchemaRegistryContextSubjectName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectName,
+    ).subject;
   }
 
   /**
@@ -3739,15 +5328,24 @@ export class ManagedSchemaRegistryClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistryContextSubjectVersionsPath(project:string,location:string,schemaRegistry:string,context:string,subject:string,version:string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      context: context,
-      subject: subject,
-      version: version,
-    });
+  projectLocationSchemaRegistryContextSubjectVersionsPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    context: string,
+    subject: string,
+    version: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        context: context,
+        subject: subject,
+        version: version,
+      },
+    );
   }
 
   /**
@@ -3757,8 +5355,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subject_versions resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistryContextSubjectVersionsName(projectLocationSchemaRegistryContextSubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextSubjectVersionsName).project;
+  matchProjectFromProjectLocationSchemaRegistryContextSubjectVersionsName(
+    projectLocationSchemaRegistryContextSubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectVersionsName,
+    ).project;
   }
 
   /**
@@ -3768,8 +5370,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subject_versions resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistryContextSubjectVersionsName(projectLocationSchemaRegistryContextSubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextSubjectVersionsName).location;
+  matchLocationFromProjectLocationSchemaRegistryContextSubjectVersionsName(
+    projectLocationSchemaRegistryContextSubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectVersionsName,
+    ).location;
   }
 
   /**
@@ -3779,8 +5385,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subject_versions resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistryContextSubjectVersionsName(projectLocationSchemaRegistryContextSubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextSubjectVersionsName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistryContextSubjectVersionsName(
+    projectLocationSchemaRegistryContextSubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectVersionsName,
+    ).schema_registry;
   }
 
   /**
@@ -3790,8 +5400,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subject_versions resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectLocationSchemaRegistryContextSubjectVersionsName(projectLocationSchemaRegistryContextSubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextSubjectVersionsName).context;
+  matchContextFromProjectLocationSchemaRegistryContextSubjectVersionsName(
+    projectLocationSchemaRegistryContextSubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectVersionsName,
+    ).context;
   }
 
   /**
@@ -3801,8 +5415,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subject_versions resource.
    * @returns {string} A string representing the subject.
    */
-  matchSubjectFromProjectLocationSchemaRegistryContextSubjectVersionsName(projectLocationSchemaRegistryContextSubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextSubjectVersionsName).subject;
+  matchSubjectFromProjectLocationSchemaRegistryContextSubjectVersionsName(
+    projectLocationSchemaRegistryContextSubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectVersionsName,
+    ).subject;
   }
 
   /**
@@ -3812,8 +5430,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subject_versions resource.
    * @returns {string} A string representing the version.
    */
-  matchVersionFromProjectLocationSchemaRegistryContextSubjectVersionsName(projectLocationSchemaRegistryContextSubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(projectLocationSchemaRegistryContextSubjectVersionsName).version;
+  matchVersionFromProjectLocationSchemaRegistryContextSubjectVersionsName(
+    projectLocationSchemaRegistryContextSubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectVersionsName,
+    ).version;
   }
 
   /**
@@ -3826,14 +5448,22 @@ export class ManagedSchemaRegistryClient {
    * @param {string} subject
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistryContextSubjectsPath(project:string,location:string,schemaRegistry:string,context:string,subject:string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      context: context,
-      subject: subject,
-    });
+  projectLocationSchemaRegistryContextSubjectsPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    context: string,
+    subject: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        context: context,
+        subject: subject,
+      },
+    );
   }
 
   /**
@@ -3843,8 +5473,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subjects resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistryContextSubjectsName(projectLocationSchemaRegistryContextSubjectsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.match(projectLocationSchemaRegistryContextSubjectsName).project;
+  matchProjectFromProjectLocationSchemaRegistryContextSubjectsName(
+    projectLocationSchemaRegistryContextSubjectsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectsName,
+    ).project;
   }
 
   /**
@@ -3854,8 +5488,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subjects resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistryContextSubjectsName(projectLocationSchemaRegistryContextSubjectsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.match(projectLocationSchemaRegistryContextSubjectsName).location;
+  matchLocationFromProjectLocationSchemaRegistryContextSubjectsName(
+    projectLocationSchemaRegistryContextSubjectsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectsName,
+    ).location;
   }
 
   /**
@@ -3865,8 +5503,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subjects resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistryContextSubjectsName(projectLocationSchemaRegistryContextSubjectsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.match(projectLocationSchemaRegistryContextSubjectsName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistryContextSubjectsName(
+    projectLocationSchemaRegistryContextSubjectsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectsName,
+    ).schema_registry;
   }
 
   /**
@@ -3876,8 +5518,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subjects resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectLocationSchemaRegistryContextSubjectsName(projectLocationSchemaRegistryContextSubjectsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.match(projectLocationSchemaRegistryContextSubjectsName).context;
+  matchContextFromProjectLocationSchemaRegistryContextSubjectsName(
+    projectLocationSchemaRegistryContextSubjectsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectsName,
+    ).context;
   }
 
   /**
@@ -3887,8 +5533,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_context_subjects resource.
    * @returns {string} A string representing the subject.
    */
-  matchSubjectFromProjectLocationSchemaRegistryContextSubjectsName(projectLocationSchemaRegistryContextSubjectsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.match(projectLocationSchemaRegistryContextSubjectsName).subject;
+  matchSubjectFromProjectLocationSchemaRegistryContextSubjectsName(
+    projectLocationSchemaRegistryContextSubjectsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryContextSubjectsPathTemplate.match(
+      projectLocationSchemaRegistryContextSubjectsName,
+    ).subject;
   }
 
   /**
@@ -3899,12 +5549,18 @@ export class ManagedSchemaRegistryClient {
    * @param {string} schema_registry
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistryModePath(project:string,location:string,schemaRegistry:string) {
-    return this.pathTemplates.projectLocationSchemaRegistryModePathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-    });
+  projectLocationSchemaRegistryModePath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryModePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+      },
+    );
   }
 
   /**
@@ -3914,8 +5570,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_mode resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistryModeName(projectLocationSchemaRegistryModeName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryModePathTemplate.match(projectLocationSchemaRegistryModeName).project;
+  matchProjectFromProjectLocationSchemaRegistryModeName(
+    projectLocationSchemaRegistryModeName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryModePathTemplate.match(
+      projectLocationSchemaRegistryModeName,
+    ).project;
   }
 
   /**
@@ -3925,8 +5585,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_mode resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistryModeName(projectLocationSchemaRegistryModeName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryModePathTemplate.match(projectLocationSchemaRegistryModeName).location;
+  matchLocationFromProjectLocationSchemaRegistryModeName(
+    projectLocationSchemaRegistryModeName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryModePathTemplate.match(
+      projectLocationSchemaRegistryModeName,
+    ).location;
   }
 
   /**
@@ -3936,8 +5600,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_mode resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistryModeName(projectLocationSchemaRegistryModeName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistryModePathTemplate.match(projectLocationSchemaRegistryModeName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistryModeName(
+    projectLocationSchemaRegistryModeName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistryModePathTemplate.match(
+      projectLocationSchemaRegistryModeName,
+    ).schema_registry;
   }
 
   /**
@@ -3949,13 +5617,20 @@ export class ManagedSchemaRegistryClient {
    * @param {string} schema
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistrySchemasPath(project:string,location:string,schemaRegistry:string,schema:string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySchemasPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      schema: schema,
-    });
+  projectLocationSchemaRegistrySchemasPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    schema: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySchemasPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        schema: schema,
+      },
+    );
   }
 
   /**
@@ -3965,8 +5640,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_schemas resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistrySchemasName(projectLocationSchemaRegistrySchemasName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySchemasPathTemplate.match(projectLocationSchemaRegistrySchemasName).project;
+  matchProjectFromProjectLocationSchemaRegistrySchemasName(
+    projectLocationSchemaRegistrySchemasName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySchemasPathTemplate.match(
+      projectLocationSchemaRegistrySchemasName,
+    ).project;
   }
 
   /**
@@ -3976,8 +5655,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_schemas resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistrySchemasName(projectLocationSchemaRegistrySchemasName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySchemasPathTemplate.match(projectLocationSchemaRegistrySchemasName).location;
+  matchLocationFromProjectLocationSchemaRegistrySchemasName(
+    projectLocationSchemaRegistrySchemasName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySchemasPathTemplate.match(
+      projectLocationSchemaRegistrySchemasName,
+    ).location;
   }
 
   /**
@@ -3987,8 +5670,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_schemas resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistrySchemasName(projectLocationSchemaRegistrySchemasName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySchemasPathTemplate.match(projectLocationSchemaRegistrySchemasName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistrySchemasName(
+    projectLocationSchemaRegistrySchemasName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySchemasPathTemplate.match(
+      projectLocationSchemaRegistrySchemasName,
+    ).schema_registry;
   }
 
   /**
@@ -3998,8 +5685,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_schemas resource.
    * @returns {string} A string representing the schema.
    */
-  matchSchemaFromProjectLocationSchemaRegistrySchemasName(projectLocationSchemaRegistrySchemasName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySchemasPathTemplate.match(projectLocationSchemaRegistrySchemasName).schema;
+  matchSchemaFromProjectLocationSchemaRegistrySchemasName(
+    projectLocationSchemaRegistrySchemasName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySchemasPathTemplate.match(
+      projectLocationSchemaRegistrySchemasName,
+    ).schema;
   }
 
   /**
@@ -4011,13 +5702,20 @@ export class ManagedSchemaRegistryClient {
    * @param {string} subject
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistrySubjectPath(project:string,location:string,schemaRegistry:string,subject:string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      subject: subject,
-    });
+  projectLocationSchemaRegistrySubjectPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    subject: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        subject: subject,
+      },
+    );
   }
 
   /**
@@ -4027,8 +5725,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subject resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistrySubjectName(projectLocationSchemaRegistrySubjectName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectPathTemplate.match(projectLocationSchemaRegistrySubjectName).project;
+  matchProjectFromProjectLocationSchemaRegistrySubjectName(
+    projectLocationSchemaRegistrySubjectName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectPathTemplate.match(
+      projectLocationSchemaRegistrySubjectName,
+    ).project;
   }
 
   /**
@@ -4038,8 +5740,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subject resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistrySubjectName(projectLocationSchemaRegistrySubjectName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectPathTemplate.match(projectLocationSchemaRegistrySubjectName).location;
+  matchLocationFromProjectLocationSchemaRegistrySubjectName(
+    projectLocationSchemaRegistrySubjectName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectPathTemplate.match(
+      projectLocationSchemaRegistrySubjectName,
+    ).location;
   }
 
   /**
@@ -4049,8 +5755,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subject resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistrySubjectName(projectLocationSchemaRegistrySubjectName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectPathTemplate.match(projectLocationSchemaRegistrySubjectName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistrySubjectName(
+    projectLocationSchemaRegistrySubjectName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectPathTemplate.match(
+      projectLocationSchemaRegistrySubjectName,
+    ).schema_registry;
   }
 
   /**
@@ -4060,8 +5770,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subject resource.
    * @returns {string} A string representing the subject.
    */
-  matchSubjectFromProjectLocationSchemaRegistrySubjectName(projectLocationSchemaRegistrySubjectName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectPathTemplate.match(projectLocationSchemaRegistrySubjectName).subject;
+  matchSubjectFromProjectLocationSchemaRegistrySubjectName(
+    projectLocationSchemaRegistrySubjectName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectPathTemplate.match(
+      projectLocationSchemaRegistrySubjectName,
+    ).subject;
   }
 
   /**
@@ -4074,14 +5788,22 @@ export class ManagedSchemaRegistryClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistrySubjectVersionsPath(project:string,location:string,schemaRegistry:string,subject:string,version:string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      subject: subject,
-      version: version,
-    });
+  projectLocationSchemaRegistrySubjectVersionsPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    subject: string,
+    version: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        subject: subject,
+        version: version,
+      },
+    );
   }
 
   /**
@@ -4091,8 +5813,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subject_versions resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistrySubjectVersionsName(projectLocationSchemaRegistrySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.match(projectLocationSchemaRegistrySubjectVersionsName).project;
+  matchProjectFromProjectLocationSchemaRegistrySubjectVersionsName(
+    projectLocationSchemaRegistrySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistrySubjectVersionsName,
+    ).project;
   }
 
   /**
@@ -4102,8 +5828,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subject_versions resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistrySubjectVersionsName(projectLocationSchemaRegistrySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.match(projectLocationSchemaRegistrySubjectVersionsName).location;
+  matchLocationFromProjectLocationSchemaRegistrySubjectVersionsName(
+    projectLocationSchemaRegistrySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistrySubjectVersionsName,
+    ).location;
   }
 
   /**
@@ -4113,8 +5843,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subject_versions resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistrySubjectVersionsName(projectLocationSchemaRegistrySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.match(projectLocationSchemaRegistrySubjectVersionsName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistrySubjectVersionsName(
+    projectLocationSchemaRegistrySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistrySubjectVersionsName,
+    ).schema_registry;
   }
 
   /**
@@ -4124,8 +5858,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subject_versions resource.
    * @returns {string} A string representing the subject.
    */
-  matchSubjectFromProjectLocationSchemaRegistrySubjectVersionsName(projectLocationSchemaRegistrySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.match(projectLocationSchemaRegistrySubjectVersionsName).subject;
+  matchSubjectFromProjectLocationSchemaRegistrySubjectVersionsName(
+    projectLocationSchemaRegistrySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistrySubjectVersionsName,
+    ).subject;
   }
 
   /**
@@ -4135,8 +5873,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subject_versions resource.
    * @returns {string} A string representing the version.
    */
-  matchVersionFromProjectLocationSchemaRegistrySubjectVersionsName(projectLocationSchemaRegistrySubjectVersionsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.match(projectLocationSchemaRegistrySubjectVersionsName).version;
+  matchVersionFromProjectLocationSchemaRegistrySubjectVersionsName(
+    projectLocationSchemaRegistrySubjectVersionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectVersionsPathTemplate.match(
+      projectLocationSchemaRegistrySubjectVersionsName,
+    ).version;
   }
 
   /**
@@ -4148,13 +5890,20 @@ export class ManagedSchemaRegistryClient {
    * @param {string} subject
    * @returns {string} Resource name string.
    */
-  projectLocationSchemaRegistrySubjectsPath(project:string,location:string,schemaRegistry:string,subject:string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectsPathTemplate.render({
-      project: project,
-      location: location,
-      schema_registry: schemaRegistry,
-      subject: subject,
-    });
+  projectLocationSchemaRegistrySubjectsPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    subject: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        schema_registry: schemaRegistry,
+        subject: subject,
+      },
+    );
   }
 
   /**
@@ -4164,8 +5913,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subjects resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSchemaRegistrySubjectsName(projectLocationSchemaRegistrySubjectsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectsPathTemplate.match(projectLocationSchemaRegistrySubjectsName).project;
+  matchProjectFromProjectLocationSchemaRegistrySubjectsName(
+    projectLocationSchemaRegistrySubjectsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectsPathTemplate.match(
+      projectLocationSchemaRegistrySubjectsName,
+    ).project;
   }
 
   /**
@@ -4175,8 +5928,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subjects resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSchemaRegistrySubjectsName(projectLocationSchemaRegistrySubjectsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectsPathTemplate.match(projectLocationSchemaRegistrySubjectsName).location;
+  matchLocationFromProjectLocationSchemaRegistrySubjectsName(
+    projectLocationSchemaRegistrySubjectsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectsPathTemplate.match(
+      projectLocationSchemaRegistrySubjectsName,
+    ).location;
   }
 
   /**
@@ -4186,8 +5943,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subjects resource.
    * @returns {string} A string representing the schema_registry.
    */
-  matchSchemaRegistryFromProjectLocationSchemaRegistrySubjectsName(projectLocationSchemaRegistrySubjectsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectsPathTemplate.match(projectLocationSchemaRegistrySubjectsName).schema_registry;
+  matchSchemaRegistryFromProjectLocationSchemaRegistrySubjectsName(
+    projectLocationSchemaRegistrySubjectsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectsPathTemplate.match(
+      projectLocationSchemaRegistrySubjectsName,
+    ).schema_registry;
   }
 
   /**
@@ -4197,8 +5958,12 @@ export class ManagedSchemaRegistryClient {
    *   A fully-qualified path representing project_location_schema_registry_subjects resource.
    * @returns {string} A string representing the subject.
    */
-  matchSubjectFromProjectLocationSchemaRegistrySubjectsName(projectLocationSchemaRegistrySubjectsName: string) {
-    return this.pathTemplates.projectLocationSchemaRegistrySubjectsPathTemplate.match(projectLocationSchemaRegistrySubjectsName).subject;
+  matchSubjectFromProjectLocationSchemaRegistrySubjectsName(
+    projectLocationSchemaRegistrySubjectsName: string,
+  ) {
+    return this.pathTemplates.projectLocationSchemaRegistrySubjectsPathTemplate.match(
+      projectLocationSchemaRegistrySubjectsName,
+    ).subject;
   }
 
   /**
@@ -4210,7 +5975,12 @@ export class ManagedSchemaRegistryClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  schemaContextPath(project:string,location:string,schemaRegistry:string,context:string) {
+  schemaContextPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+    context: string,
+  ) {
     return this.pathTemplates.schemaContextPathTemplate.render({
       project: project,
       location: location,
@@ -4227,7 +5997,8 @@ export class ManagedSchemaRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSchemaContextName(schemaContextName: string) {
-    return this.pathTemplates.schemaContextPathTemplate.match(schemaContextName).project;
+    return this.pathTemplates.schemaContextPathTemplate.match(schemaContextName)
+      .project;
   }
 
   /**
@@ -4238,7 +6009,8 @@ export class ManagedSchemaRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSchemaContextName(schemaContextName: string) {
-    return this.pathTemplates.schemaContextPathTemplate.match(schemaContextName).location;
+    return this.pathTemplates.schemaContextPathTemplate.match(schemaContextName)
+      .location;
   }
 
   /**
@@ -4249,7 +6021,8 @@ export class ManagedSchemaRegistryClient {
    * @returns {string} A string representing the schema_registry.
    */
   matchSchemaRegistryFromSchemaContextName(schemaContextName: string) {
-    return this.pathTemplates.schemaContextPathTemplate.match(schemaContextName).schema_registry;
+    return this.pathTemplates.schemaContextPathTemplate.match(schemaContextName)
+      .schema_registry;
   }
 
   /**
@@ -4260,7 +6033,8 @@ export class ManagedSchemaRegistryClient {
    * @returns {string} A string representing the context.
    */
   matchContextFromSchemaContextName(schemaContextName: string) {
-    return this.pathTemplates.schemaContextPathTemplate.match(schemaContextName).context;
+    return this.pathTemplates.schemaContextPathTemplate.match(schemaContextName)
+      .context;
   }
 
   /**
@@ -4271,7 +6045,11 @@ export class ManagedSchemaRegistryClient {
    * @param {string} schema_registry
    * @returns {string} Resource name string.
    */
-  schemaRegistryPath(project:string,location:string,schemaRegistry:string) {
+  schemaRegistryPath(
+    project: string,
+    location: string,
+    schemaRegistry: string,
+  ) {
     return this.pathTemplates.schemaRegistryPathTemplate.render({
       project: project,
       location: location,
@@ -4287,7 +6065,9 @@ export class ManagedSchemaRegistryClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSchemaRegistryName(schemaRegistryName: string) {
-    return this.pathTemplates.schemaRegistryPathTemplate.match(schemaRegistryName).project;
+    return this.pathTemplates.schemaRegistryPathTemplate.match(
+      schemaRegistryName,
+    ).project;
   }
 
   /**
@@ -4298,7 +6078,9 @@ export class ManagedSchemaRegistryClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSchemaRegistryName(schemaRegistryName: string) {
-    return this.pathTemplates.schemaRegistryPathTemplate.match(schemaRegistryName).location;
+    return this.pathTemplates.schemaRegistryPathTemplate.match(
+      schemaRegistryName,
+    ).location;
   }
 
   /**
@@ -4309,7 +6091,9 @@ export class ManagedSchemaRegistryClient {
    * @returns {string} A string representing the schema_registry.
    */
   matchSchemaRegistryFromSchemaRegistryName(schemaRegistryName: string) {
-    return this.pathTemplates.schemaRegistryPathTemplate.match(schemaRegistryName).schema_registry;
+    return this.pathTemplates.schemaRegistryPathTemplate.match(
+      schemaRegistryName,
+    ).schema_registry;
   }
 
   /**
@@ -4320,11 +6104,13 @@ export class ManagedSchemaRegistryClient {
    */
   close(): Promise<void> {
     if (this.managedSchemaRegistryStub && !this._terminated) {
-      return this.managedSchemaRegistryStub.then(stub => {
+      return this.managedSchemaRegistryStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

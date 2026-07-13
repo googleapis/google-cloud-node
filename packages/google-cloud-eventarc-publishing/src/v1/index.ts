@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {PublisherClient} from './publisher_client';
+export { PublisherClient } from './publisher_client';

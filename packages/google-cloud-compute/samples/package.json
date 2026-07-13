@@ -14,7 +14,7 @@
     "test": "mocha test --timeout 1200000"
   },
   "dependencies": {
-    "@google-cloud/compute": "^6.9.1",
+    "@google-cloud/compute": "^6.13.0",
     "@sendgrid/mail": "^8.0.0",
     "nodemailer": "^8.0.5",
     "nodemailer-smtp-transport": "^2.7.4"
@@ -23,7 +23,6 @@
     "@google-cloud/storage": "^7.0.0",
     "chai": "^4.2.0",
     "mocha": "^8.0.0",
-    "proxyquire": "^2.0.1",
-    "uuid": "^9.0.0"
+    "proxyquire": "^2.0.1"
   }
 }

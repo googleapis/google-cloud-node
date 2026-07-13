@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,7 +53,7 @@ export class CloudCatalogClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('billing');
@@ -59,9 +66,9 @@ export class CloudCatalogClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  cloudCatalogStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  cloudCatalogStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of CloudCatalogClient.
@@ -102,21 +109,42 @@ export class CloudCatalogClient {
    *     const client = new CloudCatalogClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CloudCatalogClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'cloudbilling.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +169,7 @@ export class CloudCatalogClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,10 +183,7 @@ export class CloudCatalogClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -180,19 +205,19 @@ export class CloudCatalogClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       billingAccountsPathTemplate: new this._gaxModule.PathTemplate(
-        'billingAccounts/{billing_account}'
+        'billingAccounts/{billing_account}',
       ),
       organizationBillingAccountsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/billingAccounts/{billing_account}'
+        'organizations/{organization}/billingAccounts/{billing_account}',
       ),
       projectBillingInfoPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/billingInfo'
+        'projects/{project}/billingInfo',
       ),
       servicePathTemplate: new this._gaxModule.PathTemplate(
-        'services/{service}'
+        'services/{service}',
       ),
       skuPathTemplate: new this._gaxModule.PathTemplate(
-        'services/{service}/skus/{sku}'
+        'services/{service}/skus/{sku}',
       ),
     };
 
@@ -200,16 +225,25 @@ export class CloudCatalogClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listServices:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'services'),
-      listSkus:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'skus')
+      listServices: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'services',
+      ),
+      listSkus: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'skus',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.billing.v1.CloudCatalog', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.billing.v1.CloudCatalog',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -240,37 +274,40 @@ export class CloudCatalogClient {
     // Put together the "service stub" for
     // google.cloud.billing.v1.CloudCatalog.
     this.cloudCatalogStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.billing.v1.CloudCatalog') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.billing.v1.CloudCatalog',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.billing.v1.CloudCatalog,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const cloudCatalogStubMethods =
-        ['listServices', 'listSkus'];
+    const cloudCatalogStubMethods = ['listServices', 'listSkus'];
     for (const methodName of cloudCatalogStubMethods) {
       const callPromise = this.cloudCatalogStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -285,8 +322,14 @@ export class CloudCatalogClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudbilling.googleapis.com';
   }
@@ -297,8 +340,14 @@ export class CloudCatalogClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudbilling.googleapis.com';
   }
@@ -332,7 +381,7 @@ export class CloudCatalogClient {
     return [
       'https://www.googleapis.com/auth/cloud-billing',
       'https://www.googleapis.com/auth/cloud-billing.readonly',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -342,8 +391,9 @@ export class CloudCatalogClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -355,82 +405,102 @@ export class CloudCatalogClient {
   // -- Service calls --
   // -------------------
 
- /**
- * Lists all public cloud services.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} request.pageSize
- *   Requested page size. Defaults to 5000.
- * @param {string} request.pageToken
- *   A token identifying a page of results to return. This should be a
- *   `next_page_token` value returned from a previous `ListServices`
- *   call. If unspecified, the first page of results is returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.billing.v1.Service|Service}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listServicesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all public cloud services.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   Requested page size. Defaults to 5000.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to return. This should be a
+   *   `next_page_token` value returned from a previous `ListServices`
+   *   call. If unspecified, the first page of results is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.billing.v1.Service|Service}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listServicesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listServices(
-      request?: protos.google.cloud.billing.v1.IListServicesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.billing.v1.IService[],
-        protos.google.cloud.billing.v1.IListServicesRequest|null,
-        protos.google.cloud.billing.v1.IListServicesResponse
-      ]>;
+    request?: protos.google.cloud.billing.v1.IListServicesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.billing.v1.IService[],
+      protos.google.cloud.billing.v1.IListServicesRequest | null,
+      protos.google.cloud.billing.v1.IListServicesResponse,
+    ]
+  >;
   listServices(
-      request: protos.google.cloud.billing.v1.IListServicesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.billing.v1.IListServicesRequest,
-          protos.google.cloud.billing.v1.IListServicesResponse|null|undefined,
-          protos.google.cloud.billing.v1.IService>): void;
+    request: protos.google.cloud.billing.v1.IListServicesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListServicesRequest,
+      protos.google.cloud.billing.v1.IListServicesResponse | null | undefined,
+      protos.google.cloud.billing.v1.IService
+    >,
+  ): void;
   listServices(
-      request: protos.google.cloud.billing.v1.IListServicesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.billing.v1.IListServicesRequest,
-          protos.google.cloud.billing.v1.IListServicesResponse|null|undefined,
-          protos.google.cloud.billing.v1.IService>): void;
+    request: protos.google.cloud.billing.v1.IListServicesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListServicesRequest,
+      protos.google.cloud.billing.v1.IListServicesResponse | null | undefined,
+      protos.google.cloud.billing.v1.IService
+    >,
+  ): void;
   listServices(
-      request?: protos.google.cloud.billing.v1.IListServicesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.billing.v1.IListServicesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.billing.v1.IListServicesRequest,
-          protos.google.cloud.billing.v1.IListServicesResponse|null|undefined,
-          protos.google.cloud.billing.v1.IService>,
-      callback?: PaginationCallback<
-          protos.google.cloud.billing.v1.IListServicesRequest,
-          protos.google.cloud.billing.v1.IListServicesResponse|null|undefined,
-          protos.google.cloud.billing.v1.IService>):
-      Promise<[
-        protos.google.cloud.billing.v1.IService[],
-        protos.google.cloud.billing.v1.IListServicesRequest|null,
-        protos.google.cloud.billing.v1.IListServicesResponse
-      ]>|void {
+          | protos.google.cloud.billing.v1.IListServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.billing.v1.IService
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.billing.v1.IListServicesRequest,
+      protos.google.cloud.billing.v1.IListServicesResponse | null | undefined,
+      protos.google.cloud.billing.v1.IService
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.billing.v1.IService[],
+      protos.google.cloud.billing.v1.IListServicesRequest | null,
+      protos.google.cloud.billing.v1.IListServicesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.billing.v1.IListServicesRequest,
-      protos.google.cloud.billing.v1.IListServicesResponse|null|undefined,
-      protos.google.cloud.billing.v1.IService>|undefined = callback
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.billing.v1.IListServicesRequest,
+          | protos.google.cloud.billing.v1.IListServicesResponse
+          | null
+          | undefined,
+          protos.google.cloud.billing.v1.IService
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -439,200 +509,221 @@ export class CloudCatalogClient {
     this._log.info('listServices request %j', request);
     return this.innerApiCalls
       .listServices(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.billing.v1.IService[],
-        protos.google.cloud.billing.v1.IListServicesRequest|null,
-        protos.google.cloud.billing.v1.IListServicesResponse
-      ]) => {
-        this._log.info('listServices values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.billing.v1.IService[],
+          protos.google.cloud.billing.v1.IListServicesRequest | null,
+          protos.google.cloud.billing.v1.IListServicesResponse,
+        ]) => {
+          this._log.info('listServices values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listServices`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} request.pageSize
- *   Requested page size. Defaults to 5000.
- * @param {string} request.pageToken
- *   A token identifying a page of results to return. This should be a
- *   `next_page_token` value returned from a previous `ListServices`
- *   call. If unspecified, the first page of results is returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.billing.v1.Service|Service} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listServicesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listServices`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   Requested page size. Defaults to 5000.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to return. This should be a
+   *   `next_page_token` value returned from a previous `ListServices`
+   *   call. If unspecified, the first page of results is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.billing.v1.Service|Service} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listServicesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listServicesStream(
-      request?: protos.google.cloud.billing.v1.IListServicesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.billing.v1.IListServicesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listServices`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} request.pageSize
- *   Requested page size. Defaults to 5000.
- * @param {string} request.pageToken
- *   A token identifying a page of results to return. This should be a
- *   `next_page_token` value returned from a previous `ListServices`
- *   call. If unspecified, the first page of results is returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.billing.v1.Service|Service}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/cloud_catalog.list_services.js</caption>
- * region_tag:cloudbilling_v1_generated_CloudCatalog_ListServices_async
- */
+  /**
+   * Equivalent to `listServices`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   Requested page size. Defaults to 5000.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to return. This should be a
+   *   `next_page_token` value returned from a previous `ListServices`
+   *   call. If unspecified, the first page of results is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.billing.v1.Service|Service}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_catalog.list_services.js</caption>
+   * region_tag:cloudbilling_v1_generated_CloudCatalog_ListServices_async
+   */
   listServicesAsync(
-      request?: protos.google.cloud.billing.v1.IListServicesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.billing.v1.IService>{
+    request?: protos.google.cloud.billing.v1.IListServicesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.billing.v1.IService> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.billing.v1.IService>;
   }
- /**
- * Lists all publicly available SKUs for a given cloud service.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the service.
- *   Example: "services/6F81-5844-456A"
- * @param {google.protobuf.Timestamp} request.startTime
- *   Optional inclusive start time of the time range for which the pricing
- *   versions will be returned. Timestamps in the future are not allowed.
- *   The time range has to be within a single calendar month in
- *   America/Los_Angeles timezone. Time range as a whole is optional. If not
- *   specified, the latest pricing will be returned (up to 12 hours old at
- *   most).
- * @param {google.protobuf.Timestamp} request.endTime
- *   Optional exclusive end time of the time range for which the pricing
- *   versions will be returned. Timestamps in the future are not allowed.
- *   The time range has to be within a single calendar month in
- *   America/Los_Angeles timezone. Time range as a whole is optional. If not
- *   specified, the latest pricing will be returned (up to 12 hours old at
- *   most).
- * @param {string} request.currencyCode
- *   The ISO 4217 currency code for the pricing info in the response proto.
- *   Will use the conversion rate as of start_time.
- *   Optional. If not specified USD will be used.
- * @param {number} request.pageSize
- *   Requested page size. Defaults to 5000.
- * @param {string} request.pageToken
- *   A token identifying a page of results to return. This should be a
- *   `next_page_token` value returned from a previous `ListSkus`
- *   call. If unspecified, the first page of results is returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.billing.v1.Sku|Sku}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listSkusAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all publicly available SKUs for a given cloud service.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the service.
+   *   Example: "services/6F81-5844-456A"
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   Optional inclusive start time of the time range for which the pricing
+   *   versions will be returned. Timestamps in the future are not allowed.
+   *   The time range has to be within a single calendar month in
+   *   America/Los_Angeles timezone. Time range as a whole is optional. If not
+   *   specified, the latest pricing will be returned (up to 12 hours old at
+   *   most).
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   Optional exclusive end time of the time range for which the pricing
+   *   versions will be returned. Timestamps in the future are not allowed.
+   *   The time range has to be within a single calendar month in
+   *   America/Los_Angeles timezone. Time range as a whole is optional. If not
+   *   specified, the latest pricing will be returned (up to 12 hours old at
+   *   most).
+   * @param {string} request.currencyCode
+   *   The ISO 4217 currency code for the pricing info in the response proto.
+   *   Will use the conversion rate as of start_time.
+   *   Optional. If not specified USD will be used.
+   * @param {number} request.pageSize
+   *   Requested page size. Defaults to 5000.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to return. This should be a
+   *   `next_page_token` value returned from a previous `ListSkus`
+   *   call. If unspecified, the first page of results is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.billing.v1.Sku|Sku}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSkusAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSkus(
-      request?: protos.google.cloud.billing.v1.IListSkusRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.billing.v1.ISku[],
-        protos.google.cloud.billing.v1.IListSkusRequest|null,
-        protos.google.cloud.billing.v1.IListSkusResponse
-      ]>;
+    request?: protos.google.cloud.billing.v1.IListSkusRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.billing.v1.ISku[],
+      protos.google.cloud.billing.v1.IListSkusRequest | null,
+      protos.google.cloud.billing.v1.IListSkusResponse,
+    ]
+  >;
   listSkus(
-      request: protos.google.cloud.billing.v1.IListSkusRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.billing.v1.IListSkusRequest,
-          protos.google.cloud.billing.v1.IListSkusResponse|null|undefined,
-          protos.google.cloud.billing.v1.ISku>): void;
+    request: protos.google.cloud.billing.v1.IListSkusRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListSkusRequest,
+      protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+      protos.google.cloud.billing.v1.ISku
+    >,
+  ): void;
   listSkus(
-      request: protos.google.cloud.billing.v1.IListSkusRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.billing.v1.IListSkusRequest,
-          protos.google.cloud.billing.v1.IListSkusResponse|null|undefined,
-          protos.google.cloud.billing.v1.ISku>): void;
+    request: protos.google.cloud.billing.v1.IListSkusRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.billing.v1.IListSkusRequest,
+      protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+      protos.google.cloud.billing.v1.ISku
+    >,
+  ): void;
   listSkus(
-      request?: protos.google.cloud.billing.v1.IListSkusRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.billing.v1.IListSkusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.billing.v1.IListSkusRequest,
-          protos.google.cloud.billing.v1.IListSkusResponse|null|undefined,
-          protos.google.cloud.billing.v1.ISku>,
-      callback?: PaginationCallback<
-          protos.google.cloud.billing.v1.IListSkusRequest,
-          protos.google.cloud.billing.v1.IListSkusResponse|null|undefined,
-          protos.google.cloud.billing.v1.ISku>):
-      Promise<[
-        protos.google.cloud.billing.v1.ISku[],
-        protos.google.cloud.billing.v1.IListSkusRequest|null,
-        protos.google.cloud.billing.v1.IListSkusResponse
-      ]>|void {
+          protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+          protos.google.cloud.billing.v1.ISku
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.billing.v1.IListSkusRequest,
+      protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+      protos.google.cloud.billing.v1.ISku
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.billing.v1.ISku[],
+      protos.google.cloud.billing.v1.IListSkusRequest | null,
+      protos.google.cloud.billing.v1.IListSkusResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.billing.v1.IListSkusRequest,
-      protos.google.cloud.billing.v1.IListSkusResponse|null|undefined,
-      protos.google.cloud.billing.v1.ISku>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.billing.v1.IListSkusRequest,
+          protos.google.cloud.billing.v1.IListSkusResponse | null | undefined,
+          protos.google.cloud.billing.v1.ISku
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSkus values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -641,148 +732,152 @@ export class CloudCatalogClient {
     this._log.info('listSkus request %j', request);
     return this.innerApiCalls
       .listSkus(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.billing.v1.ISku[],
-        protos.google.cloud.billing.v1.IListSkusRequest|null,
-        protos.google.cloud.billing.v1.IListSkusResponse
-      ]) => {
-        this._log.info('listSkus values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.billing.v1.ISku[],
+          protos.google.cloud.billing.v1.IListSkusRequest | null,
+          protos.google.cloud.billing.v1.IListSkusResponse,
+        ]) => {
+          this._log.info('listSkus values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listSkus`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the service.
- *   Example: "services/6F81-5844-456A"
- * @param {google.protobuf.Timestamp} request.startTime
- *   Optional inclusive start time of the time range for which the pricing
- *   versions will be returned. Timestamps in the future are not allowed.
- *   The time range has to be within a single calendar month in
- *   America/Los_Angeles timezone. Time range as a whole is optional. If not
- *   specified, the latest pricing will be returned (up to 12 hours old at
- *   most).
- * @param {google.protobuf.Timestamp} request.endTime
- *   Optional exclusive end time of the time range for which the pricing
- *   versions will be returned. Timestamps in the future are not allowed.
- *   The time range has to be within a single calendar month in
- *   America/Los_Angeles timezone. Time range as a whole is optional. If not
- *   specified, the latest pricing will be returned (up to 12 hours old at
- *   most).
- * @param {string} request.currencyCode
- *   The ISO 4217 currency code for the pricing info in the response proto.
- *   Will use the conversion rate as of start_time.
- *   Optional. If not specified USD will be used.
- * @param {number} request.pageSize
- *   Requested page size. Defaults to 5000.
- * @param {string} request.pageToken
- *   A token identifying a page of results to return. This should be a
- *   `next_page_token` value returned from a previous `ListSkus`
- *   call. If unspecified, the first page of results is returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.billing.v1.Sku|Sku} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listSkusAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listSkus`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the service.
+   *   Example: "services/6F81-5844-456A"
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   Optional inclusive start time of the time range for which the pricing
+   *   versions will be returned. Timestamps in the future are not allowed.
+   *   The time range has to be within a single calendar month in
+   *   America/Los_Angeles timezone. Time range as a whole is optional. If not
+   *   specified, the latest pricing will be returned (up to 12 hours old at
+   *   most).
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   Optional exclusive end time of the time range for which the pricing
+   *   versions will be returned. Timestamps in the future are not allowed.
+   *   The time range has to be within a single calendar month in
+   *   America/Los_Angeles timezone. Time range as a whole is optional. If not
+   *   specified, the latest pricing will be returned (up to 12 hours old at
+   *   most).
+   * @param {string} request.currencyCode
+   *   The ISO 4217 currency code for the pricing info in the response proto.
+   *   Will use the conversion rate as of start_time.
+   *   Optional. If not specified USD will be used.
+   * @param {number} request.pageSize
+   *   Requested page size. Defaults to 5000.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to return. This should be a
+   *   `next_page_token` value returned from a previous `ListSkus`
+   *   call. If unspecified, the first page of results is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.billing.v1.Sku|Sku} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSkusAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSkusStream(
-      request?: protos.google.cloud.billing.v1.IListSkusRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.billing.v1.IListSkusRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSkus stream %j', request);
     return this.descriptors.page.listSkus.createStream(
       this.innerApiCalls.listSkus as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listSkus`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The name of the service.
- *   Example: "services/6F81-5844-456A"
- * @param {google.protobuf.Timestamp} request.startTime
- *   Optional inclusive start time of the time range for which the pricing
- *   versions will be returned. Timestamps in the future are not allowed.
- *   The time range has to be within a single calendar month in
- *   America/Los_Angeles timezone. Time range as a whole is optional. If not
- *   specified, the latest pricing will be returned (up to 12 hours old at
- *   most).
- * @param {google.protobuf.Timestamp} request.endTime
- *   Optional exclusive end time of the time range for which the pricing
- *   versions will be returned. Timestamps in the future are not allowed.
- *   The time range has to be within a single calendar month in
- *   America/Los_Angeles timezone. Time range as a whole is optional. If not
- *   specified, the latest pricing will be returned (up to 12 hours old at
- *   most).
- * @param {string} request.currencyCode
- *   The ISO 4217 currency code for the pricing info in the response proto.
- *   Will use the conversion rate as of start_time.
- *   Optional. If not specified USD will be used.
- * @param {number} request.pageSize
- *   Requested page size. Defaults to 5000.
- * @param {string} request.pageToken
- *   A token identifying a page of results to return. This should be a
- *   `next_page_token` value returned from a previous `ListSkus`
- *   call. If unspecified, the first page of results is returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.billing.v1.Sku|Sku}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/cloud_catalog.list_skus.js</caption>
- * region_tag:cloudbilling_v1_generated_CloudCatalog_ListSkus_async
- */
+  /**
+   * Equivalent to `listSkus`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the service.
+   *   Example: "services/6F81-5844-456A"
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   Optional inclusive start time of the time range for which the pricing
+   *   versions will be returned. Timestamps in the future are not allowed.
+   *   The time range has to be within a single calendar month in
+   *   America/Los_Angeles timezone. Time range as a whole is optional. If not
+   *   specified, the latest pricing will be returned (up to 12 hours old at
+   *   most).
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   Optional exclusive end time of the time range for which the pricing
+   *   versions will be returned. Timestamps in the future are not allowed.
+   *   The time range has to be within a single calendar month in
+   *   America/Los_Angeles timezone. Time range as a whole is optional. If not
+   *   specified, the latest pricing will be returned (up to 12 hours old at
+   *   most).
+   * @param {string} request.currencyCode
+   *   The ISO 4217 currency code for the pricing info in the response proto.
+   *   Will use the conversion rate as of start_time.
+   *   Optional. If not specified USD will be used.
+   * @param {number} request.pageSize
+   *   Requested page size. Defaults to 5000.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results to return. This should be a
+   *   `next_page_token` value returned from a previous `ListSkus`
+   *   call. If unspecified, the first page of results is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.billing.v1.Sku|Sku}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_catalog.list_skus.js</caption>
+   * region_tag:cloudbilling_v1_generated_CloudCatalog_ListSkus_async
+   */
   listSkusAsync(
-      request?: protos.google.cloud.billing.v1.IListSkusRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.billing.v1.ISku>{
+    request?: protos.google.cloud.billing.v1.IListSkusRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.billing.v1.ISku> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSkus iterate %j', request);
     return this.descriptors.page.listSkus.asyncIterate(
       this.innerApiCalls['listSkus'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.billing.v1.ISku>;
   }
   // --------------------
@@ -795,7 +890,7 @@ export class CloudCatalogClient {
    * @param {string} billing_account
    * @returns {string} Resource name string.
    */
-  billingAccountsPath(billingAccount:string) {
+  billingAccountsPath(billingAccount: string) {
     return this.pathTemplates.billingAccountsPathTemplate.render({
       billing_account: billingAccount,
     });
@@ -809,7 +904,9 @@ export class CloudCatalogClient {
    * @returns {string} A string representing the billing_account.
    */
   matchBillingAccountFromBillingAccountsName(billingAccountsName: string) {
-    return this.pathTemplates.billingAccountsPathTemplate.match(billingAccountsName).billing_account;
+    return this.pathTemplates.billingAccountsPathTemplate.match(
+      billingAccountsName,
+    ).billing_account;
   }
 
   /**
@@ -819,7 +916,10 @@ export class CloudCatalogClient {
    * @param {string} billing_account
    * @returns {string} Resource name string.
    */
-  organizationBillingAccountsPath(organization:string,billingAccount:string) {
+  organizationBillingAccountsPath(
+    organization: string,
+    billingAccount: string,
+  ) {
     return this.pathTemplates.organizationBillingAccountsPathTemplate.render({
       organization: organization,
       billing_account: billingAccount,
@@ -833,8 +933,12 @@ export class CloudCatalogClient {
    *   A fully-qualified path representing organization_billingAccounts resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationBillingAccountsName(organizationBillingAccountsName: string) {
-    return this.pathTemplates.organizationBillingAccountsPathTemplate.match(organizationBillingAccountsName).organization;
+  matchOrganizationFromOrganizationBillingAccountsName(
+    organizationBillingAccountsName: string,
+  ) {
+    return this.pathTemplates.organizationBillingAccountsPathTemplate.match(
+      organizationBillingAccountsName,
+    ).organization;
   }
 
   /**
@@ -844,8 +948,12 @@ export class CloudCatalogClient {
    *   A fully-qualified path representing organization_billingAccounts resource.
    * @returns {string} A string representing the billing_account.
    */
-  matchBillingAccountFromOrganizationBillingAccountsName(organizationBillingAccountsName: string) {
-    return this.pathTemplates.organizationBillingAccountsPathTemplate.match(organizationBillingAccountsName).billing_account;
+  matchBillingAccountFromOrganizationBillingAccountsName(
+    organizationBillingAccountsName: string,
+  ) {
+    return this.pathTemplates.organizationBillingAccountsPathTemplate.match(
+      organizationBillingAccountsName,
+    ).billing_account;
   }
 
   /**
@@ -854,7 +962,7 @@ export class CloudCatalogClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectBillingInfoPath(project:string) {
+  projectBillingInfoPath(project: string) {
     return this.pathTemplates.projectBillingInfoPathTemplate.render({
       project: project,
     });
@@ -868,7 +976,9 @@ export class CloudCatalogClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectBillingInfoName(projectBillingInfoName: string) {
-    return this.pathTemplates.projectBillingInfoPathTemplate.match(projectBillingInfoName).project;
+    return this.pathTemplates.projectBillingInfoPathTemplate.match(
+      projectBillingInfoName,
+    ).project;
   }
 
   /**
@@ -877,7 +987,7 @@ export class CloudCatalogClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  servicePath(service:string) {
+  servicePath(service: string) {
     return this.pathTemplates.servicePathTemplate.render({
       service: service,
     });
@@ -901,7 +1011,7 @@ export class CloudCatalogClient {
    * @param {string} sku
    * @returns {string} Resource name string.
    */
-  skuPath(service:string,sku:string) {
+  skuPath(service: string, sku: string) {
     return this.pathTemplates.skuPathTemplate.render({
       service: service,
       sku: sku,
@@ -938,7 +1048,7 @@ export class CloudCatalogClient {
    */
   close(): Promise<void> {
     if (this.cloudCatalogStub && !this._terminated) {
-      return this.cloudCatalogStub.then(stub => {
+      return this.cloudCatalogStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

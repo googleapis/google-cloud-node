@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DataPolicyServiceClient} from './data_policy_service_client';
+export { DataPolicyServiceClient } from './data_policy_service_client';

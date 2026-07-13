@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,7 +35,8 @@ option ruby_package = "Google::Ads::AdManager::V1";
 service CustomTargetingKeyService {
   option (google.api.default_host) = "admanager.googleapis.com";
   option (google.api.oauth_scopes) =
-      "https://www.googleapis.com/auth/admanager";
+      "https://www.googleapis.com/auth/admanager,"
+      "https://www.googleapis.com/auth/admanager.readonly";
 
   // API to retrieve a `CustomTargetingKey` object.
   rpc GetCustomTargetingKey(GetCustomTargetingKeyRequest)
@@ -155,8 +156,18 @@ message ListCustomTargetingKeysRequest {
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to filter the response.
-  // See syntax details at
-  // https://developers.google.com/ad-manager/api/beta/filters
+  //  See syntax details at
+  //  https://developers.google.com/ad-manager/api/beta/filters
+  //
+  // <b>Filterable fields:</b>
+  // <ul style="list-style-type:none">
+  //   <li><code>adTagName</code></li>
+  //   <li><code>displayName</code></li>
+  //   <li><code>name</code></li>
+  //   <li><code>reportableType</code></li>
+  //   <li><code>status</code></li>
+  //   <li><code>type</code></li>
+  // </ul>
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.
@@ -242,9 +253,9 @@ message UpdateCustomTargetingKeyRequest {
   CustomTargetingKey custom_targeting_key = 1
       [(google.api.field_behavior) = REQUIRED];
 
-  // Required. The list of fields to update.
+  // Optional. The list of fields to update.
   google.protobuf.FieldMask update_mask = 2
-      [(google.api.field_behavior) = REQUIRED];
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Request object for `BatchUpdateCustomTargetingKeys` method.

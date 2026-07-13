@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DatastreamClient} from './datastream_client';
+export { DatastreamClient } from './datastream_client';

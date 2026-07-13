@@ -1,0 +1,81 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.appoptimize.v1beta",
+  "libraryPackage": "@google-cloud/appoptimize",
+  "services": {
+    "AppOptimize": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AppOptimizeClient",
+          "rpcs": {
+            "GetReport": {
+              "methods": [
+                "getReport"
+              ]
+            },
+            "DeleteReport": {
+              "methods": [
+                "deleteReport"
+              ]
+            },
+            "CreateReport": {
+              "methods": [
+                "createReport"
+              ]
+            },
+            "ListReports": {
+              "methods": [
+                "listReports",
+                "listReportsStream",
+                "listReportsAsync"
+              ]
+            },
+            "ReadReport": {
+              "methods": [
+                "readReport",
+                "readReportStream",
+                "readReportAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AppOptimizeClient",
+          "rpcs": {
+            "GetReport": {
+              "methods": [
+                "getReport"
+              ]
+            },
+            "DeleteReport": {
+              "methods": [
+                "deleteReport"
+              ]
+            },
+            "CreateReport": {
+              "methods": [
+                "createReport"
+              ]
+            },
+            "ListReports": {
+              "methods": [
+                "listReports",
+                "listReportsStream",
+                "listReportsAsync"
+              ]
+            },
+            "ReadReport": {
+              "methods": [
+                "readReport",
+                "readReportStream",
+                "readReportAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

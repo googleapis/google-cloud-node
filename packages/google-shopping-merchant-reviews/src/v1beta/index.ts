@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {MerchantReviewsServiceClient} from './merchant_reviews_service_client';
-export {ProductReviewsServiceClient} from './product_reviews_service_client';
+export { MerchantReviewsServiceClient } from './merchant_reviews_service_client';
+export { ProductReviewsServiceClient } from './product_reviews_service_client';

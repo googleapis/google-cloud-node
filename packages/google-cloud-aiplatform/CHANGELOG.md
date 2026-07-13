@@ -1,5 +1,19 @@
 # Changelog
 
+## [6.8.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.8.0...aiplatform-v6.8.1) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.7.0...aiplatform-v6.8.0) (2026-05-12)
+
+
+### Features
+
+* Release ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine v1beta1 API ([#8135](https://github.com/googleapis/google-cloud-node/issues/8135)) ([606d632](https://github.com/googleapis/google-cloud-node/commit/606d6324ba2bb3d11c44675825dd5b2aead69969))
+
 ## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.6.0...aiplatform-v6.7.0) (2026-05-01)
 
 

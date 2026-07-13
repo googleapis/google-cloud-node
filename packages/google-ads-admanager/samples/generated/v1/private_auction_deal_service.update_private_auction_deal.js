@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(privateAuctionDeal, updateMask) {
+function main(privateAuctionDeal) {
   // [START admanager_v1_generated_PrivateAuctionDealService_UpdatePrivateAuctionDeal_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -35,7 +35,7 @@ function main(privateAuctionDeal, updateMask) {
    */
   // const privateAuctionDeal = {}
   /**
-   *  Required. The list of fields to update.
+   *  Optional. The list of fields to update.
    */
   // const updateMask = {}
 
@@ -49,7 +49,6 @@ function main(privateAuctionDeal, updateMask) {
     // Construct request
     const request = {
       privateAuctionDeal,
-      updateMask,
     };
 
     // Run request

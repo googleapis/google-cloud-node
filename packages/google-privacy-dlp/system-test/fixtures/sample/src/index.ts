@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DlpServiceClient} from '@google-cloud/dlp';
+import { DlpServiceClient } from '@google-cloud/dlp';
 
 // check that the client class type name can be used
 function doStuffWithDlpServiceClient(client: DlpServiceClient) {

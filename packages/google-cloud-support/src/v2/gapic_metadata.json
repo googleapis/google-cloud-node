@@ -10,6 +10,11 @@
         "grpc": {
           "libraryClient": "CaseAttachmentServiceClient",
           "rpcs": {
+            "GetAttachment": {
+              "methods": [
+                "getAttachment"
+              ]
+            },
             "ListAttachments": {
               "methods": [
                 "listAttachments",
@@ -22,6 +27,11 @@
         "grpc-fallback": {
           "libraryClient": "CaseAttachmentServiceClient",
           "rpcs": {
+            "GetAttachment": {
+              "methods": [
+                "getAttachment"
+              ]
+            },
             "ListAttachments": {
               "methods": [
                 "listAttachments",
@@ -149,6 +159,11 @@
                 "createComment"
               ]
             },
+            "GetComment": {
+              "methods": [
+                "getComment"
+              ]
+            },
             "ListComments": {
               "methods": [
                 "listComments",
@@ -166,11 +181,94 @@
                 "createComment"
               ]
             },
+            "GetComment": {
+              "methods": [
+                "getComment"
+              ]
+            },
             "ListComments": {
               "methods": [
                 "listComments",
                 "listCommentsStream",
                 "listCommentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SupportEventSubscriptionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SupportEventSubscriptionServiceClient",
+          "rpcs": {
+            "CreateSupportEventSubscription": {
+              "methods": [
+                "createSupportEventSubscription"
+              ]
+            },
+            "GetSupportEventSubscription": {
+              "methods": [
+                "getSupportEventSubscription"
+              ]
+            },
+            "UpdateSupportEventSubscription": {
+              "methods": [
+                "updateSupportEventSubscription"
+              ]
+            },
+            "DeleteSupportEventSubscription": {
+              "methods": [
+                "deleteSupportEventSubscription"
+              ]
+            },
+            "UndeleteSupportEventSubscription": {
+              "methods": [
+                "undeleteSupportEventSubscription"
+              ]
+            },
+            "ListSupportEventSubscriptions": {
+              "methods": [
+                "listSupportEventSubscriptions",
+                "listSupportEventSubscriptionsStream",
+                "listSupportEventSubscriptionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SupportEventSubscriptionServiceClient",
+          "rpcs": {
+            "CreateSupportEventSubscription": {
+              "methods": [
+                "createSupportEventSubscription"
+              ]
+            },
+            "GetSupportEventSubscription": {
+              "methods": [
+                "getSupportEventSubscription"
+              ]
+            },
+            "UpdateSupportEventSubscription": {
+              "methods": [
+                "updateSupportEventSubscription"
+              ]
+            },
+            "DeleteSupportEventSubscription": {
+              "methods": [
+                "deleteSupportEventSubscription"
+              ]
+            },
+            "UndeleteSupportEventSubscription": {
+              "methods": [
+                "undeleteSupportEventSubscription"
+              ]
+            },
+            "ListSupportEventSubscriptions": {
+              "methods": [
+                "listSupportEventSubscriptions",
+                "listSupportEventSubscriptionsStream",
+                "listSupportEventSubscriptionsAsync"
               ]
             }
           }

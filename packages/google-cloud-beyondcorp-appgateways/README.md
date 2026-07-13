@@ -61,7 +61,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete app gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appgateways/samples/generated/v1/app_gateways_service.delete_app_gateway.js) |
 | get app gateway | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appgateways/samples/generated/v1/app_gateways_service.get_app_gateway.js) |
 | list app gateways | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appgateways/samples/generated/v1/app_gateways_service.list_app_gateways.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appgateways/samples/generated/v1/snippet_metadata_google.cloud.beyondcorp.appgateways.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -95,7 +94,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appgateways/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -105,7 +104,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-beyondcorp-appgateways/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

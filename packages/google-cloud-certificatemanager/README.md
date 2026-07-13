@@ -87,7 +87,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update certificate map entry | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_certificate_map_entry.js) |
 | update dns authorization | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_dns_authorization.js) |
 | update trust config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/certificate_manager.update_trust_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/samples/generated/v1/snippet_metadata_google.cloud.certificatemanager.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -121,7 +120,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -131,7 +130,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-certificatemanager/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

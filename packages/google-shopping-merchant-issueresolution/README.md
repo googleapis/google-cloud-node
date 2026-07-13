@@ -62,12 +62,10 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | render account issues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1/issue_resolution_service.render_account_issues.js) |
 | render product issues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1/issue_resolution_service.render_product_issues.js) |
 | trigger action | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1/issue_resolution_service.trigger_action.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1/snippet_metadata_google.shopping.merchant.issueresolution.v1.json) |
 | list aggregate product statuses | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/aggregate_product_statuses_service.list_aggregate_product_statuses.js) |
 | render account issues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.render_account_issues.js) |
 | render product issues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.render_product_issues.js) |
 | trigger action | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/issue_resolution_service.trigger_action.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.issueresolution.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -101,7 +99,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -111,7 +109,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-issueresolution/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

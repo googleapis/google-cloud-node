@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AgentServiceClient} from './agent_service_client';
-export {SessionServiceClient} from './session_service_client';
-export {ToolServiceClient} from './tool_service_client';
-export {WidgetServiceClient} from './widget_service_client';
+export { AgentServiceClient } from './agent_service_client';
+export { SessionServiceClient } from './session_service_client';
+export { ToolServiceClient } from './tool_service_client';
+export { WidgetServiceClient } from './widget_service_client';

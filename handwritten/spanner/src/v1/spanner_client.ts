@@ -242,6 +242,11 @@ export class SpannerClient {
         !!opts.fallback,
         !!opts.gaxServerStreamingRetries,
       ),
+      fetchCacheUpdate: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries,
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -310,6 +315,7 @@ export class SpannerClient {
       'partitionQuery',
       'partitionRead',
       'batchWrite',
+      'fetchCacheUpdate',
     ];
     for (const methodName of spannerStubMethods) {
       const callPromise = this.spannerStub.then(
@@ -1082,7 +1088,7 @@ export class SpannerClient {
    *   constraints). Given this, successful execution of a DML statement shouldn't
    *   be assumed until a subsequent `Commit` call completes successfully.
    * @param {google.spanner.v1.RoutingHint} [request.routingHint]
-   *   Optional. If present, it makes the Spanner requests location-aware.
+   *   Optional. Makes the Spanner requests location-aware if present.
    *
    *   It gives the server hints that can be used to route the request
    *   to an appropriate server, potentially significantly decreasing latency and
@@ -1461,7 +1467,7 @@ export class SpannerClient {
    *   Optional. Lock Hint for the request, it can only be used with read-write
    *   transactions.
    * @param {google.spanner.v1.RoutingHint} [request.routingHint]
-   *   Optional. If present, it makes the Spanner requests location-aware.
+   *   Optional. Makes the Spanner requests location-aware if present.
    *
    *   It gives the server hints that can be used to route the request
    *   to an appropriate server, potentially significantly decreasing latency and
@@ -1606,6 +1612,13 @@ export class SpannerClient {
    *   that commit mutations but don't perform any reads or queries. You must
    *   randomly select one of the mutations from the mutation set and send it as a
    *   part of this request.
+   * @param {google.spanner.v1.RoutingHint} [request.routingHint]
+   *   Optional. Makes the Spanner requests location-aware if present.
+   *
+   *   It gives the server hints that can be used to route the request
+   *   to an appropriate server, potentially significantly decreasing latency and
+   *   improving throughput. To achieve improved performance, most fields must be
+   *   filled in with accurate values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1774,6 +1787,13 @@ export class SpannerClient {
    *   session, then you must include the precommit token with the highest
    *   sequence number received in this transaction attempt. Failing to do so
    *   results in a `FailedPrecondition` error.
+   * @param {google.spanner.v1.RoutingHint} [request.routingHint]
+   *   Optional. Makes the Spanner requests location-aware if present.
+   *
+   *   It gives the server hints that can be used to route the request
+   *   to an appropriate server, potentially significantly decreasing latency and
+   *   improving throughput. To achieve improved performance, most fields must be
+   *   filled in with accurate values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2465,7 +2485,7 @@ export class SpannerClient {
    *   constraints). Given this, successful execution of a DML statement shouldn't
    *   be assumed until a subsequent `Commit` call completes successfully.
    * @param {google.spanner.v1.RoutingHint} [request.routingHint]
-   *   Optional. If present, it makes the Spanner requests location-aware.
+   *   Optional. Makes the Spanner requests location-aware if present.
    *
    *   It gives the server hints that can be used to route the request
    *   to an appropriate server, potentially significantly decreasing latency and
@@ -2579,7 +2599,7 @@ export class SpannerClient {
    *   Optional. Lock Hint for the request, it can only be used with read-write
    *   transactions.
    * @param {google.spanner.v1.RoutingHint} [request.routingHint]
-   *   Optional. If present, it makes the Spanner requests location-aware.
+   *   Optional. Makes the Spanner requests location-aware if present.
    *
    *   It gives the server hints that can be used to route the request
    *   to an appropriate server, potentially significantly decreasing latency and
@@ -2664,6 +2684,53 @@ export class SpannerClient {
     });
     this._log.info('batchWrite stream %j', options);
     return this.innerApiCalls.batchWrite(request, options);
+  }
+
+  /**
+   * Retrieves a cache update for a given database.
+   *
+   * This RPC can be used to warm up the client cache by fetching key recipes
+   * and server information for a given database. It is recommended to call
+   * this RPC at the beginning of the client's lifecycle, prior to any other
+   * data plane operations.
+   *
+   * The cache update is returned as a stream because the response can be too
+   * large to fit into a single `CacheUpdate` message.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.database
+   *   Required. The database for which to retrieve the cache update.
+   * @param {number} [request.maxRecipeCount]
+   *   Optional. The maximum number of key recipes to return in the response.
+   *   If not set, a default limit of 100 will be used.
+   * @param {number} [request.maxRangeCount]
+   *   Optional. The maximum number of ranges to return in the response.
+   *   If not set, a default limit of 10000 will be used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.spanner.v1.CacheUpdate|CacheUpdate} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   */
+  fetchCacheUpdate(
+    request?: protos.google.spanner.v1.IFetchCacheUpdateRequest,
+    options?: CallOptions,
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        database: request.database ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchCacheUpdate stream %j', options);
+    return this.innerApiCalls.fetchCacheUpdate(request, options);
   }
 
   /**

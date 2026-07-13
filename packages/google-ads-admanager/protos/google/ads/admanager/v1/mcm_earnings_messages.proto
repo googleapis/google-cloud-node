@@ -1,0 +1,124 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package google.ads.admanager.v1;
+
+import "google/ads/admanager/v1/mcm_enums.proto";
+import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
+import "google/type/date.proto";
+import "google/type/money.proto";
+
+option csharp_namespace = "Google.Ads.AdManager.V1";
+option go_package = "google.golang.org/genproto/googleapis/ads/admanager/v1;admanager";
+option java_multiple_files = true;
+option java_outer_classname = "McmEarningsMessagesProto";
+option java_package = "com.google.ads.admanager.v1";
+option php_namespace = "Google\\Ads\\AdManager\\V1";
+option ruby_package = "Google::Ads::AdManager::V1";
+
+// The earnings for a given month between a parent and child publisher in MCM
+message McmEarnings {
+  // Output only. The year and month that the MCM earnings data applies to. The
+  // date will be specified as the first of the month.
+  optional google.type.Date month = 1
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The current type of MCM delegation between the parent and
+  // child publisher.
+  optional DelegationTypeEnum.DelegationType delegation_type = 2
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The parent publisher in the MCM relationship.
+  // Format: `networks/{network_code}`
+  string parent = 3 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Network"
+    }
+  ];
+
+  // Output only. The name of the parent publisher.
+  optional string parent_display_name = 4
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The resource name of the `ChildPublisher`'s Ad Manager network
+  // in the MCM relationship. Format: `networks/{network_code}`
+  string child = 5 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Network"
+    }
+  ];
+
+  // Output only. The resource name of the child publisher in the MCM
+  // relationship. Format:
+  // "networks/{network_code}/childPublishers/{child_publisher_id}"
+  optional string child_publisher = 6 [
+    (google.api.field_behavior) = OUTPUT_ONLY,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/ChildPublisher"
+    }
+  ];
+
+  // Output only. The name of the child publisher in the MCM relationship.
+  optional string child_display_name = 7
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The total earnings for the month.
+  optional google.type.Money total_earnings = 8
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The portion of the total earnings paid to the parent
+  // publisher.
+  optional google.type.Money parent_payment = 9
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The portion of the total earnings paid to the child publisher.
+  optional google.type.Money child_payment = 10
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The deductions for the month due to spam in micro units. Null
+  // for earnings prior to August 2020.
+  optional google.type.Money deductions = 11
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The product type breakdown of earnings for a given month
+  // between a parent and child publisher in MCM.
+  repeated EarningsProductBreakdown earnings_product_breakdown = 12
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+
+// The product type breakdown of earnings for a given month between a parent and
+// child publisher in MCM.
+message EarningsProductBreakdown {
+  // The syndication product type of the child's earnings in MCM.
+  optional McmEarningsProductTypeEnum.McmEarningsProductType product_type = 1;
+
+  // The total earnings for the specified product type for the month.
+  optional google.type.Money total_earnings = 2;
+
+  // The portion of the total earnings for the specified product type paid to
+  // the parent publisher.
+  optional google.type.Money parent_payment = 3;
+
+  // The portion of the total earnings for the specified product type paid to
+  // the child publisher.
+  optional google.type.Money child_payment = 4;
+
+  // The deductions for the specified product type for the month due to spam.
+  optional google.type.Money deductions = 5;
+}

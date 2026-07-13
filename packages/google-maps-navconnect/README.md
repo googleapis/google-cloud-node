@@ -59,7 +59,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | --------------------------- | --------------------------------- |
 | create trip | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-navconnect/samples/generated/v1/nav_connect_service.create_trip.js) |
 | get trip | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-navconnect/samples/generated/v1/nav_connect_service.get_trip.js) |
-| maps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-navconnect/samples/generated/v1/snippet_metadata_google.maps.navconnect.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -93,7 +92,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-navconnect/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -103,7 +102,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-navconnect/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

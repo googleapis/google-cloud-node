@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {SaasDeploymentsClient} from './saas_deployments_client';
-export {SaasRolloutsClient} from './saas_rollouts_client';
+export { SaasDeploymentsClient } from './saas_deployments_client';
+export { SaasRolloutsClient } from './saas_rollouts_client';

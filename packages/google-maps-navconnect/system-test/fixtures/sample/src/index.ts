@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {NavConnectServiceClient} from '@google-cloud/navconnect';
+import { NavConnectServiceClient } from '@google-cloud/navconnect';
 
 // check that the client class type name can be used
 function doStuffWithNavConnectServiceClient(client: NavConnectServiceClient) {

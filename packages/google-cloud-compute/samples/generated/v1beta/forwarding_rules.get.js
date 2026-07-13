@@ -40,6 +40,10 @@ function main(forwardingRule, project, region) {
    *  Name of the region scoping this request.
    */
   // const region = 'us-central1'
+  /**
+   *  Check the View enum for the list of possible values.
+   */
+  // const view = 'abc123'
 
   // Imports the Compute library
   const {ForwardingRulesClient} = require('@google-cloud/compute').v1beta;

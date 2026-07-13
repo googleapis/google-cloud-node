@@ -34,14 +34,21 @@ function main(process) {
    */
   // const process = {}
   /**
-   *  The list of fields to update. Currently not used. The whole message is
-   *  updated.
+   *  Optional. The list of fields to update. Currently not used. The whole
+   *  message is updated.
    */
   // const updateMask = {}
   /**
-   *  If set to true and the process is not found, the request inserts it.
+   *  Optional. If set to true and the process is not found, the request inserts
+   *  it.
    */
   // const allowMissing = true
+  /**
+   *  Optional. A unique identifier for this request. Restricted to 36 ASCII
+   *  characters. A random UUID is recommended. This request is idempotent only
+   *  if a `request_id` is provided.
+   */
+  // const requestId = 'abc123'
 
   // Imports the Lineage library
   const {LineageClient} = require('@google-cloud/lineage').v1;

@@ -75,7 +75,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list runtime entity schemas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_entity_schemas.js) |
 | refresh connection schema metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.refresh_connection_schema_metadata.js) |
 | update connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.update_connection.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/snippet_metadata_google.cloud.connectors.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -109,7 +108,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -119,7 +118,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

@@ -16,25 +16,25 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AgentsClient} from './agents_client';
-export {AnswerRecordsClient} from './answer_records_client';
-export {ContextsClient} from './contexts_client';
-export {ConversationDatasetsClient} from './conversation_datasets_client';
-export {ConversationModelsClient} from './conversation_models_client';
-export {ConversationProfilesClient} from './conversation_profiles_client';
-export {ConversationsClient} from './conversations_client';
-export {DocumentsClient} from './documents_client';
-export {EncryptionSpecServiceClient} from './encryption_spec_service_client';
-export {EntityTypesClient} from './entity_types_client';
-export {EnvironmentsClient} from './environments_client';
-export {FulfillmentsClient} from './fulfillments_client';
-export {GeneratorEvaluationsClient} from './generator_evaluations_client';
-export {GeneratorsClient} from './generators_client';
-export {IntentsClient} from './intents_client';
-export {KnowledgeBasesClient} from './knowledge_bases_client';
-export {ParticipantsClient} from './participants_client';
-export {SessionEntityTypesClient} from './session_entity_types_client';
-export {SessionsClient} from './sessions_client';
-export {SipTrunksClient} from './sip_trunks_client';
-export {ToolsClient} from './tools_client';
-export {VersionsClient} from './versions_client';
+export { AgentsClient } from './agents_client';
+export { AnswerRecordsClient } from './answer_records_client';
+export { ContextsClient } from './contexts_client';
+export { ConversationDatasetsClient } from './conversation_datasets_client';
+export { ConversationModelsClient } from './conversation_models_client';
+export { ConversationProfilesClient } from './conversation_profiles_client';
+export { ConversationsClient } from './conversations_client';
+export { DocumentsClient } from './documents_client';
+export { EncryptionSpecServiceClient } from './encryption_spec_service_client';
+export { EntityTypesClient } from './entity_types_client';
+export { EnvironmentsClient } from './environments_client';
+export { FulfillmentsClient } from './fulfillments_client';
+export { GeneratorEvaluationsClient } from './generator_evaluations_client';
+export { GeneratorsClient } from './generators_client';
+export { IntentsClient } from './intents_client';
+export { KnowledgeBasesClient } from './knowledge_bases_client';
+export { ParticipantsClient } from './participants_client';
+export { SessionEntityTypesClient } from './session_entity_types_client';
+export { SessionsClient } from './sessions_client';
+export { SipTrunksClient } from './sip_trunks_client';
+export { ToolsClient } from './tools_client';
+export { VersionsClient } from './versions_client';

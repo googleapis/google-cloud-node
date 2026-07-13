@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AMLClient} from './a_m_l_client';
+export { AMLClient } from './a_m_l_client';

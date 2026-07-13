@@ -18,11 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -49,7 +54,7 @@ export class DestinationServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('geocode');
@@ -62,8 +67,8 @@ export class DestinationServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  destinationServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  destinationServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DestinationServiceClient.
@@ -104,21 +109,42 @@ export class DestinationServiceClient {
    *     const client = new DestinationServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DestinationServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'geocoding-backend.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -143,7 +169,7 @@ export class DestinationServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -157,10 +183,7 @@ export class DestinationServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -179,8 +202,11 @@ export class DestinationServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.maps.geocode.v4.DestinationService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.maps.geocode.v4.DestinationService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -211,36 +237,40 @@ export class DestinationServiceClient {
     // Put together the "service stub" for
     // google.maps.geocode.v4.DestinationService.
     this.destinationServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.maps.geocode.v4.DestinationService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.maps.geocode.v4.DestinationService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.maps.geocode.v4.DestinationService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const destinationServiceStubMethods =
-        ['searchDestinations'];
+    const destinationServiceStubMethods = ['searchDestinations'];
     for (const methodName of destinationServiceStubMethods) {
       const callPromise = this.destinationServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -255,8 +285,14 @@ export class DestinationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'geocoding-backend.googleapis.com';
   }
@@ -267,8 +303,14 @@ export class DestinationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'geocoding-backend.googleapis.com';
   }
@@ -302,7 +344,7 @@ export class DestinationServiceClient {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/maps-platform.destinations',
-      'https://www.googleapis.com/auth/maps-platform.geocode'
+      'https://www.googleapis.com/auth/maps-platform.geocode',
     ];
   }
 
@@ -312,8 +354,9 @@ export class DestinationServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -324,112 +367,152 @@ export class DestinationServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * This method performs a destination lookup and returns a list of
- * destinations.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.place
- *   The resource name of a place, in `places/{place_id}` format.
- * @param {google.maps.geocode.v4.SearchDestinationsRequest.AddressQuery} request.addressQuery
- *   A street address.
- * @param {google.maps.geocode.v4.SearchDestinationsRequest.LocationQuery} request.locationQuery
- *   A precise location.
- * @param {number[]} [request.travelModes]
- *   Optional. The travel modes to filter navigation points for. This influences
- *   the `navigation_points` field returned in the response. If empty,
- *   navigation points of all travel modes are returned.
- * @param {string} [request.languageCode]
- *   Optional. Language in which the results should be returned.
- * @param {string} [request.regionCode]
- *   Optional. Region code. The region code, specified as a ccTLD ("top-level
- *   domain") two-character value. The parameter affects results based on
- *   applicable law. This parameter also influences, but not fully restricts,
- *   results from the service.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.geocode.v4.SearchDestinationsResponse|SearchDestinationsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/destination_service.search_destinations.js</caption>
- * region_tag:geocoding-backend_v4_generated_DestinationService_SearchDestinations_async
- */
+  /**
+   * This method performs a destination lookup and returns a list of
+   * destinations.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.place
+   *   The resource name of a place, in `places/{place_id}` format.
+   * @param {google.maps.geocode.v4.SearchDestinationsRequest.AddressQuery} request.addressQuery
+   *   A street address.
+   * @param {google.maps.geocode.v4.SearchDestinationsRequest.LocationQuery} request.locationQuery
+   *   A precise location.
+   * @param {number[]} [request.travelModes]
+   *   Optional. The travel modes to filter navigation points for. This influences
+   *   the `navigation_points` field returned in the response. If empty,
+   *   navigation points of all travel modes are returned.
+   * @param {string} [request.languageCode]
+   *   Optional. Language in which the results should be returned.
+   * @param {string} [request.regionCode]
+   *   Optional. Region code. The region code, specified as a ccTLD ("top-level
+   *   domain") two-character value. The parameter affects results based on
+   *   applicable law. This parameter also influences, but not fully restricts,
+   *   results from the service.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.geocode.v4.SearchDestinationsResponse|SearchDestinationsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/destination_service.search_destinations.js</caption>
+   * region_tag:geocoding-backend_v4_generated_DestinationService_SearchDestinations_async
+   */
   searchDestinations(
-      request?: protos.google.maps.geocode.v4.ISearchDestinationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.geocode.v4.ISearchDestinationsResponse,
-        protos.google.maps.geocode.v4.ISearchDestinationsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.geocode.v4.ISearchDestinationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.geocode.v4.ISearchDestinationsResponse,
+      protos.google.maps.geocode.v4.ISearchDestinationsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   searchDestinations(
-      request: protos.google.maps.geocode.v4.ISearchDestinationsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.geocode.v4.ISearchDestinationsResponse,
-          protos.google.maps.geocode.v4.ISearchDestinationsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.geocode.v4.ISearchDestinationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.geocode.v4.ISearchDestinationsResponse,
+      | protos.google.maps.geocode.v4.ISearchDestinationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   searchDestinations(
-      request: protos.google.maps.geocode.v4.ISearchDestinationsRequest,
-      callback: Callback<
-          protos.google.maps.geocode.v4.ISearchDestinationsResponse,
-          protos.google.maps.geocode.v4.ISearchDestinationsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.geocode.v4.ISearchDestinationsRequest,
+    callback: Callback<
+      protos.google.maps.geocode.v4.ISearchDestinationsResponse,
+      | protos.google.maps.geocode.v4.ISearchDestinationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   searchDestinations(
-      request?: protos.google.maps.geocode.v4.ISearchDestinationsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.geocode.v4.ISearchDestinationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.geocode.v4.ISearchDestinationsResponse,
-          protos.google.maps.geocode.v4.ISearchDestinationsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.geocode.v4.ISearchDestinationsResponse,
-          protos.google.maps.geocode.v4.ISearchDestinationsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.geocode.v4.ISearchDestinationsResponse,
-        protos.google.maps.geocode.v4.ISearchDestinationsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.geocode.v4.ISearchDestinationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.geocode.v4.ISearchDestinationsResponse,
+      | protos.google.maps.geocode.v4.ISearchDestinationsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.geocode.v4.ISearchDestinationsResponse,
+      protos.google.maps.geocode.v4.ISearchDestinationsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchDestinations request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.geocode.v4.ISearchDestinationsResponse,
-        protos.google.maps.geocode.v4.ISearchDestinationsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.geocode.v4.ISearchDestinationsResponse,
+          | protos.google.maps.geocode.v4.ISearchDestinationsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('searchDestinations response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.searchDestinations(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.geocode.v4.ISearchDestinationsResponse,
-        protos.google.maps.geocode.v4.ISearchDestinationsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('searchDestinations response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .searchDestinations(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.geocode.v4.ISearchDestinationsResponse,
+          protos.google.maps.geocode.v4.ISearchDestinationsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('searchDestinations response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-
 
   /**
    * Terminate the gRPC channel and close the client.
@@ -439,7 +522,7 @@ export class DestinationServiceClient {
    */
   close(): Promise<void> {
     if (this.destinationServiceStub && !this._terminated) {
-      return this.destinationServiceStub.then(stub => {
+      return this.destinationServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

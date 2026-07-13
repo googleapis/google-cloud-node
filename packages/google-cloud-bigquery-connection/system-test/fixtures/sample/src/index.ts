@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ConnectionServiceClient} from '@google-cloud/bigquery-connection';
+import { ConnectionServiceClient } from '@google-cloud/bigquery-connection';
 
 // check that the client class type name can be used
 function doStuffWithConnectionServiceClient(client: ConnectionServiceClient) {

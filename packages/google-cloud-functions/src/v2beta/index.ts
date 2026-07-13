@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {FunctionServiceClient} from './function_service_client';
+export { FunctionServiceClient } from './function_service_client';

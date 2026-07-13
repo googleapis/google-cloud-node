@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {PublicCertificateAuthorityServiceClient} from './public_certificate_authority_service_client';
+export { PublicCertificateAuthorityServiceClient } from './public_certificate_authority_service_client';

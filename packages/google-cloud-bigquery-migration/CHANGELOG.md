@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v2.1.2...bigquery-migration-v2.2.0) (2026-06-01)
+
+
+### Features
+
+* Add support for assessment tasks in BigQuery Migration API ([#8334](https://github.com/googleapis/google-cloud-node/issues/8334)) ([cb9a19e](https://github.com/googleapis/google-cloud-node/commit/cb9a19eb93bccdbc7c579df021b9e898d32675a2))
+
 ## [2.1.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v2.1.1...bigquery-migration-v2.1.2) (2026-05-01)
 
 

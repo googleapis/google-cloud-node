@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +55,7 @@ export class DataAgentServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('geminidataanalytics');
@@ -57,11 +68,11 @@ export class DataAgentServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  dataAgentServiceStub?: Promise<{[name: string]: Function}>;
+  dataAgentServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DataAgentServiceClient.
@@ -102,21 +113,42 @@ export class DataAgentServiceClient {
    *     const client = new DataAgentServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataAgentServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'geminidataanalytics.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +173,7 @@ export class DataAgentServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +187,11 @@ export class DataAgentServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,16 +213,16 @@ export class DataAgentServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       conversationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}'
+        'projects/{project}/locations/{location}/conversations/{conversation}',
       ),
       dataAgentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataAgents/{data_agent}'
+        'projects/{project}/locations/{location}/dataAgents/{data_agent}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
     };
 
@@ -202,10 +230,16 @@ export class DataAgentServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDataAgents:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataAgents'),
-      listAccessibleDataAgents:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataAgents')
+      listDataAgents: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dataAgents',
+      ),
+      listAccessibleDataAgents: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dataAgents',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -214,45 +248,85 @@ export class DataAgentServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1alpha/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1alpha/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1alpha/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1alpha/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1alpha/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1alpha/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1alpha/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1alpha/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1alpha/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1alpha/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1alpha/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1alpha/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createDataAgentResponse = protoFilesRoot.lookup(
-      '.google.cloud.geminidataanalytics.v1alpha.DataAgent') as gax.protobuf.Type;
+      '.google.cloud.geminidataanalytics.v1alpha.DataAgent',
+    ) as gax.protobuf.Type;
     const createDataAgentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.geminidataanalytics.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.geminidataanalytics.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateDataAgentResponse = protoFilesRoot.lookup(
-      '.google.cloud.geminidataanalytics.v1alpha.DataAgent') as gax.protobuf.Type;
+      '.google.cloud.geminidataanalytics.v1alpha.DataAgent',
+    ) as gax.protobuf.Type;
     const updateDataAgentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.geminidataanalytics.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.geminidataanalytics.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteDataAgentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteDataAgentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.geminidataanalytics.v1alpha.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.geminidataanalytics.v1alpha.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDataAgent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createDataAgentResponse.decode.bind(createDataAgentResponse),
-        createDataAgentMetadata.decode.bind(createDataAgentMetadata)),
+        createDataAgentMetadata.decode.bind(createDataAgentMetadata),
+      ),
       updateDataAgent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateDataAgentResponse.decode.bind(updateDataAgentResponse),
-        updateDataAgentMetadata.decode.bind(updateDataAgentMetadata)),
+        updateDataAgentMetadata.decode.bind(updateDataAgentMetadata),
+      ),
       deleteDataAgent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDataAgentResponse.decode.bind(deleteDataAgentResponse),
-        deleteDataAgentMetadata.decode.bind(deleteDataAgentMetadata))
+        deleteDataAgentMetadata.decode.bind(deleteDataAgentMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.geminidataanalytics.v1alpha.DataAgentService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.geminidataanalytics.v1alpha.DataAgentService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -283,28 +357,46 @@ export class DataAgentServiceClient {
     // Put together the "service stub" for
     // google.cloud.geminidataanalytics.v1alpha.DataAgentService.
     this.dataAgentServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.geminidataanalytics.v1alpha.DataAgentService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.geminidataanalytics.v1alpha.DataAgentService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.geminidataanalytics.v1alpha.DataAgentService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.geminidataanalytics.v1alpha
+            .DataAgentService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataAgentServiceStubMethods =
-        ['listDataAgents', 'listAccessibleDataAgents', 'getDataAgent', 'createDataAgent', 'createDataAgentSync', 'updateDataAgent', 'updateDataAgentSync', 'deleteDataAgent', 'deleteDataAgentSync', 'getIamPolicy', 'setIamPolicy'];
+    const dataAgentServiceStubMethods = [
+      'listDataAgents',
+      'listAccessibleDataAgents',
+      'getDataAgent',
+      'createDataAgent',
+      'createDataAgentSync',
+      'updateDataAgent',
+      'updateDataAgentSync',
+      'deleteDataAgent',
+      'deleteDataAgentSync',
+      'getIamPolicy',
+      'setIamPolicy',
+    ];
     for (const methodName of dataAgentServiceStubMethods) {
       const callPromise = this.dataAgentServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -314,7 +406,7 @@ export class DataAgentServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -329,8 +421,14 @@ export class DataAgentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'geminidataanalytics.googleapis.com';
   }
@@ -341,8 +439,14 @@ export class DataAgentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'geminidataanalytics.googleapis.com';
   }
@@ -373,9 +477,7 @@ export class DataAgentServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -384,8 +486,9 @@ export class DataAgentServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -396,1115 +499,1582 @@ export class DataAgentServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single DataAgent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.get_data_agent.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_GetDataAgent_async
- */
+  /**
+   * Gets details of a single DataAgent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.get_data_agent.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_GetDataAgent_async
+   */
   getDataAgent(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      (
+        | protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getDataAgent(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDataAgent(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDataAgent(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      (
+        | protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDataAgent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          | protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDataAgent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDataAgent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDataAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          (
+            | protos.google.cloud.geminidataanalytics.v1alpha.IGetDataAgentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataAgent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a new DataAgent in a given project and location synchronously.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Value for parent.
- * @param {string} [request.dataAgentId]
- *   Optional. Id of the requesting object. Must be unique within the parent.
- *   The allowed format is: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
- *   If not provided, the server will auto-generate a value for the id.
- * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} request.dataAgent
- *   Required. The resource being created.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.create_data_agent_sync.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_CreateDataAgentSync_async
- */
+  /**
+   * Creates a new DataAgent in a given project and location synchronously.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent.
+   * @param {string} [request.dataAgentId]
+   *   Optional. Id of the requesting object. Must be unique within the parent.
+   *   The allowed format is: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+   *   If not provided, the server will auto-generate a value for the id.
+   * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} request.dataAgent
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.create_data_agent_sync.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_CreateDataAgentSync_async
+   */
   createDataAgentSync(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      (
+        | protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createDataAgentSync(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      | protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDataAgentSync(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      | protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDataAgentSync(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      | protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      (
+        | protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createDataAgentSync request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          | protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDataAgentSync response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createDataAgentSync(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createDataAgentSync response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createDataAgentSync(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          (
+            | protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataAgentSync response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the parameters of a single DataAgent synchronously.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   DataAgent resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields with non-default values
- *   present in the request will be overwritten. If a wildcard mask is provided,
- *   all fields will be overwritten.
- * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} request.dataAgent
- *   Required. The resource being updated.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.update_data_agent_sync.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_UpdateDataAgentSync_async
- */
+  /**
+   * Updates the parameters of a single DataAgent synchronously.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   DataAgent resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields with non-default values
+   *   present in the request will be overwritten. If a wildcard mask is provided,
+   *   all fields will be overwritten.
+   * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} request.dataAgent
+   *   Required. The resource being updated.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.update_data_agent_sync.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_UpdateDataAgentSync_async
+   */
   updateDataAgentSync(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      (
+        | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateDataAgentSync(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDataAgentSync(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDataAgentSync(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-          protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+      (
+        | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'data_agent.name': request.dataAgent!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'data_agent.name': request.dataAgent!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateDataAgentSync request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDataAgentSync response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateDataAgentSync(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
-        protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateDataAgentSync response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateDataAgentSync(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+          (
+            | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataAgentSync response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a single DataAgent synchronously.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.delete_data_agent_sync.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_DeleteDataAgentSync_async
- */
+  /**
+   * Deletes a single DataAgent synchronously.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.delete_data_agent_sync.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_DeleteDataAgentSync_async
+   */
   deleteDataAgentSync(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteDataAgentSync(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDataAgentSync(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDataAgentSync(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteDataAgentSync request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDataAgentSync response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteDataAgentSync(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteDataAgentSync response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteDataAgentSync(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataAgentSync response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets the IAM policy for DataAgent
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {google.iam.v1.GetPolicyOptions} request.options
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.get_iam_policy.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_GetIamPolicy_async
- */
+  /**
+   * Gets the IAM policy for DataAgent
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.get_iam_policy.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_GetIamPolicy_async
+   */
   getIamPolicy(
-      request?: protos.google.iam.v1.IGetIamPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getIamPolicy(
-      request: protos.google.iam.v1.IGetIamPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIamPolicy(
-      request: protos.google.iam.v1.IGetIamPolicyRequest,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIamPolicy(
-      request?: protos.google.iam.v1.IGetIamPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'resource': request.resource ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicy request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getIamPolicy response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Sets the IAM policy for a DataAgent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being specified.
- *   See the operation documentation for the appropriate value for this field.
- * @param {google.iam.v1.Policy} request.policy
- *   REQUIRED: The complete policy to be applied to the `resource`. The size of
- *   the policy is limited to a few 10s of KB. An empty policy is a
- *   valid policy but certain Cloud Platform services (such as Projects)
- *   might reject them.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
- *   the fields in the mask will be modified. If no mask is provided, the
- *   following default mask is used:
- *
- *   `paths: "bindings, etag"`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.set_iam_policy.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_SetIamPolicy_async
- */
+  /**
+   * Sets the IAM policy for a DataAgent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *   the fields in the mask will be modified. If no mask is provided, the
+   *   following default mask is used:
+   *
+   *   `paths: "bindings, etag"`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.set_iam_policy.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_SetIamPolicy_async
+   */
   setIamPolicy(
-      request?: protos.google.iam.v1.ISetIamPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   setIamPolicy(
-      request: protos.google.iam.v1.ISetIamPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   setIamPolicy(
-      request: protos.google.iam.v1.ISetIamPolicyRequest,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   setIamPolicy(
-      request?: protos.google.iam.v1.ISetIamPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'resource': request.resource ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicy request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('setIamPolicy response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new DataAgent in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Value for parent.
- * @param {string} [request.dataAgentId]
- *   Optional. Id of the requesting object. Must be unique within the parent.
- *   The allowed format is: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
- *   If not provided, the server will auto-generate a value for the id.
- * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} request.dataAgent
- *   Required. The resource being created.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.create_data_agent.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_CreateDataAgent_async
- */
+  /**
+   * Creates a new DataAgent in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent.
+   * @param {string} [request.dataAgentId]
+   *   Optional. Id of the requesting object. Must be unique within the parent.
+   *   The allowed format is: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+   *   If not provided, the server will auto-generate a value for the id.
+   * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} request.dataAgent
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.create_data_agent.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_CreateDataAgent_async
+   */
   createDataAgent(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createDataAgent(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDataAgent(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDataAgent(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.ICreateDataAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+            protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+            protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createDataAgent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createDataAgent request %j', request);
-    return this.innerApiCalls.createDataAgent(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createDataAgent response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createDataAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+            protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataAgent response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createDataAgent()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.create_data_agent.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_CreateDataAgent_async
- */
-  async checkCreateDataAgentProgress(name: string): Promise<LROperation<protos.google.cloud.geminidataanalytics.v1alpha.DataAgent, protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createDataAgent()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.create_data_agent.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_CreateDataAgent_async
+   */
+  async checkCreateDataAgentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.geminidataanalytics.v1alpha.DataAgent,
+      protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('createDataAgent long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createDataAgent, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.geminidataanalytics.v1alpha.DataAgent, protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createDataAgent,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.geminidataanalytics.v1alpha.DataAgent,
+      protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single DataAgent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   DataAgent resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields with non-default values
- *   present in the request will be overwritten. If a wildcard mask is provided,
- *   all fields will be overwritten.
- * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} request.dataAgent
- *   Required. The resource being updated.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.update_data_agent.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_UpdateDataAgent_async
- */
+  /**
+   * Updates the parameters of a single DataAgent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   DataAgent resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields with non-default values
+   *   present in the request will be overwritten. If a wildcard mask is provided,
+   *   all fields will be overwritten.
+   * @param {google.cloud.geminidataanalytics.v1alpha.DataAgent} request.dataAgent
+   *   Required. The resource being updated.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.update_data_agent.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_UpdateDataAgent_async
+   */
   updateDataAgent(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateDataAgent(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDataAgent(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDataAgent(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateDataAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+            protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'data_agent.name': request.dataAgent!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'data_agent.name': request.dataAgent!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+            protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateDataAgent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateDataAgent request %j', request);
-    return this.innerApiCalls.updateDataAgent(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateDataAgent response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateDataAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent,
+            protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataAgent response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateDataAgent()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.update_data_agent.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_UpdateDataAgent_async
- */
-  async checkUpdateDataAgentProgress(name: string): Promise<LROperation<protos.google.cloud.geminidataanalytics.v1alpha.DataAgent, protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateDataAgent()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.update_data_agent.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_UpdateDataAgent_async
+   */
+  async checkUpdateDataAgentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.geminidataanalytics.v1alpha.DataAgent,
+      protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('updateDataAgent long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateDataAgent, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.geminidataanalytics.v1alpha.DataAgent, protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateDataAgent,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.geminidataanalytics.v1alpha.DataAgent,
+      protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata
+    >;
   }
-/**
- * Deletes a single DataAgent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.delete_data_agent.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_DeleteDataAgent_async
- */
+  /**
+   * Deletes a single DataAgent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.delete_data_agent.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_DeleteDataAgent_async
+   */
   deleteDataAgent(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteDataAgent(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDataAgent(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDataAgent(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IDeleteDataAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteDataAgent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteDataAgent request %j', request);
-    return this.innerApiCalls.deleteDataAgent(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteDataAgent response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteDataAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.geminidataanalytics.v1alpha.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataAgent response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteDataAgent()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.delete_data_agent.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_DeleteDataAgent_async
- */
-  async checkDeleteDataAgentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteDataAgent()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.delete_data_agent.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_DeleteDataAgent_async
+   */
+  async checkDeleteDataAgentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata
+    >
+  > {
     this._log.info('deleteDataAgent long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteDataAgent, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteDataAgent,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.geminidataanalytics.v1alpha.OperationMetadata
+    >;
   }
- /**
- * Lists DataAgents in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListDataAgentsRequest.
- * @param {number} [request.pageSize]
- *   Optional. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDataAgents` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDataAgents` must
- *   match the call that provided the page token. The service may return fewer
- *   than this value.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
- *   syntax.
- * @param {string} [request.orderBy]
- *   Optional. User specification for how to order the results.
- * @param {boolean} [request.showDeleted]
- *   Optional. If true, the list results will include soft-deleted DataAgents.
- *   Defaults to false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDataAgentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists DataAgents in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListDataAgentsRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDataAgents` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDataAgents` must
+   *   match the call that provided the page token. The service may return fewer
+   *   than this value.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
+   *   syntax.
+   * @param {string} [request.orderBy]
+   *   Optional. User specification for how to order the results.
+   * @param {boolean} [request.showDeleted]
+   *   Optional. If true, the list results will include soft-deleted DataAgents.
+   *   Defaults to false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDataAgentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDataAgents(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
-        protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest|null,
-        protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
+      protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest | null,
+      protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse,
+    ]
+  >;
   listDataAgents(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
-          protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent
+    >,
+  ): void;
   listDataAgents(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
-          protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent
+    >,
+  ): void;
   listDataAgents(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
-          protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>,
-      callback?: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
-          protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
-        protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest|null,
-        protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
+      protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest | null,
+      protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
-      protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse|null|undefined,
-      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
+          | protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDataAgents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1513,234 +2083,263 @@ export class DataAgentServiceClient {
     this._log.info('listDataAgents request %j', request);
     return this.innerApiCalls
       .listDataAgents(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
-        protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest|null,
-        protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse
-      ]) => {
-        this._log.info('listDataAgents values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
+          protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest | null,
+          protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsResponse,
+        ]) => {
+          this._log.info('listDataAgents values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDataAgents`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListDataAgentsRequest.
- * @param {number} [request.pageSize]
- *   Optional. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDataAgents` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDataAgents` must
- *   match the call that provided the page token. The service may return fewer
- *   than this value.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
- *   syntax.
- * @param {string} [request.orderBy]
- *   Optional. User specification for how to order the results.
- * @param {boolean} [request.showDeleted]
- *   Optional. If true, the list results will include soft-deleted DataAgents.
- *   Defaults to false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDataAgentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDataAgents`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListDataAgentsRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDataAgents` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDataAgents` must
+   *   match the call that provided the page token. The service may return fewer
+   *   than this value.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
+   *   syntax.
+   * @param {string} [request.orderBy]
+   *   Optional. User specification for how to order the results.
+   * @param {boolean} [request.showDeleted]
+   *   Optional. If true, the list results will include soft-deleted DataAgents.
+   *   Defaults to false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDataAgentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDataAgentsStream(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDataAgents stream %j', request);
     return this.descriptors.page.listDataAgents.createStream(
       this.innerApiCalls.listDataAgents as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDataAgents`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListDataAgentsRequest.
- * @param {number} [request.pageSize]
- *   Optional. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDataAgents` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDataAgents` must
- *   match the call that provided the page token. The service may return fewer
- *   than this value.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
- *   syntax.
- * @param {string} [request.orderBy]
- *   Optional. User specification for how to order the results.
- * @param {boolean} [request.showDeleted]
- *   Optional. If true, the list results will include soft-deleted DataAgents.
- *   Defaults to false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.list_data_agents.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_ListDataAgents_async
- */
+  /**
+   * Equivalent to `listDataAgents`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListDataAgentsRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDataAgents` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDataAgents` must
+   *   match the call that provided the page token. The service may return fewer
+   *   than this value.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
+   *   syntax.
+   * @param {string} [request.orderBy]
+   *   Optional. User specification for how to order the results.
+   * @param {boolean} [request.showDeleted]
+   *   Optional. If true, the list results will include soft-deleted DataAgents.
+   *   Defaults to false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.list_data_agents.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_ListDataAgents_async
+   */
   listDataAgentsAsync(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>{
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IListDataAgentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDataAgents iterate %j', request);
     return this.descriptors.page.listDataAgents.asyncIterate(
       this.innerApiCalls['listDataAgents'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>;
   }
- /**
- * Lists DataAgents that are accessible to the caller in a given project and
- * location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListAccessibleDataAgentsRequest.
- * @param {number} [request.pageSize]
- *   Optional. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListAccessibleDataAgents`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `ListAccessibleDataAgents` must match the call that provided the page
- *   token. The service may return fewer than this value.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
- *   syntax.
- * @param {string} [request.orderBy]
- *   Optional. User specification for how to order the results.
- * @param {boolean} [request.showDeleted]
- *   Optional. If true, the list results will include soft-deleted DataAgents.
- *   Defaults to false.
- * @param {google.cloud.geminidataanalytics.v1alpha.ListAccessibleDataAgentsRequest.CreatorFilter} [request.creatorFilter]
- *   Optional. Filter for the creator of the agent.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAccessibleDataAgentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists DataAgents that are accessible to the caller in a given project and
+   * location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListAccessibleDataAgentsRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListAccessibleDataAgents`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListAccessibleDataAgents` must match the call that provided the page
+   *   token. The service may return fewer than this value.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
+   *   syntax.
+   * @param {string} [request.orderBy]
+   *   Optional. User specification for how to order the results.
+   * @param {boolean} [request.showDeleted]
+   *   Optional. If true, the list results will include soft-deleted DataAgents.
+   *   Defaults to false.
+   * @param {google.cloud.geminidataanalytics.v1alpha.ListAccessibleDataAgentsRequest.CreatorFilter} [request.creatorFilter]
+   *   Optional. Filter for the creator of the agent.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAccessibleDataAgentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAccessibleDataAgents(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
-        protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest|null,
-        protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
+      protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest | null,
+      protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse,
+    ]
+  >;
   listAccessibleDataAgents(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
-          protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent
+    >,
+  ): void;
   listAccessibleDataAgents(
-      request: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
-          protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>): void;
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent
+    >,
+  ): void;
   listAccessibleDataAgents(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
-          protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>,
-      callback?: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
-          protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
-        protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest|null,
-        protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
+      protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest | null,
+      protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
-      protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse|null|undefined,
-      protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
+          | protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAccessibleDataAgents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1749,141 +2348,146 @@ export class DataAgentServiceClient {
     this._log.info('listAccessibleDataAgents request %j', request);
     return this.innerApiCalls
       .listAccessibleDataAgents(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
-        protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest|null,
-        protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse
-      ]) => {
-        this._log.info('listAccessibleDataAgents values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent[],
+          protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest | null,
+          protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsResponse,
+        ]) => {
+          this._log.info('listAccessibleDataAgents values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAccessibleDataAgents`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListAccessibleDataAgentsRequest.
- * @param {number} [request.pageSize]
- *   Optional. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListAccessibleDataAgents`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `ListAccessibleDataAgents` must match the call that provided the page
- *   token. The service may return fewer than this value.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
- *   syntax.
- * @param {string} [request.orderBy]
- *   Optional. User specification for how to order the results.
- * @param {boolean} [request.showDeleted]
- *   Optional. If true, the list results will include soft-deleted DataAgents.
- *   Defaults to false.
- * @param {google.cloud.geminidataanalytics.v1alpha.ListAccessibleDataAgentsRequest.CreatorFilter} [request.creatorFilter]
- *   Optional. Filter for the creator of the agent.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAccessibleDataAgentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listAccessibleDataAgents`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListAccessibleDataAgentsRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListAccessibleDataAgents`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListAccessibleDataAgents` must match the call that provided the page
+   *   token. The service may return fewer than this value.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
+   *   syntax.
+   * @param {string} [request.orderBy]
+   *   Optional. User specification for how to order the results.
+   * @param {boolean} [request.showDeleted]
+   *   Optional. If true, the list results will include soft-deleted DataAgents.
+   *   Defaults to false.
+   * @param {google.cloud.geminidataanalytics.v1alpha.ListAccessibleDataAgentsRequest.CreatorFilter} [request.creatorFilter]
+   *   Optional. Filter for the creator of the agent.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAccessibleDataAgentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAccessibleDataAgentsStream(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAccessibleDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAccessibleDataAgents stream %j', request);
     return this.descriptors.page.listAccessibleDataAgents.createStream(
       this.innerApiCalls.listAccessibleDataAgents as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAccessibleDataAgents`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListAccessibleDataAgentsRequest.
- * @param {number} [request.pageSize]
- *   Optional. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListAccessibleDataAgents`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to
- *   `ListAccessibleDataAgents` must match the call that provided the page
- *   token. The service may return fewer than this value.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
- *   syntax.
- * @param {string} [request.orderBy]
- *   Optional. User specification for how to order the results.
- * @param {boolean} [request.showDeleted]
- *   Optional. If true, the list results will include soft-deleted DataAgents.
- *   Defaults to false.
- * @param {google.cloud.geminidataanalytics.v1alpha.ListAccessibleDataAgentsRequest.CreatorFilter} [request.creatorFilter]
- *   Optional. Filter for the creator of the agent.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/data_agent_service.list_accessible_data_agents.js</caption>
- * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_ListAccessibleDataAgents_async
- */
+  /**
+   * Equivalent to `listAccessibleDataAgents`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListAccessibleDataAgentsRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListAccessibleDataAgents`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   `ListAccessibleDataAgents` must match the call that provided the page
+   *   token. The service may return fewer than this value.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
+   *   syntax.
+   * @param {string} [request.orderBy]
+   *   Optional. User specification for how to order the results.
+   * @param {boolean} [request.showDeleted]
+   *   Optional. If true, the list results will include soft-deleted DataAgents.
+   *   Defaults to false.
+   * @param {google.cloud.geminidataanalytics.v1alpha.ListAccessibleDataAgentsRequest.CreatorFilter} [request.creatorFilter]
+   *   Optional. Filter for the creator of the agent.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.geminidataanalytics.v1alpha.DataAgent|DataAgent}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_agent_service.list_accessible_data_agents.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataAgentService_ListAccessibleDataAgents_async
+   */
   listAccessibleDataAgentsAsync(
-      request?: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>{
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IListAccessibleDataAgentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAccessibleDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAccessibleDataAgents iterate %j', request);
     return this.descriptors.page.listAccessibleDataAgents.asyncIterate(
       this.innerApiCalls['listAccessibleDataAgents'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.geminidataanalytics.v1alpha.IDataAgent>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1918,12 +2522,11 @@ export class DataAgentServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1956,12 +2559,12 @@ export class DataAgentServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2004,22 +2607,22 @@ export class DataAgentServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2054,15 +2657,15 @@ export class DataAgentServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2096,7 +2699,7 @@ export class DataAgentServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2109,25 +2712,24 @@ export class DataAgentServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -2166,22 +2768,22 @@ export class DataAgentServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2197,7 +2799,7 @@ export class DataAgentServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  conversationPath(project:string,location:string,conversation:string) {
+  conversationPath(project: string, location: string, conversation: string) {
     return this.pathTemplates.conversationPathTemplate.render({
       project: project,
       location: location,
@@ -2213,7 +2815,8 @@ export class DataAgentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).project;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .project;
   }
 
   /**
@@ -2224,7 +2827,8 @@ export class DataAgentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).location;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .location;
   }
 
   /**
@@ -2235,7 +2839,8 @@ export class DataAgentServiceClient {
    * @returns {string} A string representing the conversation.
    */
   matchConversationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).conversation;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .conversation;
   }
 
   /**
@@ -2246,7 +2851,7 @@ export class DataAgentServiceClient {
    * @param {string} data_agent
    * @returns {string} Resource name string.
    */
-  dataAgentPath(project:string,location:string,dataAgent:string) {
+  dataAgentPath(project: string, location: string, dataAgent: string) {
     return this.pathTemplates.dataAgentPathTemplate.render({
       project: project,
       location: location,
@@ -2262,7 +2867,8 @@ export class DataAgentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAgentName(dataAgentName: string) {
-    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName).project;
+    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName)
+      .project;
   }
 
   /**
@@ -2273,7 +2879,8 @@ export class DataAgentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAgentName(dataAgentName: string) {
-    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName).location;
+    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName)
+      .location;
   }
 
   /**
@@ -2284,7 +2891,8 @@ export class DataAgentServiceClient {
    * @returns {string} A string representing the data_agent.
    */
   matchDataAgentFromDataAgentName(dataAgentName: string) {
-    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName).data_agent;
+    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName)
+      .data_agent;
   }
 
   /**
@@ -2294,7 +2902,7 @@ export class DataAgentServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2329,7 +2937,7 @@ export class DataAgentServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2354,11 +2962,13 @@ export class DataAgentServiceClient {
    */
   close(): Promise<void> {
     if (this.dataAgentServiceStub && !this._terminated) {
-      return this.dataAgentServiceStub.then(stub => {
+      return this.dataAgentServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

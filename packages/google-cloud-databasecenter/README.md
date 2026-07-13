@@ -59,10 +59,10 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | --------------------------- | --------------------------------- |
 | aggregate fleet | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.aggregate_fleet.js) |
 | aggregate issue stats | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.aggregate_issue_stats.js) |
+| aggregate query stats | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.aggregate_query_stats.js) |
 | query database resource groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.query_database_resource_groups.js) |
 | query issues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.query_issues.js) |
 | query products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.query_products.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/snippet_metadata_google.cloud.databasecenter.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -96,7 +96,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -106,7 +106,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

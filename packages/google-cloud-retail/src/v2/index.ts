@@ -16,15 +16,15 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AnalyticsServiceClient} from './analytics_service_client';
-export {CatalogServiceClient} from './catalog_service_client';
-export {CompletionServiceClient} from './completion_service_client';
-export {ControlServiceClient} from './control_service_client';
-export {ConversationalSearchServiceClient} from './conversational_search_service_client';
-export {GenerativeQuestionServiceClient} from './generative_question_service_client';
-export {ModelServiceClient} from './model_service_client';
-export {PredictionServiceClient} from './prediction_service_client';
-export {ProductServiceClient} from './product_service_client';
-export {SearchServiceClient} from './search_service_client';
-export {ServingConfigServiceClient} from './serving_config_service_client';
-export {UserEventServiceClient} from './user_event_service_client';
+export { AnalyticsServiceClient } from './analytics_service_client';
+export { CatalogServiceClient } from './catalog_service_client';
+export { CompletionServiceClient } from './completion_service_client';
+export { ControlServiceClient } from './control_service_client';
+export { ConversationalSearchServiceClient } from './conversational_search_service_client';
+export { GenerativeQuestionServiceClient } from './generative_question_service_client';
+export { ModelServiceClient } from './model_service_client';
+export { PredictionServiceClient } from './prediction_service_client';
+export { ProductServiceClient } from './product_service_client';
+export { SearchServiceClient } from './search_service_client';
+export { ServingConfigServiceClient } from './serving_config_service_client';
+export { UserEventServiceClient } from './user_event_service_client';

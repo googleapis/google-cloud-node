@@ -59,11 +59,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
 | search | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1/report_service.search.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1/snippet_metadata_google.shopping.merchant.reports.v1.json) |
 | search | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1alpha/report_service.search.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1alpha/snippet_metadata_google.shopping.merchant.reports.v1alpha.json) |
 | search | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1beta/report_service.search.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.reports.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -97,7 +94,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -107,7 +104,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-reports/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

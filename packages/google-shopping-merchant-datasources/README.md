@@ -65,7 +65,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list data sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.list_data_sources.js) |
 | update data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/data_sources_service.update_data_source.js) |
 | get file upload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/file_uploads_service.get_file_upload.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1/snippet_metadata_google.shopping.merchant.datasources.v1.json) |
 | create data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.create_data_source.js) |
 | delete data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.delete_data_source.js) |
 | fetch data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.fetch_data_source.js) |
@@ -73,7 +72,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list data sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.list_data_sources.js) |
 | update data source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.update_data_source.js) |
 | get file upload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/file_uploads_service.get_file_upload.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.datasources.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -107,7 +105,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -117,7 +115,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,10 +20,12 @@ import * as v4 from './v4';
 
 const DataPointsServiceClient = v4.DataPointsServiceClient;
 type DataPointsServiceClient = v4.DataPointsServiceClient;
+const DataSubscriptionServiceClient = v4.DataSubscriptionServiceClient;
+type DataSubscriptionServiceClient = v4.DataSubscriptionServiceClient;
 const HealthProfileServiceClient = v4.HealthProfileServiceClient;
 type HealthProfileServiceClient = v4.HealthProfileServiceClient;
 
-export {v4, DataPointsServiceClient, HealthProfileServiceClient};
-export default {v4, DataPointsServiceClient, HealthProfileServiceClient};
+export {v4, DataPointsServiceClient, DataSubscriptionServiceClient, HealthProfileServiceClient};
+export default {v4, DataPointsServiceClient, DataSubscriptionServiceClient, HealthProfileServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

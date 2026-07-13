@@ -1,0 +1,156 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package google.ads.admanager.v1;
+
+option csharp_namespace = "Google.Ads.AdManager.V1";
+option go_package = "google.golang.org/genproto/googleapis/ads/admanager/v1;admanager";
+option java_multiple_files = true;
+option java_outer_classname = "ApplicationEnumsProto";
+option java_package = "com.google.ads.admanager.v1";
+option php_namespace = "Google\\Ads\\AdManager\\V1";
+option ruby_package = "Google::Ads::AdManager::V1";
+
+// Wrapper message for
+// [ApplicationStore][google.ads.admanager.v1.ApplicationStoreEnum.ApplicationStore].
+message ApplicationStoreEnum {
+  // The application store that distributes applications.
+  enum ApplicationStore {
+    // Not specified value.
+    APPLICATION_STORE_UNSPECIFIED = 0;
+
+    // Apple App Store (iTunes).
+    APPLE_APP_STORE = 1;
+
+    // Google Play (ex. Google Market).
+    GOOGLE_PLAY_STORE = 2;
+
+    // Amazon App Store.
+    AMAZON_APP_STORE = 14;
+
+    // Oppo App Market.
+    OPPO_APP_STORE = 15;
+
+    // Samsung Galaxy Store.
+    SAMSUNG_APP_STORE = 16;
+
+    // Vivo App Store.
+    VIVO_APP_STORE = 17;
+
+    // Mi GetApps.
+    XIAOMI_APP_STORE = 18;
+
+    // Application store for Amazon Fire TV apps.
+    AMAZON_FIRETV_STORE = 7;
+
+    // Application store for LG TV apps.
+    LG_TV_STORE = 19;
+
+    // Application store for Playstation apps.
+    PLAYSTATION_STORE = 8;
+
+    // Application store for Roku apps.
+    ROKU_STORE = 6;
+
+    // Application store for Samsung TV apps.
+    SAMSUNG_TV_STORE = 11;
+
+    // Application store for Xbox apps.
+    XBOX_STORE = 10;
+  }
+}
+
+// Wrapper message for
+// [ApplicationApprovalStatus][google.ads.admanager.v1.ApplicationApprovalStatusEnum.ApplicationApprovalStatus]
+message ApplicationApprovalStatusEnum {
+  // The approval status of the application.
+  enum ApplicationApprovalStatus {
+    // Default value. This value is unused.
+    APPLICATION_APPROVAL_STATUS_UNSPECIFIED = 0;
+
+    // The application is disapproved but has a pending review status, signaling
+    // an appeal.
+    APPEALING = 1;
+
+    // The application can serve ads.
+    APPROVED = 2;
+
+    // The application failed approval checks and it cannot serve any ads.
+    DISAPPROVED = 3;
+
+    // The application is not yet ready for review.
+    DRAFT = 4;
+
+    // The application has not yet been reviewed.
+    UNCHECKED = 5;
+  }
+}
+
+// Wrapper message for
+// [ApplicationPlatform][google.ads.admanager.v1.ApplicationPlatformEnum.ApplicationPlatform]
+message ApplicationPlatformEnum {
+  // A platform a Application can run on.
+  enum ApplicationPlatform {
+    // Default value. This value is unused.
+    APPLICATION_PLATFORM_UNSPECIFIED = 0;
+
+    // Platform for apps with platforms we don't support yet or don't have a
+    // representation for.
+    UNSUPPORTED = 14;
+
+    // Platform for Amazon Fire TV compatible apps.
+    AMAZON_TV = 6;
+
+    // Platform for Android compatible apps.
+    ANDROID = 1;
+
+    // Platform for IOS compatible apps.
+    IOS = 2;
+
+    // Platform for LG TV compatible apps.
+    LG_TV = 12;
+
+    // Platform for Playstation compatible apps.
+    PLAYSTATION = 7;
+
+    // Platform for Roku compatible apps.
+    ROKU = 5;
+
+    // Platform for Samsung TV compatible apps.
+    SAMSUNG_TV = 10;
+
+    // Platform for Xbox compatible apps.
+    XBOX = 9;
+  }
+}
+
+// Wrapper message for
+// [WebviewClaimingStatus][google.ads.admanager.v1.WebviewClaimingStatusEnum.WebviewClaimingStatus]
+message WebviewClaimingStatusEnum {
+  // The webview claiming status of a Application.
+  enum WebviewClaimingStatus {
+    // Default value. This value is unused.
+    WEBVIEW_CLAIMING_STATUS_UNSPECIFIED = 0;
+
+    // The application is soft claimed (claimed for targeting, but not
+    // ownership).
+    SOFT_CLAIMED = 1;
+
+    // The application had its soft claiming status reverted (usually by a user
+    // action).
+    SOFT_CLAIMING_REVERTED = 2;
+  }
+}

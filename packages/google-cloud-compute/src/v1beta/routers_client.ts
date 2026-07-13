@@ -18,11 +18,19 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +52,7 @@ export class RoutersClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('compute');
@@ -57,8 +65,8 @@ export class RoutersClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  routersStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  routersStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of RoutersClient.
@@ -99,27 +107,51 @@ export class RoutersClient {
    *     const client = new RoutersClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof RoutersClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'compute.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = {fallback: true};
+      opts = { fallback: true };
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -141,7 +173,7 @@ export class RoutersClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set defaultServicePath on the auth object.
     this.auth.defaultServicePath = this._servicePath;
@@ -152,10 +184,7 @@ export class RoutersClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -176,24 +205,45 @@ export class RoutersClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      aggregatedList:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items'),
-      getNatMappingInfo:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'result'),
-      list:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items'),
-      listBgpRoutes:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'result'),
-      listNamedSets:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'result'),
-      listRoutePolicies:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'result')
+      aggregatedList: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'items',
+      ),
+      getNatMappingInfo: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'result',
+      ),
+      list: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'items',
+      ),
+      listBgpRoutes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'result',
+      ),
+      listNamedSets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'result',
+      ),
+      listRoutePolicies: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'result',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.compute.v1beta.Routers', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.compute.v1beta.Routers',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -224,37 +274,64 @@ export class RoutersClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1beta.Routers.
     this.routersStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1beta.Routers') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.compute.v1beta.Routers',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1beta.Routers,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const routersStubMethods =
-        ['aggregatedList', 'delete', 'deleteNamedSet', 'deleteRoutePolicy', 'get', 'getNamedSet', 'getNatIpInfo', 'getNatMappingInfo', 'getRoutePolicy', 'getRouterStatus', 'insert', 'list', 'listBgpRoutes', 'listNamedSets', 'listRoutePolicies', 'patch', 'patchNamedSet', 'patchRoutePolicy', 'preview', 'testIamPermissions', 'update', 'updateNamedSet', 'updateRoutePolicy'];
+    const routersStubMethods = [
+      'aggregatedList',
+      'delete',
+      'deleteNamedSet',
+      'deleteRoutePolicy',
+      'get',
+      'getNamedSet',
+      'getNatIpInfo',
+      'getNatMappingInfo',
+      'getRoutePolicy',
+      'getRouterStatus',
+      'insert',
+      'list',
+      'listBgpRoutes',
+      'listNamedSets',
+      'listRoutePolicies',
+      'patch',
+      'patchNamedSet',
+      'patchRoutePolicy',
+      'preview',
+      'testIamPermissions',
+      'update',
+      'updateNamedSet',
+      'updateRoutePolicy',
+    ];
     for (const methodName of routersStubMethods) {
       const callPromise = this.routersStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -269,8 +346,14 @@ export class RoutersClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'compute.googleapis.com';
   }
@@ -281,8 +364,14 @@ export class RoutersClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'compute.googleapis.com';
   }
@@ -315,7 +404,7 @@ export class RoutersClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -325,8 +414,9 @@ export class RoutersClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -337,2247 +427,3077 @@ export class RoutersClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Deletes the specified Router resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so
- *   that if you must retry your request, the server will know to ignore the
- *   request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same
- *   request ID, the server can check if original operation with the same
- *   request ID was received, and if so, will ignore the second request. This
- *   prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be
- *   a valid UUID with the exception that zero UUID is not supported
- *   (00000000-0000-0000-0000-000000000000).
- * @param {string} request.router
- *   Name of the Router resource to delete.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- *   This method is considered to be in beta. This means while
- *   stable it is still a work-in-progress and under active development,
- *   and might get backwards-incompatible changes at any time.
- *   `.promise()` is not supported yet.
- * @example <caption>include:samples/generated/v1beta/routers.delete.js</caption>
- * region_tag:compute_v1beta_generated_Routers_Delete_async
- */
+  /**
+   * Deletes the specified Router resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.router
+   *   Name of the Router resource to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/routers.delete.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_Delete_async
+   */
   delete(
-      request?: protos.google.cloud.compute.v1beta.IDeleteRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IDeleteRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   delete(
-      request: protos.google.cloud.compute.v1beta.IDeleteRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IDeleteRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IDeleteRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   delete(
-      request: protos.google.cloud.compute.v1beta.IDeleteRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IDeleteRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IDeleteRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   delete(
-      request?: protos.google.cloud.compute.v1beta.IDeleteRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IDeleteRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IDeleteRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IDeleteRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('delete request %j', request);
-    const wrappedCallback: Callback<
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteRouterRequest|null|undefined,
-          {}|null|undefined>|undefined = callback
+          | protos.google.cloud.compute.v1beta.IDeleteRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('delete response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls.delete(request, options, wrappedCallback)
-      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
-        return [
-          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
-          operation,
-          rawResponse
-        ];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .delete(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes Named Set
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.namedSet
- *   The Named Set name for this request. Name must conform to RFC1035
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so
- *   that if you must retry your request, the server will know to ignore the
- *   request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same
- *   request ID, the server can check if original operation with the same
- *   request ID was received, and if so, will ignore the second request. This
- *   prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be
- *   a valid UUID with the exception that zero UUID is not supported
- *   (00000000-0000-0000-0000-000000000000).
- * @param {string} request.router
- *   Name of the Router resource where Named Set is defined.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- *   This method is considered to be in beta. This means while
- *   stable it is still a work-in-progress and under active development,
- *   and might get backwards-incompatible changes at any time.
- *   `.promise()` is not supported yet.
- * @example <caption>include:samples/generated/v1beta/routers.delete_named_set.js</caption>
- * region_tag:compute_v1beta_generated_Routers_DeleteNamedSet_async
- */
+  /**
+   * Deletes Named Set
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.namedSet
+   *   The Named Set name for this request. Name must conform to RFC1035
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.router
+   *   Name of the Router resource where Named Set is defined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/routers.delete_named_set.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_DeleteNamedSet_async
+   */
   deleteNamedSet(
-      request?: protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteNamedSet(
-      request: protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteNamedSet(
-      request: protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteNamedSet(
-      request?: protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteNamedSet request %j', request);
-    const wrappedCallback: Callback<
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>|undefined = callback
+          | protos.google.cloud.compute.v1beta.IDeleteNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('deleteNamedSet response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls.deleteNamedSet(request, options, wrappedCallback)
-      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
-        return [
-          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
-          operation,
-          rawResponse
-        ];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteNamedSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes Route Policy
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.policy
- *   The Policy name for this request. Name must conform to RFC1035
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so
- *   that if you must retry your request, the server will know to ignore the
- *   request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same
- *   request ID, the server can check if original operation with the same
- *   request ID was received, and if so, will ignore the second request. This
- *   prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be
- *   a valid UUID with the exception that zero UUID is not supported
- *   (00000000-0000-0000-0000-000000000000).
- * @param {string} request.router
- *   Name of the Router resource where Route Policy is defined.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- *   This method is considered to be in beta. This means while
- *   stable it is still a work-in-progress and under active development,
- *   and might get backwards-incompatible changes at any time.
- *   `.promise()` is not supported yet.
- * @example <caption>include:samples/generated/v1beta/routers.delete_route_policy.js</caption>
- * region_tag:compute_v1beta_generated_Routers_DeleteRoutePolicy_async
- */
+  /**
+   * Deletes Route Policy
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.policy
+   *   The Policy name for this request. Name must conform to RFC1035
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.router
+   *   Name of the Router resource where Route Policy is defined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/routers.delete_route_policy.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_DeleteRoutePolicy_async
+   */
   deleteRoutePolicy(
-      request?: protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteRoutePolicy(
-      request: protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteRoutePolicy(
-      request: protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteRoutePolicy(
-      request?: protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteRoutePolicy request %j', request);
-    const wrappedCallback: Callback<
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>|undefined = callback
+          | protos.google.cloud.compute.v1beta.IDeleteRoutePolicyRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('deleteRoutePolicy response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls.deleteRoutePolicy(request, options, wrappedCallback)
-      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
-        return [
-          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
-          operation,
-          rawResponse
-        ];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteRoutePolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns the specified Router resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.router
- *   Name of the Router resource to return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.Router|Router}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.get.js</caption>
- * region_tag:compute_v1beta_generated_Routers_Get_async
- */
+  /**
+   * Returns the specified Router resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.router
+   *   Name of the Router resource to return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.Router|Router}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.get.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_Get_async
+   */
   get(
-      request?: protos.google.cloud.compute.v1beta.IGetRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRouter,
-        protos.google.cloud.compute.v1beta.IGetRouterRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IGetRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRouter,
+      protos.google.cloud.compute.v1beta.IGetRouterRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   get(
-      request: protos.google.cloud.compute.v1beta.IGetRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IRouter,
-          protos.google.cloud.compute.v1beta.IGetRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IGetRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IRouter,
+      protos.google.cloud.compute.v1beta.IGetRouterRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   get(
-      request: protos.google.cloud.compute.v1beta.IGetRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IRouter,
-          protos.google.cloud.compute.v1beta.IGetRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IGetRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IRouter,
+      protos.google.cloud.compute.v1beta.IGetRouterRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   get(
-      request?: protos.google.cloud.compute.v1beta.IGetRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IGetRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IRouter,
-          protos.google.cloud.compute.v1beta.IGetRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IRouter,
-          protos.google.cloud.compute.v1beta.IGetRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRouter,
-        protos.google.cloud.compute.v1beta.IGetRouterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IGetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IRouter,
+      protos.google.cloud.compute.v1beta.IGetRouterRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRouter,
+      protos.google.cloud.compute.v1beta.IGetRouterRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('get request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.compute.v1beta.IRouter,
-        protos.google.cloud.compute.v1beta.IGetRouterRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.IRouter,
+          | protos.google.cloud.compute.v1beta.IGetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.get(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.compute.v1beta.IRouter,
-        protos.google.cloud.compute.v1beta.IGetRouterRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('get response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .get(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.IRouter,
+          protos.google.cloud.compute.v1beta.IGetRouterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns specified Named Set
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.namedSet
- *   The Named Set name for this request. Name must conform to RFC1035
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.router
- *   Name of the Router resource to query for the named set. The name should
- *   conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.RoutersGetNamedSetResponse|RoutersGetNamedSetResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.get_named_set.js</caption>
- * region_tag:compute_v1beta_generated_Routers_GetNamedSet_async
- */
+  /**
+   * Returns specified Named Set
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.namedSet
+   *   The Named Set name for this request. Name must conform to RFC1035
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.router
+   *   Name of the Router resource to query for the named set. The name should
+   *   conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.RoutersGetNamedSetResponse|RoutersGetNamedSetResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.get_named_set.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_GetNamedSet_async
+   */
   getNamedSet(
-      request?: protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
-        protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
+      protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getNamedSet(
-      request: protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
-          protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
+      | protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getNamedSet(
-      request: protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
-          protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
+      | protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getNamedSet(
-      request?: protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
-          protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
-          protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
-        protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
+      | protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
+      protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getNamedSet request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
-        protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
+          | protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNamedSet response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getNamedSet(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
-        protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getNamedSet response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getNamedSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.IRoutersGetNamedSetResponse,
+          (
+            | protos.google.cloud.compute.v1beta.IGetNamedSetRouterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNamedSet response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieves runtime NAT IP information.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.natName
- *   Name of the nat service to filter the NAT IP information.
- *   If it is omitted, all nats for this router will be returned.
- *   Name should conform to RFC1035.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.router
- *   Name of the Router resource to query for Nat IP information. The name
- *   should conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.NatIpInfoResponse|NatIpInfoResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.get_nat_ip_info.js</caption>
- * region_tag:compute_v1beta_generated_Routers_GetNatIpInfo_async
- */
+  /**
+   * Retrieves runtime NAT IP information.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.natName
+   *   Name of the nat service to filter the NAT IP information.
+   *   If it is omitted, all nats for this router will be returned.
+   *   Name should conform to RFC1035.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.router
+   *   Name of the Router resource to query for Nat IP information. The name
+   *   should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.NatIpInfoResponse|NatIpInfoResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.get_nat_ip_info.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_GetNatIpInfo_async
+   */
   getNatIpInfo(
-      request?: protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.INatIpInfoResponse,
-        protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.INatIpInfoResponse,
+      protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getNatIpInfo(
-      request: protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.INatIpInfoResponse,
-          protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.INatIpInfoResponse,
+      | protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getNatIpInfo(
-      request: protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.INatIpInfoResponse,
-          protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.INatIpInfoResponse,
+      | protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getNatIpInfo(
-      request?: protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.INatIpInfoResponse,
-          protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.INatIpInfoResponse,
-          protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.INatIpInfoResponse,
-        protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.INatIpInfoResponse,
+      | protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.INatIpInfoResponse,
+      protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getNatIpInfo request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.compute.v1beta.INatIpInfoResponse,
-        protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.INatIpInfoResponse,
+          | protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNatIpInfo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getNatIpInfo(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.compute.v1beta.INatIpInfoResponse,
-        protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getNatIpInfo response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getNatIpInfo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.INatIpInfoResponse,
+          (
+            | protos.google.cloud.compute.v1beta.IGetNatIpInfoRouterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNatIpInfo response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns specified Route Policy
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.policy
- *   The Policy name for this request. Name must conform to RFC1035
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.router
- *   Name of the Router resource to query for the route policy. The name should
- *   conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.RoutersGetRoutePolicyResponse|RoutersGetRoutePolicyResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.get_route_policy.js</caption>
- * region_tag:compute_v1beta_generated_Routers_GetRoutePolicy_async
- */
+  /**
+   * Returns specified Route Policy
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.policy
+   *   The Policy name for this request. Name must conform to RFC1035
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.router
+   *   Name of the Router resource to query for the route policy. The name should
+   *   conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.RoutersGetRoutePolicyResponse|RoutersGetRoutePolicyResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.get_route_policy.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_GetRoutePolicy_async
+   */
   getRoutePolicy(
-      request?: protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
-        protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
+      (
+        | protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getRoutePolicy(
-      request: protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
-          protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
+      | protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRoutePolicy(
-      request: protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
-          protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
+      | protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRoutePolicy(
-      request?: protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
-          protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
-          protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
-        protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
+      | protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
+      (
+        | protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getRoutePolicy request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
-        protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
+          | protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRoutePolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getRoutePolicy(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
-        protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getRoutePolicy response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getRoutePolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.IRoutersGetRoutePolicyResponse,
+          (
+            | protos.google.cloud.compute.v1beta.IGetRoutePolicyRouterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRoutePolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieves runtime information of the specified router.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.router
- *   Name of the Router resource to query.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.RouterStatusResponse|RouterStatusResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.get_router_status.js</caption>
- * region_tag:compute_v1beta_generated_Routers_GetRouterStatus_async
- */
+  /**
+   * Retrieves runtime information of the specified router.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.router
+   *   Name of the Router resource to query.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.RouterStatusResponse|RouterStatusResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.get_router_status.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_GetRouterStatus_async
+   */
   getRouterStatus(
-      request?: protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRouterStatusResponse,
-        protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRouterStatusResponse,
+      (
+        | protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getRouterStatus(
-      request: protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IRouterStatusResponse,
-          protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IRouterStatusResponse,
+      | protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRouterStatus(
-      request: protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IRouterStatusResponse,
-          protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IRouterStatusResponse,
+      | protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRouterStatus(
-      request?: protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IRouterStatusResponse,
-          protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IRouterStatusResponse,
-          protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRouterStatusResponse,
-        protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IRouterStatusResponse,
+      | protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRouterStatusResponse,
+      (
+        | protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getRouterStatus request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.compute.v1beta.IRouterStatusResponse,
-        protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.IRouterStatusResponse,
+          | protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRouterStatus response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getRouterStatus(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.compute.v1beta.IRouterStatusResponse,
-        protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getRouterStatus response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getRouterStatus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.IRouterStatusResponse,
+          (
+            | protos.google.cloud.compute.v1beta.IGetRouterStatusRouterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRouterStatus response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a Router resource in the specified project and region using
- * the data included in the request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so
- *   that if you must retry your request, the server will know to ignore the
- *   request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same
- *   request ID, the server can check if original operation with the same
- *   request ID was received, and if so, will ignore the second request. This
- *   prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be
- *   a valid UUID with the exception that zero UUID is not supported
- *   (00000000-0000-0000-0000-000000000000).
- * @param {google.cloud.compute.v1beta.Router} request.routerResource
- *   The body resource for this request
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- *   This method is considered to be in beta. This means while
- *   stable it is still a work-in-progress and under active development,
- *   and might get backwards-incompatible changes at any time.
- *   `.promise()` is not supported yet.
- * @example <caption>include:samples/generated/v1beta/routers.insert.js</caption>
- * region_tag:compute_v1beta_generated_Routers_Insert_async
- */
+  /**
+   * Creates a Router resource in the specified project and region using
+   * the data included in the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {google.cloud.compute.v1beta.Router} request.routerResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/routers.insert.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_Insert_async
+   */
   insert(
-      request?: protos.google.cloud.compute.v1beta.IInsertRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IInsertRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   insert(
-      request: protos.google.cloud.compute.v1beta.IInsertRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IInsertRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IInsertRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IInsertRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   insert(
-      request: protos.google.cloud.compute.v1beta.IInsertRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IInsertRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IInsertRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IInsertRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   insert(
-      request?: protos.google.cloud.compute.v1beta.IInsertRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IInsertRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IInsertRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IInsertRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IInsertRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IInsertRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('insert request %j', request);
-    const wrappedCallback: Callback<
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IInsertRouterRequest|null|undefined,
-          {}|null|undefined>|undefined = callback
+          | protos.google.cloud.compute.v1beta.IInsertRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('insert response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls.insert(request, options, wrappedCallback)
-      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
-        return [
-          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
-          operation,
-          rawResponse
-        ];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .insert(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Patches the specified Router resource with the data included in the
- * request. This method supportsPATCH
- * semantics and usesJSON merge
- * patch format and processing rules.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so
- *   that if you must retry your request, the server will know to ignore the
- *   request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same
- *   request ID, the server can check if original operation with the same
- *   request ID was received, and if so, will ignore the second request. This
- *   prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be
- *   a valid UUID with the exception that zero UUID is not supported
- *   (00000000-0000-0000-0000-000000000000).
- * @param {string} request.router
- *   Name of the Router resource to patch.
- * @param {google.cloud.compute.v1beta.Router} request.routerResource
- *   The body resource for this request
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- *   This method is considered to be in beta. This means while
- *   stable it is still a work-in-progress and under active development,
- *   and might get backwards-incompatible changes at any time.
- *   `.promise()` is not supported yet.
- * @example <caption>include:samples/generated/v1beta/routers.patch.js</caption>
- * region_tag:compute_v1beta_generated_Routers_Patch_async
- */
+  /**
+   * Patches the specified Router resource with the data included in the
+   * request. This method supportsPATCH
+   * semantics and usesJSON merge
+   * patch format and processing rules.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.router
+   *   Name of the Router resource to patch.
+   * @param {google.cloud.compute.v1beta.Router} request.routerResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/routers.patch.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_Patch_async
+   */
   patch(
-      request?: protos.google.cloud.compute.v1beta.IPatchRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IPatchRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   patch(
-      request: protos.google.cloud.compute.v1beta.IPatchRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IPatchRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      protos.google.cloud.compute.v1beta.IPatchRouterRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   patch(
-      request: protos.google.cloud.compute.v1beta.IPatchRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IPatchRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      protos.google.cloud.compute.v1beta.IPatchRouterRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   patch(
-      request?: protos.google.cloud.compute.v1beta.IPatchRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IPatchRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IPatchRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      protos.google.cloud.compute.v1beta.IPatchRouterRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('patch request %j', request);
-    const wrappedCallback: Callback<
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchRouterRequest|null|undefined,
-          {}|null|undefined>|undefined = callback
+          | protos.google.cloud.compute.v1beta.IPatchRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('patch response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls.patch(request, options, wrappedCallback)
-      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
-        return [
-          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
-          operation,
-          rawResponse
-        ];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .patch(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Patches Named Set
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.compute.v1beta.NamedSet} request.namedSetResource
- *   The body resource for this request
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so
- *   that if you must retry your request, the server will know to ignore the
- *   request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same
- *   request ID, the server can check if original operation with the same
- *   request ID was received, and if so, will ignore the second request. This
- *   prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be
- *   a valid UUID with the exception that zero UUID is not supported
- *   (00000000-0000-0000-0000-000000000000).
- * @param {string} request.router
- *   Name of the Router resource where Named Set is defined.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- *   This method is considered to be in beta. This means while
- *   stable it is still a work-in-progress and under active development,
- *   and might get backwards-incompatible changes at any time.
- *   `.promise()` is not supported yet.
- * @example <caption>include:samples/generated/v1beta/routers.patch_named_set.js</caption>
- * region_tag:compute_v1beta_generated_Routers_PatchNamedSet_async
- */
+  /**
+   * Patches Named Set
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1beta.NamedSet} request.namedSetResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.router
+   *   Name of the Router resource where Named Set is defined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/routers.patch_named_set.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_PatchNamedSet_async
+   */
   patchNamedSet(
-      request?: protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   patchNamedSet(
-      request: protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   patchNamedSet(
-      request: protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   patchNamedSet(
-      request?: protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('patchNamedSet request %j', request);
-    const wrappedCallback: Callback<
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>|undefined = callback
+          | protos.google.cloud.compute.v1beta.IPatchNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('patchNamedSet response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls.patchNamedSet(request, options, wrappedCallback)
-      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
-        return [
-          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
-          operation,
-          rawResponse
-        ];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .patchNamedSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Patches Route Policy
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so
- *   that if you must retry your request, the server will know to ignore the
- *   request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same
- *   request ID, the server can check if original operation with the same
- *   request ID was received, and if so, will ignore the second request. This
- *   prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be
- *   a valid UUID with the exception that zero UUID is not supported
- *   (00000000-0000-0000-0000-000000000000).
- * @param {google.cloud.compute.v1beta.RoutePolicy} request.routePolicyResource
- *   The body resource for this request
- * @param {string} request.router
- *   Name of the Router resource where Route Policy is defined.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- *   This method is considered to be in beta. This means while
- *   stable it is still a work-in-progress and under active development,
- *   and might get backwards-incompatible changes at any time.
- *   `.promise()` is not supported yet.
- * @example <caption>include:samples/generated/v1beta/routers.patch_route_policy.js</caption>
- * region_tag:compute_v1beta_generated_Routers_PatchRoutePolicy_async
- */
+  /**
+   * Patches Route Policy
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {google.cloud.compute.v1beta.RoutePolicy} request.routePolicyResource
+   *   The body resource for this request
+   * @param {string} request.router
+   *   Name of the Router resource where Route Policy is defined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/routers.patch_route_policy.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_PatchRoutePolicy_async
+   */
   patchRoutePolicy(
-      request?: protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   patchRoutePolicy(
-      request: protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   patchRoutePolicy(
-      request: protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   patchRoutePolicy(
-      request?: protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('patchRoutePolicy request %j', request);
-    const wrappedCallback: Callback<
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>|undefined = callback
+          | protos.google.cloud.compute.v1beta.IPatchRoutePolicyRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('patchRoutePolicy response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls.patchRoutePolicy(request, options, wrappedCallback)
-      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
-        return [
-          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
-          operation,
-          rawResponse
-        ];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .patchRoutePolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Preview fields auto-generated during router create andupdate operations.
- * Calling this method does NOT create or update the router.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.router
- *   Name of the Router resource to query.
- * @param {google.cloud.compute.v1beta.Router} request.routerResource
- *   The body resource for this request
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.RoutersPreviewResponse|RoutersPreviewResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.preview.js</caption>
- * region_tag:compute_v1beta_generated_Routers_Preview_async
- */
+  /**
+   * Preview fields auto-generated during router create andupdate operations.
+   * Calling this method does NOT create or update the router.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.router
+   *   Name of the Router resource to query.
+   * @param {google.cloud.compute.v1beta.Router} request.routerResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.RoutersPreviewResponse|RoutersPreviewResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.preview.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_Preview_async
+   */
   preview(
-      request?: protos.google.cloud.compute.v1beta.IPreviewRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
-        protos.google.cloud.compute.v1beta.IPreviewRouterRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IPreviewRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
+      protos.google.cloud.compute.v1beta.IPreviewRouterRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   preview(
-      request: protos.google.cloud.compute.v1beta.IPreviewRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
-          protos.google.cloud.compute.v1beta.IPreviewRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IPreviewRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
+      | protos.google.cloud.compute.v1beta.IPreviewRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   preview(
-      request: protos.google.cloud.compute.v1beta.IPreviewRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
-          protos.google.cloud.compute.v1beta.IPreviewRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IPreviewRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
+      | protos.google.cloud.compute.v1beta.IPreviewRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   preview(
-      request?: protos.google.cloud.compute.v1beta.IPreviewRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IPreviewRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
-          protos.google.cloud.compute.v1beta.IPreviewRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
-          protos.google.cloud.compute.v1beta.IPreviewRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
-        protos.google.cloud.compute.v1beta.IPreviewRouterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IPreviewRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
+      | protos.google.cloud.compute.v1beta.IPreviewRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
+      protos.google.cloud.compute.v1beta.IPreviewRouterRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('preview request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
-        protos.google.cloud.compute.v1beta.IPreviewRouterRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
+          | protos.google.cloud.compute.v1beta.IPreviewRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('preview response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.preview(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
-        protos.google.cloud.compute.v1beta.IPreviewRouterRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('preview response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .preview(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.IRoutersPreviewResponse,
+          protos.google.cloud.compute.v1beta.IPreviewRouterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('preview response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns permissions that a caller has on the specified resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   The name of the region for this request.
- * @param {string} request.resource
- *   Name or id of the resource for this request.
- * @param {google.cloud.compute.v1beta.TestPermissionsRequest} request.testPermissionsRequestResource
- *   The body resource for this request
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.TestPermissionsResponse|TestPermissionsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.test_iam_permissions.js</caption>
- * region_tag:compute_v1beta_generated_Routers_TestIamPermissions_async
- */
+  /**
+   * Returns permissions that a caller has on the specified resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {google.cloud.compute.v1beta.TestPermissionsRequest} request.testPermissionsRequestResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.TestPermissionsResponse|TestPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.test_iam_permissions.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_TestIamPermissions_async
+   */
   testIamPermissions(
-      request?: protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
-        protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
+      (
+        | protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   testIamPermissions(
-      request: protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
-          protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
+      | protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   testIamPermissions(
-      request: protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
-          protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
+      | protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   testIamPermissions(
-      request?: protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
-          protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
-          protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
-        protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
+      | protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
+      (
+        | protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'resource': request.resource ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissions request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
-        protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
+          | protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissions response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
-        protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('testIamPermissions response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .testIamPermissions(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.ITestPermissionsResponse,
+          (
+            | protos.google.cloud.compute.v1beta.ITestIamPermissionsRouterRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the specified Router resource with the data included in the
- * request.  This method conforms toPUT semantics, which requests that the state of the
- * target resource be created or replaced with the state defined by the
- * representation enclosed in the request message payload.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so
- *   that if you must retry your request, the server will know to ignore the
- *   request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same
- *   request ID, the server can check if original operation with the same
- *   request ID was received, and if so, will ignore the second request. This
- *   prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be
- *   a valid UUID with the exception that zero UUID is not supported
- *   (00000000-0000-0000-0000-000000000000).
- * @param {string} request.router
- *   Name of the Router resource to update.
- * @param {google.cloud.compute.v1beta.Router} request.routerResource
- *   The body resource for this request
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- *   This method is considered to be in beta. This means while
- *   stable it is still a work-in-progress and under active development,
- *   and might get backwards-incompatible changes at any time.
- *   `.promise()` is not supported yet.
- * @example <caption>include:samples/generated/v1beta/routers.update.js</caption>
- * region_tag:compute_v1beta_generated_Routers_Update_async
- */
+  /**
+   * Updates the specified Router resource with the data included in the
+   * request.  This method conforms toPUT semantics, which requests that the state of the
+   * target resource be created or replaced with the state defined by the
+   * representation enclosed in the request message payload.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.router
+   *   Name of the Router resource to update.
+   * @param {google.cloud.compute.v1beta.Router} request.routerResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/routers.update.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_Update_async
+   */
   update(
-      request?: protos.google.cloud.compute.v1beta.IUpdateRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IUpdateRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   update(
-      request: protos.google.cloud.compute.v1beta.IUpdateRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IUpdateRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IUpdateRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   update(
-      request: protos.google.cloud.compute.v1beta.IUpdateRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IUpdateRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IUpdateRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   update(
-      request?: protos.google.cloud.compute.v1beta.IUpdateRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IUpdateRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IUpdateRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IUpdateRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('update request %j', request);
-    const wrappedCallback: Callback<
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateRouterRequest|null|undefined,
-          {}|null|undefined>|undefined = callback
+          | protos.google.cloud.compute.v1beta.IUpdateRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('update response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls.update(request, options, wrappedCallback)
-      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
-        return [
-          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
-          operation,
-          rawResponse
-        ];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .update(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates or creates new Named Set
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.compute.v1beta.NamedSet} request.namedSetResource
- *   The body resource for this request
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so
- *   that if you must retry your request, the server will know to ignore the
- *   request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same
- *   request ID, the server can check if original operation with the same
- *   request ID was received, and if so, will ignore the second request. This
- *   prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be
- *   a valid UUID with the exception that zero UUID is not supported
- *   (00000000-0000-0000-0000-000000000000).
- * @param {string} request.router
- *   Name of the Router resource where Named Set is defined.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- *   This method is considered to be in beta. This means while
- *   stable it is still a work-in-progress and under active development,
- *   and might get backwards-incompatible changes at any time.
- *   `.promise()` is not supported yet.
- * @example <caption>include:samples/generated/v1beta/routers.update_named_set.js</caption>
- * region_tag:compute_v1beta_generated_Routers_UpdateNamedSet_async
- */
+  /**
+   * Updates or creates new Named Set
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1beta.NamedSet} request.namedSetResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.router
+   *   Name of the Router resource where Named Set is defined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/routers.update_named_set.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_UpdateNamedSet_async
+   */
   updateNamedSet(
-      request?: protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateNamedSet(
-      request: protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateNamedSet(
-      request: protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateNamedSet(
-      request?: protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateNamedSet request %j', request);
-    const wrappedCallback: Callback<
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest|null|undefined,
-          {}|null|undefined>|undefined = callback
+          | protos.google.cloud.compute.v1beta.IUpdateNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('updateNamedSet response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls.updateNamedSet(request, options, wrappedCallback)
-      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
-        return [
-          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
-          operation,
-          rawResponse
-        ];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateNamedSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates or creates new Route Policy
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so
- *   that if you must retry your request, the server will know to ignore the
- *   request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same
- *   request ID, the server can check if original operation with the same
- *   request ID was received, and if so, will ignore the second request. This
- *   prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be
- *   a valid UUID with the exception that zero UUID is not supported
- *   (00000000-0000-0000-0000-000000000000).
- * @param {google.cloud.compute.v1beta.RoutePolicy} request.routePolicyResource
- *   The body resource for this request
- * @param {string} request.router
- *   Name of the Router resource where Route Policy is defined.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- *   This method is considered to be in beta. This means while
- *   stable it is still a work-in-progress and under active development,
- *   and might get backwards-incompatible changes at any time.
- *   `.promise()` is not supported yet.
- * @example <caption>include:samples/generated/v1beta/routers.update_route_policy.js</caption>
- * region_tag:compute_v1beta_generated_Routers_UpdateRoutePolicy_async
- */
+  /**
+   * Updates or creates new Route Policy
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {google.cloud.compute.v1beta.RoutePolicy} request.routePolicyResource
+   *   The body resource for this request
+   * @param {string} request.router
+   *   Name of the Router resource where Route Policy is defined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/routers.update_route_policy.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_UpdateRoutePolicy_async
+   */
   updateRoutePolicy(
-      request?: protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateRoutePolicy(
-      request: protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateRoutePolicy(
-      request: protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateRoutePolicy(
-      request?: protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
-        protos.google.cloud.compute.v1beta.IOperation|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateRoutePolicy request %j', request);
-    const wrappedCallback: Callback<
+    const wrappedCallback:
+      | Callback<
           protos.google.cloud.compute.v1beta.IOperation,
-          protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest|null|undefined,
-          {}|null|undefined>|undefined = callback
+          | protos.google.cloud.compute.v1beta.IUpdateRoutePolicyRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, nextRequest, rawResponse) => {
           this._log.info('updateRoutePolicy response %j', rawResponse);
           callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
         }
       : undefined;
-    return this.innerApiCalls.updateRoutePolicy(request, options, wrappedCallback)
-      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
-        return [
-          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
-          operation,
-          rawResponse
-        ];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateRoutePolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-
-/**
- * Retrieves an aggregated list of routers.
- *
- * To prevent failure, Google recommends that you set the
- * `returnPartialSuccess` parameter to `true`.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {boolean} request.includeAllScopes
- *   Indicates whether every visible scope for each scope type (zone, region,
- *   global) should be included in the response. For new resource types added
- *   after this field, the flag has no effect as new resource types will always
- *   include every visible scope for each scope type in response. For resource
- *   types which predate this field, if this flag is omitted or false, only
- *   scopes of the scope types where the resource type is expected to be found
- *   will be included.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {number} request.serviceProjectNumber
- *   The Shared VPC service project id or service project number for which
- *   aggregated list request is invoked for subnetworks list-usable api.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   as tuple [string, {@link protos.google.cloud.compute.v1beta.RoutersScopedList|RoutersScopedList}]. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.aggregated_list.js</caption>
- * region_tag:compute_v1beta_generated_Routers_AggregatedList_async
- */
+  /**
+   * Retrieves an aggregated list of routers.
+   *
+   * To prevent failure, Google recommends that you set the
+   * `returnPartialSuccess` parameter to `true`.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {boolean} request.includeAllScopes
+   *   Indicates whether every visible scope for each scope type (zone, region,
+   *   global) should be included in the response. For new resource types added
+   *   after this field, the flag has no effect as new resource types will always
+   *   include every visible scope for each scope type in response. For resource
+   *   types which predate this field, if this flag is omitted or false, only
+   *   scopes of the scope types where the resource type is expected to be found
+   *   will be included.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {number} request.serviceProjectNumber
+   *   The Shared VPC service project id or service project number for which
+   *   aggregated list request is invoked for subnetworks list-usable api.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   as tuple [string, {@link protos.google.cloud.compute.v1beta.RoutersScopedList|RoutersScopedList}]. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.aggregated_list.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_AggregatedList_async
+   */
   aggregatedListAsync(
-      request?: protos.google.cloud.compute.v1beta.IAggregatedListRoutersRequest,
-      options?: CallOptions):
-    AsyncIterable<[string, protos.google.cloud.compute.v1beta.IRoutersScopedList]>{
+    request?: protos.google.cloud.compute.v1beta.IAggregatedListRoutersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<
+    [string, protos.google.cloud.compute.v1beta.IRoutersScopedList]
+  > {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+      });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
       request as {},
-      callSettings
-    ) as AsyncIterable<[string, protos.google.cloud.compute.v1beta.IRoutersScopedList]>;
+      callSettings,
+    ) as AsyncIterable<
+      [string, protos.google.cloud.compute.v1beta.IRoutersScopedList]
+    >;
   }
- /**
- * Retrieves runtime Nat mapping information of VM endpoints.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.natName
- *   Name of the nat service to filter the Nat Mapping information.
- *   If it is omitted, all nats for this router will be returned.
- *   Name should conform to RFC1035.
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.router
- *   Name of the Router resource to query for Nat Mapping information of
- *   VM endpoints.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.compute.v1beta.VmEndpointNatMappings|VmEndpointNatMappings}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `getNatMappingInfoAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieves runtime Nat mapping information of VM endpoints.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.natName
+   *   Name of the nat service to filter the Nat Mapping information.
+   *   If it is omitted, all nats for this router will be returned.
+   *   Name should conform to RFC1035.
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.router
+   *   Name of the Router resource to query for Nat Mapping information of
+   *   VM endpoints.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1beta.VmEndpointNatMappings|VmEndpointNatMappings}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `getNatMappingInfoAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   getNatMappingInfo(
-      request?: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IVmEndpointNatMappings[],
-        protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IVmEndpointNatMappings[],
+      protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest | null,
+      protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList,
+    ]
+  >;
   getNatMappingInfo(
-      request: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
-          protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList|null|undefined,
-          protos.google.cloud.compute.v1beta.IVmEndpointNatMappings>): void;
+    request: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IVmEndpointNatMappings
+    >,
+  ): void;
   getNatMappingInfo(
-      request: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
-          protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList|null|undefined,
-          protos.google.cloud.compute.v1beta.IVmEndpointNatMappings>): void;
+    request: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IVmEndpointNatMappings
+    >,
+  ): void;
   getNatMappingInfo(
-      request?: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
-          protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList|null|undefined,
-          protos.google.cloud.compute.v1beta.IVmEndpointNatMappings>,
-      callback?: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
-          protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList|null|undefined,
-          protos.google.cloud.compute.v1beta.IVmEndpointNatMappings>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IVmEndpointNatMappings[],
-        protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1beta.IVmEndpointNatMappings
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IVmEndpointNatMappings
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IVmEndpointNatMappings[],
+      protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest | null,
+      protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
-      protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList|null|undefined,
-      protos.google.cloud.compute.v1beta.IVmEndpointNatMappings>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
+          | protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1beta.IVmEndpointNatMappings
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('getNatMappingInfo values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2586,466 +3506,485 @@ export class RoutersClient {
     this._log.info('getNatMappingInfo request %j', request);
     return this.innerApiCalls
       .getNatMappingInfo(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.compute.v1beta.IVmEndpointNatMappings[],
-        protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList
-      ]) => {
-        this._log.info('getNatMappingInfo values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1beta.IVmEndpointNatMappings[],
+          protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest | null,
+          protos.google.cloud.compute.v1beta.IVmEndpointNatMappingsList,
+        ]) => {
+          this._log.info('getNatMappingInfo values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `getNatMappingInfo`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.natName
- *   Name of the nat service to filter the Nat Mapping information.
- *   If it is omitted, all nats for this router will be returned.
- *   Name should conform to RFC1035.
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.router
- *   Name of the Router resource to query for Nat Mapping information of
- *   VM endpoints.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1beta.VmEndpointNatMappings|VmEndpointNatMappings} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `getNatMappingInfoAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `getNatMappingInfo`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.natName
+   *   Name of the nat service to filter the Nat Mapping information.
+   *   If it is omitted, all nats for this router will be returned.
+   *   Name should conform to RFC1035.
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.router
+   *   Name of the Router resource to query for Nat Mapping information of
+   *   VM endpoints.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1beta.VmEndpointNatMappings|VmEndpointNatMappings} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `getNatMappingInfoAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   getNatMappingInfoStream(
-      request?: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
     const defaultCallSettings = this._defaults['getNatMappingInfo'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('getNatMappingInfo stream %j', request);
     return this.descriptors.page.getNatMappingInfo.createStream(
       this.innerApiCalls.getNatMappingInfo as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `getNatMappingInfo`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.natName
- *   Name of the nat service to filter the Nat Mapping information.
- *   If it is omitted, all nats for this router will be returned.
- *   Name should conform to RFC1035.
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.router
- *   Name of the Router resource to query for Nat Mapping information of
- *   VM endpoints.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.compute.v1beta.VmEndpointNatMappings|VmEndpointNatMappings}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.get_nat_mapping_info.js</caption>
- * region_tag:compute_v1beta_generated_Routers_GetNatMappingInfo_async
- */
+  /**
+   * Equivalent to `getNatMappingInfo`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.natName
+   *   Name of the nat service to filter the Nat Mapping information.
+   *   If it is omitted, all nats for this router will be returned.
+   *   Name should conform to RFC1035.
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.router
+   *   Name of the Router resource to query for Nat Mapping information of
+   *   VM endpoints.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.compute.v1beta.VmEndpointNatMappings|VmEndpointNatMappings}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.get_nat_mapping_info.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_GetNatMappingInfo_async
+   */
   getNatMappingInfoAsync(
-      request?: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.compute.v1beta.IVmEndpointNatMappings>{
+    request?: protos.google.cloud.compute.v1beta.IGetNatMappingInfoRoutersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.compute.v1beta.IVmEndpointNatMappings> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
     const defaultCallSettings = this._defaults['getNatMappingInfo'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('getNatMappingInfo iterate %j', request);
     return this.descriptors.page.getNatMappingInfo.asyncIterate(
       this.innerApiCalls['getNatMappingInfo'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.compute.v1beta.IVmEndpointNatMappings>;
   }
- /**
- * Retrieves a list of Router resources available to the specified project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.compute.v1beta.Router|Router}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieves a list of Router resources available to the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1beta.Router|Router}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   list(
-      request?: protos.google.cloud.compute.v1beta.IListRoutersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRouter[],
-        protos.google.cloud.compute.v1beta.IListRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRouterList
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IListRoutersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRouter[],
+      protos.google.cloud.compute.v1beta.IListRoutersRequest | null,
+      protos.google.cloud.compute.v1beta.IRouterList,
+    ]
+  >;
   list(
-      request: protos.google.cloud.compute.v1beta.IListRoutersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRouterList|null|undefined,
-          protos.google.cloud.compute.v1beta.IRouter>): void;
+    request: protos.google.cloud.compute.v1beta.IListRoutersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListRoutersRequest,
+      protos.google.cloud.compute.v1beta.IRouterList | null | undefined,
+      protos.google.cloud.compute.v1beta.IRouter
+    >,
+  ): void;
   list(
-      request: protos.google.cloud.compute.v1beta.IListRoutersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRouterList|null|undefined,
-          protos.google.cloud.compute.v1beta.IRouter>): void;
+    request: protos.google.cloud.compute.v1beta.IListRoutersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListRoutersRequest,
+      protos.google.cloud.compute.v1beta.IRouterList | null | undefined,
+      protos.google.cloud.compute.v1beta.IRouter
+    >,
+  ): void;
   list(
-      request?: protos.google.cloud.compute.v1beta.IListRoutersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.compute.v1beta.IListRoutersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.compute.v1beta.IListRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRouterList|null|undefined,
-          protos.google.cloud.compute.v1beta.IRouter>,
-      callback?: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRouterList|null|undefined,
-          protos.google.cloud.compute.v1beta.IRouter>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRouter[],
-        protos.google.cloud.compute.v1beta.IListRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRouterList
-      ]>|void {
+          protos.google.cloud.compute.v1beta.IRouterList | null | undefined,
+          protos.google.cloud.compute.v1beta.IRouter
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListRoutersRequest,
+      protos.google.cloud.compute.v1beta.IRouterList | null | undefined,
+      protos.google.cloud.compute.v1beta.IRouter
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRouter[],
+      protos.google.cloud.compute.v1beta.IListRoutersRequest | null,
+      protos.google.cloud.compute.v1beta.IRouterList,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.compute.v1beta.IListRoutersRequest,
-      protos.google.cloud.compute.v1beta.IRouterList|null|undefined,
-      protos.google.cloud.compute.v1beta.IRouter>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1beta.IListRoutersRequest,
+          protos.google.cloud.compute.v1beta.IRouterList | null | undefined,
+          protos.google.cloud.compute.v1beta.IRouter
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('list values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3054,469 +3993,498 @@ export class RoutersClient {
     this._log.info('list request %j', request);
     return this.innerApiCalls
       .list(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.compute.v1beta.IRouter[],
-        protos.google.cloud.compute.v1beta.IListRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRouterList
-      ]) => {
-        this._log.info('list values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1beta.IRouter[],
+          protos.google.cloud.compute.v1beta.IListRoutersRequest | null,
+          protos.google.cloud.compute.v1beta.IRouterList,
+        ]) => {
+          this._log.info('list values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `list`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1beta.Router|Router} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `list`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1beta.Router|Router} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listStream(
-      request?: protos.google.cloud.compute.v1beta.IListRoutersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.compute.v1beta.IListRoutersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+      });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `list`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.compute.v1beta.Router|Router}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.list.js</caption>
- * region_tag:compute_v1beta_generated_Routers_List_async
- */
+  /**
+   * Equivalent to `list`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.compute.v1beta.Router|Router}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.list.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_List_async
+   */
   listAsync(
-      request?: protos.google.cloud.compute.v1beta.IListRoutersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.compute.v1beta.IRouter>{
+    request?: protos.google.cloud.compute.v1beta.IListRoutersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.compute.v1beta.IRouter> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+      });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.compute.v1beta.IRouter>;
   }
- /**
- * Retrieves a list of router bgp routes available to the specified project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.addressFamily
- *   (Required) limit results to this address family (either IPv4 or IPv6)
- *   Check the AddressFamily enum for the list of possible values.
- * @param {string} request.destinationPrefix
- *   Limit results to destinations that are subnets of this CIDR range
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.peer
- *   (Required) limit results to the BGP peer with the given name.
- *   Name should conform to RFC1035.
- * @param {boolean} request.policyApplied
- *   When true, the method returns post-policy routes. Otherwise, it returns
- *   pre-policy routes.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.routeType
- *   (Required) limit results to this type of route (either LEARNED or
- *   ADVERTISED)
- *   Check the RouteType enum for the list of possible values.
- * @param {string} request.router
- *   Name or id of the resource for this request.
- *   Name should conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.compute.v1beta.BgpRoute|BgpRoute}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listBgpRoutesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieves a list of router bgp routes available to the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.addressFamily
+   *   (Required) limit results to this address family (either IPv4 or IPv6)
+   *   Check the AddressFamily enum for the list of possible values.
+   * @param {string} request.destinationPrefix
+   *   Limit results to destinations that are subnets of this CIDR range
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.peer
+   *   (Required) limit results to the BGP peer with the given name.
+   *   Name should conform to RFC1035.
+   * @param {boolean} request.policyApplied
+   *   When true, the method returns post-policy routes. Otherwise, it returns
+   *   pre-policy routes.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.routeType
+   *   (Required) limit results to this type of route (either LEARNED or
+   *   ADVERTISED)
+   *   Check the RouteType enum for the list of possible values.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1beta.BgpRoute|BgpRoute}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBgpRoutesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBgpRoutes(
-      request?: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IBgpRoute[],
-        protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IBgpRoute[],
+      protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest | null,
+      protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes,
+    ]
+  >;
   listBgpRoutes(
-      request: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes|null|undefined,
-          protos.google.cloud.compute.v1beta.IBgpRoute>): void;
+    request: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IBgpRoute
+    >,
+  ): void;
   listBgpRoutes(
-      request: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes|null|undefined,
-          protos.google.cloud.compute.v1beta.IBgpRoute>): void;
+    request: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IBgpRoute
+    >,
+  ): void;
   listBgpRoutes(
-      request?: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes|null|undefined,
-          protos.google.cloud.compute.v1beta.IBgpRoute>,
-      callback?: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes|null|undefined,
-          protos.google.cloud.compute.v1beta.IBgpRoute>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IBgpRoute[],
-        protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1beta.IBgpRoute
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IBgpRoute
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IBgpRoute[],
+      protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest | null,
+      protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
-      protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes|null|undefined,
-      protos.google.cloud.compute.v1beta.IBgpRoute>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
+          | protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1beta.IBgpRoute
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listBgpRoutes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3525,493 +4493,522 @@ export class RoutersClient {
     this._log.info('listBgpRoutes request %j', request);
     return this.innerApiCalls
       .listBgpRoutes(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.compute.v1beta.IBgpRoute[],
-        protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes
-      ]) => {
-        this._log.info('listBgpRoutes values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1beta.IBgpRoute[],
+          protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest | null,
+          protos.google.cloud.compute.v1beta.IRoutersListBgpRoutes,
+        ]) => {
+          this._log.info('listBgpRoutes values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listBgpRoutes`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.addressFamily
- *   (Required) limit results to this address family (either IPv4 or IPv6)
- *   Check the AddressFamily enum for the list of possible values.
- * @param {string} request.destinationPrefix
- *   Limit results to destinations that are subnets of this CIDR range
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.peer
- *   (Required) limit results to the BGP peer with the given name.
- *   Name should conform to RFC1035.
- * @param {boolean} request.policyApplied
- *   When true, the method returns post-policy routes. Otherwise, it returns
- *   pre-policy routes.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.routeType
- *   (Required) limit results to this type of route (either LEARNED or
- *   ADVERTISED)
- *   Check the RouteType enum for the list of possible values.
- * @param {string} request.router
- *   Name or id of the resource for this request.
- *   Name should conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1beta.BgpRoute|BgpRoute} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listBgpRoutesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listBgpRoutes`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.addressFamily
+   *   (Required) limit results to this address family (either IPv4 or IPv6)
+   *   Check the AddressFamily enum for the list of possible values.
+   * @param {string} request.destinationPrefix
+   *   Limit results to destinations that are subnets of this CIDR range
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.peer
+   *   (Required) limit results to the BGP peer with the given name.
+   *   Name should conform to RFC1035.
+   * @param {boolean} request.policyApplied
+   *   When true, the method returns post-policy routes. Otherwise, it returns
+   *   pre-policy routes.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.routeType
+   *   (Required) limit results to this type of route (either LEARNED or
+   *   ADVERTISED)
+   *   Check the RouteType enum for the list of possible values.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1beta.BgpRoute|BgpRoute} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBgpRoutesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBgpRoutesStream(
-      request?: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
     const defaultCallSettings = this._defaults['listBgpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listBgpRoutes stream %j', request);
     return this.descriptors.page.listBgpRoutes.createStream(
       this.innerApiCalls.listBgpRoutes as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listBgpRoutes`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.addressFamily
- *   (Required) limit results to this address family (either IPv4 or IPv6)
- *   Check the AddressFamily enum for the list of possible values.
- * @param {string} request.destinationPrefix
- *   Limit results to destinations that are subnets of this CIDR range
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.peer
- *   (Required) limit results to the BGP peer with the given name.
- *   Name should conform to RFC1035.
- * @param {boolean} request.policyApplied
- *   When true, the method returns post-policy routes. Otherwise, it returns
- *   pre-policy routes.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.routeType
- *   (Required) limit results to this type of route (either LEARNED or
- *   ADVERTISED)
- *   Check the RouteType enum for the list of possible values.
- * @param {string} request.router
- *   Name or id of the resource for this request.
- *   Name should conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.compute.v1beta.BgpRoute|BgpRoute}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.list_bgp_routes.js</caption>
- * region_tag:compute_v1beta_generated_Routers_ListBgpRoutes_async
- */
+  /**
+   * Equivalent to `listBgpRoutes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.addressFamily
+   *   (Required) limit results to this address family (either IPv4 or IPv6)
+   *   Check the AddressFamily enum for the list of possible values.
+   * @param {string} request.destinationPrefix
+   *   Limit results to destinations that are subnets of this CIDR range
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.peer
+   *   (Required) limit results to the BGP peer with the given name.
+   *   Name should conform to RFC1035.
+   * @param {boolean} request.policyApplied
+   *   When true, the method returns post-policy routes. Otherwise, it returns
+   *   pre-policy routes.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.routeType
+   *   (Required) limit results to this type of route (either LEARNED or
+   *   ADVERTISED)
+   *   Check the RouteType enum for the list of possible values.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.compute.v1beta.BgpRoute|BgpRoute}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.list_bgp_routes.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_ListBgpRoutes_async
+   */
   listBgpRoutesAsync(
-      request?: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.compute.v1beta.IBgpRoute>{
+    request?: protos.google.cloud.compute.v1beta.IListBgpRoutesRoutersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.compute.v1beta.IBgpRoute> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
     const defaultCallSettings = this._defaults['listBgpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listBgpRoutes iterate %j', request);
     return this.descriptors.page.listBgpRoutes.asyncIterate(
       this.innerApiCalls['listBgpRoutes'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.compute.v1beta.IBgpRoute>;
   }
- /**
- * Retrieves a list of router named set subresources available to the
- * specified project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.router
- *   Name or id of the resource for this request.
- *   Name should conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.compute.v1beta.NamedSet|NamedSet}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listNamedSetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieves a list of router named set subresources available to the
+   * specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1beta.NamedSet|NamedSet}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNamedSetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNamedSets(
-      request?: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.INamedSet[],
-        protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRoutersListNamedSets
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.INamedSet[],
+      protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest | null,
+      protos.google.cloud.compute.v1beta.IRoutersListNamedSets,
+    ]
+  >;
   listNamedSets(
-      request: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListNamedSets|null|undefined,
-          protos.google.cloud.compute.v1beta.INamedSet>): void;
+    request: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IRoutersListNamedSets
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.INamedSet
+    >,
+  ): void;
   listNamedSets(
-      request: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListNamedSets|null|undefined,
-          protos.google.cloud.compute.v1beta.INamedSet>): void;
+    request: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IRoutersListNamedSets
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.INamedSet
+    >,
+  ): void;
   listNamedSets(
-      request?: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListNamedSets|null|undefined,
-          protos.google.cloud.compute.v1beta.INamedSet>,
-      callback?: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListNamedSets|null|undefined,
-          protos.google.cloud.compute.v1beta.INamedSet>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.INamedSet[],
-        protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRoutersListNamedSets
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IRoutersListNamedSets
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1beta.INamedSet
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IRoutersListNamedSets
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.INamedSet
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.INamedSet[],
+      protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest | null,
+      protos.google.cloud.compute.v1beta.IRoutersListNamedSets,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
-      protos.google.cloud.compute.v1beta.IRoutersListNamedSets|null|undefined,
-      protos.google.cloud.compute.v1beta.INamedSet>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
+          | protos.google.cloud.compute.v1beta.IRoutersListNamedSets
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1beta.INamedSet
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNamedSets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4020,463 +5017,492 @@ export class RoutersClient {
     this._log.info('listNamedSets request %j', request);
     return this.innerApiCalls
       .listNamedSets(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.compute.v1beta.INamedSet[],
-        protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRoutersListNamedSets
-      ]) => {
-        this._log.info('listNamedSets values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1beta.INamedSet[],
+          protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest | null,
+          protos.google.cloud.compute.v1beta.IRoutersListNamedSets,
+        ]) => {
+          this._log.info('listNamedSets values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listNamedSets`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.router
- *   Name or id of the resource for this request.
- *   Name should conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1beta.NamedSet|NamedSet} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listNamedSetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listNamedSets`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1beta.NamedSet|NamedSet} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNamedSetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNamedSetsStream(
-      request?: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
     const defaultCallSettings = this._defaults['listNamedSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listNamedSets stream %j', request);
     return this.descriptors.page.listNamedSets.createStream(
       this.innerApiCalls.listNamedSets as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listNamedSets`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.router
- *   Name or id of the resource for this request.
- *   Name should conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.compute.v1beta.NamedSet|NamedSet}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.list_named_sets.js</caption>
- * region_tag:compute_v1beta_generated_Routers_ListNamedSets_async
- */
+  /**
+   * Equivalent to `listNamedSets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.compute.v1beta.NamedSet|NamedSet}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.list_named_sets.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_ListNamedSets_async
+   */
   listNamedSetsAsync(
-      request?: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.compute.v1beta.INamedSet>{
+    request?: protos.google.cloud.compute.v1beta.IListNamedSetsRoutersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.compute.v1beta.INamedSet> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
     const defaultCallSettings = this._defaults['listNamedSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listNamedSets iterate %j', request);
     return this.descriptors.page.listNamedSets.asyncIterate(
       this.innerApiCalls['listNamedSets'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.compute.v1beta.INamedSet>;
   }
- /**
- * Retrieves a list of router route policy subresources available to the
- * specified project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.router
- *   Name or id of the resource for this request.
- *   Name should conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.compute.v1beta.RoutePolicy|RoutePolicy}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listRoutePoliciesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieves a list of router route policy subresources available to the
+   * specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1beta.RoutePolicy|RoutePolicy}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRoutePoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRoutePolicies(
-      request?: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRoutePolicy[],
-        protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies
-      ]>;
+    request?: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRoutePolicy[],
+      protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest | null,
+      protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies,
+    ]
+  >;
   listRoutePolicies(
-      request: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies|null|undefined,
-          protos.google.cloud.compute.v1beta.IRoutePolicy>): void;
+    request: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IRoutePolicy
+    >,
+  ): void;
   listRoutePolicies(
-      request: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies|null|undefined,
-          protos.google.cloud.compute.v1beta.IRoutePolicy>): void;
+    request: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IRoutePolicy
+    >,
+  ): void;
   listRoutePolicies(
-      request?: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies|null|undefined,
-          protos.google.cloud.compute.v1beta.IRoutePolicy>,
-      callback?: PaginationCallback<
-          protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
-          protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies|null|undefined,
-          protos.google.cloud.compute.v1beta.IRoutePolicy>):
-      Promise<[
-        protos.google.cloud.compute.v1beta.IRoutePolicy[],
-        protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies
-      ]>|void {
+          | protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1beta.IRoutePolicy
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
+      | protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IRoutePolicy
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IRoutePolicy[],
+      protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest | null,
+      protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
-      protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies|null|undefined,
-      protos.google.cloud.compute.v1beta.IRoutePolicy>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
+          | protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1beta.IRoutePolicy
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRoutePolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4485,288 +5511,292 @@ export class RoutersClient {
     this._log.info('listRoutePolicies request %j', request);
     return this.innerApiCalls
       .listRoutePolicies(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.compute.v1beta.IRoutePolicy[],
-        protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest|null,
-        protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies
-      ]) => {
-        this._log.info('listRoutePolicies values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1beta.IRoutePolicy[],
+          protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest | null,
+          protos.google.cloud.compute.v1beta.IRoutersListRoutePolicies,
+        ]) => {
+          this._log.info('listRoutePolicies values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listRoutePolicies`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.router
- *   Name or id of the resource for this request.
- *   Name should conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1beta.RoutePolicy|RoutePolicy} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listRoutePoliciesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listRoutePolicies`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1beta.RoutePolicy|RoutePolicy} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRoutePoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRoutePoliciesStream(
-      request?: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
     const defaultCallSettings = this._defaults['listRoutePolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listRoutePolicies stream %j', request);
     return this.descriptors.page.listRoutePolicies.createStream(
       this.innerApiCalls.listRoutePolicies as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listRoutePolicies`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. Most
- *   Compute resources support two types of filter expressions:
- *   expressions that support regular expressions and expressions that follow
- *   API improvement proposal AIP-160.
- *   These two types of filter expressions cannot be mixed in one request.
- *
- *   If you want to use AIP-160, your expression must specify the field name, an
- *   operator, and the value that you want to use for filtering. The value
- *   must be a string, a number, or a boolean. The operator
- *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
- *
- *   For example, if you are filtering Compute Engine instances, you can
- *   exclude instances named `example-instance` by specifying
- *   `name != example-instance`.
- *
- *   The `:*` comparison can be used to test whether a key has been defined.
- *   For example, to find all objects with `owner` label use:
- *   ```
- *   labels.owner:*
- *   ```
- *
- *   You can also filter nested fields. For example, you could specify
- *   `scheduling.automaticRestart = false` to include instances only
- *   if they are not scheduled for automatic restarts. You can use filtering
- *   on nested fields to filter based onresource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within
- *   parentheses. For example:
- *   ```
- *   (scheduling.automaticRestart = true)
- *   (cpuPlatform = "Intel Skylake")
- *   ```
- *   By default, each expression is an `AND` expression. However, you
- *   can include `AND` and `OR` expressions explicitly.
- *   For example:
- *   ```
- *   (cpuPlatform = "Intel Skylake") OR
- *   (cpuPlatform = "Intel Broadwell") AND
- *   (scheduling.automaticRestart = true)
- *   ```
- *
- *   If you want to use a regular expression, use the `eq` (equal) or `ne`
- *   (not equal) operator against a single un-parenthesized expression with or
- *   without quotes or against multiple parenthesized expressions. Examples:
- *
- *   `fieldname eq unquoted literal`
- *   `fieldname eq 'single quoted literal'`
- *   `fieldname eq "double quoted literal"`
- *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
- *
- *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
- *   The literal value must match the entire field.
- *
- *   For example, to filter for instances that do not end with name "instance",
- *   you would use `name ne .*instance`.
- *
- *   You cannot combine constraints on multiple fields using regular
- *   expressions.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned.
- *   If the number of available results is larger than `maxResults`,
- *   Compute Engine returns a `nextPageToken` that can be used to get
- *   the next page of results in subsequent list requests. Acceptable values are
- *   `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results
- *   are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation
- *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
- *   results based on the `creationTimestamp` field in
- *   reverse chronological order (newest result first). Use this to sort
- *   resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or
- *   `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the
- *   `nextPageToken` returned by a previous list request to get
- *   the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   Name of the region for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case
- *   of failure. The default value is false.
- *
- *   For example, when partial success behavior is enabled, aggregatedList for a
- *   single zone scope either returns all resources in the zone or no resources,
- *   with an error code.
- * @param {string} request.router
- *   Name or id of the resource for this request.
- *   Name should conform to RFC1035.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.compute.v1beta.RoutePolicy|RoutePolicy}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/routers.list_route_policies.js</caption>
- * region_tag:compute_v1beta_generated_Routers_ListRoutePolicies_async
- */
+  /**
+   * Equivalent to `listRoutePolicies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.compute.v1beta.RoutePolicy|RoutePolicy}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/routers.list_route_policies.js</caption>
+   * region_tag:compute_v1beta_generated_Routers_ListRoutePolicies_async
+   */
   listRoutePoliciesAsync(
-      request?: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.compute.v1beta.IRoutePolicy>{
+    request?: protos.google.cloud.compute.v1beta.IListRoutePoliciesRoutersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.compute.v1beta.IRoutePolicy> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'project': request.project ?? '',
-      'region': request.region ?? '',
-      'router': request.router ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
     const defaultCallSettings = this._defaults['listRoutePolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listRoutePolicies iterate %j', request);
     return this.descriptors.page.listRoutePolicies.asyncIterate(
       this.innerApiCalls['listRoutePolicies'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.compute.v1beta.IRoutePolicy>;
   }
 
@@ -4778,7 +5808,7 @@ export class RoutersClient {
    */
   close(): Promise<void> {
     if (this.routersStub && !this._terminated) {
-      return this.routersStub.then(stub => {
+      return this.routersStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {BudgetServiceClient} from './budget_service_client';
+export { BudgetServiceClient } from './budget_service_client';

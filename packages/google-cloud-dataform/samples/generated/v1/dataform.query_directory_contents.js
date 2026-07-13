@@ -51,6 +51,13 @@ function main(workspace) {
    *  call that provided the page token.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. Specifies the metadata to return for each directory entry.
+   *  If unspecified, the default is `DIRECTORY_CONTENTS_VIEW_BASIC`.
+   *  Currently the `DIRECTORY_CONTENTS_VIEW_METADATA` view is not supported by
+   *  CMEK-protected workspaces.
+   */
+  // const view = {}
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1;

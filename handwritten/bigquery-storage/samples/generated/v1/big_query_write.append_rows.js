@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -62,8 +62,7 @@ function main(writeStream) {
    */
   // const protoRows = {}
   /**
-   *  Rows in arrow format. This is an experimental feature only selected for
-   *  allowlisted customers.
+   *  Rows in arrow format.
    */
   // const arrowRows = {}
   /**
@@ -91,8 +90,8 @@ function main(writeStream) {
   /**
    *  Optional. Default missing value interpretation for all columns in the
    *  table. When a value is specified on an `AppendRowsRequest`, it is applied
-   *  to all requests on the connection from that point forward, until a
-   *  subsequent `AppendRowsRequest` sets it to a different value.
+   *  to all requests from that point forward, until a subsequent
+   *  `AppendRowsRequest` sets it to a different value.
    *  `missing_value_interpretation` can override
    *  `default_missing_value_interpretation`. For example, if you want to write
    *  `NULL` instead of using default values for some columns, you can set

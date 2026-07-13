@@ -49,8 +49,24 @@ function main(parent) {
   // const pageToken = 'abc123'
   /**
    *  Optional. Expression to filter the response.
-   *  See syntax details at
-   *  https://developers.google.com/ad-manager/api/beta/filters
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters
+   *  <b>Filterable fields:</b>
+   *  <ul style="list-style-type:none">
+   *    <li><code>address</code></li>
+   *    <li><code>comment</code></li>
+   *    <li><code>companyId</code></li>
+   *    <li><code>creditStatus</code></li>
+   *    <li><code>displayName</code></li>
+   *    <li><code>email</code></li>
+   *    <li><code>externalId</code></li>
+   *    <li><code>fax</code></li>
+   *    <li><code>name</code></li>
+   *    <li><code>phone</code></li>
+   *    <li><code>thirdPartyCompanyId</code></li>
+   *    <li><code>type</code></li>
+   *    <li><code>updateTime</code></li>
+   *  </ul>
    */
   // const filter = 'abc123'
   /**

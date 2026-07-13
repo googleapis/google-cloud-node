@@ -64,14 +64,12 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list conversion sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.list_conversion_sources.js) |
 | undelete conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.undelete_conversion_source.js) |
 | update conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.update_conversion_source.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/snippet_metadata_google.shopping.merchant.conversions.v1.json) |
 | create conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.create_conversion_source.js) |
 | delete conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.delete_conversion_source.js) |
 | get conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.get_conversion_source.js) |
 | list conversion sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.list_conversion_sources.js) |
 | undelete conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.undelete_conversion_source.js) |
 | update conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.update_conversion_source.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.conversions.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -105,7 +103,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -115,7 +113,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

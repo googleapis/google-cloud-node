@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AccessContextManagerClient} from '@google-cloud/access-context-manager';
+import { AccessContextManagerClient } from '@google-cloud/access-context-manager';
 
 // check that the client class type name can be used
-function doStuffWithAccessContextManagerClient(client: AccessContextManagerClient) {
+function doStuffWithAccessContextManagerClient(
+  client: AccessContextManagerClient,
+) {
   client.close();
 }
 

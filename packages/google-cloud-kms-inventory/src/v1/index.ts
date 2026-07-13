@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {KeyDashboardServiceClient} from './key_dashboard_service_client';
-export {KeyTrackingServiceClient} from './key_tracking_service_client';
+export { KeyDashboardServiceClient } from './key_dashboard_service_client';
+export { KeyTrackingServiceClient } from './key_tracking_service_client';

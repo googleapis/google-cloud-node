@@ -25,7 +25,6 @@ import {
 } from './index';
 import {BoundData, RawFilter} from './filter';
 import {Row} from './row';
-import {BackoffSettings} from 'google-gax/build/src/gax';
 import {google} from '../protos/protos';
 import {CallOptions, grpc, ServiceError} from 'google-gax';
 import {Transform} from 'stream';
@@ -38,13 +37,18 @@ import {
 } from './client-side-metrics/client-side-metrics-attributes';
 import {mutateInternal} from './utils/mutateInternal';
 
+// StrictLongRunningType introduces a type equal to BackoffSettings so that we
+// don't have to reach into the gax folder of build which is causing pack and
+// play errors.
+type StrictLongRunningType = NonNullable<CallOptions['longrunning']>;
+
 // See protos/google/rpc/code.proto
 // (4=DEADLINE_EXCEEDED, 8=RESOURCE_EXHAUSTED, 10=ABORTED, 14=UNAVAILABLE)
 export const RETRYABLE_STATUS_CODES = new Set([4, 8, 10, 14]);
 // (1=CANCELLED)
 export const IGNORED_STATUS_CODES = new Set([1]);
 
-export const DEFAULT_BACKOFF_SETTINGS: BackoffSettings = {
+export const DEFAULT_BACKOFF_SETTINGS: StrictLongRunningType = {
   initialRetryDelayMillis: 10,
   retryDelayMultiplier: 2,
   maxRetryDelayMillis: 60000,
@@ -495,7 +499,7 @@ Please use the format 'prezzy' or '${instance.name}/tables/prezzy'.`);
 
 export function getNextDelay(
   numConsecutiveErrors: number,
-  config: BackoffSettings,
+  config: StrictLongRunningType,
 ) {
   // 0 - 100 ms jitter
   const jitter = Math.floor(Math.random() * 100);

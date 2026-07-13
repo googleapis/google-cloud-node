@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.3.0...dataform-v2.4.0) (2026-06-25)
+
+
+### Features
+
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.2.2...dataform-v2.3.0) (2026-05-27)
+
+
+### Features
+
+* Add folders and teamFolders related changes to v1 ([e9ad85f](https://github.com/googleapis/google-cloud-node/commit/e9ad85f0db9570343fb0625579fb9ee484280b59))
+* Update GCP Client Libraries in v1beta1 to support Folders, TeamFolders, and other relevant APIs ([e9ad85f](https://github.com/googleapis/google-cloud-node/commit/e9ad85f0db9570343fb0625579fb9ee484280b59))
+
 ## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.2.1...dataform-v2.2.2) (2026-05-01)
 
 

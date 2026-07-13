@@ -13,7 +13,9 @@ are addressed with the highest priority
 
 Sensitive Data Protection (DLP) client for Node.js
 
-[//]: # "partials.introduction"
+The [Data Loss Prevention API](https://cloud.google.com/dlp/docs/) provides programmatic access to a
+powerful detection engine for personally identifiable information and other privacy-sensitive
+data in unstructured data streams.
 
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
@@ -113,7 +115,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update inspect template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_inspect_template.js) |
 | update job trigger | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_job_trigger.js) |
 | update stored info type | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_stored_info_type.js) |
-| privacy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/snippet_metadata_google.privacy.dlp.v2.json) |
 
 
 ## Supported Node.js Versions
@@ -147,7 +148,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -157,7 +158,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

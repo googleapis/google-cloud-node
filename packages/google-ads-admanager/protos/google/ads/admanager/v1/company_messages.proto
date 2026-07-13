@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ option java_package = "com.google.ads.admanager.v1";
 option php_namespace = "Google\\Ads\\AdManager\\V1";
 option ruby_package = "Google::Ads::AdManager::V1";
 
-// The `Company` resource.
+// The [Company][google.ads.admanager.v1.Company] resource.
 message Company {
   option (google.api.resource) = {
     type: "admanager.googleapis.com/Company"
@@ -39,65 +39,76 @@ message Company {
     singular: "company"
   };
 
-  // Identifier. The resource name of the `Company`.
-  // Format: `networks/{network_code}/companies/{company_id}`
+  // Identifier. The resource name of the
+  // [Company][google.ads.admanager.v1.Company]. Format:
+  // `networks/{network_code}/companies/{company_id}`
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
-  // Output only. `Company` ID.
-  optional int64 company_id = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Output only. Deprecated: [Company][google.ads.admanager.v1.Company] ID.
+  optional int64 company_id = 2
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Required. The display name of the `Company`.
+  // Required. The display name of the
+  // [Company][google.ads.admanager.v1.Company].
   //
   // This value has a maximum length of 127 characters.
   optional string display_name = 3 [(google.api.field_behavior) = REQUIRED];
 
-  // Required. The type of the `Company`.
+  // Required. The type of the [Company][google.ads.admanager.v1.Company].
   optional CompanyTypeEnum.CompanyType type = 4
       [(google.api.field_behavior) = REQUIRED];
 
-  // Optional. The address for the `Company`.
+  // Optional. The address for the [Company][google.ads.admanager.v1.Company].
   //
   // This value has a maximum length of 1024 characters.
   optional string address = 5 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. The email for the `Company`.
+  // Optional. The email for the [Company][google.ads.admanager.v1.Company].
   //
   // This value has a maximum length of 128 characters.
   optional string email = 6 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. The fax number for the `Company`.
+  // Optional. The fax number for the
+  // [Company][google.ads.admanager.v1.Company].
   //
   // This value has a maximum length of 63 characters.
   optional string fax = 7 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. The phone number for the `Company`.
+  // Optional. The phone number for the
+  // [Company][google.ads.admanager.v1.Company].
   //
   // This value has a maximum length of 63 characters.
   optional string phone = 8 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. The external ID for the `Company`.
+  // Optional. The external ID for the
+  // [Company][google.ads.admanager.v1.Company].
   //
   // This value has a maximum length of 255 characters.
   optional string external_id = 9 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. Comments about the `Company`.
+  // Optional. Comments about the [Company][google.ads.admanager.v1.Company].
   //
   // This value has a maximum length of 1024 characters.
   optional string comment = 10 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. The credit status of the `Company`.
+  // Optional. The credit status of the
+  // [Company][google.ads.admanager.v1.Company].
   //
-  // This attribute defaults to `ACTIVE` if basic settings are enabled and
-  // `ON_HOLD` if advance settings are enabled.
+  // This attribute defaults to [CompanyCreditStatus.ACTIVE][] if basic
+  // settings are enabled and [CompanyCreditStatus.ON_HOLD][] if advance
+  // settings are enabled.
   optional CompanyCreditStatusEnum.CompanyCreditStatus credit_status = 11
       [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. The labels that are directly applied to the `Company`.
+  // Optional. The labels that are directly applied to the
+  // [Company][google.ads.admanager.v1.Company].
   repeated AppliedLabel applied_labels = 12
       [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. The resource names of primary Contact of the `Company`.
-  // Format: "networks/{network_code}/contacts/{contact_id}"
+  // Optional. The resource names of primary
+  // [Contact][google.ads.admanager.v1.Contact] of the
+  // [Company][google.ads.admanager.v1.Company]. Format:
+  // "networks/{network_code}/contacts/{contact_id}"
   optional string primary_contact = 13 [
     (google.api.field_behavior) = OPTIONAL,
     (google.api.resource_reference) = {
@@ -106,18 +117,20 @@ message Company {
   ];
 
   // Optional. The resource names of Teams that are directly associated with the
-  // `Company`. Format: "networks/{network_code}/teams/{team_id}"
+  // [Company][google.ads.admanager.v1.Company]. Format:
+  // "networks/{network_code}/teams/{team_id}"
   repeated string applied_teams = 14 [
     (google.api.field_behavior) = OPTIONAL,
     (google.api.resource_reference) = { type: "admanager.googleapis.com/Team" }
   ];
 
   // Optional. The ID of the Google-recognized canonicalized form of the
-  // `Company`.
+  // [Company][google.ads.admanager.v1.Company].
   optional int64 third_party_company_id = 16
       [(google.api.field_behavior) = OPTIONAL];
 
-  // Output only. The time the `Company` was last modified.
+  // Output only. The time the [Company][google.ads.admanager.v1.Company] was
+  // last modified.
   optional google.protobuf.Timestamp update_time = 15
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }

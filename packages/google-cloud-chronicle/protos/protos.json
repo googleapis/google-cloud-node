@@ -11,12 +11,12 @@
                     "csharp_namespace": "Google.Cloud.Chronicle.V1",
                     "go_package": "cloud.google.com/go/chronicle/apiv1/chroniclepb;chroniclepb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "RuleProto",
+                    "java_outer_classname": "RuleExecutionErrorProto",
                     "java_package": "com.google.cloud.chronicle.v1",
                     "php_namespace": "Google\\Cloud\\Chronicle\\V1",
                     "ruby_package": "Google::Cloud::Chronicle::V1",
-                    "(google.api.resource_definition).type": "chronicle.googleapis.com/ContentHub",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/instances/{instance}/contentHub",
+                    "(google.api.resource_definition).type": "chronicle.googleapis.com/CuratedRule",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/instances/{instance}/curatedRules/{curatedRule}",
                     "(google.api.resource_definition).plural": "contentHub",
                     "(google.api.resource_definition).singular": "contentHub"
                   },
@@ -5423,6 +5423,635 @@
                         }
                       }
                     },
+                    "FindingsRefinementService": {
+                      "options": {
+                        "(google.api.default_host)": "chronicle.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chronicle,https://www.googleapis.com/auth/chronicle.readonly,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GetFindingsRefinement": {
+                          "requestType": "GetFindingsRefinementRequest",
+                          "responseType": "FindingsRefinement",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*/findingsRefinements/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*/findingsRefinements/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListFindingsRefinements": {
+                          "requestType": "ListFindingsRefinementsRequest",
+                          "responseType": "ListFindingsRefinementsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/instances/*}/findingsRefinements",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/instances/*}/findingsRefinements"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateFindingsRefinement": {
+                          "requestType": "CreateFindingsRefinementRequest",
+                          "responseType": "FindingsRefinement",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/instances/*}/findingsRefinements",
+                            "(google.api.http).body": "findings_refinement",
+                            "(google.api.method_signature)": "parent,findings_refinement"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/instances/*}/findingsRefinements",
+                                "body": "findings_refinement"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,findings_refinement"
+                            }
+                          ]
+                        },
+                        "UpdateFindingsRefinement": {
+                          "requestType": "UpdateFindingsRefinementRequest",
+                          "responseType": "FindingsRefinement",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{findings_refinement.name=projects/*/locations/*/instances/*/findingsRefinements/*}",
+                            "(google.api.http).body": "findings_refinement",
+                            "(google.api.method_signature)": "findings_refinement,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{findings_refinement.name=projects/*/locations/*/instances/*/findingsRefinements/*}",
+                                "body": "findings_refinement"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "findings_refinement,update_mask"
+                            }
+                          ]
+                        },
+                        "GetFindingsRefinementDeployment": {
+                          "requestType": "GetFindingsRefinementDeploymentRequest",
+                          "responseType": "FindingsRefinementDeployment",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*/findingsRefinements/*/deployment}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*/findingsRefinements/*/deployment}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateFindingsRefinementDeployment": {
+                          "requestType": "UpdateFindingsRefinementDeploymentRequest",
+                          "responseType": "FindingsRefinementDeployment",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{findings_refinement_deployment.name=projects/*/locations/*/instances/*/findingsRefinements/*/deployment}",
+                            "(google.api.http).body": "findings_refinement_deployment",
+                            "(google.api.method_signature)": "findings_refinement_deployment,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{findings_refinement_deployment.name=projects/*/locations/*/instances/*/findingsRefinements/*/deployment}",
+                                "body": "findings_refinement_deployment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "findings_refinement_deployment,update_mask"
+                            }
+                          ]
+                        },
+                        "ListAllFindingsRefinementDeployments": {
+                          "requestType": "ListAllFindingsRefinementDeploymentsRequest",
+                          "responseType": "ListAllFindingsRefinementDeploymentsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{instance=projects/*/locations/*/instances/*}:listAllFindingsRefinementDeployments",
+                            "(google.api.method_signature)": "instance"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{instance=projects/*/locations/*/instances/*}:listAllFindingsRefinementDeployments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "instance"
+                            }
+                          ]
+                        },
+                        "ComputeFindingsRefinementActivity": {
+                          "requestType": "ComputeFindingsRefinementActivityRequest",
+                          "responseType": "ComputeFindingsRefinementActivityResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*/findingsRefinements/*}:computeFindingsRefinementActivity",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*/findingsRefinements/*}:computeFindingsRefinementActivity",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ComputeAllFindingsRefinementActivities": {
+                          "requestType": "ComputeAllFindingsRefinementActivitiesRequest",
+                          "responseType": "ComputeAllFindingsRefinementActivitiesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{instance=projects/*/locations/*/instances/*}:computeAllFindingsRefinementActivities",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "instance"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{instance=projects/*/locations/*/instances/*}:computeAllFindingsRefinementActivities",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "instance"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "FindingsRefinementType": {
+                      "values": {
+                        "FINDINGS_REFINEMENT_TYPE_UNSPECIFIED": 0,
+                        "DETECTION_EXCLUSION": 1
+                      }
+                    },
+                    "FindingsRefinement": {
+                      "options": {
+                        "(google.api.resource).type": "chronicle.googleapis.com/FindingsRefinement",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/findingsRefinements/{findings_refinement}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "type": {
+                          "type": "FindingsRefinementType",
+                          "id": 3
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "query": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "outcomeFilters": {
+                          "rule": "repeated",
+                          "type": "OutcomeFilter",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FindingsRefinementDeployment": {
+                      "options": {
+                        "(google.api.resource).type": "chronicle.googleapis.com/FindingsRefinementDeployment",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/findingsRefinements/{findings_refinement}/deployment"
+                      },
+                      "oneofs": {
+                        "FindingsRefinementApplication": {
+                          "oneof": [
+                            "detectionExclusionApplication"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "detectionExclusionApplication": {
+                          "type": "DetectionExclusionApplication",
+                          "id": 5
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "enabled": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "archived": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "DetectionExclusionApplication": {
+                      "fields": {
+                        "curatedRuleSets": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/CuratedRuleSet"
+                          }
+                        },
+                        "curatedRules": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/CuratedRule"
+                          }
+                        },
+                        "rules": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/Rule"
+                          }
+                        },
+                        "deletedCuratedRuleSets": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/CuratedRuleSet"
+                          }
+                        }
+                      }
+                    },
+                    "FindingsRefinementActivity": {
+                      "oneofs": {
+                        "Activity": {
+                          "oneof": [
+                            "detectionExclusionActivity"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "detectionExclusionActivity": {
+                          "type": "DetectionExclusionActivity",
+                          "id": 2
+                        },
+                        "findingsRefinement": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/FindingsRefinement"
+                          }
+                        }
+                      }
+                    },
+                    "DetectionExclusionActivity": {
+                      "fields": {
+                        "detectionExclusionDetectorActivities": {
+                          "rule": "repeated",
+                          "type": "DetectionExclusionDetectorActivity",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "DetectionExclusionDetectorActivity": {
+                          "oneofs": {
+                            "detectorName": {
+                              "oneof": [
+                                "curatedRule",
+                                "curatedRuleSet",
+                                "rule",
+                                "deletedCuratedRuleSet"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "curatedRule": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "chronicle.googleapis.com/CuratedRule"
+                              }
+                            },
+                            "curatedRuleSet": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "chronicle.googleapis.com/CuratedRuleSet"
+                              }
+                            },
+                            "rule": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.resource_reference).type": "chronicle.googleapis.com/Rule"
+                              }
+                            },
+                            "deletedCuratedRuleSet": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.resource_reference).type": "chronicle.googleapis.com/CuratedRuleSet"
+                              }
+                            },
+                            "excludedDetectionCount": {
+                              "type": "int64",
+                              "id": 3
+                            },
+                            "totalDetectionCount": {
+                              "type": "int64",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GetFindingsRefinementRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/FindingsRefinement"
+                          }
+                        }
+                      }
+                    },
+                    "ListFindingsRefinementsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/FindingsRefinement"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListFindingsRefinementsResponse": {
+                      "fields": {
+                        "findingsRefinements": {
+                          "rule": "repeated",
+                          "type": "FindingsRefinement",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateFindingsRefinementRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/FindingsRefinement"
+                          }
+                        },
+                        "findingsRefinement": {
+                          "type": "FindingsRefinement",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateFindingsRefinementRequest": {
+                      "fields": {
+                        "findingsRefinement": {
+                          "type": "FindingsRefinement",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetFindingsRefinementDeploymentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/FindingsRefinementDeployment"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateFindingsRefinementDeploymentRequest": {
+                      "fields": {
+                        "findingsRefinementDeployment": {
+                          "type": "FindingsRefinementDeployment",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListAllFindingsRefinementDeploymentsRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/Instance"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListAllFindingsRefinementDeploymentsResponse": {
+                      "fields": {
+                        "allFindingsRefinementDeployments": {
+                          "rule": "repeated",
+                          "type": "FindingsRefinementDeployment",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "OutcomeFilter": {
+                      "fields": {
+                        "outcomeVariable": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outcomeValue": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outcomeFilterOperator": {
+                          "type": "Operator",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Operator": {
+                          "values": {
+                            "OPERATOR_UNSPECIFIED": 0,
+                            "EQUAL": 1,
+                            "CONTAINS": 2,
+                            "MATCHES_REGEX": 3,
+                            "MATCHES_CIDR": 4
+                          }
+                        }
+                      }
+                    },
+                    "ComputeFindingsRefinementActivityRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/FindingsRefinement"
+                          }
+                        },
+                        "interval": {
+                          "type": "google.type.Interval",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ComputeFindingsRefinementActivityResponse": {
+                      "fields": {
+                        "activity": {
+                          "type": "FindingsRefinementActivity",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ComputeAllFindingsRefinementActivitiesRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/Instance"
+                          }
+                        },
+                        "interval": {
+                          "type": "google.type.Interval",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ComputeAllFindingsRefinementActivitiesResponse": {
+                      "fields": {
+                        "activities": {
+                          "rule": "repeated",
+                          "type": "FindingsRefinementActivity",
+                          "id": 1
+                        }
+                      }
+                    },
                     "InstanceService": {
                       "options": {
                         "(google.api.default_host)": "chronicle.googleapis.com",
@@ -5481,7 +6110,7 @@
                     "ReferenceListService": {
                       "options": {
                         "(google.api.default_host)": "chronicle.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chronicle,https://www.googleapis.com/auth/chronicle.readonly,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "GetReferenceList": {
@@ -5557,6 +6186,22 @@
                             },
                             {
                               "(google.api.method_signature)": "reference_list,update_mask"
+                            }
+                          ]
+                        },
+                        "VerifyReferenceList": {
+                          "requestType": "VerifyReferenceListRequest",
+                          "responseType": "VerifyReferenceListResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyReferenceList",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyReferenceList",
+                                "body": "*"
+                              }
                             }
                           ]
                         }
@@ -5694,6 +6339,46 @@
                         }
                       }
                     },
+                    "VerifyReferenceListRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/Instance"
+                          }
+                        },
+                        "syntaxType": {
+                          "type": "ReferenceListSyntaxType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entries": {
+                          "rule": "repeated",
+                          "type": "ReferenceListEntry",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyReferenceListResponse": {
+                      "fields": {
+                        "success": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "ReferenceListError",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ReferenceList": {
                       "options": {
                         "(google.api.resource).type": "chronicle.googleapis.com/ReferenceList",
@@ -5775,10 +6460,22 @@
                         }
                       }
                     },
+                    "ReferenceListError": {
+                      "fields": {
+                        "lineNumber": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "RuleService": {
                       "options": {
                         "(google.api.default_host)": "chronicle.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chronicle,https://www.googleapis.com/auth/chronicle.readonly,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
                         "CreateRule": {
@@ -5872,6 +6569,26 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "VerifyRuleText": {
+                          "requestType": "VerifyRuleTextRequest",
+                          "responseType": "VerifyRuleTextResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyRuleText",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "instance,rule_text"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{instance=projects/*/locations/*/instances/*}:verifyRuleText",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "instance,rule_text"
                             }
                           ]
                         },
@@ -6421,6 +7138,38 @@
                         }
                       }
                     },
+                    "VerifyRuleTextRequest": {
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/Instance"
+                          }
+                        },
+                        "ruleText": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "VerifyRuleTextResponse": {
+                      "fields": {
+                        "success": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "compilationDiagnostics": {
+                          "rule": "repeated",
+                          "type": "CompilationDiagnostic",
+                          "id": 3
+                        }
+                      }
+                    },
                     "ListRuleRevisionsRequest": {
                       "fields": {
                         "name": {
@@ -6717,6 +7466,122 @@
                           }
                         }
                       }
+                    },
+                    "RuleExecutionErrorService": {
+                      "options": {
+                        "(google.api.default_host)": "chronicle.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chronicle,https://www.googleapis.com/auth/chronicle.readonly,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListRuleExecutionErrors": {
+                          "requestType": "ListRuleExecutionErrorsRequest",
+                          "responseType": "ListRuleExecutionErrorsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/instances/*}/ruleExecutionErrors",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/instances/*}/ruleExecutionErrors"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListRuleExecutionErrorsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "chronicle.googleapis.com/RuleExecutionError"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListRuleExecutionErrorsResponse": {
+                      "fields": {
+                        "ruleExecutionErrors": {
+                          "rule": "repeated",
+                          "type": "RuleExecutionError",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RuleExecutionError": {
+                      "options": {
+                        "(google.api.resource).type": "chronicle.googleapis.com/RuleExecutionError",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/ruleExecutionErrors/{rule_execution_error}"
+                      },
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "rule",
+                            "curatedRule"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rule": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/Rule"
+                          }
+                        },
+                        "curatedRule": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "chronicle.googleapis.com/CuratedRule"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "timeRange": {
+                          "type": "google.type.Interval",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -6730,8 +7595,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "http": {
@@ -6855,6 +7719,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -6995,6 +7863,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -7052,6 +7942,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -7111,6 +8006,19 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
+              }
+            },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
               }
             },
             "LaunchStage": {
@@ -7245,12 +8153,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -7288,6 +8203,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -7377,6 +8297,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -7602,6 +8526,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -7652,7 +8580,14 @@
                   "type": "ServiceOptions",
                   "id": 3
                 }
-              }
+              },
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                "stream"
+              ]
             },
             "MethodDescriptorProto": {
               "edition": "proto2",
@@ -7816,6 +8751,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -7951,7 +8887,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -7978,6 +8915,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -8046,6 +8987,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -8135,6 +9096,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -8278,6 +9243,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -8288,6 +9254,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -8298,6 +9265,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -8308,6 +9276,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -8318,7 +9287,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -8328,27 +9298,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -8393,7 +9374,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -8407,6 +9394,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -8435,11 +9449,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -8452,6 +9481,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -8535,6 +9570,14 @@
                     }
                   }
                 }
+              }
+            },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {
@@ -8664,6 +9707,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
+            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {

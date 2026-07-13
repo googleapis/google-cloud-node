@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ syntax = "proto3";
 
 package google.ads.admanager.v1;
 
+import "google/ads/admanager/v1/label_enums.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 
@@ -39,4 +40,21 @@ message Label {
   // Identifier. The resource name of the `Label`.
   // Format: `networks/{network_code}/labels/{label_id}`
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
+
+  // Required. Display name of the Label. This attribute has a maximum length of
+  // 127 characters.
+  optional string display_name = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. A description of the label. This attribute has a maximum length
+  // of 255 characters.
+  optional string description = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. Specifies whether or not the label is active.
+  optional bool active = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Required. Unordered list. The types of the Label.
+  repeated LabelTypeEnum.LabelType types = 7 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.field_behavior) = UNORDERED_LIST
+  ];
 }

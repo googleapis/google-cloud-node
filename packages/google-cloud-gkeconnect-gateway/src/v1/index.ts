@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {GatewayControlClient} from './gateway_control_client';
+export { GatewayControlClient } from './gateway_control_client';

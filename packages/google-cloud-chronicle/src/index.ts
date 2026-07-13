@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,16 +32,20 @@ const EntityServiceClient = v1.EntityServiceClient;
 type EntityServiceClient = v1.EntityServiceClient;
 const FeaturedContentNativeDashboardServiceClient = v1.FeaturedContentNativeDashboardServiceClient;
 type FeaturedContentNativeDashboardServiceClient = v1.FeaturedContentNativeDashboardServiceClient;
+const FindingsRefinementServiceClient = v1.FindingsRefinementServiceClient;
+type FindingsRefinementServiceClient = v1.FindingsRefinementServiceClient;
 const InstanceServiceClient = v1.InstanceServiceClient;
 type InstanceServiceClient = v1.InstanceServiceClient;
 const NativeDashboardServiceClient = v1.NativeDashboardServiceClient;
 type NativeDashboardServiceClient = v1.NativeDashboardServiceClient;
 const ReferenceListServiceClient = v1.ReferenceListServiceClient;
 type ReferenceListServiceClient = v1.ReferenceListServiceClient;
+const RuleExecutionErrorServiceClient = v1.RuleExecutionErrorServiceClient;
+type RuleExecutionErrorServiceClient = v1.RuleExecutionErrorServiceClient;
 const RuleServiceClient = v1.RuleServiceClient;
 type RuleServiceClient = v1.RuleServiceClient;
 
-export {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleServiceClient};
-export default {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleServiceClient};
+export {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, FindingsRefinementServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleExecutionErrorServiceClient, RuleServiceClient};
+export default {v1, BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, FindingsRefinementServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleExecutionErrorServiceClient, RuleServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

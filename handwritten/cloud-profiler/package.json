@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/profiler",
-  "version": "6.0.5",
+  "version": "7.0.0",
   "description": "Adds support for Cloud Profiler to Node.js applications",
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
   "scripts": {
-    "test": "echo 'skipping tests for time being'",
+    "test": "c8 mocha 'build/test/test-*.js'",
     "system-test": "echo 'skipping tests for time being'",
     "samples-test": "echo 'no sample tests'",
     "clean": "gts clean",
@@ -20,10 +20,8 @@
     "docs": "jsdoc -c .jsdoc.js",
     "prelint": "cd samples; npm link ../; npm install",
     "prepare": "npm run compile",
-    "pretest": "npm run compile",
+    "pretest": "npm run compile && node-gyp rebuild --directory node_modules/pprof",
     "license-check": "jsgl --local .",
-    "docs-test": "echo 'skipping tests for time being'",
-    "predocs-test": "npm run docs",
     "precompile": "gts clean"
   },
   "author": {
@@ -41,9 +39,9 @@
     "extend": "^3.0.2",
     "gcp-metadata": "^6.0.0",
     "ms": "^2.1.3",
-    "pprof": "4.0.0",
+    "pprof": "5.0.0",
     "pretty-ms": "^7.0.0",
-    "protobufjs": "~7.4.0",
+    "protobufjs": "~7.5.5",
     "semver": "^7.0.0",
     "teeny-request": "^9.0.0"
   },
@@ -64,13 +62,12 @@
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^3.0.0",
     "jsdoc-region-tag": "^3.0.0",
-    "linkinator": "^5.0.0",
     "long": "^5.3.2",
     "mocha": "^9.2.2",
     "nock": "^13.0.0",
     "sinon": "^18.0.0",
     "source-map": "^0.7.0",
-    "tmp": "0.2.4",
+    "tmp": "0.2.6",
     "typescript": "5.1.6"
   },
   "files": [
@@ -84,7 +81,7 @@
     ]
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/cloud-profiler"
 }

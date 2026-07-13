@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(entitySignalsMapping, updateMask) {
+function main(entitySignalsMapping) {
   // [START admanager_v1_generated_EntitySignalsMappingService_UpdateEntitySignalsMapping_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -37,7 +37,7 @@ function main(entitySignalsMapping, updateMask) {
    */
   // const entitySignalsMapping = {}
   /**
-   *  Required. The list of fields to update.
+   *  Optional. The list of fields to update.
    */
   // const updateMask = {}
 
@@ -51,7 +51,6 @@ function main(entitySignalsMapping, updateMask) {
     // Construct request
     const request = {
       entitySignalsMapping,
-      updateMask,
     };
 
     // Run request

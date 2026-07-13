@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AnalyticsHubServiceClient} from '@google-cloud/bigquery-data-exchange';
+import { AnalyticsHubServiceClient } from '@google-cloud/bigquery-data-exchange';
 
 // check that the client class type name can be used
-function doStuffWithAnalyticsHubServiceClient(client: AnalyticsHubServiceClient) {
+function doStuffWithAnalyticsHubServiceClient(
+  client: AnalyticsHubServiceClient,
+) {
   client.close();
 }
 

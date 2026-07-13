@@ -16,23 +16,23 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AccountIssueServiceClient} from './account_issue_service_client';
-export {AccountsServiceClient} from './accounts_service_client';
-export {AccountTaxServiceClient} from './account_tax_service_client';
-export {AutofeedSettingsServiceClient} from './autofeed_settings_service_client';
-export {AutomaticImprovementsServiceClient} from './automatic_improvements_service_client';
-export {BusinessIdentityServiceClient} from './business_identity_service_client';
-export {BusinessInfoServiceClient} from './business_info_service_client';
-export {CheckoutSettingsServiceClient} from './checkout_settings_service_client';
-export {EmailPreferencesServiceClient} from './email_preferences_service_client';
-export {GbpAccountsServiceClient} from './gbp_accounts_service_client';
-export {HomepageServiceClient} from './homepage_service_client';
-export {LfpProvidersServiceClient} from './lfp_providers_service_client';
-export {OmnichannelSettingsServiceClient} from './omnichannel_settings_service_client';
-export {OnlineReturnPolicyServiceClient} from './online_return_policy_service_client';
-export {ProgramsServiceClient} from './programs_service_client';
-export {RegionsServiceClient} from './regions_service_client';
-export {ShippingSettingsServiceClient} from './shipping_settings_service_client';
-export {TermsOfServiceAgreementStateServiceClient} from './terms_of_service_agreement_state_service_client';
-export {TermsOfServiceServiceClient} from './terms_of_service_service_client';
-export {UserServiceClient} from './user_service_client';
+export { AccountIssueServiceClient } from './account_issue_service_client';
+export { AccountsServiceClient } from './accounts_service_client';
+export { AccountTaxServiceClient } from './account_tax_service_client';
+export { AutofeedSettingsServiceClient } from './autofeed_settings_service_client';
+export { AutomaticImprovementsServiceClient } from './automatic_improvements_service_client';
+export { BusinessIdentityServiceClient } from './business_identity_service_client';
+export { BusinessInfoServiceClient } from './business_info_service_client';
+export { CheckoutSettingsServiceClient } from './checkout_settings_service_client';
+export { EmailPreferencesServiceClient } from './email_preferences_service_client';
+export { GbpAccountsServiceClient } from './gbp_accounts_service_client';
+export { HomepageServiceClient } from './homepage_service_client';
+export { LfpProvidersServiceClient } from './lfp_providers_service_client';
+export { OmnichannelSettingsServiceClient } from './omnichannel_settings_service_client';
+export { OnlineReturnPolicyServiceClient } from './online_return_policy_service_client';
+export { ProgramsServiceClient } from './programs_service_client';
+export { RegionsServiceClient } from './regions_service_client';
+export { ShippingSettingsServiceClient } from './shipping_settings_service_client';
+export { TermsOfServiceAgreementStateServiceClient } from './terms_of_service_agreement_state_service_client';
+export { TermsOfServiceServiceClient } from './terms_of_service_service_client';
+export { UserServiceClient } from './user_service_client';

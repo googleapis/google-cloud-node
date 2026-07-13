@@ -42,7 +42,6 @@
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^5.0.0",
     "jsdoc-region-tag": "^4.0.0",
-    "linkinator": "^6.1.2",
     "long": "^5.2.4",
     "lru-cache": "^10.0.0",
     "mkdirp": "^3.0.1",
@@ -78,8 +77,6 @@
     "prepare": "npm run compile && cd ../tools && npm i && npm run compile && cd ../gax && pwd && node ../tools/build/src/prepublish.js . && mkdirp build/protos && cp -r protos/* build/protos/ && npm run minify-proto-json",
     "system-test": "c8 mocha build/test/system-test --timeout 600000 && npm run test-application",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "browser-test": "cd test/browser-test && npm run prefetch && npm install && npm test",
     "test-application": "cd test/test-application && npm run prefetch && npm install && npm start",
     "prelint": "cd samples; npm link ../; npm install",
@@ -99,15 +96,15 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages/gax",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/gax",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "author": "Google API Authors",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/googleapis/google-cloud-node-core/issues"
+    "url": "https://github.com/googleapis/google-cloud-node/issues"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gax",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/gax",
   "engines": {
     "node": ">=18"
   },

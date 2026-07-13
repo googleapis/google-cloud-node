@@ -80,10 +80,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | search related account group memberships | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.search_related_account_group_memberships.js) |
 | update firewall policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.update_firewall_policy.js) |
 | update key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.update_key.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/snippet_metadata_google.cloud.recaptchaenterprise.v1.json) |
 | annotate assessment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.annotate_assessment.js) |
 | create assessment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/recaptcha_enterprise_service_v1_beta1.create_assessment.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1beta1/snippet_metadata_google.cloud.recaptchaenterprise.v1beta1.json) |
 
 
 ## Supported Node.js Versions
@@ -117,7 +115,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -127,7 +125,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

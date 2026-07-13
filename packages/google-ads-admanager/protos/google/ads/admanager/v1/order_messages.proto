@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -44,8 +44,9 @@ message Order {
   // Format: `networks/{network_code}/orders/{order_id}`
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
-  // Output only. Order ID.
-  optional int64 order_id = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Output only. Deprecated: Order ID.
+  optional int64 order_id = 4
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
   // Required. The display name of the Order.  This value has a maximum length
   // of 255 characters.
@@ -151,8 +152,7 @@ message Order {
   // Output only. The archival status of the Order.
   optional bool archived = 14 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Output only. The application which modified this order. This attribute is
-  // assigned by Google.
+  // Output only. The application which modified this order.
   optional string last_modified_by_app = 15
       [(google.api.field_behavior) = OUTPUT_ONLY];
 

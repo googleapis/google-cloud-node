@@ -19,921 +19,2097 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as healthprofileserviceModule from '../src';
 
-import {protobuf} from 'google-gax';
+import { PassThrough } from 'stream';
+
+import { protobuf } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json'),
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject,
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({ done: true, value: undefined });
+          }
+          return Promise.resolve({ done: false, value: responses![counter++] });
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v4.HealthProfileServiceClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient();
-            const apiEndpoint = client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'health.googleapis.com');
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'health.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          healthprofileserviceModule.v4.HealthProfileServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'health.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          healthprofileserviceModule.v4.HealthProfileServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'health.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'health.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'health.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new healthprofileserviceModule.v4.HealthProfileServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'health.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('has universeDomain', () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient();
-            const universeDomain = client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new healthprofileserviceModule.v4.HealthProfileServiceClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'health.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
+    });
 
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = healthprofileserviceModule.v4.HealthProfileServiceClient.servicePath;
-                assert.strictEqual(servicePath, 'health.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('has port', () => {
+      const port =
+        healthprofileserviceModule.v4.HealthProfileServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = healthprofileserviceModule.v4.HealthProfileServiceClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'health.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('should create a client with no option', () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          fallback: true,
+        });
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.healthProfileServiceStub, undefined);
+      await client.initialize();
+      assert(client.healthProfileServiceStub);
+    });
+
+    it('has close method for the initialized client', (done) => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      client.initialize().catch((err) => {
+        throw err;
+      });
+      assert(client.healthProfileServiceStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has close method for the non-initialized client', (done) => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.healthProfileServiceStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
+  });
+
+  describe('getProfile', () => {
+    it('invokes getProfile without error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetProfileRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetProfileRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Profile(),
+      );
+      client.innerApiCalls.getProfile = stubSimpleCall(expectedResponse);
+      const [response] = await client.getProfile(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfile without error using callback', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetProfileRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetProfileRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Profile(),
+      );
+      client.innerApiCalls.getProfile =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getProfile(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.IProfile | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfile with error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetProfileRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetProfileRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getProfile = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getProfile(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfile with closed client', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetProfileRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetProfileRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getProfile(request), expectedError);
+    });
+  });
+
+  describe('updateProfile', () => {
+    it('invokes updateProfile without error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateProfileRequest(),
+      );
+      request.profile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateProfileRequest',
+        ['profile', 'name'],
+      );
+      request.profile.name = defaultValue1;
+      const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Profile(),
+      );
+      client.innerApiCalls.updateProfile = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateProfile(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateProfile without error using callback', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateProfileRequest(),
+      );
+      request.profile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateProfileRequest',
+        ['profile', 'name'],
+      );
+      request.profile.name = defaultValue1;
+      const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Profile(),
+      );
+      client.innerApiCalls.updateProfile =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateProfile(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.IProfile | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateProfile with error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateProfileRequest(),
+      );
+      request.profile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateProfileRequest',
+        ['profile', 'name'],
+      );
+      request.profile.name = defaultValue1;
+      const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateProfile = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateProfile(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateProfile with closed client', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateProfileRequest(),
+      );
+      request.profile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateProfileRequest',
+        ['profile', 'name'],
+      );
+      request.profile.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updateProfile(request), expectedError);
+    });
+  });
+
+  describe('getSettings', () => {
+    it('invokes getSettings without error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetSettingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetSettingsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Settings(),
+      );
+      client.innerApiCalls.getSettings = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSettings without error using callback', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetSettingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetSettingsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Settings(),
+      );
+      client.innerApiCalls.getSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.ISettings | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSettings with error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetSettingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetSettingsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSettings = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getSettings(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSettings with closed client', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetSettingsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetSettingsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getSettings(request), expectedError);
+    });
+  });
+
+  describe('updateSettings', () => {
+    it('invokes updateSettings without error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateSettingsRequest(),
+      );
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateSettingsRequest',
+        ['settings', 'name'],
+      );
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Settings(),
+      );
+      client.innerApiCalls.updateSettings = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSettings(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSettings without error using callback', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateSettingsRequest(),
+      );
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateSettingsRequest',
+        ['settings', 'name'],
+      );
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Settings(),
+      );
+      client.innerApiCalls.updateSettings =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSettings(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.ISettings | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSettings with error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateSettingsRequest(),
+      );
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateSettingsRequest',
+        ['settings', 'name'],
+      );
+      request.settings.name = defaultValue1;
+      const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSettings = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateSettings(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSettings with closed client', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.UpdateSettingsRequest(),
+      );
+      request.settings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.UpdateSettingsRequest',
+        ['settings', 'name'],
+      );
+      request.settings.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updateSettings(request), expectedError);
+    });
+  });
+
+  describe('getIdentity', () => {
+    it('invokes getIdentity without error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetIdentityRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetIdentityRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Identity(),
+      );
+      client.innerApiCalls.getIdentity = stubSimpleCall(expectedResponse);
+      const [response] = await client.getIdentity(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIdentity without error using callback', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetIdentityRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetIdentityRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.Identity(),
+      );
+      client.innerApiCalls.getIdentity =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getIdentity(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.IIdentity | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIdentity with error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetIdentityRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetIdentityRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getIdentity = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getIdentity(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIdentity with closed client', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetIdentityRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetIdentityRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getIdentity(request), expectedError);
+    });
+  });
+
+  describe('getIrnProfile', () => {
+    it('invokes getIrnProfile without error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetIrnProfileRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetIrnProfileRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.IrnProfile(),
+      );
+      client.innerApiCalls.getIrnProfile = stubSimpleCall(expectedResponse);
+      const [response] = await client.getIrnProfile(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIrnProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIrnProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIrnProfile without error using callback', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetIrnProfileRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetIrnProfileRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.IrnProfile(),
+      );
+      client.innerApiCalls.getIrnProfile =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getIrnProfile(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.IIrnProfile | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIrnProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIrnProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIrnProfile with error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetIrnProfileRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetIrnProfileRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getIrnProfile = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getIrnProfile(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getIrnProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIrnProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIrnProfile with closed client', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetIrnProfileRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetIrnProfileRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getIrnProfile(request), expectedError);
+    });
+  });
+
+  describe('getPairedDevice', () => {
+    it('invokes getPairedDevice without error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetPairedDeviceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetPairedDeviceRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.PairedDevice(),
+      );
+      client.innerApiCalls.getPairedDevice = stubSimpleCall(expectedResponse);
+      const [response] = await client.getPairedDevice(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPairedDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPairedDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPairedDevice without error using callback', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetPairedDeviceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetPairedDeviceRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.PairedDevice(),
+      );
+      client.innerApiCalls.getPairedDevice =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPairedDevice(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devicesandservices.health.v4.IPairedDevice | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPairedDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPairedDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPairedDevice with error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetPairedDeviceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetPairedDeviceRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getPairedDevice = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getPairedDevice(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getPairedDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPairedDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPairedDevice with closed client', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.GetPairedDeviceRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.GetPairedDeviceRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getPairedDevice(request), expectedError);
+    });
+  });
+
+  describe('listPairedDevices', () => {
+    it('invokes listPairedDevices without error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListPairedDevicesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListPairedDevicesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+      ];
+      client.innerApiCalls.listPairedDevices = stubSimpleCall(expectedResponse);
+      const [response] = await client.listPairedDevices(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPairedDevices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPairedDevices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPairedDevices without error using callback', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListPairedDevicesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListPairedDevicesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+      ];
+      client.innerApiCalls.listPairedDevices =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listPairedDevices(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.devicesandservices.health.v4.IPairedDevice[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listPairedDevices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPairedDevices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPairedDevices with error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListPairedDevicesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListPairedDevicesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listPairedDevices = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listPairedDevices(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listPairedDevices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPairedDevices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listPairedDevicesStream without error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListPairedDevicesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListPairedDevicesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+      ];
+      client.descriptors.page.listPairedDevices.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listPairedDevicesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4.PairedDevice[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devicesandservices.health.v4.PairedDevice,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listPairedDevices.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPairedDevices, request),
+      );
+      assert(
+        (client.descriptors.page.listPairedDevices.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listPairedDevicesStream with error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListPairedDevicesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListPairedDevicesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPairedDevices.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listPairedDevicesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devicesandservices.health.v4.PairedDevice[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.devicesandservices.health.v4.PairedDevice,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listPairedDevices.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPairedDevices, request),
+      );
+      assert(
+        (client.descriptors.page.listPairedDevices.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listPairedDevices without error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListPairedDevicesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListPairedDevicesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+        generateSampleMessage(
+          new protos.google.devicesandservices.health.v4.PairedDevice(),
+        ),
+      ];
+      client.descriptors.page.listPairedDevices.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devicesandservices.health.v4.IPairedDevice[] =
+        [];
+      const iterable = client.listPairedDevicesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPairedDevices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listPairedDevices.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listPairedDevices with error', async () => {
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devicesandservices.health.v4.ListPairedDevicesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devicesandservices.health.v4.ListPairedDevicesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPairedDevices.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listPairedDevicesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.devicesandservices.health.v4.IPairedDevice[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({universeDomain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'health.example.com');
-        });
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPairedDevices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listPairedDevices.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
 
-        it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({universe_domain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'health.example.com');
+  describe('Path templates', () => {
+    describe('dataPoint', async () => {
+      const fakePath = '/rendered/path/dataPoint';
+      const expectedParameters = {
+        user: 'userValue',
+        data_type: 'dataTypeValue',
+        data_point: 'dataPointValue',
+      };
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      client.pathTemplates.dataPointPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataPointPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new healthprofileserviceModule.v4.HealthProfileServiceClient();
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'health.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
+      it('dataPointPath', () => {
+        const result = client.dataPointPath(
+          'userValue',
+          'dataTypeValue',
+          'dataPointValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataPointPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-                it('value configured in code has priority over environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({universeDomain: 'configured.example.com'});
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'health.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
-        }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new healthprofileserviceModule.v4.HealthProfileServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
-        });
+      it('matchUserFromDataPointName', () => {
+        const result = client.matchUserFromDataPointName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.dataPointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
 
-        it('has port', () => {
-            const port = healthprofileserviceModule.v4.HealthProfileServiceClient.port;
-            assert(port);
-            assert(typeof port === 'number');
-        });
+      it('matchDataTypeFromDataPointName', () => {
+        const result = client.matchDataTypeFromDataPointName(fakePath);
+        assert.strictEqual(result, 'dataTypeValue');
+        assert(
+          (client.pathTemplates.dataPointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
 
-        it('should create a client with no option', () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient();
-            assert(client);
-        });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.healthProfileServiceStub, undefined);
-            await client.initialize();
-            assert(client.healthProfileServiceStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.healthProfileServiceStub);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.healthProfileServiceStub, undefined);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
-        });
+      it('matchDataPointFromDataPointName', () => {
+        const result = client.matchDataPointFromDataPointName(fakePath);
+        assert.strictEqual(result, 'dataPointValue');
+        assert(
+          (client.pathTemplates.dataPointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('getProfile', () => {
-        it('invokes getProfile without error', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetProfileRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetProfileRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.Profile()
-            );
-            client.innerApiCalls.getProfile = stubSimpleCall(expectedResponse);
-            const [response] = await client.getProfile(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getProfile as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfile as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    describe('dataType', async () => {
+      const fakePath = '/rendered/path/dataType';
+      const expectedParameters = {
+        user: 'userValue',
+        data_type: 'dataTypeValue',
+      };
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      client.pathTemplates.dataTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        it('invokes getProfile without error using callback', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetProfileRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetProfileRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.Profile()
-            );
-            client.innerApiCalls.getProfile = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getProfile(
-                    request,
-                    (err?: Error|null, result?: protos.google.devicesandservices.health.v4.IProfile|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getProfile as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfile as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('dataTypePath', () => {
+        const result = client.dataTypePath('userValue', 'dataTypeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataTypePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-        it('invokes getProfile with error', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetProfileRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetProfileRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getProfile = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getProfile(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getProfile as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfile as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('matchUserFromDataTypeName', () => {
+        const result = client.matchUserFromDataTypeName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.dataTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
 
-        it('invokes getProfile with closed client', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetProfileRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetProfileRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getProfile(request), expectedError);
-        });
+      it('matchDataTypeFromDataTypeName', () => {
+        const result = client.matchDataTypeFromDataTypeName(fakePath);
+        assert.strictEqual(result, 'dataTypeValue');
+        assert(
+          (client.pathTemplates.dataTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('updateProfile', () => {
-        it('invokes updateProfile without error', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateProfileRequest()
-            );
-            request.profile ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateProfileRequest', ['profile', 'name']);
-            request.profile.name = defaultValue1;
-            const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.Profile()
-            );
-            client.innerApiCalls.updateProfile = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateProfile(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateProfile as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateProfile as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    describe('identity', async () => {
+      const fakePath = '/rendered/path/identity';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      client.pathTemplates.identityPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.identityPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        it('invokes updateProfile without error using callback', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateProfileRequest()
-            );
-            request.profile ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateProfileRequest', ['profile', 'name']);
-            request.profile.name = defaultValue1;
-            const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.Profile()
-            );
-            client.innerApiCalls.updateProfile = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateProfile(
-                    request,
-                    (err?: Error|null, result?: protos.google.devicesandservices.health.v4.IProfile|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateProfile as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateProfile as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('identityPath', () => {
+        const result = client.identityPath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.identityPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-        it('invokes updateProfile with error', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateProfileRequest()
-            );
-            request.profile ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateProfileRequest', ['profile', 'name']);
-            request.profile.name = defaultValue1;
-            const expectedHeaderRequestParams = `profile.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateProfile = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.updateProfile(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateProfile as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateProfile as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateProfile with closed client', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateProfileRequest()
-            );
-            request.profile ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateProfileRequest', ['profile', 'name']);
-            request.profile.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.updateProfile(request), expectedError);
-        });
+      it('matchUserFromIdentityName', () => {
+        const result = client.matchUserFromIdentityName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.identityPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('getSettings', () => {
-        it('invokes getSettings without error', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetSettingsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetSettingsRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.Settings()
-            );
-            client.innerApiCalls.getSettings = stubSimpleCall(expectedResponse);
-            const [response] = await client.getSettings(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getSettings as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getSettings as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    describe('irnProfile', async () => {
+      const fakePath = '/rendered/path/irnProfile';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      client.pathTemplates.irnProfilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.irnProfilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        it('invokes getSettings without error using callback', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetSettingsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetSettingsRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.Settings()
-            );
-            client.innerApiCalls.getSettings = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getSettings(
-                    request,
-                    (err?: Error|null, result?: protos.google.devicesandservices.health.v4.ISettings|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getSettings as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getSettings as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('irnProfilePath', () => {
+        const result = client.irnProfilePath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.irnProfilePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-        it('invokes getSettings with error', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetSettingsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetSettingsRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getSettings = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getSettings(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getSettings as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getSettings as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getSettings with closed client', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetSettingsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetSettingsRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getSettings(request), expectedError);
-        });
+      it('matchUserFromIrnProfileName', () => {
+        const result = client.matchUserFromIrnProfileName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.irnProfilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('updateSettings', () => {
-        it('invokes updateSettings without error', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateSettingsRequest()
-            );
-            request.settings ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateSettingsRequest', ['settings', 'name']);
-            request.settings.name = defaultValue1;
-            const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.Settings()
-            );
-            client.innerApiCalls.updateSettings = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateSettings(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateSettings as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateSettings as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    describe('pairedDevice', async () => {
+      const fakePath = '/rendered/path/pairedDevice';
+      const expectedParameters = {
+        user: 'userValue',
+        paired_device: 'pairedDeviceValue',
+      };
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      client.pathTemplates.pairedDevicePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.pairedDevicePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        it('invokes updateSettings without error using callback', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateSettingsRequest()
-            );
-            request.settings ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateSettingsRequest', ['settings', 'name']);
-            request.settings.name = defaultValue1;
-            const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.Settings()
-            );
-            client.innerApiCalls.updateSettings = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateSettings(
-                    request,
-                    (err?: Error|null, result?: protos.google.devicesandservices.health.v4.ISettings|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateSettings as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateSettings as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('pairedDevicePath', () => {
+        const result = client.pairedDevicePath(
+          'userValue',
+          'pairedDeviceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-        it('invokes updateSettings with error', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateSettingsRequest()
-            );
-            request.settings ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateSettingsRequest', ['settings', 'name']);
-            request.settings.name = defaultValue1;
-            const expectedHeaderRequestParams = `settings.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateSettings = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.updateSettings(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateSettings as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateSettings as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('matchUserFromPairedDeviceName', () => {
+        const result = client.matchUserFromPairedDeviceName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
 
-        it('invokes updateSettings with closed client', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.UpdateSettingsRequest()
-            );
-            request.settings ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.UpdateSettingsRequest', ['settings', 'name']);
-            request.settings.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.updateSettings(request), expectedError);
-        });
+      it('matchPairedDeviceFromPairedDeviceName', () => {
+        const result = client.matchPairedDeviceFromPairedDeviceName(fakePath);
+        assert.strictEqual(result, 'pairedDeviceValue');
+        assert(
+          (client.pathTemplates.pairedDevicePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('getIdentity', () => {
-        it('invokes getIdentity without error', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetIdentityRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetIdentityRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.Identity()
-            );
-            client.innerApiCalls.getIdentity = stubSimpleCall(expectedResponse);
-            const [response] = await client.getIdentity(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getIdentity as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getIdentity as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    describe('profile', async () => {
+      const fakePath = '/rendered/path/profile';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      client.pathTemplates.profilePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.profilePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        it('invokes getIdentity without error using callback', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetIdentityRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetIdentityRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.Identity()
-            );
-            client.innerApiCalls.getIdentity = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getIdentity(
-                    request,
-                    (err?: Error|null, result?: protos.google.devicesandservices.health.v4.IIdentity|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getIdentity as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getIdentity as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('profilePath', () => {
+        const result = client.profilePath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.profilePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-        it('invokes getIdentity with error', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetIdentityRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetIdentityRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getIdentity = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getIdentity(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getIdentity as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getIdentity as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getIdentity with closed client', async () => {
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.devicesandservices.health.v4.GetIdentityRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.devicesandservices.health.v4.GetIdentityRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getIdentity(request), expectedError);
-        });
+      it('matchUserFromProfileName', () => {
+        const result = client.matchUserFromProfileName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.profilePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('Path templates', () => {
-
-        describe('dataPoint', async () => {
-            const fakePath = "/rendered/path/dataPoint";
-            const expectedParameters = {
-                user: "userValue",
-                data_type: "dataTypeValue",
-                data_point: "dataPointValue",
-            };
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataPointPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataPointPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataPointPath', () => {
-                const result = client.dataPointPath("userValue", "dataTypeValue", "dataPointValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataPointPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchUserFromDataPointName', () => {
-                const result = client.matchUserFromDataPointName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.dataPointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTypeFromDataPointName', () => {
-                const result = client.matchDataTypeFromDataPointName(fakePath);
-                assert.strictEqual(result, "dataTypeValue");
-                assert((client.pathTemplates.dataPointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataPointFromDataPointName', () => {
-                const result = client.matchDataPointFromDataPointName(fakePath);
-                assert.strictEqual(result, "dataPointValue");
-                assert((client.pathTemplates.dataPointPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
+    describe('settings', async () => {
+      const fakePath = '/rendered/path/settings';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      client.pathTemplates.settingsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.settingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        describe('dataType', async () => {
-            const fakePath = "/rendered/path/dataType";
-            const expectedParameters = {
-                user: "userValue",
-                data_type: "dataTypeValue",
-            };
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataTypePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataTypePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
+      it('settingsPath', () => {
+        const result = client.settingsPath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.settingsPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-            it('dataTypePath', () => {
-                const result = client.dataTypePath("userValue", "dataTypeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataTypePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchUserFromDataTypeName', () => {
-                const result = client.matchUserFromDataTypeName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.dataTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTypeFromDataTypeName', () => {
-                const result = client.matchDataTypeFromDataTypeName(fakePath);
-                assert.strictEqual(result, "dataTypeValue");
-                assert((client.pathTemplates.dataTypePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('identity', async () => {
-            const fakePath = "/rendered/path/identity";
-            const expectedParameters = {
-                user: "userValue",
-            };
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.identityPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.identityPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('identityPath', () => {
-                const result = client.identityPath("userValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.identityPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchUserFromIdentityName', () => {
-                const result = client.matchUserFromIdentityName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.identityPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('profile', async () => {
-            const fakePath = "/rendered/path/profile";
-            const expectedParameters = {
-                user: "userValue",
-            };
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.profilePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.profilePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('profilePath', () => {
-                const result = client.profilePath("userValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.profilePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchUserFromProfileName', () => {
-                const result = client.matchUserFromProfileName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.profilePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('settings', async () => {
-            const fakePath = "/rendered/path/settings";
-            const expectedParameters = {
-                user: "userValue",
-            };
-            const client = new healthprofileserviceModule.v4.HealthProfileServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.settingsPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.settingsPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('settingsPath', () => {
-                const result = client.settingsPath("userValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.settingsPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchUserFromSettingsName', () => {
-                const result = client.matchUserFromSettingsName(fakePath);
-                assert.strictEqual(result, "userValue");
-                assert((client.pathTemplates.settingsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+      it('matchUserFromSettingsName', () => {
+        const result = client.matchUserFromSettingsName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.settingsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
+
+    describe('subscriber', async () => {
+      const fakePath = '/rendered/path/subscriber';
+      const expectedParameters = {
+        project: 'projectValue',
+        subscriber: 'subscriberValue',
+      };
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.subscriberPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.subscriberPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('subscriberPath', () => {
+        const result = client.subscriberPath('projectValue', 'subscriberValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.subscriberPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromSubscriberName', () => {
+        const result = client.matchProjectFromSubscriberName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.subscriberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSubscriberFromSubscriberName', () => {
+        const result = client.matchSubscriberFromSubscriberName(fakePath);
+        assert.strictEqual(result, 'subscriberValue');
+        assert(
+          (client.pathTemplates.subscriberPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('subscription', async () => {
+      const fakePath = '/rendered/path/subscription';
+      const expectedParameters = {
+        project: 'projectValue',
+        subscriber: 'subscriberValue',
+        subscription: 'subscriptionValue',
+      };
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.subscriptionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.subscriptionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('subscriptionPath', () => {
+        const result = client.subscriptionPath(
+          'projectValue',
+          'subscriberValue',
+          'subscriptionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromSubscriptionName', () => {
+        const result = client.matchProjectFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSubscriberFromSubscriptionName', () => {
+        const result = client.matchSubscriberFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'subscriberValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSubscriptionFromSubscriptionName', () => {
+        const result = client.matchSubscriptionFromSubscriptionName(fakePath);
+        assert.strictEqual(result, 'subscriptionValue');
+        assert(
+          (client.pathTemplates.subscriptionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('user', async () => {
+      const fakePath = '/rendered/path/user';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client =
+        new healthprofileserviceModule.v4.HealthProfileServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.userPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userPath', () => {
+        const result = client.userPath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.userPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromUserName', () => {
+        const result = client.matchUserFromUserName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.userPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+  });
 });

@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +54,7 @@ export class DeploymentsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dialogflow-cx');
@@ -58,10 +67,10 @@ export class DeploymentsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  deploymentsStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  deploymentsStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DeploymentsClient.
@@ -102,21 +111,42 @@ export class DeploymentsClient {
    *     const client = new DeploymentsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DeploymentsClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'dialogflow.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +171,7 @@ export class DeploymentsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +185,11 @@ export class DeploymentsClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,97 +211,101 @@ export class DeploymentsClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       agentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}'
+        'projects/{project}/locations/{location}/agents/{agent}',
       ),
       agentGenerativeSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/generativeSettings'
+        'projects/{project}/locations/{location}/agents/{agent}/generativeSettings',
       ),
       agentValidationResultPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/validationResult'
+        'projects/{project}/locations/{location}/agents/{agent}/validationResult',
       ),
       changelogPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/changelogs/{changelog}'
+        'projects/{project}/locations/{location}/agents/{agent}/changelogs/{changelog}',
       ),
       continuousTestResultPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/continuousTestResults/{continuous_test_result}'
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/continuousTestResults/{continuous_test_result}',
       ),
       conversationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/conversations/{conversation}'
+        'projects/{project}/locations/{location}/agents/{agent}/conversations/{conversation}',
       ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/deployments/{deployment}'
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/deployments/{deployment}',
       ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/entityTypes/{entity_type}'
+        'projects/{project}/locations/{location}/agents/{agent}/entityTypes/{entity_type}',
       ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}'
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}',
       ),
       examplePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/examples/{example}'
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/examples/{example}',
       ),
       experimentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/experiments/{experiment}'
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/experiments/{experiment}',
       ),
       flowPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}'
+        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}',
       ),
       flowValidationResultPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/validationResult'
+        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/validationResult',
       ),
       generatorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/generators/{generator}'
+        'projects/{project}/locations/{location}/agents/{agent}/generators/{generator}',
       ),
       intentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/intents/{intent}'
+        'projects/{project}/locations/{location}/agents/{agent}/intents/{intent}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       pagePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/pages/{page}'
+        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/pages/{page}',
       ),
       playbookPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}'
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}',
       ),
       playbookVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/versions/{version}'
+        'projects/{project}/locations/{location}/agents/{agent}/playbooks/{playbook}/versions/{version}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
-      projectLocationAgentEnvironmentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}'
-      ),
-      projectLocationAgentFlowTransitionRouteGroupsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}'
-      ),
-      projectLocationAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
-      ),
-      projectLocationAgentTransitionRouteGroupsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}'
-      ),
+      projectLocationAgentEnvironmentSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/sessions/{session}/entityTypes/{entity_type}',
+        ),
+      projectLocationAgentFlowTransitionRouteGroupsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}',
+        ),
+      projectLocationAgentSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}',
+        ),
+      projectLocationAgentTransitionRouteGroupsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}',
+        ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securitySettings/{security_settings}'
+        'projects/{project}/locations/{location}/securitySettings/{security_settings}',
       ),
       testCasePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}'
+        'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}',
       ),
       testCaseResultPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}/results/{result}'
+        'projects/{project}/locations/{location}/agents/{agent}/testCases/{test_case}/results/{result}',
       ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}'
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}',
       ),
       toolVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}/versions/{version}'
+        'projects/{project}/locations/{location}/agents/{agent}/tools/{tool}/versions/{version}',
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}'
+        'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/versions/{version}',
       ),
       webhookPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agents/{agent}/webhooks/{webhook}'
+        'projects/{project}/locations/{location}/agents/{agent}/webhooks/{webhook}',
       ),
     };
 
@@ -283,14 +313,20 @@ export class DeploymentsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDeployments:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deployments')
+      listDeployments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'deployments',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.dialogflow.cx.v3beta1.Deployments', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.dialogflow.cx.v3beta1.Deployments',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -321,37 +357,40 @@ export class DeploymentsClient {
     // Put together the "service stub" for
     // google.cloud.dialogflow.cx.v3beta1.Deployments.
     this.deploymentsStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.dialogflow.cx.v3beta1.Deployments') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.dialogflow.cx.v3beta1.Deployments',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.cx.v3beta1.Deployments,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const deploymentsStubMethods =
-        ['listDeployments', 'getDeployment'];
+    const deploymentsStubMethods = ['listDeployments', 'getDeployment'];
     for (const methodName of deploymentsStubMethods) {
       const callPromise = this.deploymentsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -366,8 +405,14 @@ export class DeploymentsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dialogflow.googleapis.com';
   }
@@ -378,8 +423,14 @@ export class DeploymentsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dialogflow.googleapis.com';
   }
@@ -412,7 +463,7 @@ export class DeploymentsClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/dialogflow'
+      'https://www.googleapis.com/auth/dialogflow',
     ];
   }
 
@@ -422,8 +473,9 @@ export class DeploymentsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -434,189 +486,263 @@ export class DeploymentsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Retrieves the specified
- * {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the
- *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}. Format:
- *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/deployments/<DeploymentID>`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3beta1/deployments.get_deployment.js</caption>
- * region_tag:dialogflow_v3beta1_generated_Deployments_GetDeployment_async
- */
+  /**
+   * Retrieves the specified
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the
+   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/deployments/<DeploymentID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/deployments.get_deployment.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Deployments_GetDeployment_async
+   */
   getDeployment(
-      request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
-        protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getDeployment(
-      request: protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
-          protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDeployment(
-      request: protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest,
-      callback: Callback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
-          protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDeployment(
-      request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
-          protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
-          protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
-        protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
+      (
+        | protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDeployment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
-        protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDeployment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
-        protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDeployment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment,
+          (
+            | protos.google.cloud.dialogflow.cx.v3beta1.IGetDeploymentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDeployment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Returns the list of all deployments in the specified
- * {@link protos.google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
- *   to list all environments for. Format:
- *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
- * @param {number} request.pageSize
- *   The maximum number of items to return in a single page. By default 20 and
- *   at most 100.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDeploymentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Returns the list of all deployments in the specified
+   * {@link protos.google.cloud.dialogflow.cx.v3beta1.Environment|Environment}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
+   *   to list all environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By default 20 and
+   *   at most 100.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDeploymentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDeployments(
-      request?: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3beta1.IDeployment[],
-        protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest|null,
-        protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse
-      ]>;
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.IDeployment[],
+      protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest | null,
+      protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse,
+    ]
+  >;
   listDeployments(
-      request: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
-          protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment>): void;
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3beta1.IDeployment
+    >,
+  ): void;
   listDeployments(
-      request: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
-          protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment>): void;
+    request: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3beta1.IDeployment
+    >,
+  ): void;
   listDeployments(
-      request?: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
-          protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
-          protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment>):
-      Promise<[
-        protos.google.cloud.dialogflow.cx.v3beta1.IDeployment[],
-        protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest|null,
-        protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse
-      ]>|void {
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
+      | protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3beta1.IDeployment
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3beta1.IDeployment[],
+      protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest | null,
+      protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
-      protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse|null|undefined,
-      protos.google.cloud.dialogflow.cx.v3beta1.IDeployment>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
+          | protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -625,115 +751,120 @@ export class DeploymentsClient {
     this._log.info('listDeployments request %j', request);
     return this.innerApiCalls
       .listDeployments(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dialogflow.cx.v3beta1.IDeployment[],
-        protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest|null,
-        protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse
-      ]) => {
-        this._log.info('listDeployments values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.cx.v3beta1.IDeployment[],
+          protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest | null,
+          protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsResponse,
+        ]) => {
+          this._log.info('listDeployments values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDeployments`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
- *   to list all environments for. Format:
- *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
- * @param {number} request.pageSize
- *   The maximum number of items to return in a single page. By default 20 and
- *   at most 100.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDeploymentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDeployments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
+   *   to list all environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By default 20 and
+   *   at most 100.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDeploymentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDeploymentsStream(
-      request?: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDeployments stream %j', request);
     return this.descriptors.page.listDeployments.createStream(
       this.innerApiCalls.listDeployments as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDeployments`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
- *   to list all environments for. Format:
- *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
- * @param {number} request.pageSize
- *   The maximum number of items to return in a single page. By default 20 and
- *   at most 100.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3beta1/deployments.list_deployments.js</caption>
- * region_tag:dialogflow_v3beta1_generated_Deployments_ListDeployments_async
- */
+  /**
+   * Equivalent to `listDeployments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The {@link protos.google.cloud.dialogflow.cx.v3beta1.Environment|Environment}
+   *   to list all environments for. Format:
+   *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By default 20 and
+   *   at most 100.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dialogflow.cx.v3beta1.Deployment|Deployment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3beta1/deployments.list_deployments.js</caption>
+   * region_tag:dialogflow_v3beta1_generated_Deployments_ListDeployments_async
+   */
   listDeploymentsAsync(
-      request?: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IDeployment>{
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IDeployment> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDeployments iterate %j', request);
     return this.descriptors.page.listDeployments.asyncIterate(
       this.innerApiCalls['listDeployments'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IDeployment>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -768,12 +899,11 @@ export class DeploymentsClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -806,7 +936,7 @@ export class DeploymentsClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -823,7 +953,7 @@ export class DeploymentsClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentPath(project:string,location:string,agent:string) {
+  agentPath(project: string, location: string, agent: string) {
     return this.pathTemplates.agentPathTemplate.render({
       project: project,
       location: location,
@@ -872,7 +1002,11 @@ export class DeploymentsClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentGenerativeSettingsPath(project:string,location:string,agent:string) {
+  agentGenerativeSettingsPath(
+    project: string,
+    location: string,
+    agent: string,
+  ) {
     return this.pathTemplates.agentGenerativeSettingsPathTemplate.render({
       project: project,
       location: location,
@@ -887,8 +1021,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).project;
+  matchProjectFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string,
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName,
+    ).project;
   }
 
   /**
@@ -898,8 +1036,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).location;
+  matchLocationFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string,
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName,
+    ).location;
   }
 
   /**
@@ -909,8 +1051,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing AgentGenerativeSettings resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromAgentGenerativeSettingsName(agentGenerativeSettingsName: string) {
-    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(agentGenerativeSettingsName).agent;
+  matchAgentFromAgentGenerativeSettingsName(
+    agentGenerativeSettingsName: string,
+  ) {
+    return this.pathTemplates.agentGenerativeSettingsPathTemplate.match(
+      agentGenerativeSettingsName,
+    ).agent;
   }
 
   /**
@@ -921,7 +1067,7 @@ export class DeploymentsClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentValidationResultPath(project:string,location:string,agent:string) {
+  agentValidationResultPath(project: string, location: string, agent: string) {
     return this.pathTemplates.agentValidationResultPathTemplate.render({
       project: project,
       location: location,
@@ -937,7 +1083,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAgentValidationResultName(agentValidationResultName: string) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).project;
+    return this.pathTemplates.agentValidationResultPathTemplate.match(
+      agentValidationResultName,
+    ).project;
   }
 
   /**
@@ -947,8 +1095,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing AgentValidationResult resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromAgentValidationResultName(agentValidationResultName: string) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).location;
+  matchLocationFromAgentValidationResultName(
+    agentValidationResultName: string,
+  ) {
+    return this.pathTemplates.agentValidationResultPathTemplate.match(
+      agentValidationResultName,
+    ).location;
   }
 
   /**
@@ -959,7 +1111,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromAgentValidationResultName(agentValidationResultName: string) {
-    return this.pathTemplates.agentValidationResultPathTemplate.match(agentValidationResultName).agent;
+    return this.pathTemplates.agentValidationResultPathTemplate.match(
+      agentValidationResultName,
+    ).agent;
   }
 
   /**
@@ -971,7 +1125,12 @@ export class DeploymentsClient {
    * @param {string} changelog
    * @returns {string} Resource name string.
    */
-  changelogPath(project:string,location:string,agent:string,changelog:string) {
+  changelogPath(
+    project: string,
+    location: string,
+    agent: string,
+    changelog: string,
+  ) {
     return this.pathTemplates.changelogPathTemplate.render({
       project: project,
       location: location,
@@ -988,7 +1147,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).project;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .project;
   }
 
   /**
@@ -999,7 +1159,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).location;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .location;
   }
 
   /**
@@ -1021,7 +1182,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the changelog.
    */
   matchChangelogFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).changelog;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .changelog;
   }
 
   /**
@@ -1034,7 +1196,13 @@ export class DeploymentsClient {
    * @param {string} continuous_test_result
    * @returns {string} Resource name string.
    */
-  continuousTestResultPath(project:string,location:string,agent:string,environment:string,continuousTestResult:string) {
+  continuousTestResultPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    continuousTestResult: string,
+  ) {
     return this.pathTemplates.continuousTestResultPathTemplate.render({
       project: project,
       location: location,
@@ -1052,7 +1220,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).project;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName,
+    ).project;
   }
 
   /**
@@ -1063,7 +1233,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).location;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName,
+    ).location;
   }
 
   /**
@@ -1074,7 +1246,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).agent;
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName,
+    ).agent;
   }
 
   /**
@@ -1084,8 +1258,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing ContinuousTestResult resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).environment;
+  matchEnvironmentFromContinuousTestResultName(
+    continuousTestResultName: string,
+  ) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName,
+    ).environment;
   }
 
   /**
@@ -1095,8 +1273,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing ContinuousTestResult resource.
    * @returns {string} A string representing the continuous_test_result.
    */
-  matchContinuousTestResultFromContinuousTestResultName(continuousTestResultName: string) {
-    return this.pathTemplates.continuousTestResultPathTemplate.match(continuousTestResultName).continuous_test_result;
+  matchContinuousTestResultFromContinuousTestResultName(
+    continuousTestResultName: string,
+  ) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName,
+    ).continuous_test_result;
   }
 
   /**
@@ -1108,7 +1290,12 @@ export class DeploymentsClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  conversationPath(project:string,location:string,agent:string,conversation:string) {
+  conversationPath(
+    project: string,
+    location: string,
+    agent: string,
+    conversation: string,
+  ) {
     return this.pathTemplates.conversationPathTemplate.render({
       project: project,
       location: location,
@@ -1125,7 +1312,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).project;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .project;
   }
 
   /**
@@ -1136,7 +1324,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).location;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .location;
   }
 
   /**
@@ -1147,7 +1336,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).agent;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .agent;
   }
 
   /**
@@ -1158,7 +1348,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the conversation.
    */
   matchConversationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).conversation;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .conversation;
   }
 
   /**
@@ -1171,7 +1362,13 @@ export class DeploymentsClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project:string,location:string,agent:string,environment:string,deployment:string) {
+  deploymentPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    deployment: string,
+  ) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1189,7 +1386,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .project;
   }
 
   /**
@@ -1200,7 +1398,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .location;
   }
 
   /**
@@ -1211,7 +1410,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).agent;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .agent;
   }
 
   /**
@@ -1222,7 +1422,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).environment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .environment;
   }
 
   /**
@@ -1233,7 +1434,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .deployment;
   }
 
   /**
@@ -1245,7 +1447,12 @@ export class DeploymentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  entityTypePath(project:string,location:string,agent:string,entityType:string) {
+  entityTypePath(
+    project: string,
+    location: string,
+    agent: string,
+    entityType: string,
+  ) {
     return this.pathTemplates.entityTypePathTemplate.render({
       project: project,
       location: location,
@@ -1262,7 +1469,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).project;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .project;
   }
 
   /**
@@ -1273,7 +1481,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).location;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .location;
   }
 
   /**
@@ -1284,7 +1493,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).agent;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .agent;
   }
 
   /**
@@ -1295,7 +1505,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the entity_type.
    */
   matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName).entity_type;
+    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
+      .entity_type;
   }
 
   /**
@@ -1307,7 +1518,12 @@ export class DeploymentsClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(project:string,location:string,agent:string,environment:string) {
+  environmentPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+  ) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       location: location,
@@ -1324,7 +1540,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .project;
   }
 
   /**
@@ -1335,7 +1552,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).location;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .location;
   }
 
   /**
@@ -1346,7 +1564,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).agent;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .agent;
   }
 
   /**
@@ -1357,7 +1576,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .environment;
   }
 
   /**
@@ -1370,7 +1590,13 @@ export class DeploymentsClient {
    * @param {string} example
    * @returns {string} Resource name string.
    */
-  examplePath(project:string,location:string,agent:string,playbook:string,example:string) {
+  examplePath(
+    project: string,
+    location: string,
+    agent: string,
+    playbook: string,
+    example: string,
+  ) {
     return this.pathTemplates.examplePathTemplate.render({
       project: project,
       location: location,
@@ -1445,7 +1671,13 @@ export class DeploymentsClient {
    * @param {string} experiment
    * @returns {string} Resource name string.
    */
-  experimentPath(project:string,location:string,agent:string,environment:string,experiment:string) {
+  experimentPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    experiment: string,
+  ) {
     return this.pathTemplates.experimentPathTemplate.render({
       project: project,
       location: location,
@@ -1463,7 +1695,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName).project;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .project;
   }
 
   /**
@@ -1474,7 +1707,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName).location;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .location;
   }
 
   /**
@@ -1485,7 +1719,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName).agent;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .agent;
   }
 
   /**
@@ -1496,7 +1731,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName).environment;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .environment;
   }
 
   /**
@@ -1507,7 +1743,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the experiment.
    */
   matchExperimentFromExperimentName(experimentName: string) {
-    return this.pathTemplates.experimentPathTemplate.match(experimentName).experiment;
+    return this.pathTemplates.experimentPathTemplate.match(experimentName)
+      .experiment;
   }
 
   /**
@@ -1519,7 +1756,7 @@ export class DeploymentsClient {
    * @param {string} flow
    * @returns {string} Resource name string.
    */
-  flowPath(project:string,location:string,agent:string,flow:string) {
+  flowPath(project: string, location: string, agent: string, flow: string) {
     return this.pathTemplates.flowPathTemplate.render({
       project: project,
       location: location,
@@ -1581,7 +1818,12 @@ export class DeploymentsClient {
    * @param {string} flow
    * @returns {string} Resource name string.
    */
-  flowValidationResultPath(project:string,location:string,agent:string,flow:string) {
+  flowValidationResultPath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+  ) {
     return this.pathTemplates.flowValidationResultPathTemplate.render({
       project: project,
       location: location,
@@ -1598,7 +1840,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).project;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName,
+    ).project;
   }
 
   /**
@@ -1609,7 +1853,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).location;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName,
+    ).location;
   }
 
   /**
@@ -1620,7 +1866,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).agent;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName,
+    ).agent;
   }
 
   /**
@@ -1631,7 +1879,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the flow.
    */
   matchFlowFromFlowValidationResultName(flowValidationResultName: string) {
-    return this.pathTemplates.flowValidationResultPathTemplate.match(flowValidationResultName).flow;
+    return this.pathTemplates.flowValidationResultPathTemplate.match(
+      flowValidationResultName,
+    ).flow;
   }
 
   /**
@@ -1643,7 +1893,12 @@ export class DeploymentsClient {
    * @param {string} generator
    * @returns {string} Resource name string.
    */
-  generatorPath(project:string,location:string,agent:string,generator:string) {
+  generatorPath(
+    project: string,
+    location: string,
+    agent: string,
+    generator: string,
+  ) {
     return this.pathTemplates.generatorPathTemplate.render({
       project: project,
       location: location,
@@ -1660,7 +1915,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName).project;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .project;
   }
 
   /**
@@ -1671,7 +1927,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName).location;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .location;
   }
 
   /**
@@ -1693,7 +1950,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the generator.
    */
   matchGeneratorFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName).generator;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .generator;
   }
 
   /**
@@ -1705,7 +1963,7 @@ export class DeploymentsClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  intentPath(project:string,location:string,agent:string,intent:string) {
+  intentPath(project: string, location: string, agent: string, intent: string) {
     return this.pathTemplates.intentPathTemplate.render({
       project: project,
       location: location,
@@ -1765,7 +2023,7 @@ export class DeploymentsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1804,7 +2062,13 @@ export class DeploymentsClient {
    * @param {string} page
    * @returns {string} Resource name string.
    */
-  pagePath(project:string,location:string,agent:string,flow:string,page:string) {
+  pagePath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+    page: string,
+  ) {
     return this.pathTemplates.pagePathTemplate.render({
       project: project,
       location: location,
@@ -1878,7 +2142,12 @@ export class DeploymentsClient {
    * @param {string} playbook
    * @returns {string} Resource name string.
    */
-  playbookPath(project:string,location:string,agent:string,playbook:string) {
+  playbookPath(
+    project: string,
+    location: string,
+    agent: string,
+    playbook: string,
+  ) {
     return this.pathTemplates.playbookPathTemplate.render({
       project: project,
       location: location,
@@ -1941,7 +2210,13 @@ export class DeploymentsClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  playbookVersionPath(project:string,location:string,agent:string,playbook:string,version:string) {
+  playbookVersionPath(
+    project: string,
+    location: string,
+    agent: string,
+    playbook: string,
+    version: string,
+  ) {
     return this.pathTemplates.playbookVersionPathTemplate.render({
       project: project,
       location: location,
@@ -1959,7 +2234,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).project;
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName,
+    ).project;
   }
 
   /**
@@ -1970,7 +2247,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).location;
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName,
+    ).location;
   }
 
   /**
@@ -1981,7 +2260,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).agent;
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName,
+    ).agent;
   }
 
   /**
@@ -1992,7 +2273,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the playbook.
    */
   matchPlaybookFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).playbook;
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName,
+    ).playbook;
   }
 
   /**
@@ -2003,7 +2286,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromPlaybookVersionName(playbookVersionName: string) {
-    return this.pathTemplates.playbookVersionPathTemplate.match(playbookVersionName).version;
+    return this.pathTemplates.playbookVersionPathTemplate.match(
+      playbookVersionName,
+    ).version;
   }
 
   /**
@@ -2012,7 +2297,7 @@ export class DeploymentsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2040,15 +2325,24 @@ export class DeploymentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEnvironmentSessionEntityTypePath(project:string,location:string,agent:string,environment:string,session:string,entityType:string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      environment: environment,
-      session: session,
-      entity_type: entityType,
-    });
+  projectLocationAgentEnvironmentSessionEntityTypePath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    session: string,
+    entityType: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        environment: environment,
+        session: session,
+        entity_type: entityType,
+      },
+    );
   }
 
   /**
@@ -2058,8 +2352,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).project;
+  matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).project;
   }
 
   /**
@@ -2069,8 +2367,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).location;
+  matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).location;
   }
 
   /**
@@ -2080,8 +2382,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).agent;
+  matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).agent;
   }
 
   /**
@@ -2091,8 +2397,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).environment;
+  matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).environment;
   }
 
   /**
@@ -2102,8 +2412,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).session;
+  matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).session;
   }
 
   /**
@@ -2113,8 +2427,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_environment_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(projectLocationAgentEnvironmentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentSessionEntityTypeName).entity_type;
+  matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+    projectLocationAgentEnvironmentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentSessionEntityTypeName,
+    ).entity_type;
   }
 
   /**
@@ -2127,14 +2445,22 @@ export class DeploymentsClient {
    * @param {string} transition_route_group
    * @returns {string} Resource name string.
    */
-  projectLocationAgentFlowTransitionRouteGroupsPath(project:string,location:string,agent:string,flow:string,transitionRouteGroup:string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      flow: flow,
-      transition_route_group: transitionRouteGroup,
-    });
+  projectLocationAgentFlowTransitionRouteGroupsPath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+    transitionRouteGroup: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        flow: flow,
+        transition_route_group: transitionRouteGroup,
+      },
+    );
   }
 
   /**
@@ -2144,8 +2470,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).project;
+  matchProjectFromProjectLocationAgentFlowTransitionRouteGroupsName(
+    projectLocationAgentFlowTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupsName,
+    ).project;
   }
 
   /**
@@ -2155,8 +2485,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).location;
+  matchLocationFromProjectLocationAgentFlowTransitionRouteGroupsName(
+    projectLocationAgentFlowTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupsName,
+    ).location;
   }
 
   /**
@@ -2166,8 +2500,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).agent;
+  matchAgentFromProjectLocationAgentFlowTransitionRouteGroupsName(
+    projectLocationAgentFlowTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupsName,
+    ).agent;
   }
 
   /**
@@ -2177,8 +2515,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the flow.
    */
-  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).flow;
+  matchFlowFromProjectLocationAgentFlowTransitionRouteGroupsName(
+    projectLocationAgentFlowTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupsName,
+    ).flow;
   }
 
   /**
@@ -2188,8 +2530,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_flow_transitionRouteGroups resource.
    * @returns {string} A string representing the transition_route_group.
    */
-  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupsName(projectLocationAgentFlowTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(projectLocationAgentFlowTransitionRouteGroupsName).transition_route_group;
+  matchTransitionRouteGroupFromProjectLocationAgentFlowTransitionRouteGroupsName(
+    projectLocationAgentFlowTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFlowTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentFlowTransitionRouteGroupsName,
+    ).transition_route_group;
   }
 
   /**
@@ -2202,14 +2548,22 @@ export class DeploymentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentSessionEntityTypePath(project:string,location:string,agent:string,session:string,entityType:string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      session: session,
-      entity_type: entityType,
-    });
+  projectLocationAgentSessionEntityTypePath(
+    project: string,
+    location: string,
+    agent: string,
+    session: string,
+    entityType: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        session: session,
+        entity_type: entityType,
+      },
+    );
   }
 
   /**
@@ -2219,8 +2573,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).project;
+  matchProjectFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).project;
   }
 
   /**
@@ -2230,8 +2588,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).location;
+  matchLocationFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).location;
   }
 
   /**
@@ -2241,8 +2603,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).agent;
+  matchAgentFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).agent;
   }
 
   /**
@@ -2252,8 +2618,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).session;
+  matchSessionFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).session;
   }
 
   /**
@@ -2263,8 +2633,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).entity_type;
+  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).entity_type;
   }
 
   /**
@@ -2276,13 +2650,20 @@ export class DeploymentsClient {
    * @param {string} transition_route_group
    * @returns {string} Resource name string.
    */
-  projectLocationAgentTransitionRouteGroupsPath(project:string,location:string,agent:string,transitionRouteGroup:string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.render({
-      project: project,
-      location: location,
-      agent: agent,
-      transition_route_group: transitionRouteGroup,
-    });
+  projectLocationAgentTransitionRouteGroupsPath(
+    project: string,
+    location: string,
+    agent: string,
+    transitionRouteGroup: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        agent: agent,
+        transition_route_group: transitionRouteGroup,
+      },
+    );
   }
 
   /**
@@ -2292,8 +2673,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).project;
+  matchProjectFromProjectLocationAgentTransitionRouteGroupsName(
+    projectLocationAgentTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupsName,
+    ).project;
   }
 
   /**
@@ -2303,8 +2688,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).location;
+  matchLocationFromProjectLocationAgentTransitionRouteGroupsName(
+    projectLocationAgentTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupsName,
+    ).location;
   }
 
   /**
@@ -2314,8 +2703,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the agent.
    */
-  matchAgentFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).agent;
+  matchAgentFromProjectLocationAgentTransitionRouteGroupsName(
+    projectLocationAgentTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupsName,
+    ).agent;
   }
 
   /**
@@ -2325,8 +2718,12 @@ export class DeploymentsClient {
    *   A fully-qualified path representing project_location_agent_transitionRouteGroups resource.
    * @returns {string} A string representing the transition_route_group.
    */
-  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupsName(projectLocationAgentTransitionRouteGroupsName: string) {
-    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(projectLocationAgentTransitionRouteGroupsName).transition_route_group;
+  matchTransitionRouteGroupFromProjectLocationAgentTransitionRouteGroupsName(
+    projectLocationAgentTransitionRouteGroupsName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentTransitionRouteGroupsPathTemplate.match(
+      projectLocationAgentTransitionRouteGroupsName,
+    ).transition_route_group;
   }
 
   /**
@@ -2337,7 +2734,11 @@ export class DeploymentsClient {
    * @param {string} security_settings
    * @returns {string} Resource name string.
    */
-  securitySettingsPath(project:string,location:string,securitySettings:string) {
+  securitySettingsPath(
+    project: string,
+    location: string,
+    securitySettings: string,
+  ) {
     return this.pathTemplates.securitySettingsPathTemplate.render({
       project: project,
       location: location,
@@ -2353,7 +2754,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).project;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).project;
   }
 
   /**
@@ -2364,7 +2767,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).location;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).location;
   }
 
   /**
@@ -2375,7 +2780,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the security_settings.
    */
   matchSecuritySettingsFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).security_settings;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).security_settings;
   }
 
   /**
@@ -2387,7 +2794,12 @@ export class DeploymentsClient {
    * @param {string} test_case
    * @returns {string} Resource name string.
    */
-  testCasePath(project:string,location:string,agent:string,testCase:string) {
+  testCasePath(
+    project: string,
+    location: string,
+    agent: string,
+    testCase: string,
+  ) {
     return this.pathTemplates.testCasePathTemplate.render({
       project: project,
       location: location,
@@ -2437,7 +2849,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the test_case.
    */
   matchTestCaseFromTestCaseName(testCaseName: string) {
-    return this.pathTemplates.testCasePathTemplate.match(testCaseName).test_case;
+    return this.pathTemplates.testCasePathTemplate.match(testCaseName)
+      .test_case;
   }
 
   /**
@@ -2450,7 +2863,13 @@ export class DeploymentsClient {
    * @param {string} result
    * @returns {string} Resource name string.
    */
-  testCaseResultPath(project:string,location:string,agent:string,testCase:string,result:string) {
+  testCaseResultPath(
+    project: string,
+    location: string,
+    agent: string,
+    testCase: string,
+    result: string,
+  ) {
     return this.pathTemplates.testCaseResultPathTemplate.render({
       project: project,
       location: location,
@@ -2468,7 +2887,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).project;
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName,
+    ).project;
   }
 
   /**
@@ -2479,7 +2900,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).location;
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName,
+    ).location;
   }
 
   /**
@@ -2490,7 +2913,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).agent;
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName,
+    ).agent;
   }
 
   /**
@@ -2501,7 +2926,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the test_case.
    */
   matchTestCaseFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).test_case;
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName,
+    ).test_case;
   }
 
   /**
@@ -2512,7 +2939,9 @@ export class DeploymentsClient {
    * @returns {string} A string representing the result.
    */
   matchResultFromTestCaseResultName(testCaseResultName: string) {
-    return this.pathTemplates.testCaseResultPathTemplate.match(testCaseResultName).result;
+    return this.pathTemplates.testCaseResultPathTemplate.match(
+      testCaseResultName,
+    ).result;
   }
 
   /**
@@ -2524,7 +2953,7 @@ export class DeploymentsClient {
    * @param {string} tool
    * @returns {string} Resource name string.
    */
-  toolPath(project:string,location:string,agent:string,tool:string) {
+  toolPath(project: string, location: string, agent: string, tool: string) {
     return this.pathTemplates.toolPathTemplate.render({
       project: project,
       location: location,
@@ -2587,7 +3016,13 @@ export class DeploymentsClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  toolVersionPath(project:string,location:string,agent:string,tool:string,version:string) {
+  toolVersionPath(
+    project: string,
+    location: string,
+    agent: string,
+    tool: string,
+    version: string,
+  ) {
     return this.pathTemplates.toolVersionPathTemplate.render({
       project: project,
       location: location,
@@ -2605,7 +3040,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).project;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .project;
   }
 
   /**
@@ -2616,7 +3052,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).location;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .location;
   }
 
   /**
@@ -2627,7 +3064,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the agent.
    */
   matchAgentFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).agent;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .agent;
   }
 
   /**
@@ -2638,7 +3076,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the tool.
    */
   matchToolFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).tool;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .tool;
   }
 
   /**
@@ -2649,7 +3088,8 @@ export class DeploymentsClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromToolVersionName(toolVersionName: string) {
-    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName).version;
+    return this.pathTemplates.toolVersionPathTemplate.match(toolVersionName)
+      .version;
   }
 
   /**
@@ -2662,7 +3102,13 @@ export class DeploymentsClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  versionPath(project:string,location:string,agent:string,flow:string,version:string) {
+  versionPath(
+    project: string,
+    location: string,
+    agent: string,
+    flow: string,
+    version: string,
+  ) {
     return this.pathTemplates.versionPathTemplate.render({
       project: project,
       location: location,
@@ -2736,7 +3182,12 @@ export class DeploymentsClient {
    * @param {string} webhook
    * @returns {string} Resource name string.
    */
-  webhookPath(project:string,location:string,agent:string,webhook:string) {
+  webhookPath(
+    project: string,
+    location: string,
+    agent: string,
+    webhook: string,
+  ) {
     return this.pathTemplates.webhookPathTemplate.render({
       project: project,
       location: location,
@@ -2797,11 +3248,13 @@ export class DeploymentsClient {
    */
   close(): Promise<void> {
     if (this.deploymentsStub && !this._terminated) {
-      return this.deploymentsStub.then(stub => {
+      return this.deploymentsStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

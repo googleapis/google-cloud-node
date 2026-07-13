@@ -1243,6 +1243,10 @@
                         "movedPlaceId": {
                           "type": "string",
                           "id": 94
+                        },
+                        "transitStation": {
+                          "type": "TransitStation",
+                          "id": 98
                         }
                       },
                       "nested": {
@@ -1841,6 +1845,171 @@
                         },
                         "endPrice": {
                           "type": "google.type.Money",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "TransitStation": {
+                      "fields": {
+                        "displayName": {
+                          "type": "google.type.LocalizedText",
+                          "id": 1
+                        },
+                        "agencies": {
+                          "rule": "repeated",
+                          "type": "TransitAgency",
+                          "id": 2
+                        },
+                        "stops": {
+                          "rule": "repeated",
+                          "type": "TransitStop",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TransitAgency": {
+                      "fields": {
+                        "displayName": {
+                          "type": "google.type.LocalizedText",
+                          "id": 1
+                        },
+                        "url": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "fareUrl": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "icon": {
+                          "type": "TransitIcon",
+                          "id": 4
+                        },
+                        "lines": {
+                          "rule": "repeated",
+                          "type": "TransitLine",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "TransitLine": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "vehicleType": {
+                          "type": "VehicleType",
+                          "id": 2
+                        },
+                        "displayName": {
+                          "type": "google.type.LocalizedText",
+                          "id": 3
+                        },
+                        "shortDisplayName": {
+                          "type": "google.type.LocalizedText",
+                          "id": 4
+                        },
+                        "textColor": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "backgroundColor": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "url": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "icon": {
+                          "type": "TransitIcon",
+                          "id": 8
+                        },
+                        "vehicleIcon": {
+                          "type": "TransitIcon",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "VehicleType": {
+                          "values": {
+                            "VEHICLE_TYPE_UNSPECIFIED": 0,
+                            "RAIL": 1,
+                            "METRO_RAIL": 2,
+                            "SUBWAY": 3,
+                            "TRAM": 4,
+                            "MONORAIL": 5,
+                            "HEAVY_RAIL": 6,
+                            "COMMUTER_TRAIN": 7,
+                            "HIGH_SPEED_TRAIN": 8,
+                            "LONG_DISTANCE_TRAIN": 9,
+                            "BUS": 10,
+                            "INTERCITY_BUS": 11,
+                            "TROLLEYBUS": 12,
+                            "SHARE_TAXI": 13,
+                            "COACH": 14,
+                            "FERRY": 15,
+                            "CABLE_CAR": 16,
+                            "GONDOLA_LIFT": 17,
+                            "FUNICULAR": 18,
+                            "SPECIAL": 19,
+                            "HORSE_CARRIAGE": 20,
+                            "AIRPLANE": 21
+                          }
+                        }
+                      }
+                    },
+                    "TransitStop": {
+                      "oneofs": {
+                        "_wheelchairAccessibleEntrance": {
+                          "oneof": [
+                            "wheelchairAccessibleEntrance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "google.type.LocalizedText",
+                          "id": 2
+                        },
+                        "platformCode": {
+                          "type": "google.type.LocalizedText",
+                          "id": 3
+                        },
+                        "signageText": {
+                          "type": "google.type.LocalizedText",
+                          "id": 4
+                        },
+                        "stopCode": {
+                          "type": "google.type.LocalizedText",
+                          "id": 5
+                        },
+                        "location": {
+                          "type": "google.type.LatLng",
+                          "id": 6
+                        },
+                        "wheelchairAccessibleEntrance": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "TransitIcon": {
+                      "fields": {
+                        "url": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "nameIncluded": {
+                          "type": "bool",
                           "id": 2
                         }
                       }
@@ -2705,7 +2874,6 @@
         },
         "api": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/api;api",
             "java_multiple_files": true,
             "java_outer_classname": "LaunchStageProto",
@@ -2933,6 +3101,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -3073,6 +3245,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -3130,6 +3324,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -3191,6 +3390,19 @@
                 "PACKAGE_MANAGER": 20
               }
             },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -3224,12 +3436,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -3267,6 +3486,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -3356,6 +3580,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -3581,6 +3809,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -3631,7 +3863,14 @@
                   "type": "ServiceOptions",
                   "id": 3
                 }
-              }
+              },
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                "stream"
+              ]
             },
             "MethodDescriptorProto": {
               "edition": "proto2",
@@ -3795,6 +4034,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -3930,7 +4170,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -3957,6 +4198,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -4025,6 +4270,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -4114,6 +4379,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -4257,6 +4526,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -4267,6 +4537,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -4277,6 +4548,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -4287,6 +4559,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -4297,7 +4570,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -4307,27 +4581,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -4372,7 +4657,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -4386,6 +4677,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -4414,11 +4732,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -4431,6 +4764,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -4514,6 +4853,14 @@
                     }
                   }
                 }
+              }
+            },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
               }
             },
             "Timestamp": {

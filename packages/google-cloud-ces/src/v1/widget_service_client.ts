@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class WidgetServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('ces');
@@ -57,10 +64,10 @@ export class WidgetServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  widgetServiceStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  widgetServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of WidgetServiceClient.
@@ -101,21 +108,42 @@ export class WidgetServiceClient {
    *     const client = new WidgetServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof WidgetServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'ces.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +168,7 @@ export class WidgetServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,15 +182,11 @@ export class WidgetServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -184,50 +208,53 @@ export class WidgetServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       agentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/agents/{agent}'
+        'projects/{project}/locations/{location}/apps/{app}/agents/{agent}',
       ),
       appPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}'
+        'projects/{project}/locations/{location}/apps/{app}',
       ),
       appVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/versions/{version}'
+        'projects/{project}/locations/{location}/apps/{app}/versions/{version}',
       ),
       changelogPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/changelogs/{changelog}'
+        'projects/{project}/locations/{location}/apps/{app}/changelogs/{changelog}',
       ),
       conversationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/conversations/{conversation}'
+        'projects/{project}/locations/{location}/apps/{app}/conversations/{conversation}',
       ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}'
+        'projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}',
       ),
       examplePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/examples/{example}'
+        'projects/{project}/locations/{location}/apps/{app}/examples/{example}',
       ),
       guardrailPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/guardrails/{guardrail}'
+        'projects/{project}/locations/{location}/apps/{app}/guardrails/{guardrail}',
       ),
       omnichannelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/omnichannels/{omnichannel}'
+        'projects/{project}/locations/{location}/omnichannels/{omnichannel}',
       ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securitySettings'
+        'projects/{project}/locations/{location}/securitySettings',
       ),
       sessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/sessions/{session}'
+        'projects/{project}/locations/{location}/apps/{app}/sessions/{session}',
       ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/tools/{tool}'
+        'projects/{project}/locations/{location}/apps/{app}/tools/{tool}',
       ),
       toolsetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}'
+        'projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}',
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.ces.v1.WidgetService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.ces.v1.WidgetService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -258,36 +285,40 @@ export class WidgetServiceClient {
     // Put together the "service stub" for
     // google.cloud.ces.v1.WidgetService.
     this.widgetServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.ces.v1.WidgetService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.ces.v1.WidgetService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.ces.v1.WidgetService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const widgetServiceStubMethods =
-        ['generateChatToken'];
+    const widgetServiceStubMethods = ['generateChatToken'];
     for (const methodName of widgetServiceStubMethods) {
       const callPromise = this.widgetServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -302,8 +333,14 @@ export class WidgetServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'ces.googleapis.com';
   }
@@ -314,8 +351,14 @@ export class WidgetServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'ces.googleapis.com';
   }
@@ -348,7 +391,7 @@ export class WidgetServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/ces',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -358,8 +401,9 @@ export class WidgetServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -370,113 +414,147 @@ export class WidgetServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Generates a session scoped token for chat widget to authenticate with
- * Session APIs.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The session name to generate the chat token for.
- *   Format:
- *   projects/{project}/locations/{location}/apps/{app}/sessions/{session}
- * @param {string} request.deployment
- *   Required. The deployment of the app to use for the session.
- *   Format:
- *   projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}
- * @param {string} [request.recaptchaToken]
- *   Optional. The reCAPTCHA token generated by the client-side chat widget.
- * @param {boolean} [request.liveHandoffEnabled]
- *   Optional. Indicates if live handoff is enabled for the session.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.GenerateChatTokenResponse|GenerateChatTokenResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/widget_service.generate_chat_token.js</caption>
- * region_tag:ces_v1_generated_WidgetService_GenerateChatToken_async
- */
+  /**
+   * Generates a session scoped token for chat widget to authenticate with
+   * Session APIs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The session name to generate the chat token for.
+   *   Format:
+   *   projects/{project}/locations/{location}/apps/{app}/sessions/{session}
+   * @param {string} request.deployment
+   *   Required. The deployment of the app to use for the session.
+   *   Format:
+   *   projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}
+   * @param {string} [request.recaptchaToken]
+   *   Optional. The reCAPTCHA token generated by the client-side chat widget.
+   * @param {boolean} [request.liveHandoffEnabled]
+   *   Optional. Indicates if live handoff is enabled for the session.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.GenerateChatTokenResponse|GenerateChatTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/widget_service.generate_chat_token.js</caption>
+   * region_tag:ces_v1_generated_WidgetService_GenerateChatToken_async
+   */
   generateChatToken(
-      request?: protos.google.cloud.ces.v1.IGenerateChatTokenRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
-        protos.google.cloud.ces.v1.IGenerateChatTokenRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IGenerateChatTokenRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
+      protos.google.cloud.ces.v1.IGenerateChatTokenRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   generateChatToken(
-      request: protos.google.cloud.ces.v1.IGenerateChatTokenRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
-          protos.google.cloud.ces.v1.IGenerateChatTokenRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGenerateChatTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
+      protos.google.cloud.ces.v1.IGenerateChatTokenRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateChatToken(
-      request: protos.google.cloud.ces.v1.IGenerateChatTokenRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
-          protos.google.cloud.ces.v1.IGenerateChatTokenRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGenerateChatTokenRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
+      protos.google.cloud.ces.v1.IGenerateChatTokenRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateChatToken(
-      request?: protos.google.cloud.ces.v1.IGenerateChatTokenRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IGenerateChatTokenRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
-          protos.google.cloud.ces.v1.IGenerateChatTokenRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
-          protos.google.cloud.ces.v1.IGenerateChatTokenRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
-        protos.google.cloud.ces.v1.IGenerateChatTokenRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1.IGenerateChatTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
+      protos.google.cloud.ces.v1.IGenerateChatTokenRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
+      protos.google.cloud.ces.v1.IGenerateChatTokenRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('generateChatToken request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
-        protos.google.cloud.ces.v1.IGenerateChatTokenRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
+          | protos.google.cloud.ces.v1.IGenerateChatTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateChatToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.generateChatToken(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
-        protos.google.cloud.ces.v1.IGenerateChatTokenRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('generateChatToken response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .generateChatToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IGenerateChatTokenResponse,
+          protos.google.cloud.ces.v1.IGenerateChatTokenRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('generateChatToken response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -511,12 +589,11 @@ export class WidgetServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -549,7 +626,7 @@ export class WidgetServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -567,7 +644,7 @@ export class WidgetServiceClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentPath(project:string,location:string,app:string,agent:string) {
+  agentPath(project: string, location: string, app: string, agent: string) {
     return this.pathTemplates.agentPathTemplate.render({
       project: project,
       location: location,
@@ -628,7 +705,7 @@ export class WidgetServiceClient {
    * @param {string} app
    * @returns {string} Resource name string.
    */
-  appPath(project:string,location:string,app:string) {
+  appPath(project: string, location: string, app: string) {
     return this.pathTemplates.appPathTemplate.render({
       project: project,
       location: location,
@@ -678,7 +755,12 @@ export class WidgetServiceClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  appVersionPath(project:string,location:string,app:string,version:string) {
+  appVersionPath(
+    project: string,
+    location: string,
+    app: string,
+    version: string,
+  ) {
     return this.pathTemplates.appVersionPathTemplate.render({
       project: project,
       location: location,
@@ -695,7 +777,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).project;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .project;
   }
 
   /**
@@ -706,7 +789,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).location;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .location;
   }
 
   /**
@@ -728,7 +812,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).version;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .version;
   }
 
   /**
@@ -740,7 +825,12 @@ export class WidgetServiceClient {
    * @param {string} changelog
    * @returns {string} Resource name string.
    */
-  changelogPath(project:string,location:string,app:string,changelog:string) {
+  changelogPath(
+    project: string,
+    location: string,
+    app: string,
+    changelog: string,
+  ) {
     return this.pathTemplates.changelogPathTemplate.render({
       project: project,
       location: location,
@@ -757,7 +847,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).project;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .project;
   }
 
   /**
@@ -768,7 +859,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).location;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .location;
   }
 
   /**
@@ -790,7 +882,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the changelog.
    */
   matchChangelogFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).changelog;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .changelog;
   }
 
   /**
@@ -802,7 +895,12 @@ export class WidgetServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  conversationPath(project:string,location:string,app:string,conversation:string) {
+  conversationPath(
+    project: string,
+    location: string,
+    app: string,
+    conversation: string,
+  ) {
     return this.pathTemplates.conversationPathTemplate.render({
       project: project,
       location: location,
@@ -819,7 +917,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).project;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .project;
   }
 
   /**
@@ -830,7 +929,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).location;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .location;
   }
 
   /**
@@ -841,7 +941,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).app;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .app;
   }
 
   /**
@@ -852,7 +953,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the conversation.
    */
   matchConversationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).conversation;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .conversation;
   }
 
   /**
@@ -864,7 +966,12 @@ export class WidgetServiceClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project:string,location:string,app:string,deployment:string) {
+  deploymentPath(
+    project: string,
+    location: string,
+    app: string,
+    deployment: string,
+  ) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -881,7 +988,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .project;
   }
 
   /**
@@ -892,7 +1000,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .location;
   }
 
   /**
@@ -914,7 +1023,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .deployment;
   }
 
   /**
@@ -926,7 +1036,7 @@ export class WidgetServiceClient {
    * @param {string} example
    * @returns {string} Resource name string.
    */
-  examplePath(project:string,location:string,app:string,example:string) {
+  examplePath(project: string, location: string, app: string, example: string) {
     return this.pathTemplates.examplePathTemplate.render({
       project: project,
       location: location,
@@ -988,7 +1098,12 @@ export class WidgetServiceClient {
    * @param {string} guardrail
    * @returns {string} Resource name string.
    */
-  guardrailPath(project:string,location:string,app:string,guardrail:string) {
+  guardrailPath(
+    project: string,
+    location: string,
+    app: string,
+    guardrail: string,
+  ) {
     return this.pathTemplates.guardrailPathTemplate.render({
       project: project,
       location: location,
@@ -1005,7 +1120,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).project;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .project;
   }
 
   /**
@@ -1016,7 +1132,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).location;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .location;
   }
 
   /**
@@ -1038,7 +1155,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the guardrail.
    */
   matchGuardrailFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).guardrail;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .guardrail;
   }
 
   /**
@@ -1049,7 +1167,7 @@ export class WidgetServiceClient {
    * @param {string} omnichannel
    * @returns {string} Resource name string.
    */
-  omnichannelPath(project:string,location:string,omnichannel:string) {
+  omnichannelPath(project: string, location: string, omnichannel: string) {
     return this.pathTemplates.omnichannelPathTemplate.render({
       project: project,
       location: location,
@@ -1065,7 +1183,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).project;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .project;
   }
 
   /**
@@ -1076,7 +1195,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).location;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .location;
   }
 
   /**
@@ -1087,7 +1207,8 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the omnichannel.
    */
   matchOmnichannelFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).omnichannel;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .omnichannel;
   }
 
   /**
@@ -1097,7 +1218,7 @@ export class WidgetServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  securitySettingsPath(project:string,location:string) {
+  securitySettingsPath(project: string, location: string) {
     return this.pathTemplates.securitySettingsPathTemplate.render({
       project: project,
       location: location,
@@ -1112,7 +1233,9 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).project;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).project;
   }
 
   /**
@@ -1123,7 +1246,9 @@ export class WidgetServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).location;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).location;
   }
 
   /**
@@ -1135,7 +1260,7 @@ export class WidgetServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  sessionPath(project:string,location:string,app:string,session:string) {
+  sessionPath(project: string, location: string, app: string, session: string) {
     return this.pathTemplates.sessionPathTemplate.render({
       project: project,
       location: location,
@@ -1197,7 +1322,7 @@ export class WidgetServiceClient {
    * @param {string} tool
    * @returns {string} Resource name string.
    */
-  toolPath(project:string,location:string,app:string,tool:string) {
+  toolPath(project: string, location: string, app: string, tool: string) {
     return this.pathTemplates.toolPathTemplate.render({
       project: project,
       location: location,
@@ -1259,7 +1384,7 @@ export class WidgetServiceClient {
    * @param {string} toolset
    * @returns {string} Resource name string.
    */
-  toolsetPath(project:string,location:string,app:string,toolset:string) {
+  toolsetPath(project: string, location: string, app: string, toolset: string) {
     return this.pathTemplates.toolsetPathTemplate.render({
       project: project,
       location: location,
@@ -1320,11 +1445,13 @@ export class WidgetServiceClient {
    */
   close(): Promise<void> {
     if (this.widgetServiceStub && !this._terminated) {
-      return this.widgetServiceStub.then(stub => {
+      return this.widgetServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

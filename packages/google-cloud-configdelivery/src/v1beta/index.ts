@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ConfigDeliveryClient} from './config_delivery_client';
+export { ConfigDeliveryClient } from './config_delivery_client';

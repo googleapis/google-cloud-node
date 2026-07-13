@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,9 +42,9 @@ message PrivateAuction {
   // `networks/{network_code}/privateAuctions/{private_auction_id}`
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
-  // Output only. `PrivateAuction` ID.
+  // Output only. Deprecated: `PrivateAuction` ID.
   optional int64 private_auction_id = 2
-      [(google.api.field_behavior) = OUTPUT_ONLY];
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
   // Required. Display name of the `PrivateAuction`. This attribute has a
   // maximum length of 255 bytes.

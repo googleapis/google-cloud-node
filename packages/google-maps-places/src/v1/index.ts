@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {PlacesClient} from './places_client';
+export { PlacesClient } from './places_client';

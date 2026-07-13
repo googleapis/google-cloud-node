@@ -16,7 +16,15 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {FoldersClient, OrganizationsClient, ProjectsClient, TagBindingsClient, TagHoldsClient, TagKeysClient, TagValuesClient} from '@google-cloud/resource-manager';
+import {
+  FoldersClient,
+  OrganizationsClient,
+  ProjectsClient,
+  TagBindingsClient,
+  TagHoldsClient,
+  TagKeysClient,
+  TagValuesClient,
+} from '@google-cloud/resource-manager';
 
 // check that the client class type name can be used
 function doStuffWithFoldersClient(client: FoldersClient) {

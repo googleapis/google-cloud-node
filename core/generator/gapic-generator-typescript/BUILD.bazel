@@ -40,6 +40,7 @@ npm_runtime_dependencies = [
     "//:node_modules/yargs",
     "//:node_modules/google-gax",
     "//:node_modules/prettier",
+    "//:node_modules/gts",
 ]
 
 npm_test_dependencies = npm_runtime_dependencies + [

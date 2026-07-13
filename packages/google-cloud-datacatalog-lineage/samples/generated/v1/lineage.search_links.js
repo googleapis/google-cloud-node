@@ -43,6 +43,26 @@ function main(parent) {
    */
   // const target = {}
   /**
+   *  Optional. Send a list of asset information in the **sources** field to
+   *  retrieve all links that lead from the specified assets to downstream
+   *  assets. This field is similar to the `source`
+   *  source google.cloud.datacatalog.lineage.v1.SearchLinksRequest.source 
+   *  field but allows providing multiple entities.
+   *  All entities within the `MultipleEntityReference` must have the same
+   *  `fully_qualified_name`.
+   */
+  // const sources = {}
+  /**
+   *  Optional. Send a list of asset information in the **targets** field to
+   *  retrieve all links that lead from upstream assets to the specified
+   *  assets. This field is similar to the `target`
+   *  target google.cloud.datacatalog.lineage.v1.SearchLinksRequest.target 
+   *  field but allows providing multiple entities.
+   *  All entities within the `MultipleEntityReference` must have the same
+   *  `fully_qualified_name`.
+   */
+  // const targets = {}
+  /**
    *  Optional. The maximum number of links to return in a single page of the
    *  response. A page may contain fewer links than this value. If unspecified,
    *  at most 10 links are returned.

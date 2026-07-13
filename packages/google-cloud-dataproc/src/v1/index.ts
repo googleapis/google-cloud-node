@@ -16,11 +16,11 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AutoscalingPolicyServiceClient} from './autoscaling_policy_service_client';
-export {BatchControllerClient} from './batch_controller_client';
-export {ClusterControllerClient} from './cluster_controller_client';
-export {JobControllerClient} from './job_controller_client';
-export {NodeGroupControllerClient} from './node_group_controller_client';
-export {SessionControllerClient} from './session_controller_client';
-export {SessionTemplateControllerClient} from './session_template_controller_client';
-export {WorkflowTemplateServiceClient} from './workflow_template_service_client';
+export { AutoscalingPolicyServiceClient } from './autoscaling_policy_service_client';
+export { BatchControllerClient } from './batch_controller_client';
+export { ClusterControllerClient } from './cluster_controller_client';
+export { JobControllerClient } from './job_controller_client';
+export { NodeGroupControllerClient } from './node_group_controller_client';
+export { SessionControllerClient } from './session_controller_client';
+export { SessionTemplateControllerClient } from './session_template_controller_client';
+export { WorkflowTemplateServiceClient } from './workflow_template_service_client';

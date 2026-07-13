@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {BackupForGKEClient} from './backup_for_g_k_e_client';
+export { BackupForGKEClient } from './backup_for_g_k_e_client';

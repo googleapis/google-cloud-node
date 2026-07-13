@@ -33,7 +33,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. If set, validate the request and preview the review, but do not
+   *  Optional. If set, validate the request and preview the result, but do not
    *  actually apply it.
    */
   // const validateOnly = true
@@ -42,6 +42,11 @@ function main(name) {
    *  workstation on the server does not have this ETag.
    */
   // const etag = 'abc123'
+  /**
+   *  Optional. If set, the workstation starts using the boost configuration with
+   *  the specified ID.
+   */
+  // const boostConfig = 'abc123'
 
   // Imports the Workstations library
   const {WorkstationsClient} = require('@google-cloud/workstations').v1;

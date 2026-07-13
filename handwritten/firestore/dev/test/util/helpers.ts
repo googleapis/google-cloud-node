@@ -90,26 +90,32 @@ export function createInstance(
  * run.
  */
 export function verifyInstance(firestore: Firestore): Promise<void> {
-  // Allow the setTimeout() call in _initializeStream to run before
-  // verifying that all operations have finished executing.
   return new Promise<void>((resolve, reject) => {
-    if (firestore['_clientPool'].opCount === 0) {
-      resolve();
-    } else {
-      setTimeout(() => {
-        const opCount = firestore['_clientPool'].opCount;
-        if (opCount === 0) {
-          resolve();
-        } else {
-          reject(
-            new Error(
-              `Firestore has ${opCount} unfinished operations executing.`,
-            ),
-          );
-        }
-      }, 10);
+    let attempts = 20; // 20 attempts * 50ms = 1000ms maximum wait
+    function check() {
+      const opCount = firestore['_clientPool'].opCount;
+      if (opCount === 0) {
+        resolve();
+      } else if (--attempts > 0) {
+        setTimeout(check, 50);
+      } else {
+        reject(
+          new Error(
+            `Firestore has ${opCount} unfinished operations executing.`,
+          ),
+        );
+      }
     }
+    check();
   });
+}
+
+/**
+ * Helper function to check if testing is run using the REST backend.
+ * This inspects the internal preferRest setting on the given firestore instance.
+ */
+export function isRest(firestore: Firestore): boolean {
+  return !!(firestore as any)._settings?.preferRest;
 }
 
 function write(

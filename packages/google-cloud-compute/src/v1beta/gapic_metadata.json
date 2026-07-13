@@ -168,6 +168,16 @@
               "methods": [
                 "calendarMode"
               ]
+            },
+            "Capacity": {
+              "methods": [
+                "capacity"
+              ]
+            },
+            "CapacityHistory": {
+              "methods": [
+                "capacityHistory"
+              ]
             }
           }
         },
@@ -177,6 +187,16 @@
             "CalendarMode": {
               "methods": [
                 "calendarMode"
+              ]
+            },
+            "Capacity": {
+              "methods": [
+                "capacity"
+              ]
+            },
+            "CapacityHistory": {
+              "methods": [
+                "capacityHistory"
               ]
             }
           }
@@ -4405,6 +4425,16 @@
                 "get"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
@@ -4418,6 +4448,16 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "TestIamPermissions": {

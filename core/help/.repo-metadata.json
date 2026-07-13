@@ -1,0 +1,9 @@
+{
+  "name": "help",
+  "name_pretty": "Client library help",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "",
+  "product_documentation": "https://cloud.google.com/nodejs/docs/reference/help/latest",
+  "library_type": "OTHER"
+}

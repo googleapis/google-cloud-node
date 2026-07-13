@@ -16,17 +16,22 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {PublicCertificateAuthorityServiceClient} from '@google-cloud/publicca';
+import { PublicCertificateAuthorityServiceClient } from '@google-cloud/publicca';
 
 // check that the client class type name can be used
-function doStuffWithPublicCertificateAuthorityServiceClient(client: PublicCertificateAuthorityServiceClient) {
+function doStuffWithPublicCertificateAuthorityServiceClient(
+  client: PublicCertificateAuthorityServiceClient,
+) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const publicCertificateAuthorityServiceClient = new PublicCertificateAuthorityServiceClient();
-  doStuffWithPublicCertificateAuthorityServiceClient(publicCertificateAuthorityServiceClient);
+  const publicCertificateAuthorityServiceClient =
+    new PublicCertificateAuthorityServiceClient();
+  doStuffWithPublicCertificateAuthorityServiceClient(
+    publicCertificateAuthorityServiceClient,
+  );
 }
 
 main();

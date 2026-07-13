@@ -65,7 +65,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list attestors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.list_attestors.js) |
 | update attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_attestor.js) |
 | update policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/snippet_metadata_google.cloud.binaryauthorization.v1.json) |
 | get system policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/system_policy_v1.get_system_policy.js) |
 | validate attestation occurrence | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/validation_helper_v1.validate_attestation_occurrence.js) |
 | create attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.create_attestor.js) |
@@ -75,7 +74,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list attestors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.list_attestors.js) |
 | update attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_attestor.js) |
 | update policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/snippet_metadata_google.cloud.binaryauthorization.v1beta1.json) |
 | get system policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/system_policy_v1_beta1.get_system_policy.js) |
 
 
@@ -110,7 +108,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -120,7 +118,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

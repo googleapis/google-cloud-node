@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(customTargetingKey, updateMask) {
+function main(customTargetingKey) {
   // [START admanager_v1_generated_CustomTargetingKeyService_UpdateCustomTargetingKey_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -35,7 +35,7 @@ function main(customTargetingKey, updateMask) {
    */
   // const customTargetingKey = {}
   /**
-   *  Required. The list of fields to update.
+   *  Optional. The list of fields to update.
    */
   // const updateMask = {}
 
@@ -49,7 +49,6 @@ function main(customTargetingKey, updateMask) {
     // Construct request
     const request = {
       customTargetingKey,
-      updateMask,
     };
 
     // Run request

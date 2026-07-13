@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DatabaseCenterClient} from './database_center_client';
+export { DatabaseCenterClient } from './database_center_client';

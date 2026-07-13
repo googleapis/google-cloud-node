@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {RapidMigrationAssessmentClient} from './rapid_migration_assessment_client';
+export { RapidMigrationAssessmentClient } from './rapid_migration_assessment_client';

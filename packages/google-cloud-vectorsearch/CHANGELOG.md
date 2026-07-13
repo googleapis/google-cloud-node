@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.7.0...vectorsearch-v0.8.0) (2026-06-25)
+
+
+### Features
+
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.6.1...vectorsearch-v0.7.0) (2026-05-12)
+
+
+### Features
+
+* [vectorsearch] add preview support for precision reranking via Ranking API. Includes free usage up to a specific quota for vector-search-2 users during the preview period ([#8176](https://github.com/googleapis/google-cloud-node/issues/8176)) ([b781083](https://github.com/googleapis/google-cloud-node/commit/b78108349141a2b7967543419308689b9df0300d))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.6.0...vectorsearch-v0.6.1) (2026-05-01)
 
 

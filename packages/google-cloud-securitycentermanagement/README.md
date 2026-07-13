@@ -79,7 +79,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update security center service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.update_security_center_service.js) |
 | update security health analytics custom module | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.update_security_health_analytics_custom_module.js) |
 | validate event threat detection custom module | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.validate_event_threat_detection_custom_module.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/snippet_metadata_google.cloud.securitycentermanagement.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -113,7 +112,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -123,7 +122,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

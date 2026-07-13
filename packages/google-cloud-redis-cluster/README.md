@@ -73,7 +73,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.list_clusters.js) |
 | reschedule cluster maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.reschedule_cluster_maintenance.js) |
 | update cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/cloud_redis_cluster.update_cluster.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1/snippet_metadata_google.cloud.redis.cluster.v1.json) |
 | backup cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.backup_cluster.js) |
 | create cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.create_cluster.js) |
 | delete backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.delete_backup.js) |
@@ -89,7 +88,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.list_clusters.js) |
 | reschedule cluster maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.reschedule_cluster_maintenance.js) |
 | update cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/cloud_redis_cluster.update_cluster.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/samples/generated/v1beta1/snippet_metadata_google.cloud.redis.cluster.v1beta1.json) |
 
 
 ## Supported Node.js Versions
@@ -123,7 +121,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -133,7 +131,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis-cluster/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

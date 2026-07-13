@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,9 +42,9 @@ message CustomTargetingKey {
   // `networks/{network_code}/customTargetingKeys/{custom_targeting_key_id}`
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
-  // Output only. `CustomTargetingKey` ID.
+  // Output only. Deprecated: `CustomTargetingKey` ID.
   optional int64 custom_targeting_key_id = 2
-      [(google.api.field_behavior) = OUTPUT_ONLY];
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
   // Immutable. Name of the key. Keys can contain up to 10 characters each. You
   // can use alphanumeric characters and symbols other than the following:

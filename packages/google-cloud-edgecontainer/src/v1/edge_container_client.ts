@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +56,7 @@ export class EdgeContainerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('edgecontainer');
@@ -58,11 +69,11 @@ export class EdgeContainerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  edgeContainerStub?: Promise<{[name: string]: Function}>;
+  edgeContainerStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of EdgeContainerClient.
@@ -103,21 +114,42 @@ export class EdgeContainerClient {
    *     const client = new EdgeContainerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof EdgeContainerClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'edgecontainer.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -142,7 +174,7 @@ export class EdgeContainerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -156,15 +188,11 @@ export class EdgeContainerClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -186,22 +214,22 @@ export class EdgeContainerClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       clusterPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}'
+        'projects/{project}/locations/{location}/clusters/{cluster}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       machinePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/machines/{machine}'
+        'projects/{project}/locations/{location}/machines/{machine}',
       ),
       nodePoolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clusters/{cluster}/nodePools/{node_pool}'
+        'projects/{project}/locations/{location}/clusters/{cluster}/nodePools/{node_pool}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       vpnConnectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/vpnConnections/{vpn_connection}'
+        'projects/{project}/locations/{location}/vpnConnections/{vpn_connection}',
       ),
     };
 
@@ -209,14 +237,26 @@ export class EdgeContainerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listClusters:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'clusters'),
-      listNodePools:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'nodePools'),
-      listMachines:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'machines'),
-      listVpnConnections:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'vpnConnections')
+      listClusters: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'clusters',
+      ),
+      listNodePools: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'nodePools',
+      ),
+      listMachines: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'machines',
+      ),
+      listVpnConnections: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'vpnConnections',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -225,93 +265,151 @@ export class EdgeContainerClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.Cluster') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.Cluster',
+    ) as gax.protobuf.Type;
     const createClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.Cluster') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.Cluster',
+    ) as gax.protobuf.Type;
     const updateClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const upgradeClusterResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.Cluster') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.Cluster',
+    ) as gax.protobuf.Type;
     const upgradeClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteClusterResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteClusterMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createNodePoolResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.NodePool') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.NodePool',
+    ) as gax.protobuf.Type;
     const createNodePoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateNodePoolResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.NodePool') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.NodePool',
+    ) as gax.protobuf.Type;
     const updateNodePoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteNodePoolResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteNodePoolMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createVpnConnectionResponse = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.VpnConnection') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.VpnConnection',
+    ) as gax.protobuf.Type;
     const createVpnConnectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteVpnConnectionResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteVpnConnectionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.edgecontainer.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.edgecontainer.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createClusterResponse.decode.bind(createClusterResponse),
-        createClusterMetadata.decode.bind(createClusterMetadata)),
+        createClusterMetadata.decode.bind(createClusterMetadata),
+      ),
       updateCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateClusterResponse.decode.bind(updateClusterResponse),
-        updateClusterMetadata.decode.bind(updateClusterMetadata)),
+        updateClusterMetadata.decode.bind(updateClusterMetadata),
+      ),
       upgradeCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         upgradeClusterResponse.decode.bind(upgradeClusterResponse),
-        upgradeClusterMetadata.decode.bind(upgradeClusterMetadata)),
+        upgradeClusterMetadata.decode.bind(upgradeClusterMetadata),
+      ),
       deleteCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteClusterResponse.decode.bind(deleteClusterResponse),
-        deleteClusterMetadata.decode.bind(deleteClusterMetadata)),
+        deleteClusterMetadata.decode.bind(deleteClusterMetadata),
+      ),
       createNodePool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createNodePoolResponse.decode.bind(createNodePoolResponse),
-        createNodePoolMetadata.decode.bind(createNodePoolMetadata)),
+        createNodePoolMetadata.decode.bind(createNodePoolMetadata),
+      ),
       updateNodePool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateNodePoolResponse.decode.bind(updateNodePoolResponse),
-        updateNodePoolMetadata.decode.bind(updateNodePoolMetadata)),
+        updateNodePoolMetadata.decode.bind(updateNodePoolMetadata),
+      ),
       deleteNodePool: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteNodePoolResponse.decode.bind(deleteNodePoolResponse),
-        deleteNodePoolMetadata.decode.bind(deleteNodePoolMetadata)),
+        deleteNodePoolMetadata.decode.bind(deleteNodePoolMetadata),
+      ),
       createVpnConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createVpnConnectionResponse.decode.bind(createVpnConnectionResponse),
-        createVpnConnectionMetadata.decode.bind(createVpnConnectionMetadata)),
+        createVpnConnectionMetadata.decode.bind(createVpnConnectionMetadata),
+      ),
       deleteVpnConnection: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteVpnConnectionResponse.decode.bind(deleteVpnConnectionResponse),
-        deleteVpnConnectionMetadata.decode.bind(deleteVpnConnectionMetadata))
+        deleteVpnConnectionMetadata.decode.bind(deleteVpnConnectionMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.edgecontainer.v1.EdgeContainer', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.edgecontainer.v1.EdgeContainer',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -342,28 +440,54 @@ export class EdgeContainerClient {
     // Put together the "service stub" for
     // google.cloud.edgecontainer.v1.EdgeContainer.
     this.edgeContainerStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.edgecontainer.v1.EdgeContainer') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.edgecontainer.v1.EdgeContainer',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.edgecontainer.v1.EdgeContainer,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const edgeContainerStubMethods =
-        ['listClusters', 'getCluster', 'createCluster', 'updateCluster', 'upgradeCluster', 'deleteCluster', 'generateAccessToken', 'generateOfflineCredential', 'listNodePools', 'getNodePool', 'createNodePool', 'updateNodePool', 'deleteNodePool', 'listMachines', 'getMachine', 'listVpnConnections', 'getVpnConnection', 'createVpnConnection', 'deleteVpnConnection', 'getServerConfig'];
+    const edgeContainerStubMethods = [
+      'listClusters',
+      'getCluster',
+      'createCluster',
+      'updateCluster',
+      'upgradeCluster',
+      'deleteCluster',
+      'generateAccessToken',
+      'generateOfflineCredential',
+      'listNodePools',
+      'getNodePool',
+      'createNodePool',
+      'updateNodePool',
+      'deleteNodePool',
+      'listMachines',
+      'getMachine',
+      'listVpnConnections',
+      'getVpnConnection',
+      'createVpnConnection',
+      'deleteVpnConnection',
+      'getServerConfig',
+    ];
     for (const methodName of edgeContainerStubMethods) {
       const callPromise = this.edgeContainerStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -373,7 +497,7 @@ export class EdgeContainerClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -388,8 +512,14 @@ export class EdgeContainerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'edgecontainer.googleapis.com';
   }
@@ -400,8 +530,14 @@ export class EdgeContainerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'edgecontainer.googleapis.com';
   }
@@ -432,9 +568,7 @@ export class EdgeContainerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -443,8 +577,9 @@ export class EdgeContainerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -455,1779 +590,2666 @@ export class EdgeContainerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single Cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the cluster.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.Cluster|Cluster}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.get_cluster.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_GetCluster_async
- */
+  /**
+   * Gets details of a single Cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the cluster.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.Cluster|Cluster}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.get_cluster.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_GetCluster_async
+   */
   getCluster(
-      request?: protos.google.cloud.edgecontainer.v1.IGetClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.ICluster,
-        protos.google.cloud.edgecontainer.v1.IGetClusterRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IGetClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.ICluster,
+      protos.google.cloud.edgecontainer.v1.IGetClusterRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getCluster(
-      request: protos.google.cloud.edgecontainer.v1.IGetClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.ICluster,
-          protos.google.cloud.edgecontainer.v1.IGetClusterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGetClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.ICluster,
+      | protos.google.cloud.edgecontainer.v1.IGetClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCluster(
-      request: protos.google.cloud.edgecontainer.v1.IGetClusterRequest,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.ICluster,
-          protos.google.cloud.edgecontainer.v1.IGetClusterRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGetClusterRequest,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.ICluster,
+      | protos.google.cloud.edgecontainer.v1.IGetClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCluster(
-      request?: protos.google.cloud.edgecontainer.v1.IGetClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.edgecontainer.v1.IGetClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.edgecontainer.v1.ICluster,
-          protos.google.cloud.edgecontainer.v1.IGetClusterRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.edgecontainer.v1.ICluster,
-          protos.google.cloud.edgecontainer.v1.IGetClusterRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.ICluster,
-        protos.google.cloud.edgecontainer.v1.IGetClusterRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.edgecontainer.v1.IGetClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.edgecontainer.v1.ICluster,
+      | protos.google.cloud.edgecontainer.v1.IGetClusterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.ICluster,
+      protos.google.cloud.edgecontainer.v1.IGetClusterRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getCluster request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.edgecontainer.v1.ICluster,
-        protos.google.cloud.edgecontainer.v1.IGetClusterRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.ICluster,
+          | protos.google.cloud.edgecontainer.v1.IGetClusterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCluster response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getCluster(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.edgecontainer.v1.ICluster,
-        protos.google.cloud.edgecontainer.v1.IGetClusterRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getCluster response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.ICluster,
+          protos.google.cloud.edgecontainer.v1.IGetClusterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCluster response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Generates an access token for a Cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.cluster
- *   Required. The resource name of the cluster.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.GenerateAccessTokenResponse|GenerateAccessTokenResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.generate_access_token.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_GenerateAccessToken_async
- */
+  /**
+   * Generates an access token for a Cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.cluster
+   *   Required. The resource name of the cluster.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.GenerateAccessTokenResponse|GenerateAccessTokenResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.generate_access_token.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_GenerateAccessToken_async
+   */
   generateAccessToken(
-      request?: protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
-        protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
+      (
+        | protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   generateAccessToken(
-      request: protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
-          protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
+      | protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateAccessToken(
-      request: protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
-          protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
+      | protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateAccessToken(
-      request?: protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
-          protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
-          protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
-        protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
+      | protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
+      (
+        | protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'cluster': request.cluster ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        cluster: request.cluster ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('generateAccessToken request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
-        protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
+          | protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateAccessToken response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.generateAccessToken(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
-        protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('generateAccessToken response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .generateAccessToken(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenResponse,
+          (
+            | protos.google.cloud.edgecontainer.v1.IGenerateAccessTokenRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateAccessToken response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Generates an offline credential for a Cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.cluster
- *   Required. The resource name of the cluster.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse|GenerateOfflineCredentialResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.generate_offline_credential.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_GenerateOfflineCredential_async
- */
+  /**
+   * Generates an offline credential for a Cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.cluster
+   *   Required. The resource name of the cluster.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse|GenerateOfflineCredentialResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.generate_offline_credential.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_GenerateOfflineCredential_async
+   */
   generateOfflineCredential(
-      request?: protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
-        protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
+      (
+        | protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   generateOfflineCredential(
-      request: protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
-          protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
+      | protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateOfflineCredential(
-      request: protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
-          protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
+      | protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateOfflineCredential(
-      request?: protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
-          protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
-          protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
-        protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
+      | protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
+      (
+        | protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'cluster': request.cluster ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        cluster: request.cluster ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('generateOfflineCredential request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
-        protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
+          | protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateOfflineCredential response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.generateOfflineCredential(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
-        protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('generateOfflineCredential response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .generateOfflineCredential(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialResponse,
+          (
+            | protos.google.cloud.edgecontainer.v1.IGenerateOfflineCredentialRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateOfflineCredential response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single NodePool.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the node pool.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.NodePool|NodePool}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.get_node_pool.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_GetNodePool_async
- */
+  /**
+   * Gets details of a single NodePool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the node pool.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.NodePool|NodePool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.get_node_pool.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_GetNodePool_async
+   */
   getNodePool(
-      request?: protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.INodePool,
-        protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.INodePool,
+      protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getNodePool(
-      request: protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.INodePool,
-          protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.INodePool,
+      | protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getNodePool(
-      request: protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.INodePool,
-          protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.INodePool,
+      | protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getNodePool(
-      request?: protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.edgecontainer.v1.INodePool,
-          protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.edgecontainer.v1.INodePool,
-          protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.INodePool,
-        protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.edgecontainer.v1.INodePool,
+      | protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.INodePool,
+      protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getNodePool request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.edgecontainer.v1.INodePool,
-        protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.INodePool,
+          | protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNodePool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getNodePool(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.edgecontainer.v1.INodePool,
-        protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getNodePool response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.INodePool,
+          protos.google.cloud.edgecontainer.v1.IGetNodePoolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNodePool response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single Machine.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the machine.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.Machine|Machine}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.get_machine.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_GetMachine_async
- */
+  /**
+   * Gets details of a single Machine.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the machine.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.Machine|Machine}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.get_machine.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_GetMachine_async
+   */
   getMachine(
-      request?: protos.google.cloud.edgecontainer.v1.IGetMachineRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IMachine,
-        protos.google.cloud.edgecontainer.v1.IGetMachineRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IGetMachineRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IMachine,
+      protos.google.cloud.edgecontainer.v1.IGetMachineRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getMachine(
-      request: protos.google.cloud.edgecontainer.v1.IGetMachineRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.IMachine,
-          protos.google.cloud.edgecontainer.v1.IGetMachineRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGetMachineRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.IMachine,
+      | protos.google.cloud.edgecontainer.v1.IGetMachineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMachine(
-      request: protos.google.cloud.edgecontainer.v1.IGetMachineRequest,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.IMachine,
-          protos.google.cloud.edgecontainer.v1.IGetMachineRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGetMachineRequest,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.IMachine,
+      | protos.google.cloud.edgecontainer.v1.IGetMachineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMachine(
-      request?: protos.google.cloud.edgecontainer.v1.IGetMachineRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.edgecontainer.v1.IGetMachineRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.edgecontainer.v1.IMachine,
-          protos.google.cloud.edgecontainer.v1.IGetMachineRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.edgecontainer.v1.IMachine,
-          protos.google.cloud.edgecontainer.v1.IGetMachineRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IMachine,
-        protos.google.cloud.edgecontainer.v1.IGetMachineRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.edgecontainer.v1.IGetMachineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.edgecontainer.v1.IMachine,
+      | protos.google.cloud.edgecontainer.v1.IGetMachineRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IMachine,
+      protos.google.cloud.edgecontainer.v1.IGetMachineRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMachine request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.edgecontainer.v1.IMachine,
-        protos.google.cloud.edgecontainer.v1.IGetMachineRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.IMachine,
+          | protos.google.cloud.edgecontainer.v1.IGetMachineRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMachine response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMachine(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.edgecontainer.v1.IMachine,
-        protos.google.cloud.edgecontainer.v1.IGetMachineRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMachine response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMachine(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.IMachine,
+          protos.google.cloud.edgecontainer.v1.IGetMachineRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMachine response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single VPN connection.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the vpn connection.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.VpnConnection|VpnConnection}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.get_vpn_connection.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_GetVpnConnection_async
- */
+  /**
+   * Gets details of a single VPN connection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the vpn connection.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.VpnConnection|VpnConnection}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.get_vpn_connection.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_GetVpnConnection_async
+   */
   getVpnConnection(
-      request?: protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IVpnConnection,
-        protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IVpnConnection,
+      protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getVpnConnection(
-      request: protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.IVpnConnection,
-          protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.IVpnConnection,
+      | protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getVpnConnection(
-      request: protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.IVpnConnection,
-          protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.IVpnConnection,
+      | protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getVpnConnection(
-      request?: protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.edgecontainer.v1.IVpnConnection,
-          protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.edgecontainer.v1.IVpnConnection,
-          protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IVpnConnection,
-        protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.edgecontainer.v1.IVpnConnection,
+      | protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IVpnConnection,
+      protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getVpnConnection request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.edgecontainer.v1.IVpnConnection,
-        protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.IVpnConnection,
+          | protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getVpnConnection response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getVpnConnection(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.edgecontainer.v1.IVpnConnection,
-        protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getVpnConnection response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getVpnConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.IVpnConnection,
+          (
+            | protos.google.cloud.edgecontainer.v1.IGetVpnConnectionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVpnConnection response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets the server config.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name (project and location) of the server config to get,
- *   specified in the format `projects/* /locations/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.ServerConfig|ServerConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.get_server_config.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_GetServerConfig_async
- */
+  /**
+   * Gets the server config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name (project and location) of the server config to get,
+   *   specified in the format `projects/* /locations/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.edgecontainer.v1.ServerConfig|ServerConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.get_server_config.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_GetServerConfig_async
+   */
   getServerConfig(
-      request?: protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IServerConfig,
-        protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IServerConfig,
+      protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getServerConfig(
-      request: protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.IServerConfig,
-          protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.IServerConfig,
+      | protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getServerConfig(
-      request: protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest,
-      callback: Callback<
-          protos.google.cloud.edgecontainer.v1.IServerConfig,
-          protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest,
+    callback: Callback<
+      protos.google.cloud.edgecontainer.v1.IServerConfig,
+      | protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getServerConfig(
-      request?: protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.edgecontainer.v1.IServerConfig,
-          protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.edgecontainer.v1.IServerConfig,
-          protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IServerConfig,
-        protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.edgecontainer.v1.IServerConfig,
+      | protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IServerConfig,
+      protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getServerConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.edgecontainer.v1.IServerConfig,
-        protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.edgecontainer.v1.IServerConfig,
+          | protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getServerConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getServerConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.edgecontainer.v1.IServerConfig,
-        protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getServerConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getServerConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.edgecontainer.v1.IServerConfig,
+          (
+            | protos.google.cloud.edgecontainer.v1.IGetServerConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getServerConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new Cluster in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location where this cluster will be created.
- * @param {string} request.clusterId
- *   Required. A client-specified unique identifier for the cluster.
- * @param {google.cloud.edgecontainer.v1.Cluster} request.cluster
- *   Required. The cluster to create.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters. A
- *   random UUID is recommended. This request is only idempotent if
- *   `request_id` is provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.create_cluster.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateCluster_async
- */
+  /**
+   * Creates a new Cluster in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location where this cluster will be created.
+   * @param {string} request.clusterId
+   *   Required. A client-specified unique identifier for the cluster.
+   * @param {google.cloud.edgecontainer.v1.Cluster} request.cluster
+   *   Required. The cluster to create.
+   * @param {string} request.requestId
+   *   A unique identifier for this request. Restricted to 36 ASCII characters. A
+   *   random UUID is recommended. This request is only idempotent if
+   *   `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.create_cluster.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateCluster_async
+   */
   createCluster(
-      request?: protos.google.cloud.edgecontainer.v1.ICreateClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.ICreateClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createCluster(
-      request: protos.google.cloud.edgecontainer.v1.ICreateClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.ICreateClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCluster(
-      request: protos.google.cloud.edgecontainer.v1.ICreateClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.ICreateClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCluster(
-      request?: protos.google.cloud.edgecontainer.v1.ICreateClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.edgecontainer.v1.ICreateClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createCluster request %j', request);
-    return this.innerApiCalls.createCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.create_cluster.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateCluster_async
- */
-  async checkCreateClusterProgress(name: string): Promise<LROperation<protos.google.cloud.edgecontainer.v1.Cluster, protos.google.cloud.edgecontainer.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.create_cluster.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateCluster_async
+   */
+  async checkCreateClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.edgecontainer.v1.Cluster,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >
+  > {
     this._log.info('createCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.edgecontainer.v1.Cluster, protos.google.cloud.edgecontainer.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.edgecontainer.v1.Cluster,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single Cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask is used to specify the fields to be overwritten in the
- *   Cluster resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields will be overwritten.
- * @param {google.cloud.edgecontainer.v1.Cluster} request.cluster
- *   The updated cluster.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters.
- *   A random UUID is recommended.
- *   This request is only idempotent if `request_id` is provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.update_cluster.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_UpdateCluster_async
- */
+  /**
+   * Updates the parameters of a single Cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   Cluster resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.edgecontainer.v1.Cluster} request.cluster
+   *   The updated cluster.
+   * @param {string} request.requestId
+   *   A unique identifier for this request. Restricted to 36 ASCII characters.
+   *   A random UUID is recommended.
+   *   This request is only idempotent if `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.update_cluster.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_UpdateCluster_async
+   */
   updateCluster(
-      request?: protos.google.cloud.edgecontainer.v1.IUpdateClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IUpdateClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateCluster(
-      request: protos.google.cloud.edgecontainer.v1.IUpdateClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IUpdateClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCluster(
-      request: protos.google.cloud.edgecontainer.v1.IUpdateClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IUpdateClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCluster(
-      request?: protos.google.cloud.edgecontainer.v1.IUpdateClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.edgecontainer.v1.IUpdateClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'cluster.name': request.cluster!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'cluster.name': request.cluster!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateCluster request %j', request);
-    return this.innerApiCalls.updateCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.update_cluster.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_UpdateCluster_async
- */
-  async checkUpdateClusterProgress(name: string): Promise<LROperation<protos.google.cloud.edgecontainer.v1.Cluster, protos.google.cloud.edgecontainer.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.update_cluster.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_UpdateCluster_async
+   */
+  async checkUpdateClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.edgecontainer.v1.Cluster,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.edgecontainer.v1.Cluster, protos.google.cloud.edgecontainer.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.edgecontainer.v1.Cluster,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >;
   }
-/**
- * Upgrades a single cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the cluster.
- * @param {string} request.targetVersion
- *   Required. The version the cluster is going to be upgraded to.
- * @param {google.cloud.edgecontainer.v1.UpgradeClusterRequest.Schedule} request.schedule
- *   The schedule for the upgrade.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters. A
- *   random UUID is recommended. This request is only idempotent if
- *   `request_id` is provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.upgrade_cluster.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_UpgradeCluster_async
- */
+  /**
+   * Upgrades a single cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the cluster.
+   * @param {string} request.targetVersion
+   *   Required. The version the cluster is going to be upgraded to.
+   * @param {google.cloud.edgecontainer.v1.UpgradeClusterRequest.Schedule} request.schedule
+   *   The schedule for the upgrade.
+   * @param {string} request.requestId
+   *   A unique identifier for this request. Restricted to 36 ASCII characters. A
+   *   random UUID is recommended. This request is only idempotent if
+   *   `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.upgrade_cluster.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_UpgradeCluster_async
+   */
   upgradeCluster(
-      request?: protos.google.cloud.edgecontainer.v1.IUpgradeClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IUpgradeClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   upgradeCluster(
-      request: protos.google.cloud.edgecontainer.v1.IUpgradeClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IUpgradeClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   upgradeCluster(
-      request: protos.google.cloud.edgecontainer.v1.IUpgradeClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IUpgradeClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   upgradeCluster(
-      request?: protos.google.cloud.edgecontainer.v1.IUpgradeClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.edgecontainer.v1.IUpgradeClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.ICluster,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('upgradeCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('upgradeCluster request %j', request);
-    return this.innerApiCalls.upgradeCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.edgecontainer.v1.ICluster, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('upgradeCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .upgradeCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.ICluster,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('upgradeCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `upgradeCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.upgrade_cluster.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_UpgradeCluster_async
- */
-  async checkUpgradeClusterProgress(name: string): Promise<LROperation<protos.google.cloud.edgecontainer.v1.Cluster, protos.google.cloud.edgecontainer.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `upgradeCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.upgrade_cluster.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_UpgradeCluster_async
+   */
+  async checkUpgradeClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.edgecontainer.v1.Cluster,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >
+  > {
     this._log.info('upgradeCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.upgradeCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.edgecontainer.v1.Cluster, protos.google.cloud.edgecontainer.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.upgradeCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.edgecontainer.v1.Cluster,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single Cluster.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the cluster.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters. A
- *   random UUID is recommended. This request is only idempotent if
- *   `request_id` is provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.delete_cluster.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteCluster_async
- */
+  /**
+   * Deletes a single Cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the cluster.
+   * @param {string} request.requestId
+   *   A unique identifier for this request. Restricted to 36 ASCII characters. A
+   *   random UUID is recommended. This request is only idempotent if
+   *   `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.delete_cluster.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteCluster_async
+   */
   deleteCluster(
-      request?: protos.google.cloud.edgecontainer.v1.IDeleteClusterRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IDeleteClusterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteCluster(
-      request: protos.google.cloud.edgecontainer.v1.IDeleteClusterRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IDeleteClusterRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCluster(
-      request: protos.google.cloud.edgecontainer.v1.IDeleteClusterRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IDeleteClusterRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCluster(
-      request?: protos.google.cloud.edgecontainer.v1.IDeleteClusterRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.edgecontainer.v1.IDeleteClusterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteCluster response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteCluster request %j', request);
-    return this.innerApiCalls.deleteCluster(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteCluster response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteCluster(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCluster response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteCluster()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.delete_cluster.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteCluster_async
- */
-  async checkDeleteClusterProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgecontainer.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteCluster()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.delete_cluster.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteCluster_async
+   */
+  async checkDeleteClusterProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteCluster long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteCluster, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgecontainer.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteCluster,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a new NodePool in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent cluster where this node pool will be created.
- * @param {string} request.nodePoolId
- *   Required. A client-specified unique identifier for the node pool.
- * @param {google.cloud.edgecontainer.v1.NodePool} request.nodePool
- *   Required. The node pool to create.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters. A
- *   random UUID is recommended. This request is only idempotent if
- *   `request_id` is provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.create_node_pool.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateNodePool_async
- */
+  /**
+   * Creates a new NodePool in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent cluster where this node pool will be created.
+   * @param {string} request.nodePoolId
+   *   Required. A client-specified unique identifier for the node pool.
+   * @param {google.cloud.edgecontainer.v1.NodePool} request.nodePool
+   *   Required. The node pool to create.
+   * @param {string} request.requestId
+   *   A unique identifier for this request. Restricted to 36 ASCII characters. A
+   *   random UUID is recommended. This request is only idempotent if
+   *   `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.create_node_pool.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateNodePool_async
+   */
   createNodePool(
-      request?: protos.google.cloud.edgecontainer.v1.ICreateNodePoolRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.ICreateNodePoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.INodePool,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createNodePool(
-      request: protos.google.cloud.edgecontainer.v1.ICreateNodePoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.ICreateNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.INodePool,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createNodePool(
-      request: protos.google.cloud.edgecontainer.v1.ICreateNodePoolRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.ICreateNodePoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.INodePool,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createNodePool(
-      request?: protos.google.cloud.edgecontainer.v1.ICreateNodePoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.edgecontainer.v1.ICreateNodePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.INodePool,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.INodePool,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.INodePool,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.INodePool,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createNodePool request %j', request);
-    return this.innerApiCalls.createNodePool(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createNodePool response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.INodePool,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createNodePool()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.create_node_pool.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateNodePool_async
- */
-  async checkCreateNodePoolProgress(name: string): Promise<LROperation<protos.google.cloud.edgecontainer.v1.NodePool, protos.google.cloud.edgecontainer.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createNodePool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.create_node_pool.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateNodePool_async
+   */
+  async checkCreateNodePoolProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.edgecontainer.v1.NodePool,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >
+  > {
     this._log.info('createNodePool long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createNodePool, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.edgecontainer.v1.NodePool, protos.google.cloud.edgecontainer.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createNodePool,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.edgecontainer.v1.NodePool,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single NodePool.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask is used to specify the fields to be overwritten in the
- *   NodePool resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields will be overwritten.
- * @param {google.cloud.edgecontainer.v1.NodePool} request.nodePool
- *   The updated node pool.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters. A
- *   random UUID is recommended. This request is only idempotent if
- *   `request_id` is provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.update_node_pool.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_UpdateNodePool_async
- */
+  /**
+   * Updates the parameters of a single NodePool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   NodePool resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.edgecontainer.v1.NodePool} request.nodePool
+   *   The updated node pool.
+   * @param {string} request.requestId
+   *   A unique identifier for this request. Restricted to 36 ASCII characters. A
+   *   random UUID is recommended. This request is only idempotent if
+   *   `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.update_node_pool.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_UpdateNodePool_async
+   */
   updateNodePool(
-      request?: protos.google.cloud.edgecontainer.v1.IUpdateNodePoolRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IUpdateNodePoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.INodePool,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateNodePool(
-      request: protos.google.cloud.edgecontainer.v1.IUpdateNodePoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IUpdateNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.INodePool,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateNodePool(
-      request: protos.google.cloud.edgecontainer.v1.IUpdateNodePoolRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IUpdateNodePoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.INodePool,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateNodePool(
-      request?: protos.google.cloud.edgecontainer.v1.IUpdateNodePoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.edgecontainer.v1.IUpdateNodePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.INodePool,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.INodePool,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.INodePool,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'node_pool.name': request.nodePool!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'node_pool.name': request.nodePool!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.INodePool,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateNodePool request %j', request);
-    return this.innerApiCalls.updateNodePool(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.edgecontainer.v1.INodePool, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateNodePool response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.INodePool,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateNodePool()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.update_node_pool.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_UpdateNodePool_async
- */
-  async checkUpdateNodePoolProgress(name: string): Promise<LROperation<protos.google.cloud.edgecontainer.v1.NodePool, protos.google.cloud.edgecontainer.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateNodePool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.update_node_pool.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_UpdateNodePool_async
+   */
+  async checkUpdateNodePoolProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.edgecontainer.v1.NodePool,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateNodePool long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateNodePool, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.edgecontainer.v1.NodePool, protos.google.cloud.edgecontainer.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateNodePool,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.edgecontainer.v1.NodePool,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single NodePool.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the node pool.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters. A
- *   random UUID is recommended. This request is only idempotent if
- *   `request_id` is provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.delete_node_pool.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteNodePool_async
- */
+  /**
+   * Deletes a single NodePool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the node pool.
+   * @param {string} request.requestId
+   *   A unique identifier for this request. Restricted to 36 ASCII characters. A
+   *   random UUID is recommended. This request is only idempotent if
+   *   `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.delete_node_pool.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteNodePool_async
+   */
   deleteNodePool(
-      request?: protos.google.cloud.edgecontainer.v1.IDeleteNodePoolRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IDeleteNodePoolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteNodePool(
-      request: protos.google.cloud.edgecontainer.v1.IDeleteNodePoolRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IDeleteNodePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteNodePool(
-      request: protos.google.cloud.edgecontainer.v1.IDeleteNodePoolRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IDeleteNodePoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteNodePool(
-      request?: protos.google.cloud.edgecontainer.v1.IDeleteNodePoolRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.edgecontainer.v1.IDeleteNodePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteNodePool response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteNodePool request %j', request);
-    return this.innerApiCalls.deleteNodePool(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteNodePool response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteNodePool(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNodePool response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteNodePool()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.delete_node_pool.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteNodePool_async
- */
-  async checkDeleteNodePoolProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgecontainer.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteNodePool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.delete_node_pool.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteNodePool_async
+   */
+  async checkDeleteNodePoolProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteNodePool long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteNodePool, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgecontainer.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteNodePool,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a new VPN connection in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location where this vpn connection will be created.
- * @param {string} request.vpnConnectionId
- *   Required. The VPN connection identifier.
- * @param {google.cloud.edgecontainer.v1.VpnConnection} request.vpnConnection
- *   Required. The VPN connection to create.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters. A
- *   random UUID is recommended. This request is only idempotent if
- *   `request_id` is provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.create_vpn_connection.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateVpnConnection_async
- */
+  /**
+   * Creates a new VPN connection in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location where this vpn connection will be created.
+   * @param {string} request.vpnConnectionId
+   *   Required. The VPN connection identifier.
+   * @param {google.cloud.edgecontainer.v1.VpnConnection} request.vpnConnection
+   *   Required. The VPN connection to create.
+   * @param {string} request.requestId
+   *   A unique identifier for this request. Restricted to 36 ASCII characters. A
+   *   random UUID is recommended. This request is only idempotent if
+   *   `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.create_vpn_connection.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateVpnConnection_async
+   */
   createVpnConnection(
-      request?: protos.google.cloud.edgecontainer.v1.ICreateVpnConnectionRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.IVpnConnection, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.ICreateVpnConnectionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.IVpnConnection,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createVpnConnection(
-      request: protos.google.cloud.edgecontainer.v1.ICreateVpnConnectionRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.IVpnConnection, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.ICreateVpnConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.IVpnConnection,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createVpnConnection(
-      request: protos.google.cloud.edgecontainer.v1.ICreateVpnConnectionRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.IVpnConnection, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.ICreateVpnConnectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.IVpnConnection,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createVpnConnection(
-      request?: protos.google.cloud.edgecontainer.v1.ICreateVpnConnectionRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.IVpnConnection, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.IVpnConnection, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.edgecontainer.v1.IVpnConnection, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.edgecontainer.v1.ICreateVpnConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.IVpnConnection,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.IVpnConnection,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.edgecontainer.v1.IVpnConnection,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.edgecontainer.v1.IVpnConnection, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.IVpnConnection,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createVpnConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createVpnConnection request %j', request);
-    return this.innerApiCalls.createVpnConnection(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.edgecontainer.v1.IVpnConnection, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createVpnConnection response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createVpnConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.edgecontainer.v1.IVpnConnection,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createVpnConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createVpnConnection()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.create_vpn_connection.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateVpnConnection_async
- */
-  async checkCreateVpnConnectionProgress(name: string): Promise<LROperation<protos.google.cloud.edgecontainer.v1.VpnConnection, protos.google.cloud.edgecontainer.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createVpnConnection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.create_vpn_connection.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_CreateVpnConnection_async
+   */
+  async checkCreateVpnConnectionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.edgecontainer.v1.VpnConnection,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >
+  > {
     this._log.info('createVpnConnection long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createVpnConnection, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.edgecontainer.v1.VpnConnection, protos.google.cloud.edgecontainer.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createVpnConnection,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.edgecontainer.v1.VpnConnection,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single VPN connection.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the vpn connection.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters. A
- *   random UUID is recommended. This request is only idempotent if
- *   `request_id` is provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.delete_vpn_connection.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteVpnConnection_async
- */
+  /**
+   * Deletes a single VPN connection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the vpn connection.
+   * @param {string} request.requestId
+   *   A unique identifier for this request. Restricted to 36 ASCII characters. A
+   *   random UUID is recommended. This request is only idempotent if
+   *   `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.delete_vpn_connection.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteVpnConnection_async
+   */
   deleteVpnConnection(
-      request?: protos.google.cloud.edgecontainer.v1.IDeleteVpnConnectionRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IDeleteVpnConnectionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteVpnConnection(
-      request: protos.google.cloud.edgecontainer.v1.IDeleteVpnConnectionRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IDeleteVpnConnectionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteVpnConnection(
-      request: protos.google.cloud.edgecontainer.v1.IDeleteVpnConnectionRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.edgecontainer.v1.IDeleteVpnConnectionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteVpnConnection(
-      request?: protos.google.cloud.edgecontainer.v1.IDeleteVpnConnectionRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.edgecontainer.v1.IDeleteVpnConnectionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.edgecontainer.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteVpnConnection response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteVpnConnection request %j', request);
-    return this.innerApiCalls.deleteVpnConnection(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.edgecontainer.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteVpnConnection response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteVpnConnection(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.edgecontainer.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVpnConnection response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteVpnConnection()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.delete_vpn_connection.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteVpnConnection_async
- */
-  async checkDeleteVpnConnectionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgecontainer.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteVpnConnection()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.delete_vpn_connection.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_DeleteVpnConnection_async
+   */
+  async checkDeleteVpnConnectionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteVpnConnection long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteVpnConnection, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.edgecontainer.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteVpnConnection,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.edgecontainer.v1.OperationMetadata
+    >;
   }
- /**
- * Lists Clusters in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location, which owns this collection of clusters.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.edgecontainer.v1.Cluster|Cluster}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listClustersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Clusters in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location, which owns this collection of clusters.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.edgecontainer.v1.Cluster|Cluster}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listClustersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listClusters(
-      request?: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.ICluster[],
-        protos.google.cloud.edgecontainer.v1.IListClustersRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListClustersResponse
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.ICluster[],
+      protos.google.cloud.edgecontainer.v1.IListClustersRequest | null,
+      protos.google.cloud.edgecontainer.v1.IListClustersResponse,
+    ]
+  >;
   listClusters(
-      request: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListClustersRequest,
-          protos.google.cloud.edgecontainer.v1.IListClustersResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.ICluster>): void;
+    request: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListClustersRequest,
+      | protos.google.cloud.edgecontainer.v1.IListClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.ICluster
+    >,
+  ): void;
   listClusters(
-      request: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListClustersRequest,
-          protos.google.cloud.edgecontainer.v1.IListClustersResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.ICluster>): void;
+    request: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListClustersRequest,
+      | protos.google.cloud.edgecontainer.v1.IListClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.ICluster
+    >,
+  ): void;
   listClusters(
-      request?: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.edgecontainer.v1.IListClustersRequest,
-          protos.google.cloud.edgecontainer.v1.IListClustersResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.ICluster>,
-      callback?: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListClustersRequest,
-          protos.google.cloud.edgecontainer.v1.IListClustersResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.ICluster>):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.ICluster[],
-        protos.google.cloud.edgecontainer.v1.IListClustersRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListClustersResponse
-      ]>|void {
+          | protos.google.cloud.edgecontainer.v1.IListClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.ICluster
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListClustersRequest,
+      | protos.google.cloud.edgecontainer.v1.IListClustersResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.ICluster
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.ICluster[],
+      protos.google.cloud.edgecontainer.v1.IListClustersRequest | null,
+      protos.google.cloud.edgecontainer.v1.IListClustersResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.edgecontainer.v1.IListClustersRequest,
-      protos.google.cloud.edgecontainer.v1.IListClustersResponse|null|undefined,
-      protos.google.cloud.edgecontainer.v1.ICluster>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgecontainer.v1.IListClustersRequest,
+          | protos.google.cloud.edgecontainer.v1.IListClustersResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.ICluster
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listClusters values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2236,203 +3258,232 @@ export class EdgeContainerClient {
     this._log.info('listClusters request %j', request);
     return this.innerApiCalls
       .listClusters(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.edgecontainer.v1.ICluster[],
-        protos.google.cloud.edgecontainer.v1.IListClustersRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListClustersResponse
-      ]) => {
-        this._log.info('listClusters values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgecontainer.v1.ICluster[],
+          protos.google.cloud.edgecontainer.v1.IListClustersRequest | null,
+          protos.google.cloud.edgecontainer.v1.IListClustersResponse,
+        ]) => {
+          this._log.info('listClusters values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listClusters`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location, which owns this collection of clusters.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.edgecontainer.v1.Cluster|Cluster} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listClustersAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listClusters`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location, which owns this collection of clusters.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.edgecontainer.v1.Cluster|Cluster} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listClustersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listClustersStream(
-      request?: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listClusters`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location, which owns this collection of clusters.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.edgecontainer.v1.Cluster|Cluster}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.list_clusters.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_ListClusters_async
- */
+  /**
+   * Equivalent to `listClusters`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location, which owns this collection of clusters.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.edgecontainer.v1.Cluster|Cluster}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.list_clusters.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_ListClusters_async
+   */
   listClustersAsync(
-      request?: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.edgecontainer.v1.ICluster>{
+    request?: protos.google.cloud.edgecontainer.v1.IListClustersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.edgecontainer.v1.ICluster> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.edgecontainer.v1.ICluster>;
   }
- /**
- * Lists NodePools in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent cluster, which owns this collection of node pools.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.edgecontainer.v1.NodePool|NodePool}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listNodePoolsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists NodePools in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent cluster, which owns this collection of node pools.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.edgecontainer.v1.NodePool|NodePool}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNodePoolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNodePools(
-      request?: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.INodePool[],
-        protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.INodePool[],
+      protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest | null,
+      protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse,
+    ]
+  >;
   listNodePools(
-      request: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
-          protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.INodePool>): void;
+    request: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
+      | protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.INodePool
+    >,
+  ): void;
   listNodePools(
-      request: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
-          protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.INodePool>): void;
+    request: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
+      | protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.INodePool
+    >,
+  ): void;
   listNodePools(
-      request?: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
-          protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.INodePool>,
-      callback?: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
-          protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.INodePool>):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.INodePool[],
-        protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse
-      ]>|void {
+          | protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.INodePool
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
+      | protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.INodePool
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.INodePool[],
+      protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest | null,
+      protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
-      protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse|null|undefined,
-      protos.google.cloud.edgecontainer.v1.INodePool>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
+          | protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.INodePool
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNodePools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2441,201 +3492,230 @@ export class EdgeContainerClient {
     this._log.info('listNodePools request %j', request);
     return this.innerApiCalls
       .listNodePools(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.edgecontainer.v1.INodePool[],
-        protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse
-      ]) => {
-        this._log.info('listNodePools values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgecontainer.v1.INodePool[],
+          protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest | null,
+          protos.google.cloud.edgecontainer.v1.IListNodePoolsResponse,
+        ]) => {
+          this._log.info('listNodePools values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listNodePools`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent cluster, which owns this collection of node pools.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.edgecontainer.v1.NodePool|NodePool} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listNodePoolsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listNodePools`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent cluster, which owns this collection of node pools.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.edgecontainer.v1.NodePool|NodePool} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNodePoolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNodePoolsStream(
-      request?: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listNodePools stream %j', request);
     return this.descriptors.page.listNodePools.createStream(
       this.innerApiCalls.listNodePools as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listNodePools`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent cluster, which owns this collection of node pools.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.edgecontainer.v1.NodePool|NodePool}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.list_node_pools.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_ListNodePools_async
- */
+  /**
+   * Equivalent to `listNodePools`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent cluster, which owns this collection of node pools.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.edgecontainer.v1.NodePool|NodePool}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.list_node_pools.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_ListNodePools_async
+   */
   listNodePoolsAsync(
-      request?: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.edgecontainer.v1.INodePool>{
+    request?: protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.edgecontainer.v1.INodePool> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listNodePools iterate %j', request);
     return this.descriptors.page.listNodePools.asyncIterate(
       this.innerApiCalls['listNodePools'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.edgecontainer.v1.INodePool>;
   }
- /**
- * Lists Machines in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent site, which owns this collection of machines.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.edgecontainer.v1.Machine|Machine}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMachinesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Machines in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent site, which owns this collection of machines.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.edgecontainer.v1.Machine|Machine}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMachinesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMachines(
-      request?: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IMachine[],
-        protos.google.cloud.edgecontainer.v1.IListMachinesRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListMachinesResponse
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IMachine[],
+      protos.google.cloud.edgecontainer.v1.IListMachinesRequest | null,
+      protos.google.cloud.edgecontainer.v1.IListMachinesResponse,
+    ]
+  >;
   listMachines(
-      request: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
-          protos.google.cloud.edgecontainer.v1.IListMachinesResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.IMachine>): void;
+    request: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
+      | protos.google.cloud.edgecontainer.v1.IListMachinesResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.IMachine
+    >,
+  ): void;
   listMachines(
-      request: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
-          protos.google.cloud.edgecontainer.v1.IListMachinesResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.IMachine>): void;
+    request: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
+      | protos.google.cloud.edgecontainer.v1.IListMachinesResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.IMachine
+    >,
+  ): void;
   listMachines(
-      request?: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
-          protos.google.cloud.edgecontainer.v1.IListMachinesResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.IMachine>,
-      callback?: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
-          protos.google.cloud.edgecontainer.v1.IListMachinesResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.IMachine>):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IMachine[],
-        protos.google.cloud.edgecontainer.v1.IListMachinesRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListMachinesResponse
-      ]>|void {
+          | protos.google.cloud.edgecontainer.v1.IListMachinesResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.IMachine
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
+      | protos.google.cloud.edgecontainer.v1.IListMachinesResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.IMachine
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IMachine[],
+      protos.google.cloud.edgecontainer.v1.IListMachinesRequest | null,
+      protos.google.cloud.edgecontainer.v1.IListMachinesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
-      protos.google.cloud.edgecontainer.v1.IListMachinesResponse|null|undefined,
-      protos.google.cloud.edgecontainer.v1.IMachine>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
+          | protos.google.cloud.edgecontainer.v1.IListMachinesResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.IMachine
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMachines values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2644,202 +3724,231 @@ export class EdgeContainerClient {
     this._log.info('listMachines request %j', request);
     return this.innerApiCalls
       .listMachines(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.edgecontainer.v1.IMachine[],
-        protos.google.cloud.edgecontainer.v1.IListMachinesRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListMachinesResponse
-      ]) => {
-        this._log.info('listMachines values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgecontainer.v1.IMachine[],
+          protos.google.cloud.edgecontainer.v1.IListMachinesRequest | null,
+          protos.google.cloud.edgecontainer.v1.IListMachinesResponse,
+        ]) => {
+          this._log.info('listMachines values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMachines`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent site, which owns this collection of machines.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.edgecontainer.v1.Machine|Machine} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMachinesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMachines`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent site, which owns this collection of machines.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.edgecontainer.v1.Machine|Machine} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMachinesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMachinesStream(
-      request?: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMachines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMachines stream %j', request);
     return this.descriptors.page.listMachines.createStream(
       this.innerApiCalls.listMachines as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMachines`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent site, which owns this collection of machines.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.edgecontainer.v1.Machine|Machine}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.list_machines.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_ListMachines_async
- */
+  /**
+   * Equivalent to `listMachines`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent site, which owns this collection of machines.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.edgecontainer.v1.Machine|Machine}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.list_machines.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_ListMachines_async
+   */
   listMachinesAsync(
-      request?: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.edgecontainer.v1.IMachine>{
+    request?: protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.edgecontainer.v1.IMachine> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMachines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMachines iterate %j', request);
     return this.descriptors.page.listMachines.asyncIterate(
       this.innerApiCalls['listMachines'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.edgecontainer.v1.IMachine>;
   }
- /**
- * Lists VPN connections in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location, which owns this collection of VPN
- *   connections.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.edgecontainer.v1.VpnConnection|VpnConnection}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listVpnConnectionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists VPN connections in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location, which owns this collection of VPN
+   *   connections.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.edgecontainer.v1.VpnConnection|VpnConnection}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listVpnConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listVpnConnections(
-      request?: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IVpnConnection[],
-        protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse
-      ]>;
+    request?: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IVpnConnection[],
+      protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest | null,
+      protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse,
+    ]
+  >;
   listVpnConnections(
-      request: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
-          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.IVpnConnection>): void;
+    request: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
+      | protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.IVpnConnection
+    >,
+  ): void;
   listVpnConnections(
-      request: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
-          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.IVpnConnection>): void;
+    request: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
+      | protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.IVpnConnection
+    >,
+  ): void;
   listVpnConnections(
-      request?: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
-          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.IVpnConnection>,
-      callback?: PaginationCallback<
-          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
-          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse|null|undefined,
-          protos.google.cloud.edgecontainer.v1.IVpnConnection>):
-      Promise<[
-        protos.google.cloud.edgecontainer.v1.IVpnConnection[],
-        protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse
-      ]>|void {
+          | protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.IVpnConnection
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
+      | protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.edgecontainer.v1.IVpnConnection
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.edgecontainer.v1.IVpnConnection[],
+      protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest | null,
+      protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
-      protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse|null|undefined,
-      protos.google.cloud.edgecontainer.v1.IVpnConnection>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
+          | protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.edgecontainer.v1.IVpnConnection
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listVpnConnections values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2848,119 +3957,124 @@ export class EdgeContainerClient {
     this._log.info('listVpnConnections request %j', request);
     return this.innerApiCalls
       .listVpnConnections(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.edgecontainer.v1.IVpnConnection[],
-        protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest|null,
-        protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse
-      ]) => {
-        this._log.info('listVpnConnections values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.edgecontainer.v1.IVpnConnection[],
+          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest | null,
+          protos.google.cloud.edgecontainer.v1.IListVpnConnectionsResponse,
+        ]) => {
+          this._log.info('listVpnConnections values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listVpnConnections`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location, which owns this collection of VPN
- *   connections.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.edgecontainer.v1.VpnConnection|VpnConnection} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listVpnConnectionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listVpnConnections`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location, which owns this collection of VPN
+   *   connections.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.edgecontainer.v1.VpnConnection|VpnConnection} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listVpnConnectionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listVpnConnectionsStream(
-      request?: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listVpnConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listVpnConnections stream %j', request);
     return this.descriptors.page.listVpnConnections.createStream(
       this.innerApiCalls.listVpnConnections as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listVpnConnections`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent location, which owns this collection of VPN
- *   connections.
- * @param {number} request.pageSize
- *   The maximum number of resources to list.
- * @param {string} request.pageToken
- *   A page token received from previous list request.
- * @param {string} request.filter
- *   Only resources matching this filter will be listed.
- * @param {string} request.orderBy
- *   Specifies the order in which resources will be listed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.edgecontainer.v1.VpnConnection|VpnConnection}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/edge_container.list_vpn_connections.js</caption>
- * region_tag:edgecontainer_v1_generated_EdgeContainer_ListVpnConnections_async
- */
+  /**
+   * Equivalent to `listVpnConnections`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location, which owns this collection of VPN
+   *   connections.
+   * @param {number} request.pageSize
+   *   The maximum number of resources to list.
+   * @param {string} request.pageToken
+   *   A page token received from previous list request.
+   * @param {string} request.filter
+   *   Only resources matching this filter will be listed.
+   * @param {string} request.orderBy
+   *   Specifies the order in which resources will be listed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.edgecontainer.v1.VpnConnection|VpnConnection}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/edge_container.list_vpn_connections.js</caption>
+   * region_tag:edgecontainer_v1_generated_EdgeContainer_ListVpnConnections_async
+   */
   listVpnConnectionsAsync(
-      request?: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.edgecontainer.v1.IVpnConnection>{
+    request?: protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.edgecontainer.v1.IVpnConnection> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listVpnConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listVpnConnections iterate %j', request);
     return this.descriptors.page.listVpnConnections.asyncIterate(
       this.innerApiCalls['listVpnConnections'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.edgecontainer.v1.IVpnConnection>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2995,12 +4109,11 @@ export class EdgeContainerClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -3033,12 +4146,12 @@ export class EdgeContainerClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -3081,22 +4194,22 @@ export class EdgeContainerClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -3131,15 +4244,15 @@ export class EdgeContainerClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -3173,7 +4286,7 @@ export class EdgeContainerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -3186,25 +4299,24 @@ export class EdgeContainerClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -3243,22 +4355,22 @@ export class EdgeContainerClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -3274,7 +4386,7 @@ export class EdgeContainerClient {
    * @param {string} cluster
    * @returns {string} Resource name string.
    */
-  clusterPath(project:string,location:string,cluster:string) {
+  clusterPath(project: string, location: string, cluster: string) {
     return this.pathTemplates.clusterPathTemplate.render({
       project: project,
       location: location,
@@ -3322,7 +4434,7 @@ export class EdgeContainerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3359,7 +4471,7 @@ export class EdgeContainerClient {
    * @param {string} machine
    * @returns {string} Resource name string.
    */
-  machinePath(project:string,location:string,machine:string) {
+  machinePath(project: string, location: string, machine: string) {
     return this.pathTemplates.machinePathTemplate.render({
       project: project,
       location: location,
@@ -3409,7 +4521,12 @@ export class EdgeContainerClient {
    * @param {string} node_pool
    * @returns {string} Resource name string.
    */
-  nodePoolPath(project:string,location:string,cluster:string,nodePool:string) {
+  nodePoolPath(
+    project: string,
+    location: string,
+    cluster: string,
+    nodePool: string,
+  ) {
     return this.pathTemplates.nodePoolPathTemplate.render({
       project: project,
       location: location,
@@ -3459,7 +4576,8 @@ export class EdgeContainerClient {
    * @returns {string} A string representing the node_pool.
    */
   matchNodePoolFromNodePoolName(nodePoolName: string) {
-    return this.pathTemplates.nodePoolPathTemplate.match(nodePoolName).node_pool;
+    return this.pathTemplates.nodePoolPathTemplate.match(nodePoolName)
+      .node_pool;
   }
 
   /**
@@ -3468,7 +4586,7 @@ export class EdgeContainerClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -3493,7 +4611,7 @@ export class EdgeContainerClient {
    * @param {string} vpn_connection
    * @returns {string} Resource name string.
    */
-  vpnConnectionPath(project:string,location:string,vpnConnection:string) {
+  vpnConnectionPath(project: string, location: string, vpnConnection: string) {
     return this.pathTemplates.vpnConnectionPathTemplate.render({
       project: project,
       location: location,
@@ -3509,7 +4627,8 @@ export class EdgeContainerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromVpnConnectionName(vpnConnectionName: string) {
-    return this.pathTemplates.vpnConnectionPathTemplate.match(vpnConnectionName).project;
+    return this.pathTemplates.vpnConnectionPathTemplate.match(vpnConnectionName)
+      .project;
   }
 
   /**
@@ -3520,7 +4639,8 @@ export class EdgeContainerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromVpnConnectionName(vpnConnectionName: string) {
-    return this.pathTemplates.vpnConnectionPathTemplate.match(vpnConnectionName).location;
+    return this.pathTemplates.vpnConnectionPathTemplate.match(vpnConnectionName)
+      .location;
   }
 
   /**
@@ -3531,7 +4651,8 @@ export class EdgeContainerClient {
    * @returns {string} A string representing the vpn_connection.
    */
   matchVpnConnectionFromVpnConnectionName(vpnConnectionName: string) {
-    return this.pathTemplates.vpnConnectionPathTemplate.match(vpnConnectionName).vpn_connection;
+    return this.pathTemplates.vpnConnectionPathTemplate.match(vpnConnectionName)
+      .vpn_connection;
   }
 
   /**
@@ -3542,11 +4663,13 @@ export class EdgeContainerClient {
    */
   close(): Promise<void> {
     if (this.edgeContainerStub && !this._terminated) {
-      return this.edgeContainerStub.then(stub => {
+      return this.edgeContainerStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

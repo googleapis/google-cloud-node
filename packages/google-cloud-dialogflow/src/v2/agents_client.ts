@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +55,7 @@ export class AgentsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dialogflow');
@@ -57,11 +68,11 @@ export class AgentsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  agentsStub?: Promise<{[name: string]: Function}>;
+  agentsStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of AgentsClient.
@@ -102,21 +113,42 @@ export class AgentsClient {
    *     const client = new AgentsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AgentsClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'dialogflow.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +173,7 @@ export class AgentsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +187,11 @@ export class AgentsClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,139 +213,160 @@ export class AgentsClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       conversationDatasetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversationDatasets/{conversation_dataset}'
+        'projects/{project}/locations/{location}/conversationDatasets/{conversation_dataset}',
       ),
       encryptionSpecPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/encryptionSpec'
+        'projects/{project}/locations/{location}/encryptionSpec',
       ),
       generatorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/generators/{generator}'
+        'projects/{project}/locations/{location}/generators/{generator}',
       ),
       generatorEvaluationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/generators/{generator}/evaluations/{evaluation}'
+        'projects/{project}/locations/{location}/generators/{generator}/evaluations/{evaluation}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       projectAgentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent'
+        'projects/{project}/agent',
       ),
       projectAgentEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/entityTypes/{entity_type}'
+        'projects/{project}/agent/entityTypes/{entity_type}',
       ),
       projectAgentEnvironmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/environments/{environment}'
+        'projects/{project}/agent/environments/{environment}',
       ),
-      projectAgentEnvironmentUserSessionContextPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
-      ),
-      projectAgentEnvironmentUserSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
-      ),
+      projectAgentEnvironmentUserSessionContextPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}',
+        ),
+      projectAgentEnvironmentUserSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}',
+        ),
       projectAgentFulfillmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/fulfillment'
+        'projects/{project}/agent/fulfillment',
       ),
       projectAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/intents/{intent}'
+        'projects/{project}/agent/intents/{intent}',
       ),
       projectAgentSessionContextPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/sessions/{session}/contexts/{context}'
+        'projects/{project}/agent/sessions/{session}/contexts/{context}',
       ),
-      projectAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
-      ),
+      projectAgentSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}',
+        ),
       projectAgentVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/versions/{version}'
+        'projects/{project}/agent/versions/{version}',
       ),
       projectAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/answerRecords/{answer_record}'
+        'projects/{project}/answerRecords/{answer_record}',
       ),
       projectConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/conversations/{conversation}/messages/{message}'
+        'projects/{project}/conversations/{conversation}/messages/{message}',
       ),
       projectConversationModelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/conversationModels/{conversation_model}'
+        'projects/{project}/conversationModels/{conversation_model}',
       ),
-      projectConversationModelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/conversationModels/{conversation_model}/evaluations/{evaluation}'
-      ),
-      projectConversationParticipantPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/conversations/{conversation}/participants/{participant}'
-      ),
+      projectConversationModelEvaluationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/conversationModels/{conversation_model}/evaluations/{evaluation}',
+        ),
+      projectConversationParticipantPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/conversations/{conversation}/participants/{participant}',
+        ),
       projectConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/conversationProfiles/{conversation_profile}'
+        'projects/{project}/conversationProfiles/{conversation_profile}',
       ),
       projectConversationsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/conversations/{conversation}'
+        'projects/{project}/conversations/{conversation}',
       ),
       projectKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/knowledgeBases/{knowledge_base}'
+        'projects/{project}/knowledgeBases/{knowledge_base}',
       ),
-      projectKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
-      ),
+      projectKnowledgeBaseDocumentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}',
+        ),
       projectLocationAgentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agent'
+        'projects/{project}/locations/{location}/agent',
       ),
-      projectLocationAgentEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agent/entityTypes/{entity_type}'
-      ),
-      projectLocationAgentEnvironmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agent/environments/{environment}'
-      ),
-      projectLocationAgentEnvironmentUserSessionContextPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
-      ),
-      projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
-      ),
-      projectLocationAgentFulfillmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agent/fulfillment'
-      ),
+      projectLocationAgentEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/entityTypes/{entity_type}',
+        ),
+      projectLocationAgentEnvironmentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/environments/{environment}',
+        ),
+      projectLocationAgentEnvironmentUserSessionContextPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}',
+        ),
+      projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}',
+        ),
+      projectLocationAgentFulfillmentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/fulfillment',
+        ),
       projectLocationAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agent/intents/{intent}'
+        'projects/{project}/locations/{location}/agent/intents/{intent}',
       ),
-      projectLocationAgentSessionContextPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agent/sessions/{session}/contexts/{context}'
-      ),
-      projectLocationAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agent/sessions/{session}/entityTypes/{entity_type}'
-      ),
+      projectLocationAgentSessionContextPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/sessions/{session}/contexts/{context}',
+        ),
+      projectLocationAgentSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/sessions/{session}/entityTypes/{entity_type}',
+        ),
       projectLocationAgentVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/agent/versions/{version}'
+        'projects/{project}/locations/{location}/agent/versions/{version}',
       ),
       projectLocationAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/answerRecords/{answer_record}'
+        'projects/{project}/locations/{location}/answerRecords/{answer_record}',
       ),
-      projectLocationConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
-      ),
-      projectLocationConversationModelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversationModels/{conversation_model}'
-      ),
-      projectLocationConversationModelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/{evaluation}'
-      ),
-      projectLocationConversationParticipantPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}'
-      ),
-      projectLocationConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}'
-      ),
-      projectLocationConversationsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}'
-      ),
-      projectLocationKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}'
-      ),
-      projectLocationKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
-      ),
+      projectLocationConversationMessagePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}',
+        ),
+      projectLocationConversationModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversationModels/{conversation_model}',
+        ),
+      projectLocationConversationModelEvaluationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/{evaluation}',
+        ),
+      projectLocationConversationParticipantPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}',
+        ),
+      projectLocationConversationProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}',
+        ),
+      projectLocationConversationsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversations/{conversation}',
+        ),
+      projectLocationKnowledgeBasePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}',
+        ),
+      projectLocationKnowledgeBaseDocumentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}',
+        ),
       sipTrunkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sipTrunks/{siptrunk}'
+        'projects/{project}/locations/{location}/sipTrunks/{siptrunk}',
       ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tools/{tool}'
+        'projects/{project}/locations/{location}/tools/{tool}',
       ),
     };
 
@@ -325,8 +374,11 @@ export class AgentsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      searchAgents:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'agents')
+      searchAgents: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'agents',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -335,56 +387,100 @@ export class AgentsClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v2/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v2/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v2/{name=projects/*/operations/*}:cancel',additional_bindings: [{post: '/v2/{name=projects/*/locations/*/operations/*}:cancel',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v2/{name=projects/*/operations/*}',additional_bindings: [{get: '/v2/{name=projects/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2/{name=projects/*}/operations',additional_bindings: [{get: '/v2/{name=projects/*/locations/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v2/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v2/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v2/{name=projects/*/operations/*}:cancel',
+          additional_bindings: [
+            { post: '/v2/{name=projects/*/locations/*/operations/*}:cancel' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v2/{name=projects/*/operations/*}',
+          additional_bindings: [
+            { get: '/v2/{name=projects/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v2/{name=projects/*}/operations',
+          additional_bindings: [
+            { get: '/v2/{name=projects/*/locations/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const trainAgentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const trainAgentMetadata = protoFilesRoot.lookup(
-      '.google.protobuf.Struct') as gax.protobuf.Type;
+      '.google.protobuf.Struct',
+    ) as gax.protobuf.Type;
     const exportAgentResponse = protoFilesRoot.lookup(
-      '.google.cloud.dialogflow.v2.ExportAgentResponse') as gax.protobuf.Type;
+      '.google.cloud.dialogflow.v2.ExportAgentResponse',
+    ) as gax.protobuf.Type;
     const exportAgentMetadata = protoFilesRoot.lookup(
-      '.google.protobuf.Struct') as gax.protobuf.Type;
+      '.google.protobuf.Struct',
+    ) as gax.protobuf.Type;
     const importAgentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const importAgentMetadata = protoFilesRoot.lookup(
-      '.google.protobuf.Struct') as gax.protobuf.Type;
+      '.google.protobuf.Struct',
+    ) as gax.protobuf.Type;
     const restoreAgentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const restoreAgentMetadata = protoFilesRoot.lookup(
-      '.google.protobuf.Struct') as gax.protobuf.Type;
+      '.google.protobuf.Struct',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       trainAgent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         trainAgentResponse.decode.bind(trainAgentResponse),
-        trainAgentMetadata.decode.bind(trainAgentMetadata)),
+        trainAgentMetadata.decode.bind(trainAgentMetadata),
+      ),
       exportAgent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportAgentResponse.decode.bind(exportAgentResponse),
-        exportAgentMetadata.decode.bind(exportAgentMetadata)),
+        exportAgentMetadata.decode.bind(exportAgentMetadata),
+      ),
       importAgent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importAgentResponse.decode.bind(importAgentResponse),
-        importAgentMetadata.decode.bind(importAgentMetadata)),
+        importAgentMetadata.decode.bind(importAgentMetadata),
+      ),
       restoreAgent: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         restoreAgentResponse.decode.bind(restoreAgentResponse),
-        restoreAgentMetadata.decode.bind(restoreAgentMetadata))
+        restoreAgentMetadata.decode.bind(restoreAgentMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.dialogflow.v2.Agents', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.dialogflow.v2.Agents',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -415,28 +511,43 @@ export class AgentsClient {
     // Put together the "service stub" for
     // google.cloud.dialogflow.v2.Agents.
     this.agentsStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.dialogflow.v2.Agents') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.dialogflow.v2.Agents',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dialogflow.v2.Agents,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const agentsStubMethods =
-        ['getAgent', 'setAgent', 'deleteAgent', 'searchAgents', 'trainAgent', 'exportAgent', 'importAgent', 'restoreAgent', 'getValidationResult'];
+    const agentsStubMethods = [
+      'getAgent',
+      'setAgent',
+      'deleteAgent',
+      'searchAgents',
+      'trainAgent',
+      'exportAgent',
+      'importAgent',
+      'restoreAgent',
+      'getValidationResult',
+    ];
     for (const methodName of agentsStubMethods) {
       const callPromise = this.agentsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -446,7 +557,7 @@ export class AgentsClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -461,8 +572,14 @@ export class AgentsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dialogflow.googleapis.com';
   }
@@ -473,8 +590,14 @@ export class AgentsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dialogflow.googleapis.com';
   }
@@ -507,7 +630,7 @@ export class AgentsClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/dialogflow'
+      'https://www.googleapis.com/auth/dialogflow',
     ];
   }
 
@@ -517,8 +640,9 @@ export class AgentsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -529,1025 +653,1426 @@ export class AgentsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Retrieves the specified agent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project that the agent to fetch is associated with.
- *   Format: `projects/<Project ID>`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.Agent|Agent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.get_agent.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_GetAgent_async
- */
+  /**
+   * Retrieves the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent to fetch is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.Agent|Agent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.get_agent.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_GetAgent_async
+   */
   getAgent(
-      request?: protos.google.cloud.dialogflow.v2.IGetAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.v2.IAgent,
-        protos.google.cloud.dialogflow.v2.IGetAgentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.v2.IGetAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IAgent,
+      protos.google.cloud.dialogflow.v2.IGetAgentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getAgent(
-      request: protos.google.cloud.dialogflow.v2.IGetAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2.IAgent,
-          protos.google.cloud.dialogflow.v2.IGetAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IGetAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IAgent,
+      protos.google.cloud.dialogflow.v2.IGetAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAgent(
-      request: protos.google.cloud.dialogflow.v2.IGetAgentRequest,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2.IAgent,
-          protos.google.cloud.dialogflow.v2.IGetAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IGetAgentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IAgent,
+      protos.google.cloud.dialogflow.v2.IGetAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAgent(
-      request?: protos.google.cloud.dialogflow.v2.IGetAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dialogflow.v2.IGetAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dialogflow.v2.IAgent,
-          protos.google.cloud.dialogflow.v2.IGetAgentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dialogflow.v2.IAgent,
-          protos.google.cloud.dialogflow.v2.IGetAgentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dialogflow.v2.IAgent,
-        protos.google.cloud.dialogflow.v2.IGetAgentRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.dialogflow.v2.IGetAgentRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2.IAgent,
+      protos.google.cloud.dialogflow.v2.IGetAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IAgent,
+      protos.google.cloud.dialogflow.v2.IGetAgentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getAgent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dialogflow.v2.IAgent,
-        protos.google.cloud.dialogflow.v2.IGetAgentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IAgent,
+          protos.google.cloud.dialogflow.v2.IGetAgentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAgent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dialogflow.v2.IAgent,
-        protos.google.cloud.dialogflow.v2.IGetAgentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAgent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IAgent,
+          protos.google.cloud.dialogflow.v2.IGetAgentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAgent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates/updates the specified agent.
- *
- * Note: You should always train an agent prior to sending it queries. See the
- * [training
- * documentation](https://cloud.google.com/dialogflow/es/docs/training).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.dialogflow.v2.Agent} request.agent
- *   Required. The agent to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The mask to control which fields get updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.Agent|Agent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.set_agent.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_SetAgent_async
- */
+  /**
+   * Creates/updates the specified agent.
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2.Agent} request.agent
+   *   Required. The agent to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The mask to control which fields get updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.Agent|Agent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.set_agent.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_SetAgent_async
+   */
   setAgent(
-      request?: protos.google.cloud.dialogflow.v2.ISetAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.v2.IAgent,
-        protos.google.cloud.dialogflow.v2.ISetAgentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.v2.ISetAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IAgent,
+      protos.google.cloud.dialogflow.v2.ISetAgentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   setAgent(
-      request: protos.google.cloud.dialogflow.v2.ISetAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2.IAgent,
-          protos.google.cloud.dialogflow.v2.ISetAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.ISetAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IAgent,
+      protos.google.cloud.dialogflow.v2.ISetAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   setAgent(
-      request: protos.google.cloud.dialogflow.v2.ISetAgentRequest,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2.IAgent,
-          protos.google.cloud.dialogflow.v2.ISetAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.ISetAgentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IAgent,
+      protos.google.cloud.dialogflow.v2.ISetAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   setAgent(
-      request?: protos.google.cloud.dialogflow.v2.ISetAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dialogflow.v2.ISetAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dialogflow.v2.IAgent,
-          protos.google.cloud.dialogflow.v2.ISetAgentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dialogflow.v2.IAgent,
-          protos.google.cloud.dialogflow.v2.ISetAgentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dialogflow.v2.IAgent,
-        protos.google.cloud.dialogflow.v2.ISetAgentRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.dialogflow.v2.ISetAgentRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2.IAgent,
+      protos.google.cloud.dialogflow.v2.ISetAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IAgent,
+      protos.google.cloud.dialogflow.v2.ISetAgentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'agent.parent': request.agent!.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'agent.parent': request.agent!.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('setAgent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dialogflow.v2.IAgent,
-        protos.google.cloud.dialogflow.v2.ISetAgentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IAgent,
+          protos.google.cloud.dialogflow.v2.ISetAgentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.setAgent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dialogflow.v2.IAgent,
-        protos.google.cloud.dialogflow.v2.ISetAgentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('setAgent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .setAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IAgent,
+          protos.google.cloud.dialogflow.v2.ISetAgentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setAgent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified agent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project that the agent to delete is associated with.
- *   Format: `projects/<Project ID>`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.delete_agent.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_DeleteAgent_async
- */
+  /**
+   * Deletes the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent to delete is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.delete_agent.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_DeleteAgent_async
+   */
   deleteAgent(
-      request?: protos.google.cloud.dialogflow.v2.IDeleteAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.v2.IDeleteAgentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.v2.IDeleteAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2.IDeleteAgentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteAgent(
-      request: protos.google.cloud.dialogflow.v2.IDeleteAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.v2.IDeleteAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IDeleteAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2.IDeleteAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAgent(
-      request: protos.google.cloud.dialogflow.v2.IDeleteAgentRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.v2.IDeleteAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IDeleteAgentRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2.IDeleteAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAgent(
-      request?: protos.google.cloud.dialogflow.v2.IDeleteAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dialogflow.v2.IDeleteAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.v2.IDeleteAgentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dialogflow.v2.IDeleteAgentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.v2.IDeleteAgentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2.IDeleteAgentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2.IDeleteAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2.IDeleteAgentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteAgent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.v2.IDeleteAgentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2.IDeleteAgentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteAgent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dialogflow.v2.IDeleteAgentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteAgent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dialogflow.v2.IDeleteAgentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAgent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets agent validation result. Agent validation is performed during
- * training time and is updated automatically when training is completed.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project that the agent is associated with.
- *   Format: `projects/<Project ID>`.
- * @param {string} [request.languageCode]
- *   Optional. The language for which you want a validation result. If not
- *   specified, the agent's default language is used. [Many
- *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
- *   are supported. Note: languages must be enabled in the agent before they can
- *   be used.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.ValidationResult|ValidationResult}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.get_validation_result.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_GetValidationResult_async
- */
+  /**
+   * Gets agent validation result. Agent validation is performed during
+   * training time and is updated automatically when training is completed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {string} [request.languageCode]
+   *   Optional. The language for which you want a validation result. If not
+   *   specified, the agent's default language is used. [Many
+   *   languages](https://cloud.google.com/dialogflow/docs/reference/language)
+   *   are supported. Note: languages must be enabled in the agent before they can
+   *   be used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2.ValidationResult|ValidationResult}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.get_validation_result.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_GetValidationResult_async
+   */
   getValidationResult(
-      request?: protos.google.cloud.dialogflow.v2.IGetValidationResultRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.v2.IValidationResult,
-        protos.google.cloud.dialogflow.v2.IGetValidationResultRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.v2.IGetValidationResultRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IValidationResult,
+      protos.google.cloud.dialogflow.v2.IGetValidationResultRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getValidationResult(
-      request: protos.google.cloud.dialogflow.v2.IGetValidationResultRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2.IValidationResult,
-          protos.google.cloud.dialogflow.v2.IGetValidationResultRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IGetValidationResultRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IValidationResult,
+      | protos.google.cloud.dialogflow.v2.IGetValidationResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getValidationResult(
-      request: protos.google.cloud.dialogflow.v2.IGetValidationResultRequest,
-      callback: Callback<
-          protos.google.cloud.dialogflow.v2.IValidationResult,
-          protos.google.cloud.dialogflow.v2.IGetValidationResultRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IGetValidationResultRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IValidationResult,
+      | protos.google.cloud.dialogflow.v2.IGetValidationResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getValidationResult(
-      request?: protos.google.cloud.dialogflow.v2.IGetValidationResultRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dialogflow.v2.IGetValidationResultRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dialogflow.v2.IValidationResult,
-          protos.google.cloud.dialogflow.v2.IGetValidationResultRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dialogflow.v2.IValidationResult,
-          protos.google.cloud.dialogflow.v2.IGetValidationResultRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dialogflow.v2.IValidationResult,
-        protos.google.cloud.dialogflow.v2.IGetValidationResultRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2.IGetValidationResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2.IValidationResult,
+      | protos.google.cloud.dialogflow.v2.IGetValidationResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IValidationResult,
+      protos.google.cloud.dialogflow.v2.IGetValidationResultRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getValidationResult request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dialogflow.v2.IValidationResult,
-        protos.google.cloud.dialogflow.v2.IGetValidationResultRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IValidationResult,
+          | protos.google.cloud.dialogflow.v2.IGetValidationResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getValidationResult response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getValidationResult(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dialogflow.v2.IValidationResult,
-        protos.google.cloud.dialogflow.v2.IGetValidationResultRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getValidationResult response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getValidationResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dialogflow.v2.IValidationResult,
+          (
+            | protos.google.cloud.dialogflow.v2.IGetValidationResultRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getValidationResult response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Trains the specified agent.
- *
- * This method is a [long-running
- * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
- * The returned `Operation` type has the following method-specific fields:
- *
- * - `metadata`: An empty [Struct
- *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
- * - `response`: An [Empty
- *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
- *
- * Note: You should always train an agent prior to sending it queries. See the
- * [training
- * documentation](https://cloud.google.com/dialogflow/es/docs/training).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project that the agent to train is associated with.
- *   Format: `projects/<Project ID>`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.train_agent.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_TrainAgent_async
- */
+  /**
+   * Trains the specified agent.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: An [Empty
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent to train is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.train_agent.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_TrainAgent_async
+   */
   trainAgent(
-      request?: protos.google.cloud.dialogflow.v2.ITrainAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.v2.ITrainAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   trainAgent(
-      request: protos.google.cloud.dialogflow.v2.ITrainAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.ITrainAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   trainAgent(
-      request: protos.google.cloud.dialogflow.v2.ITrainAgentRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.ITrainAgentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   trainAgent(
-      request?: protos.google.cloud.dialogflow.v2.ITrainAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dialogflow.v2.ITrainAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('trainAgent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('trainAgent request %j', request);
-    return this.innerApiCalls.trainAgent(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('trainAgent response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .trainAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('trainAgent response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `trainAgent()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.train_agent.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_TrainAgent_async
- */
-  async checkTrainAgentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>>{
+  /**
+   * Check the status of the long running operation returned by `trainAgent()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.train_agent.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_TrainAgent_async
+   */
+  async checkTrainAgentProgress(
+    name: string,
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
     this._log.info('trainAgent long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.trainAgent, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.trainAgent,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
   }
-/**
- * Exports the specified agent to a ZIP file.
- *
- * This method is a [long-running
- * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
- * The returned `Operation` type has the following method-specific fields:
- *
- * - `metadata`: An empty [Struct
- *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
- * - `response`:
- * {@link protos.google.cloud.dialogflow.v2.ExportAgentResponse|ExportAgentResponse}
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project that the agent to export is associated with.
- *   Format: `projects/<Project ID>`.
- * @param {string} request.agentUri
- *   Required. The [Google Cloud
- *   Storage](https://cloud.google.com/storage/docs/) URI to export the agent
- *   to. The format of this URI must be `gs://<bucket-name>/<object-name>`. If
- *   left unspecified, the serialized agent is returned inline.
- *
- *   Dialogflow performs a write operation for the Cloud Storage object
- *   on the caller's behalf, so your request authentication must
- *   have write permissions for the object. For more information, see
- *   [Dialogflow access
- *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.export_agent.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_ExportAgent_async
- */
+  /**
+   * Exports the specified agent to a ZIP file.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`:
+   * {@link protos.google.cloud.dialogflow.v2.ExportAgentResponse|ExportAgentResponse}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent to export is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {string} request.agentUri
+   *   Required. The [Google Cloud
+   *   Storage](https://cloud.google.com/storage/docs/) URI to export the agent
+   *   to. The format of this URI must be `gs://<bucket-name>/<object-name>`. If
+   *   left unspecified, the serialized agent is returned inline.
+   *
+   *   Dialogflow performs a write operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have write permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.export_agent.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_ExportAgent_async
+   */
   exportAgent(
-      request?: protos.google.cloud.dialogflow.v2.IExportAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dialogflow.v2.IExportAgentResponse, protos.google.protobuf.IStruct>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.v2.IExportAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IExportAgentResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   exportAgent(
-      request: protos.google.cloud.dialogflow.v2.IExportAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2.IExportAgentResponse, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IExportAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IExportAgentResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportAgent(
-      request: protos.google.cloud.dialogflow.v2.IExportAgentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2.IExportAgentResponse, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IExportAgentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IExportAgentResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportAgent(
-      request?: protos.google.cloud.dialogflow.v2.IExportAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dialogflow.v2.IExportAgentResponse, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2.IExportAgentResponse, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dialogflow.v2.IExportAgentResponse, protos.google.protobuf.IStruct>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dialogflow.v2.IExportAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IExportAgentResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IExportAgentResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.v2.IExportAgentResponse,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dialogflow.v2.IExportAgentResponse, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IExportAgentResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportAgent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportAgent request %j', request);
-    return this.innerApiCalls.exportAgent(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dialogflow.v2.IExportAgentResponse, protos.google.protobuf.IStruct>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('exportAgent response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .exportAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dialogflow.v2.IExportAgentResponse,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportAgent response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `exportAgent()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.export_agent.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_ExportAgent_async
- */
-  async checkExportAgentProgress(name: string): Promise<LROperation<protos.google.cloud.dialogflow.v2.ExportAgentResponse, protos.google.protobuf.Struct>>{
+  /**
+   * Check the status of the long running operation returned by `exportAgent()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.export_agent.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_ExportAgent_async
+   */
+  async checkExportAgentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.v2.ExportAgentResponse,
+      protos.google.protobuf.Struct
+    >
+  > {
     this._log.info('exportAgent long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportAgent, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dialogflow.v2.ExportAgentResponse, protos.google.protobuf.Struct>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportAgent,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.v2.ExportAgentResponse,
+      protos.google.protobuf.Struct
+    >;
   }
-/**
- * Imports the specified agent from a ZIP file.
- *
- * Uploads new intents and entity types without deleting the existing ones.
- * Intents and entity types with the same name are replaced with the new
- * versions from
- * {@link protos.google.cloud.dialogflow.v2.ImportAgentRequest|ImportAgentRequest}. After
- * the import, the imported draft agent will be trained automatically (unless
- * disabled in agent settings). However, once the import is done, training may
- * not be completed yet. Please call
- * {@link protos.google.cloud.dialogflow.v2.Agents.TrainAgent|TrainAgent} and wait for the
- * operation it returns in order to train explicitly.
- *
- * This method is a [long-running
- * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
- * The returned `Operation` type has the following method-specific fields:
- *
- * - `metadata`: An empty [Struct
- *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
- * - `response`: An [Empty
- *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
- *
- * The operation only tracks when importing is complete, not when it is done
- * training.
- *
- * Note: You should always train an agent prior to sending it queries. See the
- * [training
- * documentation](https://cloud.google.com/dialogflow/es/docs/training).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project that the agent to import is associated with.
- *   Format: `projects/<Project ID>`.
- * @param {string} request.agentUri
- *   The URI to a Google Cloud Storage file containing the agent to import.
- *   Note: The URI must start with "gs://".
- *
- *   Dialogflow performs a read operation for the Cloud Storage object
- *   on the caller's behalf, so your request authentication must
- *   have read permissions for the object. For more information, see
- *   [Dialogflow access
- *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
- * @param {Buffer} request.agentContent
- *   Zip compressed raw byte content for agent.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.import_agent.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_ImportAgent_async
- */
+  /**
+   * Imports the specified agent from a ZIP file.
+   *
+   * Uploads new intents and entity types without deleting the existing ones.
+   * Intents and entity types with the same name are replaced with the new
+   * versions from
+   * {@link protos.google.cloud.dialogflow.v2.ImportAgentRequest|ImportAgentRequest}. After
+   * the import, the imported draft agent will be trained automatically (unless
+   * disabled in agent settings). However, once the import is done, training may
+   * not be completed yet. Please call
+   * {@link protos.google.cloud.dialogflow.v2.Agents.TrainAgent|TrainAgent} and wait for the
+   * operation it returns in order to train explicitly.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: An [Empty
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
+   *
+   * The operation only tracks when importing is complete, not when it is done
+   * training.
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent to import is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {string} request.agentUri
+   *   The URI to a Google Cloud Storage file containing the agent to import.
+   *   Note: The URI must start with "gs://".
+   *
+   *   Dialogflow performs a read operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have read permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+   * @param {Buffer} request.agentContent
+   *   Zip compressed raw byte content for agent.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.import_agent.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_ImportAgent_async
+   */
   importAgent(
-      request?: protos.google.cloud.dialogflow.v2.IImportAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.v2.IImportAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   importAgent(
-      request: protos.google.cloud.dialogflow.v2.IImportAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IImportAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importAgent(
-      request: protos.google.cloud.dialogflow.v2.IImportAgentRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IImportAgentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importAgent(
-      request?: protos.google.cloud.dialogflow.v2.IImportAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dialogflow.v2.IImportAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importAgent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importAgent request %j', request);
-    return this.innerApiCalls.importAgent(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('importAgent response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .importAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importAgent response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `importAgent()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.import_agent.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_ImportAgent_async
- */
-  async checkImportAgentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>>{
+  /**
+   * Check the status of the long running operation returned by `importAgent()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.import_agent.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_ImportAgent_async
+   */
+  async checkImportAgentProgress(
+    name: string,
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
     this._log.info('importAgent long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importAgent, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importAgent,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
   }
-/**
- * Restores the specified agent from a ZIP file.
- *
- * Replaces the current agent version with a new one. All the intents and
- * entity types in the older version are deleted. After the restore, the
- * restored draft agent will be trained automatically (unless disabled in
- * agent settings). However, once the restore is done, training may not be
- * completed yet. Please call
- * {@link protos.google.cloud.dialogflow.v2.Agents.TrainAgent|TrainAgent} and wait for the
- * operation it returns in order to train explicitly.
- *
- * This method is a [long-running
- * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
- * The returned `Operation` type has the following method-specific fields:
- *
- * - `metadata`: An empty [Struct
- *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
- * - `response`: An [Empty
- *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
- *
- * The operation only tracks when restoring is complete, not when it is done
- * training.
- *
- * Note: You should always train an agent prior to sending it queries. See the
- * [training
- * documentation](https://cloud.google.com/dialogflow/es/docs/training).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project that the agent to restore is associated with.
- *   Format: `projects/<Project ID>`.
- * @param {string} request.agentUri
- *   The URI to a Google Cloud Storage file containing the agent to restore.
- *   Note: The URI must start with "gs://".
- *
- *   Dialogflow performs a read operation for the Cloud Storage object
- *   on the caller's behalf, so your request authentication must
- *   have read permissions for the object. For more information, see
- *   [Dialogflow access
- *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
- * @param {Buffer} request.agentContent
- *   Zip compressed raw byte content for agent.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.restore_agent.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_RestoreAgent_async
- */
+  /**
+   * Restores the specified agent from a ZIP file.
+   *
+   * Replaces the current agent version with a new one. All the intents and
+   * entity types in the older version are deleted. After the restore, the
+   * restored draft agent will be trained automatically (unless disabled in
+   * agent settings). However, once the restore is done, training may not be
+   * completed yet. Please call
+   * {@link protos.google.cloud.dialogflow.v2.Agents.TrainAgent|TrainAgent} and wait for the
+   * operation it returns in order to train explicitly.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: An [Empty
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
+   *
+   * The operation only tracks when restoring is complete, not when it is done
+   * training.
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project that the agent to restore is associated with.
+   *   Format: `projects/<Project ID>`.
+   * @param {string} request.agentUri
+   *   The URI to a Google Cloud Storage file containing the agent to restore.
+   *   Note: The URI must start with "gs://".
+   *
+   *   Dialogflow performs a read operation for the Cloud Storage object
+   *   on the caller's behalf, so your request authentication must
+   *   have read permissions for the object. For more information, see
+   *   [Dialogflow access
+   *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+   * @param {Buffer} request.agentContent
+   *   Zip compressed raw byte content for agent.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.restore_agent.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_RestoreAgent_async
+   */
   restoreAgent(
-      request?: protos.google.cloud.dialogflow.v2.IRestoreAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dialogflow.v2.IRestoreAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   restoreAgent(
-      request: protos.google.cloud.dialogflow.v2.IRestoreAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IRestoreAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   restoreAgent(
-      request: protos.google.cloud.dialogflow.v2.IRestoreAgentRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dialogflow.v2.IRestoreAgentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   restoreAgent(
-      request?: protos.google.cloud.dialogflow.v2.IRestoreAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dialogflow.v2.IRestoreAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.protobuf.IStruct
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('restoreAgent response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('restoreAgent request %j', request);
-    return this.innerApiCalls.restoreAgent(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.protobuf.IStruct>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('restoreAgent response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .restoreAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.protobuf.IStruct
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreAgent response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `restoreAgent()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.restore_agent.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_RestoreAgent_async
- */
-  async checkRestoreAgentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>>{
+  /**
+   * Check the status of the long running operation returned by `restoreAgent()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.restore_agent.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_RestoreAgent_async
+   */
+  async checkRestoreAgentProgress(
+    name: string,
+  ): Promise<
+    LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>
+  > {
     this._log.info('restoreAgent long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.restoreAgent, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.protobuf.Struct>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.restoreAgent,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.protobuf.Struct
+    >;
   }
- /**
- * Returns the list of agents.
- *
- * Since there is at most one conversational agent per project, this method is
- * useful primarily for listing all agents across projects the caller has
- * access to. One can achieve that with a wildcard project collection id "-".
- * Refer to [List
- * Sub-Collections](https://cloud.google.com/apis/design/design_patterns#list_sub-collections).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project to list agents from.
- *   Format: `projects/<Project ID or '-'>`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of items to return in a single page. By
- *   default 100 and at most 1000.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2.Agent|Agent}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `searchAgentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Returns the list of agents.
+   *
+   * Since there is at most one conversational agent per project, this method is
+   * useful primarily for listing all agents across projects the caller has
+   * access to. One can achieve that with a wildcard project collection id "-".
+   * Refer to [List
+   * Sub-Collections](https://cloud.google.com/apis/design/design_patterns#list_sub-collections).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project to list agents from.
+   *   Format: `projects/<Project ID or '-'>`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dialogflow.v2.Agent|Agent}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchAgentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchAgents(
-      request?: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dialogflow.v2.IAgent[],
-        protos.google.cloud.dialogflow.v2.ISearchAgentsRequest|null,
-        protos.google.cloud.dialogflow.v2.ISearchAgentsResponse
-      ]>;
+    request?: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IAgent[],
+      protos.google.cloud.dialogflow.v2.ISearchAgentsRequest | null,
+      protos.google.cloud.dialogflow.v2.ISearchAgentsResponse,
+    ]
+  >;
   searchAgents(
-      request: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
-          protos.google.cloud.dialogflow.v2.ISearchAgentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2.IAgent>): void;
+    request: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
+      | protos.google.cloud.dialogflow.v2.ISearchAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2.IAgent
+    >,
+  ): void;
   searchAgents(
-      request: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
-          protos.google.cloud.dialogflow.v2.ISearchAgentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2.IAgent>): void;
+    request: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
+      | protos.google.cloud.dialogflow.v2.ISearchAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2.IAgent
+    >,
+  ): void;
   searchAgents(
-      request?: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
-          protos.google.cloud.dialogflow.v2.ISearchAgentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2.IAgent>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
-          protos.google.cloud.dialogflow.v2.ISearchAgentsResponse|null|undefined,
-          protos.google.cloud.dialogflow.v2.IAgent>):
-      Promise<[
-        protos.google.cloud.dialogflow.v2.IAgent[],
-        protos.google.cloud.dialogflow.v2.ISearchAgentsRequest|null,
-        protos.google.cloud.dialogflow.v2.ISearchAgentsResponse
-      ]>|void {
+          | protos.google.cloud.dialogflow.v2.ISearchAgentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2.IAgent
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
+      | protos.google.cloud.dialogflow.v2.ISearchAgentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.v2.IAgent
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IAgent[],
+      protos.google.cloud.dialogflow.v2.ISearchAgentsRequest | null,
+      protos.google.cloud.dialogflow.v2.ISearchAgentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
-      protos.google.cloud.dialogflow.v2.ISearchAgentsResponse|null|undefined,
-      protos.google.cloud.dialogflow.v2.IAgent>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
+          | protos.google.cloud.dialogflow.v2.ISearchAgentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2.IAgent
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchAgents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1556,113 +2081,118 @@ export class AgentsClient {
     this._log.info('searchAgents request %j', request);
     return this.innerApiCalls
       .searchAgents(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dialogflow.v2.IAgent[],
-        protos.google.cloud.dialogflow.v2.ISearchAgentsRequest|null,
-        protos.google.cloud.dialogflow.v2.ISearchAgentsResponse
-      ]) => {
-        this._log.info('searchAgents values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dialogflow.v2.IAgent[],
+          protos.google.cloud.dialogflow.v2.ISearchAgentsRequest | null,
+          protos.google.cloud.dialogflow.v2.ISearchAgentsResponse,
+        ]) => {
+          this._log.info('searchAgents values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `searchAgents`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project to list agents from.
- *   Format: `projects/<Project ID or '-'>`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of items to return in a single page. By
- *   default 100 and at most 1000.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2.Agent|Agent} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `searchAgentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `searchAgents`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project to list agents from.
+   *   Format: `projects/<Project ID or '-'>`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dialogflow.v2.Agent|Agent} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchAgentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchAgentsStream(
-      request?: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['searchAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchAgents stream %j', request);
     return this.descriptors.page.searchAgents.createStream(
       this.innerApiCalls.searchAgents as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `searchAgents`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project to list agents from.
- *   Format: `projects/<Project ID or '-'>`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of items to return in a single page. By
- *   default 100 and at most 1000.
- * @param {string} request.pageToken
- *   The next_page_token value returned from a previous list request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dialogflow.v2.Agent|Agent}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/agents.search_agents.js</caption>
- * region_tag:dialogflow_v2_generated_Agents_SearchAgents_async
- */
+  /**
+   * Equivalent to `searchAgents`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project to list agents from.
+   *   Format: `projects/<Project ID or '-'>`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By
+   *   default 100 and at most 1000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dialogflow.v2.Agent|Agent}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/agents.search_agents.js</caption>
+   * region_tag:dialogflow_v2_generated_Agents_SearchAgents_async
+   */
   searchAgentsAsync(
-      request?: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dialogflow.v2.IAgent>{
+    request?: protos.google.cloud.dialogflow.v2.ISearchAgentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dialogflow.v2.IAgent> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['searchAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchAgents iterate %j', request);
     return this.descriptors.page.searchAgents.asyncIterate(
       this.innerApiCalls['searchAgents'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dialogflow.v2.IAgent>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1697,12 +2227,11 @@ export class AgentsClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1735,12 +2264,12 @@ export class AgentsClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1783,22 +2312,22 @@ export class AgentsClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1833,15 +2362,15 @@ export class AgentsClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1875,7 +2404,7 @@ export class AgentsClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1888,25 +2417,24 @@ export class AgentsClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1945,22 +2473,22 @@ export class AgentsClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1976,7 +2504,11 @@ export class AgentsClient {
    * @param {string} conversation_dataset
    * @returns {string} Resource name string.
    */
-  conversationDatasetPath(project:string,location:string,conversationDataset:string) {
+  conversationDatasetPath(
+    project: string,
+    location: string,
+    conversationDataset: string,
+  ) {
     return this.pathTemplates.conversationDatasetPathTemplate.render({
       project: project,
       location: location,
@@ -1992,7 +2524,9 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConversationDatasetName(conversationDatasetName: string) {
-    return this.pathTemplates.conversationDatasetPathTemplate.match(conversationDatasetName).project;
+    return this.pathTemplates.conversationDatasetPathTemplate.match(
+      conversationDatasetName,
+    ).project;
   }
 
   /**
@@ -2003,7 +2537,9 @@ export class AgentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConversationDatasetName(conversationDatasetName: string) {
-    return this.pathTemplates.conversationDatasetPathTemplate.match(conversationDatasetName).location;
+    return this.pathTemplates.conversationDatasetPathTemplate.match(
+      conversationDatasetName,
+    ).location;
   }
 
   /**
@@ -2013,8 +2549,12 @@ export class AgentsClient {
    *   A fully-qualified path representing ConversationDataset resource.
    * @returns {string} A string representing the conversation_dataset.
    */
-  matchConversationDatasetFromConversationDatasetName(conversationDatasetName: string) {
-    return this.pathTemplates.conversationDatasetPathTemplate.match(conversationDatasetName).conversation_dataset;
+  matchConversationDatasetFromConversationDatasetName(
+    conversationDatasetName: string,
+  ) {
+    return this.pathTemplates.conversationDatasetPathTemplate.match(
+      conversationDatasetName,
+    ).conversation_dataset;
   }
 
   /**
@@ -2024,7 +2564,7 @@ export class AgentsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  encryptionSpecPath(project:string,location:string) {
+  encryptionSpecPath(project: string, location: string) {
     return this.pathTemplates.encryptionSpecPathTemplate.render({
       project: project,
       location: location,
@@ -2039,7 +2579,9 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEncryptionSpecName(encryptionSpecName: string) {
-    return this.pathTemplates.encryptionSpecPathTemplate.match(encryptionSpecName).project;
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName,
+    ).project;
   }
 
   /**
@@ -2050,7 +2592,9 @@ export class AgentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEncryptionSpecName(encryptionSpecName: string) {
-    return this.pathTemplates.encryptionSpecPathTemplate.match(encryptionSpecName).location;
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName,
+    ).location;
   }
 
   /**
@@ -2061,7 +2605,7 @@ export class AgentsClient {
    * @param {string} generator
    * @returns {string} Resource name string.
    */
-  generatorPath(project:string,location:string,generator:string) {
+  generatorPath(project: string, location: string, generator: string) {
     return this.pathTemplates.generatorPathTemplate.render({
       project: project,
       location: location,
@@ -2077,7 +2621,8 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName).project;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .project;
   }
 
   /**
@@ -2088,7 +2633,8 @@ export class AgentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName).location;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .location;
   }
 
   /**
@@ -2099,7 +2645,8 @@ export class AgentsClient {
    * @returns {string} A string representing the generator.
    */
   matchGeneratorFromGeneratorName(generatorName: string) {
-    return this.pathTemplates.generatorPathTemplate.match(generatorName).generator;
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .generator;
   }
 
   /**
@@ -2111,7 +2658,12 @@ export class AgentsClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  generatorEvaluationPath(project:string,location:string,generator:string,evaluation:string) {
+  generatorEvaluationPath(
+    project: string,
+    location: string,
+    generator: string,
+    evaluation: string,
+  ) {
     return this.pathTemplates.generatorEvaluationPathTemplate.render({
       project: project,
       location: location,
@@ -2128,7 +2680,9 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGeneratorEvaluationName(generatorEvaluationName: string) {
-    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).project;
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(
+      generatorEvaluationName,
+    ).project;
   }
 
   /**
@@ -2139,7 +2693,9 @@ export class AgentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGeneratorEvaluationName(generatorEvaluationName: string) {
-    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).location;
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(
+      generatorEvaluationName,
+    ).location;
   }
 
   /**
@@ -2150,7 +2706,9 @@ export class AgentsClient {
    * @returns {string} A string representing the generator.
    */
   matchGeneratorFromGeneratorEvaluationName(generatorEvaluationName: string) {
-    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).generator;
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(
+      generatorEvaluationName,
+    ).generator;
   }
 
   /**
@@ -2161,7 +2719,9 @@ export class AgentsClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromGeneratorEvaluationName(generatorEvaluationName: string) {
-    return this.pathTemplates.generatorEvaluationPathTemplate.match(generatorEvaluationName).evaluation;
+    return this.pathTemplates.generatorEvaluationPathTemplate.match(
+      generatorEvaluationName,
+    ).evaluation;
   }
 
   /**
@@ -2170,7 +2730,7 @@ export class AgentsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2193,7 +2753,7 @@ export class AgentsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectAgentPath(project:string) {
+  projectAgentPath(project: string) {
     return this.pathTemplates.projectAgentPathTemplate.render({
       project: project,
     });
@@ -2207,7 +2767,8 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentName(projectAgentName: string) {
-    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName).project;
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+      .project;
   }
 
   /**
@@ -2217,7 +2778,7 @@ export class AgentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectAgentEntityTypePath(project:string,entityType:string) {
+  projectAgentEntityTypePath(project: string, entityType: string) {
     return this.pathTemplates.projectAgentEntityTypePathTemplate.render({
       project: project,
       entity_type: entityType,
@@ -2231,8 +2792,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentEntityTypeName(projectAgentEntityTypeName: string) {
-    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(projectAgentEntityTypeName).project;
+  matchProjectFromProjectAgentEntityTypeName(
+    projectAgentEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(
+      projectAgentEntityTypeName,
+    ).project;
   }
 
   /**
@@ -2242,8 +2807,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectAgentEntityTypeName(projectAgentEntityTypeName: string) {
-    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(projectAgentEntityTypeName).entity_type;
+  matchEntityTypeFromProjectAgentEntityTypeName(
+    projectAgentEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(
+      projectAgentEntityTypeName,
+    ).entity_type;
   }
 
   /**
@@ -2253,7 +2822,7 @@ export class AgentsClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  projectAgentEnvironmentPath(project:string,environment:string) {
+  projectAgentEnvironmentPath(project: string, environment: string) {
     return this.pathTemplates.projectAgentEnvironmentPathTemplate.render({
       project: project,
       environment: environment,
@@ -2267,8 +2836,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentEnvironmentName(projectAgentEnvironmentName: string) {
-    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(projectAgentEnvironmentName).project;
+  matchProjectFromProjectAgentEnvironmentName(
+    projectAgentEnvironmentName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(
+      projectAgentEnvironmentName,
+    ).project;
   }
 
   /**
@@ -2278,8 +2851,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectAgentEnvironmentName(projectAgentEnvironmentName: string) {
-    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(projectAgentEnvironmentName).environment;
+  matchEnvironmentFromProjectAgentEnvironmentName(
+    projectAgentEnvironmentName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(
+      projectAgentEnvironmentName,
+    ).environment;
   }
 
   /**
@@ -2292,14 +2869,22 @@ export class AgentsClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  projectAgentEnvironmentUserSessionContextPath(project:string,environment:string,user:string,session:string,context:string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render({
-      project: project,
-      environment: environment,
-      user: user,
-      session: session,
-      context: context,
-    });
+  projectAgentEnvironmentUserSessionContextPath(
+    project: string,
+    environment: string,
+    user: string,
+    session: string,
+    context: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.render(
+      {
+        project: project,
+        environment: environment,
+        user: user,
+        session: session,
+        context: context,
+      },
+    );
   }
 
   /**
@@ -2309,8 +2894,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_context resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentEnvironmentUserSessionContextName(projectAgentEnvironmentUserSessionContextName: string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(projectAgentEnvironmentUserSessionContextName).project;
+  matchProjectFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName,
+    ).project;
   }
 
   /**
@@ -2320,8 +2909,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_context resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName(projectAgentEnvironmentUserSessionContextName: string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(projectAgentEnvironmentUserSessionContextName).environment;
+  matchEnvironmentFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName,
+    ).environment;
   }
 
   /**
@@ -2331,8 +2924,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_context resource.
    * @returns {string} A string representing the user.
    */
-  matchUserFromProjectAgentEnvironmentUserSessionContextName(projectAgentEnvironmentUserSessionContextName: string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(projectAgentEnvironmentUserSessionContextName).user;
+  matchUserFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName,
+    ).user;
   }
 
   /**
@@ -2342,8 +2939,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_context resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectAgentEnvironmentUserSessionContextName(projectAgentEnvironmentUserSessionContextName: string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(projectAgentEnvironmentUserSessionContextName).session;
+  matchSessionFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName,
+    ).session;
   }
 
   /**
@@ -2353,8 +2954,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_context resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectAgentEnvironmentUserSessionContextName(projectAgentEnvironmentUserSessionContextName: string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(projectAgentEnvironmentUserSessionContextName).context;
+  matchContextFromProjectAgentEnvironmentUserSessionContextName(
+    projectAgentEnvironmentUserSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectAgentEnvironmentUserSessionContextName,
+    ).context;
   }
 
   /**
@@ -2367,14 +2972,22 @@ export class AgentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectAgentEnvironmentUserSessionEntityTypePath(project:string,environment:string,user:string,session:string,entityType:string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render({
-      project: project,
-      environment: environment,
-      user: user,
-      session: session,
-      entity_type: entityType,
-    });
+  projectAgentEnvironmentUserSessionEntityTypePath(
+    project: string,
+    environment: string,
+    user: string,
+    session: string,
+    entityType: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        environment: environment,
+        user: user,
+        session: session,
+        entity_type: entityType,
+      },
+    );
   }
 
   /**
@@ -2384,8 +2997,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName(projectAgentEnvironmentUserSessionEntityTypeName: string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectAgentEnvironmentUserSessionEntityTypeName).project;
+  matchProjectFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName,
+    ).project;
   }
 
   /**
@@ -2395,8 +3012,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName(projectAgentEnvironmentUserSessionEntityTypeName: string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectAgentEnvironmentUserSessionEntityTypeName).environment;
+  matchEnvironmentFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName,
+    ).environment;
   }
 
   /**
@@ -2406,8 +3027,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the user.
    */
-  matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName(projectAgentEnvironmentUserSessionEntityTypeName: string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectAgentEnvironmentUserSessionEntityTypeName).user;
+  matchUserFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName,
+    ).user;
   }
 
   /**
@@ -2417,8 +3042,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName(projectAgentEnvironmentUserSessionEntityTypeName: string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectAgentEnvironmentUserSessionEntityTypeName).session;
+  matchSessionFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName,
+    ).session;
   }
 
   /**
@@ -2428,8 +3057,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName(projectAgentEnvironmentUserSessionEntityTypeName: string) {
-    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectAgentEnvironmentUserSessionEntityTypeName).entity_type;
+  matchEntityTypeFromProjectAgentEnvironmentUserSessionEntityTypeName(
+    projectAgentEnvironmentUserSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectAgentEnvironmentUserSessionEntityTypeName,
+    ).entity_type;
   }
 
   /**
@@ -2438,7 +3071,7 @@ export class AgentsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectAgentFulfillmentPath(project:string) {
+  projectAgentFulfillmentPath(project: string) {
     return this.pathTemplates.projectAgentFulfillmentPathTemplate.render({
       project: project,
     });
@@ -2451,8 +3084,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_fulfillment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentFulfillmentName(projectAgentFulfillmentName: string) {
-    return this.pathTemplates.projectAgentFulfillmentPathTemplate.match(projectAgentFulfillmentName).project;
+  matchProjectFromProjectAgentFulfillmentName(
+    projectAgentFulfillmentName: string,
+  ) {
+    return this.pathTemplates.projectAgentFulfillmentPathTemplate.match(
+      projectAgentFulfillmentName,
+    ).project;
   }
 
   /**
@@ -2462,7 +3099,7 @@ export class AgentsClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  projectAgentIntentPath(project:string,intent:string) {
+  projectAgentIntentPath(project: string, intent: string) {
     return this.pathTemplates.projectAgentIntentPathTemplate.render({
       project: project,
       intent: intent,
@@ -2477,7 +3114,9 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this.pathTemplates.projectAgentIntentPathTemplate.match(projectAgentIntentName).project;
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName,
+    ).project;
   }
 
   /**
@@ -2488,7 +3127,9 @@ export class AgentsClient {
    * @returns {string} A string representing the intent.
    */
   matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
-    return this.pathTemplates.projectAgentIntentPathTemplate.match(projectAgentIntentName).intent;
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName,
+    ).intent;
   }
 
   /**
@@ -2499,7 +3140,11 @@ export class AgentsClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  projectAgentSessionContextPath(project:string,session:string,context:string) {
+  projectAgentSessionContextPath(
+    project: string,
+    session: string,
+    context: string,
+  ) {
     return this.pathTemplates.projectAgentSessionContextPathTemplate.render({
       project: project,
       session: session,
@@ -2514,8 +3159,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_session_context resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentSessionContextName(projectAgentSessionContextName: string) {
-    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(projectAgentSessionContextName).project;
+  matchProjectFromProjectAgentSessionContextName(
+    projectAgentSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
+      projectAgentSessionContextName,
+    ).project;
   }
 
   /**
@@ -2525,8 +3174,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_session_context resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectAgentSessionContextName(projectAgentSessionContextName: string) {
-    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(projectAgentSessionContextName).session;
+  matchSessionFromProjectAgentSessionContextName(
+    projectAgentSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
+      projectAgentSessionContextName,
+    ).session;
   }
 
   /**
@@ -2536,8 +3189,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_session_context resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectAgentSessionContextName(projectAgentSessionContextName: string) {
-    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(projectAgentSessionContextName).context;
+  matchContextFromProjectAgentSessionContextName(
+    projectAgentSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectAgentSessionContextPathTemplate.match(
+      projectAgentSessionContextName,
+    ).context;
   }
 
   /**
@@ -2548,7 +3205,11 @@ export class AgentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectAgentSessionEntityTypePath(project:string,session:string,entityType:string) {
+  projectAgentSessionEntityTypePath(
+    project: string,
+    session: string,
+    entityType: string,
+  ) {
     return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.render({
       project: project,
       session: session,
@@ -2563,8 +3224,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAgentSessionEntityTypeName(projectAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(projectAgentSessionEntityTypeName).project;
+  matchProjectFromProjectAgentSessionEntityTypeName(
+    projectAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
+      projectAgentSessionEntityTypeName,
+    ).project;
   }
 
   /**
@@ -2574,8 +3239,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectAgentSessionEntityTypeName(projectAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(projectAgentSessionEntityTypeName).session;
+  matchSessionFromProjectAgentSessionEntityTypeName(
+    projectAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
+      projectAgentSessionEntityTypeName,
+    ).session;
   }
 
   /**
@@ -2585,8 +3254,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_agent_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectAgentSessionEntityTypeName(projectAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(projectAgentSessionEntityTypeName).entity_type;
+  matchEntityTypeFromProjectAgentSessionEntityTypeName(
+    projectAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
+      projectAgentSessionEntityTypeName,
+    ).entity_type;
   }
 
   /**
@@ -2596,7 +3269,7 @@ export class AgentsClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  projectAgentVersionPath(project:string,version:string) {
+  projectAgentVersionPath(project: string, version: string) {
     return this.pathTemplates.projectAgentVersionPathTemplate.render({
       project: project,
       version: version,
@@ -2611,7 +3284,9 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAgentVersionName(projectAgentVersionName: string) {
-    return this.pathTemplates.projectAgentVersionPathTemplate.match(projectAgentVersionName).project;
+    return this.pathTemplates.projectAgentVersionPathTemplate.match(
+      projectAgentVersionName,
+    ).project;
   }
 
   /**
@@ -2622,7 +3297,9 @@ export class AgentsClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromProjectAgentVersionName(projectAgentVersionName: string) {
-    return this.pathTemplates.projectAgentVersionPathTemplate.match(projectAgentVersionName).version;
+    return this.pathTemplates.projectAgentVersionPathTemplate.match(
+      projectAgentVersionName,
+    ).version;
   }
 
   /**
@@ -2632,7 +3309,7 @@ export class AgentsClient {
    * @param {string} answer_record
    * @returns {string} Resource name string.
    */
-  projectAnswerRecordPath(project:string,answerRecord:string) {
+  projectAnswerRecordPath(project: string, answerRecord: string) {
     return this.pathTemplates.projectAnswerRecordPathTemplate.render({
       project: project,
       answer_record: answerRecord,
@@ -2647,7 +3324,9 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAnswerRecordName(projectAnswerRecordName: string) {
-    return this.pathTemplates.projectAnswerRecordPathTemplate.match(projectAnswerRecordName).project;
+    return this.pathTemplates.projectAnswerRecordPathTemplate.match(
+      projectAnswerRecordName,
+    ).project;
   }
 
   /**
@@ -2657,8 +3336,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_answer_record resource.
    * @returns {string} A string representing the answer_record.
    */
-  matchAnswerRecordFromProjectAnswerRecordName(projectAnswerRecordName: string) {
-    return this.pathTemplates.projectAnswerRecordPathTemplate.match(projectAnswerRecordName).answer_record;
+  matchAnswerRecordFromProjectAnswerRecordName(
+    projectAnswerRecordName: string,
+  ) {
+    return this.pathTemplates.projectAnswerRecordPathTemplate.match(
+      projectAnswerRecordName,
+    ).answer_record;
   }
 
   /**
@@ -2669,7 +3352,11 @@ export class AgentsClient {
    * @param {string} message
    * @returns {string} Resource name string.
    */
-  projectConversationMessagePath(project:string,conversation:string,message:string) {
+  projectConversationMessagePath(
+    project: string,
+    conversation: string,
+    message: string,
+  ) {
     return this.pathTemplates.projectConversationMessagePathTemplate.render({
       project: project,
       conversation: conversation,
@@ -2684,8 +3371,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_message resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectConversationMessageName(projectConversationMessageName: string) {
-    return this.pathTemplates.projectConversationMessagePathTemplate.match(projectConversationMessageName).project;
+  matchProjectFromProjectConversationMessageName(
+    projectConversationMessageName: string,
+  ) {
+    return this.pathTemplates.projectConversationMessagePathTemplate.match(
+      projectConversationMessageName,
+    ).project;
   }
 
   /**
@@ -2695,8 +3386,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_message resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectConversationMessageName(projectConversationMessageName: string) {
-    return this.pathTemplates.projectConversationMessagePathTemplate.match(projectConversationMessageName).conversation;
+  matchConversationFromProjectConversationMessageName(
+    projectConversationMessageName: string,
+  ) {
+    return this.pathTemplates.projectConversationMessagePathTemplate.match(
+      projectConversationMessageName,
+    ).conversation;
   }
 
   /**
@@ -2706,8 +3401,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_message resource.
    * @returns {string} A string representing the message.
    */
-  matchMessageFromProjectConversationMessageName(projectConversationMessageName: string) {
-    return this.pathTemplates.projectConversationMessagePathTemplate.match(projectConversationMessageName).message;
+  matchMessageFromProjectConversationMessageName(
+    projectConversationMessageName: string,
+  ) {
+    return this.pathTemplates.projectConversationMessagePathTemplate.match(
+      projectConversationMessageName,
+    ).message;
   }
 
   /**
@@ -2717,7 +3416,7 @@ export class AgentsClient {
    * @param {string} conversation_model
    * @returns {string} Resource name string.
    */
-  projectConversationModelPath(project:string,conversationModel:string) {
+  projectConversationModelPath(project: string, conversationModel: string) {
     return this.pathTemplates.projectConversationModelPathTemplate.render({
       project: project,
       conversation_model: conversationModel,
@@ -2731,8 +3430,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectConversationModelName(projectConversationModelName: string) {
-    return this.pathTemplates.projectConversationModelPathTemplate.match(projectConversationModelName).project;
+  matchProjectFromProjectConversationModelName(
+    projectConversationModelName: string,
+  ) {
+    return this.pathTemplates.projectConversationModelPathTemplate.match(
+      projectConversationModelName,
+    ).project;
   }
 
   /**
@@ -2742,8 +3445,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_model resource.
    * @returns {string} A string representing the conversation_model.
    */
-  matchConversationModelFromProjectConversationModelName(projectConversationModelName: string) {
-    return this.pathTemplates.projectConversationModelPathTemplate.match(projectConversationModelName).conversation_model;
+  matchConversationModelFromProjectConversationModelName(
+    projectConversationModelName: string,
+  ) {
+    return this.pathTemplates.projectConversationModelPathTemplate.match(
+      projectConversationModelName,
+    ).conversation_model;
   }
 
   /**
@@ -2754,12 +3461,18 @@ export class AgentsClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  projectConversationModelEvaluationPath(project:string,conversationModel:string,evaluation:string) {
-    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.render({
-      project: project,
-      conversation_model: conversationModel,
-      evaluation: evaluation,
-    });
+  projectConversationModelEvaluationPath(
+    project: string,
+    conversationModel: string,
+    evaluation: string,
+  ) {
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.render(
+      {
+        project: project,
+        conversation_model: conversationModel,
+        evaluation: evaluation,
+      },
+    );
   }
 
   /**
@@ -2769,8 +3482,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_model_evaluation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectConversationModelEvaluationName(projectConversationModelEvaluationName: string) {
-    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(projectConversationModelEvaluationName).project;
+  matchProjectFromProjectConversationModelEvaluationName(
+    projectConversationModelEvaluationName: string,
+  ) {
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(
+      projectConversationModelEvaluationName,
+    ).project;
   }
 
   /**
@@ -2780,8 +3497,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_model_evaluation resource.
    * @returns {string} A string representing the conversation_model.
    */
-  matchConversationModelFromProjectConversationModelEvaluationName(projectConversationModelEvaluationName: string) {
-    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(projectConversationModelEvaluationName).conversation_model;
+  matchConversationModelFromProjectConversationModelEvaluationName(
+    projectConversationModelEvaluationName: string,
+  ) {
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(
+      projectConversationModelEvaluationName,
+    ).conversation_model;
   }
 
   /**
@@ -2791,8 +3512,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_model_evaluation resource.
    * @returns {string} A string representing the evaluation.
    */
-  matchEvaluationFromProjectConversationModelEvaluationName(projectConversationModelEvaluationName: string) {
-    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(projectConversationModelEvaluationName).evaluation;
+  matchEvaluationFromProjectConversationModelEvaluationName(
+    projectConversationModelEvaluationName: string,
+  ) {
+    return this.pathTemplates.projectConversationModelEvaluationPathTemplate.match(
+      projectConversationModelEvaluationName,
+    ).evaluation;
   }
 
   /**
@@ -2803,12 +3528,18 @@ export class AgentsClient {
    * @param {string} participant
    * @returns {string} Resource name string.
    */
-  projectConversationParticipantPath(project:string,conversation:string,participant:string) {
-    return this.pathTemplates.projectConversationParticipantPathTemplate.render({
-      project: project,
-      conversation: conversation,
-      participant: participant,
-    });
+  projectConversationParticipantPath(
+    project: string,
+    conversation: string,
+    participant: string,
+  ) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.render(
+      {
+        project: project,
+        conversation: conversation,
+        participant: participant,
+      },
+    );
   }
 
   /**
@@ -2818,8 +3549,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_participant resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectConversationParticipantName(projectConversationParticipantName: string) {
-    return this.pathTemplates.projectConversationParticipantPathTemplate.match(projectConversationParticipantName).project;
+  matchProjectFromProjectConversationParticipantName(
+    projectConversationParticipantName: string,
+  ) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.match(
+      projectConversationParticipantName,
+    ).project;
   }
 
   /**
@@ -2829,8 +3564,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_participant resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectConversationParticipantName(projectConversationParticipantName: string) {
-    return this.pathTemplates.projectConversationParticipantPathTemplate.match(projectConversationParticipantName).conversation;
+  matchConversationFromProjectConversationParticipantName(
+    projectConversationParticipantName: string,
+  ) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.match(
+      projectConversationParticipantName,
+    ).conversation;
   }
 
   /**
@@ -2840,8 +3579,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_participant resource.
    * @returns {string} A string representing the participant.
    */
-  matchParticipantFromProjectConversationParticipantName(projectConversationParticipantName: string) {
-    return this.pathTemplates.projectConversationParticipantPathTemplate.match(projectConversationParticipantName).participant;
+  matchParticipantFromProjectConversationParticipantName(
+    projectConversationParticipantName: string,
+  ) {
+    return this.pathTemplates.projectConversationParticipantPathTemplate.match(
+      projectConversationParticipantName,
+    ).participant;
   }
 
   /**
@@ -2851,7 +3594,7 @@ export class AgentsClient {
    * @param {string} conversation_profile
    * @returns {string} Resource name string.
    */
-  projectConversationProfilePath(project:string,conversationProfile:string) {
+  projectConversationProfilePath(project: string, conversationProfile: string) {
     return this.pathTemplates.projectConversationProfilePathTemplate.render({
       project: project,
       conversation_profile: conversationProfile,
@@ -2865,8 +3608,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectConversationProfileName(projectConversationProfileName: string) {
-    return this.pathTemplates.projectConversationProfilePathTemplate.match(projectConversationProfileName).project;
+  matchProjectFromProjectConversationProfileName(
+    projectConversationProfileName: string,
+  ) {
+    return this.pathTemplates.projectConversationProfilePathTemplate.match(
+      projectConversationProfileName,
+    ).project;
   }
 
   /**
@@ -2876,8 +3623,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversation_profile resource.
    * @returns {string} A string representing the conversation_profile.
    */
-  matchConversationProfileFromProjectConversationProfileName(projectConversationProfileName: string) {
-    return this.pathTemplates.projectConversationProfilePathTemplate.match(projectConversationProfileName).conversation_profile;
+  matchConversationProfileFromProjectConversationProfileName(
+    projectConversationProfileName: string,
+  ) {
+    return this.pathTemplates.projectConversationProfilePathTemplate.match(
+      projectConversationProfileName,
+    ).conversation_profile;
   }
 
   /**
@@ -2887,7 +3638,7 @@ export class AgentsClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  projectConversationsPath(project:string,conversation:string) {
+  projectConversationsPath(project: string, conversation: string) {
     return this.pathTemplates.projectConversationsPathTemplate.render({
       project: project,
       conversation: conversation,
@@ -2902,7 +3653,9 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectConversationsName(projectConversationsName: string) {
-    return this.pathTemplates.projectConversationsPathTemplate.match(projectConversationsName).project;
+    return this.pathTemplates.projectConversationsPathTemplate.match(
+      projectConversationsName,
+    ).project;
   }
 
   /**
@@ -2912,8 +3665,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_conversations resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectConversationsName(projectConversationsName: string) {
-    return this.pathTemplates.projectConversationsPathTemplate.match(projectConversationsName).conversation;
+  matchConversationFromProjectConversationsName(
+    projectConversationsName: string,
+  ) {
+    return this.pathTemplates.projectConversationsPathTemplate.match(
+      projectConversationsName,
+    ).conversation;
   }
 
   /**
@@ -2923,7 +3680,7 @@ export class AgentsClient {
    * @param {string} knowledge_base
    * @returns {string} Resource name string.
    */
-  projectKnowledgeBasePath(project:string,knowledgeBase:string) {
+  projectKnowledgeBasePath(project: string, knowledgeBase: string) {
     return this.pathTemplates.projectKnowledgeBasePathTemplate.render({
       project: project,
       knowledge_base: knowledgeBase,
@@ -2938,7 +3695,9 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectKnowledgeBaseName(projectKnowledgeBaseName: string) {
-    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(projectKnowledgeBaseName).project;
+    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(
+      projectKnowledgeBaseName,
+    ).project;
   }
 
   /**
@@ -2948,8 +3707,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_knowledge_base resource.
    * @returns {string} A string representing the knowledge_base.
    */
-  matchKnowledgeBaseFromProjectKnowledgeBaseName(projectKnowledgeBaseName: string) {
-    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(projectKnowledgeBaseName).knowledge_base;
+  matchKnowledgeBaseFromProjectKnowledgeBaseName(
+    projectKnowledgeBaseName: string,
+  ) {
+    return this.pathTemplates.projectKnowledgeBasePathTemplate.match(
+      projectKnowledgeBaseName,
+    ).knowledge_base;
   }
 
   /**
@@ -2960,7 +3723,11 @@ export class AgentsClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectKnowledgeBaseDocumentPath(project:string,knowledgeBase:string,document:string) {
+  projectKnowledgeBaseDocumentPath(
+    project: string,
+    knowledgeBase: string,
+    document: string,
+  ) {
     return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.render({
       project: project,
       knowledge_base: knowledgeBase,
@@ -2975,8 +3742,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_knowledge_base_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectKnowledgeBaseDocumentName(projectKnowledgeBaseDocumentName: string) {
-    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(projectKnowledgeBaseDocumentName).project;
+  matchProjectFromProjectKnowledgeBaseDocumentName(
+    projectKnowledgeBaseDocumentName: string,
+  ) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
+      projectKnowledgeBaseDocumentName,
+    ).project;
   }
 
   /**
@@ -2986,8 +3757,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_knowledge_base_document resource.
    * @returns {string} A string representing the knowledge_base.
    */
-  matchKnowledgeBaseFromProjectKnowledgeBaseDocumentName(projectKnowledgeBaseDocumentName: string) {
-    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(projectKnowledgeBaseDocumentName).knowledge_base;
+  matchKnowledgeBaseFromProjectKnowledgeBaseDocumentName(
+    projectKnowledgeBaseDocumentName: string,
+  ) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
+      projectKnowledgeBaseDocumentName,
+    ).knowledge_base;
   }
 
   /**
@@ -2997,8 +3772,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_knowledge_base_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectKnowledgeBaseDocumentName(projectKnowledgeBaseDocumentName: string) {
-    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(projectKnowledgeBaseDocumentName).document;
+  matchDocumentFromProjectKnowledgeBaseDocumentName(
+    projectKnowledgeBaseDocumentName: string,
+  ) {
+    return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
+      projectKnowledgeBaseDocumentName,
+    ).document;
   }
 
   /**
@@ -3008,7 +3787,7 @@ export class AgentsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationAgentPath(project:string,location:string) {
+  projectLocationAgentPath(project: string, location: string) {
     return this.pathTemplates.projectLocationAgentPathTemplate.render({
       project: project,
       location: location,
@@ -3023,7 +3802,9 @@ export class AgentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this.pathTemplates.projectLocationAgentPathTemplate.match(projectLocationAgentName).project;
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName,
+    ).project;
   }
 
   /**
@@ -3034,7 +3815,9 @@ export class AgentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
-    return this.pathTemplates.projectLocationAgentPathTemplate.match(projectLocationAgentName).location;
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName,
+    ).location;
   }
 
   /**
@@ -3045,12 +3828,18 @@ export class AgentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEntityTypePath(project:string,location:string,entityType:string) {
-    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.render({
-      project: project,
-      location: location,
-      entity_type: entityType,
-    });
+  projectLocationAgentEntityTypePath(
+    project: string,
+    location: string,
+    entityType: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        entity_type: entityType,
+      },
+    );
   }
 
   /**
@@ -3060,8 +3849,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEntityTypeName(projectLocationAgentEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(projectLocationAgentEntityTypeName).project;
+  matchProjectFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName,
+    ).project;
   }
 
   /**
@@ -3071,8 +3864,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEntityTypeName(projectLocationAgentEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(projectLocationAgentEntityTypeName).location;
+  matchLocationFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName,
+    ).location;
   }
 
   /**
@@ -3082,8 +3879,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentEntityTypeName(projectLocationAgentEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(projectLocationAgentEntityTypeName).entity_type;
+  matchEntityTypeFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName,
+    ).entity_type;
   }
 
   /**
@@ -3094,12 +3895,18 @@ export class AgentsClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEnvironmentPath(project:string,location:string,environment:string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.render({
-      project: project,
-      location: location,
-      environment: environment,
-    });
+  projectLocationAgentEnvironmentPath(
+    project: string,
+    location: string,
+    environment: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        environment: environment,
+      },
+    );
   }
 
   /**
@@ -3109,8 +3916,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEnvironmentName(projectLocationAgentEnvironmentName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(projectLocationAgentEnvironmentName).project;
+  matchProjectFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName,
+    ).project;
   }
 
   /**
@@ -3120,8 +3931,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEnvironmentName(projectLocationAgentEnvironmentName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(projectLocationAgentEnvironmentName).location;
+  matchLocationFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName,
+    ).location;
   }
 
   /**
@@ -3131,8 +3946,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectLocationAgentEnvironmentName(projectLocationAgentEnvironmentName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(projectLocationAgentEnvironmentName).environment;
+  matchEnvironmentFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName,
+    ).environment;
   }
 
   /**
@@ -3146,15 +3965,24 @@ export class AgentsClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEnvironmentUserSessionContextPath(project:string,location:string,environment:string,user:string,session:string,context:string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.render({
-      project: project,
-      location: location,
-      environment: environment,
-      user: user,
-      session: session,
-      context: context,
-    });
+  projectLocationAgentEnvironmentUserSessionContextPath(
+    project: string,
+    location: string,
+    environment: string,
+    user: string,
+    session: string,
+    context: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        environment: environment,
+        user: user,
+        session: session,
+        context: context,
+      },
+    );
   }
 
   /**
@@ -3164,8 +3992,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).project;
+  matchProjectFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName,
+    ).project;
   }
 
   /**
@@ -3175,8 +4007,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).location;
+  matchLocationFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName,
+    ).location;
   }
 
   /**
@@ -3186,8 +4022,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).environment;
+  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName,
+    ).environment;
   }
 
   /**
@@ -3197,8 +4037,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the user.
    */
-  matchUserFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).user;
+  matchUserFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName,
+    ).user;
   }
 
   /**
@@ -3208,8 +4052,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).session;
+  matchSessionFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName,
+    ).session;
   }
 
   /**
@@ -3219,8 +4067,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectLocationAgentEnvironmentUserSessionContextName(projectLocationAgentEnvironmentUserSessionContextName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(projectLocationAgentEnvironmentUserSessionContextName).context;
+  matchContextFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName,
+    ).context;
   }
 
   /**
@@ -3234,15 +4086,24 @@ export class AgentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentEnvironmentUserSessionEntityTypePath(project:string,location:string,environment:string,user:string,session:string,entityType:string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.render({
-      project: project,
-      location: location,
-      environment: environment,
-      user: user,
-      session: session,
-      entity_type: entityType,
-    });
+  projectLocationAgentEnvironmentUserSessionEntityTypePath(
+    project: string,
+    location: string,
+    environment: string,
+    user: string,
+    session: string,
+    entityType: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        environment: environment,
+        user: user,
+        session: session,
+        entity_type: entityType,
+      },
+    );
   }
 
   /**
@@ -3252,8 +4113,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).project;
+  matchProjectFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName,
+    ).project;
   }
 
   /**
@@ -3263,8 +4128,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).location;
+  matchLocationFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName,
+    ).location;
   }
 
   /**
@@ -3274,8 +4143,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the environment.
    */
-  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).environment;
+  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName,
+    ).environment;
   }
 
   /**
@@ -3285,8 +4158,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the user.
    */
-  matchUserFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).user;
+  matchUserFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName,
+    ).user;
   }
 
   /**
@@ -3296,8 +4173,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).session;
+  matchSessionFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName,
+    ).session;
   }
 
   /**
@@ -3307,8 +4188,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(projectLocationAgentEnvironmentUserSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(projectLocationAgentEnvironmentUserSessionEntityTypeName).entity_type;
+  matchEntityTypeFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName,
+    ).entity_type;
   }
 
   /**
@@ -3318,11 +4203,13 @@ export class AgentsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationAgentFulfillmentPath(project:string,location:string) {
-    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.render({
-      project: project,
-      location: location,
-    });
+  projectLocationAgentFulfillmentPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+      },
+    );
   }
 
   /**
@@ -3332,8 +4219,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_fulfillment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentFulfillmentName(projectLocationAgentFulfillmentName: string) {
-    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(projectLocationAgentFulfillmentName).project;
+  matchProjectFromProjectLocationAgentFulfillmentName(
+    projectLocationAgentFulfillmentName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(
+      projectLocationAgentFulfillmentName,
+    ).project;
   }
 
   /**
@@ -3343,8 +4234,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_fulfillment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentFulfillmentName(projectLocationAgentFulfillmentName: string) {
-    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(projectLocationAgentFulfillmentName).location;
+  matchLocationFromProjectLocationAgentFulfillmentName(
+    projectLocationAgentFulfillmentName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(
+      projectLocationAgentFulfillmentName,
+    ).location;
   }
 
   /**
@@ -3355,7 +4250,11 @@ export class AgentsClient {
    * @param {string} intent
    * @returns {string} Resource name string.
    */
-  projectLocationAgentIntentPath(project:string,location:string,intent:string) {
+  projectLocationAgentIntentPath(
+    project: string,
+    location: string,
+    intent: string,
+  ) {
     return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
       project: project,
       location: location,
@@ -3370,8 +4269,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).project;
+  matchProjectFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName,
+    ).project;
   }
 
   /**
@@ -3381,8 +4284,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).location;
+  matchLocationFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName,
+    ).location;
   }
 
   /**
@@ -3392,8 +4299,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_intent resource.
    * @returns {string} A string representing the intent.
    */
-  matchIntentFromProjectLocationAgentIntentName(projectLocationAgentIntentName: string) {
-    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(projectLocationAgentIntentName).intent;
+  matchIntentFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName,
+    ).intent;
   }
 
   /**
@@ -3405,13 +4316,20 @@ export class AgentsClient {
    * @param {string} context
    * @returns {string} Resource name string.
    */
-  projectLocationAgentSessionContextPath(project:string,location:string,session:string,context:string) {
-    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.render({
-      project: project,
-      location: location,
-      session: session,
-      context: context,
-    });
+  projectLocationAgentSessionContextPath(
+    project: string,
+    location: string,
+    session: string,
+    context: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        session: session,
+        context: context,
+      },
+    );
   }
 
   /**
@@ -3421,8 +4339,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_session_context resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentSessionContextName(projectLocationAgentSessionContextName: string) {
-    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(projectLocationAgentSessionContextName).project;
+  matchProjectFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName,
+    ).project;
   }
 
   /**
@@ -3432,8 +4354,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_session_context resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentSessionContextName(projectLocationAgentSessionContextName: string) {
-    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(projectLocationAgentSessionContextName).location;
+  matchLocationFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName,
+    ).location;
   }
 
   /**
@@ -3443,8 +4369,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_session_context resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentSessionContextName(projectLocationAgentSessionContextName: string) {
-    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(projectLocationAgentSessionContextName).session;
+  matchSessionFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName,
+    ).session;
   }
 
   /**
@@ -3454,8 +4384,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_session_context resource.
    * @returns {string} A string representing the context.
    */
-  matchContextFromProjectLocationAgentSessionContextName(projectLocationAgentSessionContextName: string) {
-    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(projectLocationAgentSessionContextName).context;
+  matchContextFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName,
+    ).context;
   }
 
   /**
@@ -3467,13 +4401,20 @@ export class AgentsClient {
    * @param {string} entity_type
    * @returns {string} Resource name string.
    */
-  projectLocationAgentSessionEntityTypePath(project:string,location:string,session:string,entityType:string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render({
-      project: project,
-      location: location,
-      session: session,
-      entity_type: entityType,
-    });
+  projectLocationAgentSessionEntityTypePath(
+    project: string,
+    location: string,
+    session: string,
+    entityType: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        session: session,
+        entity_type: entityType,
+      },
+    );
   }
 
   /**
@@ -3483,8 +4424,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).project;
+  matchProjectFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).project;
   }
 
   /**
@@ -3494,8 +4439,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).location;
+  matchLocationFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).location;
   }
 
   /**
@@ -3505,8 +4454,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the session.
    */
-  matchSessionFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).session;
+  matchSessionFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).session;
   }
 
   /**
@@ -3516,8 +4469,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_session_entity_type resource.
    * @returns {string} A string representing the entity_type.
    */
-  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(projectLocationAgentSessionEntityTypeName: string) {
-    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(projectLocationAgentSessionEntityTypeName).entity_type;
+  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName,
+    ).entity_type;
   }
 
   /**
@@ -3528,7 +4485,11 @@ export class AgentsClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  projectLocationAgentVersionPath(project:string,location:string,version:string) {
+  projectLocationAgentVersionPath(
+    project: string,
+    location: string,
+    version: string,
+  ) {
     return this.pathTemplates.projectLocationAgentVersionPathTemplate.render({
       project: project,
       location: location,
@@ -3543,8 +4504,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_version resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAgentVersionName(projectLocationAgentVersionName: string) {
-    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(projectLocationAgentVersionName).project;
+  matchProjectFromProjectLocationAgentVersionName(
+    projectLocationAgentVersionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
+      projectLocationAgentVersionName,
+    ).project;
   }
 
   /**
@@ -3554,8 +4519,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_version resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAgentVersionName(projectLocationAgentVersionName: string) {
-    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(projectLocationAgentVersionName).location;
+  matchLocationFromProjectLocationAgentVersionName(
+    projectLocationAgentVersionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
+      projectLocationAgentVersionName,
+    ).location;
   }
 
   /**
@@ -3565,8 +4534,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_agent_version resource.
    * @returns {string} A string representing the version.
    */
-  matchVersionFromProjectLocationAgentVersionName(projectLocationAgentVersionName: string) {
-    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(projectLocationAgentVersionName).version;
+  matchVersionFromProjectLocationAgentVersionName(
+    projectLocationAgentVersionName: string,
+  ) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
+      projectLocationAgentVersionName,
+    ).version;
   }
 
   /**
@@ -3577,7 +4550,11 @@ export class AgentsClient {
    * @param {string} answer_record
    * @returns {string} Resource name string.
    */
-  projectLocationAnswerRecordPath(project:string,location:string,answerRecord:string) {
+  projectLocationAnswerRecordPath(
+    project: string,
+    location: string,
+    answerRecord: string,
+  ) {
     return this.pathTemplates.projectLocationAnswerRecordPathTemplate.render({
       project: project,
       location: location,
@@ -3592,8 +4569,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_answer_record resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAnswerRecordName(projectLocationAnswerRecordName: string) {
-    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(projectLocationAnswerRecordName).project;
+  matchProjectFromProjectLocationAnswerRecordName(
+    projectLocationAnswerRecordName: string,
+  ) {
+    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(
+      projectLocationAnswerRecordName,
+    ).project;
   }
 
   /**
@@ -3603,8 +4584,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_answer_record resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAnswerRecordName(projectLocationAnswerRecordName: string) {
-    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(projectLocationAnswerRecordName).location;
+  matchLocationFromProjectLocationAnswerRecordName(
+    projectLocationAnswerRecordName: string,
+  ) {
+    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(
+      projectLocationAnswerRecordName,
+    ).location;
   }
 
   /**
@@ -3614,8 +4599,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_answer_record resource.
    * @returns {string} A string representing the answer_record.
    */
-  matchAnswerRecordFromProjectLocationAnswerRecordName(projectLocationAnswerRecordName: string) {
-    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(projectLocationAnswerRecordName).answer_record;
+  matchAnswerRecordFromProjectLocationAnswerRecordName(
+    projectLocationAnswerRecordName: string,
+  ) {
+    return this.pathTemplates.projectLocationAnswerRecordPathTemplate.match(
+      projectLocationAnswerRecordName,
+    ).answer_record;
   }
 
   /**
@@ -3627,13 +4616,20 @@ export class AgentsClient {
    * @param {string} message
    * @returns {string} Resource name string.
    */
-  projectLocationConversationMessagePath(project:string,location:string,conversation:string,message:string) {
-    return this.pathTemplates.projectLocationConversationMessagePathTemplate.render({
-      project: project,
-      location: location,
-      conversation: conversation,
-      message: message,
-    });
+  projectLocationConversationMessagePath(
+    project: string,
+    location: string,
+    conversation: string,
+    message: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation: conversation,
+        message: message,
+      },
+    );
   }
 
   /**
@@ -3643,8 +4639,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_message resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationMessageName(projectLocationConversationMessageName: string) {
-    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(projectLocationConversationMessageName).project;
+  matchProjectFromProjectLocationConversationMessageName(
+    projectLocationConversationMessageName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
+      projectLocationConversationMessageName,
+    ).project;
   }
 
   /**
@@ -3654,8 +4654,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_message resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationMessageName(projectLocationConversationMessageName: string) {
-    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(projectLocationConversationMessageName).location;
+  matchLocationFromProjectLocationConversationMessageName(
+    projectLocationConversationMessageName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
+      projectLocationConversationMessageName,
+    ).location;
   }
 
   /**
@@ -3665,8 +4669,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_message resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationConversationMessageName(projectLocationConversationMessageName: string) {
-    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(projectLocationConversationMessageName).conversation;
+  matchConversationFromProjectLocationConversationMessageName(
+    projectLocationConversationMessageName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
+      projectLocationConversationMessageName,
+    ).conversation;
   }
 
   /**
@@ -3676,8 +4684,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_message resource.
    * @returns {string} A string representing the message.
    */
-  matchMessageFromProjectLocationConversationMessageName(projectLocationConversationMessageName: string) {
-    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(projectLocationConversationMessageName).message;
+  matchMessageFromProjectLocationConversationMessageName(
+    projectLocationConversationMessageName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationMessagePathTemplate.match(
+      projectLocationConversationMessageName,
+    ).message;
   }
 
   /**
@@ -3688,12 +4700,18 @@ export class AgentsClient {
    * @param {string} conversation_model
    * @returns {string} Resource name string.
    */
-  projectLocationConversationModelPath(project:string,location:string,conversationModel:string) {
-    return this.pathTemplates.projectLocationConversationModelPathTemplate.render({
-      project: project,
-      location: location,
-      conversation_model: conversationModel,
-    });
+  projectLocationConversationModelPath(
+    project: string,
+    location: string,
+    conversationModel: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation_model: conversationModel,
+      },
+    );
   }
 
   /**
@@ -3703,8 +4721,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_model resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationModelName(projectLocationConversationModelName: string) {
-    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(projectLocationConversationModelName).project;
+  matchProjectFromProjectLocationConversationModelName(
+    projectLocationConversationModelName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
+      projectLocationConversationModelName,
+    ).project;
   }
 
   /**
@@ -3714,8 +4736,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_model resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationModelName(projectLocationConversationModelName: string) {
-    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(projectLocationConversationModelName).location;
+  matchLocationFromProjectLocationConversationModelName(
+    projectLocationConversationModelName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
+      projectLocationConversationModelName,
+    ).location;
   }
 
   /**
@@ -3725,8 +4751,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_model resource.
    * @returns {string} A string representing the conversation_model.
    */
-  matchConversationModelFromProjectLocationConversationModelName(projectLocationConversationModelName: string) {
-    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(projectLocationConversationModelName).conversation_model;
+  matchConversationModelFromProjectLocationConversationModelName(
+    projectLocationConversationModelName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationModelPathTemplate.match(
+      projectLocationConversationModelName,
+    ).conversation_model;
   }
 
   /**
@@ -3738,13 +4768,20 @@ export class AgentsClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  projectLocationConversationModelEvaluationPath(project:string,location:string,conversationModel:string,evaluation:string) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.render({
-      project: project,
-      location: location,
-      conversation_model: conversationModel,
-      evaluation: evaluation,
-    });
+  projectLocationConversationModelEvaluationPath(
+    project: string,
+    location: string,
+    conversationModel: string,
+    evaluation: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation_model: conversationModel,
+        evaluation: evaluation,
+      },
+    );
   }
 
   /**
@@ -3754,8 +4791,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationModelEvaluationName(projectLocationConversationModelEvaluationName: string) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(projectLocationConversationModelEvaluationName).project;
+  matchProjectFromProjectLocationConversationModelEvaluationName(
+    projectLocationConversationModelEvaluationName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationName,
+    ).project;
   }
 
   /**
@@ -3765,8 +4806,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationModelEvaluationName(projectLocationConversationModelEvaluationName: string) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(projectLocationConversationModelEvaluationName).location;
+  matchLocationFromProjectLocationConversationModelEvaluationName(
+    projectLocationConversationModelEvaluationName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationName,
+    ).location;
   }
 
   /**
@@ -3776,8 +4821,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
    * @returns {string} A string representing the conversation_model.
    */
-  matchConversationModelFromProjectLocationConversationModelEvaluationName(projectLocationConversationModelEvaluationName: string) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(projectLocationConversationModelEvaluationName).conversation_model;
+  matchConversationModelFromProjectLocationConversationModelEvaluationName(
+    projectLocationConversationModelEvaluationName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationName,
+    ).conversation_model;
   }
 
   /**
@@ -3787,8 +4836,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_model_evaluation resource.
    * @returns {string} A string representing the evaluation.
    */
-  matchEvaluationFromProjectLocationConversationModelEvaluationName(projectLocationConversationModelEvaluationName: string) {
-    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(projectLocationConversationModelEvaluationName).evaluation;
+  matchEvaluationFromProjectLocationConversationModelEvaluationName(
+    projectLocationConversationModelEvaluationName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationModelEvaluationPathTemplate.match(
+      projectLocationConversationModelEvaluationName,
+    ).evaluation;
   }
 
   /**
@@ -3800,13 +4853,20 @@ export class AgentsClient {
    * @param {string} participant
    * @returns {string} Resource name string.
    */
-  projectLocationConversationParticipantPath(project:string,location:string,conversation:string,participant:string) {
-    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.render({
-      project: project,
-      location: location,
-      conversation: conversation,
-      participant: participant,
-    });
+  projectLocationConversationParticipantPath(
+    project: string,
+    location: string,
+    conversation: string,
+    participant: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation: conversation,
+        participant: participant,
+      },
+    );
   }
 
   /**
@@ -3816,8 +4876,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_participant resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationParticipantName(projectLocationConversationParticipantName: string) {
-    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(projectLocationConversationParticipantName).project;
+  matchProjectFromProjectLocationConversationParticipantName(
+    projectLocationConversationParticipantName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
+      projectLocationConversationParticipantName,
+    ).project;
   }
 
   /**
@@ -3827,8 +4891,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_participant resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationParticipantName(projectLocationConversationParticipantName: string) {
-    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(projectLocationConversationParticipantName).location;
+  matchLocationFromProjectLocationConversationParticipantName(
+    projectLocationConversationParticipantName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
+      projectLocationConversationParticipantName,
+    ).location;
   }
 
   /**
@@ -3838,8 +4906,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_participant resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationConversationParticipantName(projectLocationConversationParticipantName: string) {
-    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(projectLocationConversationParticipantName).conversation;
+  matchConversationFromProjectLocationConversationParticipantName(
+    projectLocationConversationParticipantName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
+      projectLocationConversationParticipantName,
+    ).conversation;
   }
 
   /**
@@ -3849,8 +4921,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_participant resource.
    * @returns {string} A string representing the participant.
    */
-  matchParticipantFromProjectLocationConversationParticipantName(projectLocationConversationParticipantName: string) {
-    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(projectLocationConversationParticipantName).participant;
+  matchParticipantFromProjectLocationConversationParticipantName(
+    projectLocationConversationParticipantName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationParticipantPathTemplate.match(
+      projectLocationConversationParticipantName,
+    ).participant;
   }
 
   /**
@@ -3861,12 +4937,18 @@ export class AgentsClient {
    * @param {string} conversation_profile
    * @returns {string} Resource name string.
    */
-  projectLocationConversationProfilePath(project:string,location:string,conversationProfile:string) {
-    return this.pathTemplates.projectLocationConversationProfilePathTemplate.render({
-      project: project,
-      location: location,
-      conversation_profile: conversationProfile,
-    });
+  projectLocationConversationProfilePath(
+    project: string,
+    location: string,
+    conversationProfile: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        conversation_profile: conversationProfile,
+      },
+    );
   }
 
   /**
@@ -3876,8 +4958,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationProfileName(projectLocationConversationProfileName: string) {
-    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(projectLocationConversationProfileName).project;
+  matchProjectFromProjectLocationConversationProfileName(
+    projectLocationConversationProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(
+      projectLocationConversationProfileName,
+    ).project;
   }
 
   /**
@@ -3887,8 +4973,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationProfileName(projectLocationConversationProfileName: string) {
-    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(projectLocationConversationProfileName).location;
+  matchLocationFromProjectLocationConversationProfileName(
+    projectLocationConversationProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(
+      projectLocationConversationProfileName,
+    ).location;
   }
 
   /**
@@ -3898,8 +4988,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversation_profile resource.
    * @returns {string} A string representing the conversation_profile.
    */
-  matchConversationProfileFromProjectLocationConversationProfileName(projectLocationConversationProfileName: string) {
-    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(projectLocationConversationProfileName).conversation_profile;
+  matchConversationProfileFromProjectLocationConversationProfileName(
+    projectLocationConversationProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationProfilePathTemplate.match(
+      projectLocationConversationProfileName,
+    ).conversation_profile;
   }
 
   /**
@@ -3910,7 +5004,11 @@ export class AgentsClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  projectLocationConversationsPath(project:string,location:string,conversation:string) {
+  projectLocationConversationsPath(
+    project: string,
+    location: string,
+    conversation: string,
+  ) {
     return this.pathTemplates.projectLocationConversationsPathTemplate.render({
       project: project,
       location: location,
@@ -3925,8 +5023,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversations resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationConversationsName(projectLocationConversationsName: string) {
-    return this.pathTemplates.projectLocationConversationsPathTemplate.match(projectLocationConversationsName).project;
+  matchProjectFromProjectLocationConversationsName(
+    projectLocationConversationsName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationsPathTemplate.match(
+      projectLocationConversationsName,
+    ).project;
   }
 
   /**
@@ -3936,8 +5038,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversations resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationConversationsName(projectLocationConversationsName: string) {
-    return this.pathTemplates.projectLocationConversationsPathTemplate.match(projectLocationConversationsName).location;
+  matchLocationFromProjectLocationConversationsName(
+    projectLocationConversationsName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationsPathTemplate.match(
+      projectLocationConversationsName,
+    ).location;
   }
 
   /**
@@ -3947,8 +5053,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_conversations resource.
    * @returns {string} A string representing the conversation.
    */
-  matchConversationFromProjectLocationConversationsName(projectLocationConversationsName: string) {
-    return this.pathTemplates.projectLocationConversationsPathTemplate.match(projectLocationConversationsName).conversation;
+  matchConversationFromProjectLocationConversationsName(
+    projectLocationConversationsName: string,
+  ) {
+    return this.pathTemplates.projectLocationConversationsPathTemplate.match(
+      projectLocationConversationsName,
+    ).conversation;
   }
 
   /**
@@ -3959,7 +5069,11 @@ export class AgentsClient {
    * @param {string} knowledge_base
    * @returns {string} Resource name string.
    */
-  projectLocationKnowledgeBasePath(project:string,location:string,knowledgeBase:string) {
+  projectLocationKnowledgeBasePath(
+    project: string,
+    location: string,
+    knowledgeBase: string,
+  ) {
     return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.render({
       project: project,
       location: location,
@@ -3974,8 +5088,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_knowledge_base resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationKnowledgeBaseName(projectLocationKnowledgeBaseName: string) {
-    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(projectLocationKnowledgeBaseName).project;
+  matchProjectFromProjectLocationKnowledgeBaseName(
+    projectLocationKnowledgeBaseName: string,
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
+      projectLocationKnowledgeBaseName,
+    ).project;
   }
 
   /**
@@ -3985,8 +5103,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_knowledge_base resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationKnowledgeBaseName(projectLocationKnowledgeBaseName: string) {
-    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(projectLocationKnowledgeBaseName).location;
+  matchLocationFromProjectLocationKnowledgeBaseName(
+    projectLocationKnowledgeBaseName: string,
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
+      projectLocationKnowledgeBaseName,
+    ).location;
   }
 
   /**
@@ -3996,8 +5118,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_knowledge_base resource.
    * @returns {string} A string representing the knowledge_base.
    */
-  matchKnowledgeBaseFromProjectLocationKnowledgeBaseName(projectLocationKnowledgeBaseName: string) {
-    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(projectLocationKnowledgeBaseName).knowledge_base;
+  matchKnowledgeBaseFromProjectLocationKnowledgeBaseName(
+    projectLocationKnowledgeBaseName: string,
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBasePathTemplate.match(
+      projectLocationKnowledgeBaseName,
+    ).knowledge_base;
   }
 
   /**
@@ -4009,13 +5135,20 @@ export class AgentsClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  projectLocationKnowledgeBaseDocumentPath(project:string,location:string,knowledgeBase:string,document:string) {
-    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.render({
-      project: project,
-      location: location,
-      knowledge_base: knowledgeBase,
-      document: document,
-    });
+  projectLocationKnowledgeBaseDocumentPath(
+    project: string,
+    location: string,
+    knowledgeBase: string,
+    document: string,
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        knowledge_base: knowledgeBase,
+        document: document,
+      },
+    );
   }
 
   /**
@@ -4025,8 +5158,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_knowledge_base_document resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationKnowledgeBaseDocumentName(projectLocationKnowledgeBaseDocumentName: string) {
-    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(projectLocationKnowledgeBaseDocumentName).project;
+  matchProjectFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string,
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName,
+    ).project;
   }
 
   /**
@@ -4036,8 +5173,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_knowledge_base_document resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationKnowledgeBaseDocumentName(projectLocationKnowledgeBaseDocumentName: string) {
-    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(projectLocationKnowledgeBaseDocumentName).location;
+  matchLocationFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string,
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName,
+    ).location;
   }
 
   /**
@@ -4047,8 +5188,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_knowledge_base_document resource.
    * @returns {string} A string representing the knowledge_base.
    */
-  matchKnowledgeBaseFromProjectLocationKnowledgeBaseDocumentName(projectLocationKnowledgeBaseDocumentName: string) {
-    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(projectLocationKnowledgeBaseDocumentName).knowledge_base;
+  matchKnowledgeBaseFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string,
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName,
+    ).knowledge_base;
   }
 
   /**
@@ -4058,8 +5203,12 @@ export class AgentsClient {
    *   A fully-qualified path representing project_location_knowledge_base_document resource.
    * @returns {string} A string representing the document.
    */
-  matchDocumentFromProjectLocationKnowledgeBaseDocumentName(projectLocationKnowledgeBaseDocumentName: string) {
-    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(projectLocationKnowledgeBaseDocumentName).document;
+  matchDocumentFromProjectLocationKnowledgeBaseDocumentName(
+    projectLocationKnowledgeBaseDocumentName: string,
+  ) {
+    return this.pathTemplates.projectLocationKnowledgeBaseDocumentPathTemplate.match(
+      projectLocationKnowledgeBaseDocumentName,
+    ).document;
   }
 
   /**
@@ -4070,7 +5219,7 @@ export class AgentsClient {
    * @param {string} siptrunk
    * @returns {string} Resource name string.
    */
-  sipTrunkPath(project:string,location:string,siptrunk:string) {
+  sipTrunkPath(project: string, location: string, siptrunk: string) {
     return this.pathTemplates.sipTrunkPathTemplate.render({
       project: project,
       location: location,
@@ -4119,7 +5268,7 @@ export class AgentsClient {
    * @param {string} tool
    * @returns {string} Resource name string.
    */
-  toolPath(project:string,location:string,tool:string) {
+  toolPath(project: string, location: string, tool: string) {
     return this.pathTemplates.toolPathTemplate.render({
       project: project,
       location: location,
@@ -4168,11 +5317,13 @@ export class AgentsClient {
    */
   close(): Promise<void> {
     if (this.agentsStub && !this._terminated) {
-      return this.agentsStub.then(stub => {
+      return this.agentsStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

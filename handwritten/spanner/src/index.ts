@@ -16,7 +16,7 @@
 
 import {GrpcService, GrpcServiceConfig} from './common-grpc/service';
 import {PreciseDate} from '@google-cloud/precise-date';
-import {replaceProjectIdToken} from '@google-cloud/projectify';
+import {replaceProjectIdToken} from './helper';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import {GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
@@ -89,6 +89,7 @@ import * as v1 from './v1';
 import {
   ObservabilityOptions,
   ensureInitialContextManagerSet,
+  isTracingEnabled,
 } from './instrument';
 import {
   attributeXGoogSpannerRequestIdToActiveSpan,
@@ -496,12 +497,14 @@ class Spanner extends GrpcService {
     this.directedReadOptions = directedReadOptions;
     this.defaultTransactionOptions = defaultTransactionOptions;
     this._observabilityOptions = options.observabilityOptions;
+    if (isTracingEnabled(this._observabilityOptions)) {
+      ensureInitialContextManagerSet();
+    }
     this.sessionLabels = options.sessionLabels || null;
     this.commonHeaders_ = getCommonHeaders(
       this.projectFormattedName_,
       this._observabilityOptions?.enableEndToEndTracing,
     );
-    ensureInitialContextManagerSet();
     this._nthClientId = nextSpannerClientId();
     this._universeDomain = universeEndpoint;
     this.projectId_ = options.projectId;
@@ -561,18 +564,63 @@ class Spanner extends GrpcService {
   }
 
   /** Closes this Spanner client and cleans up all resources used by it. */
-  close(): void {
-    this.clients_.forEach(c => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const client = c as any;
-      if (client.operationsClient && client.operationsClient.close) {
-        client.operationsClient.close();
+  close(): Promise<void>;
+  close(callback: (err: Error | null) => void): void;
+  close(callback?: (err: Error | null) => void): void | Promise<void> {
+    const performTeardown = async () => {
+      const promises: Promise<void>[] = [];
+
+      this.clients_.forEach(c => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const client = c as any;
+
+        // Promise.resolve().then() safely converts synchronous throws into Promise rejections
+        if (client.operationsClient && client.operationsClient.close) {
+          promises.push(
+            Promise.resolve().then(() => client.operationsClient.close()),
+          );
+        }
+        if (client.close) {
+          promises.push(Promise.resolve().then(() => client.close()));
+        }
+      });
+
+      // Wait for all close attempts to settle.
+      // Map success to undefined, and failure to the error.
+      const results = await Promise.all(
+        promises.map(p =>
+          p.then(
+            () => undefined,
+            err => err || new Error('Unknown error during close'),
+          ),
+        ),
+      );
+
+      // Always execute cleanup
+      try {
+        await cleanup();
+      } catch (err) {
+        console.error('Error occured during cleanup: ', err);
       }
-      client.close();
-    });
-    cleanup().catch(err => {
-      console.error('Error occured during cleanup: ', err);
-    });
+
+      // If any client failed to close, throw the first error we captured
+      const firstError = results.find(r => r !== undefined);
+      if (firstError) {
+        throw firstError;
+      }
+    };
+
+    const res = performTeardown();
+
+    if (callback) {
+      // process.nextTick prevents Unhandled Promise Rejections if callback throws
+      res.then(
+        () => process.nextTick(() => callback(null)),
+        err => process.nextTick(() => callback(err)),
+      );
+    } else {
+      return res;
+    }
   }
 
   /**
@@ -1721,14 +1769,16 @@ class Spanner extends GrpcService {
         config.headers[CLOUD_RESOURCE_HEADER],
         projectId!,
       );
-      // Do context propagation
-      propagation.inject(context.active(), config.headers, {
-        set: (carrier, key, value) => {
-          carrier[key] = value; // Set the span context (trace and span ID)
-        },
-      });
-      // Attach the x-goog-spanner-request-id to the currently active span.
-      attributeXGoogSpannerRequestIdToActiveSpan(config);
+      if (isTracingEnabled(this._observabilityOptions)) {
+        // Do context propagation
+        propagation.inject(context.active(), config.headers, {
+          set: (carrier, key, value) => {
+            carrier[key] = value; // Set the span context (trace and span ID)
+          },
+        });
+        // Attach the x-goog-spanner-request-id to the currently active span.
+        attributeXGoogSpannerRequestIdToActiveSpan(config);
+      }
       const interceptors: any[] = [];
       if (this._metricsEnabled) {
         interceptors.push(MetricInterceptor);

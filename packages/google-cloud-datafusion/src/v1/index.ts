@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DataFusionClient} from './data_fusion_client';
+export { DataFusionClient } from './data_fusion_client';

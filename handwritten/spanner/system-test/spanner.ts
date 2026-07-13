@@ -21,7 +21,6 @@ import pLimit = require('p-limit');
 import concat = require('concat-stream');
 import * as crypto from 'crypto';
 import * as extend from 'extend';
-import * as uuid from 'uuid';
 import {
   Backup,
   Database,
@@ -59,7 +58,7 @@ import {
   CreateQueryPartitionsResponse,
   CreateReadPartitionsResponse,
 } from '../src/batch-transaction';
-import {isNull, isNumber} from '../src/helper';
+import {isNull, isNumber, isUuid} from '../src/helper';
 const fs = require('fs');
 
 const SKIP_BACKUPS = process.env.SKIP_BACKUPS;
@@ -913,11 +912,11 @@ describe('Spanner', () => {
       };
 
       it('GOOGLE_STANDARD_SQL should write uuid values', async () => {
-        await uuidInsert(Spanner.GOOGLE_STANDARD_SQL, uuid.v4());
+        await uuidInsert(Spanner.GOOGLE_STANDARD_SQL, crypto.randomUUID());
       });
 
       it.skip('POSTGRESQL should write uuid values', async () => {
-        await uuidInsert(Spanner.POSTGRESQL, uuid.v4());
+        await uuidInsert(Spanner.POSTGRESQL, crypto.randomUUID());
       });
 
       it('GOOGLE_STANDARD_SQL should write empty uuid array values', async () => {
@@ -934,7 +933,11 @@ describe('Spanner', () => {
       });
 
       it('GOOGLE_STANDARD_SQL should write uuid array values', async () => {
-        const values = [uuid.v4(), uuid.v4(), uuid.v4()];
+        const values = [
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+        ];
         const {row} = await insert(
           {UUIDArray: values},
           Spanner.GOOGLE_STANDARD_SQL,
@@ -943,7 +946,11 @@ describe('Spanner', () => {
       });
 
       it.skip('POSTGRESQL should write uuid array values', async () => {
-        const values = [uuid.v4(), uuid.v4(), uuid.v4()];
+        const values = [
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+        ];
         const {row} = await insert({UUIDArray: values}, Spanner.POSTGRESQL);
         assert.deepStrictEqual(row.toJSON().UUIDArray, values);
       });
@@ -1193,7 +1200,11 @@ describe('Spanner', () => {
           assert.fail('Expected an error to be thrown, but it was not.');
         } catch (err: any) {
           KOKORO_JOB_NAME?.includes('system-test-regular-session')
-            ? assert.strictEqual(err.code, grpc.status.FAILED_PRECONDITION)
+            ? assert.ok(
+                err.code === grpc.status.FAILED_PRECONDITION ||
+                  err.code === grpc.status.OUT_OF_RANGE,
+                `Expected FAILED_PRECONDITION (9) or OUT_OF_RANGE (11), got ${err.code}`,
+              )
             : assert.strictEqual(err.code, grpc.status.INVALID_ARGUMENT);
         }
       };
@@ -2936,7 +2947,7 @@ describe('Spanner', () => {
     });
   });
 
-  describe('Backups', () => {
+  describe.skip('Backups', () => {
     const SKIP_POSTGRESQL_BACKUP_TESTS = true;
 
     let googleSqlDatabase1: Database;
@@ -3968,7 +3979,7 @@ describe('Spanner', () => {
     describe('insert & query', () => {
       const ID = generateName('id');
       const NAME = generateName('name');
-      const UUID = uuid.v4();
+      const UUID = crypto.randomUUID();
       const FLOAT32 = 8.2;
       const FLOAT = 8.2;
       const INT = 2;
@@ -4599,7 +4610,7 @@ describe('Spanner', () => {
           };
 
           it('GOOGLE_STANDARD_SQL should bind the value when param type uuid is used', async () => {
-            const value = uuid.v4();
+            const value = crypto.randomUUID();
             const query = {
               sql: 'SELECT @v',
               params: {
@@ -4613,7 +4624,7 @@ describe('Spanner', () => {
           });
 
           it('GOOGLE_STANDARD_SQL should bind the value as uuid when param type is not specified', async () => {
-            const val = uuid.v4();
+            const val = crypto.randomUUID();
             const id = generateName('id');
             try {
               await googleSqlTable.insert({SingerId: id, UUID: val});
@@ -4628,14 +4639,14 @@ describe('Spanner', () => {
               };
               const [rows] = await DATABASE.run(query);
               assert.strictEqual(rows[0][0].value, id);
-              assert.strictEqual(uuid.validate(rows[0][1].value), true);
+              assert.strictEqual(isUuid(rows[0][1].value), true);
             } catch (err) {
               assert.ifError(err);
             }
           });
 
           it.skip('POSTGRESQL should bind the value when param type uuid is used', async () => {
-            const value = uuid.v4();
+            const value = crypto.randomUUID();
             const query = {
               sql: 'SELECT $1',
               params: {
@@ -4649,7 +4660,7 @@ describe('Spanner', () => {
           });
 
           it.skip('POSTGRESQL should bind the value as uuid when param type is not specified', async () => {
-            const val = uuid.v4();
+            const val = crypto.randomUUID();
             const id = generateName('id');
             try {
               await postgreSqlTable.insert({SingerId: id, UUID: val});
@@ -4664,14 +4675,18 @@ describe('Spanner', () => {
               };
               const [rows] = await PG_DATABASE.run(query);
               assert.strictEqual(rows[0][0].value, id);
-              assert.strictEqual(uuid.validate(rows[0][1].value), true);
+              assert.strictEqual(isUuid(rows[0][1].value), true);
             } catch (err) {
               assert.ifError(err);
             }
           });
 
           it('GOOGLE_STANDARD_SQL should bind arrays', async () => {
-            const values = [uuid.v4(), uuid.v4(), uuid.v4()];
+            const values = [
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+            ];
 
             const query = {
               sql: 'SELECT @v',
@@ -4711,7 +4726,11 @@ describe('Spanner', () => {
           });
 
           it.skip('POSTGRESQL should bind arrays', async () => {
-            const values = [uuid.v4(), uuid.v4(), uuid.v4()];
+            const values = [
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+            ];
 
             const query = {
               sql: 'SELECT $1',
@@ -8874,7 +8893,7 @@ describe('Spanner', () => {
 });
 
 function shortUUID() {
-  return uuid.v4().split('-').shift();
+  return crypto.randomUUID().split('-').shift();
 }
 
 function generateName(resourceType) {

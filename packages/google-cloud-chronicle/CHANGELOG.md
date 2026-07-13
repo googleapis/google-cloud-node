@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.4.0...chronicle-v0.5.0) (2026-06-25)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.3.0...chronicle-v0.4.0) (2026-05-12)
+
+
+### Features
+
+* [chronicle] Adding Client Libraries for BigQueryExportService ([#8139](https://github.com/googleapis/google-cloud-node/issues/8139)) ([ddb0db6](https://github.com/googleapis/google-cloud-node/commit/ddb0db637cff6477e8be1f60c9c5ba19c4a4e4a3))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/chronicle-v0.2.1...chronicle-v0.3.0) (2026-05-01)
 
 

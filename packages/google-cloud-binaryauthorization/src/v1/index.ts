@@ -16,6 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {BinauthzManagementServiceV1Client} from './binauthz_management_service_v1_client';
-export {SystemPolicyV1Client} from './system_policy_v1_client';
-export {ValidationHelperV1Client} from './validation_helper_v1_client';
+export { BinauthzManagementServiceV1Client } from './binauthz_management_service_v1_client';
+export { SystemPolicyV1Client } from './system_policy_v1_client';
+export { ValidationHelperV1Client } from './validation_helper_v1_client';

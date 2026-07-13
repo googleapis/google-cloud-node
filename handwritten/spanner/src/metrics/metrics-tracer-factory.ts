@@ -15,9 +15,8 @@
 import * as crypto from 'crypto';
 import * as os from 'os';
 import * as process from 'process';
-import {v4 as uuidv4} from 'uuid';
 import {MeterProvider, MetricReader} from '@opentelemetry/sdk-metrics';
-import {Counter, Histogram} from '@opentelemetry/api';
+import {Counter, Histogram, context, ROOT_CONTEXT} from '@opentelemetry/api';
 import {detectResources, Resource} from '@opentelemetry/resources';
 import {GcpDetectorSync} from '@google-cloud/opentelemetry-resource-util';
 import * as Constants from './constants';
@@ -84,9 +83,11 @@ export class MetricsTracerFactory {
     );
 
     // Start the Tracer cleanup task at an interval
-    this._intervalTracerCleanup = setInterval(
-      this._cleanMetricsTracers.bind(this),
-      Constants.TRACER_CLEANUP_INTERVAL_MS,
+    this._intervalTracerCleanup = context.with(ROOT_CONTEXT, () =>
+      setInterval(
+        this._cleanMetricsTracers.bind(this),
+        Constants.TRACER_CLEANUP_INTERVAL_MS,
+      ),
     );
     // unref the interval to prevent it from blocking app termination
     // in the event loop
@@ -141,7 +142,7 @@ export class MetricsTracerFactory {
   /**
    * Resets the singleton instance of the MetricsTracerFactory.
    */
-  public static async resetInstance(projectId?: string) {
+  public static async resetInstance() {
     clearInterval(MetricsTracerFactory._instance?._intervalTracerCleanup);
     await MetricsTracerFactory._instance?.resetMeterProvider();
     MetricsTracerFactory._instance = null;
@@ -411,7 +412,7 @@ export class MetricsTracerFactory {
    * @returns A unique string identifier for the client.
    */
   private static _generateClientUId(): string {
-    const identifier = uuidv4();
+    const identifier = crypto.randomUUID();
     const pid = process.pid.toString();
     let hostname = 'localhost';
 

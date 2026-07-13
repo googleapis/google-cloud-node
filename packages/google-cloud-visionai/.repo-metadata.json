@@ -1,17 +1,16 @@
 {
-  "name": "visionai",
-  "name_pretty": "Vision AI API",
-  "product_documentation": "https://cloud.google.com/vision-ai/docs",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/visionai/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/visionai",
-  "api_id": "visionai.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "visionai"
+    "api_description": "Vertex AI Vision is an AI-powered platform to ingest, analyze and store video data.",
+    "api_id": "visionai.googleapis.com",
+    "api_shortname": "visionai",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/visionai/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/visionai",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=187174&template=1161261",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "visionai",
+    "name_pretty": "Vision AI",
+    "product_documentation": "https://cloud.google.com/vision-ai/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

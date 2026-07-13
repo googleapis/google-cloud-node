@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {PolicyBindingsClient} from './policy_bindings_client';
-export {PrincipalAccessBoundaryPoliciesClient} from './principal_access_boundary_policies_client';
+export { PolicyBindingsClient } from './policy_bindings_client';
+export { PrincipalAccessBoundaryPoliciesClient } from './principal_access_boundary_policies_client';

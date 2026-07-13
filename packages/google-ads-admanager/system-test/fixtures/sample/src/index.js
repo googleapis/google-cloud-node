@@ -45,7 +45,10 @@ function main() {
   const deviceManufacturerServiceClient = new admanager.DeviceManufacturerServiceClient();
   const entitySignalsMappingServiceClient = new admanager.EntitySignalsMappingServiceClient();
   const geoTargetServiceClient = new admanager.GeoTargetServiceClient();
+  const labelServiceClient = new admanager.LabelServiceClient();
   const lineItemServiceClient = new admanager.LineItemServiceClient();
+  const linkedDeviceServiceClient = new admanager.LinkedDeviceServiceClient();
+  const mcmEarningsServiceClient = new admanager.McmEarningsServiceClient();
   const mobileCarrierServiceClient = new admanager.MobileCarrierServiceClient();
   const mobileDeviceServiceClient = new admanager.MobileDeviceServiceClient();
   const mobileDeviceSubmodelServiceClient = new admanager.MobileDeviceSubmodelServiceClient();
@@ -58,6 +61,7 @@ function main() {
   const privateAuctionServiceClient = new admanager.PrivateAuctionServiceClient();
   const programmaticBuyerServiceClient = new admanager.ProgrammaticBuyerServiceClient();
   const reportServiceClient = new admanager.ReportServiceClient();
+  const richMediaAdsCompanyServiceClient = new admanager.RichMediaAdsCompanyServiceClient();
   const roleServiceClient = new admanager.RoleServiceClient();
   const siteServiceClient = new admanager.SiteServiceClient();
   const taxonomyCategoryServiceClient = new admanager.TaxonomyCategoryServiceClient();

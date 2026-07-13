@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,12 +19,14 @@ package google.cloud.datacatalog.lineage.v1;
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
+import "google/api/field_info.proto";
 import "google/api/resource.proto";
 import "google/longrunning/operations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
+import "google/type/interval.proto";
 
 option csharp_namespace = "Google.Cloud.DataCatalog.Lineage.V1";
 option go_package = "cloud.google.com/go/datacatalog/lineage/apiv1/lineagepb;lineagepb";
@@ -224,6 +226,39 @@ service Lineage {
       body: "*"
     };
   }
+
+  // Retrieves a streaming response of lineage links connected to the requested
+  // assets by performing a breadth-first search in the given direction. Links
+  // represent the data flow between **source** (upstream) and **target**
+  // (downstream) assets in transformation pipelines. Links are stored in the
+  // same project as the Lineage Events that create them. This method retrieves
+  // links from all valid locations provided in the request. This method
+  // supports Column-Level Lineage (CLL) along with wildcard support to retrieve
+  // all CLL for an Entity FQN.
+  //
+  // Following permissions are required to retrieve links:
+  // * `datalineage.events.get` permission for the project where the link is
+  // stored for entity-level lineage.
+  // * `datalineage.events.getFields` permission for the project where the link
+  // is stored for column-level lineage.
+  //
+  // This method also returns processes that created the links if explicitly
+  // requested by setting
+  // [max_process_per_link](google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.limits.max_process_per_link)
+  // is non-zero and full process details are requested via
+  // `links.processes.process` in the
+  // [FieldMask](https://developers.google.com/workspace/docs/api/how-tos/field-masks#read_with_a_field_mask).
+  //
+  // Permission required to retrieve processes:
+  // * `datalineage.processes.get` permission for the project where the process
+  // is stored.
+  rpc SearchLineageStreaming(SearchLineageStreamingRequest)
+      returns (stream SearchLineageStreamingResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=projects/*/locations/*}:searchLineageStreaming"
+      body: "*"
+    };
+  }
 }
 
 // A process is the definition of a data transformation operation.
@@ -231,6 +266,8 @@ message Process {
   option (google.api.resource) = {
     type: "datalineage.googleapis.com/Process"
     pattern: "projects/{project}/locations/{location}/processes/{process}"
+    plural: "processes"
+    singular: "process"
   };
 
   // Immutable. The resource name of the lineage process. Format:
@@ -263,6 +300,8 @@ message Run {
   option (google.api.resource) = {
     type: "datalineage.googleapis.com/Run"
     pattern: "projects/{project}/locations/{location}/processes/{process}/runs/{run}"
+    plural: "runs"
+    singular: "run"
   };
 
   // The current state of the run.
@@ -292,7 +331,7 @@ message Run {
   string name = 1 [(google.api.field_behavior) = IMMUTABLE];
 
   // Optional. A human-readable name you can set to display in a user interface.
-  // Must be not longer than 1024 characters and only contain UTF-8 letters
+  // Must be not longer than 200 characters and only contain UTF-8 letters
   // or numbers, spaces or characters like `_-:&.`
   string display_name = 2 [(google.api.field_behavior) = OPTIONAL];
 
@@ -321,6 +360,8 @@ message LineageEvent {
   option (google.api.resource) = {
     type: "datalineage.googleapis.com/LineageEvent"
     pattern: "projects/{project}/locations/{location}/processes/{process}/runs/{run}/lineageEvents/{lineage_event}"
+    plural: "lineageEvents"
+    singular: "lineageEvent"
   };
 
   // Immutable. The resource name of the lineage event.
@@ -354,14 +395,35 @@ message EventLink {
 
   // Required. Reference to the target entity
   EntityReference target = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Describes how the target depends on the source.
+  DependencyInfo dependency_info = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Dependency info describes how one entity depends on another.
+message DependencyInfo {
+  // Required. Type of dependency.
+  DependencyType dependency_type = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 // The soft reference to everything you can attach a lineage event to.
 message EntityReference {
   // Required. [Fully Qualified Name
-  // (FQN)](https://cloud.google.com/data-catalog/docs/fully-qualified-names)
+  // (FQN)](https://cloud.google.com/dataplex/docs/fully-qualified-names)
   // of the entity.
   string fully_qualified_name = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Field path within the entity. Each nesting level should be a
+  // separate value in the repeated field. The order matters. Must be empty for
+  // asset level lineage
+  //
+  // For example to address "salary.net" subfield where "salary" is a column and
+  // "net" is a proto field two values in the `field` should be reported,
+  // the first is "salary" and the second is "net".
+  //
+  // Each field length is limited to 500 characters.
+  // Maximum supported nesting level is 20.
+  repeated string field = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Metadata describing the operation.
@@ -421,7 +483,7 @@ message OperationMetadata {
 }
 
 // Request message for
-// [ProcessOpenLineageRunEvent][google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEvent].
+// [ProcessOpenLineageRunEvent][google.cloud.datacatalog.lineage.v1.Lineage.ProcessOpenLineageRunEvent].
 message ProcessOpenLineageRunEventRequest {
   // Required. The name of the project and its location that should own the
   // process, run, and lineage event.
@@ -432,14 +494,17 @@ message ProcessOpenLineageRunEventRequest {
   google.protobuf.Struct open_lineage = 2
       [(google.api.field_behavior) = REQUIRED];
 
-  // A unique identifier for this request. Restricted to 36 ASCII characters.
-  // A random UUID is recommended. This request is idempotent only if a
-  // `request_id` is provided.
-  string request_id = 3;
+  // Optional. A unique identifier for this request. Restricted to 36 ASCII
+  // characters. A random UUID is recommended. This request is idempotent only
+  // if a `request_id` is provided.
+  string request_id = 3 [
+    (google.api.field_info).format = UUID4,
+    (google.api.field_behavior) = OPTIONAL
+  ];
 }
 
 // Response message for
-// [ProcessOpenLineageRunEvent][google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEvent].
+// [ProcessOpenLineageRunEvent][google.cloud.datacatalog.lineage.v1.Lineage.ProcessOpenLineageRunEvent].
 message ProcessOpenLineageRunEventResponse {
   // Created process name.
   // Format: `projects/{project}/locations/{location}/processes/{process}`.
@@ -463,7 +528,7 @@ message ProcessOpenLineageRunEventResponse {
 }
 
 // Request message for
-// [CreateProcess][google.cloud.datacatalog.lineage.v1.CreateProcess].
+// [CreateProcess][google.cloud.datacatalog.lineage.v1.Lineage.CreateProcess].
 message CreateProcessRequest {
   // Required. The name of the project and its location that should own the
   // process.
@@ -477,30 +542,43 @@ message CreateProcessRequest {
   // Required. The process to create.
   Process process = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // A unique identifier for this request. Restricted to 36 ASCII characters.
-  // A random UUID is recommended. This request is idempotent only if a
-  // `request_id` is provided.
-  string request_id = 3;
+  // Optional. A unique identifier for this request. Restricted to 36 ASCII
+  // characters. A random UUID is recommended. This request is idempotent only
+  // if a `request_id` is provided.
+  string request_id = 3 [
+    (google.api.field_info).format = UUID4,
+    (google.api.field_behavior) = OPTIONAL
+  ];
 }
 
 // Request message for
-// [UpdateProcess][google.cloud.datacatalog.lineage.v1.UpdateProcess].
+// [UpdateProcess][google.cloud.datacatalog.lineage.v1.Lineage.UpdateProcess].
 message UpdateProcessRequest {
   // Required. The lineage process to update.
   //
   // The process's `name` field is used to identify the process to update.
   Process process = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // The list of fields to update. Currently not used. The whole message is
-  // updated.
-  google.protobuf.FieldMask update_mask = 2;
+  // Optional. The list of fields to update. Currently not used. The whole
+  // message is updated.
+  google.protobuf.FieldMask update_mask = 2
+      [(google.api.field_behavior) = OPTIONAL];
 
-  // If set to true and the process is not found, the request inserts it.
-  bool allow_missing = 3;
+  // Optional. If set to true and the process is not found, the request inserts
+  // it.
+  bool allow_missing = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. A unique identifier for this request. Restricted to 36 ASCII
+  // characters. A random UUID is recommended. This request is idempotent only
+  // if a `request_id` is provided.
+  string request_id = 4 [
+    (google.api.field_info).format = UUID4,
+    (google.api.field_behavior) = OPTIONAL
+  ];
 }
 
 // Request message for
-// [GetProcess][google.cloud.datacatalog.lineage.v1.GetProcess].
+// [GetProcess][google.cloud.datacatalog.lineage.v1.Lineage.GetProcess].
 message GetProcessRequest {
   // Required. The name of the process to get.
   string name = 1 [
@@ -512,7 +590,7 @@ message GetProcessRequest {
 }
 
 // Request message for
-// [ListProcesses][google.cloud.datacatalog.lineage.v1.ListProcesses].
+// [ListProcesses][google.cloud.datacatalog.lineage.v1.Lineage.ListProcesses].
 message ListProcessesRequest {
   // Required. The name of the project and its location that owns this
   // collection of processes.
@@ -523,22 +601,22 @@ message ListProcessesRequest {
     }
   ];
 
-  // The maximum number of processes to return. The service may return
+  // Optional. The maximum number of processes to return. The service may return
   // fewer than this value. If unspecified, at most 50 processes are
   // returned. The maximum value is 100; values greater than 100 are cut to
   // 100.
-  int32 page_size = 2;
+  int32 page_size = 2 [(google.api.field_behavior) = OPTIONAL];
 
-  // The page token received from a previous `ListProcesses` call. Specify
-  // it to get the next page.
+  // Optional. The page token received from a previous `ListProcesses` call.
+  // Specify it to get the next page.
   //
   // When paginating, all other parameters specified in this call must
   // match the parameters of the call that provided the page token.
-  string page_token = 3;
+  string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for
-// [ListProcesses][google.cloud.datacatalog.lineage.v1.ListProcesses].
+// [ListProcesses][google.cloud.datacatalog.lineage.v1.Lineage.ListProcesses].
 message ListProcessesResponse {
   // The processes from the specified project and location.
   repeated Process processes = 1;
@@ -549,7 +627,7 @@ message ListProcessesResponse {
 }
 
 // Request message for
-// [DeleteProcess][google.cloud.datacatalog.lineage.v1.DeleteProcess].
+// [DeleteProcess][google.cloud.datacatalog.lineage.v1.Lineage.DeleteProcess].
 message DeleteProcessRequest {
   // Required. The name of the process to delete.
   string name = 1 [
@@ -559,13 +637,13 @@ message DeleteProcessRequest {
     }
   ];
 
-  // If set to true and the process is not found, the request
+  // Optional. If set to true and the process is not found, the request
   // succeeds but the server doesn't perform any actions.
-  bool allow_missing = 2;
+  bool allow_missing = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Request message for
-// [CreateRun][google.cloud.datacatalog.lineage.v1.CreateRun].
+// [CreateRun][google.cloud.datacatalog.lineage.v1.Lineage.CreateRun].
 message CreateRunRequest {
   // Required. The name of the process that should own the run.
   string parent = 1 [
@@ -578,14 +656,17 @@ message CreateRunRequest {
   // Required. The run to create.
   Run run = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // A unique identifier for this request. Restricted to 36 ASCII characters.
-  // A random UUID is recommended. This request is idempotent only if a
-  // `request_id` is provided.
-  string request_id = 3;
+  // Optional. A unique identifier for this request. Restricted to 36 ASCII
+  // characters. A random UUID is recommended. This request is idempotent only
+  // if a `request_id` is provided.
+  string request_id = 3 [
+    (google.api.field_info).format = UUID4,
+    (google.api.field_behavior) = OPTIONAL
+  ];
 }
 
 // Request message for
-// [UpdateRun][google.cloud.datacatalog.lineage.v1.UpdateRun].
+// [UpdateRun][google.cloud.datacatalog.lineage.v1.Lineage.UpdateRun].
 message UpdateRunRequest {
   // Required. The lineage run to update.
   //
@@ -595,16 +676,17 @@ message UpdateRunRequest {
   // `projects/{project}/locations/{location}/processes/{process}/runs/{run}`.
   Run run = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // The list of fields to update. Currently not used. The whole message is
-  // updated.
-  google.protobuf.FieldMask update_mask = 2;
+  // Optional. The list of fields to update. Currently not used. The whole
+  // message is updated.
+  google.protobuf.FieldMask update_mask = 2
+      [(google.api.field_behavior) = OPTIONAL];
 
-  // If set to true and the run is not found, the request creates it.
-  bool allow_missing = 3;
+  // Optional. If set to true and the run is not found, the request creates it.
+  bool allow_missing = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Request message for
-// [GetRun][google.cloud.datacatalog.lineage.v1.GetRun].
+// [GetRun][google.cloud.datacatalog.lineage.v1.Lineage.GetRun].
 message GetRunRequest {
   // Required. The name of the run to get.
   string name = 1 [
@@ -614,32 +696,32 @@ message GetRunRequest {
 }
 
 // Request message for
-// [ListRuns][google.cloud.datacatalog.lineage.v1.ListRuns].
+// [ListRuns][google.cloud.datacatalog.lineage.v1.Lineage.ListRuns].
 message ListRunsRequest {
   // Required. The name of process that owns this collection of runs.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {
-      child_type: "datalineage.googleapis.com/Run"
+      type: "datalineage.googleapis.com/Process"
     }
   ];
 
-  // The maximum number of runs to return. The service may return
+  // Optional. The maximum number of runs to return. The service may return
   // fewer than this value. If unspecified, at most 50 runs are
   // returned. The maximum value is 100; values greater than 100 are cut to
   // 100.
-  int32 page_size = 2;
+  int32 page_size = 2 [(google.api.field_behavior) = OPTIONAL];
 
-  // The page token received from a previous `ListRuns` call. Specify
+  // Optional. The page token received from a previous `ListRuns` call. Specify
   // it to get the next page.
   //
   // When paginating, all other parameters specified in this call must
   // match the parameters of the call that provided the page token.
-  string page_token = 3;
+  string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for
-// [ListRuns][google.cloud.datacatalog.lineage.v1.ListRuns].
+// [ListRuns][google.cloud.datacatalog.lineage.v1.Lineage.ListRuns].
 message ListRunsResponse {
   // The runs from the specified project and location.
   repeated Run runs = 1;
@@ -650,7 +732,7 @@ message ListRunsResponse {
 }
 
 // Request message for
-// [DeleteRun][google.cloud.datacatalog.lineage.v1.DeleteRun].
+// [DeleteRun][google.cloud.datacatalog.lineage.v1.Lineage.DeleteRun].
 message DeleteRunRequest {
   // Required. The name of the run to delete.
   string name = 1 [
@@ -658,13 +740,13 @@ message DeleteRunRequest {
     (google.api.resource_reference) = { type: "datalineage.googleapis.com/Run" }
   ];
 
-  // If set to true and the run is not found, the request
+  // Optional. If set to true and the run is not found, the request
   // succeeds but the server doesn't perform any actions.
-  bool allow_missing = 2;
+  bool allow_missing = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Request message for
-// [CreateLineageEvent][google.cloud.datacatalog.lineage.v1.CreateLineageEvent].
+// [CreateLineageEvent][google.cloud.datacatalog.lineage.v1.Lineage.CreateLineageEvent].
 message CreateLineageEventRequest {
   // Required. The name of the run that should own the lineage event.
   string parent = 1 [
@@ -677,14 +759,17 @@ message CreateLineageEventRequest {
   // Required. The lineage event to create.
   LineageEvent lineage_event = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // A unique identifier for this request. Restricted to 36 ASCII characters.
-  // A random UUID is recommended. This request is idempotent only if a
-  // `request_id` is provided.
-  string request_id = 3;
+  // Optional. A unique identifier for this request. Restricted to 36 ASCII
+  // characters. A random UUID is recommended. This request is idempotent only
+  // if a `request_id` is provided.
+  string request_id = 3 [
+    (google.api.field_info).format = UUID4,
+    (google.api.field_behavior) = OPTIONAL
+  ];
 }
 
 // Request message for
-// [GetLineageEvent][google.cloud.datacatalog.lineage.v1.GetLineageEvent].
+// [GetLineageEvent][google.cloud.datacatalog.lineage.v1.Lineage.GetLineageEvent].
 message GetLineageEventRequest {
   // Required. The name of the lineage event to get.
   string name = 1 [
@@ -696,34 +781,32 @@ message GetLineageEventRequest {
 }
 
 // Request message for
-// [ListLineageEvents][google.cloud.datacatalog.lineage.v1.ListLineageEvents].
+// [ListLineageEvents][google.cloud.datacatalog.lineage.v1.Lineage.ListLineageEvents].
 message ListLineageEventsRequest {
   // Required. The name of the run that owns the collection of lineage events to
   // get.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      child_type: "datalineage.googleapis.com/LineageEvent"
-    }
+    (google.api.resource_reference) = { type: "datalineage.googleapis.com/Run" }
   ];
 
-  // The maximum number of lineage events to return.
+  // Optional. The maximum number of lineage events to return.
   //
   // The service may return fewer events than this value.
   // If unspecified, at most 50 events are returned. The maximum value is 100;
   // values greater than 100 are cut to 100.
-  int32 page_size = 2;
+  int32 page_size = 2 [(google.api.field_behavior) = OPTIONAL];
 
-  // The page token received from a previous `ListLineageEvents` call. Specify
-  // it to get the next page.
+  // Optional. The page token received from a previous `ListLineageEvents` call.
+  // Specify it to get the next page.
   //
   // When paginating, all other parameters specified in this call must
   // match the parameters of the call that provided the page token.
-  string page_token = 3;
+  string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for
-// [ListLineageEvents][google.cloud.datacatalog.lineage.v1.ListLineageEvents].
+// [ListLineageEvents][google.cloud.datacatalog.lineage.v1.Lineage.ListLineageEvents].
 message ListLineageEventsResponse {
   // Lineage events from the specified project and location.
   repeated LineageEvent lineage_events = 1;
@@ -734,7 +817,7 @@ message ListLineageEventsResponse {
 }
 
 // Request message for
-// [DeleteLineageEvent][google.cloud.datacatalog.lineage.v1.DeleteLineageEvent].
+// [DeleteLineageEvent][google.cloud.datacatalog.lineage.v1.Lineage.DeleteLineageEvent].
 message DeleteLineageEventRequest {
   // Required. The name of the lineage event to delete.
   string name = 1 [
@@ -744,9 +827,9 @@ message DeleteLineageEventRequest {
     }
   ];
 
-  // If set to true and the lineage event is not found, the request
+  // Optional. If set to true and the lineage event is not found, the request
   // succeeds but the server doesn't perform any actions.
-  bool allow_missing = 2;
+  bool allow_missing = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Request message for
@@ -769,6 +852,26 @@ message SearchLinksRequest {
     // Optional. Send asset information in the **target** field to retrieve all
     // links that lead from upstream assets to the specified asset.
     EntityReference target = 5 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Send a list of asset information in the **sources** field to
+    // retrieve all links that lead from the specified assets to downstream
+    // assets. This field is similar to the `source`
+    // [source][google.cloud.datacatalog.lineage.v1.SearchLinksRequest.source]
+    // field but allows providing multiple entities.
+    // All entities within the `MultipleEntityReference` must have the same
+    // `fully_qualified_name`.
+    MultipleEntityReference sources = 6
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Send a list of asset information in the **targets** field to
+    // retrieve all links that lead from upstream assets to the specified
+    // assets. This field is similar to the `target`
+    // [target][google.cloud.datacatalog.lineage.v1.SearchLinksRequest.target]
+    // field but allows providing multiple entities.
+    // All entities within the `MultipleEntityReference` must have the same
+    // `fully_qualified_name`.
+    MultipleEntityReference targets = 7
+        [(google.api.field_behavior) = OPTIONAL];
   }
 
   // Optional. The maximum number of links to return in a single page of the
@@ -785,6 +888,14 @@ message SearchLinksRequest {
   // all parameters must match the values you provided
   // in the original request.
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Multiple entity reference for SearchLinksRequest.
+message MultipleEntityReference {
+  // Optional. The list of entities to search for links. The maximum number of
+  // entities is 20.
+  repeated EntityReference entities = 1
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for
@@ -805,6 +916,12 @@ message SearchLinksResponse {
 // Links are created when LineageEvents record data transformation between
 // related assets.
 message Link {
+  // Dependency info describes how one entity depends on another.
+  message DependencyInfo {
+    // The type of dependency.
+    DependencyType dependency_type = 1;
+  }
+
   // Output only. Immutable. The name of the link. Format:
   // `projects/{project}/locations/{location}/links/{link}`.
   string name = 1 [
@@ -823,6 +940,11 @@ message Link {
 
   // The end of the last event establishing this link.
   google.protobuf.Timestamp end_time = 5;
+
+  // Optional. The dependency info of the link (applies only to column level
+  // links).
+  repeated DependencyInfo dependency_info = 6
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Request message for
@@ -845,17 +967,17 @@ message BatchSearchLinkProcessesRequest {
   // Format: `projects/{project}/locations/{location}/links/{link}`.
   repeated string links = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // The maximum number of processes to return in a single page of the response.
-  // A page may contain fewer results than this value.
-  int32 page_size = 3;
+  // Optional. The maximum number of processes to return in a single page of the
+  // response. A page may contain fewer results than this value.
+  int32 page_size = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // The page token received from a previous `BatchSearchLinkProcesses` call.
-  // Use it to get the next page.
+  // Optional. The page token received from a previous
+  // `BatchSearchLinkProcesses` call. Use it to get the next page.
   //
   // When requesting subsequent pages of a response, remember that
   // all parameters must match the values you provided
   // in the original request.
-  string page_token = 4;
+  string page_token = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for
@@ -923,17 +1045,27 @@ message Origin {
 
     // Dataproc
     DATAPROC = 6;
+
+    // Vertex AI
+    VERTEX_AI = 7;
+
+    // Dataflow
+    DATAFLOW = 8;
+
+    // Looker Core
+    LOOKER_CORE = 9;
   }
 
   // Type of the source.
   //
   // Use of a source_type other than `CUSTOM` for process creation
-  // or updating is highly discouraged, and may be restricted in the future
-  // without notice.
+  // or updating is highly discouraged. It might be restricted in the future
+  // without notice. There will be increase in cost if you use any of the source
+  // types other than `CUSTOM`.
   SourceType source_type = 1;
 
-  // If the source_type isn't CUSTOM, the value of this field should be a GCP
-  // resource name of the system, which reports lineage. The project and
+  // If the source_type isn't CUSTOM, the value of this field should be a Google
+  // Cloud resource name of the system, which reports lineage. The project and
   // location parts of the resource name must match the project and location of
   // the lineage resource being created. Examples:
   //
@@ -942,4 +1074,164 @@ message Origin {
   // - `{source_type: BIGQUERY, name: "projects/foo/locations/eu"}`
   // - `{source_type: CUSTOM,   name: "myCustomIntegration"}`
   string name = 2;
+}
+
+// Lineage link between two entities.
+message LineageLink {
+  // Process metadata for the link.
+  message LineageProcess {
+    // Process that created the link.
+    Process process = 3;
+  }
+
+  // Dependency info describes how one entity is dependent on another.
+  message DependencyInfo {
+    // The type of dependency.
+    DependencyType dependency_type = 1;
+  }
+
+  // The entity that is the **source** of this link.
+  EntityReference source = 1;
+
+  // The entity that is the **target** of this link.
+  EntityReference target = 2;
+
+  // Processes metadata associated with the link.
+  repeated LineageProcess processes = 3;
+
+  // Describes how the target entity is dependent on the source entity.
+  repeated DependencyInfo dependency_info = 4;
+
+  // Depth of the current link in the graph starting from 1.
+  int32 depth = 5;
+
+  // The location where the LineageEvent that created the link is stored.
+  string location = 7;
+}
+
+// Request message for
+// [SearchLineageStreaming][google.cloud.datacatalog.lineage.v1.Lineage.SearchLineageStreaming].
+message SearchLineageStreamingRequest {
+  // Direction of the search.
+  enum SearchDirection {
+    // Direction is unspecified.
+    SEARCH_DIRECTION_UNSPECIFIED = 0;
+
+    // Retrieve links that lead from the specified asset to downstream assets.
+    DOWNSTREAM = 1;
+
+    // Retrieve links that lead from upstream assets to the specified asset.
+    UPSTREAM = 2;
+  }
+
+  // Entity set restriction.
+  enum EntitySet {
+    // The entity set is unspecified. Returns all the data.
+    ENTITY_SET_UNSPECIFIED = 0;
+
+    // Returns entities with only FQN specified. For example, entities with the
+    // `field` field set are not returned.
+    ENTITIES = 1;
+  }
+
+  // Filters for the search.
+  message SearchFilters {
+    // Optional. Types of dependencies between entities to retrieve.
+    // If unspecified, all dependency types are returned.
+    repeated DependencyType dependency_types = 1
+        [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Entity set restriction. If unspecified, the method returns all
+    // entities.
+    EntitySet entity_set = 2 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. Time interval to search for lineage. If unspecified, all
+    // lineage is returned. Currently, at most one of `start_time` and
+    // `end_time` can be set.
+    google.type.Interval time_range = 3
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Limits for the search results.
+  message SearchLimits {
+    // Optional. The maximum depth of the search. The default value is 5 and
+    // maximum value is 100.
+    int32 max_depth = 1 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The maximum number of links to return in the response. The
+    // default value is 1_000 and the maximum value is 10_000.
+    int32 max_results = 2 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The maximum number of processes to return per link. The default
+    // value is 0 and the maximum value is 100. If this value is non-zero, the
+    // response will contain process names for the links. To retrieve full
+    // process details in the response, include `links.processes.process` in the
+    // [FieldMask](https://developers.google.com/workspace/docs/api/how-tos/field-masks#read_with_a_field_mask).
+    int32 max_process_per_link = 3 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // Criteria for the root of the search.
+  message RootCriteria {
+    // Criteria for the root of the search.
+    oneof criteria {
+      // Optional. The entities to initiate the search from. Entities can be
+      // specified by FQN only, or by FQN and field. To search by FQN and all
+      // available fields for that FQN, use the wildcard `*` as the field value.
+      MultipleEntityReference entities = 1
+          [(google.api.field_behavior) = OPTIONAL];
+    }
+  }
+
+  // Required. The project and location to initiate the search from.
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      child_type: "datalineage.googleapis.com/Process"
+    }
+  ];
+
+  // Required. The locations to search in.
+  repeated string locations = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Criteria for the root of the search.
+  RootCriteria root_criteria = 3 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. Direction of the search.
+  SearchDirection direction = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Filters for the search.
+  SearchFilters filters = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Limits for the search.
+  SearchLimits limits = 6 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Response message for
+// [SearchLineageStreaming][google.cloud.datacatalog.lineage.v1.Lineage.SearchLineageStreaming].
+message SearchLineageStreamingResponse {
+  // Output only. The lineage links that match the search criteria. Can be empty
+  // if no links match.
+  repeated LineageLink links = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Unordered list. Unreachable resources. If non-empty, the result set might
+  // be incomplete.
+  //
+  // Currently, only locations are supported.
+  //
+  // Format: `projects/[PROJECT_NUMBER]/locations/[LOCATION]`
+  // Example: projects/123456789/locations/us-east1
+  repeated string unreachable = 2
+      [(google.api.field_behavior) = UNORDERED_LIST];
+}
+
+// Type of dependency between entities.
+enum DependencyType {
+  // Dependency type unspecified.
+  DEPENDENCY_TYPE_UNSPECIFIED = 0;
+
+  // Exact data copy without any change.
+  EXACT_COPY = 1;
+
+  // Other types of dependencies like filtering or grouping.
+  OTHER = 3;
 }

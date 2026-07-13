@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(adUnit, updateMask) {
+function main(adUnit) {
   // [START admanager_v1_generated_AdUnitService_UpdateAdUnit_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -35,7 +35,7 @@ function main(adUnit, updateMask) {
    */
   // const adUnit = {}
   /**
-   *  Required. The list of fields to update.
+   *  Optional. The list of fields to update.
    */
   // const updateMask = {}
 
@@ -49,7 +49,6 @@ function main(adUnit, updateMask) {
     // Construct request
     const request = {
       adUnit,
-      updateMask,
     };
 
     // Run request

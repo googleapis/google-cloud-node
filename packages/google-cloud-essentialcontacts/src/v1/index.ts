@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {EssentialContactsServiceClient} from './essential_contacts_service_client';
+export { EssentialContactsServiceClient } from './essential_contacts_service_client';

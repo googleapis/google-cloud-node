@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +54,7 @@ export class ApiHubCurateClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('apihub');
@@ -58,10 +67,10 @@ export class ApiHubCurateClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  apiHubCurateStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  apiHubCurateStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ApiHubCurateClient.
@@ -102,27 +111,48 @@ export class ApiHubCurateClient {
    *     const client = new ApiHubCurateClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ApiHubCurateClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'apihub.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = {fallback: true};
+      opts = { fallback: true };
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -147,7 +177,7 @@ export class ApiHubCurateClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -161,15 +191,11 @@ export class ApiHubCurateClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -191,64 +217,64 @@ export class ApiHubCurateClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       apiPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}'
+        'projects/{project}/locations/{location}/apis/{api}',
       ),
       apiHubInstancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apiHubInstances/{api_hub_instance}'
+        'projects/{project}/locations/{location}/apiHubInstances/{api_hub_instance}',
       ),
       apiOperationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}',
       ),
       attributePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/attributes/{attribute}'
+        'projects/{project}/locations/{location}/attributes/{attribute}',
       ),
       curationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/curations/{curation}'
+        'projects/{project}/locations/{location}/curations/{curation}',
       ),
       definitionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/definitions/{definition}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/definitions/{definition}',
       ),
       dependencyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dependencies/{dependency}'
+        'projects/{project}/locations/{location}/dependencies/{dependency}',
       ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/deployments/{deployment}'
+        'projects/{project}/locations/{location}/deployments/{deployment}',
       ),
       discoveredApiObservationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}'
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}',
       ),
       discoveredApiOperationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}'
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}',
       ),
       externalApiPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/externalApis/{external_api}'
+        'projects/{project}/locations/{location}/externalApis/{external_api}',
       ),
       hostProjectRegistrationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/hostProjectRegistrations/{host_project_registration}'
+        'projects/{project}/locations/{location}/hostProjectRegistrations/{host_project_registration}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       pluginPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/plugins/{plugin}'
+        'projects/{project}/locations/{location}/plugins/{plugin}',
       ),
       pluginInstancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}'
+        'projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       runtimeProjectAttachmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/runtimeProjectAttachments/{runtime_project_attachment}'
+        'projects/{project}/locations/{location}/runtimeProjectAttachments/{runtime_project_attachment}',
       ),
       specPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}',
       ),
       styleGuidePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/plugins/{plugin}/styleGuide'
+        'projects/{project}/locations/{location}/plugins/{plugin}/styleGuide',
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}',
       ),
     };
 
@@ -256,14 +282,20 @@ export class ApiHubCurateClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCurations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'curations')
+      listCurations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'curations',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.apihub.v1.ApiHubCurate', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.apihub.v1.ApiHubCurate',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -294,37 +326,46 @@ export class ApiHubCurateClient {
     // Put together the "service stub" for
     // google.cloud.apihub.v1.ApiHubCurate.
     this.apiHubCurateStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.apihub.v1.ApiHubCurate') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.apihub.v1.ApiHubCurate',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.apihub.v1.ApiHubCurate,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const apiHubCurateStubMethods =
-        ['createCuration', 'getCuration', 'listCurations', 'updateCuration', 'deleteCuration'];
+    const apiHubCurateStubMethods = [
+      'createCuration',
+      'getCuration',
+      'listCurations',
+      'updateCuration',
+      'deleteCuration',
+    ];
     for (const methodName of apiHubCurateStubMethods) {
       const callPromise = this.apiHubCurateStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -339,8 +380,14 @@ export class ApiHubCurateClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'apihub.googleapis.com';
   }
@@ -351,8 +398,14 @@ export class ApiHubCurateClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'apihub.googleapis.com';
   }
@@ -383,9 +436,7 @@ export class ApiHubCurateClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -394,8 +445,9 @@ export class ApiHubCurateClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -406,534 +458,685 @@ export class ApiHubCurateClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Create a curation resource in the API hub.
- * Once a curation resource is created, plugin instances can start using it.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource for the curation resource.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} [request.curationId]
- *   Optional. The ID to use for the curation resource, which will become the
- *   final component of the curations's resource name. This field is optional.
- *
- *   * If provided, the same will be used. The service will throw an error if
- *   the specified ID is already used by another curation resource in the API
- *   hub.
- *   * If not provided, a system generated ID will be used.
- *
- *   This value should be 4-500 characters, and valid characters
- *   are /{@link protos.A-Z|a-z}[0-9]-_/.
- * @param {google.cloud.apihub.v1.Curation} request.curation
- *   Required. The curation resource to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Curation|Curation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_curate.create_curation.js</caption>
- * region_tag:apihub_v1_generated_ApiHubCurate_CreateCuration_async
- */
+  /**
+   * Create a curation resource in the API hub.
+   * Once a curation resource is created, plugin instances can start using it.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource for the curation resource.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.curationId]
+   *   Optional. The ID to use for the curation resource, which will become the
+   *   final component of the curations's resource name. This field is optional.
+   *
+   *   * If provided, the same will be used. The service will throw an error if
+   *   the specified ID is already used by another curation resource in the API
+   *   hub.
+   *   * If not provided, a system generated ID will be used.
+   *
+   *   This value should be 4-500 characters, and valid characters
+   *   are /{@link protos.A-Z|a-z}[0-9]-_/.
+   * @param {google.cloud.apihub.v1.Curation} request.curation
+   *   Required. The curation resource to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Curation|Curation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_curate.create_curation.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubCurate_CreateCuration_async
+   */
   createCuration(
-      request?: protos.google.cloud.apihub.v1.ICreateCurationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.ICreateCurationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apihub.v1.ICreateCurationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.ICreateCurationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createCuration(
-      request: protos.google.cloud.apihub.v1.ICreateCurationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.ICreateCurationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.ICreateCurationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.ICreateCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCuration(
-      request: protos.google.cloud.apihub.v1.ICreateCurationRequest,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.ICreateCurationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.ICreateCurationRequest,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.ICreateCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCuration(
-      request?: protos.google.cloud.apihub.v1.ICreateCurationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apihub.v1.ICreateCurationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.ICreateCurationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.ICreateCurationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.ICreateCurationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.apihub.v1.ICreateCurationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.ICreateCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.ICreateCurationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createCuration request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.ICreateCurationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.ICuration,
+          | protos.google.cloud.apihub.v1.ICreateCurationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCuration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createCuration(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.ICreateCurationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createCuration response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createCuration(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.ICuration,
+          protos.google.cloud.apihub.v1.ICreateCurationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createCuration response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get curation resource details.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the curation resource to retrieve.
- *   Format: `projects/{project}/locations/{location}/curations/{curation}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Curation|Curation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_curate.get_curation.js</caption>
- * region_tag:apihub_v1_generated_ApiHubCurate_GetCuration_async
- */
+  /**
+   * Get curation resource details.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the curation resource to retrieve.
+   *   Format: `projects/{project}/locations/{location}/curations/{curation}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Curation|Curation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_curate.get_curation.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubCurate_GetCuration_async
+   */
   getCuration(
-      request?: protos.google.cloud.apihub.v1.IGetCurationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.IGetCurationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IGetCurationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.IGetCurationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getCuration(
-      request: protos.google.cloud.apihub.v1.IGetCurationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.IGetCurationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IGetCurationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.IGetCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCuration(
-      request: protos.google.cloud.apihub.v1.IGetCurationRequest,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.IGetCurationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IGetCurationRequest,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.IGetCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCuration(
-      request?: protos.google.cloud.apihub.v1.IGetCurationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apihub.v1.IGetCurationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.IGetCurationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.IGetCurationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.IGetCurationRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.apihub.v1.IGetCurationRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.IGetCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.IGetCurationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getCuration request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.IGetCurationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.ICuration,
+          protos.google.cloud.apihub.v1.IGetCurationRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCuration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getCuration(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.IGetCurationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getCuration response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getCuration(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.ICuration,
+          protos.google.cloud.apihub.v1.IGetCurationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCuration response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update a curation resource in the API hub. The following fields in the
- * {@link protos.google.cloud.apihub.v1.Curation|curation} can be updated:
- *
- * * {@link protos.google.cloud.apihub.v1.Curation.display_name|display_name}
- * * {@link protos.google.cloud.apihub.v1.Curation.description|description}
- *
- * The
- * {@link protos.google.cloud.apihub.v1.UpdateApiRequest.update_mask|update_mask}
- * should be used to specify the fields being updated.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.apihub.v1.Curation} request.curation
- *   Required. The curation resource to update.
- *
- *   The curation resource's `name` field is used to identify the curation
- *   resource to update.
- *   Format: `projects/{project}/locations/{location}/curations/{curation}`
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Curation|Curation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_curate.update_curation.js</caption>
- * region_tag:apihub_v1_generated_ApiHubCurate_UpdateCuration_async
- */
+  /**
+   * Update a curation resource in the API hub. The following fields in the
+   * {@link protos.google.cloud.apihub.v1.Curation|curation} can be updated:
+   *
+   * * {@link protos.google.cloud.apihub.v1.Curation.display_name|display_name}
+   * * {@link protos.google.cloud.apihub.v1.Curation.description|description}
+   *
+   * The
+   * {@link protos.google.cloud.apihub.v1.UpdateApiRequest.update_mask|update_mask}
+   * should be used to specify the fields being updated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.apihub.v1.Curation} request.curation
+   *   Required. The curation resource to update.
+   *
+   *   The curation resource's `name` field is used to identify the curation
+   *   resource to update.
+   *   Format: `projects/{project}/locations/{location}/curations/{curation}`
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Curation|Curation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_curate.update_curation.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubCurate_UpdateCuration_async
+   */
   updateCuration(
-      request?: protos.google.cloud.apihub.v1.IUpdateCurationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.IUpdateCurationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IUpdateCurationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.IUpdateCurationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateCuration(
-      request: protos.google.cloud.apihub.v1.IUpdateCurationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.IUpdateCurationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IUpdateCurationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.IUpdateCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCuration(
-      request: protos.google.cloud.apihub.v1.IUpdateCurationRequest,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.IUpdateCurationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IUpdateCurationRequest,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.IUpdateCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCuration(
-      request?: protos.google.cloud.apihub.v1.IUpdateCurationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apihub.v1.IUpdateCurationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.IUpdateCurationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.apihub.v1.ICuration,
-          protos.google.cloud.apihub.v1.IUpdateCurationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.IUpdateCurationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.apihub.v1.IUpdateCurationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.IUpdateCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.ICuration,
+      protos.google.cloud.apihub.v1.IUpdateCurationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'curation.name': request.curation!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'curation.name': request.curation!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateCuration request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.IUpdateCurationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.ICuration,
+          | protos.google.cloud.apihub.v1.IUpdateCurationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCuration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateCuration(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.apihub.v1.ICuration,
-        protos.google.cloud.apihub.v1.IUpdateCurationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateCuration response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateCuration(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.ICuration,
+          protos.google.cloud.apihub.v1.IUpdateCurationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCuration response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a curation resource in the API hub. A curation can only be deleted
- * if it's not being used by any plugin instance.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the curation resource to delete.
- *   Format: `projects/{project}/locations/{location}/curations/{curation}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_curate.delete_curation.js</caption>
- * region_tag:apihub_v1_generated_ApiHubCurate_DeleteCuration_async
- */
+  /**
+   * Delete a curation resource in the API hub. A curation can only be deleted
+   * if it's not being used by any plugin instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the curation resource to delete.
+   *   Format: `projects/{project}/locations/{location}/curations/{curation}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_curate.delete_curation.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubCurate_DeleteCuration_async
+   */
   deleteCuration(
-      request?: protos.google.cloud.apihub.v1.IDeleteCurationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apihub.v1.IDeleteCurationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IDeleteCurationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.apihub.v1.IDeleteCurationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteCuration(
-      request: protos.google.cloud.apihub.v1.IDeleteCurationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.apihub.v1.IDeleteCurationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IDeleteCurationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.apihub.v1.IDeleteCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCuration(
-      request: protos.google.cloud.apihub.v1.IDeleteCurationRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.apihub.v1.IDeleteCurationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IDeleteCurationRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.apihub.v1.IDeleteCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCuration(
-      request?: protos.google.cloud.apihub.v1.IDeleteCurationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apihub.v1.IDeleteCurationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.apihub.v1.IDeleteCurationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.apihub.v1.IDeleteCurationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apihub.v1.IDeleteCurationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.apihub.v1.IDeleteCurationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.apihub.v1.IDeleteCurationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.apihub.v1.IDeleteCurationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteCuration request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apihub.v1.IDeleteCurationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apihub.v1.IDeleteCurationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteCuration response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteCuration(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apihub.v1.IDeleteCurationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteCuration response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteCuration(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteCurationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCuration response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * List curation resources in the API hub.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of curation resources.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of curation resources.
- *
- *   A filter expression consists of a field name, a comparison
- *   operator, and a value for filtering. The value must be a string. The
- *   comparison operator must be one of: `<`, `>`, `:` or `=`. Filters are case
- *   insensitive.
- *
- *   The following fields in the `curation resource` are eligible for filtering:
- *
- *     * `create_time` - The time at which the curation was created.
- *     The value should be in the (RFC3339)[https://tools.ietf.org/html/rfc3339]
- *     format. Allowed comparison operators: `>` and `<`.
- *     * `display_name` - The display name of the curation. Allowed
- *     comparison operators: `=`.
- *     * `state` - The state of the curation. Allowed comparison operators: `=`.
- *
- *   Expressions are combined with either `AND` logic operator or `OR` logical
- *   operator but not both of them together i.e. only one of the `AND` or `OR`
- *   operator can be used throughout the filter string and both the operators
- *   cannot be used together. No other logical operators are supported. At most
- *   three filter fields are allowed in the filter string and if provided
- *   more than that then `INVALID_ARGUMENT` error is returned by the API.
- *
- *   Here are a few examples:
- *
- *     * `create_time < \"2021-08-15T14:50:00Z\" AND create_time >
- *     \"2021-08-10T12:00:00Z\"` -
- *     The curation resource was created before _2021-08-15 14:50:00 UTC_ and
- *     after _2021-08-10 12:00:00 UTC_.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of curation resources to return. The service
- *   may return fewer than this value. If unspecified, at most 50 curations will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListCurations` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters (except page_size) provided to
- *   `ListCurations` must match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.apihub.v1.Curation|Curation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listCurationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * List curation resources in the API hub.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of curation resources.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of curation resources.
+   *
+   *   A filter expression consists of a field name, a comparison
+   *   operator, and a value for filtering. The value must be a string. The
+   *   comparison operator must be one of: `<`, `>`, `:` or `=`. Filters are case
+   *   insensitive.
+   *
+   *   The following fields in the `curation resource` are eligible for filtering:
+   *
+   *     * `create_time` - The time at which the curation was created.
+   *     The value should be in the (RFC3339)[https://tools.ietf.org/html/rfc3339]
+   *     format. Allowed comparison operators: `>` and `<`.
+   *     * `display_name` - The display name of the curation. Allowed
+   *     comparison operators: `=`.
+   *     * `state` - The state of the curation. Allowed comparison operators: `=`.
+   *
+   *   Expressions are combined with either `AND` logic operator or `OR` logical
+   *   operator but not both of them together i.e. only one of the `AND` or `OR`
+   *   operator can be used throughout the filter string and both the operators
+   *   cannot be used together. No other logical operators are supported. At most
+   *   three filter fields are allowed in the filter string and if provided
+   *   more than that then `INVALID_ARGUMENT` error is returned by the API.
+   *
+   *   Here are a few examples:
+   *
+   *     * `create_time < \"2021-08-15T14:50:00Z\" AND create_time >
+   *     \"2021-08-10T12:00:00Z\"` -
+   *     The curation resource was created before _2021-08-15 14:50:00 UTC_ and
+   *     after _2021-08-10 12:00:00 UTC_.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of curation resources to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 curations will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCurations` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters (except page_size) provided to
+   *   `ListCurations` must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.apihub.v1.Curation|Curation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCurationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCurations(
-      request?: protos.google.cloud.apihub.v1.IListCurationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.ICuration[],
-        protos.google.cloud.apihub.v1.IListCurationsRequest|null,
-        protos.google.cloud.apihub.v1.IListCurationsResponse
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IListCurationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.ICuration[],
+      protos.google.cloud.apihub.v1.IListCurationsRequest | null,
+      protos.google.cloud.apihub.v1.IListCurationsResponse,
+    ]
+  >;
   listCurations(
-      request: protos.google.cloud.apihub.v1.IListCurationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListCurationsRequest,
-          protos.google.cloud.apihub.v1.IListCurationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.ICuration>): void;
+    request: protos.google.cloud.apihub.v1.IListCurationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListCurationsRequest,
+      protos.google.cloud.apihub.v1.IListCurationsResponse | null | undefined,
+      protos.google.cloud.apihub.v1.ICuration
+    >,
+  ): void;
   listCurations(
-      request: protos.google.cloud.apihub.v1.IListCurationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListCurationsRequest,
-          protos.google.cloud.apihub.v1.IListCurationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.ICuration>): void;
+    request: protos.google.cloud.apihub.v1.IListCurationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListCurationsRequest,
+      protos.google.cloud.apihub.v1.IListCurationsResponse | null | undefined,
+      protos.google.cloud.apihub.v1.ICuration
+    >,
+  ): void;
   listCurations(
-      request?: protos.google.cloud.apihub.v1.IListCurationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.apihub.v1.IListCurationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.apihub.v1.IListCurationsRequest,
-          protos.google.cloud.apihub.v1.IListCurationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.ICuration>,
-      callback?: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListCurationsRequest,
-          protos.google.cloud.apihub.v1.IListCurationsResponse|null|undefined,
-          protos.google.cloud.apihub.v1.ICuration>):
-      Promise<[
-        protos.google.cloud.apihub.v1.ICuration[],
-        protos.google.cloud.apihub.v1.IListCurationsRequest|null,
-        protos.google.cloud.apihub.v1.IListCurationsResponse
-      ]>|void {
+          | protos.google.cloud.apihub.v1.IListCurationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.ICuration
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListCurationsRequest,
+      protos.google.cloud.apihub.v1.IListCurationsResponse | null | undefined,
+      protos.google.cloud.apihub.v1.ICuration
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.ICuration[],
+      protos.google.cloud.apihub.v1.IListCurationsRequest | null,
+      protos.google.cloud.apihub.v1.IListCurationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.apihub.v1.IListCurationsRequest,
-      protos.google.cloud.apihub.v1.IListCurationsResponse|null|undefined,
-      protos.google.cloud.apihub.v1.ICuration>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListCurationsRequest,
+          | protos.google.cloud.apihub.v1.IListCurationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.ICuration
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCurations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -942,185 +1145,190 @@ export class ApiHubCurateClient {
     this._log.info('listCurations request %j', request);
     return this.innerApiCalls
       .listCurations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.apihub.v1.ICuration[],
-        protos.google.cloud.apihub.v1.IListCurationsRequest|null,
-        protos.google.cloud.apihub.v1.IListCurationsResponse
-      ]) => {
-        this._log.info('listCurations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.ICuration[],
+          protos.google.cloud.apihub.v1.IListCurationsRequest | null,
+          protos.google.cloud.apihub.v1.IListCurationsResponse,
+        ]) => {
+          this._log.info('listCurations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listCurations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of curation resources.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of curation resources.
- *
- *   A filter expression consists of a field name, a comparison
- *   operator, and a value for filtering. The value must be a string. The
- *   comparison operator must be one of: `<`, `>`, `:` or `=`. Filters are case
- *   insensitive.
- *
- *   The following fields in the `curation resource` are eligible for filtering:
- *
- *     * `create_time` - The time at which the curation was created.
- *     The value should be in the (RFC3339)[https://tools.ietf.org/html/rfc3339]
- *     format. Allowed comparison operators: `>` and `<`.
- *     * `display_name` - The display name of the curation. Allowed
- *     comparison operators: `=`.
- *     * `state` - The state of the curation. Allowed comparison operators: `=`.
- *
- *   Expressions are combined with either `AND` logic operator or `OR` logical
- *   operator but not both of them together i.e. only one of the `AND` or `OR`
- *   operator can be used throughout the filter string and both the operators
- *   cannot be used together. No other logical operators are supported. At most
- *   three filter fields are allowed in the filter string and if provided
- *   more than that then `INVALID_ARGUMENT` error is returned by the API.
- *
- *   Here are a few examples:
- *
- *     * `create_time < \"2021-08-15T14:50:00Z\" AND create_time >
- *     \"2021-08-10T12:00:00Z\"` -
- *     The curation resource was created before _2021-08-15 14:50:00 UTC_ and
- *     after _2021-08-10 12:00:00 UTC_.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of curation resources to return. The service
- *   may return fewer than this value. If unspecified, at most 50 curations will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListCurations` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters (except page_size) provided to
- *   `ListCurations` must match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.apihub.v1.Curation|Curation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listCurationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listCurations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of curation resources.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of curation resources.
+   *
+   *   A filter expression consists of a field name, a comparison
+   *   operator, and a value for filtering. The value must be a string. The
+   *   comparison operator must be one of: `<`, `>`, `:` or `=`. Filters are case
+   *   insensitive.
+   *
+   *   The following fields in the `curation resource` are eligible for filtering:
+   *
+   *     * `create_time` - The time at which the curation was created.
+   *     The value should be in the (RFC3339)[https://tools.ietf.org/html/rfc3339]
+   *     format. Allowed comparison operators: `>` and `<`.
+   *     * `display_name` - The display name of the curation. Allowed
+   *     comparison operators: `=`.
+   *     * `state` - The state of the curation. Allowed comparison operators: `=`.
+   *
+   *   Expressions are combined with either `AND` logic operator or `OR` logical
+   *   operator but not both of them together i.e. only one of the `AND` or `OR`
+   *   operator can be used throughout the filter string and both the operators
+   *   cannot be used together. No other logical operators are supported. At most
+   *   three filter fields are allowed in the filter string and if provided
+   *   more than that then `INVALID_ARGUMENT` error is returned by the API.
+   *
+   *   Here are a few examples:
+   *
+   *     * `create_time < \"2021-08-15T14:50:00Z\" AND create_time >
+   *     \"2021-08-10T12:00:00Z\"` -
+   *     The curation resource was created before _2021-08-15 14:50:00 UTC_ and
+   *     after _2021-08-10 12:00:00 UTC_.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of curation resources to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 curations will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCurations` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters (except page_size) provided to
+   *   `ListCurations` must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.apihub.v1.Curation|Curation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCurationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCurationsStream(
-      request?: protos.google.cloud.apihub.v1.IListCurationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.apihub.v1.IListCurationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listCurations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listCurations stream %j', request);
     return this.descriptors.page.listCurations.createStream(
       this.innerApiCalls.listCurations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listCurations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of curation resources.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of curation resources.
- *
- *   A filter expression consists of a field name, a comparison
- *   operator, and a value for filtering. The value must be a string. The
- *   comparison operator must be one of: `<`, `>`, `:` or `=`. Filters are case
- *   insensitive.
- *
- *   The following fields in the `curation resource` are eligible for filtering:
- *
- *     * `create_time` - The time at which the curation was created.
- *     The value should be in the (RFC3339)[https://tools.ietf.org/html/rfc3339]
- *     format. Allowed comparison operators: `>` and `<`.
- *     * `display_name` - The display name of the curation. Allowed
- *     comparison operators: `=`.
- *     * `state` - The state of the curation. Allowed comparison operators: `=`.
- *
- *   Expressions are combined with either `AND` logic operator or `OR` logical
- *   operator but not both of them together i.e. only one of the `AND` or `OR`
- *   operator can be used throughout the filter string and both the operators
- *   cannot be used together. No other logical operators are supported. At most
- *   three filter fields are allowed in the filter string and if provided
- *   more than that then `INVALID_ARGUMENT` error is returned by the API.
- *
- *   Here are a few examples:
- *
- *     * `create_time < \"2021-08-15T14:50:00Z\" AND create_time >
- *     \"2021-08-10T12:00:00Z\"` -
- *     The curation resource was created before _2021-08-15 14:50:00 UTC_ and
- *     after _2021-08-10 12:00:00 UTC_.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of curation resources to return. The service
- *   may return fewer than this value. If unspecified, at most 50 curations will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListCurations` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters (except page_size) provided to
- *   `ListCurations` must match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.apihub.v1.Curation|Curation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_curate.list_curations.js</caption>
- * region_tag:apihub_v1_generated_ApiHubCurate_ListCurations_async
- */
+  /**
+   * Equivalent to `listCurations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of curation resources.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of curation resources.
+   *
+   *   A filter expression consists of a field name, a comparison
+   *   operator, and a value for filtering. The value must be a string. The
+   *   comparison operator must be one of: `<`, `>`, `:` or `=`. Filters are case
+   *   insensitive.
+   *
+   *   The following fields in the `curation resource` are eligible for filtering:
+   *
+   *     * `create_time` - The time at which the curation was created.
+   *     The value should be in the (RFC3339)[https://tools.ietf.org/html/rfc3339]
+   *     format. Allowed comparison operators: `>` and `<`.
+   *     * `display_name` - The display name of the curation. Allowed
+   *     comparison operators: `=`.
+   *     * `state` - The state of the curation. Allowed comparison operators: `=`.
+   *
+   *   Expressions are combined with either `AND` logic operator or `OR` logical
+   *   operator but not both of them together i.e. only one of the `AND` or `OR`
+   *   operator can be used throughout the filter string and both the operators
+   *   cannot be used together. No other logical operators are supported. At most
+   *   three filter fields are allowed in the filter string and if provided
+   *   more than that then `INVALID_ARGUMENT` error is returned by the API.
+   *
+   *   Here are a few examples:
+   *
+   *     * `create_time < \"2021-08-15T14:50:00Z\" AND create_time >
+   *     \"2021-08-10T12:00:00Z\"` -
+   *     The curation resource was created before _2021-08-15 14:50:00 UTC_ and
+   *     after _2021-08-10 12:00:00 UTC_.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of curation resources to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 curations will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCurations` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters (except page_size) provided to
+   *   `ListCurations` must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.apihub.v1.Curation|Curation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_curate.list_curations.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubCurate_ListCurations_async
+   */
   listCurationsAsync(
-      request?: protos.google.cloud.apihub.v1.IListCurationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.apihub.v1.ICuration>{
+    request?: protos.google.cloud.apihub.v1.IListCurationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.apihub.v1.ICuration> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listCurations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listCurations iterate %j', request);
     return this.descriptors.page.listCurations.asyncIterate(
       this.innerApiCalls['listCurations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.apihub.v1.ICuration>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1155,12 +1363,11 @@ export class ApiHubCurateClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1193,7 +1400,7 @@ export class ApiHubCurateClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1210,7 +1417,7 @@ export class ApiHubCurateClient {
    * @param {string} api
    * @returns {string} Resource name string.
    */
-  apiPath(project:string,location:string,api:string) {
+  apiPath(project: string, location: string, api: string) {
     return this.pathTemplates.apiPathTemplate.render({
       project: project,
       location: location,
@@ -1259,7 +1466,11 @@ export class ApiHubCurateClient {
    * @param {string} api_hub_instance
    * @returns {string} Resource name string.
    */
-  apiHubInstancePath(project:string,location:string,apiHubInstance:string) {
+  apiHubInstancePath(
+    project: string,
+    location: string,
+    apiHubInstance: string,
+  ) {
     return this.pathTemplates.apiHubInstancePathTemplate.render({
       project: project,
       location: location,
@@ -1275,7 +1486,9 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).project;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(
+      apiHubInstanceName,
+    ).project;
   }
 
   /**
@@ -1286,7 +1499,9 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).location;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(
+      apiHubInstanceName,
+    ).location;
   }
 
   /**
@@ -1297,7 +1512,9 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the api_hub_instance.
    */
   matchApiHubInstanceFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).api_hub_instance;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(
+      apiHubInstanceName,
+    ).api_hub_instance;
   }
 
   /**
@@ -1310,7 +1527,13 @@ export class ApiHubCurateClient {
    * @param {string} operation
    * @returns {string} Resource name string.
    */
-  apiOperationPath(project:string,location:string,api:string,version:string,operation:string) {
+  apiOperationPath(
+    project: string,
+    location: string,
+    api: string,
+    version: string,
+    operation: string,
+  ) {
     return this.pathTemplates.apiOperationPathTemplate.render({
       project: project,
       location: location,
@@ -1328,7 +1551,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).project;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .project;
   }
 
   /**
@@ -1339,7 +1563,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).location;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .location;
   }
 
   /**
@@ -1350,7 +1575,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the api.
    */
   matchApiFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).api;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .api;
   }
 
   /**
@@ -1361,7 +1587,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).version;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .version;
   }
 
   /**
@@ -1372,7 +1599,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the operation.
    */
   matchOperationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).operation;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .operation;
   }
 
   /**
@@ -1383,7 +1611,7 @@ export class ApiHubCurateClient {
    * @param {string} attribute
    * @returns {string} Resource name string.
    */
-  attributePath(project:string,location:string,attribute:string) {
+  attributePath(project: string, location: string, attribute: string) {
     return this.pathTemplates.attributePathTemplate.render({
       project: project,
       location: location,
@@ -1399,7 +1627,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName).project;
+    return this.pathTemplates.attributePathTemplate.match(attributeName)
+      .project;
   }
 
   /**
@@ -1410,7 +1639,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName).location;
+    return this.pathTemplates.attributePathTemplate.match(attributeName)
+      .location;
   }
 
   /**
@@ -1421,7 +1651,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the attribute.
    */
   matchAttributeFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName).attribute;
+    return this.pathTemplates.attributePathTemplate.match(attributeName)
+      .attribute;
   }
 
   /**
@@ -1432,7 +1663,7 @@ export class ApiHubCurateClient {
    * @param {string} curation
    * @returns {string} Resource name string.
    */
-  curationPath(project:string,location:string,curation:string) {
+  curationPath(project: string, location: string, curation: string) {
     return this.pathTemplates.curationPathTemplate.render({
       project: project,
       location: location,
@@ -1483,7 +1714,13 @@ export class ApiHubCurateClient {
    * @param {string} definition
    * @returns {string} Resource name string.
    */
-  definitionPath(project:string,location:string,api:string,version:string,definition:string) {
+  definitionPath(
+    project: string,
+    location: string,
+    api: string,
+    version: string,
+    definition: string,
+  ) {
     return this.pathTemplates.definitionPathTemplate.render({
       project: project,
       location: location,
@@ -1501,7 +1738,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).project;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .project;
   }
 
   /**
@@ -1512,7 +1750,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).location;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .location;
   }
 
   /**
@@ -1534,7 +1773,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).version;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .version;
   }
 
   /**
@@ -1545,7 +1785,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the definition.
    */
   matchDefinitionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).definition;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .definition;
   }
 
   /**
@@ -1556,7 +1797,7 @@ export class ApiHubCurateClient {
    * @param {string} dependency
    * @returns {string} Resource name string.
    */
-  dependencyPath(project:string,location:string,dependency:string) {
+  dependencyPath(project: string, location: string, dependency: string) {
     return this.pathTemplates.dependencyPathTemplate.render({
       project: project,
       location: location,
@@ -1572,7 +1813,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).project;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
+      .project;
   }
 
   /**
@@ -1583,7 +1825,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).location;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
+      .location;
   }
 
   /**
@@ -1594,7 +1837,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the dependency.
    */
   matchDependencyFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).dependency;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
+      .dependency;
   }
 
   /**
@@ -1605,7 +1849,7 @@ export class ApiHubCurateClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project:string,location:string,deployment:string) {
+  deploymentPath(project: string, location: string, deployment: string) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1621,7 +1865,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .project;
   }
 
   /**
@@ -1632,7 +1877,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .location;
   }
 
   /**
@@ -1643,7 +1889,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .deployment;
   }
 
   /**
@@ -1654,7 +1901,11 @@ export class ApiHubCurateClient {
    * @param {string} discovered_api_observation
    * @returns {string} Resource name string.
    */
-  discoveredApiObservationPath(project:string,location:string,discoveredApiObservation:string) {
+  discoveredApiObservationPath(
+    project: string,
+    location: string,
+    discoveredApiObservation: string,
+  ) {
     return this.pathTemplates.discoveredApiObservationPathTemplate.render({
       project: project,
       location: location,
@@ -1669,8 +1920,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing DiscoveredApiObservation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
-    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).project;
+  matchProjectFromDiscoveredApiObservationName(
+    discoveredApiObservationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(
+      discoveredApiObservationName,
+    ).project;
   }
 
   /**
@@ -1680,8 +1935,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing DiscoveredApiObservation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
-    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).location;
+  matchLocationFromDiscoveredApiObservationName(
+    discoveredApiObservationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(
+      discoveredApiObservationName,
+    ).location;
   }
 
   /**
@@ -1691,8 +1950,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing DiscoveredApiObservation resource.
    * @returns {string} A string representing the discovered_api_observation.
    */
-  matchDiscoveredApiObservationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
-    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).discovered_api_observation;
+  matchDiscoveredApiObservationFromDiscoveredApiObservationName(
+    discoveredApiObservationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(
+      discoveredApiObservationName,
+    ).discovered_api_observation;
   }
 
   /**
@@ -1704,7 +1967,12 @@ export class ApiHubCurateClient {
    * @param {string} discovered_api_operation
    * @returns {string} Resource name string.
    */
-  discoveredApiOperationPath(project:string,location:string,discoveredApiObservation:string,discoveredApiOperation:string) {
+  discoveredApiOperationPath(
+    project: string,
+    location: string,
+    discoveredApiObservation: string,
+    discoveredApiOperation: string,
+  ) {
     return this.pathTemplates.discoveredApiOperationPathTemplate.render({
       project: project,
       location: location,
@@ -1720,8 +1988,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).project;
+  matchProjectFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).project;
   }
 
   /**
@@ -1731,8 +2003,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).location;
+  matchLocationFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).location;
   }
 
   /**
@@ -1742,8 +2018,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the discovered_api_observation.
    */
-  matchDiscoveredApiObservationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_observation;
+  matchDiscoveredApiObservationFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).discovered_api_observation;
   }
 
   /**
@@ -1753,8 +2033,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the discovered_api_operation.
    */
-  matchDiscoveredApiOperationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_operation;
+  matchDiscoveredApiOperationFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).discovered_api_operation;
   }
 
   /**
@@ -1765,7 +2049,7 @@ export class ApiHubCurateClient {
    * @param {string} external_api
    * @returns {string} Resource name string.
    */
-  externalApiPath(project:string,location:string,externalApi:string) {
+  externalApiPath(project: string, location: string, externalApi: string) {
     return this.pathTemplates.externalApiPathTemplate.render({
       project: project,
       location: location,
@@ -1781,7 +2065,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).project;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
+      .project;
   }
 
   /**
@@ -1792,7 +2077,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).location;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
+      .location;
   }
 
   /**
@@ -1803,7 +2089,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the external_api.
    */
   matchExternalApiFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).external_api;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
+      .external_api;
   }
 
   /**
@@ -1814,7 +2101,11 @@ export class ApiHubCurateClient {
    * @param {string} host_project_registration
    * @returns {string} Resource name string.
    */
-  hostProjectRegistrationPath(project:string,location:string,hostProjectRegistration:string) {
+  hostProjectRegistrationPath(
+    project: string,
+    location: string,
+    hostProjectRegistration: string,
+  ) {
     return this.pathTemplates.hostProjectRegistrationPathTemplate.render({
       project: project,
       location: location,
@@ -1829,8 +2120,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).project;
+  matchProjectFromHostProjectRegistrationName(
+    hostProjectRegistrationName: string,
+  ) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
+      hostProjectRegistrationName,
+    ).project;
   }
 
   /**
@@ -1840,8 +2135,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).location;
+  matchLocationFromHostProjectRegistrationName(
+    hostProjectRegistrationName: string,
+  ) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
+      hostProjectRegistrationName,
+    ).location;
   }
 
   /**
@@ -1851,8 +2150,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the host_project_registration.
    */
-  matchHostProjectRegistrationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).host_project_registration;
+  matchHostProjectRegistrationFromHostProjectRegistrationName(
+    hostProjectRegistrationName: string,
+  ) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
+      hostProjectRegistrationName,
+    ).host_project_registration;
   }
 
   /**
@@ -1862,7 +2165,7 @@ export class ApiHubCurateClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1899,7 +2202,7 @@ export class ApiHubCurateClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  pluginPath(project:string,location:string,plugin:string) {
+  pluginPath(project: string, location: string, plugin: string) {
     return this.pathTemplates.pluginPathTemplate.render({
       project: project,
       location: location,
@@ -1949,7 +2252,12 @@ export class ApiHubCurateClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  pluginInstancePath(project:string,location:string,plugin:string,instance:string) {
+  pluginInstancePath(
+    project: string,
+    location: string,
+    plugin: string,
+    instance: string,
+  ) {
     return this.pathTemplates.pluginInstancePathTemplate.render({
       project: project,
       location: location,
@@ -1966,7 +2274,9 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).project;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).project;
   }
 
   /**
@@ -1977,7 +2287,9 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).location;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).location;
   }
 
   /**
@@ -1988,7 +2300,9 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the plugin.
    */
   matchPluginFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).plugin;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).plugin;
   }
 
   /**
@@ -1999,7 +2313,9 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).instance;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).instance;
   }
 
   /**
@@ -2008,7 +2324,7 @@ export class ApiHubCurateClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2033,7 +2349,11 @@ export class ApiHubCurateClient {
    * @param {string} runtime_project_attachment
    * @returns {string} Resource name string.
    */
-  runtimeProjectAttachmentPath(project:string,location:string,runtimeProjectAttachment:string) {
+  runtimeProjectAttachmentPath(
+    project: string,
+    location: string,
+    runtimeProjectAttachment: string,
+  ) {
     return this.pathTemplates.runtimeProjectAttachmentPathTemplate.render({
       project: project,
       location: location,
@@ -2048,8 +2368,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).project;
+  matchProjectFromRuntimeProjectAttachmentName(
+    runtimeProjectAttachmentName: string,
+  ) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
+      runtimeProjectAttachmentName,
+    ).project;
   }
 
   /**
@@ -2059,8 +2383,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).location;
+  matchLocationFromRuntimeProjectAttachmentName(
+    runtimeProjectAttachmentName: string,
+  ) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
+      runtimeProjectAttachmentName,
+    ).location;
   }
 
   /**
@@ -2070,8 +2398,12 @@ export class ApiHubCurateClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the runtime_project_attachment.
    */
-  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).runtime_project_attachment;
+  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(
+    runtimeProjectAttachmentName: string,
+  ) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
+      runtimeProjectAttachmentName,
+    ).runtime_project_attachment;
   }
 
   /**
@@ -2084,7 +2416,13 @@ export class ApiHubCurateClient {
    * @param {string} spec
    * @returns {string} Resource name string.
    */
-  specPath(project:string,location:string,api:string,version:string,spec:string) {
+  specPath(
+    project: string,
+    location: string,
+    api: string,
+    version: string,
+    spec: string,
+  ) {
     return this.pathTemplates.specPathTemplate.render({
       project: project,
       location: location,
@@ -2157,7 +2495,7 @@ export class ApiHubCurateClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  styleGuidePath(project:string,location:string,plugin:string) {
+  styleGuidePath(project: string, location: string, plugin: string) {
     return this.pathTemplates.styleGuidePathTemplate.render({
       project: project,
       location: location,
@@ -2173,7 +2511,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).project;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
+      .project;
   }
 
   /**
@@ -2184,7 +2523,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).location;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
+      .location;
   }
 
   /**
@@ -2195,7 +2535,8 @@ export class ApiHubCurateClient {
    * @returns {string} A string representing the plugin.
    */
   matchPluginFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).plugin;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
+      .plugin;
   }
 
   /**
@@ -2207,7 +2548,7 @@ export class ApiHubCurateClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  versionPath(project:string,location:string,api:string,version:string) {
+  versionPath(project: string, location: string, api: string, version: string) {
     return this.pathTemplates.versionPathTemplate.render({
       project: project,
       location: location,
@@ -2268,11 +2609,13 @@ export class ApiHubCurateClient {
    */
   close(): Promise<void> {
     if (this.apiHubCurateStub && !this._terminated) {
-      return this.apiHubCurateStub.then(stub => {
+      return this.apiHubCurateStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CertificateManagerClient} from './certificate_manager_client';
+export { CertificateManagerClient } from './certificate_manager_client';

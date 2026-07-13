@@ -74,6 +74,10 @@ describe('Transaction', () => {
     formattedName_: SESSION_NAME,
     request: REQUEST,
     requestStream: REQUEST_STREAM,
+    commonHeaders_: {
+      [CLOUD_RESOURCE_HEADER]: 'formatted-database-name',
+      [AFE_SERVER_TIMING_HEADER]: 'true',
+    },
   };
 
   const PARTIAL_RESULT_STREAM = sandbox.stub();

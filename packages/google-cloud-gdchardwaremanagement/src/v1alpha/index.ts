@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {GDCHardwareManagementClient} from './g_d_c_hardware_management_client';
+export { GDCHardwareManagementClient } from './g_d_c_hardware_management_client';

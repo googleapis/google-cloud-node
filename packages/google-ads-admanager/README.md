@@ -75,8 +75,14 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list ad unit sizes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.list_ad_unit_sizes.js) |
 | list ad units | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.list_ad_units.js) |
 | update ad unit | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/ad_unit_service.update_ad_unit.js) |
+| batch archive applications | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/application_service.batch_archive_applications.js) |
+| batch create applications | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/application_service.batch_create_applications.js) |
+| batch unarchive applications | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/application_service.batch_unarchive_applications.js) |
+| batch update applications | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/application_service.batch_update_applications.js) |
+| create application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/application_service.create_application.js) |
 | get application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/application_service.get_application.js) |
 | list applications | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/application_service.list_applications.js) |
+| update application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/application_service.update_application.js) |
 | get audience segment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/audience_segment_service.get_audience_segment.js) |
 | list audience segments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/audience_segment_service.list_audience_segments.js) |
 | get bandwidth group | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/bandwidth_group_service.get_bandwidth_group.js) |
@@ -85,8 +91,12 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list browser languages | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/browser_language_service.list_browser_languages.js) |
 | get browser | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/browser_service.get_browser.js) |
 | list browsers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/browser_service.list_browsers.js) |
+| batch activate cms metadata keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/cms_metadata_key_service.batch_activate_cms_metadata_keys.js) |
+| batch deactivate cms metadata keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/cms_metadata_key_service.batch_deactivate_cms_metadata_keys.js) |
 | get cms metadata key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/cms_metadata_key_service.get_cms_metadata_key.js) |
 | list cms metadata keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/cms_metadata_key_service.list_cms_metadata_keys.js) |
+| batch activate cms metadata values | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/cms_metadata_value_service.batch_activate_cms_metadata_values.js) |
+| batch deactivate cms metadata values | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/cms_metadata_value_service.batch_deactivate_cms_metadata_values.js) |
 | get cms metadata value | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/cms_metadata_value_service.get_cms_metadata_value.js) |
 | list cms metadata values | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/cms_metadata_value_service.list_cms_metadata_values.js) |
 | get company | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/company_service.get_company.js) |
@@ -137,8 +147,19 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update entity signals mapping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/entity_signals_mapping_service.update_entity_signals_mapping.js) |
 | get geo target | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/geo_target_service.get_geo_target.js) |
 | list geo targets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/geo_target_service.list_geo_targets.js) |
+| batch activate labels | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/label_service.batch_activate_labels.js) |
+| batch create labels | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/label_service.batch_create_labels.js) |
+| batch deactivate labels | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/label_service.batch_deactivate_labels.js) |
+| batch update labels | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/label_service.batch_update_labels.js) |
+| create label | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/label_service.create_label.js) |
+| get label | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/label_service.get_label.js) |
+| list labels | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/label_service.list_labels.js) |
+| update label | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/label_service.update_label.js) |
 | get line item | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/line_item_service.get_line_item.js) |
 | list line items | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/line_item_service.list_line_items.js) |
+| get linked device | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/linked_device_service.get_linked_device.js) |
+| list linked devices | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/linked_device_service.list_linked_devices.js) |
+| fetch mcm earnings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/mcm_earnings_service.fetch_mcm_earnings.js) |
 | get mobile carrier | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/mobile_carrier_service.get_mobile_carrier.js) |
 | list mobile carriers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/mobile_carrier_service.list_mobile_carriers.js) |
 | get mobile device | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/mobile_device_service.get_mobile_device.js) |
@@ -178,6 +199,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list reports | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/report_service.list_reports.js) |
 | run report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/report_service.run_report.js) |
 | update report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/report_service.update_report.js) |
+| get rich media ads company | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/rich_media_ads_company_service.get_rich_media_ads_company.js) |
+| list rich media ads companies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/rich_media_ads_company_service.list_rich_media_ads_companies.js) |
 | get role | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/role_service.get_role.js) |
 | list roles | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/role_service.list_roles.js) |
 | batch create sites | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/site_service.batch_create_sites.js) |
@@ -188,7 +211,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/site_service.get_site.js) |
 | list sites | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/site_service.list_sites.js) |
 | update site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/site_service.update_site.js) |
-| ads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/snippet_metadata_google.ads.admanager.v1.json) |
 | get taxonomy category | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/taxonomy_category_service.get_taxonomy_category.js) |
 | list taxonomy categories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/taxonomy_category_service.list_taxonomy_categories.js) |
 | batch activate teams | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/team_service.batch_activate_teams.js) |
@@ -233,7 +255,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -243,7 +265,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

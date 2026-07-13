@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DataSourcesServiceClient} from './data_sources_service_client';
-export {FileUploadsServiceClient} from './file_uploads_service_client';
+export { DataSourcesServiceClient } from './data_sources_service_client';
+export { FileUploadsServiceClient } from './file_uploads_service_client';

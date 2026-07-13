@@ -32,7 +32,10 @@ node.owlbot_main(relative_dir="handwritten/logging",
         ".github/release-please.yml",
         ".github/CODEOWNERS",
         ".github/sync-repo-settings.yaml",
-        "README.md"
+        "README.md",
+        ".kokoro/system-test.sh",
+        ".kokoro/continuous/node14/system-test.cfg",
+        ".kokoro/presubmit/node14/system-test.cfg"
     ]
 )
 

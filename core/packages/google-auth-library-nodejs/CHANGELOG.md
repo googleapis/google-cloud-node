@@ -5,6 +5,45 @@
 
 [1]: https://www.npmjs.com/package/google-auth-library?activeTab=versions
 
+## [10.9.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.8.1...google-auth-library-v10.9.0) (2026-06-24)
+
+
+### Features
+
+* **auth:** Regional access boundaries main merge ([#8665](https://github.com/googleapis/google-cloud-node/issues/8665)) ([76e6d3b](https://github.com/googleapis/google-cloud-node/commit/76e6d3b6dea6032547780155c045e41552e27f40))
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+
+## [10.8.1](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.8.0...google-auth-library-v10.8.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* Strip trailing slashes from automatic GDCH audience ([#8692](https://github.com/googleapis/google-cloud-node/issues/8692)) ([4e4badf](https://github.com/googleapis/google-cloud-node/commit/4e4badf1a5c6fde28fa099fb184b02cf794d8dfd))
+
+## [10.8.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.7.0...google-auth-library-v10.8.0) (2026-06-18)
+
+
+### Features
+
+* Port GDCH credentials support to Node.js Auth SDK ([#8301](https://github.com/googleapis/google-cloud-node/issues/8301)) ([75f148c](https://github.com/googleapis/google-cloud-node/commit/75f148ca83618193c884e139ff8ed76e28854d2d))
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+
+## [10.7.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.6.3...google-auth-library-v10.7.0) (2026-06-03)
+
+
+### Features
+
+* Port GDCH credentials support to Node.js Auth SDK ([#8301](https://github.com/googleapis/google-cloud-node/issues/8301)) ([75f148c](https://github.com/googleapis/google-cloud-node/commit/75f148ca83618193c884e139ff8ed76e28854d2d))
+
 ## [10.6.3](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.6.2...google-auth-library-v10.6.3) (2026-05-11)
 
 

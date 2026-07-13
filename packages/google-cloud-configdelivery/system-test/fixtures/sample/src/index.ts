@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ConfigDeliveryClient} from '@google-cloud/configdelivery';
+import { ConfigDeliveryClient } from '@google-cloud/configdelivery';
 
 // check that the client class type name can be used
 function doStuffWithConfigDeliveryClient(client: ConfigDeliveryClient) {

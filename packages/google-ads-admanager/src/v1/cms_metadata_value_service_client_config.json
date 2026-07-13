@@ -27,6 +27,14 @@
         "ListCmsMetadataValues": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "BatchActivateCmsMetadataValues": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchDeactivateCmsMetadataValues": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

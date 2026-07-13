@@ -50,7 +50,9 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/billing-budgets
 ```
 
-[//]: # "partials.body"
+### Using TypeScript
+
+`@google-cloud/billing-budgets` provides TypeScript type definitions.
 
 ## Samples
 
@@ -63,13 +65,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.get_budget.js) |
 | list budgets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.list_budgets.js) |
 | update budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/budget_service.update_budget.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1/snippet_metadata_google.cloud.billing.budgets.v1.json) |
 | create budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.create_budget.js) |
 | delete budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.delete_budget.js) |
 | get budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.get_budget.js) |
 | list budgets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.list_budgets.js) |
 | update budget | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/budget_service.update_budget.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/samples/generated/v1beta1/snippet_metadata_google.cloud.billing.budgets.v1beta1.json) |
 
 
 ## Supported Node.js Versions
@@ -103,7 +103,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -113,7 +113,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-billing-budgets/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

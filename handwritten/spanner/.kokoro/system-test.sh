@@ -50,7 +50,7 @@ npm run system-test
 # codecov combines coverage across integration and unit tests. Include
 # the logic below for any environment you wish to collect coverage for:
 COVERAGE_NODE=18
-if npx check-node-version@3.3.0 --silent --node $COVERAGE_NODE; then
+if [[ $(node -v) == v${COVERAGE_NODE}.* ]]; then
   NYC_BIN=./node_modules/nyc/bin/nyc.js
   if [ -f "$NYC_BIN" ]; then
     $NYC_BIN report || true

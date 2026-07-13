@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ClientConnectorServicesServiceClient} from './client_connector_services_service_client';
+export { ClientConnectorServicesServiceClient } from './client_connector_services_service_client';

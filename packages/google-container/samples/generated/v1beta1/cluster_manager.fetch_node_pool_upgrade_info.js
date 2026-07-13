@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name (project, location, cluster, nodepool) of the nodepool
+   *  Required. The name (project, location, cluster, node pool) of the node pool
    *  to get. Specified in the format
    *  `projects/* /locations/* /clusters/* /nodePools/*` or
    *  `projects/* /zones/* /clusters/* /nodePools/*`.

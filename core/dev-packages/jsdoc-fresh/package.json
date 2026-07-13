@@ -1,6 +1,6 @@
 {
   "name": "jsdoc-fresh",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "description": "Fresh JSDoc 3 Template",
   "scripts": {
     "prelint": "echo no prelint needed",
@@ -10,20 +10,19 @@
     "docs": "echo no docs needed",
     "system-test": "echo no system test",
     "samples-test": "echo no samples test",
-    "docs-test": "echo no docs tests",
     "compile": "echo no compile script"
   },
   "repository": {
     "type": "git",
-    "directory": "packages/jsdoc-fresh",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/dev-packages/jsdoc-fresh",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "author": "Google LLC",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/googleapis/google-cloud-node-core/issues"
+    "url": "https://github.com/googleapis/google-cloud-node/issues"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/dev-packages/jsdoc-fresh",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/dev-packages/jsdoc-fresh",
   "devDependencies": {
     "gts": "^5.0.0",
     "typescript": "^5.1.6"
@@ -32,6 +31,6 @@
     "@jsdoc/salty": "^0.2.5"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   }
 }

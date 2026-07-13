@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(contact, updateMask) {
+function main(contact) {
   // [START admanager_v1_generated_ContactService_UpdateContact_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -34,7 +34,7 @@ function main(contact, updateMask) {
    */
   // const contact = {}
   /**
-   *  Required. The list of fields to update.
+   *  Optional. The list of fields to update.
    */
   // const updateMask = {}
 
@@ -48,7 +48,6 @@ function main(contact, updateMask) {
     // Construct request
     const request = {
       contact,
-      updateMask,
     };
 
     // Run request

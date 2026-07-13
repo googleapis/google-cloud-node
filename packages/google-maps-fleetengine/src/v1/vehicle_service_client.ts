@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class VehicleServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('fleetengine');
@@ -57,9 +64,9 @@ export class VehicleServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  vehicleServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  vehicleServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of VehicleServiceClient.
@@ -100,21 +107,42 @@ export class VehicleServiceClient {
    *     const client = new VehicleServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof VehicleServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'fleetengine.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +167,7 @@ export class VehicleServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +181,7 @@ export class VehicleServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,10 +203,10 @@ export class VehicleServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       tripPathTemplate: new this._gaxModule.PathTemplate(
-        'providers/{provider}/trips/{trip}'
+        'providers/{provider}/trips/{trip}',
       ),
       vehiclePathTemplate: new this._gaxModule.PathTemplate(
-        'providers/{provider}/vehicles/{vehicle}'
+        'providers/{provider}/vehicles/{vehicle}',
       ),
     };
 
@@ -189,14 +214,20 @@ export class VehicleServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listVehicles:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'vehicles')
+      listVehicles: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'vehicles',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'maps.fleetengine.v1.VehicleService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'maps.fleetengine.v1.VehicleService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -227,37 +258,48 @@ export class VehicleServiceClient {
     // Put together the "service stub" for
     // maps.fleetengine.v1.VehicleService.
     this.vehicleServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('maps.fleetengine.v1.VehicleService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'maps.fleetengine.v1.VehicleService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).maps.fleetengine.v1.VehicleService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const vehicleServiceStubMethods =
-        ['createVehicle', 'getVehicle', 'deleteVehicle', 'updateVehicle', 'updateVehicleAttributes', 'listVehicles', 'searchVehicles'];
+    const vehicleServiceStubMethods = [
+      'createVehicle',
+      'getVehicle',
+      'deleteVehicle',
+      'updateVehicle',
+      'updateVehicleAttributes',
+      'listVehicles',
+      'searchVehicles',
+    ];
     for (const methodName of vehicleServiceStubMethods) {
       const callPromise = this.vehicleServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -272,8 +314,14 @@ export class VehicleServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'fleetengine.googleapis.com';
   }
@@ -284,8 +332,14 @@ export class VehicleServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'fleetengine.googleapis.com';
   }
@@ -316,9 +370,7 @@ export class VehicleServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -327,8 +379,9 @@ export class VehicleServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -339,132 +392,145 @@ export class VehicleServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Instantiates a new vehicle associated with an on-demand rideshare or
- * deliveries provider. Each `Vehicle` must have a unique vehicle ID.
- *
- * The following `Vehicle` fields are required when creating a `Vehicle`:
- *
- * * `vehicleState`
- * * `supportedTripTypes`
- * * `maximumCapacity`
- * * `vehicleType`
- *
- * The following `Vehicle` fields are ignored when creating a `Vehicle`:
- *
- * * `name`
- * * `currentTrips`
- * * `availableCapacity`
- * * `current_route_segment`
- * * `current_route_segment_end_point`
- * * `current_route_segment_version`
- * * `current_route_segment_traffic`
- * * `route`
- * * `waypoints`
- * * `waypoints_version`
- * * `remaining_distance_meters`
- * * `remaining_time_seconds`
- * * `eta_to_next_waypoint`
- * * `navigation_status`
- *
- * All other fields are optional and used if provided.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {string} request.vehicleId
- *   Required. Unique Vehicle ID.
- *   Subject to the following restrictions:
- *
- *   * Must be a valid Unicode string.
- *   * Limited to a maximum length of 64 characters.
- *   * Normalized according to [Unicode Normalization Form C]
- *   (http://www.unicode.org/reports/tr15/).
- *   * May not contain any of the following ASCII characters: '/', ':', '?',
- *   ',', or '#'.
- * @param {maps.fleetengine.v1.Vehicle} request.vehicle
- *   Required. The Vehicle entity to create. When creating a Vehicle, the
- *   following fields are required:
- *
- *   * `vehicleState`
- *   * `supportedTripTypes`
- *   * `maximumCapacity`
- *   * `vehicleType`
- *
- *   When creating a Vehicle, the following fields are ignored:
- *
- *   * `name`
- *   * `currentTrips`
- *   * `availableCapacity`
- *   * `current_route_segment`
- *   * `current_route_segment_end_point`
- *   * `current_route_segment_version`
- *   * `current_route_segment_traffic`
- *   * `route`
- *   * `waypoints`
- *   * `waypoints_version`
- *   * `remaining_distance_meters`
- *   * `remaining_time_seconds`
- *   * `eta_to_next_waypoint`
- *   * `navigation_status`
- *
- *   All other fields are optional and used if provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Vehicle|Vehicle}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vehicle_service.create_vehicle.js</caption>
- * region_tag:fleetengine_v1_generated_VehicleService_CreateVehicle_async
- */
+  /**
+   * Instantiates a new vehicle associated with an on-demand rideshare or
+   * deliveries provider. Each `Vehicle` must have a unique vehicle ID.
+   *
+   * The following `Vehicle` fields are required when creating a `Vehicle`:
+   *
+   * * `vehicleState`
+   * * `supportedTripTypes`
+   * * `maximumCapacity`
+   * * `vehicleType`
+   *
+   * The following `Vehicle` fields are ignored when creating a `Vehicle`:
+   *
+   * * `name`
+   * * `currentTrips`
+   * * `availableCapacity`
+   * * `current_route_segment`
+   * * `current_route_segment_end_point`
+   * * `current_route_segment_version`
+   * * `current_route_segment_traffic`
+   * * `route`
+   * * `waypoints`
+   * * `waypoints_version`
+   * * `remaining_distance_meters`
+   * * `remaining_time_seconds`
+   * * `eta_to_next_waypoint`
+   * * `navigation_status`
+   *
+   * All other fields are optional and used if provided.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.parent
+   *   Required. Must be in the format `providers/{provider}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {string} request.vehicleId
+   *   Required. Unique Vehicle ID.
+   *   Subject to the following restrictions:
+   *
+   *   * Must be a valid Unicode string.
+   *   * Limited to a maximum length of 64 characters.
+   *   * Normalized according to [Unicode Normalization Form C]
+   *   (http://www.unicode.org/reports/tr15/).
+   *   * May not contain any of the following ASCII characters: '/', ':', '?',
+   *   ',', or '#'.
+   * @param {maps.fleetengine.v1.Vehicle} request.vehicle
+   *   Required. The Vehicle entity to create. When creating a Vehicle, the
+   *   following fields are required:
+   *
+   *   * `vehicleState`
+   *   * `supportedTripTypes`
+   *   * `maximumCapacity`
+   *   * `vehicleType`
+   *
+   *   When creating a Vehicle, the following fields are ignored:
+   *
+   *   * `name`
+   *   * `currentTrips`
+   *   * `availableCapacity`
+   *   * `current_route_segment`
+   *   * `current_route_segment_end_point`
+   *   * `current_route_segment_version`
+   *   * `current_route_segment_traffic`
+   *   * `route`
+   *   * `waypoints`
+   *   * `waypoints_version`
+   *   * `remaining_distance_meters`
+   *   * `remaining_time_seconds`
+   *   * `eta_to_next_waypoint`
+   *   * `navigation_status`
+   *
+   *   All other fields are optional and used if provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Vehicle|Vehicle}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vehicle_service.create_vehicle.js</caption>
+   * region_tag:fleetengine_v1_generated_VehicleService_CreateVehicle_async
+   */
   createVehicle(
-      request?: protos.maps.fleetengine.v1.ICreateVehicleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.ICreateVehicleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.maps.fleetengine.v1.ICreateVehicleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.ICreateVehicleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createVehicle(
-      request: protos.maps.fleetengine.v1.ICreateVehicleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.ICreateVehicleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.ICreateVehicleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.ICreateVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createVehicle(
-      request: protos.maps.fleetengine.v1.ICreateVehicleRequest,
-      callback: Callback<
-          protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.ICreateVehicleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.ICreateVehicleRequest,
+    callback: Callback<
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.ICreateVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createVehicle(
-      request?: protos.maps.fleetengine.v1.ICreateVehicleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.maps.fleetengine.v1.ICreateVehicleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.ICreateVehicleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.ICreateVehicleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.ICreateVehicleRequest|undefined, {}|undefined
-      ]>|void {
+          protos.maps.fleetengine.v1.ICreateVehicleRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.ICreateVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.ICreateVehicleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -474,119 +540,149 @@ export class VehicleServiceClient {
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('createVehicle request %j', request);
-    const wrappedCallback: Callback<
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.ICreateVehicleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.maps.fleetengine.v1.IVehicle,
+          protos.maps.fleetengine.v1.ICreateVehicleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createVehicle response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createVehicle(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.ICreateVehicleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createVehicle response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createVehicle(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.maps.fleetengine.v1.IVehicle,
+          protos.maps.fleetengine.v1.ICreateVehicleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createVehicle response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns a vehicle from the Fleet Engine.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.name
- *   Required. Must be in the format
- *   `providers/{provider}/vehicles/{vehicle}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {google.protobuf.Timestamp} request.currentRouteSegmentVersion
- *   Indicates the minimum timestamp (exclusive) for which
- *   `Vehicle.current_route_segment` is retrieved.
- *   If the route is unchanged since this timestamp, the `current_route_segment`
- *   field is not set in the response. If a minimum is unspecified, the
- *   `current_route_segment` is always retrieved.
- * @param {google.protobuf.Timestamp} request.waypointsVersion
- *   Indicates the minimum timestamp (exclusive) for which `Vehicle.waypoints`
- *   data is retrieved. If the waypoints are unchanged since this timestamp, the
- *   `vehicle.waypoints` data is not set in the response. If this field is
- *   unspecified, `vehicle.waypoints` is always retrieved.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Vehicle|Vehicle}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vehicle_service.get_vehicle.js</caption>
- * region_tag:fleetengine_v1_generated_VehicleService_GetVehicle_async
- */
+  /**
+   * Returns a vehicle from the Fleet Engine.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.name
+   *   Required. Must be in the format
+   *   `providers/{provider}/vehicles/{vehicle}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {google.protobuf.Timestamp} request.currentRouteSegmentVersion
+   *   Indicates the minimum timestamp (exclusive) for which
+   *   `Vehicle.current_route_segment` is retrieved.
+   *   If the route is unchanged since this timestamp, the `current_route_segment`
+   *   field is not set in the response. If a minimum is unspecified, the
+   *   `current_route_segment` is always retrieved.
+   * @param {google.protobuf.Timestamp} request.waypointsVersion
+   *   Indicates the minimum timestamp (exclusive) for which `Vehicle.waypoints`
+   *   data is retrieved. If the waypoints are unchanged since this timestamp, the
+   *   `vehicle.waypoints` data is not set in the response. If this field is
+   *   unspecified, `vehicle.waypoints` is always retrieved.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Vehicle|Vehicle}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vehicle_service.get_vehicle.js</caption>
+   * region_tag:fleetengine_v1_generated_VehicleService_GetVehicle_async
+   */
   getVehicle(
-      request?: protos.maps.fleetengine.v1.IGetVehicleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.IGetVehicleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.maps.fleetengine.v1.IGetVehicleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.IGetVehicleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getVehicle(
-      request: protos.maps.fleetengine.v1.IGetVehicleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.IGetVehicleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IGetVehicleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.IGetVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getVehicle(
-      request: protos.maps.fleetengine.v1.IGetVehicleRequest,
-      callback: Callback<
-          protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.IGetVehicleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IGetVehicleRequest,
+    callback: Callback<
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.IGetVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getVehicle(
-      request?: protos.maps.fleetengine.v1.IGetVehicleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.maps.fleetengine.v1.IGetVehicleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.IGetVehicleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.IGetVehicleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.IGetVehicleRequest|undefined, {}|undefined
-      ]>|void {
+          protos.maps.fleetengine.v1.IGetVehicleRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.IGetVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.IGetVehicleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -596,111 +692,141 @@ export class VehicleServiceClient {
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('getVehicle request %j', request);
-    const wrappedCallback: Callback<
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.IGetVehicleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.maps.fleetengine.v1.IVehicle,
+          protos.maps.fleetengine.v1.IGetVehicleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getVehicle response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getVehicle(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.IGetVehicleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getVehicle response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getVehicle(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.maps.fleetengine.v1.IVehicle,
+          protos.maps.fleetengine.v1.IGetVehicleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getVehicle response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a Vehicle from the Fleet Engine.
- *
- * Returns FAILED_PRECONDITION if the Vehicle has active Trips.
- * assigned to it.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} [request.header]
- *   Optional. The standard Fleet Engine request header.
- * @param {string} request.name
- *   Required. Must be in the format
- *   `providers/{provider}/vehicles/{vehicle}`.
- *   The {provider} must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vehicle_service.delete_vehicle.js</caption>
- * region_tag:fleetengine_v1_generated_VehicleService_DeleteVehicle_async
- */
+  /**
+   * Deletes a Vehicle from the Fleet Engine.
+   *
+   * Returns FAILED_PRECONDITION if the Vehicle has active Trips.
+   * assigned to it.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} [request.header]
+   *   Optional. The standard Fleet Engine request header.
+   * @param {string} request.name
+   *   Required. Must be in the format
+   *   `providers/{provider}/vehicles/{vehicle}`.
+   *   The {provider} must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vehicle_service.delete_vehicle.js</caption>
+   * region_tag:fleetengine_v1_generated_VehicleService_DeleteVehicle_async
+   */
   deleteVehicle(
-      request?: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IDeleteVehicleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IDeleteVehicleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteVehicle(
-      request: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IDeleteVehicleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IDeleteVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteVehicle(
-      request: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IDeleteVehicleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IDeleteVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteVehicle(
-      request?: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.maps.fleetengine.v1.IDeleteVehicleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IDeleteVehicleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.maps.fleetengine.v1.IDeleteVehicleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IDeleteVehicleRequest|undefined, {}|undefined
-      ]>|void {
+          protos.maps.fleetengine.v1.IDeleteVehicleRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IDeleteVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.maps.fleetengine.v1.IDeleteVehicleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -710,144 +836,174 @@ export class VehicleServiceClient {
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('deleteVehicle request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IDeleteVehicleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteVehicleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteVehicle response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteVehicle(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.maps.fleetengine.v1.IDeleteVehicleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteVehicle response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteVehicle(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.maps.fleetengine.v1.IDeleteVehicleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteVehicle response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Writes updated vehicle data to the Fleet Engine.
- *
- * When updating a `Vehicle`, the following fields cannot be updated since
- * they are managed by the server:
- *
- * * `currentTrips`
- * * `availableCapacity`
- * * `current_route_segment_version`
- * * `waypoints_version`
- *
- * The vehicle `name` also cannot be updated.
- *
- * If the `attributes` field is updated, **all** the vehicle's attributes are
- * replaced with the attributes provided in the request. If you want to update
- * only some attributes, see the `UpdateVehicleAttributes` method. Likewise,
- * the `waypoints` field can be updated, but must contain all the waypoints
- * currently on the vehicle, and no other waypoints.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.name
- *   Required. Must be in the format
- *   `providers/{provider}/vehicles/{vehicle}`.
- *   The {provider} must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {maps.fleetengine.v1.Vehicle} request.vehicle
- *   Required. The `Vehicle` entity values to apply.  When updating a `Vehicle`,
- *   the following fields may not be updated as they are managed by the
- *   server.
- *
- *   * `available_capacity`
- *   * `current_route_segment_version`
- *   * `current_trips`
- *   * `name`
- *   * `waypoints_version`
- *
- *   If the `attributes` field is updated, **all** the vehicle's attributes are
- *   replaced with the attributes provided in the request. If you want to update
- *   only some attributes, see the `UpdateVehicleAttributes` method.
- *
- *   Likewise, the `waypoints` field can be updated, but must contain all the
- *   waypoints currently on the vehicle, and no other waypoints.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. A field mask indicating which fields of the `Vehicle` to update.
- *   At least one field name must be provided.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Vehicle|Vehicle}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vehicle_service.update_vehicle.js</caption>
- * region_tag:fleetengine_v1_generated_VehicleService_UpdateVehicle_async
- */
+  /**
+   * Writes updated vehicle data to the Fleet Engine.
+   *
+   * When updating a `Vehicle`, the following fields cannot be updated since
+   * they are managed by the server:
+   *
+   * * `currentTrips`
+   * * `availableCapacity`
+   * * `current_route_segment_version`
+   * * `waypoints_version`
+   *
+   * The vehicle `name` also cannot be updated.
+   *
+   * If the `attributes` field is updated, **all** the vehicle's attributes are
+   * replaced with the attributes provided in the request. If you want to update
+   * only some attributes, see the `UpdateVehicleAttributes` method. Likewise,
+   * the `waypoints` field can be updated, but must contain all the waypoints
+   * currently on the vehicle, and no other waypoints.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.name
+   *   Required. Must be in the format
+   *   `providers/{provider}/vehicles/{vehicle}`.
+   *   The {provider} must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {maps.fleetengine.v1.Vehicle} request.vehicle
+   *   Required. The `Vehicle` entity values to apply.  When updating a `Vehicle`,
+   *   the following fields may not be updated as they are managed by the
+   *   server.
+   *
+   *   * `available_capacity`
+   *   * `current_route_segment_version`
+   *   * `current_trips`
+   *   * `name`
+   *   * `waypoints_version`
+   *
+   *   If the `attributes` field is updated, **all** the vehicle's attributes are
+   *   replaced with the attributes provided in the request. If you want to update
+   *   only some attributes, see the `UpdateVehicleAttributes` method.
+   *
+   *   Likewise, the `waypoints` field can be updated, but must contain all the
+   *   waypoints currently on the vehicle, and no other waypoints.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. A field mask indicating which fields of the `Vehicle` to update.
+   *   At least one field name must be provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.Vehicle|Vehicle}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vehicle_service.update_vehicle.js</caption>
+   * region_tag:fleetengine_v1_generated_VehicleService_UpdateVehicle_async
+   */
   updateVehicle(
-      request?: protos.maps.fleetengine.v1.IUpdateVehicleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.IUpdateVehicleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.maps.fleetengine.v1.IUpdateVehicleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.IUpdateVehicleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateVehicle(
-      request: protos.maps.fleetengine.v1.IUpdateVehicleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.IUpdateVehicleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IUpdateVehicleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.IUpdateVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateVehicle(
-      request: protos.maps.fleetengine.v1.IUpdateVehicleRequest,
-      callback: Callback<
-          protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.IUpdateVehicleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IUpdateVehicleRequest,
+    callback: Callback<
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.IUpdateVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateVehicle(
-      request?: protos.maps.fleetengine.v1.IUpdateVehicleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.maps.fleetengine.v1.IUpdateVehicleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.IUpdateVehicleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.maps.fleetengine.v1.IVehicle,
-          protos.maps.fleetengine.v1.IUpdateVehicleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.IUpdateVehicleRequest|undefined, {}|undefined
-      ]>|void {
+          protos.maps.fleetengine.v1.IUpdateVehicleRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.IUpdateVehicleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.IVehicle,
+      protos.maps.fleetengine.v1.IUpdateVehicleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -857,114 +1013,152 @@ export class VehicleServiceClient {
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('updateVehicle request %j', request);
-    const wrappedCallback: Callback<
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.IUpdateVehicleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.maps.fleetengine.v1.IVehicle,
+          protos.maps.fleetengine.v1.IUpdateVehicleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateVehicle response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateVehicle(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.maps.fleetengine.v1.IVehicle,
-        protos.maps.fleetengine.v1.IUpdateVehicleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateVehicle response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateVehicle(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.maps.fleetengine.v1.IVehicle,
+          protos.maps.fleetengine.v1.IUpdateVehicleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVehicle response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Partially updates a vehicle's attributes.
- * Only the attributes mentioned in the request will be updated, other
- * attributes will NOT be altered. Note: this is different in `UpdateVehicle`,
- * where the whole `attributes` field will be replaced by the one in
- * `UpdateVehicleRequest`, attributes not in the request would be removed.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.name
- *   Required. Must be in the format `providers/{provider}/vehicles/{vehicle}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {number[]} request.attributes
- *   Required. The vehicle attributes to update. Unmentioned attributes are not
- *   altered or removed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.UpdateVehicleAttributesResponse|UpdateVehicleAttributesResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vehicle_service.update_vehicle_attributes.js</caption>
- * region_tag:fleetengine_v1_generated_VehicleService_UpdateVehicleAttributes_async
- */
+  /**
+   * Partially updates a vehicle's attributes.
+   * Only the attributes mentioned in the request will be updated, other
+   * attributes will NOT be altered. Note: this is different in `UpdateVehicle`,
+   * where the whole `attributes` field will be replaced by the one in
+   * `UpdateVehicleRequest`, attributes not in the request would be removed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.name
+   *   Required. Must be in the format `providers/{provider}/vehicles/{vehicle}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {number[]} request.attributes
+   *   Required. The vehicle attributes to update. Unmentioned attributes are not
+   *   altered or removed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.UpdateVehicleAttributesResponse|UpdateVehicleAttributesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vehicle_service.update_vehicle_attributes.js</caption>
+   * region_tag:fleetengine_v1_generated_VehicleService_UpdateVehicleAttributes_async
+   */
   updateVehicleAttributes(
-      request?: protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
-        protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
+      protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateVehicleAttributes(
-      request: protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
-          protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
+      | protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateVehicleAttributes(
-      request: protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest,
-      callback: Callback<
-          protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
-          protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest,
+    callback: Callback<
+      protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
+      | protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateVehicleAttributes(
-      request?: protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
-          protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
-          protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
-        protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
+      | protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
+      protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -974,233 +1168,268 @@ export class VehicleServiceClient {
     {
       const fieldValue = request.name;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('updateVehicleAttributes request %j', request);
-    const wrappedCallback: Callback<
-        protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
-        protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
+          | protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateVehicleAttributes response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateVehicleAttributes(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
-        protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateVehicleAttributes response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateVehicleAttributes(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.maps.fleetengine.v1.IUpdateVehicleAttributesResponse,
+          (
+            | protos.maps.fleetengine.v1.IUpdateVehicleAttributesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateVehicleAttributes response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns a list of vehicles that match the request options.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {maps.fleetengine.v1.TerminalLocation} request.pickupPoint
- *   Required. The pickup point to search near.
- * @param {maps.fleetengine.v1.TerminalLocation} request.dropoffPoint
- *   The customer's intended dropoff location. The field is required if
- *   `trip_types` contains `TripType.SHARED`.
- * @param {number} request.pickupRadiusMeters
- *   Required. Defines the vehicle search radius around the pickup point. Only
- *   vehicles within the search radius will be returned. Value must be between
- *   400 and 10000 meters (inclusive).
- * @param {number} request.count
- *   Required. Specifies the maximum number of vehicles to return. The value
- *   must be between 1 and 50 (inclusive).
- * @param {number} request.minimumCapacity
- *   Required. Specifies the number of passengers being considered for a trip.
- *   The value must be greater than or equal to one. The driver is not
- *   considered in the capacity value.
- * @param {number[]} request.tripTypes
- *   Required. Represents the type of proposed trip. Must include exactly one
- *   type. `UNKNOWN_TRIP_TYPE` is not allowed. Restricts the search to only
- *   those vehicles that can support that trip type.
- * @param {google.protobuf.Duration} request.maximumStaleness
- *   Restricts the search to only those vehicles that have sent location updates
- *   to Fleet Engine within the specified duration. Stationary vehicles still
- *   transmitting their locations are not considered stale. If this field is not
- *   set, the server uses five minutes as the default value.
- * @param {number[]} request.vehicleTypes
- *   Required. Restricts the search to vehicles with one of the specified types.
- *   At least one vehicle type must be specified. VehicleTypes with a category
- *   of `UNKNOWN` are not allowed.
- * @param {number[]} request.requiredAttributes
- *   Callers can form complex logical operations using any combination of the
- *   `required_attributes`, `required_one_of_attributes`, and
- *   `required_one_of_attribute_sets` fields.
- *
- *   `required_attributes` is a list; `required_one_of_attributes` uses a
- *   message which allows a list of lists. In combination, the two fields allow
- *   the composition of this expression:
- *
- *   ```
- *   (required_attributes[0] AND required_attributes[1] AND ...)
- *   AND
- *   (required_one_of_attributes{@link protos.0|0} OR required_one_of_attributes{@link protos.1|0} OR
- *   ...)
- *   AND
- *   (required_one_of_attributes{@link protos.0|1} OR required_one_of_attributes{@link protos.1|1} OR
- *   ...)
- *   ```
- *
- *   Restricts the search to only those vehicles with the specified attributes.
- *   This field is a conjunction/AND operation. A max of 50 required_attributes
- *   is allowed. This matches the maximum number of attributes allowed on a
- *   vehicle.
- * @param {number[]} request.requiredOneOfAttributes
- *   Restricts the search to only those vehicles with at least one of
- *   the specified attributes in each `VehicleAttributeList`. Within each
- *   list, a vehicle must match at least one of the attributes. This field is an
- *   inclusive disjunction/OR operation in each `VehicleAttributeList` and a
- *   conjunction/AND operation across the collection of `VehicleAttributeList`.
- * @param {number[]} request.requiredOneOfAttributeSets
- *   `required_one_of_attribute_sets` provides additional functionality.
- *
- *   Similar to `required_one_of_attributes`, `required_one_of_attribute_sets`
- *   uses a message which allows a list of lists, allowing expressions such as
- *   this one:
- *
- *   ```
- *   (required_attributes[0] AND required_attributes[1] AND ...)
- *   AND
- *   (
- *     (required_one_of_attribute_sets{@link protos.0|0} AND
- *     required_one_of_attribute_sets{@link protos.1|0} AND
- *     ...)
- *     OR
- *     (required_one_of_attribute_sets{@link protos.0|1} AND
- *     required_one_of_attribute_sets{@link protos.1|1} AND
- *     ...)
- *   )
- *   ```
- *
- *   Restricts the search to only those vehicles with all the attributes in a
- *   `VehicleAttributeList`. Within each list, a
- *   vehicle must match all of the attributes. This field is a conjunction/AND
- *   operation in each `VehicleAttributeList` and inclusive disjunction/OR
- *   operation across the collection of `VehicleAttributeList`.
- * @param {maps.fleetengine.v1.SearchVehiclesRequest.VehicleMatchOrder} request.orderBy
- *   Required. Specifies the desired ordering criterion for results.
- * @param {boolean} request.includeBackToBack
- *   This indicates if vehicles with a single active trip are eligible for this
- *   search. This field is only used when `current_trips_present` is
- *   unspecified. When `current_trips_present` is unspecified  and  this field
- *   is `false`, vehicles with assigned trips are excluded from the search
- *   results. When `current_trips_present` is unspecified and this field is
- *   `true`, search results can include vehicles with one active trip that has a
- *   status of `ENROUTE_TO_DROPOFF`. When `current_trips_present` is specified,
- *   this field cannot be set to true.
- *
- *   The default value is `false`.
- * @param {string} request.tripId
- *   Indicates the trip associated with this `SearchVehicleRequest`.
- * @param {maps.fleetengine.v1.SearchVehiclesRequest.CurrentTripsPresent} request.currentTripsPresent
- *   This indicates if vehicles with active trips are eligible for this search.
- *   This must be set to something other than
- *   `CURRENT_TRIPS_PRESENT_UNSPECIFIED` if `trip_type` includes `SHARED`.
- * @param {string} [request.filter]
- *   Optional. A filter query to apply when searching vehicles. See
- *   http://aip.dev/160 for examples of the filter syntax.
- *
- *   This field is designed to replace the `required_attributes`,
- *   `required_one_of_attributes`, and `required_one_of_attributes_sets` fields.
- *   If a non-empty value is specified here, the following fields must be empty:
- *   `required_attributes`, `required_one_of_attributes`, and
- *   `required_one_of_attributes_sets`.
- *
- *   This filter functions as an AND clause with other constraints,
- *   such as `minimum_capacity` or `vehicle_types`.
- *
- *   Note that the only queries supported are on vehicle attributes (for
- *   example, `attributes.<key> = <value>` or `attributes.<key1> = <value1> AND
- *   attributes.<key2> = <value2>`). The maximum number of restrictions allowed
- *   in a filter query is 50.
- *
- *   Also, all attributes are stored as strings, so the only supported
- *   comparisons against attributes are string comparisons. In order to compare
- *   against number or boolean values, the values must be explicitly quoted to
- *   be treated as strings (for example, `attributes.<key> = "10"` or
- *   `attributes.<key> = "true"`).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.SearchVehiclesResponse|SearchVehiclesResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vehicle_service.search_vehicles.js</caption>
- * region_tag:fleetengine_v1_generated_VehicleService_SearchVehicles_async
- */
+  /**
+   * Returns a list of vehicles that match the request options.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.parent
+   *   Required. Must be in the format `providers/{provider}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {maps.fleetengine.v1.TerminalLocation} request.pickupPoint
+   *   Required. The pickup point to search near.
+   * @param {maps.fleetengine.v1.TerminalLocation} request.dropoffPoint
+   *   The customer's intended dropoff location. The field is required if
+   *   `trip_types` contains `TripType.SHARED`.
+   * @param {number} request.pickupRadiusMeters
+   *   Required. Defines the vehicle search radius around the pickup point. Only
+   *   vehicles within the search radius will be returned. Value must be between
+   *   400 and 10000 meters (inclusive).
+   * @param {number} request.count
+   *   Required. Specifies the maximum number of vehicles to return. The value
+   *   must be between 1 and 50 (inclusive).
+   * @param {number} request.minimumCapacity
+   *   Required. Specifies the number of passengers being considered for a trip.
+   *   The value must be greater than or equal to one. The driver is not
+   *   considered in the capacity value.
+   * @param {number[]} request.tripTypes
+   *   Required. Represents the type of proposed trip. Must include exactly one
+   *   type. `UNKNOWN_TRIP_TYPE` is not allowed. Restricts the search to only
+   *   those vehicles that can support that trip type.
+   * @param {google.protobuf.Duration} request.maximumStaleness
+   *   Restricts the search to only those vehicles that have sent location updates
+   *   to Fleet Engine within the specified duration. Stationary vehicles still
+   *   transmitting their locations are not considered stale. If this field is not
+   *   set, the server uses five minutes as the default value.
+   * @param {number[]} request.vehicleTypes
+   *   Required. Restricts the search to vehicles with one of the specified types.
+   *   At least one vehicle type must be specified. VehicleTypes with a category
+   *   of `UNKNOWN` are not allowed.
+   * @param {number[]} request.requiredAttributes
+   *   Callers can form complex logical operations using any combination of the
+   *   `required_attributes`, `required_one_of_attributes`, and
+   *   `required_one_of_attribute_sets` fields.
+   *
+   *   `required_attributes` is a list; `required_one_of_attributes` uses a
+   *   message which allows a list of lists. In combination, the two fields allow
+   *   the composition of this expression:
+   *
+   *   ```
+   *   (required_attributes[0] AND required_attributes[1] AND ...)
+   *   AND
+   *   (required_one_of_attributes{@link protos.0|0} OR required_one_of_attributes{@link protos.1|0} OR
+   *   ...)
+   *   AND
+   *   (required_one_of_attributes{@link protos.0|1} OR required_one_of_attributes{@link protos.1|1} OR
+   *   ...)
+   *   ```
+   *
+   *   Restricts the search to only those vehicles with the specified attributes.
+   *   This field is a conjunction/AND operation. A max of 50 required_attributes
+   *   is allowed. This matches the maximum number of attributes allowed on a
+   *   vehicle.
+   * @param {number[]} request.requiredOneOfAttributes
+   *   Restricts the search to only those vehicles with at least one of
+   *   the specified attributes in each `VehicleAttributeList`. Within each
+   *   list, a vehicle must match at least one of the attributes. This field is an
+   *   inclusive disjunction/OR operation in each `VehicleAttributeList` and a
+   *   conjunction/AND operation across the collection of `VehicleAttributeList`.
+   * @param {number[]} request.requiredOneOfAttributeSets
+   *   `required_one_of_attribute_sets` provides additional functionality.
+   *
+   *   Similar to `required_one_of_attributes`, `required_one_of_attribute_sets`
+   *   uses a message which allows a list of lists, allowing expressions such as
+   *   this one:
+   *
+   *   ```
+   *   (required_attributes[0] AND required_attributes[1] AND ...)
+   *   AND
+   *   (
+   *     (required_one_of_attribute_sets{@link protos.0|0} AND
+   *     required_one_of_attribute_sets{@link protos.1|0} AND
+   *     ...)
+   *     OR
+   *     (required_one_of_attribute_sets{@link protos.0|1} AND
+   *     required_one_of_attribute_sets{@link protos.1|1} AND
+   *     ...)
+   *   )
+   *   ```
+   *
+   *   Restricts the search to only those vehicles with all the attributes in a
+   *   `VehicleAttributeList`. Within each list, a
+   *   vehicle must match all of the attributes. This field is a conjunction/AND
+   *   operation in each `VehicleAttributeList` and inclusive disjunction/OR
+   *   operation across the collection of `VehicleAttributeList`.
+   * @param {maps.fleetengine.v1.SearchVehiclesRequest.VehicleMatchOrder} request.orderBy
+   *   Required. Specifies the desired ordering criterion for results.
+   * @param {boolean} request.includeBackToBack
+   *   This indicates if vehicles with a single active trip are eligible for this
+   *   search. This field is only used when `current_trips_present` is
+   *   unspecified. When `current_trips_present` is unspecified  and  this field
+   *   is `false`, vehicles with assigned trips are excluded from the search
+   *   results. When `current_trips_present` is unspecified and this field is
+   *   `true`, search results can include vehicles with one active trip that has a
+   *   status of `ENROUTE_TO_DROPOFF`. When `current_trips_present` is specified,
+   *   this field cannot be set to true.
+   *
+   *   The default value is `false`.
+   * @param {string} request.tripId
+   *   Indicates the trip associated with this `SearchVehicleRequest`.
+   * @param {maps.fleetengine.v1.SearchVehiclesRequest.CurrentTripsPresent} request.currentTripsPresent
+   *   This indicates if vehicles with active trips are eligible for this search.
+   *   This must be set to something other than
+   *   `CURRENT_TRIPS_PRESENT_UNSPECIFIED` if `trip_type` includes `SHARED`.
+   * @param {string} [request.filter]
+   *   Optional. A filter query to apply when searching vehicles. See
+   *   http://aip.dev/160 for examples of the filter syntax.
+   *
+   *   This field is designed to replace the `required_attributes`,
+   *   `required_one_of_attributes`, and `required_one_of_attributes_sets` fields.
+   *   If a non-empty value is specified here, the following fields must be empty:
+   *   `required_attributes`, `required_one_of_attributes`, and
+   *   `required_one_of_attributes_sets`.
+   *
+   *   This filter functions as an AND clause with other constraints,
+   *   such as `minimum_capacity` or `vehicle_types`.
+   *
+   *   Note that the only queries supported are on vehicle attributes (for
+   *   example, `attributes.<key> = <value>` or `attributes.<key1> = <value1> AND
+   *   attributes.<key2> = <value2>`). The maximum number of restrictions allowed
+   *   in a filter query is 50.
+   *
+   *   Also, all attributes are stored as strings, so the only supported
+   *   comparisons against attributes are string comparisons. In order to compare
+   *   against number or boolean values, the values must be explicitly quoted to
+   *   be treated as strings (for example, `attributes.<key> = "10"` or
+   *   `attributes.<key> = "true"`).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.maps.fleetengine.v1.SearchVehiclesResponse|SearchVehiclesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vehicle_service.search_vehicles.js</caption>
+   * region_tag:fleetengine_v1_generated_VehicleService_SearchVehicles_async
+   */
   searchVehicles(
-      request?: protos.maps.fleetengine.v1.ISearchVehiclesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.maps.fleetengine.v1.ISearchVehiclesResponse,
-        protos.maps.fleetengine.v1.ISearchVehiclesRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.maps.fleetengine.v1.ISearchVehiclesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.ISearchVehiclesResponse,
+      protos.maps.fleetengine.v1.ISearchVehiclesRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   searchVehicles(
-      request: protos.maps.fleetengine.v1.ISearchVehiclesRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.maps.fleetengine.v1.ISearchVehiclesResponse,
-          protos.maps.fleetengine.v1.ISearchVehiclesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.ISearchVehiclesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.maps.fleetengine.v1.ISearchVehiclesResponse,
+      protos.maps.fleetengine.v1.ISearchVehiclesRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   searchVehicles(
-      request: protos.maps.fleetengine.v1.ISearchVehiclesRequest,
-      callback: Callback<
-          protos.maps.fleetengine.v1.ISearchVehiclesResponse,
-          protos.maps.fleetengine.v1.ISearchVehiclesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.maps.fleetengine.v1.ISearchVehiclesRequest,
+    callback: Callback<
+      protos.maps.fleetengine.v1.ISearchVehiclesResponse,
+      protos.maps.fleetengine.v1.ISearchVehiclesRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   searchVehicles(
-      request?: protos.maps.fleetengine.v1.ISearchVehiclesRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.maps.fleetengine.v1.ISearchVehiclesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.maps.fleetengine.v1.ISearchVehiclesResponse,
-          protos.maps.fleetengine.v1.ISearchVehiclesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.maps.fleetengine.v1.ISearchVehiclesResponse,
-          protos.maps.fleetengine.v1.ISearchVehiclesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.maps.fleetengine.v1.ISearchVehiclesResponse,
-        protos.maps.fleetengine.v1.ISearchVehiclesRequest|undefined, {}|undefined
-      ]>|void {
+          protos.maps.fleetengine.v1.ISearchVehiclesRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.maps.fleetengine.v1.ISearchVehiclesResponse,
+      protos.maps.fleetengine.v1.ISearchVehiclesRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.ISearchVehiclesResponse,
+      protos.maps.fleetengine.v1.ISearchVehiclesRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -1210,225 +1439,253 @@ export class VehicleServiceClient {
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchVehicles request %j', request);
-    const wrappedCallback: Callback<
-        protos.maps.fleetengine.v1.ISearchVehiclesResponse,
-        protos.maps.fleetengine.v1.ISearchVehiclesRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.maps.fleetengine.v1.ISearchVehiclesResponse,
+          protos.maps.fleetengine.v1.ISearchVehiclesRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('searchVehicles response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.searchVehicles(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.maps.fleetengine.v1.ISearchVehiclesResponse,
-        protos.maps.fleetengine.v1.ISearchVehiclesRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('searchVehicles response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .searchVehicles(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.maps.fleetengine.v1.ISearchVehiclesResponse,
+          protos.maps.fleetengine.v1.ISearchVehiclesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('searchVehicles response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Returns a paginated list of vehicles associated with
- * a provider that match the request options.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {number} request.pageSize
- *   The maximum number of vehicles to return.
- *   Default value: 100.
- * @param {string} request.pageToken
- *   The value of the `next_page_token` provided by a previous call to
- *   `ListVehicles` so that you can paginate through groups of vehicles. The
- *   value is undefined if the filter criteria of the request is not the same as
- *   the filter criteria for the previous call to `ListVehicles`.
- * @param {google.protobuf.Int32Value} request.minimumCapacity
- *   Specifies the required minimum capacity of the vehicle. All vehicles
- *   returned will have a `maximum_capacity` greater than or equal to this
- *   value. If set, must be greater or equal to 0.
- * @param {number[]} request.tripTypes
- *   Restricts the response to vehicles that support at least one of the
- *   specified trip types.
- * @param {google.protobuf.Duration} request.maximumStaleness
- *   Restricts the response to vehicles that have sent location updates to Fleet
- *   Engine within the specified duration. Stationary vehicles still
- *   transmitting their locations are not considered stale. If present, must be
- *   a valid positive duration.
- * @param {number[]} request.vehicleTypeCategories
- *   Required. Restricts the response to vehicles with one of the specified type
- *   categories. `UNKNOWN` is not allowed.
- * @param {string[]} request.requiredAttributes
- *   Callers can form complex logical operations using any combination of the
- *   `required_attributes`, `required_one_of_attributes`, and
- *   `required_one_of_attribute_sets` fields.
- *
- *   `required_attributes` is a list; `required_one_of_attributes` uses a
- *   message which allows a list of lists. In combination, the two fields allow
- *   the composition of this expression:
- *
- *   ```
- *   (required_attributes[0] AND required_attributes[1] AND ...)
- *   AND
- *   (required_one_of_attributes{@link protos.0|0} OR required_one_of_attributes{@link protos.1|0} OR
- *   ...)
- *   AND
- *   (required_one_of_attributes{@link protos.0|1} OR required_one_of_attributes{@link protos.1|1} OR
- *   ...)
- *   ```
- *
- *   Restricts the response to vehicles with the specified attributes. This
- *   field is a conjunction/AND operation. A max of 50 required_attributes is
- *   allowed. This matches the maximum number of attributes allowed on a
- *   vehicle. Each repeated string should be of the format "key:value".
- * @param {string[]} request.requiredOneOfAttributes
- *   Restricts the response to vehicles with at least one of the specified
- *   attributes in each `VehicleAttributeList`. Within each list, a vehicle must
- *   match at least one of the attributes. This field is an inclusive
- *   disjunction/OR operation in each `VehicleAttributeList` and a
- *   conjunction/AND operation across the collection of `VehicleAttributeList`.
- *   Each repeated string should be of the format
- *   "key1:value1|key2:value2|key3:value3".
- * @param {string[]} request.requiredOneOfAttributeSets
- *   `required_one_of_attribute_sets` provides additional functionality.
- *
- *   Similar to `required_one_of_attributes`, `required_one_of_attribute_sets`
- *   uses a message which allows a list of lists, allowing expressions such as
- *   this one:
- *
- *   ```
- *   (required_attributes[0] AND required_attributes[1] AND ...)
- *   AND
- *   (
- *     (required_one_of_attribute_sets{@link protos.0|0} AND
- *     required_one_of_attribute_sets{@link protos.1|0} AND
- *     ...)
- *     OR
- *     (required_one_of_attribute_sets{@link protos.0|1} AND
- *     required_one_of_attribute_sets{@link protos.1|1} AND
- *     ...)
- *   )
- *   ```
- *
- *   Restricts the response to vehicles that match all the attributes in a
- *   `VehicleAttributeList`. Within each list, a vehicle must match all of the
- *   attributes. This field is a conjunction/AND operation in each
- *   `VehicleAttributeList` and inclusive disjunction/OR operation across the
- *   collection of `VehicleAttributeList`. Each repeated string should be of the
- *   format "key1:value1|key2:value2|key3:value3".
- * @param {maps.fleetengine.v1.VehicleState} request.vehicleState
- *   Restricts the response to vehicles that have this vehicle state.
- * @param {boolean} request.onTripOnly
- *   Only return the vehicles with current trip(s).
- * @param {string} [request.filter]
- *   Optional. A filter query to apply when listing vehicles. See
- *   http://aip.dev/160 for examples of the filter syntax.
- *
- *   This field is designed to replace the `required_attributes`,
- *   `required_one_of_attributes`, and `required_one_of_attributes_sets` fields.
- *   If a non-empty value is specified here, the following fields must be empty:
- *   `required_attributes`, `required_one_of_attributes`, and
- *   `required_one_of_attributes_sets`.
- *
- *   This filter functions as an AND clause with other constraints,
- *   such as `vehicle_state` or `on_trip_only`.
- *
- *   Note that the only queries supported are on vehicle attributes (for
- *   example, `attributes.<key> = <value>` or `attributes.<key1> = <value1> AND
- *   attributes.<key2> = <value2>`). The maximum number of restrictions allowed
- *   in a filter query is 50.
- *
- *   Also, all attributes are stored as strings, so the only supported
- *   comparisons against attributes are string comparisons. In order to compare
- *   against number or boolean values, the values must be explicitly quoted to
- *   be treated as strings (for example, `attributes.<key> = "10"` or
- *   `attributes.<key> = "true"`).
- * @param {google.geo.type.Viewport} [request.viewport]
- *   Optional. A filter that limits the vehicles returned to those whose last
- *   known location was in the rectangular area defined by the viewport.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.maps.fleetengine.v1.Vehicle|Vehicle}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listVehiclesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Returns a paginated list of vehicles associated with
+   * a provider that match the request options.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.parent
+   *   Required. Must be in the format `providers/{provider}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {number} request.pageSize
+   *   The maximum number of vehicles to return.
+   *   Default value: 100.
+   * @param {string} request.pageToken
+   *   The value of the `next_page_token` provided by a previous call to
+   *   `ListVehicles` so that you can paginate through groups of vehicles. The
+   *   value is undefined if the filter criteria of the request is not the same as
+   *   the filter criteria for the previous call to `ListVehicles`.
+   * @param {google.protobuf.Int32Value} request.minimumCapacity
+   *   Specifies the required minimum capacity of the vehicle. All vehicles
+   *   returned will have a `maximum_capacity` greater than or equal to this
+   *   value. If set, must be greater or equal to 0.
+   * @param {number[]} request.tripTypes
+   *   Restricts the response to vehicles that support at least one of the
+   *   specified trip types.
+   * @param {google.protobuf.Duration} request.maximumStaleness
+   *   Restricts the response to vehicles that have sent location updates to Fleet
+   *   Engine within the specified duration. Stationary vehicles still
+   *   transmitting their locations are not considered stale. If present, must be
+   *   a valid positive duration.
+   * @param {number[]} request.vehicleTypeCategories
+   *   Required. Restricts the response to vehicles with one of the specified type
+   *   categories. `UNKNOWN` is not allowed.
+   * @param {string[]} request.requiredAttributes
+   *   Callers can form complex logical operations using any combination of the
+   *   `required_attributes`, `required_one_of_attributes`, and
+   *   `required_one_of_attribute_sets` fields.
+   *
+   *   `required_attributes` is a list; `required_one_of_attributes` uses a
+   *   message which allows a list of lists. In combination, the two fields allow
+   *   the composition of this expression:
+   *
+   *   ```
+   *   (required_attributes[0] AND required_attributes[1] AND ...)
+   *   AND
+   *   (required_one_of_attributes{@link protos.0|0} OR required_one_of_attributes{@link protos.1|0} OR
+   *   ...)
+   *   AND
+   *   (required_one_of_attributes{@link protos.0|1} OR required_one_of_attributes{@link protos.1|1} OR
+   *   ...)
+   *   ```
+   *
+   *   Restricts the response to vehicles with the specified attributes. This
+   *   field is a conjunction/AND operation. A max of 50 required_attributes is
+   *   allowed. This matches the maximum number of attributes allowed on a
+   *   vehicle. Each repeated string should be of the format "key:value".
+   * @param {string[]} request.requiredOneOfAttributes
+   *   Restricts the response to vehicles with at least one of the specified
+   *   attributes in each `VehicleAttributeList`. Within each list, a vehicle must
+   *   match at least one of the attributes. This field is an inclusive
+   *   disjunction/OR operation in each `VehicleAttributeList` and a
+   *   conjunction/AND operation across the collection of `VehicleAttributeList`.
+   *   Each repeated string should be of the format
+   *   "key1:value1|key2:value2|key3:value3".
+   * @param {string[]} request.requiredOneOfAttributeSets
+   *   `required_one_of_attribute_sets` provides additional functionality.
+   *
+   *   Similar to `required_one_of_attributes`, `required_one_of_attribute_sets`
+   *   uses a message which allows a list of lists, allowing expressions such as
+   *   this one:
+   *
+   *   ```
+   *   (required_attributes[0] AND required_attributes[1] AND ...)
+   *   AND
+   *   (
+   *     (required_one_of_attribute_sets{@link protos.0|0} AND
+   *     required_one_of_attribute_sets{@link protos.1|0} AND
+   *     ...)
+   *     OR
+   *     (required_one_of_attribute_sets{@link protos.0|1} AND
+   *     required_one_of_attribute_sets{@link protos.1|1} AND
+   *     ...)
+   *   )
+   *   ```
+   *
+   *   Restricts the response to vehicles that match all the attributes in a
+   *   `VehicleAttributeList`. Within each list, a vehicle must match all of the
+   *   attributes. This field is a conjunction/AND operation in each
+   *   `VehicleAttributeList` and inclusive disjunction/OR operation across the
+   *   collection of `VehicleAttributeList`. Each repeated string should be of the
+   *   format "key1:value1|key2:value2|key3:value3".
+   * @param {maps.fleetengine.v1.VehicleState} request.vehicleState
+   *   Restricts the response to vehicles that have this vehicle state.
+   * @param {boolean} request.onTripOnly
+   *   Only return the vehicles with current trip(s).
+   * @param {string} [request.filter]
+   *   Optional. A filter query to apply when listing vehicles. See
+   *   http://aip.dev/160 for examples of the filter syntax.
+   *
+   *   This field is designed to replace the `required_attributes`,
+   *   `required_one_of_attributes`, and `required_one_of_attributes_sets` fields.
+   *   If a non-empty value is specified here, the following fields must be empty:
+   *   `required_attributes`, `required_one_of_attributes`, and
+   *   `required_one_of_attributes_sets`.
+   *
+   *   This filter functions as an AND clause with other constraints,
+   *   such as `vehicle_state` or `on_trip_only`.
+   *
+   *   Note that the only queries supported are on vehicle attributes (for
+   *   example, `attributes.<key> = <value>` or `attributes.<key1> = <value1> AND
+   *   attributes.<key2> = <value2>`). The maximum number of restrictions allowed
+   *   in a filter query is 50.
+   *
+   *   Also, all attributes are stored as strings, so the only supported
+   *   comparisons against attributes are string comparisons. In order to compare
+   *   against number or boolean values, the values must be explicitly quoted to
+   *   be treated as strings (for example, `attributes.<key> = "10"` or
+   *   `attributes.<key> = "true"`).
+   * @param {google.geo.type.Viewport} [request.viewport]
+   *   Optional. A filter that limits the vehicles returned to those whose last
+   *   known location was in the rectangular area defined by the viewport.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.maps.fleetengine.v1.Vehicle|Vehicle}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listVehiclesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listVehicles(
-      request?: protos.maps.fleetengine.v1.IListVehiclesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.maps.fleetengine.v1.IVehicle[],
-        protos.maps.fleetengine.v1.IListVehiclesRequest|null,
-        protos.maps.fleetengine.v1.IListVehiclesResponse
-      ]>;
+    request?: protos.maps.fleetengine.v1.IListVehiclesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.IVehicle[],
+      protos.maps.fleetengine.v1.IListVehiclesRequest | null,
+      protos.maps.fleetengine.v1.IListVehiclesResponse,
+    ]
+  >;
   listVehicles(
-      request: protos.maps.fleetengine.v1.IListVehiclesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.maps.fleetengine.v1.IListVehiclesRequest,
-          protos.maps.fleetengine.v1.IListVehiclesResponse|null|undefined,
-          protos.maps.fleetengine.v1.IVehicle>): void;
+    request: protos.maps.fleetengine.v1.IListVehiclesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.maps.fleetengine.v1.IListVehiclesRequest,
+      protos.maps.fleetengine.v1.IListVehiclesResponse | null | undefined,
+      protos.maps.fleetengine.v1.IVehicle
+    >,
+  ): void;
   listVehicles(
-      request: protos.maps.fleetengine.v1.IListVehiclesRequest,
-      callback: PaginationCallback<
-          protos.maps.fleetengine.v1.IListVehiclesRequest,
-          protos.maps.fleetengine.v1.IListVehiclesResponse|null|undefined,
-          protos.maps.fleetengine.v1.IVehicle>): void;
+    request: protos.maps.fleetengine.v1.IListVehiclesRequest,
+    callback: PaginationCallback<
+      protos.maps.fleetengine.v1.IListVehiclesRequest,
+      protos.maps.fleetengine.v1.IListVehiclesResponse | null | undefined,
+      protos.maps.fleetengine.v1.IVehicle
+    >,
+  ): void;
   listVehicles(
-      request?: protos.maps.fleetengine.v1.IListVehiclesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.maps.fleetengine.v1.IListVehiclesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.maps.fleetengine.v1.IListVehiclesRequest,
-          protos.maps.fleetengine.v1.IListVehiclesResponse|null|undefined,
-          protos.maps.fleetengine.v1.IVehicle>,
-      callback?: PaginationCallback<
-          protos.maps.fleetengine.v1.IListVehiclesRequest,
-          protos.maps.fleetengine.v1.IListVehiclesResponse|null|undefined,
-          protos.maps.fleetengine.v1.IVehicle>):
-      Promise<[
-        protos.maps.fleetengine.v1.IVehicle[],
-        protos.maps.fleetengine.v1.IListVehiclesRequest|null,
-        protos.maps.fleetengine.v1.IListVehiclesResponse
-      ]>|void {
+          protos.maps.fleetengine.v1.IListVehiclesResponse | null | undefined,
+          protos.maps.fleetengine.v1.IVehicle
+        >,
+    callback?: PaginationCallback<
+      protos.maps.fleetengine.v1.IListVehiclesRequest,
+      protos.maps.fleetengine.v1.IListVehiclesResponse | null | undefined,
+      protos.maps.fleetengine.v1.IVehicle
+    >,
+  ): Promise<
+    [
+      protos.maps.fleetengine.v1.IVehicle[],
+      protos.maps.fleetengine.v1.IListVehiclesRequest | null,
+      protos.maps.fleetengine.v1.IListVehiclesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -1438,23 +1695,27 @@ export class VehicleServiceClient {
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.maps.fleetengine.v1.IListVehiclesRequest,
-      protos.maps.fleetengine.v1.IListVehiclesResponse|null|undefined,
-      protos.maps.fleetengine.v1.IVehicle>|undefined = callback
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.maps.fleetengine.v1.IListVehiclesRequest,
+          protos.maps.fleetengine.v1.IListVehiclesResponse | null | undefined,
+          protos.maps.fleetengine.v1.IVehicle
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listVehicles values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1463,153 +1724,155 @@ export class VehicleServiceClient {
     this._log.info('listVehicles request %j', request);
     return this.innerApiCalls
       .listVehicles(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.maps.fleetengine.v1.IVehicle[],
-        protos.maps.fleetengine.v1.IListVehiclesRequest|null,
-        protos.maps.fleetengine.v1.IListVehiclesResponse
-      ]) => {
-        this._log.info('listVehicles values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.maps.fleetengine.v1.IVehicle[],
+          protos.maps.fleetengine.v1.IListVehiclesRequest | null,
+          protos.maps.fleetengine.v1.IListVehiclesResponse,
+        ]) => {
+          this._log.info('listVehicles values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listVehicles`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {number} request.pageSize
- *   The maximum number of vehicles to return.
- *   Default value: 100.
- * @param {string} request.pageToken
- *   The value of the `next_page_token` provided by a previous call to
- *   `ListVehicles` so that you can paginate through groups of vehicles. The
- *   value is undefined if the filter criteria of the request is not the same as
- *   the filter criteria for the previous call to `ListVehicles`.
- * @param {google.protobuf.Int32Value} request.minimumCapacity
- *   Specifies the required minimum capacity of the vehicle. All vehicles
- *   returned will have a `maximum_capacity` greater than or equal to this
- *   value. If set, must be greater or equal to 0.
- * @param {number[]} request.tripTypes
- *   Restricts the response to vehicles that support at least one of the
- *   specified trip types.
- * @param {google.protobuf.Duration} request.maximumStaleness
- *   Restricts the response to vehicles that have sent location updates to Fleet
- *   Engine within the specified duration. Stationary vehicles still
- *   transmitting their locations are not considered stale. If present, must be
- *   a valid positive duration.
- * @param {number[]} request.vehicleTypeCategories
- *   Required. Restricts the response to vehicles with one of the specified type
- *   categories. `UNKNOWN` is not allowed.
- * @param {string[]} request.requiredAttributes
- *   Callers can form complex logical operations using any combination of the
- *   `required_attributes`, `required_one_of_attributes`, and
- *   `required_one_of_attribute_sets` fields.
- *
- *   `required_attributes` is a list; `required_one_of_attributes` uses a
- *   message which allows a list of lists. In combination, the two fields allow
- *   the composition of this expression:
- *
- *   ```
- *   (required_attributes[0] AND required_attributes[1] AND ...)
- *   AND
- *   (required_one_of_attributes{@link protos.0|0} OR required_one_of_attributes{@link protos.1|0} OR
- *   ...)
- *   AND
- *   (required_one_of_attributes{@link protos.0|1} OR required_one_of_attributes{@link protos.1|1} OR
- *   ...)
- *   ```
- *
- *   Restricts the response to vehicles with the specified attributes. This
- *   field is a conjunction/AND operation. A max of 50 required_attributes is
- *   allowed. This matches the maximum number of attributes allowed on a
- *   vehicle. Each repeated string should be of the format "key:value".
- * @param {string[]} request.requiredOneOfAttributes
- *   Restricts the response to vehicles with at least one of the specified
- *   attributes in each `VehicleAttributeList`. Within each list, a vehicle must
- *   match at least one of the attributes. This field is an inclusive
- *   disjunction/OR operation in each `VehicleAttributeList` and a
- *   conjunction/AND operation across the collection of `VehicleAttributeList`.
- *   Each repeated string should be of the format
- *   "key1:value1|key2:value2|key3:value3".
- * @param {string[]} request.requiredOneOfAttributeSets
- *   `required_one_of_attribute_sets` provides additional functionality.
- *
- *   Similar to `required_one_of_attributes`, `required_one_of_attribute_sets`
- *   uses a message which allows a list of lists, allowing expressions such as
- *   this one:
- *
- *   ```
- *   (required_attributes[0] AND required_attributes[1] AND ...)
- *   AND
- *   (
- *     (required_one_of_attribute_sets{@link protos.0|0} AND
- *     required_one_of_attribute_sets{@link protos.1|0} AND
- *     ...)
- *     OR
- *     (required_one_of_attribute_sets{@link protos.0|1} AND
- *     required_one_of_attribute_sets{@link protos.1|1} AND
- *     ...)
- *   )
- *   ```
- *
- *   Restricts the response to vehicles that match all the attributes in a
- *   `VehicleAttributeList`. Within each list, a vehicle must match all of the
- *   attributes. This field is a conjunction/AND operation in each
- *   `VehicleAttributeList` and inclusive disjunction/OR operation across the
- *   collection of `VehicleAttributeList`. Each repeated string should be of the
- *   format "key1:value1|key2:value2|key3:value3".
- * @param {maps.fleetengine.v1.VehicleState} request.vehicleState
- *   Restricts the response to vehicles that have this vehicle state.
- * @param {boolean} request.onTripOnly
- *   Only return the vehicles with current trip(s).
- * @param {string} [request.filter]
- *   Optional. A filter query to apply when listing vehicles. See
- *   http://aip.dev/160 for examples of the filter syntax.
- *
- *   This field is designed to replace the `required_attributes`,
- *   `required_one_of_attributes`, and `required_one_of_attributes_sets` fields.
- *   If a non-empty value is specified here, the following fields must be empty:
- *   `required_attributes`, `required_one_of_attributes`, and
- *   `required_one_of_attributes_sets`.
- *
- *   This filter functions as an AND clause with other constraints,
- *   such as `vehicle_state` or `on_trip_only`.
- *
- *   Note that the only queries supported are on vehicle attributes (for
- *   example, `attributes.<key> = <value>` or `attributes.<key1> = <value1> AND
- *   attributes.<key2> = <value2>`). The maximum number of restrictions allowed
- *   in a filter query is 50.
- *
- *   Also, all attributes are stored as strings, so the only supported
- *   comparisons against attributes are string comparisons. In order to compare
- *   against number or boolean values, the values must be explicitly quoted to
- *   be treated as strings (for example, `attributes.<key> = "10"` or
- *   `attributes.<key> = "true"`).
- * @param {google.geo.type.Viewport} [request.viewport]
- *   Optional. A filter that limits the vehicles returned to those whose last
- *   known location was in the rectangular area defined by the viewport.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.maps.fleetengine.v1.Vehicle|Vehicle} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listVehiclesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listVehicles`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.parent
+   *   Required. Must be in the format `providers/{provider}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {number} request.pageSize
+   *   The maximum number of vehicles to return.
+   *   Default value: 100.
+   * @param {string} request.pageToken
+   *   The value of the `next_page_token` provided by a previous call to
+   *   `ListVehicles` so that you can paginate through groups of vehicles. The
+   *   value is undefined if the filter criteria of the request is not the same as
+   *   the filter criteria for the previous call to `ListVehicles`.
+   * @param {google.protobuf.Int32Value} request.minimumCapacity
+   *   Specifies the required minimum capacity of the vehicle. All vehicles
+   *   returned will have a `maximum_capacity` greater than or equal to this
+   *   value. If set, must be greater or equal to 0.
+   * @param {number[]} request.tripTypes
+   *   Restricts the response to vehicles that support at least one of the
+   *   specified trip types.
+   * @param {google.protobuf.Duration} request.maximumStaleness
+   *   Restricts the response to vehicles that have sent location updates to Fleet
+   *   Engine within the specified duration. Stationary vehicles still
+   *   transmitting their locations are not considered stale. If present, must be
+   *   a valid positive duration.
+   * @param {number[]} request.vehicleTypeCategories
+   *   Required. Restricts the response to vehicles with one of the specified type
+   *   categories. `UNKNOWN` is not allowed.
+   * @param {string[]} request.requiredAttributes
+   *   Callers can form complex logical operations using any combination of the
+   *   `required_attributes`, `required_one_of_attributes`, and
+   *   `required_one_of_attribute_sets` fields.
+   *
+   *   `required_attributes` is a list; `required_one_of_attributes` uses a
+   *   message which allows a list of lists. In combination, the two fields allow
+   *   the composition of this expression:
+   *
+   *   ```
+   *   (required_attributes[0] AND required_attributes[1] AND ...)
+   *   AND
+   *   (required_one_of_attributes{@link protos.0|0} OR required_one_of_attributes{@link protos.1|0} OR
+   *   ...)
+   *   AND
+   *   (required_one_of_attributes{@link protos.0|1} OR required_one_of_attributes{@link protos.1|1} OR
+   *   ...)
+   *   ```
+   *
+   *   Restricts the response to vehicles with the specified attributes. This
+   *   field is a conjunction/AND operation. A max of 50 required_attributes is
+   *   allowed. This matches the maximum number of attributes allowed on a
+   *   vehicle. Each repeated string should be of the format "key:value".
+   * @param {string[]} request.requiredOneOfAttributes
+   *   Restricts the response to vehicles with at least one of the specified
+   *   attributes in each `VehicleAttributeList`. Within each list, a vehicle must
+   *   match at least one of the attributes. This field is an inclusive
+   *   disjunction/OR operation in each `VehicleAttributeList` and a
+   *   conjunction/AND operation across the collection of `VehicleAttributeList`.
+   *   Each repeated string should be of the format
+   *   "key1:value1|key2:value2|key3:value3".
+   * @param {string[]} request.requiredOneOfAttributeSets
+   *   `required_one_of_attribute_sets` provides additional functionality.
+   *
+   *   Similar to `required_one_of_attributes`, `required_one_of_attribute_sets`
+   *   uses a message which allows a list of lists, allowing expressions such as
+   *   this one:
+   *
+   *   ```
+   *   (required_attributes[0] AND required_attributes[1] AND ...)
+   *   AND
+   *   (
+   *     (required_one_of_attribute_sets{@link protos.0|0} AND
+   *     required_one_of_attribute_sets{@link protos.1|0} AND
+   *     ...)
+   *     OR
+   *     (required_one_of_attribute_sets{@link protos.0|1} AND
+   *     required_one_of_attribute_sets{@link protos.1|1} AND
+   *     ...)
+   *   )
+   *   ```
+   *
+   *   Restricts the response to vehicles that match all the attributes in a
+   *   `VehicleAttributeList`. Within each list, a vehicle must match all of the
+   *   attributes. This field is a conjunction/AND operation in each
+   *   `VehicleAttributeList` and inclusive disjunction/OR operation across the
+   *   collection of `VehicleAttributeList`. Each repeated string should be of the
+   *   format "key1:value1|key2:value2|key3:value3".
+   * @param {maps.fleetengine.v1.VehicleState} request.vehicleState
+   *   Restricts the response to vehicles that have this vehicle state.
+   * @param {boolean} request.onTripOnly
+   *   Only return the vehicles with current trip(s).
+   * @param {string} [request.filter]
+   *   Optional. A filter query to apply when listing vehicles. See
+   *   http://aip.dev/160 for examples of the filter syntax.
+   *
+   *   This field is designed to replace the `required_attributes`,
+   *   `required_one_of_attributes`, and `required_one_of_attributes_sets` fields.
+   *   If a non-empty value is specified here, the following fields must be empty:
+   *   `required_attributes`, `required_one_of_attributes`, and
+   *   `required_one_of_attributes_sets`.
+   *
+   *   This filter functions as an AND clause with other constraints,
+   *   such as `vehicle_state` or `on_trip_only`.
+   *
+   *   Note that the only queries supported are on vehicle attributes (for
+   *   example, `attributes.<key> = <value>` or `attributes.<key1> = <value1> AND
+   *   attributes.<key2> = <value2>`). The maximum number of restrictions allowed
+   *   in a filter query is 50.
+   *
+   *   Also, all attributes are stored as strings, so the only supported
+   *   comparisons against attributes are string comparisons. In order to compare
+   *   against number or boolean values, the values must be explicitly quoted to
+   *   be treated as strings (for example, `attributes.<key> = "10"` or
+   *   `attributes.<key> = "true"`).
+   * @param {google.geo.type.Viewport} [request.viewport]
+   *   Optional. A filter that limits the vehicles returned to those whose last
+   *   known location was in the rectangular area defined by the viewport.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.maps.fleetengine.v1.Vehicle|Vehicle} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listVehiclesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listVehiclesStream(
-      request?: protos.maps.fleetengine.v1.IListVehiclesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.maps.fleetengine.v1.IListVehiclesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1618,169 +1881,170 @@ export class VehicleServiceClient {
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listVehicles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listVehicles stream %j', request);
     return this.descriptors.page.listVehicles.createStream(
       this.innerApiCalls.listVehicles as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listVehicles`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.v1.RequestHeader} request.header
- *   The standard Fleet Engine request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Project ID (for example, `sample-cloud-project`)
- *   of the Google Cloud Project of which the service account making
- *   this call is a member.
- * @param {number} request.pageSize
- *   The maximum number of vehicles to return.
- *   Default value: 100.
- * @param {string} request.pageToken
- *   The value of the `next_page_token` provided by a previous call to
- *   `ListVehicles` so that you can paginate through groups of vehicles. The
- *   value is undefined if the filter criteria of the request is not the same as
- *   the filter criteria for the previous call to `ListVehicles`.
- * @param {google.protobuf.Int32Value} request.minimumCapacity
- *   Specifies the required minimum capacity of the vehicle. All vehicles
- *   returned will have a `maximum_capacity` greater than or equal to this
- *   value. If set, must be greater or equal to 0.
- * @param {number[]} request.tripTypes
- *   Restricts the response to vehicles that support at least one of the
- *   specified trip types.
- * @param {google.protobuf.Duration} request.maximumStaleness
- *   Restricts the response to vehicles that have sent location updates to Fleet
- *   Engine within the specified duration. Stationary vehicles still
- *   transmitting their locations are not considered stale. If present, must be
- *   a valid positive duration.
- * @param {number[]} request.vehicleTypeCategories
- *   Required. Restricts the response to vehicles with one of the specified type
- *   categories. `UNKNOWN` is not allowed.
- * @param {string[]} request.requiredAttributes
- *   Callers can form complex logical operations using any combination of the
- *   `required_attributes`, `required_one_of_attributes`, and
- *   `required_one_of_attribute_sets` fields.
- *
- *   `required_attributes` is a list; `required_one_of_attributes` uses a
- *   message which allows a list of lists. In combination, the two fields allow
- *   the composition of this expression:
- *
- *   ```
- *   (required_attributes[0] AND required_attributes[1] AND ...)
- *   AND
- *   (required_one_of_attributes{@link protos.0|0} OR required_one_of_attributes{@link protos.1|0} OR
- *   ...)
- *   AND
- *   (required_one_of_attributes{@link protos.0|1} OR required_one_of_attributes{@link protos.1|1} OR
- *   ...)
- *   ```
- *
- *   Restricts the response to vehicles with the specified attributes. This
- *   field is a conjunction/AND operation. A max of 50 required_attributes is
- *   allowed. This matches the maximum number of attributes allowed on a
- *   vehicle. Each repeated string should be of the format "key:value".
- * @param {string[]} request.requiredOneOfAttributes
- *   Restricts the response to vehicles with at least one of the specified
- *   attributes in each `VehicleAttributeList`. Within each list, a vehicle must
- *   match at least one of the attributes. This field is an inclusive
- *   disjunction/OR operation in each `VehicleAttributeList` and a
- *   conjunction/AND operation across the collection of `VehicleAttributeList`.
- *   Each repeated string should be of the format
- *   "key1:value1|key2:value2|key3:value3".
- * @param {string[]} request.requiredOneOfAttributeSets
- *   `required_one_of_attribute_sets` provides additional functionality.
- *
- *   Similar to `required_one_of_attributes`, `required_one_of_attribute_sets`
- *   uses a message which allows a list of lists, allowing expressions such as
- *   this one:
- *
- *   ```
- *   (required_attributes[0] AND required_attributes[1] AND ...)
- *   AND
- *   (
- *     (required_one_of_attribute_sets{@link protos.0|0} AND
- *     required_one_of_attribute_sets{@link protos.1|0} AND
- *     ...)
- *     OR
- *     (required_one_of_attribute_sets{@link protos.0|1} AND
- *     required_one_of_attribute_sets{@link protos.1|1} AND
- *     ...)
- *   )
- *   ```
- *
- *   Restricts the response to vehicles that match all the attributes in a
- *   `VehicleAttributeList`. Within each list, a vehicle must match all of the
- *   attributes. This field is a conjunction/AND operation in each
- *   `VehicleAttributeList` and inclusive disjunction/OR operation across the
- *   collection of `VehicleAttributeList`. Each repeated string should be of the
- *   format "key1:value1|key2:value2|key3:value3".
- * @param {maps.fleetengine.v1.VehicleState} request.vehicleState
- *   Restricts the response to vehicles that have this vehicle state.
- * @param {boolean} request.onTripOnly
- *   Only return the vehicles with current trip(s).
- * @param {string} [request.filter]
- *   Optional. A filter query to apply when listing vehicles. See
- *   http://aip.dev/160 for examples of the filter syntax.
- *
- *   This field is designed to replace the `required_attributes`,
- *   `required_one_of_attributes`, and `required_one_of_attributes_sets` fields.
- *   If a non-empty value is specified here, the following fields must be empty:
- *   `required_attributes`, `required_one_of_attributes`, and
- *   `required_one_of_attributes_sets`.
- *
- *   This filter functions as an AND clause with other constraints,
- *   such as `vehicle_state` or `on_trip_only`.
- *
- *   Note that the only queries supported are on vehicle attributes (for
- *   example, `attributes.<key> = <value>` or `attributes.<key1> = <value1> AND
- *   attributes.<key2> = <value2>`). The maximum number of restrictions allowed
- *   in a filter query is 50.
- *
- *   Also, all attributes are stored as strings, so the only supported
- *   comparisons against attributes are string comparisons. In order to compare
- *   against number or boolean values, the values must be explicitly quoted to
- *   be treated as strings (for example, `attributes.<key> = "10"` or
- *   `attributes.<key> = "true"`).
- * @param {google.geo.type.Viewport} [request.viewport]
- *   Optional. A filter that limits the vehicles returned to those whose last
- *   known location was in the rectangular area defined by the viewport.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.maps.fleetengine.v1.Vehicle|Vehicle}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/vehicle_service.list_vehicles.js</caption>
- * region_tag:fleetengine_v1_generated_VehicleService_ListVehicles_async
- */
+  /**
+   * Equivalent to `listVehicles`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {maps.fleetengine.v1.RequestHeader} request.header
+   *   The standard Fleet Engine request header.
+   * @param {string} request.parent
+   *   Required. Must be in the format `providers/{provider}`.
+   *   The provider must be the Project ID (for example, `sample-cloud-project`)
+   *   of the Google Cloud Project of which the service account making
+   *   this call is a member.
+   * @param {number} request.pageSize
+   *   The maximum number of vehicles to return.
+   *   Default value: 100.
+   * @param {string} request.pageToken
+   *   The value of the `next_page_token` provided by a previous call to
+   *   `ListVehicles` so that you can paginate through groups of vehicles. The
+   *   value is undefined if the filter criteria of the request is not the same as
+   *   the filter criteria for the previous call to `ListVehicles`.
+   * @param {google.protobuf.Int32Value} request.minimumCapacity
+   *   Specifies the required minimum capacity of the vehicle. All vehicles
+   *   returned will have a `maximum_capacity` greater than or equal to this
+   *   value. If set, must be greater or equal to 0.
+   * @param {number[]} request.tripTypes
+   *   Restricts the response to vehicles that support at least one of the
+   *   specified trip types.
+   * @param {google.protobuf.Duration} request.maximumStaleness
+   *   Restricts the response to vehicles that have sent location updates to Fleet
+   *   Engine within the specified duration. Stationary vehicles still
+   *   transmitting their locations are not considered stale. If present, must be
+   *   a valid positive duration.
+   * @param {number[]} request.vehicleTypeCategories
+   *   Required. Restricts the response to vehicles with one of the specified type
+   *   categories. `UNKNOWN` is not allowed.
+   * @param {string[]} request.requiredAttributes
+   *   Callers can form complex logical operations using any combination of the
+   *   `required_attributes`, `required_one_of_attributes`, and
+   *   `required_one_of_attribute_sets` fields.
+   *
+   *   `required_attributes` is a list; `required_one_of_attributes` uses a
+   *   message which allows a list of lists. In combination, the two fields allow
+   *   the composition of this expression:
+   *
+   *   ```
+   *   (required_attributes[0] AND required_attributes[1] AND ...)
+   *   AND
+   *   (required_one_of_attributes{@link protos.0|0} OR required_one_of_attributes{@link protos.1|0} OR
+   *   ...)
+   *   AND
+   *   (required_one_of_attributes{@link protos.0|1} OR required_one_of_attributes{@link protos.1|1} OR
+   *   ...)
+   *   ```
+   *
+   *   Restricts the response to vehicles with the specified attributes. This
+   *   field is a conjunction/AND operation. A max of 50 required_attributes is
+   *   allowed. This matches the maximum number of attributes allowed on a
+   *   vehicle. Each repeated string should be of the format "key:value".
+   * @param {string[]} request.requiredOneOfAttributes
+   *   Restricts the response to vehicles with at least one of the specified
+   *   attributes in each `VehicleAttributeList`. Within each list, a vehicle must
+   *   match at least one of the attributes. This field is an inclusive
+   *   disjunction/OR operation in each `VehicleAttributeList` and a
+   *   conjunction/AND operation across the collection of `VehicleAttributeList`.
+   *   Each repeated string should be of the format
+   *   "key1:value1|key2:value2|key3:value3".
+   * @param {string[]} request.requiredOneOfAttributeSets
+   *   `required_one_of_attribute_sets` provides additional functionality.
+   *
+   *   Similar to `required_one_of_attributes`, `required_one_of_attribute_sets`
+   *   uses a message which allows a list of lists, allowing expressions such as
+   *   this one:
+   *
+   *   ```
+   *   (required_attributes[0] AND required_attributes[1] AND ...)
+   *   AND
+   *   (
+   *     (required_one_of_attribute_sets{@link protos.0|0} AND
+   *     required_one_of_attribute_sets{@link protos.1|0} AND
+   *     ...)
+   *     OR
+   *     (required_one_of_attribute_sets{@link protos.0|1} AND
+   *     required_one_of_attribute_sets{@link protos.1|1} AND
+   *     ...)
+   *   )
+   *   ```
+   *
+   *   Restricts the response to vehicles that match all the attributes in a
+   *   `VehicleAttributeList`. Within each list, a vehicle must match all of the
+   *   attributes. This field is a conjunction/AND operation in each
+   *   `VehicleAttributeList` and inclusive disjunction/OR operation across the
+   *   collection of `VehicleAttributeList`. Each repeated string should be of the
+   *   format "key1:value1|key2:value2|key3:value3".
+   * @param {maps.fleetengine.v1.VehicleState} request.vehicleState
+   *   Restricts the response to vehicles that have this vehicle state.
+   * @param {boolean} request.onTripOnly
+   *   Only return the vehicles with current trip(s).
+   * @param {string} [request.filter]
+   *   Optional. A filter query to apply when listing vehicles. See
+   *   http://aip.dev/160 for examples of the filter syntax.
+   *
+   *   This field is designed to replace the `required_attributes`,
+   *   `required_one_of_attributes`, and `required_one_of_attributes_sets` fields.
+   *   If a non-empty value is specified here, the following fields must be empty:
+   *   `required_attributes`, `required_one_of_attributes`, and
+   *   `required_one_of_attributes_sets`.
+   *
+   *   This filter functions as an AND clause with other constraints,
+   *   such as `vehicle_state` or `on_trip_only`.
+   *
+   *   Note that the only queries supported are on vehicle attributes (for
+   *   example, `attributes.<key> = <value>` or `attributes.<key1> = <value1> AND
+   *   attributes.<key2> = <value2>`). The maximum number of restrictions allowed
+   *   in a filter query is 50.
+   *
+   *   Also, all attributes are stored as strings, so the only supported
+   *   comparisons against attributes are string comparisons. In order to compare
+   *   against number or boolean values, the values must be explicitly quoted to
+   *   be treated as strings (for example, `attributes.<key> = "10"` or
+   *   `attributes.<key> = "true"`).
+   * @param {google.geo.type.Viewport} [request.viewport]
+   *   Optional. A filter that limits the vehicles returned to those whose last
+   *   known location was in the rectangular area defined by the viewport.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.maps.fleetengine.v1.Vehicle|Vehicle}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/vehicle_service.list_vehicles.js</caption>
+   * region_tag:fleetengine_v1_generated_VehicleService_ListVehicles_async
+   */
   listVehiclesAsync(
-      request?: protos.maps.fleetengine.v1.IListVehiclesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.maps.fleetengine.v1.IVehicle>{
+    request?: protos.maps.fleetengine.v1.IListVehiclesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.maps.fleetengine.v1.IVehicle> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1789,26 +2053,27 @@ export class VehicleServiceClient {
     {
       const fieldValue = request.parent;
       if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
+        const match = fieldValue
+          .toString()
+          .match(RegExp('(?<provider_id>providers/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
           Object.assign(routingParameter, { provider_id: parameterValue });
         }
       }
     }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listVehicles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listVehicles iterate %j', request);
     return this.descriptors.page.listVehicles.asyncIterate(
       this.innerApiCalls['listVehicles'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.maps.fleetengine.v1.IVehicle>;
   }
   // --------------------
@@ -1822,7 +2087,7 @@ export class VehicleServiceClient {
    * @param {string} trip
    * @returns {string} Resource name string.
    */
-  tripPath(provider:string,trip:string) {
+  tripPath(provider: string, trip: string) {
     return this.pathTemplates.tripPathTemplate.render({
       provider: provider,
       trip: trip,
@@ -1858,7 +2123,7 @@ export class VehicleServiceClient {
    * @param {string} vehicle
    * @returns {string} Resource name string.
    */
-  vehiclePath(provider:string,vehicle:string) {
+  vehiclePath(provider: string, vehicle: string) {
     return this.pathTemplates.vehiclePathTemplate.render({
       provider: provider,
       vehicle: vehicle,
@@ -1895,7 +2160,7 @@ export class VehicleServiceClient {
    */
   close(): Promise<void> {
     if (this.vehicleServiceStub && !this._terminated) {
-      return this.vehicleServiceStub.then(stub => {
+      return this.vehicleServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

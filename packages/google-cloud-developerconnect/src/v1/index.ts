@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DeveloperConnectClient} from './developer_connect_client';
-export {InsightsConfigServiceClient} from './insights_config_service_client';
+export { DeveloperConnectClient } from './developer_connect_client';
+export { InsightsConfigServiceClient } from './insights_config_service_client';

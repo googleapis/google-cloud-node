@@ -1,12 +1,21 @@
 # Changelog
 
 
-## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.0...bigquery-storage-v5.1.1) (2026-05-11)
+## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.1...bigquery-storage-v5.1.2) (2026-06-16)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+* **deps:** Update dependency protobufjs to v7.5.5 [security] ([#8071](https://github.com/googleapis/google-cloud-node/issues/8071)) ([ea623da](https://github.com/googleapis/google-cloud-node/commit/ea623da20f374cfa480fb9fdb7758afd0a993a8e))
+
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.0...bigquery-storage-v5.1.1) (2026-05-13)
 
 
 ### Bug Fixes
 
 * Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+* For bigquery-storage add protobufjs to depend ([#8243](https://github.com/googleapis/google-cloud-node/issues/8243)) ([a63b61d](https://github.com/googleapis/google-cloud-node/commit/a63b61d13c1651deb62b3903292f3bd1c7f4d614))
 * Upgrade the protobufjs dependency for bigquery storage ([#8136](https://github.com/googleapis/google-cloud-node/issues/8136)) ([778adb0](https://github.com/googleapis/google-cloud-node/commit/778adb0d5f368448f99bf68dcbcf37c3a7394f5d))
 
 ## [5.1.0](https://github.com/googleapis/nodejs-bigquery-storage/compare/v5.0.0...v5.1.0) (2025-06-06)

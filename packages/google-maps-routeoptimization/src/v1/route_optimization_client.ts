@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,7 +68,7 @@ export class RouteOptimizationClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('routeoptimization');
@@ -74,9 +81,9 @@ export class RouteOptimizationClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   operationsClient: gax.OperationsClient;
-  routeOptimizationStub?: Promise<{[name: string]: Function}>;
+  routeOptimizationStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of RouteOptimizationClient.
@@ -117,21 +124,42 @@ export class RouteOptimizationClient {
    *     const client = new RouteOptimizationClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof RouteOptimizationClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'routeoptimization.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -156,7 +184,7 @@ export class RouteOptimizationClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -170,10 +198,7 @@ export class RouteOptimizationClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -196,45 +221,68 @@ export class RouteOptimizationClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const batchOptimizeToursResponse = protoFilesRoot.lookup(
-      '.google.maps.routeoptimization.v1.BatchOptimizeToursResponse') as gax.protobuf.Type;
+      '.google.maps.routeoptimization.v1.BatchOptimizeToursResponse',
+    ) as gax.protobuf.Type;
     const batchOptimizeToursMetadata = protoFilesRoot.lookup(
-      '.google.maps.routeoptimization.v1.BatchOptimizeToursMetadata') as gax.protobuf.Type;
+      '.google.maps.routeoptimization.v1.BatchOptimizeToursMetadata',
+    ) as gax.protobuf.Type;
     const optimizeToursLongRunningResponse = protoFilesRoot.lookup(
-      '.google.maps.routeoptimization.v1.OptimizeToursResponse') as gax.protobuf.Type;
+      '.google.maps.routeoptimization.v1.OptimizeToursResponse',
+    ) as gax.protobuf.Type;
     const optimizeToursLongRunningMetadata = protoFilesRoot.lookup(
-      '.google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata') as gax.protobuf.Type;
+      '.google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata',
+    ) as gax.protobuf.Type;
     const optimizeToursUriResponse = protoFilesRoot.lookup(
-      '.google.maps.routeoptimization.v1.OptimizeToursUriResponse') as gax.protobuf.Type;
+      '.google.maps.routeoptimization.v1.OptimizeToursUriResponse',
+    ) as gax.protobuf.Type;
     const optimizeToursUriMetadata = protoFilesRoot.lookup(
-      '.google.maps.routeoptimization.v1.OptimizeToursUriMetadata') as gax.protobuf.Type;
+      '.google.maps.routeoptimization.v1.OptimizeToursUriMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       batchOptimizeTours: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         batchOptimizeToursResponse.decode.bind(batchOptimizeToursResponse),
-        batchOptimizeToursMetadata.decode.bind(batchOptimizeToursMetadata)),
+        batchOptimizeToursMetadata.decode.bind(batchOptimizeToursMetadata),
+      ),
       optimizeToursLongRunning: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        optimizeToursLongRunningResponse.decode.bind(optimizeToursLongRunningResponse),
-        optimizeToursLongRunningMetadata.decode.bind(optimizeToursLongRunningMetadata)),
+        optimizeToursLongRunningResponse.decode.bind(
+          optimizeToursLongRunningResponse,
+        ),
+        optimizeToursLongRunningMetadata.decode.bind(
+          optimizeToursLongRunningMetadata,
+        ),
+      ),
       optimizeToursUri: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         optimizeToursUriResponse.decode.bind(optimizeToursUriResponse),
-        optimizeToursUriMetadata.decode.bind(optimizeToursUriMetadata))
+        optimizeToursUriMetadata.decode.bind(optimizeToursUriMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.maps.routeoptimization.v1.RouteOptimization', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.maps.routeoptimization.v1.RouteOptimization',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -265,37 +313,46 @@ export class RouteOptimizationClient {
     // Put together the "service stub" for
     // google.maps.routeoptimization.v1.RouteOptimization.
     this.routeOptimizationStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.maps.routeoptimization.v1.RouteOptimization') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.maps.routeoptimization.v1.RouteOptimization,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.maps.routeoptimization.v1.RouteOptimization',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.maps.routeoptimization.v1
+            .RouteOptimization,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const routeOptimizationStubMethods =
-        ['optimizeTours', 'batchOptimizeTours', 'optimizeToursLongRunning', 'optimizeToursUri'];
+    const routeOptimizationStubMethods = [
+      'optimizeTours',
+      'batchOptimizeTours',
+      'optimizeToursLongRunning',
+      'optimizeToursUri',
+    ];
     for (const methodName of routeOptimizationStubMethods) {
       const callPromise = this.routeOptimizationStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.longrunning[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.longrunning[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -310,8 +367,14 @@ export class RouteOptimizationClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'routeoptimization.googleapis.com';
   }
@@ -322,8 +385,14 @@ export class RouteOptimizationClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'routeoptimization.googleapis.com';
   }
@@ -354,9 +423,7 @@ export class RouteOptimizationClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -365,8 +432,9 @@ export class RouteOptimizationClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -377,884 +445,1113 @@ export class RouteOptimizationClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Sends an `OptimizeToursRequest` containing a `ShipmentModel` and returns an
- * `OptimizeToursResponse` containing `ShipmentRoute`s, which are a set of
- * routes to be performed by vehicles minimizing the overall cost.
- *
- * A `ShipmentModel` model consists mainly of `Shipment`s that need to be
- * carried out and `Vehicle`s that can be used to transport the `Shipment`s.
- * The `ShipmentRoute`s assign `Shipment`s to `Vehicle`s. More specifically,
- * they assign a series of `Visit`s to each vehicle, where a `Visit`
- * corresponds to a `VisitRequest`, which is a pickup or delivery for a
- * `Shipment`.
- *
- * The goal is to provide an assignment of `ShipmentRoute`s to `Vehicle`s that
- * minimizes the total cost where cost has many components defined in the
- * `ShipmentModel`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Target project or location to make a call.
- *
- *   Format:
- *   * `projects/{project-id}`
- *   * `projects/{project-id}/locations/{location-id}`
- *
- *   If no location is specified, a region will be chosen automatically.
- * @param {google.protobuf.Duration} request.timeout
- *   If this timeout is set, the server returns a response before the timeout
- *   period has elapsed or the server deadline for synchronous requests is
- *   reached, whichever is sooner.
- *
- *   For asynchronous requests, the server will generate a solution (if
- *   possible) before the timeout has elapsed.
- * @param {google.maps.routeoptimization.v1.ShipmentModel} request.model
- *   Shipment model to solve.
- * @param {google.maps.routeoptimization.v1.OptimizeToursRequest.SolvingMode} request.solvingMode
- *   By default, the solving mode is `DEFAULT_SOLVE` (0).
- * @param {google.maps.routeoptimization.v1.OptimizeToursRequest.SearchMode} request.searchMode
- *   Search mode used to solve the request.
- * @param {number[]} request.injectedFirstSolutionRoutes
- *   Guide the optimization algorithm in finding a first solution that is
- *   similar to a previous solution.
- *
- *   The model is constrained when the first solution is built.
- *   Any shipments not performed on a route are implicitly skipped in the first
- *   solution, but they may be performed in successive solutions.
- *
- *   The solution must satisfy some basic validity assumptions:
- *
- *     * for all routes, `vehicle_index` must be in range and not be duplicated.
- *     * for all visits, `shipment_index` and `visit_request_index` must be
- *       in range.
- *     * a shipment may only be referenced on one route.
- *     * the pickup of a pickup-delivery shipment must be performed before
- *       the delivery.
- *     * no more than one pickup alternative or delivery alternative of
- *       a shipment may be performed.
- *     * for all routes, times are increasing (i.e., `vehicle_start_time
- *       <= visits[0].start_time <= visits[1].start_time ...
- *       <= vehicle_end_time`).
- *     * a shipment may only be performed on a vehicle that is allowed. A
- *       vehicle is allowed if
- *       {@link protos.google.maps.routeoptimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}
- *       is empty or its `vehicle_index` is included in
- *       {@link protos.google.maps.routeoptimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}.
- *
- *   If the injected solution is not feasible, a validation error is not
- *   necessarily returned and an error indicating infeasibility may be returned
- *   instead.
- * @param {google.maps.routeoptimization.v1.InjectedSolutionConstraint} request.injectedSolutionConstraint
- *   Constrain the optimization algorithm to find a final solution that is
- *   similar to a previous solution. For example, this may be used to freeze
- *   portions of routes which have already been completed or which are to be
- *   completed but must not be modified.
- *
- *   If the injected solution is not feasible, a validation error is not
- *   necessarily returned and an error indicating infeasibility may be returned
- *   instead.
- * @param {number[]} request.refreshDetailsRoutes
- *   If non-empty, the given routes will be refreshed, without modifying their
- *   underlying sequence of visits or travel times: only other details will be
- *   updated. This does not solve the model.
- *
- *   As of 2020/11, this only populates the polylines of non-empty routes and
- *   requires that `populate_polylines` is true.
- *
- *   The `route_polyline` fields of the passed-in routes may be inconsistent
- *   with route `transitions`.
- *
- *   This field must not be used together with `injected_first_solution_routes`
- *   or `injected_solution_constraint`.
- *
- *   `Shipment.ignore` and `Vehicle.ignore` have no effect on the behavior.
- *   Polylines are still populated between all visits in all non-empty routes
- *   regardless of whether the related shipments or vehicles are ignored.
- * @param {boolean} request.interpretInjectedSolutionsUsingLabels
- *   If true:
- *
- *     * uses
- *     {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label}
- *     instead of `vehicle_index` to
- *       match routes in an injected solution with vehicles in the request;
- *       reuses the mapping of original
- *       {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
- *       to new
- *       {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
- *       to update
- *       {@link protos.google.maps.routeoptimization.v1.InjectedSolutionConstraint.ConstraintRelaxation.vehicle_indices|ConstraintRelaxation.vehicle_indices}
- *       if non-empty, but the mapping must be unambiguous (i.e., multiple
- *       `ShipmentRoute`s must not share the same original `vehicle_index`).
- *     * uses
- *     {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label}
- *     instead of `shipment_index`
- *       to match visits in an injected solution with shipments in the request;
- *     * uses
- *     {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label}
- *     instead of
- *     {@link protos.google.maps.routeoptimization.v1.SkippedShipment.index|SkippedShipment.index}
- *     to
- *       match skipped shipments in the injected solution with request
- *       shipments.
- *
- *   This interpretation applies to the `injected_first_solution_routes`,
- *   `injected_solution_constraint`, and `refresh_details_routes` fields.
- *   It can be used when shipment or vehicle indices in the request have
- *   changed since the solution was created, perhaps because shipments or
- *   vehicles have been removed from or added to the request.
- *
- *   If true, labels in the following categories must appear at most once in
- *   their category:
- *
- *     * {@link protos.google.maps.routeoptimization.v1.Vehicle.label|Vehicle.label} in the
- *     request;
- *     * {@link protos.google.maps.routeoptimization.v1.Shipment.label|Shipment.label} in
- *     the request;
- *     * {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label} in the injected solution;
- *     * {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label} and {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label} in
- *       the injected solution (except pickup/delivery visit pairs, whose
- *       `shipment_label` must appear twice).
- *
- *   If a `vehicle_label` in the injected solution does not correspond to a
- *   request vehicle, the corresponding route is removed from the solution
- *   along with its visits. If a `shipment_label` in the injected solution does
- *   not correspond to a request shipment, the corresponding visit is removed
- *   from the solution. If a
- *   {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label}
- *   in the injected solution does not correspond to a request shipment, the
- *   `SkippedShipment` is removed from the solution.
- *
- *   Removing route visits or entire routes from an injected solution may
- *   have an effect on the implied constraints, which may lead to change in
- *   solution, validation errors, or infeasibility.
- *
- *   NOTE: The caller must ensure that each
- *   {@link protos.google.maps.routeoptimization.v1.Vehicle.label|Vehicle.label} (resp.
- *   {@link protos.google.maps.routeoptimization.v1.Shipment.label|Shipment.label}) uniquely
- *   identifies a vehicle (resp. shipment) entity used across the two relevant
- *   requests: the past request that produced the `OptimizeToursResponse` used
- *   in the injected solution and the current request that includes the injected
- *   solution. The uniqueness checks described above are not enough to guarantee
- *   this requirement.
- * @param {boolean} request.considerRoadTraffic
- *   Consider traffic estimation in calculating `ShipmentRoute` fields
- *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Transition.travel_duration|Transition.travel_duration},
- *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.start_time|Visit.start_time},
- *   and `vehicle_end_time`; in setting the
- *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.has_traffic_infeasibilities|ShipmentRoute.has_traffic_infeasibilities}
- *   field, and in calculating the
- *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.total_cost|OptimizeToursResponse.total_cost}
- *   field.
- * @param {boolean} request.populatePolylines
- *   If true, polylines will be populated in response `ShipmentRoute`s.
- * @param {boolean} request.populateTransitionPolylines
- *   If true, polylines and route tokens will be populated in response
- *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.transitions|ShipmentRoute.transitions}.
- * @param {boolean} request.allowLargeDeadlineDespiteInterruptionRisk
- *   If this is set, then the request can have a deadline
- *   (see https://grpc.io/blog/deadlines) of up to 60 minutes.
- *   Otherwise, the maximum deadline is only 30 minutes.
- *   Note that long-lived requests have a significantly larger (but still small)
- *   risk of interruption.
- * @param {boolean} request.useGeodesicDistances
- *   If true, travel distances will be computed using geodesic distances instead
- *   of Google Maps distances, and travel times will be computed using geodesic
- *   distances with a speed defined by `geodesic_meters_per_second`.
- * @param {number} request.geodesicMetersPerSecond
- *   When `use_geodesic_distances` is true, this field must be set and defines
- *   the speed applied to compute travel times. Its value must be at least 1.0
- *   meters/seconds.
- * @param {number} request.maxValidationErrors
- *   Truncates the number of validation errors returned. These errors are
- *   typically attached to an INVALID_ARGUMENT error payload as a BadRequest
- *   error detail (https://cloud.google.com/apis/design/errors#error_details),
- *   unless solving_mode=VALIDATE_ONLY: see the
- *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.validation_errors|OptimizeToursResponse.validation_errors}
- *   field.
- *   This defaults to 100 and is capped at 10,000.
- * @param {string} request.label
- *   Label that may be used to identify this request, reported back in the
- *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.request_label|OptimizeToursResponse.request_label}.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse|OptimizeToursResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/route_optimization.optimize_tours.js</caption>
- * region_tag:routeoptimization_v1_generated_RouteOptimization_OptimizeTours_async
- */
+  /**
+   * Sends an `OptimizeToursRequest` containing a `ShipmentModel` and returns an
+   * `OptimizeToursResponse` containing `ShipmentRoute`s, which are a set of
+   * routes to be performed by vehicles minimizing the overall cost.
+   *
+   * A `ShipmentModel` model consists mainly of `Shipment`s that need to be
+   * carried out and `Vehicle`s that can be used to transport the `Shipment`s.
+   * The `ShipmentRoute`s assign `Shipment`s to `Vehicle`s. More specifically,
+   * they assign a series of `Visit`s to each vehicle, where a `Visit`
+   * corresponds to a `VisitRequest`, which is a pickup or delivery for a
+   * `Shipment`.
+   *
+   * The goal is to provide an assignment of `ShipmentRoute`s to `Vehicle`s that
+   * minimizes the total cost where cost has many components defined in the
+   * `ShipmentModel`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Target project or location to make a call.
+   *
+   *   Format:
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/{location-id}`
+   *
+   *   If no location is specified, a region will be chosen automatically.
+   * @param {google.protobuf.Duration} request.timeout
+   *   If this timeout is set, the server returns a response before the timeout
+   *   period has elapsed or the server deadline for synchronous requests is
+   *   reached, whichever is sooner.
+   *
+   *   For asynchronous requests, the server will generate a solution (if
+   *   possible) before the timeout has elapsed.
+   * @param {google.maps.routeoptimization.v1.ShipmentModel} request.model
+   *   Shipment model to solve.
+   * @param {google.maps.routeoptimization.v1.OptimizeToursRequest.SolvingMode} request.solvingMode
+   *   By default, the solving mode is `DEFAULT_SOLVE` (0).
+   * @param {google.maps.routeoptimization.v1.OptimizeToursRequest.SearchMode} request.searchMode
+   *   Search mode used to solve the request.
+   * @param {number[]} request.injectedFirstSolutionRoutes
+   *   Guide the optimization algorithm in finding a first solution that is
+   *   similar to a previous solution.
+   *
+   *   The model is constrained when the first solution is built.
+   *   Any shipments not performed on a route are implicitly skipped in the first
+   *   solution, but they may be performed in successive solutions.
+   *
+   *   The solution must satisfy some basic validity assumptions:
+   *
+   *     * for all routes, `vehicle_index` must be in range and not be duplicated.
+   *     * for all visits, `shipment_index` and `visit_request_index` must be
+   *       in range.
+   *     * a shipment may only be referenced on one route.
+   *     * the pickup of a pickup-delivery shipment must be performed before
+   *       the delivery.
+   *     * no more than one pickup alternative or delivery alternative of
+   *       a shipment may be performed.
+   *     * for all routes, times are increasing (i.e., `vehicle_start_time
+   *       <= visits[0].start_time <= visits[1].start_time ...
+   *       <= vehicle_end_time`).
+   *     * a shipment may only be performed on a vehicle that is allowed. A
+   *       vehicle is allowed if
+   *       {@link protos.google.maps.routeoptimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}
+   *       is empty or its `vehicle_index` is included in
+   *       {@link protos.google.maps.routeoptimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}.
+   *
+   *   If the injected solution is not feasible, a validation error is not
+   *   necessarily returned and an error indicating infeasibility may be returned
+   *   instead.
+   * @param {google.maps.routeoptimization.v1.InjectedSolutionConstraint} request.injectedSolutionConstraint
+   *   Constrain the optimization algorithm to find a final solution that is
+   *   similar to a previous solution. For example, this may be used to freeze
+   *   portions of routes which have already been completed or which are to be
+   *   completed but must not be modified.
+   *
+   *   If the injected solution is not feasible, a validation error is not
+   *   necessarily returned and an error indicating infeasibility may be returned
+   *   instead.
+   * @param {number[]} request.refreshDetailsRoutes
+   *   If non-empty, the given routes will be refreshed, without modifying their
+   *   underlying sequence of visits or travel times: only other details will be
+   *   updated. This does not solve the model.
+   *
+   *   As of 2020/11, this only populates the polylines of non-empty routes and
+   *   requires that `populate_polylines` is true.
+   *
+   *   The `route_polyline` fields of the passed-in routes may be inconsistent
+   *   with route `transitions`.
+   *
+   *   This field must not be used together with `injected_first_solution_routes`
+   *   or `injected_solution_constraint`.
+   *
+   *   `Shipment.ignore` and `Vehicle.ignore` have no effect on the behavior.
+   *   Polylines are still populated between all visits in all non-empty routes
+   *   regardless of whether the related shipments or vehicles are ignored.
+   * @param {boolean} request.interpretInjectedSolutionsUsingLabels
+   *   If true:
+   *
+   *     * uses
+   *     {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label}
+   *     instead of `vehicle_index` to
+   *       match routes in an injected solution with vehicles in the request;
+   *       reuses the mapping of original
+   *       {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
+   *       to new
+   *       {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
+   *       to update
+   *       {@link protos.google.maps.routeoptimization.v1.InjectedSolutionConstraint.ConstraintRelaxation.vehicle_indices|ConstraintRelaxation.vehicle_indices}
+   *       if non-empty, but the mapping must be unambiguous (i.e., multiple
+   *       `ShipmentRoute`s must not share the same original `vehicle_index`).
+   *     * uses
+   *     {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label}
+   *     instead of `shipment_index`
+   *       to match visits in an injected solution with shipments in the request;
+   *     * uses
+   *     {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label}
+   *     instead of
+   *     {@link protos.google.maps.routeoptimization.v1.SkippedShipment.index|SkippedShipment.index}
+   *     to
+   *       match skipped shipments in the injected solution with request
+   *       shipments.
+   *
+   *   This interpretation applies to the `injected_first_solution_routes`,
+   *   `injected_solution_constraint`, and `refresh_details_routes` fields.
+   *   It can be used when shipment or vehicle indices in the request have
+   *   changed since the solution was created, perhaps because shipments or
+   *   vehicles have been removed from or added to the request.
+   *
+   *   If true, labels in the following categories must appear at most once in
+   *   their category:
+   *
+   *     * {@link protos.google.maps.routeoptimization.v1.Vehicle.label|Vehicle.label} in the
+   *     request;
+   *     * {@link protos.google.maps.routeoptimization.v1.Shipment.label|Shipment.label} in
+   *     the request;
+   *     * {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label} in the injected solution;
+   *     * {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label} and {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label} in
+   *       the injected solution (except pickup/delivery visit pairs, whose
+   *       `shipment_label` must appear twice).
+   *
+   *   If a `vehicle_label` in the injected solution does not correspond to a
+   *   request vehicle, the corresponding route is removed from the solution
+   *   along with its visits. If a `shipment_label` in the injected solution does
+   *   not correspond to a request shipment, the corresponding visit is removed
+   *   from the solution. If a
+   *   {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label}
+   *   in the injected solution does not correspond to a request shipment, the
+   *   `SkippedShipment` is removed from the solution.
+   *
+   *   Removing route visits or entire routes from an injected solution may
+   *   have an effect on the implied constraints, which may lead to change in
+   *   solution, validation errors, or infeasibility.
+   *
+   *   NOTE: The caller must ensure that each
+   *   {@link protos.google.maps.routeoptimization.v1.Vehicle.label|Vehicle.label} (resp.
+   *   {@link protos.google.maps.routeoptimization.v1.Shipment.label|Shipment.label}) uniquely
+   *   identifies a vehicle (resp. shipment) entity used across the two relevant
+   *   requests: the past request that produced the `OptimizeToursResponse` used
+   *   in the injected solution and the current request that includes the injected
+   *   solution. The uniqueness checks described above are not enough to guarantee
+   *   this requirement.
+   * @param {boolean} request.considerRoadTraffic
+   *   Consider traffic estimation in calculating `ShipmentRoute` fields
+   *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Transition.travel_duration|Transition.travel_duration},
+   *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.start_time|Visit.start_time},
+   *   and `vehicle_end_time`; in setting the
+   *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.has_traffic_infeasibilities|ShipmentRoute.has_traffic_infeasibilities}
+   *   field, and in calculating the
+   *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.total_cost|OptimizeToursResponse.total_cost}
+   *   field.
+   * @param {boolean} request.populatePolylines
+   *   If true, polylines will be populated in response `ShipmentRoute`s.
+   * @param {boolean} request.populateTransitionPolylines
+   *   If true, polylines and route tokens will be populated in response
+   *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.transitions|ShipmentRoute.transitions}.
+   * @param {boolean} request.allowLargeDeadlineDespiteInterruptionRisk
+   *   If this is set, then the request can have a deadline
+   *   (see https://grpc.io/blog/deadlines) of up to 60 minutes.
+   *   Otherwise, the maximum deadline is only 30 minutes.
+   *   Note that long-lived requests have a significantly larger (but still small)
+   *   risk of interruption.
+   * @param {boolean} request.useGeodesicDistances
+   *   If true, travel distances will be computed using geodesic distances instead
+   *   of Google Maps distances, and travel times will be computed using geodesic
+   *   distances with a speed defined by `geodesic_meters_per_second`.
+   * @param {number} request.geodesicMetersPerSecond
+   *   When `use_geodesic_distances` is true, this field must be set and defines
+   *   the speed applied to compute travel times. Its value must be at least 1.0
+   *   meters/seconds.
+   * @param {number} request.maxValidationErrors
+   *   Truncates the number of validation errors returned. These errors are
+   *   typically attached to an INVALID_ARGUMENT error payload as a BadRequest
+   *   error detail (https://cloud.google.com/apis/design/errors#error_details),
+   *   unless solving_mode=VALIDATE_ONLY: see the
+   *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.validation_errors|OptimizeToursResponse.validation_errors}
+   *   field.
+   *   This defaults to 100 and is capped at 10,000.
+   * @param {string} request.label
+   *   Label that may be used to identify this request, reported back in the
+   *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.request_label|OptimizeToursResponse.request_label}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse|OptimizeToursResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/route_optimization.optimize_tours.js</caption>
+   * region_tag:routeoptimization_v1_generated_RouteOptimization_OptimizeTours_async
+   */
   optimizeTours(
-      request?: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
-        protos.google.maps.routeoptimization.v1.IOptimizeToursRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+      protos.google.maps.routeoptimization.v1.IOptimizeToursRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   optimizeTours(
-      request: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
-          protos.google.maps.routeoptimization.v1.IOptimizeToursRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+      | protos.google.maps.routeoptimization.v1.IOptimizeToursRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   optimizeTours(
-      request: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
-      callback: Callback<
-          protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
-          protos.google.maps.routeoptimization.v1.IOptimizeToursRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
+    callback: Callback<
+      protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+      | protos.google.maps.routeoptimization.v1.IOptimizeToursRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   optimizeTours(
-      request?: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
-          protos.google.maps.routeoptimization.v1.IOptimizeToursRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
-          protos.google.maps.routeoptimization.v1.IOptimizeToursRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
-        protos.google.maps.routeoptimization.v1.IOptimizeToursRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.routeoptimization.v1.IOptimizeToursRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+      | protos.google.maps.routeoptimization.v1.IOptimizeToursRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+      protos.google.maps.routeoptimization.v1.IOptimizeToursRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('optimizeTours request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
-        protos.google.maps.routeoptimization.v1.IOptimizeToursRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+          | protos.google.maps.routeoptimization.v1.IOptimizeToursRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('optimizeTours response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.optimizeTours(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
-        protos.google.maps.routeoptimization.v1.IOptimizeToursRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('optimizeTours response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .optimizeTours(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+          (
+            | protos.google.maps.routeoptimization.v1.IOptimizeToursRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('optimizeTours response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Optimizes vehicle tours for one or more `OptimizeToursRequest`
- * messages as a batch.
- *
- * This method is a Long Running Operation (LRO). The inputs for optimization
- * (`OptimizeToursRequest` messages) and outputs (`OptimizeToursResponse`
- * messages) are read from and written to Cloud Storage in user-specified
- * format. Like the `OptimizeTours` method, each `OptimizeToursRequest`
- * contains a `ShipmentModel` and returns an `OptimizeToursResponse`
- * containing `ShipmentRoute` fields, which are a set of routes to be
- * performed by vehicles minimizing the overall cost.
- *
- * The user can poll `operations.get` to check the status of the LRO:
- *
- * If the LRO `done` field is false, then at least one request is still
- * being processed. Other requests may have completed successfully and their
- * results are available in Cloud Storage.
- *
- * If the LRO's `done` field is true, then all requests have been processed.
- * Any successfully processed requests will have their results available in
- * Cloud Storage. Any requests that failed will not have their results
- * available in Cloud Storage. If the LRO's `error` field is set, then it
- * contains the error from one of the failed requests.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Target project and location to make a call.
- *
- *   Format:
- *   * `projects/{project-id}`
- *   * `projects/{project-id}/locations/{location-id}`
- *
- *   If no location is specified, a region will be chosen automatically.
- * @param {number[]} request.modelConfigs
- *   Required. Input/Output information each purchase model, such as file paths
- *   and data formats.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/route_optimization.batch_optimize_tours.js</caption>
- * region_tag:routeoptimization_v1_generated_RouteOptimization_BatchOptimizeTours_async
- */
+  /**
+   * Optimizes vehicle tours for one or more `OptimizeToursRequest`
+   * messages as a batch.
+   *
+   * This method is a Long Running Operation (LRO). The inputs for optimization
+   * (`OptimizeToursRequest` messages) and outputs (`OptimizeToursResponse`
+   * messages) are read from and written to Cloud Storage in user-specified
+   * format. Like the `OptimizeTours` method, each `OptimizeToursRequest`
+   * contains a `ShipmentModel` and returns an `OptimizeToursResponse`
+   * containing `ShipmentRoute` fields, which are a set of routes to be
+   * performed by vehicles minimizing the overall cost.
+   *
+   * The user can poll `operations.get` to check the status of the LRO:
+   *
+   * If the LRO `done` field is false, then at least one request is still
+   * being processed. Other requests may have completed successfully and their
+   * results are available in Cloud Storage.
+   *
+   * If the LRO's `done` field is true, then all requests have been processed.
+   * Any successfully processed requests will have their results available in
+   * Cloud Storage. Any requests that failed will not have their results
+   * available in Cloud Storage. If the LRO's `error` field is set, then it
+   * contains the error from one of the failed requests.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Target project and location to make a call.
+   *
+   *   Format:
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/{location-id}`
+   *
+   *   If no location is specified, a region will be chosen automatically.
+   * @param {number[]} request.modelConfigs
+   *   Required. Input/Output information each purchase model, such as file paths
+   *   and data formats.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/route_optimization.batch_optimize_tours.js</caption>
+   * region_tag:routeoptimization_v1_generated_RouteOptimization_BatchOptimizeTours_async
+   */
   batchOptimizeTours(
-      request?: protos.google.maps.routeoptimization.v1.IBatchOptimizeToursRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.routeoptimization.v1.IBatchOptimizeToursRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse,
+        protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   batchOptimizeTours(
-      request: protos.google.maps.routeoptimization.v1.IBatchOptimizeToursRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.routeoptimization.v1.IBatchOptimizeToursRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse,
+        protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchOptimizeTours(
-      request: protos.google.maps.routeoptimization.v1.IBatchOptimizeToursRequest,
-      callback: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.routeoptimization.v1.IBatchOptimizeToursRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse,
+        protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchOptimizeTours(
-      request?: protos.google.maps.routeoptimization.v1.IBatchOptimizeToursRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.maps.routeoptimization.v1.IBatchOptimizeToursRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse,
+            protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse,
+        protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse,
+        protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse,
+            protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('batchOptimizeTours response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchOptimizeTours request %j', request);
-    return this.innerApiCalls.batchOptimizeTours(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('batchOptimizeTours response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .batchOptimizeTours(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.maps.routeoptimization.v1.IBatchOptimizeToursResponse,
+            protos.google.maps.routeoptimization.v1.IBatchOptimizeToursMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchOptimizeTours response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `batchOptimizeTours()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/route_optimization.batch_optimize_tours.js</caption>
- * region_tag:routeoptimization_v1_generated_RouteOptimization_BatchOptimizeTours_async
- */
-  async checkBatchOptimizeToursProgress(name: string): Promise<LROperation<protos.google.maps.routeoptimization.v1.BatchOptimizeToursResponse, protos.google.maps.routeoptimization.v1.BatchOptimizeToursMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `batchOptimizeTours()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/route_optimization.batch_optimize_tours.js</caption>
+   * region_tag:routeoptimization_v1_generated_RouteOptimization_BatchOptimizeTours_async
+   */
+  async checkBatchOptimizeToursProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.maps.routeoptimization.v1.BatchOptimizeToursResponse,
+      protos.google.maps.routeoptimization.v1.BatchOptimizeToursMetadata
+    >
+  > {
     this._log.info('batchOptimizeTours long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchOptimizeTours, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.maps.routeoptimization.v1.BatchOptimizeToursResponse, protos.google.maps.routeoptimization.v1.BatchOptimizeToursMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchOptimizeTours,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.maps.routeoptimization.v1.BatchOptimizeToursResponse,
+      protos.google.maps.routeoptimization.v1.BatchOptimizeToursMetadata
+    >;
   }
-/**
- * This is a variant of the
- * {@link protos.google.maps.routeoptimization.v1.RouteOptimization.OptimizeTours|OptimizeTours}
- * method designed for
- * optimizations with large timeout values. It should be preferred over the
- * `OptimizeTours` method for optimizations that take longer than
- * a few minutes.
- *
- * The returned {@link protos.google.longrunning.Operation|long-running operation} (LRO)
- * will have a name of the format
- * `<parent>/operations/<operation_id>` and can be used to track
- * progress of the computation. The
- * {@link protos.google.longrunning.Operation.metadata|metadata} field type is
- * {@link protos.google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata|OptimizeToursLongRunningMetadata}.
- * The {@link protos.google.longrunning.Operation.response|response} field type is
- * {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse|OptimizeToursResponse},
- * if successful.
- *
- * Experimental: See
- * https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request
- * for more details.
- *
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Target project or location to make a call.
- *
- *   Format:
- *   * `projects/{project-id}`
- *   * `projects/{project-id}/locations/{location-id}`
- *
- *   If no location is specified, a region will be chosen automatically.
- * @param {google.protobuf.Duration} request.timeout
- *   If this timeout is set, the server returns a response before the timeout
- *   period has elapsed or the server deadline for synchronous requests is
- *   reached, whichever is sooner.
- *
- *   For asynchronous requests, the server will generate a solution (if
- *   possible) before the timeout has elapsed.
- * @param {google.maps.routeoptimization.v1.ShipmentModel} request.model
- *   Shipment model to solve.
- * @param {google.maps.routeoptimization.v1.OptimizeToursRequest.SolvingMode} request.solvingMode
- *   By default, the solving mode is `DEFAULT_SOLVE` (0).
- * @param {google.maps.routeoptimization.v1.OptimizeToursRequest.SearchMode} request.searchMode
- *   Search mode used to solve the request.
- * @param {number[]} request.injectedFirstSolutionRoutes
- *   Guide the optimization algorithm in finding a first solution that is
- *   similar to a previous solution.
- *
- *   The model is constrained when the first solution is built.
- *   Any shipments not performed on a route are implicitly skipped in the first
- *   solution, but they may be performed in successive solutions.
- *
- *   The solution must satisfy some basic validity assumptions:
- *
- *     * for all routes, `vehicle_index` must be in range and not be duplicated.
- *     * for all visits, `shipment_index` and `visit_request_index` must be
- *       in range.
- *     * a shipment may only be referenced on one route.
- *     * the pickup of a pickup-delivery shipment must be performed before
- *       the delivery.
- *     * no more than one pickup alternative or delivery alternative of
- *       a shipment may be performed.
- *     * for all routes, times are increasing (i.e., `vehicle_start_time
- *       <= visits[0].start_time <= visits[1].start_time ...
- *       <= vehicle_end_time`).
- *     * a shipment may only be performed on a vehicle that is allowed. A
- *       vehicle is allowed if
- *       {@link protos.google.maps.routeoptimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}
- *       is empty or its `vehicle_index` is included in
- *       {@link protos.google.maps.routeoptimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}.
- *
- *   If the injected solution is not feasible, a validation error is not
- *   necessarily returned and an error indicating infeasibility may be returned
- *   instead.
- * @param {google.maps.routeoptimization.v1.InjectedSolutionConstraint} request.injectedSolutionConstraint
- *   Constrain the optimization algorithm to find a final solution that is
- *   similar to a previous solution. For example, this may be used to freeze
- *   portions of routes which have already been completed or which are to be
- *   completed but must not be modified.
- *
- *   If the injected solution is not feasible, a validation error is not
- *   necessarily returned and an error indicating infeasibility may be returned
- *   instead.
- * @param {number[]} request.refreshDetailsRoutes
- *   If non-empty, the given routes will be refreshed, without modifying their
- *   underlying sequence of visits or travel times: only other details will be
- *   updated. This does not solve the model.
- *
- *   As of 2020/11, this only populates the polylines of non-empty routes and
- *   requires that `populate_polylines` is true.
- *
- *   The `route_polyline` fields of the passed-in routes may be inconsistent
- *   with route `transitions`.
- *
- *   This field must not be used together with `injected_first_solution_routes`
- *   or `injected_solution_constraint`.
- *
- *   `Shipment.ignore` and `Vehicle.ignore` have no effect on the behavior.
- *   Polylines are still populated between all visits in all non-empty routes
- *   regardless of whether the related shipments or vehicles are ignored.
- * @param {boolean} request.interpretInjectedSolutionsUsingLabels
- *   If true:
- *
- *     * uses
- *     {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label}
- *     instead of `vehicle_index` to
- *       match routes in an injected solution with vehicles in the request;
- *       reuses the mapping of original
- *       {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
- *       to new
- *       {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
- *       to update
- *       {@link protos.google.maps.routeoptimization.v1.InjectedSolutionConstraint.ConstraintRelaxation.vehicle_indices|ConstraintRelaxation.vehicle_indices}
- *       if non-empty, but the mapping must be unambiguous (i.e., multiple
- *       `ShipmentRoute`s must not share the same original `vehicle_index`).
- *     * uses
- *     {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label}
- *     instead of `shipment_index`
- *       to match visits in an injected solution with shipments in the request;
- *     * uses
- *     {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label}
- *     instead of
- *     {@link protos.google.maps.routeoptimization.v1.SkippedShipment.index|SkippedShipment.index}
- *     to
- *       match skipped shipments in the injected solution with request
- *       shipments.
- *
- *   This interpretation applies to the `injected_first_solution_routes`,
- *   `injected_solution_constraint`, and `refresh_details_routes` fields.
- *   It can be used when shipment or vehicle indices in the request have
- *   changed since the solution was created, perhaps because shipments or
- *   vehicles have been removed from or added to the request.
- *
- *   If true, labels in the following categories must appear at most once in
- *   their category:
- *
- *     * {@link protos.google.maps.routeoptimization.v1.Vehicle.label|Vehicle.label} in the
- *     request;
- *     * {@link protos.google.maps.routeoptimization.v1.Shipment.label|Shipment.label} in
- *     the request;
- *     * {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label} in the injected solution;
- *     * {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label} and {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label} in
- *       the injected solution (except pickup/delivery visit pairs, whose
- *       `shipment_label` must appear twice).
- *
- *   If a `vehicle_label` in the injected solution does not correspond to a
- *   request vehicle, the corresponding route is removed from the solution
- *   along with its visits. If a `shipment_label` in the injected solution does
- *   not correspond to a request shipment, the corresponding visit is removed
- *   from the solution. If a
- *   {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label}
- *   in the injected solution does not correspond to a request shipment, the
- *   `SkippedShipment` is removed from the solution.
- *
- *   Removing route visits or entire routes from an injected solution may
- *   have an effect on the implied constraints, which may lead to change in
- *   solution, validation errors, or infeasibility.
- *
- *   NOTE: The caller must ensure that each
- *   {@link protos.google.maps.routeoptimization.v1.Vehicle.label|Vehicle.label} (resp.
- *   {@link protos.google.maps.routeoptimization.v1.Shipment.label|Shipment.label}) uniquely
- *   identifies a vehicle (resp. shipment) entity used across the two relevant
- *   requests: the past request that produced the `OptimizeToursResponse` used
- *   in the injected solution and the current request that includes the injected
- *   solution. The uniqueness checks described above are not enough to guarantee
- *   this requirement.
- * @param {boolean} request.considerRoadTraffic
- *   Consider traffic estimation in calculating `ShipmentRoute` fields
- *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Transition.travel_duration|Transition.travel_duration},
- *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.start_time|Visit.start_time},
- *   and `vehicle_end_time`; in setting the
- *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.has_traffic_infeasibilities|ShipmentRoute.has_traffic_infeasibilities}
- *   field, and in calculating the
- *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.total_cost|OptimizeToursResponse.total_cost}
- *   field.
- * @param {boolean} request.populatePolylines
- *   If true, polylines will be populated in response `ShipmentRoute`s.
- * @param {boolean} request.populateTransitionPolylines
- *   If true, polylines and route tokens will be populated in response
- *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.transitions|ShipmentRoute.transitions}.
- * @param {boolean} request.allowLargeDeadlineDespiteInterruptionRisk
- *   If this is set, then the request can have a deadline
- *   (see https://grpc.io/blog/deadlines) of up to 60 minutes.
- *   Otherwise, the maximum deadline is only 30 minutes.
- *   Note that long-lived requests have a significantly larger (but still small)
- *   risk of interruption.
- * @param {boolean} request.useGeodesicDistances
- *   If true, travel distances will be computed using geodesic distances instead
- *   of Google Maps distances, and travel times will be computed using geodesic
- *   distances with a speed defined by `geodesic_meters_per_second`.
- * @param {number} request.geodesicMetersPerSecond
- *   When `use_geodesic_distances` is true, this field must be set and defines
- *   the speed applied to compute travel times. Its value must be at least 1.0
- *   meters/seconds.
- * @param {number} request.maxValidationErrors
- *   Truncates the number of validation errors returned. These errors are
- *   typically attached to an INVALID_ARGUMENT error payload as a BadRequest
- *   error detail (https://cloud.google.com/apis/design/errors#error_details),
- *   unless solving_mode=VALIDATE_ONLY: see the
- *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.validation_errors|OptimizeToursResponse.validation_errors}
- *   field.
- *   This defaults to 100 and is capped at 10,000.
- * @param {string} request.label
- *   Label that may be used to identify this request, reported back in the
- *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.request_label|OptimizeToursResponse.request_label}.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/route_optimization.optimize_tours_long_running.js</caption>
- * region_tag:routeoptimization_v1_generated_RouteOptimization_OptimizeToursLongRunning_async
- */
+  /**
+   * This is a variant of the
+   * {@link protos.google.maps.routeoptimization.v1.RouteOptimization.OptimizeTours|OptimizeTours}
+   * method designed for
+   * optimizations with large timeout values. It should be preferred over the
+   * `OptimizeTours` method for optimizations that take longer than
+   * a few minutes.
+   *
+   * The returned {@link protos.google.longrunning.Operation|long-running operation} (LRO)
+   * will have a name of the format
+   * `<parent>/operations/<operation_id>` and can be used to track
+   * progress of the computation. The
+   * {@link protos.google.longrunning.Operation.metadata|metadata} field type is
+   * {@link protos.google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata|OptimizeToursLongRunningMetadata}.
+   * The {@link protos.google.longrunning.Operation.response|response} field type is
+   * {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse|OptimizeToursResponse},
+   * if successful.
+   *
+   * Experimental: See
+   * https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request
+   * for more details.
+   *
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Target project or location to make a call.
+   *
+   *   Format:
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/{location-id}`
+   *
+   *   If no location is specified, a region will be chosen automatically.
+   * @param {google.protobuf.Duration} request.timeout
+   *   If this timeout is set, the server returns a response before the timeout
+   *   period has elapsed or the server deadline for synchronous requests is
+   *   reached, whichever is sooner.
+   *
+   *   For asynchronous requests, the server will generate a solution (if
+   *   possible) before the timeout has elapsed.
+   * @param {google.maps.routeoptimization.v1.ShipmentModel} request.model
+   *   Shipment model to solve.
+   * @param {google.maps.routeoptimization.v1.OptimizeToursRequest.SolvingMode} request.solvingMode
+   *   By default, the solving mode is `DEFAULT_SOLVE` (0).
+   * @param {google.maps.routeoptimization.v1.OptimizeToursRequest.SearchMode} request.searchMode
+   *   Search mode used to solve the request.
+   * @param {number[]} request.injectedFirstSolutionRoutes
+   *   Guide the optimization algorithm in finding a first solution that is
+   *   similar to a previous solution.
+   *
+   *   The model is constrained when the first solution is built.
+   *   Any shipments not performed on a route are implicitly skipped in the first
+   *   solution, but they may be performed in successive solutions.
+   *
+   *   The solution must satisfy some basic validity assumptions:
+   *
+   *     * for all routes, `vehicle_index` must be in range and not be duplicated.
+   *     * for all visits, `shipment_index` and `visit_request_index` must be
+   *       in range.
+   *     * a shipment may only be referenced on one route.
+   *     * the pickup of a pickup-delivery shipment must be performed before
+   *       the delivery.
+   *     * no more than one pickup alternative or delivery alternative of
+   *       a shipment may be performed.
+   *     * for all routes, times are increasing (i.e., `vehicle_start_time
+   *       <= visits[0].start_time <= visits[1].start_time ...
+   *       <= vehicle_end_time`).
+   *     * a shipment may only be performed on a vehicle that is allowed. A
+   *       vehicle is allowed if
+   *       {@link protos.google.maps.routeoptimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}
+   *       is empty or its `vehicle_index` is included in
+   *       {@link protos.google.maps.routeoptimization.v1.Shipment.allowed_vehicle_indices|Shipment.allowed_vehicle_indices}.
+   *
+   *   If the injected solution is not feasible, a validation error is not
+   *   necessarily returned and an error indicating infeasibility may be returned
+   *   instead.
+   * @param {google.maps.routeoptimization.v1.InjectedSolutionConstraint} request.injectedSolutionConstraint
+   *   Constrain the optimization algorithm to find a final solution that is
+   *   similar to a previous solution. For example, this may be used to freeze
+   *   portions of routes which have already been completed or which are to be
+   *   completed but must not be modified.
+   *
+   *   If the injected solution is not feasible, a validation error is not
+   *   necessarily returned and an error indicating infeasibility may be returned
+   *   instead.
+   * @param {number[]} request.refreshDetailsRoutes
+   *   If non-empty, the given routes will be refreshed, without modifying their
+   *   underlying sequence of visits or travel times: only other details will be
+   *   updated. This does not solve the model.
+   *
+   *   As of 2020/11, this only populates the polylines of non-empty routes and
+   *   requires that `populate_polylines` is true.
+   *
+   *   The `route_polyline` fields of the passed-in routes may be inconsistent
+   *   with route `transitions`.
+   *
+   *   This field must not be used together with `injected_first_solution_routes`
+   *   or `injected_solution_constraint`.
+   *
+   *   `Shipment.ignore` and `Vehicle.ignore` have no effect on the behavior.
+   *   Polylines are still populated between all visits in all non-empty routes
+   *   regardless of whether the related shipments or vehicles are ignored.
+   * @param {boolean} request.interpretInjectedSolutionsUsingLabels
+   *   If true:
+   *
+   *     * uses
+   *     {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label}
+   *     instead of `vehicle_index` to
+   *       match routes in an injected solution with vehicles in the request;
+   *       reuses the mapping of original
+   *       {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
+   *       to new
+   *       {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_index|ShipmentRoute.vehicle_index}
+   *       to update
+   *       {@link protos.google.maps.routeoptimization.v1.InjectedSolutionConstraint.ConstraintRelaxation.vehicle_indices|ConstraintRelaxation.vehicle_indices}
+   *       if non-empty, but the mapping must be unambiguous (i.e., multiple
+   *       `ShipmentRoute`s must not share the same original `vehicle_index`).
+   *     * uses
+   *     {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label}
+   *     instead of `shipment_index`
+   *       to match visits in an injected solution with shipments in the request;
+   *     * uses
+   *     {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label}
+   *     instead of
+   *     {@link protos.google.maps.routeoptimization.v1.SkippedShipment.index|SkippedShipment.index}
+   *     to
+   *       match skipped shipments in the injected solution with request
+   *       shipments.
+   *
+   *   This interpretation applies to the `injected_first_solution_routes`,
+   *   `injected_solution_constraint`, and `refresh_details_routes` fields.
+   *   It can be used when shipment or vehicle indices in the request have
+   *   changed since the solution was created, perhaps because shipments or
+   *   vehicles have been removed from or added to the request.
+   *
+   *   If true, labels in the following categories must appear at most once in
+   *   their category:
+   *
+   *     * {@link protos.google.maps.routeoptimization.v1.Vehicle.label|Vehicle.label} in the
+   *     request;
+   *     * {@link protos.google.maps.routeoptimization.v1.Shipment.label|Shipment.label} in
+   *     the request;
+   *     * {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.vehicle_label|ShipmentRoute.vehicle_label} in the injected solution;
+   *     * {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label} and {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.shipment_label|ShipmentRoute.Visit.shipment_label} in
+   *       the injected solution (except pickup/delivery visit pairs, whose
+   *       `shipment_label` must appear twice).
+   *
+   *   If a `vehicle_label` in the injected solution does not correspond to a
+   *   request vehicle, the corresponding route is removed from the solution
+   *   along with its visits. If a `shipment_label` in the injected solution does
+   *   not correspond to a request shipment, the corresponding visit is removed
+   *   from the solution. If a
+   *   {@link protos.google.maps.routeoptimization.v1.SkippedShipment.label|SkippedShipment.label}
+   *   in the injected solution does not correspond to a request shipment, the
+   *   `SkippedShipment` is removed from the solution.
+   *
+   *   Removing route visits or entire routes from an injected solution may
+   *   have an effect on the implied constraints, which may lead to change in
+   *   solution, validation errors, or infeasibility.
+   *
+   *   NOTE: The caller must ensure that each
+   *   {@link protos.google.maps.routeoptimization.v1.Vehicle.label|Vehicle.label} (resp.
+   *   {@link protos.google.maps.routeoptimization.v1.Shipment.label|Shipment.label}) uniquely
+   *   identifies a vehicle (resp. shipment) entity used across the two relevant
+   *   requests: the past request that produced the `OptimizeToursResponse` used
+   *   in the injected solution and the current request that includes the injected
+   *   solution. The uniqueness checks described above are not enough to guarantee
+   *   this requirement.
+   * @param {boolean} request.considerRoadTraffic
+   *   Consider traffic estimation in calculating `ShipmentRoute` fields
+   *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Transition.travel_duration|Transition.travel_duration},
+   *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.Visit.start_time|Visit.start_time},
+   *   and `vehicle_end_time`; in setting the
+   *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.has_traffic_infeasibilities|ShipmentRoute.has_traffic_infeasibilities}
+   *   field, and in calculating the
+   *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.total_cost|OptimizeToursResponse.total_cost}
+   *   field.
+   * @param {boolean} request.populatePolylines
+   *   If true, polylines will be populated in response `ShipmentRoute`s.
+   * @param {boolean} request.populateTransitionPolylines
+   *   If true, polylines and route tokens will be populated in response
+   *   {@link protos.google.maps.routeoptimization.v1.ShipmentRoute.transitions|ShipmentRoute.transitions}.
+   * @param {boolean} request.allowLargeDeadlineDespiteInterruptionRisk
+   *   If this is set, then the request can have a deadline
+   *   (see https://grpc.io/blog/deadlines) of up to 60 minutes.
+   *   Otherwise, the maximum deadline is only 30 minutes.
+   *   Note that long-lived requests have a significantly larger (but still small)
+   *   risk of interruption.
+   * @param {boolean} request.useGeodesicDistances
+   *   If true, travel distances will be computed using geodesic distances instead
+   *   of Google Maps distances, and travel times will be computed using geodesic
+   *   distances with a speed defined by `geodesic_meters_per_second`.
+   * @param {number} request.geodesicMetersPerSecond
+   *   When `use_geodesic_distances` is true, this field must be set and defines
+   *   the speed applied to compute travel times. Its value must be at least 1.0
+   *   meters/seconds.
+   * @param {number} request.maxValidationErrors
+   *   Truncates the number of validation errors returned. These errors are
+   *   typically attached to an INVALID_ARGUMENT error payload as a BadRequest
+   *   error detail (https://cloud.google.com/apis/design/errors#error_details),
+   *   unless solving_mode=VALIDATE_ONLY: see the
+   *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.validation_errors|OptimizeToursResponse.validation_errors}
+   *   field.
+   *   This defaults to 100 and is capped at 10,000.
+   * @param {string} request.label
+   *   Label that may be used to identify this request, reported back in the
+   *   {@link protos.google.maps.routeoptimization.v1.OptimizeToursResponse.request_label|OptimizeToursResponse.request_label}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/route_optimization.optimize_tours_long_running.js</caption>
+   * region_tag:routeoptimization_v1_generated_RouteOptimization_OptimizeToursLongRunning_async
+   */
   optimizeToursLongRunning(
-      request?: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+        protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   optimizeToursLongRunning(
-      request: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+        protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   optimizeToursLongRunning(
-      request: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
-      callback: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+        protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   optimizeToursLongRunning(
-      request?: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.maps.routeoptimization.v1.IOptimizeToursRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+            protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+        protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+        protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+            protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('optimizeToursLongRunning response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('optimizeToursLongRunning request %j', request);
-    return this.innerApiCalls.optimizeToursLongRunning(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('optimizeToursLongRunning response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .optimizeToursLongRunning(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.maps.routeoptimization.v1.IOptimizeToursResponse,
+            protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('optimizeToursLongRunning response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `optimizeToursLongRunning()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/route_optimization.optimize_tours_long_running.js</caption>
- * region_tag:routeoptimization_v1_generated_RouteOptimization_OptimizeToursLongRunning_async
- */
-  async checkOptimizeToursLongRunningProgress(name: string): Promise<LROperation<protos.google.maps.routeoptimization.v1.OptimizeToursResponse, protos.google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `optimizeToursLongRunning()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/route_optimization.optimize_tours_long_running.js</caption>
+   * region_tag:routeoptimization_v1_generated_RouteOptimization_OptimizeToursLongRunning_async
+   */
+  async checkOptimizeToursLongRunningProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.maps.routeoptimization.v1.OptimizeToursResponse,
+      protos.google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+    >
+  > {
     this._log.info('optimizeToursLongRunning long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.optimizeToursLongRunning, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.maps.routeoptimization.v1.OptimizeToursResponse, protos.google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.optimizeToursLongRunning,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.maps.routeoptimization.v1.OptimizeToursResponse,
+      protos.google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata
+    >;
   }
-/**
- * This is a variant of the
- * {@link protos.google.maps.routeoptimization.v1.RouteOptimization.OptimizeToursLongRunning|OptimizeToursLongRunning}
- * method designed for optimizations with large timeout values and large
- * input/output sizes.
- *
- * The client specifies the URI of the `OptimizeToursRequest` stored
- * in Google Cloud Storage and the server writes the `OptimizeToursResponse`
- * to a client-specified Google Cloud Storage URI.
- *
- * This method should be preferred over the `OptimizeTours` method for
- * optimizations that take longer than a few minutes and input/output sizes
- * that are larger than 8MB, though it can be used for shorter and smaller
- * optimizations as well.
- *
- * The returned {@link protos.google.longrunning.Operation|long-running operation} (LRO)
- * will have a name of the format
- * `<parent>/operations/<operation_id>` and can be used to track
- * progress of the computation. The
- * {@link protos.google.longrunning.Operation.metadata|metadata} field type is
- * {@link protos.google.maps.routeoptimization.v1.OptimizeToursUriMetadata|OptimizeToursLongRunningMetadata}.
- * The {@link protos.google.longrunning.Operation.response|response} field type is
- * {@link protos.google.maps.routeoptimization.v1.OptimizeToursUriResponse|OptimizeToursUriResponse},
- * if successful.
- *
- * Experimental: See
- * https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request
- * for more details.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Target project or location to make a call.
- *
- *   Format:
- *   * `projects/{project-id}`
- *   * `projects/{project-id}/locations/{location-id}`
- *
- *   If no location is specified, a region will be chosen automatically.
- * @param {google.maps.routeoptimization.v1.Uri} request.input
- *   Required. The URI of the Cloud Storage object containing the
- *   `OptimizeToursRequest`.
- * @param {google.maps.routeoptimization.v1.Uri} request.output
- *   Required. The URI of the Cloud Storage object that will contain the
- *   `OptimizeToursResponse`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/route_optimization.optimize_tours_uri.js</caption>
- * region_tag:routeoptimization_v1_generated_RouteOptimization_OptimizeToursUri_async
- */
+  /**
+   * This is a variant of the
+   * {@link protos.google.maps.routeoptimization.v1.RouteOptimization.OptimizeToursLongRunning|OptimizeToursLongRunning}
+   * method designed for optimizations with large timeout values and large
+   * input/output sizes.
+   *
+   * The client specifies the URI of the `OptimizeToursRequest` stored
+   * in Google Cloud Storage and the server writes the `OptimizeToursResponse`
+   * to a client-specified Google Cloud Storage URI.
+   *
+   * This method should be preferred over the `OptimizeTours` method for
+   * optimizations that take longer than a few minutes and input/output sizes
+   * that are larger than 8MB, though it can be used for shorter and smaller
+   * optimizations as well.
+   *
+   * The returned {@link protos.google.longrunning.Operation|long-running operation} (LRO)
+   * will have a name of the format
+   * `<parent>/operations/<operation_id>` and can be used to track
+   * progress of the computation. The
+   * {@link protos.google.longrunning.Operation.metadata|metadata} field type is
+   * {@link protos.google.maps.routeoptimization.v1.OptimizeToursUriMetadata|OptimizeToursLongRunningMetadata}.
+   * The {@link protos.google.longrunning.Operation.response|response} field type is
+   * {@link protos.google.maps.routeoptimization.v1.OptimizeToursUriResponse|OptimizeToursUriResponse},
+   * if successful.
+   *
+   * Experimental: See
+   * https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request
+   * for more details.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Target project or location to make a call.
+   *
+   *   Format:
+   *   * `projects/{project-id}`
+   *   * `projects/{project-id}/locations/{location-id}`
+   *
+   *   If no location is specified, a region will be chosen automatically.
+   * @param {google.maps.routeoptimization.v1.Uri} request.input
+   *   Required. The URI of the Cloud Storage object containing the
+   *   `OptimizeToursRequest`.
+   * @param {google.maps.routeoptimization.v1.Uri} request.output
+   *   Required. The URI of the Cloud Storage object that will contain the
+   *   `OptimizeToursResponse`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/route_optimization.optimize_tours_uri.js</caption>
+   * region_tag:routeoptimization_v1_generated_RouteOptimization_OptimizeToursUri_async
+   */
   optimizeToursUri(
-      request?: protos.google.maps.routeoptimization.v1.IOptimizeToursUriRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.routeoptimization.v1.IOptimizeToursUriRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse,
+        protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   optimizeToursUri(
-      request: protos.google.maps.routeoptimization.v1.IOptimizeToursUriRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.routeoptimization.v1.IOptimizeToursUriRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse,
+        protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   optimizeToursUri(
-      request: protos.google.maps.routeoptimization.v1.IOptimizeToursUriRequest,
-      callback: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.routeoptimization.v1.IOptimizeToursUriRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse,
+        protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   optimizeToursUri(
-      request?: protos.google.maps.routeoptimization.v1.IOptimizeToursUriRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.maps.routeoptimization.v1.IOptimizeToursUriRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse,
+            protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse,
+        protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse,
+        protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse,
+            protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('optimizeToursUri response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('optimizeToursUri request %j', request);
-    return this.innerApiCalls.optimizeToursUri(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('optimizeToursUri response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .optimizeToursUri(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse,
+            protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('optimizeToursUri response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `optimizeToursUri()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/route_optimization.optimize_tours_uri.js</caption>
- * region_tag:routeoptimization_v1_generated_RouteOptimization_OptimizeToursUri_async
- */
-  async checkOptimizeToursUriProgress(name: string): Promise<LROperation<protos.google.maps.routeoptimization.v1.OptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.OptimizeToursUriMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `optimizeToursUri()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/route_optimization.optimize_tours_uri.js</caption>
+   * region_tag:routeoptimization_v1_generated_RouteOptimization_OptimizeToursUri_async
+   */
+  async checkOptimizeToursUriProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.maps.routeoptimization.v1.OptimizeToursUriResponse,
+      protos.google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+    >
+  > {
     this._log.info('optimizeToursUri long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.optimizeToursUri, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.maps.routeoptimization.v1.OptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.OptimizeToursUriMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.optimizeToursUri,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.maps.routeoptimization.v1.OptimizeToursUriResponse,
+      protos.google.maps.routeoptimization.v1.OptimizeToursUriMetadata
+    >;
   }
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1297,22 +1594,22 @@ export class RouteOptimizationClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1347,15 +1644,15 @@ export class RouteOptimizationClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1389,7 +1686,7 @@ export class RouteOptimizationClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1402,25 +1699,24 @@ export class RouteOptimizationClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1459,25 +1755,24 @@ export class RouteOptimizationClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
-
 
   /**
    * Terminate the gRPC channel and close the client.
@@ -1487,7 +1782,7 @@ export class RouteOptimizationClient {
    */
   close(): Promise<void> {
     if (this.routeOptimizationStub && !this._terminated) {
-      return this.routeOptimizationStub.then(stub => {
+      return this.routeOptimizationStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

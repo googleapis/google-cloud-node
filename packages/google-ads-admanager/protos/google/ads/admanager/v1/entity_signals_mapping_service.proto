@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,7 +35,8 @@ option ruby_package = "Google::Ads::AdManager::V1";
 service EntitySignalsMappingService {
   option (google.api.default_host) = "admanager.googleapis.com";
   option (google.api.oauth_scopes) =
-      "https://www.googleapis.com/auth/admanager";
+      "https://www.googleapis.com/auth/admanager,"
+      "https://www.googleapis.com/auth/admanager.readonly";
 
   // API to retrieve a `EntitySignalsMapping` object.
   rpc GetEntitySignalsMapping(GetEntitySignalsMappingRequest)
@@ -176,9 +177,9 @@ message UpdateEntitySignalsMappingRequest {
   EntitySignalsMapping entity_signals_mapping = 1
       [(google.api.field_behavior) = REQUIRED];
 
-  // Required. The list of fields to update.
+  // Optional. The list of fields to update.
   google.protobuf.FieldMask update_mask = 2
-      [(google.api.field_behavior) = REQUIRED];
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response object for `ListEntitySignalsMappingsRequest` containing matching

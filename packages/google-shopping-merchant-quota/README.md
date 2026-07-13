@@ -61,9 +61,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get account limit | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1/account_limits_service.get_account_limit.js) |
 | list account limits | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1/account_limits_service.list_account_limits.js) |
 | list quota groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1/quota_service.list_quota_groups.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1/snippet_metadata_google.shopping.merchant.quota.v1.json) |
 | list quota groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1beta/quota_service.list_quota_groups.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.quota.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -97,7 +95,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -107,7 +105,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-quota/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

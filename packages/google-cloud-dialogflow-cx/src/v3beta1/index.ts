@@ -16,24 +16,24 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AgentsClient} from './agents_client';
-export {ChangelogsClient} from './changelogs_client';
-export {ConversationHistoryClient} from './conversation_history_client';
-export {DeploymentsClient} from './deployments_client';
-export {EntityTypesClient} from './entity_types_client';
-export {EnvironmentsClient} from './environments_client';
-export {ExamplesClient} from './examples_client';
-export {ExperimentsClient} from './experiments_client';
-export {FlowsClient} from './flows_client';
-export {GeneratorsClient} from './generators_client';
-export {IntentsClient} from './intents_client';
-export {PagesClient} from './pages_client';
-export {PlaybooksClient} from './playbooks_client';
-export {SecuritySettingsServiceClient} from './security_settings_service_client';
-export {SessionEntityTypesClient} from './session_entity_types_client';
-export {SessionsClient} from './sessions_client';
-export {TestCasesClient} from './test_cases_client';
-export {ToolsClient} from './tools_client';
-export {TransitionRouteGroupsClient} from './transition_route_groups_client';
-export {VersionsClient} from './versions_client';
-export {WebhooksClient} from './webhooks_client';
+export { AgentsClient } from './agents_client';
+export { ChangelogsClient } from './changelogs_client';
+export { ConversationHistoryClient } from './conversation_history_client';
+export { DeploymentsClient } from './deployments_client';
+export { EntityTypesClient } from './entity_types_client';
+export { EnvironmentsClient } from './environments_client';
+export { ExamplesClient } from './examples_client';
+export { ExperimentsClient } from './experiments_client';
+export { FlowsClient } from './flows_client';
+export { GeneratorsClient } from './generators_client';
+export { IntentsClient } from './intents_client';
+export { PagesClient } from './pages_client';
+export { PlaybooksClient } from './playbooks_client';
+export { SecuritySettingsServiceClient } from './security_settings_service_client';
+export { SessionEntityTypesClient } from './session_entity_types_client';
+export { SessionsClient } from './sessions_client';
+export { TestCasesClient } from './test_cases_client';
+export { ToolsClient } from './tools_client';
+export { TransitionRouteGroupsClient } from './transition_route_groups_client';
+export { VersionsClient } from './versions_client';
+export { WebhooksClient } from './webhooks_client';

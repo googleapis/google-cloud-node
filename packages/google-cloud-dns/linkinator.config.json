@@ -1,9 +1,0 @@
-{
-  "recurse": true,
-  "skip": [
-    "https://codecov.io/gh/googleapis/",
-    "img.shields.io"
-  ],
-  "silent": true,
-  "concurrency": 10
-}

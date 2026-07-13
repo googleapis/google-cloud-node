@@ -16,6 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DataObjectSearchServiceClient} from './data_object_search_service_client';
-export {DataObjectServiceClient} from './data_object_service_client';
-export {VectorSearchServiceClient} from './vector_search_service_client';
+export { DataObjectSearchServiceClient } from './data_object_search_service_client';
+export { DataObjectServiceClient } from './data_object_service_client';
+export { VectorSearchServiceClient } from './vector_search_service_client';

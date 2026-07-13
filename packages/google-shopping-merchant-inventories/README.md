@@ -64,14 +64,12 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete regional inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1/regional_inventory_service.delete_regional_inventory.js) |
 | insert regional inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1/regional_inventory_service.insert_regional_inventory.js) |
 | list regional inventories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1/regional_inventory_service.list_regional_inventories.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1/snippet_metadata_google.shopping.merchant.inventories.v1.json) |
 | delete local inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.delete_local_inventory.js) |
 | insert local inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.insert_local_inventory.js) |
 | list local inventories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/local_inventory_service.list_local_inventories.js) |
 | delete regional inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.delete_regional_inventory.js) |
 | insert regional inventory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.insert_regional_inventory.js) |
 | list regional inventories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/regional_inventory_service.list_regional_inventories.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.inventories.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -105,7 +103,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -115,7 +113,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-inventories/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

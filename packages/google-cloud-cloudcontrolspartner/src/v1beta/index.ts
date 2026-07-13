@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudControlsPartnerCoreClient} from './cloud_controls_partner_core_client';
-export {CloudControlsPartnerMonitoringClient} from './cloud_controls_partner_monitoring_client';
+export { CloudControlsPartnerCoreClient } from './cloud_controls_partner_core_client';
+export { CloudControlsPartnerMonitoringClient } from './cloud_controls_partner_monitoring_client';

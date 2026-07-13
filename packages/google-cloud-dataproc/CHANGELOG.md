@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.6.0...dataproc-v6.7.0) (2026-06-25)
+
+
+### Features
+
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.5.1...dataproc-v6.6.0) (2026-06-16)
+
+
+### Features
+
+* Regenerated google-cloud-dataproc ([#8604](https://github.com/googleapis/google-cloud-node/issues/8604)) ([3b7367a](https://github.com/googleapis/google-cloud-node/commit/3b7367a24115ccf43bd46646f257cee6e787c07c))
+
+## [6.5.1](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.5.0...dataproc-v6.5.1) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.4.0...dataproc-v6.5.0) (2026-05-12)
+
+
+### Features
+
+* [dataproc] add support for Cloud Resource Manager tags for Dataproc Serverless workloads ([#8179](https://github.com/googleapis/google-cloud-node/issues/8179)) ([3b19b3a](https://github.com/googleapis/google-cloud-node/commit/3b19b3a827a22d92bf0592382611bfe8bce1d507))
+
 ## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.3.0...dataproc-v6.4.0) (2026-05-01)
 
 

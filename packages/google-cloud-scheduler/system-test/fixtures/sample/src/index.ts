@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CloudSchedulerClient} from '@google-cloud/scheduler';
+import { CloudSchedulerClient } from '@google-cloud/scheduler';
 
 // check that the client class type name can be used
 function doStuffWithCloudSchedulerClient(client: CloudSchedulerClient) {

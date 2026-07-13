@@ -264,7 +264,9 @@ export namespace google {
                             TYPE_UNSPECIFIED = 0,
                             STRING = 1,
                             INT = 2,
-                            BOOL = 3
+                            BOOL = 3,
+                            STRUCT = 4,
+                            LIST = 5
                         }
                     }
 
@@ -405,7 +407,9 @@ export namespace google {
                             TYPE_READY = 1,
                             TYPE_UPDATING = 2,
                             TYPE_PROVISIONED = 3,
-                            TYPE_OPERATION_ERROR = 4
+                            TYPE_OPERATION_ERROR = 4,
+                            TYPE_APP_CREATED_OR_ALREADY_EXISTS = 6,
+                            TYPE_APP_COMPONENTS_REGISTERED = 7
                         }
                     }
 
@@ -548,7 +552,147 @@ export namespace google {
                             TYPE_SUCCEEDED = 4,
                             TYPE_CANCELLED = 5,
                             TYPE_APP_CREATED = 6,
-                            TYPE_APP_COMPONENTS_REGISTERED = 7
+                            TYPE_APP_COMPONENTS_REGISTERED = 7,
+                            TYPE_WORKLOAD_SUCCEEDED = 8
+                        }
+                    }
+
+                    /** Properties of a SaasCondition. */
+                    interface ISaasCondition {
+
+                        /** SaasCondition status */
+                        status?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition.Status|keyof typeof google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition.Status|null);
+
+                        /** SaasCondition type */
+                        type?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition.Type|keyof typeof google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition.Type|null);
+
+                        /** SaasCondition lastTransitionTime */
+                        lastTransitionTime?: (google.protobuf.ITimestamp|null);
+
+                        /** SaasCondition message */
+                        message?: (string|null);
+
+                        /** SaasCondition reason */
+                        reason?: (string|null);
+                    }
+
+                    /** Represents a SaasCondition. */
+                    class SaasCondition implements ISaasCondition {
+
+                        /**
+                         * Constructs a new SaasCondition.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaasCondition);
+
+                        /** SaasCondition status. */
+                        public status: (google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition.Status|keyof typeof google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition.Status);
+
+                        /** SaasCondition type. */
+                        public type: (google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition.Type|keyof typeof google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition.Type);
+
+                        /** SaasCondition lastTransitionTime. */
+                        public lastTransitionTime?: (google.protobuf.ITimestamp|null);
+
+                        /** SaasCondition message. */
+                        public message: string;
+
+                        /** SaasCondition reason. */
+                        public reason: string;
+
+                        /**
+                         * Creates a new SaasCondition instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SaasCondition instance
+                         */
+                        public static create(properties?: google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaasCondition): google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition;
+
+                        /**
+                         * Encodes the specified SaasCondition message. Does not implicitly {@link google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition.verify|verify} messages.
+                         * @param message SaasCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaasCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SaasCondition message, length delimited. Does not implicitly {@link google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition.verify|verify} messages.
+                         * @param message SaasCondition message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaasCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SaasCondition message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SaasCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition;
+
+                        /**
+                         * Decodes a SaasCondition message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SaasCondition
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition;
+
+                        /**
+                         * Verifies a SaasCondition message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SaasCondition message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SaasCondition
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition;
+
+                        /**
+                         * Creates a plain object from a SaasCondition message. Also converts values to other types if specified.
+                         * @param message SaasCondition
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SaasCondition to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SaasCondition
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SaasCondition {
+
+                        /** Status enum. */
+                        enum Status {
+                            STATUS_UNSPECIFIED = 0,
+                            STATUS_UNKNOWN = 1,
+                            STATUS_TRUE = 2,
+                            STATUS_FALSE = 3
+                        }
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            TYPE_READY = 1,
+                            TYPE_SYNCHRONIZED = 2
                         }
                     }
 
@@ -761,6 +905,21 @@ export namespace google {
                         /** Saas locations */
                         locations?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.ILocation[]|null);
 
+                        /** Saas applicationTemplate */
+                        applicationTemplate?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.ICompositeRef|null);
+
+                        /** Saas blueprintRepo */
+                        blueprintRepo?: (string|null);
+
+                        /** Saas state */
+                        state?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas.State|keyof typeof google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas.State|null);
+
+                        /** Saas conditions */
+                        conditions?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaasCondition[]|null);
+
+                        /** Saas error */
+                        error?: (google.rpc.IStatus|null);
+
                         /** Saas labels */
                         labels?: ({ [k: string]: string }|null);
 
@@ -794,6 +953,21 @@ export namespace google {
 
                         /** Saas locations. */
                         public locations: google.cloud.saasplatform.saasservicemgmt.v1beta1.ILocation[];
+
+                        /** Saas applicationTemplate. */
+                        public applicationTemplate?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.ICompositeRef|null);
+
+                        /** Saas blueprintRepo. */
+                        public blueprintRepo: string;
+
+                        /** Saas state. */
+                        public state: (google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas.State|keyof typeof google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas.State);
+
+                        /** Saas conditions. */
+                        public conditions: google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaasCondition[];
+
+                        /** Saas error. */
+                        public error?: (google.rpc.IStatus|null);
 
                         /** Saas labels. */
                         public labels: { [k: string]: string };
@@ -889,6 +1063,20 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace Saas {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_TYPE_UNSPECIFIED = 0,
+                            STATE_ACTIVE = 1,
+                            STATE_RUNNING = 2,
+                            STATE_FAILED = 3,
+                            ACTIVE = 1,
+                            RUNNING = 2,
+                            FAILED = 3
+                        }
                     }
 
                     /** Properties of a Tenant. */
@@ -1057,6 +1245,12 @@ export namespace google {
                         /** UnitKind saas */
                         saas?: (string|null);
 
+                        /** UnitKind applicationTemplateComponent */
+                        applicationTemplateComponent?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.IComponentRef|null);
+
+                        /** UnitKind appParams */
+                        appParams?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.IAppParams|null);
+
                         /** UnitKind labels */
                         labels?: ({ [k: string]: string }|null);
 
@@ -1102,6 +1296,12 @@ export namespace google {
 
                         /** UnitKind saas. */
                         public saas: string;
+
+                        /** UnitKind applicationTemplateComponent. */
+                        public applicationTemplateComponent?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.IComponentRef|null);
+
+                        /** UnitKind appParams. */
+                        public appParams?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.IAppParams|null);
 
                         /** UnitKind labels. */
                         public labels: { [k: string]: string };
@@ -1253,6 +1453,9 @@ export namespace google {
                         /** Unit systemCleanupAt */
                         systemCleanupAt?: (google.protobuf.ITimestamp|null);
 
+                        /** Unit application */
+                        application?: (string|null);
+
                         /** Unit labels */
                         labels?: ({ [k: string]: string }|null);
 
@@ -1270,6 +1473,12 @@ export namespace google {
 
                         /** Unit updateTime */
                         updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Unit satisfiesPzs */
+                        satisfiesPzs?: (boolean|null);
+
+                        /** Unit satisfiesPzi */
+                        satisfiesPzi?: (boolean|null);
                     }
 
                     /** Represents an Unit. */
@@ -1332,6 +1541,9 @@ export namespace google {
                         /** Unit systemCleanupAt. */
                         public systemCleanupAt?: (google.protobuf.ITimestamp|null);
 
+                        /** Unit application. */
+                        public application: string;
+
                         /** Unit labels. */
                         public labels: { [k: string]: string };
 
@@ -1349,6 +1561,12 @@ export namespace google {
 
                         /** Unit updateTime. */
                         public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Unit satisfiesPzs. */
+                        public satisfiesPzs: boolean;
+
+                        /** Unit satisfiesPzi. */
+                        public satisfiesPzi: boolean;
 
                         /**
                          * Creates a new Unit instance using the specified properties.
@@ -1716,6 +1934,9 @@ export namespace google {
 
                         /** UnitOperation updateTime */
                         updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** UnitOperation deleteTime */
+                        deleteTime?: (google.protobuf.ITimestamp|null);
                     }
 
                     /** Represents an UnitOperation. */
@@ -1783,6 +2004,9 @@ export namespace google {
 
                         /** UnitOperation updateTime. */
                         public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** UnitOperation deleteTime. */
+                        public deleteTime?: (google.protobuf.ITimestamp|null);
 
                         /** UnitOperation unitOperationType. */
                         public unitOperationType?: ("provision"|"upgrade"|"deprovision");
@@ -2297,6 +2521,9 @@ export namespace google {
                         /** Release inputVariableDefaults */
                         inputVariableDefaults?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitVariable[]|null);
 
+                        /** Release applicationTemplateComponent */
+                        applicationTemplateComponent?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.IComponentRef|null);
+
                         /** Release labels */
                         labels?: ({ [k: string]: string }|null);
 
@@ -2345,6 +2572,9 @@ export namespace google {
 
                         /** Release inputVariableDefaults. */
                         public inputVariableDefaults: google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitVariable[];
+
+                        /** Release applicationTemplateComponent. */
+                        public applicationTemplateComponent?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.IComponentRef|null);
 
                         /** Release labels. */
                         public labels: { [k: string]: string };
@@ -2967,6 +3197,439 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CompositeRef. */
+                    interface ICompositeRef {
+
+                        /** CompositeRef applicationTemplate */
+                        applicationTemplate?: (string|null);
+
+                        /** CompositeRef revision */
+                        revision?: (string|null);
+
+                        /** CompositeRef syncOperation */
+                        syncOperation?: (string|null);
+                    }
+
+                    /** Represents a CompositeRef. */
+                    class CompositeRef implements ICompositeRef {
+
+                        /**
+                         * Constructs a new CompositeRef.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.saasplatform.saasservicemgmt.v1beta1.ICompositeRef);
+
+                        /** CompositeRef applicationTemplate. */
+                        public applicationTemplate: string;
+
+                        /** CompositeRef revision. */
+                        public revision: string;
+
+                        /** CompositeRef syncOperation. */
+                        public syncOperation: string;
+
+                        /**
+                         * Creates a new CompositeRef instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CompositeRef instance
+                         */
+                        public static create(properties?: google.cloud.saasplatform.saasservicemgmt.v1beta1.ICompositeRef): google.cloud.saasplatform.saasservicemgmt.v1beta1.CompositeRef;
+
+                        /**
+                         * Encodes the specified CompositeRef message. Does not implicitly {@link google.cloud.saasplatform.saasservicemgmt.v1beta1.CompositeRef.verify|verify} messages.
+                         * @param message CompositeRef message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.ICompositeRef, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CompositeRef message, length delimited. Does not implicitly {@link google.cloud.saasplatform.saasservicemgmt.v1beta1.CompositeRef.verify|verify} messages.
+                         * @param message CompositeRef message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.ICompositeRef, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CompositeRef message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CompositeRef
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.saasplatform.saasservicemgmt.v1beta1.CompositeRef;
+
+                        /**
+                         * Decodes a CompositeRef message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CompositeRef
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.saasplatform.saasservicemgmt.v1beta1.CompositeRef;
+
+                        /**
+                         * Verifies a CompositeRef message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CompositeRef message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CompositeRef
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.saasplatform.saasservicemgmt.v1beta1.CompositeRef;
+
+                        /**
+                         * Creates a plain object from a CompositeRef message. Also converts values to other types if specified.
+                         * @param message CompositeRef
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.CompositeRef, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CompositeRef to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CompositeRef
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ComponentRef. */
+                    interface IComponentRef {
+
+                        /** ComponentRef compositeRef */
+                        compositeRef?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.ICompositeRef|null);
+
+                        /** ComponentRef component */
+                        component?: (string|null);
+
+                        /** ComponentRef revision */
+                        revision?: (string|null);
+                    }
+
+                    /** Represents a ComponentRef. */
+                    class ComponentRef implements IComponentRef {
+
+                        /**
+                         * Constructs a new ComponentRef.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.saasplatform.saasservicemgmt.v1beta1.IComponentRef);
+
+                        /** ComponentRef compositeRef. */
+                        public compositeRef?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.ICompositeRef|null);
+
+                        /** ComponentRef component. */
+                        public component: string;
+
+                        /** ComponentRef revision. */
+                        public revision: string;
+
+                        /**
+                         * Creates a new ComponentRef instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ComponentRef instance
+                         */
+                        public static create(properties?: google.cloud.saasplatform.saasservicemgmt.v1beta1.IComponentRef): google.cloud.saasplatform.saasservicemgmt.v1beta1.ComponentRef;
+
+                        /**
+                         * Encodes the specified ComponentRef message. Does not implicitly {@link google.cloud.saasplatform.saasservicemgmt.v1beta1.ComponentRef.verify|verify} messages.
+                         * @param message ComponentRef message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.IComponentRef, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ComponentRef message, length delimited. Does not implicitly {@link google.cloud.saasplatform.saasservicemgmt.v1beta1.ComponentRef.verify|verify} messages.
+                         * @param message ComponentRef message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.IComponentRef, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ComponentRef message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ComponentRef
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.saasplatform.saasservicemgmt.v1beta1.ComponentRef;
+
+                        /**
+                         * Decodes a ComponentRef message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ComponentRef
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.saasplatform.saasservicemgmt.v1beta1.ComponentRef;
+
+                        /**
+                         * Verifies a ComponentRef message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ComponentRef message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ComponentRef
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.saasplatform.saasservicemgmt.v1beta1.ComponentRef;
+
+                        /**
+                         * Creates a plain object from a ComponentRef message. Also converts values to other types if specified.
+                         * @param message ComponentRef
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.ComponentRef, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ComponentRef to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ComponentRef
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AppParams. */
+                    interface IAppParams {
+
+                        /** AppParams group */
+                        group?: (string|null);
+
+                        /** AppParams scope */
+                        scope?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.IScope|null);
+                    }
+
+                    /** Represents an AppParams. */
+                    class AppParams implements IAppParams {
+
+                        /**
+                         * Constructs a new AppParams.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.saasplatform.saasservicemgmt.v1beta1.IAppParams);
+
+                        /** AppParams group. */
+                        public group: string;
+
+                        /** AppParams scope. */
+                        public scope?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.IScope|null);
+
+                        /**
+                         * Creates a new AppParams instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AppParams instance
+                         */
+                        public static create(properties?: google.cloud.saasplatform.saasservicemgmt.v1beta1.IAppParams): google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams;
+
+                        /**
+                         * Encodes the specified AppParams message. Does not implicitly {@link google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.verify|verify} messages.
+                         * @param message AppParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.IAppParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AppParams message, length delimited. Does not implicitly {@link google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.verify|verify} messages.
+                         * @param message AppParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.IAppParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AppParams message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AppParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams;
+
+                        /**
+                         * Decodes an AppParams message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AppParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams;
+
+                        /**
+                         * Verifies an AppParams message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AppParams message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AppParams
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams;
+
+                        /**
+                         * Creates a plain object from an AppParams message. Also converts values to other types if specified.
+                         * @param message AppParams
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AppParams to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AppParams
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AppParams {
+
+                        /** Properties of a Scope. */
+                        interface IScope {
+
+                            /** Scope type */
+                            type?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.Scope.Type|keyof typeof google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.Scope.Type|null);
+                        }
+
+                        /** Represents a Scope. */
+                        class Scope implements IScope {
+
+                            /**
+                             * Constructs a new Scope.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.IScope);
+
+                            /** Scope type. */
+                            public type: (google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.Scope.Type|keyof typeof google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.Scope.Type);
+
+                            /**
+                             * Creates a new Scope instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Scope instance
+                             */
+                            public static create(properties?: google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.IScope): google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.Scope;
+
+                            /**
+                             * Encodes the specified Scope message. Does not implicitly {@link google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.Scope.verify|verify} messages.
+                             * @param message Scope message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.IScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Scope message, length delimited. Does not implicitly {@link google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.Scope.verify|verify} messages.
+                             * @param message Scope message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.IScope, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Scope message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Scope
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.Scope;
+
+                            /**
+                             * Decodes a Scope message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Scope
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.Scope;
+
+                            /**
+                             * Verifies a Scope message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Scope message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Scope
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.Scope;
+
+                            /**
+                             * Creates a plain object from a Scope message. Also converts values to other types if specified.
+                             * @param message Scope
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.saasplatform.saasservicemgmt.v1beta1.AppParams.Scope, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Scope to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Scope
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Scope {
+
+                            /** Type enum. */
+                            enum Type {
+                                TYPE_UNSPECIFIED = 0,
+                                TYPE_REGIONAL = 1,
+                                TYPE_GLOBAL = 2,
+                                REGIONAL = 1,
+                                GLOBAL = 2
+                            }
+                        }
                     }
 
                     /** Represents a SaasDeployments */
@@ -7744,6 +8407,9 @@ export namespace google {
                         /** Rollout control */
                         control?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutControl|null);
 
+                        /** Rollout effectiveUnitFilter */
+                        effectiveUnitFilter?: (string|null);
+
                         /** Rollout labels */
                         labels?: ({ [k: string]: string }|null);
 
@@ -7761,6 +8427,9 @@ export namespace google {
 
                         /** Rollout updateTime */
                         updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Rollout deleteTime */
+                        deleteTime?: (google.protobuf.ITimestamp|null);
                     }
 
                     /** Represents a Rollout. */
@@ -7814,6 +8483,9 @@ export namespace google {
                         /** Rollout control. */
                         public control?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutControl|null);
 
+                        /** Rollout effectiveUnitFilter. */
+                        public effectiveUnitFilter: string;
+
                         /** Rollout labels. */
                         public labels: { [k: string]: string };
 
@@ -7831,6 +8503,9 @@ export namespace google {
 
                         /** Rollout updateTime. */
                         public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Rollout deleteTime. */
+                        public deleteTime?: (google.protobuf.ITimestamp|null);
 
                         /**
                          * Creates a new Rollout instance using the specified properties.
@@ -8120,10 +8795,10 @@ export namespace google {
                         constructor(properties?: google.cloud.saasplatform.saasservicemgmt.v1beta1.IErrorBudget);
 
                         /** ErrorBudget allowedCount. */
-                        public allowedCount: number;
+                        public allowedCount?: (number|null);
 
                         /** ErrorBudget allowedPercentage. */
-                        public allowedPercentage: number;
+                        public allowedPercentage?: (number|null);
 
                         /**
                          * Creates a new ErrorBudget instance using the specified properties.
@@ -8208,6 +8883,9 @@ export namespace google {
 
                         /** RolloutStats operationsByState */
                         operationsByState?: (google.cloud.saasplatform.saasservicemgmt.v1beta1.IAggregate[]|null);
+
+                        /** RolloutStats estimatedTotalUnitCount */
+                        estimatedTotalUnitCount?: (number|Long|string|null);
                     }
 
                     /** Represents a RolloutStats. */
@@ -8221,6 +8899,9 @@ export namespace google {
 
                         /** RolloutStats operationsByState. */
                         public operationsByState: google.cloud.saasplatform.saasservicemgmt.v1beta1.IAggregate[];
+
+                        /** RolloutStats estimatedTotalUnitCount. */
+                        public estimatedTotalUnitCount?: (number|Long|string|null);
 
                         /**
                          * Creates a new RolloutStats instance using the specified properties.
@@ -10116,115 +10797,6 @@ export namespace google {
             IDENTIFIER = 8
         }
 
-        /** Properties of a FieldInfo. */
-        interface IFieldInfo {
-
-            /** FieldInfo format */
-            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
-        }
-
-        /** Represents a FieldInfo. */
-        class FieldInfo implements IFieldInfo {
-
-            /**
-             * Constructs a new FieldInfo.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IFieldInfo);
-
-            /** FieldInfo format. */
-            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
-
-            /**
-             * Creates a new FieldInfo instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldInfo instance
-             */
-            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
-
-            /**
-             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
-
-            /**
-             * Verifies a FieldInfo message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldInfo
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
-
-            /**
-             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
-             * @param message FieldInfo
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldInfo to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace FieldInfo {
-
-            /** Format enum. */
-            enum Format {
-                FORMAT_UNSPECIFIED = 0,
-                UUID4 = 1,
-                IPV4 = 2,
-                IPV6 = 3,
-                IPV4_OR_IPV6 = 4
-            }
-        }
-
         /** Properties of a ResourceDescriptor. */
         interface IResourceDescriptor {
 
@@ -10471,6 +11043,218 @@ export namespace google {
 
             /**
              * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -10845,6 +11629,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -10861,6 +11648,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -11562,6 +12352,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -11575,6 +12368,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -11652,6 +12448,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -11980,6 +12888,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -11993,6 +12904,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -12318,6 +13232,109 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -12434,6 +13451,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -12463,6 +13481,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -12512,6 +13533,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -12647,6 +13671,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -12687,6 +13714,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -13535,6 +14565,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -13560,6 +14593,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -14495,17 +15531,20 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
 
-            /** FieldOptions .google.api.fieldInfo */
-            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
-
             /** FieldOptions .google.api.resourceReference */
             ".google.api.resourceReference"?: (google.api.IResourceReference|null);
+
+            /** FieldOptions .google.api.fieldInfo */
+            ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
         }
 
         /** Represents a FieldOptions. */
@@ -14552,6 +15591,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -14768,6 +15810,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -15011,6 +16168,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -15032,6 +16192,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15622,6 +16785,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -15650,6 +16819,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -15773,6 +16948,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -15892,8 +17177,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -15908,8 +17196,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -16442,6 +17733,13 @@ export namespace google {
             }
         }
 
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
+        }
+
         /** Properties of a Timestamp. */
         interface ITimestamp {
 
@@ -16539,6 +17837,109 @@ export namespace google {
 
             /**
              * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|Buffer|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|Buffer|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -16830,6 +18231,119 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

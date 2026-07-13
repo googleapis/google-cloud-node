@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DocumentProcessorServiceClient} from './document_processor_service_client';
-export {DocumentServiceClient} from './document_service_client';
+export { DocumentProcessorServiceClient } from './document_processor_service_client';
+export { DocumentServiceClient } from './document_service_client';

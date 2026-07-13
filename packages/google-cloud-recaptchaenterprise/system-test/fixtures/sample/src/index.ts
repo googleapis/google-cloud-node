@@ -16,16 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {RecaptchaEnterpriseServiceClient} from '@google-cloud/recaptcha-enterprise';
+import { RecaptchaEnterpriseServiceClient } from '@google-cloud/recaptcha-enterprise';
 
 // check that the client class type name can be used
-function doStuffWithRecaptchaEnterpriseServiceClient(client: RecaptchaEnterpriseServiceClient) {
+function doStuffWithRecaptchaEnterpriseServiceClient(
+  client: RecaptchaEnterpriseServiceClient,
+) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const recaptchaEnterpriseServiceClient = new RecaptchaEnterpriseServiceClient();
+  const recaptchaEnterpriseServiceClient =
+    new RecaptchaEnterpriseServiceClient();
   doStuffWithRecaptchaEnterpriseServiceClient(recaptchaEnterpriseServiceClient);
 }
 

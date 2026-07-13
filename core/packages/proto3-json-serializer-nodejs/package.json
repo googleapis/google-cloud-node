@@ -3,8 +3,8 @@
   "version": "3.0.5",
   "repository": {
     "type": "git",
-    "directory": "packages/proto3-json-serializer-nodejs",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/proto3-json-serializer-nodejs",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "description": "Support for proto3 JSON serialiazation/deserialization for protobuf.js",
   "main": "build/src/index.js",
@@ -33,8 +33,6 @@
     "pretest": "npm run compile",
     "compile-test-protos": "cd test-fixtures/proto && pbjs -t json test.proto > test.json",
     "docs": "jsdoc -c .jsdoc.js",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "prelint": "cd samples && npm link ../ && npm install"
   },
@@ -50,7 +48,6 @@
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^5.0.0",
     "jsdoc-region-tag": "^4.0.0",
-    "linkinator": "^6.1.2",
     "mocha": "^11.1.0",
     "pack-n-play": "^4.0.0",
     "protobufjs-cli": "^1.2.0",

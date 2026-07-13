@@ -84,7 +84,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list zones | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_zones.js) |
 | update router | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.update_router.js) |
 | update subnet | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.update_subnet.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/snippet_metadata_google.cloud.edgenetwork.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -118,7 +117,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -128,7 +127,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

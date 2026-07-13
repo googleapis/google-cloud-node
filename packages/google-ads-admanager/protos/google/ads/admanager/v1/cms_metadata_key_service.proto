@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +34,8 @@ option ruby_package = "Google::Ads::AdManager::V1";
 service CmsMetadataKeyService {
   option (google.api.default_host) = "admanager.googleapis.com";
   option (google.api.oauth_scopes) =
-      "https://www.googleapis.com/auth/admanager";
+      "https://www.googleapis.com/auth/admanager,"
+      "https://www.googleapis.com/auth/admanager.readonly";
 
   // API to retrieve a `CmsMetadataKey` object.
   rpc GetCmsMetadataKey(GetCmsMetadataKeyRequest) returns (CmsMetadataKey) {
@@ -51,6 +52,26 @@ service CmsMetadataKeyService {
       get: "/v1/{parent=networks/*}/cmsMetadataKeys"
     };
     option (google.api.method_signature) = "parent";
+  }
+
+  // API to activate a list of `CmsMetadataKey` objects.
+  rpc BatchActivateCmsMetadataKeys(BatchActivateCmsMetadataKeysRequest)
+      returns (BatchActivateCmsMetadataKeysResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=networks/*}/cmsMetadataKeys:batchActivate"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,names";
+  }
+
+  // API to deactivate a list of `CmsMetadataKey` objects.
+  rpc BatchDeactivateCmsMetadataKeys(BatchDeactivateCmsMetadataKeysRequest)
+      returns (BatchDeactivateCmsMetadataKeysResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=networks/*}/cmsMetadataKeys:batchDeactivate"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,names";
   }
 }
 
@@ -91,8 +112,15 @@ message ListCmsMetadataKeysRequest {
   string page_token = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to filter the response.
-  // See syntax details at
-  // https://developers.google.com/ad-manager/api/beta/filters
+  //  See syntax details at
+  //  https://developers.google.com/ad-manager/api/beta/filters
+  //
+  // <b>Filterable fields:</b>
+  // <ul style="list-style-type:none">
+  //   <li><code>displayName</code></li>
+  //   <li><code>name</code></li>
+  //   <li><code>status</code></li>
+  // </ul>
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.
@@ -127,3 +155,52 @@ message ListCmsMetadataKeysResponse {
   // https://developers.google.com/ad-manager/api/beta/field-masks
   int32 total_size = 3;
 }
+
+// Request object for `BatchActivateCmsMetadataKeys` method.
+message BatchActivateCmsMetadataKeysRequest {
+  // Required. The parent resource where `CmsMetadataKeys` will be activated.
+  // Format: `networks/{network_code}`
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Network"
+    }
+  ];
+
+  // Required. The resource names of the `CmsMetadataKey`s to activate.
+  // Format: `networks/{network_code}/cmsMetadataKeys/{cms_metadata_key_id}`
+  repeated string names = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/CmsMetadataKey"
+    }
+  ];
+}
+
+// Response object for `BatchActivateCmsMetadataKeys` method.
+message BatchActivateCmsMetadataKeysResponse {}
+
+// Request message for `BatchDeactivateCmsMetadataKeys` method.
+message BatchDeactivateCmsMetadataKeysRequest {
+  // Required. The parent resource where `CmsMetadataKeys` will be
+  // deactivated.
+  // Format: `networks/{network_code}`
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Network"
+    }
+  ];
+
+  // Required. The resource names of the `CmsMetadataKey`s to deactivate.
+  // Format: `networks/{network_code}/cmsMetadataKeys/{cms_metadata_key_id}`
+  repeated string names = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/CmsMetadataKey"
+    }
+  ];
+}
+
+// Response object for `BatchDeactivateCmsMetadataKeys` method.
+message BatchDeactivateCmsMetadataKeysResponse {}

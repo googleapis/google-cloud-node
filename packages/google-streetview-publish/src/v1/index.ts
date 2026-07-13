@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {StreetViewPublishServiceClient} from './street_view_publish_service_client';
+export { StreetViewPublishServiceClient } from './street_view_publish_service_client';
