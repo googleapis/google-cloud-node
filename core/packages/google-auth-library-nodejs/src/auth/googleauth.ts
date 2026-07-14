@@ -571,7 +571,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       return null;
     }
     try {
-      return this._getApplicationCredentialsFromFilePath(
+      return await this._getApplicationCredentialsFromFilePath(
         credentialsPath,
         options,
       );
@@ -592,31 +592,35 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
   async _tryGetApplicationCredentialsFromWellKnownFile(
     options?: AuthClientOptions,
   ): Promise<JSONClient | null> {
-    // First, figure out the location of the file, depending upon the OS type.
-    let location = null;
-    if (this._isWindows()) {
-      // Windows
-      location = process.env['APPDATA'];
-    } else {
-      // Linux or Mac
-      const home = process.env['HOME'];
-      if (home) {
-        location = path.join(home, '.config');
+    // First, figure out the location of the Cloud SDK config directory. The
+    // `CLOUDSDK_CONFIG` environment variable overrides the platform-specific
+    // default location; when it is set, `gcloud` stores the application default
+    // credentials file there, so it takes precedence.
+    let configDir: string | undefined = process.env['CLOUDSDK_CONFIG'];
+    if (!configDir) {
+      if (this._isWindows()) {
+        // Windows
+        if (process.env['APPDATA']) {
+          configDir = path.join(process.env['APPDATA'], 'gcloud');
+        }
+      } else {
+        // Linux or Mac
+        const home = process.env['HOME'];
+        if (home) {
+          configDir = path.join(home, '.config', 'gcloud');
+        }
       }
     }
-    // If we found the root path, expand it.
-    if (location) {
-      location = path.join(
-        location,
-        'gcloud',
-        'application_default_credentials.json',
-      );
-      if (!fs.existsSync(location)) {
-        location = null;
-      }
+    // The config directory could not be determined.
+    if (!configDir) {
+      return null;
     }
+    const location = path.join(
+      configDir,
+      'application_default_credentials.json',
+    );
     // The file does not exist.
-    if (!location) {
+    if (!fs.existsSync(location)) {
       return null;
     }
     // The file seems to exist. Try to use it.
