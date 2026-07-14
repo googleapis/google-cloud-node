@@ -300,3 +300,40 @@ export function getWellKnownCertificateConfigFileLocation(): string {
 function _isWindows(): boolean {
   return os.platform().startsWith('win');
 }
+
+/**
+ * Returns the workforce identity pool ID if it is determinable
+ * from the audience resource name.
+ * @param audience The audience used to determine the pool ID.
+ * @return The pool ID associated with the workforce identity pool, if
+ *   this can be determined from the audience field. Otherwise, null is
+ *   returned.
+ */
+export function getWorkforcePoolIdFromAudience(
+  audience: string,
+): string | null {
+  // STS audience pattern:
+  // .../workforcePools/$WORKFORCE_POOL_ID/providers/...
+  return (
+    audience.match(/\/workforcePools\/(?<poolId>[^/]+)\/providers\//)?.groups
+      ?.poolId ?? null
+  );
+}
+
+/**
+ * Returns the workload identity pool ID if it is determinable
+ * from the audience resource name.
+ * @param audience The audience used to determine the pool ID.
+ * @return The pool ID associated with the workload identity pool, if
+ *   this can be determined from the audience field. Otherwise, null is
+ *   returned.
+ */
+export function getWorkloadPoolIdFromAudience(audience: string): string | null {
+  // STS audience pattern:
+  // .../workloadIdentityPools/POOL_ID/providers/...
+  return (
+    audience.match(
+      /\/workloadIdentityPools\/(?<workloadPool>[^/]+)\/providers\//,
+    )?.groups?.workloadPool ?? null
+  );
+}

@@ -19,6 +19,11 @@ import * as nock from 'nock';
 import {describe, it, afterEach} from 'mocha';
 import {Impersonated, JWT, UserRefreshClient} from '../src';
 import {CredentialRequest} from '../src/auth/credentials';
+import {
+  SERVICE_ACCOUNT_LOOKUP_ENDPOINT,
+  RegionalAccessBoundaryData,
+} from '../src/auth/regionalaccessboundary';
+import sinon = require('sinon');
 
 const PEM_PATH = './test/fixtures/private.pem';
 
@@ -69,8 +74,15 @@ interface ImpersonatedCredentialRequest {
 }
 
 describe('impersonated', () => {
+  beforeEach(() => {
+    sinon
+      .stub(Impersonated.prototype, 'getRegionalAccessBoundaryUrl')
+      .resolves(undefined);
+  });
+
   afterEach(() => {
     nock.cleanAll();
+    sinon.restore();
   });
 
   it('should request impersonated credentials on first request', async () => {
@@ -588,5 +600,104 @@ describe('impersonated', () => {
     assert.equal(resp.keyId, expectedKeyID);
     assert.equal(resp.signedBlob, expectedSignedBlob);
     scopes.forEach(s => s.done());
+  });
+
+  describe('regional access boundaries', () => {
+    const TARGET_PRINCIPAL_EMAIL = 'target@project.iam.gserviceaccount.com';
+    const MOCK_ACCESS_TOKEN = 'abc123';
+    const MOCK_AUTH_HEADER = `Bearer ${MOCK_ACCESS_TOKEN}`;
+
+    const EXPECTED_RAB_DATA: RegionalAccessBoundaryData = {
+      locations: ['sadad', 'asdad'],
+      encodedLocations: '000x9',
+    };
+
+    function setupRegionalAccessBoundaryNock(
+      email: string,
+      regionalAccessBoundaryData: RegionalAccessBoundaryData = EXPECTED_RAB_DATA,
+    ): nock.Scope {
+      const lookupUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(email),
+      );
+      return nock(new URL(lookupUrl).origin)
+        .get(new URL(lookupUrl).pathname)
+        .matchHeader('authorization', MOCK_AUTH_HEADER)
+        .reply(200, regionalAccessBoundaryData);
+    }
+
+    beforeEach(() => {
+      (
+        Impersonated.prototype.getRegionalAccessBoundaryUrl as sinon.SinonStub
+      ).restore();
+    });
+
+    afterEach(() => {
+      nock.cleanAll();
+    });
+
+    it('should trigger asynchronous RAB refresh', async () => {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const impersonated = new Impersonated({
+        sourceClient: createSampleJWTClient(),
+        targetPrincipal: TARGET_PRINCIPAL_EMAIL,
+        lifetime: 30,
+        delegates: [],
+        targetScopes: ['https://www.googleapis.com/auth/cloud-platform'],
+      });
+
+      const tokenScope = createGTokenMock({access_token: MOCK_ACCESS_TOKEN});
+      const saScope = nock('https://iamcredentials.googleapis.com')
+        .post(
+          `/v1/projects/-/serviceAccounts/${TARGET_PRINCIPAL_EMAIL}:generateAccessToken`,
+        )
+        .reply(200, {
+          accessToken: MOCK_ACCESS_TOKEN,
+          expireTime: tomorrow.toISOString(),
+        });
+
+      let rabLookupCalled = false;
+      const rabScope = setupRegionalAccessBoundaryNock(TARGET_PRINCIPAL_EMAIL);
+      rabScope.on('request', () => {
+        rabLookupCalled = true;
+      });
+
+      const url = 'https://pubsub.googleapis.com';
+      const headers = await impersonated.getRequestHeaders(url);
+
+      // Initial headers should NOT have RAB
+      assert.strictEqual(headers.get('x-allowed-locations'), null);
+
+      // Wait for background lookup
+      await (impersonated as any).regionalAccessBoundaryManager
+        .regionalAccessBoundaryRefreshPromise;
+      assert.strictEqual(rabLookupCalled, true);
+
+      assert.deepStrictEqual(
+        impersonated.getRegionalAccessBoundary(),
+        EXPECTED_RAB_DATA,
+      );
+
+      tokenScope.done();
+      saScope.done();
+      rabScope.done();
+    });
+
+    it('should fail getRegionalAccessBoundaryUrl in background if no target principal is specified', async () => {
+      const impersonated = new Impersonated({
+        sourceClient: createSampleJWTClient(),
+        // targetPrincipal missing
+        lifetime: 30,
+        delegates: [],
+        targetScopes: ['https://www.googleapis.com/auth/cloud-platform'],
+      });
+
+      // Error happens in background.
+      await assert.rejects(
+        impersonated.getRegionalAccessBoundaryUrl(),
+        /RegionalAccessBoundary: A targetPrincipal is required for regional access boundary lookups but was not provided in the ImpersonatedClient options./,
+      );
+    });
   });
 });

@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import {strict as assert} from 'assert';
-
 import * as nock from 'nock';
 import {
   Gaxios,
@@ -23,10 +22,26 @@ import {
   GaxiosResponse,
 } from 'gaxios';
 
-import {AuthClient, PassThroughClient} from '../src';
+import {AuthClient, Compute, PassThroughClient} from '../src';
 import {snakeToCamel} from '../src/util';
 import {PRODUCT_NAME, USER_AGENT} from '../src/shared.cjs';
 import * as logging from 'google-logging-utils';
+import {BASE_PATH, HOST_ADDRESS, HEADERS} from 'gcp-metadata';
+import sinon = require('sinon');
+import {
+  RegionalAccessBoundaryData,
+  SERVICE_ACCOUNT_LOOKUP_ENDPOINT,
+} from '../src/auth/regionalaccessboundary';
+
+interface ComputeWithRAB {
+  regionalAccessBoundaryManager: {
+    regionalAccessBoundaryRefreshPromise: Promise<void> | null;
+    fetchRegionalAccessBoundary(
+      accessToken: string,
+    ): Promise<RegionalAccessBoundaryData | null>;
+  };
+  resolveServiceAccountEmail(): Promise<string | null>;
+}
 
 // Fakes for the logger, to capture logs that would've happened.
 interface TestLog {
@@ -54,6 +69,17 @@ class TestLogSink implements logging.DebugLogBackend {
 }
 
 describe('AuthClient', () => {
+  let sandbox: sinon.SinonSandbox;
+
+  beforeEach(() => {
+    sandbox = sinon.createSandbox();
+  });
+
+  afterEach(() => {
+    sandbox.restore();
+    nock.cleanAll();
+  });
+
   it('should accept and normalize snake case options to camel case', () => {
     const expected = {
       project_id: 'my-projectId',
@@ -374,6 +400,258 @@ describe('AuthClient', () => {
         assert.deepStrictEqual(testLogSink.logs[0].args[3] as {test: string}, {
           message: 'boo!',
         });
+      });
+    });
+
+    describe('regional access boundaries', () => {
+      const MOCK_ACCESS_TOKEN = 'abc123';
+      const SERVICE_ACCOUNT_EMAIL = 'service-account@example.com';
+      const EXPECTED_RAB_DATA: RegionalAccessBoundaryData = {
+        locations: ['us-central1', 'europe-west1'],
+        encodedLocations: '0x123',
+      };
+
+      function setupTokenNock(
+        email: string | 'default' = 'default',
+      ): nock.Scope {
+        const tokenPath =
+          email === 'default'
+            ? `${BASE_PATH}/instance/service-accounts/default/token`
+            : `${BASE_PATH}/instance/service-accounts/${email}/token`;
+        return nock(HOST_ADDRESS)
+          .get(tokenPath)
+          .reply(
+            200,
+            {access_token: MOCK_ACCESS_TOKEN, expires_in: 10000},
+            HEADERS,
+          );
+      }
+
+      it('should trigger asynchronous background refresh and not block', async () => {
+        const compute = new Compute({
+          serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+        });
+        // Set up nocks
+        const tokenScope = setupTokenNock(SERVICE_ACCOUNT_EMAIL);
+        // Use a promise to track when the RAB lookup is actually called
+        let rabLookupCalled = false;
+        const rabUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+          '{service_account_email}',
+          encodeURIComponent(SERVICE_ACCOUNT_EMAIL),
+        );
+
+        const rabScope = nock(new URL(rabUrl).origin)
+          .get(new URL(rabUrl).pathname)
+          .reply(() => {
+            rabLookupCalled = true;
+            return [200, EXPECTED_RAB_DATA];
+          });
+
+        // Initial call - should NOT have the header yet because refresh is async
+        const headers = await compute.getRequestHeaders(
+          'https://pubsub.googleapis.com',
+        );
+
+        assert.strictEqual(headers.get('x-allowed-locations'), null);
+
+        // Wait for the background task to complete
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
+
+        assert.strictEqual(rabLookupCalled, true);
+        assert.deepStrictEqual(
+          compute.getRegionalAccessBoundary(),
+          EXPECTED_RAB_DATA,
+        );
+
+        tokenScope.done();
+        rabScope.done();
+      });
+
+      it('should NOT trigger lookup for regional endpoints', async () => {
+        const compute = new Compute({
+          serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+        });
+
+        const tokenScope = setupTokenNock(SERVICE_ACCOUNT_EMAIL);
+        // No RAB nock setup here. If it's called, nock will throw.
+
+        await compute.getRequestHeaders('https://us-east1.rep.googleapis.com');
+
+        tokenScope.done();
+        // Assert no RAB lookup was attempted (implicitly verified by lack of nock error)
+      });
+
+      it('should NOT trigger lookup for non-GDU universes', async () => {
+        const compute = new Compute({
+          serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+          universe_domain: 'custom-universe.com',
+        });
+
+        const tokenScope = setupTokenNock(SERVICE_ACCOUNT_EMAIL);
+
+        await compute.getRequestHeaders('https://pubsub.googleapis.com');
+
+        tokenScope.done();
+        // Assert no RAB lookup was attempted
+      });
+
+      it('should NOT crash and should trigger lookup for relative URLs', async () => {
+        const compute = new Compute({
+          serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+        });
+
+        const tokenScope = setupTokenNock(SERVICE_ACCOUNT_EMAIL);
+        // If it treats the relative URL as global, it should try to call the RAB endpoint.
+        const rabUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+          '{universe_domain}',
+          'googleapis.com',
+        ).replace(
+          '{service_account_email}',
+          encodeURIComponent(SERVICE_ACCOUNT_EMAIL),
+        );
+
+        const rabScope = nock(new URL(rabUrl).origin)
+          .get(new URL(rabUrl).pathname)
+          .reply(200, EXPECTED_RAB_DATA);
+
+        // This should NOT throw even though '/v1/resource' is relative
+        await compute.getRequestHeaders('/v1/resource');
+
+        // Wait for the background task to complete
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
+
+        assert.deepStrictEqual(
+          compute.getRegionalAccessBoundary(),
+          EXPECTED_RAB_DATA,
+        );
+
+        tokenScope.done();
+        rabScope.done();
+      });
+
+      it('should retry on retryable errors in background', async () => {
+        const compute = new Compute({
+          serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+        });
+
+        setupTokenNock(SERVICE_ACCOUNT_EMAIL);
+
+        // Mock 503 then 200
+        const rabUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+          '{service_account_email}',
+          encodeURIComponent(SERVICE_ACCOUNT_EMAIL),
+        );
+
+        const rabFail = nock(new URL(rabUrl).origin)
+          .get(new URL(rabUrl).pathname)
+          .reply(503);
+        const rabSuccess = nock(new URL(rabUrl).origin)
+          .get(new URL(rabUrl).pathname)
+          .reply(200, EXPECTED_RAB_DATA);
+
+        await compute.getRequestHeaders('https://pubsub.googleapis.com');
+
+        // Wait for the background task to complete
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
+
+        assert.deepStrictEqual(
+          compute.getRegionalAccessBoundary(),
+          EXPECTED_RAB_DATA,
+        );
+        rabFail.done();
+        rabSuccess.done();
+      });
+
+      it('should enter cooldown on non-retryable error', async () => {
+        const compute = new Compute({
+          serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+        });
+
+        setupTokenNock(SERVICE_ACCOUNT_EMAIL);
+
+        const rabUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+          '{service_account_email}',
+          encodeURIComponent(SERVICE_ACCOUNT_EMAIL),
+        );
+
+        const rabFail = nock(new URL(rabUrl).origin)
+          .get(new URL(rabUrl).pathname)
+          .reply(400, {error: 'Permanent failure'});
+
+        await compute.getRequestHeaders('https://pubsub.googleapis.com');
+
+        // Wait for the background task to complete
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
+
+        assert.ok(compute.getRegionalAccessBoundaryCooldownTime() > Date.now());
+
+        // Subsequent call should NOT trigger nock (which would fail as we only set up 1)
+        await compute.getRequestHeaders('https://pubsub.googleapis.com');
+
+        rabFail.done();
+      });
+
+      it('should only call getLookupUrl once and cache the null result if RAB is not supported', async () => {
+        const compute = new Compute({
+          serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+        });
+
+        const tokenScope = setupTokenNock(SERVICE_ACCOUNT_EMAIL);
+        const spy = sandbox.spy(compute, 'getRegionalAccessBoundaryUrl');
+        sandbox
+          .stub(
+            compute as unknown as ComputeWithRAB,
+            'resolveServiceAccountEmail',
+          )
+          .resolves(null);
+
+        // Make first request. This triggers the background refresh which calls getRegionalAccessBoundaryUrl once.
+        await compute.getRequestHeaders('https://pubsub.googleapis.com');
+
+        // Wait for the background task to complete
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
+
+        assert.strictEqual(spy.callCount, 1);
+
+        // Make second request. This should NOT trigger background refresh or call getRegionalAccessBoundaryUrl again.
+        await compute.getRequestHeaders('https://pubsub.googleapis.com');
+        await (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager.regionalAccessBoundaryRefreshPromise;
+
+        assert.strictEqual(spy.callCount, 1);
+
+        tokenScope.done();
+      });
+
+      it('should throw malformed response error if the response data is null', async () => {
+        const compute = new Compute({
+          serviceAccountEmail: SERVICE_ACCOUNT_EMAIL,
+        });
+
+        const rabUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+          '{service_account_email}',
+          encodeURIComponent(SERVICE_ACCOUNT_EMAIL),
+        );
+
+        // Reply with a 200 OK but null body
+        const rabNull = nock(new URL(rabUrl).origin)
+          .get(new URL(rabUrl).pathname)
+          .reply(200, null as any);
+
+        const manager = (compute as unknown as ComputeWithRAB)
+          .regionalAccessBoundaryManager;
+
+        await assert.rejects(
+          manager.fetchRegionalAccessBoundary('some-token'),
+          /RegionalAccessBoundary: Malformed response from lookup endpoint\./,
+        );
+
+        rabNull.done();
       });
     });
   });

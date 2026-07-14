@@ -33,6 +33,8 @@ import {
   EXPIRATION_TIME_OFFSET,
   SharedExternalAccountClientOptions,
 } from './baseexternalclient';
+import {WORKFORCE_LOOKUP_ENDPOINT} from './regionalaccessboundary';
+import {getWorkforcePoolIdFromAudience} from '../util';
 
 /**
  * The credentials JSON file type for external account authorized user clients.
@@ -159,6 +161,7 @@ export class ExternalAccountAuthorizedUserClient extends AuthClient {
   private cachedAccessToken: CredentialsWithResponse | null;
   private readonly externalAccountAuthorizedUserHandler: ExternalAccountAuthorizedUserHandler;
   private refreshToken: string;
+  private readonly audience: string;
 
   /**
    * Instantiates an ExternalAccountAuthorizedUserClient instances using the
@@ -172,6 +175,7 @@ export class ExternalAccountAuthorizedUserClient extends AuthClient {
     if (options.universe_domain) {
       this.universeDomain = options.universe_domain;
     }
+    this.audience = options.audience;
     this.refreshToken = options.refresh_token;
     const clientAuthentication = {
       confidentialClientType: 'basic',
@@ -218,11 +222,20 @@ export class ExternalAccountAuthorizedUserClient extends AuthClient {
     };
   }
 
-  async getRequestHeaders(): Promise<Headers> {
+  /**
+   * The main authentication interface. It takes an optional url which when
+   * present is the endpoint being accessed, and returns a Promise which
+   * resolves with authorization header fields.
+   *
+   * @param url The URI being authorized.
+   * @returns A promise that resolves with authorization header fields.
+   */
+  async getRequestHeaders(url?: string | URL): Promise<Headers> {
     const accessTokenResponse = await this.getAccessToken();
     const headers = new Headers({
       authorization: `Bearer ${accessTokenResponse.token}`,
     });
+    this.applyRegionalAccessBoundary(headers, url);
     return this.addSharedMetadataHeaders(headers);
   }
 
@@ -256,13 +269,14 @@ export class ExternalAccountAuthorizedUserClient extends AuthClient {
     reAuthRetried = false,
   ): Promise<GaxiosResponse<T>> {
     let response: GaxiosResponse;
+    const requestOpts = {...opts};
     try {
-      const requestHeaders = await this.getRequestHeaders();
-      opts.headers = Gaxios.mergeHeaders(opts.headers);
+      const requestHeaders = await this.getRequestHeaders(opts.url);
+      requestOpts.headers = Gaxios.mergeHeaders(requestOpts.headers);
 
-      this.addUserProjectAndAuthHeaders(opts.headers, requestHeaders);
+      this.applyHeadersFromSource(requestOpts.headers, requestHeaders);
 
-      response = await this.transporter.request<T>(opts);
+      response = await this.transporter.request<T>(requestOpts);
     } catch (e) {
       const res = (e as GaxiosError).response;
       if (res) {
@@ -308,21 +322,34 @@ export class ExternalAccountAuthorizedUserClient extends AuthClient {
 
     if (refreshResponse.refresh_token !== undefined) {
       this.refreshToken = refreshResponse.refresh_token;
+
+      // Set credentials.
+      this.credentials = {...this.cachedAccessToken};
+      delete (this.credentials as CredentialsWithResponse).res;
     }
 
     return this.cachedAccessToken;
   }
 
   /**
-   * Returns whether the provided credentials are expired or not.
-   * If there is no expiry time, assumes the token is not expired or expiring.
-   * @param credentials The credentials to check for expiration.
-   * @return Whether the credentials are expired or not.
+   * Returns the regional access boundary lookup URL for the external account
+   * authorized user.
+   * This implementation constructs the lookup endpoint using the workforce
+   * pool ID resolved from the audience.
+   *
+   * @return The regional access boundary URL string.
+   * @internal
    */
-  private isExpired(credentials: Credentials): boolean {
-    const now = new Date().getTime();
-    return credentials.expiry_date
-      ? now >= credentials.expiry_date - this.eagerRefreshThresholdMillis
-      : false;
+  public async getRegionalAccessBoundaryUrl(): Promise<string | null> {
+    const poolId = getWorkforcePoolIdFromAudience(this.audience);
+    if (!poolId) {
+      throw new Error(
+        `RegionalAccessBoundary: A workforce pool ID is required for regional access boundary lookups but could not be determined from the audience: ${this.audience}.`,
+      );
+    }
+    return WORKFORCE_LOOKUP_ENDPOINT.replace(
+      '{pool_id}',
+      encodeURIComponent(poolId),
+    );
   }
 }

@@ -31,7 +31,16 @@ import {
 import * as sts from './stscredentials';
 import {ClientAuthentication} from './oauth2common';
 import {SnakeToCamelObject, originalOrCamelOptions} from '../util';
+import {
+  getWorkforcePoolIdFromAudience,
+  getWorkloadPoolIdFromAudience,
+} from '../util';
 import {pkg} from '../shared.cjs';
+import {
+  SERVICE_ACCOUNT_LOOKUP_ENDPOINT,
+  WORKFORCE_LOOKUP_ENDPOINT,
+  WORKLOAD_LOOKUP_ENDPOINT,
+} from './regionalaccessboundary';
 
 /**
  * The required token exchange grant_type: rfc8693#section-2.1
@@ -415,11 +424,12 @@ export abstract class BaseExternalAccountClient extends AuthClient {
    * The result has the form:
    * { authorization: 'Bearer <access_token_value>' }
    */
-  async getRequestHeaders(): Promise<Headers> {
+  async getRequestHeaders(url?: string | URL): Promise<Headers> {
     const accessTokenResponse = await this.getAccessToken();
     const headers = new Headers({
       authorization: `Bearer ${accessTokenResponse.token}`,
     });
+    this.applyRegionalAccessBoundary(headers, url);
     return this.addSharedMetadataHeaders(headers);
   }
 
@@ -499,13 +509,14 @@ export abstract class BaseExternalAccountClient extends AuthClient {
     reAuthRetried = false,
   ): Promise<GaxiosResponse<T>> {
     let response: GaxiosResponse;
+    const requestOpts = {...opts};
     try {
-      const requestHeaders = await this.getRequestHeaders();
-      opts.headers = Gaxios.mergeHeaders(opts.headers);
+      const requestHeaders = await this.getRequestHeaders(opts.url);
+      requestOpts.headers = Gaxios.mergeHeaders(requestOpts.headers);
 
-      this.addUserProjectAndAuthHeaders(opts.headers, requestHeaders);
+      this.applyHeadersFromSource(requestOpts.headers, requestHeaders);
 
-      response = await this.transporter.request<T>(opts);
+      response = await this.transporter.request<T>(requestOpts);
     } catch (e) {
       const res = (e as GaxiosError).response;
       if (res) {
@@ -685,19 +696,6 @@ export abstract class BaseExternalAccountClient extends AuthClient {
   }
 
   /**
-   * Returns whether the provided credentials are expired or not.
-   * If there is no expiry time, assumes the token is not expired or expiring.
-   * @param accessToken The credentials to check for expiration.
-   * @return Whether the credentials are expired or not.
-   */
-  private isExpired(accessToken: Credentials): boolean {
-    const now = new Date().getTime();
-    return accessToken.expiry_date
-      ? now >= accessToken.expiry_date - this.eagerRefreshThresholdMillis
-      : false;
-  }
-
-  /**
    * @return The list of scopes for the requested GCP access token.
    */
   private getScopesArray(): string[] {
@@ -721,5 +719,55 @@ export abstract class BaseExternalAccountClient extends AuthClient {
 
   protected getTokenUrl(): string {
     return this.tokenUrl;
+  }
+
+  /**
+   * Returns the regional access boundary lookup URL for the external account.
+   * This implementation constructs the URL based on the audience of the
+   * workforce or workload pool. If the client is configured for service account
+   * impersonation, it uses the target service account email to generate
+   * the lookup endpoint.
+   *
+   * @return The regional access boundary URL string.
+   * @internal
+   */
+  public async getRegionalAccessBoundaryUrl(): Promise<string> {
+    if (this.serviceAccountImpersonationUrl) {
+      // When impersonating a service account, the regional access boundary is determined
+      // by the security policies of the target service account.
+      const email = this.getServiceAccountEmail();
+      if (!email) {
+        throw new Error(
+          `RegionalAccessBoundary: A service account email is required for regional access boundary lookups but could not be determined from the serviceAccountImpersonationUrl ${this.serviceAccountImpersonationUrl}.`,
+        );
+      }
+      return SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(email),
+      );
+    }
+
+    // Check if the audience corresponds to a workforce identity pool.
+    const wfPoolId = getWorkforcePoolIdFromAudience(this.audience);
+    if (wfPoolId) {
+      return WORKFORCE_LOOKUP_ENDPOINT.replace(
+        '{pool_id}',
+        encodeURIComponent(wfPoolId),
+      );
+    }
+
+    // Check if the audience corresponds to a workload identity pool.
+    const wlPoolId = getWorkloadPoolIdFromAudience(this.audience);
+    const projectNumber = this.getProjectNumber(this.audience);
+    if (wlPoolId && projectNumber) {
+      return WORKLOAD_LOOKUP_ENDPOINT.replace(
+        '{project_id}',
+        projectNumber,
+      ).replace('{pool_id}', wlPoolId);
+    }
+
+    throw new RangeError(
+      `RegionalAccessBoundary: Invalid audience provided: "${this.audience}" does not correspond to a workforce or workload pool.`,
+    );
   }
 }

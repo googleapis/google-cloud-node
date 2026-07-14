@@ -17,7 +17,11 @@ import {describe, it, beforeEach, afterEach} from 'mocha';
 import {BASE_PATH, HEADERS, HOST_ADDRESS} from 'gcp-metadata';
 import * as nock from 'nock';
 import * as sinon from 'sinon';
-import {Compute} from '../src';
+import {Compute, gcpMetadata} from '../src';
+import {
+  SERVICE_ACCOUNT_LOOKUP_ENDPOINT,
+  RegionalAccessBoundaryData,
+} from '../src/auth/regionalaccessboundary';
 
 nock.disableNetConnect();
 
@@ -44,6 +48,9 @@ describe('compute', () => {
   let compute: Compute;
   beforeEach(() => {
     compute = new Compute();
+    sandbox
+      .stub(Compute.prototype, 'getRegionalAccessBoundaryUrl')
+      .resolves(undefined);
   });
 
   afterEach(() => {
@@ -260,5 +267,192 @@ describe('compute', () => {
     }
 
     assert.fail('failed to throw');
+  });
+  describe('regional access boundaries', () => {
+    const MOCK_ACCESS_TOKEN = 'abc123';
+    const MOCK_AUTH_HEADER = `Bearer ${MOCK_ACCESS_TOKEN}`;
+    const EXPECTED_RAB_DATA: RegionalAccessBoundaryData = {
+      locations: ['sadad', 'asdad'],
+      encodedLocations: '000x9',
+    };
+
+    function setupTokenNock(email: string | 'default' = 'default'): nock.Scope {
+      const tokenPath =
+        email === 'default'
+          ? `${BASE_PATH}/instance/service-accounts/default/token`
+          : `${BASE_PATH}/instance/service-accounts/${email}/token`;
+      return nock(HOST_ADDRESS)
+        .get(tokenPath)
+        .reply(
+          200,
+          {access_token: MOCK_ACCESS_TOKEN, expires_in: 10000},
+          HEADERS,
+        );
+    }
+
+    function setupRegionalAccessBoundaryNock(
+      email: string,
+      regionalAccessBoundaryData: RegionalAccessBoundaryData = EXPECTED_RAB_DATA,
+    ): nock.Scope {
+      const lookupUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(email),
+      );
+      return nock(new URL(lookupUrl).origin)
+        .get(new URL(lookupUrl).pathname)
+        .matchHeader('authorization', MOCK_AUTH_HEADER)
+        .reply(200, regionalAccessBoundaryData);
+    }
+
+    beforeEach(() => {
+      (
+        Compute.prototype.getRegionalAccessBoundaryUrl as sinon.SinonStub
+      ).restore();
+    });
+
+    afterEach(() => {
+      nock.cleanAll();
+    });
+
+    it('should trigger asynchronous RAB refresh using email from metadata server', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'fake-default-sa@developer.gserviceaccount.com';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      const tokenScope = setupTokenNock('default');
+      const rabScope = setupRegionalAccessBoundaryNock(fakeEmail);
+      let rabLookupCalled = false;
+      rabScope.on('request', () => {
+        rabLookupCalled = true;
+      });
+
+      const url = 'https://pubsub.googleapis.com';
+      const headers = await compute.getRequestHeaders(url);
+
+      // Initial headers should NOT have RAB
+      assert.strictEqual(headers.get('x-allowed-locations'), null);
+
+      // Wait for background tasks (email resolution + RAB lookup)
+      await (compute as any).regionalAccessBoundaryManager
+        .regionalAccessBoundaryRefreshPromise;
+      assert.strictEqual(rabLookupCalled, true);
+
+      assert.deepStrictEqual(
+        compute.getRegionalAccessBoundary(),
+        EXPECTED_RAB_DATA,
+      );
+
+      tokenScope.done();
+      rabScope.done();
+    });
+
+    it('should fail getRegionalAccessBoundaryUrl in background if metadata call fails', async () => {
+      const compute = new Compute();
+
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .rejects(new Error('metadata failure'));
+
+      // Error happens in background, so getRequestHeaders resolves fine.
+      // We manually call getRegionalAccessBoundaryUrl to verify the failure logic.
+      await assert.rejects(
+        compute.getRegionalAccessBoundaryUrl(),
+        /RegionalAccessBoundary: Failed to retrieve default service account email from metadata server./,
+      );
+    });
+
+    it('should return null from getRegionalAccessBoundaryUrl if email returned from metadata server is not a valid email format', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'not-a-valid-email';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      const url = await compute.getRegionalAccessBoundaryUrl();
+      assert.strictEqual(url, null);
+    });
+
+    it('should return valid URL from getRegionalAccessBoundaryUrl if custom serviceAccountEmail is set', async () => {
+      const email = 'custom-sa@example.com';
+      const compute = new Compute({serviceAccountEmail: email});
+      const url = await compute.getRegionalAccessBoundaryUrl();
+      const expectedUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(email),
+      );
+      assert.strictEqual(url, expectedUrl);
+    });
+
+    it('should return valid URL from getRegionalAccessBoundaryUrl when MDS returns a valid default service account email', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'fake-default-sa@developer.gserviceaccount.com';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      const url = await compute.getRegionalAccessBoundaryUrl();
+      const expectedUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(fakeEmail),
+      );
+      assert.strictEqual(url, expectedUrl);
+    });
+
+    it('should NOT trigger asynchronous RAB refresh and NOT attach RAB header if email from metadata server is not a valid email format', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'not-a-valid-email';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      const tokenScope = setupTokenNock('default');
+
+      const url = 'https://pubsub.googleapis.com';
+      const headers = await compute.getRequestHeaders(url);
+
+      // Headers should NOT have RAB
+      assert.strictEqual(headers.get('x-allowed-locations'), null);
+
+      // Wait for background task to run
+      await (compute as any).regionalAccessBoundaryManager
+        .regionalAccessBoundaryRefreshPromise;
+
+      // Regional access boundary data should remain null
+      assert.strictEqual(compute.getRegionalAccessBoundary(), null);
+
+      tokenScope.done();
+    });
+
+    it('should cache the service account email and avoid repeated metadata server calls when email is invalid', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'not-a-valid-email';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      // Call it the first time
+      let url = await compute.getRegionalAccessBoundaryUrl();
+      assert.strictEqual(url, null);
+      assert.strictEqual(metadataStub.callCount, 1);
+
+      // Call it a second time - should use cache and not call MDS again
+      url = await compute.getRegionalAccessBoundaryUrl();
+      assert.strictEqual(url, null);
+      assert.strictEqual(metadataStub.callCount, 1);
+    });
   });
 });
