@@ -337,14 +337,10 @@ describe('compute', () => {
       assert.strictEqual(headers.get('x-allowed-locations'), null);
 
       // Wait for background tasks (email resolution + RAB lookup)
-      let attempts = 0;
-      while (!rabLookupCalled && attempts < 10) {
-        await new Promise(r => setTimeout(r, 100));
-        attempts++;
-      }
+      await (compute as any).regionalAccessBoundaryManager
+        .regionalAccessBoundaryRefreshPromise;
       assert.strictEqual(rabLookupCalled, true);
 
-      await new Promise(r => setTimeout(r, 50));
       assert.deepStrictEqual(
         compute.getRegionalAccessBoundary(),
         EXPECTED_RAB_DATA,
@@ -429,8 +425,9 @@ describe('compute', () => {
       // Headers should NOT have RAB
       assert.strictEqual(headers.get('x-allowed-locations'), null);
 
-      // Wait a little bit for any background task to run
-      await new Promise(r => setTimeout(r, 500));
+      // Wait for background task to run
+      await (compute as any).regionalAccessBoundaryManager
+        .regionalAccessBoundaryRefreshPromise;
 
       // Regional access boundary data should remain null
       assert.strictEqual(compute.getRegionalAccessBoundary(), null);

@@ -951,14 +951,10 @@ describe('ExternalAccountAuthorizedUserClient', () => {
       assert.strictEqual(headers.get('x-allowed-locations'), null);
 
       // Wait for background lookup
-      let attempts = 0;
-      while (!rabLookupCalled && attempts < 20) {
-        await new Promise(r => setTimeout(r, 100));
-        attempts++;
-      }
+      await (client as any).regionalAccessBoundaryManager
+        .regionalAccessBoundaryRefreshPromise;
       assert.strictEqual(rabLookupCalled, true);
 
-      await new Promise(r => setTimeout(r, 100));
       assert.deepStrictEqual(
         client.getRegionalAccessBoundary(),
         EXPECTED_RAB_DATA,

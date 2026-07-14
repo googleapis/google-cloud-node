@@ -670,14 +670,10 @@ describe('impersonated', () => {
       assert.strictEqual(headers.get('x-allowed-locations'), null);
 
       // Wait for background lookup
-      let attempts = 0;
-      while (!rabLookupCalled && attempts < 10) {
-        await new Promise(r => setTimeout(r, 50));
-        attempts++;
-      }
+      await (impersonated as any).regionalAccessBoundaryManager
+        .regionalAccessBoundaryRefreshPromise;
       assert.strictEqual(rabLookupCalled, true);
 
-      await new Promise(r => setTimeout(r, 50));
       assert.deepStrictEqual(
         impersonated.getRegionalAccessBoundary(),
         EXPECTED_RAB_DATA,

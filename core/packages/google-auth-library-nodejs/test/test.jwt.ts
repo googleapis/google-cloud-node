@@ -1309,15 +1309,10 @@ describe('jwt', () => {
       assert.strictEqual(headers.get('x-allowed-locations'), null);
 
       // Wait for background lookup
-      let attempts = 0;
-      while (!rabLookupCalled && attempts < 10) {
-        await new Promise(r => setTimeout(r, 50));
-        attempts++;
-      }
+      await (jwt as any).regionalAccessBoundaryManager
+        .regionalAccessBoundaryRefreshPromise;
       assert.strictEqual(rabLookupCalled, true);
 
-      // Give it a moment to update state
-      await new Promise(r => setTimeout(r, 50));
       assert.deepStrictEqual(
         jwt.getRegionalAccessBoundary(),
         EXPECTED_RAB_DATA,
@@ -1358,14 +1353,10 @@ describe('jwt', () => {
       assert.ok(authHeader?.startsWith('Bearer '));
 
       // Wait for background lookup
-      let attempts = 0;
-      while (!rabLookupCalled && attempts < 10) {
-        await new Promise(r => setTimeout(r, 50));
-        attempts++;
-      }
+      await (jwt as any).regionalAccessBoundaryManager
+        .regionalAccessBoundaryRefreshPromise;
       assert.strictEqual(rabLookupCalled, true);
 
-      await new Promise(r => setTimeout(r, 50));
       assert.deepStrictEqual(
         jwt.getRegionalAccessBoundary(),
         EXPECTED_RAB_DATA,
