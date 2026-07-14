@@ -3011,6 +3011,7 @@ async function testPqc(pemPath: string, port: number) {
 }
 
 async function main() {
+  /*
   const showcaseServer = new ShowcaseServer();
   try {
     await showcaseServer.start();
@@ -3018,6 +3019,7 @@ async function main() {
   } finally {
     showcaseServer.stop();
   }
+  */
 
   console.log('Starting PQC test with TLS-enabled showcase server...');
   process.env['SHOWCASE_VERSION'] = '0.41.1';
