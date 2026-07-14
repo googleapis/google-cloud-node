@@ -33,6 +33,8 @@ export const WORKLOAD_LOOKUP_ENDPOINT =
 export const WORKFORCE_LOOKUP_ENDPOINT =
   'https://iamcredentials.googleapis.com/v1/locations/global/workforcePools/{pool_id}/allowedLocations';
 
+export const REGIONAL_ACCESS_BOUNDARY_HEADER = 'x-allowed-locations';
+
 /**
  * RAB is considered valid for 6 hours.
  */

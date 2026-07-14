@@ -21,6 +21,7 @@ import {log as makeLog} from 'google-logging-utils';
 
 import {PRODUCT_NAME, USER_AGENT} from '../shared.cjs';
 import {
+  REGIONAL_ACCESS_BOUNDARY_HEADER,
   RegionalAccessBoundaryData,
   RegionalAccessBoundaryManager,
 } from './regionalaccessboundary';
@@ -449,7 +450,7 @@ export abstract class AuthClient
         headers,
       );
     if (rabHeader) {
-      headers.set('x-allowed-locations', rabHeader);
+      headers.set(REGIONAL_ACCESS_BOUNDARY_HEADER, rabHeader);
     }
   }
 
@@ -468,7 +469,7 @@ export abstract class AuthClient
   ): T {
     const xGoogUserProject = source.get('x-goog-user-project');
     const authorizationHeader = source.get('authorization');
-    const xGoogAllowedLocs = source.get('x-allowed-locations');
+    const xGoogAllowedLocs = source.get(REGIONAL_ACCESS_BOUNDARY_HEADER);
 
     if (xGoogUserProject) {
       target.set('x-goog-user-project', xGoogUserProject);
@@ -479,7 +480,7 @@ export abstract class AuthClient
     }
 
     if (xGoogAllowedLocs) {
-      target.set('x-allowed-locations', xGoogAllowedLocs);
+      target.set(REGIONAL_ACCESS_BOUNDARY_HEADER, xGoogAllowedLocs);
     }
 
     return target;
