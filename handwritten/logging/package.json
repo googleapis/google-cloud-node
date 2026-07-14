@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/logging",
-  "version": "11.2.3",
+  "version": "11.3.0",
   "description": "Cloud Logging Client Library for Node.js",
   "keywords": [
     "google apis client",
@@ -47,7 +47,7 @@
     "postpublish": "./.kokoro/publish-min.sh"
   },
   "dependencies": {
-    "@google-cloud/common": "^5.0.0",
+    "@google-cloud/common": "^6.0.0",
     "@google-cloud/paginator": "^5.0.0",
     "@google-cloud/projectify": "^4.0.0",
     "@google-cloud/promisify": "4.0.0",
@@ -57,7 +57,7 @@
     "dot-prop": "^6.0.0",
     "extend": "^3.0.2",
     "gcp-metadata": "^6.0.0",
-    "google-auth-library": "^9.0.0",
+    "google-auth-library": "^10.6.2",
     "google-gax": "^4.0.3",
     "long": "^5.3.2",
     "on-finished": "^2.3.0",
@@ -105,7 +105,7 @@
     "webpack-cli": "^5.0.0"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging"
 }

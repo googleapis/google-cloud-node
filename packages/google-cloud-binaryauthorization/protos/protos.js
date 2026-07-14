@@ -82,6 +82,7 @@
                          * @property {Object.<string,google.cloud.binaryauthorization.v1.IAdmissionRule>|null} [istioServiceIdentityAdmissionRules] Policy istioServiceIdentityAdmissionRules
                          * @property {google.cloud.binaryauthorization.v1.IAdmissionRule|null} [defaultAdmissionRule] Policy defaultAdmissionRule
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Policy updateTime
+                         * @property {string|null} [etag] Policy etag
                          */
     
                         /**
@@ -185,6 +186,14 @@
                         Policy.prototype.updateTime = null;
     
                         /**
+                         * Policy etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.binaryauthorization.v1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.etag = "";
+    
+                        /**
                          * Creates a new Policy instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.binaryauthorization.v1.Policy
@@ -241,6 +250,8 @@
                                     writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.binaryauthorization.v1.AdmissionRule.encode(message.kubernetesNamespaceAdmissionRules[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.etag);
                             return writer;
                         };
     
@@ -407,6 +418,10 @@
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 11: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -520,6 +535,9 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -631,6 +649,8 @@
                                     throw TypeError(".google.cloud.binaryauthorization.v1.Policy.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                             }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -661,6 +681,7 @@
                                 object.updateTime = null;
                                 object.description = "";
                                 object.globalPolicyEvaluationMode = options.enums === String ? "GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED" : 0;
+                                object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -710,6 +731,8 @@
                                     object.kubernetesNamespaceAdmissionRules[keys2[j]] = $root.google.cloud.binaryauthorization.v1.AdmissionRule.toObject(message.kubernetesNamespaceAdmissionRules[keys2[j]], options);
                                 }
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -1353,6 +1376,7 @@
                          * @property {string|null} [description] Attestor description
                          * @property {google.cloud.binaryauthorization.v1.IUserOwnedGrafeasNote|null} [userOwnedGrafeasNote] Attestor userOwnedGrafeasNote
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Attestor updateTime
+                         * @property {string|null} [etag] Attestor etag
                          */
     
                         /**
@@ -1402,6 +1426,14 @@
                          */
                         Attestor.prototype.updateTime = null;
     
+                        /**
+                         * Attestor etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.binaryauthorization.v1.Attestor
+                         * @instance
+                         */
+                        Attestor.prototype.etag = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -1448,6 +1480,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.etag);
                             return writer;
                         };
     
@@ -1502,6 +1536,10 @@
                                     }
                                 case 4: {
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 7: {
+                                        message.etag = reader.string();
                                         break;
                                     }
                                 default:
@@ -1563,6 +1601,9 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -1596,6 +1637,8 @@
                                     throw TypeError(".google.cloud.binaryauthorization.v1.Attestor.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                             }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -1616,6 +1659,7 @@
                                 object.name = "";
                                 object.updateTime = null;
                                 object.description = "";
+                                object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1628,6 +1672,8 @@
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -1954,6 +2000,7 @@
                          * @interface IPkixPublicKey
                          * @property {string|null} [publicKeyPem] PkixPublicKey publicKeyPem
                          * @property {google.cloud.binaryauthorization.v1.PkixPublicKey.SignatureAlgorithm|null} [signatureAlgorithm] PkixPublicKey signatureAlgorithm
+                         * @property {string|null} [keyId] PkixPublicKey keyId
                          */
     
                         /**
@@ -1988,6 +2035,14 @@
                         PkixPublicKey.prototype.signatureAlgorithm = 0;
     
                         /**
+                         * PkixPublicKey keyId.
+                         * @member {string} keyId
+                         * @memberof google.cloud.binaryauthorization.v1.PkixPublicKey
+                         * @instance
+                         */
+                        PkixPublicKey.prototype.keyId = "";
+    
+                        /**
                          * Creates a new PkixPublicKey instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.binaryauthorization.v1.PkixPublicKey
@@ -2015,6 +2070,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.publicKeyPem);
                             if (message.signatureAlgorithm != null && Object.hasOwnProperty.call(message, "signatureAlgorithm"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.signatureAlgorithm);
+                            if (message.keyId != null && Object.hasOwnProperty.call(message, "keyId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.keyId);
                             return writer;
                         };
     
@@ -2061,6 +2118,10 @@
                                     }
                                 case 2: {
                                         message.signatureAlgorithm = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.keyId = reader.string();
                                         break;
                                     }
                                 default:
@@ -2111,8 +2172,12 @@
                                     return "signatureAlgorithm: enum value expected";
                                 case 0:
                                 case 1:
+                                case 1:
+                                case 2:
                                 case 2:
                                 case 3:
+                                case 3:
+                                case 4:
                                 case 4:
                                 case 5:
                                 case 6:
@@ -2124,8 +2189,12 @@
                                 case 10:
                                 case 11:
                                 case 11:
+                                case 13:
                                     break;
                                 }
+                            if (message.keyId != null && message.hasOwnProperty("keyId"))
+                                if (!$util.isString(message.keyId))
+                                    return "keyId: string expected";
                             return null;
                         };
     
@@ -2162,7 +2231,15 @@
                             case 1:
                                 message.signatureAlgorithm = 1;
                                 break;
+                            case "RSA_SIGN_PSS_2048_SHA256":
+                            case 1:
+                                message.signatureAlgorithm = 1;
+                                break;
                             case "RSA_PSS_3072_SHA256":
+                            case 2:
+                                message.signatureAlgorithm = 2;
+                                break;
+                            case "RSA_SIGN_PSS_3072_SHA256":
                             case 2:
                                 message.signatureAlgorithm = 2;
                                 break;
@@ -2170,7 +2247,15 @@
                             case 3:
                                 message.signatureAlgorithm = 3;
                                 break;
+                            case "RSA_SIGN_PSS_4096_SHA256":
+                            case 3:
+                                message.signatureAlgorithm = 3;
+                                break;
                             case "RSA_PSS_4096_SHA512":
+                            case 4:
+                                message.signatureAlgorithm = 4;
+                                break;
+                            case "RSA_SIGN_PSS_4096_SHA512":
                             case 4:
                                 message.signatureAlgorithm = 4;
                                 break;
@@ -2214,7 +2299,13 @@
                             case 11:
                                 message.signatureAlgorithm = 11;
                                 break;
+                            case "ML_DSA_65":
+                            case 13:
+                                message.signatureAlgorithm = 13;
+                                break;
                             }
+                            if (object.keyId != null)
+                                message.keyId = String(object.keyId);
                             return message;
                         };
     
@@ -2234,11 +2325,14 @@
                             if (options.defaults) {
                                 object.publicKeyPem = "";
                                 object.signatureAlgorithm = options.enums === String ? "SIGNATURE_ALGORITHM_UNSPECIFIED" : 0;
+                                object.keyId = "";
                             }
                             if (message.publicKeyPem != null && message.hasOwnProperty("publicKeyPem"))
                                 object.publicKeyPem = message.publicKeyPem;
                             if (message.signatureAlgorithm != null && message.hasOwnProperty("signatureAlgorithm"))
                                 object.signatureAlgorithm = options.enums === String ? $root.google.cloud.binaryauthorization.v1.PkixPublicKey.SignatureAlgorithm[message.signatureAlgorithm] === undefined ? message.signatureAlgorithm : $root.google.cloud.binaryauthorization.v1.PkixPublicKey.SignatureAlgorithm[message.signatureAlgorithm] : message.signatureAlgorithm;
+                            if (message.keyId != null && message.hasOwnProperty("keyId"))
+                                object.keyId = message.keyId;
                             return object;
                         };
     
@@ -2274,9 +2368,13 @@
                          * @enum {number}
                          * @property {number} SIGNATURE_ALGORITHM_UNSPECIFIED=0 SIGNATURE_ALGORITHM_UNSPECIFIED value
                          * @property {number} RSA_PSS_2048_SHA256=1 RSA_PSS_2048_SHA256 value
+                         * @property {number} RSA_SIGN_PSS_2048_SHA256=1 RSA_SIGN_PSS_2048_SHA256 value
                          * @property {number} RSA_PSS_3072_SHA256=2 RSA_PSS_3072_SHA256 value
+                         * @property {number} RSA_SIGN_PSS_3072_SHA256=2 RSA_SIGN_PSS_3072_SHA256 value
                          * @property {number} RSA_PSS_4096_SHA256=3 RSA_PSS_4096_SHA256 value
+                         * @property {number} RSA_SIGN_PSS_4096_SHA256=3 RSA_SIGN_PSS_4096_SHA256 value
                          * @property {number} RSA_PSS_4096_SHA512=4 RSA_PSS_4096_SHA512 value
+                         * @property {number} RSA_SIGN_PSS_4096_SHA512=4 RSA_SIGN_PSS_4096_SHA512 value
                          * @property {number} RSA_SIGN_PKCS1_2048_SHA256=5 RSA_SIGN_PKCS1_2048_SHA256 value
                          * @property {number} RSA_SIGN_PKCS1_3072_SHA256=6 RSA_SIGN_PKCS1_3072_SHA256 value
                          * @property {number} RSA_SIGN_PKCS1_4096_SHA256=7 RSA_SIGN_PKCS1_4096_SHA256 value
@@ -2287,14 +2385,19 @@
                          * @property {number} EC_SIGN_P384_SHA384=10 EC_SIGN_P384_SHA384 value
                          * @property {number} ECDSA_P521_SHA512=11 ECDSA_P521_SHA512 value
                          * @property {number} EC_SIGN_P521_SHA512=11 EC_SIGN_P521_SHA512 value
+                         * @property {number} ML_DSA_65=13 ML_DSA_65 value
                          */
                         PkixPublicKey.SignatureAlgorithm = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "SIGNATURE_ALGORITHM_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "RSA_PSS_2048_SHA256"] = 1;
+                            values["RSA_SIGN_PSS_2048_SHA256"] = 1;
                             values[valuesById[2] = "RSA_PSS_3072_SHA256"] = 2;
+                            values["RSA_SIGN_PSS_3072_SHA256"] = 2;
                             values[valuesById[3] = "RSA_PSS_4096_SHA256"] = 3;
+                            values["RSA_SIGN_PSS_4096_SHA256"] = 3;
                             values[valuesById[4] = "RSA_PSS_4096_SHA512"] = 4;
+                            values["RSA_SIGN_PSS_4096_SHA512"] = 4;
                             values[valuesById[5] = "RSA_SIGN_PKCS1_2048_SHA256"] = 5;
                             values[valuesById[6] = "RSA_SIGN_PKCS1_3072_SHA256"] = 6;
                             values[valuesById[7] = "RSA_SIGN_PKCS1_4096_SHA256"] = 7;
@@ -2305,6 +2408,7 @@
                             values["EC_SIGN_P384_SHA384"] = 10;
                             values[valuesById[11] = "ECDSA_P521_SHA512"] = 11;
                             values["EC_SIGN_P521_SHA512"] = 11;
+                            values[valuesById[13] = "ML_DSA_65"] = 13;
                             return values;
                         })();
     
@@ -7776,6 +7880,7 @@
                          * @property {Object.<string,google.cloud.binaryauthorization.v1beta1.IAdmissionRule>|null} [istioServiceIdentityAdmissionRules] Policy istioServiceIdentityAdmissionRules
                          * @property {google.cloud.binaryauthorization.v1beta1.IAdmissionRule|null} [defaultAdmissionRule] Policy defaultAdmissionRule
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Policy updateTime
+                         * @property {string|null} [etag] Policy etag
                          */
     
                         /**
@@ -7879,6 +7984,14 @@
                         Policy.prototype.updateTime = null;
     
                         /**
+                         * Policy etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Policy
+                         * @instance
+                         */
+                        Policy.prototype.etag = "";
+    
+                        /**
                          * Creates a new Policy instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.binaryauthorization.v1beta1.Policy
@@ -7935,6 +8048,8 @@
                                     writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.encode(message.kubernetesNamespaceAdmissionRules[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.etag);
                             return writer;
                         };
     
@@ -8101,6 +8216,10 @@
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
+                                case 11: {
+                                        message.etag = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7, long);
                                     break;
@@ -8214,6 +8333,9 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -8325,6 +8447,8 @@
                                     throw TypeError(".google.cloud.binaryauthorization.v1beta1.Policy.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                             }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -8355,6 +8479,7 @@
                                 object.updateTime = null;
                                 object.description = "";
                                 object.globalPolicyEvaluationMode = options.enums === String ? "GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED" : 0;
+                                object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -8404,6 +8529,8 @@
                                     object.kubernetesNamespaceAdmissionRules[keys2[j]] = $root.google.cloud.binaryauthorization.v1beta1.AdmissionRule.toObject(message.kubernetesNamespaceAdmissionRules[keys2[j]], options);
                                 }
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -9047,6 +9174,7 @@
                          * @property {string|null} [description] Attestor description
                          * @property {google.cloud.binaryauthorization.v1beta1.IUserOwnedDrydockNote|null} [userOwnedDrydockNote] Attestor userOwnedDrydockNote
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Attestor updateTime
+                         * @property {string|null} [etag] Attestor etag
                          */
     
                         /**
@@ -9096,6 +9224,14 @@
                          */
                         Attestor.prototype.updateTime = null;
     
+                        /**
+                         * Attestor etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.binaryauthorization.v1beta1.Attestor
+                         * @instance
+                         */
+                        Attestor.prototype.etag = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -9142,6 +9278,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.description);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.etag);
                             return writer;
                         };
     
@@ -9196,6 +9334,10 @@
                                     }
                                 case 4: {
                                         message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 7: {
+                                        message.etag = reader.string();
                                         break;
                                     }
                                 default:
@@ -9257,6 +9399,9 @@
                                 if (error)
                                     return "updateTime." + error;
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -9290,6 +9435,8 @@
                                     throw TypeError(".google.cloud.binaryauthorization.v1beta1.Attestor.updateTime: object expected");
                                 message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime, long + 1);
                             }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -9310,6 +9457,7 @@
                                 object.name = "";
                                 object.updateTime = null;
                                 object.description = "";
+                                object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -9322,6 +9470,8 @@
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -9805,8 +9955,12 @@
                                     return "signatureAlgorithm: enum value expected";
                                 case 0:
                                 case 1:
+                                case 1:
+                                case 2:
                                 case 2:
                                 case 3:
+                                case 3:
+                                case 4:
                                 case 4:
                                 case 5:
                                 case 6:
@@ -9818,6 +9972,7 @@
                                 case 10:
                                 case 11:
                                 case 11:
+                                case 13:
                                     break;
                                 }
                             return null;
@@ -9856,7 +10011,15 @@
                             case 1:
                                 message.signatureAlgorithm = 1;
                                 break;
+                            case "RSA_SIGN_PSS_2048_SHA256":
+                            case 1:
+                                message.signatureAlgorithm = 1;
+                                break;
                             case "RSA_PSS_3072_SHA256":
+                            case 2:
+                                message.signatureAlgorithm = 2;
+                                break;
+                            case "RSA_SIGN_PSS_3072_SHA256":
                             case 2:
                                 message.signatureAlgorithm = 2;
                                 break;
@@ -9864,7 +10027,15 @@
                             case 3:
                                 message.signatureAlgorithm = 3;
                                 break;
+                            case "RSA_SIGN_PSS_4096_SHA256":
+                            case 3:
+                                message.signatureAlgorithm = 3;
+                                break;
                             case "RSA_PSS_4096_SHA512":
+                            case 4:
+                                message.signatureAlgorithm = 4;
+                                break;
+                            case "RSA_SIGN_PSS_4096_SHA512":
                             case 4:
                                 message.signatureAlgorithm = 4;
                                 break;
@@ -9907,6 +10078,10 @@
                             case "EC_SIGN_P521_SHA512":
                             case 11:
                                 message.signatureAlgorithm = 11;
+                                break;
+                            case "ML_DSA_65":
+                            case 13:
+                                message.signatureAlgorithm = 13;
                                 break;
                             }
                             return message;
@@ -9968,9 +10143,13 @@
                          * @enum {number}
                          * @property {number} SIGNATURE_ALGORITHM_UNSPECIFIED=0 SIGNATURE_ALGORITHM_UNSPECIFIED value
                          * @property {number} RSA_PSS_2048_SHA256=1 RSA_PSS_2048_SHA256 value
+                         * @property {number} RSA_SIGN_PSS_2048_SHA256=1 RSA_SIGN_PSS_2048_SHA256 value
                          * @property {number} RSA_PSS_3072_SHA256=2 RSA_PSS_3072_SHA256 value
+                         * @property {number} RSA_SIGN_PSS_3072_SHA256=2 RSA_SIGN_PSS_3072_SHA256 value
                          * @property {number} RSA_PSS_4096_SHA256=3 RSA_PSS_4096_SHA256 value
+                         * @property {number} RSA_SIGN_PSS_4096_SHA256=3 RSA_SIGN_PSS_4096_SHA256 value
                          * @property {number} RSA_PSS_4096_SHA512=4 RSA_PSS_4096_SHA512 value
+                         * @property {number} RSA_SIGN_PSS_4096_SHA512=4 RSA_SIGN_PSS_4096_SHA512 value
                          * @property {number} RSA_SIGN_PKCS1_2048_SHA256=5 RSA_SIGN_PKCS1_2048_SHA256 value
                          * @property {number} RSA_SIGN_PKCS1_3072_SHA256=6 RSA_SIGN_PKCS1_3072_SHA256 value
                          * @property {number} RSA_SIGN_PKCS1_4096_SHA256=7 RSA_SIGN_PKCS1_4096_SHA256 value
@@ -9981,14 +10160,19 @@
                          * @property {number} EC_SIGN_P384_SHA384=10 EC_SIGN_P384_SHA384 value
                          * @property {number} ECDSA_P521_SHA512=11 ECDSA_P521_SHA512 value
                          * @property {number} EC_SIGN_P521_SHA512=11 EC_SIGN_P521_SHA512 value
+                         * @property {number} ML_DSA_65=13 ML_DSA_65 value
                          */
                         PkixPublicKey.SignatureAlgorithm = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "SIGNATURE_ALGORITHM_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "RSA_PSS_2048_SHA256"] = 1;
+                            values["RSA_SIGN_PSS_2048_SHA256"] = 1;
                             values[valuesById[2] = "RSA_PSS_3072_SHA256"] = 2;
+                            values["RSA_SIGN_PSS_3072_SHA256"] = 2;
                             values[valuesById[3] = "RSA_PSS_4096_SHA256"] = 3;
+                            values["RSA_SIGN_PSS_4096_SHA256"] = 3;
                             values[valuesById[4] = "RSA_PSS_4096_SHA512"] = 4;
+                            values["RSA_SIGN_PSS_4096_SHA512"] = 4;
                             values[valuesById[5] = "RSA_SIGN_PKCS1_2048_SHA256"] = 5;
                             values[valuesById[6] = "RSA_SIGN_PKCS1_3072_SHA256"] = 6;
                             values[valuesById[7] = "RSA_SIGN_PKCS1_4096_SHA256"] = 7;
@@ -9999,6 +10183,7 @@
                             values["EC_SIGN_P384_SHA384"] = 10;
                             values[valuesById[11] = "ECDSA_P521_SHA512"] = 11;
                             values["EC_SIGN_P521_SHA512"] = 11;
+                            values[valuesById[13] = "ML_DSA_65"] = 13;
                             return values;
                         })();
     
@@ -10589,6 +10774,74 @@
                         return BinauthzManagementServiceV1Beta1;
                     })();
     
+                    v1beta1.SystemPolicyV1Beta1 = (function() {
+    
+                        /**
+                         * Constructs a new SystemPolicyV1Beta1 service.
+                         * @memberof google.cloud.binaryauthorization.v1beta1
+                         * @classdesc Represents a SystemPolicyV1Beta1
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function SystemPolicyV1Beta1(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (SystemPolicyV1Beta1.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SystemPolicyV1Beta1;
+    
+                        /**
+                         * Creates new SystemPolicyV1Beta1 service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {SystemPolicyV1Beta1} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        SystemPolicyV1Beta1.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1|getSystemPolicy}.
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @typedef GetSystemPolicyCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.binaryauthorization.v1beta1.Policy} [response] Policy
+                         */
+    
+                        /**
+                         * Calls GetSystemPolicy.
+                         * @function getSystemPolicy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} request GetSystemPolicyRequest message or plain object
+                         * @param {google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(SystemPolicyV1Beta1.prototype.getSystemPolicy = function getSystemPolicy(request, callback) {
+                            return this.rpcCall(getSystemPolicy, $root.google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest, $root.google.cloud.binaryauthorization.v1beta1.Policy, request, callback);
+                        }, "name", { value: "GetSystemPolicy" });
+    
+                        /**
+                         * Calls GetSystemPolicy.
+                         * @function getSystemPolicy
+                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
+                         * @instance
+                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} request GetSystemPolicyRequest message or plain object
+                         * @returns {Promise<google.cloud.binaryauthorization.v1beta1.Policy>} Promise
+                         * @variation 2
+                         */
+    
+                        return SystemPolicyV1Beta1;
+                    })();
+    
                     v1beta1.GetPolicyRequest = (function() {
     
                         /**
@@ -10804,74 +11057,6 @@
                         };
     
                         return GetPolicyRequest;
-                    })();
-    
-                    v1beta1.SystemPolicyV1Beta1 = (function() {
-    
-                        /**
-                         * Constructs a new SystemPolicyV1Beta1 service.
-                         * @memberof google.cloud.binaryauthorization.v1beta1
-                         * @classdesc Represents a SystemPolicyV1Beta1
-                         * @extends $protobuf.rpc.Service
-                         * @constructor
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         */
-                        function SystemPolicyV1Beta1(rpcImpl, requestDelimited, responseDelimited) {
-                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
-                        }
-    
-                        (SystemPolicyV1Beta1.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = SystemPolicyV1Beta1;
-    
-                        /**
-                         * Creates new SystemPolicyV1Beta1 service using the specified rpc implementation.
-                         * @function create
-                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
-                         * @static
-                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-                         * @returns {SystemPolicyV1Beta1} RPC service. Useful where requests and/or responses are streamed.
-                         */
-                        SystemPolicyV1Beta1.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-                            return new this(rpcImpl, requestDelimited, responseDelimited);
-                        };
-    
-                        /**
-                         * Callback as used by {@link google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1|getSystemPolicy}.
-                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
-                         * @typedef GetSystemPolicyCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.cloud.binaryauthorization.v1beta1.Policy} [response] Policy
-                         */
-    
-                        /**
-                         * Calls GetSystemPolicy.
-                         * @function getSystemPolicy
-                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
-                         * @instance
-                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} request GetSystemPolicyRequest message or plain object
-                         * @param {google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1.GetSystemPolicyCallback} callback Node-style callback called with the error, if any, and Policy
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(SystemPolicyV1Beta1.prototype.getSystemPolicy = function getSystemPolicy(request, callback) {
-                            return this.rpcCall(getSystemPolicy, $root.google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest, $root.google.cloud.binaryauthorization.v1beta1.Policy, request, callback);
-                        }, "name", { value: "GetSystemPolicy" });
-    
-                        /**
-                         * Calls GetSystemPolicy.
-                         * @function getSystemPolicy
-                         * @memberof google.cloud.binaryauthorization.v1beta1.SystemPolicyV1Beta1
-                         * @instance
-                         * @param {google.cloud.binaryauthorization.v1beta1.IGetSystemPolicyRequest} request GetSystemPolicyRequest message or plain object
-                         * @returns {Promise<google.cloud.binaryauthorization.v1beta1.Policy>} Promise
-                         * @variation 2
-                         */
-    
-                        return SystemPolicyV1Beta1;
                     })();
     
                     v1beta1.UpdatePolicyRequest = (function() {

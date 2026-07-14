@@ -43516,6 +43516,7 @@
                          * @property {string|null} [model] InputAudioConfig model
                          * @property {google.cloud.dialogflow.v2.SpeechModelVariant|null} [modelVariant] InputAudioConfig modelVariant
                          * @property {boolean|null} [singleUtterance] InputAudioConfig singleUtterance
+                         * @property {boolean|null} [enableVoiceActivityEvents] InputAudioConfig enableVoiceActivityEvents
                          * @property {boolean|null} [disableNoSpeechRecognizedEvent] InputAudioConfig disableNoSpeechRecognizedEvent
                          * @property {boolean|null} [enableAutomaticPunctuation] InputAudioConfig enableAutomaticPunctuation
                          * @property {Array.<string>|null} [phraseSets] InputAudioConfig phraseSets
@@ -43613,6 +43614,14 @@
                         InputAudioConfig.prototype.singleUtterance = false;
     
                         /**
+                         * InputAudioConfig enableVoiceActivityEvents.
+                         * @member {boolean} enableVoiceActivityEvents
+                         * @memberof google.cloud.dialogflow.v2.InputAudioConfig
+                         * @instance
+                         */
+                        InputAudioConfig.prototype.enableVoiceActivityEvents = false;
+    
+                        /**
                          * InputAudioConfig disableNoSpeechRecognizedEvent.
                          * @member {boolean} disableNoSpeechRecognizedEvent
                          * @memberof google.cloud.dialogflow.v2.InputAudioConfig
@@ -43697,6 +43706,8 @@
                                     writer.uint32(/* id 20, wireType 2 =*/162).string(message.phraseSets[i]);
                             if (message.optOutConformerModelMigration != null && Object.hasOwnProperty.call(message, "optOutConformerModelMigration"))
                                 writer.uint32(/* id 26, wireType 0 =*/208).bool(message.optOutConformerModelMigration);
+                            if (message.enableVoiceActivityEvents != null && Object.hasOwnProperty.call(message, "enableVoiceActivityEvents"))
+                                writer.uint32(/* id 27, wireType 0 =*/216).bool(message.enableVoiceActivityEvents);
                             return writer;
                         };
     
@@ -43775,6 +43786,10 @@
                                     }
                                 case 8: {
                                         message.singleUtterance = reader.bool();
+                                        break;
+                                    }
+                                case 27: {
+                                        message.enableVoiceActivityEvents = reader.bool();
                                         break;
                                     }
                                 case 14: {
@@ -43890,6 +43905,9 @@
                             if (message.singleUtterance != null && message.hasOwnProperty("singleUtterance"))
                                 if (typeof message.singleUtterance !== "boolean")
                                     return "singleUtterance: boolean expected";
+                            if (message.enableVoiceActivityEvents != null && message.hasOwnProperty("enableVoiceActivityEvents"))
+                                if (typeof message.enableVoiceActivityEvents !== "boolean")
+                                    return "enableVoiceActivityEvents: boolean expected";
                             if (message.disableNoSpeechRecognizedEvent != null && message.hasOwnProperty("disableNoSpeechRecognizedEvent"))
                                 if (typeof message.disableNoSpeechRecognizedEvent !== "boolean")
                                     return "disableNoSpeechRecognizedEvent: boolean expected";
@@ -44020,6 +44038,8 @@
                             }
                             if (object.singleUtterance != null)
                                 message.singleUtterance = Boolean(object.singleUtterance);
+                            if (object.enableVoiceActivityEvents != null)
+                                message.enableVoiceActivityEvents = Boolean(object.enableVoiceActivityEvents);
                             if (object.disableNoSpeechRecognizedEvent != null)
                                 message.disableNoSpeechRecognizedEvent = Boolean(object.disableNoSpeechRecognizedEvent);
                             if (object.enableAutomaticPunctuation != null)
@@ -44065,6 +44085,7 @@
                                 object.disableNoSpeechRecognizedEvent = false;
                                 object.enableAutomaticPunctuation = false;
                                 object.optOutConformerModelMigration = false;
+                                object.enableVoiceActivityEvents = false;
                             }
                             if (message.audioEncoding != null && message.hasOwnProperty("audioEncoding"))
                                 object.audioEncoding = options.enums === String ? $root.google.cloud.dialogflow.v2.AudioEncoding[message.audioEncoding] === undefined ? message.audioEncoding : $root.google.cloud.dialogflow.v2.AudioEncoding[message.audioEncoding] : message.audioEncoding;
@@ -44101,6 +44122,8 @@
                             }
                             if (message.optOutConformerModelMigration != null && message.hasOwnProperty("optOutConformerModelMigration"))
                                 object.optOutConformerModelMigration = message.optOutConformerModelMigration;
+                            if (message.enableVoiceActivityEvents != null && message.hasOwnProperty("enableVoiceActivityEvents"))
+                                object.enableVoiceActivityEvents = message.enableVoiceActivityEvents;
                             return object;
                         };
     
@@ -50357,7 +50380,11 @@
                                     return "messageType: enum value expected";
                                 case 0:
                                 case 1:
+                                case 3:
                                 case 2:
+                                case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.transcript != null && message.hasOwnProperty("transcript"))
@@ -50420,9 +50447,25 @@
                             case 1:
                                 message.messageType = 1;
                                 break;
+                            case "DTMF_DIGITS":
+                            case 3:
+                                message.messageType = 3;
+                                break;
                             case "END_OF_SINGLE_UTTERANCE":
                             case 2:
                                 message.messageType = 2;
+                                break;
+                            case "PARTIAL_DTMF_DIGITS":
+                            case 4:
+                                message.messageType = 4;
+                                break;
+                            case "SPEECH_ACTIVITY_BEGIN":
+                            case 5:
+                                message.messageType = 5;
+                                break;
+                            case "SPEECH_ACTIVITY_END":
+                            case 6:
+                                message.messageType = 6;
                                 break;
                             }
                             if (object.transcript != null)
@@ -50526,13 +50569,21 @@
                          * @enum {number}
                          * @property {number} MESSAGE_TYPE_UNSPECIFIED=0 MESSAGE_TYPE_UNSPECIFIED value
                          * @property {number} TRANSCRIPT=1 TRANSCRIPT value
+                         * @property {number} DTMF_DIGITS=3 DTMF_DIGITS value
                          * @property {number} END_OF_SINGLE_UTTERANCE=2 END_OF_SINGLE_UTTERANCE value
+                         * @property {number} PARTIAL_DTMF_DIGITS=4 PARTIAL_DTMF_DIGITS value
+                         * @property {number} SPEECH_ACTIVITY_BEGIN=5 SPEECH_ACTIVITY_BEGIN value
+                         * @property {number} SPEECH_ACTIVITY_END=6 SPEECH_ACTIVITY_END value
                          */
                         StreamingRecognitionResult.MessageType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "MESSAGE_TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "TRANSCRIPT"] = 1;
+                            values[valuesById[3] = "DTMF_DIGITS"] = 3;
                             values[valuesById[2] = "END_OF_SINGLE_UTTERANCE"] = 2;
+                            values[valuesById[4] = "PARTIAL_DTMF_DIGITS"] = 4;
+                            values[valuesById[5] = "SPEECH_ACTIVITY_BEGIN"] = 5;
+                            values[valuesById[6] = "SPEECH_ACTIVITY_END"] = 6;
                             return values;
                         })();
     
@@ -84877,6 +84928,7 @@
                          * @property {google.cloud.dialogflow.v2.SearchKnowledgeDebugInfo.ISearchKnowledgeBehavior|null} [searchKnowledgeBehavior] SearchKnowledgeDebugInfo searchKnowledgeBehavior
                          * @property {google.cloud.dialogflow.v2.IIngestedContextReferenceDebugInfo|null} [ingestedContextReferenceDebugInfo] SearchKnowledgeDebugInfo ingestedContextReferenceDebugInfo
                          * @property {google.cloud.dialogflow.v2.IServiceLatency|null} [serviceLatency] SearchKnowledgeDebugInfo serviceLatency
+                         * @property {google.protobuf.IStruct|null} [cesDebugInfo] SearchKnowledgeDebugInfo cesDebugInfo
                          */
     
                         /**
@@ -84927,6 +84979,14 @@
                         SearchKnowledgeDebugInfo.prototype.serviceLatency = null;
     
                         /**
+                         * SearchKnowledgeDebugInfo cesDebugInfo.
+                         * @member {google.protobuf.IStruct|null|undefined} cesDebugInfo
+                         * @memberof google.cloud.dialogflow.v2.SearchKnowledgeDebugInfo
+                         * @instance
+                         */
+                        SearchKnowledgeDebugInfo.prototype.cesDebugInfo = null;
+    
+                        /**
                          * Creates a new SearchKnowledgeDebugInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dialogflow.v2.SearchKnowledgeDebugInfo
@@ -84958,6 +85018,8 @@
                                 $root.google.cloud.dialogflow.v2.IngestedContextReferenceDebugInfo.encode(message.ingestedContextReferenceDebugInfo, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.serviceLatency != null && Object.hasOwnProperty.call(message, "serviceLatency"))
                                 $root.google.cloud.dialogflow.v2.ServiceLatency.encode(message.serviceLatency, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.cesDebugInfo != null && Object.hasOwnProperty.call(message, "cesDebugInfo"))
+                                $root.google.protobuf.Struct.encode(message.cesDebugInfo, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -85012,6 +85074,10 @@
                                     }
                                 case 4: {
                                         message.serviceLatency = $root.google.cloud.dialogflow.v2.ServiceLatency.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.cesDebugInfo = $root.google.protobuf.Struct.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
@@ -85083,6 +85149,11 @@
                                 var error = $root.google.cloud.dialogflow.v2.ServiceLatency.verify(message.serviceLatency, long + 1);
                                 if (error)
                                     return "serviceLatency." + error;
+                            }
+                            if (message.cesDebugInfo != null && message.hasOwnProperty("cesDebugInfo")) {
+                                var error = $root.google.protobuf.Struct.verify(message.cesDebugInfo, long + 1);
+                                if (error)
+                                    return "cesDebugInfo." + error;
                             }
                             return null;
                         };
@@ -85166,6 +85237,11 @@
                                     throw TypeError(".google.cloud.dialogflow.v2.SearchKnowledgeDebugInfo.serviceLatency: object expected");
                                 message.serviceLatency = $root.google.cloud.dialogflow.v2.ServiceLatency.fromObject(object.serviceLatency, long + 1);
                             }
+                            if (object.cesDebugInfo != null) {
+                                if (typeof object.cesDebugInfo !== "object")
+                                    throw TypeError(".google.cloud.dialogflow.v2.SearchKnowledgeDebugInfo.cesDebugInfo: object expected");
+                                message.cesDebugInfo = $root.google.protobuf.Struct.fromObject(object.cesDebugInfo, long + 1);
+                            }
                             return message;
                         };
     
@@ -85187,6 +85263,7 @@
                                 object.searchKnowledgeBehavior = null;
                                 object.ingestedContextReferenceDebugInfo = null;
                                 object.serviceLatency = null;
+                                object.cesDebugInfo = null;
                             }
                             if (message.datastoreResponseReason != null && message.hasOwnProperty("datastoreResponseReason"))
                                 object.datastoreResponseReason = options.enums === String ? $root.google.cloud.dialogflow.v2.DatastoreResponseReason[message.datastoreResponseReason] === undefined ? message.datastoreResponseReason : $root.google.cloud.dialogflow.v2.DatastoreResponseReason[message.datastoreResponseReason] : message.datastoreResponseReason;
@@ -85196,6 +85273,8 @@
                                 object.ingestedContextReferenceDebugInfo = $root.google.cloud.dialogflow.v2.IngestedContextReferenceDebugInfo.toObject(message.ingestedContextReferenceDebugInfo, options);
                             if (message.serviceLatency != null && message.hasOwnProperty("serviceLatency"))
                                 object.serviceLatency = $root.google.cloud.dialogflow.v2.ServiceLatency.toObject(message.serviceLatency, options);
+                            if (message.cesDebugInfo != null && message.hasOwnProperty("cesDebugInfo"))
+                                object.cesDebugInfo = $root.google.protobuf.Struct.toObject(message.cesDebugInfo, options);
                             return object;
                         };
     
@@ -188648,6 +188727,7 @@
                          * @property {string|null} [model] InputAudioConfig model
                          * @property {google.cloud.dialogflow.v2beta1.SpeechModelVariant|null} [modelVariant] InputAudioConfig modelVariant
                          * @property {boolean|null} [singleUtterance] InputAudioConfig singleUtterance
+                         * @property {boolean|null} [enableVoiceActivityEvents] InputAudioConfig enableVoiceActivityEvents
                          * @property {boolean|null} [disableNoSpeechRecognizedEvent] InputAudioConfig disableNoSpeechRecognizedEvent
                          * @property {google.cloud.dialogflow.v2beta1.IBargeInConfig|null} [bargeInConfig] InputAudioConfig bargeInConfig
                          * @property {boolean|null} [enableAutomaticPunctuation] InputAudioConfig enableAutomaticPunctuation
@@ -188745,6 +188825,14 @@
                          * @instance
                          */
                         InputAudioConfig.prototype.singleUtterance = false;
+    
+                        /**
+                         * InputAudioConfig enableVoiceActivityEvents.
+                         * @member {boolean} enableVoiceActivityEvents
+                         * @memberof google.cloud.dialogflow.v2beta1.InputAudioConfig
+                         * @instance
+                         */
+                        InputAudioConfig.prototype.enableVoiceActivityEvents = false;
     
                         /**
                          * InputAudioConfig disableNoSpeechRecognizedEvent.
@@ -188851,6 +188939,8 @@
                                     writer.uint32(/* id 20, wireType 2 =*/162).string(message.phraseSets[i]);
                             if (message.optOutConformerModelMigration != null && Object.hasOwnProperty.call(message, "optOutConformerModelMigration"))
                                 writer.uint32(/* id 26, wireType 0 =*/208).bool(message.optOutConformerModelMigration);
+                            if (message.enableVoiceActivityEvents != null && Object.hasOwnProperty.call(message, "enableVoiceActivityEvents"))
+                                writer.uint32(/* id 27, wireType 0 =*/216).bool(message.enableVoiceActivityEvents);
                             return writer;
                         };
     
@@ -188929,6 +189019,10 @@
                                     }
                                 case 8: {
                                         message.singleUtterance = reader.bool();
+                                        break;
+                                    }
+                                case 27: {
+                                        message.enableVoiceActivityEvents = reader.bool();
                                         break;
                                     }
                                 case 14: {
@@ -189052,6 +189146,9 @@
                             if (message.singleUtterance != null && message.hasOwnProperty("singleUtterance"))
                                 if (typeof message.singleUtterance !== "boolean")
                                     return "singleUtterance: boolean expected";
+                            if (message.enableVoiceActivityEvents != null && message.hasOwnProperty("enableVoiceActivityEvents"))
+                                if (typeof message.enableVoiceActivityEvents !== "boolean")
+                                    return "enableVoiceActivityEvents: boolean expected";
                             if (message.disableNoSpeechRecognizedEvent != null && message.hasOwnProperty("disableNoSpeechRecognizedEvent"))
                                 if (typeof message.disableNoSpeechRecognizedEvent !== "boolean")
                                     return "disableNoSpeechRecognizedEvent: boolean expected";
@@ -189192,6 +189289,8 @@
                             }
                             if (object.singleUtterance != null)
                                 message.singleUtterance = Boolean(object.singleUtterance);
+                            if (object.enableVoiceActivityEvents != null)
+                                message.enableVoiceActivityEvents = Boolean(object.enableVoiceActivityEvents);
                             if (object.disableNoSpeechRecognizedEvent != null)
                                 message.disableNoSpeechRecognizedEvent = Boolean(object.disableNoSpeechRecognizedEvent);
                             if (object.bargeInConfig != null) {
@@ -189249,6 +189348,7 @@
                                 object.enableAutomaticPunctuation = false;
                                 object.defaultNoSpeechTimeout = null;
                                 object.optOutConformerModelMigration = false;
+                                object.enableVoiceActivityEvents = false;
                             }
                             if (message.audioEncoding != null && message.hasOwnProperty("audioEncoding"))
                                 object.audioEncoding = options.enums === String ? $root.google.cloud.dialogflow.v2beta1.AudioEncoding[message.audioEncoding] === undefined ? message.audioEncoding : $root.google.cloud.dialogflow.v2beta1.AudioEncoding[message.audioEncoding] : message.audioEncoding;
@@ -189289,6 +189389,8 @@
                             }
                             if (message.optOutConformerModelMigration != null && message.hasOwnProperty("optOutConformerModelMigration"))
                                 object.optOutConformerModelMigration = message.optOutConformerModelMigration;
+                            if (message.enableVoiceActivityEvents != null && message.hasOwnProperty("enableVoiceActivityEvents"))
+                                object.enableVoiceActivityEvents = message.enableVoiceActivityEvents;
                             return object;
                         };
     
@@ -196409,6 +196511,8 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
+                                case 6:
                                     break;
                                 }
                             if (message.transcript != null && message.hasOwnProperty("transcript"))
@@ -196490,6 +196594,14 @@
                             case "PARTIAL_DTMF_DIGITS":
                             case 4:
                                 message.messageType = 4;
+                                break;
+                            case "SPEECH_ACTIVITY_BEGIN":
+                            case 5:
+                                message.messageType = 5;
+                                break;
+                            case "SPEECH_ACTIVITY_END":
+                            case 6:
+                                message.messageType = 6;
                                 break;
                             }
                             if (object.transcript != null)
@@ -196609,6 +196721,8 @@
                          * @property {number} END_OF_SINGLE_UTTERANCE=2 END_OF_SINGLE_UTTERANCE value
                          * @property {number} DTMF_DIGITS=3 DTMF_DIGITS value
                          * @property {number} PARTIAL_DTMF_DIGITS=4 PARTIAL_DTMF_DIGITS value
+                         * @property {number} SPEECH_ACTIVITY_BEGIN=5 SPEECH_ACTIVITY_BEGIN value
+                         * @property {number} SPEECH_ACTIVITY_END=6 SPEECH_ACTIVITY_END value
                          */
                         StreamingRecognitionResult.MessageType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -196617,6 +196731,8 @@
                             values[valuesById[2] = "END_OF_SINGLE_UTTERANCE"] = 2;
                             values[valuesById[3] = "DTMF_DIGITS"] = 3;
                             values[valuesById[4] = "PARTIAL_DTMF_DIGITS"] = 4;
+                            values[valuesById[5] = "SPEECH_ACTIVITY_BEGIN"] = 5;
+                            values[valuesById[6] = "SPEECH_ACTIVITY_END"] = 6;
                             return values;
                         })();
     
@@ -235720,6 +235836,7 @@
                          * @property {google.cloud.dialogflow.v2beta1.SearchKnowledgeDebugInfo.ISearchKnowledgeBehavior|null} [searchKnowledgeBehavior] SearchKnowledgeDebugInfo searchKnowledgeBehavior
                          * @property {google.cloud.dialogflow.v2beta1.IIngestedContextReferenceDebugInfo|null} [ingestedContextReferenceDebugInfo] SearchKnowledgeDebugInfo ingestedContextReferenceDebugInfo
                          * @property {google.cloud.dialogflow.v2beta1.IServiceLatency|null} [serviceLatency] SearchKnowledgeDebugInfo serviceLatency
+                         * @property {google.protobuf.IStruct|null} [cesDebugInfo] SearchKnowledgeDebugInfo cesDebugInfo
                          */
     
                         /**
@@ -235770,6 +235887,14 @@
                         SearchKnowledgeDebugInfo.prototype.serviceLatency = null;
     
                         /**
+                         * SearchKnowledgeDebugInfo cesDebugInfo.
+                         * @member {google.protobuf.IStruct|null|undefined} cesDebugInfo
+                         * @memberof google.cloud.dialogflow.v2beta1.SearchKnowledgeDebugInfo
+                         * @instance
+                         */
+                        SearchKnowledgeDebugInfo.prototype.cesDebugInfo = null;
+    
+                        /**
                          * Creates a new SearchKnowledgeDebugInfo instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dialogflow.v2beta1.SearchKnowledgeDebugInfo
@@ -235801,6 +235926,8 @@
                                 $root.google.cloud.dialogflow.v2beta1.IngestedContextReferenceDebugInfo.encode(message.ingestedContextReferenceDebugInfo, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.serviceLatency != null && Object.hasOwnProperty.call(message, "serviceLatency"))
                                 $root.google.cloud.dialogflow.v2beta1.ServiceLatency.encode(message.serviceLatency, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.cesDebugInfo != null && Object.hasOwnProperty.call(message, "cesDebugInfo"))
+                                $root.google.protobuf.Struct.encode(message.cesDebugInfo, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -235855,6 +235982,10 @@
                                     }
                                 case 4: {
                                         message.serviceLatency = $root.google.cloud.dialogflow.v2beta1.ServiceLatency.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.cesDebugInfo = $root.google.protobuf.Struct.decode(reader, reader.uint32(), undefined, long + 1);
                                         break;
                                     }
                                 default:
@@ -235926,6 +236057,11 @@
                                 var error = $root.google.cloud.dialogflow.v2beta1.ServiceLatency.verify(message.serviceLatency, long + 1);
                                 if (error)
                                     return "serviceLatency." + error;
+                            }
+                            if (message.cesDebugInfo != null && message.hasOwnProperty("cesDebugInfo")) {
+                                var error = $root.google.protobuf.Struct.verify(message.cesDebugInfo, long + 1);
+                                if (error)
+                                    return "cesDebugInfo." + error;
                             }
                             return null;
                         };
@@ -236009,6 +236145,11 @@
                                     throw TypeError(".google.cloud.dialogflow.v2beta1.SearchKnowledgeDebugInfo.serviceLatency: object expected");
                                 message.serviceLatency = $root.google.cloud.dialogflow.v2beta1.ServiceLatency.fromObject(object.serviceLatency, long + 1);
                             }
+                            if (object.cesDebugInfo != null) {
+                                if (typeof object.cesDebugInfo !== "object")
+                                    throw TypeError(".google.cloud.dialogflow.v2beta1.SearchKnowledgeDebugInfo.cesDebugInfo: object expected");
+                                message.cesDebugInfo = $root.google.protobuf.Struct.fromObject(object.cesDebugInfo, long + 1);
+                            }
                             return message;
                         };
     
@@ -236030,6 +236171,7 @@
                                 object.searchKnowledgeBehavior = null;
                                 object.ingestedContextReferenceDebugInfo = null;
                                 object.serviceLatency = null;
+                                object.cesDebugInfo = null;
                             }
                             if (message.datastoreResponseReason != null && message.hasOwnProperty("datastoreResponseReason"))
                                 object.datastoreResponseReason = options.enums === String ? $root.google.cloud.dialogflow.v2beta1.DatastoreResponseReason[message.datastoreResponseReason] === undefined ? message.datastoreResponseReason : $root.google.cloud.dialogflow.v2beta1.DatastoreResponseReason[message.datastoreResponseReason] : message.datastoreResponseReason;
@@ -236039,6 +236181,8 @@
                                 object.ingestedContextReferenceDebugInfo = $root.google.cloud.dialogflow.v2beta1.IngestedContextReferenceDebugInfo.toObject(message.ingestedContextReferenceDebugInfo, options);
                             if (message.serviceLatency != null && message.hasOwnProperty("serviceLatency"))
                                 object.serviceLatency = $root.google.cloud.dialogflow.v2beta1.ServiceLatency.toObject(message.serviceLatency, options);
+                            if (message.cesDebugInfo != null && message.hasOwnProperty("cesDebugInfo"))
+                                object.cesDebugInfo = $root.google.protobuf.Struct.toObject(message.cesDebugInfo, options);
                             return object;
                         };
     

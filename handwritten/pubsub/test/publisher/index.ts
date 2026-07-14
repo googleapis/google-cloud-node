@@ -166,6 +166,10 @@ describe('Publisher', () => {
     it('should call through to publishMessage', () => {
       const stub = sandbox.stub(publisher, 'publishMessage');
 
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       publisher.publish(buffer, spy);
 
       const [{data}, callback] = stub.lastCall.args;
@@ -177,6 +181,10 @@ describe('Publisher', () => {
       const stub = sandbox.stub(publisher, 'publishMessage');
       const attrs = {};
 
+      // This warning is not real, but it should be resolved by future work
+      // on the linting config.
+      //
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       publisher.publish(buffer, attrs, spy);
 
       const [{attributes}, callback] = stub.lastCall.args;

@@ -17,6 +17,7 @@ import {expect, use} from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import * as extend from 'extend';
 import {GoogleError, GrpcClient, Status} from 'google-gax';
+import * as sinon from 'sinon';
 
 import {google} from '../protos/firestore_v1_proto_api';
 
@@ -793,6 +794,53 @@ describe('instantiation', () => {
         Firestore.FieldValue.delete(),
       ),
     ).to.be.false;
+  });
+
+  describe('grpcOptions flow control window size', () => {
+    let createStubSpy: sinon.SinonSpy;
+
+    beforeEach(() => {
+      createStubSpy = sinon.spy(GrpcClient.prototype, 'createStub');
+    });
+
+    afterEach(() => {
+      createStubSpy.restore();
+    });
+
+    it('defaults flow_control_window to 256 KB', async () => {
+      const firestore = new Firestore.Firestore(DEFAULT_SETTINGS);
+      // Trigger client creation & initialize() which calls createStub
+      await firestore['_clientPool'].run('tag', /* requiresGrpc= */ true, async (client: any) => {
+        await client.initialize();
+      });
+
+      expect(createStubSpy.calledOnce).to.be.true;
+      const clientOpts = createStubSpy.firstCall.args[1];
+      expect(clientOpts.grpcOptions).to.exist;
+      expect(clientOpts.grpcOptions['grpc-node.flow_control_window']).to.equal(
+        256 * 1024, // 256 KB
+      );
+    });
+
+    it('allows user to override flow_control_window default', async () => {
+      const firestore = new Firestore.Firestore({
+        ...DEFAULT_SETTINGS,
+        grpcOptions: {
+          'grpc-node.flow_control_window': 512 * 1024,
+        },
+      });
+      // Trigger client creation & initialize() which calls createStub
+      await firestore['_clientPool'].run('tag', /* requiresGrpc= */ true, async (client: any) => {
+        await client.initialize();
+      });
+
+      expect(createStubSpy.calledOnce).to.be.true;
+      const clientOpts = createStubSpy.firstCall.args[1];
+      expect(clientOpts.grpcOptions).to.exist;
+      expect(clientOpts.grpcOptions['grpc-node.flow_control_window']).to.equal(
+        512 * 1024,
+      );
+    });
   });
 });
 
