@@ -31,15 +31,22 @@ function sleep(timeoutMs: number) {
 
 export class ShowcaseServer {
   server: execa.ExecaChildProcess | undefined;
+  originalCwd: string | undefined;
 
-  async start() {
-    const testDir = path.join(process.cwd(), '.showcase-server-dir');
+  async start(opts?: { tls?: boolean; port?: string; caCertOutputFile?: string }) {
+    this.originalCwd = process.cwd();
+    const testDir = path.join(this.originalCwd, '.showcase-server-dir');
     const platform = process.platform;
     const arch = process.arch === 'x64' ? 'amd64' : process.arch;
     const showcaseVersion = process.env['SHOWCASE_VERSION'] || '0.36.2';
     const tarballFilename = `gapic-showcase-${showcaseVersion}-${platform}-${arch}.tar.gz`;
     const fallbackServerUrl = `https://github.com/googleapis/gapic-showcase/releases/download/v${showcaseVersion}/${tarballFilename}`;
     const binaryName = './gapic-showcase';
+
+    let resolvedCaCertPath = '';
+    if (opts?.caCertOutputFile) {
+      resolvedCaCertPath = path.resolve(this.originalCwd, opts.caCertOutputFile);
+    }
 
     await fsp.rm(testDir, {recursive: true, force: true});
     await mkdir(testDir);
@@ -48,7 +55,19 @@ export class ShowcaseServer {
 
     await download(fallbackServerUrl, testDir);
     await execa('tar', ['xzf', tarballFilename]);
-    const childProcess = execa(binaryName, ['run'], {
+
+    const args = ['run'];
+    if (opts?.tls) {
+      args.push('--tls');
+    }
+    if (opts?.port) {
+      args.push('--port', opts.port);
+    }
+    if (resolvedCaCertPath) {
+      args.push('--ca-cert-output-file', resolvedCaCertPath);
+    }
+
+    const childProcess = execa(binaryName, args, {
       cwd: testDir,
       stdio: 'inherit',
     });
@@ -75,6 +94,9 @@ export class ShowcaseServer {
       throw new Error("Cannot kill the server, it's not started.");
     }
     this.server.kill();
+    if (this.originalCwd) {
+      process.chdir(this.originalCwd);
+    }
   }
 }
 
