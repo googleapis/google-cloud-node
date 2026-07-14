@@ -2792,7 +2792,7 @@ describe('storage', function () {
       });
     });
 
-    describe.only('kms keys', () => {
+    describe.skip('kms keys', () => {
       // Test skipped due to kokoro to GCB migration.
       const FILE_CONTENTS = 'secret data';
 
@@ -3808,7 +3808,7 @@ describe('storage', function () {
         ]);
       });
 
-      it.only('should list all objects matching a prefix', async () => {
+      it.skip('should list all objects matching a prefix', async () => {
         // Test skipped due to kokoro to GCB migration.
         const [files] = await bucket.getFiles();
         assert.strictEqual(files.length, 3);
