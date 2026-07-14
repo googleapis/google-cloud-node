@@ -62,7 +62,7 @@ import {isNull, isNumber, isUuid} from '../src/helper';
 const fs = require('fs');
 
 const SKIP_BACKUPS = process.env.SKIP_BACKUPS;
-const KOKORO_JOB_NAME = process.env.KOKORO_JOB_NAME;
+const TRIGGER_NAME = process.env.TRIGGER_NAME;
 const SKIP_FGAC_TESTS = (process.env.SKIP_FGAC_TESTS || 'false').toLowerCase();
 
 const IAM_MEMBER = process.env.IAM_MEMBER;
@@ -558,7 +558,7 @@ describe('Spanner', () => {
         await table.insert({BoolValue: 'abc'});
         assert.fail('Expected an error to be thrown, but it was not.');
       } catch (err: any) {
-        KOKORO_JOB_NAME?.includes('system-test-regular-session')
+        TRIGGER_NAME?.includes('regular-sessions')
           ? assert.strictEqual(err.code, grpc.status.FAILED_PRECONDITION)
           : assert.strictEqual(err.code, grpc.status.INVALID_ARGUMENT);
       }
@@ -1199,7 +1199,7 @@ describe('Spanner', () => {
           await insert({NumericValue: value}, dialect);
           assert.fail('Expected an error to be thrown, but it was not.');
         } catch (err: any) {
-          KOKORO_JOB_NAME?.includes('system-test-regular-session')
+          TRIGGER_NAME?.includes('regular-sessions')
             ? assert.ok(
                 err.code === grpc.status.FAILED_PRECONDITION ||
                   err.code === grpc.status.OUT_OF_RANGE,
@@ -2965,7 +2965,7 @@ describe('Spanner', () => {
       if (IS_EMULATOR_ENABLED) {
         this.skip();
       }
-      if (SKIP_BACKUPS === 'true' || KOKORO_JOB_NAME?.includes('presubmit')) {
+      if (SKIP_BACKUPS === 'true') {
         this.skip();
       }
       googleSqlDatabase1 = DATABASE;
