@@ -762,8 +762,8 @@ export abstract class BaseExternalAccountClient extends AuthClient {
     if (wlPoolId && projectNumber) {
       return WORKLOAD_LOOKUP_ENDPOINT.replace(
         '{project_id}',
-        projectNumber,
-      ).replace('{pool_id}', wlPoolId);
+        encodeURIComponent(projectNumber),
+      ).replace('{pool_id}', encodeURIComponent(wlPoolId));
     }
 
     throw new RangeError(
