@@ -622,8 +622,7 @@ describe.skip('Firestore class', () => {
 
 // Skip partition query tests when running against the emulator because
 // partition queries are not supported by the emulator.
-describe.skip('CollectionGroup class', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('CollectionGroup class', () => {
   const desiredPartitionCount = 3;
   const documentCount = 2 * 128 + 127; // Minimum partition size is 128.
 
@@ -743,8 +742,7 @@ describe.skip('CollectionGroup class', () => {
   });
 });
 
-describe.skip('CollectionReference class', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('CollectionReference class', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
 
@@ -847,8 +845,7 @@ describe.skip('CollectionReference class', () => {
   });
 });
 
-describe.skip('DocumentReference class', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('DocumentReference class', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
 
