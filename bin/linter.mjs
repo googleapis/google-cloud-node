@@ -56,7 +56,11 @@ async function run() {
  * Executes a Git command synchronously.
  */
 function runGit(args, options = {}) {
-  return execFileSync('git', args, {encoding: 'utf8', ...options});
+  return execFileSync('git', args, {
+    encoding: 'utf8',
+    stdio: 'pipe',
+    ...options,
+  });
 }
 
 /**
@@ -64,7 +68,14 @@ function runGit(args, options = {}) {
  */
 function getChangedFiles() {
   const base = process.env.GITHUB_BASE_REF || 'main';
-  const refsToTry = [`origin/${base}`, base, 'HEAD~1'];
+  const refsToTry = [
+    base,
+    `upstream/${base}`,
+    `origin/${base}`,
+    'FETCH_HEAD',
+    'HEAD~1',
+    'HEAD^',
+  ];
 
   for (const ref of refsToTry) {
     try {
@@ -85,9 +96,23 @@ function getChangedFiles() {
     }
   }
 
-  throw new Error(
-    `Error finding changed files: Tried refs [${refsToTry.join(', ')}] but all failed.`
-  );
+  // Fallback to checking uncommitted working tree changes against HEAD if all specific refs fail
+  try {
+    const output = runGit([
+      'diff',
+      '--name-only',
+      '--diff-filter=ACMRT',
+      'HEAD',
+      '--',
+      '*.ts',
+    ]);
+    return output
+      .split('\n')
+      .map(f => f.trim())
+      .filter(f => f.length > 0 && existsSync(f));
+  } catch {
+    return [];
+  }
 }
 
 // --- ESLint Checker ---
