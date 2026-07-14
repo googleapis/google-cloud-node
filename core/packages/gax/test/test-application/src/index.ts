@@ -3031,7 +3031,7 @@ async function main() {
       fs.unlinkSync(pemPath);
     }
 
-    await showcaseServerTls.start({
+    await (showcaseServerTls as any).start({
       tls: true,
       port: `:${tlsPort}`,
       caCertOutputFile: caCertOutputFile,
