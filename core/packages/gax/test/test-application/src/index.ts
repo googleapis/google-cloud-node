@@ -3010,17 +3010,7 @@ async function testPqc(pemPath: string, port: number) {
   console.log('All PQC Integration Tests Passed Successfully!');
 }
 
-async function main() {
-  /*
-  const showcaseServer = new ShowcaseServer();
-  try {
-    await showcaseServer.start();
-    await testShowcase();
-  } finally {
-    showcaseServer.stop();
-  }
-  */
-
+async function runPqcComplianceTests() {
   console.log('Starting PQC test with TLS-enabled showcase server...');
   process.env['SHOWCASE_VERSION'] = '0.41.1';
   const showcaseServerTls = new ShowcaseServer();
@@ -3046,6 +3036,19 @@ async function main() {
       fs.unlinkSync(pemPath);
     }
   }
+}
+
+async function main() {
+  /*
+  const showcaseServer = new ShowcaseServer();
+  try {
+    await showcaseServer.start();
+    await testShowcase();
+  } finally {
+    showcaseServer.stop();
+  }
+  */
+  runPqcComplianceTests()
 }
 
 main();
