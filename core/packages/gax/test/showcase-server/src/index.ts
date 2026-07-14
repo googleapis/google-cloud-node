@@ -31,7 +31,7 @@ function sleep(timeoutMs: number) {
 
 export class ShowcaseServer {
   server: execa.ExecaChildProcess | undefined;
-  originalCwd: string | undefined;
+  private originalCwd: string | undefined;
 
   async start(opts?: { tls?: boolean; port?: string; caCertOutputFile?: string }) {
     this.originalCwd = process.cwd();
