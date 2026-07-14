@@ -1,0 +1,101 @@
+{
+  "interfaces": {
+    "google.cloud.chronicle.v1.FindingsRefinementService": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "428c5aaf9d316f79432135c4aa645fec8787c38a": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 120000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "9a025b4450f346ceba9ee4c52154e0b025f7c11c": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 600000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "GetFindingsRefinement": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "ListFindingsRefinements": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "CreateFindingsRefinement": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "UpdateFindingsRefinement": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "GetFindingsRefinementDeployment": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "428c5aaf9d316f79432135c4aa645fec8787c38a"
+        },
+        "UpdateFindingsRefinementDeployment": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListAllFindingsRefinementDeployments": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "428c5aaf9d316f79432135c4aa645fec8787c38a"
+        },
+        "ComputeFindingsRefinementActivity": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "9a025b4450f346ceba9ee4c52154e0b025f7c11c"
+        },
+        "ComputeAllFindingsRefinementActivities": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "9a025b4450f346ceba9ee4c52154e0b025f7c11c"
+        }
+      }
+    }
+  }
+}

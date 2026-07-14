@@ -24,6 +24,7 @@ import {
   DataTableServiceClient,
   EntityServiceClient,
   FeaturedContentNativeDashboardServiceClient,
+  FindingsRefinementServiceClient,
   InstanceServiceClient,
   NativeDashboardServiceClient,
   ReferenceListServiceClient,
@@ -60,6 +61,11 @@ function doStuffWithEntityServiceClient(client: EntityServiceClient) {
 }
 function doStuffWithFeaturedContentNativeDashboardServiceClient(
   client: FeaturedContentNativeDashboardServiceClient,
+) {
+  client.close();
+}
+function doStuffWithFindingsRefinementServiceClient(
+  client: FindingsRefinementServiceClient,
 ) {
   client.close();
 }
@@ -110,6 +116,9 @@ function main() {
   doStuffWithFeaturedContentNativeDashboardServiceClient(
     featuredContentNativeDashboardServiceClient,
   );
+  // check that the client instance can be created
+  const findingsRefinementServiceClient = new FindingsRefinementServiceClient();
+  doStuffWithFindingsRefinementServiceClient(findingsRefinementServiceClient);
   // check that the client instance can be created
   const instanceServiceClient = new InstanceServiceClient();
   doStuffWithInstanceServiceClient(instanceServiceClient);

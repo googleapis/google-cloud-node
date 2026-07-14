@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/dataform",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Dataform API client for Node.js",
   "repository": {
     "type": "git",
@@ -62,7 +62,7 @@
     "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18"
   },
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
