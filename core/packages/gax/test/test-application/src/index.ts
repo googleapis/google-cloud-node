@@ -2903,13 +2903,6 @@ async function testStreamingErrorAfterDataNoBufferNoRetry(
   });
 }
 
-/**
- * Tests Post Quantum Cryptography (PQC) using the specified CA cert and port.
- * It verifies both gRPC and HTTP/REST clients by inspecting the negotiated TLS group.
- * @param pemPath Path to the generated CA certificate file.
- * @param port The port the TLS showcase server is listening on.
- */
-
 async function main() {
   /*
   const showcaseServer = new ShowcaseServer();
