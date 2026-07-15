@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.2.0...workloadmanager-v0.2.1) (2026-07-15)
+
+
+### Bug Fixes
+
+* Documentation url ([#8881](https://github.com/googleapis/google-cloud-node/issues/8881)) ([a3d1773](https://github.com/googleapis/google-cloud-node/commit/a3d17735e97c3757f278e240b144835e0cc8aa26))
+* Update documentation URL ([#8884](https://github.com/googleapis/google-cloud-node/issues/8884)) ([c6a2b2e](https://github.com/googleapis/google-cloud-node/commit/c6a2b2e2d19febd9ed52562c28bb8b14c0c9b33a))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.1.1...workloadmanager-v0.2.0) (2026-07-13)
 
 
