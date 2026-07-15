@@ -20,6 +20,8 @@ sources:
     sha256: 503314c3f49e4de70138d35d5b9b12cca0c74d7c5ba34380895440b83aa45b94
 tools:
   pnpm:
+    - name: pnpm
+      version: 7.32.2
     - name: gapic-generator-typescript
       version: gapic-generator-v4.12.2
       package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v4.12.2.tar.gz
