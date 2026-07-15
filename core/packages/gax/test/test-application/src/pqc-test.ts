@@ -6,6 +6,12 @@ import {grpc, GoogleAuth, googleAuthLibrary} from 'google-gax';
 import {EchoClient} from 'showcase-echo-client';
 import {ShowcaseServer} from 'showcase-server';
 
+/**
+ * Tests Post Quantum Cryptography (PQC) using the specified CA cert and port.
+ * It verifies both gRPC and HTTP/REST clients by inspecting the negotiated TLS group.
+ * @param pemPath Path to the generated CA certificate file.
+ * @param port The port the TLS showcase server is listening on.
+ */
 async function testPqc(pemPath: string, port: number) {
   console.log('Running Post Quantum Cryptography (PQC) Integration Tests...');
 
