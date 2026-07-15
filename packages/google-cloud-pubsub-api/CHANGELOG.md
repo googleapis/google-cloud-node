@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/google-cloud-pubsub-api-v0.2.0...google-cloud-pubsub-api-v0.2.1) (2026-07-15)
+
+
+### Bug Fixes
+
+* Use the release version of gax ([#8877](https://github.com/googleapis/google-cloud-node/issues/8877)) ([ad24c26](https://github.com/googleapis/google-cloud-node/commit/ad24c26a64e8fa874313049ab73596d977696535))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-pubsub-api-v0.1.0...google-cloud-pubsub-api-v0.2.0) (2026-07-13)
 
 

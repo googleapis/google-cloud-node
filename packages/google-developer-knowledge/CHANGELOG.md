@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/developer-knowledge-v0.1.0...developer-knowledge-v0.1.1) (2026-07-15)
+
+
+### Bug Fixes
+
+* **developer-knowledge:** Update distribution_name typo ([#8879](https://github.com/googleapis/google-cloud-node/issues/8879)) ([1012a54](https://github.com/googleapis/google-cloud-node/commit/1012a54dadf723800aa08497bcefafd9b78e9681))
+
 ## 0.1.0 (2026-07-13)
 
 
