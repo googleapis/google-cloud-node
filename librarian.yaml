@@ -1789,6 +1789,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      client_documentation_override: https://docs.cloud.google.com/nodejs/docs/reference/workloadmanager/latest
   - name: google-cloud-workstations
     version: 2.3.0
     apis:
