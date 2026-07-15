@@ -2916,6 +2916,9 @@ async function testPqc(pemPath: string, port: number) {
   // Verify the CA certificate file exists
   let pemExists = false;
   for (let i = 0; i < 15; i++) {
+    // We loop up to 15 times (waiting 1 second each time) because gapic-showcase
+    // generates the CA certificate asynchronously on startup. This ensures the file
+    // is completely written to disk before we attempt to use it for our PQC tests.
     if (fs.existsSync(pemPath)) {
       pemExists = true;
       break;
