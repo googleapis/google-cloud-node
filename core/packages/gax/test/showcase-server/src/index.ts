@@ -31,7 +31,6 @@ function sleep(timeoutMs: number) {
 
 export class ShowcaseServer {
   server: execa.ExecaChildProcess | undefined;
-  private originalCwd: string | undefined;
 
   /**
    * Starts the gapic-showcase server.
@@ -41,9 +40,8 @@ export class ShowcaseServer {
    *  - caCertOutputFile: Path where the server should write its CA cert (when TLS is enabled).
    */
   async start(opts?: { tls?: boolean; port?: string; caCertOutputFile?: string }) {
-    // Keep track of the original working directory to restore it on stop
-    this.originalCwd = process.cwd();
-    const testDir = path.join(this.originalCwd, '.showcase-server-dir');
+    const cwd = process.cwd();
+    const testDir = path.join(cwd, '.showcase-server-dir');
     const platform = process.platform;
     const arch = process.arch === 'x64' ? 'amd64' : process.arch;
     const showcaseVersion = process.env['SHOWCASE_VERSION'] || '0.36.2';
@@ -53,7 +51,7 @@ export class ShowcaseServer {
 
     let resolvedCaCertPath = '';
     if (opts?.caCertOutputFile) {
-      resolvedCaCertPath = path.resolve(this.originalCwd, opts.caCertOutputFile);
+      resolvedCaCertPath = path.resolve(cwd, opts.caCertOutputFile);
     }
 
     await fsp.rm(testDir, {recursive: true, force: true});
@@ -105,10 +103,6 @@ export class ShowcaseServer {
       throw new Error("Cannot kill the server, it's not started.");
     }
     this.server.kill();
-    // Restore the original working directory if we changed it
-    if (this.originalCwd) {
-      process.chdir(this.originalCwd);
-    }
   }
 }
 
