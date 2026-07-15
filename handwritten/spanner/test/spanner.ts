@@ -4170,8 +4170,8 @@ describe('Spanner with mock server', () => {
       let attempts = 0;
       const database = newTestDatabase();
       const [updated] = await database.runTransactionAsync(
-        (transaction): Promise<number[]> => {
-          void transaction.begin();
+        async (transaction): Promise<number[]> => {
+          await transaction.begin();
           return transaction.runUpdate(insertSql).then(updateCount => {
             if (!attempts) {
               spannerMock.abortTransaction(transaction);
@@ -4192,8 +4192,8 @@ describe('Spanner with mock server', () => {
       try {
         await database.runTransactionAsync(
           {timeout: 1},
-          (transaction): Promise<number[]> => {
-            void transaction.begin();
+          async (transaction): Promise<number[]> => {
+            await transaction.begin();
             attempts++;
             return transaction.runUpdate(insertSql).then(updateCount => {
               // Always abort the transaction.
@@ -4220,8 +4220,8 @@ describe('Spanner with mock server', () => {
       const database = newTestDatabase();
 
       const [updated] = await database.runTransactionAsync(
-        (transaction): Promise<number[]> => {
-          void transaction.begin();
+        async (transaction): Promise<number[]> => {
+          await transaction.begin();
           return transaction.runUpdate(insertSql).then(updateCount => {
             if (!attempts) {
               spannerMock.setExecutionTime(

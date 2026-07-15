@@ -15,9 +15,6 @@
  */
 
 import {GrpcService} from './common-grpc/service';
-import * as checkpointStream from 'checkpoint-stream';
-import * as eventsIntercept from 'events-intercept';
-import mergeStream = require('merge-stream');
 import {common as p} from 'protobufjs';
 import {Readable, Transform} from 'stream';
 import * as streamEvents from 'stream-events';
@@ -576,67 +573,36 @@ export function partialResultStream(
   const retryableCodes = [grpc.status.UNAVAILABLE];
   const maxQueued = 10;
   let lastResumeToken: ResumeToken;
-  let lastRequestStream: Readable;
+  let lastRequestStream: Readable | null = null;
   const startTime = Date.now();
   const timeout = options?.gaxOptions?.timeout ?? Infinity;
 
-  // mergeStream allows multiple streams to be connected into one. This is good;
-  // if we need to retry a request and pipe more data to the user's stream.
-  // We also add an additional stream that can be used to flush any remaining
-  // items in the checkpoint stream that have been received, and that did not
-  // contain a resume token.
-  const requestsStream = mergeStream();
-  const flushStream = new stream.PassThrough({objectMode: true});
-  requestsStream.add(flushStream);
   const partialRSStream = new PartialResultStream(options);
   const userStream = streamEvents(partialRSStream);
+
   // We keep track of the number of PartialResultSets that did not include a
   // resume token, as that is an indication whether it is safe to retry the
   // stream halfway.
   let withoutCheckpointCount = 0;
-  const batchAndSplitOnTokenStream = checkpointStream.obj({
-    maxQueued,
-    isCheckpointFn: (chunk: google.spanner.v1.PartialResultSet): boolean => {
-      const withCheckpoint = _hasResumeToken(chunk);
-      if (withCheckpoint) {
-        withoutCheckpointCount = 0;
-      } else {
-        withoutCheckpointCount++;
-      }
-      return withCheckpoint;
-    },
-  });
+  const queuedChunks: google.spanner.v1.PartialResultSet[] = [];
+  let isRequestActive = false;
 
-  // This listener ensures that the last request that executed successfully
-  // after one or more retries will end the requestsStream.
-  const endListener = () => {
-    setImmediate(() => {
-      // Push a fake PartialResultSet without any values but with a resume token
-      // into the stream to ensure that the checkpoint stream is emptied, and
-      // then push `null` to end the stream.
-      flushStream.push({resumeToken: '_'});
-      flushStream.push(null);
-      requestsStream.end();
-    });
-  };
-  const makeRequest = (): void => {
-    if (isDefined(lastResumeToken) && lastResumeToken.length > 0) {
-      partialRSStream._resetPendingValues();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (userStream as any).abort = () => {
+    isRequestActive = false;
+    if (lastRequestStream) {
+      lastRequestStream.destroy();
     }
-    lastRequestStream = requestFn(lastResumeToken);
-    lastRequestStream.on('end', endListener);
-    requestsStream.add(lastRequestStream);
   };
 
   const retry = (err: grpc.ServiceError): void => {
     const elapsed = Date.now() - startTime;
     if (elapsed >= timeout) {
-      // The timeout has reached so this will flush any rows the
-      // checkpoint stream has queued. After that, we will destroy the
-      // user's stream with the Deadline exceeded error.
-      setImmediate(() =>
-        batchAndSplitOnTokenStream.destroy(new DeadlineError(err)),
-      );
+      isRequestActive = false;
+      for (const qChunk of queuedChunks) {
+        partialRSStream.write(qChunk);
+      }
+      userStream.destroy(new DeadlineError(err));
       return;
     }
 
@@ -645,58 +611,95 @@ export function partialResultStream(
         err.code &&
         (retryableCodes!.includes(err.code) || isRetryableInternalError(err))
       ) ||
-      // If we have received too many chunks without a resume token, it is not
-      // safe to retry.
       withoutCheckpointCount > maxQueued
     ) {
-      // This is not a retryable error so this will flush any rows the
-      // checkpoint stream has queued. After that, we will destroy the
-      // user's stream with the same error.
-      setImmediate(() => batchAndSplitOnTokenStream.destroy(err));
+      isRequestActive = false;
+      for (const qChunk of queuedChunks) {
+        partialRSStream.write(qChunk);
+      }
+      userStream.destroy(err);
       return;
     }
 
     if (lastRequestStream) {
-      lastRequestStream.removeListener('end', endListener);
       lastRequestStream.destroy();
     }
-    // Delay the retry until all the values that are already in the stream
-    // pipeline have been handled. This ensures that the checkpoint stream is
-    // reset to the correct point. Calling .reset() directly here could cause
-    // any values that are currently in the pipeline and that have not been
-    // handled yet, to be pushed twice into the entire stream.
+
     setImmediate(() => {
-      // Empty queued rows on the checkpoint stream (will not emit them to user).
-      batchAndSplitOnTokenStream.reset();
+      queuedChunks.length = 0;
       makeRequest();
     });
   };
 
+  const makeRequest = (): void => {
+    if (isDefined(lastResumeToken) && lastResumeToken.length > 0) {
+      partialRSStream._resetPendingValues();
+    }
+    lastRequestStream = requestFn(lastResumeToken);
+    isRequestActive = true;
+
+    lastRequestStream.on('data', chunk => {
+      if (!isRequestActive) return;
+
+      queuedChunks.push(chunk);
+
+      if (_hasResumeToken(chunk)) {
+        withoutCheckpointCount = 0;
+        lastResumeToken = chunk.resumeToken;
+      } else {
+        withoutCheckpointCount++;
+      }
+
+      if (_hasResumeToken(chunk) || queuedChunks.length > maxQueued) {
+        let ok = true;
+        for (const qChunk of queuedChunks) {
+          ok = partialRSStream.write(qChunk);
+        }
+        queuedChunks.length = 0;
+
+        if (!ok) {
+          lastRequestStream!.pause();
+          partialRSStream.once('drain', () => {
+            if (isRequestActive && lastRequestStream) {
+              lastRequestStream.resume();
+            }
+          });
+        }
+      }
+    });
+
+    lastRequestStream.on('error', err => {
+      if (!isRequestActive) return;
+      setImmediate(() => retry(err as grpc.ServiceError));
+    });
+
+    lastRequestStream.on('end', () => {
+      if (!isRequestActive) return;
+      setImmediate(() => {
+        for (const qChunk of queuedChunks) {
+          partialRSStream.write(qChunk);
+        }
+        queuedChunks.length = 0;
+        partialRSStream.end();
+      });
+    });
+  };
+
   userStream.once('reading', makeRequest);
-  eventsIntercept.patch(requestsStream);
 
-  // need types for events-intercept
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (requestsStream as any).intercept('error', err =>
-    // Retry __after__ all pending data has been processed to ensure that the
-    // checkpoint stream is reset at the correct position.
-    setImmediate(() => retry(err)),
-  );
+  userStream.on('paused', () => {
+    if (isRequestActive && lastRequestStream) {
+      lastRequestStream.pause();
+    }
+  });
 
-  return (
-    requestsStream
-      .pipe(batchAndSplitOnTokenStream)
-      // If we get this error, the checkpoint stream has flushed any rows
-      // it had queued. We can now destroy the user's stream, as our retry
-      // attempts are over.
-      .on('error', (err: Error) => userStream.destroy(err))
-      .on('checkpoint', (row: google.spanner.v1.PartialResultSet) => {
-        lastResumeToken = row.resumeToken;
-      })
-      .pipe(userStream)
-      .on('paused', () => requestsStream.pause())
-      .on('resumed', () => requestsStream.resume())
-  );
+  userStream.on('resumed', () => {
+    if (isRequestActive && lastRequestStream) {
+      lastRequestStream.resume();
+    }
+  });
+
+  return userStream;
 }
 
 function _hasResumeToken(chunk: google.spanner.v1.PartialResultSet): boolean {

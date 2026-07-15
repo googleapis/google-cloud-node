@@ -17,7 +17,7 @@
 import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const checkpointStream = require('checkpoint-stream');
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const concat = require('concat-stream');
 import * as proxyquire from 'proxyquire';
@@ -102,7 +102,6 @@ describe('PartialResultStream', () => {
 
   before(() => {
     const prsExports = proxyquire('../src/partial-result-stream.js', {
-      'checkpoint-stream': checkpointStream,
       stream: {Transform},
       './codec': {codec},
     });
@@ -637,11 +636,6 @@ describe('PartialResultStream', () => {
       // - UNAVAILABLE error (should retry)
       // - Two rows
       // - Confirm all rows were received.
-      const fakeCheckpointStream = through.obj();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (fakeCheckpointStream as any).reset = () => {};
-
-      sandbox.stub(checkpointStream, 'obj').returns(fakeCheckpointStream);
 
       const firstFakeRequestStream = through.obj();
       const secondFakeRequestStream = through.obj();
@@ -668,9 +662,7 @@ describe('PartialResultStream', () => {
 
         setTimeout(() => {
           secondFakeRequestStream.push(RESULT_WITH_TOKEN);
-          fakeCheckpointStream.emit('checkpoint', RESULT_WITH_TOKEN);
           secondFakeRequestStream.push(RESULT_WITH_TOKEN);
-          fakeCheckpointStream.emit('checkpoint', RESULT_WITH_TOKEN);
 
           secondFakeRequestStream.end();
         }, 500);
@@ -689,12 +681,6 @@ describe('PartialResultStream', () => {
     });
 
     it('should get Deadline exceeded error if timeout has reached', done => {
-      const fakeCheckpointStream = through.obj();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (fakeCheckpointStream as any).reset = () => {};
-
-      sandbox.stub(checkpointStream, 'obj').returns(fakeCheckpointStream);
-
       const firstFakeRequestStream = through.obj();
 
       const requestFnStub = sandbox.stub();
@@ -726,10 +712,6 @@ describe('PartialResultStream', () => {
       // - Error event (should retry)
       // - Two rows
       // - Confirm all rows were received.
-      const fakeCheckpointStream = through.obj();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (fakeCheckpointStream as any).reset = () => {};
-      sandbox.stub(checkpointStream, 'obj').returns(fakeCheckpointStream);
 
       const firstFakeRequestStream = through.obj();
       const secondFakeRequestStream = through.obj();
@@ -739,9 +721,7 @@ describe('PartialResultStream', () => {
       requestFnStub.onCall(0).callsFake(() => {
         setTimeout(() => {
           firstFakeRequestStream.push(RESULT_WITH_TOKEN);
-          fakeCheckpointStream.emit('checkpoint', RESULT_WITH_TOKEN);
           firstFakeRequestStream.push(RESULT_WITH_TOKEN);
-          fakeCheckpointStream.emit('checkpoint', RESULT_WITH_TOKEN);
 
           setTimeout(() => {
             // This causes a new request stream to be created.
@@ -760,9 +740,7 @@ describe('PartialResultStream', () => {
 
         setTimeout(() => {
           secondFakeRequestStream.push(RESULT_WITH_TOKEN);
-          fakeCheckpointStream.emit('checkpoint', RESULT_WITH_TOKEN);
           secondFakeRequestStream.push(RESULT_WITH_TOKEN);
-          fakeCheckpointStream.emit('checkpoint', RESULT_WITH_TOKEN);
 
           secondFakeRequestStream.end();
         }, 500);
@@ -782,8 +760,6 @@ describe('PartialResultStream', () => {
 
     it('should emit non-retryable error', done => {
       // This test will emit two rows and then an error.
-      const fakeCheckpointStream = through.obj();
-      sandbox.stub(checkpointStream, 'obj').returns(fakeCheckpointStream);
 
       const fakeRequestStream = through.obj();
 
@@ -792,9 +768,7 @@ describe('PartialResultStream', () => {
       requestFnStub.onCall(0).callsFake(() => {
         setTimeout(() => {
           fakeRequestStream.push(RESULT_WITH_TOKEN);
-          fakeCheckpointStream.emit('checkpoint', RESULT_WITH_TOKEN);
           fakeRequestStream.push(RESULT_WITH_TOKEN);
-          fakeCheckpointStream.emit('checkpoint', RESULT_WITH_TOKEN);
 
           setTimeout(() => {
             fakeRequestStream.emit('error', {
