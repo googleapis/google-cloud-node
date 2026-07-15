@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/pubsub-api",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Pubsub client for Node.js",
   "repository": {
     "type": "git",
@@ -42,7 +42,7 @@
     "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "google-gax": "^5.1.1-rc.1"
+    "google-gax": "^5.0.7"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
