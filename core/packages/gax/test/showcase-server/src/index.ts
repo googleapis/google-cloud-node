@@ -33,7 +33,15 @@ export class ShowcaseServer {
   server: execa.ExecaChildProcess | undefined;
   private originalCwd: string | undefined;
 
+  /**
+   * Starts the gapic-showcase server.
+   * @param opts Optional configuration for the server:
+   *  - tls: If true, starts the server with TLS enabled.
+   *  - port: The port to bind the server to (e.g. ":7443").
+   *  - caCertOutputFile: Path where the server should write its CA cert (when TLS is enabled).
+   */
   async start(opts?: { tls?: boolean; port?: string; caCertOutputFile?: string }) {
+    // Keep track of the original working directory to restore it on stop
     this.originalCwd = process.cwd();
     const testDir = path.join(this.originalCwd, '.showcase-server-dir');
     const platform = process.platform;
@@ -57,6 +65,7 @@ export class ShowcaseServer {
     await execa('tar', ['xzf', tarballFilename]);
 
     const args = ['run'];
+    // Pass additional options to gapic-showcase based on opts
     if (opts?.tls) {
       args.push('--tls');
     }
@@ -94,6 +103,7 @@ export class ShowcaseServer {
       throw new Error("Cannot kill the server, it's not started.");
     }
     this.server.kill();
+    // Restore the original working directory if we changed it
     if (this.originalCwd) {
       process.chdir(this.originalCwd);
     }

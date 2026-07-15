@@ -2904,6 +2904,12 @@ async function testStreamingErrorAfterDataNoBufferNoRetry(
   });
 }
 
+/**
+ * Tests Post Quantum Cryptography (PQC) using the specified CA cert and port.
+ * It verifies both gRPC and HTTP/REST clients by inspecting the negotiated TLS group.
+ * @param pemPath Path to the generated CA certificate file.
+ * @param port The port the TLS showcase server is listening on.
+ */
 async function testPqc(pemPath: string, port: number) {
   console.log('Running Post Quantum Cryptography (PQC) Integration Tests...');
 
@@ -2926,6 +2932,7 @@ async function testPqc(pemPath: string, port: number) {
   console.log('Testing PQC via gRPC...');
   let negotiatedGroupGrpc: string | undefined;
 
+  // Interceptor to capture the 'x-showcase-tls-group' metadata from the response
   const interceptor = (options: any, nextCall: any) => {
     return new grpc.InterceptingCall(nextCall(options), {
       start: (metadata: any, listener: any, next: any) => {
@@ -2975,6 +2982,8 @@ async function testPqc(pemPath: string, port: number) {
     authClient: new googleAuthLibrary.PassThroughClient(),
   });
 
+  // Override fetch to capture the 'x-showcase-tls-group' header from the response
+  // and inject the CA certificate via https.Agent for localhost TLS verification.
   const originalFetch = auth.fetch.bind(auth);
   (auth as any).fetch = async (url: string, opts: any) => {
     if (url.startsWith('https:')) {
@@ -3010,6 +3019,10 @@ async function testPqc(pemPath: string, port: number) {
   console.log('All PQC Integration Tests Passed Successfully!');
 }
 
+/**
+ * Spins up a TLS-enabled showcase server and runs the PQC compliance tests.
+ * Cleans up the generated certificate file after the tests complete.
+ */
 async function runPqcComplianceTests() {
   console.log('Starting PQC test with TLS-enabled showcase server...');
   process.env['SHOWCASE_VERSION'] = '0.41.1';
