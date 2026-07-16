@@ -35,6 +35,9 @@ describe('mtlsutils', () => {
   beforeEach(async () => {
     sandbox = sinon.createSandbox();
     sandbox.stub(process, 'env').value({...process.env});
+    delete process.env.GOOGLE_API_USE_CLIENT_CERTIFICATE;
+    delete process.env.GOOGLE_API_USE_MTLS_ENDPOINT;
+    delete process.env.GOOGLE_API_CERTIFICATE_CONFIG;
     tempDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'mtls-tests-'));
   });
 
