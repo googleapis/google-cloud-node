@@ -4,6 +4,9 @@
     "rootDir": ".",
     "outDir": "build",
     "resolveJsonModule": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "strict": false,
     "lib": [
       "es2018",
       "dom"
@@ -11,6 +14,8 @@
   },
   "include": [
     "src/*.ts",
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "test/*.ts",
+    "test/**/*.ts"
   ]
 }
