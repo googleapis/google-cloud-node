@@ -4,9 +4,9 @@
     "rootDir": ".",
     "outDir": "build",
     "resolveJsonModule": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "lib": [
       "es2018",
       "dom"
