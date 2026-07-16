@@ -56,13 +56,10 @@ export class ShowcaseServer {
 
     await fsp.rm(testDir, {recursive: true, force: true});
     await mkdir(testDir);
-    // Change the working directory to testDir so that the tar extraction
-    // and the gapic-showcase server execution happen in an isolated environment.
-    process.chdir(testDir);
     console.log(`Server will be run from ${testDir}.`);
 
     await download(fallbackServerUrl, testDir);
-    await execa('tar', ['xzf', tarballFilename]);
+    await execa('tar', ['xzf', tarballFilename], {cwd: testDir});
 
     const args = ['run'];
     // Pass additional options to gapic-showcase based on opts

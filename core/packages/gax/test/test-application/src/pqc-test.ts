@@ -179,7 +179,7 @@ export async function runPqcComplianceTests() {
       fs.unlinkSync(pemPath);
     }
 
-    await (showcaseServerTls as any).start({
+    await showcaseServerTls.start({
       tls: true,
       port: `:${tlsPort}`,
       caCertOutputFile: caCertOutputFile,
