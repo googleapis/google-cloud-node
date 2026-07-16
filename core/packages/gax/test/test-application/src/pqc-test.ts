@@ -29,7 +29,6 @@ import {ShowcaseServer} from 'showcase-server';
  * @param port The port the TLS showcase server is listening on.
  */
 async function testPqc(pemPath: string, port: number) {
-  console.log('Running Post Quantum Cryptography (PQC) Integration Tests...');
 
   // Verify the CA certificate file exists
   let pemExists = false;
@@ -50,7 +49,6 @@ async function testPqc(pemPath: string, port: number) {
   const pemBuffer = fs.readFileSync(pemPath);
 
   // --- 1. gRPC PQC Test ---
-  console.log('Testing PQC via gRPC...');
   let negotiatedGroupGrpc: string | undefined;
 
   // Interceptor to capture the 'x-showcase-tls-group' metadata from the response
@@ -91,12 +89,10 @@ async function testPqc(pemPath: string, port: number) {
   );
 
   assert.strictEqual(responseGrpc.content, 'grpc-pqc-test');
-  console.log(`gRPC TLS negotiated group: ${negotiatedGroupGrpc}`);
   assert.ok(negotiatedGroupGrpc, 'Expected negotiated TLS group in gRPC response metadata');
   assert.strictEqual(negotiatedGroupGrpc, 'X25519MLKEM768');
 
   // --- 2. HTTP/REST Fallback PQC Test ---
-  console.log('Testing PQC via HTTP/REST Fallback...');
   let negotiatedGroupRest: string | undefined;
 
   const auth = new GoogleAuth({
@@ -133,11 +129,8 @@ async function testPqc(pemPath: string, port: number) {
   const [responseRest] = await restClient.echo({ content: 'rest-pqc-test' });
 
   assert.strictEqual(responseRest.content, 'rest-pqc-test');
-  console.log(`REST TLS negotiated group: ${negotiatedGroupRest}`);
   assert.ok(negotiatedGroupRest, 'Expected negotiated TLS group in REST response headers');
   assert.strictEqual(negotiatedGroupRest, 'X25519MLKEM768');
-
-  console.log('All PQC Integration Tests Passed Successfully!');
 }
 
 /**
@@ -145,7 +138,6 @@ async function testPqc(pemPath: string, port: number) {
  * Cleans up the generated certificate file after the tests complete.
  */
 export async function runPqcComplianceTests() {
-  console.log('Starting PQC test with TLS-enabled showcase server...');
   process.env['SHOWCASE_VERSION'] = '0.41.1';
   const showcaseServerTls = new ShowcaseServer();
   const tlsPort = 7443;
