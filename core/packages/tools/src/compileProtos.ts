@@ -353,24 +353,30 @@ async function compileProtos(
   await writeFile(tsOutput, tsResult);
 
   if (options.noComments) {
-    const minified = uglify.minify(jsResult, {
+    const uglifyOptions: uglify.MinifyOptions = {
       output: {comments: false, beautify: false},
       compress: false,
       mangle: false,
-    });
-    if (minified.code) {
-      await writeFile(jsOutput, minified.code);
+    };
+
+    const minified = uglify.minify(
+      (await readFile(jsOutput)).toString(),
+      uglifyOptions,
+    );
+    if (minified.error) {
+      throw new Error(`UglifyJS failed on ${jsOutput}: ${minified.error}`);
     }
+    await writeFile(jsOutput, minified.code);
 
     if (options.esm && jsOutputEsm) {
-      const minifiedEsm = uglify.minify((await readFile(jsOutputEsm)).toString(), {
-        output: {comments: false, beautify: false},
-        compress: false,
-        mangle: false,
-      });
-      if (minifiedEsm.code) {
-        await writeFile(jsOutputEsm, minifiedEsm.code);
+      const esmContent = (await readFile(jsOutputEsm)).toString();
+      const minifiedEsm = uglify.minify(esmContent, uglifyOptions);
+      if (minifiedEsm.error) {
+        throw new Error(
+          `UglifyJS failed on ${jsOutputEsm}: ${minifiedEsm.error}`,
+        );
       }
+      await writeFile(jsOutputEsm, minifiedEsm.code);
     }
   }
 }

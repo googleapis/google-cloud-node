@@ -228,6 +228,38 @@ describe('compileProtos tool', () => {
     assert(!ts.toString().includes('import * as $protobuf from "protobufjs"'));
   });
 
+  it('compiles protos to JS without comments if --no-comments is specified', async function () {
+    this.timeout(20000);
+    await compileProtos.main(['--no-comments', 'protoLists']);
+    assert(fs.existsSync(expectedJSResultFile));
+    assert(fs.existsSync(expectedTSResultFile));
+
+    const js = await readFile(expectedJSResultFile);
+    assert(!js.toString().includes('//'));
+    assert(!js.toString().includes('/*'));
+    assert(js.toString().includes('_org_fake_package'));
+    assert(js.toString().includes('TestMessage'));
+  });
+
+  it('compiles protos to CJS and ES6 without comments if --no-comments and --esm are specified', async function () {
+    this.timeout(20000);
+    await compileProtos.main(['--no-comments', '--esm', 'esm']);
+    assert(fs.existsSync(expectedCommonJSResultFile));
+    assert(fs.existsSync(expectedJSResultFile));
+
+    const cjs = await readFile(expectedCommonJSResultFile);
+    assert(!cjs.toString().includes('//'));
+    assert(!cjs.toString().includes('/*'));
+    assert(cjs.toString().includes('_org_fake_package'));
+    assert(cjs.toString().includes('TestMessage'));
+
+    const js = await readFile(expectedJSResultFile);
+    assert(!js.toString().includes('//'));
+    assert(!js.toString().includes('/*'));
+    assert(js.toString().includes('_org_fake_package'));
+    assert(js.toString().includes('TestMessage'));
+  });
+
   it('writes an empty object if no protos are given', async () => {
     await compileProtos.main(['protoLists/empty']);
     assert(fs.existsSync(expectedJsonResultFile));
