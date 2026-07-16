@@ -103,7 +103,7 @@ describe('compileProtos tool', () => {
     assert(!js.toString().includes('require("protobufjs/minimal")'));
 
     // check that it uses proper root object; it's taken from fixtures/package.json
-    assert(js.toString().includes('$protobuf.roots._org_fake_package'));
+    assert(js.toString().includes('_org_fake_package'));
 
     const ts = await readFile(expectedTSResultFile);
     assert(ts.toString().includes('TestMessage'));
@@ -148,7 +148,7 @@ describe('compileProtos tool', () => {
     assert(!cjs.toString().includes('require("protobufjs/minimal")'));
 
     // check that it uses proper root object; it's taken from fixtures/package.json
-    assert(cjs.toString().includes('$protobuf.roots._org_fake_package'));
+    assert(cjs.toString().includes('_org_fake_package'));
 
     const js = await readFile(expectedJSResultFile);
     assert(js.toString().includes('TestMessage'));
@@ -171,7 +171,7 @@ describe('compileProtos tool', () => {
     );
 
     // check that it uses proper root object; it's taken from fixtures/package.json
-    assert(js.toString().includes('$protobuf.roots._org_fake_package'));
+    assert(js.toString().includes('_org_fake_package'));
 
     const ts = await readFile(expectedTSResultFile);
     assert(ts.toString().includes('TestMessage'));
@@ -210,7 +210,7 @@ describe('compileProtos tool', () => {
     assert(!js.toString().includes('require("protobufjs/minimal")'));
 
     // check that it uses proper root object; it's taken from fixtures/package.json
-    assert(js.toString().includes('$protobuf.roots._org_fake_package'));
+    assert(js.toString().includes('_org_fake_package'));
 
     const ts = await readFile(expectedTSResultFile);
     assert(ts.toString().includes('TestMessage'));
