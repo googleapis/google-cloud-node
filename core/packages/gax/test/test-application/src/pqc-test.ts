@@ -22,6 +22,8 @@ import {grpc, GoogleAuth, googleAuthLibrary} from 'google-gax';
 import {EchoClient} from 'showcase-echo-client';
 import {ShowcaseServer} from 'showcase-server';
 
+import * as tls from 'tls';
+
 /**
  * Tests Post Quantum Cryptography (PQC) using the specified CA cert and port.
  * It verifies both gRPC and HTTP/REST clients by inspecting the negotiated TLS group.
@@ -48,89 +50,117 @@ async function testPqc(pemPath: string, port: number) {
 
   const pemBuffer = fs.readFileSync(pemPath);
 
-  // --- 1. gRPC PQC Test ---
-  let negotiatedGroupGrpc: string | undefined;
+  const originalTlsConnect = tls.connect;
+  let grpcSocket: tls.TLSSocket | undefined;
+  let restSocket: tls.TLSSocket | undefined;
 
-  // Interceptor to capture the 'x-showcase-tls-group' metadata from the response
-  const interceptor = (options: any, nextCall: any) => {
-    return new grpc.InterceptingCall(nextCall(options), {
-      start: (metadata: any, listener: any, next: any) => {
-        next(metadata, {
-          onReceiveMetadata: (receivedMetadata: any, nextListener: any) => {
-            const group = receivedMetadata.get('x-showcase-tls-group');
-            if (group && group.length > 0) {
-              negotiatedGroupGrpc = group[0].toString();
-            }
-            nextListener(receivedMetadata);
-          },
-        });
-      },
+  let currentTestType: 'grpc' | 'rest' | 'none' = 'none';
+
+  (tls as any).connect = function (...args: any[]) {
+    const socket = originalTlsConnect.apply(this, args as any);
+    socket.on('secureConnect', () => {
+      if (currentTestType === 'grpc') {
+        grpcSocket = socket as tls.TLSSocket;
+      } else if (currentTestType === 'rest') {
+        restSocket = socket as tls.TLSSocket;
+      }
     });
+    return socket;
   };
 
-  const grpcClientOpts = {
-    grpc,
-    sslCreds: grpc.credentials.createSsl(pemBuffer),
-    servicePath: 'localhost',
-    port: port,
-  };
+  try {
+    // --- 1. gRPC PQC Test ---
+    currentTestType = 'grpc';
+    let negotiatedGroupGrpc: string | undefined;
 
-  const grpcClient = new EchoClient(grpcClientOpts);
-
-  const [responseGrpc] = await grpcClient.echo(
-    { content: 'grpc-pqc-test' },
-    {
-      otherArgs: {
-        options: {
-          interceptors: [interceptor],
+    const interceptor = (options: any, nextCall: any) => {
+      return new grpc.InterceptingCall(nextCall(options), {
+        start: (metadata: any, listener: any, next: any) => {
+          next(metadata, {
+            onReceiveMetadata: (receivedMetadata: any, nextListener: any) => {
+              const group = receivedMetadata.get('x-showcase-tls-group');
+              if (group && group.length > 0) {
+                negotiatedGroupGrpc = group[0].toString();
+              }
+              nextListener(receivedMetadata);
+            },
+          });
         },
-      },
-    }
-  );
-
-  assert.strictEqual(responseGrpc.content, 'grpc-pqc-test');
-  assert.ok(negotiatedGroupGrpc, 'Expected negotiated TLS group in gRPC response metadata');
-  assert.strictEqual(negotiatedGroupGrpc, 'X25519MLKEM768');
-
-  // --- 2. HTTP/REST Fallback PQC Test ---
-  let negotiatedGroupRest: string | undefined;
-
-  const auth = new GoogleAuth({
-    authClient: new googleAuthLibrary.PassThroughClient(),
-  });
-
-  // Override fetch to capture the 'x-showcase-tls-group' header from the response
-  // and inject the CA certificate via https.Agent for localhost TLS verification.
-  const originalFetch = auth.fetch.bind(auth);
-  (auth as any).fetch = async (url: string, opts: any) => {
-    if (url.startsWith('https:')) {
-      opts.agent = new https.Agent({
-        ca: pemBuffer,
-        keepAlive: true,
       });
-    }
-    const res = await originalFetch(url, opts);
-    const group = typeof res.headers.get === 'function' ? res.headers.get('x-showcase-tls-group') : (res.headers as any)['x-showcase-tls-group'];
-    if (group) {
-      negotiatedGroupRest = group;
-    }
-    return res;
-  };
+    };
 
-  const restClientOpts = {
-    fallback: true,
-    protocol: 'https',
-    servicePath: 'localhost',
-    port: port,
-    auth: auth,
-  };
+    const grpcClientOpts = {
+      grpc,
+      sslCreds: grpc.credentials.createSsl(pemBuffer),
+      servicePath: 'localhost',
+      port: port,
+    };
 
-  const restClient = new EchoClient(restClientOpts);
-  const [responseRest] = await restClient.echo({ content: 'rest-pqc-test' });
+    const grpcClient = new EchoClient(grpcClientOpts);
 
-  assert.strictEqual(responseRest.content, 'rest-pqc-test');
-  assert.ok(negotiatedGroupRest, 'Expected negotiated TLS group in REST response headers');
-  assert.strictEqual(negotiatedGroupRest, 'X25519MLKEM768');
+    const [responseGrpc] = await grpcClient.echo(
+      { content: 'grpc-pqc-test' },
+      {
+        otherArgs: {
+          options: {
+            interceptors: [interceptor],
+          },
+        },
+      }
+    );
+
+    assert.strictEqual(responseGrpc.content, 'grpc-pqc-test');
+    assert.ok(grpcSocket, 'Expected to intercept gRPC TLS socket');
+    assert.strictEqual(grpcSocket.getProtocol(), 'TLSv1.3');
+    assert.strictEqual(grpcSocket.getCipher()?.name, 'TLS_AES_128_GCM_SHA256', 'Expected specific negotiated cipher');
+    assert.ok(negotiatedGroupGrpc, 'Expected negotiated TLS group in gRPC response metadata');
+    assert.strictEqual(negotiatedGroupGrpc, 'X25519MLKEM768');
+
+    // --- 2. HTTP/REST Fallback PQC Test ---
+    currentTestType = 'rest';
+    let negotiatedGroupRest: string | undefined;
+
+    const auth = new GoogleAuth({
+      authClient: new googleAuthLibrary.PassThroughClient(),
+    });
+
+    const originalFetch = auth.fetch.bind(auth);
+    (auth as any).fetch = async (url: string, opts: any) => {
+      if (url.startsWith('https:')) {
+        opts.agent = new https.Agent({
+          ca: pemBuffer,
+          keepAlive: true,
+        });
+      }
+      const res = await originalFetch(url, opts);
+      const group = typeof res.headers.get === 'function' ? res.headers.get('x-showcase-tls-group') : (res.headers as any)['x-showcase-tls-group'];
+      if (group) {
+        negotiatedGroupRest = group;
+      }
+      return res;
+    };
+
+    const restClientOpts = {
+      fallback: true,
+      protocol: 'https',
+      servicePath: 'localhost',
+      port: port,
+      auth: auth,
+    };
+
+    const restClient = new EchoClient(restClientOpts);
+    const [responseRest] = await restClient.echo({ content: 'rest-pqc-test' });
+
+    assert.strictEqual(responseRest.content, 'rest-pqc-test');
+    assert.ok(restSocket, 'Expected to intercept REST TLS socket');
+    assert.strictEqual(restSocket.getProtocol(), 'TLSv1.3');
+    assert.strictEqual(restSocket.getCipher()?.name, 'TLS_AES_128_GCM_SHA256', 'Expected specific negotiated cipher');
+    assert.ok(negotiatedGroupRest, 'Expected negotiated TLS group in REST response headers');
+    assert.strictEqual(negotiatedGroupRest, 'X25519MLKEM768');
+  } finally {
+    // Restore the original tls.connect
+    (tls as any).connect = originalTlsConnect;
+  }
 }
 
 /**
