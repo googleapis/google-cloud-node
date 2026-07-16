@@ -23,7 +23,7 @@
     "@types/mocha": "^10.0.10",
     "gts": "^7.0.0",
     "mocha": "^10.0.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.3.0"
   },
   "dependencies": {
     "@google-cloud/common": "file:google-cloud-common.tgz",

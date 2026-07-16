@@ -52,84 +52,88 @@ async function testPqc(pemPath: string, port: number) {
   // used by @google-cloud/common) can verify the self-signed certificate seamlessly.
   const tls = require('tls');
   const originalTlsConnect = tls.connect;
-  tls.connect = function (...args: any[]) {
-    const options0 = args[0];
-    if (typeof options0 === 'object' && options0 !== null) {
-      if (options0.host === 'localhost' || options0.host === '127.0.0.1') {
-        options0.ca = pemBuffer;
-      }
-    }
-    const options2 = args[2];
-    if (typeof options2 === 'object' && options2 !== null) {
-      if (options2.host === 'localhost' || options2.host === '127.0.0.1') {
-        options2.ca = pemBuffer;
-      }
-    }
-    return originalTlsConnect.apply(tls, args);
-  };
-
-  // --- ServiceObject PQC Test ---
-  console.log('Testing PQC via ServiceObject in common core library...');
-
-  const authCommon = new GoogleAuth({
-    authClient: new googleAuthLibrary.PassThroughClient(),
-  });
-
-  const testService = new Service({
-    baseUrl: `https://localhost:${port}/v1beta1`,
-    apiEndpoint: `localhost:${port}`,
-    scopes: [],
-    projectIdRequired: false,
-    packageJson: {
-      name: 'pqc-test',
-      version: '0.1.0 rest/5.0.7 gapic/0.1.0',
-    },
-    authClient: authCommon,
-  }, {
-    authClient: authCommon,
-  });
-
-  const testServiceObject = new ServiceObject({
-    parent: testService,
-    baseUrl: 'echo',
-  });
-
-  await new Promise<void>((resolve, reject) => {
-    testServiceObject.request(
-      {
-        method: 'POST',
-        uri: ':echo',
-        json: {
-          content: 'service-object-pqc-test',
-        },
-        headers: {
-          'x-goog-api-client': 'gl-node/22.22.1 gccl/0.1.0 rest/5.0.7 gapic/0.1.0',
-        },
-        agent: new https.Agent({
-          ca: pemBuffer,
-          keepAlive: true,
-        }),
-      } as any,
-      (err, body, response) => {
-        if (err) {
-          reject(err);
-        } else {
-          try {
-            assert.strictEqual(body.content, 'service-object-pqc-test');
-            const group = response.headers['x-showcase-tls-group'] || (response.headers.get && response.headers.get('x-showcase-tls-group'));
-            console.log(`ServiceObject REST TLS negotiated group: ${group}`);
-            assert.ok(group, 'Expected negotiated TLS group in ServiceObject response headers');
-            assert.strictEqual(group, 'X25519MLKEM768');
-            resolve();
-          } catch (e) {
-            reject(e);
-          }
+  try {
+    tls.connect = function (...args: any[]) {
+      const options0 = args[0];
+      if (typeof options0 === 'object' && options0 !== null) {
+        if (options0.host === 'localhost' || options0.host === '127.0.0.1') {
+          options0.ca = pemBuffer;
         }
       }
-    );
-  });
+      const options2 = args[2];
+      if (typeof options2 === 'object' && options2 !== null) {
+        if (options2.host === 'localhost' || options2.host === '127.0.0.1') {
+          options2.ca = pemBuffer;
+        }
+      }
+      return originalTlsConnect.apply(tls, args);
+    };
 
-  console.log('ServiceObject PQC Integration Test Passed Successfully!');
+    // --- ServiceObject PQC Test ---
+    console.log('Testing PQC via ServiceObject in common core library...');
+
+    const authCommon = new GoogleAuth({
+      authClient: new googleAuthLibrary.PassThroughClient(),
+    });
+
+    const testService = new Service({
+      baseUrl: `https://localhost:${port}/v1beta1`,
+      apiEndpoint: `localhost:${port}`,
+      scopes: [],
+      projectIdRequired: false,
+      packageJson: {
+        name: 'pqc-test',
+        version: '0.1.0 rest/5.0.7 gapic/0.1.0',
+      },
+      authClient: authCommon,
+    }, {
+      authClient: authCommon,
+    });
+
+    const testServiceObject = new ServiceObject({
+      parent: testService,
+      baseUrl: 'echo',
+    });
+
+    await new Promise<void>((resolve, reject) => {
+      testServiceObject.request(
+        {
+          method: 'POST',
+          uri: ':echo',
+          json: {
+            content: 'service-object-pqc-test',
+          },
+          headers: {
+            'x-goog-api-client': 'gl-node/22.22.1 gccl/0.1.0 rest/5.0.7 gapic/0.1.0',
+          },
+          agent: new https.Agent({
+            ca: pemBuffer,
+            keepAlive: true,
+          }),
+        } as any,
+        (err, body, response) => {
+          if (err) {
+            reject(err);
+          } else {
+            try {
+              assert.strictEqual(body.content, 'service-object-pqc-test');
+              const group = response.headers['x-showcase-tls-group'] || (response.headers.get && response.headers.get('x-showcase-tls-group'));
+              console.log(`ServiceObject REST TLS negotiated group: ${group}`);
+              assert.ok(group, 'Expected negotiated TLS group in ServiceObject response headers');
+              assert.strictEqual(group, 'X25519MLKEM768');
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          }
+        }
+      );
+    });
+
+    console.log('ServiceObject PQC Integration Test Passed Successfully!');
+  } finally {
+    tls.connect = originalTlsConnect;
+  }
 }
 
 /**
@@ -157,9 +161,17 @@ export async function runPqcServiceObjectTests() {
 
     await testPqc(pemPath, tlsPort);
   } finally {
-    showcaseServerTls.stop();
+    try {
+      showcaseServerTls.stop();
+    } catch (err) {
+      console.error('Failed to stop showcase server:', err);
+    }
     if (fs.existsSync(pemPath)) {
-      fs.unlinkSync(pemPath);
+      try {
+        fs.unlinkSync(pemPath);
+      } catch (err) {
+        console.error('Failed to delete PEM file:', err);
+      }
     }
   }
 }

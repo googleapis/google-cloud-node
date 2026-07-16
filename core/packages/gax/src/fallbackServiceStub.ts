@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import type {Response as NodeFetchResponse} from 'node-fetch' assert {'resolution-mode': 'import'};
+import type {Response as NodeFetchResponse} from 'node-fetch' with {'resolution-mode': 'import'};
 
 import {AuthClient, GoogleAuth, gaxios} from 'google-auth-library';
 import * as serializer from 'proto3-json-serializer';
