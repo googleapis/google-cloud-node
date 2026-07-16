@@ -4,6 +4,51 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "0d02ecc65200ffe7eb62cb5c8b3d44c56bc4a021",
+          "message": "Add support for custom affinity key",
+          "issues": [
+            "8157"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "bd23de147d0614e64fe31a850cfa53b49f4c5637",
+          "message": "System test against regular sessions",
+          "issues": [
+            "8872"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "perf",
+          "sha": "07fe148ed0e06518c1a2c904344dafc9d41aa68a",
+          "message": "Eliminate extend overhead",
+          "issues": [
+            "8865"
+          ],
+          "scope": "Spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "7548ab0a58c9fb15265966097f4c74677e113a98",
+          "message": "Missing callback parameter in close",
+          "issues": [
+            "8127"
+          ],
+          "scope": "spanner"
+        }
+      ],
+      "version": "8.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "20dc2291-cccf-42c8-b0ea-3694d13de908",
+      "createTime": "2026-07-16T19:23:07.959Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "1012a54dadf723800aa08497bcefafd9b78e9681",
           "message": "Update distribution_name typo",
@@ -82136,5 +82181,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-15T20:03:02.490Z"
+  "updateTime": "2026-07-16T19:23:07.959Z"
 }
