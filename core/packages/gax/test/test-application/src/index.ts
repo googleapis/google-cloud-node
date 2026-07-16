@@ -2911,6 +2911,7 @@ async function main() {
   } finally {
     showcaseServer.stop();
   }
+  // Run PQC tests with a different showcase server because setup with a certificate is required.
   runPqcComplianceTests()
 }
 
