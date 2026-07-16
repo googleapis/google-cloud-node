@@ -20,10 +20,12 @@ sources:
     sha256: 503314c3f49e4de70138d35d5b9b12cca0c74d7c5ba34380895440b83aa45b94
 tools:
   pnpm:
+    - name: pnpm
+      version: 7.32.2
     - name: gapic-generator-typescript
-      version: gapic-generator-v4.12.1
-      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v4.12.1.tar.gz
-      checksum: 477e4a9b3442457667846bd5c629d1c059e7caf2d5a3ebce95da626a2d42ea80
+      version: gapic-generator-v4.12.2
+      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v4.12.2.tar.gz
+      checksum: 7fbdc5b9d08e58a2aa7b72c1ee407cac69e56d179fe623d27ac806419b8a3359
       build:
         - pnpm install
         - ./node_modules/.bin/tsc
@@ -212,12 +214,12 @@ libraries:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
   - name: google-cloud-agentregistry
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
   - name: google-cloud-aiplatform
-    version: 6.8.1
+    version: 6.9.0
     apis:
       - path: google/cloud/aiplatform/v1
       - path: google/cloud/aiplatform/v1beta1
@@ -557,7 +559,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-binaryauthorization
-    version: 4.4.1
+    version: 4.5.0
     apis:
       - path: google/cloud/binaryauthorization/v1
       - path: google/cloud/binaryauthorization/v1beta1
@@ -581,7 +583,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/certificate-manager'
   - name: google-cloud-ces
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/cloud/ces/v1
       - path: google/cloud/ces/v1beta
@@ -596,7 +598,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-chronicle
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/cloud/chronicle/v1
     copyright_year: "2026"
@@ -748,7 +750,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/configmanagement'
   - name: google-cloud-dataform
-    version: 2.4.0
+    version: 2.5.0
     apis:
       - path: google/cloud/dataform/v1
       - path: google/cloud/dataform/v1beta1
@@ -783,7 +785,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/dataplex
   - name: google-cloud-dataproc
-    version: 6.7.0
+    version: 6.8.0
     apis:
       - path: google/cloud/dataproc/v1
     copyright_year: "2026"
@@ -828,7 +830,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-dialogflow
-    version: 7.7.0
+    version: 7.8.0
     apis:
       - path: google/cloud/dialogflow/v2
       - path: google/cloud/dialogflow/v2beta1
@@ -904,7 +906,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-eventarc-publishing
-    version: 4.2.2
+    version: 4.3.0
     apis:
       - path: google/cloud/eventarc/publishing/v1
     copyright_year: "2026"
@@ -1045,14 +1047,14 @@ libraries:
       default_version: v1
       main_service: iot
   - name: google-cloud-kms
-    version: 5.5.1
+    version: 5.6.0
     apis:
       - path: google/cloud/kms/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-kms-inventory
-    version: 2.6.1
+    version: 2.7.0
     apis:
       - path: google/cloud/kms/inventory/v1
     copyright_year: "2026"
@@ -1172,7 +1174,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-modelarmor
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/cloud/modelarmor/v1
       - path: google/cloud/modelarmor/v1beta
@@ -1214,7 +1216,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/network-management'
   - name: google-cloud-networksecurity
-    version: 3.5.0
+    version: 3.6.0
     apis:
       - path: google/cloud/networksecurity/v1
       - path: google/cloud/networksecurity/v1beta1
@@ -1351,8 +1353,9 @@ libraries:
     apis:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
+    version: 1.1.0
   - name: google-cloud-pubsub-api
-    version: 0.1.0
+    version: 0.2.1
     apis:
       - path: google/pubsub/v1
     nodejs:
@@ -1432,7 +1435,7 @@ libraries:
     nodejs:
       default_version: v2
   - name: google-cloud-saasplatform-saasservicemgmt
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/saasplatform/saasservicemgmt/v1beta1
     copyright_year: "2026"
@@ -1458,7 +1461,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/secret-manager'
   - name: google-cloud-securesourcemanager
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/cloud/securesourcemanager/v1
     copyright_year: "2026"
@@ -1553,7 +1556,7 @@ libraries:
         pumpify: ^2.0.1
         stream-events: ^1.0.5
   - name: google-cloud-sql
-    version: 0.24.1
+    version: 0.25.0
     apis:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
@@ -1575,7 +1578,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-support
-    version: 2.4.0
+    version: 2.5.0
     apis:
       - path: google/cloud/support/v2
       - path: google/cloud/support/v2beta
@@ -1782,12 +1785,13 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-workloadmanager
-    version: 0.1.1
+    version: 0.2.1
     apis:
       - path: google/cloud/workloadmanager/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
+      client_documentation_override: https://docs.cloud.google.com/nodejs/docs/reference/workloadmanager/latest
   - name: google-cloud-workstations
     version: 2.3.0
     apis:
@@ -1819,6 +1823,7 @@ libraries:
     copyright_year: "2026"
     nodejs:
       package_name: '@google/developer-knowledge'
+    version: 0.1.1
   - name: google-devicesandservices-health
     version: 0.3.0
     apis:

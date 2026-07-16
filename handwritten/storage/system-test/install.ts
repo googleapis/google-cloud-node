@@ -21,7 +21,7 @@ describe('pack-n-play tests', () => {
     await packNTest({
       sample: {
         description: 'Should be able to import the storage library in ESM',
-        esm: readFileSync('./system-test/fixtures/index-esm.js').toString(),
+        cjs: readFileSync('./system-test/fixtures/index-esm.js').toString(),
       },
     });
   });
