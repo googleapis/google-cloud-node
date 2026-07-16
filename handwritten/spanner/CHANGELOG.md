@@ -5,6 +5,24 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.9.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.8.1...spanner-v8.9.0) (2026-07-16)
+
+
+### Features
+
+* **spanner:** Add support for custom affinity key ([#8157](https://github.com/googleapis/google-cloud-node/issues/8157)) ([0d02ecc](https://github.com/googleapis/google-cloud-node/commit/0d02ecc65200ffe7eb62cb5c8b3d44c56bc4a021))
+
+
+### Bug Fixes
+
+* **spanner:** Missing callback parameter in close ([#8127](https://github.com/googleapis/google-cloud-node/issues/8127)) ([7548ab0](https://github.com/googleapis/google-cloud-node/commit/7548ab0a58c9fb15265966097f4c74677e113a98))
+* **spanner:** System test against regular sessions ([#8872](https://github.com/googleapis/google-cloud-node/issues/8872)) ([bd23de1](https://github.com/googleapis/google-cloud-node/commit/bd23de147d0614e64fe31a850cfa53b49f4c5637))
+
+
+### Performance Improvements
+
+* **Spanner:** Eliminate extend overhead ([#8865](https://github.com/googleapis/google-cloud-node/issues/8865)) ([07fe148](https://github.com/googleapis/google-cloud-node/commit/07fe148ed0e06518c1a2c904344dafc9d41aa68a))
+
 ## [8.8.1](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.8.0...spanner-v8.8.1) (2026-07-06)
 
 
