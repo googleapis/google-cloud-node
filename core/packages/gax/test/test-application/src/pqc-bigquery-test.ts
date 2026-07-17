@@ -100,9 +100,6 @@ async function testPqc(pemPath: string, port: number) {
           json: {
             content: 'bigquery-pqc-test',
           },
-          headers: {
-            'x-goog-api-client': 'gl-node/22.22.1 gccl/8.3.1 rest/5.0.7 gapic/0.1.0',
-          },
           agent: new https.Agent({
             ca: pemBuffer,
             keepAlive: true,
