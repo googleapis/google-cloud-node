@@ -40,6 +40,8 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
 fi
 
 # Install dependencies
+# Normalize POSIX paths to Windows-compatible mixed paths (forward slashes) on Windows Git Bash
+# so native Node.js and pnpm processes can resolve .pnpmfile.cjs without segmentation faults.
 PNPMFILE_PATH="${PROJECT_ROOT}/.pnpmfile.cjs"
 if command -v cygpath >/dev/null 2>&1; then
     PNPMFILE_PATH=$(cygpath -m "${PNPMFILE_PATH}")
