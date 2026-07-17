@@ -20,16 +20,12 @@ sources:
     sha256: 503314c3f49e4de70138d35d5b9b12cca0c74d7c5ba34380895440b83aa45b94
 tools:
   pnpm:
-    - name: pnpm
-      version: 7.32.2
     - name: gapic-generator-typescript
       version: gapic-generator-v4.12.2
       package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v4.12.2.tar.gz
       checksum: 7fbdc5b9d08e58a2aa7b72c1ee407cac69e56d179fe623d27ac806419b8a3359
-      build:
         - pnpm install --frozen-lockfile
-        - ./node_modules/.bin/tsc
-        - cp -a templates protos build/
+        - pnpm run compile
         - pnpm add -g "$PWD"
     - name: gapic-node-processing
       version: 0.1.8
