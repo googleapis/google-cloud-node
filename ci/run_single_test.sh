@@ -29,6 +29,8 @@ if [ -z "${TEST_TYPE}" ]; then
     TEST_TYPE="units"
 fi
 
+TEST_CMD=${TEST_CMD:-pnpm}
+
 d=$(pwd)
 PROJECT=$(basename ${d})
 
@@ -69,20 +71,20 @@ fi
 set +e
 case ${TEST_TYPE} in
 lint)
-    pnpm prelint
-    pnpm lint
+    ${TEST_CMD} prelint
+    ${TEST_CMD} lint
     retval=$?
     ;;
 samples)
-    pnpm samples-test
+    ${TEST_CMD} samples-test
     retval=$?
     ;;
 system)
-    pnpm system-test
+    ${TEST_CMD} system-test
     retval=$?
     ;;
 units)
-    pnpm test
+    ${TEST_CMD} test
     retval=$?
     ;;
 *)
