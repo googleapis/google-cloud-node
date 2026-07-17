@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2026 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: 'google-developer-knowledge',
+    systemName: '@google/developer-knowledge',
     theme: 'lumen',
     default: {
       outputSourceFiles: false
