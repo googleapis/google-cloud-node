@@ -3,7 +3,11 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
-  "repository": "googleapis/nodejs-monitoring",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-monitoring/samples",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "files": [
     "*.js"
   ],

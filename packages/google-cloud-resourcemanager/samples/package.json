@@ -3,7 +3,11 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google LLC",
-  "repository": "googleapis/nodejs-resource-manager",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-resourcemanager/samples",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "files": [
     "*.js"
   ],

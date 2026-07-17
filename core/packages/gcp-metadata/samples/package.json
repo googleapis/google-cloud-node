@@ -8,7 +8,11 @@
   "files": [
     "*.js"
   ],
-  "repository": "googleapis/google-cloud-node",
+  "repository": {
+    "type": "git",
+    "directory": "core/packages/gcp-metadata/samples",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "private": true,
   "scripts": {
     "test": "mocha"

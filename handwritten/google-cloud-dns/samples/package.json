@@ -3,7 +3,11 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
-  "repository": "googleapis/nodejs-dns",
+  "repository": {
+    "type": "git",
+    "directory": "handwritten/google-cloud-dns/samples",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "engines": {
     "node": ">=18"
   },

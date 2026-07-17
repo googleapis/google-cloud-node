@@ -5,7 +5,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/nodejs-redis",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-redis/samples",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "private": true,
   "scripts": {
     "test": "c8 mocha system-test"

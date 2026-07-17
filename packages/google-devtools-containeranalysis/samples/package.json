@@ -3,7 +3,11 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
-  "repository": "googleapis/nodejs-containeranalysis",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-devtools-containeranalysis/samples",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "files": [
     "*.js"
   ],

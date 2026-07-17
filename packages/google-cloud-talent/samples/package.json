@@ -6,7 +6,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/nodejs-talent",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-talent/samples",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "private": true,
   "files": [
     "*.js"

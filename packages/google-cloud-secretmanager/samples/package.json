@@ -6,7 +6,11 @@
     "*.js"
   ],
   "author": "Google LLC",
-  "repository": "googleapis/nodejs-secret-manager",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-secretmanager/samples",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "engines": {
     "node": ">=18"
   },

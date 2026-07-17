@@ -9,7 +9,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/nodejs-iot",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-iot/samples",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "private": true,
   "scripts": {
     "test": "echo tests deprecated"
