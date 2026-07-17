@@ -84,7 +84,7 @@
  * @property {constructor} SubscriberClient
  *     Reference to {@link v1.SubscriberClient}.
  */
-import * as v1 from './v1';
+import * as v1 from '@google-cloud/pubsub-api';
 export {v1};
 export {ServiceError, CallOptions} from 'google-gax';
 export {
