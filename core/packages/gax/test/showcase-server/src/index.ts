@@ -32,8 +32,16 @@ function sleep(timeoutMs: number) {
 export class ShowcaseServer {
   server: execa.ExecaChildProcess | undefined;
 
-  async start() {
-    const testDir = path.join(process.cwd(), '.showcase-server-dir');
+  /**
+   * Starts the gapic-showcase server.
+   * @param opts Optional configuration for the server:
+   *  - tls: If true, starts the server with TLS enabled.
+   *  - port: The port to bind the server to (e.g. ":7443").
+   *  - caCertOutputFile: Path where the server should write its CA cert (when TLS is enabled).
+   */
+  async start(opts?: { tls?: boolean; port?: string; caCertOutputFile?: string }) {
+    const cwd = process.cwd();
+    const testDir = path.join(cwd, '.showcase-server-dir');
     const platform = process.platform;
     const arch = process.arch === 'x64' ? 'amd64' : process.arch;
     const showcaseVersion = process.env['SHOWCASE_VERSION'] || '0.36.2';
@@ -41,14 +49,36 @@ export class ShowcaseServer {
     const fallbackServerUrl = `https://github.com/googleapis/gapic-showcase/releases/download/v${showcaseVersion}/${tarballFilename}`;
     const binaryName = './gapic-showcase';
 
+    let resolvedCaCertPath = '';
+    if (opts?.caCertOutputFile) {
+      resolvedCaCertPath = path.resolve(cwd, opts.caCertOutputFile);
+    }
+
     await fsp.rm(testDir, {recursive: true, force: true});
     await mkdir(testDir);
+    // Change the working directory to testDir so that the tar extraction
+    // and the gapic-showcase server execution happen in an isolated environment.
     process.chdir(testDir);
     console.log(`Server will be run from ${testDir}.`);
 
     await download(fallbackServerUrl, testDir);
     await execa('tar', ['xzf', tarballFilename]);
-    const childProcess = execa(binaryName, ['run'], {
+    // Restore the working directory to the original cwd so that paths like caCertOutputFile are resolved correctly
+    process.chdir(cwd);
+
+    const args = ['run'];
+    // Pass additional options to gapic-showcase based on opts
+    if (opts?.tls) {
+      args.push('--tls');
+    }
+    if (opts?.port) {
+      args.push('--port', opts.port);
+    }
+    if (resolvedCaCertPath) {
+      args.push('--ca-cert-output-file', resolvedCaCertPath);
+    }
+
+    const childProcess = execa(binaryName, args, {
       cwd: testDir,
       stdio: 'inherit',
     });
