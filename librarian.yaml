@@ -27,14 +27,14 @@ tools:
       package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v4.12.2.tar.gz
       checksum: 7fbdc5b9d08e58a2aa7b72c1ee407cac69e56d179fe623d27ac806419b8a3359
       build:
-        - pnpm install
+        - pnpm install --frozen-lockfile
         - ./node_modules/.bin/tsc
         - cp -a templates protos build/
         - pnpm add -g "$PWD"
     - name: gapic-node-processing
       version: 0.1.8
     - name: gapic-tools
-      version: 1.0.6
+      version: 1.1.0
     - name: protobufjs
       version: 7.5.8
     - name: protobufjs-cli
