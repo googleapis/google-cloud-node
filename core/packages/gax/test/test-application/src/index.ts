@@ -15,6 +15,7 @@
  */
 
 'use strict';
+const {runPqcBigQueryTests} = require('./pqc-bigquery-test');
 import {EchoClient, SequenceServiceClient, protos} from 'showcase-echo-client';
 import {ShowcaseServer} from 'showcase-server';
 import * as assert from 'assert';
@@ -2903,6 +2904,7 @@ async function testStreamingErrorAfterDataNoBufferNoRetry(
 }
 
 async function main() {
+  /*
   const showcaseServer = new ShowcaseServer();
   try {
     await showcaseServer.start();
@@ -2910,6 +2912,8 @@ async function main() {
   } finally {
     showcaseServer.stop();
   }
+  */
+  await runPqcBigQueryTests();
 }
 
 main();
