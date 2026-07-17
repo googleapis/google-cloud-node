@@ -270,7 +270,8 @@ export class RegionalAccessBoundaryManager {
       if (await shouldMtlsEndpointBeUsed()) {
         if (await canMtlsBeEnabled()) {
           const {cert, key} = await getClientCertAndKey();
-          opts.agent = new https.Agent({cert, key});
+          opts.cert = cert.toString('utf8');
+          opts.key = key.toString('utf8');
           mtlsApplied = true;
         } else if (
           getMtlsEndpointUsagePolicy() === MtlsEndpointUsagePolicy.ALWAYS

@@ -1391,6 +1391,8 @@ describe('jwt', () => {
 
       const tokenScope = createGTokenMock({access_token: MOCK_ACCESS_TOKEN});
 
+      const requestSpy = localSandbox.spy(jwt.transporter, 'request');
+
       // Construct and mock the mTLS lookup URL
       const lookupUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
         '{service_account_email}',
@@ -1424,6 +1426,18 @@ describe('jwt', () => {
         jwt.getRegionalAccessBoundary(),
         EXPECTED_RAB_DATA,
       );
+
+      // Verify transporter request options
+      const lookupCall = requestSpy.getCalls().find(c => {
+        const url = c.args[0]?.url;
+        return url && url.toString().includes('allowedLocations');
+      });
+      assert.ok(lookupCall);
+      const callOpts = lookupCall!.args[0];
+      assert.ok(callOpts);
+      assert.strictEqual(callOpts.agent, undefined);
+      assert.ok(callOpts.cert);
+      assert.ok(callOpts.key);
 
       tokenScope.done();
       rabScope.done();
