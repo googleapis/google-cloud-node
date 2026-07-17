@@ -7,7 +7,11 @@
   "engines": {
     "node": ">=18"
   },
-  "repository": "googleapis/google-cloud-node",
+  "repository": {
+    "type": "git",
+    "directory": "core/packages/typeless-sample-bot",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "bin": "./build/src/bin/typeless-sample-bot.js",
   "main": "./build/src/app.js",
   "type": "module",

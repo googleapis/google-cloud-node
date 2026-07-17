@@ -4,7 +4,7 @@
   "description": "Workflows client for Node.js",
   "repository": {
     "type": "git",
-    "directory": "packages/google-cloud-workflows-executions",
+    "directory": "packages/google-cloud-workflows",
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "license": "Apache-2.0",

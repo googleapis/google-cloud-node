@@ -4,7 +4,7 @@
   "description": "Mediatranslation client for Node.js",
   "repository": {
     "type": "git",
-    "directory": "packages/media-translatation",
+    "directory": "packages/google-cloud-mediatranslation",
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "license": "Apache-2.0",

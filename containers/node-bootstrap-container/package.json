@@ -11,7 +11,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/googleapis/google-cloud-node.git"
+    "directory": "containers/node-bootstrap-container",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "author": "Google LLC",
   "license": "Apache-2.0",
