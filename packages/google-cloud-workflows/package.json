@@ -64,7 +64,7 @@
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-workflows-executions",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-workflows",
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
   },
