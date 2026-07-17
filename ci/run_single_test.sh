@@ -42,7 +42,7 @@ fi
 # Install dependencies
 PNPMFILE_PATH="${PROJECT_ROOT}/.pnpmfile.cjs"
 if command -v cygpath >/dev/null 2>&1; then
-    PNPMFILE_PATH=$(cygpath -w "${PNPMFILE_PATH}")
+    PNPMFILE_PATH=$(cygpath -m "${PNPMFILE_PATH}")
 fi
 
 echo "pnpm install --ignore-scripts --engine-strict --prod --pnpmfile \"${PNPMFILE_PATH}\"; pnpm install --pnpmfile \"${PNPMFILE_PATH}\""
