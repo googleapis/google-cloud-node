@@ -11,13 +11,14 @@
   "keywords": [],
   "scripts": {
     "compile": "tsc -p .",
-    "prefetch-cleanup": "rm -rf node_modules package-lock.json google-gax*.tgz showcase-echo-client*.tgz showcase-server*.tgz google-cloud-common*.tgz google-cloud-bigquery*.tgz",
+    "prefetch-cleanup": "rm -f google-gax*.tgz showcase-echo-client*.tgz showcase-server*.tgz google-cloud-common*.tgz google-cloud-bigquery*.tgz",
     "prefetch-google-gax": "cd ../.. && npm pack && mv google-gax*.tgz test/test-application/google-gax.tgz",
     "prefetch-google-cloud-common": "cd ../../../../../core/common && npm pack && mv google-cloud-common*.tgz ../../core/packages/gax/test/test-application/google-cloud-common.tgz",
     "prefetch-google-cloud-bigquery": "cd ../../../../../handwritten/bigquery && npm pack && mv google-cloud-bigquery*.tgz ../../core/packages/gax/test/test-application/google-cloud-bigquery.tgz",
     "prefetch-showcase-echo-client": "cd ../showcase-echo-client && npm run prefetch && npm install && npm pack && mv showcase-echo-client*.tgz ../test-application/showcase-echo-client.tgz",
     "prefetch-showcase-server": "cd ../showcase-server && npm install && npm pack && mv showcase-server*.tgz ../test-application/showcase-server.tgz",
     "prefetch": "npm run prefetch-cleanup && npm run prefetch-google-gax && npm run prefetch-google-cloud-common && npm run prefetch-google-cloud-bigquery && npm run prefetch-showcase-echo-client && npm run prefetch-showcase-server",
+    "postinstall": "npm run prefetch && npm install --no-save ./google-gax.tgz ./google-cloud-bigquery.tgz ./google-cloud-common.tgz ./showcase-echo-client.tgz ./showcase-server.tgz",
     "prepare": "npm run compile",
     "start": "node build/src/index.js"
   },
@@ -28,14 +29,9 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@google-cloud/bigquery": "file:./google-cloud-bigquery.tgz",
-    "@google-cloud/common": "file:./google-cloud-common.tgz",
     "@grpc/grpc-js": "~1.6.0",
-    "google-gax": "file:./google-gax.tgz",
     "protobufjs": "^7.0.0",
-    "pumpify": "^2.0.1",
-    "showcase-echo-client": "./showcase-echo-client.tgz",
-    "showcase-server": "./showcase-server.tgz"
+    "pumpify": "^2.0.1"
   },
   "engines": {
     "node": ">=18"
