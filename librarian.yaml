@@ -24,7 +24,8 @@ tools:
       version: gapic-generator-v4.12.2
       package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v4.12.2.tar.gz
       checksum: 7fbdc5b9d08e58a2aa7b72c1ee407cac69e56d179fe623d27ac806419b8a3359
-        - pnpm install --frozen-lockfile
+      build:
+        - pnpm install --frozen-lockfile --config.auto-install-peers=true
         - pnpm run compile
         - pnpm add -g "$PWD"
     - name: gapic-node-processing
