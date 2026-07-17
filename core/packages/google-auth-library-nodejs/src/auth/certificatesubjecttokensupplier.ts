@@ -22,6 +22,8 @@ import {
   getClientCertAndKey,
 } from './mtlsutils';
 
+export {CertificateSourceUnavailableError, InvalidConfigurationError};
+
 /**
  * Defines options for creating a {@link CertificateSubjectTokenSupplier}.
  */
