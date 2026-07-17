@@ -12,14 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Gaxios, GaxiosOptions } from 'gaxios';
-import { log as makeLog } from 'google-logging-utils';
+import {Gaxios, GaxiosOptions} from 'gaxios';
+import {log as makeLog} from 'google-logging-utils';
 import * as https from 'https';
 import {
   canMtlsBeEnabled,
   getClientCertAndKey,
   getMtlsEndpointUsagePolicy,
   MtlsEndpointUsagePolicy,
+  shouldMtlsEndpointBeUsed,
 } from './mtlsutils';
 
 const log = makeLog('auth');
@@ -263,15 +264,19 @@ export class RegionalAccessBoundaryManager {
       url: this.lookupUrl,
     };
 
-    // If mTLS can be enabled, use mTLS agent and switch to the mTLS endpoint
+    // Switch to the mTLS endpoint if configured or available
+    let mtlsApplied = false;
     try {
-      if (await canMtlsBeEnabled()) {
-        const { cert, key } = await getClientCertAndKey();
-        opts.agent = new https.Agent({ cert, key });
-        opts.url = this.lookupUrl.replace(
-          'iamcredentials.googleapis.com',
-          'iamcredentials.mtls.googleapis.com',
-        );
+      if (await shouldMtlsEndpointBeUsed()) {
+        if (await canMtlsBeEnabled()) {
+          const {cert, key} = await getClientCertAndKey();
+          opts.agent = new https.Agent({cert, key});
+          mtlsApplied = true;
+        } else if (
+          getMtlsEndpointUsagePolicy() === MtlsEndpointUsagePolicy.ALWAYS
+        ) {
+          mtlsApplied = true;
+        }
       }
     } catch (e) {
       log.error('RegionalAccessBoundary: Failed to initialize mTLS: ', e);
@@ -281,7 +286,14 @@ export class RegionalAccessBoundaryManager {
       }
     }
 
-    const { data: regionalAccessBoundaryData } =
+    if (mtlsApplied) {
+      opts.url = this.lookupUrl.replace(
+        'iamcredentials.googleapis.com',
+        'iamcredentials.mtls.googleapis.com',
+      );
+    }
+
+    const {data: regionalAccessBoundaryData} =
       await this.options.transporter.request<RegionalAccessBoundaryData>(opts);
 
     if (!regionalAccessBoundaryData?.encodedLocations) {

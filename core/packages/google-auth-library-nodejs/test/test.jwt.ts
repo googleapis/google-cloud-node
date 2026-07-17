@@ -1282,12 +1282,17 @@ describe('jwt', () => {
         .reply(200, regionalAccessBoundaryData);
     }
 
+    let localSandbox: sinon.SinonSandbox;
+
     beforeEach(() => {
+      localSandbox = sinon.createSandbox();
+      localSandbox.stub(process, 'env').value({...process.env});
       (JWT.prototype.getRegionalAccessBoundaryUrl as sinon.SinonStub).restore();
     });
 
     afterEach(() => {
       nock.cleanAll();
+      localSandbox.restore();
     });
 
     it('should trigger asynchronous regional access boundaries refresh', async () => {
@@ -1341,6 +1346,19 @@ describe('jwt', () => {
 
       const tokenScope = createGTokenMock({access_token: MOCK_ACCESS_TOKEN});
 
+      const lookupUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(SERVICE_ACCOUNT_EMAIL),
+      ).replace(
+        'iamcredentials.googleapis.com',
+        'iamcredentials.mtls.googleapis.com',
+      );
+
+      const rabScope = nock(new URL(lookupUrl).origin)
+        .get(new URL(lookupUrl).pathname)
+        .matchHeader('authorization', MOCK_AUTH_HEADER)
+        .reply(403, 'Forbidden');
+
       // We trigger the background lookup by getting request headers.
       await jwt.getRequestHeaders('https://pubsub.googleapis.com');
 
@@ -1355,6 +1373,7 @@ describe('jwt', () => {
       assert.ok(jwt.getRegionalAccessBoundaryCooldownTime() > Date.now());
 
       tokenScope.done();
+      rabScope.done();
     });
 
     it('should use mTLS endpoint for RAB lookup if GOOGLE_API_USE_MTLS_ENDPOINT is always and valid cert config is present', async () => {

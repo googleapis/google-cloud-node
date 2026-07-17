@@ -89,15 +89,10 @@ export function getMtlsEndpointUsagePolicy(): MtlsEndpointUsagePolicy {
 export async function canMtlsBeEnabled(
   certConfigPathOverride?: string,
 ): Promise<boolean> {
-  const policy = getMtlsEndpointUsagePolicy();
   if (process.env.GOOGLE_API_USE_CLIENT_CERTIFICATE === 'false') {
-    if (policy === MtlsEndpointUsagePolicy.ALWAYS) {
-      throw new CertificateSourceUnavailableError(
-        'mTLS is configured to ALWAYS, but client certificate usage was explicitly disabled via GOOGLE_API_USE_CLIENT_CERTIFICATE=false.',
-      );
-    }
     return false;
   }
+  const policy = getMtlsEndpointUsagePolicy();
   if (policy === MtlsEndpointUsagePolicy.NEVER) {
     return false;
   }
@@ -259,4 +254,28 @@ export async function getClientCertAndKey(
   }
 
   return {cert, key};
+}
+
+/**
+ * Returns whether the mutual TLS (mTLS) endpoint should be used.
+ *
+ * @param certConfigPathOverride Optional path to override the certificate configuration file.
+ * @returns true if the mTLS endpoint should be used, false otherwise.
+ */
+export async function shouldMtlsEndpointBeUsed(
+  certConfigPathOverride?: string,
+): Promise<boolean> {
+  const policy = getMtlsEndpointUsagePolicy();
+  if (policy === MtlsEndpointUsagePolicy.ALWAYS) {
+    return true;
+  }
+  if (policy === MtlsEndpointUsagePolicy.NEVER) {
+    return false;
+  }
+  // policy is AUTO: use mTLS endpoint if client certificate can be enabled
+  try {
+    return await canMtlsBeEnabled(certConfigPathOverride);
+  } catch (e) {
+    return false;
+  }
 }

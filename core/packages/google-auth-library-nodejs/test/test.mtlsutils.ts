@@ -25,6 +25,7 @@ import {
   InvalidConfigurationError,
   getMtlsEndpointUsagePolicy,
   MtlsEndpointUsagePolicy,
+  shouldMtlsEndpointBeUsed,
 } from '../src/auth/mtlsutils';
 import * as util from '../src/util';
 
@@ -118,13 +119,11 @@ describe('mtlsutils', () => {
       assert.strictEqual(result, true);
     });
 
-    it('throws error if GOOGLE_API_USE_MTLS_ENDPOINT is always and GOOGLE_API_USE_CLIENT_CERTIFICATE is false', async () => {
+    it('returns false if GOOGLE_API_USE_CLIENT_CERTIFICATE is false, even if GOOGLE_API_USE_MTLS_ENDPOINT is always', async () => {
       process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'always';
       process.env.GOOGLE_API_USE_CLIENT_CERTIFICATE = 'false';
-      await assert.rejects(
-        canMtlsBeEnabled(),
-        /mTLS is configured to ALWAYS, but client certificate usage was explicitly disabled via GOOGLE_API_USE_CLIENT_CERTIFICATE=false\./,
-      );
+      const result = await canMtlsBeEnabled();
+      assert.strictEqual(result, false);
     });
   });
 
@@ -197,6 +196,45 @@ describe('mtlsutils', () => {
         getMtlsEndpointUsagePolicy(),
         MtlsEndpointUsagePolicy.ALWAYS,
       );
+    });
+  });
+
+  describe('shouldMtlsEndpointBeUsed', () => {
+    it('returns true if GOOGLE_API_USE_MTLS_ENDPOINT is always', async () => {
+      process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'always';
+      const result = await shouldMtlsEndpointBeUsed();
+      assert.strictEqual(result, true);
+    });
+
+    it('returns false if GOOGLE_API_USE_MTLS_ENDPOINT is never', async () => {
+      process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'never';
+      const result = await shouldMtlsEndpointBeUsed();
+      assert.strictEqual(result, false);
+    });
+
+    it('returns true if GOOGLE_API_USE_MTLS_ENDPOINT is auto and cert config is present', async () => {
+      process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'auto';
+      process.env.GOOGLE_API_CERTIFICATE_CONFIG =
+        './test/fixtures/external-account-cert/cert_config.json';
+      const result = await shouldMtlsEndpointBeUsed();
+      assert.strictEqual(result, true);
+    });
+
+    it('returns false if GOOGLE_API_USE_MTLS_ENDPOINT is auto and no cert config is present', async () => {
+      process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'auto';
+      delete process.env.GOOGLE_API_CERTIFICATE_CONFIG;
+      sandbox
+        .stub(util, 'getWellKnownCertificateConfigFileLocation')
+        .returns(path.join(tempDir, 'non_existent.json'));
+      const result = await shouldMtlsEndpointBeUsed();
+      assert.strictEqual(result, false);
+    });
+
+    it('returns true if GOOGLE_API_USE_MTLS_ENDPOINT is always and GOOGLE_API_USE_CLIENT_CERTIFICATE is false', async () => {
+      process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'always';
+      process.env.GOOGLE_API_USE_CLIENT_CERTIFICATE = 'false';
+      const result = await shouldMtlsEndpointBeUsed();
+      assert.strictEqual(result, true);
     });
   });
 });
