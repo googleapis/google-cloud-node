@@ -1347,10 +1347,10 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-productregistry
+    version: 1.1.0
     apis:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
-    version: 1.1.0
   - name: google-cloud-pubsub-api
     version: 0.2.1
     apis:
@@ -1815,12 +1815,12 @@ libraries:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
   - name: google-developer-knowledge
+    version: 0.1.1
     apis:
       - path: google/developers/knowledge/v1
     copyright_year: "2026"
     nodejs:
       package_name: '@google/developer-knowledge'
-    version: 0.1.1
   - name: google-devicesandservices-health
     version: 0.3.0
     apis:
