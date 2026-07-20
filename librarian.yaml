@@ -1088,6 +1088,15 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-logging-api
+    version: 0.1.0
+    apis:
+      - path: google/logging/v2
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/logging-api'
+      metadata_name_override: logging-api
+      name_pretty_override: Logging API
   - name: google-cloud-lustre
     version: 0.2.2
     apis:
