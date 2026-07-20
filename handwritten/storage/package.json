@@ -69,8 +69,8 @@
     "presystem-test": "npm run compile -- --sourceMap",
     "pretest": "npm run compile -- --sourceMap",
     "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test:esm": "mocha build/esm/system-test --timeout 600000 --exit",
-    "system-test": "mocha build/cjs/system-test --timeout 600000 --exit",
+    "system-test:esm": "mkdir $HOME/.config && mocha build/esm/system-test --timeout 600000 --exit",
+    "system-test": "mkdir $HOME/.config && mocha build/cjs/system-test --timeout 600000 --exit",
     "test": "cross-env NODE_OPTIONS=\"--require ./scripts/preload-yargs.cjs --no-deprecation\" c8 mocha build/cjs/test"
   },
   "dependencies": {
