@@ -537,7 +537,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-bigtable-api
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/bigtable/v2
       - path: google/bigtable/admin/v2
@@ -547,7 +547,7 @@ libraries:
       metadata_name_override: bigtable-api
       name_pretty_override: Bigtable API
   - name: google-cloud-bigquery-storage-api
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/cloud/bigquery/storage/v1
     copyright_year: "2026"
@@ -818,7 +818,7 @@ libraries:
       default_version: v1alpha
       package_name: '@google-cloud/data-qna'
   - name: google-cloud-datastore-api
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/datastore/v1
       - path: google/datastore/admin/v1
@@ -956,7 +956,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-firestore-api
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/firestore/v1
       - path: google/firestore/admin/v1
@@ -1130,7 +1130,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-logging-api
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/logging/v2
     copyright_year: "2026"
@@ -1578,7 +1578,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-spanner-api
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/spanner/v1
       - path: google/spanner/executor/v1
