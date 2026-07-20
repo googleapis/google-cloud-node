@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as cloudproductregistryreadserviceModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf} from 'google-gax';
+import { protobuf } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
+            return Promise.resolve({ done: true, value: undefined });
           }
-          return Promise.resolve({done: false, value: responses![counter++]});
+          return Promise.resolve({ done: false, value: responses![counter++] });
         },
       };
     },
@@ -170,7 +170,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
-          {universeDomain: 'example.com'},
+          { universeDomain: 'example.com' },
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudproductregistry.example.com');
@@ -179,7 +179,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
-          {universe_domain: 'example.com'},
+          { universe_domain: 'example.com' },
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudproductregistry.example.com');
@@ -206,7 +206,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
-              {universeDomain: 'configured.example.com'},
+              { universeDomain: 'configured.example.com' },
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -224,7 +224,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
-          {universe_domain: 'example.com', universeDomain: 'example.net'},
+          { universe_domain: 'example.com', universeDomain: 'example.net' },
         );
       });
     });
@@ -257,7 +257,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -266,15 +266,15 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       assert(client.cloudProductRegistryReadServiceStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.cloudProductRegistryReadServiceStub);
@@ -283,16 +283,16 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -302,7 +302,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -312,7 +312,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -327,7 +327,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -353,7 +353,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -387,7 +387,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -437,7 +437,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -471,7 +471,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -485,7 +485,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getProductSuite(request), expectedError);
@@ -497,7 +497,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -531,7 +531,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -581,7 +581,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -615,7 +615,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -629,7 +629,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getLogicalProduct(request), expectedError);
@@ -641,7 +641,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -676,7 +676,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -726,7 +726,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -763,7 +763,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -777,7 +777,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(
@@ -792,7 +792,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -826,7 +826,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -876,7 +876,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -910,7 +910,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -924,7 +924,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       );
       request.lookupUri = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.lookupEntity(request), expectedError);
@@ -936,7 +936,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -964,7 +964,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -991,7 +991,8 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              protos.google.cloud.productregistry.v1.IProductSuite[] | null,
+              | protos.google.cloud.productregistry.v1.IProductSuite[]
+              | null,
           ) => {
             if (err) {
               reject(err);
@@ -1009,7 +1010,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1029,7 +1030,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1080,7 +1081,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1120,7 +1121,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1160,7 +1161,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1193,7 +1194,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1222,7 +1223,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1249,7 +1250,8 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              protos.google.cloud.productregistry.v1.ILogicalProduct[] | null,
+              | protos.google.cloud.productregistry.v1.ILogicalProduct[]
+              | null,
           ) => {
             if (err) {
               reject(err);
@@ -1267,7 +1269,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1287,7 +1289,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1338,7 +1340,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1378,7 +1380,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1418,7 +1420,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1451,7 +1453,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1494,7 +1496,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1554,7 +1556,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1591,7 +1593,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1663,7 +1665,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1724,7 +1726,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1781,7 +1783,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1835,7 +1837,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1878,7 +1880,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );
@@ -1943,7 +1945,7 @@ describe('v1.CloudProductRegistryReadServiceClient', () => {
       const client =
         new cloudproductregistryreadserviceModule.v1.CloudProductRegistryReadServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
             projectId: 'bogus',
           },
         );

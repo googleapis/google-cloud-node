@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import {Transform} from 'stream';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,7 +52,7 @@ export class CloudProductRegistryReadServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('productregistry');
@@ -65,9 +65,9 @@ export class CloudProductRegistryReadServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  cloudProductRegistryReadServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  cloudProductRegistryReadServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of CloudProductRegistryReadServiceClient.
@@ -144,7 +144,7 @@ export class CloudProductRegistryReadServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -241,7 +241,7 @@ export class CloudProductRegistryReadServiceClient {
       'google.cloud.productregistry.v1.CloudProductRegistryReadService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      { 'x-goog-api-client': clientHeader.join(' ') },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -282,7 +282,7 @@ export class CloudProductRegistryReadServiceClient {
             .CloudProductRegistryReadService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{[method: string]: Function}>;
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -297,7 +297,7 @@ export class CloudProductRegistryReadServiceClient {
     ];
     for (const methodName of cloudProductRegistryReadServiceStubMethods) {
       const callPromise = this.cloudProductRegistryReadServiceStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -502,7 +502,7 @@ export class CloudProductRegistryReadServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getProductSuite request %j', request);
@@ -646,7 +646,7 @@ export class CloudProductRegistryReadServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getLogicalProduct request %j', request);
@@ -790,7 +790,7 @@ export class CloudProductRegistryReadServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getLogicalProductVariant request %j', request);
@@ -931,7 +931,7 @@ export class CloudProductRegistryReadServiceClient {
       this._gaxModule.routingHeader.fromParams({
         lookup_uri: request.lookupUri ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('lookupEntity request %j', request);
@@ -1076,7 +1076,7 @@ export class CloudProductRegistryReadServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1143,7 +1143,7 @@ export class CloudProductRegistryReadServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProductSuites'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listProductSuites stream %j', request);
@@ -1192,7 +1192,7 @@ export class CloudProductRegistryReadServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProductSuites'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listProductSuites iterate %j', request);
@@ -1301,7 +1301,7 @@ export class CloudProductRegistryReadServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1373,7 +1373,7 @@ export class CloudProductRegistryReadServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listLogicalProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listLogicalProducts stream %j', request);
@@ -1427,7 +1427,7 @@ export class CloudProductRegistryReadServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listLogicalProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listLogicalProducts iterate %j', request);
@@ -1541,7 +1541,7 @@ export class CloudProductRegistryReadServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -1618,7 +1618,7 @@ export class CloudProductRegistryReadServiceClient {
       });
     const defaultCallSettings = this._defaults['listLogicalProductVariants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listLogicalProductVariants stream %j', request);
@@ -1677,7 +1677,7 @@ export class CloudProductRegistryReadServiceClient {
       });
     const defaultCallSettings = this._defaults['listLogicalProductVariants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('listLogicalProductVariants iterate %j', request);
@@ -1790,7 +1790,7 @@ export class CloudProductRegistryReadServiceClient {
    */
   close(): Promise<void> {
     if (this.cloudProductRegistryReadServiceStub && !this._terminated) {
-      return this.cloudProductRegistryReadServiceStub.then(stub => {
+      return this.cloudProductRegistryReadServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

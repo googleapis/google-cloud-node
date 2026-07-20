@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.developers.knowledge.v1",
-  "libraryPackage": "google-developer-knowledge",
+  "libraryPackage": "@google/developer-knowledge",
   "services": {
     "DeveloperKnowledge": {
       "clients": {

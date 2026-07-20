@@ -16,6 +16,8 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
+
 'use strict';
 
 function main(query) {
@@ -82,7 +84,7 @@ function main(query) {
   // const filter = 'abc123'
 
   // Imports the Knowledge library
-  const {DeveloperKnowledgeClient} = require('google-developer-knowledge').v1;
+  const {DeveloperKnowledgeClient} = require('@google/developer-knowledge').v1;
 
   // Instantiates a client
   const knowledgeClient = new DeveloperKnowledgeClient();
@@ -96,7 +98,7 @@ function main(query) {
     // Run request
     const iterable = knowledgeClient.searchDocumentChunksAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 
