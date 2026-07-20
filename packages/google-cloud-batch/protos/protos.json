@@ -2389,6 +2389,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "instanceFlexibilityPolicy": {
+                          "type": "InstanceFlexibilityPolicy",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2572,6 +2579,13 @@
                           }
                         },
                         "NetworkInterface": {
+                          "oneofs": {
+                            "_nicType": {
+                              "oneof": [
+                                "nicType"
+                              ]
+                            }
+                          },
                           "fields": {
                             "network": {
                               "type": "string",
@@ -2584,6 +2598,24 @@
                             "noExternalIpAddress": {
                               "type": "bool",
                               "id": 3
+                            },
+                            "nicType": {
+                              "type": "NicType",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "NicType": {
+                              "values": {
+                                "NIC_TYPE_UNSPECIFIED": 0,
+                                "GVNIC": 1,
+                                "IRDMA": 2,
+                                "MRDMA": 3
+                              }
                             }
                           }
                         },
@@ -2605,6 +2637,45 @@
                             "maxDistance": {
                               "type": "int64",
                               "id": 2
+                            }
+                          }
+                        },
+                        "InstanceFlexibilityPolicy": {
+                          "fields": {
+                            "instanceSelections": {
+                              "keyType": "string",
+                              "type": "InstanceSelection",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "InstanceSelection": {
+                          "oneofs": {
+                            "_rank": {
+                              "oneof": [
+                                "rank"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "machineTypes": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "rank": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
                             }
                           }
                         },

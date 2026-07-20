@@ -16,8 +16,8 @@ version: v0.27.1
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 2b625c91510a2e8320a778bc88af8b65bc4a19a2
-    sha256: 503314c3f49e4de70138d35d5b9b12cca0c74d7c5ba34380895440b83aa45b94
+    commit: e82c753169134e7eb263394d5e77ba6ec28596c2
+    sha256: 4427fc14f395abf744386f8b5a21158bc81b2cff57eb29dbf873f040998afbdc
 tools:
   pnpm:
     - name: gapic-generator-typescript
@@ -346,6 +346,7 @@ libraries:
     apis:
       - path: google/cloud/apigeeregistry/v1
     copyright_year: "2026"
+    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/apigee-registry'
@@ -2189,6 +2190,7 @@ libraries:
       - src/util/storage_control_utils.ts
       - src/util/uber_client_builder.ts
       - test/storage_control_compatibility.ts
+    skip_generate: true
     nodejs:
       default_version: v2
       package_name: '@google-cloud/storage-control'

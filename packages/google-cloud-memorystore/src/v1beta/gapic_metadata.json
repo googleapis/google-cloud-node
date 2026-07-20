@@ -25,6 +25,26 @@
                 "getSharedRegionalCertificateAuthority"
               ]
             },
+            "GetBackupCollection": {
+              "methods": [
+                "getBackupCollection"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "GetTokenAuthUser": {
+              "methods": [
+                "getTokenAuthUser"
+              ]
+            },
+            "GetAuthToken": {
+              "methods": [
+                "getAuthToken"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
@@ -40,11 +60,89 @@
                 "deleteInstance"
               ]
             },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "ExportBackup": {
+              "methods": [
+                "exportBackup"
+              ]
+            },
+            "BackupInstance": {
+              "methods": [
+                "backupInstance"
+              ]
+            },
+            "StartMigration": {
+              "methods": [
+                "startMigration"
+              ]
+            },
+            "FinishMigration": {
+              "methods": [
+                "finishMigration"
+              ]
+            },
+            "AddTokenAuthUser": {
+              "methods": [
+                "addTokenAuthUser"
+              ]
+            },
+            "DeleteTokenAuthUser": {
+              "methods": [
+                "deleteTokenAuthUser"
+              ]
+            },
+            "AddAuthToken": {
+              "methods": [
+                "addAuthToken"
+              ]
+            },
+            "DeleteAuthToken": {
+              "methods": [
+                "deleteAuthToken"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
                 "listInstancesStream",
                 "listInstancesAsync"
+              ]
+            },
+            "ListBackupCollections": {
+              "methods": [
+                "listBackupCollections",
+                "listBackupCollectionsStream",
+                "listBackupCollectionsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "ListTokenAuthUsers": {
+              "methods": [
+                "listTokenAuthUsers",
+                "listTokenAuthUsersStream",
+                "listTokenAuthUsersAsync"
+              ]
+            },
+            "ListAuthTokens": {
+              "methods": [
+                "listAuthTokens",
+                "listAuthTokensStream",
+                "listAuthTokensAsync"
               ]
             }
           }
@@ -67,6 +165,26 @@
                 "getSharedRegionalCertificateAuthority"
               ]
             },
+            "GetBackupCollection": {
+              "methods": [
+                "getBackupCollection"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "GetTokenAuthUser": {
+              "methods": [
+                "getTokenAuthUser"
+              ]
+            },
+            "GetAuthToken": {
+              "methods": [
+                "getAuthToken"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
@@ -82,11 +200,89 @@
                 "deleteInstance"
               ]
             },
+            "RescheduleMaintenance": {
+              "methods": [
+                "rescheduleMaintenance"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "ExportBackup": {
+              "methods": [
+                "exportBackup"
+              ]
+            },
+            "BackupInstance": {
+              "methods": [
+                "backupInstance"
+              ]
+            },
+            "StartMigration": {
+              "methods": [
+                "startMigration"
+              ]
+            },
+            "FinishMigration": {
+              "methods": [
+                "finishMigration"
+              ]
+            },
+            "AddTokenAuthUser": {
+              "methods": [
+                "addTokenAuthUser"
+              ]
+            },
+            "DeleteTokenAuthUser": {
+              "methods": [
+                "deleteTokenAuthUser"
+              ]
+            },
+            "AddAuthToken": {
+              "methods": [
+                "addAuthToken"
+              ]
+            },
+            "DeleteAuthToken": {
+              "methods": [
+                "deleteAuthToken"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
                 "listInstancesStream",
                 "listInstancesAsync"
+              ]
+            },
+            "ListBackupCollections": {
+              "methods": [
+                "listBackupCollections",
+                "listBackupCollectionsStream",
+                "listBackupCollectionsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "ListTokenAuthUsers": {
+              "methods": [
+                "listTokenAuthUsers",
+                "listTokenAuthUsersStream",
+                "listTokenAuthUsersAsync"
+              ]
+            },
+            "ListAuthTokens": {
+              "methods": [
+                "listAuthTokens",
+                "listAuthTokensStream",
+                "listAuthTokensAsync"
               ]
             }
           }
