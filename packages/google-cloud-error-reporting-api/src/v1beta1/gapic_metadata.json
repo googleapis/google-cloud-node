@@ -1,0 +1,119 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.devtools.clouderrorreporting.v1beta1",
+  "libraryPackage": "@google-cloud/error-reporting-api",
+  "services": {
+    "ErrorGroupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ErrorGroupServiceClient",
+          "rpcs": {
+            "GetGroup": {
+              "methods": [
+                "getGroup"
+              ]
+            },
+            "UpdateGroup": {
+              "methods": [
+                "updateGroup"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ErrorGroupServiceClient",
+          "rpcs": {
+            "GetGroup": {
+              "methods": [
+                "getGroup"
+              ]
+            },
+            "UpdateGroup": {
+              "methods": [
+                "updateGroup"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ErrorStatsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ErrorStatsServiceClient",
+          "rpcs": {
+            "DeleteEvents": {
+              "methods": [
+                "deleteEvents"
+              ]
+            },
+            "ListGroupStats": {
+              "methods": [
+                "listGroupStats",
+                "listGroupStatsStream",
+                "listGroupStatsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ErrorStatsServiceClient",
+          "rpcs": {
+            "DeleteEvents": {
+              "methods": [
+                "deleteEvents"
+              ]
+            },
+            "ListGroupStats": {
+              "methods": [
+                "listGroupStats",
+                "listGroupStatsStream",
+                "listGroupStatsAsync"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "listEvents",
+                "listEventsStream",
+                "listEventsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ReportErrorsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReportErrorsServiceClient",
+          "rpcs": {
+            "ReportErrorEvent": {
+              "methods": [
+                "reportErrorEvent"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReportErrorsServiceClient",
+          "rpcs": {
+            "ReportErrorEvent": {
+              "methods": [
+                "reportErrorEvent"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

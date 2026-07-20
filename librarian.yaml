@@ -887,6 +887,15 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-error-reporting-api
+    version: 0.1.0
+    apis:
+      - path: google/devtools/clouderrorreporting/v1beta1
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/error-reporting-api'
+      metadata_name_override: clouderrorreporting-api
+      name_pretty_override: Error Reporting API
   - name: google-cloud-essentialcontacts
     version: 4.2.2
     apis:

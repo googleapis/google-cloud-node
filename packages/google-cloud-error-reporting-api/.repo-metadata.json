@@ -1,0 +1,16 @@
+{
+  "api_description": "Groups and counts similar errors from cloud services and applications,\nreports new errors, and provides access to error groups and their\nassociated errors.",
+  "api_id": "clouderrorreporting.googleapis.com",
+  "api_shortname": "clouderrorreporting",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/error-reporting-api/latest",
+  "default_version": "v1beta1",
+  "distribution_name": "@google-cloud/error-reporting-api",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559780",
+  "language": "nodejs",
+  "library_type": "GAPIC_AUTO",
+  "name": "clouderrorreporting-api",
+  "name_pretty": "Error Reporting API",
+  "product_documentation": "https://cloud.google.com/error-reporting/docs",
+  "release_level": "preview",
+  "repo": "googleapis/google-cloud-node"
+}

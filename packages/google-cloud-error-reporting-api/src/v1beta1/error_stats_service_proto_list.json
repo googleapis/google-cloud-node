@@ -1,0 +1,6 @@
+[
+  "../../protos/google/devtools/clouderrorreporting/v1beta1/common.proto",
+  "../../protos/google/devtools/clouderrorreporting/v1beta1/error_group_service.proto",
+  "../../protos/google/devtools/clouderrorreporting/v1beta1/error_stats_service.proto",
+  "../../protos/google/devtools/clouderrorreporting/v1beta1/report_errors_service.proto"
+]
