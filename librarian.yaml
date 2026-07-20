@@ -346,6 +346,7 @@ libraries:
     apis:
       - path: google/cloud/apigeeregistry/v1
     copyright_year: "2026"
+    skip_generate: true
     nodejs:
       default_version: v1
       package_name: '@google-cloud/apigee-registry'
@@ -545,6 +546,15 @@ libraries:
       package_name: '@google-cloud/bigtable-api'
       metadata_name_override: bigtable-api
       name_pretty_override: Bigtable API
+  - name: google-cloud-bigquery-storage-api
+    version: 0.1.0
+    apis:
+      - path: google/cloud/bigquery/storage/v1
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/bigquery-storage-api'
+      metadata_name_override: bigquerystorage-api
+      name_pretty_override: BigQuery Storage API
   - name: google-cloud-billing
     version: 5.1.2
     apis:
@@ -807,6 +817,16 @@ libraries:
     nodejs:
       default_version: v1alpha
       package_name: '@google-cloud/data-qna'
+  - name: google-cloud-datastore-api
+    version: 0.1.0
+    apis:
+      - path: google/datastore/v1
+      - path: google/datastore/admin/v1
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/datastore-api'
+      metadata_name_override: datastore-api
+      name_pretty_override: Datastore API
   - name: google-cloud-datastream
     version: 4.3.2
     apis:
@@ -935,6 +955,17 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-firestore-api
+    version: 0.1.0
+    apis:
+      - path: google/firestore/v1
+      - path: google/firestore/admin/v1
+      - path: google/firestore/v1beta1
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/firestore-api'
+      metadata_name_override: firestore-api
+      name_pretty_override: Firestore API
   - name: google-cloud-functions
     version: 4.2.2
     apis:
@@ -1098,6 +1129,15 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-logging-api
+    version: 0.1.0
+    apis:
+      - path: google/logging/v2
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/logging-api'
+      metadata_name_override: logging-api
+      name_pretty_override: Logging API
   - name: google-cloud-lustre
     version: 0.2.2
     apis:
@@ -1537,6 +1577,18 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-spanner-api
+    version: 0.1.0
+    apis:
+      - path: google/spanner/v1
+      - path: google/spanner/executor/v1
+      - path: google/spanner/admin/database/v1
+      - path: google/spanner/admin/instance/v1
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/spanner-api'
+      metadata_name_override: spanner-api
+      name_pretty_override: Spanner API
   - name: google-cloud-speech
     version: 7.5.0
     apis:
