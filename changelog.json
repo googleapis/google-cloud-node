@@ -5,6 +5,162 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "b01b02d4c3722575c327721d3b295a2b7ad45e98",
+          "message": "Onboard a new library",
+          "issues": [
+            "8860"
+          ],
+          "scope": "google/spanner/v1"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner-api",
+      "id": "b3034ab3-6cad-4eea-beb8-42e45286a45e",
+      "createTime": "2026-07-20T21:33:13.651Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2ac07e4a497ed1550ad8696e8549537fec4c6e6e",
+          "message": "Onboard a new library",
+          "issues": [
+            "8863"
+          ],
+          "scope": "google/logging/v2"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-api",
+      "id": "2b2a00f4-9354-42be-a284-99a26f4551af",
+      "createTime": "2026-07-20T21:33:13.627Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e39cdbd4d8960bce42d02f82ef26277c418af74a",
+          "message": "Onboard a new library",
+          "issues": [
+            "8859"
+          ],
+          "scope": "google/firestore/v1"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore-api",
+      "id": "8e18e446-c29e-4ce2-9910-e40fbddf6b5b",
+      "createTime": "2026-07-20T21:33:13.605Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0e2dc22a5a6cdbfc181cc7bff96c37a2f469e734",
+          "message": "Onboard a new library",
+          "issues": [
+            "8856"
+          ],
+          "scope": "google/datastore/v1"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastore-api",
+      "id": "bd33172c-ff24-447e-b4ae-d6c2b888a051",
+      "createTime": "2026-07-20T21:33:13.570Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e6793064d6a76f8052e371f4b6987f7b886deb92",
+          "message": "Onboard a new library",
+          "issues": [
+            "8857"
+          ],
+          "scope": "google/bigtable/v2"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "c3db6a0f-ec33-4476-beca-6a63dd2fdce1",
+      "createTime": "2026-07-20T21:33:13.542Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "40f5d9dea8b9a650cd8cc43452e2ebf88f9dfe9a",
+          "message": "Onboard a new library",
+          "issues": [
+            "8861"
+          ],
+          "scope": "google/cloud/bigquery/storage/v1"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage-api",
+      "id": "fd7ab000-9fca-4eaa-b437-4a7fce96a992",
+      "createTime": "2026-07-20T21:33:13.511Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "685b4280ea28a961d6d051fb38d68bed1b73f222",
           "message": "Add --no-comments support to compileProtos to reduce proto file size",
           "issues": [
@@ -82207,5 +82363,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-16T19:59:04.275Z"
+  "updateTime": "2026-07-20T21:33:13.651Z"
 }

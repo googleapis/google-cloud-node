@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery-storage-api",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "BigQuery Storage API client for Node.js",
   "repository": {
     "type": "git",

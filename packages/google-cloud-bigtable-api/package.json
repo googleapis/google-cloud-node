@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigtable-api",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Cloud Bigtable API client for Node.js",
   "repository": {
     "type": "git",
