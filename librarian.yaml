@@ -1527,6 +1527,18 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-spanner-api
+    version: 0.1.0
+    apis:
+      - path: google/spanner/v1
+      - path: google/spanner/executor/v1
+      - path: google/spanner/admin/database/v1
+      - path: google/spanner/admin/instance/v1
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/spanner-api'
+      metadata_name_override: spanner-api
+      name_pretty_override: Spanner API
   - name: google-cloud-speech
     version: 7.5.0
     apis:
