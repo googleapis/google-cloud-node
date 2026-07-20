@@ -535,6 +535,16 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-bigtable-api
+    version: 0.1.0
+    apis:
+      - path: google/bigtable/v2
+      - path: google/bigtable/admin/v2
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/bigtable-api'
+      metadata_name_override: bigtable-api
+      name_pretty_override: Bigtable API
   - name: google-cloud-billing
     version: 5.1.2
     apis:
