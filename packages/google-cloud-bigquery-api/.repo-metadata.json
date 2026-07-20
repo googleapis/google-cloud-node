@@ -1,0 +1,14 @@
+{
+  "api_description": "A data platform for customers to create, manage, share and query data.",
+  "api_id": "bigquery.googleapis.com",
+  "api_shortname": "bigquery",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-api/latest",
+  "default_version": "v2",
+  "distribution_name": "@google-cloud/bigquery-api",
+  "language": "nodejs",
+  "library_type": "GAPIC_AUTO",
+  "name": "bigquery-api",
+  "name_pretty": "BigQuery API",
+  "release_level": "preview",
+  "repo": "googleapis/google-cloud-node"
+}

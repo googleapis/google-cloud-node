@@ -484,6 +484,15 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-bigquery-api
+    version: 0.1.0
+    apis:
+      - path: google/cloud/bigquery/v2
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/bigquery-api'
+      metadata_name_override: bigquery-api
+      name_pretty_override: BigQuery API
   - name: google-cloud-bigquery-connection
     version: 4.1.2
     apis:
