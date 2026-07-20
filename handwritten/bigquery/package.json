@@ -47,7 +47,8 @@
     "pretest": "npm run compile",
     "types": "node scripts/gen-types.js",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean"
+    "precompile": "gts clean",
+    "types-ci": "npm i && npm run types"
   },
   "dependencies": {
     "@google-cloud/common": "^6.0.0",
