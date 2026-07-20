@@ -797,6 +797,16 @@ libraries:
     nodejs:
       default_version: v1alpha
       package_name: '@google-cloud/data-qna'
+  - name: google-cloud-datastore-api
+    version: 0.1.0
+    apis:
+      - path: google/datastore/v1
+      - path: google/datastore/admin/v1
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/datastore-api'
+      metadata_name_override: datastore-api
+      name_pretty_override: Datastore API
   - name: google-cloud-datastream
     version: 4.3.2
     apis:
