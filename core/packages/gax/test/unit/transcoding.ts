@@ -385,9 +385,7 @@ describe('gRPC to HTTP transcoding', () => {
     );
     assert.strictEqual(encodeWithoutSlashes('..'), '%2E%2E');
     
-    const maliciousInput = '..?$httpMethod=DELETE#';
-    const encoded = encodeWithoutSlashes(maliciousInput);
-    assert.strictEqual(encoded, '%2E%2E%3F%24httpMethod%3DDELETE%23');
+    assert.strictEqual(encodeWithoutSlashes('..?$httpMethod=DELETE#'), '%2E%2E%3F%24httpMethod%3DDELETE%23');
   });
 
 
