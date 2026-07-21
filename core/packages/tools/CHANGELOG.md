@@ -1,6 +1,18 @@
 # Changelog
 
 
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v1.0.6...gapic-tools-v1.1.0) (2026-07-16)
+
+
+### Features
+
+* **tools:** Add --no-comments support to compileProtos to reduce proto file size ([#8890](https://github.com/googleapis/google-cloud-node/issues/8890)) ([685b428](https://github.com/googleapis/google-cloud-node/commit/685b4280ea28a961d6d051fb38d68bed1b73f222))
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+
 ## [1.0.6](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v1.0.5...gapic-tools-v1.0.6) (2026-05-11)
 
 
