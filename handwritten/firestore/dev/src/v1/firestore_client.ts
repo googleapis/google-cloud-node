@@ -318,7 +318,7 @@ export class FirestoreClient {
       {
         'grpc.max_receive_message_length': maxMessageLength,
         'grpc.max_send_message_length': maxMessageLength,
-        'grpc-node.flow_control_window': flowControlWindowSize
+        'grpc-node.flow_control_window': flowControlWindowSize,
       },
       clientOpts.grpcOptions, // Can overwrite grpc options
     );
