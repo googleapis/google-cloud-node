@@ -2460,3 +2460,11 @@ export {v1, protos};
 export default {Spanner};
 export {Float32, Float, Int, Struct, Numeric, PGNumeric, SpannerDate, Interval};
 export {ObservabilityOptions};
+
+const DatabaseAdminClient = v1.DatabaseAdminClient;
+type DatabaseAdminClient = v1.DatabaseAdminClient;
+const InstanceAdminClient = v1.InstanceAdminClient;
+type InstanceAdminClient = v1.InstanceAdminClient;
+const SpannerClient = v1.SpannerClient;
+type SpannerClient = v1.SpannerClient;
+export { DatabaseAdminClient, InstanceAdminClient, SpannerClient };
