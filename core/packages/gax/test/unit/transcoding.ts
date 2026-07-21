@@ -366,10 +366,7 @@ describe('gRPC to HTTP transcoding', () => {
       encodeWithSlashes(
         '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ',
       ),
-      ('_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20').toLowerCase() ===
-      ('_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20').toLowerCase()
-        ? '_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20'
-        : ''
+      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20'
     );
     assert.strictEqual(encodeWithSlashes('..'), '%2E%2E');
   });
@@ -384,10 +381,7 @@ describe('gRPC to HTTP transcoding', () => {
       encodeWithoutSlashes(
         '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ',
       ),
-      ('_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20').toLowerCase() ===
-      ('_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20').toLowerCase()
-        ? '_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20'
-        : ''
+      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20'
     );
     assert.strictEqual(encodeWithoutSlashes('..'), '%2E%2E');
   });
