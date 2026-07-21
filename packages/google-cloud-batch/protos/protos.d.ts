@@ -9184,6 +9184,9 @@ export namespace google {
 
                     /** AllocationPolicy tags */
                     tags?: (string[]|null);
+
+                    /** AllocationPolicy instanceFlexibilityPolicy */
+                    instanceFlexibilityPolicy?: (google.cloud.batch.v1alpha.AllocationPolicy.IInstanceFlexibilityPolicy|null);
                 }
 
                 /** Represents an AllocationPolicy. */
@@ -9227,6 +9230,9 @@ export namespace google {
 
                     /** AllocationPolicy tags. */
                     public tags: string[];
+
+                    /** AllocationPolicy instanceFlexibilityPolicy. */
+                    public instanceFlexibilityPolicy?: (google.cloud.batch.v1alpha.AllocationPolicy.IInstanceFlexibilityPolicy|null);
 
                     /**
                      * Creates a new AllocationPolicy instance using the specified properties.
@@ -10036,6 +10042,9 @@ export namespace google {
 
                         /** NetworkInterface noExternalIpAddress */
                         noExternalIpAddress?: (boolean|null);
+
+                        /** NetworkInterface nicType */
+                        nicType?: (google.cloud.batch.v1alpha.AllocationPolicy.NetworkInterface.NicType|keyof typeof google.cloud.batch.v1alpha.AllocationPolicy.NetworkInterface.NicType|null);
                     }
 
                     /** Represents a NetworkInterface. */
@@ -10055,6 +10064,9 @@ export namespace google {
 
                         /** NetworkInterface noExternalIpAddress. */
                         public noExternalIpAddress: boolean;
+
+                        /** NetworkInterface nicType. */
+                        public nicType?: (google.cloud.batch.v1alpha.AllocationPolicy.NetworkInterface.NicType|keyof typeof google.cloud.batch.v1alpha.AllocationPolicy.NetworkInterface.NicType|null);
 
                         /**
                          * Creates a new NetworkInterface instance using the specified properties.
@@ -10132,6 +10144,17 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace NetworkInterface {
+
+                        /** NicType enum. */
+                        enum NicType {
+                            NIC_TYPE_UNSPECIFIED = 0,
+                            GVNIC = 1,
+                            IRDMA = 2,
+                            MRDMA = 3
+                        }
                     }
 
                     /** Properties of a NetworkPolicy. */
@@ -10328,6 +10351,206 @@ export namespace google {
 
                         /**
                          * Gets the default type url for PlacementPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InstanceFlexibilityPolicy. */
+                    interface IInstanceFlexibilityPolicy {
+
+                        /** InstanceFlexibilityPolicy instanceSelections */
+                        instanceSelections?: ({ [k: string]: google.cloud.batch.v1alpha.AllocationPolicy.IInstanceSelection }|null);
+                    }
+
+                    /** Represents an InstanceFlexibilityPolicy. */
+                    class InstanceFlexibilityPolicy implements IInstanceFlexibilityPolicy {
+
+                        /**
+                         * Constructs a new InstanceFlexibilityPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.batch.v1alpha.AllocationPolicy.IInstanceFlexibilityPolicy);
+
+                        /** InstanceFlexibilityPolicy instanceSelections. */
+                        public instanceSelections: { [k: string]: google.cloud.batch.v1alpha.AllocationPolicy.IInstanceSelection };
+
+                        /**
+                         * Creates a new InstanceFlexibilityPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InstanceFlexibilityPolicy instance
+                         */
+                        public static create(properties?: google.cloud.batch.v1alpha.AllocationPolicy.IInstanceFlexibilityPolicy): google.cloud.batch.v1alpha.AllocationPolicy.InstanceFlexibilityPolicy;
+
+                        /**
+                         * Encodes the specified InstanceFlexibilityPolicy message. Does not implicitly {@link google.cloud.batch.v1alpha.AllocationPolicy.InstanceFlexibilityPolicy.verify|verify} messages.
+                         * @param message InstanceFlexibilityPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.batch.v1alpha.AllocationPolicy.IInstanceFlexibilityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InstanceFlexibilityPolicy message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.AllocationPolicy.InstanceFlexibilityPolicy.verify|verify} messages.
+                         * @param message InstanceFlexibilityPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.batch.v1alpha.AllocationPolicy.IInstanceFlexibilityPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InstanceFlexibilityPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InstanceFlexibilityPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.AllocationPolicy.InstanceFlexibilityPolicy;
+
+                        /**
+                         * Decodes an InstanceFlexibilityPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InstanceFlexibilityPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.AllocationPolicy.InstanceFlexibilityPolicy;
+
+                        /**
+                         * Verifies an InstanceFlexibilityPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InstanceFlexibilityPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InstanceFlexibilityPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.AllocationPolicy.InstanceFlexibilityPolicy;
+
+                        /**
+                         * Creates a plain object from an InstanceFlexibilityPolicy message. Also converts values to other types if specified.
+                         * @param message InstanceFlexibilityPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.batch.v1alpha.AllocationPolicy.InstanceFlexibilityPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InstanceFlexibilityPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InstanceFlexibilityPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InstanceSelection. */
+                    interface IInstanceSelection {
+
+                        /** InstanceSelection machineTypes */
+                        machineTypes?: (string[]|null);
+
+                        /** InstanceSelection rank */
+                        rank?: (number|null);
+                    }
+
+                    /** Represents an InstanceSelection. */
+                    class InstanceSelection implements IInstanceSelection {
+
+                        /**
+                         * Constructs a new InstanceSelection.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.batch.v1alpha.AllocationPolicy.IInstanceSelection);
+
+                        /** InstanceSelection machineTypes. */
+                        public machineTypes: string[];
+
+                        /** InstanceSelection rank. */
+                        public rank?: (number|null);
+
+                        /**
+                         * Creates a new InstanceSelection instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InstanceSelection instance
+                         */
+                        public static create(properties?: google.cloud.batch.v1alpha.AllocationPolicy.IInstanceSelection): google.cloud.batch.v1alpha.AllocationPolicy.InstanceSelection;
+
+                        /**
+                         * Encodes the specified InstanceSelection message. Does not implicitly {@link google.cloud.batch.v1alpha.AllocationPolicy.InstanceSelection.verify|verify} messages.
+                         * @param message InstanceSelection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.batch.v1alpha.AllocationPolicy.IInstanceSelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InstanceSelection message, length delimited. Does not implicitly {@link google.cloud.batch.v1alpha.AllocationPolicy.InstanceSelection.verify|verify} messages.
+                         * @param message InstanceSelection message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.batch.v1alpha.AllocationPolicy.IInstanceSelection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InstanceSelection message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InstanceSelection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.batch.v1alpha.AllocationPolicy.InstanceSelection;
+
+                        /**
+                         * Decodes an InstanceSelection message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InstanceSelection
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.batch.v1alpha.AllocationPolicy.InstanceSelection;
+
+                        /**
+                         * Verifies an InstanceSelection message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InstanceSelection message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InstanceSelection
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.batch.v1alpha.AllocationPolicy.InstanceSelection;
+
+                        /**
+                         * Creates a plain object from an InstanceSelection message. Also converts values to other types if specified.
+                         * @param message InstanceSelection
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.batch.v1alpha.AllocationPolicy.InstanceSelection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InstanceSelection to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InstanceSelection
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
