@@ -33,10 +33,11 @@ import QueryMode = google.spanner.v1.ExecuteSqlRequest.QueryMode;
 import NullValue = google.protobuf.NullValue;
 import {ExecuteSqlRequest, ReadRequest} from '../../src/transaction';
 import {randomInt} from 'crypto';
+import {getProtoPath} from '../../src/common-grpc/protos';
 
 const PROTO_PATH = 'spanner.proto';
-const IMPORT_PATH = __dirname + '/../../../node_modules/@google-cloud/spanner-api/build/protos';
-const PROTO_DIR = IMPORT_PATH + '/google/spanner/v1';
+const IMPORT_PATH = getProtoPath();
+const PROTO_DIR = getProtoPath('google/spanner/v1');
 const GAX_PROTO_DIR = path.join(
   path.dirname(require.resolve('google-gax')),
   '..',
