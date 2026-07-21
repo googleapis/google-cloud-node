@@ -62,7 +62,8 @@
     "long": "^5.3.2",
     "on-finished": "^2.3.0",
     "pumpify": "^2.0.1",
-    "stream-events": "^1.0.5"
+    "stream-events": "^1.0.5",
+    "@google-cloud/logging-api": "^0.2.0"
   },
   "devDependencies": {
     "@google-cloud/bigquery": "^7.0.0",

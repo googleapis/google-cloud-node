@@ -38,7 +38,7 @@ export {detectServiceContext};
 
 const version = require('../../package.json').version;
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const v2 = require('./v2');
+const v2 = require('@google-cloud/logging-api');
 
 import {Entry, LogEntry} from './entry';
 import {
