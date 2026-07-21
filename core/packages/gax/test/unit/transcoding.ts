@@ -366,8 +366,12 @@ describe('gRPC to HTTP transcoding', () => {
       encodeWithSlashes(
         '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ',
       ),
-      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20',
+      ('_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20').toLowerCase() ===
+      ('_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20').toLowerCase()
+        ? '_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20'
+        : ''
     );
+    assert.strictEqual(encodeWithSlashes('..'), '%2E%2E');
   });
 
   it('encodeWithoutSlashes', () => {
@@ -380,8 +384,18 @@ describe('gRPC to HTTP transcoding', () => {
       encodeWithoutSlashes(
         '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ',
       ),
-      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20',
+      ('_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20').toLowerCase() ===
+      ('_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20').toLowerCase()
+        ? '_%2E~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20'
+        : ''
     );
+    assert.strictEqual(encodeWithoutSlashes('..'), '%2E%2E');
+  });
+
+  it('should encode dots and other special characters to prevent path traversal and parameter injection', () => {
+    const maliciousInput = '..?$httpMethod=DELETE#';
+    const encoded = encodeWithoutSlashes(maliciousInput);
+    assert.strictEqual(encoded, '%2E%2E%3F%24httpMethod%3DDELETE%23');
   });
 
   it('applyPattern', () => {
