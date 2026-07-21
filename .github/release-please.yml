@@ -15,3 +15,9 @@ branches:
     manifest: true
     manifestFile: .release-please-manifest.json
     manifestConfig: release-please-submodules.json
+  - branch: main
+    handleGHRelease: true
+    tagPullRequestNumber: true
+    manifest: true
+    manifestFile: .release-please-manifest.json
+    manifestConfig: release-please-core.json
