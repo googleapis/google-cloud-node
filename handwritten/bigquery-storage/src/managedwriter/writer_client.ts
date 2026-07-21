@@ -16,7 +16,7 @@ import * as gax from 'google-gax';
 import type {CallOptions, ClientOptions} from 'google-gax';
 import * as protos from '../../protos/protos';
 
-import {BigQueryWriteClient} from '../v1';
+import {BigQueryWriteClient} from '@google-cloud/bigquery-storage-api';
 import {
   WriteStreamType,
   DefaultStream,

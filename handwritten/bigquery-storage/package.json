@@ -37,7 +37,8 @@
     "google-auth-library": "^10.0.0",
     "google-gax": "^5.0.0",
     "long": "^5.2.0",
-    "protobufjs": "^7.5.5"
+    "protobufjs": "^7.5.5",
+    "@google-cloud/bigquery-storage-api": "^0.2.0"
   },
   "peerDependencies": {
     "protobufjs": "~7.5.5"
