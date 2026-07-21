@@ -15,7 +15,8 @@
  */
 
 import * as path from 'path';
-import {google} from '../../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {grpc, ServiceError} from 'google-gax';
 import * as protoLoader from '@grpc/proto-loader';
 // eslint-disable-next-line n/no-extraneous-import
@@ -34,8 +35,8 @@ import {ExecuteSqlRequest, ReadRequest} from '../../src/transaction';
 import {randomInt} from 'crypto';
 
 const PROTO_PATH = 'spanner.proto';
-const IMPORT_PATH = __dirname + '/../../../protos';
-const PROTO_DIR = __dirname + '/../../../protos/google/spanner/v1';
+const IMPORT_PATH = __dirname + '/../../../node_modules/@google-cloud/spanner-api/build/protos';
+const PROTO_DIR = IMPORT_PATH + '/google/spanner/v1';
 const GAX_PROTO_DIR = path.join(
   path.dirname(require.resolve('google-gax')),
   '..',

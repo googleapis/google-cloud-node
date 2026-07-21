@@ -46,10 +46,8 @@
     "pretest": "npm run compile",
     "presystem-test": "npm run compile",
     "preobservability-test": "npm run compile",
-    "proto": "compileProtos src",
     "benchwrapper": "node bin/benchwrapper.js",
     "precompile": "gts clean",
-    "compile-protos": "compileProtos src",
     "coverage": "c8 mocha build/test build/test/common && c8 report --check-coverage"
   },
   "dependencies": {
@@ -61,6 +59,7 @@
     "@google-cloud/opentelemetry-resource-util": "^2.4.0",
     "@google-cloud/precise-date": "^5.0.0",
     "@google-cloud/promisify": "^5.0.0",
+    "@google-cloud/spanner-api": "^0.2.0",
     "@grpc/grpc-js": "^1.13.2",
     "@grpc/proto-loader": "^0.8.0",
     "@opentelemetry/api": "^1.9.0",

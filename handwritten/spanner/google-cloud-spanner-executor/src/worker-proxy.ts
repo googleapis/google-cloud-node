@@ -26,7 +26,7 @@ import {ReflectionService} from '@grpc/reflection';
 
 const PROTO_PATH = path.join(
   __dirname,
-  '../../protos/google/spanner/executor/v1/cloud_executor.proto',
+  '../../../node_modules/@google-cloud/spanner-api/build/protos/google/spanner/executor/v1/cloud_executor.proto',
 );
 
 const OPTION_SPANNER_PORT = 'spanner_port';
@@ -160,7 +160,7 @@ export class WorkerProxy {
       defaults: true,
       oneofs: true,
       includeDirs: [
-        path.join(__dirname, '../../protos'),
+        path.join(__dirname, '../../../node_modules/@google-cloud/spanner-api/build/protos'),
         path.join(__dirname, '../../../node_modules/google-proto-files'),
         path.join(__dirname, '../../../node_modules/google-gax/build/protos'),
       ],
