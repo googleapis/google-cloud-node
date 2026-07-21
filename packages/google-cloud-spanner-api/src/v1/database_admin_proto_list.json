@@ -1,0 +1,6 @@
+[
+  "../../protos/google/spanner/admin/database/v1/backup.proto",
+  "../../protos/google/spanner/admin/database/v1/backup_schedule.proto",
+  "../../protos/google/spanner/admin/database/v1/common.proto",
+  "../../protos/google/spanner/admin/database/v1/spanner_database_admin.proto"
+]
