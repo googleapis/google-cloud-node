@@ -496,6 +496,8 @@ export class KeyManagementServiceClient {
       'deleteCryptoKey',
       'deleteCryptoKeyVersion',
       'importCryptoKeyVersion',
+      'importTrustedKeyWrappedCryptoKeyVersion',
+      'exportTrustedKeyWrappedCryptoKeyVersion',
       'createImportJob',
       'updateCryptoKey',
       'updateCryptoKeyVersion',
@@ -1579,6 +1581,16 @@ export class KeyManagementServiceClient {
    *   or
    *   {@link protos.google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion|ImportCryptoKeyVersion}
    *   before you can use this {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
+   * @param {boolean} [request.trustedWrappingEnabled]
+   *   Optional. Whether trusted wrapping will be enabled on the first
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersions} created for this
+   *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}. This field is only supported
+   *   for keys with
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|CryptoKeyVersionTemplate.protection_level}
+   *   {@link protos.google.cloud.kms.v1.ProtectionLevel.HSM_SINGLE_TENANT|HSM_SINGLE_TENANT}.
+   *   This field is supported for all
+   *   {@link protos.google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose|CryptoKeyPurposes} except
+   *   {@link protos.google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1936,6 +1948,14 @@ export class KeyManagementServiceClient {
    *   {@link protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest.wrapped_key|wrapped_key}.
    *   Prefer to use that field in new work. Either that field or this field
    *   (but not both) must be specified.
+   * @param {boolean} [request.trustedWrappingEnabled]
+   *   Optional. Whether trusted wrapping will be enabled on the imported
+   *   [CryptoKeyVersion]. This field is only supported for keys with
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersionTemplate.protection_level|CryptoKeyVersionTemplate.protection_level}
+   *   {@link protos.google.cloud.kms.v1.ProtectionLevel.HSM_SINGLE_TENANT|HSM_SINGLE_TENANT}.
+   *   This field is supported for all
+   *   {@link protos.google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose|CryptoKeyPurposes} besides
+   *   {@link protos.google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2043,6 +2063,384 @@ export class KeyManagementServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('importCryptoKeyVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Import wrapped key material into a
+   * {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with a trusted
+   * key.
+   *
+   * All requests must specify a {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}. If
+   * a {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} is additionally
+   * specified in the request, key material will be reimported into that
+   * version. Otherwise, a new version will be created, and will be assigned the
+   * next sequential id within the {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey}.
+   *
+   * The {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} will have
+   * trusted_wrapping_enabled set to true.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The {@link protos.google.cloud.kms.v1.CryptoKey.name|name} of the
+   *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} to be imported into.
+   * @param {string} request.importingKey
+   *   Required. Required - the CKV of the trusted key used to import.
+   *   This can be the name of a CryptoKeyVersion or a CryptoKey.
+   * @param {string} [request.cryptoKeyVersion]
+   *   Optional. The optional {@link protos.google.cloud.kms.v1.CryptoKeyVersion.name|name} of
+   *   an existing {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to
+   *   target for an import operation. If this field is not present, a new
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} containing the
+   *   supplied key material is created.
+   *
+   *   If this field is present, the supplied key material is imported into
+   *   the existing {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. To
+   *   import into an existing
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}, the
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} must be a child of
+   *   {@link protos.google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest.parent|ImportTrustedKeyWrappedCryptoKeyVersionRequest.parent},
+   *   have been previously created via
+   *   {@link protos.google.cloud.kms.v1.KeyManagementService.ImportTrustedKeyWrappedCryptoKeyVersion|ImportTrustedKeyWrappedCryptoKeyVersion},
+   *   and be in
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED}
+   *   or
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.IMPORT_FAILED|IMPORT_FAILED}
+   *   state. The key material and algorithm must match the previous
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} exactly if the
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} has ever contained
+   *   key material
+   * @param {Buffer} request.wrappedKey
+   *   Required. The target key pre-wrapped on premises.
+   * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm} request.algorithm
+   *   Required. Required - The
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|algorithm}
+   *   of the key being imported. This does not need to match the
+   *   {@link protos.google.cloud.kms.v1.CryptoKey.version_template|version_template} of the
+   *   {@link protos.google.cloud.kms.v1.CryptoKey|CryptoKey} this version imports into.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/key_management_service.import_trusted_key_wrapped_crypto_key_version.js</caption>
+   * region_tag:cloudkms_v1_generated_KeyManagementService_ImportTrustedKeyWrappedCryptoKeyVersion_async
+   */
+  importTrustedKeyWrappedCryptoKeyVersion(
+    request?: protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      (
+        | protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  importTrustedKeyWrappedCryptoKeyVersion(
+    request: protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  importTrustedKeyWrappedCryptoKeyVersion(
+    request: protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  importTrustedKeyWrappedCryptoKeyVersion(
+    request?: protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      | protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.ICryptoKeyVersion,
+      (
+        | protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'importTrustedKeyWrappedCryptoKeyVersion request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          | protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'importTrustedKeyWrappedCryptoKeyVersion response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .importTrustedKeyWrappedCryptoKeyVersion(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.ICryptoKeyVersion,
+          (
+            | protos.google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'importTrustedKeyWrappedCryptoKeyVersion response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Exports a {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} with a
+   * trusted key.
+   *
+   * The {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} must have
+   * trusted_wrapping_enabled set to true. The
+   * {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} of the
+   * [wrapping_key] must have the
+   * {@link protos.google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.AES_WRAPPING|AES_WRAPPING}
+   * purpose. The [wrapping_key] must have the
+   * {@link protos.google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm.AES_256_KWP|AES_256_KWP}
+   * algorithm.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The {@link protos.google.cloud.kms.v1.CryptoKeyVersion.name|name} of the
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to export. The
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} must have
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion.trusted_wrapping_enabled|trusted_wrapping_enabled}
+   *   set to true.
+   * @param {string} request.wrappingKey
+   *   Required. The {@link protos.google.cloud.kms.v1.CryptoKeyVersion.name|name} of the
+   *   {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to use as a
+   *   wrapping key. The {@link protos.google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}
+   *   must have {@link protos.google.cloud.kms.v1.CryptoKeyVersion.hsm_trusted|hsm_trusted}
+   *   set to true.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse|ExportTrustedKeyWrappedCryptoKeyVersionResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/key_management_service.export_trusted_key_wrapped_crypto_key_version.js</caption>
+   * region_tag:cloudkms_v1_generated_KeyManagementService_ExportTrustedKeyWrappedCryptoKeyVersion_async
+   */
+  exportTrustedKeyWrappedCryptoKeyVersion(
+    request?: protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse,
+      (
+        | protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  exportTrustedKeyWrappedCryptoKeyVersion(
+    request: protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse,
+      | protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  exportTrustedKeyWrappedCryptoKeyVersion(
+    request: protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest,
+    callback: Callback<
+      protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse,
+      | protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  exportTrustedKeyWrappedCryptoKeyVersion(
+    request?: protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse,
+          | protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse,
+      | protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse,
+      (
+        | protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info(
+      'exportTrustedKeyWrappedCryptoKeyVersion request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse,
+          | protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'exportTrustedKeyWrappedCryptoKeyVersion response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .exportTrustedKeyWrappedCryptoKeyVersion(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse,
+          (
+            | protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'exportTrustedKeyWrappedCryptoKeyVersion response %j',
+            response,
+          );
           return [response, options, rawResponse];
         },
       )

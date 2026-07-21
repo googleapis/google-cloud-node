@@ -786,6 +786,11 @@
                                 "kmsKey"
                               ]
                             },
+                            "_asyncClusterEndpointsDeletionEnabled": {
+                              "oneof": [
+                                "asyncClusterEndpointsDeletionEnabled"
+                              ]
+                            },
                             "_serverCaMode": {
                               "oneof": [
                                 "serverCaMode"
@@ -1028,6 +1033,14 @@
                               "id": 43,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "asyncClusterEndpointsDeletionEnabled": {
+                              "type": "bool",
+                              "id": 44,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             },
                             "serverCaMode": {
@@ -2905,6 +2918,11 @@
                                 "kmsKey"
                               ]
                             },
+                            "_asyncClusterEndpointsDeletionEnabled": {
+                              "oneof": [
+                                "asyncClusterEndpointsDeletionEnabled"
+                              ]
+                            },
                             "_serverCaMode": {
                               "oneof": [
                                 "serverCaMode"
@@ -3147,6 +3165,14 @@
                               "id": 43,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "asyncClusterEndpointsDeletionEnabled": {
+                              "type": "bool",
+                              "id": 44,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             },
                             "serverCaMode": {
