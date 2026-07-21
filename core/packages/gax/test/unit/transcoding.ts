@@ -366,7 +366,7 @@ describe('gRPC to HTTP transcoding', () => {
       encodeWithSlashes(
         '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ',
       ),
-      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20'
+      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20',
     );
     assert.strictEqual(encodeWithSlashes('..'), '%2E%2E');
   });
@@ -381,13 +381,11 @@ describe('gRPC to HTTP transcoding', () => {
       encodeWithoutSlashes(
         '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ',
       ),
-      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20'
+      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20',
     );
     assert.strictEqual(encodeWithoutSlashes('..'), '%2E%2E');
-    
     assert.strictEqual(encodeWithoutSlashes('..?$httpMethod=DELETE#'), '%2E%2E%3F%24httpMethod%3DDELETE%23');
   });
-
 
   it('applyPattern', () => {
     assert.strictEqual(applyPattern('*', 'test'), 'test');
