@@ -5246,6 +5246,7 @@ describe('File', () => {
         const options = {
           invocationId: 'resumable-persistent-id',
         };
+        resumableUpload.upload();
 
         const resumableUpload = require('../src/resumable-upload');
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

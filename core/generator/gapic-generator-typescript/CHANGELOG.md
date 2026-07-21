@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [4.12.2](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.1...gapic-generator-v4.12.2) (2026-07-13)
+
+
+### Bug Fixes
+
+* **generator:** Add long dependency to CJS template and update baselines ([#8685](https://github.com/googleapis/google-cloud-node/issues/8685)) ([8e51888](https://github.com/googleapis/google-cloud-node/commit/8e5188877da05a226e9976b2e5057eaec5054d1f))
+* **generator:** Update package.json template to monorepo repository/homepage schema and &gt;=18 engines range ([#8840](https://github.com/googleapis/google-cloud-node/issues/8840)) ([f120e17](https://github.com/googleapis/google-cloud-node/commit/f120e17e588d0a0d7fbf037aa17ab1c869dda90e))
+
 ## [4.12.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.0...gapic-generator-v4.12.1) (2026-06-26)
 
 

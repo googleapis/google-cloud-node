@@ -28,3 +28,18 @@ jobs:
         env:
           BUILD_TYPE: presubmit
           TEST_TYPE: units
+  lint:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          fetch-depth: 300
+          persist-credentials: false
+      - name: Use Node.js 24
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: 24
+      - run: npm install
+      - run: npm run lint
+        name: Run monorepo linter
