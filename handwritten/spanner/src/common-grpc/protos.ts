@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import path from 'node:path';
+import * as path from 'node:path';
 
 const API_PATH = path.dirname(require.resolve('@google-cloud/spanner-api/package.json'));
 const IMPORT_PATH = path.join(API_PATH, 'build/protos');
