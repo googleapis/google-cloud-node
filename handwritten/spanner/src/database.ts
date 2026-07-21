@@ -41,7 +41,7 @@ import {
   google as databaseAdmin,
   google,
   google as spannerClient,
-} from '../protos/protos';
+} from '@google-cloud/spanner-api/build/protos/protos';
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 import {

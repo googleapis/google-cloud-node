@@ -28,7 +28,7 @@ import {
   PartitionedDml,
   TimestampBounds,
 } from './transaction';
-import {google} from '../protos/protos';
+import {google} from '@google-cloud/spanner-api/build/protos/protos';
 import {
   Database,
   CreateSessionCallback,

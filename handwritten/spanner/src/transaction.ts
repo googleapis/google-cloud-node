@@ -33,9 +33,9 @@ import {
 import {Session} from './session';
 import {Key} from './table';
 import {Span} from './instrument';
-import {google as spannerClient} from '../protos/protos';
+import {google as spannerClient} from '@google-cloud/spanner-api/build/protos/protos';
 import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
-import {google} from '../protos/protos';
+import {google} from '@google-cloud/spanner-api/build/protos/protos';
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import IAny = google.protobuf.IAny;
 import IQueryOptions = google.spanner.v1.ExecuteSqlRequest.IQueryOptions;

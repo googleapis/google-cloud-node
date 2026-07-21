@@ -16,7 +16,7 @@
 import {ServiceObjectConfig} from '@google-cloud/common';
 const common = require('./common-grpc/service-object');
 
-import {google as instanceAdmin} from '../protos/protos';
+import {google as instanceAdmin} from '@google-cloud/spanner-api/build/protos/protos';
 import {Operation as GaxOperation} from 'google-gax';
 import snakeCase = require('lodash.snakecase');
 import {

@@ -22,7 +22,7 @@ import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import * as through from 'through2';
 import {RunTransactionOptions} from '../src/transaction-runner';
-import {google} from '../protos/protos';
+import {google} from '@google-cloud/spanner-api/build/protos/protos';
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 import {randomUUID} from 'crypto';

@@ -24,7 +24,7 @@ import {Transaction} from './transaction';
 import {NormalCallback} from './common';
 import {isSessionNotFoundError} from './session-pool';
 import {Database} from './database';
-import {google} from '../protos/protos';
+import {google} from '@google-cloud/spanner-api/build/protos/protos';
 import IRequestOptions = google.spanner.v1.IRequestOptions;
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;

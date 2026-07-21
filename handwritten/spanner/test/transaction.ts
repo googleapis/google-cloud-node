@@ -24,7 +24,7 @@ import * as sinon from 'sinon';
 
 import {protos} from '../src';
 import {codec} from '../src/codec';
-import {google} from '../protos/protos';
+import {google} from '@google-cloud/spanner-api/build/protos/protos';
 import {
   CLOUD_RESOURCE_HEADER,
   LEADER_AWARE_ROUTING_HEADER,

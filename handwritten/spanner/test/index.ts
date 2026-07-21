@@ -200,7 +200,7 @@ describe('Spanner', () => {
       './codec.js': {codec: fakeCodec},
       './instance.js': {Instance: FakeInstance},
       './instance-config.js': {InstanceConfig: FakeInstanceConfig},
-      './v1': fakeV1,
+      '@google-cloud/spanner-api': fakeV1,
     }).Spanner;
   });
 

@@ -20,7 +20,7 @@ import * as mock from '../test/mockserver/mockspanner';
 import {SimulatedExecutionTime} from '../test/mockserver/mockspanner';
 import * as mockInstanceAdmin from '../test/mockserver/mockinstanceadmin';
 import * as mockDatabaseAdmin from '../test/mockserver/mockdatabaseadmin';
-import {google} from '../protos/protos';
+import {google} from '@google-cloud/spanner-api/build/protos/protos';
 import {SessionPoolOptions} from '../src/session-pool';
 import protobuf = google.spanner.v1;
 import {performance} from 'perf_hooks';

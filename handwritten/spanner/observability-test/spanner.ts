@@ -16,7 +16,7 @@
 
 import * as assert from 'assert';
 import {grpc} from 'google-gax';
-import {google} from '../protos/protos';
+import {google} from '@google-cloud/spanner-api/build/protos/protos';
 import {Database, Instance, Spanner} from '../src';
 import {MutationSet} from '../src/transaction';
 import protobuf = google.spanner.v1;

@@ -61,7 +61,7 @@ import {
   GoogleError,
   ClientOptions,
 } from 'google-gax';
-import {google, google as instanceAdmin} from '../protos/protos';
+import {google, google as instanceAdmin} from '@google-cloud/spanner-api/build/protos/protos';
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 import {
@@ -85,7 +85,7 @@ import {
 } from './transaction';
 import grpcGcpModule = require('grpc-gcp');
 const grpcGcp = grpcGcpModule(grpc);
-import * as v1 from './v1';
+import * as v1 from '@google-cloud/spanner-api';
 import {
   ObservabilityOptions,
   ensureInitialContextManagerSet,
@@ -2453,7 +2453,7 @@ export {MutationSet};
  * @property {constructor} SpannerClient
  *   Reference to {@link v1.SpannerClient}
  */
-import * as protos from '../protos/protos';
+import * as protos from '@google-cloud/spanner-api/build/protos/protos';
 import IInstanceConfig = instanceAdmin.spanner.admin.instance.v1.IInstanceConfig;
 import {RunTransactionOptions} from './transaction-runner';
 export {v1, protos};

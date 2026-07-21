@@ -15,7 +15,7 @@
  */
 
 import {status} from '@grpc/grpc-js';
-import * as protos from '../../protos/protos';
+import * as protos from '@google-cloud/spanner-api/build/protos/protos';
 
 // Import Protobuf types
 import spanner = protos.google.spanner;

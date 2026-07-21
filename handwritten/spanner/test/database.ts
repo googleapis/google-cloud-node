@@ -36,7 +36,7 @@ import {
   LEADER_AWARE_ROUTING_HEADER,
   AFE_SERVER_TIMING_HEADER,
 } from '../src/common';
-import {google} from '../protos/protos';
+import {google} from '@google-cloud/spanner-api/build/protos/protos';
 import {protos} from '../src';
 import * as inst from '../src/instance';
 import RequestOptions = google.spanner.v1.RequestOptions;

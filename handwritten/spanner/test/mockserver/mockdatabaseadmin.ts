@@ -15,7 +15,7 @@
  */
 
 import * as path from 'path';
-import {google} from '../../protos/protos';
+import {google} from '@google-cloud/spanner-api/build/protos/protos';
 import {grpc} from 'google-gax';
 import * as protoLoader from '@grpc/proto-loader';
 import {createUnimplementedError} from './mockspanner';

@@ -21,7 +21,7 @@ import * as sinon from 'sinon';
 import {Big} from 'big.js';
 import {PreciseDate} from '@google-cloud/precise-date';
 import {GrpcService} from '../src/common-grpc/service';
-import {google} from '../protos/protos';
+import {google} from '@google-cloud/spanner-api/build/protos/protos';
 import {GoogleError} from 'google-gax';
 import {util} from 'protobufjs';
 import * as crypto from 'crypto';
