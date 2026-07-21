@@ -287,6 +287,7 @@ export class DeveloperKnowledgeClient {
       'searchDocumentChunks',
       'getDocument',
       'batchGetDocuments',
+      'answerQuery',
     ];
     for (const methodName of developerKnowledgeStubMethods) {
       const callPromise = this.developerKnowledgeStub.then(
@@ -555,6 +556,7 @@ export class DeveloperKnowledgeClient {
    *
    *   Format: `documents/{uri_without_scheme}`
    *   Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets`
+   *
    * @param {google.developers.knowledge.v1.DocumentView} [request.view]
    *   Optional. Specifies the
    *   {@link protos.google.developers.knowledge.v1.DocumentView|DocumentView} of the
@@ -693,6 +695,136 @@ export class DeveloperKnowledgeClient {
         throw error;
       });
   }
+  /**
+   * Answers a query using grounded generation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.query
+   *   Required. The query to answer.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.developers.knowledge.v1.AnswerQueryResponse|AnswerQueryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_knowledge.answer_query.js</caption>
+   * region_tag:developerknowledge_v1_generated_DeveloperKnowledge_AnswerQuery_async
+   */
+  answerQuery(
+    request?: protos.google.developers.knowledge.v1.IAnswerQueryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+      protos.google.developers.knowledge.v1.IAnswerQueryRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  answerQuery(
+    request: protos.google.developers.knowledge.v1.IAnswerQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+      | protos.google.developers.knowledge.v1.IAnswerQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  answerQuery(
+    request: protos.google.developers.knowledge.v1.IAnswerQueryRequest,
+    callback: Callback<
+      protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+      | protos.google.developers.knowledge.v1.IAnswerQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  answerQuery(
+    request?: protos.google.developers.knowledge.v1.IAnswerQueryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+          | protos.google.developers.knowledge.v1.IAnswerQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+      | protos.google.developers.knowledge.v1.IAnswerQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+      protos.google.developers.knowledge.v1.IAnswerQueryRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('answerQuery request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+          | protos.google.developers.knowledge.v1.IAnswerQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('answerQuery response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .answerQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+          protos.google.developers.knowledge.v1.IAnswerQueryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('answerQuery response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Searches for developer knowledge across Google's developer documentation.
@@ -719,8 +851,7 @@ export class DeveloperKnowledgeClient {
    *
    *   If unspecified, at most 5 results will be returned.
    *
-   *   The maximum value is 20; values above 20 will result in an INVALID_ARGUMENT
-   *   error.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. Contains a page token, received from a previous
    *   `SearchDocumentChunks` call. Provide this to retrieve the subsequent page.
@@ -734,6 +865,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
+   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -743,6 +876,8 @@ export class DeveloperKnowledgeClient {
    *     markdown content or metadata.
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *
+   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
@@ -757,12 +892,14 @@ export class DeveloperKnowledgeClient {
    *
    *   Examples:
    *
+   *   * Filter by `Document.content_length_bytes`:
+   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
-   *   "firebase.google.com"`
+   *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
    *   * `update_time < "2024-01-01T00:00:00Z"`
    *   * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
-   *   "developer.chrome.com" OR data_source = "web.dev")`
+   *     "developer.chrome.com" OR data_source = "web.dev")`
    *   * `uri = "https://docs.cloud.google.com/release-notes"`
    *
    *   The `filter` string must not exceed 500 characters; values longer than 500
@@ -891,8 +1028,7 @@ export class DeveloperKnowledgeClient {
    *
    *   If unspecified, at most 5 results will be returned.
    *
-   *   The maximum value is 20; values above 20 will result in an INVALID_ARGUMENT
-   *   error.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. Contains a page token, received from a previous
    *   `SearchDocumentChunks` call. Provide this to retrieve the subsequent page.
@@ -906,6 +1042,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
+   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -915,6 +1053,8 @@ export class DeveloperKnowledgeClient {
    *     markdown content or metadata.
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *
+   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
@@ -929,12 +1069,14 @@ export class DeveloperKnowledgeClient {
    *
    *   Examples:
    *
+   *   * Filter by `Document.content_length_bytes`:
+   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
-   *   "firebase.google.com"`
+   *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
    *   * `update_time < "2024-01-01T00:00:00Z"`
    *   * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
-   *   "developer.chrome.com" OR data_source = "web.dev")`
+   *     "developer.chrome.com" OR data_source = "web.dev")`
    *   * `uri = "https://docs.cloud.google.com/release-notes"`
    *
    *   The `filter` string must not exceed 500 characters; values longer than 500
@@ -986,8 +1128,7 @@ export class DeveloperKnowledgeClient {
    *
    *   If unspecified, at most 5 results will be returned.
    *
-   *   The maximum value is 20; values above 20 will result in an INVALID_ARGUMENT
-   *   error.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. Contains a page token, received from a previous
    *   `SearchDocumentChunks` call. Provide this to retrieve the subsequent page.
@@ -1001,6 +1142,8 @@ export class DeveloperKnowledgeClient {
    *
    *   Supported fields for filtering:
    *
+   *   * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *     field in bytes.
    *   * `data_source` (STRING): The source of the document, e.g.
    *     `docs.cloud.google.com`. See
    *     https://developers.google.com/knowledge/reference/corpus-reference for
@@ -1010,6 +1153,8 @@ export class DeveloperKnowledgeClient {
    *     markdown content or metadata.
    *   * `uri` (STRING): The document URI, e.g.
    *     `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *
+   *   INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *
    *   STRING fields support `=` (equals) and `!=` (not equals) operators for
    *   **exact match** on the whole string. Partial match, prefix match, and
@@ -1024,12 +1169,14 @@ export class DeveloperKnowledgeClient {
    *
    *   Examples:
    *
+   *   * Filter by `Document.content_length_bytes`:
+   *     `content_length_bytes < 50000`
    *   * `data_source = "docs.cloud.google.com" OR data_source =
-   *   "firebase.google.com"`
+   *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
    *   * `update_time < "2024-01-01T00:00:00Z"`
    *   * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
-   *   "developer.chrome.com" OR data_source = "web.dev")`
+   *     "developer.chrome.com" OR data_source = "web.dev")`
    *   * `uri = "https://docs.cloud.google.com/release-notes"`
    *
    *   The `filter` string must not exceed 500 characters; values longer than 500

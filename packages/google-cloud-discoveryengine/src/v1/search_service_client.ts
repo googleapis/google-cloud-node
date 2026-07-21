@@ -908,6 +908,14 @@ export class SearchServiceClient {
    *   `relevance_filter_spec` instead.
    *
    *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
    * @param {object} [options]
@@ -1375,6 +1383,14 @@ export class SearchServiceClient {
    *   `relevance_filter_spec` instead.
    *
    *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
    * @param {object} [options]
@@ -1771,6 +1787,14 @@ export class SearchServiceClient {
    *   `relevance_filter_spec` instead.
    *
    *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
    * @param {object} [options]
@@ -2178,6 +2202,14 @@ export class SearchServiceClient {
    *   `relevance_filter_spec` instead.
    *
    *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
    * @param {object} [options]
@@ -2645,6 +2677,14 @@ export class SearchServiceClient {
    *   `relevance_filter_spec` instead.
    *
    *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
    * @param {object} [options]
@@ -3041,6 +3081,14 @@ export class SearchServiceClient {
    *   `relevance_filter_spec` instead.
    *
    *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
    *   Optional. The specification for returning the relevance score.
    * @param {object} [options]

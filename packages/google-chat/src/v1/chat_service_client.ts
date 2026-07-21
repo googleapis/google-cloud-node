@@ -206,6 +206,9 @@ export class ChatServiceClient {
       attachmentPathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}/messages/{message}/attachments/{attachment}',
       ),
+      availabilityPathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/availability',
+      ),
       customEmojiPathTemplate: new this._gaxModule.PathTemplate(
         'customEmojis/{custom_emoji}',
       ),
@@ -383,6 +386,11 @@ export class ChatServiceClient {
       'getSpaceReadState',
       'updateSpaceReadState',
       'getThreadReadState',
+      'getAvailability',
+      'markAsActive',
+      'markAsAway',
+      'markAsDoNotDisturb',
+      'updateAvailability',
       'getSpaceEvent',
       'listSpaceEvents',
       'getSpaceNotificationSetting',
@@ -516,6 +524,8 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.spaces',
       'https://www.googleapis.com/auth/chat.spaces.create',
       'https://www.googleapis.com/auth/chat.spaces.readonly',
+      'https://www.googleapis.com/auth/chat.users.availability',
+      'https://www.googleapis.com/auth/chat.users.availability.readonly',
       'https://www.googleapis.com/auth/chat.users.readstate',
       'https://www.googleapis.com/auth/chat.users.readstate.readonly',
       'https://www.googleapis.com/auth/chat.users.sections',
@@ -2362,6 +2372,24 @@ export class ChatServiceClient {
    *   To learn more, see [Make a space discoverable to specific
    *   users](https://developers.google.com/workspace/chat/space-target-audience).
    *   `access_settings.audience` is not supported with `useAdminAccess`.
+   *
+   *   `access_settings.access_permission_settings`: Updates the [access
+   *   permission
+   *   settings](https://support.google.com/chat/answer/11971020) of who can
+   *   discover and join the space where `spaceType` field is `SPACE`. Principals
+   *   allowed to join the space must also be allowed to discover it. To update
+   *   access permission settings for a space, the authenticating user must be a
+   *   space manager or assistant manager and omit all other field masks in the
+   *   request. You can't update this field if the space is in [import
+   *   mode](https://developers.google.com/workspace/chat/import-data-overview).
+   *   To learn more, see [Make a space discoverable to specific
+   *   users](https://developers.google.com/workspace/chat/space-target-audience).
+   *   `access_settings.access_permission_settings` is not supported with
+   *   `useAdminAccess`.
+   *   The supported field masks include:
+   *
+   *   - `access_settings.access_permission_settings.discoverSpaceSetting`
+   *   - `access_settings.access_permission_settings.joinSpaceSetting`
    *
    *   `permission_settings`: Supports changing the
    *   [permission settings](https://support.google.com/chat/answer/13340792)
@@ -4684,6 +4712,729 @@ export class ChatServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('getThreadReadState response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Returns availability information for a human user in Google Chat. For
+   * example, this can be used to check if a user is online or away, or to
+   * retrieve their custom status message.
+   *
+   * This method only retrieves the authenticated user's availability.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with one of the following [authorization
+   * scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.availability.readonly`
+   *   - `https://www.googleapis.com/auth/chat.users.availability`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the availability to retrieve.
+   *
+   *   Format: users/{user}/availability
+   *
+   *   `{user}` is the id for the Person in the People API or Admin SDK directory
+   *   API. For example, `users/123456789`.
+   *
+   *   The user's email address or `me` can also be used as an alias to refer to
+   *   the caller.  For example, `users/user@example.com` or `users/me`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Availability|Availability}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.get_availability.js</caption>
+   * region_tag:chat_v1_generated_ChatService_GetAvailability_async
+   */
+  getAvailability(
+    request?: protos.google.chat.v1.IGetAvailabilityRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IGetAvailabilityRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getAvailability(
+    request: protos.google.chat.v1.IGetAvailabilityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IGetAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAvailability(
+    request: protos.google.chat.v1.IGetAvailabilityRequest,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IGetAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAvailability(
+    request?: protos.google.chat.v1.IGetAvailabilityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IGetAvailabilityRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IGetAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IGetAvailabilityRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getAvailability request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IGetAvailabilityRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAvailability response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAvailability(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IGetAvailabilityRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAvailability response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Marks user as `ACTIVE` in Google Chat.
+   *
+   * Sets the user's availability state to `ACTIVE`. The `ACTIVE` state
+   * lasts until the specified expiration, at which point the user's state
+   * becomes `AWAY`. Note that if the user is actively using Chat, the `ACTIVE`
+   * state duration may extend beyond the provided expiration.
+   *
+   * This method only updates the authenticated user's availability.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with [authorization
+   * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.availability`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the availability to mark as active.
+   *   Format: users/{user}/availability
+   *
+   *   `{user}` is the id for the Person in the People API or Admin SDK directory
+   *   API. For example, `users/123456789`.
+   *
+   *   The user's email address or `me` can also be used as an alias to refer to
+   *   the caller.  For example, `users/user@example.com` or `users/me`.
+   * @param {google.protobuf.Timestamp} request.expireTime
+   *   The absolute timestamp when the ACTIVE state expires.
+   * @param {google.protobuf.Duration} request.ttl
+   *   The duration from the current time until the ACTIVE state expires.
+   *   Using a short TTL can effectively reset the user's state to be based
+   *   on activity after this brief duration.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Availability|Availability}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.mark_as_active.js</caption>
+   * region_tag:chat_v1_generated_ChatService_MarkAsActive_async
+   */
+  markAsActive(
+    request?: protos.google.chat.v1.IMarkAsActiveRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsActiveRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  markAsActive(
+    request: protos.google.chat.v1.IMarkAsActiveRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsActiveRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsActive(
+    request: protos.google.chat.v1.IMarkAsActiveRequest,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsActiveRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsActive(
+    request?: protos.google.chat.v1.IMarkAsActiveRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsActiveRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsActiveRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsActiveRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('markAsActive request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsActiveRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('markAsActive response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .markAsActive(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsActiveRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('markAsActive response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Marks user as `AWAY` in Google Chat.
+   *
+   * Sets the user's state to away and is not affected by the user's
+   * activity.
+   *
+   * This method only updates the authenticated user's availability.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with [authorization
+   * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.availability`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the availability to mark as away.
+   *   Format: users/{user}/availability
+   *
+   *   `{user}` is the id for the Person in the People API or Admin SDK directory
+   *   API. For example, `users/123456789`.
+   *
+   *   The user's email address or `me` can also be used as an alias to refer to
+   *   the caller.  For example, `users/user@example.com` or `users/me`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Availability|Availability}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.mark_as_away.js</caption>
+   * region_tag:chat_v1_generated_ChatService_MarkAsAway_async
+   */
+  markAsAway(
+    request?: protos.google.chat.v1.IMarkAsAwayRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsAwayRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  markAsAway(
+    request: protos.google.chat.v1.IMarkAsAwayRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsAwayRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsAway(
+    request: protos.google.chat.v1.IMarkAsAwayRequest,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsAwayRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsAway(
+    request?: protos.google.chat.v1.IMarkAsAwayRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsAwayRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsAwayRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsAwayRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('markAsAway request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsAwayRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('markAsAway response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .markAsAway(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsAwayRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('markAsAway response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Marks user as `DO_NOT_DISTURB` in Google Chat.
+   *
+   * Sets a user's availability state to `DO_NOT_DISTURB` until a specified
+   * expiration time.
+   * When in `DO_NOT_DISTURB`, users typically won't receive notifications.
+   *
+   * This method only updates the authenticated user's availability.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with [authorization
+   * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.availability`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the availability to mark as Do Not Disturb.
+   *   Format: users/{user}/availability
+   *
+   *   `{user}` is the id for the Person in the People API or Admin SDK directory
+   *   API. For example, `users/123456789`.
+   *
+   *   The user's email address or `me` can also be used as an alias to refer to
+   *   the caller.  For example, `users/user@example.com` or `users/me`.
+   * @param {google.protobuf.Timestamp} request.expireTime
+   *   The absolute timestamp when the DND state expires.
+   * @param {google.protobuf.Duration} request.ttl
+   *   The duration from the current time until the DND state expires.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Availability|Availability}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.mark_as_do_not_disturb.js</caption>
+   * region_tag:chat_v1_generated_ChatService_MarkAsDoNotDisturb_async
+   */
+  markAsDoNotDisturb(
+    request?: protos.google.chat.v1.IMarkAsDoNotDisturbRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsDoNotDisturbRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  markAsDoNotDisturb(
+    request: protos.google.chat.v1.IMarkAsDoNotDisturbRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsDoNotDisturbRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsDoNotDisturb(
+    request: protos.google.chat.v1.IMarkAsDoNotDisturbRequest,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsDoNotDisturbRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsDoNotDisturb(
+    request?: protos.google.chat.v1.IMarkAsDoNotDisturbRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsDoNotDisturbRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsDoNotDisturbRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsDoNotDisturbRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('markAsDoNotDisturb request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsDoNotDisturbRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('markAsDoNotDisturb response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .markAsDoNotDisturb(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsDoNotDisturbRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('markAsDoNotDisturb response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates availability information for a human user. Only the `custom_status`
+   * field can be updated through this method.
+   *
+   * This method only updates the authenticated user's availability.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with one of the following [authorization
+   * scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.availability`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.chat.v1.Availability} request.availability
+   *   Required. The availability to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update.
+   *   The only field that can be updated is `custom_status`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Availability|Availability}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.update_availability.js</caption>
+   * region_tag:chat_v1_generated_ChatService_UpdateAvailability_async
+   */
+  updateAvailability(
+    request?: protos.google.chat.v1.IUpdateAvailabilityRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IUpdateAvailabilityRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateAvailability(
+    request: protos.google.chat.v1.IUpdateAvailabilityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IUpdateAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAvailability(
+    request: protos.google.chat.v1.IUpdateAvailabilityRequest,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IUpdateAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAvailability(
+    request?: protos.google.chat.v1.IUpdateAvailabilityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IUpdateAvailabilityRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IUpdateAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IUpdateAvailabilityRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'availability.name': request.availability!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateAvailability request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IUpdateAvailabilityRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAvailability response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAvailability(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IUpdateAvailabilityRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAvailability response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -9765,6 +10516,30 @@ export class ChatServiceClient {
   matchAttachmentFromAttachmentName(attachmentName: string) {
     return this.pathTemplates.attachmentPathTemplate.match(attachmentName)
       .attachment;
+  }
+
+  /**
+   * Return a fully-qualified availability resource name string.
+   *
+   * @param {string} user
+   * @returns {string} Resource name string.
+   */
+  availabilityPath(user: string) {
+    return this.pathTemplates.availabilityPathTemplate.render({
+      user: user,
+    });
+  }
+
+  /**
+   * Parse the user from Availability resource.
+   *
+   * @param {string} availabilityName
+   *   A fully-qualified path representing Availability resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromAvailabilityName(availabilityName: string) {
+    return this.pathTemplates.availabilityPathTemplate.match(availabilityName)
+      .user;
   }
 
   /**
