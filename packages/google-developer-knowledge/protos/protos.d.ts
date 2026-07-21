@@ -87,6 +87,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public batchGetDocuments(request: google.developers.knowledge.v1.IBatchGetDocumentsRequest): Promise<google.developers.knowledge.v1.BatchGetDocumentsResponse>;
+
+                    /**
+                     * Calls AnswerQuery.
+                     * @param request AnswerQueryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AnswerQueryResponse
+                     */
+                    public answerQuery(request: google.developers.knowledge.v1.IAnswerQueryRequest, callback: google.developers.knowledge.v1.DeveloperKnowledge.AnswerQueryCallback): void;
+
+                    /**
+                     * Calls AnswerQuery.
+                     * @param request AnswerQueryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public answerQuery(request: google.developers.knowledge.v1.IAnswerQueryRequest): Promise<google.developers.knowledge.v1.AnswerQueryResponse>;
                 }
 
                 namespace DeveloperKnowledge {
@@ -111,6 +125,13 @@ export namespace google {
                      * @param [response] BatchGetDocumentsResponse
                      */
                     type BatchGetDocumentsCallback = (error: (Error|null), response?: google.developers.knowledge.v1.BatchGetDocumentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.developers.knowledge.v1.DeveloperKnowledge|answerQuery}.
+                     * @param error Error, if any
+                     * @param [response] AnswerQueryResponse
+                     */
+                    type AnswerQueryCallback = (error: (Error|null), response?: google.developers.knowledge.v1.AnswerQueryResponse) => void;
                 }
 
                 /** DocumentView enum. */
@@ -147,6 +168,9 @@ export namespace google {
 
                     /** Document view */
                     view?: (google.developers.knowledge.v1.DocumentView|keyof typeof google.developers.knowledge.v1.DocumentView|null);
+
+                    /** Document contentLengthBytes */
+                    contentLengthBytes?: (number|null);
                 }
 
                 /** Represents a Document. */
@@ -181,6 +205,9 @@ export namespace google {
 
                     /** Document view. */
                     public view: (google.developers.knowledge.v1.DocumentView|keyof typeof google.developers.knowledge.v1.DocumentView);
+
+                    /** Document contentLengthBytes. */
+                    public contentLengthBytes: number;
 
                     /**
                      * Creates a new Document instance using the specified properties.
@@ -779,6 +806,715 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AnswerQueryRequest. */
+                interface IAnswerQueryRequest {
+
+                    /** AnswerQueryRequest query */
+                    query?: (string|null);
+                }
+
+                /** Represents an AnswerQueryRequest. */
+                class AnswerQueryRequest implements IAnswerQueryRequest {
+
+                    /**
+                     * Constructs a new AnswerQueryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.developers.knowledge.v1.IAnswerQueryRequest);
+
+                    /** AnswerQueryRequest query. */
+                    public query: string;
+
+                    /**
+                     * Creates a new AnswerQueryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnswerQueryRequest instance
+                     */
+                    public static create(properties?: google.developers.knowledge.v1.IAnswerQueryRequest): google.developers.knowledge.v1.AnswerQueryRequest;
+
+                    /**
+                     * Encodes the specified AnswerQueryRequest message. Does not implicitly {@link google.developers.knowledge.v1.AnswerQueryRequest.verify|verify} messages.
+                     * @param message AnswerQueryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.developers.knowledge.v1.IAnswerQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnswerQueryRequest message, length delimited. Does not implicitly {@link google.developers.knowledge.v1.AnswerQueryRequest.verify|verify} messages.
+                     * @param message AnswerQueryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.developers.knowledge.v1.IAnswerQueryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnswerQueryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnswerQueryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.developers.knowledge.v1.AnswerQueryRequest;
+
+                    /**
+                     * Decodes an AnswerQueryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnswerQueryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.developers.knowledge.v1.AnswerQueryRequest;
+
+                    /**
+                     * Verifies an AnswerQueryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnswerQueryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnswerQueryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.developers.knowledge.v1.AnswerQueryRequest;
+
+                    /**
+                     * Creates a plain object from an AnswerQueryRequest message. Also converts values to other types if specified.
+                     * @param message AnswerQueryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.developers.knowledge.v1.AnswerQueryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnswerQueryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnswerQueryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AnswerQueryResponse. */
+                interface IAnswerQueryResponse {
+
+                    /** AnswerQueryResponse answer */
+                    answer?: (google.developers.knowledge.v1.IAnswer|null);
+                }
+
+                /** Represents an AnswerQueryResponse. */
+                class AnswerQueryResponse implements IAnswerQueryResponse {
+
+                    /**
+                     * Constructs a new AnswerQueryResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.developers.knowledge.v1.IAnswerQueryResponse);
+
+                    /** AnswerQueryResponse answer. */
+                    public answer?: (google.developers.knowledge.v1.IAnswer|null);
+
+                    /**
+                     * Creates a new AnswerQueryResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AnswerQueryResponse instance
+                     */
+                    public static create(properties?: google.developers.knowledge.v1.IAnswerQueryResponse): google.developers.knowledge.v1.AnswerQueryResponse;
+
+                    /**
+                     * Encodes the specified AnswerQueryResponse message. Does not implicitly {@link google.developers.knowledge.v1.AnswerQueryResponse.verify|verify} messages.
+                     * @param message AnswerQueryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.developers.knowledge.v1.IAnswerQueryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AnswerQueryResponse message, length delimited. Does not implicitly {@link google.developers.knowledge.v1.AnswerQueryResponse.verify|verify} messages.
+                     * @param message AnswerQueryResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.developers.knowledge.v1.IAnswerQueryResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AnswerQueryResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AnswerQueryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.developers.knowledge.v1.AnswerQueryResponse;
+
+                    /**
+                     * Decodes an AnswerQueryResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AnswerQueryResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.developers.knowledge.v1.AnswerQueryResponse;
+
+                    /**
+                     * Verifies an AnswerQueryResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AnswerQueryResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AnswerQueryResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.developers.knowledge.v1.AnswerQueryResponse;
+
+                    /**
+                     * Creates a plain object from an AnswerQueryResponse message. Also converts values to other types if specified.
+                     * @param message AnswerQueryResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.developers.knowledge.v1.AnswerQueryResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AnswerQueryResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AnswerQueryResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Answer. */
+                interface IAnswer {
+
+                    /** Answer answerText */
+                    answerText?: (string|null);
+
+                    /** Answer citations */
+                    citations?: (google.developers.knowledge.v1.Answer.IAnswerCitation[]|null);
+
+                    /** Answer references */
+                    references?: (google.developers.knowledge.v1.Answer.IAnswerReference[]|null);
+                }
+
+                /** Represents an Answer. */
+                class Answer implements IAnswer {
+
+                    /**
+                     * Constructs a new Answer.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.developers.knowledge.v1.IAnswer);
+
+                    /** Answer answerText. */
+                    public answerText: string;
+
+                    /** Answer citations. */
+                    public citations: google.developers.knowledge.v1.Answer.IAnswerCitation[];
+
+                    /** Answer references. */
+                    public references: google.developers.knowledge.v1.Answer.IAnswerReference[];
+
+                    /**
+                     * Creates a new Answer instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Answer instance
+                     */
+                    public static create(properties?: google.developers.knowledge.v1.IAnswer): google.developers.knowledge.v1.Answer;
+
+                    /**
+                     * Encodes the specified Answer message. Does not implicitly {@link google.developers.knowledge.v1.Answer.verify|verify} messages.
+                     * @param message Answer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.developers.knowledge.v1.IAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Answer message, length delimited. Does not implicitly {@link google.developers.knowledge.v1.Answer.verify|verify} messages.
+                     * @param message Answer message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.developers.knowledge.v1.IAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Answer message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Answer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.developers.knowledge.v1.Answer;
+
+                    /**
+                     * Decodes an Answer message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Answer
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.developers.knowledge.v1.Answer;
+
+                    /**
+                     * Verifies an Answer message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Answer message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Answer
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.developers.knowledge.v1.Answer;
+
+                    /**
+                     * Creates a plain object from an Answer message. Also converts values to other types if specified.
+                     * @param message Answer
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.developers.knowledge.v1.Answer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Answer to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Answer
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Answer {
+
+                    /** Properties of an AnswerCitation. */
+                    interface IAnswerCitation {
+
+                        /** AnswerCitation startIndex */
+                        startIndex?: (number|null);
+
+                        /** AnswerCitation endIndex */
+                        endIndex?: (number|null);
+
+                        /** AnswerCitation sources */
+                        sources?: (google.developers.knowledge.v1.Answer.ICitationSource[]|null);
+                    }
+
+                    /** Represents an AnswerCitation. */
+                    class AnswerCitation implements IAnswerCitation {
+
+                        /**
+                         * Constructs a new AnswerCitation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.developers.knowledge.v1.Answer.IAnswerCitation);
+
+                        /** AnswerCitation startIndex. */
+                        public startIndex: number;
+
+                        /** AnswerCitation endIndex. */
+                        public endIndex: number;
+
+                        /** AnswerCitation sources. */
+                        public sources: google.developers.knowledge.v1.Answer.ICitationSource[];
+
+                        /**
+                         * Creates a new AnswerCitation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AnswerCitation instance
+                         */
+                        public static create(properties?: google.developers.knowledge.v1.Answer.IAnswerCitation): google.developers.knowledge.v1.Answer.AnswerCitation;
+
+                        /**
+                         * Encodes the specified AnswerCitation message. Does not implicitly {@link google.developers.knowledge.v1.Answer.AnswerCitation.verify|verify} messages.
+                         * @param message AnswerCitation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.developers.knowledge.v1.Answer.IAnswerCitation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AnswerCitation message, length delimited. Does not implicitly {@link google.developers.knowledge.v1.Answer.AnswerCitation.verify|verify} messages.
+                         * @param message AnswerCitation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.developers.knowledge.v1.Answer.IAnswerCitation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AnswerCitation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AnswerCitation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.developers.knowledge.v1.Answer.AnswerCitation;
+
+                        /**
+                         * Decodes an AnswerCitation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AnswerCitation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.developers.knowledge.v1.Answer.AnswerCitation;
+
+                        /**
+                         * Verifies an AnswerCitation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AnswerCitation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AnswerCitation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.developers.knowledge.v1.Answer.AnswerCitation;
+
+                        /**
+                         * Creates a plain object from an AnswerCitation message. Also converts values to other types if specified.
+                         * @param message AnswerCitation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.developers.knowledge.v1.Answer.AnswerCitation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AnswerCitation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AnswerCitation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CitationSource. */
+                    interface ICitationSource {
+
+                        /** CitationSource referenceIndex */
+                        referenceIndex?: (number|null);
+                    }
+
+                    /** Represents a CitationSource. */
+                    class CitationSource implements ICitationSource {
+
+                        /**
+                         * Constructs a new CitationSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.developers.knowledge.v1.Answer.ICitationSource);
+
+                        /** CitationSource referenceIndex. */
+                        public referenceIndex: number;
+
+                        /**
+                         * Creates a new CitationSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CitationSource instance
+                         */
+                        public static create(properties?: google.developers.knowledge.v1.Answer.ICitationSource): google.developers.knowledge.v1.Answer.CitationSource;
+
+                        /**
+                         * Encodes the specified CitationSource message. Does not implicitly {@link google.developers.knowledge.v1.Answer.CitationSource.verify|verify} messages.
+                         * @param message CitationSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.developers.knowledge.v1.Answer.ICitationSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CitationSource message, length delimited. Does not implicitly {@link google.developers.knowledge.v1.Answer.CitationSource.verify|verify} messages.
+                         * @param message CitationSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.developers.knowledge.v1.Answer.ICitationSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CitationSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CitationSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.developers.knowledge.v1.Answer.CitationSource;
+
+                        /**
+                         * Decodes a CitationSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CitationSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.developers.knowledge.v1.Answer.CitationSource;
+
+                        /**
+                         * Verifies a CitationSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CitationSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CitationSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.developers.knowledge.v1.Answer.CitationSource;
+
+                        /**
+                         * Creates a plain object from a CitationSource message. Also converts values to other types if specified.
+                         * @param message CitationSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.developers.knowledge.v1.Answer.CitationSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CitationSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CitationSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AnswerReference. */
+                    interface IAnswerReference {
+
+                        /** AnswerReference documentReference */
+                        documentReference?: (google.developers.knowledge.v1.Answer.IDocumentReference|null);
+                    }
+
+                    /** Represents an AnswerReference. */
+                    class AnswerReference implements IAnswerReference {
+
+                        /**
+                         * Constructs a new AnswerReference.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.developers.knowledge.v1.Answer.IAnswerReference);
+
+                        /** AnswerReference documentReference. */
+                        public documentReference?: (google.developers.knowledge.v1.Answer.IDocumentReference|null);
+
+                        /** AnswerReference content. */
+                        public content?: "documentReference";
+
+                        /**
+                         * Creates a new AnswerReference instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AnswerReference instance
+                         */
+                        public static create(properties?: google.developers.knowledge.v1.Answer.IAnswerReference): google.developers.knowledge.v1.Answer.AnswerReference;
+
+                        /**
+                         * Encodes the specified AnswerReference message. Does not implicitly {@link google.developers.knowledge.v1.Answer.AnswerReference.verify|verify} messages.
+                         * @param message AnswerReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.developers.knowledge.v1.Answer.IAnswerReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AnswerReference message, length delimited. Does not implicitly {@link google.developers.knowledge.v1.Answer.AnswerReference.verify|verify} messages.
+                         * @param message AnswerReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.developers.knowledge.v1.Answer.IAnswerReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AnswerReference message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AnswerReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.developers.knowledge.v1.Answer.AnswerReference;
+
+                        /**
+                         * Decodes an AnswerReference message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AnswerReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.developers.knowledge.v1.Answer.AnswerReference;
+
+                        /**
+                         * Verifies an AnswerReference message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AnswerReference message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AnswerReference
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.developers.knowledge.v1.Answer.AnswerReference;
+
+                        /**
+                         * Creates a plain object from an AnswerReference message. Also converts values to other types if specified.
+                         * @param message AnswerReference
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.developers.knowledge.v1.Answer.AnswerReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AnswerReference to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AnswerReference
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DocumentReference. */
+                    interface IDocumentReference {
+
+                        /** DocumentReference documentChunk */
+                        documentChunk?: (google.developers.knowledge.v1.IDocumentChunk|null);
+                    }
+
+                    /** Represents a DocumentReference. */
+                    class DocumentReference implements IDocumentReference {
+
+                        /**
+                         * Constructs a new DocumentReference.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.developers.knowledge.v1.Answer.IDocumentReference);
+
+                        /** DocumentReference documentChunk. */
+                        public documentChunk?: (google.developers.knowledge.v1.IDocumentChunk|null);
+
+                        /**
+                         * Creates a new DocumentReference instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DocumentReference instance
+                         */
+                        public static create(properties?: google.developers.knowledge.v1.Answer.IDocumentReference): google.developers.knowledge.v1.Answer.DocumentReference;
+
+                        /**
+                         * Encodes the specified DocumentReference message. Does not implicitly {@link google.developers.knowledge.v1.Answer.DocumentReference.verify|verify} messages.
+                         * @param message DocumentReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.developers.knowledge.v1.Answer.IDocumentReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DocumentReference message, length delimited. Does not implicitly {@link google.developers.knowledge.v1.Answer.DocumentReference.verify|verify} messages.
+                         * @param message DocumentReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.developers.knowledge.v1.Answer.IDocumentReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DocumentReference message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DocumentReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.developers.knowledge.v1.Answer.DocumentReference;
+
+                        /**
+                         * Decodes a DocumentReference message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DocumentReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.developers.knowledge.v1.Answer.DocumentReference;
+
+                        /**
+                         * Verifies a DocumentReference message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DocumentReference message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DocumentReference
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.developers.knowledge.v1.Answer.DocumentReference;
+
+                        /**
+                         * Creates a plain object from a DocumentReference message. Also converts values to other types if specified.
+                         * @param message DocumentReference
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.developers.knowledge.v1.Answer.DocumentReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DocumentReference to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DocumentReference
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a DocumentChunk. */

@@ -88,6 +88,87 @@
                         }
                       }
                     },
+                    "Agent": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AgentAnomaly": {
+                      "fields": {
+                        "confidenceScore": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "detectorReferences": {
+                          "rule": "repeated",
+                          "type": "DetectorReference",
+                          "id": 2
+                        },
+                        "invocationReferences": {
+                          "rule": "repeated",
+                          "type": "InvocationReference",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DetectorReference": {
+                      "fields": {
+                        "severity": {
+                          "type": "Severity",
+                          "id": 1
+                        },
+                        "detectorId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "explanation": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "recommendation": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Severity": {
+                          "values": {
+                            "SEVERITY_UNSPECIFIED": 0,
+                            "CRITICAL": 1,
+                            "HIGH": 2,
+                            "MEDIUM": 3,
+                            "LOW": 4
+                          }
+                        }
+                      }
+                    },
+                    "InvocationReference": {
+                      "fields": {
+                        "invocationId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AgentSession": {
+                      "fields": {
+                        "sessionId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "Application": {
                       "fields": {
                         "baseUri": {
@@ -1577,6 +1658,19 @@
                         "externalExposure": {
                           "type": "ExternalExposure",
                           "id": 84
+                        },
+                        "agent": {
+                          "type": "Agent",
+                          "id": 88
+                        },
+                        "agentSessions": {
+                          "rule": "repeated",
+                          "type": "AgentSession",
+                          "id": 89
+                        },
+                        "agentAnomaly": {
+                          "type": "AgentAnomaly",
+                          "id": 90
                         }
                       },
                       "nested": {
@@ -9522,6 +9616,87 @@
                         }
                       }
                     },
+                    "Agent": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AgentAnomaly": {
+                      "fields": {
+                        "confidenceScore": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "detectorReferences": {
+                          "rule": "repeated",
+                          "type": "DetectorReference",
+                          "id": 2
+                        },
+                        "invocationReferences": {
+                          "rule": "repeated",
+                          "type": "InvocationReference",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DetectorReference": {
+                      "fields": {
+                        "severity": {
+                          "type": "Severity",
+                          "id": 1
+                        },
+                        "detectorId": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "explanation": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "recommendation": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Severity": {
+                          "values": {
+                            "SEVERITY_UNSPECIFIED": 0,
+                            "CRITICAL": 1,
+                            "HIGH": 2,
+                            "MEDIUM": 3,
+                            "LOW": 4
+                          }
+                        }
+                      }
+                    },
+                    "InvocationReference": {
+                      "fields": {
+                        "invocationId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AgentSession": {
+                      "fields": {
+                        "sessionId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "AiModel": {
                       "fields": {
                         "name": {
@@ -10728,6 +10903,19 @@
                         "vertexAi": {
                           "type": "VertexAi",
                           "id": 72
+                        },
+                        "agent": {
+                          "type": "Agent",
+                          "id": 81
+                        },
+                        "agentSessions": {
+                          "rule": "repeated",
+                          "type": "AgentSession",
+                          "id": 82
+                        },
+                        "agentAnomaly": {
+                          "type": "AgentAnomaly",
+                          "id": 83
                         }
                       },
                       "nested": {

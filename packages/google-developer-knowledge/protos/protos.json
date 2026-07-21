@@ -68,6 +68,22 @@
                               }
                             }
                           ]
+                        },
+                        "AnswerQuery": {
+                          "requestType": "AnswerQueryRequest",
+                          "responseType": "AnswerQueryResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1:answerQuery",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1:answerQuery",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -139,6 +155,13 @@
                         "view": {
                           "type": "DocumentView",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "contentLengthBytes": {
+                          "type": "int32",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -238,6 +261,117 @@
                           "rule": "repeated",
                           "type": "Document",
                           "id": 1
+                        }
+                      }
+                    },
+                    "AnswerQueryRequest": {
+                      "fields": {
+                        "query": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AnswerQueryResponse": {
+                      "fields": {
+                        "answer": {
+                          "type": "Answer",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Answer": {
+                      "fields": {
+                        "answerText": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "citations": {
+                          "rule": "repeated",
+                          "type": "AnswerCitation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "references": {
+                          "rule": "repeated",
+                          "type": "AnswerReference",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AnswerCitation": {
+                          "fields": {
+                            "startIndex": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "endIndex": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "sources": {
+                              "rule": "repeated",
+                              "type": "CitationSource",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "CitationSource": {
+                          "fields": {
+                            "referenceIndex": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "AnswerReference": {
+                          "oneofs": {
+                            "content": {
+                              "oneof": [
+                                "documentReference"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "documentReference": {
+                              "type": "DocumentReference",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "DocumentReference": {
+                          "fields": {
+                            "documentChunk": {
+                              "type": "DocumentChunk",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
                         }
                       }
                     },

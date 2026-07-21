@@ -6503,6 +6503,9 @@ export namespace google {
                     /** Operation importance */
                     importance?: (google.api.servicecontrol.v1.Operation.Importance|keyof typeof google.api.servicecontrol.v1.Operation.Importance|null);
 
+                    /** Operation userLabels */
+                    userLabels?: ({ [k: string]: string }|null);
+
                     /** Operation extensions */
                     extensions?: (google.protobuf.IAny[]|null);
                 }
@@ -6542,6 +6545,9 @@ export namespace google {
 
                     /** Operation importance. */
                     public importance: (google.api.servicecontrol.v1.Operation.Importance|keyof typeof google.api.servicecontrol.v1.Operation.Importance);
+
+                    /** Operation userLabels. */
+                    public userLabels: { [k: string]: string };
 
                     /** Operation extensions. */
                     public extensions: google.protobuf.IAny[];
