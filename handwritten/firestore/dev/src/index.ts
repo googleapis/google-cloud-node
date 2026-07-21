@@ -75,7 +75,7 @@ import {
 } from './validate';
 import {WriteBatch} from './write-batch';
 
-import {interfaces} from './v1/firestore_client_config.json';
+import {interfaces} from '@google-cloud/firestore-api/build/src/v1/firestore_client_config.json';
 const serviceConfig = interfaces['google.firestore.v1.Firestore'];
 
 import api = google.firestore.v1;
@@ -636,32 +636,29 @@ export class Firestore implements firestore.Firestore {
           }
         }
 
+        const grpcOptions = Object.assign(
+          {
+            'grpc-node.flow_control_window': 256 * 1024,
+          },
+          this._settings.grpcOptions,
+        );
+
+        let settings: ClientOptions = {
+          ...this._settings,
+          grpcOptions,
+          fallback: useFallback,
+        };
+
         if (this._settings.ssl === false) {
           const grpcModule = this._settings.grpc ?? require('google-gax').grpc;
-          const sslCreds = grpcModule.credentials.createInsecure();
-
-          const settings: ClientOptions = {
-            sslCreds,
-            ...this._settings,
-            fallback: useFallback,
-          };
-
-          // Since `ssl === false`, if we're using the GAX fallback then
-          // also set the `protocol` option for GAX fallback to force http
+          settings.sslCreds = grpcModule.credentials.createInsecure();
           if (useFallback) {
             settings.protocol = 'http';
           }
-
-          client = new module.exports.v1(settings, gax);
-        } else {
-          client = new module.exports.v1(
-            {
-              ...this._settings,
-              fallback: useFallback,
-            },
-            gax,
-          );
         }
+
+        const v1Client = (module.exports.v1 && module.exports.v1.FirestoreClient) || module.exports.v1;
+        client = new v1Client(settings, gax);
 
         logger(
           'clientFactory',
@@ -2029,7 +2026,7 @@ module.exports = Object.assign(module.exports, existingExports);
 Object.defineProperty(module.exports, 'v1beta1', {
   // The v1beta1 module is very large. To avoid pulling it in from static
   // scope, we lazy-load the module.
-  get: () => require('./v1beta1'),
+  get: () => require('@google-cloud/firestore-api').v1beta1,
 });
 
 /**
@@ -2043,7 +2040,7 @@ Object.defineProperty(module.exports, 'v1beta1', {
 Object.defineProperty(module.exports, 'v1', {
   // The v1 module is very large. To avoid pulling it in from static
   // scope, we lazy-load  the module.
-  get: () => require('./v1'),
+  get: () => require('@google-cloud/firestore-api').v1,
 });
 
 /**
