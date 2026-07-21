@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/agentregistry",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Agentregistry client for Node.js",
   "repository": {
     "type": "git",
@@ -59,6 +59,6 @@
     "sinon": "^20.0.0"
   },
   "engines": {
-    "node": ">=v18"
+    "node": ">=18"
   }
 }

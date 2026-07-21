@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/logging",
-  "version": "11.2.3",
+  "version": "11.3.0",
   "description": "Cloud Logging Client Library for Node.js",
   "keywords": [
     "google apis client",
@@ -105,7 +105,7 @@
     "webpack-cli": "^5.0.0"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging"
 }

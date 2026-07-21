@@ -2,7 +2,7 @@
     "api_description": "Workload Manager is a service that provides tooling for enterprise\nworkloads to automate the deployment and validation of your workloads\nagainst best practices and recommendations.",
     "api_id": "workloadmanager.googleapis.com",
     "api_shortname": "workloadmanager",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/workloadmanager/latest",
+    "client_documentation": "https://docs.cloud.google.com/nodejs/docs/reference/workloadmanager/latest",
     "default_version": "v1",
     "distribution_name": "@google-cloud/workloadmanager",
     "issue_tracker": "https://issuetracker.google.com/issues/new?component=1631482&template=0",

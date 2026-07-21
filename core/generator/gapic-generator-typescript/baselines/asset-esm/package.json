@@ -2,8 +2,13 @@
   "name": "@google-cloud/asset",
   "version": "0.1.0",
   "description": "Asset client for Node.js",
-  "repository": "googleapis/nodejs-asset",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-cloud-asset",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
+  },
   "license": "Apache-2.0",
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-asset",
   "author": "Google LLC",
   "main": "./build/cjs/src/index.cjs",
   "types": "./build/cjs/src/index.d.ts",
@@ -98,6 +103,6 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=v18"
+    "node": ">=18"
   }
 }
