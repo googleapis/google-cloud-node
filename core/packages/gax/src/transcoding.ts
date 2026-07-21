@@ -150,25 +150,17 @@ export function buildQueryStringComponents(
 export function encodeWithSlashes(str: string): string {
   return str
     .split('')
-    .map(c => {
-      if (c === '.') {
-        return '%2E';
-      }
-      return c.match(/[-_~0-9a-zA-Z]/) ? c : encodeURIComponent(c);
-    })
-    .join('');
+    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
+    .join('')
+    .replace(/\.\./g, '%2E%2E');
 }
 
 export function encodeWithoutSlashes(str: string): string {
   return str
     .split('')
-    .map(c => {
-      if (c === '.') {
-        return '%2E';
-      }
-      return c.match(/[-_~0-9a-zA-Z/]/) ? c : encodeURIComponent(c);
-    })
-    .join('');
+    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : encodeURIComponent(c)))
+    .join('')
+    .replace(/\.\./g, '%2E%2E');
 }
 
 function escapeRegExp(str: string) {
