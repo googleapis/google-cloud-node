@@ -5,6 +5,33 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "ecf348bed2cc5678d78e4950f6aa417e73ab26b4",
+          "message": "Add support for 16MB documents",
+          "issues": [
+            "8649"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "506b8b69952b7baf6bd04235598e58932ccec57f",
+          "message": "Eager evict idle REST clients on gRPC transition",
+          "issues": [
+            "8817"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "8.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "ebf68e66-0a0b-45ef-8183-b418a77cb6eb",
+      "createTime": "2026-07-21T14:57:44.177Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b01b02d4c3722575c327721d3b295a2b7ad45e98",
           "message": "Onboard a new library",
           "issues": [
@@ -82363,5 +82390,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-20T21:33:13.651Z"
+  "updateTime": "2026-07-21T14:57:44.177Z"
 }
