@@ -214,6 +214,12 @@ export class PlacementServiceClient {
       adReviewCenterAdPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}',
       ),
+      adRulePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/adRules/{ad_rule}',
+      ),
+      adSpotPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/adSpots/{ad_spot}',
+      ),
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/adUnits/{ad_unit}',
       ),
@@ -231,6 +237,9 @@ export class PlacementServiceClient {
       ),
       browserLanguagePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/browserLanguages/{browser_language}',
+      ),
+      cdnConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/cdnConfigs/{cdn_config}',
       ),
       childPublisherPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/childPublishers/{child_publisher}',
@@ -292,6 +301,9 @@ export class PlacementServiceClient {
       linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/linkedDevices/{linked_device}',
       ),
+      liveStreamPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/liveStreams/{live_stream}',
+      ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}',
       ),
@@ -340,11 +352,20 @@ export class PlacementServiceClient {
       sitePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/sites/{site}',
       ),
+      suggestedAdUnitPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/suggestedAdUnits/{suggested_ad_unit}',
+      ),
+      targetingPresetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/targetingPresets/{targeting_preset}',
+      ),
       taxonomyCategoryPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/taxonomyCategories/{taxonomy_category}',
       ),
       teamPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/teams/{team}',
+      ),
+      thirdPartyCompanyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/thirdPartyCompanies/{third_party_company}',
       ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}',
@@ -542,7 +563,7 @@ export class PlacementServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * API to retrieve a `Placement` object.
+   * Retrieves a `Placement` object.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -671,7 +692,7 @@ export class PlacementServiceClient {
       });
   }
   /**
-   * API to create an `Placement` object.
+   * Creates an `Placement` object.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -802,7 +823,7 @@ export class PlacementServiceClient {
       });
   }
   /**
-   * API to update an `Placement` object.
+   * Updates an `Placement` object.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -936,7 +957,7 @@ export class PlacementServiceClient {
       });
   }
   /**
-   * API to batch create `Placement` objects.
+   * Creates `Placement` objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1079,7 +1100,7 @@ export class PlacementServiceClient {
       });
   }
   /**
-   * API to batch update `Placement` objects.
+   * Batch updates `Placement` objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1655,7 +1676,7 @@ export class PlacementServiceClient {
   }
 
   /**
-   * API to retrieve a list of `Placement` objects.
+   * Lists `Placement` objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2069,6 +2090,78 @@ export class PlacementServiceClient {
   }
 
   /**
+   * Return a fully-qualified adRule resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} ad_rule
+   * @returns {string} Resource name string.
+   */
+  adRulePath(networkCode: string, adRule: string) {
+    return this.pathTemplates.adRulePathTemplate.render({
+      network_code: networkCode,
+      ad_rule: adRule,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdRule resource.
+   *
+   * @param {string} adRuleName
+   *   A fully-qualified path representing AdRule resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdRuleName(adRuleName: string) {
+    return this.pathTemplates.adRulePathTemplate.match(adRuleName).network_code;
+  }
+
+  /**
+   * Parse the ad_rule from AdRule resource.
+   *
+   * @param {string} adRuleName
+   *   A fully-qualified path representing AdRule resource.
+   * @returns {string} A string representing the ad_rule.
+   */
+  matchAdRuleFromAdRuleName(adRuleName: string) {
+    return this.pathTemplates.adRulePathTemplate.match(adRuleName).ad_rule;
+  }
+
+  /**
+   * Return a fully-qualified adSpot resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} ad_spot
+   * @returns {string} Resource name string.
+   */
+  adSpotPath(networkCode: string, adSpot: string) {
+    return this.pathTemplates.adSpotPathTemplate.render({
+      network_code: networkCode,
+      ad_spot: adSpot,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdSpot resource.
+   *
+   * @param {string} adSpotName
+   *   A fully-qualified path representing AdSpot resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdSpotName(adSpotName: string) {
+    return this.pathTemplates.adSpotPathTemplate.match(adSpotName).network_code;
+  }
+
+  /**
+   * Parse the ad_spot from AdSpot resource.
+   *
+   * @param {string} adSpotName
+   *   A fully-qualified path representing AdSpot resource.
+   * @returns {string} A string representing the ad_spot.
+   */
+  matchAdSpotFromAdSpotName(adSpotName: string) {
+    return this.pathTemplates.adSpotPathTemplate.match(adSpotName).ad_spot;
+  }
+
+  /**
    * Return a fully-qualified adUnit resource name string.
    *
    * @param {string} network_code
@@ -2297,6 +2390,44 @@ export class PlacementServiceClient {
     return this.pathTemplates.browserLanguagePathTemplate.match(
       browserLanguageName,
     ).browser_language;
+  }
+
+  /**
+   * Return a fully-qualified cdnConfig resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} cdn_config
+   * @returns {string} Resource name string.
+   */
+  cdnConfigPath(networkCode: string, cdnConfig: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.render({
+      network_code: networkCode,
+      cdn_config: cdnConfig,
+    });
+  }
+
+  /**
+   * Parse the network_code from CdnConfig resource.
+   *
+   * @param {string} cdnConfigName
+   *   A fully-qualified path representing CdnConfig resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCdnConfigName(cdnConfigName: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.match(cdnConfigName)
+      .network_code;
+  }
+
+  /**
+   * Parse the cdn_config from CdnConfig resource.
+   *
+   * @param {string} cdnConfigName
+   *   A fully-qualified path representing CdnConfig resource.
+   * @returns {string} A string representing the cdn_config.
+   */
+  matchCdnConfigFromCdnConfigName(cdnConfigName: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.match(cdnConfigName)
+      .cdn_config;
   }
 
   /**
@@ -3087,6 +3218,44 @@ export class PlacementServiceClient {
   }
 
   /**
+   * Return a fully-qualified liveStream resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} live_stream
+   * @returns {string} Resource name string.
+   */
+  liveStreamPath(networkCode: string, liveStream: string) {
+    return this.pathTemplates.liveStreamPathTemplate.render({
+      network_code: networkCode,
+      live_stream: liveStream,
+    });
+  }
+
+  /**
+   * Parse the network_code from LiveStream resource.
+   *
+   * @param {string} liveStreamName
+   *   A fully-qualified path representing LiveStream resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLiveStreamName(liveStreamName: string) {
+    return this.pathTemplates.liveStreamPathTemplate.match(liveStreamName)
+      .network_code;
+  }
+
+  /**
+   * Parse the live_stream from LiveStream resource.
+   *
+   * @param {string} liveStreamName
+   *   A fully-qualified path representing LiveStream resource.
+   * @returns {string} A string representing the live_stream.
+   */
+  matchLiveStreamFromLiveStreamName(liveStreamName: string) {
+    return this.pathTemplates.liveStreamPathTemplate.match(liveStreamName)
+      .live_stream;
+  }
+
+  /**
    * Return a fully-qualified liveStreamEvent resource name string.
    *
    * @param {string} network_code
@@ -3706,6 +3875,86 @@ export class PlacementServiceClient {
   }
 
   /**
+   * Return a fully-qualified suggestedAdUnit resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} suggested_ad_unit
+   * @returns {string} Resource name string.
+   */
+  suggestedAdUnitPath(networkCode: string, suggestedAdUnit: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.render({
+      network_code: networkCode,
+      suggested_ad_unit: suggestedAdUnit,
+    });
+  }
+
+  /**
+   * Parse the network_code from SuggestedAdUnit resource.
+   *
+   * @param {string} suggestedAdUnitName
+   *   A fully-qualified path representing SuggestedAdUnit resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSuggestedAdUnitName(suggestedAdUnitName: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.match(
+      suggestedAdUnitName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the suggested_ad_unit from SuggestedAdUnit resource.
+   *
+   * @param {string} suggestedAdUnitName
+   *   A fully-qualified path representing SuggestedAdUnit resource.
+   * @returns {string} A string representing the suggested_ad_unit.
+   */
+  matchSuggestedAdUnitFromSuggestedAdUnitName(suggestedAdUnitName: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.match(
+      suggestedAdUnitName,
+    ).suggested_ad_unit;
+  }
+
+  /**
+   * Return a fully-qualified targetingPreset resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} targeting_preset
+   * @returns {string} Resource name string.
+   */
+  targetingPresetPath(networkCode: string, targetingPreset: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.render({
+      network_code: networkCode,
+      targeting_preset: targetingPreset,
+    });
+  }
+
+  /**
+   * Parse the network_code from TargetingPreset resource.
+   *
+   * @param {string} targetingPresetName
+   *   A fully-qualified path representing TargetingPreset resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromTargetingPresetName(targetingPresetName: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.match(
+      targetingPresetName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the targeting_preset from TargetingPreset resource.
+   *
+   * @param {string} targetingPresetName
+   *   A fully-qualified path representing TargetingPreset resource.
+   * @returns {string} A string representing the targeting_preset.
+   */
+  matchTargetingPresetFromTargetingPresetName(targetingPresetName: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.match(
+      targetingPresetName,
+    ).targeting_preset;
+  }
+
+  /**
    * Return a fully-qualified taxonomyCategory resource name string.
    *
    * @param {string} network_code
@@ -3779,6 +4028,48 @@ export class PlacementServiceClient {
    */
   matchTeamFromTeamName(teamName: string) {
     return this.pathTemplates.teamPathTemplate.match(teamName).team;
+  }
+
+  /**
+   * Return a fully-qualified thirdPartyCompany resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} third_party_company
+   * @returns {string} Resource name string.
+   */
+  thirdPartyCompanyPath(networkCode: string, thirdPartyCompany: string) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.render({
+      network_code: networkCode,
+      third_party_company: thirdPartyCompany,
+    });
+  }
+
+  /**
+   * Parse the network_code from ThirdPartyCompany resource.
+   *
+   * @param {string} thirdPartyCompanyName
+   *   A fully-qualified path representing ThirdPartyCompany resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromThirdPartyCompanyName(thirdPartyCompanyName: string) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.match(
+      thirdPartyCompanyName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the third_party_company from ThirdPartyCompany resource.
+   *
+   * @param {string} thirdPartyCompanyName
+   *   A fully-qualified path representing ThirdPartyCompany resource.
+   * @returns {string} A string representing the third_party_company.
+   */
+  matchThirdPartyCompanyFromThirdPartyCompanyName(
+    thirdPartyCompanyName: string,
+  ) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.match(
+      thirdPartyCompanyName,
+    ).third_party_company;
   }
 
   /**

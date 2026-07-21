@@ -56,8 +56,14 @@ export namespace google {
                         /** LocalInventoryAttributes instoreProductLocation */
                         instoreProductLocation?: (string|null);
 
+                        /** LocalInventoryAttributes localShippingLabel */
+                        localShippingLabel?: (string|null);
+
                         /** LocalInventoryAttributes loyaltyPrograms */
                         loyaltyPrograms?: (google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram[]|null);
+
+                        /** LocalInventoryAttributes customAttributes */
+                        customAttributes?: (google.shopping.type.ICustomAttribute[]|null);
                     }
 
                     /** Represents a LocalInventoryAttributes. */
@@ -93,8 +99,14 @@ export namespace google {
                         /** LocalInventoryAttributes instoreProductLocation. */
                         public instoreProductLocation?: (string|null);
 
+                        /** LocalInventoryAttributes localShippingLabel. */
+                        public localShippingLabel?: (string|null);
+
                         /** LocalInventoryAttributes loyaltyPrograms. */
                         public loyaltyPrograms: google.shopping.merchant.inventories.v1.IInventoryLoyaltyProgram[];
+
+                        /** LocalInventoryAttributes customAttributes. */
+                        public customAttributes: google.shopping.type.ICustomAttribute[];
 
                         /**
                          * Creates a new LocalInventoryAttributes instance using the specified properties.

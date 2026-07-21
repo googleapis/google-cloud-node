@@ -1023,6 +1023,270 @@ describe('v1.MemorystoreClient', () => {
     });
   });
 
+  describe('getTokenAuthUser', () => {
+    it('invokes getTokenAuthUser without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.GetTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.GetTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+      );
+      client.innerApiCalls.getTokenAuthUser = stubSimpleCall(expectedResponse);
+      const [response] = await client.getTokenAuthUser(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTokenAuthUser without error using callback', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.GetTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.GetTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+      );
+      client.innerApiCalls.getTokenAuthUser =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getTokenAuthUser(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.memorystore.v1.ITokenAuthUser | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTokenAuthUser with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.GetTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.GetTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getTokenAuthUser = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getTokenAuthUser(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getTokenAuthUser with closed client', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.GetTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.GetTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getTokenAuthUser(request), expectedError);
+    });
+  });
+
+  describe('getAuthToken', () => {
+    it('invokes getAuthToken without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.GetAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.GetAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.AuthToken(),
+      );
+      client.innerApiCalls.getAuthToken = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAuthToken(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAuthToken without error using callback', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.GetAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.GetAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.AuthToken(),
+      );
+      client.innerApiCalls.getAuthToken =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAuthToken(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.memorystore.v1.IAuthToken | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAuthToken with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.GetAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.GetAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAuthToken = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getAuthToken(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAuthToken with closed client', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.GetAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.GetAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getAuthToken(request), expectedError);
+    });
+  });
+
   describe('createInstance', () => {
     it('invokes createInstance without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
@@ -2380,6 +2644,1166 @@ describe('v1.MemorystoreClient', () => {
     });
   });
 
+  describe('startMigration', () => {
+    it('invokes startMigration without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.StartMigrationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.StartMigrationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.startMigration =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.startMigration(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startMigration without error using callback', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.StartMigrationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.StartMigrationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.startMigration =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.startMigration(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.memorystore.v1.IInstance,
+              protos.google.cloud.memorystore.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.memorystore.v1.IInstance,
+        protos.google.cloud.memorystore.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startMigration with call error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.StartMigrationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.StartMigrationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.startMigration = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.startMigration(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes startMigration with LRO error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.StartMigrationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.StartMigrationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.startMigration = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.startMigration(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkStartMigrationProgress without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkStartMigrationProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkStartMigrationProgress with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkStartMigrationProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('finishMigration', () => {
+    it('invokes finishMigration without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.FinishMigrationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.FinishMigrationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.finishMigration =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.finishMigration(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.finishMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finishMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes finishMigration without error using callback', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.FinishMigrationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.FinishMigrationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.finishMigration =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.finishMigration(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.memorystore.v1.IInstance,
+              protos.google.cloud.memorystore.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.memorystore.v1.IInstance,
+        protos.google.cloud.memorystore.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.finishMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finishMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes finishMigration with call error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.FinishMigrationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.FinishMigrationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.finishMigration = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.finishMigration(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.finishMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finishMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes finishMigration with LRO error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.FinishMigrationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.FinishMigrationRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.finishMigration = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.finishMigration(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.finishMigration as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finishMigration as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkFinishMigrationProgress without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkFinishMigrationProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkFinishMigrationProgress with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkFinishMigrationProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('addTokenAuthUser', () => {
+    it('invokes addTokenAuthUser without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.AddTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.AddTokenAuthUserRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.addTokenAuthUser =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.addTokenAuthUser(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addTokenAuthUser without error using callback', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.AddTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.AddTokenAuthUserRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.addTokenAuthUser =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addTokenAuthUser(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.memorystore.v1.IInstance,
+              protos.google.cloud.memorystore.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.memorystore.v1.IInstance,
+        protos.google.cloud.memorystore.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addTokenAuthUser with call error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.AddTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.AddTokenAuthUserRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addTokenAuthUser = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.addTokenAuthUser(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addTokenAuthUser with LRO error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.AddTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.AddTokenAuthUserRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addTokenAuthUser = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.addTokenAuthUser(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkAddTokenAuthUserProgress without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkAddTokenAuthUserProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkAddTokenAuthUserProgress with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkAddTokenAuthUserProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteTokenAuthUser', () => {
+    it('invokes deleteTokenAuthUser without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.DeleteTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.DeleteTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteTokenAuthUser =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteTokenAuthUser(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTokenAuthUser without error using callback', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.DeleteTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.DeleteTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteTokenAuthUser =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteTokenAuthUser(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.memorystore.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.memorystore.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTokenAuthUser with call error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.DeleteTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.DeleteTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTokenAuthUser = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteTokenAuthUser(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteTokenAuthUser with LRO error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.DeleteTokenAuthUserRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.DeleteTokenAuthUserRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteTokenAuthUser = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteTokenAuthUser(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTokenAuthUser as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteTokenAuthUserProgress without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteTokenAuthUserProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteTokenAuthUserProgress with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteTokenAuthUserProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('addAuthToken', () => {
+    it('invokes addAuthToken without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.AddAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.AddAuthTokenRequest',
+        ['tokenAuthUser'],
+      );
+      request.tokenAuthUser = defaultValue1;
+      const expectedHeaderRequestParams = `token_auth_user=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.addAuthToken = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.addAuthToken(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAuthToken without error using callback', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.AddAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.AddAuthTokenRequest',
+        ['tokenAuthUser'],
+      );
+      request.tokenAuthUser = defaultValue1;
+      const expectedHeaderRequestParams = `token_auth_user=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.addAuthToken =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addAuthToken(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.memorystore.v1.ITokenAuthUser,
+              protos.google.cloud.memorystore.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.memorystore.v1.ITokenAuthUser,
+        protos.google.cloud.memorystore.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAuthToken with call error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.AddAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.AddAuthTokenRequest',
+        ['tokenAuthUser'],
+      );
+      request.tokenAuthUser = defaultValue1;
+      const expectedHeaderRequestParams = `token_auth_user=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addAuthToken = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.addAuthToken(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes addAuthToken with LRO error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.AddAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.AddAuthTokenRequest',
+        ['tokenAuthUser'],
+      );
+      request.tokenAuthUser = defaultValue1;
+      const expectedHeaderRequestParams = `token_auth_user=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addAuthToken = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.addAuthToken(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkAddAuthTokenProgress without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkAddAuthTokenProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkAddAuthTokenProgress with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.checkAddAuthTokenProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteAuthToken', () => {
+    it('invokes deleteAuthToken without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.DeleteAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.DeleteAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAuthToken =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteAuthToken(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAuthToken without error using callback', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.DeleteAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.DeleteAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAuthToken =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAuthToken(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.memorystore.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.memorystore.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAuthToken with call error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.DeleteAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.DeleteAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAuthToken = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteAuthToken(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAuthToken with LRO error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.DeleteAuthTokenRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.DeleteAuthTokenRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAuthToken = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteAuthToken(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthToken as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteAuthTokenProgress without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteAuthTokenProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteAuthTokenProgress with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteAuthTokenProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
@@ -3364,6 +4788,660 @@ describe('v1.MemorystoreClient', () => {
       );
     });
   });
+
+  describe('listTokenAuthUsers', () => {
+    it('invokes listTokenAuthUsers without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+      ];
+      client.innerApiCalls.listTokenAuthUsers =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listTokenAuthUsers(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTokenAuthUsers without error using callback', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+      ];
+      client.innerApiCalls.listTokenAuthUsers =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listTokenAuthUsers(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.memorystore.v1.ITokenAuthUser[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTokenAuthUsers with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listTokenAuthUsers = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listTokenAuthUsers(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTokenAuthUsers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listTokenAuthUsersStream without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+      ];
+      client.descriptors.page.listTokenAuthUsers.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listTokenAuthUsersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.memorystore.v1.TokenAuthUser[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.memorystore.v1.TokenAuthUser) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTokenAuthUsers, request),
+      );
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listTokenAuthUsersStream with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTokenAuthUsers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listTokenAuthUsersStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.memorystore.v1.TokenAuthUser[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.memorystore.v1.TokenAuthUser) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listTokenAuthUsers, request),
+      );
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listTokenAuthUsers without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.TokenAuthUser(),
+        ),
+      ];
+      client.descriptors.page.listTokenAuthUsers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.memorystore.v1.ITokenAuthUser[] = [];
+      const iterable = client.listTokenAuthUsersAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTokenAuthUsers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listTokenAuthUsers with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListTokenAuthUsersRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListTokenAuthUsersRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listTokenAuthUsers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listTokenAuthUsersAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.memorystore.v1.ITokenAuthUser[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listTokenAuthUsers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listTokenAuthUsers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
+  describe('listAuthTokens', () => {
+    it('invokes listAuthTokens without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+      ];
+      client.innerApiCalls.listAuthTokens = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAuthTokens(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAuthTokens without error using callback', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+      ];
+      client.innerApiCalls.listAuthTokens =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAuthTokens(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.memorystore.v1.IAuthToken[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAuthTokens with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAuthTokens = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listAuthTokens(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuthTokens as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAuthTokensStream without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+      ];
+      client.descriptors.page.listAuthTokens.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAuthTokensStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.memorystore.v1.AuthToken[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.memorystore.v1.AuthToken) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAuthTokens.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAuthTokens, request),
+      );
+      assert(
+        (client.descriptors.page.listAuthTokens.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listAuthTokensStream with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAuthTokens.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAuthTokensStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.memorystore.v1.AuthToken[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.memorystore.v1.AuthToken) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAuthTokens.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAuthTokens, request),
+      );
+      assert(
+        (client.descriptors.page.listAuthTokens.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listAuthTokens without error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.memorystore.v1.AuthToken(),
+        ),
+      ];
+      client.descriptors.page.listAuthTokens.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.memorystore.v1.IAuthToken[] = [];
+      const iterable = client.listAuthTokensAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAuthTokens.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAuthTokens.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listAuthTokens with error', async () => {
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.memorystore.v1.ListAuthTokensRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.memorystore.v1.ListAuthTokensRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAuthTokens.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAuthTokensAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.memorystore.v1.IAuthToken[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAuthTokens.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAuthTokens.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
@@ -3879,6 +5957,94 @@ describe('v1.MemorystoreClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('authToken', async () => {
+      const fakePath = '/rendered/path/authToken';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        token_auth_user: 'tokenAuthUserValue',
+        auth_token: 'authTokenValue',
+      };
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.authTokenPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.authTokenPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('authTokenPath', () => {
+        const result = client.authTokenPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'tokenAuthUserValue',
+          'authTokenValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAuthTokenName', () => {
+        const result = client.matchProjectFromAuthTokenName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAuthTokenName', () => {
+        const result = client.matchLocationFromAuthTokenName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromAuthTokenName', () => {
+        const result = client.matchInstanceFromAuthTokenName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTokenAuthUserFromAuthTokenName', () => {
+        const result = client.matchTokenAuthUserFromAuthTokenName(fakePath);
+        assert.strictEqual(result, 'tokenAuthUserValue');
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAuthTokenFromAuthTokenName', () => {
+        const result = client.matchAuthTokenFromAuthTokenName(fakePath);
+        assert.strictEqual(result, 'authTokenValue');
+        assert(
+          (client.pathTemplates.authTokenPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('backup', async () => {
       const fakePath = '/rendered/path/backup';
       const expectedParameters = {
@@ -4561,6 +6727,83 @@ describe('v1.MemorystoreClient', () => {
       });
     });
 
+    describe('networkAttachment', async () => {
+      const fakePath = '/rendered/path/networkAttachment';
+      const expectedParameters = {
+        project: 'projectValue',
+        region: 'regionValue',
+        network_attachment: 'networkAttachmentValue',
+      };
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.networkAttachmentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.networkAttachmentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('networkAttachmentPath', () => {
+        const result = client.networkAttachmentPath(
+          'projectValue',
+          'regionValue',
+          'networkAttachmentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.networkAttachmentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromNetworkAttachmentName', () => {
+        const result = client.matchProjectFromNetworkAttachmentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.networkAttachmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRegionFromNetworkAttachmentName', () => {
+        const result = client.matchRegionFromNetworkAttachmentName(fakePath);
+        assert.strictEqual(result, 'regionValue');
+        assert(
+          (
+            client.pathTemplates.networkAttachmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchNetworkAttachmentFromNetworkAttachmentName', () => {
+        const result =
+          client.matchNetworkAttachmentFromNetworkAttachmentName(fakePath);
+        assert.strictEqual(result, 'networkAttachmentValue');
+        assert(
+          (
+            client.pathTemplates.networkAttachmentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -4735,6 +6978,82 @@ describe('v1.MemorystoreClient', () => {
             client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('tokenAuthUser', async () => {
+      const fakePath = '/rendered/path/tokenAuthUser';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        token_auth_user: 'tokenAuthUserValue',
+      };
+      const client = new memorystoreModule.v1.MemorystoreClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.tokenAuthUserPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tokenAuthUserPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tokenAuthUserPath', () => {
+        const result = client.tokenAuthUserPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'tokenAuthUserValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tokenAuthUserPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromTokenAuthUserName', () => {
+        const result = client.matchProjectFromTokenAuthUserName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tokenAuthUserPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromTokenAuthUserName', () => {
+        const result = client.matchLocationFromTokenAuthUserName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tokenAuthUserPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromTokenAuthUserName', () => {
+        const result = client.matchInstanceFromTokenAuthUserName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.tokenAuthUserPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTokenAuthUserFromTokenAuthUserName', () => {
+        const result = client.matchTokenAuthUserFromTokenAuthUserName(fakePath);
+        assert.strictEqual(result, 'tokenAuthUserValue');
+        assert(
+          (client.pathTemplates.tokenAuthUserPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

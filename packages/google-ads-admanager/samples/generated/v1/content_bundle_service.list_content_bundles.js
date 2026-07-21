@@ -55,6 +55,8 @@ function main(parent) {
    *  <ul style="list-style-type:none">
    *    <li><code>displayName</code></li>
    *    <li><code>name</code></li>
+   *    <li><code>status</code></li>
+   *    <li><code>updateTime</code></li>
    *  </ul>
    */
   // const filter = 'abc123'

@@ -3713,6 +3713,8 @@ export class EvaluationServiceClient {
    *   not set, default to STABLE.
    * @param {boolean} [request.generateLatencyReport]
    *   Optional. Whether to generate a latency report for the evaluation run.
+   * @param {google.cloud.ces.v1beta.EvaluationRunCachingSettings} [request.evaluationRunCachingSettings]
+   *   Optional. The caching settings to use for the evaluation run.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3887,6 +3889,9 @@ export class EvaluationServiceClient {
    * @param {google.cloud.ces.v1beta.Conversation.Source} [request.source]
    *   Optional. Indicate the source of the conversation. If not set, all sources
    *   will be searched.
+   * @param {google.cloud.ces.v1beta.GenerateEvaluationRequest.EvaluationType} [request.evaluationType]
+   *   Optional. The type of evaluation to generate. Defaults to GOLDEN if
+   *   unspecified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

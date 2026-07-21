@@ -383,6 +383,545 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an Agent. */
+                interface IAgent {
+
+                    /** Agent id */
+                    id?: (string|null);
+
+                    /** Agent displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents an Agent. */
+                class Agent implements IAgent {
+
+                    /**
+                     * Constructs a new Agent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IAgent);
+
+                    /** Agent id. */
+                    public id: string;
+
+                    /** Agent displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new Agent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Agent instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IAgent): google.cloud.securitycenter.v1.Agent;
+
+                    /**
+                     * Encodes the specified Agent message. Does not implicitly {@link google.cloud.securitycenter.v1.Agent.verify|verify} messages.
+                     * @param message Agent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IAgent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Agent message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Agent.verify|verify} messages.
+                     * @param message Agent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IAgent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Agent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Agent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Agent;
+
+                    /**
+                     * Decodes an Agent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Agent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Agent;
+
+                    /**
+                     * Verifies an Agent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Agent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Agent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Agent;
+
+                    /**
+                     * Creates a plain object from an Agent message. Also converts values to other types if specified.
+                     * @param message Agent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Agent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Agent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Agent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AgentAnomaly. */
+                interface IAgentAnomaly {
+
+                    /** AgentAnomaly confidenceScore */
+                    confidenceScore?: (number|null);
+
+                    /** AgentAnomaly detectorReferences */
+                    detectorReferences?: (google.cloud.securitycenter.v1.IDetectorReference[]|null);
+
+                    /** AgentAnomaly invocationReferences */
+                    invocationReferences?: (google.cloud.securitycenter.v1.IInvocationReference[]|null);
+                }
+
+                /** Represents an AgentAnomaly. */
+                class AgentAnomaly implements IAgentAnomaly {
+
+                    /**
+                     * Constructs a new AgentAnomaly.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IAgentAnomaly);
+
+                    /** AgentAnomaly confidenceScore. */
+                    public confidenceScore: number;
+
+                    /** AgentAnomaly detectorReferences. */
+                    public detectorReferences: google.cloud.securitycenter.v1.IDetectorReference[];
+
+                    /** AgentAnomaly invocationReferences. */
+                    public invocationReferences: google.cloud.securitycenter.v1.IInvocationReference[];
+
+                    /**
+                     * Creates a new AgentAnomaly instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AgentAnomaly instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IAgentAnomaly): google.cloud.securitycenter.v1.AgentAnomaly;
+
+                    /**
+                     * Encodes the specified AgentAnomaly message. Does not implicitly {@link google.cloud.securitycenter.v1.AgentAnomaly.verify|verify} messages.
+                     * @param message AgentAnomaly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IAgentAnomaly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AgentAnomaly message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.AgentAnomaly.verify|verify} messages.
+                     * @param message AgentAnomaly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IAgentAnomaly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AgentAnomaly message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AgentAnomaly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.AgentAnomaly;
+
+                    /**
+                     * Decodes an AgentAnomaly message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AgentAnomaly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.AgentAnomaly;
+
+                    /**
+                     * Verifies an AgentAnomaly message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AgentAnomaly message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AgentAnomaly
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.AgentAnomaly;
+
+                    /**
+                     * Creates a plain object from an AgentAnomaly message. Also converts values to other types if specified.
+                     * @param message AgentAnomaly
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.AgentAnomaly, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AgentAnomaly to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AgentAnomaly
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DetectorReference. */
+                interface IDetectorReference {
+
+                    /** DetectorReference severity */
+                    severity?: (google.cloud.securitycenter.v1.DetectorReference.Severity|keyof typeof google.cloud.securitycenter.v1.DetectorReference.Severity|null);
+
+                    /** DetectorReference detectorId */
+                    detectorId?: (string|null);
+
+                    /** DetectorReference displayName */
+                    displayName?: (string|null);
+
+                    /** DetectorReference explanation */
+                    explanation?: (string|null);
+
+                    /** DetectorReference recommendation */
+                    recommendation?: (string|null);
+                }
+
+                /** Represents a DetectorReference. */
+                class DetectorReference implements IDetectorReference {
+
+                    /**
+                     * Constructs a new DetectorReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IDetectorReference);
+
+                    /** DetectorReference severity. */
+                    public severity: (google.cloud.securitycenter.v1.DetectorReference.Severity|keyof typeof google.cloud.securitycenter.v1.DetectorReference.Severity);
+
+                    /** DetectorReference detectorId. */
+                    public detectorId: string;
+
+                    /** DetectorReference displayName. */
+                    public displayName: string;
+
+                    /** DetectorReference explanation. */
+                    public explanation: string;
+
+                    /** DetectorReference recommendation. */
+                    public recommendation: string;
+
+                    /**
+                     * Creates a new DetectorReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DetectorReference instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IDetectorReference): google.cloud.securitycenter.v1.DetectorReference;
+
+                    /**
+                     * Encodes the specified DetectorReference message. Does not implicitly {@link google.cloud.securitycenter.v1.DetectorReference.verify|verify} messages.
+                     * @param message DetectorReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IDetectorReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DetectorReference message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.DetectorReference.verify|verify} messages.
+                     * @param message DetectorReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IDetectorReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DetectorReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DetectorReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.DetectorReference;
+
+                    /**
+                     * Decodes a DetectorReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DetectorReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.DetectorReference;
+
+                    /**
+                     * Verifies a DetectorReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DetectorReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DetectorReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.DetectorReference;
+
+                    /**
+                     * Creates a plain object from a DetectorReference message. Also converts values to other types if specified.
+                     * @param message DetectorReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.DetectorReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DetectorReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DetectorReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DetectorReference {
+
+                    /** Severity enum. */
+                    enum Severity {
+                        SEVERITY_UNSPECIFIED = 0,
+                        CRITICAL = 1,
+                        HIGH = 2,
+                        MEDIUM = 3,
+                        LOW = 4
+                    }
+                }
+
+                /** Properties of an InvocationReference. */
+                interface IInvocationReference {
+
+                    /** InvocationReference invocationId */
+                    invocationId?: (string|null);
+                }
+
+                /** Represents an InvocationReference. */
+                class InvocationReference implements IInvocationReference {
+
+                    /**
+                     * Constructs a new InvocationReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IInvocationReference);
+
+                    /** InvocationReference invocationId. */
+                    public invocationId: string;
+
+                    /**
+                     * Creates a new InvocationReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InvocationReference instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IInvocationReference): google.cloud.securitycenter.v1.InvocationReference;
+
+                    /**
+                     * Encodes the specified InvocationReference message. Does not implicitly {@link google.cloud.securitycenter.v1.InvocationReference.verify|verify} messages.
+                     * @param message InvocationReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IInvocationReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InvocationReference message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.InvocationReference.verify|verify} messages.
+                     * @param message InvocationReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IInvocationReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InvocationReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InvocationReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.InvocationReference;
+
+                    /**
+                     * Decodes an InvocationReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InvocationReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.InvocationReference;
+
+                    /**
+                     * Verifies an InvocationReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InvocationReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InvocationReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.InvocationReference;
+
+                    /**
+                     * Creates a plain object from an InvocationReference message. Also converts values to other types if specified.
+                     * @param message InvocationReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.InvocationReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InvocationReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InvocationReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AgentSession. */
+                interface IAgentSession {
+
+                    /** AgentSession sessionId */
+                    sessionId?: (string|null);
+                }
+
+                /** Represents an AgentSession. */
+                class AgentSession implements IAgentSession {
+
+                    /**
+                     * Constructs a new AgentSession.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IAgentSession);
+
+                    /** AgentSession sessionId. */
+                    public sessionId: string;
+
+                    /**
+                     * Creates a new AgentSession instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AgentSession instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IAgentSession): google.cloud.securitycenter.v1.AgentSession;
+
+                    /**
+                     * Encodes the specified AgentSession message. Does not implicitly {@link google.cloud.securitycenter.v1.AgentSession.verify|verify} messages.
+                     * @param message AgentSession message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IAgentSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AgentSession message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.AgentSession.verify|verify} messages.
+                     * @param message AgentSession message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IAgentSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AgentSession message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AgentSession
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.AgentSession;
+
+                    /**
+                     * Decodes an AgentSession message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AgentSession
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.AgentSession;
+
+                    /**
+                     * Verifies an AgentSession message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AgentSession message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AgentSession
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.AgentSession;
+
+                    /**
+                     * Creates a plain object from an AgentSession message. Also converts values to other types if specified.
+                     * @param message AgentSession
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.AgentSession, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AgentSession to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AgentSession
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an Application. */
                 interface IApplication {
 
@@ -6224,6 +6763,15 @@ export namespace google {
 
                     /** Finding externalExposure */
                     externalExposure?: (google.cloud.securitycenter.v1.IExternalExposure|null);
+
+                    /** Finding agent */
+                    agent?: (google.cloud.securitycenter.v1.IAgent|null);
+
+                    /** Finding agentSessions */
+                    agentSessions?: (google.cloud.securitycenter.v1.IAgentSession[]|null);
+
+                    /** Finding agentAnomaly */
+                    agentAnomaly?: (google.cloud.securitycenter.v1.IAgentAnomaly|null);
                 }
 
                 /** Represents a Finding. */
@@ -6390,6 +6938,15 @@ export namespace google {
 
                     /** Finding externalExposure. */
                     public externalExposure?: (google.cloud.securitycenter.v1.IExternalExposure|null);
+
+                    /** Finding agent. */
+                    public agent?: (google.cloud.securitycenter.v1.IAgent|null);
+
+                    /** Finding agentSessions. */
+                    public agentSessions: google.cloud.securitycenter.v1.IAgentSession[];
+
+                    /** Finding agentAnomaly. */
+                    public agentAnomaly?: (google.cloud.securitycenter.v1.IAgentAnomaly|null);
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -34517,6 +35074,545 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an Agent. */
+                interface IAgent {
+
+                    /** Agent id */
+                    id?: (string|null);
+
+                    /** Agent displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents an Agent. */
+                class Agent implements IAgent {
+
+                    /**
+                     * Constructs a new Agent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v2.IAgent);
+
+                    /** Agent id. */
+                    public id: string;
+
+                    /** Agent displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new Agent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Agent instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v2.IAgent): google.cloud.securitycenter.v2.Agent;
+
+                    /**
+                     * Encodes the specified Agent message. Does not implicitly {@link google.cloud.securitycenter.v2.Agent.verify|verify} messages.
+                     * @param message Agent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v2.IAgent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Agent message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.Agent.verify|verify} messages.
+                     * @param message Agent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v2.IAgent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Agent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Agent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.Agent;
+
+                    /**
+                     * Decodes an Agent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Agent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.Agent;
+
+                    /**
+                     * Verifies an Agent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Agent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Agent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.Agent;
+
+                    /**
+                     * Creates a plain object from an Agent message. Also converts values to other types if specified.
+                     * @param message Agent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v2.Agent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Agent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Agent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AgentAnomaly. */
+                interface IAgentAnomaly {
+
+                    /** AgentAnomaly confidenceScore */
+                    confidenceScore?: (number|null);
+
+                    /** AgentAnomaly detectorReferences */
+                    detectorReferences?: (google.cloud.securitycenter.v2.IDetectorReference[]|null);
+
+                    /** AgentAnomaly invocationReferences */
+                    invocationReferences?: (google.cloud.securitycenter.v2.IInvocationReference[]|null);
+                }
+
+                /** Represents an AgentAnomaly. */
+                class AgentAnomaly implements IAgentAnomaly {
+
+                    /**
+                     * Constructs a new AgentAnomaly.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v2.IAgentAnomaly);
+
+                    /** AgentAnomaly confidenceScore. */
+                    public confidenceScore: number;
+
+                    /** AgentAnomaly detectorReferences. */
+                    public detectorReferences: google.cloud.securitycenter.v2.IDetectorReference[];
+
+                    /** AgentAnomaly invocationReferences. */
+                    public invocationReferences: google.cloud.securitycenter.v2.IInvocationReference[];
+
+                    /**
+                     * Creates a new AgentAnomaly instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AgentAnomaly instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v2.IAgentAnomaly): google.cloud.securitycenter.v2.AgentAnomaly;
+
+                    /**
+                     * Encodes the specified AgentAnomaly message. Does not implicitly {@link google.cloud.securitycenter.v2.AgentAnomaly.verify|verify} messages.
+                     * @param message AgentAnomaly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v2.IAgentAnomaly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AgentAnomaly message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.AgentAnomaly.verify|verify} messages.
+                     * @param message AgentAnomaly message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v2.IAgentAnomaly, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AgentAnomaly message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AgentAnomaly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.AgentAnomaly;
+
+                    /**
+                     * Decodes an AgentAnomaly message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AgentAnomaly
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.AgentAnomaly;
+
+                    /**
+                     * Verifies an AgentAnomaly message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AgentAnomaly message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AgentAnomaly
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.AgentAnomaly;
+
+                    /**
+                     * Creates a plain object from an AgentAnomaly message. Also converts values to other types if specified.
+                     * @param message AgentAnomaly
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v2.AgentAnomaly, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AgentAnomaly to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AgentAnomaly
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DetectorReference. */
+                interface IDetectorReference {
+
+                    /** DetectorReference severity */
+                    severity?: (google.cloud.securitycenter.v2.DetectorReference.Severity|keyof typeof google.cloud.securitycenter.v2.DetectorReference.Severity|null);
+
+                    /** DetectorReference detectorId */
+                    detectorId?: (string|null);
+
+                    /** DetectorReference displayName */
+                    displayName?: (string|null);
+
+                    /** DetectorReference explanation */
+                    explanation?: (string|null);
+
+                    /** DetectorReference recommendation */
+                    recommendation?: (string|null);
+                }
+
+                /** Represents a DetectorReference. */
+                class DetectorReference implements IDetectorReference {
+
+                    /**
+                     * Constructs a new DetectorReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v2.IDetectorReference);
+
+                    /** DetectorReference severity. */
+                    public severity: (google.cloud.securitycenter.v2.DetectorReference.Severity|keyof typeof google.cloud.securitycenter.v2.DetectorReference.Severity);
+
+                    /** DetectorReference detectorId. */
+                    public detectorId: string;
+
+                    /** DetectorReference displayName. */
+                    public displayName: string;
+
+                    /** DetectorReference explanation. */
+                    public explanation: string;
+
+                    /** DetectorReference recommendation. */
+                    public recommendation: string;
+
+                    /**
+                     * Creates a new DetectorReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DetectorReference instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v2.IDetectorReference): google.cloud.securitycenter.v2.DetectorReference;
+
+                    /**
+                     * Encodes the specified DetectorReference message. Does not implicitly {@link google.cloud.securitycenter.v2.DetectorReference.verify|verify} messages.
+                     * @param message DetectorReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v2.IDetectorReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DetectorReference message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.DetectorReference.verify|verify} messages.
+                     * @param message DetectorReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v2.IDetectorReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DetectorReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DetectorReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.DetectorReference;
+
+                    /**
+                     * Decodes a DetectorReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DetectorReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.DetectorReference;
+
+                    /**
+                     * Verifies a DetectorReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DetectorReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DetectorReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.DetectorReference;
+
+                    /**
+                     * Creates a plain object from a DetectorReference message. Also converts values to other types if specified.
+                     * @param message DetectorReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v2.DetectorReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DetectorReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DetectorReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DetectorReference {
+
+                    /** Severity enum. */
+                    enum Severity {
+                        SEVERITY_UNSPECIFIED = 0,
+                        CRITICAL = 1,
+                        HIGH = 2,
+                        MEDIUM = 3,
+                        LOW = 4
+                    }
+                }
+
+                /** Properties of an InvocationReference. */
+                interface IInvocationReference {
+
+                    /** InvocationReference invocationId */
+                    invocationId?: (string|null);
+                }
+
+                /** Represents an InvocationReference. */
+                class InvocationReference implements IInvocationReference {
+
+                    /**
+                     * Constructs a new InvocationReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v2.IInvocationReference);
+
+                    /** InvocationReference invocationId. */
+                    public invocationId: string;
+
+                    /**
+                     * Creates a new InvocationReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InvocationReference instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v2.IInvocationReference): google.cloud.securitycenter.v2.InvocationReference;
+
+                    /**
+                     * Encodes the specified InvocationReference message. Does not implicitly {@link google.cloud.securitycenter.v2.InvocationReference.verify|verify} messages.
+                     * @param message InvocationReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v2.IInvocationReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InvocationReference message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.InvocationReference.verify|verify} messages.
+                     * @param message InvocationReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v2.IInvocationReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InvocationReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InvocationReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.InvocationReference;
+
+                    /**
+                     * Decodes an InvocationReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InvocationReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.InvocationReference;
+
+                    /**
+                     * Verifies an InvocationReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InvocationReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InvocationReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.InvocationReference;
+
+                    /**
+                     * Creates a plain object from an InvocationReference message. Also converts values to other types if specified.
+                     * @param message InvocationReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v2.InvocationReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InvocationReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InvocationReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AgentSession. */
+                interface IAgentSession {
+
+                    /** AgentSession sessionId */
+                    sessionId?: (string|null);
+                }
+
+                /** Represents an AgentSession. */
+                class AgentSession implements IAgentSession {
+
+                    /**
+                     * Constructs a new AgentSession.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v2.IAgentSession);
+
+                    /** AgentSession sessionId. */
+                    public sessionId: string;
+
+                    /**
+                     * Creates a new AgentSession instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AgentSession instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v2.IAgentSession): google.cloud.securitycenter.v2.AgentSession;
+
+                    /**
+                     * Encodes the specified AgentSession message. Does not implicitly {@link google.cloud.securitycenter.v2.AgentSession.verify|verify} messages.
+                     * @param message AgentSession message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v2.IAgentSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AgentSession message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v2.AgentSession.verify|verify} messages.
+                     * @param message AgentSession message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v2.IAgentSession, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AgentSession message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AgentSession
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v2.AgentSession;
+
+                    /**
+                     * Decodes an AgentSession message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AgentSession
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v2.AgentSession;
+
+                    /**
+                     * Verifies an AgentSession message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AgentSession message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AgentSession
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v2.AgentSession;
+
+                    /**
+                     * Creates a plain object from an AgentSession message. Also converts values to other types if specified.
+                     * @param message AgentSession
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v2.AgentSession, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AgentSession to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AgentSession
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an AiModel. */
                 interface IAiModel {
 
@@ -38982,6 +40078,15 @@ export namespace google {
 
                     /** Finding vertexAi */
                     vertexAi?: (google.cloud.securitycenter.v2.IVertexAi|null);
+
+                    /** Finding agent */
+                    agent?: (google.cloud.securitycenter.v2.IAgent|null);
+
+                    /** Finding agentSessions */
+                    agentSessions?: (google.cloud.securitycenter.v2.IAgentSession[]|null);
+
+                    /** Finding agentAnomaly */
+                    agentAnomaly?: (google.cloud.securitycenter.v2.IAgentAnomaly|null);
                 }
 
                 /** Represents a Finding. */
@@ -39175,6 +40280,15 @@ export namespace google {
 
                     /** Finding vertexAi. */
                     public vertexAi?: (google.cloud.securitycenter.v2.IVertexAi|null);
+
+                    /** Finding agent. */
+                    public agent?: (google.cloud.securitycenter.v2.IAgent|null);
+
+                    /** Finding agentSessions. */
+                    public agentSessions: google.cloud.securitycenter.v2.IAgentSession[];
+
+                    /** Finding agentAnomaly. */
+                    public agentAnomaly?: (google.cloud.securitycenter.v2.IAgentAnomaly|null);
 
                     /**
                      * Creates a new Finding instance using the specified properties.

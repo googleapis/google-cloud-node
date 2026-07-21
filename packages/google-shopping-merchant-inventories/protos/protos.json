@@ -47,6 +47,11 @@
                               "oneof": [
                                 "instoreProductLocation"
                               ]
+                            },
+                            "_localShippingLabel": {
+                              "oneof": [
+                                "localShippingLabel"
+                              ]
                             }
                           },
                           "fields": {
@@ -110,10 +115,26 @@
                                 "proto3_optional": true
                               }
                             },
+                            "localShippingLabel": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
                             "loyaltyPrograms": {
                               "rule": "repeated",
                               "type": "InventoryLoyaltyProgram",
                               "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "customAttributes": {
+                              "rule": "repeated",
+                              "type": "google.shopping.type.CustomAttribute",
+                              "id": 11,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
