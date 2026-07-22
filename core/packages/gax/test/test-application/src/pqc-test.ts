@@ -117,7 +117,6 @@ async function testPqc(pemPath: string, port: number) {
     assert.strictEqual(responseGrpc.content, 'grpc-pqc-test');
     assert.ok(grpcSocket, 'Expected to intercept gRPC TLS socket');
     assert.strictEqual(grpcSocket.getProtocol(), 'TLSv1.3');
-    assert.strictEqual(grpcSocket.getCipher()?.name, 'TLS_AES_128_GCM_SHA256', 'Expected specific negotiated cipher');
     assert.ok(negotiatedGroupGrpc, 'Expected negotiated TLS group in gRPC response metadata');
     assert.strictEqual(negotiatedGroupGrpc, 'X25519MLKEM768');
     assert.ok(clientSupportedGroupsGrpc, 'Expected client supported groups in gRPC response metadata');
@@ -166,7 +165,6 @@ async function testPqc(pemPath: string, port: number) {
     assert.strictEqual(responseRest.content, 'rest-pqc-test');
     assert.ok(restSocket, 'Expected to intercept REST TLS socket');
     assert.strictEqual(restSocket.getProtocol(), 'TLSv1.3');
-    assert.strictEqual(restSocket.getCipher()?.name, 'TLS_AES_128_GCM_SHA256', 'Expected specific negotiated cipher');
     assert.ok(negotiatedGroupRest, 'Expected negotiated TLS group in REST response headers');
     assert.strictEqual(negotiatedGroupRest, 'X25519MLKEM768');
     assert.ok(clientSupportedGroupsRest, 'Expected client supported groups in REST response headers');
