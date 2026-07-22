@@ -39,8 +39,7 @@ import {verifyInstance} from '../test/util/helpers';
 import {DeferredPromise, getTestRoot} from './firestore';
 import {IndexTestHelper} from './index_test_helper';
 
-describe.skip('Query and Pipeline Compare - Enterprise DB', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
   interface PaginatedResults {
     pages: number;
     docs: QueryDocumentSnapshot[];

@@ -138,8 +138,7 @@ export function getTestRoot(settings: Settings = {}): CollectionReference {
   return getTestDb(settings).collection(`node_${version}_${autoId()}`);
 }
 
-describe.skip('Firestore class', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('Firestore class', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
 
@@ -622,7 +621,7 @@ describe.skip('Firestore class', () => {
 
 // Skip partition query tests when running against the emulator because
 // partition queries are not supported by the emulator.
-describe('CollectionGroup class', () => {
+describe.skipEmulator.skipEnterprise('CollectionGroup class', () => {
   const desiredPartitionCount = 3;
   const documentCount = 2 * 128 + 127; // Minimum partition size is 128.
 
@@ -1933,8 +1932,7 @@ describe('DocumentReference class', () => {
   });
 });
 
-describe.skip('runs query on a large collection', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('runs query on a large collection', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
 
@@ -1970,8 +1968,7 @@ describe.skip('runs query on a large collection', () => {
   });
 });
 
-describe.skip('Query class - Standard DB', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe.skipEnterprise('Query class - Standard DB', () => {
   interface PaginatedResults {
     pages: number;
     docs: QueryDocumentSnapshot[];
@@ -4861,8 +4858,7 @@ describe.skip('Query class - Standard DB', () => {
   });
 });
 
-describe.skip('count queries', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.('count queries', () => {
+describe('count queries', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
 
@@ -5015,8 +5011,7 @@ describe.skip('count queries', () => {
   );
 });
 
-describe.skip('count queries using aggregate api', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('count queries using aggregate api', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
 
@@ -5192,8 +5187,7 @@ describe.skip('count queries using aggregate api', () => {
   }
 });
 
-describe.skip('Aggregation queries', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('Aggregation queries', () => {
   let firestore: Firestore;
   let col: CollectionReference;
 
@@ -6869,8 +6863,7 @@ describe.skip('Aggregation queries', () => {
   });
 });
 
-describe.skip('Transaction class', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('Transaction class', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
 
@@ -7158,8 +7151,7 @@ describe.skip('Transaction class', () => {
   });
 });
 
-describe.skip('WriteBatch class', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('WriteBatch class', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
 
@@ -7303,8 +7295,7 @@ describe.skip('WriteBatch class', () => {
   });
 });
 
-describe.skip('QuerySnapshot class', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('QuerySnapshot class', () => {
   let firestore: Firestore;
   let querySnapshot: Promise<QuerySnapshot>;
 
@@ -7374,8 +7365,7 @@ describe.skip('QuerySnapshot class', () => {
   });
 });
 
-describe.skip('BulkWriter class', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('BulkWriter class', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
   let writer: BulkWriter;
@@ -7585,8 +7575,7 @@ describe.skip('BulkWriter class', () => {
   });
 });
 
-describe.skip('Client initialization', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('Client initialization', () => {
   const ops: Array<
     [
       string,
@@ -7702,8 +7691,7 @@ describe.skip('Client initialization', () => {
   }
 });
 
-describe.skip('Bundle building', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('Bundle building', () => {
   let firestore: Firestore;
   let testCol: CollectionReference;
 
@@ -7862,8 +7850,7 @@ describe.skip('Bundle building', () => {
   });
 });
 
-describe.skip('Types test', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+describe('Types test', () => {
   let firestore: Firestore;
   let randomCol: CollectionReference;
   let doc: DocumentReference;
