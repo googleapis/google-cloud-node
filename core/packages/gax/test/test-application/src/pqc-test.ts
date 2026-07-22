@@ -22,6 +22,7 @@ import {grpc, GoogleAuth, googleAuthLibrary} from 'google-gax';
 import {EchoClient} from 'showcase-echo-client';
 import {ShowcaseServer} from 'showcase-server';
 
+import * as os from 'os';
 import * as tls from 'tls';
 
 /**
@@ -173,11 +174,13 @@ export async function runPqcComplianceTests() {
     return;
   }
 
+  const originalShowcaseVersion = process.env['SHOWCASE_VERSION'];
   process.env['SHOWCASE_VERSION'] = '0.41.1';
   const showcaseServerTls = new ShowcaseServer();
   const tlsPort = 7443;
-  const caCertOutputFile = 'showcase.pem';
-  const pemPath = path.join(process.cwd(), caCertOutputFile);
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pqc-test-'));
+  const caCertOutputFile = path.join(tempDir, 'showcase.pem');
+  const pemPath = caCertOutputFile;
 
   try {
     if (fs.existsSync(pemPath)) {
@@ -197,8 +200,13 @@ export async function runPqcComplianceTests() {
     await testPqc(pemBuffer, tlsPort);
   } finally {
     showcaseServerTls.stop();
-    if (fs.existsSync(pemPath)) {
-      fs.unlinkSync(pemPath);
+    if (originalShowcaseVersion === undefined) {
+      delete process.env['SHOWCASE_VERSION'];
+    } else {
+      process.env['SHOWCASE_VERSION'] = originalShowcaseVersion;
+    }
+    if (fs.existsSync(tempDir)) {
+      fs.rmSync(tempDir, {recursive: true, force: true});
     }
   }
 }
