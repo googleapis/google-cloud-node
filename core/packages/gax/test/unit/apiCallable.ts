@@ -329,6 +329,30 @@ describe('createApiCall', () => {
       );
     }
   });
+
+  describe('in regards to OpenTelemetry Tracing', () => {
+    let consoleSpy: sinon.SinonSpy;
+    beforeEach(() => {
+      consoleSpy = sinon.spy(console, 'log');
+    });
+
+    afterEach(() => {
+      consoleSpy.restore();
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+    });
+
+    it('logs "tracing enabled" when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED and ClientOptions field is set', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'true';
+      const mockClientOptions = { enableTelemetryTracing: true };
+      createApiCall(() => { }, { clientOptions: mockClientOptions });
+      assert(consoleSpy.calledWith('tracing enabled'));
+    });
+
+    it('logs "tracing disabled" when GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED is not set', () => {
+      createApiCall(() => { });
+      assert(consoleSpy.calledWith('tracing disabled'));
+    });
+  });
 });
 
 describe('Promise', () => {

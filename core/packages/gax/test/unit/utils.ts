@@ -16,6 +16,7 @@
 
 import {GaxCallPromise} from '../../src/apitypes';
 import {createApiCall as realCreateApiCall} from '../../src/createApiCall';
+import {ClientOptions} from '../../src/clientInterface';
 import * as gax from '../../src/gax';
 import {GoogleError} from '../../src/googleError';
 import {Descriptor} from '../../src/descriptor';
@@ -42,6 +43,7 @@ export interface Options {
   returnCancelFunc?: boolean;
   cancel?: Function;
   deadline?: string;
+  clientOptions?: ClientOptions;
 }
 
 export function createApiCall(func: Function, opts?: Options) {
@@ -78,6 +80,8 @@ export function createApiCall(func: Function, opts?: Options) {
     }),
     settings,
     descriptor,
+    undefined,
+    opts?.clientOptions,
   ) as GaxCallPromise;
 }
 

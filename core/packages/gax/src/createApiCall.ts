@@ -18,6 +18,7 @@
  * Provides function wrappers that implement page streaming and retrying.
  */
 
+import { ClientOptions } from './clientInterface';
 import {createAPICaller} from './apiCaller';
 import {
   APICallback,
@@ -173,8 +174,10 @@ export function createApiCall(
   };
 
   if (tracingEnabled) {
+    console.log('tracing enabled');
     return invokeCall;
   } else {
+    console.log('tracing disabled');
     return invokeCall;
   }
 }
