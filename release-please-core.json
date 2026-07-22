@@ -71,34 +71,6 @@
   },
   "plugins": [
     {
-      "type": "linked-versions",
-      "groupName": "core",
-      "components": [
-        "common",
-        "jsdoc-fresh",
-        "jsdoc-region-tag",
-        "pack-n-play",
-        "gapic-generator",
-        "gapic-node-processing",
-        "google-gax",
-        "gaxios",
-        "gcp-metadata",
-        "google-auth-library",
-        "google-logging-utils",
-        "googleapis-common",
-        "google-proto-files",
-        "proto3-json-serializer",
-        "retry-request",
-        "teeny-request",
-        "gapic-tools",
-        "typeless-sample-bot",
-        "paginator",
-        "precise-date",
-        "projectify",
-        "promisify"
-      ]
-    },
-    {
       "type": "sentence-case"
     }
   ],
