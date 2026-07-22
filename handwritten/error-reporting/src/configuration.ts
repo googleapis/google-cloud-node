@@ -179,7 +179,11 @@ export class Configuration {
      * @defaultvalue null
      */
     this._givenConfiguration =
-      givenConfig?.toString() === '[object Object]' ? givenConfig! : {};
+      typeof givenConfig === 'object' &&
+      givenConfig !== null &&
+      !Array.isArray(givenConfig)
+        ? givenConfig
+        : {};
     this._checkLocalServiceContext();
     this._gatherLocalConfiguration();
   }

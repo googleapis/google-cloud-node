@@ -2197,6 +2197,9 @@ export namespace google {
                         /** Cluster encryptionInfo */
                         encryptionInfo?: (google.cloud.redis.cluster.v1.IEncryptionInfo|null);
 
+                        /** Cluster asyncClusterEndpointsDeletionEnabled */
+                        asyncClusterEndpointsDeletionEnabled?: (boolean|null);
+
                         /** Cluster serverCaMode */
                         serverCaMode?: (google.cloud.redis.cluster.v1.ServerCaMode|keyof typeof google.cloud.redis.cluster.v1.ServerCaMode|null);
 
@@ -2305,6 +2308,9 @@ export namespace google {
 
                         /** Cluster encryptionInfo. */
                         public encryptionInfo?: (google.cloud.redis.cluster.v1.IEncryptionInfo|null);
+
+                        /** Cluster asyncClusterEndpointsDeletionEnabled. */
+                        public asyncClusterEndpointsDeletionEnabled?: (boolean|null);
 
                         /** Cluster serverCaMode. */
                         public serverCaMode?: (google.cloud.redis.cluster.v1.ServerCaMode|keyof typeof google.cloud.redis.cluster.v1.ServerCaMode|null);
@@ -8627,6 +8633,9 @@ export namespace google {
                         /** Cluster encryptionInfo */
                         encryptionInfo?: (google.cloud.redis.cluster.v1beta1.IEncryptionInfo|null);
 
+                        /** Cluster asyncClusterEndpointsDeletionEnabled */
+                        asyncClusterEndpointsDeletionEnabled?: (boolean|null);
+
                         /** Cluster serverCaMode */
                         serverCaMode?: (google.cloud.redis.cluster.v1beta1.ServerCaMode|keyof typeof google.cloud.redis.cluster.v1beta1.ServerCaMode|null);
 
@@ -8735,6 +8744,9 @@ export namespace google {
 
                         /** Cluster encryptionInfo. */
                         public encryptionInfo?: (google.cloud.redis.cluster.v1beta1.IEncryptionInfo|null);
+
+                        /** Cluster asyncClusterEndpointsDeletionEnabled. */
+                        public asyncClusterEndpointsDeletionEnabled?: (boolean|null);
 
                         /** Cluster serverCaMode. */
                         public serverCaMode?: (google.cloud.redis.cluster.v1beta1.ServerCaMode|keyof typeof google.cloud.redis.cluster.v1beta1.ServerCaMode|null);

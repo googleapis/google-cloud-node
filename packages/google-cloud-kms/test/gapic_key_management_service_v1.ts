@@ -1745,6 +1745,302 @@ describe('v1.KeyManagementServiceClient', () => {
     });
   });
 
+  describe('importTrustedKeyWrappedCryptoKeyVersion', () => {
+    it('invokes importTrustedKeyWrappedCryptoKeyVersion without error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CryptoKeyVersion(),
+      );
+      client.innerApiCalls.importTrustedKeyWrappedCryptoKeyVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.importTrustedKeyWrappedCryptoKeyVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .importTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .importTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importTrustedKeyWrappedCryptoKeyVersion without error using callback', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CryptoKeyVersion(),
+      );
+      client.innerApiCalls.importTrustedKeyWrappedCryptoKeyVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.importTrustedKeyWrappedCryptoKeyVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.kms.v1.ICryptoKeyVersion | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .importTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .importTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importTrustedKeyWrappedCryptoKeyVersion with error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importTrustedKeyWrappedCryptoKeyVersion =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.importTrustedKeyWrappedCryptoKeyVersion(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .importTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .importTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importTrustedKeyWrappedCryptoKeyVersion with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.importTrustedKeyWrappedCryptoKeyVersion(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('exportTrustedKeyWrappedCryptoKeyVersion', () => {
+    it('invokes exportTrustedKeyWrappedCryptoKeyVersion without error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse(),
+      );
+      client.innerApiCalls.exportTrustedKeyWrappedCryptoKeyVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.exportTrustedKeyWrappedCryptoKeyVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .exportTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .exportTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportTrustedKeyWrappedCryptoKeyVersion without error using callback', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse(),
+      );
+      client.innerApiCalls.exportTrustedKeyWrappedCryptoKeyVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.exportTrustedKeyWrappedCryptoKeyVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls
+          .exportTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .exportTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportTrustedKeyWrappedCryptoKeyVersion with error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.exportTrustedKeyWrappedCryptoKeyVersion =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.exportTrustedKeyWrappedCryptoKeyVersion(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls
+          .exportTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .exportTrustedKeyWrappedCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes exportTrustedKeyWrappedCryptoKeyVersion with closed client', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.exportTrustedKeyWrappedCryptoKeyVersion(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('createImportJob', () => {
     it('invokes createImportJob without error', async () => {
       const client =
