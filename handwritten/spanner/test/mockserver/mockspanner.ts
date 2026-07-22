@@ -24,7 +24,6 @@ import {Metadata} from '@grpc/grpc-js';
 import {Transaction} from '../../src';
 import protobuf = google.spanner.v1;
 import Timestamp = google.protobuf.Timestamp;
-import RetryInfo = google.rpc.RetryInfo;
 import ExecuteBatchDmlResponse = google.spanner.v1.ExecuteBatchDmlResponse;
 import ResultSet = google.spanner.v1.ResultSet;
 import Status = google.rpc.Status;
@@ -32,8 +31,9 @@ import Any = google.protobuf.Any;
 import QueryMode = google.spanner.v1.ExecuteSqlRequest.QueryMode;
 import NullValue = google.protobuf.NullValue;
 import {ExecuteSqlRequest, ReadRequest} from '../../src/transaction';
-import {randomInt} from 'crypto';
-import {getProtoPath} from '../../src/common-grpc/protos';
+import {getProtoPath, getRetryInfo} from '../../src/common-grpc/protos';
+
+const RetryInfo = getRetryInfo();
 
 const PROTO_PATH = 'spanner.proto';
 const IMPORT_PATH = getProtoPath();

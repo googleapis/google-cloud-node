@@ -17,6 +17,10 @@ import * as path from 'node:path';
 const API_PATH = path.dirname(require.resolve('@google-cloud/spanner-api/package.json'));
 const IMPORT_PATH = path.join(API_PATH, 'build/protos');
 
+import * as protobufjs from 'protobufjs';
+const statusProtoJson = require('../../protos/status.json');
+const RetryInfo = protobufjs.Root.fromJSON(statusProtoJson).lookupType('google.rpc.RetryInfo');
+
 /**
  * Builds the filesystem path to a particular proto sub-path, for protos
  * stored in `@google-cloud/spanner-api`.
@@ -32,4 +36,8 @@ export function getProtoPath(protoSubPath?: string): string {
   } else {
     return IMPORT_PATH;
   }
+}
+
+export function getRetryInfo(): typeof RetryInfo {
+  return RetryInfo;
 }
