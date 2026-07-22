@@ -269,7 +269,6 @@ describe('Spanner', () => {
   });
 
   after(async () => {
-    await MetricsTracerFactory.resetInstance();
     try {
       if (generateInstanceForTest) {
         // Sleep for 30 seconds before cleanup, just in case
@@ -305,9 +304,10 @@ describe('Spanner', () => {
           ),
         );
       }
-      await MetricsTracerFactory.resetInstance();
     } catch (err) {
       console.error('Cleanup failed:', err);
+    } finally {
+      await MetricsTracerFactory.resetInstance();
     }
   });
 
@@ -8939,8 +8939,10 @@ function deleteInstanceArray(instanceArray) {
   );
 }
 async function deleteInstance(instance: Instance) {
-  const [backups] = await instance.getBackups();
-  await Promise.all(backups.map(backup => backup.delete(GAX_OPTIONS)));
+  if (!process.env.SPANNER_EMULATOR_HOST) {
+    const [backups] = await instance.getBackups();
+    await Promise.all(backups.map(backup => backup.delete(GAX_OPTIONS)));
+  }
   return instance.delete(GAX_OPTIONS);
 }
 
