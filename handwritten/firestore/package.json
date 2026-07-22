@@ -39,6 +39,7 @@
     "api-report": "node scripts/api-report.mjs",
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
+    "deploy-indexes": "npx firebase-tools deploy --only firestore:indexes",
     "system-test:rest": "FIRESTORE_DATABASE_ID=firestore-standard FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
     "system-test:enterprise:rest": "RUN_ENTERPRISE_TESTS=yes FIRESTORE_DATABASE_ID=firestore-enterprise FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
     "system-test:grpc": "FIRESTORE_DATABASE_ID=firestore-standard mocha build/system-test --timeout 1200000",
