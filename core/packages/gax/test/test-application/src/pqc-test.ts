@@ -180,6 +180,14 @@ async function testPqc(pemPath: string, port: number) {
  * Cleans up the generated certificate file after the tests complete.
  */
 export async function runPqcComplianceTests() {
+  const [major, minor] = process.version.replace('v', '').split('.').map(Number);
+  if (major < 22 || (major === 22 && minor < 20)) {
+    console.log(
+      `skipping PQC compliance tests because node version is ${process.version}`
+    );
+    return;
+  }
+
   process.env['SHOWCASE_VERSION'] = '0.41.1';
   const showcaseServerTls = new ShowcaseServer();
   const tlsPort = 7443;
