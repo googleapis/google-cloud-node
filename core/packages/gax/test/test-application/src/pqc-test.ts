@@ -27,28 +27,10 @@ import * as tls from 'tls';
 /**
  * Tests Post Quantum Cryptography (PQC) using the specified CA cert and port.
  * It verifies both gRPC and HTTP/REST clients by inspecting the negotiated TLS group.
- * @param pemPath Path to the generated CA certificate file.
+ * @param pemBuffer The CA certificate buffer.
  * @param port The port the TLS showcase server is listening on.
  */
-async function testPqc(pemPath: string, port: number) {
-
-  // Verify the CA certificate file exists
-  let pemExists = false;
-  for (let i = 0; i < 15; i++) {
-    // We loop up to 15 times (waiting 1 second each time) because gapic-showcase
-    // generates the CA certificate asynchronously on startup. This ensures the file
-    // is completely written to disk before we attempt to use it for our PQC tests.
-    if (fs.existsSync(pemPath)) {
-      pemExists = true;
-      break;
-    }
-    await new Promise(resolve => setTimeout(resolve, 1000));
-  }
-  if (!pemExists) {
-    throw new Error(`CA Certificate file not found at ${pemPath}`);
-  }
-
-  const pemBuffer = fs.readFileSync(pemPath);
+async function testPqc(pemBuffer: Buffer, port: number) {
 
   const originalTlsConnect = tls.connect;
   let grpcSocket: tls.TLSSocket | undefined;
@@ -199,13 +181,17 @@ export async function runPqcComplianceTests() {
       fs.unlinkSync(pemPath);
     }
 
-    await showcaseServerTls.start({
+    const pemBuffer = await showcaseServerTls.start({
       tls: true,
       port: `:${tlsPort}`,
       caCertOutputFile: caCertOutputFile,
     });
 
-    await testPqc(pemPath, tlsPort);
+    if (!pemBuffer) {
+      throw new Error('Expected showcase server to return CA certificate buffer');
+    }
+
+    await testPqc(pemBuffer, tlsPort);
   } finally {
     showcaseServerTls.stop();
     if (fs.existsSync(pemPath)) {

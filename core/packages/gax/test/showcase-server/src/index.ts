@@ -93,6 +93,25 @@ export class ShowcaseServer {
     );
 
     this.server = childProcess;
+
+    if (resolvedCaCertPath) {
+      let pemExists = false;
+      for (let i = 0; i < 15; i++) {
+        // We loop up to 15 times (waiting 1 second each time) because gapic-showcase
+        // generates the CA certificate asynchronously on startup. This ensures the file
+        // is completely written to disk before we attempt to use it for our PQC tests.
+        if (fs.existsSync(resolvedCaCertPath)) {
+          pemExists = true;
+          break;
+        }
+        await sleep(1000);
+      }
+      if (!pemExists) {
+        throw new Error(`CA Certificate file not found at ${resolvedCaCertPath}`);
+      }
+
+      return fs.readFileSync(resolvedCaCertPath);
+    }
   }
 
   stop() {
