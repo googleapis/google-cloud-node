@@ -95,6 +95,7 @@
   "packages/google-cloud-clouddms": "4.1.2",
   "packages/google-cloud-cloudsecuritycompliance": "0.2.1",
   "packages/google-cloud-commerce-consumer-procurement": "0.7.2",
+  "packages/google-cloud-commerceproducer": "0.0.0",
   "packages/google-cloud-compute": "6.14.0",
   "packages/google-cloud-confidentialcomputing": "2.3.0",
   "packages/google-cloud-config": "0.12.1",
