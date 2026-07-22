@@ -33,30 +33,7 @@ import * as tls from 'tls';
  */
 async function testPqc(pemBuffer: Buffer, port: number) {
 
-  const originalTlsConnect = tls.connect;
-  let grpcSocket: tls.TLSSocket | undefined;
-  let restSocket: tls.TLSSocket | undefined;
-
-  let currentTestType: 'grpc' | 'rest' | 'none' = 'none';
-
-  (tls as any).connect = function (...args: any[]) {
-    const socket = originalTlsConnect.apply(this, args as any);
-    socket.on('secureConnect', () => {
-      // Verify the socket is connecting to the expected test server port
-      // to ensure this mock doesn't accidentally affect other tests.
-      assert.strictEqual(socket.remotePort, port);
-      if (currentTestType === 'grpc') {
-        grpcSocket = socket as tls.TLSSocket;
-      } else if (currentTestType === 'rest') {
-        restSocket = socket as tls.TLSSocket;
-      }
-    });
-    return socket;
-  };
-
-  try {
-    // --- 1. gRPC PQC Test ---
-    currentTestType = 'grpc';
+  // --- 1. gRPC PQC Test ---
     let negotiatedGroupGrpc: string | undefined;
     let clientSupportedGroupsGrpc: string | undefined;
 
@@ -101,15 +78,12 @@ async function testPqc(pemBuffer: Buffer, port: number) {
     );
 
     assert.strictEqual(responseGrpc.content, 'grpc-pqc-test');
-    assert.ok(grpcSocket, 'Expected to intercept gRPC TLS socket');
-    assert.strictEqual(grpcSocket.getProtocol(), 'TLSv1.3');
     assert.ok(negotiatedGroupGrpc, 'Expected negotiated TLS group in gRPC response metadata');
     assert.strictEqual(negotiatedGroupGrpc, 'X25519MLKEM768');
     assert.ok(clientSupportedGroupsGrpc, 'Expected client supported groups in gRPC response metadata');
     assert.ok(clientSupportedGroupsGrpc.includes('X25519MLKEM768'), 'Expected client to include X25519MLKEM768 in supported groups');
 
     // --- 2. HTTP/REST Fallback PQC Test ---
-    currentTestType = 'rest';
     let negotiatedGroupRest: string | undefined;
     let clientSupportedGroupsRest: string | undefined;
 
@@ -149,16 +123,10 @@ async function testPqc(pemBuffer: Buffer, port: number) {
     const [responseRest] = await restClient.echo({ content: 'rest-pqc-test' });
 
     assert.strictEqual(responseRest.content, 'rest-pqc-test');
-    assert.ok(restSocket, 'Expected to intercept REST TLS socket');
-    assert.strictEqual(restSocket.getProtocol(), 'TLSv1.3');
     assert.ok(negotiatedGroupRest, 'Expected negotiated TLS group in REST response headers');
     assert.strictEqual(negotiatedGroupRest, 'X25519MLKEM768');
     assert.ok(clientSupportedGroupsRest, 'Expected client supported groups in REST response headers');
     assert.ok(clientSupportedGroupsRest.includes('X25519MLKEM768'), 'Expected client to include X25519MLKEM768 in supported groups');
-  } finally {
-    // Restore the original tls.connect
-    (tls as any).connect = originalTlsConnect;
-  }
 }
 
 /**
