@@ -294,6 +294,9 @@ describe.skipEnterprise('Tracing Tests', () => {
     if (!settings.databaseId && process.env.DATABASE_ID) {
       settings.databaseId = process.env.DATABASE_ID;
     }
+    if (!settings.databaseId && !process.env.FIRESTORE_EMULATOR_HOST) {
+      settings.databaseId = 'firestore-standard';
+    }
     // If a Project ID has not been specified in the settings, check whether
     // it's been specified using an environment variable.
     if (!settings.projectId && process.env.PROJECT_ID) {

@@ -27,8 +27,7 @@ steps:
   dir: 'handwritten/firestore'
   env:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
-  # If you need specific credentials from Secret Manager, uncomment these:
-  # - 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/sa-key.json'
+  - 'FIRESTORE_DATABASE_ID=firestore-standard'
   id: 'run-system-tests'
   waitFor: ['install-dependencies']
   # For Secret Manager, uncomment these (adjust secret name and volume path as needed):

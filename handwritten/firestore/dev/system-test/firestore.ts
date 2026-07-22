@@ -107,6 +107,8 @@ export function getTestDb(settings: Settings = {}): Firestore {
   const internalSettings: Settings = {};
   if (process.env.FIRESTORE_DATABASE_ID) {
     internalSettings.databaseId = process.env.FIRESTORE_DATABASE_ID;
+  } else if (!process.env.FIRESTORE_EMULATOR_HOST) {
+    internalSettings.databaseId = 'firestore-standard';
   }
 
   if (process.env.FIRESTORE_TARGET_BACKEND) {
