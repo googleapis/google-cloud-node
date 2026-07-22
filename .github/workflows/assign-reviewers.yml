@@ -17,7 +17,7 @@ jobs:
         continue-on-error: true
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
-          github-token: ${{ secrets.GOOGLER_CHECK_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const author = context.payload.pull_request.user.login;
 
@@ -39,51 +39,6 @@ jobs:
                   console.error("Failed to assign default cloud-sdk-nodejs-team reviewer:", err.message || err);
                 }
               }
-              return;
-            }
-            
-            const ALLOWED_BOTS = new Set([
-              'gcf-owl-bot[bot]',
-              'gcf-owl-bot',
-              'release-please[bot]',
-              'release-please',
-              'dependabot[bot]',
-              'dependabot',
-              'renovate-bot',
-              'renovate[bot]',
-              'renovate',
-              'yoshi-code-bot'
-            ]);
-
-            let isGoogler = ALLOWED_BOTS.has(author);
-            
-            if (isGoogler) {
-              console.log(`${author} is a trusted bot. Treating as Googler.`);
-            } else {
-              const orgs = ['googlers', 'GoogleCloudPlatform', 'googleapis'];
-              for (const org of orgs) {
-                try {
-                  const res = await github.rest.orgs.checkMembershipForUser({
-                    org: org,
-                    username: author,
-                  });
-                  if (res.status === 204) {
-                    isGoogler = true;
-                    console.log(`${author} is a member of '${org}' organization.`);
-                    break;
-                  }
-                } catch (error) {
-                  if (error.status === 404) {
-                    console.log(`${author} is NOT a member of '${org}' organization.`);
-                  } else {
-                    console.warn(`Could not check membership in '${org}' organization: Status ${error.status}.`);
-                  }
-                }
-              }
-            }
-
-            if (!isGoogler) {
-              console.log("PR not opened by a Googler. Skipping auto-assignment.");
               return;
             }
 
