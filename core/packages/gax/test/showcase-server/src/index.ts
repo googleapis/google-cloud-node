@@ -112,6 +112,7 @@ export class ShowcaseServer {
 
       return fs.readFileSync(resolvedCaCertPath);
     }
+    return undefined;
   }
 
   stop() {
