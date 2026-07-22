@@ -20715,52 +20715,6 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
-                            },
-                            "toolResponses": {
-                              "type": "ToolResponses",
-                              "id": 5,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "ToolResponse": {
-                              "fields": {
-                                "id": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "tool": {
-                                  "type": "string",
-                                  "id": 2,
-                                  "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
-                                  }
-                                },
-                                "response": {
-                                  "type": "google.protobuf.Struct",
-                                  "id": 3,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                }
-                              }
-                            },
-                            "ToolResponses": {
-                              "fields": {
-                                "toolResponses": {
-                                  "rule": "repeated",
-                                  "type": "ToolResponse",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                }
-                              }
                             }
                           }
                         },
@@ -20798,8 +20752,7 @@
                             "recognitionResult",
                             "bargeInSignal",
                             "analyzeContentResponse",
-                            "turnComplete",
-                            "toolCalls"
+                            "turnComplete"
                           ]
                         }
                       },
@@ -20819,10 +20772,6 @@
                         "turnComplete": {
                           "type": "TurnComplete",
                           "id": 4
-                        },
-                        "toolCalls": {
-                          "type": "ToolCalls",
-                          "id": 5
                         }
                       },
                       "nested": {
@@ -20831,31 +20780,6 @@
                         },
                         "TurnComplete": {
                           "fields": {}
-                        },
-                        "ToolCall": {
-                          "fields": {
-                            "id": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "tool": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "args": {
-                              "type": "google.protobuf.Struct",
-                              "id": 3
-                            }
-                          }
-                        },
-                        "ToolCalls": {
-                          "fields": {
-                            "toolCalls": {
-                              "rule": "repeated",
-                              "type": "ToolCall",
-                              "id": 1
-                            }
-                          }
                         }
                       }
                     },
@@ -30303,6 +30227,29 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "peerHostnames": {
+                          "rule": "repeated",
+                          "type": "SipHostname",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "googleRootCertFile": {
+                          "type": "GoogleRootCertFile",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GoogleRootCertFile": {
+                          "values": {
+                            "CERT_FILE_UNSPECIFIED": 0,
+                            "EXTERNAL_PRIVATE_CA": 5
+                          }
                         }
                       }
                     },
@@ -30403,6 +30350,135 @@
                                 "proto3_optional": true
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "SipHostname": {
+                      "fields": {
+                        "peerHostname": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "enabledSipPing": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pingInterval": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "peerSocketAddress": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "probeDetails": {
+                          "type": "ProbeDetails",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "connectionState": {
+                          "type": "ConnectionState",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorDetails": {
+                          "type": "HostnameErrorDetails",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ConnectionState": {
+                          "values": {
+                            "CONNECTION_STATE_UNSPECIFIED": 0,
+                            "CONNECTED": 1,
+                            "DISCONNECTED": 2,
+                            "AUTHENTICATION_FAILED": 3,
+                            "KEEPALIVE": 4
+                          }
+                        },
+                        "HostnameCertificateState": {
+                          "values": {
+                            "HOSTNAME_CERTIFICATE_STATE_UNSPECIFIED": 0,
+                            "VALID": 1,
+                            "INVALID": 2,
+                            "EXPIRED": 3,
+                            "HOSTNAME_NOT_FOUND": 4,
+                            "UNAUTHENTICATED": 5,
+                            "TRUST_STORE_NOT_FOUND": 6,
+                            "HOSTNAME_INVALID_FORMAT": 7,
+                            "QUOTA_EXCEEDED": 8
+                          }
+                        },
+                        "HostnameErrorDetails": {
+                          "fields": {
+                            "certificateState": {
+                              "type": "HostnameCertificateState",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "errorMessage": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ProbeDetails": {
+                      "fields": {
+                        "optionsLatency": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "probeStatus": {
+                          "type": "ProbeStatus",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "initTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ProbeStatus": {
+                          "values": {
+                            "PROBE_STATUS_UNSPECIFIED": 0,
+                            "PROBE_STATUS_SUCCESS": 1,
+                            "PROBE_STATUS_FAILED": 2
                           }
                         }
                       }

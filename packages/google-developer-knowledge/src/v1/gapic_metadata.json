@@ -20,6 +20,11 @@
                 "batchGetDocuments"
               ]
             },
+            "AnswerQuery": {
+              "methods": [
+                "answerQuery"
+              ]
+            },
             "SearchDocumentChunks": {
               "methods": [
                 "searchDocumentChunks",
@@ -40,6 +45,11 @@
             "BatchGetDocuments": {
               "methods": [
                 "batchGetDocuments"
+              ]
+            },
+            "AnswerQuery": {
+              "methods": [
+                "answerQuery"
               ]
             },
             "SearchDocumentChunks": {

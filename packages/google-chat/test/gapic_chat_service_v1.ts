@@ -3443,6 +3443,672 @@ describe('v1.ChatServiceClient', () => {
     });
   });
 
+  describe('getAvailability', () => {
+    it('invokes getAvailability without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetAvailabilityRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetAvailabilityRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Availability(),
+      );
+      client.innerApiCalls.getAvailability = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAvailability(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAvailability as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAvailability as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAvailability without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetAvailabilityRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetAvailabilityRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Availability(),
+      );
+      client.innerApiCalls.getAvailability =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAvailability(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.IAvailability | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAvailability as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAvailability as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAvailability with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetAvailabilityRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetAvailabilityRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAvailability = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getAvailability(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAvailability as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAvailability as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAvailability with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetAvailabilityRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetAvailabilityRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getAvailability(request), expectedError);
+    });
+  });
+
+  describe('markAsActive', () => {
+    it('invokes markAsActive without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsActiveRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsActiveRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Availability(),
+      );
+      client.innerApiCalls.markAsActive = stubSimpleCall(expectedResponse);
+      const [response] = await client.markAsActive(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.markAsActive as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markAsActive as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markAsActive without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsActiveRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsActiveRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Availability(),
+      );
+      client.innerApiCalls.markAsActive =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.markAsActive(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.IAvailability | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.markAsActive as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markAsActive as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markAsActive with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsActiveRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsActiveRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.markAsActive = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.markAsActive(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.markAsActive as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markAsActive as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markAsActive with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsActiveRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsActiveRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.markAsActive(request), expectedError);
+    });
+  });
+
+  describe('markAsAway', () => {
+    it('invokes markAsAway without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsAwayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsAwayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Availability(),
+      );
+      client.innerApiCalls.markAsAway = stubSimpleCall(expectedResponse);
+      const [response] = await client.markAsAway(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.markAsAway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markAsAway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markAsAway without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsAwayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsAwayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Availability(),
+      );
+      client.innerApiCalls.markAsAway =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.markAsAway(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.IAvailability | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.markAsAway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markAsAway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markAsAway with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsAwayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsAwayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.markAsAway = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.markAsAway(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.markAsAway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markAsAway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markAsAway with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsAwayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsAwayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.markAsAway(request), expectedError);
+    });
+  });
+
+  describe('markAsDoNotDisturb', () => {
+    it('invokes markAsDoNotDisturb without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsDoNotDisturbRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsDoNotDisturbRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Availability(),
+      );
+      client.innerApiCalls.markAsDoNotDisturb =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.markAsDoNotDisturb(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.markAsDoNotDisturb as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markAsDoNotDisturb as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markAsDoNotDisturb without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsDoNotDisturbRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsDoNotDisturbRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Availability(),
+      );
+      client.innerApiCalls.markAsDoNotDisturb =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.markAsDoNotDisturb(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.IAvailability | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.markAsDoNotDisturb as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markAsDoNotDisturb as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markAsDoNotDisturb with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsDoNotDisturbRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsDoNotDisturbRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.markAsDoNotDisturb = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.markAsDoNotDisturb(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.markAsDoNotDisturb as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.markAsDoNotDisturb as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes markAsDoNotDisturb with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.MarkAsDoNotDisturbRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.MarkAsDoNotDisturbRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.markAsDoNotDisturb(request), expectedError);
+    });
+  });
+
+  describe('updateAvailability', () => {
+    it('invokes updateAvailability without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateAvailabilityRequest(),
+      );
+      request.availability ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateAvailabilityRequest',
+        ['availability', 'name'],
+      );
+      request.availability.name = defaultValue1;
+      const expectedHeaderRequestParams = `availability.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Availability(),
+      );
+      client.innerApiCalls.updateAvailability =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateAvailability(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAvailability as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAvailability as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAvailability without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateAvailabilityRequest(),
+      );
+      request.availability ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateAvailabilityRequest',
+        ['availability', 'name'],
+      );
+      request.availability.name = defaultValue1;
+      const expectedHeaderRequestParams = `availability.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.Availability(),
+      );
+      client.innerApiCalls.updateAvailability =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAvailability(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.IAvailability | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAvailability as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAvailability as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAvailability with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateAvailabilityRequest(),
+      );
+      request.availability ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateAvailabilityRequest',
+        ['availability', 'name'],
+      );
+      request.availability.name = defaultValue1;
+      const expectedHeaderRequestParams = `availability.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAvailability = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateAvailability(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAvailability as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAvailability as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAvailability with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.UpdateAvailabilityRequest(),
+      );
+      request.availability ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.UpdateAvailabilityRequest',
+        ['availability', 'name'],
+      );
+      request.availability.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updateAvailability(request), expectedError);
+    });
+  });
+
   describe('getSpaceEvent', () => {
     it('invokes getSpaceEvent without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
@@ -7164,6 +7830,44 @@ describe('v1.ChatServiceClient', () => {
         assert.strictEqual(result, 'attachmentValue');
         assert(
           (client.pathTemplates.attachmentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('availability', async () => {
+      const fakePath = '/rendered/path/availability';
+      const expectedParameters = {
+        user: 'userValue',
+      };
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.availabilityPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.availabilityPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('availabilityPath', () => {
+        const result = client.availabilityPath('userValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.availabilityPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchUserFromAvailabilityName', () => {
+        const result = client.matchUserFromAvailabilityName(fakePath);
+        assert.strictEqual(result, 'userValue');
+        assert(
+          (client.pathTemplates.availabilityPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

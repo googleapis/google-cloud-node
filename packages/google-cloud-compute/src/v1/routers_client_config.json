@@ -30,12 +30,22 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "DeleteNamedSet": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteRoutePolicy": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Get": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "GetNamedSet": {
           "timeout_millis": 600000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
@@ -75,12 +85,22 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "ListNamedSets": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "ListRoutePolicies": {
           "timeout_millis": 600000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "Patch": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PatchNamedSet": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -96,6 +116,11 @@
           "retry_params_name": "default"
         },
         "Update": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateNamedSet": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

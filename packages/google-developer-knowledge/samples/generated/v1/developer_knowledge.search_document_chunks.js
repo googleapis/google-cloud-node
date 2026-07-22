@@ -37,8 +37,7 @@ function main(query) {
    *  Optional. Specifies the maximum number of results to return. The service
    *  may return fewer than this value.
    *  If unspecified, at most 5 results will be returned.
-   *  The maximum value is 20; values above 20 will result in an INVALID_ARGUMENT
-   *  error.
+   *  The maximum value is 100; values above 100 will be coerced to 100.
    */
   // const pageSize = 1234
   /**
@@ -53,6 +52,8 @@ function main(query) {
    *  DocumentChunk google.developers.knowledge.v1.DocumentChunk s, the filter
    *  is applied to `DocumentChunk.document` fields.
    *  Supported fields for filtering:
+   *  * `content_length_bytes` (INTEGER): The length of the `Document.content`
+   *    field in bytes.
    *  * `data_source` (STRING): The source of the document, e.g.
    *    `docs.cloud.google.com`. See
    *    https://developers.google.com/knowledge/reference/corpus-reference for
@@ -62,6 +63,7 @@ function main(query) {
    *    markdown content or metadata.
    *  * `uri` (STRING): The document URI, e.g.
    *    `https://docs.cloud.google.com/bigquery/docs/tables`.
+   *  INTEGER fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *  STRING fields support `=` (equals) and `!=` (not equals) operators for
    *  **exact match** on the whole string. Partial match, prefix match, and
    *  regexp match are not supported.
@@ -71,12 +73,14 @@ function main(query) {
    *  operators. `OR` has higher precedence than `AND`. Use parentheses for
    *  explicit precedence grouping.
    *  Examples:
+   *  * Filter by `Document.content_length_bytes`:
+   *    `content_length_bytes < 50000`
    *  * `data_source = "docs.cloud.google.com" OR data_source =
-   *  "firebase.google.com"`
+   *    "firebase.google.com"`
    *  * `data_source != "firebase.google.com"`
    *  * `update_time < "2024-01-01T00:00:00Z"`
    *  * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
-   *  "developer.chrome.com" OR data_source = "web.dev")`
+   *    "developer.chrome.com" OR data_source = "web.dev")`
    *  * `uri = "https://docs.cloud.google.com/release-notes"`
    *  The `filter` string must not exceed 500 characters; values longer than 500
    *  characters will result in an `INVALID_ARGUMENT` error.
