@@ -41,6 +41,8 @@ async function testPqc(pemBuffer: Buffer, port: number) {
   (tls as any).connect = function (...args: any[]) {
     const socket = originalTlsConnect.apply(this, args as any);
     socket.on('secureConnect', () => {
+      // Verify the socket is connecting to the expected test server port
+      // to ensure this mock doesn't accidentally affect other tests.
       assert.strictEqual(socket.remotePort, port);
       if (currentTestType === 'grpc') {
         grpcSocket = socket as tls.TLSSocket;
