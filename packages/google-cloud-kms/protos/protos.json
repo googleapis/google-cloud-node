@@ -1217,7 +1217,8 @@
                             "deleteSingleTenantHsmInstance",
                             "addQuorumMember",
                             "removeQuorumMember",
-                            "refreshSingleTenantHsmInstance"
+                            "refreshSingleTenantHsmInstance",
+                            "upgradeKeyTrust"
                           ]
                         }
                       },
@@ -1316,6 +1317,10 @@
                         "refreshSingleTenantHsmInstance": {
                           "type": "RefreshSingleTenantHsmInstance",
                           "id": 17
+                        },
+                        "upgradeKeyTrust": {
+                          "type": "UpgradeKeyTrust",
+                          "id": 18
                         }
                       },
                       "nested": {
@@ -1445,6 +1450,24 @@
                         },
                         "RefreshSingleTenantHsmInstance": {
                           "fields": {}
+                        },
+                        "UpgradeKeyTrust": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "twoFactorPublicKeyPem": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -1914,7 +1937,8 @@
                             "ASYMMETRIC_DECRYPT": 6,
                             "RAW_ENCRYPT_DECRYPT": 7,
                             "MAC": 9,
-                            "KEY_ENCAPSULATION": 10
+                            "KEY_ENCAPSULATION": 10,
+                            "AES_WRAPPING": 11
                           }
                         }
                       }
@@ -2098,6 +2122,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "trustedWrappingEnabled": {
+                          "type": "bool",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "hsmTrusted": {
+                          "type": "bool",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2149,7 +2187,8 @@
                             "PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256": 60,
                             "PQ_SIGN_ML_DSA_44_EXTERNAL_MU": 70,
                             "PQ_SIGN_ML_DSA_65_EXTERNAL_MU": 67,
-                            "PQ_SIGN_ML_DSA_87_EXTERNAL_MU": 71
+                            "PQ_SIGN_ML_DSA_87_EXTERNAL_MU": 71,
+                            "AES_256_KWP": 73
                           }
                         },
                         "CryptoKeyVersionState": {
@@ -2787,6 +2826,36 @@
                               "(google.api.http)": {
                                 "post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions:import",
                                 "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ImportTrustedKeyWrappedCryptoKeyVersion": {
+                          "requestType": "ImportTrustedKeyWrappedCryptoKeyVersionRequest",
+                          "responseType": "CryptoKeyVersion",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions:importTrustedKeyWrappedCryptoKeyVersion",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/keyRings/*/cryptoKeys/*}/cryptoKeyVersions:importTrustedKeyWrappedCryptoKeyVersion",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ExportTrustedKeyWrappedCryptoKeyVersion": {
+                          "requestType": "ExportTrustedKeyWrappedCryptoKeyVersionRequest",
+                          "responseType": "ExportTrustedKeyWrappedCryptoKeyVersionResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:exportTrustedKeyWrappedCryptoKeyVersion"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*}:exportTrustedKeyWrappedCryptoKeyVersion"
                               }
                             }
                           ]
@@ -3519,6 +3588,13 @@
                         "skipInitialVersionCreation": {
                           "type": "bool",
                           "id": 5
+                        },
+                        "trustedWrappingEnabled": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3617,6 +3693,84 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "trustedWrappingEnabled": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ImportTrustedKeyWrappedCryptoKeyVersionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "importingKey": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "cryptoKeyVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "wrappedKey": {
+                          "type": "bytes",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "algorithm": {
+                          "type": "CryptoKeyVersion.CryptoKeyVersionAlgorithm",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ExportTrustedKeyWrappedCryptoKeyVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        },
+                        "wrappingKey": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKeyVersion"
+                          }
+                        }
+                      }
+                    },
+                    "ExportTrustedKeyWrappedCryptoKeyVersionResponse": {
+                      "fields": {
+                        "wrappedKey": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "wrappedKeyCrc32c": {
+                          "type": "google.protobuf.Int64Value",
+                          "id": 2
                         }
                       }
                     },

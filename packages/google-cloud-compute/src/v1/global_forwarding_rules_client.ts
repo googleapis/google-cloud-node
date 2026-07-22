@@ -562,6 +562,9 @@ export class GlobalForwardingRulesClient {
    *   Name of the ForwardingRule resource to return.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.view
+   *
+   *   Check the View enum for the list of possible values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

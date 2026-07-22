@@ -94,6 +94,9 @@ export namespace google {
 
                     /** Agent transferRules */
                     transferRules?: (google.cloud.ces.v1.ITransferRule[]|null);
+
+                    /** Agent validationErrors */
+                    validationErrors?: (string[]|null);
                 }
 
                 /** Represents an Agent. */
@@ -170,6 +173,9 @@ export namespace google {
 
                     /** Agent transferRules. */
                     public transferRules: google.cloud.ces.v1.ITransferRule[];
+
+                    /** Agent validationErrors. */
+                    public validationErrors: string[];
 
                     /** Agent agentType. */
                     public agentType?: ("llmAgent"|"remoteDialogflowAgent");
@@ -365,6 +371,9 @@ export namespace google {
 
                         /** RemoteDialogflowAgent respectResponseInterruptionSettings */
                         respectResponseInterruptionSettings?: (boolean|null);
+
+                        /** RemoteDialogflowAgent languageCodeVariable */
+                        languageCodeVariable?: (string|null);
                     }
 
                     /** Represents a RemoteDialogflowAgent. */
@@ -393,6 +402,9 @@ export namespace google {
 
                         /** RemoteDialogflowAgent respectResponseInterruptionSettings. */
                         public respectResponseInterruptionSettings: boolean;
+
+                        /** RemoteDialogflowAgent languageCodeVariable. */
+                        public languageCodeVariable: string;
 
                         /**
                          * Creates a new RemoteDialogflowAgent instance using the specified properties.
@@ -2161,6 +2173,12 @@ export namespace google {
 
                     /** ChannelProfile noiseSuppressionLevel */
                     noiseSuppressionLevel?: (string|null);
+
+                    /** ChannelProfile whatsappConfig */
+                    whatsappConfig?: (google.cloud.ces.v1.ChannelProfile.IWhatsAppConfig|null);
+
+                    /** ChannelProfile instagramConfig */
+                    instagramConfig?: (google.cloud.ces.v1.ChannelProfile.IInstagramConfig|null);
                 }
 
                 /** Represents a ChannelProfile. */
@@ -2192,6 +2210,12 @@ export namespace google {
 
                     /** ChannelProfile noiseSuppressionLevel. */
                     public noiseSuppressionLevel: string;
+
+                    /** ChannelProfile whatsappConfig. */
+                    public whatsappConfig?: (google.cloud.ces.v1.ChannelProfile.IWhatsAppConfig|null);
+
+                    /** ChannelProfile instagramConfig. */
+                    public instagramConfig?: (google.cloud.ces.v1.ChannelProfile.IInstagramConfig|null);
 
                     /**
                      * Creates a new ChannelProfile instance using the specified properties.
@@ -2629,6 +2653,248 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a WhatsAppConfig. */
+                    interface IWhatsAppConfig {
+
+                        /** WhatsAppConfig wabaId */
+                        wabaId?: (string|null);
+
+                        /** WhatsAppConfig phoneNumberId */
+                        phoneNumberId?: (string|null);
+
+                        /** WhatsAppConfig phoneNumber */
+                        phoneNumber?: (string|null);
+
+                        /** WhatsAppConfig displayName */
+                        displayName?: (string|null);
+
+                        /** WhatsAppConfig thumbnailUrl */
+                        thumbnailUrl?: (string|null);
+
+                        /** WhatsAppConfig description */
+                        description?: (string|null);
+                    }
+
+                    /** Represents a WhatsAppConfig. */
+                    class WhatsAppConfig implements IWhatsAppConfig {
+
+                        /**
+                         * Constructs a new WhatsAppConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1.ChannelProfile.IWhatsAppConfig);
+
+                        /** WhatsAppConfig wabaId. */
+                        public wabaId: string;
+
+                        /** WhatsAppConfig phoneNumberId. */
+                        public phoneNumberId: string;
+
+                        /** WhatsAppConfig phoneNumber. */
+                        public phoneNumber: string;
+
+                        /** WhatsAppConfig displayName. */
+                        public displayName: string;
+
+                        /** WhatsAppConfig thumbnailUrl. */
+                        public thumbnailUrl: string;
+
+                        /** WhatsAppConfig description. */
+                        public description: string;
+
+                        /**
+                         * Creates a new WhatsAppConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WhatsAppConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1.ChannelProfile.IWhatsAppConfig): google.cloud.ces.v1.ChannelProfile.WhatsAppConfig;
+
+                        /**
+                         * Encodes the specified WhatsAppConfig message. Does not implicitly {@link google.cloud.ces.v1.ChannelProfile.WhatsAppConfig.verify|verify} messages.
+                         * @param message WhatsAppConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1.ChannelProfile.IWhatsAppConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WhatsAppConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ChannelProfile.WhatsAppConfig.verify|verify} messages.
+                         * @param message WhatsAppConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1.ChannelProfile.IWhatsAppConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WhatsAppConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WhatsAppConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ChannelProfile.WhatsAppConfig;
+
+                        /**
+                         * Decodes a WhatsAppConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WhatsAppConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ChannelProfile.WhatsAppConfig;
+
+                        /**
+                         * Verifies a WhatsAppConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WhatsAppConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WhatsAppConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ChannelProfile.WhatsAppConfig;
+
+                        /**
+                         * Creates a plain object from a WhatsAppConfig message. Also converts values to other types if specified.
+                         * @param message WhatsAppConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1.ChannelProfile.WhatsAppConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WhatsAppConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for WhatsAppConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InstagramConfig. */
+                    interface IInstagramConfig {
+
+                        /** InstagramConfig instagramAccountId */
+                        instagramAccountId?: (string|null);
+
+                        /** InstagramConfig displayName */
+                        displayName?: (string|null);
+
+                        /** InstagramConfig thumbnailUrl */
+                        thumbnailUrl?: (string|null);
+
+                        /** InstagramConfig description */
+                        description?: (string|null);
+                    }
+
+                    /** Represents an InstagramConfig. */
+                    class InstagramConfig implements IInstagramConfig {
+
+                        /**
+                         * Constructs a new InstagramConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1.ChannelProfile.IInstagramConfig);
+
+                        /** InstagramConfig instagramAccountId. */
+                        public instagramAccountId: string;
+
+                        /** InstagramConfig displayName. */
+                        public displayName: string;
+
+                        /** InstagramConfig thumbnailUrl. */
+                        public thumbnailUrl: string;
+
+                        /** InstagramConfig description. */
+                        public description: string;
+
+                        /**
+                         * Creates a new InstagramConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InstagramConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1.ChannelProfile.IInstagramConfig): google.cloud.ces.v1.ChannelProfile.InstagramConfig;
+
+                        /**
+                         * Encodes the specified InstagramConfig message. Does not implicitly {@link google.cloud.ces.v1.ChannelProfile.InstagramConfig.verify|verify} messages.
+                         * @param message InstagramConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1.ChannelProfile.IInstagramConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InstagramConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ChannelProfile.InstagramConfig.verify|verify} messages.
+                         * @param message InstagramConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1.ChannelProfile.IInstagramConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InstagramConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InstagramConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ChannelProfile.InstagramConfig;
+
+                        /**
+                         * Decodes an InstagramConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InstagramConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ChannelProfile.InstagramConfig;
+
+                        /**
+                         * Verifies an InstagramConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InstagramConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InstagramConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ChannelProfile.InstagramConfig;
+
+                        /**
+                         * Creates a plain object from an InstagramConfig message. Also converts values to other types if specified.
+                         * @param message InstagramConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1.ChannelProfile.InstagramConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InstagramConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InstagramConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** ChannelType enum. */
                     enum ChannelType {
                         UNKNOWN = 0,
@@ -2637,8 +2903,11 @@ export namespace google {
                         TWILIO = 4,
                         GOOGLE_TELEPHONY_PLATFORM = 5,
                         CONTACT_CENTER_AS_A_SERVICE = 6,
+                        CONTACT_CENTER_AS_A_SERVICE_CHAT = 11,
                         FIVE9 = 7,
-                        CONTACT_CENTER_INTEGRATION = 8
+                        CONTACT_CENTER_INTEGRATION = 8,
+                        WHATSAPP = 9,
+                        INSTAGRAM = 10
                     }
                 }
 
@@ -2763,6 +3032,484 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Span
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AgentCard. */
+                interface IAgentCard {
+
+                    /** AgentCard name */
+                    name?: (string|null);
+
+                    /** AgentCard description */
+                    description?: (string|null);
+
+                    /** AgentCard supportedInterfaces */
+                    supportedInterfaces?: (google.cloud.ces.v1.IAgentInterface[]|null);
+
+                    /** AgentCard version */
+                    version?: (string|null);
+
+                    /** AgentCard skills */
+                    skills?: (google.cloud.ces.v1.IAgentSkill[]|null);
+                }
+
+                /** Represents an AgentCard. */
+                class AgentCard implements IAgentCard {
+
+                    /**
+                     * Constructs a new AgentCard.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IAgentCard);
+
+                    /** AgentCard name. */
+                    public name: string;
+
+                    /** AgentCard description. */
+                    public description: string;
+
+                    /** AgentCard supportedInterfaces. */
+                    public supportedInterfaces: google.cloud.ces.v1.IAgentInterface[];
+
+                    /** AgentCard version. */
+                    public version: string;
+
+                    /** AgentCard skills. */
+                    public skills: google.cloud.ces.v1.IAgentSkill[];
+
+                    /**
+                     * Creates a new AgentCard instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AgentCard instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IAgentCard): google.cloud.ces.v1.AgentCard;
+
+                    /**
+                     * Encodes the specified AgentCard message. Does not implicitly {@link google.cloud.ces.v1.AgentCard.verify|verify} messages.
+                     * @param message AgentCard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IAgentCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AgentCard message, length delimited. Does not implicitly {@link google.cloud.ces.v1.AgentCard.verify|verify} messages.
+                     * @param message AgentCard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IAgentCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AgentCard message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AgentCard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.AgentCard;
+
+                    /**
+                     * Decodes an AgentCard message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AgentCard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.AgentCard;
+
+                    /**
+                     * Verifies an AgentCard message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AgentCard message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AgentCard
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.AgentCard;
+
+                    /**
+                     * Creates a plain object from an AgentCard message. Also converts values to other types if specified.
+                     * @param message AgentCard
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.AgentCard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AgentCard to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AgentCard
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AgentInterface. */
+                interface IAgentInterface {
+
+                    /** AgentInterface url */
+                    url?: (string|null);
+
+                    /** AgentInterface protocolBinding */
+                    protocolBinding?: (string|null);
+
+                    /** AgentInterface tenant */
+                    tenant?: (string|null);
+
+                    /** AgentInterface protocolVersion */
+                    protocolVersion?: (string|null);
+                }
+
+                /** Represents an AgentInterface. */
+                class AgentInterface implements IAgentInterface {
+
+                    /**
+                     * Constructs a new AgentInterface.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IAgentInterface);
+
+                    /** AgentInterface url. */
+                    public url: string;
+
+                    /** AgentInterface protocolBinding. */
+                    public protocolBinding: string;
+
+                    /** AgentInterface tenant. */
+                    public tenant: string;
+
+                    /** AgentInterface protocolVersion. */
+                    public protocolVersion: string;
+
+                    /**
+                     * Creates a new AgentInterface instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AgentInterface instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IAgentInterface): google.cloud.ces.v1.AgentInterface;
+
+                    /**
+                     * Encodes the specified AgentInterface message. Does not implicitly {@link google.cloud.ces.v1.AgentInterface.verify|verify} messages.
+                     * @param message AgentInterface message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IAgentInterface, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AgentInterface message, length delimited. Does not implicitly {@link google.cloud.ces.v1.AgentInterface.verify|verify} messages.
+                     * @param message AgentInterface message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IAgentInterface, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AgentInterface message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AgentInterface
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.AgentInterface;
+
+                    /**
+                     * Decodes an AgentInterface message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AgentInterface
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.AgentInterface;
+
+                    /**
+                     * Verifies an AgentInterface message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AgentInterface message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AgentInterface
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.AgentInterface;
+
+                    /**
+                     * Creates a plain object from an AgentInterface message. Also converts values to other types if specified.
+                     * @param message AgentInterface
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.AgentInterface, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AgentInterface to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AgentInterface
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AgentSkill. */
+                interface IAgentSkill {
+
+                    /** AgentSkill id */
+                    id?: (string|null);
+
+                    /** AgentSkill name */
+                    name?: (string|null);
+
+                    /** AgentSkill description */
+                    description?: (string|null);
+
+                    /** AgentSkill tags */
+                    tags?: (string[]|null);
+
+                    /** AgentSkill examples */
+                    examples?: (string[]|null);
+
+                    /** AgentSkill inputModes */
+                    inputModes?: (string[]|null);
+
+                    /** AgentSkill outputModes */
+                    outputModes?: (string[]|null);
+                }
+
+                /** Represents an AgentSkill. */
+                class AgentSkill implements IAgentSkill {
+
+                    /**
+                     * Constructs a new AgentSkill.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IAgentSkill);
+
+                    /** AgentSkill id. */
+                    public id: string;
+
+                    /** AgentSkill name. */
+                    public name: string;
+
+                    /** AgentSkill description. */
+                    public description: string;
+
+                    /** AgentSkill tags. */
+                    public tags: string[];
+
+                    /** AgentSkill examples. */
+                    public examples: string[];
+
+                    /** AgentSkill inputModes. */
+                    public inputModes: string[];
+
+                    /** AgentSkill outputModes. */
+                    public outputModes: string[];
+
+                    /**
+                     * Creates a new AgentSkill instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AgentSkill instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IAgentSkill): google.cloud.ces.v1.AgentSkill;
+
+                    /**
+                     * Encodes the specified AgentSkill message. Does not implicitly {@link google.cloud.ces.v1.AgentSkill.verify|verify} messages.
+                     * @param message AgentSkill message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IAgentSkill, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AgentSkill message, length delimited. Does not implicitly {@link google.cloud.ces.v1.AgentSkill.verify|verify} messages.
+                     * @param message AgentSkill message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IAgentSkill, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AgentSkill message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AgentSkill
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.AgentSkill;
+
+                    /**
+                     * Decodes an AgentSkill message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AgentSkill
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.AgentSkill;
+
+                    /**
+                     * Verifies an AgentSkill message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AgentSkill message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AgentSkill
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.AgentSkill;
+
+                    /**
+                     * Creates a plain object from an AgentSkill message. Also converts values to other types if specified.
+                     * @param message AgentSkill
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.AgentSkill, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AgentSkill to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AgentSkill
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RemoteAgentTool. */
+                interface IRemoteAgentTool {
+
+                    /** RemoteAgentTool name */
+                    name?: (string|null);
+
+                    /** RemoteAgentTool description */
+                    description?: (string|null);
+
+                    /** RemoteAgentTool agentCard */
+                    agentCard?: (google.cloud.ces.v1.IAgentCard|null);
+                }
+
+                /** Represents a RemoteAgentTool. */
+                class RemoteAgentTool implements IRemoteAgentTool {
+
+                    /**
+                     * Constructs a new RemoteAgentTool.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IRemoteAgentTool);
+
+                    /** RemoteAgentTool name. */
+                    public name: string;
+
+                    /** RemoteAgentTool description. */
+                    public description: string;
+
+                    /** RemoteAgentTool agentCard. */
+                    public agentCard?: (google.cloud.ces.v1.IAgentCard|null);
+
+                    /**
+                     * Creates a new RemoteAgentTool instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoteAgentTool instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IRemoteAgentTool): google.cloud.ces.v1.RemoteAgentTool;
+
+                    /**
+                     * Encodes the specified RemoteAgentTool message. Does not implicitly {@link google.cloud.ces.v1.RemoteAgentTool.verify|verify} messages.
+                     * @param message RemoteAgentTool message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IRemoteAgentTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoteAgentTool message, length delimited. Does not implicitly {@link google.cloud.ces.v1.RemoteAgentTool.verify|verify} messages.
+                     * @param message RemoteAgentTool message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IRemoteAgentTool, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoteAgentTool message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoteAgentTool
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.RemoteAgentTool;
+
+                    /**
+                     * Decodes a RemoteAgentTool message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoteAgentTool
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.RemoteAgentTool;
+
+                    /**
+                     * Verifies a RemoteAgentTool message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoteAgentTool message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoteAgentTool
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.RemoteAgentTool;
+
+                    /**
+                     * Creates a plain object from a RemoteAgentTool message. Also converts values to other types if specified.
+                     * @param message RemoteAgentTool
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.RemoteAgentTool, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoteAgentTool to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoteAgentTool
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -10740,8 +11487,14 @@ export namespace google {
                     /** App clientCertificateSettings */
                     clientCertificateSettings?: (google.cloud.ces.v1.IClientCertificateSettings|null);
 
+                    /** App vpcScSettings */
+                    vpcScSettings?: (google.cloud.ces.v1.IVpcScSettings|null);
+
                     /** App locked */
                     locked?: (boolean|null);
+
+                    /** App validationErrors */
+                    validationErrors?: (string[]|null);
                 }
 
                 /** Represents an App. */
@@ -10828,8 +11581,14 @@ export namespace google {
                     /** App clientCertificateSettings. */
                     public clientCertificateSettings?: (google.cloud.ces.v1.IClientCertificateSettings|null);
 
+                    /** App vpcScSettings. */
+                    public vpcScSettings?: (google.cloud.ces.v1.IVpcScSettings|null);
+
                     /** App locked. */
                     public locked: boolean;
+
+                    /** App validationErrors. */
+                    public validationErrors: string[];
 
                     /**
                      * Creates a new App instance using the specified properties.
@@ -11593,8 +12352,17 @@ export namespace google {
                     /** SynthesizeSpeechConfig voice */
                     voice?: (string|null);
 
+                    /** SynthesizeSpeechConfig voiceSampleGcsUri */
+                    voiceSampleGcsUri?: (string|null);
+
                     /** SynthesizeSpeechConfig speakingRate */
                     speakingRate?: (number|null);
+
+                    /** SynthesizeSpeechConfig model */
+                    model?: (string|null);
+
+                    /** SynthesizeSpeechConfig instruction */
+                    instruction?: (string|null);
                 }
 
                 /** Represents a SynthesizeSpeechConfig. */
@@ -11609,8 +12377,17 @@ export namespace google {
                     /** SynthesizeSpeechConfig voice. */
                     public voice: string;
 
+                    /** SynthesizeSpeechConfig voiceSampleGcsUri. */
+                    public voiceSampleGcsUri: string;
+
                     /** SynthesizeSpeechConfig speakingRate. */
                     public speakingRate: number;
+
+                    /** SynthesizeSpeechConfig model. */
+                    public model: string;
+
+                    /** SynthesizeSpeechConfig instruction. */
+                    public instruction: string;
 
                     /**
                      * Creates a new SynthesizeSpeechConfig instance using the specified properties.
@@ -11796,8 +12573,14 @@ export namespace google {
                     /** LoggingSettings audioRecordingConfig */
                     audioRecordingConfig?: (google.cloud.ces.v1.IAudioRecordingConfig|null);
 
+                    /** LoggingSettings unredactedAudioRecordingConfig */
+                    unredactedAudioRecordingConfig?: (google.cloud.ces.v1.IAudioRecordingConfig|null);
+
                     /** LoggingSettings bigqueryExportSettings */
                     bigqueryExportSettings?: (google.cloud.ces.v1.IBigQueryExportSettings|null);
+
+                    /** LoggingSettings unredactedBigqueryExportSettings */
+                    unredactedBigqueryExportSettings?: (google.cloud.ces.v1.IBigQueryExportSettings|null);
 
                     /** LoggingSettings cloudLoggingSettings */
                     cloudLoggingSettings?: (google.cloud.ces.v1.ICloudLoggingSettings|null);
@@ -11827,8 +12610,14 @@ export namespace google {
                     /** LoggingSettings audioRecordingConfig. */
                     public audioRecordingConfig?: (google.cloud.ces.v1.IAudioRecordingConfig|null);
 
+                    /** LoggingSettings unredactedAudioRecordingConfig. */
+                    public unredactedAudioRecordingConfig?: (google.cloud.ces.v1.IAudioRecordingConfig|null);
+
                     /** LoggingSettings bigqueryExportSettings. */
                     public bigqueryExportSettings?: (google.cloud.ces.v1.IBigQueryExportSettings|null);
+
+                    /** LoggingSettings unredactedBigqueryExportSettings. */
+                    public unredactedBigqueryExportSettings?: (google.cloud.ces.v1.IBigQueryExportSettings|null);
 
                     /** LoggingSettings cloudLoggingSettings. */
                     public cloudLoggingSettings?: (google.cloud.ces.v1.ICloudLoggingSettings|null);
@@ -11925,6 +12714,12 @@ export namespace google {
 
                     /** ErrorHandlingSettings errorHandlingStrategy */
                     errorHandlingStrategy?: (google.cloud.ces.v1.ErrorHandlingSettings.ErrorHandlingStrategy|keyof typeof google.cloud.ces.v1.ErrorHandlingSettings.ErrorHandlingStrategy|null);
+
+                    /** ErrorHandlingSettings fallbackResponseConfig */
+                    fallbackResponseConfig?: (google.cloud.ces.v1.ErrorHandlingSettings.IFallbackResponseConfig|null);
+
+                    /** ErrorHandlingSettings endSessionConfig */
+                    endSessionConfig?: (google.cloud.ces.v1.ErrorHandlingSettings.IEndSessionConfig|null);
                 }
 
                 /** Represents an ErrorHandlingSettings. */
@@ -11938,6 +12733,12 @@ export namespace google {
 
                     /** ErrorHandlingSettings errorHandlingStrategy. */
                     public errorHandlingStrategy: (google.cloud.ces.v1.ErrorHandlingSettings.ErrorHandlingStrategy|keyof typeof google.cloud.ces.v1.ErrorHandlingSettings.ErrorHandlingStrategy);
+
+                    /** ErrorHandlingSettings fallbackResponseConfig. */
+                    public fallbackResponseConfig?: (google.cloud.ces.v1.ErrorHandlingSettings.IFallbackResponseConfig|null);
+
+                    /** ErrorHandlingSettings endSessionConfig. */
+                    public endSessionConfig?: (google.cloud.ces.v1.ErrorHandlingSettings.IEndSessionConfig|null);
 
                     /**
                      * Creates a new ErrorHandlingSettings instance using the specified properties.
@@ -12018,6 +12819,206 @@ export namespace google {
                 }
 
                 namespace ErrorHandlingSettings {
+
+                    /** Properties of a FallbackResponseConfig. */
+                    interface IFallbackResponseConfig {
+
+                        /** FallbackResponseConfig customFallbackMessages */
+                        customFallbackMessages?: ({ [k: string]: string }|null);
+
+                        /** FallbackResponseConfig maxFallbackAttempts */
+                        maxFallbackAttempts?: (number|null);
+                    }
+
+                    /** Represents a FallbackResponseConfig. */
+                    class FallbackResponseConfig implements IFallbackResponseConfig {
+
+                        /**
+                         * Constructs a new FallbackResponseConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1.ErrorHandlingSettings.IFallbackResponseConfig);
+
+                        /** FallbackResponseConfig customFallbackMessages. */
+                        public customFallbackMessages: { [k: string]: string };
+
+                        /** FallbackResponseConfig maxFallbackAttempts. */
+                        public maxFallbackAttempts: number;
+
+                        /**
+                         * Creates a new FallbackResponseConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FallbackResponseConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1.ErrorHandlingSettings.IFallbackResponseConfig): google.cloud.ces.v1.ErrorHandlingSettings.FallbackResponseConfig;
+
+                        /**
+                         * Encodes the specified FallbackResponseConfig message. Does not implicitly {@link google.cloud.ces.v1.ErrorHandlingSettings.FallbackResponseConfig.verify|verify} messages.
+                         * @param message FallbackResponseConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1.ErrorHandlingSettings.IFallbackResponseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FallbackResponseConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ErrorHandlingSettings.FallbackResponseConfig.verify|verify} messages.
+                         * @param message FallbackResponseConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1.ErrorHandlingSettings.IFallbackResponseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FallbackResponseConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FallbackResponseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ErrorHandlingSettings.FallbackResponseConfig;
+
+                        /**
+                         * Decodes a FallbackResponseConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FallbackResponseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ErrorHandlingSettings.FallbackResponseConfig;
+
+                        /**
+                         * Verifies a FallbackResponseConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FallbackResponseConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FallbackResponseConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ErrorHandlingSettings.FallbackResponseConfig;
+
+                        /**
+                         * Creates a plain object from a FallbackResponseConfig message. Also converts values to other types if specified.
+                         * @param message FallbackResponseConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1.ErrorHandlingSettings.FallbackResponseConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FallbackResponseConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FallbackResponseConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an EndSessionConfig. */
+                    interface IEndSessionConfig {
+
+                        /** EndSessionConfig escalateSession */
+                        escalateSession?: (boolean|null);
+                    }
+
+                    /** Represents an EndSessionConfig. */
+                    class EndSessionConfig implements IEndSessionConfig {
+
+                        /**
+                         * Constructs a new EndSessionConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1.ErrorHandlingSettings.IEndSessionConfig);
+
+                        /** EndSessionConfig escalateSession. */
+                        public escalateSession?: (boolean|null);
+
+                        /**
+                         * Creates a new EndSessionConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EndSessionConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1.ErrorHandlingSettings.IEndSessionConfig): google.cloud.ces.v1.ErrorHandlingSettings.EndSessionConfig;
+
+                        /**
+                         * Encodes the specified EndSessionConfig message. Does not implicitly {@link google.cloud.ces.v1.ErrorHandlingSettings.EndSessionConfig.verify|verify} messages.
+                         * @param message EndSessionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1.ErrorHandlingSettings.IEndSessionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EndSessionConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ErrorHandlingSettings.EndSessionConfig.verify|verify} messages.
+                         * @param message EndSessionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1.ErrorHandlingSettings.IEndSessionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EndSessionConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EndSessionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ErrorHandlingSettings.EndSessionConfig;
+
+                        /**
+                         * Decodes an EndSessionConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EndSessionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ErrorHandlingSettings.EndSessionConfig;
+
+                        /**
+                         * Verifies an EndSessionConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EndSessionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EndSessionConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ErrorHandlingSettings.EndSessionConfig;
+
+                        /**
+                         * Creates a plain object from an EndSessionConfig message. Also converts values to other types if specified.
+                         * @param message EndSessionConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1.ErrorHandlingSettings.EndSessionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EndSessionConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EndSessionConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** ErrorHandlingStrategy enum. */
                     enum ErrorHandlingStrategy {
@@ -12697,11 +13698,111 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a VpcScSettings. */
+                interface IVpcScSettings {
+
+                    /** VpcScSettings allowedOrigins */
+                    allowedOrigins?: (string[]|null);
+                }
+
+                /** Represents a VpcScSettings. */
+                class VpcScSettings implements IVpcScSettings {
+
+                    /**
+                     * Constructs a new VpcScSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IVpcScSettings);
+
+                    /** VpcScSettings allowedOrigins. */
+                    public allowedOrigins: string[];
+
+                    /**
+                     * Creates a new VpcScSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VpcScSettings instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IVpcScSettings): google.cloud.ces.v1.VpcScSettings;
+
+                    /**
+                     * Encodes the specified VpcScSettings message. Does not implicitly {@link google.cloud.ces.v1.VpcScSettings.verify|verify} messages.
+                     * @param message VpcScSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IVpcScSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VpcScSettings message, length delimited. Does not implicitly {@link google.cloud.ces.v1.VpcScSettings.verify|verify} messages.
+                     * @param message VpcScSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IVpcScSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VpcScSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VpcScSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.VpcScSettings;
+
+                    /**
+                     * Decodes a VpcScSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VpcScSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.VpcScSettings;
+
+                    /**
+                     * Verifies a VpcScSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VpcScSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VpcScSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.VpcScSettings;
+
+                    /**
+                     * Creates a plain object from a VpcScSettings message. Also converts values to other types if specified.
+                     * @param message VpcScSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.VpcScSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VpcScSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VpcScSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ConversationLoggingSettings. */
                 interface IConversationLoggingSettings {
 
                     /** ConversationLoggingSettings disableConversationLogging */
                     disableConversationLogging?: (boolean|null);
+
+                    /** ConversationLoggingSettings retentionWindow */
+                    retentionWindow?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a ConversationLoggingSettings. */
@@ -12715,6 +13816,9 @@ export namespace google {
 
                     /** ConversationLoggingSettings disableConversationLogging. */
                     public disableConversationLogging: boolean;
+
+                    /** ConversationLoggingSettings retentionWindow. */
+                    public retentionWindow?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new ConversationLoggingSettings instance using the specified properties.
@@ -16002,6 +17106,9 @@ export namespace google {
                     /** Tool widgetTool */
                     widgetTool?: (google.cloud.ces.v1.IWidgetTool|null);
 
+                    /** Tool remoteAgentTool */
+                    remoteAgentTool?: (google.cloud.ces.v1.IRemoteAgentTool|null);
+
                     /** Tool name */
                     name?: (string|null);
 
@@ -16010,6 +17117,9 @@ export namespace google {
 
                     /** Tool executionType */
                     executionType?: (google.cloud.ces.v1.ExecutionType|keyof typeof google.cloud.ces.v1.ExecutionType|null);
+
+                    /** Tool timeout */
+                    timeout?: (google.protobuf.IDuration|null);
 
                     /** Tool createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
@@ -16069,6 +17179,9 @@ export namespace google {
                     /** Tool widgetTool. */
                     public widgetTool?: (google.cloud.ces.v1.IWidgetTool|null);
 
+                    /** Tool remoteAgentTool. */
+                    public remoteAgentTool?: (google.cloud.ces.v1.IRemoteAgentTool|null);
+
                     /** Tool name. */
                     public name: string;
 
@@ -16077,6 +17190,9 @@ export namespace google {
 
                     /** Tool executionType. */
                     public executionType: (google.cloud.ces.v1.ExecutionType|keyof typeof google.cloud.ces.v1.ExecutionType);
+
+                    /** Tool timeout. */
+                    public timeout?: (google.protobuf.IDuration|null);
 
                     /** Tool createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -16094,7 +17210,7 @@ export namespace google {
                     public toolFakeConfig?: (google.cloud.ces.v1.IToolFakeConfig|null);
 
                     /** Tool toolType. */
-                    public toolType?: ("clientFunction"|"openApiTool"|"googleSearchTool"|"connectorTool"|"dataStoreTool"|"pythonFunction"|"mcpTool"|"fileSearchTool"|"systemTool"|"agentTool"|"widgetTool");
+                    public toolType?: ("clientFunction"|"openApiTool"|"googleSearchTool"|"connectorTool"|"dataStoreTool"|"pythonFunction"|"mcpTool"|"fileSearchTool"|"systemTool"|"agentTool"|"widgetTool"|"remoteAgentTool");
 
                     /**
                      * Creates a new Tool instance using the specified properties.
@@ -19910,6 +21026,9 @@ export namespace google {
                     /** McpTool name */
                     name?: (string|null);
 
+                    /** McpTool nameOverride */
+                    nameOverride?: (string|null);
+
                     /** McpTool description */
                     description?: (string|null);
 
@@ -19933,6 +21052,9 @@ export namespace google {
 
                     /** McpTool customHeaders */
                     customHeaders?: ({ [k: string]: string }|null);
+
+                    /** McpTool state */
+                    state?: (google.cloud.ces.v1.McpTool.State|keyof typeof google.cloud.ces.v1.McpTool.State|null);
                 }
 
                 /** Represents a McpTool. */
@@ -19946,6 +21068,9 @@ export namespace google {
 
                     /** McpTool name. */
                     public name: string;
+
+                    /** McpTool nameOverride. */
+                    public nameOverride: string;
 
                     /** McpTool description. */
                     public description: string;
@@ -19970,6 +21095,9 @@ export namespace google {
 
                     /** McpTool customHeaders. */
                     public customHeaders: { [k: string]: string };
+
+                    /** McpTool state. */
+                    public state: (google.cloud.ces.v1.McpTool.State|keyof typeof google.cloud.ces.v1.McpTool.State);
 
                     /**
                      * Creates a new McpTool instance using the specified properties.
@@ -20047,6 +21175,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace McpTool {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        INACTIVE = 2,
+                        STALE = 3
+                    }
                 }
 
                 /** Properties of an OpenApiTool. */
@@ -20199,6 +21338,9 @@ export namespace google {
 
                     /** PythonFunction description */
                     description?: (string|null);
+
+                    /** PythonFunction serviceDirectoryConfig */
+                    serviceDirectoryConfig?: (google.cloud.ces.v1.IServiceDirectoryConfig|null);
                 }
 
                 /** Represents a PythonFunction. */
@@ -20218,6 +21360,9 @@ export namespace google {
 
                     /** PythonFunction description. */
                     public description: string;
+
+                    /** PythonFunction serviceDirectoryConfig. */
+                    public serviceDirectoryConfig?: (google.cloud.ces.v1.IServiceDirectoryConfig|null);
 
                     /**
                      * Creates a new PythonFunction instance using the specified properties.
@@ -20420,6 +21565,9 @@ export namespace google {
 
                     /** WidgetTool dataMapping */
                     dataMapping?: (google.cloud.ces.v1.WidgetTool.IDataMapping|null);
+
+                    /** WidgetTool textResponseConfig */
+                    textResponseConfig?: (google.cloud.ces.v1.WidgetTool.ITextResponseConfig|null);
                 }
 
                 /** Represents a WidgetTool. */
@@ -20448,6 +21596,9 @@ export namespace google {
 
                     /** WidgetTool dataMapping. */
                     public dataMapping?: (google.cloud.ces.v1.WidgetTool.IDataMapping|null);
+
+                    /** WidgetTool textResponseConfig. */
+                    public textResponseConfig?: (google.cloud.ces.v1.WidgetTool.ITextResponseConfig|null);
 
                     /** WidgetTool input. */
                     public input?: "parameters";
@@ -20531,6 +21682,126 @@ export namespace google {
                 }
 
                 namespace WidgetTool {
+
+                    /** Properties of a TextResponseConfig. */
+                    interface ITextResponseConfig {
+
+                        /** TextResponseConfig type */
+                        type?: (google.cloud.ces.v1.WidgetTool.TextResponseConfig.Type|keyof typeof google.cloud.ces.v1.WidgetTool.TextResponseConfig.Type|null);
+
+                        /** TextResponseConfig staticText */
+                        staticText?: (string|null);
+
+                        /** TextResponseConfig textResponseInstruction */
+                        textResponseInstruction?: (string|null);
+                    }
+
+                    /** Represents a TextResponseConfig. */
+                    class TextResponseConfig implements ITextResponseConfig {
+
+                        /**
+                         * Constructs a new TextResponseConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1.WidgetTool.ITextResponseConfig);
+
+                        /** TextResponseConfig type. */
+                        public type: (google.cloud.ces.v1.WidgetTool.TextResponseConfig.Type|keyof typeof google.cloud.ces.v1.WidgetTool.TextResponseConfig.Type);
+
+                        /** TextResponseConfig staticText. */
+                        public staticText: string;
+
+                        /** TextResponseConfig textResponseInstruction. */
+                        public textResponseInstruction: string;
+
+                        /**
+                         * Creates a new TextResponseConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TextResponseConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1.WidgetTool.ITextResponseConfig): google.cloud.ces.v1.WidgetTool.TextResponseConfig;
+
+                        /**
+                         * Encodes the specified TextResponseConfig message. Does not implicitly {@link google.cloud.ces.v1.WidgetTool.TextResponseConfig.verify|verify} messages.
+                         * @param message TextResponseConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1.WidgetTool.ITextResponseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TextResponseConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.WidgetTool.TextResponseConfig.verify|verify} messages.
+                         * @param message TextResponseConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1.WidgetTool.ITextResponseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TextResponseConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TextResponseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.WidgetTool.TextResponseConfig;
+
+                        /**
+                         * Decodes a TextResponseConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TextResponseConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.WidgetTool.TextResponseConfig;
+
+                        /**
+                         * Verifies a TextResponseConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TextResponseConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TextResponseConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.WidgetTool.TextResponseConfig;
+
+                        /**
+                         * Creates a plain object from a TextResponseConfig message. Also converts values to other types if specified.
+                         * @param message TextResponseConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1.WidgetTool.TextResponseConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TextResponseConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TextResponseConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TextResponseConfig {
+
+                        /** Type enum. */
+                        enum Type {
+                            TYPE_UNSPECIFIED = 0,
+                            NONE = 1,
+                            LLM_GENERATED = 2,
+                            STATIC = 3
+                        }
+                    }
 
                     /** Properties of a DataMapping. */
                     interface IDataMapping {
@@ -20702,6 +21973,9 @@ export namespace google {
                     /** Toolset description */
                     description?: (string|null);
 
+                    /** Toolset timeout */
+                    timeout?: (google.protobuf.IDuration|null);
+
                     /** Toolset createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -20744,6 +22018,9 @@ export namespace google {
 
                     /** Toolset description. */
                     public description: string;
+
+                    /** Toolset timeout. */
+                    public timeout?: (google.protobuf.IDuration|null);
 
                     /** Toolset createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -20967,6 +22244,9 @@ export namespace google {
 
                     /** McpToolset customHeaders */
                     customHeaders?: ({ [k: string]: string }|null);
+
+                    /** McpToolset toolOverrides */
+                    toolOverrides?: (google.cloud.ces.v1.IMcpToolOverride[]|null);
                 }
 
                 /** Represents a McpToolset. */
@@ -20992,6 +22272,9 @@ export namespace google {
 
                     /** McpToolset customHeaders. */
                     public customHeaders: { [k: string]: string };
+
+                    /** McpToolset toolOverrides. */
+                    public toolOverrides: google.cloud.ces.v1.IMcpToolOverride[];
 
                     /**
                      * Creates a new McpToolset instance using the specified properties.
@@ -21065,6 +22348,230 @@ export namespace google {
 
                     /**
                      * Gets the default type url for McpToolset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a McpToolOverride. */
+                interface IMcpToolOverride {
+
+                    /** McpToolOverride tool */
+                    tool?: (string|null);
+
+                    /** McpToolOverride nameOverride */
+                    nameOverride?: (string|null);
+
+                    /** McpToolOverride descriptionOverride */
+                    descriptionOverride?: (string|null);
+
+                    /** McpToolOverride snapshot */
+                    snapshot?: (google.cloud.ces.v1.IMcpToolDefinition|null);
+                }
+
+                /** Represents a McpToolOverride. */
+                class McpToolOverride implements IMcpToolOverride {
+
+                    /**
+                     * Constructs a new McpToolOverride.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IMcpToolOverride);
+
+                    /** McpToolOverride tool. */
+                    public tool: string;
+
+                    /** McpToolOverride nameOverride. */
+                    public nameOverride: string;
+
+                    /** McpToolOverride descriptionOverride. */
+                    public descriptionOverride: string;
+
+                    /** McpToolOverride snapshot. */
+                    public snapshot?: (google.cloud.ces.v1.IMcpToolDefinition|null);
+
+                    /**
+                     * Creates a new McpToolOverride instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns McpToolOverride instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IMcpToolOverride): google.cloud.ces.v1.McpToolOverride;
+
+                    /**
+                     * Encodes the specified McpToolOverride message. Does not implicitly {@link google.cloud.ces.v1.McpToolOverride.verify|verify} messages.
+                     * @param message McpToolOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IMcpToolOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified McpToolOverride message, length delimited. Does not implicitly {@link google.cloud.ces.v1.McpToolOverride.verify|verify} messages.
+                     * @param message McpToolOverride message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IMcpToolOverride, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a McpToolOverride message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns McpToolOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.McpToolOverride;
+
+                    /**
+                     * Decodes a McpToolOverride message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns McpToolOverride
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.McpToolOverride;
+
+                    /**
+                     * Verifies a McpToolOverride message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a McpToolOverride message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns McpToolOverride
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.McpToolOverride;
+
+                    /**
+                     * Creates a plain object from a McpToolOverride message. Also converts values to other types if specified.
+                     * @param message McpToolOverride
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.McpToolOverride, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this McpToolOverride to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for McpToolOverride
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a McpToolDefinition. */
+                interface IMcpToolDefinition {
+
+                    /** McpToolDefinition description */
+                    description?: (string|null);
+
+                    /** McpToolDefinition inputSchema */
+                    inputSchema?: (google.cloud.ces.v1.ISchema|null);
+
+                    /** McpToolDefinition outputSchema */
+                    outputSchema?: (google.cloud.ces.v1.ISchema|null);
+                }
+
+                /** Represents a McpToolDefinition. */
+                class McpToolDefinition implements IMcpToolDefinition {
+
+                    /**
+                     * Constructs a new McpToolDefinition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IMcpToolDefinition);
+
+                    /** McpToolDefinition description. */
+                    public description: string;
+
+                    /** McpToolDefinition inputSchema. */
+                    public inputSchema?: (google.cloud.ces.v1.ISchema|null);
+
+                    /** McpToolDefinition outputSchema. */
+                    public outputSchema?: (google.cloud.ces.v1.ISchema|null);
+
+                    /**
+                     * Creates a new McpToolDefinition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns McpToolDefinition instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IMcpToolDefinition): google.cloud.ces.v1.McpToolDefinition;
+
+                    /**
+                     * Encodes the specified McpToolDefinition message. Does not implicitly {@link google.cloud.ces.v1.McpToolDefinition.verify|verify} messages.
+                     * @param message McpToolDefinition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IMcpToolDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified McpToolDefinition message, length delimited. Does not implicitly {@link google.cloud.ces.v1.McpToolDefinition.verify|verify} messages.
+                     * @param message McpToolDefinition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IMcpToolDefinition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a McpToolDefinition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns McpToolDefinition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.McpToolDefinition;
+
+                    /**
+                     * Decodes a McpToolDefinition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns McpToolDefinition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.McpToolDefinition;
+
+                    /**
+                     * Verifies a McpToolDefinition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a McpToolDefinition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns McpToolDefinition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.McpToolDefinition;
+
+                    /**
+                     * Creates a plain object from a McpToolDefinition message. Also converts values to other types if specified.
+                     * @param message McpToolDefinition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.McpToolDefinition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this McpToolDefinition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for McpToolDefinition
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -21648,18 +23155,344 @@ export namespace google {
                         SOURCE_UNSPECIFIED = 0,
                         LIVE = 1,
                         SIMULATOR = 2,
-                        EVAL = 3
+                        EVAL = 3,
+                        AGENT_TOOL = 4
                     }
 
                     /** InputType enum. */
                     enum InputType {
                         INPUT_TYPE_UNSPECIFIED = 0,
                         INPUT_TYPE_TEXT = 1,
+                        INPUT_TYPE_EVENT = 7,
                         INPUT_TYPE_AUDIO = 2,
                         INPUT_TYPE_IMAGE = 3,
                         INPUT_TYPE_BLOB = 4,
                         INPUT_TYPE_TOOL_RESPONSE = 5,
                         INPUT_TYPE_VARIABLES = 6
+                    }
+                }
+
+                /** Properties of an ExperimentConfig. */
+                interface IExperimentConfig {
+
+                    /** ExperimentConfig versionRelease */
+                    versionRelease?: (google.cloud.ces.v1.ExperimentConfig.IVersionRelease|null);
+                }
+
+                /** Represents an ExperimentConfig. */
+                class ExperimentConfig implements IExperimentConfig {
+
+                    /**
+                     * Constructs a new ExperimentConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IExperimentConfig);
+
+                    /** ExperimentConfig versionRelease. */
+                    public versionRelease?: (google.cloud.ces.v1.ExperimentConfig.IVersionRelease|null);
+
+                    /**
+                     * Creates a new ExperimentConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExperimentConfig instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IExperimentConfig): google.cloud.ces.v1.ExperimentConfig;
+
+                    /**
+                     * Encodes the specified ExperimentConfig message. Does not implicitly {@link google.cloud.ces.v1.ExperimentConfig.verify|verify} messages.
+                     * @param message ExperimentConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IExperimentConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExperimentConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ExperimentConfig.verify|verify} messages.
+                     * @param message ExperimentConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IExperimentConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExperimentConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExperimentConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ExperimentConfig;
+
+                    /**
+                     * Decodes an ExperimentConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExperimentConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ExperimentConfig;
+
+                    /**
+                     * Verifies an ExperimentConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExperimentConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExperimentConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ExperimentConfig;
+
+                    /**
+                     * Creates a plain object from an ExperimentConfig message. Also converts values to other types if specified.
+                     * @param message ExperimentConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.ExperimentConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExperimentConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExperimentConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExperimentConfig {
+
+                    /** Properties of a VersionRelease. */
+                    interface IVersionRelease {
+
+                        /** VersionRelease state */
+                        state?: (google.cloud.ces.v1.ExperimentConfig.State|keyof typeof google.cloud.ces.v1.ExperimentConfig.State|null);
+
+                        /** VersionRelease trafficAllocations */
+                        trafficAllocations?: (google.cloud.ces.v1.ExperimentConfig.VersionRelease.ITrafficAllocation[]|null);
+                    }
+
+                    /** Represents a VersionRelease. */
+                    class VersionRelease implements IVersionRelease {
+
+                        /**
+                         * Constructs a new VersionRelease.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1.ExperimentConfig.IVersionRelease);
+
+                        /** VersionRelease state. */
+                        public state: (google.cloud.ces.v1.ExperimentConfig.State|keyof typeof google.cloud.ces.v1.ExperimentConfig.State);
+
+                        /** VersionRelease trafficAllocations. */
+                        public trafficAllocations: google.cloud.ces.v1.ExperimentConfig.VersionRelease.ITrafficAllocation[];
+
+                        /**
+                         * Creates a new VersionRelease instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VersionRelease instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1.ExperimentConfig.IVersionRelease): google.cloud.ces.v1.ExperimentConfig.VersionRelease;
+
+                        /**
+                         * Encodes the specified VersionRelease message. Does not implicitly {@link google.cloud.ces.v1.ExperimentConfig.VersionRelease.verify|verify} messages.
+                         * @param message VersionRelease message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1.ExperimentConfig.IVersionRelease, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VersionRelease message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ExperimentConfig.VersionRelease.verify|verify} messages.
+                         * @param message VersionRelease message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1.ExperimentConfig.IVersionRelease, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VersionRelease message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VersionRelease
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ExperimentConfig.VersionRelease;
+
+                        /**
+                         * Decodes a VersionRelease message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VersionRelease
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ExperimentConfig.VersionRelease;
+
+                        /**
+                         * Verifies a VersionRelease message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VersionRelease message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VersionRelease
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ExperimentConfig.VersionRelease;
+
+                        /**
+                         * Creates a plain object from a VersionRelease message. Also converts values to other types if specified.
+                         * @param message VersionRelease
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1.ExperimentConfig.VersionRelease, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VersionRelease to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VersionRelease
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace VersionRelease {
+
+                        /** Properties of a TrafficAllocation. */
+                        interface ITrafficAllocation {
+
+                            /** TrafficAllocation id */
+                            id?: (string|null);
+
+                            /** TrafficAllocation trafficPercentage */
+                            trafficPercentage?: (number|null);
+
+                            /** TrafficAllocation appVersion */
+                            appVersion?: (string|null);
+                        }
+
+                        /** Represents a TrafficAllocation. */
+                        class TrafficAllocation implements ITrafficAllocation {
+
+                            /**
+                             * Constructs a new TrafficAllocation.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.ces.v1.ExperimentConfig.VersionRelease.ITrafficAllocation);
+
+                            /** TrafficAllocation id. */
+                            public id: string;
+
+                            /** TrafficAllocation trafficPercentage. */
+                            public trafficPercentage: number;
+
+                            /** TrafficAllocation appVersion. */
+                            public appVersion: string;
+
+                            /**
+                             * Creates a new TrafficAllocation instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TrafficAllocation instance
+                             */
+                            public static create(properties?: google.cloud.ces.v1.ExperimentConfig.VersionRelease.ITrafficAllocation): google.cloud.ces.v1.ExperimentConfig.VersionRelease.TrafficAllocation;
+
+                            /**
+                             * Encodes the specified TrafficAllocation message. Does not implicitly {@link google.cloud.ces.v1.ExperimentConfig.VersionRelease.TrafficAllocation.verify|verify} messages.
+                             * @param message TrafficAllocation message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.ces.v1.ExperimentConfig.VersionRelease.ITrafficAllocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TrafficAllocation message, length delimited. Does not implicitly {@link google.cloud.ces.v1.ExperimentConfig.VersionRelease.TrafficAllocation.verify|verify} messages.
+                             * @param message TrafficAllocation message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.ces.v1.ExperimentConfig.VersionRelease.ITrafficAllocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TrafficAllocation message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TrafficAllocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.ExperimentConfig.VersionRelease.TrafficAllocation;
+
+                            /**
+                             * Decodes a TrafficAllocation message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TrafficAllocation
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.ExperimentConfig.VersionRelease.TrafficAllocation;
+
+                            /**
+                             * Verifies a TrafficAllocation message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TrafficAllocation message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TrafficAllocation
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.ExperimentConfig.VersionRelease.TrafficAllocation;
+
+                            /**
+                             * Creates a plain object from a TrafficAllocation message. Also converts values to other types if specified.
+                             * @param message TrafficAllocation
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.ces.v1.ExperimentConfig.VersionRelease.TrafficAllocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TrafficAllocation to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TrafficAllocation
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        RUNNING = 2,
+                        DONE = 3,
+                        EXPIRED = 4
                     }
                 }
 
@@ -21686,6 +23519,15 @@ export namespace google {
 
                     /** Deployment etag */
                     etag?: (string|null);
+
+                    /** Deployment experimentConfig */
+                    experimentConfig?: (google.cloud.ces.v1.IExperimentConfig|null);
+
+                    /** Deployment whatsappCredentials */
+                    whatsappCredentials?: (google.cloud.ces.v1.IWhatsAppCredentials|null);
+
+                    /** Deployment instagramCredentials */
+                    instagramCredentials?: (google.cloud.ces.v1.IInstagramCredentials|null);
                 }
 
                 /** Represents a Deployment. */
@@ -21717,6 +23559,15 @@ export namespace google {
 
                     /** Deployment etag. */
                     public etag: string;
+
+                    /** Deployment experimentConfig. */
+                    public experimentConfig?: (google.cloud.ces.v1.IExperimentConfig|null);
+
+                    /** Deployment whatsappCredentials. */
+                    public whatsappCredentials?: (google.cloud.ces.v1.IWhatsAppCredentials|null);
+
+                    /** Deployment instagramCredentials. */
+                    public instagramCredentials?: (google.cloud.ces.v1.IInstagramCredentials|null);
 
                     /**
                      * Creates a new Deployment instance using the specified properties.
@@ -21790,6 +23641,360 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Deployment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WhatsAppCredentials. */
+                interface IWhatsAppCredentials {
+
+                    /** WhatsAppCredentials authCode */
+                    authCode?: (string|null);
+
+                    /** WhatsAppCredentials pin */
+                    pin?: (string|null);
+
+                    /** WhatsAppCredentials phoneNumber */
+                    phoneNumber?: (string|null);
+
+                    /** WhatsAppCredentials businessAccountId */
+                    businessAccountId?: (string|null);
+
+                    /** WhatsAppCredentials wabaId */
+                    wabaId?: (string|null);
+
+                    /** WhatsAppCredentials conversationProfileId */
+                    conversationProfileId?: (string|null);
+                }
+
+                /** Represents a WhatsAppCredentials. */
+                class WhatsAppCredentials implements IWhatsAppCredentials {
+
+                    /**
+                     * Constructs a new WhatsAppCredentials.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IWhatsAppCredentials);
+
+                    /** WhatsAppCredentials authCode. */
+                    public authCode: string;
+
+                    /** WhatsAppCredentials pin. */
+                    public pin: string;
+
+                    /** WhatsAppCredentials phoneNumber. */
+                    public phoneNumber: string;
+
+                    /** WhatsAppCredentials businessAccountId. */
+                    public businessAccountId: string;
+
+                    /** WhatsAppCredentials wabaId. */
+                    public wabaId: string;
+
+                    /** WhatsAppCredentials conversationProfileId. */
+                    public conversationProfileId: string;
+
+                    /**
+                     * Creates a new WhatsAppCredentials instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WhatsAppCredentials instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IWhatsAppCredentials): google.cloud.ces.v1.WhatsAppCredentials;
+
+                    /**
+                     * Encodes the specified WhatsAppCredentials message. Does not implicitly {@link google.cloud.ces.v1.WhatsAppCredentials.verify|verify} messages.
+                     * @param message WhatsAppCredentials message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IWhatsAppCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WhatsAppCredentials message, length delimited. Does not implicitly {@link google.cloud.ces.v1.WhatsAppCredentials.verify|verify} messages.
+                     * @param message WhatsAppCredentials message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IWhatsAppCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WhatsAppCredentials message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WhatsAppCredentials
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.WhatsAppCredentials;
+
+                    /**
+                     * Decodes a WhatsAppCredentials message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WhatsAppCredentials
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.WhatsAppCredentials;
+
+                    /**
+                     * Verifies a WhatsAppCredentials message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WhatsAppCredentials message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WhatsAppCredentials
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.WhatsAppCredentials;
+
+                    /**
+                     * Creates a plain object from a WhatsAppCredentials message. Also converts values to other types if specified.
+                     * @param message WhatsAppCredentials
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.WhatsAppCredentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WhatsAppCredentials to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WhatsAppCredentials
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InstagramCredentials. */
+                interface IInstagramCredentials {
+
+                    /** InstagramCredentials authCode */
+                    authCode?: (string|null);
+
+                    /** InstagramCredentials conversationProfileId */
+                    conversationProfileId?: (string|null);
+                }
+
+                /** Represents an InstagramCredentials. */
+                class InstagramCredentials implements IInstagramCredentials {
+
+                    /**
+                     * Constructs a new InstagramCredentials.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IInstagramCredentials);
+
+                    /** InstagramCredentials authCode. */
+                    public authCode: string;
+
+                    /** InstagramCredentials conversationProfileId. */
+                    public conversationProfileId: string;
+
+                    /**
+                     * Creates a new InstagramCredentials instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstagramCredentials instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IInstagramCredentials): google.cloud.ces.v1.InstagramCredentials;
+
+                    /**
+                     * Encodes the specified InstagramCredentials message. Does not implicitly {@link google.cloud.ces.v1.InstagramCredentials.verify|verify} messages.
+                     * @param message InstagramCredentials message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IInstagramCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstagramCredentials message, length delimited. Does not implicitly {@link google.cloud.ces.v1.InstagramCredentials.verify|verify} messages.
+                     * @param message InstagramCredentials message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IInstagramCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstagramCredentials message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstagramCredentials
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.InstagramCredentials;
+
+                    /**
+                     * Decodes an InstagramCredentials message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstagramCredentials
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.InstagramCredentials;
+
+                    /**
+                     * Verifies an InstagramCredentials message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstagramCredentials message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstagramCredentials
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.InstagramCredentials;
+
+                    /**
+                     * Creates a plain object from an InstagramCredentials message. Also converts values to other types if specified.
+                     * @param message InstagramCredentials
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.InstagramCredentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstagramCredentials to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstagramCredentials
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MockedToolCall. */
+                interface IMockedToolCall {
+
+                    /** MockedToolCall toolId */
+                    toolId?: (string|null);
+
+                    /** MockedToolCall toolset */
+                    toolset?: (google.cloud.ces.v1.IToolsetTool|null);
+
+                    /** MockedToolCall tool */
+                    tool?: (string|null);
+
+                    /** MockedToolCall expectedArgsPattern */
+                    expectedArgsPattern?: (google.protobuf.IStruct|null);
+
+                    /** MockedToolCall mockResponse */
+                    mockResponse?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents a MockedToolCall. */
+                class MockedToolCall implements IMockedToolCall {
+
+                    /**
+                     * Constructs a new MockedToolCall.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IMockedToolCall);
+
+                    /** MockedToolCall toolId. */
+                    public toolId?: (string|null);
+
+                    /** MockedToolCall toolset. */
+                    public toolset?: (google.cloud.ces.v1.IToolsetTool|null);
+
+                    /** MockedToolCall tool. */
+                    public tool: string;
+
+                    /** MockedToolCall expectedArgsPattern. */
+                    public expectedArgsPattern?: (google.protobuf.IStruct|null);
+
+                    /** MockedToolCall mockResponse. */
+                    public mockResponse?: (google.protobuf.IStruct|null);
+
+                    /** MockedToolCall toolIdentifier. */
+                    public toolIdentifier?: ("toolId"|"toolset");
+
+                    /**
+                     * Creates a new MockedToolCall instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MockedToolCall instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IMockedToolCall): google.cloud.ces.v1.MockedToolCall;
+
+                    /**
+                     * Encodes the specified MockedToolCall message. Does not implicitly {@link google.cloud.ces.v1.MockedToolCall.verify|verify} messages.
+                     * @param message MockedToolCall message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IMockedToolCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MockedToolCall message, length delimited. Does not implicitly {@link google.cloud.ces.v1.MockedToolCall.verify|verify} messages.
+                     * @param message MockedToolCall message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IMockedToolCall, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MockedToolCall message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MockedToolCall
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.MockedToolCall;
+
+                    /**
+                     * Decodes a MockedToolCall message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MockedToolCall
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.MockedToolCall;
+
+                    /**
+                     * Verifies a MockedToolCall message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MockedToolCall message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MockedToolCall
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.MockedToolCall;
+
+                    /**
+                     * Creates a plain object from a MockedToolCall message. Also converts values to other types if specified.
+                     * @param message MockedToolCall
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.MockedToolCall, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MockedToolCall to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MockedToolCall
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -23212,6 +25417,119 @@ export namespace google {
                     ALAW = 3
                 }
 
+                /** Properties of a MockConfig. */
+                interface IMockConfig {
+
+                    /** MockConfig mockedToolCalls */
+                    mockedToolCalls?: (google.cloud.ces.v1.IMockedToolCall[]|null);
+
+                    /** MockConfig unmatchedToolCallBehavior */
+                    unmatchedToolCallBehavior?: (google.cloud.ces.v1.MockConfig.UnmatchedToolCallBehavior|keyof typeof google.cloud.ces.v1.MockConfig.UnmatchedToolCallBehavior|null);
+                }
+
+                /** Represents a MockConfig. */
+                class MockConfig implements IMockConfig {
+
+                    /**
+                     * Constructs a new MockConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1.IMockConfig);
+
+                    /** MockConfig mockedToolCalls. */
+                    public mockedToolCalls: google.cloud.ces.v1.IMockedToolCall[];
+
+                    /** MockConfig unmatchedToolCallBehavior. */
+                    public unmatchedToolCallBehavior: (google.cloud.ces.v1.MockConfig.UnmatchedToolCallBehavior|keyof typeof google.cloud.ces.v1.MockConfig.UnmatchedToolCallBehavior);
+
+                    /**
+                     * Creates a new MockConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MockConfig instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1.IMockConfig): google.cloud.ces.v1.MockConfig;
+
+                    /**
+                     * Encodes the specified MockConfig message. Does not implicitly {@link google.cloud.ces.v1.MockConfig.verify|verify} messages.
+                     * @param message MockConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1.IMockConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MockConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1.MockConfig.verify|verify} messages.
+                     * @param message MockConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1.IMockConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MockConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MockConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1.MockConfig;
+
+                    /**
+                     * Decodes a MockConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MockConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1.MockConfig;
+
+                    /**
+                     * Verifies a MockConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MockConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MockConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1.MockConfig;
+
+                    /**
+                     * Creates a plain object from a MockConfig message. Also converts values to other types if specified.
+                     * @param message MockConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1.MockConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MockConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MockConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MockConfig {
+
+                    /** UnmatchedToolCallBehavior enum. */
+                    enum UnmatchedToolCallBehavior {
+                        UNMATCHED_TOOL_CALL_BEHAVIOR_UNSPECIFIED = 0,
+                        FAIL = 1,
+                        PASS_THROUGH = 2
+                    }
+                }
+
                 /** Properties of an InputAudioConfig. */
                 interface IInputAudioConfig {
 
@@ -23991,6 +26309,9 @@ export namespace google {
 
                         /** CitedChunk text */
                         text?: (string|null);
+
+                        /** CitedChunk requiresAttribution */
+                        requiresAttribution?: (boolean|null);
                     }
 
                     /** Represents a CitedChunk. */
@@ -24010,6 +26331,9 @@ export namespace google {
 
                         /** CitedChunk text. */
                         public text: string;
+
+                        /** CitedChunk requiresAttribution. */
+                        public requiresAttribution: boolean;
 
                         /**
                          * Creates a new CitedChunk instance using the specified properties.
@@ -24367,6 +26691,9 @@ export namespace google {
 
                     /** SessionOutput diagnosticInfo */
                     diagnosticInfo?: (google.cloud.ces.v1.SessionOutput.IDiagnosticInfo|null);
+
+                    /** SessionOutput context */
+                    context?: (google.protobuf.IAny[]|null);
                 }
 
                 /** Represents a SessionOutput. */
@@ -24407,6 +26734,9 @@ export namespace google {
 
                     /** SessionOutput diagnosticInfo. */
                     public diagnosticInfo?: (google.cloud.ces.v1.SessionOutput.IDiagnosticInfo|null);
+
+                    /** SessionOutput context. */
+                    public context: google.protobuf.IAny[];
 
                     /** SessionOutput outputType. */
                     public outputType?: ("text"|"audio"|"toolCalls"|"citations"|"googleSearchSuggestions"|"endSession"|"payload");
@@ -25514,6 +27844,9 @@ export namespace google {
 
                     /** ExecuteToolRequest args */
                     args?: (google.protobuf.IStruct|null);
+
+                    /** ExecuteToolRequest mockConfig */
+                    mockConfig?: (google.cloud.ces.v1.IMockConfig|null);
                 }
 
                 /** Represents an ExecuteToolRequest. */
@@ -25542,6 +27875,9 @@ export namespace google {
 
                     /** ExecuteToolRequest args. */
                     public args?: (google.protobuf.IStruct|null);
+
+                    /** ExecuteToolRequest mockConfig. */
+                    public mockConfig?: (google.cloud.ces.v1.IMockConfig|null);
 
                     /** ExecuteToolRequest toolIdentifier. */
                     public toolIdentifier?: ("tool"|"toolsetTool");
@@ -25641,6 +27977,12 @@ export namespace google {
 
                     /** ExecuteToolResponse variables */
                     variables?: (google.protobuf.IStruct|null);
+
+                    /** ExecuteToolResponse citations */
+                    citations?: (google.cloud.ces.v1.ICitations|null);
+
+                    /** ExecuteToolResponse googleSearchSuggestions */
+                    googleSearchSuggestions?: (google.cloud.ces.v1.IGoogleSearchSuggestions|null);
                 }
 
                 /** Represents an ExecuteToolResponse. */
@@ -25663,6 +28005,12 @@ export namespace google {
 
                     /** ExecuteToolResponse variables. */
                     public variables?: (google.protobuf.IStruct|null);
+
+                    /** ExecuteToolResponse citations. */
+                    public citations?: (google.cloud.ces.v1.ICitations|null);
+
+                    /** ExecuteToolResponse googleSearchSuggestions. */
+                    public googleSearchSuggestions?: (google.cloud.ces.v1.IGoogleSearchSuggestions|null);
 
                     /** ExecuteToolResponse toolIdentifier. */
                     public toolIdentifier?: ("tool"|"toolsetTool");
@@ -25983,6 +28331,9 @@ export namespace google {
 
                     /** RetrieveToolsRequest toolIds */
                     toolIds?: (string[]|null);
+
+                    /** RetrieveToolsRequest bypassPersistenceConfig */
+                    bypassPersistenceConfig?: (boolean|null);
                 }
 
                 /** Represents a RetrieveToolsRequest. */
@@ -25999,6 +28350,9 @@ export namespace google {
 
                     /** RetrieveToolsRequest toolIds. */
                     public toolIds: string[];
+
+                    /** RetrieveToolsRequest bypassPersistenceConfig. */
+                    public bypassPersistenceConfig: boolean;
 
                     /**
                      * Creates a new RetrieveToolsRequest instance using the specified properties.
@@ -28589,6 +30943,12 @@ export namespace google {
 
                     /** ChannelProfile noiseSuppressionLevel */
                     noiseSuppressionLevel?: (string|null);
+
+                    /** ChannelProfile whatsappConfig */
+                    whatsappConfig?: (google.cloud.ces.v1beta.ChannelProfile.IWhatsAppConfig|null);
+
+                    /** ChannelProfile instagramConfig */
+                    instagramConfig?: (google.cloud.ces.v1beta.ChannelProfile.IInstagramConfig|null);
                 }
 
                 /** Represents a ChannelProfile. */
@@ -28620,6 +30980,12 @@ export namespace google {
 
                     /** ChannelProfile noiseSuppressionLevel. */
                     public noiseSuppressionLevel: string;
+
+                    /** ChannelProfile whatsappConfig. */
+                    public whatsappConfig?: (google.cloud.ces.v1beta.ChannelProfile.IWhatsAppConfig|null);
+
+                    /** ChannelProfile instagramConfig. */
+                    public instagramConfig?: (google.cloud.ces.v1beta.ChannelProfile.IInstagramConfig|null);
 
                     /**
                      * Creates a new ChannelProfile instance using the specified properties.
@@ -29057,6 +31423,248 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a WhatsAppConfig. */
+                    interface IWhatsAppConfig {
+
+                        /** WhatsAppConfig wabaId */
+                        wabaId?: (string|null);
+
+                        /** WhatsAppConfig phoneNumberId */
+                        phoneNumberId?: (string|null);
+
+                        /** WhatsAppConfig phoneNumber */
+                        phoneNumber?: (string|null);
+
+                        /** WhatsAppConfig displayName */
+                        displayName?: (string|null);
+
+                        /** WhatsAppConfig thumbnailUrl */
+                        thumbnailUrl?: (string|null);
+
+                        /** WhatsAppConfig description */
+                        description?: (string|null);
+                    }
+
+                    /** Represents a WhatsAppConfig. */
+                    class WhatsAppConfig implements IWhatsAppConfig {
+
+                        /**
+                         * Constructs a new WhatsAppConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.ChannelProfile.IWhatsAppConfig);
+
+                        /** WhatsAppConfig wabaId. */
+                        public wabaId: string;
+
+                        /** WhatsAppConfig phoneNumberId. */
+                        public phoneNumberId: string;
+
+                        /** WhatsAppConfig phoneNumber. */
+                        public phoneNumber: string;
+
+                        /** WhatsAppConfig displayName. */
+                        public displayName: string;
+
+                        /** WhatsAppConfig thumbnailUrl. */
+                        public thumbnailUrl: string;
+
+                        /** WhatsAppConfig description. */
+                        public description: string;
+
+                        /**
+                         * Creates a new WhatsAppConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WhatsAppConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.ChannelProfile.IWhatsAppConfig): google.cloud.ces.v1beta.ChannelProfile.WhatsAppConfig;
+
+                        /**
+                         * Encodes the specified WhatsAppConfig message. Does not implicitly {@link google.cloud.ces.v1beta.ChannelProfile.WhatsAppConfig.verify|verify} messages.
+                         * @param message WhatsAppConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.ChannelProfile.IWhatsAppConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WhatsAppConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ChannelProfile.WhatsAppConfig.verify|verify} messages.
+                         * @param message WhatsAppConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.ChannelProfile.IWhatsAppConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WhatsAppConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WhatsAppConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.ChannelProfile.WhatsAppConfig;
+
+                        /**
+                         * Decodes a WhatsAppConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WhatsAppConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.ChannelProfile.WhatsAppConfig;
+
+                        /**
+                         * Verifies a WhatsAppConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WhatsAppConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WhatsAppConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.ChannelProfile.WhatsAppConfig;
+
+                        /**
+                         * Creates a plain object from a WhatsAppConfig message. Also converts values to other types if specified.
+                         * @param message WhatsAppConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.ChannelProfile.WhatsAppConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WhatsAppConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for WhatsAppConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InstagramConfig. */
+                    interface IInstagramConfig {
+
+                        /** InstagramConfig instagramAccountId */
+                        instagramAccountId?: (string|null);
+
+                        /** InstagramConfig displayName */
+                        displayName?: (string|null);
+
+                        /** InstagramConfig thumbnailUrl */
+                        thumbnailUrl?: (string|null);
+
+                        /** InstagramConfig description */
+                        description?: (string|null);
+                    }
+
+                    /** Represents an InstagramConfig. */
+                    class InstagramConfig implements IInstagramConfig {
+
+                        /**
+                         * Constructs a new InstagramConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.ces.v1beta.ChannelProfile.IInstagramConfig);
+
+                        /** InstagramConfig instagramAccountId. */
+                        public instagramAccountId: string;
+
+                        /** InstagramConfig displayName. */
+                        public displayName: string;
+
+                        /** InstagramConfig thumbnailUrl. */
+                        public thumbnailUrl: string;
+
+                        /** InstagramConfig description. */
+                        public description: string;
+
+                        /**
+                         * Creates a new InstagramConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InstagramConfig instance
+                         */
+                        public static create(properties?: google.cloud.ces.v1beta.ChannelProfile.IInstagramConfig): google.cloud.ces.v1beta.ChannelProfile.InstagramConfig;
+
+                        /**
+                         * Encodes the specified InstagramConfig message. Does not implicitly {@link google.cloud.ces.v1beta.ChannelProfile.InstagramConfig.verify|verify} messages.
+                         * @param message InstagramConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.ces.v1beta.ChannelProfile.IInstagramConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InstagramConfig message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.ChannelProfile.InstagramConfig.verify|verify} messages.
+                         * @param message InstagramConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.ces.v1beta.ChannelProfile.IInstagramConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InstagramConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InstagramConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.ChannelProfile.InstagramConfig;
+
+                        /**
+                         * Decodes an InstagramConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InstagramConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.ChannelProfile.InstagramConfig;
+
+                        /**
+                         * Verifies an InstagramConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InstagramConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InstagramConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.ChannelProfile.InstagramConfig;
+
+                        /**
+                         * Creates a plain object from an InstagramConfig message. Also converts values to other types if specified.
+                         * @param message InstagramConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.ces.v1beta.ChannelProfile.InstagramConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InstagramConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InstagramConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** ChannelType enum. */
                     enum ChannelType {
                         UNKNOWN = 0,
@@ -29065,8 +31673,11 @@ export namespace google {
                         TWILIO = 4,
                         GOOGLE_TELEPHONY_PLATFORM = 5,
                         CONTACT_CENTER_AS_A_SERVICE = 6,
+                        CONTACT_CENTER_AS_A_SERVICE_CHAT = 11,
                         FIVE9 = 7,
-                        CONTACT_CENTER_INTEGRATION = 8
+                        CONTACT_CENTER_INTEGRATION = 8,
+                        WHATSAPP = 9,
+                        INSTAGRAM = 10
                     }
                 }
 
@@ -29195,6 +31806,113 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EvaluationRunCachingSettings. */
+                interface IEvaluationRunCachingSettings {
+
+                    /** EvaluationRunCachingSettings runCachingMode */
+                    runCachingMode?: (google.cloud.ces.v1beta.EvaluationRunCachingSettings.EvaluationRunCachingMode|keyof typeof google.cloud.ces.v1beta.EvaluationRunCachingSettings.EvaluationRunCachingMode|null);
+                }
+
+                /** Represents an EvaluationRunCachingSettings. */
+                class EvaluationRunCachingSettings implements IEvaluationRunCachingSettings {
+
+                    /**
+                     * Constructs a new EvaluationRunCachingSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IEvaluationRunCachingSettings);
+
+                    /** EvaluationRunCachingSettings runCachingMode. */
+                    public runCachingMode: (google.cloud.ces.v1beta.EvaluationRunCachingSettings.EvaluationRunCachingMode|keyof typeof google.cloud.ces.v1beta.EvaluationRunCachingSettings.EvaluationRunCachingMode);
+
+                    /**
+                     * Creates a new EvaluationRunCachingSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvaluationRunCachingSettings instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IEvaluationRunCachingSettings): google.cloud.ces.v1beta.EvaluationRunCachingSettings;
+
+                    /**
+                     * Encodes the specified EvaluationRunCachingSettings message. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationRunCachingSettings.verify|verify} messages.
+                     * @param message EvaluationRunCachingSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IEvaluationRunCachingSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvaluationRunCachingSettings message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.EvaluationRunCachingSettings.verify|verify} messages.
+                     * @param message EvaluationRunCachingSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IEvaluationRunCachingSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvaluationRunCachingSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvaluationRunCachingSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.EvaluationRunCachingSettings;
+
+                    /**
+                     * Decodes an EvaluationRunCachingSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvaluationRunCachingSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.EvaluationRunCachingSettings;
+
+                    /**
+                     * Verifies an EvaluationRunCachingSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvaluationRunCachingSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvaluationRunCachingSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.EvaluationRunCachingSettings;
+
+                    /**
+                     * Creates a plain object from an EvaluationRunCachingSettings message. Also converts values to other types if specified.
+                     * @param message EvaluationRunCachingSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.EvaluationRunCachingSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvaluationRunCachingSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvaluationRunCachingSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EvaluationRunCachingSettings {
+
+                    /** EvaluationRunCachingMode enum. */
+                    enum EvaluationRunCachingMode {
+                        EVALUATION_RUN_CACHING_MODE_UNSPECIFIED = 0,
+                        FORCE_RUN = 1,
+                        SKIP_IF_UNCHANGED = 2
+                    }
                 }
 
                 /** Properties of an AgentCard. */
@@ -38343,6 +41061,9 @@ export namespace google {
 
                         /** QualityReportGenerationConfig evaluationRun */
                         evaluationRun?: (string|null);
+
+                        /** QualityReportGenerationConfig algorithm */
+                        algorithm?: (google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig.LossAttributionAlgorithm|keyof typeof google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig.LossAttributionAlgorithm|null);
                     }
 
                     /** Represents a QualityReportGenerationConfig. */
@@ -38356,6 +41077,9 @@ export namespace google {
 
                         /** QualityReportGenerationConfig evaluationRun. */
                         public evaluationRun: string;
+
+                        /** QualityReportGenerationConfig algorithm. */
+                        public algorithm: (google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig.LossAttributionAlgorithm|keyof typeof google.cloud.ces.v1beta.GenerateAppResourceRequest.QualityReportGenerationConfig.LossAttributionAlgorithm);
 
                         /**
                          * Creates a new QualityReportGenerationConfig instance using the specified properties.
@@ -38433,6 +41157,16 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace QualityReportGenerationConfig {
+
+                        /** LossAttributionAlgorithm enum. */
+                        enum LossAttributionAlgorithm {
+                            LOSS_ATTRIBUTION_ALGORITHM_UNSPECIFIED = 0,
+                            APP_CENTRIC = 1,
+                            AGENT_CENTRIC = 2
+                        }
                     }
 
                     /** Properties of a HillClimbingFixConfig. */
@@ -41016,8 +43750,17 @@ export namespace google {
                     /** SynthesizeSpeechConfig voice */
                     voice?: (string|null);
 
+                    /** SynthesizeSpeechConfig voiceSampleGcsUri */
+                    voiceSampleGcsUri?: (string|null);
+
                     /** SynthesizeSpeechConfig speakingRate */
                     speakingRate?: (number|null);
+
+                    /** SynthesizeSpeechConfig model */
+                    model?: (string|null);
+
+                    /** SynthesizeSpeechConfig instruction */
+                    instruction?: (string|null);
                 }
 
                 /** Represents a SynthesizeSpeechConfig. */
@@ -41032,8 +43775,17 @@ export namespace google {
                     /** SynthesizeSpeechConfig voice. */
                     public voice: string;
 
+                    /** SynthesizeSpeechConfig voiceSampleGcsUri. */
+                    public voiceSampleGcsUri: string;
+
                     /** SynthesizeSpeechConfig speakingRate. */
                     public speakingRate: number;
+
+                    /** SynthesizeSpeechConfig model. */
+                    public model: string;
+
+                    /** SynthesizeSpeechConfig instruction. */
+                    public instruction: string;
 
                     /**
                      * Creates a new SynthesizeSpeechConfig instance using the specified properties.
@@ -41225,6 +43977,9 @@ export namespace google {
                     /** LoggingSettings bigqueryExportSettings */
                     bigqueryExportSettings?: (google.cloud.ces.v1beta.IBigQueryExportSettings|null);
 
+                    /** LoggingSettings unredactedBigqueryExportSettings */
+                    unredactedBigqueryExportSettings?: (google.cloud.ces.v1beta.IBigQueryExportSettings|null);
+
                     /** LoggingSettings cloudLoggingSettings */
                     cloudLoggingSettings?: (google.cloud.ces.v1beta.ICloudLoggingSettings|null);
 
@@ -41258,6 +44013,9 @@ export namespace google {
 
                     /** LoggingSettings bigqueryExportSettings. */
                     public bigqueryExportSettings?: (google.cloud.ces.v1beta.IBigQueryExportSettings|null);
+
+                    /** LoggingSettings unredactedBigqueryExportSettings. */
+                    public unredactedBigqueryExportSettings?: (google.cloud.ces.v1beta.IBigQueryExportSettings|null);
 
                     /** LoggingSettings cloudLoggingSettings. */
                     public cloudLoggingSettings?: (google.cloud.ces.v1beta.ICloudLoggingSettings|null);
@@ -42249,6 +45007,9 @@ export namespace google {
 
                     /** EvaluationSettings scenarioExecutionMode */
                     scenarioExecutionMode?: (google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode|keyof typeof google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode|null);
+
+                    /** EvaluationSettings evaluationRunCachingSettings */
+                    evaluationRunCachingSettings?: (google.cloud.ces.v1beta.IEvaluationRunCachingSettings|null);
                 }
 
                 /** Represents an EvaluationSettings. */
@@ -42277,6 +45038,9 @@ export namespace google {
 
                     /** EvaluationSettings scenarioExecutionMode. */
                     public scenarioExecutionMode: (google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode|keyof typeof google.cloud.ces.v1beta.EvaluationSettings.ScenarioExecutionMode);
+
+                    /** EvaluationSettings evaluationRunCachingSettings. */
+                    public evaluationRunCachingSettings?: (google.cloud.ces.v1beta.IEvaluationRunCachingSettings|null);
 
                     /**
                      * Creates a new EvaluationSettings instance using the specified properties.
@@ -51827,6 +54591,9 @@ export namespace google {
                     /** Toolset description */
                     description?: (string|null);
 
+                    /** Toolset timeout */
+                    timeout?: (google.protobuf.IDuration|null);
+
                     /** Toolset createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -51869,6 +54636,9 @@ export namespace google {
 
                     /** Toolset description. */
                     public description: string;
+
+                    /** Toolset timeout. */
+                    public timeout?: (google.protobuf.IDuration|null);
 
                     /** Toolset createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
@@ -53370,6 +56140,12 @@ export namespace google {
 
                     /** Deployment experimentConfig */
                     experimentConfig?: (google.cloud.ces.v1beta.IExperimentConfig|null);
+
+                    /** Deployment whatsappCredentials */
+                    whatsappCredentials?: (google.cloud.ces.v1beta.IWhatsAppCredentials|null);
+
+                    /** Deployment instagramCredentials */
+                    instagramCredentials?: (google.cloud.ces.v1beta.IInstagramCredentials|null);
                 }
 
                 /** Represents a Deployment. */
@@ -53404,6 +56180,12 @@ export namespace google {
 
                     /** Deployment experimentConfig. */
                     public experimentConfig?: (google.cloud.ces.v1beta.IExperimentConfig|null);
+
+                    /** Deployment whatsappCredentials. */
+                    public whatsappCredentials?: (google.cloud.ces.v1beta.IWhatsAppCredentials|null);
+
+                    /** Deployment instagramCredentials. */
+                    public instagramCredentials?: (google.cloud.ces.v1beta.IInstagramCredentials|null);
 
                     /**
                      * Creates a new Deployment instance using the specified properties.
@@ -53477,6 +56259,236 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Deployment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WhatsAppCredentials. */
+                interface IWhatsAppCredentials {
+
+                    /** WhatsAppCredentials authCode */
+                    authCode?: (string|null);
+
+                    /** WhatsAppCredentials pin */
+                    pin?: (string|null);
+
+                    /** WhatsAppCredentials phoneNumber */
+                    phoneNumber?: (string|null);
+
+                    /** WhatsAppCredentials businessAccountId */
+                    businessAccountId?: (string|null);
+
+                    /** WhatsAppCredentials wabaId */
+                    wabaId?: (string|null);
+
+                    /** WhatsAppCredentials conversationProfileId */
+                    conversationProfileId?: (string|null);
+                }
+
+                /** Represents a WhatsAppCredentials. */
+                class WhatsAppCredentials implements IWhatsAppCredentials {
+
+                    /**
+                     * Constructs a new WhatsAppCredentials.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IWhatsAppCredentials);
+
+                    /** WhatsAppCredentials authCode. */
+                    public authCode: string;
+
+                    /** WhatsAppCredentials pin. */
+                    public pin: string;
+
+                    /** WhatsAppCredentials phoneNumber. */
+                    public phoneNumber: string;
+
+                    /** WhatsAppCredentials businessAccountId. */
+                    public businessAccountId: string;
+
+                    /** WhatsAppCredentials wabaId. */
+                    public wabaId: string;
+
+                    /** WhatsAppCredentials conversationProfileId. */
+                    public conversationProfileId: string;
+
+                    /**
+                     * Creates a new WhatsAppCredentials instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WhatsAppCredentials instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IWhatsAppCredentials): google.cloud.ces.v1beta.WhatsAppCredentials;
+
+                    /**
+                     * Encodes the specified WhatsAppCredentials message. Does not implicitly {@link google.cloud.ces.v1beta.WhatsAppCredentials.verify|verify} messages.
+                     * @param message WhatsAppCredentials message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IWhatsAppCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WhatsAppCredentials message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.WhatsAppCredentials.verify|verify} messages.
+                     * @param message WhatsAppCredentials message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IWhatsAppCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WhatsAppCredentials message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WhatsAppCredentials
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.WhatsAppCredentials;
+
+                    /**
+                     * Decodes a WhatsAppCredentials message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WhatsAppCredentials
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.WhatsAppCredentials;
+
+                    /**
+                     * Verifies a WhatsAppCredentials message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WhatsAppCredentials message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WhatsAppCredentials
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.WhatsAppCredentials;
+
+                    /**
+                     * Creates a plain object from a WhatsAppCredentials message. Also converts values to other types if specified.
+                     * @param message WhatsAppCredentials
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.WhatsAppCredentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WhatsAppCredentials to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WhatsAppCredentials
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InstagramCredentials. */
+                interface IInstagramCredentials {
+
+                    /** InstagramCredentials authCode */
+                    authCode?: (string|null);
+
+                    /** InstagramCredentials conversationProfileId */
+                    conversationProfileId?: (string|null);
+                }
+
+                /** Represents an InstagramCredentials. */
+                class InstagramCredentials implements IInstagramCredentials {
+
+                    /**
+                     * Constructs a new InstagramCredentials.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.ces.v1beta.IInstagramCredentials);
+
+                    /** InstagramCredentials authCode. */
+                    public authCode: string;
+
+                    /** InstagramCredentials conversationProfileId. */
+                    public conversationProfileId: string;
+
+                    /**
+                     * Creates a new InstagramCredentials instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstagramCredentials instance
+                     */
+                    public static create(properties?: google.cloud.ces.v1beta.IInstagramCredentials): google.cloud.ces.v1beta.InstagramCredentials;
+
+                    /**
+                     * Encodes the specified InstagramCredentials message. Does not implicitly {@link google.cloud.ces.v1beta.InstagramCredentials.verify|verify} messages.
+                     * @param message InstagramCredentials message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.ces.v1beta.IInstagramCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstagramCredentials message, length delimited. Does not implicitly {@link google.cloud.ces.v1beta.InstagramCredentials.verify|verify} messages.
+                     * @param message InstagramCredentials message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.ces.v1beta.IInstagramCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstagramCredentials message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstagramCredentials
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.ces.v1beta.InstagramCredentials;
+
+                    /**
+                     * Decodes an InstagramCredentials message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstagramCredentials
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.ces.v1beta.InstagramCredentials;
+
+                    /**
+                     * Verifies an InstagramCredentials message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstagramCredentials message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstagramCredentials
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.ces.v1beta.InstagramCredentials;
+
+                    /**
+                     * Creates a plain object from an InstagramCredentials message. Also converts values to other types if specified.
+                     * @param message InstagramCredentials
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.ces.v1beta.InstagramCredentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstagramCredentials to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstagramCredentials
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -59593,6 +62605,9 @@ export namespace google {
 
                     /** RunEvaluationRequest generateLatencyReport */
                     generateLatencyReport?: (boolean|null);
+
+                    /** RunEvaluationRequest evaluationRunCachingSettings */
+                    evaluationRunCachingSettings?: (google.cloud.ces.v1beta.IEvaluationRunCachingSettings|null);
                 }
 
                 /** Represents a RunEvaluationRequest. */
@@ -59639,6 +62654,9 @@ export namespace google {
 
                     /** RunEvaluationRequest generateLatencyReport. */
                     public generateLatencyReport: boolean;
+
+                    /** RunEvaluationRequest evaluationRunCachingSettings. */
+                    public evaluationRunCachingSettings?: (google.cloud.ces.v1beta.IEvaluationRunCachingSettings|null);
 
                     /**
                      * Creates a new RunEvaluationRequest instance using the specified properties.
@@ -61633,6 +64651,9 @@ export namespace google {
 
                     /** SessionOutput diagnosticInfo */
                     diagnosticInfo?: (google.cloud.ces.v1beta.SessionOutput.IDiagnosticInfo|null);
+
+                    /** SessionOutput context */
+                    context?: (google.protobuf.IAny[]|null);
                 }
 
                 /** Represents a SessionOutput. */
@@ -61673,6 +64694,9 @@ export namespace google {
 
                     /** SessionOutput diagnosticInfo. */
                     public diagnosticInfo?: (google.cloud.ces.v1beta.SessionOutput.IDiagnosticInfo|null);
+
+                    /** SessionOutput context. */
+                    public context: google.protobuf.IAny[];
 
                     /** SessionOutput outputType. */
                     public outputType?: ("text"|"audio"|"toolCalls"|"citations"|"googleSearchSuggestions"|"endSession"|"payload");
@@ -64925,6 +67949,9 @@ export namespace google {
 
                     /** GenerateEvaluationRequest source */
                     source?: (google.cloud.ces.v1beta.Conversation.Source|keyof typeof google.cloud.ces.v1beta.Conversation.Source|null);
+
+                    /** GenerateEvaluationRequest evaluationType */
+                    evaluationType?: (google.cloud.ces.v1beta.GenerateEvaluationRequest.EvaluationType|keyof typeof google.cloud.ces.v1beta.GenerateEvaluationRequest.EvaluationType|null);
                 }
 
                 /** Represents a GenerateEvaluationRequest. */
@@ -64941,6 +67968,9 @@ export namespace google {
 
                     /** GenerateEvaluationRequest source. */
                     public source: (google.cloud.ces.v1beta.Conversation.Source|keyof typeof google.cloud.ces.v1beta.Conversation.Source);
+
+                    /** GenerateEvaluationRequest evaluationType. */
+                    public evaluationType: (google.cloud.ces.v1beta.GenerateEvaluationRequest.EvaluationType|keyof typeof google.cloud.ces.v1beta.GenerateEvaluationRequest.EvaluationType);
 
                     /**
                      * Creates a new GenerateEvaluationRequest instance using the specified properties.
@@ -65018,6 +68048,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GenerateEvaluationRequest {
+
+                    /** EvaluationType enum. */
+                    enum EvaluationType {
+                        EVALUATION_TYPE_UNSPECIFIED = 0,
+                        GOLDEN = 1,
+                        SCENARIO = 2
+                    }
                 }
 
                 /** Properties of an ImportEvaluationsRequest. */

@@ -135,6 +135,31 @@
                 "getThreadReadState"
               ]
             },
+            "GetAvailability": {
+              "methods": [
+                "getAvailability"
+              ]
+            },
+            "MarkAsActive": {
+              "methods": [
+                "markAsActive"
+              ]
+            },
+            "MarkAsAway": {
+              "methods": [
+                "markAsAway"
+              ]
+            },
+            "MarkAsDoNotDisturb": {
+              "methods": [
+                "markAsDoNotDisturb"
+              ]
+            },
+            "UpdateAvailability": {
+              "methods": [
+                "updateAvailability"
+              ]
+            },
             "GetSpaceEvent": {
               "methods": [
                 "getSpaceEvent"
@@ -373,6 +398,31 @@
             "GetThreadReadState": {
               "methods": [
                 "getThreadReadState"
+              ]
+            },
+            "GetAvailability": {
+              "methods": [
+                "getAvailability"
+              ]
+            },
+            "MarkAsActive": {
+              "methods": [
+                "markAsActive"
+              ]
+            },
+            "MarkAsAway": {
+              "methods": [
+                "markAsAway"
+              ]
+            },
+            "MarkAsDoNotDisturb": {
+              "methods": [
+                "markAsDoNotDisturb"
+              ]
+            },
+            "UpdateAvailability": {
+              "methods": [
+                "updateAvailability"
               ]
             },
             "GetSpaceEvent": {
