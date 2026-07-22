@@ -657,6 +657,7 @@ libraries:
     apis:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
+    version: 0.1.0
   - name: google-cloud-compute
     version: 6.14.0
     apis:
