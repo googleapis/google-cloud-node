@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "ecba5e3d36eee9a6cdcf26d8fa7439b7b4244686",
+          "message": "Remove owlbot template updater from cloud-profiler",
+          "issues": [
+            "8915"
+          ]
+        }
+      ],
+      "version": "7.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/profiler",
+      "id": "e53ddf0a-ee01-4f65-8be6-9aca81f5831f",
+      "createTime": "2026-07-22T21:03:19.835Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
           "message": "Update API sources and regenerate",
@@ -82747,5 +82764,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-21T16:25:07.411Z"
+  "updateTime": "2026-07-22T21:03:19.835Z"
 }
