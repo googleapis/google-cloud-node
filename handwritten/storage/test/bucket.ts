@@ -27,6 +27,7 @@ import {
 } from '../src/index.js';
 import sinon from 'sinon';
 import {StorageTransport} from '../src/storage-transport.js';
+import {GoogleAuth} from 'google-auth-library';
 import {
   AvailableServiceObjectMethods,
   BucketExceptionMessages,
@@ -2938,6 +2939,97 @@ describe('Bucket', () => {
         };
 
         bucket.upload(filepath, options, err => {
+          assert.ifError(err);
+          assert.strictEqual(retryCount, 2);
+          done();
+        });
+      });
+
+      it('should use the same invocationId in x-goog-api-client header across retries', done => {
+        const fakeFile = new File(bucket, 'file-name');
+
+        const options = {
+          destination: fakeFile,
+          resumable: false,
+          validation: false,
+          preconditionOpts: { ifGenerationMatch: 123 },
+        };
+
+        const authClient = new GoogleAuth();
+        sandbox.stub(authClient, 'request');
+
+        const realTransport = new StorageTransport({
+          apiEndpoint: 'https://storage.googleapis.com',
+          baseUrl: 'https://storage.googleapis.com',
+          authClient: authClient,
+          projectId: 'project-id',
+          retryOptions: STORAGE.retryOptions,
+          scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+          packageJson: { name: 'test-package', version: '1.0.0' },
+        });
+
+        // Swap storage transport to test real header compilation
+        const originalTransport = bucket.storage.storageTransport;
+        bucket.storage.storageTransport = realTransport;
+
+        // Update existing file instance to use new transport
+        const originalFileTransport = fakeFile.storageTransport;
+        fakeFile.storageTransport = realTransport;
+
+        let retryCount = 0;
+        let firstInvocationId: string | undefined;
+
+        bucket.storage.retryOptions.autoRetry = true;
+        bucket.storage.retryOptions.maxRetries = 2;
+        bucket.storage.retryOptions.idempotencyStrategy = 1;
+        bucket.storage.retryOptions.retryableErrorFn = () => true;
+
+        const requestStub = realTransport.authClient.request as sinon.SinonStub;
+        requestStub.callsFake(async (reqOpts) => {
+          if (reqOpts.method !== 'POST') {
+            return {
+              config: {},
+              data: {},
+              headers: {},
+              status: 204,
+              statusText: 'No Content',
+            } as any;
+          }
+
+          if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
+            const part = reqOpts.multipart[1];
+            if (part && part.content && typeof part.content.resume === 'function') {
+              part.content.resume();
+            }
+          }
+
+          retryCount++;
+          const headers = reqOpts.headers || {};
+          const apiClientHeader = headers['x-goog-api-client'] || '';
+          const match = apiClientHeader.match(/gccl-invocation-id\/([a-f0-9-]+)/);
+          const currentId = match ? match[1] : undefined;
+
+          if (retryCount === 1) {
+            firstInvocationId = currentId;
+            const error = new Error('Retryable failure') as GaxiosError;
+            error.code = 500;
+            error.status = 500;
+            throw error;
+          } else {
+            assert.strictEqual(currentId, firstInvocationId);
+            return {
+              config: {},
+              data: {},
+              headers: {},
+              status: 200,
+              statusText: 'OK',
+            } as any;
+          }
+        });
+
+        bucket.upload(filepath, options, err => {
+          bucket.storage.storageTransport = originalTransport;
+          fakeFile.storageTransport = originalFileTransport;
           assert.ifError(err);
           assert.strictEqual(retryCount, 2);
           done();

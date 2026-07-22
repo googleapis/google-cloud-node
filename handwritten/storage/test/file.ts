@@ -26,6 +26,7 @@ import {
   StorageRequestOptions,
   StorageTransport,
 } from '../src/storage-transport.js';
+import {GoogleAuth} from 'google-auth-library';
 import sinon from 'sinon';
 import {
   FileExceptionMessages,
@@ -4676,6 +4677,119 @@ describe('File', () => {
       const calledOptions = createWriteStreamStub.firstCall.args[0];
       assert.ok(calledOptions?.invocationId);
       assert.strictEqual(typeof calledOptions?.invocationId, 'string');
+    });
+
+    it('should use the same invocationId across retries in a simple upload', async () => {
+      const options = {
+        resumable: false,
+        preconditionOpts: { ifGenerationMatch: 123 },
+      };
+      let retryCount = 0;
+      let firstInvocationId: string | undefined;
+
+      file.storage.retryOptions.autoRetry = true;
+      file.storage.retryOptions.maxRetries = 2;
+      file.storage.retryOptions.idempotencyStrategy = 1;
+      file.storage.retryOptions.retryableErrorFn = () => true;
+
+      sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
+        retryCount++;
+        const currentId = options_?.invocationId;
+
+        if (retryCount === 1) {
+          firstInvocationId = currentId;
+        } else {
+          assert.strictEqual(currentId, firstInvocationId);
+        }
+
+        return new DelayedStream500Error(retryCount);
+      });
+
+      await file.save(DATA, options);
+      assert.strictEqual(retryCount, 2);
+    });
+
+    it('should use the same invocationId in x-goog-api-client header across retries', async () => {
+      const options = {
+        resumable: false,
+        validation: false,
+        preconditionOpts: { ifGenerationMatch: 123 },
+      };
+
+      const authClient = new GoogleAuth();
+      sandbox.stub(authClient, 'request');
+
+      const realTransport = new StorageTransport({
+        apiEndpoint: 'https://storage.googleapis.com',
+        baseUrl: 'https://storage.googleapis.com',
+        authClient: authClient,
+        projectId: 'project-id',
+        retryOptions: file.storage.retryOptions,
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: { name: 'test-package', version: '1.0.0' },
+      });
+      // Use real transport to verify StorageTransport header formatting
+      const originalTransport = file.storageTransport;
+      file.storageTransport = realTransport;
+
+      let retryCount = 0;
+      let firstInvocationId: string | undefined;
+
+      file.storage.retryOptions.autoRetry = true;
+      file.storage.retryOptions.maxRetries = 2;
+      file.storage.retryOptions.idempotencyStrategy = 1;
+      file.storage.retryOptions.retryableErrorFn = () => true;
+
+      // Stub the authClient.request method used by the transport
+      const requestStub = realTransport.authClient.request as sinon.SinonStub;
+      requestStub.callsFake(async (reqOpts) => {
+        if (reqOpts.method !== 'POST') {
+          return {
+            config: {},
+            data: {},
+            headers: {},
+            status: 204,
+            statusText: 'No Content',
+          } as any;
+        }
+
+        if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
+          const part = reqOpts.multipart[1];
+          if (part && part.content && typeof part.content.resume === 'function') {
+            part.content.resume();
+          }
+        }
+
+        retryCount++;
+        const headers = reqOpts.headers || {};
+        const apiClientHeader = headers['x-goog-api-client'] || '';
+        const match = apiClientHeader.match(/gccl-invocation-id\/([a-f0-9-]+)/);
+        const currentId = match ? match[1] : undefined;
+
+        if (retryCount === 1) {
+          firstInvocationId = currentId;
+          const error = new Error('Retryable failure') as GaxiosError;
+          error.code = 500;
+          error.status = 500;
+          throw error;
+        } else {
+          assert.strictEqual(currentId, firstInvocationId);
+          return {
+            config: {},
+            data: {},
+            headers: {},
+            status: 200,
+            statusText: 'OK',
+          } as any;
+        }
+      });
+
+      try {
+        await file.save(DATA, options);
+      } finally {
+        file.storageTransport = originalTransport;
+      }
+      assert.strictEqual(retryCount, 2);
     });
   });
 
