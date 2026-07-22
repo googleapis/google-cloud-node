@@ -72,6 +72,7 @@ async function testPqc(pemPath: string, port: number) {
     // --- 1. gRPC PQC Test ---
     currentTestType = 'grpc';
     let negotiatedGroupGrpc: string | undefined;
+    let clientSupportedGroupsGrpc: string | undefined;
 
     const interceptor = (options: any, nextCall: any) => {
       return new grpc.InterceptingCall(nextCall(options), {
@@ -81,6 +82,10 @@ async function testPqc(pemPath: string, port: number) {
               const group = receivedMetadata.get('x-showcase-tls-group');
               if (group && group.length > 0) {
                 negotiatedGroupGrpc = group[0].toString();
+              }
+              const supportedGroups = receivedMetadata.get('x-showcase-tls-client-supported-groups');
+              if (supportedGroups && supportedGroups.length > 0) {
+                clientSupportedGroupsGrpc = supportedGroups[0].toString();
               }
               nextListener(receivedMetadata);
             },
@@ -115,10 +120,13 @@ async function testPqc(pemPath: string, port: number) {
     assert.strictEqual(grpcSocket.getCipher()?.name, 'TLS_AES_128_GCM_SHA256', 'Expected specific negotiated cipher');
     assert.ok(negotiatedGroupGrpc, 'Expected negotiated TLS group in gRPC response metadata');
     assert.strictEqual(negotiatedGroupGrpc, 'X25519MLKEM768');
+    assert.ok(clientSupportedGroupsGrpc, 'Expected client supported groups in gRPC response metadata');
+    assert.ok(clientSupportedGroupsGrpc.includes('X25519MLKEM768'), 'Expected client to include X25519MLKEM768 in supported groups');
 
     // --- 2. HTTP/REST Fallback PQC Test ---
     currentTestType = 'rest';
     let negotiatedGroupRest: string | undefined;
+    let clientSupportedGroupsRest: string | undefined;
 
     const auth = new GoogleAuth({
       authClient: new googleAuthLibrary.PassThroughClient(),
@@ -136,6 +144,10 @@ async function testPqc(pemPath: string, port: number) {
       const group = typeof res.headers.get === 'function' ? res.headers.get('x-showcase-tls-group') : (res.headers as any)['x-showcase-tls-group'];
       if (group) {
         negotiatedGroupRest = group;
+      }
+      const supportedGroups = typeof res.headers.get === 'function' ? res.headers.get('x-showcase-tls-client-supported-groups') : (res.headers as any)['x-showcase-tls-client-supported-groups'];
+      if (supportedGroups) {
+        clientSupportedGroupsRest = supportedGroups;
       }
       return res;
     };
@@ -157,6 +169,8 @@ async function testPqc(pemPath: string, port: number) {
     assert.strictEqual(restSocket.getCipher()?.name, 'TLS_AES_128_GCM_SHA256', 'Expected specific negotiated cipher');
     assert.ok(negotiatedGroupRest, 'Expected negotiated TLS group in REST response headers');
     assert.strictEqual(negotiatedGroupRest, 'X25519MLKEM768');
+    assert.ok(clientSupportedGroupsRest, 'Expected client supported groups in REST response headers');
+    assert.ok(clientSupportedGroupsRest.includes('X25519MLKEM768'), 'Expected client to include X25519MLKEM768 in supported groups');
   } finally {
     // Restore the original tls.connect
     (tls as any).connect = originalTlsConnect;
