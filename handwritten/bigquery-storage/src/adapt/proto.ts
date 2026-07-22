@@ -13,7 +13,7 @@ import '../protobuf';
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 import {bqTypeToFieldTypeMap, convertModeToLabel} from './proto_mappings';
 import {normalizeFieldType} from './schema_mappings';
 import {AdaptOptions, AdaptOption} from './options';

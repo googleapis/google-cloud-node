@@ -26,7 +26,7 @@ export default {
   reader,
   ReadClient,
 };
-import * as protos from '../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 export {protos};
 import * as adapt from './adapt';
 export {adapt};
