@@ -19,7 +19,6 @@
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {before, beforeEach, describe, it} from 'mocha';
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import {
   CLOUD_RESOURCE_HEADER,
@@ -33,7 +32,7 @@ import {
 } from '../src/request_id_header';
 
 let promisified = false;
-const fakePfy = extend({}, pfy, {
+const fakePfy = Object.assign({}, pfy, {
   promisifyAll(klass, options) {
     if (klass.name !== 'Session') {
       return;
@@ -173,7 +172,7 @@ describe('Session', () => {
           uniqueProperty: true,
         };
 
-        const databaseInstance = extend({}, DATABASE, {
+        const databaseInstance = Object.assign({}, DATABASE, {
           createSession(options_, callback) {
             assert.strictEqual(options_, options);
             callback(null, createdSession, apiResponse);
@@ -202,7 +201,7 @@ describe('Session', () => {
       });
 
       it('should check for options', done => {
-        const databaseInstance = extend({}, DATABASE, {
+        const databaseInstance = Object.assign({}, DATABASE, {
           createSession(options, callback) {
             assert.deepStrictEqual(options, {});
             callback(null, {}, apiResponse);
@@ -224,7 +223,7 @@ describe('Session', () => {
         const error = new Error('Error.');
         const apiResponse = {};
 
-        const databaseInstance = extend({}, DATABASE, {
+        const databaseInstance = Object.assign({}, DATABASE, {
           createSession(options_, callback) {
             callback(error, null, apiResponse);
           },

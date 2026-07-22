@@ -16,8 +16,9 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const knowledge = require('google-developer-knowledge');
+const knowledge = require('@google/developer-knowledge');
 
 function main() {
   const developerKnowledgeClient = new knowledge.DeveloperKnowledgeClient();

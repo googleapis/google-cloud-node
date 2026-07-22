@@ -27,6 +27,7 @@ steps:
   dir: 'handwritten/spanner'
   env:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
+  - 'TRIGGER_NAME=${TRIGGER_NAME}'
   # If you need specific credentials from Secret Manager, uncomment these:
   # - 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/sa-key.json'
   - 'GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS=false'
