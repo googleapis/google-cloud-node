@@ -5242,21 +5242,7 @@ describe('File', () => {
         assert.strictEqual(file.storage.retryOptions.autoRetry, true);
       });
 
-      it('should pass the invocationId to the resumable upload configuration', done => {
-        const options = {
-          invocationId: 'resumable-persistent-id',
-        };
 
-        const resumableUpload = require('../src/resumable-upload');
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        sandbox.stub(resumableUpload, 'upload').callsFake((cfg: any) => {
-          assert.strictEqual(cfg.invocationId, options.invocationId);
-          setImmediate(done);
-          return new PassThrough();
-        });
-
-        file.startResumableUpload_(duplexify(), options);
-      });
     });
   });
 

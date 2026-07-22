@@ -249,7 +249,6 @@ export interface CreateResumableUploadOptions
    * @see {@link CRC32C.from} for possible values.
    */
   resumeCRC32C?: Parameters<(typeof CRC32C)['from']>[0];
-  invocationId?: string;
   preconditionOpts?: PreconditionOptions;
   [GCCL_GCS_CMD_KEY]?: resumableUpload.UploadConfig[typeof GCCL_GCS_CMD_KEY];
 }
@@ -266,6 +265,7 @@ export interface CreateWriteStreamOptions extends CreateResumableUploadOptions {
   resumable?: boolean;
   timeout?: number;
   validation?: string | boolean;
+  invocationId?: string;
 }
 
 export interface MakeFilePrivateOptions {
@@ -4492,7 +4492,6 @@ class File extends ServiceObject<File, FileMetadata> {
       chunkSize: options?.chunkSize,
       highWaterMark: options?.highWaterMark,
       universeDomain: this.bucket.storage.universeDomain,
-      invocationId: options.invocationId,
       [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
     };
 
