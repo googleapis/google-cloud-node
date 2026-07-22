@@ -16,6 +16,8 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
+
 'use strict';
 
 function main(names) {
@@ -38,13 +40,13 @@ function main(names) {
    *  Optional. Specifies the
    *  DocumentView google.developers.knowledge.v1.DocumentView  of the
    *  document. If unspecified,
-   *  DeveloperKnowledge.BatchGetDocuments google.developers.knowledge.v1.DeveloperKnowledge.BatchGetDocuments
+   *  DeveloperKnowledge.BatchGetDocuments google.developers.knowledge.v1.DeveloperKnowledge.BatchGetDocuments 
    *  defaults to `DOCUMENT_VIEW_CONTENT`.
    */
   // const view = {}
 
   // Imports the Knowledge library
-  const {DeveloperKnowledgeClient} = require('google-developer-knowledge').v1;
+  const {DeveloperKnowledgeClient} = require('@google/developer-knowledge').v1;
 
   // Instantiates a client
   const knowledgeClient = new DeveloperKnowledgeClient();

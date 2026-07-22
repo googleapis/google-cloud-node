@@ -1,6 +1,6 @@
 {
   "name": "gapic-tools",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "compiles, updates, and minifies protos",
   "main": "build/src/compileProtos.js",
   "files": [
@@ -30,6 +30,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@babel/core": "^7.26.8",
+    "@babel/template": "^7.26.8",
     "@babel/traverse": "^7.26.8",
     "google-gax": "^5.0.6",
     "google-proto-files": "^5.0.0",
@@ -47,6 +48,7 @@
     "@babel/cli": "^7.26.4",
     "@babel/types": "^7.26.8",
     "@types/babel__core": "^7.20.5",
+    "@types/babel__template": "^7.4.4",
     "@types/babel__traverse": "^7.20.6",
     "@types/mocha": "^10.0.10",
     "@types/ncp": "^2.0.8",

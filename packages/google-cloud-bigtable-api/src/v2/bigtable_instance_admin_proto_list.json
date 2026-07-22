@@ -1,0 +1,8 @@
+[
+  "../../protos/google/bigtable/admin/v2/bigtable_instance_admin.proto",
+  "../../protos/google/bigtable/admin/v2/bigtable_table_admin.proto",
+  "../../protos/google/bigtable/admin/v2/common.proto",
+  "../../protos/google/bigtable/admin/v2/instance.proto",
+  "../../protos/google/bigtable/admin/v2/table.proto",
+  "../../protos/google/bigtable/admin/v2/types.proto"
+]

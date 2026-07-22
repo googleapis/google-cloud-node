@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.8.1...backupdr-v0.9.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
 ## [0.8.1](https://github.com/googleapis/google-cloud-node/compare/backupdr-v0.8.0...backupdr-v0.8.1) (2026-05-01)
 
 

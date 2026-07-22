@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudProductRegistryReadServiceClient} from './cloud_product_registry_read_service_client';
+export { CloudProductRegistryReadServiceClient } from './cloud_product_registry_read_service_client';
