@@ -38,7 +38,8 @@ import * as gapicConfig from './service_controller_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  [Google Service Control API](/service-control/overview)
+ *  [Google Service Control
+ *  API](https://cloud.google.com/service-control/overview)
  *
  *  Lets clients check and report operations against a [managed
  *  service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
@@ -376,8 +377,8 @@ export class ServiceControllerClient {
    * propagation, therefore callers MUST NOT depend on the `Check` method having
    * the latest policy information.
    *
-   * NOTE: the {@link protos.google.api.servicecontrol.v1.CheckRequest|CheckRequest} has
-   * the size limit (wire-format byte size) of 1MB.
+   * NOTE: the {@link protos.google.api.servicecontrol.v1.CheckRequest|CheckRequest} has the
+   * size limit (wire-format byte size) of 1MB.
    *
    * This method requires the `servicemanagement.services.check` permission
    * on the specified service. For more information, see

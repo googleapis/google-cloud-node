@@ -328,6 +328,155 @@ describe('v1beta.RolloutsClient', () => {
     });
   });
 
+  describe('advance', () => {
+    it('invokes advance without error', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.AdvanceRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.AdvanceRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.AdvanceRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&rollout=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.Operation(),
+      );
+      client.innerApiCalls.advance = stubSimpleCall(expectedResponse);
+      const [response] = await client.advance(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (client.innerApiCalls.advance as SinonStub).getCall(
+        0,
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.advance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes advance without error using callback', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.AdvanceRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.AdvanceRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.AdvanceRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&rollout=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.Operation(),
+      );
+      client.innerApiCalls.advance =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.advance(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1beta.IOperation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.advance as SinonStub).getCall(
+        0,
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.advance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes advance with error', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.AdvanceRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.AdvanceRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.AdvanceRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&rollout=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.advance = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.advance(request), expectedError);
+      const actualRequest = (client.innerApiCalls.advance as SinonStub).getCall(
+        0,
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.advance as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes advance with closed client', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.AdvanceRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.AdvanceRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.AdvanceRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.advance(request), expectedError);
+    });
+  });
+
   describe('cancel', () => {
     it('invokes cancel without error', async () => {
       const client = new rolloutsModule.v1beta.RolloutsClient({
@@ -768,6 +917,300 @@ describe('v1beta.RolloutsClient', () => {
         throw err;
       });
       await assert.rejects(client.get(request), expectedError);
+    });
+  });
+
+  describe('pause', () => {
+    it('invokes pause without error', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.PauseRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.PauseRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.PauseRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&rollout=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.Operation(),
+      );
+      client.innerApiCalls.pause = stubSimpleCall(expectedResponse);
+      const [response] = await client.pause(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (client.innerApiCalls.pause as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pause as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes pause without error using callback', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.PauseRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.PauseRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.PauseRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&rollout=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.Operation(),
+      );
+      client.innerApiCalls.pause = stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.pause(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1beta.IOperation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.pause as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pause as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes pause with error', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.PauseRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.PauseRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.PauseRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&rollout=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.pause = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.pause(request), expectedError);
+      const actualRequest = (client.innerApiCalls.pause as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pause as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes pause with closed client', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.PauseRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.PauseRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.PauseRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.pause(request), expectedError);
+    });
+  });
+
+  describe('resume', () => {
+    it('invokes resume without error', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.ResumeRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ResumeRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ResumeRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&rollout=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.Operation(),
+      );
+      client.innerApiCalls.resume = stubSimpleCall(expectedResponse);
+      const [response] = await client.resume(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const actualRequest = (client.innerApiCalls.resume as SinonStub).getCall(
+        0,
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resume as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resume without error using callback', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.ResumeRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ResumeRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ResumeRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&rollout=${defaultValue2 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.Operation(),
+      );
+      client.innerApiCalls.resume =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.resume(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1beta.IOperation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.resume as SinonStub).getCall(
+        0,
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resume as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resume with error', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.ResumeRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ResumeRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ResumeRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}&rollout=${defaultValue2 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.resume = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.resume(request), expectedError);
+      const actualRequest = (client.innerApiCalls.resume as SinonStub).getCall(
+        0,
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resume as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resume with closed client', async () => {
+      const client = new rolloutsModule.v1beta.RolloutsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1beta.ResumeRolloutRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ResumeRolloutRequest',
+        ['project'],
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1beta.ResumeRolloutRequest',
+        ['rollout'],
+      );
+      request.rollout = defaultValue2;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.resume(request), expectedError);
     });
   });
 

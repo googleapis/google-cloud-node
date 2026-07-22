@@ -1419,6 +1419,13 @@
                           "type": "RelevanceThreshold",
                           "id": 44
                         },
+                        "relevanceFilterSpec": {
+                          "type": "RelevanceFilterSpec",
+                          "id": 86,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "relevanceScoreSpec": {
                           "type": "RelevanceScoreSpec",
                           "id": 52,
@@ -1945,6 +1952,46 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "RelevanceFilterSpec": {
+                          "fields": {
+                            "keywordSearchThreshold": {
+                              "type": "RelevanceThresholdSpec",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "semanticSearchThreshold": {
+                              "type": "RelevanceThresholdSpec",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RelevanceThresholdSpec": {
+                              "oneofs": {
+                                "relevanceThresholdSpec": {
+                                  "oneof": [
+                                    "relevanceThreshold",
+                                    "semanticRelevanceThreshold"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "relevanceThreshold": {
+                                  "type": "RelevanceThreshold",
+                                  "id": 1
+                                },
+                                "semanticRelevanceThreshold": {
+                                  "type": "float",
+                                  "id": 2
+                                }
                               }
                             }
                           }
