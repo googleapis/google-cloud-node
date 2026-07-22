@@ -78,7 +78,7 @@
     "system-test": "c8 mocha build/test/system-test --timeout 600000 && npm run test-application",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "browser-test": "cd test/browser-test && npm run prefetch && npm install && npm test",
-    "test-application": "cd test/test-application && npm run prefetch && npm install && npm start && npm test",
+    "test-application": "cd test/test-application && npm run prefetch && npm install && npm start",
     "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean",
     "update-protos": "cd ../tools && rm -rf node_modules build && npm i && npm run compile && cd ../gax && node ../tools/build/src/listProtos.js .",

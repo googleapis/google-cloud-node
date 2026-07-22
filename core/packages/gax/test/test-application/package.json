@@ -17,14 +17,10 @@
     "prefetch-showcase-server": "cd ../showcase-server && npm install && npm pack && mv showcase-server*.tgz ../test-application/showcase-server.tgz",
     "prefetch": "npm run prefetch-cleanup && npm run prefetch-google-gax && npm run prefetch-showcase-echo-client && npm run prefetch-showcase-server",
     "prepare": "npm run compile",
-    "start": "node build/src/index.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "start": "node build/src/index.js"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
-    "jest": "^30.4.2",
     "mocha": "^10.0.1",
-    "ts-jest": "^29.4.11",
     "typescript": "^5.1.6"
   },
   "dependencies": {

@@ -7,10 +7,6 @@
     "lib": [
       "es2018",
       "dom"
-    ],
-    "types": [
-      "jest",
-      "node"
     ]
   },
   "include": [
