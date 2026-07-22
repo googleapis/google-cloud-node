@@ -261,7 +261,15 @@ export class RolloutsClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const rolloutsStubMethods = ['cancel', 'delete', 'get', 'list'];
+    const rolloutsStubMethods = [
+      'advance',
+      'cancel',
+      'delete',
+      'get',
+      'list',
+      'pause',
+      'resume',
+    ];
     for (const methodName of rolloutsStubMethods) {
       const callPromise = this.rolloutsStub.then(
         (stub) =>
@@ -378,6 +386,173 @@ export class RolloutsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Advances a Rollout to the next wave, or completes it if no waves remain.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.currentWaveNumber
+   *   Required. Wave number of the current wave.
+   * @param {string} request.project
+   *   Required. Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.rollout
+   *   Required. Name of the Rollout resource to advance.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/rollouts.advance.js</caption>
+   * region_tag:compute_v1beta_generated_Rollouts_Advance_async
+   */
+  advance(
+    request?: protos.google.cloud.compute.v1beta.IAdvanceRolloutRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  advance(
+    request: protos.google.cloud.compute.v1beta.IAdvanceRolloutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IAdvanceRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  advance(
+    request: protos.google.cloud.compute.v1beta.IAdvanceRolloutRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IAdvanceRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  advance(
+    request?: protos.google.cloud.compute.v1beta.IAdvanceRolloutRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          | protos.google.cloud.compute.v1beta.IAdvanceRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IAdvanceRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        rollout: request.rollout ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('advance request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          | protos.google.cloud.compute.v1beta.IAdvanceRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('advance response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .advance(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
   /**
    * Cancels a Rollout.
    *
@@ -825,6 +1000,344 @@ export class RolloutsClient {
         ]) => {
           this._log.info('get response %j', response);
           return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Pauses a Rollout.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.etag
+   *   The etag of the Rollout.
+   *   If this is provided, the request will only succeed if the etag matches
+   *   the current etag of the Rollout.
+   * @param {string} request.project
+   *   Required. Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.rollout
+   *   Required. Name of the Rollout resource to pause.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/rollouts.pause.js</caption>
+   * region_tag:compute_v1beta_generated_Rollouts_Pause_async
+   */
+  pause(
+    request?: protos.google.cloud.compute.v1beta.IPauseRolloutRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  pause(
+    request: protos.google.cloud.compute.v1beta.IPauseRolloutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IPauseRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  pause(
+    request: protos.google.cloud.compute.v1beta.IPauseRolloutRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IPauseRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  pause(
+    request?: protos.google.cloud.compute.v1beta.IPauseRolloutRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          | protos.google.cloud.compute.v1beta.IPauseRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IPauseRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        rollout: request.rollout ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('pause request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          | protos.google.cloud.compute.v1beta.IPauseRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('pause response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pause(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Resumes a Rollout.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.etag
+   *   The etag of the Rollout.
+   *   If this is provided, the request will only succeed if the etag matches
+   *   the current etag of the Rollout.
+   * @param {string} request.project
+   *   Required. Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.rollout
+   *   Required. Name of the Rollout resource to resume.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/rollouts.resume.js</caption>
+   * region_tag:compute_v1beta_generated_Rollouts_Resume_async
+   */
+  resume(
+    request?: protos.google.cloud.compute.v1beta.IResumeRolloutRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  resume(
+    request: protos.google.cloud.compute.v1beta.IResumeRolloutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IResumeRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  resume(
+    request: protos.google.cloud.compute.v1beta.IResumeRolloutRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IResumeRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  resume(
+    request?: protos.google.cloud.compute.v1beta.IResumeRolloutRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          | protos.google.cloud.compute.v1beta.IResumeRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.IResumeRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        rollout: request.rollout ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('resume request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          | protos.google.cloud.compute.v1beta.IResumeRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('resume response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resume(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
         },
       )
       .catch((error: any) => {

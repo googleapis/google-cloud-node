@@ -539,6 +539,91 @@ describe('v1.DeveloperKnowledgeClient', () => {
     });
   });
 
+  describe('answerQuery', () => {
+    it('invokes answerQuery without error', async () => {
+      const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryResponse(),
+      );
+      client.innerApiCalls.answerQuery = stubSimpleCall(expectedResponse);
+      const [response] = await client.answerQuery(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes answerQuery without error using callback', async () => {
+      const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryResponse(),
+      );
+      client.innerApiCalls.answerQuery =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.answerQuery(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.developers.knowledge.v1.IAnswerQueryResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes answerQuery with error', async () => {
+      const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.answerQuery = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.answerQuery(request), expectedError);
+    });
+
+    it('invokes answerQuery with closed client', async () => {
+      const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryRequest(),
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.answerQuery(request), expectedError);
+    });
+  });
+
   describe('searchDocumentChunks', () => {
     it('invokes searchDocumentChunks without error', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({

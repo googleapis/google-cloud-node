@@ -1,5 +1,8 @@
 [
   "../../protos/google/cloud/securitycenter/v1/access.proto",
+  "../../protos/google/cloud/securitycenter/v1/agent.proto",
+  "../../protos/google/cloud/securitycenter/v1/agent_anomaly.proto",
+  "../../protos/google/cloud/securitycenter/v1/agent_session.proto",
   "../../protos/google/cloud/securitycenter/v1/application.proto",
   "../../protos/google/cloud/securitycenter/v1/asset.proto",
   "../../protos/google/cloud/securitycenter/v1/attack_exposure.proto",
