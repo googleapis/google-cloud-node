@@ -1,6 +1,9 @@
 name: Auto Assign Reviewers
 
 on:
+  # pull_request_target is required to grant write permissions for reviewer assignment on fork PRs.
+  # The workflow only runs github-script and does not check out or execute untrusted code.
+  # zizmor: ignore[dangerous-triggers]
   pull_request_target:
     types: [opened, ready_for_review, reopened, synchronize]
 
