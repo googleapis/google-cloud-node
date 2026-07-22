@@ -27,7 +27,7 @@ const PROTO_DIR = path.join(
   'protos',
 );
 const JSON_PATH = path.join(PROTO_DIR, 'protos.json');
-const JSON_PROTOS = fs.readFileSync(JSON_PATH, 'utf-8');
+const JSON_PROTOS = JSON.parse(fs.readFileSync(JSON_PATH, 'utf-8'));
 
 /**
  * Service for creating, configuring, and deleting Cloud Bigtable tables.
