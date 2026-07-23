@@ -1,6 +1,6 @@
 {
   "name": "jsdoc-region-tag",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "replace region tags with code samples",
   "main": "src/index.js",
   "scripts": {
