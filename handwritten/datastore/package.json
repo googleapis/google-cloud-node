@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r system-test/data build/system-test",
+    "compile": "tsc -p . && cp -r protos build && cp -r system-test/data build/system-test",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
