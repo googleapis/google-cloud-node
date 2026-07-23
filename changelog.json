@@ -4,6 +4,35 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "829990f297b287c43d6f7761c7a5e3a9ec322c1d",
+          "message": "Add GOOGLE_APPLICATION_CREDENTIALS context to credential load errors",
+          "issues": [
+            "8800",
+            "8799"
+          ],
+          "scope": "auth"
+        },
+        {
+          "type": "fix",
+          "sha": "6e912cf5f6309a2d2a0f0207296dd807396c064a",
+          "message": "Honor CLOUDSDK_CONFIG when locating the ADC well-known file",
+          "issues": [
+            "8798",
+            "8797"
+          ],
+          "scope": "auth"
+        }
+      ],
+      "version": "10.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "642dfdb5-914e-4fad-a04a-9afd2d0991a0",
+      "createTime": "2026-07-23T15:09:01.366Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "7d991ec48098dc6eb1039d8aa9ad96f9acf02273",
           "message": "Modify default maxConcurrentStreamsLowWatermark value …",
@@ -82816,5 +82845,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-23T06:10:36.364Z"
+  "updateTime": "2026-07-23T15:09:01.366Z"
 }
