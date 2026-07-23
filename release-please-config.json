@@ -228,6 +228,7 @@
     "packages/google-maps-fleetengine": {},
     "packages/google-maps-fleetengine-delivery": {},
     "packages/google-maps-geocode": {},
+    "packages/google-maps-isochrones": {},
     "packages/google-maps-mapmanagement": {},
     "packages/google-maps-mapsplatformdatasets": {},
     "packages/google-maps-navconnect": {},
