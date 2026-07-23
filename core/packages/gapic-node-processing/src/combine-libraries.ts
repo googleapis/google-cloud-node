@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import {Dirent} from 'fs';
+import * as ts from 'typescript';
 import {LibraryConfig} from './library';
 
 const fs = require('fs/promises'); // For async file system operations
@@ -25,6 +26,70 @@ export interface FilePaths {
 export interface FilePathsAndContents {
   filePath: string;
   content: string;
+}
+
+export function isVersionIndexFile(filePath: string): boolean {
+  return Boolean(filePath.match(/(?:^|\/)src\/v[^/]+\/index\.ts$/));
+}
+
+export function mergeVersionIndexExports(
+  contentA: string,
+  contentB: string,
+): string {
+  const exportsMap = new Map<string, string>();
+
+  function parseExports(content: string) {
+    if (!content) return;
+    const sourceFile = ts.createSourceFile(
+      'index.ts',
+      content,
+      ts.ScriptTarget.Latest,
+      true,
+    );
+
+    for (const statement of sourceFile.statements) {
+      if (ts.isExportDeclaration(statement)) {
+        const moduleSpecifier =
+          statement.moduleSpecifier &&
+          ts.isStringLiteral(statement.moduleSpecifier)
+            ? statement.moduleSpecifier.text
+            : '';
+        if (
+          statement.exportClause &&
+          ts.isNamedExports(statement.exportClause)
+        ) {
+          for (const element of statement.exportClause.elements) {
+            const exportSpecifier = element.propertyName
+              ? `${element.propertyName.text} as ${element.name.text}`
+              : element.name.text;
+            if (moduleSpecifier) {
+              exportsMap.set(exportSpecifier, moduleSpecifier);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  parseExports(contentA);
+  parseExports(contentB);
+
+  const licenseMatchA = contentA.match(/^(\/\*\*?[\s\S]*?\*\/|\/\/[^\n]*\n)+/);
+  const licenseMatchB = contentB.match(/^(\/\*\*?[\s\S]*?\*\/|\/\/[^\n]*\n)+/);
+  const licenseHeader = (
+    licenseMatchA ? licenseMatchA[0] : licenseMatchB ? licenseMatchB[0] : ''
+  ).trim();
+
+  const exportLines: string[] = [];
+  const sortedExportKeys = Array.from(exportsMap.keys()).sort();
+  for (const exportKey of sortedExportKeys) {
+    const moduleSpecifier = exportsMap.get(exportKey);
+    exportLines.push(`export {${exportKey}} from '${moduleSpecifier}';`);
+  }
+
+  return (
+    (licenseHeader ? licenseHeader + '\n' : '') + exportLines.join('\n') + '\n'
+  );
 }
 /**
  * Recursively removes a regex pattern from a specified property in an array of objects.
@@ -157,23 +222,32 @@ export async function generateFinalDirectoryPath(
     );
   }
 
-  // Now we need to clean out duplicates
-  const uniquePaths = new Set<string>();
-  const uniquefullPathAndContent = [];
+  // Now we need to clean out duplicates and merge version index files
+  const uniquePathsMap = new Map<string, FilePathsAndContents>();
 
   for (const fullPathAndContent of fullPathsAndContents) {
     const normalizedPath = fullPathAndContent.filePath.replace(/\\/g, '/');
     fullPathAndContent.filePath = normalizedPath;
-    if (!uniquePaths.has(normalizedPath)) {
-      uniquePaths.add(normalizedPath);
-      uniquefullPathAndContent.push(fullPathAndContent);
+
+    if (isVersionIndexFile(normalizedPath)) {
+      if (uniquePathsMap.has(normalizedPath)) {
+        const existing = uniquePathsMap.get(normalizedPath)!;
+        existing.content = mergeVersionIndexExports(
+          existing.content,
+          fullPathAndContent.content,
+        );
+      } else {
+        uniquePathsMap.set(normalizedPath, fullPathAndContent);
+      }
+    } else {
+      if (!uniquePathsMap.has(normalizedPath)) {
+        uniquePathsMap.set(normalizedPath, fullPathAndContent);
+      }
     }
   }
-  uniquefullPathAndContent.forEach(x => console.log(x));
-  return uniquefullPathAndContent as unknown as {
-    filePath: string;
-    content: string;
-  }[];
+
+  const uniquefullPathAndContent = Array.from(uniquePathsMap.values());
+  return uniquefullPathAndContent;
 }
 
 /**

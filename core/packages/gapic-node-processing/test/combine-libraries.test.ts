@@ -16,6 +16,7 @@ import {
   generateFinalDirectoryPath,
   combineLibraries,
   writeFilesToGivenLocation,
+  mergeVersionIndexExports,
 } from '../src/combine-libraries';
 import {describe, it} from 'mocha';
 import * as path from 'path';
@@ -281,5 +282,25 @@ describe('combine libraries', () => {
         `Could not delete ${path.join(TEST_FIXTURES_PATH, 'testDir')} directory`,
       );
     }
+  });
+
+  it('should merge export statements across version index files', () => {
+    const contentA = `// Copyright 2026 Google LLC
+export { BigtableClient } from './bigtable_client';
+`;
+    const contentB = `// Copyright 2026 Google LLC
+export { BigtableInstanceAdminClient } from './bigtable_instance_admin_client';
+export { BigtableTableAdminClient } from './bigtable_table_admin_client';
+`;
+
+    const merged = mergeVersionIndexExports(contentA, contentB);
+    assert.strictEqual(
+      merged,
+      `// Copyright 2026 Google LLC
+export {BigtableClient} from './bigtable_client';
+export {BigtableInstanceAdminClient} from './bigtable_instance_admin_client';
+export {BigtableTableAdminClient} from './bigtable_table_admin_client';
+`
+    );
   });
 });
