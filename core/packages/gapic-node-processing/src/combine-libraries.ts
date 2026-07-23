@@ -361,7 +361,7 @@ export async function writeFilesToGivenLocation(
   try {
     await fs.rm(dirToWrite, {recursive: true, force: true});
   } catch (err) {
-    `${dirToWrite} not found; could not be deleted`;
+    // ignore if directory does not exist
   }
   await ensureDirectoryExists(dirToWrite);
 

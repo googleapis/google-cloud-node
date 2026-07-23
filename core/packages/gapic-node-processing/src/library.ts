@@ -248,12 +248,9 @@ export class LibraryConfig {
 }
 
 function alphaOrBetaPrecedence(preRelease: string): '' | 'beta' | 'alpha' {
-  console.log(preRelease);
   if (preRelease.startsWith('beta')) {
-    console.log('beta');
     return 'beta';
   } else if (preRelease.startsWith('alpha')) {
-    console.log('alpha');
     return 'alpha';
   } else {
     throw new Error(`Unknown pre-release type: ${preRelease}`);
