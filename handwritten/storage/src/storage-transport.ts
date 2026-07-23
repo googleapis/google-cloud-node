@@ -255,7 +255,10 @@ export class StorageTransport {
   }
 
   #prepareHeaders(reqOpts: StorageRequestOptions): Record<string, string> {
-    const headersObj = this.#buildRequestHeaders(reqOpts);
+    const headersObj = this.#buildRequestHeaders(
+      reqOpts.headers,
+      reqOpts.invocationId,
+    );
 
     if (reqOpts[GCCL_GCS_CMD_KEY]) {
       const current = headersObj.get('x-goog-api-client') || '';
@@ -300,13 +303,16 @@ export class StorageTransport {
     return searchParams.toString();
   };
 
-  #buildRequestHeaders(reqOpts: StorageRequestOptions) {
-    const headers = new Headers(reqOpts.headers);
+  #buildRequestHeaders(
+    reqHeaders?: GaxiosOptions['headers'],
+    invocationId?: string,
+  ) {
+    const headers = new Headers(reqHeaders);
     headers.set('User-Agent', this.#getUserAgentString());
-    const invocationId = reqOpts.invocationId || randomUUID();
+    const finalInvocationId = invocationId || randomUUID();
     headers.set(
       'x-goog-api-client',
-      `${getRuntimeTrackingString()} gccl/${this.packageJson.version}-${getModuleFormat()} gccl-invocation-id/${invocationId}`,
+      `${getRuntimeTrackingString()} gccl/${this.packageJson.version}-${getModuleFormat()} gccl-invocation-id/${finalInvocationId}`,
     );
     return headers;
   }
