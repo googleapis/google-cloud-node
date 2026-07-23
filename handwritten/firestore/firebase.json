@@ -1,5 +1,8 @@
 {
-  "firestore": {
-    "indexes": "firestore.indexes.json"
-  }
+  "firestore": [
+    {
+      "database": "firestore-standard",
+      "indexes": "firestore.indexes.json"
+    }
+  ]
 }
