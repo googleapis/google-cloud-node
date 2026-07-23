@@ -112,7 +112,10 @@ export class ShowcaseServer {
           if (triggeredFilename === filename || fs.existsSync(resolvedCaCertPath)) {
             clearTimeout(timeoutId);
             watcher.close();
-            resolve(true);
+            // Wait a few milliseconds to ensure showcase has finished writing the file.
+            setTimeout(() => {
+              resolve(true);
+            }, 500);
           }
         });
       });
