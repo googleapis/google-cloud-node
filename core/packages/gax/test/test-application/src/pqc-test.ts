@@ -25,6 +25,129 @@ import {ShowcaseServer} from 'showcase-server';
 import * as os from 'os';
 import * as tls from 'tls';
 
+async function grpcPqcTest(pemBuffer: Buffer, port: number) {
+  let negotiatedGroupGrpc: string | undefined;
+  let clientSupportedGroupsGrpc: string | undefined;
+
+  const interceptor = (options: any, nextCall: any) => {
+    return new grpc.InterceptingCall(nextCall(options), {
+      start: (metadata: any, listener: any, next: any) => {
+        next(metadata, {
+          onReceiveMetadata: (receivedMetadata: any, nextListener: any) => {
+            const group = receivedMetadata.get('x-showcase-tls-group');
+            if (group && group.length > 0) {
+              negotiatedGroupGrpc = group[0].toString();
+            }
+            const supportedGroups = receivedMetadata.get(
+              'x-showcase-tls-client-supported-groups'
+            );
+            if (supportedGroups && supportedGroups.length > 0) {
+              clientSupportedGroupsGrpc = supportedGroups[0].toString();
+            }
+            nextListener(receivedMetadata);
+          },
+        });
+      },
+    });
+  };
+
+  const grpcClientOpts = {
+    grpc,
+    sslCreds: grpc.credentials.createSsl(pemBuffer),
+    servicePath: 'localhost',
+    port: port,
+  };
+
+  const grpcClient = new EchoClient(grpcClientOpts);
+
+  const [responseGrpc] = await grpcClient.echo(
+    { content: 'grpc-pqc-test' },
+    {
+      otherArgs: {
+        options: {
+          interceptors: [interceptor],
+        },
+      },
+    }
+  );
+
+  assert.strictEqual(responseGrpc.content, 'grpc-pqc-test');
+  assert.ok(
+    negotiatedGroupGrpc,
+    'Expected negotiated TLS group in gRPC response metadata'
+  );
+  assert.strictEqual(negotiatedGroupGrpc, 'X25519MLKEM768');
+  assert.ok(
+    clientSupportedGroupsGrpc,
+    'Expected client supported groups in gRPC response metadata'
+  );
+  assert.ok(
+    clientSupportedGroupsGrpc.includes('X25519MLKEM768'),
+    'Expected client to include X25519MLKEM768 in supported groups'
+  );
+}
+
+async function httpRestFallbackPqcTest(pemBuffer: Buffer, port: number) {
+  let negotiatedGroupRest: string | undefined;
+  let clientSupportedGroupsRest: string | undefined;
+
+  const auth = new GoogleAuth({
+    authClient: new googleAuthLibrary.PassThroughClient(),
+  });
+
+  const originalFetch = auth.fetch.bind(auth);
+  (auth as any).fetch = async (url: string, opts: any) => {
+    if (url.startsWith('https:')) {
+      opts.agent = new https.Agent({
+        ca: pemBuffer,
+        keepAlive: true,
+      });
+    }
+    const res = await originalFetch(url, opts);
+    const group =
+      typeof res.headers.get === 'function'
+        ? res.headers.get('x-showcase-tls-group')
+        : (res.headers as any)['x-showcase-tls-group'];
+    if (group) {
+      negotiatedGroupRest = group;
+    }
+    const supportedGroups =
+      typeof res.headers.get === 'function'
+        ? res.headers.get('x-showcase-tls-client-supported-groups')
+        : (res.headers as any)['x-showcase-tls-client-supported-groups'];
+    if (supportedGroups) {
+      clientSupportedGroupsRest = supportedGroups;
+    }
+    return res;
+  };
+
+  const restClientOpts = {
+    fallback: true,
+    protocol: 'https',
+    servicePath: 'localhost',
+    port: port,
+    auth: auth,
+  };
+
+  const restClient = new EchoClient(restClientOpts);
+  const [responseRest] = await restClient.echo({ content: 'rest-pqc-test' });
+
+  assert.strictEqual(responseRest.content, 'rest-pqc-test');
+  assert.ok(
+    negotiatedGroupRest,
+    'Expected negotiated TLS group in REST response headers'
+  );
+  assert.strictEqual(negotiatedGroupRest, 'X25519MLKEM768');
+  assert.ok(
+    clientSupportedGroupsRest,
+    'Expected client supported groups in REST response headers'
+  );
+  assert.ok(
+    clientSupportedGroupsRest.includes('X25519MLKEM768'),
+    'Expected client to include X25519MLKEM768 in supported groups'
+  );
+}
+
 /**
  * Tests Post Quantum Cryptography (PQC) using the specified CA cert and port.
  * It verifies both gRPC and HTTP/REST clients by inspecting the negotiated TLS group.
@@ -32,101 +155,8 @@ import * as tls from 'tls';
  * @param port The port the TLS showcase server is listening on.
  */
 async function testPqc(pemBuffer: Buffer, port: number) {
-
-  // --- 1. gRPC PQC Test ---
-    let negotiatedGroupGrpc: string | undefined;
-    let clientSupportedGroupsGrpc: string | undefined;
-
-    const interceptor = (options: any, nextCall: any) => {
-      return new grpc.InterceptingCall(nextCall(options), {
-        start: (metadata: any, listener: any, next: any) => {
-          next(metadata, {
-            onReceiveMetadata: (receivedMetadata: any, nextListener: any) => {
-              const group = receivedMetadata.get('x-showcase-tls-group');
-              if (group && group.length > 0) {
-                negotiatedGroupGrpc = group[0].toString();
-              }
-              const supportedGroups = receivedMetadata.get('x-showcase-tls-client-supported-groups');
-              if (supportedGroups && supportedGroups.length > 0) {
-                clientSupportedGroupsGrpc = supportedGroups[0].toString();
-              }
-              nextListener(receivedMetadata);
-            },
-          });
-        },
-      });
-    };
-
-    const grpcClientOpts = {
-      grpc,
-      sslCreds: grpc.credentials.createSsl(pemBuffer),
-      servicePath: 'localhost',
-      port: port,
-    };
-
-    const grpcClient = new EchoClient(grpcClientOpts);
-
-    const [responseGrpc] = await grpcClient.echo(
-      { content: 'grpc-pqc-test' },
-      {
-        otherArgs: {
-          options: {
-            interceptors: [interceptor],
-          },
-        },
-      }
-    );
-
-    assert.strictEqual(responseGrpc.content, 'grpc-pqc-test');
-    assert.ok(negotiatedGroupGrpc, 'Expected negotiated TLS group in gRPC response metadata');
-    assert.strictEqual(negotiatedGroupGrpc, 'X25519MLKEM768');
-    assert.ok(clientSupportedGroupsGrpc, 'Expected client supported groups in gRPC response metadata');
-    assert.ok(clientSupportedGroupsGrpc.includes('X25519MLKEM768'), 'Expected client to include X25519MLKEM768 in supported groups');
-
-    // --- 2. HTTP/REST Fallback PQC Test ---
-    let negotiatedGroupRest: string | undefined;
-    let clientSupportedGroupsRest: string | undefined;
-
-    const auth = new GoogleAuth({
-      authClient: new googleAuthLibrary.PassThroughClient(),
-    });
-
-    const originalFetch = auth.fetch.bind(auth);
-    (auth as any).fetch = async (url: string, opts: any) => {
-      if (url.startsWith('https:')) {
-        opts.agent = new https.Agent({
-          ca: pemBuffer,
-          keepAlive: true,
-        });
-      }
-      const res = await originalFetch(url, opts);
-      const group = typeof res.headers.get === 'function' ? res.headers.get('x-showcase-tls-group') : (res.headers as any)['x-showcase-tls-group'];
-      if (group) {
-        negotiatedGroupRest = group;
-      }
-      const supportedGroups = typeof res.headers.get === 'function' ? res.headers.get('x-showcase-tls-client-supported-groups') : (res.headers as any)['x-showcase-tls-client-supported-groups'];
-      if (supportedGroups) {
-        clientSupportedGroupsRest = supportedGroups;
-      }
-      return res;
-    };
-
-    const restClientOpts = {
-      fallback: true,
-      protocol: 'https',
-      servicePath: 'localhost',
-      port: port,
-      auth: auth,
-    };
-
-    const restClient = new EchoClient(restClientOpts);
-    const [responseRest] = await restClient.echo({ content: 'rest-pqc-test' });
-
-    assert.strictEqual(responseRest.content, 'rest-pqc-test');
-    assert.ok(negotiatedGroupRest, 'Expected negotiated TLS group in REST response headers');
-    assert.strictEqual(negotiatedGroupRest, 'X25519MLKEM768');
-    assert.ok(clientSupportedGroupsRest, 'Expected client supported groups in REST response headers');
-    assert.ok(clientSupportedGroupsRest.includes('X25519MLKEM768'), 'Expected client to include X25519MLKEM768 in supported groups');
+  await grpcPqcTest(pemBuffer, port);
+  await httpRestFallbackPqcTest(pemBuffer, port);
 }
 
 /**
