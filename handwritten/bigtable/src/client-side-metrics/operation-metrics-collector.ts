@@ -13,7 +13,6 @@
 // limitations under the License.
 
 const {status} = require('@grpc/grpc-js');
-import * as fs from 'fs';
 import {MethodName, StreamingState} from './client-side-metrics-attributes';
 import {grpc, ServiceError} from 'google-gax';
 import * as gax from 'google-gax';
@@ -26,9 +25,10 @@ import {TimedStream} from '../timed-stream';
 // with failures in the metrics collector.
 const METRICS_DEBUG = process.env.METRICS_DEBUG;
 
-const protoDir = require.resolve('@google-cloud/bigtable-api/build/protos');
+const protoSource = require.resolve('@google-cloud/bigtable-api');
 const protoPath = path.join(
-  protoDir,
+  protoSource,
+  'build/protos',
   'google/bigtable/v2/response_params.proto',
 );
 const root = gax.protobuf.loadSync(protoPath);

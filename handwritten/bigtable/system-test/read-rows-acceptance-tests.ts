@@ -57,9 +57,10 @@ class FakeMetricsConfigManager extends ClientSideMetricsConfigManager {
   }
 }
 
-const protoDir = require.resolve('@google-cloud/bigtable-api/build/protos');
+const protoSource = require.resolve('@google-cloud/bigtable-api');
 const protosJson = path.join(
-  protoDir,
+  protoSource,
+  'build/protos',
   'protos.json',
 );
 

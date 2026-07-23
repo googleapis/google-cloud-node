@@ -26,9 +26,10 @@ import * as path from 'path'; // Import the 'path' module
 import * as gax from 'google-gax';
 import * as proxyquire from 'proxyquire';
 import {GCPMetricsHandler} from '../../src/client-side-metrics/gcp-metrics-handler';
-const protoDir = require.resolve('@google-cloud/bigtable-api/build/protos');
+const protoSource = require.resolve('@google-cloud/bigtable-api');
 const protoPath = path.join(
-  protoDir,
+  protoSource,
+  'build/protos',
   'google/bigtable/v2/response_params.proto',
 );
 const root = gax.protobuf.loadSync(protoPath);

@@ -22,9 +22,10 @@ import {MockService} from '../mock-service';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 
-const protoDir = require.resolve('@google-cloud/bigtable-api/build/protos');
+const protoSource = require.resolve('@google-cloud/bigtable-api');
 const protoPath = path.join(
-  protoDir,
+  protoSource,
+  'build/protos',
   'protos.json',
 );
 const jsonProtosString = fs.readFileSync(protoPath);
