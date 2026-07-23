@@ -306,6 +306,23 @@
           ]
         }
       ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/paginator",
+      "id": "daa94e13-c04b-4f1c-b683-207a94d0ed0f",
+      "createTime": "2026-07-23T06:10:35.280Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
       "version": "4.13.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/gapic-generator",

@@ -17,7 +17,7 @@
   "core/packages/teeny-request": "10.1.4",
   "core/packages/tools": "1.1.0",
   "core/packages/typeless-sample-bot": "3.1.3",
-  "core/paginator": "6.0.2",
+  "core/paginator": "6.1.0",
   "core/precise-date": "5.1.0",
   "core/projectify": "5.1.0",
   "core/promisify": "5.1.0",
