@@ -4,7 +4,7 @@
   "core/dev-packages/jsdoc-region-tag": "4.0.2",
   "core/dev-packages/pack-n-play": "4.2.2",
   "core/generator/gapic-generator-typescript": "4.12.2",
-  "core/packages/gapic-node-processing": "0.1.9",
+  "core/packages/gapic-node-processing": "0.2.0",
   "core/packages/gax": "5.0.7",
   "core/packages/gaxios": "7.2.0",
   "core/packages/gcp-metadata": "8.1.3",
