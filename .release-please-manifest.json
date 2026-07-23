@@ -11,7 +11,7 @@
   "core/packages/google-auth-library-nodejs": "10.9.0",
   "core/packages/logging-utils": "1.1.4",
   "core/packages/nodejs-googleapis-common": "8.0.2",
-  "core/packages/nodejs-proto-files": "5.0.2",
+  "core/packages/nodejs-proto-files": "5.0.3",
   "core/packages/proto3-json-serializer-nodejs": "3.0.5",
   "core/packages/retry-request": "8.0.3",
   "core/packages/teeny-request": "10.1.3",
