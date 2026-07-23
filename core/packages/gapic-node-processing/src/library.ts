@@ -143,18 +143,16 @@ export class LibraryConfig {
           INDEX_PATH,
         );
         try {
-          if (await fs.stat(indexFile)) {
-            const fileContent = await fs.readFile(indexFile, 'utf8');
-            const clientsRegexMatch = Array.from(
-              fileContent.matchAll(CLIENT_EXTRACTION_REGEX),
-            );
-            if (!versionMap.has(version)) {
-              versionMap.set(version, new Set());
-            }
-            const set = versionMap.get(version)!;
-            for (const match of clientsRegexMatch) {
-              set.add(match[1]);
-            }
+          const fileContent = await fs.readFile(indexFile, 'utf8');
+          const clientsRegexMatch = Array.from(
+            fileContent.matchAll(CLIENT_EXTRACTION_REGEX),
+          );
+          if (!versionMap.has(version)) {
+            versionMap.set(version, new Set());
+          }
+          const set = versionMap.get(version)!;
+          for (const match of clientsRegexMatch) {
+            set.add(match[1]);
           }
         } catch (err) {
           // ignore if file does not exist

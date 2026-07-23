@@ -28,8 +28,27 @@ export interface FilePathsAndContents {
   content: string;
 }
 
+function isVersionDirectory(dirName: string): boolean {
+  return (
+    dirName.length >= 2 &&
+    dirName.startsWith('v') &&
+    dirName[1] >= '0' &&
+    dirName[1] <= '9'
+  );
+}
+
 export function isVersionIndexFile(filePath: string): boolean {
-  return Boolean(filePath.match(/(?:^|\/)src\/v[^/]+\/index\.ts$/));
+  const parts = filePath.replace(/\\/g, '/').split('/');
+  if (parts.length < 3) return false;
+  const fileName = parts[parts.length - 1];
+  const versionDir = parts[parts.length - 2];
+  const srcDir = parts[parts.length - 3];
+
+  return (
+    fileName === 'index.ts' &&
+    srcDir === 'src' &&
+    isVersionDirectory(versionDir)
+  );
 }
 
 export function mergeVersionIndexExports(

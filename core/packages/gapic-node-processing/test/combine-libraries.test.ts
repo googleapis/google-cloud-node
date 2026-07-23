@@ -17,6 +17,7 @@ import {
   combineLibraries,
   writeFilesToGivenLocation,
   mergeVersionIndexExports,
+  isVersionIndexFile,
 } from '../src/combine-libraries';
 import {describe, it} from 'mocha';
 import * as path from 'path';
@@ -302,5 +303,21 @@ export {BigtableInstanceAdminClient} from './bigtable_instance_admin_client';
 export {BigtableTableAdminClient} from './bigtable_table_admin_client';
 `
     );
+  });
+
+  describe('isVersionIndexFile', () => {
+    it('should return true for valid version index files', () => {
+      assert.strictEqual(isVersionIndexFile('src/v1/index.ts'), true);
+      assert.strictEqual(isVersionIndexFile('src/v2/index.ts'), true);
+      assert.strictEqual(isVersionIndexFile('src/v1beta1/index.ts'), true);
+      assert.strictEqual(isVersionIndexFile('packages/foo/src/v1/index.ts'), true);
+    });
+
+    it('should return false for non-version or non-index files', () => {
+      assert.strictEqual(isVersionIndexFile('src/index.ts'), false);
+      assert.strictEqual(isVersionIndexFile('src/validators/index.ts'), false);
+      assert.strictEqual(isVersionIndexFile('src/views/index.ts'), false);
+      assert.strictEqual(isVersionIndexFile('src/v1/helpers.ts'), false);
+    });
   });
 });
