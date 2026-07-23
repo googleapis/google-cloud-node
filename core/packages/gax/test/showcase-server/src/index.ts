@@ -95,17 +95,28 @@ export class ShowcaseServer {
     this.server = childProcess;
 
     if (resolvedCaCertPath) {
-      let pemExists = false;
-      for (let i = 0; i < 15; i++) {
-        // We loop up to 15 times (waiting 1 second each time) because gapic-showcase
-        // generates the CA certificate asynchronously on startup. This ensures the file
-        // is completely written to disk before we attempt to use it for our PQC tests.
+      const dir = path.dirname(resolvedCaCertPath);
+      const filename = path.basename(resolvedCaCertPath);
+
+      const pemExists = await new Promise<boolean>((resolve) => {
         if (fs.existsSync(resolvedCaCertPath)) {
-          pemExists = true;
-          break;
+          return resolve(true);
         }
-        await sleep(1000);
-      }
+
+        const timeoutId = setTimeout(() => {
+          watcher.close();
+          resolve(false);
+        }, 15000);
+
+        const watcher = fs.watch(dir, (eventType, triggeredFilename) => {
+          if (triggeredFilename === filename || fs.existsSync(resolvedCaCertPath)) {
+            clearTimeout(timeoutId);
+            watcher.close();
+            resolve(true);
+          }
+        });
+      });
+
       if (!pemExists) {
         throw new Error(`CA Certificate file not found at ${resolvedCaCertPath}`);
       }
