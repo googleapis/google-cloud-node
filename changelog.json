@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/common",
+      "id": "579c9d68-90c7-4946-824e-bc22afd8a8ea",
+      "createTime": "2026-07-23T15:09:00.980Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "7d991ec48098dc6eb1039d8aa9ad96f9acf02273",
           "message": "Modify default maxConcurrentStreamsLowWatermark value …",
           "issues": [
@@ -82816,5 +82833,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-23T06:10:36.364Z"
+  "updateTime": "2026-07-23T15:09:00.980Z"
 }

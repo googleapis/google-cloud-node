@@ -1,5 +1,5 @@
 {
-  "core/common": "6.0.1",
+  "core/common": "6.1.0",
   "core/dev-packages/jsdoc-fresh": "5.0.4",
   "core/dev-packages/jsdoc-region-tag": "4.0.2",
   "core/dev-packages/pack-n-play": "4.2.2",
