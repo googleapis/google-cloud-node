@@ -67,6 +67,7 @@
     "packages/google-cloud-clouddms": {},
     "packages/google-cloud-cloudsecuritycompliance": {},
     "packages/google-cloud-commerce-consumer-procurement": {},
+    "packages/google-cloud-commerceproducer": {},
     "packages/google-cloud-compute": {},
     "packages/google-cloud-confidentialcomputing": {},
     "packages/google-cloud-config": {},
