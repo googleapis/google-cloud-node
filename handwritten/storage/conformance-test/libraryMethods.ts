@@ -91,25 +91,16 @@ export async function combine(options: ConformanceTestOptions) {
   await file1.save('file1 contents');
   await file2.save('file2 contents');
 
-  const destinationFile = encodeURIComponent('all-files.txt');
-  const body = {
-    sourceObjects: [{name: file1.name}, {name: file2.name}],
-  };
-
-  const requestOptions: StorageRequestOptions = {
-    method: 'POST',
-    url: `storage/v1/b/${encodeURIComponent(options.bucket!.name)}/o/${destinationFile}/compose`,
-    body: JSON.stringify(body),
-    queryParameters: {},
-  };
-
+  const combineOptions: any = {};
   if (options.preconditionRequired) {
-    requestOptions.queryParameters!.ifGenerationMatch = 0;
-  } else {
-    delete requestOptions.queryParameters!.ifGenerationMatch;
+    combineOptions.ifGenerationMatch = 0;
   }
 
-  return await options.storageTransport!.makeRequest(requestOptions);
+  return await options.bucket!.combine(
+    ['file1.txt', 'file2.txt'],
+    'all-files.txt',
+    combineOptions,
+  );
 }
 
 export async function create(options: ConformanceTestOptions) {

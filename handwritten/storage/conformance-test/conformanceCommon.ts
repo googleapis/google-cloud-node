@@ -17,6 +17,7 @@
 import * as jsonToNodeApiMapping from './test-data/retryInvocationMap.json';
 import * as libraryMethods from './libraryMethods.js';
 import {Bucket, File, Gaxios, HmacKey, Notification, Storage} from '../src';
+import * as gaxios from 'gaxios';
 import * as crypto from 'crypto';
 import * as assert from 'assert';
 import {
@@ -78,8 +79,10 @@ const authClient = new GoogleAuth({
 
 authClient.getAccessToken = async () => ({token: 'unauthenticated-test-token'});
 authClient.request = async opts => {
-  const gaxios = new Gaxios();
-  return gaxios.request(opts);
+  if (typeof (opts as any).adapter === 'function') {
+    return (opts as any).adapter(opts);
+  }
+  return (gaxios as any).instance.request(opts);
 };
 
 export function executeScenario(testCase: RetryTestCase) {
@@ -107,6 +110,9 @@ export function executeScenario(testCase: RetryTestCase) {
 
         describe(`${storageMethodString}`, async () => {
           beforeEach(async () => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (gaxios as any)?.instance?.interceptors?.request?.clear();
+
             const rawTransport = new StorageTransport({
               apiEndpoint: TESTBENCH_HOST,
               authClient: authClient,
@@ -135,12 +141,6 @@ export function executeScenario(testCase: RetryTestCase) {
               rawTransport,
             );
 
-            // Create a Proxy around rawStorageTransport to intercept makeRequest
-            storageTransport = createRetryProxy(
-              rawTransport,
-              creationResult.id,
-            );
-
             storage = new Storage({
               apiEndpoint: TESTBENCH_HOST,
               projectId: CONF_TEST_PROJECT_ID,
@@ -162,12 +162,26 @@ export function executeScenario(testCase: RetryTestCase) {
               storageMethodString,
               bucket,
             );
-            notification = bucket.notification(TESTS_PREFIX);
-            await notification.create();
+            if (
+              storageMethodString !== 'createNotification' &&
+              storageMethodString !== 'notificationCreate'
+            ) {
+              notification = bucket.notification(TESTS_PREFIX);
+              await notification.create();
+            }
 
-            [hmacKey] = await storage.createHmacKey(
-              `${TESTS_PREFIX}@email.com`,
-            );
+            if (
+              storageMethodString === 'deleteHMAC' ||
+              storageMethodString === 'getHMAC' ||
+              storageMethodString === 'getMetadataHMAC' ||
+              storageMethodString === 'setMetadataHMAC'
+            ) {
+              [hmacKey] = await storage.createHmacKey(
+                `${TESTS_PREFIX}@email.com`,
+              );
+            }
+
+            storageTransport = storage.storageTransport;
           });
 
           it(`${instructionNumber}`, async () => {
@@ -182,17 +196,54 @@ export function executeScenario(testCase: RetryTestCase) {
               preconditionRequired: testCase.preconditionProvided,
             };
 
-            if (testCase.expectSuccess) {
-              await storageMethodObject(methodParameters);
-              const testBenchResult = await getTestBenchRetryTest(
-                creationResult.id,
-                storageTransport,
-              );
-              assert.strictEqual(testBenchResult.completed, true);
-            } else {
-              await assert.rejects(async () => {
+            const injectHeader = (reqOpts: any) => {
+              const url = reqOpts.url?.toString() || '';
+              if (url.includes('retry_test') || !creationResult?.id) {
+                return reqOpts;
+              }
+              reqOpts.headers = reqOpts.headers || {};
+              if (typeof reqOpts.headers.set === 'function') {
+                reqOpts.headers.set('x-retry-test-id', creationResult.id);
+              }
+              try {
+                reqOpts.headers['x-retry-test-id'] = creationResult.id;
+              } catch (e) {}
+              return reqOpts;
+            };
+
+            const interceptor = {
+              resolved: injectHeader,
+              request: injectHeader,
+            };
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (storage.storageTransport as any)?.gaxiosInstance?.interceptors?.request?.clear();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (gaxios as any)?.instance?.interceptors?.request?.clear();
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (storage.storageTransport as any).gaxiosInstance.interceptors.request.add(interceptor);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (gaxios as any).instance.interceptors.request.add(interceptor);
+
+            try {
+              if (testCase.expectSuccess) {
                 await storageMethodObject(methodParameters);
-              }, undefined);
+                const testBenchResult = await getTestBenchRetryTest(
+                  creationResult.id,
+                  storageTransport,
+                );
+                assert.strictEqual(testBenchResult.completed, true);
+              } else {
+                await assert.rejects(async () => {
+                  await storageMethodObject(methodParameters);
+                }, undefined);
+              }
+            } finally {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (storage.storageTransport as any)?.gaxiosInstance?.interceptors?.request?.clear();
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (gaxios as any)?.instance?.interceptors?.request?.clear();
             }
           }).timeout(TIMEOUT_FOR_INDIVIDUAL_TEST);
         });
@@ -201,38 +252,7 @@ export function executeScenario(testCase: RetryTestCase) {
   }
 }
 
-/**
- * Creates a Proxy to automatically inject x-retry-test-id into all requests
- */
-function createRetryProxy(
-  transport: StorageTransport,
-  retryId: string,
-): StorageTransport {
-  return new Proxy(transport, {
-    get(target, prop, receiver) {
-      const original = Reflect.get(target, prop, receiver);
-      if (prop === 'makeRequest' && typeof original === 'function') {
-        return async (
-          reqOpts: StorageRequestOptions,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          callback?: StorageTransportCallback<any>,
-        ) => {
-          reqOpts.headers = reqOpts.headers || {};
 
-          if (reqOpts.headers instanceof Headers) {
-            reqOpts.headers.set('x-retry-test-id', retryId);
-          } else {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (reqOpts.headers as any)['x-retry-test-id'] = retryId;
-          }
-
-          return original.apply(target, [reqOpts, callback]);
-        };
-      }
-      return original;
-    },
-  });
-}
 
 async function createBucketForTest(
   storage: Storage,
@@ -258,6 +278,9 @@ async function createFileForTest(
   bucket: Bucket,
 ) {
   const file = bucket.file(generateName(method, 'file'));
+  if (method === 'deleteBucket') {
+    return file;
+  }
   await file.save('test-content');
   if (withPrecondition) {
     const [metadata] = await file.getMetadata();
