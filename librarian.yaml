@@ -210,6 +210,10 @@ libraries:
       nodejs_apis:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
+  - name: google-cloud-agentidentity
+    apis:
+      - path: google/cloud/agentidentity/v1beta
+    copyright_year: "2026"
   - name: google-cloud-agentregistry
     version: 0.2.0
     apis:
@@ -654,10 +658,10 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/procurement'
   - name: google-cloud-commerceproducer
+    version: 0.1.0
     apis:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
-    version: 0.1.0
   - name: google-cloud-compute
     version: 6.14.0
     apis:
