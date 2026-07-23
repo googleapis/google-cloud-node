@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "3cebe31d-1349-4655-a7ae-fdf44d99fb54",
+      "createTime": "2026-07-23T06:10:32.251Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "d49517d6e03628178ac34f8c3c74afe9c133c537",
           "message": "Onboard a new library",
           "issues": [
@@ -82790,5 +82807,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-22T23:25:50.051Z"
+  "updateTime": "2026-07-23T06:10:32.251Z"
 }
