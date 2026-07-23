@@ -104,6 +104,7 @@ async function httpRestFallbackPqcTest(pemBuffer: Buffer, port: number) {
       });
     }
     const res = await originalFetch(url, opts);
+    // res.headers is a Headers instance (with .get()) in standard Fetch API and a plain object in other HTTP clients.
     const group =
       typeof res.headers.get === 'function'
         ? res.headers.get('x-showcase-tls-group')
