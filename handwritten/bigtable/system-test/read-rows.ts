@@ -17,7 +17,8 @@ import {Mutation} from '../src/mutation.js';
 const {tests} = require('../../system-test/data/read-rows-retry-test.json') as {
   tests: Test[];
 };
-import {google} from '../protos/protos';
+import {protos} from '../src';
+import google = protos.google;
 import * as assert from 'assert';
 import {describe, it, afterEach, beforeEach} from 'mocha';
 import * as sinon from 'sinon';

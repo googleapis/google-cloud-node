@@ -26,9 +26,10 @@ import {TimedStream} from '../timed-stream';
 // with failures in the metrics collector.
 const METRICS_DEBUG = process.env.METRICS_DEBUG;
 
+const protoDir = require.resolve('@google-cloud/bigtable-api/build/protos');
 const protoPath = path.join(
-  __dirname,
-  '../../protos/google/bigtable/v2/response_params.proto',
+  protoDir,
+  'google/bigtable/v2/response_params.proto',
 );
 const root = gax.protobuf.loadSync(protoPath);
 const ResponseParams = root.lookupType('ResponseParams');

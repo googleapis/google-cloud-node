@@ -39,7 +39,8 @@ import {generateId, PREFIX} from './common';
 import {BigtableTableAdminClient} from '../src/v2';
 import {ServiceError} from 'google-gax';
 import {BigtableDate, QueryResultRow} from '../src/execute-query/values';
-import {google} from '../protos/protos';
+import {protos} from '../src';
+import google = protos.google;
 
 type IBackup = google.bigtable.admin.v2.IBackup;
 

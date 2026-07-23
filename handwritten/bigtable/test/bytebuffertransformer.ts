@@ -15,7 +15,8 @@
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
-import {google} from '../protos/protos';
+import {protos} from '../src';
+import google = protos.google;
 import {createProtoRows} from './utils/proto-bytes';
 import {ByteBufferTransformer} from '../src/execute-query/bytebuffertransformer';
 import * as SqlValues from '../src/execute-query/values';
