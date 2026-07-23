@@ -3,6 +3,10 @@
     {
       "database": "firestore-standard",
       "indexes": "firestore.indexes.json"
+    },
+    {
+      "database": "firestore-enterprise",
+      "indexes": "firestore.enterprise.indexes.json"
     }
   ]
 }
