@@ -5,6 +5,49 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "d49517d6e03628178ac34f8c3c74afe9c133c537",
+          "message": "Onboard a new library",
+          "issues": [
+            "8940"
+          ],
+          "scope": "google/cloud/commerceproducer/v1beta"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/commerceproducer",
+      "id": "ea40fb57-c28e-41df-8415-ff8f77b18c7a",
+      "createTime": "2026-07-22T23:25:50.051Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ecba5e3d36eee9a6cdcf26d8fa7439b7b4244686",
+          "message": "Remove owlbot template updater from cloud-profiler",
+          "issues": [
+            "8915"
+          ]
+        }
+      ],
+      "version": "7.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/profiler",
+      "id": "e53ddf0a-ee01-4f65-8be6-9aca81f5831f",
+      "createTime": "2026-07-22T21:03:19.835Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -82747,5 +82790,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-21T16:25:07.411Z"
+  "updateTime": "2026-07-22T23:25:50.051Z"
 }
