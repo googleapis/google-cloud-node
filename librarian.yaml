@@ -536,6 +536,15 @@ libraries:
     copyright_year: "2026"
     nodejs:
       default_version: v1
+  - name: google-cloud-bigquery-storage-api
+    version: 0.2.0
+    apis:
+      - path: google/cloud/bigquery/storage/v1
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/bigquery-storage-api'
+      metadata_name_override: bigquerystorage-api
+      name_pretty_override: BigQuery Storage API
   - name: google-cloud-bigtable-api
     version: 0.2.0
     apis:
@@ -546,15 +555,6 @@ libraries:
       package_name: '@google-cloud/bigtable-api'
       metadata_name_override: bigtable-api
       name_pretty_override: Bigtable API
-  - name: google-cloud-bigquery-storage-api
-    version: 0.2.0
-    apis:
-      - path: google/cloud/bigquery/storage/v1
-    copyright_year: "2026"
-    nodejs:
-      package_name: '@google-cloud/bigquery-storage-api'
-      metadata_name_override: bigquerystorage-api
-      name_pretty_override: BigQuery Storage API
   - name: google-cloud-billing
     version: 5.1.2
     apis:
@@ -653,6 +653,11 @@ libraries:
     nodejs:
       default_version: v1
       package_name: '@google-cloud/procurement'
+  - name: google-cloud-commerceproducer
+    apis:
+      - path: google/cloud/commerceproducer/v1beta
+    copyright_year: "2026"
+    version: 0.1.0
   - name: google-cloud-compute
     version: 6.14.0
     apis:
