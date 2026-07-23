@@ -10,6 +10,68 @@
       },
       "fields": [
         {
+          "fieldPath": "location",
+          "searchConfig": {
+            "geoSpec": {}
+          }
+        },
+        {
+          "fieldPath": "menu",
+          "searchConfig": {
+            "textSpec": {
+              "indexSpecs": [
+                {
+                  "indexType": "TOKENIZED",
+                  "matchType": "MATCH_GLOBALLY"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "fieldPath": "description",
+          "searchConfig": {
+            "textSpec": {
+              "indexSpecs": [
+                {
+                  "indexType": "TOKENIZED",
+                  "matchType": "MATCH_GLOBALLY"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "fieldPath": "name",
+          "searchConfig": {
+            "textSpec": {
+              "indexSpecs": [
+                {
+                  "indexType": "TOKENIZED",
+                  "matchType": "MATCH_GLOBALLY"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "collectionGroup": "GeoTextSearchIntegrationTests",
+      "queryScope": "COLLECTION",
+      "density": "SPARSE_ANY",
+      "searchIndexOptions": {
+        "textLanguage": "und",
+        "textLanguageOverrideFieldPath": "language"
+      },
+      "fields": [
+        {
+          "fieldPath": "location",
+          "searchConfig": {
+            "geoSpec": {}
+          }
+        },
+        {
           "fieldPath": "menu",
           "searchConfig": {
             "textSpec": {
