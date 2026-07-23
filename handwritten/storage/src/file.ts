@@ -265,6 +265,13 @@ export interface CreateWriteStreamOptions extends CreateResumableUploadOptions {
   resumable?: boolean;
   timeout?: number;
   validation?: string | boolean;
+}
+
+/**
+ * @internal
+ */
+export interface CreateWriteStreamOptionsInternal
+  extends CreateWriteStreamOptions {
   invocationId?: string;
 }
 
@@ -2214,7 +2221,10 @@ class File extends ServiceObject<File, FileMetadata> {
 
     writeStream.once('writing', async () => {
       if (options.resumable === false) {
-        await this.startSimpleUpload_(fileWriteStream, options);
+        await this.startSimpleUpload_(
+          fileWriteStream,
+          options as CreateWriteStreamOptionsInternal,
+        );
       } else {
         await this.startResumableUpload_(fileWriteStream, options);
       }
@@ -4230,7 +4240,7 @@ class File extends ServiceObject<File, FileMetadata> {
           const writable = this.createWriteStream({
             ...options,
             invocationId: persistentInvocationId,
-          });
+          } as CreateWriteStreamOptionsInternal);
 
           if (options.onUploadProgress) {
             writable.on('progress', options.onUploadProgress);
@@ -4537,7 +4547,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   startSimpleUpload_(
     dup: Duplexify,
-    options: CreateWriteStreamOptions = {},
+    options: CreateWriteStreamOptionsInternal = {},
   ): void {
     options.metadata ??= {};
 

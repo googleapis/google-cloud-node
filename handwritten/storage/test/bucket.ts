@@ -38,6 +38,7 @@ import {
   ComposeCleanupError,
 } from '../src/bucket.js';
 import mime from 'mime';
+import {CreateWriteStreamOptionsInternal} from '../src/file.js';
 import {convertObjKeysToSnakeCase, getDirName} from '../src/util.js';
 import {util} from '../src/nodejs-common/index.js';
 import path from 'path';
@@ -2911,9 +2912,9 @@ describe('Bucket', () => {
         bucket.storage.retryOptions.idempotencyStrategy = 1;
         bucket.storage.retryOptions.retryableErrorFn = () => true;
 
-        fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
+        fakeFile.createWriteStream = (options_) => {
           retryCount++;
-          const currentId = options_.invocationId;
+          const currentId = (options_ as CreateWriteStreamOptionsInternal)?.invocationId;
 
           if (retryCount === 1) {
             firstInvocationId = currentId;

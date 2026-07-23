@@ -39,6 +39,7 @@ import {
   FileOptions,
   CreateResumableUploadOptions,
   CreateWriteStreamOptions,
+  CreateWriteStreamOptionsInternal,
   FileMetadata,
   ContextValue,
 } from './file.js';
@@ -4526,7 +4527,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             const writable = newFile.createWriteStream({
               ...options,
               invocationId: persistentInvocationId,
-            });
+            } as CreateWriteStreamOptionsInternal);
             if (options.onUploadProgress) {
               writable.on('progress', options.onUploadProgress);
             }

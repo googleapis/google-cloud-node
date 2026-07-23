@@ -38,6 +38,7 @@ import {
   RequestError,
   SetFileMetadataOptions,
   STORAGE_POST_POLICY_BASE_URL,
+  CreateWriteStreamOptionsInternal,
 } from '../src/file.js';
 import {Duplex, PassThrough, Readable, Stream, Transform} from 'stream';
 import * as crypto from 'crypto';
@@ -4674,7 +4675,7 @@ describe('File', () => {
       await file.save(DATA, options);
 
       // Verify createWriteStream was called with an invocationId
-      const calledOptions = createWriteStreamStub.firstCall.args[0];
+      const calledOptions = createWriteStreamStub.firstCall.args[0] as CreateWriteStreamOptionsInternal;
       assert.ok(calledOptions?.invocationId);
       assert.strictEqual(typeof calledOptions?.invocationId, 'string');
     });
@@ -4694,7 +4695,7 @@ describe('File', () => {
 
       sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
         retryCount++;
-        const currentId = options_?.invocationId;
+        const currentId = (options_ as CreateWriteStreamOptionsInternal)?.invocationId;
 
         if (retryCount === 1) {
           firstInvocationId = currentId;
@@ -5474,7 +5475,7 @@ describe('File', () => {
     });
 
     it('should pass the invocationId to the storageTransport', async () => {
-      const options = {
+      const options: CreateWriteStreamOptionsInternal = {
         invocationId: 'test-uuid-1234',
         userProject: 'user-project-id',
       };
