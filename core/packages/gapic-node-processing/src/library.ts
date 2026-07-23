@@ -36,6 +36,10 @@ export {{ '{' + service.name.toPascalCase() + 'Client}' }} from './{{ service.na
 */
 const CLIENT_EXTRACTION_REGEX = /export\s*{\s*(\w+Client)\s*}/g;
 
+function isNodeError(err: unknown): err is NodeJS.ErrnoException {
+  return err instanceof Error && 'code' in err;
+}
+
 /**
  * Represents a parsed version of a library, breaking it down into components
  * that can be used for comparison to determine release precedence.
@@ -155,7 +159,14 @@ export class LibraryConfig {
             set.add(match[1]);
           }
         } catch (err) {
-          // ignore if file does not exist
+          if (isNodeError(err) && err.code === 'ENOENT') {
+            // ignore if file does not exist
+          } else {
+            const details = err instanceof Error ? err.message : String(err);
+            throw new Error(
+              `Failed to read version index file at ${indexFile}: ${details}`,
+            );
+          }
         }
       }
     }
