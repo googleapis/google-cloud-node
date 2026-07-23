@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "5.0.8",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "2c74fffd-9939-4664-92cb-8d56efd3a03a",
+      "createTime": "2026-07-23T15:09:01.632Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "7d991ec48098dc6eb1039d8aa9ad96f9acf02273",
           "message": "Modify default maxConcurrentStreamsLowWatermark value …",
@@ -82816,5 +82833,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-23T06:10:36.364Z"
+  "updateTime": "2026-07-23T15:09:01.632Z"
 }
