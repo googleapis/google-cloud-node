@@ -14,8 +14,8 @@
 
 const {dirname, join, resolve} = require('node:path');
 
-const API_PATH = dirname(require.resolve('@google-cloud/datastore-api/package.json'));
-const DATASTORE_PROTOS = join(API_PATH, 'build/protos');
+const API_PATH = join(dirname(require.resolve('@google-cloud/datastore-api')), '..');
+const DATASTORE_PROTOS = join(API_PATH, 'protos');
 
 const PROTO_PATH = join(DATASTORE_PROTOS, 'google/datastore/v1/datastore.proto');
 const GAX_PROTOS_DIR = resolve(
