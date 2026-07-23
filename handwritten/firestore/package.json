@@ -117,10 +117,18 @@
   },
   "//_comment": "TODO: Remove @sinonjs/fake-timers overrides/resolutions when version > 15.3.0 fixes the duplicate identifier 'withGlobal' issue.",
   "overrides": {
-    "@sinonjs/fake-timers": "15.1.1"
+    "@sinonjs/fake-timers": "15.1.1",
+    "brace-expansion": "^2.0.1"
   },
   "resolutions": {
-    "@sinonjs/fake-timers": "15.1.1"
+    "@sinonjs/fake-timers": "15.1.1",
+    "brace-expansion": "^2.0.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.1.1",
+      "brace-expansion": "^2.0.1"
+    }
   },
   "exports": {
     ".": {

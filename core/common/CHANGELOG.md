@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/common?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/common-v6.0.1...common-v6.1.0) (2026-07-23)
+
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/common-v6.0.0...common-v6.0.1) (2026-05-11)
 
 

@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.2.0...gaxios-v7.3.0) (2026-07-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
 ## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.1.6...gaxios-v7.2.0) (2026-07-07)
 
 
