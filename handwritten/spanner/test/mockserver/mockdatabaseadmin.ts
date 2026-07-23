@@ -24,7 +24,7 @@ import v1 = google.spanner.admin.database.v1;
 import iam = google.iam.v1;
 import longrunning = google.longrunning;
 import Any = google.protobuf.Any;
-import {getProtoPath} from '../../src/common-grpc/protos';
+import {getProtoPath} from '../../src/protos';
 
 const PROTO_PATH = 'spanner_database_admin.proto';
 const IMPORT_PATH = getProtoPath();

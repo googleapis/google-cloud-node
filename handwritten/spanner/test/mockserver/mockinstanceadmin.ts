@@ -25,7 +25,7 @@ import iam = google.iam.v1;
 import longrunning = google.longrunning;
 import Any = google.protobuf.Any;
 import Empty = google.protobuf.Empty;
-import {getProtoPath} from '../../src/common-grpc/protos';
+import {getProtoPath} from '../../src/protos';
 
 const PROTO_PATH = 'spanner_instance_admin.proto';
 const IMPORT_PATH = getProtoPath();

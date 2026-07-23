@@ -50,9 +50,6 @@ describe('TransactionRunner', () => {
     decode: DECODE,
   };
 
-  const LOOKUP = sandbox.stub().withArgs(RETRY_KEY).returns(RETRY_INFO);
-  const FROM_JSON = sandbox.stub().returns({lookup: LOOKUP});
-
   const SESSION = {
     parent: {},
     transaction: () => fakeTransaction,
@@ -69,7 +66,9 @@ describe('TransactionRunner', () => {
 
   before(() => {
     const runners = proxyquire('../src/transaction-runner', {
-      protobufjs: {Root: {fromJSON: FROM_JSON}},
+      './protos': {
+        getRetryInfo: () => RETRY_INFO,
+      },
     });
 
     Runner = runners.Runner;

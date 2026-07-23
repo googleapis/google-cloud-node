@@ -23,7 +23,7 @@ import {CloudExecutorImpl} from './cloud-executor-impl';
 import {CloudUtil} from './cloud-util';
 import {HealthImplementation} from 'grpc-health-check';
 import {ReflectionService} from '@grpc/reflection';
-import {getProtoPath} from '../../src/common-grpc/protos';
+import {getProtoPath} from '../../src/protos';
 
 const PROTO_PATH = getProtoPath('google/spanner/executor/v1/cloud_executor.proto');
 

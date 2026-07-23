@@ -28,7 +28,7 @@ import google = protos.google;
 import IRequestOptions = google.spanner.v1.IRequestOptions;
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
-import {getRetryInfo} from './common-grpc/protos';
+import {getRetryInfo} from './protos';
 
 const RETRY_INFO = 'google.rpc.retryinfo-bin';
 
