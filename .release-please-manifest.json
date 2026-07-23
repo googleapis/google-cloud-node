@@ -20,7 +20,7 @@
   "core/paginator": "6.0.2",
   "core/precise-date": "5.1.0",
   "core/projectify": "5.1.0",
-  "core/promisify": "5.1.0",
+  "core/promisify": "5.2.0",
   "handwritten/bigquery": "8.3.1",
   "handwritten/bigquery-storage": "5.1.2",
   "handwritten/bigtable": "6.5.1",
