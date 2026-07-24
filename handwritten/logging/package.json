@@ -25,19 +25,17 @@
   "author": "Google Inc.",
   "main": "build/src/index.js",
   "files": [
-    "build/src",
-    "build/protos"
+    "build/src"
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r proto* build/",
-    "compile-protos": "compileProtos src",
+    "compile": "tsc -p .",
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "npm run compile",
     "system-test": "mocha build/system-test --timeout 600000",
