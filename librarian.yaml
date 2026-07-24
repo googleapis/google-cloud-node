@@ -16,8 +16,8 @@ version: v0.27.1
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 2b625c91510a2e8320a778bc88af8b65bc4a19a2
-    sha256: 503314c3f49e4de70138d35d5b9b12cca0c74d7c5ba34380895440b83aa45b94
+    commit: e82c753169134e7eb263394d5e77ba6ec28596c2
+    sha256: 4427fc14f395abf744386f8b5a21158bc81b2cff57eb29dbf873f040998afbdc
 tools:
   pnpm:
     - name: gapic-generator-typescript
@@ -50,7 +50,7 @@ default:
   output: packages
 libraries:
   - name: google-ads-admanager
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/ads/admanager/v1
     copyright_year: "2026"
@@ -121,7 +121,7 @@ libraries:
           path: google/api/cloudquotas/v1beta
       package_name: '@google-cloud/cloudquotas'
   - name: google-api-servicecontrol
-    version: 4.3.2
+    version: 4.4.0
     apis:
       - path: google/api/servicecontrol/v2
       - path: google/api/servicecontrol/v1
@@ -184,7 +184,7 @@ libraries:
       package_name: '@google/area120-tables'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
   - name: google-chat
-    version: 0.25.0
+    version: 0.26.0
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
@@ -216,7 +216,7 @@ libraries:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
   - name: google-cloud-aiplatform
-    version: 6.9.0
+    version: 6.10.0
     apis:
       - path: google/cloud/aiplatform/v1
       - path: google/cloud/aiplatform/v1beta1
@@ -416,7 +416,7 @@ libraries:
       default_version: v1
       main_service: automl
   - name: google-cloud-backupdr
-    version: 0.8.1
+    version: 0.9.0
     apis:
       - path: google/cloud/backupdr/v1
     copyright_year: "2026"
@@ -431,7 +431,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/bare-metal-solution'
   - name: google-cloud-batch
-    version: 2.3.1
+    version: 2.4.0
     apis:
       - path: google/cloud/batch/v1
       - path: google/cloud/batch/v1alpha
@@ -537,7 +537,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-bigquery-storage-api
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/cloud/bigquery/storage/v1
     copyright_year: "2026"
@@ -545,6 +545,16 @@ libraries:
       package_name: '@google-cloud/bigquery-storage-api'
       metadata_name_override: bigquerystorage-api
       name_pretty_override: BigQuery Storage API
+  - name: google-cloud-bigtable-api
+    version: 0.2.0
+    apis:
+      - path: google/bigtable/v2
+      - path: google/bigtable/admin/v2
+    copyright_year: "2026"
+    nodejs:
+      package_name: '@google-cloud/bigtable-api'
+      metadata_name_override: bigtable-api
+      name_pretty_override: Bigtable API
   - name: google-cloud-billing
     version: 5.1.2
     apis:
@@ -590,7 +600,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/certificate-manager'
   - name: google-cloud-ces
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/cloud/ces/v1
       - path: google/cloud/ces/v1beta
@@ -643,8 +653,13 @@ libraries:
     nodejs:
       default_version: v1
       package_name: '@google-cloud/procurement'
+  - name: google-cloud-commerceproducer
+    version: 0.1.0
+    apis:
+      - path: google/cloud/commerceproducer/v1beta
+    copyright_year: "2026"
   - name: google-cloud-compute
-    version: 6.13.0
+    version: 6.14.0
     apis:
       - path: google/cloud/compute/v1
       - path: google/cloud/compute/v1beta
@@ -808,7 +823,7 @@ libraries:
       default_version: v1alpha
       package_name: '@google-cloud/data-qna'
   - name: google-cloud-datastore-api
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/datastore/v1
       - path: google/datastore/admin/v1
@@ -847,7 +862,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-dialogflow
-    version: 7.8.0
+    version: 7.9.0
     apis:
       - path: google/cloud/dialogflow/v2
       - path: google/cloud/dialogflow/v2beta1
@@ -868,7 +883,7 @@ libraries:
       metadata_name_override: dialogflow-cx
       name_pretty_override: Dialogflow CX API
   - name: google-cloud-discoveryengine
-    version: 2.8.0
+    version: 2.9.0
     apis:
       - path: google/cloud/discoveryengine/v1
       - path: google/cloud/discoveryengine/v1beta
@@ -946,7 +961,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-firestore-api
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/firestore/v1
       - path: google/firestore/admin/v1
@@ -1019,7 +1034,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/gke-hub'
   - name: google-cloud-gkemulticloud
-    version: 2.3.1
+    version: 2.4.0
     apis:
       - path: google/cloud/gkemulticloud/v1
     copyright_year: "2026"
@@ -1075,14 +1090,14 @@ libraries:
       default_version: v1
       main_service: iot
   - name: google-cloud-kms
-    version: 5.6.0
+    version: 5.7.0
     apis:
       - path: google/cloud/kms/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-kms-inventory
-    version: 2.7.0
+    version: 2.8.0
     apis:
       - path: google/cloud/kms/inventory/v1
     copyright_year: "2026"
@@ -1120,7 +1135,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-logging-api
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/logging/v2
     copyright_year: "2026"
@@ -1186,7 +1201,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-memorystore
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/cloud/memorystore/v1
       - path: google/cloud/memorystore/v1beta
@@ -1430,7 +1445,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis-cluster
-    version: 0.12.0
+    version: 0.13.0
     apis:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
@@ -1489,7 +1504,7 @@ libraries:
       default_version: v1
       main_service: scheduler
   - name: google-cloud-secretmanager
-    version: 6.2.0
+    version: 6.3.0
     apis:
       - path: google/cloud/secretmanager/v1
       - path: google/cloud/secretmanager/v1beta2
@@ -1524,7 +1539,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/publicca'
   - name: google-cloud-securitycenter
-    version: 9.4.0
+    version: 9.5.0
     apis:
       - path: google/cloud/securitycenter/v2
       - path: google/cloud/securitycenter/v1
@@ -1568,7 +1583,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-spanner-api
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/spanner/v1
       - path: google/spanner/executor/v1
@@ -1867,14 +1882,14 @@ libraries:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
   - name: google-developer-knowledge
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/developers/knowledge/v1
     copyright_year: "2026"
     nodejs:
       package_name: '@google/developer-knowledge'
   - name: google-devicesandservices-health
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/devicesandservices/health/v4
     copyright_year: "2026"
@@ -2000,6 +2015,11 @@ libraries:
     nodejs:
       default_version: v4
       package_name: '@google-cloud/geocode'
+  - name: google-maps-isochrones
+    apis:
+      - path: google/maps/isochrones/v1
+    copyright_year: "2026"
+    version: 0.1.0
   - name: google-maps-mapmanagement
     version: 0.1.1
     apis:
@@ -2128,7 +2148,7 @@ libraries:
       package_name: '@google-shopping/datasources'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-inventories
-    version: 0.12.1
+    version: 0.13.0
     apis:
       - path: google/shopping/merchant/inventories/v1
       - path: google/shopping/merchant/inventories/v1beta
@@ -2178,7 +2198,7 @@ libraries:
       package_name: '@google-shopping/ordertracking'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-products
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/shopping/merchant/products/v1
       - path: google/shopping/merchant/products/v1beta
@@ -2241,6 +2261,7 @@ libraries:
       - src/util/storage_control_utils.ts
       - src/util/uber_client_builder.ts
       - test/storage_control_compatibility.ts
+    skip_generate: true
     nodejs:
       default_version: v2
       package_name: '@google-cloud/storage-control'

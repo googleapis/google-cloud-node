@@ -1367,7 +1367,8 @@ export namespace google {
                         ASYMMETRIC_DECRYPT = 6,
                         RAW_ENCRYPT_DECRYPT = 7,
                         MAC = 9,
-                        KEY_ENCAPSULATION = 10
+                        KEY_ENCAPSULATION = 10,
+                        AES_WRAPPING = 11
                     }
                 }
 
@@ -1752,6 +1753,12 @@ export namespace google {
 
                     /** CryptoKeyVersion reimportEligible */
                     reimportEligible?: (boolean|null);
+
+                    /** CryptoKeyVersion trustedWrappingEnabled */
+                    trustedWrappingEnabled?: (boolean|null);
+
+                    /** CryptoKeyVersion hsmTrusted */
+                    hsmTrusted?: (boolean|null);
                 }
 
                 /** Represents a CryptoKeyVersion. */
@@ -1810,6 +1817,12 @@ export namespace google {
 
                     /** CryptoKeyVersion reimportEligible. */
                     public reimportEligible: boolean;
+
+                    /** CryptoKeyVersion trustedWrappingEnabled. */
+                    public trustedWrappingEnabled: boolean;
+
+                    /** CryptoKeyVersion hsmTrusted. */
+                    public hsmTrusted: boolean;
 
                     /**
                      * Creates a new CryptoKeyVersion instance using the specified properties.
@@ -1939,7 +1952,8 @@ export namespace google {
                         PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 = 60,
                         PQ_SIGN_ML_DSA_44_EXTERNAL_MU = 70,
                         PQ_SIGN_ML_DSA_65_EXTERNAL_MU = 67,
-                        PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
+                        PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71,
+                        AES_256_KWP = 73
                     }
 
                     /** CryptoKeyVersionState enum. */

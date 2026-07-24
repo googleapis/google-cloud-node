@@ -16,6 +16,8 @@ import {
   generateFinalDirectoryPath,
   combineLibraries,
   writeFilesToGivenLocation,
+  mergeVersionIndexExports,
+  isVersionIndexFile,
 } from '../src/combine-libraries';
 import {describe, it} from 'mocha';
 import * as path from 'path';
@@ -281,5 +283,41 @@ describe('combine libraries', () => {
         `Could not delete ${path.join(TEST_FIXTURES_PATH, 'testDir')} directory`,
       );
     }
+  });
+
+  it('should merge export statements across version index files', () => {
+    const contentA = `// Copyright 2026 Google LLC
+export { BigtableClient } from './bigtable_client';
+`;
+    const contentB = `// Copyright 2026 Google LLC
+export { BigtableInstanceAdminClient } from './bigtable_instance_admin_client';
+export { BigtableTableAdminClient } from './bigtable_table_admin_client';
+`;
+
+    const merged = mergeVersionIndexExports(contentA, contentB);
+    assert.strictEqual(
+      merged,
+      `// Copyright 2026 Google LLC
+export {BigtableClient} from './bigtable_client';
+export {BigtableInstanceAdminClient} from './bigtable_instance_admin_client';
+export {BigtableTableAdminClient} from './bigtable_table_admin_client';
+`
+    );
+  });
+
+  describe('isVersionIndexFile', () => {
+    it('should return true for valid version index files', () => {
+      assert.strictEqual(isVersionIndexFile('src/v1/index.ts'), true);
+      assert.strictEqual(isVersionIndexFile('src/v2/index.ts'), true);
+      assert.strictEqual(isVersionIndexFile('src/v1beta1/index.ts'), true);
+      assert.strictEqual(isVersionIndexFile('packages/foo/src/v1/index.ts'), true);
+    });
+
+    it('should return false for non-version or non-index files', () => {
+      assert.strictEqual(isVersionIndexFile('src/index.ts'), false);
+      assert.strictEqual(isVersionIndexFile('src/validators/index.ts'), false);
+      assert.strictEqual(isVersionIndexFile('src/views/index.ts'), false);
+      assert.strictEqual(isVersionIndexFile('src/v1/helpers.ts'), false);
+    });
   });
 });
