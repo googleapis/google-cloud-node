@@ -29,6 +29,7 @@ jobs:
       # only required for workflows in private repositories
       actions: read
       contents: read
+      issues: write # Added for creating issues on failure
 
     strategy:
       fail-fast: false
