@@ -45,7 +45,7 @@ import * as SqlTypes from '../src/execute-query/types';
 import {RestoreTableConfig} from '../src/backup';
 import {Options} from './cluster';
 import {createClusterOptionsList} from './constants/cluster';
-import {protos} from '../src';
+import {protos} from '@google-cloud/bigtable-api';
 import google = protos.google;
 import {PreciseDate} from '@google-cloud/precise-date';
 import Long = require('long');

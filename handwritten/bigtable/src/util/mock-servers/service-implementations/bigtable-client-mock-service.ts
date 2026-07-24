@@ -19,15 +19,10 @@
 import grpc = require('@grpc/grpc-js');
 import protoLoader = require('@grpc/proto-loader');
 import {MockService} from '../mock-service';
-import * as path from 'node:path';
 import * as fs from 'node:fs';
+import {getProtoPath} from '../../../utils/protos';
 
-const protoSource = require.resolve('@google-cloud/bigtable-api');
-const protoPath = path.join(
-  protoSource,
-  'build/protos',
-  'protos.json',
-);
+const protoPath = getProtoPath('protos.json');
 const jsonProtosString = fs.readFileSync(protoPath);
 const jsonProtos = JSON.parse(jsonProtosString.toString());
 

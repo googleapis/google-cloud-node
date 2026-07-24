@@ -15,7 +15,7 @@
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
-import {protos} from '../src';
+import {protos} from '@google-cloud/bigtable-api';
 import google = protos.google;
 import {createProtoRows} from './utils/proto-bytes';
 import {ByteBufferTransformer} from '../src/execute-query/bytebuffertransformer';

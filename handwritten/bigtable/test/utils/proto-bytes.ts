@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 import {Readable} from 'stream';
-import {protos} from '../../src';
+import {protos} from '@google-cloud/bigtable-api';
 import google = protos.google;
 import {PreparedStatement} from '../../src/execute-query/preparedstatement';
 
