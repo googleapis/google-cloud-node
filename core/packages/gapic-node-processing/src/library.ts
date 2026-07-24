@@ -36,6 +36,10 @@ export {{ '{' + service.name.toPascalCase() + 'Client}' }} from './{{ service.na
 */
 const CLIENT_EXTRACTION_REGEX = /export\s*{\s*(\w+Client)\s*}/g;
 
+function isNodeError(err: unknown): err is NodeJS.ErrnoException {
+  return err instanceof Error && 'code' in err;
+}
+
 /**
  * Represents a parsed version of a library, breaking it down into components
  * that can be used for comparison to determine release precedence.
@@ -119,7 +123,7 @@ export class LibraryConfig {
    * A getter to provide a list of clients and their corresponding versions.
    */
   public async getClientsAndVersions() {
-    const clientsAndVersions: VersionsAndClients[] = [];
+    const versionMap = new Map<string, Set<string>>();
     const allVersionedLibraries = await getAllTopLevelDirectories(
       this.sourcePath,
     );
@@ -130,16 +134,10 @@ export class LibraryConfig {
         throw new Error(
           'Unexpected library format. Expected *only* top-level directories containing fully formed libraries for each verison.',
         );
-        // If this fails, it means that the library is not
-        // in the format we expect. This could happen if we
-        // are rerunning the command on a well-formed library
       }
       const versions = await getAllTopLevelDirectories(
         path.join(this.sourcePath, directory, this.srcPath),
       );
-      // even though this looks nested, it ends up being o(1) since
-      // we only have one directory per versioned library (the single
-      // version of the library)
       for (const version of versions) {
         const indexFile = path.join(
           this.sourcePath,
@@ -148,23 +146,37 @@ export class LibraryConfig {
           version,
           INDEX_PATH,
         );
-        if (await fs.stat(indexFile)) {
+        try {
           const fileContent = await fs.readFile(indexFile, 'utf8');
           const clientsRegexMatch = Array.from(
             fileContent.matchAll(CLIENT_EXTRACTION_REGEX),
           );
-          // ensures we don't have any duplicates in the regex matching
-          // creates an array from the set which is what the client type is
-          clientsAndVersions.push({
-            version,
-            clients: Array.from(
-              new Set(clientsRegexMatch.map((x: any) => x[1])),
-            ),
-          });
+          if (!versionMap.has(version)) {
+            versionMap.set(version, new Set());
+          }
+          const set = versionMap.get(version)!;
+          for (const match of clientsRegexMatch) {
+            set.add(match[1]);
+          }
+        } catch (err) {
+          if (isNodeError(err) && err.code === 'ENOENT') {
+            // ignore if file does not exist
+          } else {
+            const details = err instanceof Error ? err.message : String(err);
+            throw new Error(
+              `Failed to read version index file at ${indexFile}: ${details}`,
+            );
+          }
         }
       }
     }
-    console.log('Found the following clients and versions', clientsAndVersions);
+    const clientsAndVersions: VersionsAndClients[] = [];
+    for (const [version, clientSet] of versionMap.entries()) {
+      clientsAndVersions.push({
+        version,
+        clients: Array.from(clientSet).sort(),
+      });
+    }
     return clientsAndVersions;
   }
 
@@ -247,12 +259,9 @@ export class LibraryConfig {
 }
 
 function alphaOrBetaPrecedence(preRelease: string): '' | 'beta' | 'alpha' {
-  console.log(preRelease);
   if (preRelease.startsWith('beta')) {
-    console.log('beta');
     return 'beta';
   } else if (preRelease.startsWith('alpha')) {
-    console.log('alpha');
     return 'alpha';
   } else {
     throw new Error(`Unknown pre-release type: ${preRelease}`);

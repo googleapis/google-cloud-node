@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.10](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.9...gapic-node-processing-v0.1.10) (2026-07-23)
+
+
+### Bug Fixes
+
+* **gapic-node-processing:** Preserve index.ts exports and merge clients across multi-api staging subdirectories ([#8953](https://github.com/googleapis/google-cloud-node/issues/8953)) ([fee5a15](https://github.com/googleapis/google-cloud-node/commit/fee5a15dc99d8055f7b316c4b7630d044821f235))
+
 ## [0.1.9](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.8...gapic-node-processing-v0.1.9) (2026-06-18)
 
 
