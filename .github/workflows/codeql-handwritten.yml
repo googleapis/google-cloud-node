@@ -69,3 +69,11 @@ jobs:
         build-mode: ${{ matrix.build-mode }}
     - name: Perform CodeQL Analysis for handwritten
       uses: github/codeql-action/analyze@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4
+
+    - name: Create issue on failure
+      if: ${{ failure() }}
+      uses: googleapis/librarian/.github/actions/create-issue-on-failure@main # zizmor: ignore[unpinned-uses]
+      with:
+        title: "CodeQL Advanced - handwritten failed"
+        body: "The daily scheduled task CodeQL Advanced - handwritten failed."
+        mention: "@googleapis/cloud-sdk-nodejs-team"

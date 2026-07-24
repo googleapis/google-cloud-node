@@ -70,3 +70,11 @@ jobs:
 
     - name: Perform CodeQL Analysis for repo meta
       uses: github/codeql-action/analyze@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4
+
+    - name: Create issue on failure
+      if: ${{ failure() }}
+      uses: googleapis/librarian/.github/actions/create-issue-on-failure@main # zizmor: ignore[unpinned-uses]
+      with:
+        title: "CodeQL Advanced - repo meta failed"
+        body: "The daily scheduled task CodeQL Advanced - repo meta failed."
+        mention: "@googleapis/cloud-sdk-nodejs-team"

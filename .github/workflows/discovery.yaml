@@ -1,5 +1,6 @@
 permissions:
   contents: read
+  issues: write # Added for creating issues on failure
 
 on:
   schedule:
@@ -41,3 +42,10 @@ jobs:
           git_dir: 'handwritten/bigquery'
           fork: true
           force: true
+      - name: Create issue on failure
+        if: ${{ failure() }}
+        uses: googleapis/librarian/.github/actions/create-issue-on-failure@main # zizmor: ignore[unpinned-uses]
+        with:
+          title: "Update Discovery Generated Types failed"
+          body: "The weekly scheduled task to update Discovery Generated Types failed."
+          mention: "@googleapis/cloud-sdk-nodejs-team" # Can be updated to @googleapis/bigquery-team if preferred

@@ -1,5 +1,6 @@
 permissions:
   contents: read
+  issues: write # Added for creating issues on failure
 
 on:
   schedule:
@@ -33,3 +34,10 @@ jobs:
           message: 'docs: update the list of available APIs'
           branch: update-api-list
           git_dir: '.'
+      - name: Create issue on failure
+        if: ${{ failure() }}
+        uses: googleapis/librarian/.github/actions/create-issue-on-failure@main # zizmor: ignore[unpinned-uses]
+        with:
+          title: "Update API list failed"
+          body: "The daily scheduled task to update the API list failed."
+          mention: "@googleapis/cloud-sdk-nodejs-team"
