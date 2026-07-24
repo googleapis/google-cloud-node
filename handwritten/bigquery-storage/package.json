@@ -10,13 +10,12 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "files": [
-    "build/src",
-    "build/protos"
+    "build/src"
   ],
   "main": "build/src/index.js",
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p .",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
