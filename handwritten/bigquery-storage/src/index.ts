@@ -12,8 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as v1 from '@google-cloud/bigquery-storage-api';
-import {BigQueryReadClient, BigQueryWriteClient} from '@google-cloud/bigquery-storage-api';
+import {v1, BigQueryReadClient, BigQueryWriteClient} from '@google-cloud/bigquery-storage-api';
 import * as managedwriter from './managedwriter';
 import * as reader from './reader';
 const WriterClient = managedwriter.WriterClient;
