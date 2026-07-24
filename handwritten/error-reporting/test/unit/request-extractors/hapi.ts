@@ -153,6 +153,7 @@ describe('hapiRequestInformationExtractor behaviour', () => {
         referrer: 'www.ANOTHER-TEST.com',
         remoteAddress: '0.0.0.1',
       };
+      
       deepStrictEqual(
         hapiRequestInformationExtractor(REQUEST as {} as hapi.Request),
         EXPECTED,
