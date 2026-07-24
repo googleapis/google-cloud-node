@@ -138,7 +138,8 @@
   },
   "overrides": {
     "gcp-metadata": "^7.0.1",
-    "@sinonjs/fake-timers": "15.2.1"
+    "@sinonjs/fake-timers": "15.2.1",
+    "brace-expansion": "5.0.7"
   },
   "pnpm": {
     "overrides": {
