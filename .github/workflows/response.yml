@@ -26,7 +26,7 @@ jobs:
             await script({github, context})
       - name: Create issue on failure
         if: ${{ failure() }}
-        uses: googleapis/librarian/.github/actions/create-issue-on-failure@main # zizmor: ignore[unpinned-uses]
+        uses: googleapis/librarian/.github/actions/create-issue-on-failure@baf9b8078c5e98cb90b53088f284fb7b060e195b # main
         with:
           title: "Close unresponsive issues failed"
           body: "The daily scheduled task to close unresponsive issues failed."
