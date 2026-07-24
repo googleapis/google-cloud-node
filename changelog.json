@@ -4,6 +4,24 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "c2f51364b47c40e6793c55d3020329e1fa4a9f74",
+          "message": "Move typescript to dependencies for AST runtime execution",
+          "issues": [
+            "8962"
+          ],
+          "scope": "gapic-node-processing"
+        }
+      ],
+      "version": "0.1.11",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "0f3e8835-d490-4fb9-8b07-25406b1826be",
+      "createTime": "2026-07-24T15:02:00.313Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "4326a4d3eb0afcde14b12aece285f84f2274e609",
           "message": "Onboard a new library",
@@ -83144,5 +83162,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-23T20:57:58.341Z"
+  "updateTime": "2026-07-24T15:02:00.313Z"
 }
