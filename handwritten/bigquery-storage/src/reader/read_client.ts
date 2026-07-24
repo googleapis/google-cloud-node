@@ -15,8 +15,8 @@
 import * as gax from 'google-gax';
 import type {CallOptions, ClientOptions} from 'google-gax';
 
-import * as protos from '../../protos/protos';
-import {BigQueryReadClient} from '../v1';
+import {protos} from '@google-cloud/bigquery-storage-api';
+import {BigQueryReadClient} from '@google-cloud/bigquery-storage-api';
 import {ReadStream} from './read_stream';
 import {TableReader} from './table_reader';
 import {ArrowTableReader} from './arrow_reader';
