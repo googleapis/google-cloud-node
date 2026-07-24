@@ -52,7 +52,8 @@ import {Log, GetEntriesRequest, TailEntriesRequest, LogOptions} from './log';
 import {LogSync, LogSyncOptions} from './log-sync';
 import {Sink} from './sink';
 import {Duplex, PassThrough, Transform, Writable} from 'stream';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/logging-api';
+import google = protos.google;
 
 import {Bucket} from '@google-cloud/storage'; // types only
 import {Dataset, BigQuery} from '@google-cloud/bigquery'; // types only
@@ -1602,7 +1603,6 @@ export {Logging};
  *   Reference to {@link v2.MetricsServiceV2Client}
  */
 module.exports.v2 = v2;
-import * as protos from '../protos/protos';
 export {protos};
 export {v2};
 export * from '@opentelemetry/api';
