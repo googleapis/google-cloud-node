@@ -72,7 +72,12 @@ function getChangedFiles() {
   // Attempt to fetch the base branch and set origin/${base} so it doesn't compare against itself
   if (process.env.GITHUB_BASE_REF) {
     try {
-      runGit(['fetch', 'origin', base, '--depth=1']);
+      runGit([
+        'fetch',
+        'origin',
+        `+refs/heads/${base}:refs/remotes/origin/${base}`,
+        '--depth=1',
+      ]);
     } catch {
       // Continue if network fetch fails or remote does not exist
     }
