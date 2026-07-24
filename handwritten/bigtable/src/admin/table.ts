@@ -15,18 +15,13 @@
 import {BigtableTableAdminClient} from './v2';
 import {LROperation, CallOptions, ClientOptions} from 'google-gax';
 import type * as gax from 'google-gax';
-import * as path from 'node:path';
 import * as fs from 'node:fs';
 
 import {protos} from '@google-cloud/bigtable-api';
 import google = protos.google;
+import {getProtoPath} from '../utils/protos';
 
-const PROTO_DIR = path.join(
-  path.dirname(require.resolve('@google-cloud/bigtable-api')),
-  '..',
-  'protos',
-);
-const JSON_PATH = path.join(PROTO_DIR, 'protos.json');
+const JSON_PATH = getProtoPath('protos.json');
 const JSON_PROTOS = JSON.parse(fs.readFileSync(JSON_PATH, 'utf-8'));
 
 /**
