@@ -26,10 +26,12 @@ import * as hapi from '@hapi/hapi';
  * @returns {Number} - Either an HTTP status code or -1 in absence of an
  *  extractable status code.
  */
-function attemptToExtractStatusCode(req: hapi.Request) {
+function attemptToExtractStatusCode(
+  req: hapi.Request | Record<string, unknown>,
+) {
   // TODO: Handle the cases where `req.response` and `req.response.output` are
   // `null` in this function
-  if (typeof req.response === 'object') {
+  if (typeof req.response === 'object' && req.response !== null) {
     if ('statusCode' in req.response) {
       return (req.response as hapi.ResponseObject).statusCode;
     } else if (
@@ -52,11 +54,17 @@ function attemptToExtractStatusCode(req: hapi.Request) {
  * @returns {String} - Either an empty string if the IP cannot be extracted or
  *  a string that represents the remote IP address
  */
-function extractRemoteAddressFromRequest(req: hapi.Request) {
-  if ('x-forwarded-for' in req.headers) {
-    return req.headers['x-forwarded-for'];
+function extractRemoteAddressFromRequest(
+  req: hapi.Request | Record<string, unknown>,
+) {
+  if (
+    req.headers &&
+    typeof req.headers === 'object' &&
+    'x-forwarded-for' in req.headers
+  ) {
+    return (req.headers as Record<string, unknown>)['x-forwarded-for'];
   } else if (req.info?.toString() === '[object Object]') {
-    return req.info.remoteAddress;
+    return (req.info as {remoteAddress?: string}).remoteAddress;
   }
 
   return '';
@@ -65,10 +73,11 @@ function extractRemoteAddressFromRequest(req: hapi.Request) {
 /**
  * Helper to normalize headers that might be arrays into a single string.
  */
-function getSingleHeader(
-  val: string | string[] | undefined,
-): string | undefined {
-  return Array.isArray(val) ? val[0] : val;
+function getSingleHeader(val: unknown): string | undefined {
+  if (Array.isArray(val)) {
+    return typeof val[0] === 'string' ? val[0] : undefined;
+  }
+  return typeof val === 'string' ? val : undefined;
 }
 
 /**
@@ -80,7 +89,9 @@ function getSingleHeader(
  * @returns {RequestInformationContainer} - an object containing the request
  *  information in a standardized format
  */
-export function hapiRequestInformationExtractor(req?: hapi.Request) {
+export function hapiRequestInformationExtractor(
+  req?: hapi.Request | Record<string, unknown>,
+) {
   const returnObject = new RequestInformationContainer();
 
   if (
@@ -92,18 +103,24 @@ export function hapiRequestInformationExtractor(req?: hapi.Request) {
     return returnObject;
   }
 
-  let urlString: string;
+  let urlString = '';
   if (typeof req!.url === 'string') {
-    urlString = req!.url as {} as string;
-  } else {
-    urlString = req!.url.pathname;
+    urlString = req!.url;
+  } else if (
+    req!.url &&
+    typeof req!.url === 'object' &&
+    'pathname' in req!.url
+  ) {
+    urlString = (req!.url as {pathname: string}).pathname;
   }
 
+  const headers = req!.headers as Record<string, unknown>;
+
   returnObject
-    .setMethod(req!.method)
+    .setMethod(typeof req!.method === 'string' ? req!.method : '')
     .setUrl(urlString)
-    .setUserAgent(getSingleHeader(req!.headers['user-agent']))
-    .setReferrer(getSingleHeader(req!.headers.referrer))
+    .setUserAgent(getSingleHeader(headers['user-agent']))
+    .setReferrer(getSingleHeader(headers.referrer))
     .setStatusCode(attemptToExtractStatusCode(req!))
     .setRemoteAddress(getSingleHeader(extractRemoteAddressFromRequest(req!)));
 

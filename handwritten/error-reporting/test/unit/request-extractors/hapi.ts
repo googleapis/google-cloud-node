@@ -14,8 +14,7 @@
 
 import * as hapi from '@hapi/hapi';
 import {URL} from 'url';
-import {describe, it} from 'mocha';
-
+import * as assert from 'assert';
 import {hapiRequestInformationExtractor} from '../../../src/request-extractors/hapi';
 import {Fuzzer} from '../../../utils/fuzzer';
 import {deepStrictEqual} from '../../util';
@@ -137,6 +136,21 @@ describe('hapiRequestInformationExtractor behaviour', () => {
         hapiRequestInformationExtractor(REQUEST as {} as hapi.Request),
         EXPECTED,
       );
+    });
+    it('Should handle array headers correctly', () => {
+      const REQUEST = {
+        headers: {
+          'x-forwarded-for': ['0.0.0.1', '0.0.0.2'],
+          'user-agent': ['Mozilla/5.0', 'Chrome/90'],
+          referrer: ['www.ANOTHER-TEST.com'],
+        },
+      };
+
+      const actual = hapiRequestInformationExtractor(REQUEST);
+      
+      assert.strictEqual(actual.remoteAddress, '0.0.0.1');
+      assert.strictEqual(actual.userAgent, 'Mozilla/5.0');
+      assert.strictEqual(actual.referrer, 'www.ANOTHER-TEST.com');
     });
   });
 });
