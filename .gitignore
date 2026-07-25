@@ -8,6 +8,11 @@ packages/*/AUTHORS
 packages/*/CONTRIBUTORS
 packages/*/COPYING
 package-lock.json
+yarn.lock
+bun.lockb
+**/pnpm-lock.yaml
+!/pnpm-lock.yaml
 __pycache__
-packages/*/pnpm-lock.yaml
-containers/*/pnpm-lock.yaml
+**/docs.metadata
+**/backstory/
+*.tsbuildinfo

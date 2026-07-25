@@ -39,16 +39,9 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER=xunit
 fi
 
-# Install dependencies
-# Normalize POSIX paths to Windows-compatible mixed paths (forward slashes) on Windows Git Bash
-# so native Node.js and pnpm processes can resolve .pnpmfile.cjs without segmentation faults.
-PNPMFILE_PATH="${PROJECT_ROOT}/.pnpmfile.cjs"
-if command -v cygpath >/dev/null 2>&1; then
-    PNPMFILE_PATH=$(cygpath -m "${PNPMFILE_PATH}")
-fi
-
-echo "pnpm install --ignore-scripts --engine-strict --prod --pnpmfile \"${PNPMFILE_PATH}\"; pnpm install --pnpmfile \"${PNPMFILE_PATH}\""
-pnpm install --ignore-scripts --engine-strict --prod --pnpmfile "${PNPMFILE_PATH}"; pnpm install --pnpmfile "${PNPMFILE_PATH}"
+# Dependencies are pre-installed globally at the workspace root.
+# We only execute compilation / prep if required by the package.
+pnpm run compile --if-present
 
 
 retval=0

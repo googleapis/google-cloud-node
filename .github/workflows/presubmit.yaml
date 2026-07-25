@@ -22,6 +22,8 @@ jobs:
       - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
         with:
           version: ^10.0.0
+      - name: Install Workspace Dependencies (Frozen Lockfile)
+        run: pnpm install --frozen-lockfile
       - run: node --version
       - run: ci/run_conditional_tests.sh
         name: Run unit tests
@@ -40,6 +42,10 @@ jobs:
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: 24
-      - run: npm install
-      - run: npm run lint
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        with:
+          version: ^10.0.0
+      - name: Install Workspace Dependencies (Frozen Lockfile)
+        run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
         name: Run monorepo linter
