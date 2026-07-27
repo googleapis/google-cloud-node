@@ -2019,6 +2019,7 @@ libraries:
     apis:
       - path: google/maps/isochrones/v1
     copyright_year: "2026"
+    version: 0.1.0
   - name: google-maps-mapmanagement
     version: 0.1.1
     apis:
