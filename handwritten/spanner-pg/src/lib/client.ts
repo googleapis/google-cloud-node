@@ -18,6 +18,7 @@ import {encodeValue, decodeValue, getPgOid} from './codec.js';
 import {Pool as SpannerPool, Connection} from 'spannerlib-node';
 import {Query} from './query.js';
 import {enrichPgError} from './errors.js';
+import {types, globalRegistry, hasCustomParser, TypeParserRegistry} from './types.js';
 
 export interface ClientConfig {
   connectionString?: string;
@@ -26,6 +27,7 @@ export interface ClientConfig {
   project?: string;
   instance?: string;
   database?: string;
+  types?: any;
 }
 
 export interface FieldDef {
@@ -44,6 +46,35 @@ export interface QueryConfig {
   text: string;
   values?: any[];
   rowMode?: 'array';
+  types?: any;
+}
+
+/**
+ * Module-level cache for SpannerPool instances keyed by database DSN string.
+ *
+ * In Cloud Spanner, establishing a connection pool involves gRPC channel setup,
+ * IAM/OAuth2 credential resolution, and CGO session initialization (~2-3s overhead).
+ *
+ * To match the instant connect behavior expected by node-postgres applications and
+ * ORMs when instantiating new Client objects, SpannerPool handles are transparently
+ * cached per DSN. Multiple Client instances targeting the same database share the
+ * underlying gRPC session channels, while individual clients acquire and release
+ * separate connection handles.
+ */
+const poolCache = new Map<string, SpannerPool>();
+
+/**
+ * Closes all cached SpannerPool instances and clears the module-level pool cache.
+ *
+ * This function should be called during application graceful shutdown or in test runner
+ * hooks (e.g. afterAll) to close all underlying gRPC background channels and ensure
+ * Node.js exits cleanly without open handle warnings.
+ */
+export async function clearPoolCache(): Promise<void> {
+  for (const [, pool] of poolCache.entries()) {
+    await pool.close().catch(() => {});
+  }
+  poolCache.clear();
 }
 
 export class Client extends EventEmitter {
@@ -56,6 +87,14 @@ export class Client extends EventEmitter {
   private queryQueue: Array<{run: () => Promise<any>}> = [];
   private isExecuting = false;
   private ending = false;
+  /**
+   * Tracks the PostgreSQL transaction status indicator:
+   * - 'I': Idle (not in a transaction block)
+   * - 'T': In Transaction (active transaction block after BEGIN / START TRANSACTION)
+   * - 'E': In Failed Transaction (an error occurred during an active transaction)
+   */
+  private txStatus: 'I' | 'T' | 'E' = 'I';
+  public types: any;
 
   constructor(config?: string | ClientConfig) {
     super();
@@ -64,6 +103,31 @@ export class Client extends EventEmitter {
     } else {
       this.config = config || {};
     }
+    this.types = this.config.types || new TypeParserRegistry(globalRegistry);
+  }
+
+  /**
+   * Registers a custom type parser function for a given PostgreSQL OID on this Client instance.
+   *
+   * Type parser resolution precedence order:
+   * 1. Query-level (`query.types`)
+   * 2. Client-instance level (`client.types`, registered via `client.setTypeParser`)
+   * 3. Client-config level (`client.config.types`)
+   * 4. Global level (`pg.types`)
+   */
+  public setTypeParser(oid: number | string, format?: any, customParser?: any): void {
+    if (typeof format === 'function') {
+      customParser = format;
+      format = 'text';
+    }
+    return this.types.setTypeParser(oid, format, customParser);
+  }
+
+  /**
+   * Returns the current PostgreSQL transaction status indicator string ('I', 'T', or 'E').
+   */
+  public getTransactionStatus(): string {
+    return this.txStatus;
   }
 
   /**
@@ -76,34 +140,41 @@ export class Client extends EventEmitter {
   }
 
   /**
-   * Stubs custom client-level type parsing overrides.
-   */
-  setTypeParser(id: number, parser: Function): void {}
-
-  /**
    * Establishes a session pool and checkout connection.
    */
-  async connect(): Promise<void>;
-  async connect(callback: (err?: Error) => void): Promise<void>;
-  async connect(callback?: (err?: Error) => void): Promise<void> {
+  async connect(): Promise<this>;
+  async connect(callback: (err?: Error) => void): Promise<this>;
+  async connect(callback?: (err?: Error) => void): Promise<this> {
     if (this.isConnected) {
-      if (callback) callback();
-      return;
+      const err = new Error('Client has already been connected');
+      if (callback) {
+        process.nextTick(() => callback(err));
+        return this;
+      }
+      return Promise.reject(err);
     }
 
     try {
       const dsn = resolveDsn(this.config);
-      this.spannerPool = await SpannerPool.create(dsn);
+      let pool = poolCache.get(dsn);
+      if (!pool) {
+        pool = await SpannerPool.create(dsn);
+        poolCache.set(dsn, pool);
+      }
+      this.spannerPool = pool;
       this.connection = await this.spannerPool.createConnection();
       this.isConnected = true;
       this.emit('connect');
       if (callback) callback();
+      return this;
     } catch (err: any) {
       err = enrichPgError(err);
-      this.emit('error', err);
       if (callback) {
         callback(err);
-        return;
+        return this;
+      }
+      if (this.listenerCount('error') > 0) {
+        this.emit('error', err);
       }
       throw err;
     }
@@ -113,16 +184,14 @@ export class Client extends EventEmitter {
    * Closes active connection and pool handles.
    */
   private async doClose(): Promise<void> {
-    if (this.connection && !this.externalConnection) {
-      await this.connection.close();
-      this.connection = null;
-    }
-    if (this.spannerPool && !this.externalConnection) {
-      await this.spannerPool.close();
-      this.spannerPool = null;
-    }
+    const conn = this.connection;
+    this.connection = null;
+    this.spannerPool = null;
     this.isConnected = false;
     this.emit('end');
+    if (conn && !this.externalConnection) {
+      void conn.close().catch(() => {});
+    }
   }
 
   async end(): Promise<void>;
@@ -175,8 +244,15 @@ export class Client extends EventEmitter {
     values?: any[] | ((err: Error | null, result?: QueryResult) => void),
     callback?: (err: Error | null, result?: QueryResult) => void,
   ): Query {
-    const query =
-      text instanceof Query ? text : new Query(text, values as any, callback);
+    let query: Query;
+    if (text instanceof Query) {
+      query = text;
+      if (typeof values === 'function') {
+        query.callback = values as any;
+      }
+    } else {
+      query = new Query(text, values as any, callback);
+    }
 
     if (this.ending) {
       const err = new Error('Client was closed and is not queryable');
@@ -202,10 +278,62 @@ export class Client extends EventEmitter {
         const sqlValues = query.values;
         const actualCallback = query.callback;
         const isArrayMode = query.rowMode === 'array';
+        // Resolves custom type parsers according to priority order:
+        // 1. query.types  2. client.types  3. client.config.types  4. global pg.types
+        const customTypesHook = (oid: number) => {
+          if (query.types && typeof query.types.getTypeParser === 'function') {
+            return query.types.getTypeParser(oid);
+          }
+          if (this.types && typeof this.types.getTypeParser === 'function') {
+            return this.types.getTypeParser(oid);
+          }
+          if (
+            this.config?.types &&
+            typeof this.config.types.getTypeParser === 'function'
+          ) {
+            return this.config.types.getTypeParser(oid);
+          }
+          if (hasCustomParser(oid)) {
+            return types.getTypeParser(oid);
+          }
+          return null;
+        };
+        if (typeof sqlText !== 'string') {
+          const err = enrichPgError(new Error('Query text must be a string'));
+          if (query.listenerCount('error') > 0) {
+            query.emit('error', err);
+          }
+          if (actualCallback) {
+            process.nextTick(() => actualCallback(err));
+          }
+          throw err;
+        }
+        if (
+          sqlValues !== undefined &&
+          sqlValues !== null &&
+          !Array.isArray(sqlValues)
+        ) {
+          const err = enrichPgError(
+            new Error('Query values must be an Array')
+          );
+          if (query.listenerCount('error') > 0) {
+            query.emit('error', err);
+          }
+          if (actualCallback) {
+            process.nextTick(() => actualCallback(err));
+          }
+          throw err;
+        }
+
         let rows: any;
         try {
           if (!this.isConnected) {
             await this.connect();
+          }
+
+          const trimmedUpper = sqlText.trim().toUpperCase();
+          if (trimmedUpper.startsWith('BEGIN') || trimmedUpper.startsWith('START TRANSACTION')) {
+            this.txStatus = 'T';
           }
 
           // 1. Build Spanner parameter maps from positional args
@@ -229,116 +357,154 @@ export class Client extends EventEmitter {
 
           rows = await this.connection!.execute(executeRequest);
 
-          // 3. Extract columns metadata
-          const metadata = await rows.metadata();
-          const fields: FieldDef[] = [];
-          if (metadata && metadata.rowType && metadata.rowType.fields) {
-            for (const f of metadata.rowType.fields) {
-              fields.push({
-                name: f.name || '',
-                dataTypeID: f.type ? getPgOid(f.type) : 0,
-              });
+          const resultSets: QueryResult[] = [];
+          let hasMoreResultSets = false;
+          do {
+            // 3. Extract columns metadata
+            const metadata = await rows.metadata();
+            const fields: FieldDef[] = [];
+            if (metadata && metadata.rowType && metadata.rowType.fields) {
+              for (const f of metadata.rowType.fields) {
+                fields.push({
+                  name: f.name || '',
+                  dataTypeID: f.type ? getPgOid(f.type) : 0,
+                });
+              }
             }
-          }
 
-          // 4. Decode results rows
-          const outputRows: any[] = [];
-          let listValue;
-          while ((listValue = await rows.next()) !== null) {
-            let rowData: any;
-            if (isArrayMode) {
-              rowData = [];
-              if (
-                listValue.values &&
-                metadata &&
-                metadata.rowType &&
-                metadata.rowType.fields
-              ) {
-                for (
-                  let colIdx = 0;
-                  colIdx < listValue.values.length;
-                  colIdx++
+            // 4. Decode results rows
+            const outputRows: any[] = [];
+            const currentResult: QueryResult = {
+              rows: outputRows,
+              fields,
+              rowCount: 0,
+              command: 'SELECT',
+            };
+            let listValue;
+            while ((listValue = await rows.next()) !== null) {
+              let rowData: any;
+              if (isArrayMode) {
+                rowData = [];
+                if (
+                  listValue.values &&
+                  metadata &&
+                  metadata.rowType &&
+                  metadata.rowType.fields
                 ) {
-                  const field: any = metadata.rowType.fields[colIdx];
-                  const fieldType: any = field.type;
-                  const valProto: any = listValue.values[colIdx];
-                  rowData.push(decodeValue(valProto, fieldType));
+                  for (
+                    let colIdx = 0;
+                    colIdx < listValue.values.length;
+                    colIdx++
+                  ) {
+                    const field: any = metadata.rowType.fields[colIdx];
+                    const fieldType: any = field.type;
+                    const valProto: any = listValue.values[colIdx];
+                    rowData.push(
+                      decodeValue(valProto, fieldType, true, customTypesHook)
+                    );
+                  }
+                }
+              } else {
+                rowData = {};
+                if (
+                  listValue.values &&
+                  metadata &&
+                  metadata.rowType &&
+                  metadata.rowType.fields
+                ) {
+                  for (
+                    let colIdx = 0;
+                    colIdx < listValue.values.length;
+                    colIdx++
+                  ) {
+                    const field: any = metadata.rowType.fields[colIdx];
+                    const fieldName: string = field.name || '';
+                    const fieldType: any = field.type;
+                    const valProto: any = listValue.values[colIdx];
+                    rowData[fieldName] = decodeValue(
+                      valProto,
+                      fieldType,
+                      true,
+                      customTypesHook
+                    );
+                  }
                 }
               }
+
+              outputRows.push(rowData);
+              currentResult.rowCount = outputRows.length;
+              query.emit('row', rowData, currentResult);
+            }
+
+            // 5. Query stats & row count mapping
+            let rowCount = outputRows.length;
+            const stats = await rows.resultSetStats();
+            if (
+              stats &&
+              stats.rowCountExact !== undefined &&
+              stats.rowCountExact !== null
+            ) {
+              rowCount =
+                typeof stats.rowCountExact === 'number'
+                  ? stats.rowCountExact
+                  : parseInt(stats.rowCountExact.toString(), 10);
+            }
+
+            // Inferred PG command per statement
+            const statements = sqlText
+              .split(';')
+              .map(s => s.trim())
+              .filter(s => s.length > 0);
+            const currentStmt = statements[resultSets.length] || sqlText;
+            let command = 'SELECT';
+            const trimmedSql = currentStmt.trim().toUpperCase();
+            if (trimmedSql.startsWith('INSERT')) command = 'INSERT';
+            else if (trimmedSql.startsWith('UPDATE')) command = 'UPDATE';
+            else if (trimmedSql.startsWith('DELETE')) command = 'DELETE';
+            else if (trimmedSql.startsWith('CREATE')) command = 'CREATE';
+            else if (trimmedSql.startsWith('DROP')) command = 'DROP';
+
+            resultSets.push({
+              rows: outputRows,
+              fields,
+              rowCount,
+              command,
+            });
+
+            if (typeof rows.nextResultSet === 'function') {
+              hasMoreResultSets = await rows.nextResultSet();
             } else {
-              rowData = {};
-              if (
-                listValue.values &&
-                metadata &&
-                metadata.rowType &&
-                metadata.rowType.fields
-              ) {
-                for (
-                  let colIdx = 0;
-                  colIdx < listValue.values.length;
-                  colIdx++
-                ) {
-                  const field: any = metadata.rowType.fields[colIdx];
-                  const fieldName: string = field.name || '';
-                  const fieldType: any = field.type;
-                  const valProto: any = listValue.values[colIdx];
-                  rowData[fieldName] = decodeValue(valProto, fieldType);
-                }
-              }
+              hasMoreResultSets = false;
             }
-
-            outputRows.push(rowData);
-            query.emit('row', rowData);
-          }
-
-          // 5. Query stats & row count mapping
-          let rowCount = outputRows.length;
-          const stats = await rows.resultSetStats();
-          if (
-            stats &&
-            stats.rowCountExact !== undefined &&
-            stats.rowCountExact !== null
-          ) {
-            rowCount =
-              typeof stats.rowCountExact === 'number'
-                ? stats.rowCountExact
-                : parseInt(stats.rowCountExact.toString(), 10);
-          }
+          } while (hasMoreResultSets);
 
           // Clean up iterator
           await rows.close();
 
-          // Inferred PG command
-          let command = 'SELECT';
-          const trimmedSql = sqlText.trim().toUpperCase();
-          if (trimmedSql.startsWith('INSERT')) command = 'INSERT';
-          else if (trimmedSql.startsWith('UPDATE')) command = 'UPDATE';
-          else if (trimmedSql.startsWith('DELETE')) command = 'DELETE';
-          else if (trimmedSql.startsWith('CREATE')) command = 'CREATE';
-          else if (trimmedSql.startsWith('DROP')) command = 'DROP';
-
-          const result: QueryResult = {
-            rows: outputRows,
-            fields,
-            rowCount,
-            command,
-          };
-
-          query.emit('end', result);
-          if (actualCallback) {
-            process.nextTick(() => actualCallback(null, result as any));
+          if (trimmedUpper.startsWith('COMMIT') || trimmedUpper.startsWith('ROLLBACK')) {
+            this.txStatus = 'I';
           }
-          return result;
+
+          const finalResult: any =
+            resultSets.length > 1 ? resultSets : resultSets[0];
+
+          query.emit('end', finalResult);
+          if (actualCallback) {
+            process.nextTick(() => actualCallback(null, finalResult));
+          }
+          return finalResult;
         } catch (err: any) {
           err = enrichPgError(err);
-          if (rows) {
-            await rows.close().catch(() => {});
+          if (this.txStatus === 'T') {
+            this.txStatus = 'E';
           }
-          if (query.listenerCount('error') > 0) {
-            query.emit('error', err);
+          if (rows) {
+            void rows.close().catch(() => {});
           }
           if (actualCallback) {
             process.nextTick(() => actualCallback(err));
+          } else {
+            query.emit('error', err);
           }
           throw err;
         }
@@ -361,6 +527,7 @@ export class Client extends EventEmitter {
     });
 
     query.setPromise(executionPromise);
+    executionPromise.catch(() => {});
     this.queryQueue.push(task);
     void this.processQueue();
     return query;

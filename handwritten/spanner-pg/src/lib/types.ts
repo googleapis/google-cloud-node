@@ -25,23 +25,39 @@ export type TypeParser = (value: any) => any;
  * registration and retrieval by PostgreSQL Object Identifier (OID), unifying
  * default decoding logic with decodeValue.
  */
-class TypeParserRegistry {
+export class TypeParserRegistry {
   private customParsers = new Map<string, TypeParser>();
+  private parent?: TypeParserRegistry;
+
+  constructor(parent?: TypeParserRegistry) {
+    this.parent = parent;
+  }
 
   /**
    * Returns whether a custom type parser has been registered for this OID.
    */
   hasCustomParser(oid: number | string): boolean {
-    return this.customParsers.has(`${oid}`);
+    const key = `${oid}`;
+    return (
+      this.customParsers.has(`${key}:text`) ||
+      this.customParsers.has(`${key}:binary`) ||
+      (this.parent ? this.parent.hasCustomParser(oid) : false)
+    );
   }
 
   /**
    * Retrieves the active type parser for a given PostgreSQL OID and optional format.
    * If no custom parser is registered, reuses core Spanner decodeValue logic.
    */
-  getTypeParser(oid: number | string, format?: string): TypeParser {
-    const key = `${oid}`;
-    const custom = this.customParsers.get(key);
+  getTypeParser(oid: number | string, format = 'text'): TypeParser {
+    const key = `${oid}:${format}`;
+    let custom =
+      this.customParsers.get(key) ||
+      this.customParsers.get(`${oid}:text`) ||
+      this.customParsers.get(`${oid}:binary`);
+    if (!custom && this.parent) {
+      custom = this.parent.getTypeParser(oid, format);
+    }
     if (custom) {
       return custom;
     }
@@ -62,14 +78,18 @@ class TypeParserRegistry {
     parseFn?: TypeParser
   ): void {
     let fn: TypeParser | undefined;
+    let format = 'text';
     if (typeof formatOrParser === 'function') {
       fn = formatOrParser;
     } else if (typeof parseFn === 'function') {
       fn = parseFn;
+      if (typeof formatOrParser === 'string') {
+        format = formatOrParser;
+      }
     }
 
     if (fn) {
-      this.customParsers.set(`${oid}`, fn);
+      this.customParsers.set(`${oid}:${format}`, fn);
     }
   }
 
@@ -81,7 +101,8 @@ class TypeParserRegistry {
   }
 }
 
-const registry = new TypeParserRegistry();
+export const globalRegistry = new TypeParserRegistry();
+const registry = globalRegistry;
 
 registerCustomParserHook((oid: number) => {
   return registry.hasCustomParser(oid) ? registry.getTypeParser(oid) : null;

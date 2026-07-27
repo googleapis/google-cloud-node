@@ -162,6 +162,8 @@ export function getPgOid(typeProto: any): number {
       return PgOid.FLOAT8;
     case TypeCode.STRING:
       return PgOid.TEXT;
+    case TypeCode.NUMERIC:
+      return PgOid.NUMERIC;
     case TypeCode.DATE:
       return PgOid.DATE;
     case TypeCode.TIMESTAMP:
@@ -308,7 +310,7 @@ export function encodeValue(val: any, oid?: number): EncodedParam {
   if (typeof val === 'object') {
     return {
       valueProto: {stringValue: JSON.stringify(val)},
-      typeProto: {code: TypeCode.JSON},
+      typeProto: explicitType || {code: TypeCode.STRING},
     };
   }
 
@@ -317,14 +319,14 @@ export function encodeValue(val: any, oid?: number): EncodedParam {
   );
 }
 
-let customParserHook:
+let globalCustomParserHook:
   | ((oid: number) => ((val: string) => any) | null)
   | null = null;
 
 export function registerCustomParserHook(
   hook: (oid: number) => ((val: string) => any) | null
 ): void {
-  customParserHook = hook;
+  globalCustomParserHook = hook;
 }
 
 /**
@@ -333,7 +335,8 @@ export function registerCustomParserHook(
 export function decodeValue(
   valProto: any,
   typeProto: any,
-  applyCustomParsers = true
+  applyCustomParsers = true,
+  instanceCustomParserHook?: (oid: number) => any
 ): any {
   if (valProto === null || valProto === undefined) {
     return null;
@@ -357,17 +360,44 @@ export function decodeValue(
     else rawVal = valProto; // fallback
   }
 
-  if (applyCustomParsers && customParserHook) {
-    const oid = getPgOid(typeProto);
-    const customParser = customParserHook(oid);
-    if (customParser && rawVal !== null && rawVal !== undefined) {
-      return customParser(String(rawVal));
-    }
-  }
-
   let code = typeProto?.code;
   if (typeof code === 'string' && (TypeCode as any)[code] !== undefined) {
     code = (TypeCode as any)[code];
+  }
+
+  if (code === TypeCode.ARRAY) {
+    const elemType = typeProto.arrayElementType || {
+      code: TypeCode.TYPE_CODE_UNSPECIFIED,
+    };
+    const list = (rawVal && rawVal.values) ? rawVal.values : [];
+    const decodedArray = list.map((v: any) =>
+      decodeValue(v, elemType, applyCustomParsers, instanceCustomParserHook)
+    );
+    const hook = instanceCustomParserHook || globalCustomParserHook;
+    if (hook) {
+      const oid = getPgOid(typeProto);
+      const customParser = hook(oid);
+      if (customParser) {
+        // If a user registered a custom parser for the array OID, pass decodedArray or String(decodedArray)
+        try {
+          return customParser(decodedArray);
+        } catch {
+          return customParser(String(decodedArray));
+        }
+      }
+    }
+    return decodedArray;
+  }
+
+  if (applyCustomParsers) {
+    const hook = instanceCustomParserHook || globalCustomParserHook;
+    if (hook) {
+      const oid = getPgOid(typeProto);
+      const customParser = hook(oid);
+      if (customParser && rawVal !== null && rawVal !== undefined) {
+        return customParser(String(rawVal));
+      }
+    }
   }
 
   if (
@@ -408,14 +438,6 @@ export function decodeValue(
       } catch {
         return rawVal;
       }
-
-    case TypeCode.ARRAY: {
-      if (!rawVal || !rawVal.values) return [];
-      const elemType = typeProto.arrayElementType || {
-        code: TypeCode.TYPE_CODE_UNSPECIFIED,
-      };
-      return rawVal.values.map((v: any) => decodeValue(v, elemType));
-    }
 
     default:
       return rawVal;

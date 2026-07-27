@@ -20,6 +20,7 @@ export class Query extends EventEmitter {
   public values?: any[];
   public callback?: (err: Error | null, result?: any) => void;
   public rowMode?: 'array';
+  public types?: any;
   private promise!: Promise<any>;
 
   constructor(
@@ -34,13 +35,15 @@ export class Query extends EventEmitter {
       this.values = text.values;
       this.callback = text.callback;
       this.rowMode = text.rowMode;
+      this.types = text.types;
       return;
     }
 
     if (typeof text === 'object') {
       this.text = text.text;
-      this.values = text.values;
+      this.values = Array.isArray(values) ? values : text.values;
       this.rowMode = text.rowMode;
+      this.types = text.types;
       this.callback =
         typeof values === 'function' ? (values as any) : (callback as any);
     } else {
@@ -60,9 +63,17 @@ export class Query extends EventEmitter {
    */
   public then(
     onFulfilled?: (value: any) => any,
-    onRejected?: (reason: any) => any,
+    onRejected?: (reason: any) => any
   ): Promise<any> {
     return this.promise.then(onFulfilled, onRejected);
+  }
+
+  public catch(onRejected?: (reason: any) => any): Promise<any> {
+    return this.promise.catch(onRejected);
+  }
+
+  public finally(onFinally?: () => void): Promise<any> {
+    return this.promise.finally(onFinally);
   }
 
   /**

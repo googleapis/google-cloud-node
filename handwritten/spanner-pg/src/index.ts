@@ -16,8 +16,9 @@ import {Client} from './lib/client.js';
 import {Pool} from './lib/pool.js';
 import {Query} from './lib/query.js';
 import {types} from './lib/types.js';
+import {DatabaseError} from './lib/errors.js';
 
-export {Client, Pool, Query, types};
+export {Client, Pool, Query, types, DatabaseError};
 export const native = {Client, Pool};
 
 export const defaults = {
@@ -27,25 +28,6 @@ export const defaults = {
   password: '',
   database: 'postgres',
 };
-
-export class DatabaseError extends Error {
-  severity?: string;
-  code?: string;
-  detail?: string;
-  hint?: string;
-  position?: string;
-  internalPosition?: string;
-  internalQuery?: string;
-  where?: string;
-  schema?: string;
-  table?: string;
-  column?: string;
-  dataType?: string;
-  constraint?: string;
-  file?: string;
-  line?: string;
-  routine?: string;
-}
 
 export const escapeIdentifier = (str: string) => `"${str.replace(/"/g, '""')}"`;
 export const escapeLiteral = (str: string) => `'${str.replace(/'/g, "''")}'`;

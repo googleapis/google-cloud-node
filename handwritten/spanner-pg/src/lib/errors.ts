@@ -12,13 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export interface PgError extends Error {
-  code?: string;
+export class DatabaseError extends Error {
   severity?: string;
+  code?: string;
   detail?: string;
   hint?: string;
   position?: string | number;
+
+  constructor(message: string) {
+    super(message);
+    this.name = 'DatabaseError';
+    Object.setPrototypeOf(this, DatabaseError.prototype);
+  }
 }
+
+export type PgError = DatabaseError;
 
 /**
  * Enriches a thrown Error from Spanner or SpannerLib with standard node-postgres (pg)
@@ -27,7 +35,9 @@ export interface PgError extends Error {
  */
 export function enrichPgError(err: any): PgError {
   if (!err) {
-    err = new Error('Unknown error');
+    err = new DatabaseError('Unknown error');
+  } else if (!(err instanceof DatabaseError)) {
+    Object.setPrototypeOf(err, DatabaseError.prototype);
   }
 
   const pgErr = err as PgError;

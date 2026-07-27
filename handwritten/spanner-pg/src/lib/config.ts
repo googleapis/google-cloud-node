@@ -15,40 +15,47 @@
 import {ClientConfig} from './client.js';
 
 export function resolveDsn(config?: string | ClientConfig): string {
+  if (typeof config === 'string') {
+    return config;
+  }
+  const cfg = typeof config === 'object' ? (config as ClientConfig) : undefined;
+  if (cfg?.connectionString) {
+    return cfg.connectionString;
+  }
+
+  if (cfg?.database && cfg.database.startsWith('projects/')) {
+    return cfg.database;
+  }
+
+  const baseDsn = process.env.DATABASE_URL || process.env.PGCONNECTSTRING || '';
+  let project = cfg?.project || process.env.SPANNER_PROJECT_ID || process.env.GOOGLE_CLOUD_PROJECT;
+  let instance = cfg?.instance || process.env.SPANNER_INSTANCE_ID;
+  let database = cfg?.database || process.env.PGDATABASE;
+
+  if (database && database.startsWith('projects/')) {
+    return database;
+  }
+
+  if (baseDsn && baseDsn.startsWith('projects/')) {
+    const parts = baseDsn.split('/');
+    if (parts.length >= 6) {
+      if (!project) project = parts[1];
+      if (!instance) instance = parts[3];
+      if (!database || database === 'postgres' || (process.env.PGDATABASE && database === process.env.PGDATABASE)) {
+        database = parts[5].split('?')[0];
+      }
+    }
+  }
+
   let resolvedDsn = '';
-
-  const connectionString =
-    typeof config === 'string'
-      ? config
-      : config?.connectionString || process.env.DATABASE_URL || process.env.PGCONNECTSTRING;
-  if (connectionString) {
-    resolvedDsn = connectionString;
-  } else {
-    // Build DSN from parts
-    const cfg = config as ClientConfig;
-    const database = (cfg && cfg.database) || process.env.PGDATABASE;
-    const project = (cfg && cfg.project) || process.env.SPANNER_PROJECT_ID || process.env.GOOGLE_CLOUD_PROJECT;
-    const instance = (cfg && cfg.instance) || process.env.SPANNER_INSTANCE_ID;
-
-    if (!database || !project || !instance) {
-      throw new Error(
-        'No connection configuration specified. Either connectionString must be provided, or database, project, and instance must all be specified (or provided via env variables)'
-      );
-    }
-
-    const dbPath = `projects/${project}/instances/${instance}/databases/${database}`;
-    const queryParams: string[] = [];
-
-    if (cfg && cfg.host) {
+  if (project && instance && database) {
+    resolvedDsn = `projects/${project}/instances/${instance}/databases/${database}`;
+    if (cfg?.host) {
       const endpoint = cfg.port ? `${cfg.host}:${cfg.port}` : cfg.host;
-      queryParams.push(`api_endpoint=${endpoint}`);
+      resolvedDsn += `?api_endpoint=${endpoint}`;
     }
-
-    if (queryParams.length > 0) {
-      resolvedDsn = `${dbPath}?${queryParams.join(';')}`;
-    } else {
-      resolvedDsn = dbPath;
-    }
+  } else {
+    resolvedDsn = baseDsn;
   }
 
   // Unified emulator host parameter injection
