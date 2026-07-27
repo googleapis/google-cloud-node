@@ -14,7 +14,7 @@
 
 import {Transform, TransformOptions, TransformCallback} from 'stream';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-import {protos} from '..';
+import {protos} from '@google-cloud/bigtable-api';
 import google = protos.google;
 import {MetadataConsumer} from './metadataconsumer';
 
