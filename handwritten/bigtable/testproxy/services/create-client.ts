@@ -22,7 +22,10 @@ import {log} from './utils/log';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 
-const BIGTABLE_API_DIR = path.dirname(require.resolve('@google-cloud/bigtable-api'));
+const BIGTABLE_API_DIR = path.join(
+  path.dirname(require.resolve('@google-cloud/bigtable-api')),
+  '..',
+);
 
 function durationToMilliseconds(
   duration: google.protobuf.Duration | google.protobuf.IDuration,
