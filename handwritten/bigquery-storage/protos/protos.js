@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots["_google_cloud_bigquery_storage_protos"] || ($protobuf.roots["_google_cloud_bigquery_storage_protos"] = {});
+    var $root = $protobuf.roots._google_cloud_bigquery_storage_protos || ($protobuf.roots._google_cloud_bigquery_storage_protos = {});
     
     $root.google = (function() {
     
@@ -146,7 +146,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ArrowSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -383,7 +383,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ArrowRecordBatch.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -647,7 +647,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ArrowSerializationOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -964,7 +964,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             AvroSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -1192,7 +1192,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             AvroRows.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -1456,7 +1456,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             AvroSerializationOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -1733,7 +1733,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ProtoSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -1957,7 +1957,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ProtoRows.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -2172,7 +2172,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryRead.prototype.createReadSession = function createReadSession(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, createReadSession, $root.google.cloud.bigquery.storage.v1.CreateReadSessionRequest, $root.google.cloud.bigquery.storage.v1.ReadSession, request, callback);
+                                return this.rpcCall(createReadSession, $root.google.cloud.bigquery.storage.v1.CreateReadSessionRequest, $root.google.cloud.bigquery.storage.v1.ReadSession, request, callback);
                             }, "name", { value: "CreateReadSession" });
     
                             /**
@@ -2205,7 +2205,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryRead.prototype.readRows = function readRows(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, readRows, $root.google.cloud.bigquery.storage.v1.ReadRowsRequest, $root.google.cloud.bigquery.storage.v1.ReadRowsResponse, request, callback);
+                                return this.rpcCall(readRows, $root.google.cloud.bigquery.storage.v1.ReadRowsRequest, $root.google.cloud.bigquery.storage.v1.ReadRowsResponse, request, callback);
                             }, "name", { value: "ReadRows" });
     
                             /**
@@ -2238,7 +2238,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryRead.prototype.splitReadStream = function splitReadStream(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, splitReadStream, $root.google.cloud.bigquery.storage.v1.SplitReadStreamRequest, $root.google.cloud.bigquery.storage.v1.SplitReadStreamResponse, request, callback);
+                                return this.rpcCall(splitReadStream, $root.google.cloud.bigquery.storage.v1.SplitReadStreamRequest, $root.google.cloud.bigquery.storage.v1.SplitReadStreamResponse, request, callback);
                             }, "name", { value: "SplitReadStream" });
     
                             /**
@@ -2306,7 +2306,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.createWriteStream = function createWriteStream(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, createWriteStream, $root.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest, $root.google.cloud.bigquery.storage.v1.WriteStream, request, callback);
+                                return this.rpcCall(createWriteStream, $root.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest, $root.google.cloud.bigquery.storage.v1.WriteStream, request, callback);
                             }, "name", { value: "CreateWriteStream" });
     
                             /**
@@ -2339,7 +2339,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.appendRows = function appendRows(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, appendRows, $root.google.cloud.bigquery.storage.v1.AppendRowsRequest, $root.google.cloud.bigquery.storage.v1.AppendRowsResponse, request, callback);
+                                return this.rpcCall(appendRows, $root.google.cloud.bigquery.storage.v1.AppendRowsRequest, $root.google.cloud.bigquery.storage.v1.AppendRowsResponse, request, callback);
                             }, "name", { value: "AppendRows" });
     
                             /**
@@ -2372,7 +2372,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.getWriteStream = function getWriteStream(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, getWriteStream, $root.google.cloud.bigquery.storage.v1.GetWriteStreamRequest, $root.google.cloud.bigquery.storage.v1.WriteStream, request, callback);
+                                return this.rpcCall(getWriteStream, $root.google.cloud.bigquery.storage.v1.GetWriteStreamRequest, $root.google.cloud.bigquery.storage.v1.WriteStream, request, callback);
                             }, "name", { value: "GetWriteStream" });
     
                             /**
@@ -2405,7 +2405,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.finalizeWriteStream = function finalizeWriteStream(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, finalizeWriteStream, $root.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest, $root.google.cloud.bigquery.storage.v1.FinalizeWriteStreamResponse, request, callback);
+                                return this.rpcCall(finalizeWriteStream, $root.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest, $root.google.cloud.bigquery.storage.v1.FinalizeWriteStreamResponse, request, callback);
                             }, "name", { value: "FinalizeWriteStream" });
     
                             /**
@@ -2438,7 +2438,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.batchCommitWriteStreams = function batchCommitWriteStreams(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, batchCommitWriteStreams, $root.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest, $root.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsResponse, request, callback);
+                                return this.rpcCall(batchCommitWriteStreams, $root.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest, $root.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsResponse, request, callback);
                             }, "name", { value: "BatchCommitWriteStreams" });
     
                             /**
@@ -2471,7 +2471,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.flushRows = function flushRows(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, flushRows, $root.google.cloud.bigquery.storage.v1.FlushRowsRequest, $root.google.cloud.bigquery.storage.v1.FlushRowsResponse, request, callback);
+                                return this.rpcCall(flushRows, $root.google.cloud.bigquery.storage.v1.FlushRowsRequest, $root.google.cloud.bigquery.storage.v1.FlushRowsResponse, request, callback);
                             }, "name", { value: "FlushRows" });
     
                             /**
@@ -2591,7 +2591,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CreateReadSessionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -2861,7 +2861,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -3105,7 +3105,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ThrottleState.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -3322,7 +3322,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StreamStats.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -3552,7 +3552,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 Progress.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -3893,7 +3893,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -4289,7 +4289,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SplitReadStreamRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -4530,7 +4530,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SplitReadStreamResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -4781,7 +4781,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CreateWriteStreamRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -5098,7 +5098,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             AppendRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -5515,7 +5515,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 ArrowData.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -5766,7 +5766,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 ProtoData.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -6085,7 +6085,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             AppendRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -6396,7 +6396,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 AppendResult.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -6632,7 +6632,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             GetWriteStreamRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -6899,7 +6899,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchCommitWriteStreamsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -7156,7 +7156,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchCommitWriteStreamsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -7410,7 +7410,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FinalizeWriteStreamRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -7627,7 +7627,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FinalizeWriteStreamResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -7869,7 +7869,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FlushRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -8104,7 +8104,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FlushRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -8357,7 +8357,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StorageError.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -8745,7 +8745,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             RowError.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -9198,7 +9198,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadSession.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -9681,7 +9681,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 TableModifiers.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -9986,7 +9986,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 TableReadOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -10345,7 +10345,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadStream.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -10644,7 +10644,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             WriteStream.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -11031,7 +11031,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             TableSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -11379,7 +11379,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             TableFieldSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -11971,7 +11971,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 FieldElementType.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -12278,7 +12278,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(MetastorePartitionService.prototype.batchCreateMetastorePartitions = function batchCreateMetastorePartitions(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, batchCreateMetastorePartitions, $root.google.cloud.bigquery.storage.v1alpha.BatchCreateMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1alpha.BatchCreateMetastorePartitionsResponse, request, callback);
+                                return this.rpcCall(batchCreateMetastorePartitions, $root.google.cloud.bigquery.storage.v1alpha.BatchCreateMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1alpha.BatchCreateMetastorePartitionsResponse, request, callback);
                             }, "name", { value: "BatchCreateMetastorePartitions" });
     
                             /**
@@ -12311,7 +12311,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(MetastorePartitionService.prototype.batchDeleteMetastorePartitions = function batchDeleteMetastorePartitions(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, batchDeleteMetastorePartitions, $root.google.cloud.bigquery.storage.v1alpha.BatchDeleteMetastorePartitionsRequest, $root.google.protobuf.Empty, request, callback);
+                                return this.rpcCall(batchDeleteMetastorePartitions, $root.google.cloud.bigquery.storage.v1alpha.BatchDeleteMetastorePartitionsRequest, $root.google.protobuf.Empty, request, callback);
                             }, "name", { value: "BatchDeleteMetastorePartitions" });
     
                             /**
@@ -12344,7 +12344,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(MetastorePartitionService.prototype.batchUpdateMetastorePartitions = function batchUpdateMetastorePartitions(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, batchUpdateMetastorePartitions, $root.google.cloud.bigquery.storage.v1alpha.BatchUpdateMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1alpha.BatchUpdateMetastorePartitionsResponse, request, callback);
+                                return this.rpcCall(batchUpdateMetastorePartitions, $root.google.cloud.bigquery.storage.v1alpha.BatchUpdateMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1alpha.BatchUpdateMetastorePartitionsResponse, request, callback);
                             }, "name", { value: "BatchUpdateMetastorePartitions" });
     
                             /**
@@ -12377,7 +12377,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(MetastorePartitionService.prototype.listMetastorePartitions = function listMetastorePartitions(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, listMetastorePartitions, $root.google.cloud.bigquery.storage.v1alpha.ListMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1alpha.ListMetastorePartitionsResponse, request, callback);
+                                return this.rpcCall(listMetastorePartitions, $root.google.cloud.bigquery.storage.v1alpha.ListMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1alpha.ListMetastorePartitionsResponse, request, callback);
                             }, "name", { value: "ListMetastorePartitions" });
     
                             /**
@@ -12410,7 +12410,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(MetastorePartitionService.prototype.streamMetastorePartitions = function streamMetastorePartitions(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, streamMetastorePartitions, $root.google.cloud.bigquery.storage.v1alpha.StreamMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1alpha.StreamMetastorePartitionsResponse, request, callback);
+                                return this.rpcCall(streamMetastorePartitions, $root.google.cloud.bigquery.storage.v1alpha.StreamMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1alpha.StreamMetastorePartitionsResponse, request, callback);
                             }, "name", { value: "StreamMetastorePartitions" });
     
                             /**
@@ -12508,7 +12508,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CreateMetastorePartitionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -12778,7 +12778,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchCreateMetastorePartitionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -13054,7 +13054,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchCreateMetastorePartitionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -13314,7 +13314,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchDeleteMetastorePartitionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -13587,7 +13587,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             UpdateMetastorePartitionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -13851,7 +13851,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchUpdateMetastorePartitionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -14115,7 +14115,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchUpdateMetastorePartitionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -14373,7 +14373,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ListMetastorePartitionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -14640,7 +14640,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ListMetastorePartitionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -14915,7 +14915,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StreamMetastorePartitionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -15188,7 +15188,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StreamMetastorePartitionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -15457,7 +15457,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchSizeTooLargeError.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -15712,7 +15712,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FieldSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -15975,7 +15975,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StorageDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -16258,7 +16258,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SerDeInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -16592,7 +16592,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             MetastorePartition.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -16947,7 +16947,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             MetastorePartitionList.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -17183,7 +17183,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadStream.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -17402,7 +17402,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StreamList.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -17640,7 +17640,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             MetastorePartitionValues.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -17864,7 +17864,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(MetastorePartitionService.prototype.batchCreateMetastorePartitions = function batchCreateMetastorePartitions(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, batchCreateMetastorePartitions, $root.google.cloud.bigquery.storage.v1beta.BatchCreateMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1beta.BatchCreateMetastorePartitionsResponse, request, callback);
+                                return this.rpcCall(batchCreateMetastorePartitions, $root.google.cloud.bigquery.storage.v1beta.BatchCreateMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1beta.BatchCreateMetastorePartitionsResponse, request, callback);
                             }, "name", { value: "BatchCreateMetastorePartitions" });
     
                             /**
@@ -17897,7 +17897,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(MetastorePartitionService.prototype.batchDeleteMetastorePartitions = function batchDeleteMetastorePartitions(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, batchDeleteMetastorePartitions, $root.google.cloud.bigquery.storage.v1beta.BatchDeleteMetastorePartitionsRequest, $root.google.protobuf.Empty, request, callback);
+                                return this.rpcCall(batchDeleteMetastorePartitions, $root.google.cloud.bigquery.storage.v1beta.BatchDeleteMetastorePartitionsRequest, $root.google.protobuf.Empty, request, callback);
                             }, "name", { value: "BatchDeleteMetastorePartitions" });
     
                             /**
@@ -17930,7 +17930,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(MetastorePartitionService.prototype.batchUpdateMetastorePartitions = function batchUpdateMetastorePartitions(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, batchUpdateMetastorePartitions, $root.google.cloud.bigquery.storage.v1beta.BatchUpdateMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1beta.BatchUpdateMetastorePartitionsResponse, request, callback);
+                                return this.rpcCall(batchUpdateMetastorePartitions, $root.google.cloud.bigquery.storage.v1beta.BatchUpdateMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1beta.BatchUpdateMetastorePartitionsResponse, request, callback);
                             }, "name", { value: "BatchUpdateMetastorePartitions" });
     
                             /**
@@ -17963,7 +17963,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(MetastorePartitionService.prototype.listMetastorePartitions = function listMetastorePartitions(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, listMetastorePartitions, $root.google.cloud.bigquery.storage.v1beta.ListMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1beta.ListMetastorePartitionsResponse, request, callback);
+                                return this.rpcCall(listMetastorePartitions, $root.google.cloud.bigquery.storage.v1beta.ListMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1beta.ListMetastorePartitionsResponse, request, callback);
                             }, "name", { value: "ListMetastorePartitions" });
     
                             /**
@@ -17996,7 +17996,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(MetastorePartitionService.prototype.streamMetastorePartitions = function streamMetastorePartitions(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, streamMetastorePartitions, $root.google.cloud.bigquery.storage.v1beta.StreamMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1beta.StreamMetastorePartitionsResponse, request, callback);
+                                return this.rpcCall(streamMetastorePartitions, $root.google.cloud.bigquery.storage.v1beta.StreamMetastorePartitionsRequest, $root.google.cloud.bigquery.storage.v1beta.StreamMetastorePartitionsResponse, request, callback);
                             }, "name", { value: "StreamMetastorePartitions" });
     
                             /**
@@ -18094,7 +18094,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CreateMetastorePartitionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -18364,7 +18364,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchCreateMetastorePartitionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -18640,7 +18640,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchCreateMetastorePartitionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -18900,7 +18900,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchDeleteMetastorePartitionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -19173,7 +19173,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             UpdateMetastorePartitionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -19437,7 +19437,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchUpdateMetastorePartitionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -19701,7 +19701,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchUpdateMetastorePartitionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -19959,7 +19959,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ListMetastorePartitionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -20226,7 +20226,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ListMetastorePartitionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -20501,7 +20501,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StreamMetastorePartitionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -20774,7 +20774,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StreamMetastorePartitionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -21043,7 +21043,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchSizeTooLargeError.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -21298,7 +21298,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FieldSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -21561,7 +21561,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StorageDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -21844,7 +21844,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SerDeInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -22178,7 +22178,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             MetastorePartition.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -22533,7 +22533,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             MetastorePartitionList.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -22769,7 +22769,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadStream.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -22988,7 +22988,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StreamList.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -23226,7 +23226,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             MetastorePartitionValues.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -23469,7 +23469,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ArrowSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -23706,7 +23706,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ArrowRecordBatch.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -23959,7 +23959,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             AvroSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -24187,7 +24187,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             AvroRows.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -24453,7 +24453,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             TableReadOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -24678,7 +24678,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryStorage.prototype.createReadSession = function createReadSession(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, createReadSession, $root.google.cloud.bigquery.storage.v1beta1.CreateReadSessionRequest, $root.google.cloud.bigquery.storage.v1beta1.ReadSession, request, callback);
+                                return this.rpcCall(createReadSession, $root.google.cloud.bigquery.storage.v1beta1.CreateReadSessionRequest, $root.google.cloud.bigquery.storage.v1beta1.ReadSession, request, callback);
                             }, "name", { value: "CreateReadSession" });
     
                             /**
@@ -24711,7 +24711,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryStorage.prototype.readRows = function readRows(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, readRows, $root.google.cloud.bigquery.storage.v1beta1.ReadRowsRequest, $root.google.cloud.bigquery.storage.v1beta1.ReadRowsResponse, request, callback);
+                                return this.rpcCall(readRows, $root.google.cloud.bigquery.storage.v1beta1.ReadRowsRequest, $root.google.cloud.bigquery.storage.v1beta1.ReadRowsResponse, request, callback);
                             }, "name", { value: "ReadRows" });
     
                             /**
@@ -24744,7 +24744,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryStorage.prototype.batchCreateReadSessionStreams = function batchCreateReadSessionStreams(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, batchCreateReadSessionStreams, $root.google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsRequest, $root.google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsResponse, request, callback);
+                                return this.rpcCall(batchCreateReadSessionStreams, $root.google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsRequest, $root.google.cloud.bigquery.storage.v1beta1.BatchCreateReadSessionStreamsResponse, request, callback);
                             }, "name", { value: "BatchCreateReadSessionStreams" });
     
                             /**
@@ -24777,7 +24777,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryStorage.prototype.finalizeStream = function finalizeStream(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, finalizeStream, $root.google.cloud.bigquery.storage.v1beta1.FinalizeStreamRequest, $root.google.protobuf.Empty, request, callback);
+                                return this.rpcCall(finalizeStream, $root.google.cloud.bigquery.storage.v1beta1.FinalizeStreamRequest, $root.google.protobuf.Empty, request, callback);
                             }, "name", { value: "FinalizeStream" });
     
                             /**
@@ -24810,7 +24810,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryStorage.prototype.splitReadStream = function splitReadStream(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, splitReadStream, $root.google.cloud.bigquery.storage.v1beta1.SplitReadStreamRequest, $root.google.cloud.bigquery.storage.v1beta1.SplitReadStreamResponse, request, callback);
+                                return this.rpcCall(splitReadStream, $root.google.cloud.bigquery.storage.v1beta1.SplitReadStreamRequest, $root.google.cloud.bigquery.storage.v1beta1.SplitReadStreamResponse, request, callback);
                             }, "name", { value: "SplitReadStream" });
     
                             /**
@@ -24897,7 +24897,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             Stream.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -25125,7 +25125,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StreamPosition.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -25467,7 +25467,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadSession.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -25949,7 +25949,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CreateReadSessionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -26302,7 +26302,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -26557,7 +26557,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StreamStatus.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -26841,7 +26841,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             Progress.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -27071,7 +27071,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ThrottleStatus.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -27379,7 +27379,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -27749,7 +27749,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchCreateReadSessionStreamsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -27986,7 +27986,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchCreateReadSessionStreamsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -28222,7 +28222,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FinalizeStreamRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -28455,7 +28455,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SplitReadStreamRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -28701,7 +28701,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SplitReadStreamResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -28963,7 +28963,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             TableReference.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -29205,7 +29205,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             TableModifiers.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -29439,7 +29439,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ArrowSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -29665,7 +29665,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ArrowRecordBatch.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -29891,7 +29891,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ArrowSerializationOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -30148,7 +30148,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             AvroSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -30365,7 +30365,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             AvroRows.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -30591,7 +30591,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ProtoSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -30815,7 +30815,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ProtoRows.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -31030,7 +31030,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryRead.prototype.createReadSession = function createReadSession(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, createReadSession, $root.google.cloud.bigquery.storage.v1beta2.CreateReadSessionRequest, $root.google.cloud.bigquery.storage.v1beta2.ReadSession, request, callback);
+                                return this.rpcCall(createReadSession, $root.google.cloud.bigquery.storage.v1beta2.CreateReadSessionRequest, $root.google.cloud.bigquery.storage.v1beta2.ReadSession, request, callback);
                             }, "name", { value: "CreateReadSession" });
     
                             /**
@@ -31063,7 +31063,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryRead.prototype.readRows = function readRows(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, readRows, $root.google.cloud.bigquery.storage.v1beta2.ReadRowsRequest, $root.google.cloud.bigquery.storage.v1beta2.ReadRowsResponse, request, callback);
+                                return this.rpcCall(readRows, $root.google.cloud.bigquery.storage.v1beta2.ReadRowsRequest, $root.google.cloud.bigquery.storage.v1beta2.ReadRowsResponse, request, callback);
                             }, "name", { value: "ReadRows" });
     
                             /**
@@ -31096,7 +31096,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryRead.prototype.splitReadStream = function splitReadStream(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, splitReadStream, $root.google.cloud.bigquery.storage.v1beta2.SplitReadStreamRequest, $root.google.cloud.bigquery.storage.v1beta2.SplitReadStreamResponse, request, callback);
+                                return this.rpcCall(splitReadStream, $root.google.cloud.bigquery.storage.v1beta2.SplitReadStreamRequest, $root.google.cloud.bigquery.storage.v1beta2.SplitReadStreamResponse, request, callback);
                             }, "name", { value: "SplitReadStream" });
     
                             /**
@@ -31164,7 +31164,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.createWriteStream = function createWriteStream(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, createWriteStream, $root.google.cloud.bigquery.storage.v1beta2.CreateWriteStreamRequest, $root.google.cloud.bigquery.storage.v1beta2.WriteStream, request, callback);
+                                return this.rpcCall(createWriteStream, $root.google.cloud.bigquery.storage.v1beta2.CreateWriteStreamRequest, $root.google.cloud.bigquery.storage.v1beta2.WriteStream, request, callback);
                             }, "name", { value: "CreateWriteStream" });
     
                             /**
@@ -31197,7 +31197,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.appendRows = function appendRows(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, appendRows, $root.google.cloud.bigquery.storage.v1beta2.AppendRowsRequest, $root.google.cloud.bigquery.storage.v1beta2.AppendRowsResponse, request, callback);
+                                return this.rpcCall(appendRows, $root.google.cloud.bigquery.storage.v1beta2.AppendRowsRequest, $root.google.cloud.bigquery.storage.v1beta2.AppendRowsResponse, request, callback);
                             }, "name", { value: "AppendRows" });
     
                             /**
@@ -31230,7 +31230,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.getWriteStream = function getWriteStream(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, getWriteStream, $root.google.cloud.bigquery.storage.v1beta2.GetWriteStreamRequest, $root.google.cloud.bigquery.storage.v1beta2.WriteStream, request, callback);
+                                return this.rpcCall(getWriteStream, $root.google.cloud.bigquery.storage.v1beta2.GetWriteStreamRequest, $root.google.cloud.bigquery.storage.v1beta2.WriteStream, request, callback);
                             }, "name", { value: "GetWriteStream" });
     
                             /**
@@ -31263,7 +31263,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.finalizeWriteStream = function finalizeWriteStream(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, finalizeWriteStream, $root.google.cloud.bigquery.storage.v1beta2.FinalizeWriteStreamRequest, $root.google.cloud.bigquery.storage.v1beta2.FinalizeWriteStreamResponse, request, callback);
+                                return this.rpcCall(finalizeWriteStream, $root.google.cloud.bigquery.storage.v1beta2.FinalizeWriteStreamRequest, $root.google.cloud.bigquery.storage.v1beta2.FinalizeWriteStreamResponse, request, callback);
                             }, "name", { value: "FinalizeWriteStream" });
     
                             /**
@@ -31296,7 +31296,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.batchCommitWriteStreams = function batchCommitWriteStreams(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, batchCommitWriteStreams, $root.google.cloud.bigquery.storage.v1beta2.BatchCommitWriteStreamsRequest, $root.google.cloud.bigquery.storage.v1beta2.BatchCommitWriteStreamsResponse, request, callback);
+                                return this.rpcCall(batchCommitWriteStreams, $root.google.cloud.bigquery.storage.v1beta2.BatchCommitWriteStreamsRequest, $root.google.cloud.bigquery.storage.v1beta2.BatchCommitWriteStreamsResponse, request, callback);
                             }, "name", { value: "BatchCommitWriteStreams" });
     
                             /**
@@ -31329,7 +31329,7 @@
                              * @variation 1
                              */
                             Object.defineProperty(BigQueryWrite.prototype.flushRows = function flushRows(request, callback) {
-                                return $protobuf.rpc.Service.prototype.rpcCall.call(this, flushRows, $root.google.cloud.bigquery.storage.v1beta2.FlushRowsRequest, $root.google.cloud.bigquery.storage.v1beta2.FlushRowsResponse, request, callback);
+                                return this.rpcCall(flushRows, $root.google.cloud.bigquery.storage.v1beta2.FlushRowsRequest, $root.google.cloud.bigquery.storage.v1beta2.FlushRowsResponse, request, callback);
                             }, "name", { value: "FlushRows" });
     
                             /**
@@ -31438,7 +31438,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CreateReadSessionRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -31696,7 +31696,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -31940,7 +31940,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ThrottleState.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -32157,7 +32157,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StreamStats.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -32387,7 +32387,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 Progress.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -32711,7 +32711,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -33081,7 +33081,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SplitReadStreamRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -33322,7 +33322,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             SplitReadStreamResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -33573,7 +33573,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             CreateWriteStreamRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -33855,7 +33855,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             AppendRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -34133,7 +34133,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 ProtoData.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -34412,7 +34412,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             AppendRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -34678,7 +34678,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 AppendResult.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -34903,7 +34903,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             GetWriteStreamRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -35133,7 +35133,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchCommitWriteStreamsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -35390,7 +35390,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             BatchCommitWriteStreamsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -35644,7 +35644,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FinalizeWriteStreamRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -35861,7 +35861,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FinalizeWriteStreamResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -36103,7 +36103,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FlushRowsRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -36338,7 +36338,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             FlushRowsResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -36591,7 +36591,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             StorageError.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -37021,7 +37021,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadSession.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -37414,7 +37414,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 TableModifiers.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -37660,7 +37660,7 @@
                                  * @returns {$protobuf.Writer} Writer
                                  */
                                 TableReadOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                    return this.encode(message, writer).ldelim();
                                 };
     
                                 /**
@@ -37925,7 +37925,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             ReadStream.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -38186,7 +38186,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             WriteStream.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -38516,7 +38516,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             TableSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -38798,7 +38798,7 @@
                              * @returns {$protobuf.Writer} Writer
                              */
                             TableFieldSchema.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                                return this.encode(message, writer).ldelim();
                             };
     
                             /**
@@ -39285,7 +39285,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileDescriptorSet.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -39714,7 +39714,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -40437,7 +40437,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 DescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -40972,7 +40972,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ExtensionRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -41230,7 +41230,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -41500,7 +41500,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ExtensionRangeOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -41859,7 +41859,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Declaration.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -42252,7 +42252,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -42791,7 +42791,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 OneofDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -43087,7 +43087,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -43456,7 +43456,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     EnumReservedRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -43711,7 +43711,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumValueDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -43982,7 +43982,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ServiceDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -44304,7 +44304,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -44822,7 +44822,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FileOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -45456,7 +45456,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MessageOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -45972,7 +45972,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -46746,7 +46746,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     EditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -47078,7 +47078,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -47555,7 +47555,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 OneofOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -47855,7 +47855,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -48192,7 +48192,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 EnumValueOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -48545,7 +48545,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ServiceOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -48907,7 +48907,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -49338,7 +49338,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 UninterpretedOption.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -49691,7 +49691,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     NamePart.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -50003,7 +50003,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FeatureSet.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -50612,7 +50612,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -50859,7 +50859,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FeatureSetDefaults.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -51278,7 +51278,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     FeatureSetEditionDefault.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -51604,7 +51604,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 SourceCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -51893,7 +51893,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Location.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -52218,7 +52218,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 GeneratedCodeInfo.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -52500,7 +52500,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     Annotation.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -52856,7 +52856,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Duration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -53100,7 +53100,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 DoubleValue.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -53317,7 +53317,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FloatValue.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -53534,7 +53534,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Int64Value.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -53765,7 +53765,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 UInt64Value.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -53996,7 +53996,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Int32Value.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -54213,7 +54213,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 UInt32Value.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -54430,7 +54430,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 BoolValue.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -54647,7 +54647,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 StringValue.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -54864,7 +54864,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 BytesValue.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -55101,7 +55101,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -55356,7 +55356,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -55584,7 +55584,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Empty.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -55786,7 +55786,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -56042,7 +56042,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Http.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -56406,7 +56406,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 HttpRule.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -56804,7 +56804,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CustomHttpPattern.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -57061,7 +57061,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CommonLanguageSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -57462,7 +57462,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ClientLibrarySettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -58005,7 +58005,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Publishing.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -58470,7 +58470,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 JavaSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -58759,7 +58759,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 CppSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -58981,7 +58981,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 PhpSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -59214,7 +59214,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 PythonSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -59473,7 +59473,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -59718,7 +59718,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 NodeSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -60005,7 +60005,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 DotnetSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -60414,7 +60414,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 RubySettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -60649,7 +60649,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 GoSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -60949,7 +60949,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 MethodSettings.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -61241,7 +61241,7 @@
                      * @returns {$protobuf.Writer} Writer
                      */
                     LongRunning.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        return this.encode(message, writer).ldelim();
                     };
     
                     /**
@@ -61568,7 +61568,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -61939,7 +61939,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -62348,7 +62348,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
@@ -62614,7 +62614,7 @@
                  * @returns {$protobuf.Writer} Writer
                  */
                 Status.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    return this.encode(message, writer).ldelim();
                 };
     
                 /**
