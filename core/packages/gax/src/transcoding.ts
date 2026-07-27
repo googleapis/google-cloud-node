@@ -127,8 +127,9 @@ export function buildQueryStringComponents(
     if (Array.isArray(request[key])) {
       for (const value of request[key] as JSONObject[]) {
         resultList.push(
-          `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
+          `${prefix}${encodeWithoutSlashes(key, key)}=${encodeWithoutSlashes(
             value.toString(),
+            key,
           )}`,
         );
       }
@@ -138,8 +139,9 @@ export function buildQueryStringComponents(
       );
     } else {
       resultList.push(
-        `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
+        `${prefix}${encodeWithoutSlashes(key, key)}=${encodeWithoutSlashes(
           request[key] === null ? 'null' : request[key]!.toString(),
+          key,
         )}`,
       );
     }
@@ -147,17 +149,53 @@ export function buildQueryStringComponents(
   return resultList;
 }
 
-export function encodeWithSlashes(str: string): string {
+export function encodeWithSlashes(
+  str: string,
+  propertyName = 'resource ID',
+): string {
+  const segments = str.split('/');
+  if (segments.some(segment => segment === '.' || segment === '..')) {
+    let leftoverSegments = 0;
+    const unseenSegments = segments.length;
+
+    for (let i = 0; i < segments.length; i++) {
+      const segment = segments[i];
+      const remaining = unseenSegments - 1 - i;
+      if (segment === '..') {
+        leftoverSegments--;
+      } else if (segment !== '.' && segment !== '') {
+        leftoverSegments++;
+      }
+
+      if (leftoverSegments < 0) {
+        throw new Error(`Invalid value "${str}" for ${propertyName}`);
+      }
+      if (leftoverSegments > remaining) {
+        break; // Validation succeeds early
+      }
+    }
+
+    if (leftoverSegments === 0) {
+      throw new Error(`Invalid value "${str}" for ${propertyName}`);
+    }
+  }
+
   return str
     .split('')
-    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
+    .map(c => (c.match(/[-_.~/0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
     .join('');
 }
 
-export function encodeWithoutSlashes(str: string): string {
+export function encodeWithoutSlashes(
+  str: string,
+  propertyName = 'resource ID',
+): string {
+  if (str === '.' || str === '..') {
+    throw new Error(`Invalid value ${str} for ${propertyName}`);
+  }
   return str
     .split('')
-    .map(c => (c.match(/[-_.~0-9a-zA-Z/]/) ? c : encodeURIComponent(c)))
+    .map(c => (c.match(/[-_.~0-9a-zA-Z]/) ? c : encodeURIComponent(c)))
     .join('');
 }
 
@@ -168,9 +206,10 @@ function escapeRegExp(str: string) {
 export function applyPattern(
   pattern: string,
   fieldValue: string,
+  propertyName?: string,
 ): string | undefined {
   if (!pattern || pattern === '*') {
-    return encodeWithSlashes(fieldValue);
+    return encodeWithoutSlashes(fieldValue, propertyName);
   }
 
   if (!pattern.includes('*') && pattern !== fieldValue) {
@@ -190,7 +229,7 @@ export function applyPattern(
     return undefined;
   }
 
-  return encodeWithoutSlashes(fieldValue);
+  return encodeWithSlashes(fieldValue, propertyName);
 }
 
 function fieldToCamelCase(field: string): string {
@@ -224,6 +263,7 @@ export function match(
     const appliedPattern = applyPattern(
       pattern,
       fieldValue === null ? 'null' : fieldValue!.toString(),
+      camelCasedField,
     );
     if (appliedPattern === undefined) {
       return undefined;

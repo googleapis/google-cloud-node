@@ -359,18 +359,18 @@ describe('gRPC to HTTP transcoding', () => {
     assert.deepStrictEqual(request7, {field: {subfield: {q: 'w'}}});
   });
 
-  it('encodeWithSlashes', () => {
+  it('encodeWithSlashes (now used for double asterisk matching and keeps slashes)', () => {
     assert.strictEqual(encodeWithSlashes('abcd'), 'abcd');
     assert.strictEqual(encodeWithSlashes('тест'), '%D1%82%D0%B5%D1%81%D1%82');
     assert.strictEqual(
       encodeWithSlashes(
         '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ',
       ),
-      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20',
+      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20',
     );
   });
 
-  it('encodeWithoutSlashes', () => {
+  it('encodeWithoutSlashes (now used for single asterisk matching and encodes slashes)', () => {
     assert.strictEqual(encodeWithoutSlashes('abcd'), 'abcd');
     assert.strictEqual(
       encodeWithoutSlashes('тест'),
@@ -380,8 +380,58 @@ describe('gRPC to HTTP transcoding', () => {
       encodeWithoutSlashes(
         '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/ ',
       ),
-      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ/%20',
+      '_.~0-9abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%2F%20',
     );
+  });
+
+  describe('REST fallback security guidelines tests', () => {
+    it('throws error for invalid single asterisk values ("." and "..")', () => {
+      assert.throws(() => {
+        encodeWithoutSlashes('.', 'mySingleParam');
+      }, /Invalid value \. for mySingleParam/);
+
+      assert.throws(() => {
+        encodeWithoutSlashes('..', 'mySingleParam');
+      }, /Invalid value \.\. for mySingleParam/);
+
+      // default propertyName
+      assert.throws(() => {
+        encodeWithoutSlashes('.');
+      }, /Invalid value \. for resource ID/);
+    });
+
+    it('throws error for unsafe double asterisk path traversals', () => {
+      // "a/b/../../.." is unsafe because leftoverSegments would be -1 (which is < 0)
+      assert.throws(() => {
+        encodeWithSlashes('a/b/../../..', 'myDoubleParam');
+      }, /Invalid value "a\/b\/\.\.\/\.\.\/\.\." for myDoubleParam/);
+
+      // "a/.." leftoverSegments is 0
+      assert.throws(() => {
+        encodeWithSlashes('a/..', 'myDoubleParam');
+      }, /Invalid value "a\/\.\." for myDoubleParam/);
+
+      // "a/b/../.." leftoverSegments is 0
+      assert.throws(() => {
+        encodeWithSlashes('a/b/../..', 'myDoubleParam');
+      }, /Invalid value "a\/b\/\.\.\/\.\." for myDoubleParam/);
+    });
+
+    it('processes safe double asterisk path traversals successfully', () => {
+      // "a/b/.." leftoverSegments is 1 (succeeds)
+      assert.strictEqual(encodeWithSlashes('a/b/..'), 'a/b/..');
+
+      // "a/b/../c/.." leftoverSegments is 1 (succeeds)
+      assert.strictEqual(encodeWithSlashes('a/b/../c/..'), 'a/b/../c/..');
+
+      // "a/b/." leftoverSegments is 2 (succeeds)
+      assert.strictEqual(encodeWithSlashes('a/b/.'), 'a/b/.');
+    });
+
+    it('correctly percent-encodes unsafe URL characters', () => {
+      assert.strictEqual(encodeWithoutSlashes('foo$bar?baz#qux'), 'foo%24bar%3Fbaz%23qux');
+      assert.strictEqual(encodeWithSlashes('foo$bar?baz#qux'), 'foo%24bar%3Fbaz%23qux');
+    });
   });
 
   it('applyPattern', () => {
