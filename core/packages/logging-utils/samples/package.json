@@ -23,13 +23,14 @@
     "directory": "core/packages/logging-utils/samples"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "dependencies": {
-    "google-logging-utils": "^1.1.4"
+    "google-logging-utils": "^1.2.0"
   },
   "devDependencies": {
     "@google-cloud/typeless-sample-bot": "^2.1.0",
+    "@types/node": "^25.6.0",
     "gts": "^5.0.0",
     "mocha": "^10.0.0"
   }

@@ -7,6 +7,7 @@
   "../../protos/google/cloud/chronicle/v1/entity.proto",
   "../../protos/google/cloud/chronicle/v1/featured_content_metadata.proto",
   "../../protos/google/cloud/chronicle/v1/featured_content_native_dashboard.proto",
+  "../../protos/google/cloud/chronicle/v1/findings_refinement.proto",
   "../../protos/google/cloud/chronicle/v1/instance.proto",
   "../../protos/google/cloud/chronicle/v1/native_dashboard.proto",
   "../../protos/google/cloud/chronicle/v1/reference_list.proto",

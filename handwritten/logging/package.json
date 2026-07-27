@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/logging",
-  "version": "11.2.3",
+  "version": "11.3.0",
   "description": "Cloud Logging Client Library for Node.js",
   "keywords": [
     "google apis client",
@@ -25,19 +25,17 @@
   "author": "Google Inc.",
   "main": "build/src/index.js",
   "files": [
-    "build/src",
-    "build/protos"
+    "build/src"
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r proto* build/",
-    "compile-protos": "compileProtos src",
+    "compile": "tsc -p .",
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "npm run compile",
     "system-test": "mocha build/system-test --timeout 600000",
@@ -47,7 +45,7 @@
     "postpublish": "./.kokoro/publish-min.sh"
   },
   "dependencies": {
-    "@google-cloud/common": "^5.0.0",
+    "@google-cloud/common": "^6.0.0",
     "@google-cloud/paginator": "^5.0.0",
     "@google-cloud/projectify": "^4.0.0",
     "@google-cloud/promisify": "4.0.0",
@@ -57,12 +55,13 @@
     "dot-prop": "^6.0.0",
     "extend": "^3.0.2",
     "gcp-metadata": "^6.0.0",
-    "google-auth-library": "^9.0.0",
+    "google-auth-library": "^10.6.2",
     "google-gax": "^4.0.3",
     "long": "^5.3.2",
     "on-finished": "^2.3.0",
     "pumpify": "^2.0.1",
-    "stream-events": "^1.0.5"
+    "stream-events": "^1.0.5",
+    "@google-cloud/logging-api": "^0.2.0"
   },
   "devDependencies": {
     "@google-cloud/bigquery": "^7.0.0",
@@ -105,7 +104,7 @@
     "webpack-cli": "^5.0.0"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging"
 }

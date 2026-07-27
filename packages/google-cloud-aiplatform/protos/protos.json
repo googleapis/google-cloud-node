@@ -4374,6 +4374,14 @@
                             "proto3_optional": true
                           }
                         },
+                        "retrievalQueries": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "groundingChunks": {
                           "rule": "repeated",
                           "type": "GroundingChunk",
@@ -33815,6 +33823,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "identityType": {
+                          "type": "IdentityType",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -34066,6 +34081,13 @@
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
+                          }
+                        },
+                        "IdentityType": {
+                          "values": {
+                            "IDENTITY_TYPE_UNSPECIFIED": 0,
+                            "SERVICE_ACCOUNT": 2,
+                            "AGENT_IDENTITY": 3
                           }
                         }
                       }
@@ -51841,6 +51863,21 @@
                         "loggingConfig": {
                           "type": "PredictRequestResponseLoggingConfig",
                           "id": 3
+                        },
+                        "dataSharingEnabledProvider": {
+                          "type": "ModelProvider",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ModelProvider": {
+                          "values": {
+                            "MODEL_PROVIDER_UNSPECIFIED": 0,
+                            "ANTHROPIC": 1
+                          }
                         }
                       }
                     },
@@ -84436,6 +84473,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "identityType": {
+                          "type": "IdentityType",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -84687,6 +84731,13 @@
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
+                          }
+                        },
+                        "IdentityType": {
+                          "values": {
+                            "IDENTITY_TYPE_UNSPECIFIED": 0,
+                            "SERVICE_ACCOUNT": 2,
+                            "AGENT_IDENTITY": 3
                           }
                         }
                       }

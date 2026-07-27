@@ -1089,6 +1089,11 @@
                           }
                         },
                         "OutputAudioEncoding": {
+                          "valuesOptions": {
+                            "OUTPUT_AUDIO_ENCODING_MP3": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
                             "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
@@ -13874,6 +13879,11 @@
                           }
                         },
                         "OutputAudioEncoding": {
+                          "valuesOptions": {
+                            "OUTPUT_AUDIO_ENCODING_MP3": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
                             "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,

@@ -3487,6 +3487,9 @@ export namespace google {
 
                     /** SingleTenantHsmInstanceProposal refreshSingleTenantHsmInstance */
                     refreshSingleTenantHsmInstance?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance|null);
+
+                    /** SingleTenantHsmInstanceProposal upgradeKeyTrust */
+                    upgradeKeyTrust?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IUpgradeKeyTrust|null);
                 }
 
                 /** Represents a SingleTenantHsmInstanceProposal. */
@@ -3549,6 +3552,9 @@ export namespace google {
                     /** SingleTenantHsmInstanceProposal refreshSingleTenantHsmInstance. */
                     public refreshSingleTenantHsmInstance?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IRefreshSingleTenantHsmInstance|null);
 
+                    /** SingleTenantHsmInstanceProposal upgradeKeyTrust. */
+                    public upgradeKeyTrust?: (google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IUpgradeKeyTrust|null);
+
                     /** SingleTenantHsmInstanceProposal approvalParameters. */
                     public approvalParameters?: ("quorumParameters"|"requiredActionQuorumParameters");
 
@@ -3556,7 +3562,7 @@ export namespace google {
                     public expiration?: ("expireTime"|"ttl");
 
                     /** SingleTenantHsmInstanceProposal operation. */
-                    public operation?: ("registerTwoFactorAuthKeys"|"disableSingleTenantHsmInstance"|"enableSingleTenantHsmInstance"|"deleteSingleTenantHsmInstance"|"addQuorumMember"|"removeQuorumMember"|"refreshSingleTenantHsmInstance");
+                    public operation?: ("registerTwoFactorAuthKeys"|"disableSingleTenantHsmInstance"|"enableSingleTenantHsmInstance"|"deleteSingleTenantHsmInstance"|"addQuorumMember"|"removeQuorumMember"|"refreshSingleTenantHsmInstance"|"upgradeKeyTrust");
 
                     /**
                      * Creates a new SingleTenantHsmInstanceProposal instance using the specified properties.
@@ -4529,6 +4535,109 @@ export namespace google {
 
                         /**
                          * Gets the default type url for RefreshSingleTenantHsmInstance
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpgradeKeyTrust. */
+                    interface IUpgradeKeyTrust {
+
+                        /** UpgradeKeyTrust name */
+                        name?: (string|null);
+
+                        /** UpgradeKeyTrust twoFactorPublicKeyPem */
+                        twoFactorPublicKeyPem?: (string|null);
+                    }
+
+                    /** Represents an UpgradeKeyTrust. */
+                    class UpgradeKeyTrust implements IUpgradeKeyTrust {
+
+                        /**
+                         * Constructs a new UpgradeKeyTrust.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IUpgradeKeyTrust);
+
+                        /** UpgradeKeyTrust name. */
+                        public name: string;
+
+                        /** UpgradeKeyTrust twoFactorPublicKeyPem. */
+                        public twoFactorPublicKeyPem: string;
+
+                        /**
+                         * Creates a new UpgradeKeyTrust instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpgradeKeyTrust instance
+                         */
+                        public static create(properties?: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IUpgradeKeyTrust): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.UpgradeKeyTrust;
+
+                        /**
+                         * Encodes the specified UpgradeKeyTrust message. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.UpgradeKeyTrust.verify|verify} messages.
+                         * @param message UpgradeKeyTrust message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IUpgradeKeyTrust, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpgradeKeyTrust message, length delimited. Does not implicitly {@link google.cloud.kms.v1.SingleTenantHsmInstanceProposal.UpgradeKeyTrust.verify|verify} messages.
+                         * @param message UpgradeKeyTrust message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.IUpgradeKeyTrust, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpgradeKeyTrust message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpgradeKeyTrust
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.UpgradeKeyTrust;
+
+                        /**
+                         * Decodes an UpgradeKeyTrust message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpgradeKeyTrust
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.UpgradeKeyTrust;
+
+                        /**
+                         * Verifies an UpgradeKeyTrust message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpgradeKeyTrust message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpgradeKeyTrust
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.SingleTenantHsmInstanceProposal.UpgradeKeyTrust;
+
+                        /**
+                         * Creates a plain object from an UpgradeKeyTrust message. Also converts values to other types if specified.
+                         * @param message UpgradeKeyTrust
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.kms.v1.SingleTenantHsmInstanceProposal.UpgradeKeyTrust, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpgradeKeyTrust to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpgradeKeyTrust
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -6869,7 +6978,8 @@ export namespace google {
                         ASYMMETRIC_DECRYPT = 6,
                         RAW_ENCRYPT_DECRYPT = 7,
                         MAC = 9,
-                        KEY_ENCAPSULATION = 10
+                        KEY_ENCAPSULATION = 10,
+                        AES_WRAPPING = 11
                     }
                 }
 
@@ -7254,6 +7364,12 @@ export namespace google {
 
                     /** CryptoKeyVersion reimportEligible */
                     reimportEligible?: (boolean|null);
+
+                    /** CryptoKeyVersion trustedWrappingEnabled */
+                    trustedWrappingEnabled?: (boolean|null);
+
+                    /** CryptoKeyVersion hsmTrusted */
+                    hsmTrusted?: (boolean|null);
                 }
 
                 /** Represents a CryptoKeyVersion. */
@@ -7312,6 +7428,12 @@ export namespace google {
 
                     /** CryptoKeyVersion reimportEligible. */
                     public reimportEligible: boolean;
+
+                    /** CryptoKeyVersion trustedWrappingEnabled. */
+                    public trustedWrappingEnabled: boolean;
+
+                    /** CryptoKeyVersion hsmTrusted. */
+                    public hsmTrusted: boolean;
 
                     /**
                      * Creates a new CryptoKeyVersion instance using the specified properties.
@@ -7441,7 +7563,8 @@ export namespace google {
                         PQ_SIGN_HASH_SLH_DSA_SHA2_128S_SHA256 = 60,
                         PQ_SIGN_ML_DSA_44_EXTERNAL_MU = 70,
                         PQ_SIGN_ML_DSA_65_EXTERNAL_MU = 67,
-                        PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71
+                        PQ_SIGN_ML_DSA_87_EXTERNAL_MU = 71,
+                        AES_256_KWP = 73
                     }
 
                     /** CryptoKeyVersionState enum. */
@@ -7744,6 +7867,9 @@ export namespace google {
                     /** ImportJob publicKey */
                     publicKey?: (google.cloud.kms.v1.ImportJob.IWrappingPublicKey|null);
 
+                    /** ImportJob publicKeyFormat */
+                    publicKeyFormat?: (google.cloud.kms.v1.PublicKey.PublicKeyFormat|keyof typeof google.cloud.kms.v1.PublicKey.PublicKeyFormat|null);
+
                     /** ImportJob attestation */
                     attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
 
@@ -7786,6 +7912,9 @@ export namespace google {
 
                     /** ImportJob publicKey. */
                     public publicKey?: (google.cloud.kms.v1.ImportJob.IWrappingPublicKey|null);
+
+                    /** ImportJob publicKeyFormat. */
+                    public publicKeyFormat: (google.cloud.kms.v1.PublicKey.PublicKeyFormat|keyof typeof google.cloud.kms.v1.PublicKey.PublicKeyFormat);
 
                     /** ImportJob attestation. */
                     public attestation?: (google.cloud.kms.v1.IKeyOperationAttestation|null);
@@ -7881,7 +8010,10 @@ export namespace google {
                         RSA_OAEP_3072_SHA256_AES_256 = 3,
                         RSA_OAEP_4096_SHA256_AES_256 = 4,
                         RSA_OAEP_3072_SHA256 = 5,
-                        RSA_OAEP_4096_SHA256 = 6
+                        RSA_OAEP_4096_SHA256 = 6,
+                        HPKE_KEM_ML_KEM_768_HKDF_SHA256_AES_256_GCM = 8,
+                        HPKE_KEM_ML_KEM_1024_HKDF_SHA256_AES_256_GCM = 9,
+                        HPKE_KEM_XWING_HKDF_SHA256_AES_256_GCM = 10
                     }
 
                     /** ImportJobState enum. */
@@ -7897,6 +8029,9 @@ export namespace google {
 
                         /** WrappingPublicKey pem */
                         pem?: (string|null);
+
+                        /** WrappingPublicKey data */
+                        data?: (Uint8Array|Buffer|string|null);
                     }
 
                     /** Represents a WrappingPublicKey. */
@@ -7910,6 +8045,9 @@ export namespace google {
 
                         /** WrappingPublicKey pem. */
                         public pem: string;
+
+                        /** WrappingPublicKey data. */
+                        public data: (Uint8Array|Buffer|string);
 
                         /**
                          * Creates a new WrappingPublicKey instance using the specified properties.
@@ -8590,6 +8728,34 @@ export namespace google {
                     public importCryptoKeyVersion(request: google.cloud.kms.v1.IImportCryptoKeyVersionRequest): Promise<google.cloud.kms.v1.CryptoKeyVersion>;
 
                     /**
+                     * Calls ImportTrustedKeyWrappedCryptoKeyVersion.
+                     * @param request ImportTrustedKeyWrappedCryptoKeyVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CryptoKeyVersion
+                     */
+                    public importTrustedKeyWrappedCryptoKeyVersion(request: google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest, callback: google.cloud.kms.v1.KeyManagementService.ImportTrustedKeyWrappedCryptoKeyVersionCallback): void;
+
+                    /**
+                     * Calls ImportTrustedKeyWrappedCryptoKeyVersion.
+                     * @param request ImportTrustedKeyWrappedCryptoKeyVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importTrustedKeyWrappedCryptoKeyVersion(request: google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest): Promise<google.cloud.kms.v1.CryptoKeyVersion>;
+
+                    /**
+                     * Calls ExportTrustedKeyWrappedCryptoKeyVersion.
+                     * @param request ExportTrustedKeyWrappedCryptoKeyVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ExportTrustedKeyWrappedCryptoKeyVersionResponse
+                     */
+                    public exportTrustedKeyWrappedCryptoKeyVersion(request: google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest, callback: google.cloud.kms.v1.KeyManagementService.ExportTrustedKeyWrappedCryptoKeyVersionCallback): void;
+
+                    /**
+                     * Calls ExportTrustedKeyWrappedCryptoKeyVersion.
+                     * @param request ExportTrustedKeyWrappedCryptoKeyVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportTrustedKeyWrappedCryptoKeyVersion(request: google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest): Promise<google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse>;
+
+                    /**
                      * Calls CreateImportJob.
                      * @param request CreateImportJobRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ImportJob
@@ -8934,6 +9100,20 @@ export namespace google {
                      * @param [response] CryptoKeyVersion
                      */
                     type ImportCryptoKeyVersionCallback = (error: (Error|null), response?: google.cloud.kms.v1.CryptoKeyVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|importTrustedKeyWrappedCryptoKeyVersion}.
+                     * @param error Error, if any
+                     * @param [response] CryptoKeyVersion
+                     */
+                    type ImportTrustedKeyWrappedCryptoKeyVersionCallback = (error: (Error|null), response?: google.cloud.kms.v1.CryptoKeyVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|exportTrustedKeyWrappedCryptoKeyVersion}.
+                     * @param error Error, if any
+                     * @param [response] ExportTrustedKeyWrappedCryptoKeyVersionResponse
+                     */
+                    type ExportTrustedKeyWrappedCryptoKeyVersionCallback = (error: (Error|null), response?: google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|createImportJob}.
@@ -10597,6 +10777,9 @@ export namespace google {
 
                     /** GetImportJobRequest name */
                     name?: (string|null);
+
+                    /** GetImportJobRequest publicKeyFormat */
+                    publicKeyFormat?: (google.cloud.kms.v1.PublicKey.PublicKeyFormat|keyof typeof google.cloud.kms.v1.PublicKey.PublicKeyFormat|null);
                 }
 
                 /** Represents a GetImportJobRequest. */
@@ -10610,6 +10793,9 @@ export namespace google {
 
                     /** GetImportJobRequest name. */
                     public name: string;
+
+                    /** GetImportJobRequest publicKeyFormat. */
+                    public publicKeyFormat: (google.cloud.kms.v1.PublicKey.PublicKeyFormat|keyof typeof google.cloud.kms.v1.PublicKey.PublicKeyFormat);
 
                     /**
                      * Creates a new GetImportJobRequest instance using the specified properties.
@@ -10909,6 +11095,9 @@ export namespace google {
 
                     /** CreateCryptoKeyRequest skipInitialVersionCreation */
                     skipInitialVersionCreation?: (boolean|null);
+
+                    /** CreateCryptoKeyRequest trustedWrappingEnabled */
+                    trustedWrappingEnabled?: (boolean|null);
                 }
 
                 /** Represents a CreateCryptoKeyRequest. */
@@ -10931,6 +11120,9 @@ export namespace google {
 
                     /** CreateCryptoKeyRequest skipInitialVersionCreation. */
                     public skipInitialVersionCreation: boolean;
+
+                    /** CreateCryptoKeyRequest trustedWrappingEnabled. */
+                    public trustedWrappingEnabled: boolean;
 
                     /**
                      * Creates a new CreateCryptoKeyRequest instance using the specified properties.
@@ -11327,6 +11519,9 @@ export namespace google {
 
                     /** ImportCryptoKeyVersionRequest rsaAesWrappedKey */
                     rsaAesWrappedKey?: (Uint8Array|Buffer|string|null);
+
+                    /** ImportCryptoKeyVersionRequest trustedWrappingEnabled */
+                    trustedWrappingEnabled?: (boolean|null);
                 }
 
                 /** Represents an ImportCryptoKeyVersionRequest. */
@@ -11355,6 +11550,9 @@ export namespace google {
 
                     /** ImportCryptoKeyVersionRequest rsaAesWrappedKey. */
                     public rsaAesWrappedKey?: (Uint8Array|Buffer|string|null);
+
+                    /** ImportCryptoKeyVersionRequest trustedWrappingEnabled. */
+                    public trustedWrappingEnabled: boolean;
 
                     /** ImportCryptoKeyVersionRequest wrappedKeyMaterial. */
                     public wrappedKeyMaterial?: "rsaAesWrappedKey";
@@ -11431,6 +11629,333 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ImportCryptoKeyVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportTrustedKeyWrappedCryptoKeyVersionRequest. */
+                interface IImportTrustedKeyWrappedCryptoKeyVersionRequest {
+
+                    /** ImportTrustedKeyWrappedCryptoKeyVersionRequest parent */
+                    parent?: (string|null);
+
+                    /** ImportTrustedKeyWrappedCryptoKeyVersionRequest importingKey */
+                    importingKey?: (string|null);
+
+                    /** ImportTrustedKeyWrappedCryptoKeyVersionRequest cryptoKeyVersion */
+                    cryptoKeyVersion?: (string|null);
+
+                    /** ImportTrustedKeyWrappedCryptoKeyVersionRequest wrappedKey */
+                    wrappedKey?: (Uint8Array|Buffer|string|null);
+
+                    /** ImportTrustedKeyWrappedCryptoKeyVersionRequest algorithm */
+                    algorithm?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null);
+                }
+
+                /** Represents an ImportTrustedKeyWrappedCryptoKeyVersionRequest. */
+                class ImportTrustedKeyWrappedCryptoKeyVersionRequest implements IImportTrustedKeyWrappedCryptoKeyVersionRequest {
+
+                    /**
+                     * Constructs a new ImportTrustedKeyWrappedCryptoKeyVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest);
+
+                    /** ImportTrustedKeyWrappedCryptoKeyVersionRequest parent. */
+                    public parent: string;
+
+                    /** ImportTrustedKeyWrappedCryptoKeyVersionRequest importingKey. */
+                    public importingKey: string;
+
+                    /** ImportTrustedKeyWrappedCryptoKeyVersionRequest cryptoKeyVersion. */
+                    public cryptoKeyVersion: string;
+
+                    /** ImportTrustedKeyWrappedCryptoKeyVersionRequest wrappedKey. */
+                    public wrappedKey: (Uint8Array|Buffer|string);
+
+                    /** ImportTrustedKeyWrappedCryptoKeyVersionRequest algorithm. */
+                    public algorithm: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm);
+
+                    /**
+                     * Creates a new ImportTrustedKeyWrappedCryptoKeyVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportTrustedKeyWrappedCryptoKeyVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest): google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest;
+
+                    /**
+                     * Encodes the specified ImportTrustedKeyWrappedCryptoKeyVersionRequest message. Does not implicitly {@link google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest.verify|verify} messages.
+                     * @param message ImportTrustedKeyWrappedCryptoKeyVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportTrustedKeyWrappedCryptoKeyVersionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest.verify|verify} messages.
+                     * @param message ImportTrustedKeyWrappedCryptoKeyVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IImportTrustedKeyWrappedCryptoKeyVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportTrustedKeyWrappedCryptoKeyVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportTrustedKeyWrappedCryptoKeyVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest;
+
+                    /**
+                     * Decodes an ImportTrustedKeyWrappedCryptoKeyVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportTrustedKeyWrappedCryptoKeyVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest;
+
+                    /**
+                     * Verifies an ImportTrustedKeyWrappedCryptoKeyVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportTrustedKeyWrappedCryptoKeyVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportTrustedKeyWrappedCryptoKeyVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest;
+
+                    /**
+                     * Creates a plain object from an ImportTrustedKeyWrappedCryptoKeyVersionRequest message. Also converts values to other types if specified.
+                     * @param message ImportTrustedKeyWrappedCryptoKeyVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ImportTrustedKeyWrappedCryptoKeyVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportTrustedKeyWrappedCryptoKeyVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportTrustedKeyWrappedCryptoKeyVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportTrustedKeyWrappedCryptoKeyVersionRequest. */
+                interface IExportTrustedKeyWrappedCryptoKeyVersionRequest {
+
+                    /** ExportTrustedKeyWrappedCryptoKeyVersionRequest name */
+                    name?: (string|null);
+
+                    /** ExportTrustedKeyWrappedCryptoKeyVersionRequest wrappingKey */
+                    wrappingKey?: (string|null);
+                }
+
+                /** Represents an ExportTrustedKeyWrappedCryptoKeyVersionRequest. */
+                class ExportTrustedKeyWrappedCryptoKeyVersionRequest implements IExportTrustedKeyWrappedCryptoKeyVersionRequest {
+
+                    /**
+                     * Constructs a new ExportTrustedKeyWrappedCryptoKeyVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest);
+
+                    /** ExportTrustedKeyWrappedCryptoKeyVersionRequest name. */
+                    public name: string;
+
+                    /** ExportTrustedKeyWrappedCryptoKeyVersionRequest wrappingKey. */
+                    public wrappingKey: string;
+
+                    /**
+                     * Creates a new ExportTrustedKeyWrappedCryptoKeyVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportTrustedKeyWrappedCryptoKeyVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest): google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest;
+
+                    /**
+                     * Encodes the specified ExportTrustedKeyWrappedCryptoKeyVersionRequest message. Does not implicitly {@link google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest.verify|verify} messages.
+                     * @param message ExportTrustedKeyWrappedCryptoKeyVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportTrustedKeyWrappedCryptoKeyVersionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest.verify|verify} messages.
+                     * @param message ExportTrustedKeyWrappedCryptoKeyVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportTrustedKeyWrappedCryptoKeyVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportTrustedKeyWrappedCryptoKeyVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest;
+
+                    /**
+                     * Decodes an ExportTrustedKeyWrappedCryptoKeyVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportTrustedKeyWrappedCryptoKeyVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest;
+
+                    /**
+                     * Verifies an ExportTrustedKeyWrappedCryptoKeyVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportTrustedKeyWrappedCryptoKeyVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportTrustedKeyWrappedCryptoKeyVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest;
+
+                    /**
+                     * Creates a plain object from an ExportTrustedKeyWrappedCryptoKeyVersionRequest message. Also converts values to other types if specified.
+                     * @param message ExportTrustedKeyWrappedCryptoKeyVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportTrustedKeyWrappedCryptoKeyVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportTrustedKeyWrappedCryptoKeyVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportTrustedKeyWrappedCryptoKeyVersionResponse. */
+                interface IExportTrustedKeyWrappedCryptoKeyVersionResponse {
+
+                    /** ExportTrustedKeyWrappedCryptoKeyVersionResponse wrappedKey */
+                    wrappedKey?: (Uint8Array|Buffer|string|null);
+
+                    /** ExportTrustedKeyWrappedCryptoKeyVersionResponse wrappedKeyCrc32c */
+                    wrappedKeyCrc32c?: (google.protobuf.IInt64Value|null);
+                }
+
+                /** Represents an ExportTrustedKeyWrappedCryptoKeyVersionResponse. */
+                class ExportTrustedKeyWrappedCryptoKeyVersionResponse implements IExportTrustedKeyWrappedCryptoKeyVersionResponse {
+
+                    /**
+                     * Constructs a new ExportTrustedKeyWrappedCryptoKeyVersionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse);
+
+                    /** ExportTrustedKeyWrappedCryptoKeyVersionResponse wrappedKey. */
+                    public wrappedKey: (Uint8Array|Buffer|string);
+
+                    /** ExportTrustedKeyWrappedCryptoKeyVersionResponse wrappedKeyCrc32c. */
+                    public wrappedKeyCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /**
+                     * Creates a new ExportTrustedKeyWrappedCryptoKeyVersionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportTrustedKeyWrappedCryptoKeyVersionResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse): google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse;
+
+                    /**
+                     * Encodes the specified ExportTrustedKeyWrappedCryptoKeyVersionResponse message. Does not implicitly {@link google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse.verify|verify} messages.
+                     * @param message ExportTrustedKeyWrappedCryptoKeyVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportTrustedKeyWrappedCryptoKeyVersionResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse.verify|verify} messages.
+                     * @param message ExportTrustedKeyWrappedCryptoKeyVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IExportTrustedKeyWrappedCryptoKeyVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportTrustedKeyWrappedCryptoKeyVersionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportTrustedKeyWrappedCryptoKeyVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse;
+
+                    /**
+                     * Decodes an ExportTrustedKeyWrappedCryptoKeyVersionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportTrustedKeyWrappedCryptoKeyVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse;
+
+                    /**
+                     * Verifies an ExportTrustedKeyWrappedCryptoKeyVersionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportTrustedKeyWrappedCryptoKeyVersionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportTrustedKeyWrappedCryptoKeyVersionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse;
+
+                    /**
+                     * Creates a plain object from an ExportTrustedKeyWrappedCryptoKeyVersionResponse message. Also converts values to other types if specified.
+                     * @param message ExportTrustedKeyWrappedCryptoKeyVersionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.ExportTrustedKeyWrappedCryptoKeyVersionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportTrustedKeyWrappedCryptoKeyVersionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportTrustedKeyWrappedCryptoKeyVersionResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

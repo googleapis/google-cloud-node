@@ -196,6 +196,84 @@
           }
         }
       }
+    },
+    "SupportEventSubscriptionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SupportEventSubscriptionServiceClient",
+          "rpcs": {
+            "CreateSupportEventSubscription": {
+              "methods": [
+                "createSupportEventSubscription"
+              ]
+            },
+            "GetSupportEventSubscription": {
+              "methods": [
+                "getSupportEventSubscription"
+              ]
+            },
+            "UpdateSupportEventSubscription": {
+              "methods": [
+                "updateSupportEventSubscription"
+              ]
+            },
+            "DeleteSupportEventSubscription": {
+              "methods": [
+                "deleteSupportEventSubscription"
+              ]
+            },
+            "UndeleteSupportEventSubscription": {
+              "methods": [
+                "undeleteSupportEventSubscription"
+              ]
+            },
+            "ListSupportEventSubscriptions": {
+              "methods": [
+                "listSupportEventSubscriptions",
+                "listSupportEventSubscriptionsStream",
+                "listSupportEventSubscriptionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SupportEventSubscriptionServiceClient",
+          "rpcs": {
+            "CreateSupportEventSubscription": {
+              "methods": [
+                "createSupportEventSubscription"
+              ]
+            },
+            "GetSupportEventSubscription": {
+              "methods": [
+                "getSupportEventSubscription"
+              ]
+            },
+            "UpdateSupportEventSubscription": {
+              "methods": [
+                "updateSupportEventSubscription"
+              ]
+            },
+            "DeleteSupportEventSubscription": {
+              "methods": [
+                "deleteSupportEventSubscription"
+              ]
+            },
+            "UndeleteSupportEventSubscription": {
+              "methods": [
+                "undeleteSupportEventSubscription"
+              ]
+            },
+            "ListSupportEventSubscriptions": {
+              "methods": [
+                "listSupportEventSubscriptions",
+                "listSupportEventSubscriptionsStream",
+                "listSupportEventSubscriptionsAsync"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

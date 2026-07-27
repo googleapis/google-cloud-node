@@ -439,6 +439,10 @@ export class ToolServiceClient {
    * @param {google.protobuf.Struct} [request.args]
    *   Optional. The input parameters and values for the tool in JSON object
    *   format.
+   * @param {google.cloud.ces.v1.MockConfig} [request.mockConfig]
+   *   Optional. Mock configuration for the tool execution.
+   *   If this field is set, tools that call other tools will be
+   *   mocked based on the provided patterns and responses.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -706,6 +710,10 @@ export class ToolServiceClient {
    * @param {string[]} [request.toolIds]
    *   Optional. The identifiers of the tools to retrieve from the toolset.
    *   If empty, all tools in the toolset will be returned.
+   * @param {boolean} [request.bypassPersistenceConfig]
+   *   Optional. If true, the returned tools will contain raw descriptions and
+   *   schemas directly from the server, bypassing any stored persistence
+   *   configurations (overrides/snapshots).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -229,6 +229,13 @@ export class DashboardChartServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}',
         ),
+      findingsRefinementPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/findingsRefinements/{findings_refinement}',
+      ),
+      findingsRefinementDeploymentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/findingsRefinements/{findings_refinement}/deployment',
+        ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}',
       ),
@@ -1402,6 +1409,166 @@ export class DashboardChartServiceClient {
     return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
       featuredContentNativeDashboardName,
     ).featured_content_native_dashboard;
+  }
+
+  /**
+   * Return a fully-qualified findingsRefinement resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} findings_refinement
+   * @returns {string} Resource name string.
+   */
+  findingsRefinementPath(
+    project: string,
+    location: string,
+    instance: string,
+    findingsRefinement: string,
+  ) {
+    return this.pathTemplates.findingsRefinementPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      findings_refinement: findingsRefinement,
+    });
+  }
+
+  /**
+   * Parse the project from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFindingsRefinementName(findingsRefinementName: string) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFindingsRefinementName(findingsRefinementName: string) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromFindingsRefinementName(findingsRefinementName: string) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).instance;
+  }
+
+  /**
+   * Parse the findings_refinement from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the findings_refinement.
+   */
+  matchFindingsRefinementFromFindingsRefinementName(
+    findingsRefinementName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).findings_refinement;
+  }
+
+  /**
+   * Return a fully-qualified findingsRefinementDeployment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} findings_refinement
+   * @returns {string} Resource name string.
+   */
+  findingsRefinementDeploymentPath(
+    project: string,
+    location: string,
+    instance: string,
+    findingsRefinement: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      findings_refinement: findingsRefinement,
+    });
+  }
+
+  /**
+   * Parse the project from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).instance;
+  }
+
+  /**
+   * Parse the findings_refinement from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the findings_refinement.
+   */
+  matchFindingsRefinementFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).findings_refinement;
   }
 
   /**

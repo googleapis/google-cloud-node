@@ -1,0 +1,67 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.developers.knowledge.v1",
+  "libraryPackage": "@google/developer-knowledge",
+  "services": {
+    "DeveloperKnowledge": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DeveloperKnowledgeClient",
+          "rpcs": {
+            "GetDocument": {
+              "methods": [
+                "getDocument"
+              ]
+            },
+            "BatchGetDocuments": {
+              "methods": [
+                "batchGetDocuments"
+              ]
+            },
+            "AnswerQuery": {
+              "methods": [
+                "answerQuery"
+              ]
+            },
+            "SearchDocumentChunks": {
+              "methods": [
+                "searchDocumentChunks",
+                "searchDocumentChunksStream",
+                "searchDocumentChunksAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DeveloperKnowledgeClient",
+          "rpcs": {
+            "GetDocument": {
+              "methods": [
+                "getDocument"
+              ]
+            },
+            "BatchGetDocuments": {
+              "methods": [
+                "batchGetDocuments"
+              ]
+            },
+            "AnswerQuery": {
+              "methods": [
+                "answerQuery"
+              ]
+            },
+            "SearchDocumentChunks": {
+              "methods": [
+                "searchDocumentChunks",
+                "searchDocumentChunksStream",
+                "searchDocumentChunksAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

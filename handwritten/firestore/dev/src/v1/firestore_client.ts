@@ -151,7 +151,15 @@ export class FirestoreClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    opts = Object.assign(
+      {
+        servicePath,
+        port,
+        clientConfig,
+        fallback,
+      },
+      opts,
+    );
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -301,16 +309,28 @@ export class FirestoreClient {
       return this.firestoreStub;
     }
 
-    // Put together the "service stub" for
-    // google.firestore.v1.Firestore.
+    // Clone the existing options to avoid mutating shared state
+    const clientOpts: ClientOptions = Object.assign({}, this._opts);
+
+    const flowControlWindowSize = 256 * 1024; // 256 KB
+    const maxMessageLength = 17 * 1024 * 1024; // 17 MB (16 MB documents + overlead)
+    clientOpts.grpcOptions = Object.assign(
+      {
+        'grpc.max_receive_message_length': maxMessageLength,
+        'grpc.max_send_message_length': maxMessageLength,
+        'grpc-node.flow_control_window': flowControlWindowSize,
+      },
+      clientOpts.grpcOptions, // Can overwrite grpc options
+    );
+
+    // Pass the updated options into the stub creator
     this.firestoreStub = this._gaxGrpc.createStub(
-      this._opts.fallback
+      clientOpts.fallback
         ? (this._protos as protobuf.Root).lookupService(
             'google.firestore.v1.Firestore',
           )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.firestore.v1.Firestore,
-      this._opts,
+        : (this._protos as any).google.firestore.v1.Firestore,
+      clientOpts,
       this._providedCustomServicePath,
     ) as Promise<{[method: string]: Function}>;
 
