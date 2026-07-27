@@ -380,14 +380,14 @@ async function createAPIRequestAsync<T>(
       mooOpts.headers = Gaxios.mergeHeaders(mooOpts.headers!, authHeaders);
       return h2.request<T>(mooOpts);
     } else {
-      const res = await (authClient as GoogleAuth).request<T>(options as any);
+      const res = await (authClient as GoogleAuth).request<T>(options);
 
-      return marshallGaxiosResponse(res as any);
+      return marshallGaxiosResponse(res);
     }
   } else {
     return new Gaxios()
-      .request<T>(options as any)
-      .then(res => marshallGaxiosResponse(res as any));
+      .request<T>(options)
+      .then(res => marshallGaxiosResponse(res));
   }
 }
 

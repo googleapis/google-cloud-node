@@ -18,7 +18,7 @@ import execa = require('execa');
 import {describe, it} from 'mocha';
 
 describe('pack-n-play', function () {
-  it('should run tests', async () => {
+  it.skip('should run tests', async () => {
     // Stubbed out due to pnpm workspace conflicts with nested npm install
   });
 });

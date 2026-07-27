@@ -487,7 +487,7 @@ describe('createAPIRequest', () => {
 
     it('should allow passing a GoogleAuth param for auth', async () => {
       const auth = new GoogleAuth();
-      const stub = sandbox.stub(auth, 'request').resolves({} as any);
+      const stub = sandbox.stub(auth, 'request').resolves({} as GaxiosResponse);
       await createAPIRequest<FakeParams>({
         options: {url},
         params: {},
@@ -515,7 +515,7 @@ describe('createAPIRequest', () => {
       sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
       const requestStub = sandbox
         .stub(auth, 'request')
-        .resolves({data: fakeResponse} as any);
+        .resolves({data: fakeResponse} as GaxiosResponse);
       const result = await createAPIRequest<FakeParams>({
         options: {url: gduUrl},
         params: {},
@@ -549,7 +549,7 @@ describe('createAPIRequest', () => {
       sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
       const requestStub = sandbox
         .stub(auth, 'request')
-        .resolves({data: fakeResponse} as any);
+        .resolves({data: fakeResponse} as GaxiosResponse);
       const result = await createAPIRequest<FakeParams>({
         options: {url: gduUrl},
         params: {},
@@ -608,7 +608,7 @@ describe('createAPIRequest', () => {
         sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
         const requestStub = sandbox
           .stub(auth, 'request')
-          .resolves({data: fakeResponse} as any);
+          .resolves({data: fakeResponse} as GaxiosResponse);
         const result = await createAPIRequest<FakeParams>({
           options: {url: gduUrl},
           params: {},
@@ -648,7 +648,7 @@ describe('createAPIRequest', () => {
         sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
         const requestStub = sandbox
           .stub(auth, 'request')
-          .resolves({data: fakeResponse} as any);
+          .resolves({data: fakeResponse} as GaxiosResponse);
         const result = await createAPIRequest<FakeParams>({
           options: {url: gduUrl},
           params: {},

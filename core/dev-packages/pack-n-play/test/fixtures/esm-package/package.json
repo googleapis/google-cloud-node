@@ -9,6 +9,6 @@
   "type": "module",
   "dependencies": {
     "mocha": "^10.2.0",
-    "pack-n-play": "file:../../.."
+    "pack-n-play": "workspace:*"
   }
 }

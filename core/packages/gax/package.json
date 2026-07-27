@@ -62,7 +62,7 @@
   },
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
-    "pretest": "npm run prepare",
+    "pretest": "pnpm run prepare",
     "test": "c8 mocha build/test/unit",
     "lint": "gts check src samples test",
     "clean": "gts clean",
@@ -74,15 +74,15 @@
     "compile-status-protos": "pbjs -t json google/rpc/status.proto google/rpc/error_details.proto -p ./protos > protos/status.json",
     "compile-http-protos": "pbjs -t static-module -r http_proto --keep-case google/api/http.proto -p ./protos > protos/http.js && pbts protos/http.js -o protos/http.d.ts",
     "fix": "gts fix",
-    "prepare": "npm run compile && cd ../tools && npm run compile && cd ../gax && pwd && node ../tools/build/src/prepublish.js . && mkdirp build/protos && cp -r protos/* build/protos/ && npm run minify-proto-json",
-    "system-test": "c8 mocha build/test/system-test --timeout 600000 && npm run test-application",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "browser-test": "cd test/browser-test && npm run prefetch && npm install && npm test",
-    "test-application": "cd test/test-application && npm run prefetch && npm install && npm start",
-    "prelint": "cd samples; npm link ../; npm install",
+    "prepare": "pnpm run compile && cd ../tools && pnpm run compile && cd ../gax && pwd && node ../tools/build/src/prepublish.js . && mkdirp build/protos && cp -r protos/* build/protos/ && pnpm run minify-proto-json",
+    "system-test": "c8 mocha build/test/system-test --timeout 600000 && pnpm run test-application",
+    "samples-test": "cd samples/ && pnpm link ../ && pnpm test && cd ../",
+    "browser-test": "cd test/browser-test && pnpm run prefetch && pnpm install && pnpm test",
+    "test-application": "cd test/test-application && pnpm run prefetch && pnpm install && pnpm start",
+    "prelint": "cd samples; pnpm link ../; pnpm install",
     "precompile": "gts clean",
-    "update-protos": "cd ../tools && npm run compile && cd ../gax && node ../tools/build/src/listProtos.js .",
-    "minify-proto-json": "cd ../tools && npm run compile && cd ../gax && node ../tools/build/src/minify.js"
+    "update-protos": "cd ../tools && pnpm run compile && cd ../gax && node ../tools/build/src/listProtos.js .",
+    "minify-proto-json": "cd ../tools && pnpm run compile && cd ../gax && node ../tools/build/src/minify.js"
   },
   "keywords": [
     "grpc"
