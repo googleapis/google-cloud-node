@@ -2024,6 +2024,7 @@ module.exports = Object.assign(module.exports, existingExports);
  * @internal
  * @name Firestore.v1beta1
  * @type {function}
+ * @deprecated Use v1 instead.
  */
 Object.defineProperty(module.exports, 'v1beta1', {
   // The v1beta1 module is very large. To avoid pulling it in from static
@@ -2044,6 +2045,7 @@ Object.defineProperty(module.exports, 'v1beta1', {
  * @internal
  * @name Firestore.v1
  * @type {function}
+ * @deprecated Use the top-level Firestore client instead.
  */
 Object.defineProperty(module.exports, 'v1', {
   // The v1 module is very large. To avoid pulling it in from static
@@ -2057,6 +2059,14 @@ Object.defineProperty(module.exports, 'v1', {
   },
 });
 
+/**
+ * {@link Status} factory function.
+ *
+ * @private
+ * @internal
+ * @name Firestore.GrpcStatus
+ * @type {function}
+ */
 Object.defineProperty(module.exports, 'GrpcStatus', {
   // The gax module is very large. To avoid pulling it in from static
   // scope, we lazy-load the module.

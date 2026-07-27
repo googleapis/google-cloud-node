@@ -2988,21 +2988,17 @@ declare namespace FirebaseFirestore {
     build(): Buffer;
   }
   /**
-   * The v1beta1 Veneer client. This client provides access to to the underlying
+   * The v1beta1 Veneer client. This client provides access to the underlying
    * Firestore v1beta1 RPCs.
    * @deprecated Use v1 instead.
    */
-  export const v1beta1: {
-    FirestoreClient: typeof import('./v1beta1/firestore_client').FirestoreClient;
-  };
+  export const v1beta1: typeof import('@google-cloud/firestore-api').v1beta1;
   /**
    * The v1 Veneer clients. These clients provide access to the Firestore Admin
    * API and the underlying Firestore v1 RPCs.
+   * @deprecated Use the top-level Firestore client instead.
    */
-  export const v1: {
-    FirestoreClient: typeof import('./v1/firestore_client').FirestoreClient;
-    FirestoreAdminClient: typeof import('./v1/firestore_admin_client').FirestoreAdminClient;
-  };
+  export const v1: typeof import('@google-cloud/firestore-api').v1;
   /**
    * Status codes returned by Firestore's gRPC calls.
    */
