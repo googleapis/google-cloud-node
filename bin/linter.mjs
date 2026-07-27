@@ -17,7 +17,7 @@ import {existsSync} from 'fs';
 import path from 'path';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
-import ts from 'typescript';
+import * as ts from 'typescript';
 
 // --- Globals & Promisified API Wrappers ---
 const execFileAsync = promisify(execFile);
