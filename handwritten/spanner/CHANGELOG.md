@@ -5,6 +5,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.10.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.9.0...spanner-v8.10.0) (2026-07-23)
+
+
+### Features
+
+* **Spanner:** Modify default maxConcurrentStreamsLowWatermark value … ([#8933](https://github.com/googleapis/google-cloud-node/issues/8933)) ([7d991ec](https://github.com/googleapis/google-cloud-node/commit/7d991ec48098dc6eb1039d8aa9ad96f9acf02273))
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
 ## [8.9.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.8.1...spanner-v8.9.0) (2026-07-16)
 
 

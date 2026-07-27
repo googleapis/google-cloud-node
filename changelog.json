@@ -22,6 +22,412 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/precise-date",
+      "id": "3158ef00-e13a-4eca-b4fa-c488dcf39d0d",
+      "createTime": "2026-07-23T06:10:33.251Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c2f51364b47c40e6793c55d3020329e1fa4a9f74",
+          "message": "Move typescript to dependencies for AST runtime execution",
+          "issues": [
+            "8962"
+          ],
+          "scope": "gapic-node-processing"
+        }
+      ],
+      "version": "0.1.11",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "0f3e8835-d490-4fb9-8b07-25406b1826be",
+      "createTime": "2026-07-24T15:02:00.313Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4326a4d3eb0afcde14b12aece285f84f2274e609",
+          "message": "Onboard a new library",
+          "issues": [
+            "8943"
+          ],
+          "scope": "google/maps/isochrones/v1"
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-maps/isochrones",
+      "id": "47d1da52-5dd8-4af3-b256-b41143b3778e",
+      "createTime": "2026-07-23T20:57:58.341Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "3.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/typeless-sample-bot",
+      "id": "1a19c36c-5ab3-4ea2-a3bf-d3ab358ca866",
+      "createTime": "2026-07-23T20:57:58.307Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "10.1.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "teeny-request",
+      "id": "075ce12d-5971-4bc7-9ad1-0581b907d296",
+      "createTime": "2026-07-23T20:57:58.275Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "8.0.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "retry-request",
+      "id": "2d9ad5b9-e2a9-4722-8cf6-fcd17d31ab0d",
+      "createTime": "2026-07-23T20:57:58.243Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "3.0.6",
+      "language": "JAVASCRIPT",
+      "artifactName": "proto3-json-serializer",
+      "id": "53305b78-072c-42e2-a06d-ddb2372191e5",
+      "createTime": "2026-07-23T20:57:58.206Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "5.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-proto-files",
+      "id": "d5907022-37ac-41f0-ac11-05b0df82461a",
+      "createTime": "2026-07-23T20:57:58.176Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "8.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "googleapis-common",
+      "id": "82b9baef-6eba-412e-8645-18f15781a963",
+      "createTime": "2026-07-23T20:57:58.144Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "1.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-logging-utils",
+      "id": "826f3558-cc2d-438f-8240-d83ede2528fb",
+      "createTime": "2026-07-23T20:57:58.109Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "829990f297b287c43d6f7761c7a5e3a9ec322c1d",
+          "message": "Add GOOGLE_APPLICATION_CREDENTIALS context to credential load errors",
+          "issues": [
+            "8800",
+            "8799"
+          ],
+          "scope": "auth"
+        },
+        {
+          "type": "fix",
+          "sha": "6e912cf5f6309a2d2a0f0207296dd807396c064a",
+          "message": "Honor CLOUDSDK_CONFIG when locating the ADC well-known file",
+          "issues": [
+            "8798",
+            "8797"
+          ],
+          "scope": "auth"
+        }
+      ],
+      "version": "10.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "700030aa-d9d4-47e0-8c75-b0cd9a32254f",
+      "createTime": "2026-07-23T20:57:58.077Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "8.1.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "88ba8e20-1861-4566-b205-a1ee9f6a29a4",
+      "createTime": "2026-07-23T20:57:58.046Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "5.0.8",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "e44c4ef1-8029-4f5e-82ea-7ebc247c7dff",
+      "createTime": "2026-07-23T20:57:58.006Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "fee5a15dc99d8055f7b316c4b7630d044821f235",
+          "message": "Preserve index.ts exports and merge clients across multi-api staging subdirectories",
+          "issues": [
+            "8953"
+          ],
+          "scope": "gapic-node-processing"
+        }
+      ],
+      "version": "0.1.10",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "be01cd70-ded0-4576-abb5-d7143913e3d4",
+      "createTime": "2026-07-23T20:57:57.974Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "4.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "pack-n-play",
+      "id": "c24bb261-66c5-4a65-9185-4b65e21f4b4e",
+      "createTime": "2026-07-23T20:57:57.942Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "368f18ecc361310e7bfb323ba0e7836186ea08d1",
+          "message": "Correct repository URLs in core package.json files",
+          "issues": [
+            "8722"
+          ]
+        }
+      ],
+      "version": "4.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "jsdoc-region-tag",
+      "id": "54528d86-7cce-4b61-9cd5-c82fee5d29aa",
+      "createTime": "2026-07-23T20:57:57.909Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/common",
+      "id": "25c5475d-650d-4f4b-b1e2-321c132de9d8",
+      "createTime": "2026-07-23T20:57:57.864Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/paginator",
+      "id": "daa94e13-c04b-4f1c-b683-207a94d0ed0f",
+      "createTime": "2026-07-23T06:10:35.280Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "3cebe31d-1349-4655-a7ae-fdf44d99fb54",
+      "createTime": "2026-07-23T06:10:32.251Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
+      "version": "4.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "cee41793-f6d8-4105-baf7-44c8b1685175",
+      "createTime": "2026-07-23T06:10:32.768Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7d991ec48098dc6eb1039d8aa9ad96f9acf02273",
+          "message": "Modify default maxConcurrentStreamsLowWatermark value …",
+          "issues": [
+            "8933"
+          ],
+          "scope": "Spanner"
+        },
+        {
+          "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
+      "version": "8.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "f8f16b22-2ce3-4b50-93cd-2427caa44508",
+      "createTime": "2026-07-23T06:10:36.364Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "d49517d6e03628178ac34f8c3c74afe9c133c537",
           "message": "Onboard a new library",
           "issues": [
@@ -82807,5 +83213,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-23T06:10:31.909Z"
+  "updateTime": "2026-07-24T15:02:00.313Z"
 }
