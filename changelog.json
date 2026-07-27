@@ -12,6 +12,23 @@
           ]
         }
       ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "jsdoc-fresh",
+      "id": "ae8ef239-b02a-4e42-8c7b-1a088bdf1de0",
+      "createTime": "2026-07-23T06:10:31.909Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
       "version": "5.2.0",
       "language": "JAVASCRIPT",
       "artifactName": "@google-cloud/precise-date",
