@@ -103,6 +103,6 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=bigquerystorage.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/handwritten/bigquery-storage/samples
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/tree/main/handwritten/bigquery-storage/samples
 [homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/handwritten/bigquery-storage/CHANGELOG.md
-[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/handwritten/bigquery-storage
+[homepage]: https://github.com/googleapis/google-cloud-node/tree/main/handwritten/bigquery-storage
