@@ -289,8 +289,12 @@ The dist-tags follow the naming convention `legacy-(version)`.
 For example, `{{ metadata['lib_install_cmd'] }}@legacy-10` installs client libraries
 for versions compatible with Node.js 10.
 
-Network traffic is only secure against post-quantum decryption algorithms for
-users running Node version 22.20+.
+## Post-quantum Cryptography
+
+A minimum Node version of >=22.20 is required for post-quantum cryptography to
+be used. When running an application with a supported node version and making
+requests with a client library, network traffic will automatically be secure
+against post-quantum decryption methods.
 
 ## Versioning
 
