@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    npm install
+    corepack enable pnpm && pnpm install
   dir: 'handwritten/error-reporting'
   id: 'install-dependencies'
 
@@ -23,7 +23,7 @@ steps:
   args:
   - '-c'
   - |
-    npm run system-test
+    corepack enable pnpm && pnpm run system-test
   dir: 'handwritten/error-reporting'
   env:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable

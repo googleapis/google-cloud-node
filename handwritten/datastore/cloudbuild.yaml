@@ -23,7 +23,7 @@ steps:
   args:
   - '-c'
   - |
-    npm run system-test
+    corepack enable pnpm && pnpm run system-test
   dir: 'handwritten/datastore'
   env:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable

@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    npm install
+    corepack enable pnpm && pnpm install
   dir: 'handwritten/pubsub'
   id: 'install-dependencies'
 
@@ -23,7 +23,7 @@ steps:
   args:
   - '-c'
   - |
-    npm run system-test
+    corepack enable pnpm && pnpm run system-test
   dir: 'handwritten/pubsub'
   env:
   - 'GCLOUD_PROJECT=${PROJECT_ID}' # Pass project ID via build variable

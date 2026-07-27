@@ -1,0 +1,28 @@
+steps:
+# 1. Set up Node.js environment
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    corepack enable pnpm && pnpm install
+  dir: 'handwritten/firestore'
+  id: 'install-dependencies'
+
+# 2. Configure environment variables for the tests and run system tests
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    corepack enable pnpm && pnpm run system-test
+  dir: 'handwritten/firestore'
+  env:
+  - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
+  id: 'run-system-tests'
+  waitFor: ['install-dependencies']
+
+substitutions:
+  _GCP_PROJECT_ID: 'long-door-651'
+
+timeout: '3600s'
