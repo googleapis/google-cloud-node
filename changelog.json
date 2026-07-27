@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/precise-date",
+      "id": "3158ef00-e13a-4eca-b4fa-c488dcf39d0d",
+      "createTime": "2026-07-23T06:10:33.251Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "c2f51364b47c40e6793c55d3020329e1fa4a9f74",
           "message": "Move typescript to dependencies for AST runtime execution",
