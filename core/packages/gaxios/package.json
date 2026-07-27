@@ -1,6 +1,6 @@
 {
   "name": "gaxios",
-  "version": "7.3.0",
+  "version": "8.0.0",
   "description": "A simple common HTTP client specifically for Google APIs and services.",
   "main": "build/cjs/src/index.js",
   "types": "build/cjs/src/index.d.ts",
@@ -45,7 +45,7 @@
     "google"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "author": "Google, LLC",
   "license": "Apache-2.0",

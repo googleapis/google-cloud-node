@@ -1,6 +1,6 @@
 {
   "name": "google-gax",
-  "version": "5.0.8",
+  "version": "6.0.0",
   "description": "Google API Extensions",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -106,7 +106,7 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/gax",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "browser": "build/src/fallback.js"
 }
