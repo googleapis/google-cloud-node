@@ -79,7 +79,7 @@ function fakeRequest() {
 fakeRequest.defaults = (defaults: r.CoreOptions) => {
   assert.ok(
     /^gl-node\/(?<nodeVersion>[^W]+) gccl\/(?<gccl>[^W]+) gccl-invocation-id\/(?<gcclInvocationId>[^W]+)$/.test(
-      defaults.headers!['x-goog-api-client']
+      (defaults.headers as any)['x-goog-api-client']
     )
   );
   return fakeRequest;
@@ -130,7 +130,7 @@ describe('common/util', () => {
         return {token: '', res: undefined};
       }
 
-      async getRequestHeaders() {
+      async getRequestHeaders(): Promise<any> {
         return {};
       }
 

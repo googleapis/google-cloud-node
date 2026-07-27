@@ -32,7 +32,8 @@ import {GoogleAuth} from 'google-auth-library';
 import {XMLParser, XMLBuilder} from 'fast-xml-parser';
 import AsyncRetry from 'async-retry';
 import {ApiError} from './nodejs-common/index.js';
-import {GaxiosResponse, Headers} from 'gaxios';
+import {GaxiosResponse} from 'gaxios';
+type Headers = Record<string, string>;
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
 import {getRuntimeTrackingString, getUserAgentString} from './util.js';
@@ -229,7 +230,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
         headerFound = true;
 
         // Prepend command feature to value, if not already there
-        if (!value.includes(GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED)) {
+        if (!(value as string).includes(GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED)) {
           headers[key] =
             `${value} gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
         }
@@ -240,14 +241,14 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
 
     // If the header isn't present, add it
     if (!headerFound) {
-      headers['x-goog-api-client'] = `${getRuntimeTrackingString()} gccl/${
+      (headers as any)['x-goog-api-client'] = `${getRuntimeTrackingString()} gccl/${
         packageJson.version
       } gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
     }
 
     // If the User-Agent isn't present, add it
     if (!userAgentFound) {
-      headers['User-Agent'] = getUserAgentString();
+      (headers as any)['User-Agent'] = getUserAgentString();
     }
 
     return headers;
@@ -268,10 +269,10 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
           url,
         });
 
-        if (res.data && res.data.error) {
-          throw res.data.error;
+        if (res.data && (res.data as any).error) {
+          throw (res.data as any).error;
         }
-        const parsedXML = this.xmlParser.parse(res.data);
+        const parsedXML = this.xmlParser.parse(res.data as string);
         this.uploadId = parsedXML.InitiateMultipartUploadResult.UploadId;
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
@@ -304,7 +305,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     } else if (validation === 'crc32c') {
       const crc = new CRC32C();
       crc.update(chunk);
-      headers['x-goog-hash'] = `crc32c=${crc.toString()}`;
+      (headers as any)['x-goog-hash'] = `crc32c=${crc.toString()}`;
     }
 
     return AsyncRetry(async bail => {
@@ -315,10 +316,10 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
           body: chunk,
           headers,
         });
-        if (res.data && res.data.error) {
-          throw res.data.error;
+        if (res.data && (res.data as any).error) {
+          throw (res.data as any).error;
         }
-        this.partsMap.set(partNumber, res.headers['etag']);
+        this.partsMap.set(partNumber, (res.headers as any)['etag']);
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
       }
@@ -350,8 +351,8 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
           method: 'POST',
           body,
         });
-        if (res.data && res.data.error) {
-          throw res.data.error;
+        if (res.data && (res.data as any).error) {
+          throw (res.data as any).error;
         }
         return res;
       } catch (e) {
@@ -375,8 +376,8 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
           url,
           method: 'DELETE',
         });
-        if (res.data && res.data.error) {
-          throw res.data.error;
+        if (res.data && (res.data as any).error) {
+          throw (res.data as any).error;
         }
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);

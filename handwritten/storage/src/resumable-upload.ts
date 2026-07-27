@@ -631,7 +631,7 @@ export class Upload extends Writable {
     }
 
     if (checksums.length > 0) {
-      headers!['X-Goog-Hash'] = checksums.join(',');
+      (headers as any)['X-Goog-Hash'] = checksums.join(',');
     }
   }
 
@@ -792,17 +792,17 @@ export class Upload extends Writable {
 
   protected async createURIAsync(): Promise<string> {
     const metadata = {...this.metadata};
-    const headers: gaxios.Headers = {};
+    const headers: Record<string, string> = {};
 
     // Delete content length and content type from metadata if they exist.
     // These are headers and should not be sent as part of the metadata.
     if (metadata.contentLength) {
-      headers['X-Upload-Content-Length'] = metadata.contentLength.toString();
+      (headers as any)['X-Upload-Content-Length'] = metadata.contentLength.toString();
       delete metadata.contentLength;
     }
 
     if (metadata.contentType) {
-      headers!['X-Upload-Content-Type'] = metadata.contentType;
+      (headers as any)['X-Upload-Content-Type'] = metadata.contentType;
       delete metadata.contentType;
     }
 
@@ -834,12 +834,12 @@ export class Upload extends Writable {
     };
 
     if (metadata.contentLength) {
-      reqOpts.headers!['X-Upload-Content-Length'] =
+      (reqOpts.headers as any)['X-Upload-Content-Length'] =
         metadata.contentLength.toString();
     }
 
     if (metadata.contentType) {
-      reqOpts.headers!['X-Upload-Content-Type'] = metadata.contentType;
+      (reqOpts.headers as any)['X-Upload-Content-Type'] = metadata.contentType;
     }
 
     if (typeof this.generation !== 'undefined') {
@@ -855,7 +855,7 @@ export class Upload extends Writable {
     }
 
     if (this.origin) {
-      reqOpts.headers!.Origin = this.origin;
+      (reqOpts.headers as any)!.Origin = this.origin;
     }
     const uri = await AsyncRetry(
       async (bail: (err: Error) => void) => {
@@ -863,7 +863,7 @@ export class Upload extends Writable {
           const res = await this.makeRequest(reqOpts);
           // We have successfully got a URI we can now create a new invocation id
           this.currentInvocationId.uri = crypto.randomUUID();
-          return res.headers.location;
+          return (res.headers as any).location;
         } catch (err) {
           const e = err as GaxiosError;
           const apiError = {
@@ -1050,8 +1050,8 @@ export class Upload extends Writable {
 
       // `Content-Length` for multiple chunk uploads is the size of the chunk,
       // not the overall object
-      headers['Content-Length'] = bytesToUpload;
-      headers['Content-Range'] =
+      (headers as any)['Content-Length'] = bytesToUpload;
+      (headers as any)['Content-Range'] =
         `bytes ${this.offset}-${endingByte}/${totalObjectSize}`;
 
       // Apply X-Goog-Hash header ONLY on the final chunk (WriteObject call)
@@ -1059,7 +1059,7 @@ export class Upload extends Writable {
         this.#applyChecksumHeaders(headers);
       }
     } else {
-      headers['Content-Range'] = `bytes ${this.offset}-*/${this.contentLength}`;
+      (headers as any)['Content-Range'] = `bytes ${this.offset}-*/${this.contentLength}`;
 
       if (this.#hashValidator) {
         this.#hashValidator.end();
@@ -1111,7 +1111,7 @@ export class Upload extends Writable {
     const shouldContinueWithNextMultiChunkRequest =
       this.chunkSize &&
       resp.status === RESUMABLE_INCOMPLETE_STATUS_CODE &&
-      resp.headers.range &&
+      (resp.headers as any).range &&
       moreDataToUpload;
 
     /**
@@ -1127,7 +1127,7 @@ export class Upload extends Writable {
       // Use the upper value in this header to determine where to start the next chunk.
       // We should not assume that the server received all bytes sent in the request.
       // https://cloud.google.com/storage/docs/performing-resumable-uploads#chunked-upload
-      const range: string = resp.headers.range;
+      const range: string = (resp.headers as any).range;
       this.offset = Number(range.split('-')[1]) + 1;
 
       // We should not assume that the server received all bytes sent in the request.
@@ -1223,7 +1223,7 @@ export class Upload extends Writable {
       method: 'PUT',
       url: this.uri,
       headers: {
-        'Content-Length': 0,
+        'Content-Length': '0',
         'Content-Range': 'bytes */*',
         'User-Agent': getUserAgentString(),
         'x-goog-api-client': googAPIClient,
@@ -1264,8 +1264,8 @@ export class Upload extends Writable {
       const resp = await this.checkUploadStatus({retry: false});
 
       if (resp.status === RESUMABLE_INCOMPLETE_STATUS_CODE) {
-        if (typeof resp.headers.range === 'string') {
-          this.offset = Number(resp.headers.range.split('-')[1]) + 1;
+        if (typeof (resp.headers as any).range === 'string') {
+          this.offset = Number((resp.headers as any).range.split('-')[1]) + 1;
           return;
         }
       }
@@ -1288,9 +1288,9 @@ export class Upload extends Writable {
   private async makeRequest(reqOpts: GaxiosOptions): GaxiosPromise {
     if (this.encryption) {
       reqOpts.headers = reqOpts.headers || {};
-      reqOpts.headers['x-goog-encryption-algorithm'] = 'AES256';
-      reqOpts.headers['x-goog-encryption-key'] = this.encryption.key.toString();
-      reqOpts.headers['x-goog-encryption-key-sha256'] =
+      (reqOpts.headers as any)['x-goog-encryption-algorithm'] = 'AES256';
+      (reqOpts.headers as any)['x-goog-encryption-key'] = this.encryption.key.toString();
+      (reqOpts.headers as any)['x-goog-encryption-key-sha256'] =
         this.encryption.hash.toString();
     }
 
@@ -1333,7 +1333,7 @@ export class Upload extends Writable {
       reqOpts.params = reqOpts.params || {};
       reqOpts.params.userProject = this.userProject;
     }
-    reqOpts.signal = controller.signal;
+    reqOpts.signal = controller.signal as any;
     reqOpts.validateStatus = () => true;
 
     const combinedReqOpts = {
