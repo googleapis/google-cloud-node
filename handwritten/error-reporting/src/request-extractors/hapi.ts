@@ -102,10 +102,10 @@ export function hapiRequestInformationExtractor(req?: hapi.Request) {
   returnObject
     .setMethod(req!.method)
     .setUrl(urlString)
-    .setUserAgent(getSingleHeader(req!.headers['user-agent']))
-    .setReferrer(getSingleHeader(req!.headers.referrer))
+    .setUserAgent(getSingleHeader(req!.headers['user-agent'] as any))
+    .setReferrer(getSingleHeader(req!.headers.referrer as any))
     .setStatusCode(attemptToExtractStatusCode(req!))
-    .setRemoteAddress(getSingleHeader(extractRemoteAddressFromRequest(req!)));
+    .setRemoteAddress(getSingleHeader(extractRemoteAddressFromRequest(req!) as any));
 
   return returnObject;
 }

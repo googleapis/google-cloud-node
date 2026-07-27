@@ -24,5 +24,7 @@ async function createGHIssue(octokit) {
       });
 }
 
-createGHIssue(octokit);
+if (require.main === module) {
+    createGHIssue(octokit);
+}
 exports.createGHIssue = createGHIssue;

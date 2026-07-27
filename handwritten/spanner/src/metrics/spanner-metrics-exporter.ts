@@ -34,7 +34,7 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
   private _metricsExportFailureLogged = false;
 
   constructor({auth}: ExporterOptions, projectId: string) {
-    this._client = new MetricServiceClient({auth: auth});
+    this._client = new MetricServiceClient({auth: auth as any});
 
     this._projectId = projectId;
   }
