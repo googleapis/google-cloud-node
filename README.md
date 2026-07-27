@@ -289,6 +289,9 @@ The dist-tags follow the naming convention `legacy-(version)`.
 For example, `{{ metadata['lib_install_cmd'] }}@legacy-10` installs client libraries
 for versions compatible with Node.js 10.
 
+Network traffic is only secure against post-quantum decryption algorithms for
+users running Node version 22.20+.
+
 ## Versioning
 
 Our libraries follow [Semantic Versioning][semver].
