@@ -5,6 +5,24 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "234da8e6a49fe8c6efd9d585320e689efd3b0020",
+          "message": "Upgrade the node version to 22 for the js-doc-fresh core package",
+          "issues": [
+            "8977"
+          ],
+          "breakingChangeNote": "upgrade the node version to 22 for the js-doc-fresh core package ([#8977](https://github.com/googleapis/google-cloud-node/issues/8977))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "jsdoc-fresh",
+      "id": "97c53a27-8e0e-4ad0-a1b9-f47a17aa1f41",
+      "createTime": "2026-07-27T21:14:17.996Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -83213,5 +83231,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-24T15:02:00.313Z"
+  "updateTime": "2026-07-27T21:14:17.996Z"
 }
