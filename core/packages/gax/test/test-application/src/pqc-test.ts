@@ -166,12 +166,14 @@ async function testPqc(pemBuffer: Buffer, port: number) {
  */
 export async function runPqcComplianceTests() {
   const [major, minor] = process.version.replace('v', '').split('.').map(Number);
+  /*
   if (major < 22 || (major === 22 && minor < 20)) {
     console.log(
       `skipping PQC compliance tests because node version is ${process.version}`
     );
     return;
   }
+   */
 
   const originalShowcaseVersion = process.env['SHOWCASE_VERSION'];
   process.env['SHOWCASE_VERSION'] = '0.41.1';
