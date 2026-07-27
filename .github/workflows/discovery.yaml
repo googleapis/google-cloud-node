@@ -19,7 +19,7 @@ jobs:
       - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
 
       # Install all deps, including dev dependencies.
-      - run: cd handwritten/bigquery && pnpm install
+      - run: cd handwritten/bigquery && pnpm install --filter .
       # Generate types
       - run: cd handwritten/bigquery && pnpm run types
       # Fix formatting

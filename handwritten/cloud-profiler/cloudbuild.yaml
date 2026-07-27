@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    corepack enable pnpm && pnpm install
+    corepack enable pnpm && pnpm install --filter .
   dir: 'handwritten/cloud-profiler'
   id: 'install-dependencies'
 
