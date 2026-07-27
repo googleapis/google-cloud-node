@@ -1,6 +1,18 @@
 # Changelog
 
 
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v1.1.4...google-logging-utils-v1.2.0) (2026-07-23)
+
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+
 ## [1.1.4](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v1.1.3...google-logging-utils-v1.1.4) (2026-05-11)
 
 
