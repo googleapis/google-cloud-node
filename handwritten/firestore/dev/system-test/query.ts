@@ -1587,6 +1587,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
 
     beforeEach(() => resetPromise());
 
+    // skipped test was due to the kokoro to GCB migration
     it.skip('handles changing a doc', () => {
       const ref1 = randomCol.doc('doc1');
       const ref2 = randomCol.doc('doc2');
@@ -1640,6 +1641,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         });
     });
 
+    // skipped test was due to the kokoro to GCB migration
     it.skip("handles changing a doc so it doesn't match", () => {
       const ref1 = randomCol.doc('doc1');
       const ref2 = randomCol.doc('doc2');
@@ -1697,6 +1699,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         });
     });
 
+    // skipped test was due to the kokoro to GCB migration
     it.skip('handles deleting a doc', () => {
       const ref1 = randomCol.doc('doc1');
       const ref2 = randomCol.doc('doc2');
@@ -1753,6 +1756,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
         });
     });
 
+    // skipped test was due to the kokoro to GCB migration
     it.skip('orders limitToLast() correctly', async () => {
       const ref1 = randomCol.doc('doc1');
       const ref2 = randomCol.doc('doc2');
@@ -1776,6 +1780,7 @@ describe.skipClassic('Query and Pipeline Compare - Enterprise DB', () => {
       unsubscribe();
     });
 
+    // skipped test was due to the kokoro to GCB migration
     it.skip('SDK orders vector field same way as backend', async () => {
       // We validate that the SDK orders the vector field the same way as the backend
       // by comparing the sort order of vector fields from a Query.get() and

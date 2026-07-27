@@ -1574,6 +1574,7 @@ describe('DocumentReference class', () => {
 
     beforeEach(() => resetPromise());
 
+    // skipped test was due to the kokoro to GCB migration
     it.skip('handles changing a doc', () => {
       const ref = randomCol.doc('doc');
       let readTime: Timestamp;
@@ -1626,6 +1627,7 @@ describe('DocumentReference class', () => {
         });
     });
 
+    // skipped test was due to the kokoro to GCB migration
     it.skip('handles deleting a doc', () => {
       const ref = randomCol.doc('doc');
 
@@ -1663,6 +1665,7 @@ describe('DocumentReference class', () => {
         });
     });
 
+    // skipped test was due to the kokoro to GCB migration
     it.skip('handles multiple docs', done => {
       const doc1 = randomCol.doc();
       const doc2 = randomCol.doc();
@@ -1706,6 +1709,7 @@ describe('DocumentReference class', () => {
       });
     });
 
+    // skipped test was due to the kokoro to GCB migration
     it.skip('handles multiple streams on same doc', done => {
       const doc = randomCol.doc();
 
@@ -1747,6 +1751,7 @@ describe('DocumentReference class', () => {
       });
     });
 
+    // skipped test was due to the kokoro to GCB migration
     it.skip('handles more than 100 concurrent listeners', async () => {
       const ref = randomCol.doc('doc');
 
@@ -1778,6 +1783,7 @@ describe('DocumentReference class', () => {
       unsubscribeCallbacks.forEach(c => c());
     });
 
+    // skipped test was due to the kokoro to GCB migration
     it.skip('handles query snapshots with converters', async () => {
       const setupDeferred = new Deferred<void>();
       const resultsDeferred = new Deferred<QuerySnapshot<Post>>();
@@ -1850,6 +1856,7 @@ describe('DocumentReference class', () => {
     expect(result2.data()).to.deep.equal([1, 2, 3]);
   });
 
+  // skipped test was due to the kokoro to GCB migration
   it.skip('can listen to documents with vectors', async () => {
     const ref = randomCol.doc();
     const initialDeferred = new Deferred<void>();
@@ -7615,6 +7622,7 @@ describe('Client initialization', () => {
         });
         return deferred.promise;
       },
+      // skipped test was due to the kokoro to GCB migration
       true,
     ],
     ['DocumentReference.get()', randomColl => randomColl.doc().get()],
@@ -7657,6 +7665,7 @@ describe('Client initialization', () => {
         });
         return deferred.promise;
       },
+      // skipped test was due to the kokoro to GCB migration
       true,
     ],
     [
