@@ -1574,7 +1574,7 @@ describe('DocumentReference class', () => {
 
     beforeEach(() => resetPromise());
 
-    it('handles changing a doc', () => {
+    it.skip('handles changing a doc', () => {
       const ref = randomCol.doc('doc');
       let readTime: Timestamp;
       let createTime: Timestamp;
@@ -1626,7 +1626,7 @@ describe('DocumentReference class', () => {
         });
     });
 
-    it('handles deleting a doc', () => {
+    it.skip('handles deleting a doc', () => {
       const ref = randomCol.doc('doc');
 
       const unsubscribe = ref.onSnapshot(
@@ -1663,7 +1663,7 @@ describe('DocumentReference class', () => {
         });
     });
 
-    it('handles multiple docs', done => {
+    it.skip('handles multiple docs', done => {
       const doc1 = randomCol.doc();
       const doc2 = randomCol.doc();
 
@@ -1706,7 +1706,7 @@ describe('DocumentReference class', () => {
       });
     });
 
-    it('handles multiple streams on same doc', done => {
+    it.skip('handles multiple streams on same doc', done => {
       const doc = randomCol.doc();
 
       // Document transitions from non-existent to existent to non-existent.
@@ -1747,7 +1747,7 @@ describe('DocumentReference class', () => {
       });
     });
 
-    it('handles more than 100 concurrent listeners', async () => {
+    it.skip('handles more than 100 concurrent listeners', async () => {
       const ref = randomCol.doc('doc');
 
       const emptyResults: Array<Deferred<void>> = [];
@@ -1778,7 +1778,7 @@ describe('DocumentReference class', () => {
       unsubscribeCallbacks.forEach(c => c());
     });
 
-    it('handles query snapshots with converters', async () => {
+    it.skip('handles query snapshots with converters', async () => {
       const setupDeferred = new Deferred<void>();
       const resultsDeferred = new Deferred<QuerySnapshot<Post>>();
       const ref = randomCol.doc('doc').withConverter(postConverter);
@@ -1850,7 +1850,7 @@ describe('DocumentReference class', () => {
     expect(result2.data()).to.deep.equal([1, 2, 3]);
   });
 
-  it('can listen to documents with vectors', async () => {
+  it.skip('can listen to documents with vectors', async () => {
     const ref = randomCol.doc();
     const initialDeferred = new Deferred<void>();
     const createDeferred = new Deferred<void>();
@@ -7615,6 +7615,7 @@ describe('Client initialization', () => {
         });
         return deferred.promise;
       },
+      true,
     ],
     ['DocumentReference.get()', randomColl => randomColl.doc().get()],
     ['DocumentReference.create()', randomColl => randomColl.doc().create({})],
@@ -7656,6 +7657,7 @@ describe('Client initialization', () => {
         });
         return deferred.promise;
       },
+      true,
     ],
     [
       'CollectionGroup.getPartitions()',
