@@ -18,7 +18,7 @@ const API_PATH = path.dirname(require.resolve('@google-cloud/spanner-api/package
 const IMPORT_PATH = path.join(API_PATH, 'build/protos');
 
 import {Root} from 'protobufjs';
-const statusProtoJson = require('../../protos/status.json');
+const statusProtoJson = require('../protos/status.json');
 const RetryInfo = Root.fromJSON(statusProtoJson).lookupType('google.rpc.RetryInfo');
 
 /**
