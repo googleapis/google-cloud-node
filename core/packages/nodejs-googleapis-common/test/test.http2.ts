@@ -53,7 +53,7 @@ describe('http2', () => {
   // persists across test runs.
   sinon.stub(auth, 'request').resolves({
     data: {},
-  } as GaxiosResponse<{}>);
+  } as any);
 
   function fakeConnect(host: string) {
     return (connectStub || (() => {}))(host);
