@@ -1,8 +1,11 @@
 name: Auto Assign Reviewers
 
 on:
+  # pull_request_target is required to grant write permissions for reviewer assignment on fork PRs.
+  # The workflow only runs github-script and does not check out or execute untrusted code.
+  # zizmor: ignore[dangerous-triggers]
   pull_request_target:
-    types: [opened, ready_for_review, reopened]
+    types: [opened, ready_for_review, reopened, synchronize]
 
 permissions:
   pull-requests: write
@@ -17,53 +20,83 @@ jobs:
         continue-on-error: true
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
-          github-token: ${{ secrets.GOOGLER_CHECK_TOKEN || secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const author = context.payload.pull_request.user.login;
-            
-            const ALLOWED_BOTS = new Set([
-              'gcf-owl-bot[bot]',
-              'gcf-owl-bot',
-              'release-please[bot]',
-              'release-please',
-              'dependabot[bot]',
-              'dependabot',
-              'renovate-bot',
-              'renovate',
-              'yoshi-code-bot'
-            ]);
 
-            let isGoogler = ALLOWED_BOTS.has(author);
-            
-            if (isGoogler) {
-              console.log(`${author} is a trusted bot. Treating as Googler.`);
-            } else {
-              const orgs = ['googlers', 'GoogleCloudPlatform', 'googleapis'];
-              for (const org of orgs) {
+            // Release PRs should remain the responsibility of the oncall,
+            // so we route them only to the default team rather than individual team members.
+            if (author === 'release-please[bot]' || author === 'release-please') {
+              console.log(`PR opened by ${author}. Ensuring cloud-sdk-nodejs-team is assigned as a reviewer.`);
+              const requestedTeams = context.payload.pull_request.requested_teams || [];
+              const hasDefaultTeam = requestedTeams.some(team => team.slug === 'cloud-sdk-nodejs-team');
+              if (!hasDefaultTeam) {
                 try {
-                  const res = await github.rest.orgs.checkMembershipForUser({
-                    org: org,
-                    username: author,
+                  await github.rest.pulls.requestReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    team_reviewers: ['cloud-sdk-nodejs-team'],
                   });
-                  if (res.status === 204) {
-                    isGoogler = true;
-                    console.log(`${author} is a member of '${org}' organization.`);
-                    break;
-                  }
-                } catch (error) {
-                  if (error.status === 404) {
-                    console.log(`${author} is NOT a member of '${org}' organization.`);
-                  } else {
-                    console.warn(`Could not check membership in '${org}' organization: Status ${error.status}.`);
-                  }
+                } catch (err) {
+                  console.error("Failed to assign default cloud-sdk-nodejs-team reviewer:", err.message || err);
                 }
               }
-            }
-
-            if (!isGoogler) {
-              console.log("PR not opened by a Googler. Skipping auto-assignment.");
               return;
             }
+
+            const requestedReviewers = context.payload.pull_request.requested_reviewers || [];
+            const requestedTeams = context.payload.pull_request.requested_teams || [];
+
+            const hasDefaultTeam = requestedTeams.some(team => team.slug === 'cloud-sdk-nodejs-team');
+            const hasRouteSpecificTeam = requestedTeams.some(team => team.slug !== 'cloud-sdk-nodejs-team');
+
+            // Check if PR has already been reviewed
+            let hasReviews = false;
+            try {
+              const { data: reviews } = await github.rest.pulls.listReviews({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+              });
+              if (reviews.length > 0) {
+                console.log("PR already has reviews.");
+                hasReviews = true;
+              }
+            } catch (err) {
+              console.warn("Failed to check PR reviews:", err.message || err);
+            }
+
+            let shouldExit = false;
+            if (requestedReviewers.length > 0) {
+              console.log(`PR already has requested reviewers: ${requestedReviewers.map(r => r.login).join(', ')}.`);
+              shouldExit = true;
+            } else if (hasRouteSpecificTeam) {
+              console.log(`PR already has route-specific team reviewer requested: ${requestedTeams.map(t => t.slug).join(', ')}.`);
+              shouldExit = true;
+            } else if (hasReviews) {
+              shouldExit = true;
+            }
+
+            if (shouldExit) {
+              if (hasDefaultTeam) {
+                console.log("PR already has individual, route-specific reviewers, or reviews, but default cloud-sdk-nodejs-team is still requested. Removing it...");
+                try {
+                  await github.rest.pulls.removeRequestedReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    reviewers: [],
+                    team_reviewers: ['cloud-sdk-nodejs-team'],
+                  });
+                } catch (err) {
+                  console.warn("Failed to remove default cloud-sdk-nodejs-team reviewer:", err.message || err);
+                }
+              }
+              console.log("Skipping auto-assignment.");
+              return;
+            }
+
 
             // 2. Get list of files modified in the PR
             const { data: files } = await github.rest.pulls.listFiles({
@@ -213,6 +246,7 @@ jobs:
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   pull_number: context.payload.pull_request.number,
+                  reviewers: [],
                   team_reviewers: ['cloud-sdk-nodejs-team'],
                 });
               } catch (err) {

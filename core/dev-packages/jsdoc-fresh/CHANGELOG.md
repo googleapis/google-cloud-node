@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/jsdoc-fresh-v5.0.4...jsdoc-fresh-v5.1.0) (2026-07-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
 ## [5.0.4](https://github.com/googleapis/google-cloud-node/compare/jsdoc-fresh-v5.0.3...jsdoc-fresh-v5.0.4) (2026-06-25)
 
 
