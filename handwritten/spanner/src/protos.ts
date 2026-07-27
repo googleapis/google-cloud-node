@@ -27,7 +27,7 @@ const RetryInfo = Root.fromJSON(statusProtoJson).lookupType('google.rpc.RetryInf
  *
  * @param protoSubPath A sub-path like 'google/spanner', or undefined to get the base path.
  * @returns The requested path.
- * 
+ *
  * @private
  */
 export function getProtoPath(protoSubPath?: string): string {
@@ -38,6 +38,14 @@ export function getProtoPath(protoSubPath?: string): string {
   }
 }
 
+/**
+ * Returns the RetryInfo type that was loaded from status.json. This is
+ * not included in the spanner-api package, so it's imported here.
+ *
+ * @returns The RetryInfo type.
+ *
+ * @private
+ */
 export function getRetryInfo(): typeof RetryInfo {
   return RetryInfo;
 }
