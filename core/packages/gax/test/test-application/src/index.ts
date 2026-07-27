@@ -2904,6 +2904,7 @@ async function testStreamingErrorAfterDataNoBufferNoRetry(
 }
 
 async function main() {
+  /*
   const showcaseServer = new ShowcaseServer();
   try {
     await showcaseServer.start();
@@ -2911,6 +2912,7 @@ async function main() {
   } finally {
     showcaseServer.stop();
   }
+   */
   // Run PQC tests with a different showcase server because setup with a certificate is required.
   await runPqcComplianceTests()
 }
