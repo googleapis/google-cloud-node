@@ -56,6 +56,22 @@ export type Rows = Array<Row | Json>;
 const RETRY_INFO_TYPE = 'type.googleapis.com/google.rpc.retryinfo';
 const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
 
+let nextAffinityId = 0;
+
+/**
+ * Injects a key-value pair into the gaxOpts.otherArgs.options object
+ * without mutating the original.
+ */
+function injectGaxOpt(existingOpts: any, key: string, value: any): any {
+  return Object.assign({}, existingOpts, {
+    otherArgs: Object.assign({}, existingOpts?.otherArgs, {
+      options: Object.assign({}, existingOpts?.otherArgs?.options, {
+        [key]: value,
+      }),
+    }),
+  });
+}
+
 export interface TimestampBounds {
   strong?: boolean;
   minReadTimestamp?: PreciseDate | spannerClient.protobuf.ITimestamp;
@@ -292,6 +308,9 @@ export class Snapshot extends EventEmitter {
     | undefined
     | null;
   id?: Uint8Array | string;
+  protected _affinityKey?: string;
+  protected _bindGaxOpts?: CallOptions;
+  protected _unbindGaxOpts?: CallOptions;
   multiplexedSessionPreviousTransactionId?: Uint8Array | string;
   ended: boolean;
   metadata?: spannerClient.spanner.v1.ITransaction;
@@ -361,8 +380,63 @@ export class Snapshot extends EventEmitter {
     this.ended = false;
     this.session = session;
     this.queryOptions = Object.assign({}, queryOptions);
-    this.request = session.request.bind(session);
-    this.requestStream = session.requestStream.bind(session);
+    // If the session is multiplexed, generate a unique affinity key for this
+    // specific transaction/snapshot. This allows requests using the same shared
+    // multiplexed session to be distributed across different gRPC channels.
+    if (session.metadata && session.metadata.multiplexed) {
+      this._affinityKey = `mux-affinity-${process.pid}-${nextAffinityId++}`;
+      // Pre-construct and cache the bind gax options to avoid creating
+      // a new object on every request, which improves performance.
+      this._bindGaxOpts = {
+        otherArgs: {
+          options: {
+            affinityKey: this._affinityKey,
+          },
+        },
+      };
+      // Pre-construct and cache the unbind gax options. This explicitly signals
+      // the channel factory to release the affinity mapping when the transaction ends.
+      this._unbindGaxOpts = {
+        otherArgs: {
+          options: {
+            affinityKey: this._affinityKey,
+            unbind: true,
+          },
+        },
+      };
+      this.request = (config: any, callback?: Function) => {
+        let gaxOpts;
+        if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
+          gaxOpts = this._bindGaxOpts as any;
+        } else {
+          gaxOpts = injectGaxOpt(
+            config.gaxOpts,
+            'affinityKey',
+            this._affinityKey,
+          );
+        }
+        config = Object.assign({}, config, {gaxOpts});
+        return session.request(config, callback);
+      };
+
+      this.requestStream = (config: any) => {
+        let gaxOpts;
+        if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
+          gaxOpts = this._bindGaxOpts as any;
+        } else {
+          gaxOpts = injectGaxOpt(
+            config.gaxOpts,
+            'affinityKey',
+            this._affinityKey,
+          );
+        }
+        config = Object.assign({}, config, {gaxOpts});
+        return session.requestStream(config);
+      };
+    } else {
+      this.request = session.request.bind(session);
+      this.requestStream = session.requestStream.bind(session);
+    }
 
     const readOnly = Snapshot.encodeTimestampBounds(options || {});
     this._options = {readOnly};
@@ -1024,6 +1098,20 @@ export class Snapshot extends EventEmitter {
 
     this.ended = true;
     process.nextTick(() => this.emit('end'));
+
+    if (this._affinityKey) {
+      const database = this.session?.parent as Database;
+      const spanner = database?.parent?.parent as Spanner;
+      const client = spanner?.clients_?.get('SpannerClient') as any;
+
+      if (client?.spannerStub) {
+        Promise.resolve(client.spannerStub)
+          .then((stub: any) => {
+            stub?.getChannel?.()?.unbind?.(this._affinityKey);
+          })
+          .catch(() => {});
+      }
+    }
   }
 
   /**
@@ -2374,7 +2462,7 @@ export class Transaction extends Dml {
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     const callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
-    const gaxOpts =
+    let gaxOpts =
       'gaxOptions' in options ? (options as CommitOptions).gaxOptions : options;
 
     const mutations = this._queuedMutations;
@@ -2449,12 +2537,20 @@ export class Transaction extends Dml {
         span.addEvent('Starting Commit');
 
         const database = this.session.parent as Database;
+        if (this._affinityKey) {
+          if (!gaxOpts || Object.keys(gaxOpts).length === 0) {
+            gaxOpts = this._unbindGaxOpts as any;
+          } else {
+            gaxOpts = injectGaxOpt(gaxOpts, 'unbind', true);
+          }
+        }
+
         this.request(
           {
             client: 'SpannerClient',
             method: 'commit',
             reqOpts,
-            gaxOpts: gaxOpts,
+            gaxOpts,
             headers: injectRequestIDIntoHeaders(
               headers,
               this.session,
@@ -2787,7 +2883,7 @@ export class Transaction extends Dml {
       | spannerClient.spanner.v1.Spanner.RollbackCallback,
     cb?: spannerClient.spanner.v1.Spanner.RollbackCallback,
   ): void | Promise<void> {
-    const gaxOpts =
+    let gaxOpts =
       typeof gaxOptionsOrCallback === 'object' ? gaxOptionsOrCallback : {};
     const callback =
       typeof gaxOptionsOrCallback === 'function' ? gaxOptionsOrCallback : cb!;
@@ -2810,6 +2906,14 @@ export class Transaction extends Dml {
       const headers = this.commonHeaders_;
       if (this._getSpanner().routeToLeaderEnabled) {
         addLeaderAwareRoutingHeader(headers);
+      }
+
+      if (this._affinityKey) {
+        if (!gaxOpts || Object.keys(gaxOpts).length === 0) {
+          gaxOpts = this._unbindGaxOpts as any;
+        } else {
+          gaxOpts = injectGaxOpt(gaxOpts, 'unbind', true);
+        }
       }
 
       this.request(

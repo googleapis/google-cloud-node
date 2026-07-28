@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [10.1.4](https://github.com/googleapis/google-cloud-node/compare/teeny-request-v10.1.3...teeny-request-v10.1.4) (2026-07-23)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [10.1.3](https://github.com/googleapis/google-cloud-node/compare/teeny-request-v10.1.2...teeny-request-v10.1.3) (2026-05-06)
 
 

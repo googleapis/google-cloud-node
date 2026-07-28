@@ -324,6 +324,8 @@ export class SecretManagerServiceClient {
       'setIamPolicy',
       'getIamPolicy',
       'testIamPermissions',
+      'enableManagedRotation',
+      'rotateSecret',
     ];
     for (const methodName of secretManagerServiceStubMethods) {
       const callPromise = this.secretManagerServiceStub.then(
@@ -2294,6 +2296,297 @@ export class SecretManagerServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Enables the managed rotation feature for a
+   * {@link protos.google.cloud.secretmanager.v1.Secret|Secret}. This method can only be
+   * triggered once for a secret. In order to do further rotations, RotateSecret
+   * should be used. This method will add a secret version and update the
+   * password in Cloud SQL.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to associate with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
+   * @param {google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials} request.cloudSqlSingleUserCredentials
+   *   Credentials required for Cloud SQL DB for Single user Managed Rotation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secret_manager_service.enable_managed_rotation.js</caption>
+   * region_tag:secretmanager_v1_generated_SecretManagerService_EnableManagedRotation_async
+   */
+  enableManagedRotation(
+    request?: protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      (
+        | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  enableManagedRotation(
+    request: protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  enableManagedRotation(
+    request: protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest,
+    callback: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  enableManagedRotation(
+    request?: protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      (
+        | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('enableManagedRotation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('enableManagedRotation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .enableManagedRotation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          (
+            | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('enableManagedRotation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Do a managed rotation for a {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
+   * This can only be triggered after Managed rotation has been enabled.
+   * This method will add a secret version and update the password in Cloud SQL.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to associate with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secret_manager_service.rotate_secret.js</caption>
+   * region_tag:secretmanager_v1_generated_SecretManagerService_RotateSecret_async
+   */
+  rotateSecret(
+    request?: protos.google.cloud.secretmanager.v1.IRotateSecretRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      protos.google.cloud.secretmanager.v1.IRotateSecretRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  rotateSecret(
+    request: protos.google.cloud.secretmanager.v1.IRotateSecretRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IRotateSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  rotateSecret(
+    request: protos.google.cloud.secretmanager.v1.IRotateSecretRequest,
+    callback: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IRotateSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  rotateSecret(
+    request?: protos.google.cloud.secretmanager.v1.IRotateSecretRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IRotateSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IRotateSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      protos.google.cloud.secretmanager.v1.IRotateSecretRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('rotateSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IRotateSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rotateSecret response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rotateSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          protos.google.cloud.secretmanager.v1.IRotateSecretRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rotateSecret response %j', response);
           return [response, options, rawResponse];
         },
       )

@@ -133,6 +133,32 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "secretType": {
+                          "type": "SecretType",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "policyMember": {
+                          "type": "google.iam.v1.ResourcePolicyMember",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SecretType": {
+                          "values": {
+                            "SECRET_TYPE_UNSPECIFIED": 0,
+                            "CLOUD_SQL_DB_CREDENTIALS": 1,
+                            "ACCESS_KEY": 2,
+                            "CERTIFICATE": 3,
+                            "OTHER_DB_CREDENTIALS": 4,
+                            "OTHER": 50
+                          }
                         }
                       }
                     },
@@ -394,6 +420,42 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "managedRotationStatus": {
+                          "type": "ManagedRotationStatus",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ManagedRotationStatus": {
+                          "fields": {
+                            "state": {
+                              "type": "State",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "ACTIVE": 1,
+                                "INACTIVE": 2
+                              }
+                            }
                           }
                         }
                       }
@@ -776,6 +838,58 @@
                               }
                             }
                           ]
+                        },
+                        "EnableManagedRotation": {
+                          "requestType": "EnableManagedRotationRequest",
+                          "responseType": "SecretVersion",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/secrets/*}:enableManagedRotation",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*/secrets/*}:enableManagedRotation",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,cloud_sql_single_user_credentials"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/secrets/*}:enableManagedRotation",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/locations/*/secrets/*}:enableManagedRotation",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,cloud_sql_single_user_credentials"
+                            }
+                          ]
+                        },
+                        "RotateSecret": {
+                          "requestType": "RotateSecretRequest",
+                          "responseType": "SecretVersion",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/secrets/*}:rotateSecret",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*/secrets/*}:rotateSecret",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/secrets/*}:rotateSecret",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/locations/*/secrets/*}:rotateSecret",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -870,6 +984,68 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "EnableManagedRotationRequest": {
+                      "oneofs": {
+                        "credentials": {
+                          "oneof": [
+                            "cloudSqlSingleUserCredentials"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/Secret"
+                          }
+                        },
+                        "cloudSqlSingleUserCredentials": {
+                          "type": "CloudSQLSingleUserCredentials",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "CloudSQLSingleUserCredentials": {
+                          "fields": {
+                            "instanceId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "username": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "password": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RotateSecretRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/Secret"
                           }
                         }
                       }
@@ -4147,6 +4323,18 @@
                 }
               }
             },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
             "FieldMask": {
               "fields": {
                 "paths": {
@@ -4167,13 +4355,31 @@
               "options": {
                 "csharp_namespace": "Google.Cloud.Iam.V1",
                 "go_package": "cloud.google.com/go/iam/apiv1/iampb;iampb",
+                "php_namespace": "Google\\Cloud\\Iam\\V1",
                 "java_multiple_files": true,
                 "java_outer_classname": "PolicyProto",
                 "java_package": "com.google.iam.v1",
-                "php_namespace": "Google\\Cloud\\Iam\\V1",
                 "cc_enable_arenas": true
               },
               "nested": {
+                "ResourcePolicyMember": {
+                  "fields": {
+                    "iamPolicyNamePrincipal": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "iamPolicyUidPrincipal": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  }
+                },
                 "IAMPolicy": {
                   "options": {
                     "(google.api.default_host)": "iam-meta-api.googleapis.com"
@@ -4451,6 +4657,35 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
                 }
               }
             }

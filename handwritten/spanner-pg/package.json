@@ -9,7 +9,7 @@
   },
   "license": "Apache-2.0",
   "author": "Google LLC",
-  "main": "./build/cjs/src/index.cjs",
+  "main": "./build/cjs/src/index.js",
   "module": "./build/esm/src/index.js",
   "types": "./build/cjs/src/index.d.ts",
   "type": "module",
@@ -21,24 +21,25 @@
       },
       "require": {
         "types": "./build/cjs/src/index.d.ts",
-        "default": "./build/cjs/src/index.cjs"
+        "default": "./build/cjs/src/index.js"
       }
     }
   },
   "files": [
     "build/esm/src",
-    "build/cjs/src"
+    "build/cjs/src",
+    "build/cjs/package.json"
   ],
   "scripts": {
     "clean": "gts clean",
     "compile:esm": "tsc -p .",
-    "compile:cjs": "tsc -p ./tsconfig.cjs.json && babel build/cjs --out-dir build/cjs --out-file-extension .cjs && node scripts/fix-extensions.cjs",
+    "compile:cjs": "tsc -p ./tsconfig.cjs.json && node -e \"require('fs').writeFileSync('build/cjs/package.json', JSON.stringify({type: 'commonjs'}))\"",
     "compile": "npm run compile:esm && npm run compile:cjs",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",
     "test:esm": "c8 mocha build/esm/test/unit/**/*.js",
-    "test:cjs": "c8 mocha build/cjs/test/unit/**/*.cjs",
+    "test:cjs": "c8 mocha build/cjs/test/unit/**/*.js",
     "test": "npm run test:esm && npm run test:cjs",
     "test:pg-suite": "node test/pg-suite/run_pg_suite.cjs"
   },
@@ -53,11 +54,9 @@
     "gts": "^6.0.2",
     "mocha": "^11.1.0",
     "sinon": "^21.0.3",
-    "typescript": "^5.8.2",
-    "@babel/core": "^7.24.0",
-    "@babel/cli": "^7.23.9"
+    "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=18"
   }
 }

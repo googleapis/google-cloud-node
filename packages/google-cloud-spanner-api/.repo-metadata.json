@@ -1,0 +1,16 @@
+{
+  "api_description": "Cloud Spanner is a managed, mission-critical, globally consistent and\nscalable relational database service.",
+  "api_id": "spanner.googleapis.com",
+  "api_shortname": "spanner",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/spanner-api/latest",
+  "default_version": "v1",
+  "distribution_name": "@google-cloud/spanner-api",
+  "issue_tracker": "https://issuetracker.google.com/issues/new?component=190851&template=0",
+  "language": "nodejs",
+  "library_type": "GAPIC_AUTO",
+  "name": "spanner-api",
+  "name_pretty": "Spanner API",
+  "product_documentation": "https://cloud.google.com/spanner/docs",
+  "release_level": "preview",
+  "repo": "googleapis/google-cloud-node"
+}

@@ -5,6 +5,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/precise-date?activeTab=versions
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/precise-date-v5.1.0...precise-date-v5.2.0) (2026-07-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/precise-date-v5.0.1...precise-date-v5.1.0) (2026-06-24)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/precise-date-v5.0.0...precise-date-v5.0.1) (2026-05-11)
 
 

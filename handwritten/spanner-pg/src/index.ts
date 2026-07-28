@@ -13,4 +13,10 @@
 // limitations under the License.
 
 export const escapeIdentifier = (str: string) => `"${str.replace(/"/g, '""')}"`;
-export const escapeLiteral = (str: string) => `'${str.replace(/'/g, "''")}'`;
+
+export const escapeLiteral = (str: string) => {
+  if (str.includes('\\')) {
+    return "E'" + str.replace(/'/g, "''").replace(/\\/g, '\\\\') + "'";
+  }
+  return "'" + str.replace(/'/g, "''") + "'";
+};

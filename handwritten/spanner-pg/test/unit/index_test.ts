@@ -29,4 +29,8 @@ describe('@google-cloud/spanner-pg index exports', () => {
     assert.strictEqual(escapeLiteral('hello world'), "'hello world'");
     assert.strictEqual(escapeLiteral("O'Connor"), "'O''Connor'");
   });
+
+  it('should escape backslashes with E string syntax', () => {
+    assert.strictEqual(escapeLiteral('hello\\world'), "E'hello\\\\world'");
+  });
 });

@@ -5102,6 +5102,9 @@ export namespace google {
                     /** SearchRequest relevanceThreshold */
                     relevanceThreshold?: (google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold|null);
 
+                    /** SearchRequest relevanceFilterSpec */
+                    relevanceFilterSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IRelevanceFilterSpec|null);
+
                     /** SearchRequest relevanceScoreSpec */
                     relevanceScoreSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec|null);
                 }
@@ -5213,6 +5216,9 @@ export namespace google {
 
                     /** SearchRequest relevanceThreshold. */
                     public relevanceThreshold: (google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold);
+
+                    /** SearchRequest relevanceFilterSpec. */
+                    public relevanceFilterSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IRelevanceFilterSpec|null);
 
                     /** SearchRequest relevanceScoreSpec. */
                     public relevanceScoreSpec?: (google.cloud.discoveryengine.v1.SearchRequest.IRelevanceScoreSpec|null);
@@ -7905,6 +7911,218 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RelevanceFilterSpec. */
+                    interface IRelevanceFilterSpec {
+
+                        /** RelevanceFilterSpec keywordSearchThreshold */
+                        keywordSearchThreshold?: (google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.IRelevanceThresholdSpec|null);
+
+                        /** RelevanceFilterSpec semanticSearchThreshold */
+                        semanticSearchThreshold?: (google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.IRelevanceThresholdSpec|null);
+                    }
+
+                    /** Represents a RelevanceFilterSpec. */
+                    class RelevanceFilterSpec implements IRelevanceFilterSpec {
+
+                        /**
+                         * Constructs a new RelevanceFilterSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceFilterSpec);
+
+                        /** RelevanceFilterSpec keywordSearchThreshold. */
+                        public keywordSearchThreshold?: (google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.IRelevanceThresholdSpec|null);
+
+                        /** RelevanceFilterSpec semanticSearchThreshold. */
+                        public semanticSearchThreshold?: (google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.IRelevanceThresholdSpec|null);
+
+                        /**
+                         * Creates a new RelevanceFilterSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RelevanceFilterSpec instance
+                         */
+                        public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceFilterSpec): google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec;
+
+                        /**
+                         * Encodes the specified RelevanceFilterSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.verify|verify} messages.
+                         * @param message RelevanceFilterSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceFilterSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RelevanceFilterSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.verify|verify} messages.
+                         * @param message RelevanceFilterSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.IRelevanceFilterSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RelevanceFilterSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RelevanceFilterSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec;
+
+                        /**
+                         * Decodes a RelevanceFilterSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RelevanceFilterSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec;
+
+                        /**
+                         * Verifies a RelevanceFilterSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RelevanceFilterSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RelevanceFilterSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec;
+
+                        /**
+                         * Creates a plain object from a RelevanceFilterSpec message. Also converts values to other types if specified.
+                         * @param message RelevanceFilterSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RelevanceFilterSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RelevanceFilterSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RelevanceFilterSpec {
+
+                        /** Properties of a RelevanceThresholdSpec. */
+                        interface IRelevanceThresholdSpec {
+
+                            /** RelevanceThresholdSpec relevanceThreshold */
+                            relevanceThreshold?: (google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold|null);
+
+                            /** RelevanceThresholdSpec semanticRelevanceThreshold */
+                            semanticRelevanceThreshold?: (number|null);
+                        }
+
+                        /** Represents a RelevanceThresholdSpec. */
+                        class RelevanceThresholdSpec implements IRelevanceThresholdSpec {
+
+                            /**
+                             * Constructs a new RelevanceThresholdSpec.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.IRelevanceThresholdSpec);
+
+                            /** RelevanceThresholdSpec relevanceThreshold. */
+                            public relevanceThreshold?: (google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold|keyof typeof google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold|null);
+
+                            /** RelevanceThresholdSpec semanticRelevanceThreshold. */
+                            public semanticRelevanceThreshold?: (number|null);
+
+                            /** RelevanceThresholdSpec relevanceThresholdSpec. */
+                            public relevanceThresholdSpec?: ("relevanceThreshold"|"semanticRelevanceThreshold");
+
+                            /**
+                             * Creates a new RelevanceThresholdSpec instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RelevanceThresholdSpec instance
+                             */
+                            public static create(properties?: google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.IRelevanceThresholdSpec): google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.RelevanceThresholdSpec;
+
+                            /**
+                             * Encodes the specified RelevanceThresholdSpec message. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.RelevanceThresholdSpec.verify|verify} messages.
+                             * @param message RelevanceThresholdSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.IRelevanceThresholdSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RelevanceThresholdSpec message, length delimited. Does not implicitly {@link google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.RelevanceThresholdSpec.verify|verify} messages.
+                             * @param message RelevanceThresholdSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.IRelevanceThresholdSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RelevanceThresholdSpec message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RelevanceThresholdSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.RelevanceThresholdSpec;
+
+                            /**
+                             * Decodes a RelevanceThresholdSpec message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RelevanceThresholdSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.RelevanceThresholdSpec;
+
+                            /**
+                             * Verifies a RelevanceThresholdSpec message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RelevanceThresholdSpec message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RelevanceThresholdSpec
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.RelevanceThresholdSpec;
+
+                            /**
+                             * Creates a plain object from a RelevanceThresholdSpec message. Also converts values to other types if specified.
+                             * @param message RelevanceThresholdSpec
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.discoveryengine.v1.SearchRequest.RelevanceFilterSpec.RelevanceThresholdSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RelevanceThresholdSpec to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RelevanceThresholdSpec
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** RankingExpressionBackend enum. */

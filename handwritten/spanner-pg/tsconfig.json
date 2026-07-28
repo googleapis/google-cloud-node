@@ -7,21 +7,7 @@
     "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "types": [
-      "node",
-      "mocha"
-    ],
-    "lib": [
-      "es2023"
-    ]
+    "types": ["node", "mocha"]
   },
-  "include": [
-    "src/*.ts",
-    "src/**/*.ts",
-    "test/*.ts",
-    "test/**/*.ts"
-  ],
-  "exclude": [
-    "test/pg-suite/cloudflare"
-  ]
+  "include": ["src/*.ts", "src/**/*.ts", "test/*.ts", "test/**/*.ts"]
 }

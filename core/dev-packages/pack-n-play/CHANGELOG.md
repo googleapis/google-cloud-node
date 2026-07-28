@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [4.2.3](https://github.com/googleapis/google-cloud-node/compare/pack-n-play-v4.2.2...pack-n-play-v4.2.3) (2026-07-23)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+
 ## [4.2.2](https://github.com/googleapis/google-cloud-node/compare/pack-n-play-v4.2.1...pack-n-play-v4.2.2) (2026-05-11)
 
 
