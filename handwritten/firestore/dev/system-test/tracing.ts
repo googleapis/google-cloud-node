@@ -159,7 +159,7 @@ class SpanData {
 }
 
 describe.skip('Tracing Tests', () => {
-  // Tests have been skipped due to failures from kokoro to GCB migration.
+  // This test suite was skipped for the kokoro to GCB migration.
   let firestore: Firestore;
   let randomCol: CollectionReference;
   let tracerProvider: NodeTracerProvider;
