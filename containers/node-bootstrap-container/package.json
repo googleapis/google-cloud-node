@@ -23,6 +23,7 @@
     "@octokit/rest": "19.0.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "mocha": "^11.1.0",
     "sinon": "21.0.3",
     "snap-shot-it": "^7.9.6"
