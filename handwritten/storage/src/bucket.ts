@@ -29,6 +29,7 @@ import * as http from 'http';
 import * as path from 'path';
 import {promisify} from 'util';
 import AsyncRetry from 'async-retry';
+import {randomUUID} from 'crypto';
 import {convertObjKeysToSnakeCase, handleContextValidation} from './util.js';
 
 import {Acl, AclMetadata} from './acl.js';
@@ -38,6 +39,7 @@ import {
   FileOptions,
   CreateResumableUploadOptions,
   CreateWriteStreamOptions,
+  CreateWriteStreamOptionsInternal,
   FileMetadata,
   ContextValue,
 } from './file.js';
@@ -4511,6 +4513,7 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
     optionsOrCallback?: UploadOptions | UploadCallback,
     callback?: UploadCallback,
   ): Promise<UploadResponse> | void {
+    const persistentInvocationId = randomUUID();
     const upload = (numberOfRetries: number | undefined) => {
       const returnValue = AsyncRetry(
         async (bail: (err: GaxiosError | Error) => void) => {
@@ -4521,7 +4524,10 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
             ) {
               newFile.storage.retryOptions.autoRetry = false;
             }
-            const writable = newFile.createWriteStream(options);
+            const writable = newFile.createWriteStream({
+              ...options,
+              invocationId: persistentInvocationId,
+            } as CreateWriteStreamOptionsInternal);
             if (options.onUploadProgress) {
               writable.on('progress', options.onUploadProgress);
             }
