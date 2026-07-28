@@ -27,6 +27,7 @@ import {
 } from '../src/index.js';
 import sinon, {createSandbox} from 'sinon';
 import {StorageTransport} from '../src/storage-transport.js';
+import {GoogleAuth} from 'google-auth-library';
 import {
   AvailableServiceObjectMethods,
   BucketExceptionMessages,
@@ -37,6 +38,7 @@ import {
   ComposeCleanupError,
 } from '../src/bucket.js';
 import mime from 'mime';
+import {CreateWriteStreamOptionsInternal} from '../src/file.js';
 import {convertObjKeysToSnakeCase, getDirName} from '../src/util.js';
 import {DeleteOptions, util} from '../src/nodejs-common/index.js';
 import path from 'path';
@@ -57,6 +59,7 @@ describe('Bucket', () => {
   let STORAGE: Storage;
   let sandbox: sinon.SinonSandbox;
   let storageTransport: StorageTransport;
+  let originalRetryOptions: any;
   const PROJECT_ID = 'project-id';
   const BUCKET_NAME = 'test-bucket';
 
@@ -66,6 +69,7 @@ describe('Bucket', () => {
     storageTransport = sandbox.createStubInstance(StorageTransport);
     STORAGE.storageTransport = storageTransport;
     STORAGE.retryOptions.autoRetry = true;
+    originalRetryOptions = Object.assign({}, STORAGE.retryOptions);
   });
 
   beforeEach(() => {
@@ -74,6 +78,12 @@ describe('Bucket', () => {
 
   afterEach(() => {
     sandbox.restore();
+    for (const key of Object.keys(STORAGE.retryOptions)) {
+      if (!(key in originalRetryOptions)) {
+        delete (STORAGE.retryOptions as any)[key];
+      }
+    }
+    Object.assign(STORAGE.retryOptions, originalRetryOptions);
   });
 
   describe('instantiation', () => {
@@ -1321,7 +1331,7 @@ describe('Bucket', () => {
       });
     });
 
-    it('should execute callback with queued errors', done => {
+    it('should execute callback with error from deleting file', done => {
       const error = new Error('Error.');
       const files = [new File(bucket, '1'), new File(bucket, '2')];
 
@@ -1445,13 +1455,19 @@ describe('Bucket', () => {
       void bucket.disableRequesterPays();
     });
 
-    it('should set autoRetry to false when ifMetagenerationMatch is undefined', async done => {
-      bucket.setMetadata = sandbox.stub().callsFake(() => {
-        assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
+    it('should set autoRetry to false when ifMetagenerationMatch is undefined', done => {
+      const setMetadataStub = sandbox
+        .stub(Object.getPrototypeOf(Bucket.prototype), 'setMetadata')
+        .callsFake(() => {
+          assert.strictEqual(bucket.storage.retryOptions.autoRetry, false);
+          return Promise.resolve([]);
+        });
+
+      bucket.disableRequesterPays(err => {
+        assert.ifError(err);
+        assert.strictEqual(setMetadataStub.calledOnce, true);
         done();
-        return Promise.resolve();
       });
-      await bucket.disableRequesterPays();
     });
   });
 
@@ -2895,6 +2911,146 @@ describe('Bucket', () => {
         bucket.upload(filepath, options, err => {
           assert.strictEqual(err?.message, 'first error');
           assert.ok(retryCount === 1);
+          done();
+        });
+      });
+
+      it('should use the same invocationId across retries in a multipart upload', done => {
+        const fakeFile = new File(bucket, 'file-name');
+        const options = {
+          destination: fakeFile,
+          resumable: false,
+          preconditionOpts: {ifGenerationMatch: 123},
+        };
+        let retryCount = 0;
+        let firstInvocationId: string | undefined;
+
+        bucket.storage.retryOptions.autoRetry = true;
+        bucket.storage.retryOptions.maxRetries = 2;
+        bucket.storage.retryOptions.idempotencyStrategy = 1;
+        bucket.storage.retryOptions.retryableErrorFn = () => true;
+
+        fakeFile.createWriteStream = (options_) => {
+          retryCount++;
+          const currentId = (options_ as CreateWriteStreamOptionsInternal)?.invocationId;
+
+          if (retryCount === 1) {
+            firstInvocationId = currentId;
+          } else {
+            assert.strictEqual(currentId, firstInvocationId);
+          }
+
+          const ws = new stream.PassThrough();
+          ws.resume();
+
+          setImmediate(() => {
+            if (retryCount === 1) {
+              const error = new Error('Retryable failure') as GaxiosError;
+              error.code = 500;
+              error.status = 500;
+              ws.destroy(error);
+            } else {
+              ws.emit('metadata', {});
+            }
+          });
+          
+          return ws as any;
+        };
+
+        bucket.upload(filepath, options, err => {
+          assert.ifError(err);
+          assert.strictEqual(retryCount, 2);
+          done();
+        });
+      });
+
+      it('should use the same invocationId in x-goog-api-client header across retries', done => {
+        const fakeFile = new File(bucket, 'file-name');
+
+        const options = {
+          destination: fakeFile,
+          resumable: false,
+          validation: false,
+          preconditionOpts: { ifGenerationMatch: 123 },
+        };
+
+        const authClient = new GoogleAuth();
+        sandbox.stub(authClient, 'request');
+
+        const realTransport = new StorageTransport({
+          apiEndpoint: 'https://storage.googleapis.com',
+          baseUrl: 'https://storage.googleapis.com',
+          authClient: authClient,
+          projectId: 'project-id',
+          retryOptions: STORAGE.retryOptions,
+          scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+          packageJson: { name: 'test-package', version: '1.0.0' },
+        });
+
+        // Swap storage transport to test real header compilation
+        const originalTransport = bucket.storage.storageTransport;
+        bucket.storage.storageTransport = realTransport;
+
+        // Update existing file instance to use new transport
+        const originalFileTransport = fakeFile.storageTransport;
+        fakeFile.storageTransport = realTransport;
+
+        let retryCount = 0;
+        let firstInvocationId: string | undefined;
+
+        bucket.storage.retryOptions.autoRetry = true;
+        bucket.storage.retryOptions.maxRetries = 2;
+        bucket.storage.retryOptions.idempotencyStrategy = 1;
+        bucket.storage.retryOptions.retryableErrorFn = () => true;
+
+        const requestStub = realTransport.authClient.request as sinon.SinonStub;
+        requestStub.callsFake(async (reqOpts) => {
+          if (reqOpts.method !== 'POST') {
+            return {
+              config: {},
+              data: {},
+              headers: {},
+              status: 204,
+              statusText: 'No Content',
+            } as any;
+          }
+
+          if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
+            const part = reqOpts.multipart[1];
+            if (part && part.content && typeof part.content.resume === 'function') {
+              part.content.resume();
+            }
+          }
+
+          retryCount++;
+          const headers = reqOpts.headers || {};
+          const apiClientHeader = headers['x-goog-api-client'] || '';
+          const match = apiClientHeader.match(/gccl-invocation-id\/([a-f0-9-]+)/);
+          const currentId = match ? match[1] : undefined;
+
+          if (retryCount === 1) {
+            firstInvocationId = currentId;
+            const error = new Error('Retryable failure') as GaxiosError;
+            error.code = 500;
+            error.status = 500;
+            throw error;
+          } else {
+            assert.strictEqual(currentId, firstInvocationId);
+            return {
+              config: {},
+              data: {},
+              headers: {},
+              status: 200,
+              statusText: 'OK',
+            } as any;
+          }
+        });
+
+        bucket.upload(filepath, options, err => {
+          bucket.storage.storageTransport = originalTransport;
+          fakeFile.storageTransport = originalFileTransport;
+          assert.ifError(err);
+          assert.strictEqual(retryCount, 2);
           done();
         });
       });
