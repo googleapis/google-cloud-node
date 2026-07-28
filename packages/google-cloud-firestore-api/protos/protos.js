@@ -73824,6 +73824,7 @@
                  * @memberof google.api
                  * @interface IPhpSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PhpSettings common
+                 * @property {string|null} [libraryPackage] PhpSettings libraryPackage
                  */
     
                 /**
@@ -73848,6 +73849,14 @@
                  * @instance
                  */
                 PhpSettings.prototype.common = null;
+    
+                /**
+                 * PhpSettings libraryPackage.
+                 * @member {string} libraryPackage
+                 * @memberof google.api.PhpSettings
+                 * @instance
+                 */
+                PhpSettings.prototype.libraryPackage = "";
     
                 /**
                  * Creates a new PhpSettings instance using the specified properties.
@@ -73879,6 +73888,8 @@
                         throw Error("max depth exceeded");
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                    if (message.libraryPackage != null && Object.hasOwnProperty.call(message, "libraryPackage"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.libraryPackage);
                     return writer;
                 };
     
@@ -73921,6 +73932,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
+                        case 2: {
+                                message.libraryPackage = reader.string();
                                 break;
                             }
                         default:
@@ -73967,6 +73982,9 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.libraryPackage != null && Object.hasOwnProperty.call(message, "libraryPackage"))
+                        if (!$util.isString(message.libraryPackage))
+                            return "libraryPackage: string expected";
                     return null;
                 };
     
@@ -73993,6 +74011,8 @@
                             throw TypeError(".google.api.PhpSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common, long + 1);
                     }
+                    if (object.libraryPackage != null)
+                        message.libraryPackage = String(object.libraryPackage);
                     return message;
                 };
     
@@ -74013,10 +74033,14 @@
                     if (q > $util.recursionLimit)
                         throw Error("max depth exceeded");
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.libraryPackage = "";
+                    }
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options, q + 1);
+                    if (message.libraryPackage != null && Object.hasOwnProperty.call(message, "libraryPackage"))
+                        object.libraryPackage = message.libraryPackage;
                     return object;
                 };
     
@@ -75840,6 +75864,7 @@
                  * @property {string|null} [selector] MethodSettings selector
                  * @property {google.api.MethodSettings.ILongRunning|null} [longRunning] MethodSettings longRunning
                  * @property {Array.<string>|null} [autoPopulatedFields] MethodSettings autoPopulatedFields
+                 * @property {google.api.IBatchingConfigProto|null} [batching] MethodSettings batching
                  */
     
                 /**
@@ -75883,6 +75908,14 @@
                 MethodSettings.prototype.autoPopulatedFields = $util.emptyArray;
     
                 /**
+                 * MethodSettings batching.
+                 * @member {google.api.IBatchingConfigProto|null|undefined} batching
+                 * @memberof google.api.MethodSettings
+                 * @instance
+                 */
+                MethodSettings.prototype.batching = null;
+    
+                /**
                  * Creates a new MethodSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.MethodSettings
@@ -75917,6 +75950,8 @@
                     if (message.autoPopulatedFields != null && message.autoPopulatedFields.length)
                         for (var i = 0; i < message.autoPopulatedFields.length; ++i)
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.autoPopulatedFields[i]);
+                    if (message.batching != null && Object.hasOwnProperty.call(message, "batching"))
+                        $root.google.api.BatchingConfigProto.encode(message.batching, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
                     return writer;
                 };
     
@@ -75969,6 +76004,10 @@
                                 if (!(message.autoPopulatedFields && message.autoPopulatedFields.length))
                                     message.autoPopulatedFields = [];
                                 message.autoPopulatedFields.push(reader.string());
+                                break;
+                            }
+                        case 4: {
+                                message.batching = $root.google.api.BatchingConfigProto.decode(reader, reader.uint32(), undefined, long + 1);
                                 break;
                             }
                         default:
@@ -76025,6 +76064,11 @@
                             if (!$util.isString(message.autoPopulatedFields[i]))
                                 return "autoPopulatedFields: string[] expected";
                     }
+                    if (message.batching != null && Object.hasOwnProperty.call(message, "batching")) {
+                        var error = $root.google.api.BatchingConfigProto.verify(message.batching, long + 1);
+                        if (error)
+                            return "batching." + error;
+                    }
                     return null;
                 };
     
@@ -76060,6 +76104,11 @@
                         for (var i = 0; i < object.autoPopulatedFields.length; ++i)
                             message.autoPopulatedFields[i] = String(object.autoPopulatedFields[i]);
                     }
+                    if (object.batching != null) {
+                        if (!$util.isObject(object.batching))
+                            throw TypeError(".google.api.MethodSettings.batching: object expected");
+                        message.batching = $root.google.api.BatchingConfigProto.fromObject(object.batching, long + 1);
+                    }
                     return message;
                 };
     
@@ -76085,6 +76134,7 @@
                     if (options.defaults) {
                         object.selector = "";
                         object.longRunning = null;
+                        object.batching = null;
                     }
                     if (message.selector != null && Object.hasOwnProperty.call(message, "selector"))
                         object.selector = message.selector;
@@ -76095,6 +76145,8 @@
                         for (var j = 0; j < message.autoPopulatedFields.length; ++j)
                             object.autoPopulatedFields[j] = message.autoPopulatedFields[j];
                     }
+                    if (message.batching != null && Object.hasOwnProperty.call(message, "batching"))
+                        object.batching = $root.google.api.BatchingConfigProto.toObject(message.batching, options, q + 1);
                     return object;
                 };
     
@@ -76746,6 +76798,1015 @@
                 };
     
                 return SelectiveGapicGeneration;
+            })();
+    
+            api.BatchingConfigProto = (function() {
+    
+                /**
+                 * Properties of a BatchingConfigProto.
+                 * @memberof google.api
+                 * @interface IBatchingConfigProto
+                 * @property {google.api.IBatchingSettingsProto|null} [thresholds] BatchingConfigProto thresholds
+                 * @property {google.api.IBatchingDescriptorProto|null} [batchDescriptor] BatchingConfigProto batchDescriptor
+                 */
+    
+                /**
+                 * Constructs a new BatchingConfigProto.
+                 * @memberof google.api
+                 * @classdesc Represents a BatchingConfigProto.
+                 * @implements IBatchingConfigProto
+                 * @constructor
+                 * @param {google.api.IBatchingConfigProto=} [properties] Properties to set
+                 */
+                function BatchingConfigProto(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BatchingConfigProto thresholds.
+                 * @member {google.api.IBatchingSettingsProto|null|undefined} thresholds
+                 * @memberof google.api.BatchingConfigProto
+                 * @instance
+                 */
+                BatchingConfigProto.prototype.thresholds = null;
+    
+                /**
+                 * BatchingConfigProto batchDescriptor.
+                 * @member {google.api.IBatchingDescriptorProto|null|undefined} batchDescriptor
+                 * @memberof google.api.BatchingConfigProto
+                 * @instance
+                 */
+                BatchingConfigProto.prototype.batchDescriptor = null;
+    
+                /**
+                 * Creates a new BatchingConfigProto instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.BatchingConfigProto
+                 * @static
+                 * @param {google.api.IBatchingConfigProto=} [properties] Properties to set
+                 * @returns {google.api.BatchingConfigProto} BatchingConfigProto instance
+                 */
+                BatchingConfigProto.create = function create(properties) {
+                    return new BatchingConfigProto(properties);
+                };
+    
+                /**
+                 * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.BatchingConfigProto
+                 * @static
+                 * @param {google.api.IBatchingConfigProto} message BatchingConfigProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BatchingConfigProto.encode = function encode(message, writer, q) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
+                    if (message.thresholds != null && Object.hasOwnProperty.call(message, "thresholds"))
+                        $root.google.api.BatchingSettingsProto.encode(message.thresholds, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                    if (message.batchDescriptor != null && Object.hasOwnProperty.call(message, "batchDescriptor"))
+                        $root.google.api.BatchingDescriptorProto.encode(message.batchDescriptor, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.BatchingConfigProto
+                 * @static
+                 * @param {google.api.IBatchingConfigProto} message BatchingConfigProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BatchingConfigProto.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BatchingConfigProto message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.BatchingConfigProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.BatchingConfigProto} BatchingConfigProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BatchingConfigProto.decode = function decode(reader, length, error, long) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.BatchingConfigProto();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.thresholds = $root.google.api.BatchingSettingsProto.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
+                        case 2: {
+                                message.batchDescriptor = $root.google.api.BatchingDescriptorProto.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7, long);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.BatchingConfigProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.BatchingConfigProto} BatchingConfigProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BatchingConfigProto.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BatchingConfigProto message.
+                 * @function verify
+                 * @memberof google.api.BatchingConfigProto
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BatchingConfigProto.verify = function verify(message, long) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
+                    if (message.thresholds != null && Object.hasOwnProperty.call(message, "thresholds")) {
+                        var error = $root.google.api.BatchingSettingsProto.verify(message.thresholds, long + 1);
+                        if (error)
+                            return "thresholds." + error;
+                    }
+                    if (message.batchDescriptor != null && Object.hasOwnProperty.call(message, "batchDescriptor")) {
+                        var error = $root.google.api.BatchingDescriptorProto.verify(message.batchDescriptor, long + 1);
+                        if (error)
+                            return "batchDescriptor." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.BatchingConfigProto
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.BatchingConfigProto} BatchingConfigProto
+                 */
+                BatchingConfigProto.fromObject = function fromObject(object, long) {
+                    if (object instanceof $root.google.api.BatchingConfigProto)
+                        return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.BatchingConfigProto: object expected");
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var message = new $root.google.api.BatchingConfigProto();
+                    if (object.thresholds != null) {
+                        if (!$util.isObject(object.thresholds))
+                            throw TypeError(".google.api.BatchingConfigProto.thresholds: object expected");
+                        message.thresholds = $root.google.api.BatchingSettingsProto.fromObject(object.thresholds, long + 1);
+                    }
+                    if (object.batchDescriptor != null) {
+                        if (!$util.isObject(object.batchDescriptor))
+                            throw TypeError(".google.api.BatchingConfigProto.batchDescriptor: object expected");
+                        message.batchDescriptor = $root.google.api.BatchingDescriptorProto.fromObject(object.batchDescriptor, long + 1);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.BatchingConfigProto
+                 * @static
+                 * @param {google.api.BatchingConfigProto} message BatchingConfigProto
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BatchingConfigProto.toObject = function toObject(message, options, q) {
+                    if (!options)
+                        options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
+                    var object = {};
+                    if (options.defaults) {
+                        object.thresholds = null;
+                        object.batchDescriptor = null;
+                    }
+                    if (message.thresholds != null && Object.hasOwnProperty.call(message, "thresholds"))
+                        object.thresholds = $root.google.api.BatchingSettingsProto.toObject(message.thresholds, options, q + 1);
+                    if (message.batchDescriptor != null && Object.hasOwnProperty.call(message, "batchDescriptor"))
+                        object.batchDescriptor = $root.google.api.BatchingDescriptorProto.toObject(message.batchDescriptor, options, q + 1);
+                    return object;
+                };
+    
+                /**
+                 * Converts this BatchingConfigProto to JSON.
+                 * @function toJSON
+                 * @memberof google.api.BatchingConfigProto
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BatchingConfigProto.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BatchingConfigProto
+                 * @function getTypeUrl
+                 * @memberof google.api.BatchingConfigProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BatchingConfigProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.BatchingConfigProto";
+                };
+    
+                return BatchingConfigProto;
+            })();
+    
+            api.BatchingSettingsProto = (function() {
+    
+                /**
+                 * Properties of a BatchingSettingsProto.
+                 * @memberof google.api
+                 * @interface IBatchingSettingsProto
+                 * @property {number|null} [elementCountThreshold] BatchingSettingsProto elementCountThreshold
+                 * @property {number|Long|null} [requestByteThreshold] BatchingSettingsProto requestByteThreshold
+                 * @property {google.protobuf.IDuration|null} [delayThreshold] BatchingSettingsProto delayThreshold
+                 * @property {number|null} [elementCountLimit] BatchingSettingsProto elementCountLimit
+                 * @property {number|null} [requestByteLimit] BatchingSettingsProto requestByteLimit
+                 * @property {number|null} [flowControlElementLimit] BatchingSettingsProto flowControlElementLimit
+                 * @property {number|null} [flowControlByteLimit] BatchingSettingsProto flowControlByteLimit
+                 * @property {google.api.FlowControlLimitExceededBehaviorProto|null} [flowControlLimitExceededBehavior] BatchingSettingsProto flowControlLimitExceededBehavior
+                 */
+    
+                /**
+                 * Constructs a new BatchingSettingsProto.
+                 * @memberof google.api
+                 * @classdesc Represents a BatchingSettingsProto.
+                 * @implements IBatchingSettingsProto
+                 * @constructor
+                 * @param {google.api.IBatchingSettingsProto=} [properties] Properties to set
+                 */
+                function BatchingSettingsProto(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BatchingSettingsProto elementCountThreshold.
+                 * @member {number} elementCountThreshold
+                 * @memberof google.api.BatchingSettingsProto
+                 * @instance
+                 */
+                BatchingSettingsProto.prototype.elementCountThreshold = 0;
+    
+                /**
+                 * BatchingSettingsProto requestByteThreshold.
+                 * @member {number|Long} requestByteThreshold
+                 * @memberof google.api.BatchingSettingsProto
+                 * @instance
+                 */
+                BatchingSettingsProto.prototype.requestByteThreshold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * BatchingSettingsProto delayThreshold.
+                 * @member {google.protobuf.IDuration|null|undefined} delayThreshold
+                 * @memberof google.api.BatchingSettingsProto
+                 * @instance
+                 */
+                BatchingSettingsProto.prototype.delayThreshold = null;
+    
+                /**
+                 * BatchingSettingsProto elementCountLimit.
+                 * @member {number} elementCountLimit
+                 * @memberof google.api.BatchingSettingsProto
+                 * @instance
+                 */
+                BatchingSettingsProto.prototype.elementCountLimit = 0;
+    
+                /**
+                 * BatchingSettingsProto requestByteLimit.
+                 * @member {number} requestByteLimit
+                 * @memberof google.api.BatchingSettingsProto
+                 * @instance
+                 */
+                BatchingSettingsProto.prototype.requestByteLimit = 0;
+    
+                /**
+                 * BatchingSettingsProto flowControlElementLimit.
+                 * @member {number} flowControlElementLimit
+                 * @memberof google.api.BatchingSettingsProto
+                 * @instance
+                 */
+                BatchingSettingsProto.prototype.flowControlElementLimit = 0;
+    
+                /**
+                 * BatchingSettingsProto flowControlByteLimit.
+                 * @member {number} flowControlByteLimit
+                 * @memberof google.api.BatchingSettingsProto
+                 * @instance
+                 */
+                BatchingSettingsProto.prototype.flowControlByteLimit = 0;
+    
+                /**
+                 * BatchingSettingsProto flowControlLimitExceededBehavior.
+                 * @member {google.api.FlowControlLimitExceededBehaviorProto} flowControlLimitExceededBehavior
+                 * @memberof google.api.BatchingSettingsProto
+                 * @instance
+                 */
+                BatchingSettingsProto.prototype.flowControlLimitExceededBehavior = 0;
+    
+                /**
+                 * Creates a new BatchingSettingsProto instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.BatchingSettingsProto
+                 * @static
+                 * @param {google.api.IBatchingSettingsProto=} [properties] Properties to set
+                 * @returns {google.api.BatchingSettingsProto} BatchingSettingsProto instance
+                 */
+                BatchingSettingsProto.create = function create(properties) {
+                    return new BatchingSettingsProto(properties);
+                };
+    
+                /**
+                 * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.BatchingSettingsProto
+                 * @static
+                 * @param {google.api.IBatchingSettingsProto} message BatchingSettingsProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BatchingSettingsProto.encode = function encode(message, writer, q) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
+                    if (message.elementCountThreshold != null && Object.hasOwnProperty.call(message, "elementCountThreshold"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.elementCountThreshold);
+                    if (message.requestByteThreshold != null && Object.hasOwnProperty.call(message, "requestByteThreshold"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int64(message.requestByteThreshold);
+                    if (message.delayThreshold != null && Object.hasOwnProperty.call(message, "delayThreshold"))
+                        $root.google.protobuf.Duration.encode(message.delayThreshold, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
+                    if (message.elementCountLimit != null && Object.hasOwnProperty.call(message, "elementCountLimit"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.elementCountLimit);
+                    if (message.requestByteLimit != null && Object.hasOwnProperty.call(message, "requestByteLimit"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.requestByteLimit);
+                    if (message.flowControlElementLimit != null && Object.hasOwnProperty.call(message, "flowControlElementLimit"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.flowControlElementLimit);
+                    if (message.flowControlByteLimit != null && Object.hasOwnProperty.call(message, "flowControlByteLimit"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.flowControlByteLimit);
+                    if (message.flowControlLimitExceededBehavior != null && Object.hasOwnProperty.call(message, "flowControlLimitExceededBehavior"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.flowControlLimitExceededBehavior);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.BatchingSettingsProto
+                 * @static
+                 * @param {google.api.IBatchingSettingsProto} message BatchingSettingsProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BatchingSettingsProto.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.BatchingSettingsProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.BatchingSettingsProto} BatchingSettingsProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BatchingSettingsProto.decode = function decode(reader, length, error, long) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.BatchingSettingsProto();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.elementCountThreshold = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.requestByteThreshold = reader.int64();
+                                break;
+                            }
+                        case 3: {
+                                message.delayThreshold = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
+                                break;
+                            }
+                        case 4: {
+                                message.elementCountLimit = reader.int32();
+                                break;
+                            }
+                        case 5: {
+                                message.requestByteLimit = reader.int32();
+                                break;
+                            }
+                        case 6: {
+                                message.flowControlElementLimit = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.flowControlByteLimit = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.flowControlLimitExceededBehavior = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7, long);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.BatchingSettingsProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.BatchingSettingsProto} BatchingSettingsProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BatchingSettingsProto.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BatchingSettingsProto message.
+                 * @function verify
+                 * @memberof google.api.BatchingSettingsProto
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BatchingSettingsProto.verify = function verify(message, long) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
+                    if (message.elementCountThreshold != null && Object.hasOwnProperty.call(message, "elementCountThreshold"))
+                        if (!$util.isInteger(message.elementCountThreshold))
+                            return "elementCountThreshold: integer expected";
+                    if (message.requestByteThreshold != null && Object.hasOwnProperty.call(message, "requestByteThreshold"))
+                        if (!$util.isInteger(message.requestByteThreshold) && !(message.requestByteThreshold && $util.isInteger(message.requestByteThreshold.low) && $util.isInteger(message.requestByteThreshold.high)))
+                            return "requestByteThreshold: integer|Long expected";
+                    if (message.delayThreshold != null && Object.hasOwnProperty.call(message, "delayThreshold")) {
+                        var error = $root.google.protobuf.Duration.verify(message.delayThreshold, long + 1);
+                        if (error)
+                            return "delayThreshold." + error;
+                    }
+                    if (message.elementCountLimit != null && Object.hasOwnProperty.call(message, "elementCountLimit"))
+                        if (!$util.isInteger(message.elementCountLimit))
+                            return "elementCountLimit: integer expected";
+                    if (message.requestByteLimit != null && Object.hasOwnProperty.call(message, "requestByteLimit"))
+                        if (!$util.isInteger(message.requestByteLimit))
+                            return "requestByteLimit: integer expected";
+                    if (message.flowControlElementLimit != null && Object.hasOwnProperty.call(message, "flowControlElementLimit"))
+                        if (!$util.isInteger(message.flowControlElementLimit))
+                            return "flowControlElementLimit: integer expected";
+                    if (message.flowControlByteLimit != null && Object.hasOwnProperty.call(message, "flowControlByteLimit"))
+                        if (!$util.isInteger(message.flowControlByteLimit))
+                            return "flowControlByteLimit: integer expected";
+                    if (message.flowControlLimitExceededBehavior != null && Object.hasOwnProperty.call(message, "flowControlLimitExceededBehavior"))
+                        switch (message.flowControlLimitExceededBehavior) {
+                        default:
+                            return "flowControlLimitExceededBehavior: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.BatchingSettingsProto
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.BatchingSettingsProto} BatchingSettingsProto
+                 */
+                BatchingSettingsProto.fromObject = function fromObject(object, long) {
+                    if (object instanceof $root.google.api.BatchingSettingsProto)
+                        return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.BatchingSettingsProto: object expected");
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var message = new $root.google.api.BatchingSettingsProto();
+                    if (object.elementCountThreshold != null)
+                        message.elementCountThreshold = object.elementCountThreshold | 0;
+                    if (object.requestByteThreshold != null)
+                        if ($util.Long)
+                            message.requestByteThreshold = $util.Long.fromValue(object.requestByteThreshold, false);
+                        else if (typeof object.requestByteThreshold === "string")
+                            message.requestByteThreshold = parseInt(object.requestByteThreshold, 10);
+                        else if (typeof object.requestByteThreshold === "number")
+                            message.requestByteThreshold = object.requestByteThreshold;
+                        else if (typeof object.requestByteThreshold === "object")
+                            message.requestByteThreshold = new $util.LongBits(object.requestByteThreshold.low >>> 0, object.requestByteThreshold.high >>> 0).toNumber();
+                    if (object.delayThreshold != null) {
+                        if (!$util.isObject(object.delayThreshold))
+                            throw TypeError(".google.api.BatchingSettingsProto.delayThreshold: object expected");
+                        message.delayThreshold = $root.google.protobuf.Duration.fromObject(object.delayThreshold, long + 1);
+                    }
+                    if (object.elementCountLimit != null)
+                        message.elementCountLimit = object.elementCountLimit | 0;
+                    if (object.requestByteLimit != null)
+                        message.requestByteLimit = object.requestByteLimit | 0;
+                    if (object.flowControlElementLimit != null)
+                        message.flowControlElementLimit = object.flowControlElementLimit | 0;
+                    if (object.flowControlByteLimit != null)
+                        message.flowControlByteLimit = object.flowControlByteLimit | 0;
+                    switch (object.flowControlLimitExceededBehavior) {
+                    default:
+                        if (typeof object.flowControlLimitExceededBehavior === "number") {
+                            message.flowControlLimitExceededBehavior = object.flowControlLimitExceededBehavior;
+                            break;
+                        }
+                        break;
+                    case "UNSET_BEHAVIOR":
+                    case 0:
+                        message.flowControlLimitExceededBehavior = 0;
+                        break;
+                    case "THROW_EXCEPTION":
+                    case 1:
+                        message.flowControlLimitExceededBehavior = 1;
+                        break;
+                    case "BLOCK":
+                    case 2:
+                        message.flowControlLimitExceededBehavior = 2;
+                        break;
+                    case "IGNORE":
+                    case 3:
+                        message.flowControlLimitExceededBehavior = 3;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.BatchingSettingsProto
+                 * @static
+                 * @param {google.api.BatchingSettingsProto} message BatchingSettingsProto
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BatchingSettingsProto.toObject = function toObject(message, options, q) {
+                    if (!options)
+                        options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
+                    var object = {};
+                    if (options.defaults) {
+                        object.elementCountThreshold = 0;
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.requestByteThreshold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
+                        } else
+                            object.requestByteThreshold = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
+                        object.delayThreshold = null;
+                        object.elementCountLimit = 0;
+                        object.requestByteLimit = 0;
+                        object.flowControlElementLimit = 0;
+                        object.flowControlByteLimit = 0;
+                        object.flowControlLimitExceededBehavior = options.enums === String ? "UNSET_BEHAVIOR" : 0;
+                    }
+                    if (message.elementCountThreshold != null && Object.hasOwnProperty.call(message, "elementCountThreshold"))
+                        object.elementCountThreshold = message.elementCountThreshold;
+                    if (message.requestByteThreshold != null && Object.hasOwnProperty.call(message, "requestByteThreshold"))
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.requestByteThreshold = typeof message.requestByteThreshold === "number" ? BigInt(message.requestByteThreshold) : $util.Long.fromBits(message.requestByteThreshold.low >>> 0, message.requestByteThreshold.high >>> 0, false).toBigInt();
+                        else if (typeof message.requestByteThreshold === "number")
+                            object.requestByteThreshold = options.longs === String ? String(message.requestByteThreshold) : message.requestByteThreshold;
+                        else
+                            object.requestByteThreshold = options.longs === String ? $util.Long.prototype.toString.call(message.requestByteThreshold) : options.longs === Number ? new $util.LongBits(message.requestByteThreshold.low >>> 0, message.requestByteThreshold.high >>> 0).toNumber() : message.requestByteThreshold;
+                    if (message.delayThreshold != null && Object.hasOwnProperty.call(message, "delayThreshold"))
+                        object.delayThreshold = $root.google.protobuf.Duration.toObject(message.delayThreshold, options, q + 1);
+                    if (message.elementCountLimit != null && Object.hasOwnProperty.call(message, "elementCountLimit"))
+                        object.elementCountLimit = message.elementCountLimit;
+                    if (message.requestByteLimit != null && Object.hasOwnProperty.call(message, "requestByteLimit"))
+                        object.requestByteLimit = message.requestByteLimit;
+                    if (message.flowControlElementLimit != null && Object.hasOwnProperty.call(message, "flowControlElementLimit"))
+                        object.flowControlElementLimit = message.flowControlElementLimit;
+                    if (message.flowControlByteLimit != null && Object.hasOwnProperty.call(message, "flowControlByteLimit"))
+                        object.flowControlByteLimit = message.flowControlByteLimit;
+                    if (message.flowControlLimitExceededBehavior != null && Object.hasOwnProperty.call(message, "flowControlLimitExceededBehavior"))
+                        object.flowControlLimitExceededBehavior = options.enums === String ? $root.google.api.FlowControlLimitExceededBehaviorProto[message.flowControlLimitExceededBehavior] === undefined ? message.flowControlLimitExceededBehavior : $root.google.api.FlowControlLimitExceededBehaviorProto[message.flowControlLimitExceededBehavior] : message.flowControlLimitExceededBehavior;
+                    return object;
+                };
+    
+                /**
+                 * Converts this BatchingSettingsProto to JSON.
+                 * @function toJSON
+                 * @memberof google.api.BatchingSettingsProto
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BatchingSettingsProto.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BatchingSettingsProto
+                 * @function getTypeUrl
+                 * @memberof google.api.BatchingSettingsProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BatchingSettingsProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.BatchingSettingsProto";
+                };
+    
+                return BatchingSettingsProto;
+            })();
+    
+            /**
+             * FlowControlLimitExceededBehaviorProto enum.
+             * @name google.api.FlowControlLimitExceededBehaviorProto
+             * @enum {number}
+             * @property {number} UNSET_BEHAVIOR=0 UNSET_BEHAVIOR value
+             * @property {number} THROW_EXCEPTION=1 THROW_EXCEPTION value
+             * @property {number} BLOCK=2 BLOCK value
+             * @property {number} IGNORE=3 IGNORE value
+             */
+            api.FlowControlLimitExceededBehaviorProto = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "UNSET_BEHAVIOR"] = 0;
+                values[valuesById[1] = "THROW_EXCEPTION"] = 1;
+                values[valuesById[2] = "BLOCK"] = 2;
+                values[valuesById[3] = "IGNORE"] = 3;
+                return values;
+            })();
+    
+            api.BatchingDescriptorProto = (function() {
+    
+                /**
+                 * Properties of a BatchingDescriptorProto.
+                 * @memberof google.api
+                 * @interface IBatchingDescriptorProto
+                 * @property {string|null} [batchedField] BatchingDescriptorProto batchedField
+                 * @property {Array.<string>|null} [discriminatorFields] BatchingDescriptorProto discriminatorFields
+                 * @property {string|null} [subresponseField] BatchingDescriptorProto subresponseField
+                 */
+    
+                /**
+                 * Constructs a new BatchingDescriptorProto.
+                 * @memberof google.api
+                 * @classdesc Represents a BatchingDescriptorProto.
+                 * @implements IBatchingDescriptorProto
+                 * @constructor
+                 * @param {google.api.IBatchingDescriptorProto=} [properties] Properties to set
+                 */
+                function BatchingDescriptorProto(properties) {
+                    this.discriminatorFields = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * BatchingDescriptorProto batchedField.
+                 * @member {string} batchedField
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @instance
+                 */
+                BatchingDescriptorProto.prototype.batchedField = "";
+    
+                /**
+                 * BatchingDescriptorProto discriminatorFields.
+                 * @member {Array.<string>} discriminatorFields
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @instance
+                 */
+                BatchingDescriptorProto.prototype.discriminatorFields = $util.emptyArray;
+    
+                /**
+                 * BatchingDescriptorProto subresponseField.
+                 * @member {string} subresponseField
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @instance
+                 */
+                BatchingDescriptorProto.prototype.subresponseField = "";
+    
+                /**
+                 * Creates a new BatchingDescriptorProto instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @static
+                 * @param {google.api.IBatchingDescriptorProto=} [properties] Properties to set
+                 * @returns {google.api.BatchingDescriptorProto} BatchingDescriptorProto instance
+                 */
+                BatchingDescriptorProto.create = function create(properties) {
+                    return new BatchingDescriptorProto(properties);
+                };
+    
+                /**
+                 * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @static
+                 * @param {google.api.IBatchingDescriptorProto} message BatchingDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BatchingDescriptorProto.encode = function encode(message, writer, q) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
+                    if (message.batchedField != null && Object.hasOwnProperty.call(message, "batchedField"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.batchedField);
+                    if (message.discriminatorFields != null && message.discriminatorFields.length)
+                        for (var i = 0; i < message.discriminatorFields.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.discriminatorFields[i]);
+                    if (message.subresponseField != null && Object.hasOwnProperty.call(message, "subresponseField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.subresponseField);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @static
+                 * @param {google.api.IBatchingDescriptorProto} message BatchingDescriptorProto message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                BatchingDescriptorProto.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.BatchingDescriptorProto} BatchingDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BatchingDescriptorProto.decode = function decode(reader, length, error, long) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $Reader.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.BatchingDescriptorProto();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.batchedField = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.discriminatorFields && message.discriminatorFields.length))
+                                    message.discriminatorFields = [];
+                                message.discriminatorFields.push(reader.string());
+                                break;
+                            }
+                        case 3: {
+                                message.subresponseField = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7, long);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.BatchingDescriptorProto} BatchingDescriptorProto
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                BatchingDescriptorProto.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a BatchingDescriptorProto message.
+                 * @function verify
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                BatchingDescriptorProto.verify = function verify(message, long) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        return "maximum nesting depth exceeded";
+                    if (message.batchedField != null && Object.hasOwnProperty.call(message, "batchedField"))
+                        if (!$util.isString(message.batchedField))
+                            return "batchedField: string expected";
+                    if (message.discriminatorFields != null && Object.hasOwnProperty.call(message, "discriminatorFields")) {
+                        if (!Array.isArray(message.discriminatorFields))
+                            return "discriminatorFields: array expected";
+                        for (var i = 0; i < message.discriminatorFields.length; ++i)
+                            if (!$util.isString(message.discriminatorFields[i]))
+                                return "discriminatorFields: string[] expected";
+                    }
+                    if (message.subresponseField != null && Object.hasOwnProperty.call(message, "subresponseField"))
+                        if (!$util.isString(message.subresponseField))
+                            return "subresponseField: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.BatchingDescriptorProto} BatchingDescriptorProto
+                 */
+                BatchingDescriptorProto.fromObject = function fromObject(object, long) {
+                    if (object instanceof $root.google.api.BatchingDescriptorProto)
+                        return object;
+                    if (!$util.isObject(object))
+                        throw TypeError(".google.api.BatchingDescriptorProto: object expected");
+                    if (long === undefined)
+                        long = 0;
+                    if (long > $util.recursionLimit)
+                        throw Error("maximum nesting depth exceeded");
+                    var message = new $root.google.api.BatchingDescriptorProto();
+                    if (object.batchedField != null)
+                        message.batchedField = String(object.batchedField);
+                    if (object.discriminatorFields) {
+                        if (!Array.isArray(object.discriminatorFields))
+                            throw TypeError(".google.api.BatchingDescriptorProto.discriminatorFields: array expected");
+                        message.discriminatorFields = [];
+                        for (var i = 0; i < object.discriminatorFields.length; ++i)
+                            message.discriminatorFields[i] = String(object.discriminatorFields[i]);
+                    }
+                    if (object.subresponseField != null)
+                        message.subresponseField = String(object.subresponseField);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @static
+                 * @param {google.api.BatchingDescriptorProto} message BatchingDescriptorProto
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                BatchingDescriptorProto.toObject = function toObject(message, options, q) {
+                    if (!options)
+                        options = {};
+                    if (q === undefined)
+                        q = 0;
+                    if (q > $util.recursionLimit)
+                        throw Error("max depth exceeded");
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.discriminatorFields = [];
+                    if (options.defaults) {
+                        object.batchedField = "";
+                        object.subresponseField = "";
+                    }
+                    if (message.batchedField != null && Object.hasOwnProperty.call(message, "batchedField"))
+                        object.batchedField = message.batchedField;
+                    if (message.discriminatorFields && message.discriminatorFields.length) {
+                        object.discriminatorFields = [];
+                        for (var j = 0; j < message.discriminatorFields.length; ++j)
+                            object.discriminatorFields[j] = message.discriminatorFields[j];
+                    }
+                    if (message.subresponseField != null && Object.hasOwnProperty.call(message, "subresponseField"))
+                        object.subresponseField = message.subresponseField;
+                    return object;
+                };
+    
+                /**
+                 * Converts this BatchingDescriptorProto to JSON.
+                 * @function toJSON
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                BatchingDescriptorProto.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for BatchingDescriptorProto
+                 * @function getTypeUrl
+                 * @memberof google.api.BatchingDescriptorProto
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                BatchingDescriptorProto.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.BatchingDescriptorProto";
+                };
+    
+                return BatchingDescriptorProto;
             })();
     
             /**
@@ -77543,6 +78604,8 @@
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
              * @property {number} EDITION_2024=1001 EDITION_2024 value
+             * @property {number} EDITION_2026=1002 EDITION_2026 value
+             * @property {number} EDITION_UNSTABLE=9999 EDITION_UNSTABLE value
              * @property {number} EDITION_1_TEST_ONLY=1 EDITION_1_TEST_ONLY value
              * @property {number} EDITION_2_TEST_ONLY=2 EDITION_2_TEST_ONLY value
              * @property {number} EDITION_99997_TEST_ONLY=99997 EDITION_99997_TEST_ONLY value
@@ -77558,6 +78621,8 @@
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
                 values[valuesById[1001] = "EDITION_2024"] = 1001;
+                values[valuesById[1002] = "EDITION_2026"] = 1002;
+                values[valuesById[9999] = "EDITION_UNSTABLE"] = 9999;
                 values[valuesById[1] = "EDITION_1_TEST_ONLY"] = 1;
                 values[valuesById[2] = "EDITION_2_TEST_ONLY"] = 2;
                 values[valuesById[99997] = "EDITION_99997_TEST_ONLY"] = 99997;
@@ -78042,6 +79107,8 @@
                         case 999:
                         case 1000:
                         case 1001:
+                        case 1002:
+                        case 9999:
                         case 1:
                         case 2:
                         case 99997:
@@ -78185,6 +79252,14 @@
                     case "EDITION_2024":
                     case 1001:
                         message.edition = 1001;
+                        break;
+                    case "EDITION_2026":
+                    case 1002:
+                        message.edition = 1002;
+                        break;
+                    case "EDITION_UNSTABLE":
+                    case 9999:
+                        message.edition = 9999;
                         break;
                     case "EDITION_1_TEST_ONLY":
                     case 1:
@@ -85054,6 +86129,8 @@
                             case 999:
                             case 1000:
                             case 1001:
+                            case 1002:
+                            case 9999:
                             case 1:
                             case 2:
                             case 99997:
@@ -85116,6 +86193,14 @@
                         case "EDITION_2024":
                         case 1001:
                             message.edition = 1001;
+                            break;
+                        case "EDITION_2026":
+                        case 1002:
+                            message.edition = 1002;
+                            break;
+                        case "EDITION_UNSTABLE":
+                        case 9999:
+                            message.edition = 9999;
                             break;
                         case "EDITION_1_TEST_ONLY":
                         case 1:
@@ -85214,6 +86299,7 @@
                      * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
                      * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
                      * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     * @property {string|null} [removalError] FeatureSupport removalError
                      */
     
                     /**
@@ -85264,6 +86350,14 @@
                     FeatureSupport.prototype.editionRemoved = 0;
     
                     /**
+                     * FeatureSupport removalError.
+                     * @member {string} removalError
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.removalError = "";
+    
+                    /**
                      * Creates a new FeatureSupport instance using the specified properties.
                      * @function create
                      * @memberof google.protobuf.FieldOptions.FeatureSupport
@@ -85299,6 +86393,8 @@
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
                         if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
                             writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        if (message.removalError != null && Object.hasOwnProperty.call(message, "removalError"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.removalError);
                         return writer;
                     };
     
@@ -85355,6 +86451,10 @@
                                     message.editionRemoved = reader.int32();
                                     break;
                                 }
+                            case 5: {
+                                    message.removalError = reader.string();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7, long);
                                 break;
@@ -85404,6 +86504,8 @@
                             case 999:
                             case 1000:
                             case 1001:
+                            case 1002:
+                            case 9999:
                             case 1:
                             case 2:
                             case 99997:
@@ -85422,6 +86524,8 @@
                             case 999:
                             case 1000:
                             case 1001:
+                            case 1002:
+                            case 9999:
                             case 1:
                             case 2:
                             case 99997:
@@ -85443,6 +86547,8 @@
                             case 999:
                             case 1000:
                             case 1001:
+                            case 1002:
+                            case 9999:
                             case 1:
                             case 2:
                             case 99997:
@@ -85451,6 +86557,9 @@
                             case 2147483647:
                                 break;
                             }
+                        if (message.removalError != null && Object.hasOwnProperty.call(message, "removalError"))
+                            if (!$util.isString(message.removalError))
+                                return "removalError: string expected";
                         return null;
                     };
     
@@ -85502,6 +86611,14 @@
                         case "EDITION_2024":
                         case 1001:
                             message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_2026":
+                        case 1002:
+                            message.editionIntroduced = 1002;
+                            break;
+                        case "EDITION_UNSTABLE":
+                        case 9999:
+                            message.editionIntroduced = 9999;
                             break;
                         case "EDITION_1_TEST_ONLY":
                         case 1:
@@ -85558,6 +86675,14 @@
                         case "EDITION_2024":
                         case 1001:
                             message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_2026":
+                        case 1002:
+                            message.editionDeprecated = 1002;
+                            break;
+                        case "EDITION_UNSTABLE":
+                        case 9999:
+                            message.editionDeprecated = 9999;
                             break;
                         case "EDITION_1_TEST_ONLY":
                         case 1:
@@ -85617,6 +86742,14 @@
                         case 1001:
                             message.editionRemoved = 1001;
                             break;
+                        case "EDITION_2026":
+                        case 1002:
+                            message.editionRemoved = 1002;
+                            break;
+                        case "EDITION_UNSTABLE":
+                        case 9999:
+                            message.editionRemoved = 9999;
+                            break;
                         case "EDITION_1_TEST_ONLY":
                         case 1:
                             message.editionRemoved = 1;
@@ -85642,6 +86775,8 @@
                             message.editionRemoved = 2147483647;
                             break;
                         }
+                        if (object.removalError != null)
+                            message.removalError = String(object.removalError);
                         return message;
                     };
     
@@ -85667,6 +86802,7 @@
                             object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
                             object.deprecationWarning = "";
                             object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.removalError = "";
                         }
                         if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
                             object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
@@ -85676,6 +86812,8 @@
                             object.deprecationWarning = message.deprecationWarning;
                         if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
                             object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        if (message.removalError != null && Object.hasOwnProperty.call(message, "removalError"))
+                            object.removalError = message.removalError;
                         return object;
                     };
     
@@ -88239,6 +89377,7 @@
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
                  * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
                  * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
+                 * @property {google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null} [enforceProtoLimits] FeatureSet enforceProtoLimits
                  */
     
                 /**
@@ -88321,6 +89460,14 @@
                 FeatureSet.prototype.defaultSymbolVisibility = 0;
     
                 /**
+                 * FeatureSet enforceProtoLimits.
+                 * @member {google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits} enforceProtoLimits
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceProtoLimits = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -88364,6 +89511,8 @@
                         writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
                     if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
                         writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
+                    if (message.enforceProtoLimits != null && Object.hasOwnProperty.call(message, "enforceProtoLimits"))
+                        writer.uint32(/* id 9, wireType 0 =*/72).int32(message.enforceProtoLimits);
                     return writer;
                 };
     
@@ -88434,6 +89583,10 @@
                             }
                         case 8: {
                                 message.defaultSymbolVisibility = reader.int32();
+                                break;
+                            }
+                        case 9: {
+                                message.enforceProtoLimits = reader.int32();
                                 break;
                             }
                         default:
@@ -88537,6 +89690,7 @@
                         case 0:
                         case 1:
                         case 2:
+                        case 3:
                             break;
                         }
                     if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
@@ -88548,6 +89702,15 @@
                         case 2:
                         case 3:
                         case 4:
+                            break;
+                        }
+                    if (message.enforceProtoLimits != null && Object.hasOwnProperty.call(message, "enforceProtoLimits"))
+                        switch (message.enforceProtoLimits) {
+                        default:
+                            return "enforceProtoLimits: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
                             break;
                         }
                     return null;
@@ -88714,6 +89877,10 @@
                     case 2:
                         message.enforceNamingStyle = 2;
                         break;
+                    case "STYLE2026":
+                    case 3:
+                        message.enforceNamingStyle = 3;
+                        break;
                     }
                     switch (object.defaultSymbolVisibility) {
                     default:
@@ -88741,6 +89908,26 @@
                     case "STRICT":
                     case 4:
                         message.defaultSymbolVisibility = 4;
+                        break;
+                    }
+                    switch (object.enforceProtoLimits) {
+                    default:
+                        if (typeof object.enforceProtoLimits === "number") {
+                            message.enforceProtoLimits = object.enforceProtoLimits;
+                            break;
+                        }
+                        break;
+                    case "PROTO_LIMITS_UNKNOWN":
+                    case 0:
+                        message.enforceProtoLimits = 0;
+                        break;
+                    case "LEGACY_NO_EXPLICIT_LIMITS":
+                    case 1:
+                        message.enforceProtoLimits = 1;
+                        break;
+                    case "PROTO_LIMITS2026":
+                    case 2:
+                        message.enforceProtoLimits = 2;
                         break;
                     }
                     return message;
@@ -88772,6 +89959,7 @@
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
                         object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
                         object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
+                        object.enforceProtoLimits = options.enums === String ? "PROTO_LIMITS_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && Object.hasOwnProperty.call(message, "fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -88789,6 +89977,8 @@
                         object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
                     if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
                         object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
+                    if (message.enforceProtoLimits != null && Object.hasOwnProperty.call(message, "enforceProtoLimits"))
+                        object.enforceProtoLimits = options.enums === String ? $root.google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits[message.enforceProtoLimits] === undefined ? message.enforceProtoLimits : $root.google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits[message.enforceProtoLimits] : message.enforceProtoLimits;
                     return object;
                 };
     
@@ -88923,12 +90113,14 @@
                  * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
                  * @property {number} STYLE2024=1 STYLE2024 value
                  * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 * @property {number} STYLE2026=3 STYLE2026 value
                  */
                 FeatureSet.EnforceNamingStyle = (function() {
                     var valuesById = {}, values = Object.create(valuesById);
                     values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
                     values[valuesById[1] = "STYLE2024"] = 1;
                     values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    values[valuesById[3] = "STYLE2026"] = 3;
                     return values;
                 })();
     
@@ -89141,6 +90333,211 @@
                     return VisibilityFeature;
                 })();
     
+                FeatureSet.ProtoLimitsFeature = (function() {
+    
+                    /**
+                     * Properties of a ProtoLimitsFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IProtoLimitsFeature
+                     */
+    
+                    /**
+                     * Constructs a new ProtoLimitsFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a ProtoLimitsFeature.
+                     * @implements IProtoLimitsFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IProtoLimitsFeature=} [properties] Properties to set
+                     */
+                    function ProtoLimitsFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new ProtoLimitsFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.ProtoLimitsFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IProtoLimitsFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.ProtoLimitsFeature} ProtoLimitsFeature instance
+                     */
+                    ProtoLimitsFeature.create = function create(properties) {
+                        return new ProtoLimitsFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.ProtoLimitsFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IProtoLimitsFeature} message ProtoLimitsFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ProtoLimitsFeature.encode = function encode(message, writer, q) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.ProtoLimitsFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IProtoLimitsFeature} message ProtoLimitsFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ProtoLimitsFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.ProtoLimitsFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.ProtoLimitsFeature} ProtoLimitsFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ProtoLimitsFeature.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.ProtoLimitsFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.ProtoLimitsFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.ProtoLimitsFeature} ProtoLimitsFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ProtoLimitsFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ProtoLimitsFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.ProtoLimitsFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ProtoLimitsFeature.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.ProtoLimitsFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.ProtoLimitsFeature} ProtoLimitsFeature
+                     */
+                    ProtoLimitsFeature.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.ProtoLimitsFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.ProtoLimitsFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.ProtoLimitsFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.ProtoLimitsFeature} message ProtoLimitsFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ProtoLimitsFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this ProtoLimitsFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.ProtoLimitsFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ProtoLimitsFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ProtoLimitsFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.ProtoLimitsFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ProtoLimitsFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.ProtoLimitsFeature";
+                    };
+    
+                    /**
+                     * EnforceProtoLimits enum.
+                     * @name google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits
+                     * @enum {number}
+                     * @property {number} PROTO_LIMITS_UNKNOWN=0 PROTO_LIMITS_UNKNOWN value
+                     * @property {number} LEGACY_NO_EXPLICIT_LIMITS=1 LEGACY_NO_EXPLICIT_LIMITS value
+                     * @property {number} PROTO_LIMITS2026=2 PROTO_LIMITS2026 value
+                     */
+                    ProtoLimitsFeature.EnforceProtoLimits = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "PROTO_LIMITS_UNKNOWN"] = 0;
+                        values[valuesById[1] = "LEGACY_NO_EXPLICIT_LIMITS"] = 1;
+                        values[valuesById[2] = "PROTO_LIMITS2026"] = 2;
+                        return values;
+                    })();
+    
+                    return ProtoLimitsFeature;
+                })();
+    
                 return FeatureSet;
             })();
     
@@ -89342,6 +90739,8 @@
                         case 999:
                         case 1000:
                         case 1001:
+                        case 1002:
+                        case 9999:
                         case 1:
                         case 2:
                         case 99997:
@@ -89360,6 +90759,8 @@
                         case 999:
                         case 1000:
                         case 1001:
+                        case 1002:
+                        case 9999:
                         case 1:
                         case 2:
                         case 99997:
@@ -89430,6 +90831,14 @@
                     case 1001:
                         message.minimumEdition = 1001;
                         break;
+                    case "EDITION_2026":
+                    case 1002:
+                        message.minimumEdition = 1002;
+                        break;
+                    case "EDITION_UNSTABLE":
+                    case 9999:
+                        message.minimumEdition = 9999;
+                        break;
                     case "EDITION_1_TEST_ONLY":
                     case 1:
                         message.minimumEdition = 1;
@@ -89485,6 +90894,14 @@
                     case "EDITION_2024":
                     case 1001:
                         message.maximumEdition = 1001;
+                        break;
+                    case "EDITION_2026":
+                    case 1002:
+                        message.maximumEdition = 1002;
+                        break;
+                    case "EDITION_UNSTABLE":
+                    case 9999:
+                        message.maximumEdition = 9999;
                         break;
                     case "EDITION_1_TEST_ONLY":
                     case 1:
@@ -89760,6 +91177,8 @@
                             case 999:
                             case 1000:
                             case 1001:
+                            case 1002:
+                            case 9999:
                             case 1:
                             case 2:
                             case 99997:
@@ -89829,6 +91248,14 @@
                         case "EDITION_2024":
                         case 1001:
                             message.edition = 1001;
+                            break;
+                        case "EDITION_2026":
+                        case 1002:
+                            message.edition = 1002;
+                            break;
+                        case "EDITION_UNSTABLE":
+                        case 9999:
+                            message.edition = 9999;
                             break;
                         case "EDITION_1_TEST_ONLY":
                         case 1:
@@ -96576,6 +98003,7 @@
                  * @property {string|null} [filter] ListOperationsRequest filter
                  * @property {number|null} [pageSize] ListOperationsRequest pageSize
                  * @property {string|null} [pageToken] ListOperationsRequest pageToken
+                 * @property {boolean|null} [returnPartialSuccess] ListOperationsRequest returnPartialSuccess
                  */
     
                 /**
@@ -96626,6 +98054,14 @@
                 ListOperationsRequest.prototype.pageToken = "";
     
                 /**
+                 * ListOperationsRequest returnPartialSuccess.
+                 * @member {boolean} returnPartialSuccess
+                 * @memberof google.longrunning.ListOperationsRequest
+                 * @instance
+                 */
+                ListOperationsRequest.prototype.returnPartialSuccess = false;
+    
+                /**
                  * Creates a new ListOperationsRequest instance using the specified properties.
                  * @function create
                  * @memberof google.longrunning.ListOperationsRequest
@@ -96661,6 +98097,8 @@
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                    if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).bool(message.returnPartialSuccess);
                     return writer;
                 };
     
@@ -96717,6 +98155,10 @@
                                 message.pageToken = reader.string();
                                 break;
                             }
+                        case 5: {
+                                message.returnPartialSuccess = reader.bool();
+                                break;
+                            }
                         default:
                             reader.skipType(tag & 7, long);
                             break;
@@ -96768,6 +98210,9 @@
                     if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                         if (!$util.isString(message.pageToken))
                             return "pageToken: string expected";
+                    if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                        if (typeof message.returnPartialSuccess !== "boolean")
+                            return "returnPartialSuccess: boolean expected";
                     return null;
                 };
     
@@ -96797,6 +98242,8 @@
                         message.pageSize = object.pageSize | 0;
                     if (object.pageToken != null)
                         message.pageToken = String(object.pageToken);
+                    if (object.returnPartialSuccess != null)
+                        message.returnPartialSuccess = Boolean(object.returnPartialSuccess);
                     return message;
                 };
     
@@ -96822,6 +98269,7 @@
                         object.pageSize = 0;
                         object.pageToken = "";
                         object.name = "";
+                        object.returnPartialSuccess = false;
                     }
                     if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                         object.filter = message.filter;
@@ -96831,6 +98279,8 @@
                         object.pageToken = message.pageToken;
                     if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                         object.name = message.name;
+                    if (message.returnPartialSuccess != null && Object.hasOwnProperty.call(message, "returnPartialSuccess"))
+                        object.returnPartialSuccess = message.returnPartialSuccess;
                     return object;
                 };
     
@@ -96871,6 +98321,7 @@
                  * @interface IListOperationsResponse
                  * @property {Array.<google.longrunning.IOperation>|null} [operations] ListOperationsResponse operations
                  * @property {string|null} [nextPageToken] ListOperationsResponse nextPageToken
+                 * @property {Array.<string>|null} [unreachable] ListOperationsResponse unreachable
                  */
     
                 /**
@@ -96883,6 +98334,7 @@
                  */
                 function ListOperationsResponse(properties) {
                     this.operations = [];
+                    this.unreachable = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null && keys[i] !== "__proto__")
@@ -96904,6 +98356,14 @@
                  * @instance
                  */
                 ListOperationsResponse.prototype.nextPageToken = "";
+    
+                /**
+                 * ListOperationsResponse unreachable.
+                 * @member {Array.<string>} unreachable
+                 * @memberof google.longrunning.ListOperationsResponse
+                 * @instance
+                 */
+                ListOperationsResponse.prototype.unreachable = $util.emptyArray;
     
                 /**
                  * Creates a new ListOperationsResponse instance using the specified properties.
@@ -96938,6 +98398,9 @@
                             $root.google.longrunning.Operation.encode(message.operations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
                     if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                    if (message.unreachable != null && message.unreachable.length)
+                        for (var i = 0; i < message.unreachable.length; ++i)
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                     return writer;
                 };
     
@@ -96986,6 +98449,12 @@
                             }
                         case 2: {
                                 message.nextPageToken = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.unreachable && message.unreachable.length))
+                                    message.unreachable = [];
+                                message.unreachable.push(reader.string());
                                 break;
                             }
                         default:
@@ -97039,6 +98508,13 @@
                     if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                         if (!$util.isString(message.nextPageToken))
                             return "nextPageToken: string expected";
+                    if (message.unreachable != null && Object.hasOwnProperty.call(message, "unreachable")) {
+                        if (!Array.isArray(message.unreachable))
+                            return "unreachable: array expected";
+                        for (var i = 0; i < message.unreachable.length; ++i)
+                            if (!$util.isString(message.unreachable[i]))
+                                return "unreachable: string[] expected";
+                    }
                     return null;
                 };
     
@@ -97072,6 +98548,13 @@
                     }
                     if (object.nextPageToken != null)
                         message.nextPageToken = String(object.nextPageToken);
+                    if (object.unreachable) {
+                        if (!Array.isArray(object.unreachable))
+                            throw TypeError(".google.longrunning.ListOperationsResponse.unreachable: array expected");
+                        message.unreachable = [];
+                        for (var i = 0; i < object.unreachable.length; ++i)
+                            message.unreachable[i] = String(object.unreachable[i]);
+                    }
                     return message;
                 };
     
@@ -97092,8 +98575,10 @@
                     if (q > $util.recursionLimit)
                         throw Error("max depth exceeded");
                     var object = {};
-                    if (options.arrays || options.defaults)
+                    if (options.arrays || options.defaults) {
                         object.operations = [];
+                        object.unreachable = [];
+                    }
                     if (options.defaults)
                         object.nextPageToken = "";
                     if (message.operations && message.operations.length) {
@@ -97103,6 +98588,11 @@
                     }
                     if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                         object.nextPageToken = message.nextPageToken;
+                    if (message.unreachable && message.unreachable.length) {
+                        object.unreachable = [];
+                        for (var j = 0; j < message.unreachable.length; ++j)
+                            object.unreachable[j] = message.unreachable[j];
+                    }
                     return object;
                 };
     
