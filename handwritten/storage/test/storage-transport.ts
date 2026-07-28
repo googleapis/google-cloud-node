@@ -22,7 +22,7 @@ import sinon from 'sinon';
 import assert from 'assert';
 import {GCCL_GCS_CMD_KEY} from '../src/nodejs-common/util';
 import {RETRYABLE_ERR_FN_DEFAULT} from '../src/storage';
-import {Gaxios} from 'gaxios';
+import {Gaxios, GaxiosResponse} from 'gaxios';
 
 describe('Storage Transport', () => {
   let sandbox: sinon.SinonSandbox;
@@ -187,6 +187,53 @@ describe('Storage Transport', () => {
 
     const transport = new StorageTransport(options);
     assert.ok(transport.authClient instanceof GoogleAuth);
+  });
+
+  it('should use the provided invocationId in x-goog-api-client header', async () => {
+    const invocationId = 'manual-id-5678';
+    const mockResponse = {
+      config: {},
+      data: {},
+      headers: {},
+      status: 200,
+      statusText: 'OK',
+      request: {},
+    } as unknown as GaxiosResponse;
+
+    const requestStub = transport.authClient.request as sinon.SinonStub;
+    requestStub.resolves(mockResponse);
+
+    await transport.makeRequest({
+      url: 'http://test',
+      invocationId: invocationId,
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const headers = requestStub.firstCall.args[0].headers as any;
+    const apiClientHeader = headers['x-goog-api-client'];
+
+    assert.ok(apiClientHeader.includes(`gccl-invocation-id/${invocationId}`));
+  });
+
+  it('should generate a new random ID if none is provided', async () => {
+    const mockResponse = {
+      config: {},
+      data: {},
+      headers: {},
+      status: 200,
+      statusText: 'OK',
+    } as GaxiosResponse;
+    const requestStub = transport.authClient.request as sinon.SinonStub;
+    requestStub.resolves(mockResponse);
+
+    await transport.makeRequest({url: 'http://test'});
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const headers = requestStub.firstCall.args[0].headers as any;
+    const apiClientHeader = headers['x-goog-api-client'];
+
+    assert.ok(apiClientHeader.includes('gccl-invocation-id/'));
+    const id = apiClientHeader.split('gccl-invocation-id/')[1];
+    assert.strictEqual(id.length, 36);
   });
 
   it('should handle absolute URLs and project validation', async () => {
