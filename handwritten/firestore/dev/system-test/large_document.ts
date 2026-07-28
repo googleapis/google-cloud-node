@@ -77,15 +77,11 @@ describe('Large Document Integration Tests', function () {
     ]);
   });
 
-  after(async function () {
+  after(async () => {
     if (db && collectionName) {
       try {
         // Delete documents in parallel
-        await Promise.all([
-          docRef.delete(),
-          docA.delete(),
-          docB.delete(),
-        ]);
+        await Promise.all([docRef.delete(), docA.delete(), docB.delete()]);
       } catch (e) {
         // Suppress cleanup errors
       }
@@ -102,7 +98,10 @@ describe('Large Document Integration Tests', function () {
 
   it('can query multiple large documents', async () => {
     const colRef = db.collection(collectionName);
-    const query = colRef.where(FieldPath.documentId(), 'in', ['doc_a', 'doc_b']);
+    const query = colRef.where(FieldPath.documentId(), 'in', [
+      'doc_a',
+      'doc_b',
+    ]);
     const snapshot = await query.get();
     expect(snapshot.size).to.equal(2);
     snapshot.forEach(doc => {
@@ -123,7 +122,7 @@ describe('Large Document Integration Tests', function () {
         (error: any) => {
           unsubscribe();
           reject(error);
-        }
+        },
       );
     });
     await deferred;
@@ -134,14 +133,16 @@ describe('Large Document Integration Tests', function () {
       const snapshot = await transaction.get(docRef);
       expect((snapshot as any).exists).to.be.true;
       transaction.update(docRef, {
-        transaction_timestamp: FieldValue.serverTimestamp()
+        transaction_timestamp: FieldValue.serverTimestamp(),
       });
     });
   });
 
   it('can paginate large documents safely', async () => {
     const colRef = db.collection(collectionName);
-    const query = colRef.where(FieldPath.documentId(), 'in', ['doc_a', 'doc_b']).orderBy(FieldPath.documentId());
+    const query = colRef
+      .where(FieldPath.documentId(), 'in', ['doc_a', 'doc_b'])
+      .orderBy(FieldPath.documentId());
 
     // Page 1
     const snapshot1 = await query.limit(1).get();
@@ -161,14 +162,18 @@ describe('Large Document Integration Tests', function () {
   });
 
   it('gracefully rejects oversized payloads', async () => {
-    const oversizedDoc = db.collection(collectionName).doc('temp_oversized_doc');
+    const oversizedDoc = db
+      .collection(collectionName)
+      .doc('temp_oversized_doc');
     // Generate ~16.1MB payload
     const targetBytes = 16 * 1024 * 1024 + 102400;
     const largePayload = generateAsciiString(targetBytes);
 
     try {
       await oversizedDoc.set({chunk: largePayload});
-      throw new Error('Setting a document exceeding the 16MB limit should fail.');
+      throw new Error(
+        'Setting a document exceeding the 16MB limit should fail.',
+      );
     } catch (error: any) {
       expect(error.code).to.equal(3); // INVALID_ARGUMENT (gRPC status code 3)
     }
