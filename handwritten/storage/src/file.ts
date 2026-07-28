@@ -27,6 +27,7 @@ import * as resumableUpload from './resumable-upload.js';
 import {Writable, Readable, pipeline, Transform, PipelineSource} from 'stream';
 import * as zlib from 'zlib';
 import * as http from 'http';
+import {randomUUID} from 'crypto';
 
 import {
   ExceptionMessages,
@@ -339,6 +340,14 @@ export interface CreateWriteStreamOptions extends CreateResumableUploadOptions {
   resumable?: boolean;
   timeout?: number;
   validation?: string | boolean;
+}
+
+/**
+ * @internal
+ */
+export interface CreateWriteStreamOptionsInternal
+  extends CreateWriteStreamOptions {
+  invocationId?: string;
 }
 
 export interface MakeFilePrivateOptions {
@@ -1833,6 +1842,7 @@ class File extends ServiceObject<File, FileMetadata> {
         queryParameters: query as unknown as StorageQueryParameters,
         responseType: 'stream',
         decompress: options.decompress,
+        compress: false,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any;
 
@@ -2266,7 +2276,10 @@ class File extends ServiceObject<File, FileMetadata> {
 
     writeStream.once('writing', async () => {
       if (options.resumable === false) {
-        await this.startSimpleUpload_(fileWriteStream, options);
+        await this.startSimpleUpload_(
+          fileWriteStream,
+          options as CreateWriteStreamOptionsInternal,
+        );
       } else {
         await this.startResumableUpload_(fileWriteStream, options);
       }
@@ -4425,13 +4438,17 @@ class File extends ServiceObject<File, FileMetadata> {
     ) {
       maxRetries = 0;
     }
+    const persistentInvocationId = randomUUID();
     const returnValue = AsyncRetry(
       async (bail: (err: Error) => void) => {
         return new Promise<void>((resolve, reject) => {
           if (maxRetries === 0) {
             this.storage.retryOptions.autoRetry = false;
           }
-          const writable = this.createWriteStream(options);
+          const writable = this.createWriteStream({
+            ...options,
+            invocationId: persistentInvocationId,
+          } as CreateWriteStreamOptionsInternal);
 
           if (options.onUploadProgress) {
             writable.on('progress', options.onUploadProgress);
@@ -4744,7 +4761,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   startSimpleUpload_(
     dup: Duplexify,
-    options: CreateWriteStreamOptions = {},
+    options: CreateWriteStreamOptionsInternal = {},
   ): void {
     options.metadata ??= {};
 
@@ -4758,6 +4775,7 @@ class File extends ServiceObject<File, FileMetadata> {
         uploadType: 'multipart',
       },
       url,
+      invocationId: options.invocationId,
       [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
       method: 'POST',
       responseType: 'json',
