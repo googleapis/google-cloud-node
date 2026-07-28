@@ -3803,8 +3803,8 @@ describe('File', () => {
     it('should pass signingEndpoint to URLSigner', done => {
       const signingEndpoint = 'https://my-endpoint.com';
       const config = {
-        signingEndpoint,
         ...SIGNED_URL_CONFIG,
+        signingEndpoint,
       };
 
       file.getSignedUrl(config, (err: Error | null) => {
