@@ -127,22 +127,47 @@ async function checkEslint(filesToCheck) {
   }
 
   try {
-    const eslint = new ESLint();
-    const results = await eslint.lintFiles(filesToCheck);
-    const formatter = await eslint.loadFormatter('stylish');
-    const resultText = formatter.format(results);
-
-    if (resultText) {
-      console.log(resultText);
+    // Group files by their nearest tsconfig directory
+    const filesByPackage = new Map();
+    for (const file of filesToCheck) {
+      const tsconfigDir = findTsconfigDir(file) || process.cwd();
+      if (!filesByPackage.has(tsconfigDir)) {
+        filesByPackage.set(tsconfigDir, []);
+      }
+      filesByPackage.get(tsconfigDir).push(path.resolve(process.cwd(), file));
     }
 
     let hasBlockingErrors = false;
 
-    for (const fileResult of results) {
-      for (const message of fileResult.messages) {
-        // message.severity === 2 indicates an error-level rule configuration.
-        if (message.severity === 2) {
-          hasBlockingErrors = true;
+    // Lint files per package directory to correctly resolve tsconfig.json
+    for (const [pkgDir, files] of filesByPackage.entries()) {
+      const absolutePkgDir = path.resolve(process.cwd(), pkgDir);
+      const eslint = new ESLint({
+        cwd: absolutePkgDir,
+        fix: true,
+        overrideConfig: {
+          parserOptions: {
+            project: './tsconfig.json',
+            tsconfigRootDir: absolutePkgDir,
+            createDefaultProgram: true
+          }
+        }
+      });
+      const results = await eslint.lintFiles(files);
+      await ESLint.outputFixes(results);
+      const formatter = await eslint.loadFormatter('stylish');
+      const resultText = formatter.format(results);
+
+      if (resultText) {
+        console.log(`\nESLint results for package: ${pkgDir}`);
+        console.log(resultText);
+      }
+
+      for (const fileResult of results) {
+        for (const message of fileResult.messages) {
+          if (message.severity === 2) {
+            hasBlockingErrors = true;
+          }
         }
       }
     }

@@ -42,13 +42,17 @@
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "gts": "^6.0.2",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=18"

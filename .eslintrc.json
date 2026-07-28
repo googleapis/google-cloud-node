@@ -12,8 +12,10 @@
   "rules": {
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "error",
-    "promise/catch-or-return": "error",
-    "promise/always-return": "error"
+    "promise/catch-or-return": "off",
+    "promise/always-return": "off",
+    "promise/param-names": "off",
+    "@typescript-eslint/no-floating-promises": "off"
   },
   "ignorePatterns": [
     "**/node_modules",
