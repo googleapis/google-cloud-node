@@ -99,15 +99,33 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "BatchCreateTasks": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DeleteTask": {
           "timeout_millis": 20000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
         },
+        "BatchDeleteTasks": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "RunTask": {
           "timeout_millis": 20000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "UpdateCmekConfig": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
+        },
+        "GetCmekConfig": {
+          "timeout_millis": 20000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "2607cc7256ff9acb2ee9b232c5722dbbaab18846"
         }
       }
     }
