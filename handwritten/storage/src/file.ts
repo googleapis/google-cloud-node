@@ -3236,6 +3236,7 @@ class File extends ServiceObject<File, FileMetadata> {
       contentMd5: cfg.contentMd5,
       contentType: cfg.contentType,
       host: cfg.host,
+      signingEndpoint: cfg.signingEndpoint,
     };
 
     if (cfg.cname) {

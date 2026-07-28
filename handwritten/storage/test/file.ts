@@ -3794,7 +3794,26 @@ describe('File', () => {
           contentType: config.contentType,
           cname: CNAME,
           virtualHostedStyle: true,
+          signingEndpoint: undefined,
         });
+        done();
+      });
+    });
+
+    it('should pass signingEndpoint to URLSigner', done => {
+      const signingEndpoint = 'https://my-endpoint.com';
+      const config = {
+        signingEndpoint,
+        ...SIGNED_URL_CONFIG,
+      };
+
+      file.getSignedUrl(config, (err: Error | null) => {
+        assert.ifError(err);
+        const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
+        assert.strictEqual(
+          getSignedUrlArgs[0]['signingEndpoint'],
+          signingEndpoint
+        );
         done();
       });
     });
