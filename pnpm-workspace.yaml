@@ -1,5 +1,5 @@
 packages:
-  - 'core'
+  - 'core/*'
   - 'core/packages/*'
   - 'core/dev-packages/*'
   - 'packages/*'

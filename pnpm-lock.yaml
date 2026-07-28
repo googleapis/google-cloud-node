@@ -65,6 +65,109 @@ importers:
         specifier: ^7.9.6
         version: 7.9.10
 
+  core/common:
+    dependencies:
+      '@google-cloud/projectify':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@google-cloud/promisify':
+        specifier: ^4.0.0
+        version: 4.0.0
+      arrify:
+        specifier: ^2.0.0
+        version: 2.0.1
+      duplexify:
+        specifier: ^4.1.3
+        version: 4.1.3
+      extend:
+        specifier: ^3.0.2
+        version: 3.0.2
+      google-auth-library:
+        specifier: 10.5.0
+        version: 10.5.0
+      html-entities:
+        specifier: ^2.5.2
+        version: 2.6.0
+      retry-request:
+        specifier: ^8.0.0
+        version: 8.0.3
+      teeny-request:
+        specifier: ^10.0.0
+        version: 10.1.3
+    devDependencies:
+      '@types/ent':
+        specifier: ^2.2.8
+        version: 2.2.8
+      '@types/extend':
+        specifier: ^3.0.4
+        version: 3.0.4
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/mv':
+        specifier: ^2.1.4
+        version: 2.1.4
+      '@types/ncp':
+        specifier: ^2.0.8
+        version: 2.0.8
+      '@types/node':
+        specifier: ^22.13.5
+        version: 22.20.1
+      '@types/proxyquire':
+        specifier: ^1.3.31
+        version: 1.3.31
+      '@types/request':
+        specifier: ^2.48.12
+        version: 2.48.13
+      '@types/sinon':
+        specifier: ^17.0.4
+        version: 17.0.4
+      '@types/tmp':
+        specifier: ^0.2.6
+        version: 0.2.6
+      c8:
+        specifier: ^9.1.0
+        version: 9.1.0
+      codecov:
+        specifier: ^3.8.3
+        version: 3.8.3(encoding@0.1.13)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.9.3)
+      jsdoc:
+        specifier: ^4.0.4
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^3.0.0
+        version: 3.0.0
+      jsdoc-region-tag:
+        specifier: ^3.0.0
+        version: 3.0.0
+      mocha:
+        specifier: ^11.1.0
+        version: 11.7.6
+      mv:
+        specifier: ^2.1.1
+        version: 2.1.1
+      ncp:
+        specifier: ^2.0.0
+        version: 2.0.0
+      nock:
+        specifier: ^14.0.1
+        version: 14.0.16
+      proxyquire:
+        specifier: ^2.1.3
+        version: 2.1.3
+      sinon:
+        specifier: ^19.0.2
+        version: 19.0.5
+      tmp:
+        specifier: ^0.2.3
+        version: 0.2.6
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
   core/dev-packages/jsdoc-fresh:
     dependencies:
       '@jsdoc/salty':
@@ -151,6 +254,8 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.9.3
+
+  core/help: {}
 
   core/packages/gapic-node-processing:
     dependencies:
@@ -1216,6 +1321,172 @@ importers:
       snap-shot-it:
         specifier: ^7.9.10
         version: 7.9.10
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+  core/paginator:
+    dependencies:
+      extend:
+        specifier: ^3.0.2
+        version: 3.0.2
+    devDependencies:
+      '@types/extend':
+        specifier: ^3.0.4
+        version: 3.0.4
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/node':
+        specifier: ^22.13.8
+        version: 22.20.1
+      '@types/proxyquire':
+        specifier: ^1.3.31
+        version: 1.3.31
+      '@types/sinon':
+        specifier: ^17.0.4
+        version: 17.0.4
+      c8:
+        specifier: ^9.1.0
+        version: 9.1.0
+      codecov:
+        specifier: ^3.8.3
+        version: 3.8.3(encoding@0.1.13)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.9.3)
+      jsdoc:
+        specifier: ^4.0.4
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^3.0.0
+        version: 3.0.0
+      jsdoc-region-tag:
+        specifier: ^3.0.0
+        version: 3.0.0
+      mocha:
+        specifier: ^11.1.0
+        version: 11.7.6
+      path-to-regexp:
+        specifier: ^8.2.0
+        version: 8.4.2
+      proxyquire:
+        specifier: ^2.1.3
+        version: 2.1.3
+      sinon:
+        specifier: ^19.0.2
+        version: 19.0.5
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+  core/precise-date:
+    devDependencies:
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/node':
+        specifier: ^22.13.8
+        version: 22.20.1
+      '@types/sinon':
+        specifier: ^17.0.4
+        version: 17.0.4
+      c8:
+        specifier: ^9.1.0
+        version: 9.1.0
+      codecov:
+        specifier: ^3.8.3
+        version: 3.8.3(encoding@0.1.13)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.9.3)
+      mocha:
+        specifier: ^11.1.0
+        version: 11.7.6
+      path-to-regexp:
+        specifier: ^8.2.0
+        version: 8.4.2
+      sinon:
+        specifier: ^19.0.2
+        version: 19.0.5
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+  core/projectify:
+    devDependencies:
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/node':
+        specifier: ^22.13.9
+        version: 22.20.1
+      c8:
+        specifier: ^9.1.0
+        version: 9.1.0
+      codecov:
+        specifier: ^3.8.3
+        version: 3.8.3(encoding@0.1.13)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.9.3)
+      jsdoc:
+        specifier: ^4.0.4
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^3.0.0
+        version: 3.0.0
+      jsdoc-region-tag:
+        specifier: ^3.0.0
+        version: 3.0.0
+      mocha:
+        specifier: ^11.1.0
+        version: 11.7.6
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.3
+
+  core/promisify:
+    devDependencies:
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/node':
+        specifier: ^22.13.9
+        version: 22.20.1
+      '@types/sinon':
+        specifier: ^17.0.4
+        version: 17.0.4
+      c8:
+        specifier: ^9.1.0
+        version: 9.1.0
+      chai:
+        specifier: ^5.2.0
+        version: 5.3.3
+      codecov:
+        specifier: ^3.8.3
+        version: 3.8.3(encoding@0.1.13)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.9.3)
+      hard-rejection:
+        specifier: ^2.1.0
+        version: 2.1.0
+      jsdoc:
+        specifier: ^4.0.4
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^3.0.0
+        version: 3.0.0
+      jsdoc-region-tag:
+        specifier: ^3.0.0
+        version: 3.0.0
+      mocha:
+        specifier: ^11.1.0
+        version: 11.7.6
+      sinon:
+        specifier: ^19.0.2
+        version: 19.0.5
       typescript:
         specifier: ^5.8.2
         version: 5.9.3
@@ -16845,6 +17116,9 @@ packages:
   '@types/duplexify@3.6.5':
     resolution: {integrity: sha512-fB56ACzlW91UdZ5F3VXplVMDngO8QaX5Y2mjvADtN01TT2TMy4WjF0Lg+tFDvt4uMBeTe4SgaD+qCrA7dL5/tA==}
 
+  '@types/ent@2.2.8':
+    resolution: {integrity: sha512-T7OSxLcPBbcUxTIeJTpmV8cMsFfx/OasIDHlq+PO1choUQnYIcoxQj45n9NpzrR9yOJDwte8tmvs6Y+axitRFg==}
+
   '@types/escape-string-regexp@2.0.3':
     resolution: {integrity: sha512-OZjkKRpXVi7OccivLmCEYSKIhS8YJj5mC79yzguHlO69jTK0xkOHjmL7w7SHRiUQFYYZWFGyU4VYfeXH+GkYlQ==}
     deprecated: This is a stub types definition. escape-string-regexp provides its own type definitions, so you do not need this installed.
@@ -26560,6 +26834,8 @@ snapshots:
     dependencies:
       '@types/node': 22.20.1
 
+  '@types/ent@2.2.8': {}
+
   '@types/escape-string-regexp@2.0.3':
     dependencies:
       escape-string-regexp: 4.0.0
@@ -27282,7 +27558,7 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -27292,7 +27568,7 @@ snapshots:
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -27302,7 +27578,7 @@ snapshots:
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@xtuc/ieee754@1.2.0': {}
@@ -32412,7 +32688,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
 
   nunjucks@3.2.4(chokidar@3.6.0):
     dependencies:
@@ -34627,7 +34903,7 @@ snapshots:
       picomatch: 4.0.5
       source-map: 0.7.6
       typescript: 5.8.3
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
     optionalDependencies:
       loader-utils: 2.0.4
 
@@ -35076,7 +35352,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
 
   webpack-merge@4.2.2:
