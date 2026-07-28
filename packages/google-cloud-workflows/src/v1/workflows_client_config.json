@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.datastore.v1.Datastore": {
+    "google.cloud.workflows.v1.Workflows": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [
@@ -20,44 +20,28 @@
         }
       },
       "methods": {
-        "Lookup": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "RunQuery": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "RunAggregationQuery": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "BeginTransaction": {
-          "timeout_millis": 60000,
+        "ListWorkflows": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "Commit": {
-          "timeout_millis": 60000,
+        "GetWorkflow": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "Rollback": {
-          "timeout_millis": 60000,
+        "CreateWorkflow": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "AllocateIds": {
-          "timeout_millis": 60000,
+        "DeleteWorkflow": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "ReserveIds": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+        "UpdateWorkflow": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListWorkflowRevisions": {
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
       }

@@ -21,11 +21,16 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import { SinonStub } from 'sinon';
 import { describe, it } from 'mocha';
-import * as datastoreadminModule from '../src';
+import * as workflowsModule from '../src';
 
 import { PassThrough } from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {
+  protobuf,
+  LROperation,
+  operationsProtos,
+  LocationProtos,
+} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -159,16 +164,16 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.DatastoreAdminClient', () => {
+describe('v1beta.WorkflowsClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient();
+      const client = new workflowsModule.v1beta.WorkflowsClient();
       const apiEndpoint = client.apiEndpoint;
-      assert.strictEqual(apiEndpoint, 'datastore.googleapis.com');
+      assert.strictEqual(apiEndpoint, 'workflows.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient();
+      const client = new workflowsModule.v1beta.WorkflowsClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -179,36 +184,34 @@ describe('v1.DatastoreAdminClient', () => {
     ) {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
-        const servicePath =
-          datastoreadminModule.v1.DatastoreAdminClient.servicePath;
-        assert.strictEqual(servicePath, 'datastore.googleapis.com');
+        const servicePath = workflowsModule.v1beta.WorkflowsClient.servicePath;
+        assert.strictEqual(servicePath, 'workflows.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
 
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
-        const apiEndpoint =
-          datastoreadminModule.v1.DatastoreAdminClient.apiEndpoint;
-        assert.strictEqual(apiEndpoint, 'datastore.googleapis.com');
+        const apiEndpoint = workflowsModule.v1beta.WorkflowsClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'workflows.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         universeDomain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'datastore.example.com');
+      assert.strictEqual(servicePath, 'workflows.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         universe_domain: 'example.com',
       });
       const servicePath = client.apiEndpoint;
-      assert.strictEqual(servicePath, 'datastore.example.com');
+      assert.strictEqual(servicePath, 'workflows.example.com');
     });
 
     if (typeof process === 'object' && 'env' in process) {
@@ -216,9 +219,9 @@ describe('v1.DatastoreAdminClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new datastoreadminModule.v1.DatastoreAdminClient();
+          const client = new workflowsModule.v1beta.WorkflowsClient();
           const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'datastore.example.com');
+          assert.strictEqual(servicePath, 'workflows.example.com');
           if (saved) {
             process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
           } else {
@@ -229,11 +232,11 @@ describe('v1.DatastoreAdminClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new datastoreadminModule.v1.DatastoreAdminClient({
+          const client = new workflowsModule.v1beta.WorkflowsClient({
             universeDomain: 'configured.example.com',
           });
           const servicePath = client.apiEndpoint;
-          assert.strictEqual(servicePath, 'datastore.configured.example.com');
+          assert.strictEqual(servicePath, 'workflows.configured.example.com');
           if (saved) {
             process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
           } else {
@@ -244,7 +247,7 @@ describe('v1.DatastoreAdminClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new datastoreadminModule.v1.DatastoreAdminClient({
+        new workflowsModule.v1beta.WorkflowsClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -252,42 +255,42 @@ describe('v1.DatastoreAdminClient', () => {
     });
 
     it('has port', () => {
-      const port = datastoreadminModule.v1.DatastoreAdminClient.port;
+      const port = workflowsModule.v1beta.WorkflowsClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient();
+      const client = new workflowsModule.v1beta.WorkflowsClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         fallback: true,
       });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
-      assert.strictEqual(client.datastoreAdminStub, undefined);
+      assert.strictEqual(client.workflowsStub, undefined);
       await client.initialize();
-      assert(client.datastoreAdminStub);
+      assert(client.workflowsStub);
     });
 
     it('has close method for the initialized client', (done) => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       client.initialize().catch((err) => {
         throw err;
       });
-      assert(client.datastoreAdminStub);
+      assert(client.workflowsStub);
       client
         .close()
         .then(() => {
@@ -299,11 +302,11 @@ describe('v1.DatastoreAdminClient', () => {
     });
 
     it('has close method for the non-initialized client', (done) => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
-      assert.strictEqual(client.datastoreAdminStub, undefined);
+      assert.strictEqual(client.workflowsStub, undefined);
       client
         .close()
         .then(() => {
@@ -316,7 +319,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -328,7 +331,7 @@ describe('v1.DatastoreAdminClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -349,74 +352,64 @@ describe('v1.DatastoreAdminClient', () => {
     });
   });
 
-  describe('getIndex', () => {
-    it('invokes getIndex without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+  describe('getWorkflow', () => {
+    it('invokes getWorkflow without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.GetIndexRequest(),
+        new protos.google.cloud.workflows.v1beta.GetWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.GetIndexRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.GetWorkflowRequest',
+        ['name'],
       );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.GetIndexRequest',
-        ['indexId'],
-      );
-      request.indexId = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&index_id=${defaultValue2 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.datastore.admin.v1.Index(),
+        new protos.google.cloud.workflows.v1beta.Workflow(),
       );
-      client.innerApiCalls.getIndex = stubSimpleCall(expectedResponse);
-      const [response] = await client.getIndex(request);
+      client.innerApiCalls.getWorkflow = stubSimpleCall(expectedResponse);
+      const [response] = await client.getWorkflow(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getIndex as SinonStub
+        client.innerApiCalls.getWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getIndex as SinonStub
+        client.innerApiCalls.getWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getIndex without error using callback', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes getWorkflow without error using callback', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.GetIndexRequest(),
+        new protos.google.cloud.workflows.v1beta.GetWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.GetIndexRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.GetWorkflowRequest',
+        ['name'],
       );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.GetIndexRequest',
-        ['indexId'],
-      );
-      request.indexId = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&index_id=${defaultValue2 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.datastore.admin.v1.Index(),
+        new protos.google.cloud.workflows.v1beta.Workflow(),
       );
-      client.innerApiCalls.getIndex =
+      client.innerApiCalls.getWorkflow =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getIndex(
+        client.getWorkflow(
           request,
           (
             err?: Error | null,
-            result?: protos.google.datastore.admin.v1.IIndex | null,
+            result?: protos.google.cloud.workflows.v1beta.IWorkflow | null,
           ) => {
             if (err) {
               reject(err);
@@ -429,137 +422,130 @@ describe('v1.DatastoreAdminClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getIndex as SinonStub
+        client.innerApiCalls.getWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getIndex as SinonStub
+        client.innerApiCalls.getWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getIndex with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes getWorkflow with error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.GetIndexRequest(),
+        new protos.google.cloud.workflows.v1beta.GetWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.GetIndexRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.GetWorkflowRequest',
+        ['name'],
       );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.GetIndexRequest',
-        ['indexId'],
-      );
-      request.indexId = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&index_id=${defaultValue2 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getIndex = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getIndex(request), expectedError);
+      client.innerApiCalls.getWorkflow = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getWorkflow(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getIndex as SinonStub
+        client.innerApiCalls.getWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getIndex as SinonStub
+        client.innerApiCalls.getWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getIndex with closed client', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes getWorkflow with closed client', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.GetIndexRequest(),
+        new protos.google.cloud.workflows.v1beta.GetWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.GetIndexRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.GetWorkflowRequest',
+        ['name'],
       );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.GetIndexRequest',
-        ['indexId'],
-      );
-      request.indexId = defaultValue2;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close().catch((err) => {
         throw err;
       });
-      await assert.rejects(client.getIndex(request), expectedError);
+      await assert.rejects(client.getWorkflow(request), expectedError);
     });
   });
 
-  describe('exportEntities', () => {
-    it('invokes exportEntities without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+  describe('createWorkflow', () => {
+    it('invokes createWorkflow without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ExportEntitiesRequest(),
+        new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ExportEntitiesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.CreateWorkflowRequest',
+        ['parent'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
-      client.innerApiCalls.exportEntities =
+      client.innerApiCalls.createWorkflow =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.exportEntities(request);
+      const [operation] = await client.createWorkflow(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.exportEntities as SinonStub
+        client.innerApiCalls.createWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEntities as SinonStub
+        client.innerApiCalls.createWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes exportEntities without error using callback', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes createWorkflow without error using callback', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ExportEntitiesRequest(),
+        new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ExportEntitiesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.CreateWorkflowRequest',
+        ['parent'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
-      client.innerApiCalls.exportEntities =
+      client.innerApiCalls.createWorkflow =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.exportEntities(
+        client.createWorkflow(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.datastore.admin.v1.IExportEntitiesResponse,
-              protos.google.datastore.admin.v1.IExportEntitiesMetadata
+              protos.google.cloud.workflows.v1beta.IWorkflow,
+              protos.google.cloud.workflows.v1beta.IOperationMetadata
             > | null,
           ) => {
             if (err) {
@@ -571,87 +557,87 @@ describe('v1.DatastoreAdminClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.datastore.admin.v1.IExportEntitiesResponse,
-        protos.google.datastore.admin.v1.IExportEntitiesMetadata
+        protos.google.cloud.workflows.v1beta.IWorkflow,
+        protos.google.cloud.workflows.v1beta.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.exportEntities as SinonStub
+        client.innerApiCalls.createWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEntities as SinonStub
+        client.innerApiCalls.createWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes exportEntities with call error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes createWorkflow with call error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ExportEntitiesRequest(),
+        new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ExportEntitiesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.CreateWorkflowRequest',
+        ['parent'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.exportEntities = stubLongRunningCall(
+      client.innerApiCalls.createWorkflow = stubLongRunningCall(
         undefined,
         expectedError,
       );
-      await assert.rejects(client.exportEntities(request), expectedError);
+      await assert.rejects(client.createWorkflow(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.exportEntities as SinonStub
+        client.innerApiCalls.createWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEntities as SinonStub
+        client.innerApiCalls.createWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes exportEntities with LRO error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes createWorkflow with LRO error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ExportEntitiesRequest(),
+        new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ExportEntitiesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.CreateWorkflowRequest',
+        ['parent'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.exportEntities = stubLongRunningCall(
+      client.innerApiCalls.createWorkflow = stubLongRunningCall(
         undefined,
         undefined,
         expectedError,
       );
-      const [operation] = await client.exportEntities(request);
+      const [operation] = await client.createWorkflow(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.exportEntities as SinonStub
+        client.innerApiCalls.createWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.exportEntities as SinonStub
+        client.innerApiCalls.createWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkExportEntitiesProgress without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes checkCreateWorkflowProgress without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -664,7 +650,7 @@ describe('v1.DatastoreAdminClient', () => {
       expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkExportEntitiesProgress(
+      const decodedOperation = await client.checkCreateWorkflowProgress(
         expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -672,8 +658,8 @@ describe('v1.DatastoreAdminClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkExportEntitiesProgress with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes checkCreateWorkflowProgress with error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -685,75 +671,75 @@ describe('v1.DatastoreAdminClient', () => {
         expectedError,
       );
       await assert.rejects(
-        client.checkExportEntitiesProgress(''),
+        client.checkCreateWorkflowProgress(''),
         expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('importEntities', () => {
-    it('invokes importEntities without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+  describe('deleteWorkflow', () => {
+    it('invokes deleteWorkflow without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ImportEntitiesRequest(),
+        new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ImportEntitiesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.DeleteWorkflowRequest',
+        ['name'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
-      client.innerApiCalls.importEntities =
+      client.innerApiCalls.deleteWorkflow =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.importEntities(request);
+      const [operation] = await client.deleteWorkflow(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importEntities as SinonStub
+        client.innerApiCalls.deleteWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importEntities as SinonStub
+        client.innerApiCalls.deleteWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importEntities without error using callback', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes deleteWorkflow without error using callback', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ImportEntitiesRequest(),
+        new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ImportEntitiesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.DeleteWorkflowRequest',
+        ['name'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
-      client.innerApiCalls.importEntities =
+      client.innerApiCalls.deleteWorkflow =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.importEntities(
+        client.deleteWorkflow(
           request,
           (
             err?: Error | null,
             result?: LROperation<
               protos.google.protobuf.IEmpty,
-              protos.google.datastore.admin.v1.IImportEntitiesMetadata
+              protos.google.cloud.workflows.v1beta.IOperationMetadata
             > | null,
           ) => {
             if (err) {
@@ -766,86 +752,86 @@ describe('v1.DatastoreAdminClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.datastore.admin.v1.IImportEntitiesMetadata
+        protos.google.cloud.workflows.v1beta.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.importEntities as SinonStub
+        client.innerApiCalls.deleteWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importEntities as SinonStub
+        client.innerApiCalls.deleteWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importEntities with call error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes deleteWorkflow with call error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ImportEntitiesRequest(),
+        new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ImportEntitiesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.DeleteWorkflowRequest',
+        ['name'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.importEntities = stubLongRunningCall(
+      client.innerApiCalls.deleteWorkflow = stubLongRunningCall(
         undefined,
         expectedError,
       );
-      await assert.rejects(client.importEntities(request), expectedError);
+      await assert.rejects(client.deleteWorkflow(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.importEntities as SinonStub
+        client.innerApiCalls.deleteWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importEntities as SinonStub
+        client.innerApiCalls.deleteWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes importEntities with LRO error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes deleteWorkflow with LRO error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ImportEntitiesRequest(),
+        new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ImportEntitiesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.DeleteWorkflowRequest',
+        ['name'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.importEntities = stubLongRunningCall(
+      client.innerApiCalls.deleteWorkflow = stubLongRunningCall(
         undefined,
         undefined,
         expectedError,
       );
-      const [operation] = await client.importEntities(request);
+      const [operation] = await client.deleteWorkflow(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.importEntities as SinonStub
+        client.innerApiCalls.deleteWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.importEntities as SinonStub
+        client.innerApiCalls.deleteWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkImportEntitiesProgress without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes checkDeleteWorkflowProgress without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -858,7 +844,7 @@ describe('v1.DatastoreAdminClient', () => {
       expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkImportEntitiesProgress(
+      const decodedOperation = await client.checkDeleteWorkflowProgress(
         expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -866,8 +852,8 @@ describe('v1.DatastoreAdminClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkImportEntitiesProgress with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes checkDeleteWorkflowProgress with error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -879,74 +865,77 @@ describe('v1.DatastoreAdminClient', () => {
         expectedError,
       );
       await assert.rejects(
-        client.checkImportEntitiesProgress(''),
+        client.checkDeleteWorkflowProgress(''),
         expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('createIndex', () => {
-    it('invokes createIndex without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+  describe('updateWorkflow', () => {
+    it('invokes updateWorkflow without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.CreateIndexRequest(),
+        new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest(),
       );
+      request.workflow ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.CreateIndexRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.UpdateWorkflowRequest',
+        ['workflow', 'name'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.workflow.name = defaultValue1;
+      const expectedHeaderRequestParams = `workflow.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
-      client.innerApiCalls.createIndex = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createIndex(request);
+      client.innerApiCalls.updateWorkflow =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateWorkflow(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createIndex as SinonStub
+        client.innerApiCalls.updateWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createIndex as SinonStub
+        client.innerApiCalls.updateWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createIndex without error using callback', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes updateWorkflow without error using callback', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.CreateIndexRequest(),
+        new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest(),
       );
+      request.workflow ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.CreateIndexRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.UpdateWorkflowRequest',
+        ['workflow', 'name'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.workflow.name = defaultValue1;
+      const expectedHeaderRequestParams = `workflow.name=${defaultValue1 ?? ''}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation(),
       );
-      client.innerApiCalls.createIndex =
+      client.innerApiCalls.updateWorkflow =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createIndex(
+        client.updateWorkflow(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.datastore.admin.v1.IIndex,
-              protos.google.datastore.admin.v1.IIndexOperationMetadata
+              protos.google.cloud.workflows.v1beta.IWorkflow,
+              protos.google.cloud.workflows.v1beta.IOperationMetadata
             > | null,
           ) => {
             if (err) {
@@ -958,87 +947,89 @@ describe('v1.DatastoreAdminClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
+        protos.google.cloud.workflows.v1beta.IWorkflow,
+        protos.google.cloud.workflows.v1beta.IOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.createIndex as SinonStub
+        client.innerApiCalls.updateWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createIndex as SinonStub
+        client.innerApiCalls.updateWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createIndex with call error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes updateWorkflow with call error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.CreateIndexRequest(),
+        new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest(),
       );
+      request.workflow ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.CreateIndexRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.UpdateWorkflowRequest',
+        ['workflow', 'name'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.workflow.name = defaultValue1;
+      const expectedHeaderRequestParams = `workflow.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.createIndex = stubLongRunningCall(
+      client.innerApiCalls.updateWorkflow = stubLongRunningCall(
         undefined,
         expectedError,
       );
-      await assert.rejects(client.createIndex(request), expectedError);
+      await assert.rejects(client.updateWorkflow(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.createIndex as SinonStub
+        client.innerApiCalls.updateWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createIndex as SinonStub
+        client.innerApiCalls.updateWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes createIndex with LRO error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes updateWorkflow with LRO error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.CreateIndexRequest(),
+        new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest(),
       );
+      request.workflow ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.CreateIndexRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.UpdateWorkflowRequest',
+        ['workflow', 'name'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.workflow.name = defaultValue1;
+      const expectedHeaderRequestParams = `workflow.name=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.createIndex = stubLongRunningCall(
+      client.innerApiCalls.updateWorkflow = stubLongRunningCall(
         undefined,
         undefined,
         expectedError,
       );
-      const [operation] = await client.createIndex(request);
+      const [operation] = await client.updateWorkflow(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.createIndex as SinonStub
+        client.innerApiCalls.updateWorkflow as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.createIndex as SinonStub
+        client.innerApiCalls.updateWorkflow as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkCreateIndexProgress without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes checkUpdateWorkflowProgress without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1051,7 +1042,7 @@ describe('v1.DatastoreAdminClient', () => {
       expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateIndexProgress(
+      const decodedOperation = await client.checkUpdateWorkflowProgress(
         expectedResponse.name,
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -1059,8 +1050,8 @@ describe('v1.DatastoreAdminClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkCreateIndexProgress with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes checkUpdateWorkflowProgress with error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1071,283 +1062,88 @@ describe('v1.DatastoreAdminClient', () => {
         undefined,
         expectedError,
       );
-      await assert.rejects(client.checkCreateIndexProgress(''), expectedError);
+      await assert.rejects(
+        client.checkUpdateWorkflowProgress(''),
+        expectedError,
+      );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('deleteIndex', () => {
-    it('invokes deleteIndex without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+  describe('listWorkflows', () => {
+    it('invokes listWorkflows without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.DeleteIndexRequest(),
+        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.DeleteIndexRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent'],
       );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.DeleteIndexRequest',
-        ['indexId'],
-      );
-      request.indexId = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&index_id=${defaultValue2 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
-      );
-      client.innerApiCalls.deleteIndex = stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteIndex(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteIndex as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteIndex as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteIndex without error using callback', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.DeleteIndexRequest(),
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.DeleteIndexRequest',
-        ['projectId'],
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.DeleteIndexRequest',
-        ['indexId'],
-      );
-      request.indexId = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&index_id=${defaultValue2 ?? ''}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation(),
-      );
-      client.innerApiCalls.deleteIndex =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteIndex(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.datastore.admin.v1.IIndex,
-              protos.google.datastore.admin.v1.IIndexOperationMetadata
-            > | null,
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          },
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteIndex as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteIndex as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteIndex with call error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.DeleteIndexRequest(),
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.DeleteIndexRequest',
-        ['projectId'],
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.DeleteIndexRequest',
-        ['indexId'],
-      );
-      request.indexId = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&index_id=${defaultValue2 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteIndex = stubLongRunningCall(
-        undefined,
-        expectedError,
-      );
-      await assert.rejects(client.deleteIndex(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteIndex as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteIndex as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteIndex with LRO error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.DeleteIndexRequest(),
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.DeleteIndexRequest',
-        ['projectId'],
-      );
-      request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.DeleteIndexRequest',
-        ['indexId'],
-      );
-      request.indexId = defaultValue2;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}&index_id=${defaultValue2 ?? ''}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteIndex = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError,
-      );
-      const [operation] = await client.deleteIndex(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteIndex as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteIndex as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteIndexProgress without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation(),
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteIndexProgress(
-        expectedResponse.name,
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteIndexProgress with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError,
-      );
-      await assert.rejects(client.checkDeleteIndexProgress(''), expectedError);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listIndexes', () => {
-    it('invokes listIndexes without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
-        projectId: 'bogus',
-      });
-      await client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ListIndexesRequest(),
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ListIndexesRequest',
-        ['projectId'],
-      );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
       ];
-      client.innerApiCalls.listIndexes = stubSimpleCall(expectedResponse);
-      const [response] = await client.listIndexes(request);
+      client.innerApiCalls.listWorkflows = stubSimpleCall(expectedResponse);
+      const [response] = await client.listWorkflows(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listIndexes as SinonStub
+        client.innerApiCalls.listWorkflows as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listIndexes as SinonStub
+        client.innerApiCalls.listWorkflows as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listIndexes without error using callback', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes listWorkflows without error using callback', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ListIndexesRequest(),
+        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ListIndexesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
       ];
-      client.innerApiCalls.listIndexes =
+      client.innerApiCalls.listWorkflows =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listIndexes(
+        client.listWorkflows(
           request,
           (
             err?: Error | null,
-            result?: protos.google.datastore.admin.v1.IIndex[] | null,
+            result?: protos.google.cloud.workflows.v1beta.IWorkflow[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1360,74 +1156,80 @@ describe('v1.DatastoreAdminClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listIndexes as SinonStub
+        client.innerApiCalls.listWorkflows as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listIndexes as SinonStub
+        client.innerApiCalls.listWorkflows as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listIndexes with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes listWorkflows with error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ListIndexesRequest(),
+        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ListIndexesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listIndexes = stubSimpleCall(
+      client.innerApiCalls.listWorkflows = stubSimpleCall(
         undefined,
         expectedError,
       );
-      await assert.rejects(client.listIndexes(request), expectedError);
+      await assert.rejects(client.listWorkflows(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.listIndexes as SinonStub
+        client.innerApiCalls.listWorkflows as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listIndexes as SinonStub
+        client.innerApiCalls.listWorkflows as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listIndexesStream without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes listWorkflowsStream without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ListIndexesRequest(),
+        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ListIndexesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
       ];
-      client.descriptors.page.listIndexes.createStream =
+      client.descriptors.page.listWorkflows.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listIndexesStream(request);
+      const stream = client.listWorkflowsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.datastore.admin.v1.Index[] = [];
+        const responses: protos.google.cloud.workflows.v1beta.Workflow[] = [];
         stream.on(
           'data',
-          (response: protos.google.datastore.admin.v1.Index) => {
+          (response: protos.google.cloud.workflows.v1beta.Workflow) => {
             responses.push(response);
           },
         );
@@ -1441,12 +1243,12 @@ describe('v1.DatastoreAdminClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listIndexes.createStream as SinonStub)
+        (client.descriptors.page.listWorkflows.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listIndexes, request),
+          .calledWith(client.innerApiCalls.listWorkflows, request),
       );
       assert(
-        (client.descriptors.page.listIndexes.createStream as SinonStub)
+        (client.descriptors.page.listWorkflows.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1454,32 +1256,30 @@ describe('v1.DatastoreAdminClient', () => {
       );
     });
 
-    it('invokes listIndexesStream with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('invokes listWorkflowsStream with error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ListIndexesRequest(),
+        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ListIndexesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listIndexes.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError,
-      );
-      const stream = client.listIndexesStream(request);
+      client.descriptors.page.listWorkflows.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listWorkflowsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.datastore.admin.v1.Index[] = [];
+        const responses: protos.google.cloud.workflows.v1beta.Workflow[] = [];
         stream.on(
           'data',
-          (response: protos.google.datastore.admin.v1.Index) => {
+          (response: protos.google.cloud.workflows.v1beta.Workflow) => {
             responses.push(response);
           },
         );
@@ -1492,12 +1292,12 @@ describe('v1.DatastoreAdminClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listIndexes.createStream as SinonStub)
+        (client.descriptors.page.listWorkflows.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listIndexes, request),
+          .calledWith(client.innerApiCalls.listWorkflows, request),
       );
       assert(
-        (client.descriptors.page.listIndexes.createStream as SinonStub)
+        (client.descriptors.page.listWorkflows.createStream as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1505,42 +1305,48 @@ describe('v1.DatastoreAdminClient', () => {
       );
     });
 
-    it('uses async iteration with listIndexes without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('uses async iteration with listWorkflows without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ListIndexesRequest(),
+        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ListIndexesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedResponse = [
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
-        generateSampleMessage(new protos.google.datastore.admin.v1.Index()),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.workflows.v1beta.Workflow(),
+        ),
       ];
-      client.descriptors.page.listIndexes.asyncIterate =
+      client.descriptors.page.listWorkflows.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.datastore.admin.v1.IIndex[] = [];
-      const iterable = client.listIndexesAsync(request);
+      const responses: protos.google.cloud.workflows.v1beta.IWorkflow[] = [];
+      const iterable = client.listWorkflowsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listIndexes.asyncIterate as SinonStub).getCall(
-          0,
-        ).args[1],
+        (
+          client.descriptors.page.listWorkflows.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request,
       );
       assert(
-        (client.descriptors.page.listIndexes.asyncIterate as SinonStub)
+        (client.descriptors.page.listWorkflows.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1548,41 +1354,39 @@ describe('v1.DatastoreAdminClient', () => {
       );
     });
 
-    it('uses async iteration with listIndexes with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+    it('uses async iteration with listWorkflows with error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.datastore.admin.v1.ListIndexesRequest(),
+        new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.datastore.admin.v1.ListIndexesRequest',
-        ['projectId'],
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent'],
       );
-      request.projectId = defaultValue1;
-      const expectedHeaderRequestParams = `project_id=${defaultValue1 ?? ''}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
       const expectedError = new Error('expected');
-      client.descriptors.page.listIndexes.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError,
-      );
-      const iterable = client.listIndexesAsync(request);
+      client.descriptors.page.listWorkflows.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listWorkflowsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.datastore.admin.v1.IIndex[] = [];
+        const responses: protos.google.cloud.workflows.v1beta.IWorkflow[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listIndexes.asyncIterate as SinonStub).getCall(
-          0,
-        ).args[1],
+        (
+          client.descriptors.page.listWorkflows.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request,
       );
       assert(
-        (client.descriptors.page.listIndexes.asyncIterate as SinonStub)
+        (client.descriptors.page.listWorkflows.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -1590,9 +1394,207 @@ describe('v1.DatastoreAdminClient', () => {
       );
     });
   });
+  describe('getLocation', () => {
+    it('invokes getLocation without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location(),
+      );
+      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+      const response = await client.getLocation(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
+    });
+    it('invokes getLocation without error using callback', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location(),
+      );
+      client.locationsClient.getLocation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLocation(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: LocationProtos.google.cloud.location.ILocation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+    });
+    it('invokes getLocation with error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.locationsClient.getLocation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getLocation(request, expectedOptions),
+        expectedError,
+      );
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
+    });
+  });
+  describe('listLocationsAsync', () => {
+    it('uses async iteration with listLocations without error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+      ];
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+      const iterable = client.listLocationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+    it('uses async iteration with listLocations with error', async () => {
+      const client = new workflowsModule.v1beta.WorkflowsClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listLocationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1613,7 +1615,7 @@ describe('v1.DatastoreAdminClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1651,7 +1653,7 @@ describe('v1.DatastoreAdminClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1675,7 +1677,7 @@ describe('v1.DatastoreAdminClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1697,7 +1699,7 @@ describe('v1.DatastoreAdminClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1735,7 +1737,7 @@ describe('v1.DatastoreAdminClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1759,7 +1761,7 @@ describe('v1.DatastoreAdminClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1781,7 +1783,7 @@ describe('v1.DatastoreAdminClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1819,7 +1821,7 @@ describe('v1.DatastoreAdminClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1843,7 +1845,7 @@ describe('v1.DatastoreAdminClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1878,7 +1880,7 @@ describe('v1.DatastoreAdminClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client = new datastoreadminModule.v1.DatastoreAdminClient({
+      const client = new workflowsModule.v1beta.WorkflowsClient({
         credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
@@ -1903,6 +1905,121 @@ describe('v1.DatastoreAdminClient', () => {
         ).getCall(0).args[1],
         request,
       );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('location', async () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new workflowsModule.v1beta.WorkflowsClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('workflow', async () => {
+      const fakePath = '/rendered/path/workflow';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        workflow: 'workflowValue',
+      };
+      const client = new workflowsModule.v1beta.WorkflowsClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.workflowPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.workflowPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('workflowPath', () => {
+        const result = client.workflowPath(
+          'projectValue',
+          'locationValue',
+          'workflowValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.workflowPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromWorkflowName', () => {
+        const result = client.matchProjectFromWorkflowName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.workflowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromWorkflowName', () => {
+        const result = client.matchLocationFromWorkflowName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.workflowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchWorkflowFromWorkflowName', () => {
+        const result = client.matchWorkflowFromWorkflowName(fakePath);
+        assert.strictEqual(result, 'workflowValue');
+        assert(
+          (client.pathTemplates.workflowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
   });
 });

@@ -27,6 +27,8 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
@@ -35,64 +37,20 @@ import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/datastore_admin_client_config.json`.
+ * `src/v1/workflows_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './datastore_admin_client_config.json';
+import * as gapicConfig from './workflows_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Google Cloud Datastore Admin API
- *
- *  The Datastore Admin API provides several admin services for Cloud Datastore.
- *
- *  Concepts: Project, namespace, kind, and entity as defined in the Google Cloud
- *  Datastore API.
- *
- *  Operation: An Operation represents work being performed in the background.
- *
- *  EntityFilter: Allows specifying a subset of entities in a project. This is
- *  specified as a combination of kinds and namespaces (either or both of which
- *  may be all).
- *
- *  Export/Import Service:
- *
- *  - The Export/Import service provides the ability to copy all or a subset of
- *  entities to/from Google Cloud Storage.
- *  - Exported data may be imported into Cloud Datastore for any Google Cloud
- *  Platform project. It is not restricted to the export source project. It is
- *  possible to export from one project and then import into another.
- *  - Exported data can also be loaded into Google BigQuery for analysis.
- *  - Exports and imports are performed asynchronously. An Operation resource is
- *  created for each export/import. The state (including any errors encountered)
- *  of the export/import may be queried via the Operation resource.
- *
- *  Index Service:
- *
- *  - The index service manages Cloud Datastore composite indexes.
- *  - Index creation and deletion are performed asynchronously.
- *  An Operation resource is created for each such asynchronous operation.
- *  The state of the operation (including any errors encountered)
- *  may be queried via the Operation resource.
- *
- *  Operation Service:
- *
- *  - The Operations collection provides a record of actions performed for the
- *  specified project (including any operations in progress). Operations are not
- *  created directly but through calls on other collections or resources.
- *  - An operation that is not yet done may be cancelled. The request to cancel
- *  is asynchronous and the operation may continue to run for some time after the
- *  request to cancel is made.
- *  - An operation that is done may be deleted so that it is no longer listed as
- *  part of the Operation collection.
- *  - ListOperations returns all pending operations, but not completed
- *  operations.
- *  - Operations are created by service DatastoreAdmin, but are accessed via
- *  service google.longrunning.Operations.
+ *  Workflows is used to deploy and execute workflow programs.
+ *  Workflows makes sure the program executes reliably, despite hardware and
+ *  networking interruptions.
  * @class
  * @memberof v1
  */
-export class DatastoreAdminClient {
+export class WorkflowsClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -102,7 +60,7 @@ export class DatastoreAdminClient {
   private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('datastore-admin');
+  private _log = logging.log('workflows');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
@@ -113,11 +71,13 @@ export class DatastoreAdminClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: { [name: string]: Function };
+  locationsClient: LocationsClient;
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  datastoreAdminStub?: Promise<{ [name: string]: Function }>;
+  workflowsStub?: Promise<{ [name: string]: Function }>;
 
   /**
-   * Construct an instance of DatastoreAdminClient.
+   * Construct an instance of WorkflowsClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -152,7 +112,7 @@ export class DatastoreAdminClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new DatastoreAdminClient({fallback: true}, gax);
+   *     const client = new WorkflowsClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -160,7 +120,7 @@ export class DatastoreAdminClient {
     gaxInstance?: typeof gax | typeof gax.fallback,
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof DatastoreAdminClient;
+    const staticMembers = this.constructor as typeof WorkflowsClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -179,7 +139,7 @@ export class DatastoreAdminClient {
       opts?.universe_domain ??
       universeDomainEnvVar ??
       'googleapis.com';
-    this._servicePath = 'datastore.' + this._universeDomain;
+    this._servicePath = 'workflows.' + this._universeDomain;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || this._servicePath;
     this._providedCustomServicePath = !!(
@@ -227,6 +187,10 @@ export class DatastoreAdminClient {
     if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts,
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -246,14 +210,37 @@ export class DatastoreAdminClient {
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}',
+      ),
+      cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}/cryptoKeyVersions/{cryptoKeyVersion}',
+      ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}',
+      ),
+      workflowPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/workflows/{workflow}',
+      ),
+    };
+
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listIndexes: new this._gaxModule.PageDescriptor(
+      listWorkflows: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'indexes',
+        'workflows',
+      ),
+      listWorkflowRevisions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'workflows',
       ),
     };
 
@@ -269,77 +256,70 @@ export class DatastoreAdminClient {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [
         {
-          selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1/{name=projects/*/operations/*}:cancel',
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1/{name=projects/*/operations/*}',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=projects/*/operations/*}',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1/{name=projects/*}/operations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
         },
       ];
     }
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const exportEntitiesResponse = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.ExportEntitiesResponse',
+    const createWorkflowResponse = protoFilesRoot.lookup(
+      '.google.cloud.workflows.v1.Workflow',
     ) as gax.protobuf.Type;
-    const exportEntitiesMetadata = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.ExportEntitiesMetadata',
+    const createWorkflowMetadata = protoFilesRoot.lookup(
+      '.google.cloud.workflows.v1.OperationMetadata',
     ) as gax.protobuf.Type;
-    const importEntitiesResponse = protoFilesRoot.lookup(
+    const deleteWorkflowResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty',
     ) as gax.protobuf.Type;
-    const importEntitiesMetadata = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.ImportEntitiesMetadata',
+    const deleteWorkflowMetadata = protoFilesRoot.lookup(
+      '.google.cloud.workflows.v1.OperationMetadata',
     ) as gax.protobuf.Type;
-    const createIndexResponse = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.Index',
+    const updateWorkflowResponse = protoFilesRoot.lookup(
+      '.google.cloud.workflows.v1.Workflow',
     ) as gax.protobuf.Type;
-    const createIndexMetadata = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.IndexOperationMetadata',
-    ) as gax.protobuf.Type;
-    const deleteIndexResponse = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.Index',
-    ) as gax.protobuf.Type;
-    const deleteIndexMetadata = protoFilesRoot.lookup(
-      '.google.datastore.admin.v1.IndexOperationMetadata',
+    const updateWorkflowMetadata = protoFilesRoot.lookup(
+      '.google.cloud.workflows.v1.OperationMetadata',
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      exportEntities: new this._gaxModule.LongrunningDescriptor(
+      createWorkflow: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        exportEntitiesResponse.decode.bind(exportEntitiesResponse),
-        exportEntitiesMetadata.decode.bind(exportEntitiesMetadata),
+        createWorkflowResponse.decode.bind(createWorkflowResponse),
+        createWorkflowMetadata.decode.bind(createWorkflowMetadata),
       ),
-      importEntities: new this._gaxModule.LongrunningDescriptor(
+      deleteWorkflow: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        importEntitiesResponse.decode.bind(importEntitiesResponse),
-        importEntitiesMetadata.decode.bind(importEntitiesMetadata),
+        deleteWorkflowResponse.decode.bind(deleteWorkflowResponse),
+        deleteWorkflowMetadata.decode.bind(deleteWorkflowMetadata),
       ),
-      createIndex: new this._gaxModule.LongrunningDescriptor(
+      updateWorkflow: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createIndexResponse.decode.bind(createIndexResponse),
-        createIndexMetadata.decode.bind(createIndexMetadata),
-      ),
-      deleteIndex: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteIndexResponse.decode.bind(deleteIndexResponse),
-        deleteIndexMetadata.decode.bind(deleteIndexMetadata),
+        updateWorkflowResponse.decode.bind(updateWorkflowResponse),
+        updateWorkflowMetadata.decode.bind(updateWorkflowMetadata),
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.datastore.admin.v1.DatastoreAdmin',
+      'google.cloud.workflows.v1.Workflows',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       { 'x-goog-api-client': clientHeader.join(' ') },
@@ -367,35 +347,35 @@ export class DatastoreAdminClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.datastoreAdminStub) {
-      return this.datastoreAdminStub;
+    if (this.workflowsStub) {
+      return this.workflowsStub;
     }
 
     // Put together the "service stub" for
-    // google.datastore.admin.v1.DatastoreAdmin.
-    this.datastoreAdminStub = this._gaxGrpc.createStub(
+    // google.cloud.workflows.v1.Workflows.
+    this.workflowsStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.datastore.admin.v1.DatastoreAdmin',
+            'google.cloud.workflows.v1.Workflows',
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.datastore.admin.v1.DatastoreAdmin,
+          (this._protos as any).google.cloud.workflows.v1.Workflows,
       this._opts,
       this._providedCustomServicePath,
     ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const datastoreAdminStubMethods = [
-      'exportEntities',
-      'importEntities',
-      'createIndex',
-      'deleteIndex',
-      'getIndex',
-      'listIndexes',
+    const workflowsStubMethods = [
+      'listWorkflows',
+      'getWorkflow',
+      'createWorkflow',
+      'deleteWorkflow',
+      'updateWorkflow',
+      'listWorkflowRevisions',
     ];
-    for (const methodName of datastoreAdminStubMethods) {
-      const callPromise = this.datastoreAdminStub.then(
+    for (const methodName of workflowsStubMethods) {
+      const callPromise = this.workflowsStub.then(
         (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -423,7 +403,7 @@ export class DatastoreAdminClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.datastoreAdminStub;
+    return this.workflowsStub;
   }
 
   /**
@@ -441,7 +421,7 @@ export class DatastoreAdminClient {
         'DeprecationWarning',
       );
     }
-    return 'datastore.googleapis.com';
+    return 'workflows.googleapis.com';
   }
 
   /**
@@ -459,7 +439,7 @@ export class DatastoreAdminClient {
         'DeprecationWarning',
       );
     }
-    return 'datastore.googleapis.com';
+    return 'workflows.googleapis.com';
   }
 
   /**
@@ -488,10 +468,7 @@ export class DatastoreAdminClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/datastore',
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -514,68 +491,75 @@ export class DatastoreAdminClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets an index.
+   * Gets details of a single workflow.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Project ID against which to make the request.
-   * @param {string} request.indexId
-   *   The resource ID of the index to get.
+   * @param {string} request.name
+   *   Required. Name of the workflow for which information should be retrieved.
+   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+   * @param {string} [request.revisionId]
+   *   Optional. The revision of the workflow to retrieve. If the revision_id is
+   *   empty, the latest revision is retrieved.
+   *   The format is "000001-a4d", where the first six characters define
+   *   the zero-padded decimal revision number. They are followed by a hyphen and
+   *   three hexadecimal characters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.datastore.admin.v1.Index|Index}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.workflows.v1.Workflow|Workflow}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/datastore_admin.get_index.js</caption>
-   * region_tag:datastore_v1_generated_DatastoreAdmin_GetIndex_async
+   * @example <caption>include:samples/generated/v1/workflows.get_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_GetWorkflow_async
    */
-  getIndex(
-    request?: protos.google.datastore.admin.v1.IGetIndexRequest,
+  getWorkflow(
+    request?: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
     options?: CallOptions,
   ): Promise<
     [
-      protos.google.datastore.admin.v1.IIndex,
-      protos.google.datastore.admin.v1.IGetIndexRequest | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow,
+      protos.google.cloud.workflows.v1.IGetWorkflowRequest | undefined,
       {} | undefined,
     ]
   >;
-  getIndex(
-    request: protos.google.datastore.admin.v1.IGetIndexRequest,
+  getWorkflow(
+    request: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.datastore.admin.v1.IIndex,
-      protos.google.datastore.admin.v1.IGetIndexRequest | null | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow,
+      protos.google.cloud.workflows.v1.IGetWorkflowRequest | null | undefined,
       {} | null | undefined
     >,
   ): void;
-  getIndex(
-    request: protos.google.datastore.admin.v1.IGetIndexRequest,
+  getWorkflow(
+    request: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
     callback: Callback<
-      protos.google.datastore.admin.v1.IIndex,
-      protos.google.datastore.admin.v1.IGetIndexRequest | null | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow,
+      protos.google.cloud.workflows.v1.IGetWorkflowRequest | null | undefined,
       {} | null | undefined
     >,
   ): void;
-  getIndex(
-    request?: protos.google.datastore.admin.v1.IGetIndexRequest,
+  getWorkflow(
+    request?: protos.google.cloud.workflows.v1.IGetWorkflowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.datastore.admin.v1.IIndex,
-          protos.google.datastore.admin.v1.IGetIndexRequest | null | undefined,
+          protos.google.cloud.workflows.v1.IWorkflow,
+          | protos.google.cloud.workflows.v1.IGetWorkflowRequest
+          | null
+          | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.datastore.admin.v1.IIndex,
-      protos.google.datastore.admin.v1.IGetIndexRequest | null | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow,
+      protos.google.cloud.workflows.v1.IGetWorkflowRequest | null | undefined,
       {} | null | undefined
     >,
   ): Promise<
     [
-      protos.google.datastore.admin.v1.IIndex,
-      protos.google.datastore.admin.v1.IGetIndexRequest | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow,
+      protos.google.cloud.workflows.v1.IGetWorkflowRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -592,34 +576,35 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId?.toString() ?? '',
-        index_id: request.indexId?.toString() ?? '',
+        name: request.name ?? '',
       });
     this.initialize().catch((err) => {
       throw err;
     });
-    this._log.info('getIndex request %j', request);
+    this._log.info('getWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
-          protos.google.datastore.admin.v1.IIndex,
-          protos.google.datastore.admin.v1.IGetIndexRequest | null | undefined,
+          protos.google.cloud.workflows.v1.IWorkflow,
+          | protos.google.cloud.workflows.v1.IGetWorkflowRequest
+          | null
+          | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getIndex response %j', response);
+          this._log.info('getWorkflow response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
     return this.innerApiCalls
-      .getIndex(request, options, wrappedCallback)
+      .getWorkflow(request, options, wrappedCallback)
       ?.then(
         ([response, options, rawResponse]: [
-          protos.google.datastore.admin.v1.IIndex,
-          protos.google.datastore.admin.v1.IGetIndexRequest | undefined,
+          protos.google.cloud.workflows.v1.IWorkflow,
+          protos.google.cloud.workflows.v1.IGetWorkflowRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getIndex response %j', response);
+          this._log.info('getWorkflow response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -642,42 +627,26 @@ export class DatastoreAdminClient {
   }
 
   /**
-   * Exports a copy of all or a subset of entities from Google Cloud Datastore
-   * to another storage system, such as Google Cloud Storage. Recent updates to
-   * entities may not be reflected in the export. The export occurs in the
-   * background and its progress can be monitored and managed via the
-   * Operation resource that is created. The output of an export may only be
-   * used once the associated operation is done. If an export operation is
-   * cancelled before completion it may leave partial data behind in Google
-   * Cloud Storage.
+   * Creates a new workflow. If a workflow with the specified name already
+   * exists in the specified project and location, the long running operation
+   * returns a {@link protos.google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS} error.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. Project ID against which to make the request.
-   * @param {number[]} request.labels
-   *   Client-assigned labels.
-   * @param {google.datastore.admin.v1.EntityFilter} request.entityFilter
-   *   Description of what data from the project is included in the export.
-   * @param {string} request.outputUrlPrefix
-   *   Required. Location for the export metadata and data files.
+   * @param {string} request.parent
+   *   Required. Project and location in which the workflow should be created.
+   *   Format:  projects/{project}/locations/{location}
+   * @param {google.cloud.workflows.v1.Workflow} request.workflow
+   *   Required. Workflow to be created.
+   * @param {string} request.workflowId
+   *   Required. The ID of the workflow to be created. It has to fulfill the
+   *   following requirements:
    *
-   *   The full resource URL of the external storage location. Currently, only
-   *   Google Cloud Storage is supported. So output_url_prefix should be of the
-   *   form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the
-   *   name of the Cloud Storage bucket and `NAMESPACE_PATH` is an optional Cloud
-   *   Storage namespace path (this is not a Cloud Datastore namespace). For more
-   *   information about Cloud Storage namespace paths, see
-   *   [Object name
-   *   considerations](https://cloud.google.com/storage/docs/naming#object-considerations).
-   *
-   *   The resulting files will be nested deeper than the specified URL prefix.
-   *   The final output URL will be provided in the
-   *   {@link protos.google.datastore.admin.v1.ExportEntitiesResponse.output_url|google.datastore.admin.v1.ExportEntitiesResponse.output_url}
-   *   field. That value should be used for subsequent ImportEntities operations.
-   *
-   *   By nesting the data files deeper, the same Cloud Storage bucket can be used
-   *   in multiple ExportEntities operations without conflict.
+   *   * Must contain only letters, numbers, underscores and hyphens.
+   *   * Must start with a letter.
+   *   * Must be between 1-64 characters.
+   *   * Must end with a number or a letter.
+   *   * Must be unique within the customer project and location.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -686,61 +655,61 @@ export class DatastoreAdminClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/datastore_admin.export_entities.js</caption>
-   * region_tag:datastore_v1_generated_DatastoreAdmin_ExportEntities_async
+   * @example <caption>include:samples/generated/v1/workflows.create_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_CreateWorkflow_async
    */
-  exportEntities(
-    request?: protos.google.datastore.admin.v1.IExportEntitiesRequest,
+  createWorkflow(
+    request?: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
     options?: CallOptions,
   ): Promise<
     [
       LROperation<
-        protos.google.datastore.admin.v1.IExportEntitiesResponse,
-        protos.google.datastore.admin.v1.IExportEntitiesMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  exportEntities(
-    request: protos.google.datastore.admin.v1.IExportEntitiesRequest,
+  createWorkflow(
+    request: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.datastore.admin.v1.IExportEntitiesResponse,
-        protos.google.datastore.admin.v1.IExportEntitiesMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >,
   ): void;
-  exportEntities(
-    request: protos.google.datastore.admin.v1.IExportEntitiesRequest,
+  createWorkflow(
+    request: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
     callback: Callback<
       LROperation<
-        protos.google.datastore.admin.v1.IExportEntitiesResponse,
-        protos.google.datastore.admin.v1.IExportEntitiesMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >,
   ): void;
-  exportEntities(
-    request?: protos.google.datastore.admin.v1.IExportEntitiesRequest,
+  createWorkflow(
+    request?: protos.google.cloud.workflows.v1.ICreateWorkflowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.datastore.admin.v1.IExportEntitiesResponse,
-            protos.google.datastore.admin.v1.IExportEntitiesMetadata
+            protos.google.cloud.workflows.v1.IWorkflow,
+            protos.google.cloud.workflows.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.datastore.admin.v1.IExportEntitiesResponse,
-        protos.google.datastore.admin.v1.IExportEntitiesMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -748,8 +717,8 @@ export class DatastoreAdminClient {
   ): Promise<
     [
       LROperation<
-        protos.google.datastore.admin.v1.IExportEntitiesResponse,
-        protos.google.datastore.admin.v1.IExportEntitiesMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -768,7 +737,7 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId?.toString() ?? '',
+        parent: request.parent ?? '',
       });
     this.initialize().catch((err) => {
       throw err;
@@ -776,55 +745,55 @@ export class DatastoreAdminClient {
     const wrappedCallback:
       | Callback<
           LROperation<
-            protos.google.datastore.admin.v1.IExportEntitiesResponse,
-            protos.google.datastore.admin.v1.IExportEntitiesMetadata
+            protos.google.cloud.workflows.v1.IWorkflow,
+            protos.google.cloud.workflows.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('exportEntities response %j', rawResponse);
+          this._log.info('createWorkflow response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('exportEntities request %j', request);
+    this._log.info('createWorkflow request %j', request);
     return this.innerApiCalls
-      .exportEntities(request, options, wrappedCallback)
+      .createWorkflow(request, options, wrappedCallback)
       ?.then(
         ([response, rawResponse, _]: [
           LROperation<
-            protos.google.datastore.admin.v1.IExportEntitiesResponse,
-            protos.google.datastore.admin.v1.IExportEntitiesMetadata
+            protos.google.cloud.workflows.v1.IWorkflow,
+            protos.google.cloud.workflows.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('exportEntities response %j', rawResponse);
+          this._log.info('createWorkflow response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
   }
   /**
-   * Check the status of the long running operation returned by `exportEntities()`.
+   * Check the status of the long running operation returned by `createWorkflow()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/datastore_admin.export_entities.js</caption>
-   * region_tag:datastore_v1_generated_DatastoreAdmin_ExportEntities_async
+   * @example <caption>include:samples/generated/v1/workflows.create_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_CreateWorkflow_async
    */
-  async checkExportEntitiesProgress(
+  async checkCreateWorkflowProgress(
     name: string,
   ): Promise<
     LROperation<
-      protos.google.datastore.admin.v1.ExportEntitiesResponse,
-      protos.google.datastore.admin.v1.ExportEntitiesMetadata
+      protos.google.cloud.workflows.v1.Workflow,
+      protos.google.cloud.workflows.v1.OperationMetadata
     >
   > {
-    this._log.info('exportEntities long-running');
+    this._log.info('createWorkflow long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         { name },
@@ -832,47 +801,24 @@ export class DatastoreAdminClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.exportEntities,
+      this.descriptors.longrunning.createWorkflow,
       this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
-      protos.google.datastore.admin.v1.ExportEntitiesResponse,
-      protos.google.datastore.admin.v1.ExportEntitiesMetadata
+      protos.google.cloud.workflows.v1.Workflow,
+      protos.google.cloud.workflows.v1.OperationMetadata
     >;
   }
   /**
-   * Imports entities into Google Cloud Datastore. Existing entities with the
-   * same key are overwritten. The import occurs in the background and its
-   * progress can be monitored and managed via the Operation resource that is
-   * created. If an ImportEntities operation is cancelled, it is possible
-   * that a subset of the data has already been imported to Cloud Datastore.
+   * Deletes a workflow with the specified name.
+   * This method also cancels and deletes all running executions of the
+   * workflow.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Required. Project ID against which to make the request.
-   * @param {number[]} request.labels
-   *   Client-assigned labels.
-   * @param {string} request.inputUrl
-   *   Required. The full resource URL of the external storage location.
-   *   Currently, only Google Cloud Storage is supported. So input_url should be
-   *   of the form:
-   *   `gs://BUCKET_NAME[/NAMESPACE_PATH]/OVERALL_EXPORT_METADATA_FILE`, where
-   *   `BUCKET_NAME` is the name of the Cloud Storage bucket, `NAMESPACE_PATH` is
-   *   an optional Cloud Storage namespace path (this is not a Cloud Datastore
-   *   namespace), and `OVERALL_EXPORT_METADATA_FILE` is the metadata file written
-   *   by the ExportEntities operation. For more information about Cloud Storage
-   *   namespace paths, see
-   *   [Object name
-   *   considerations](https://cloud.google.com/storage/docs/naming#object-considerations).
-   *
-   *   For more information, see
-   *   {@link protos.google.datastore.admin.v1.ExportEntitiesResponse.output_url|google.datastore.admin.v1.ExportEntitiesResponse.output_url}.
-   * @param {google.datastore.admin.v1.EntityFilter} request.entityFilter
-   *   Optionally specify which kinds/namespaces are to be imported. If provided,
-   *   the list must be a subset of the EntityFilter used in creating the export,
-   *   otherwise a FAILED_PRECONDITION error will be returned. If no filter is
-   *   specified then all entities from the export are imported.
+   * @param {string} request.name
+   *   Required. Name of the workflow to be deleted.
+   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -881,53 +827,53 @@ export class DatastoreAdminClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/datastore_admin.import_entities.js</caption>
-   * region_tag:datastore_v1_generated_DatastoreAdmin_ImportEntities_async
+   * @example <caption>include:samples/generated/v1/workflows.delete_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_DeleteWorkflow_async
    */
-  importEntities(
-    request?: protos.google.datastore.admin.v1.IImportEntitiesRequest,
+  deleteWorkflow(
+    request?: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
     options?: CallOptions,
   ): Promise<
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.datastore.admin.v1.IImportEntitiesMetadata
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  importEntities(
-    request: protos.google.datastore.admin.v1.IImportEntitiesRequest,
+  deleteWorkflow(
+    request: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.datastore.admin.v1.IImportEntitiesMetadata
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >,
   ): void;
-  importEntities(
-    request: protos.google.datastore.admin.v1.IImportEntitiesRequest,
+  deleteWorkflow(
+    request: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.datastore.admin.v1.IImportEntitiesMetadata
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >,
   ): void;
-  importEntities(
-    request?: protos.google.datastore.admin.v1.IImportEntitiesRequest,
+  deleteWorkflow(
+    request?: protos.google.cloud.workflows.v1.IDeleteWorkflowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.datastore.admin.v1.IImportEntitiesMetadata
+            protos.google.cloud.workflows.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -935,7 +881,7 @@ export class DatastoreAdminClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.datastore.admin.v1.IImportEntitiesMetadata
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -944,7 +890,7 @@ export class DatastoreAdminClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.datastore.admin.v1.IImportEntitiesMetadata
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -963,7 +909,7 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId?.toString() ?? '',
+        name: request.name ?? '',
       });
     this.initialize().catch((err) => {
       throw err;
@@ -972,54 +918,54 @@ export class DatastoreAdminClient {
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.datastore.admin.v1.IImportEntitiesMetadata
+            protos.google.cloud.workflows.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('importEntities response %j', rawResponse);
+          this._log.info('deleteWorkflow response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('importEntities request %j', request);
+    this._log.info('deleteWorkflow request %j', request);
     return this.innerApiCalls
-      .importEntities(request, options, wrappedCallback)
+      .deleteWorkflow(request, options, wrappedCallback)
       ?.then(
         ([response, rawResponse, _]: [
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.datastore.admin.v1.IImportEntitiesMetadata
+            protos.google.cloud.workflows.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('importEntities response %j', rawResponse);
+          this._log.info('deleteWorkflow response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
   }
   /**
-   * Check the status of the long running operation returned by `importEntities()`.
+   * Check the status of the long running operation returned by `deleteWorkflow()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/datastore_admin.import_entities.js</caption>
-   * region_tag:datastore_v1_generated_DatastoreAdmin_ImportEntities_async
+   * @example <caption>include:samples/generated/v1/workflows.delete_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_DeleteWorkflow_async
    */
-  async checkImportEntitiesProgress(
+  async checkDeleteWorkflowProgress(
     name: string,
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.datastore.admin.v1.ImportEntitiesMetadata
+      protos.google.cloud.workflows.v1.OperationMetadata
     >
   > {
-    this._log.info('importEntities long-running');
+    this._log.info('deleteWorkflow long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         { name },
@@ -1027,37 +973,28 @@ export class DatastoreAdminClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.importEntities,
+      this.descriptors.longrunning.deleteWorkflow,
       this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.datastore.admin.v1.ImportEntitiesMetadata
+      protos.google.cloud.workflows.v1.OperationMetadata
     >;
   }
   /**
-   * Creates the specified index.
-   * A newly created index's initial state is `CREATING`. On completion of the
-   * returned {@link protos.google.longrunning.Operation|google.longrunning.Operation}, the
-   * state will be `READY`. If the index already exists, the call will return an
-   * `ALREADY_EXISTS` status.
-   *
-   * During index creation, the process could result in an error, in which
-   * case the index will move to the `ERROR` state. The process can be recovered
-   * by fixing the data that caused the error, removing the index with
-   * {@link protos.google.datastore.admin.v1.DatastoreAdmin.DeleteIndex|delete}, then
-   * re-creating the index with [create]
-   * [google.datastore.admin.v1.DatastoreAdmin.CreateIndex].
-   *
-   * Indexes with a single property cannot be created.
+   * Updates an existing workflow.
+   * Running this method has no impact on already running executions of the
+   * workflow. A new revision of the workflow might be created as a result of a
+   * successful update operation. In that case, the new revision is used
+   * in new workflow executions.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Project ID against which to make the request.
-   * @param {google.datastore.admin.v1.Index} request.index
-   *   The index to create. The name and state fields are output only and will be
-   *   ignored. Single property indexes cannot be created or deleted.
+   * @param {google.cloud.workflows.v1.Workflow} request.workflow
+   *   Required. Workflow to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   List of fields to be updated. If not present, the entire workflow
+   *   will be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1066,61 +1003,61 @@ export class DatastoreAdminClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/datastore_admin.create_index.js</caption>
-   * region_tag:datastore_v1_generated_DatastoreAdmin_CreateIndex_async
+   * @example <caption>include:samples/generated/v1/workflows.update_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_UpdateWorkflow_async
    */
-  createIndex(
-    request?: protos.google.datastore.admin.v1.ICreateIndexRequest,
+  updateWorkflow(
+    request?: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
     options?: CallOptions,
   ): Promise<
     [
       LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  createIndex(
-    request: protos.google.datastore.admin.v1.ICreateIndexRequest,
+  updateWorkflow(
+    request: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >,
   ): void;
-  createIndex(
-    request: protos.google.datastore.admin.v1.ICreateIndexRequest,
+  updateWorkflow(
+    request: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
     callback: Callback<
       LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >,
   ): void;
-  createIndex(
-    request?: protos.google.datastore.admin.v1.ICreateIndexRequest,
+  updateWorkflow(
+    request?: protos.google.cloud.workflows.v1.IUpdateWorkflowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.datastore.admin.v1.IIndex,
-            protos.google.datastore.admin.v1.IIndexOperationMetadata
+            protos.google.cloud.workflows.v1.IWorkflow,
+            protos.google.cloud.workflows.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1128,8 +1065,8 @@ export class DatastoreAdminClient {
   ): Promise<
     [
       LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
+        protos.google.cloud.workflows.v1.IWorkflow,
+        protos.google.cloud.workflows.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -1148,7 +1085,7 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId?.toString() ?? '',
+        'workflow.name': request.workflow!.name ?? '',
       });
     this.initialize().catch((err) => {
       throw err;
@@ -1156,55 +1093,55 @@ export class DatastoreAdminClient {
     const wrappedCallback:
       | Callback<
           LROperation<
-            protos.google.datastore.admin.v1.IIndex,
-            protos.google.datastore.admin.v1.IIndexOperationMetadata
+            protos.google.cloud.workflows.v1.IWorkflow,
+            protos.google.cloud.workflows.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('createIndex response %j', rawResponse);
+          this._log.info('updateWorkflow response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
-    this._log.info('createIndex request %j', request);
+    this._log.info('updateWorkflow request %j', request);
     return this.innerApiCalls
-      .createIndex(request, options, wrappedCallback)
+      .updateWorkflow(request, options, wrappedCallback)
       ?.then(
         ([response, rawResponse, _]: [
           LROperation<
-            protos.google.datastore.admin.v1.IIndex,
-            protos.google.datastore.admin.v1.IIndexOperationMetadata
+            protos.google.cloud.workflows.v1.IWorkflow,
+            protos.google.cloud.workflows.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createIndex response %j', rawResponse);
+          this._log.info('updateWorkflow response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );
   }
   /**
-   * Check the status of the long running operation returned by `createIndex()`.
+   * Check the status of the long running operation returned by `updateWorkflow()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/datastore_admin.create_index.js</caption>
-   * region_tag:datastore_v1_generated_DatastoreAdmin_CreateIndex_async
+   * @example <caption>include:samples/generated/v1/workflows.update_workflow.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_UpdateWorkflow_async
    */
-  async checkCreateIndexProgress(
+  async checkUpdateWorkflowProgress(
     name: string,
   ): Promise<
     LROperation<
-      protos.google.datastore.admin.v1.Index,
-      protos.google.datastore.admin.v1.IndexOperationMetadata
+      protos.google.cloud.workflows.v1.Workflow,
+      protos.google.cloud.workflows.v1.OperationMetadata
     >
   > {
-    this._log.info('createIndex long-running');
+    this._log.info('updateWorkflow long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         { name },
@@ -1212,271 +1149,117 @@ export class DatastoreAdminClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.createIndex,
+      this.descriptors.longrunning.updateWorkflow,
       this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
-      protos.google.datastore.admin.v1.Index,
-      protos.google.datastore.admin.v1.IndexOperationMetadata
+      protos.google.cloud.workflows.v1.Workflow,
+      protos.google.cloud.workflows.v1.OperationMetadata
     >;
   }
   /**
-   * Deletes an existing index.
-   * An index can only be deleted if it is in a `READY` or `ERROR` state. On
-   * successful execution of the request, the index will be in a `DELETING`
-   * {@link protos.google.datastore.admin.v1.Index.State|state}. And on completion of the
-   * returned {@link protos.google.longrunning.Operation|google.longrunning.Operation}, the
-   * index will be removed.
-   *
-   * During index deletion, the process could result in an error, in which
-   * case the index will move to the `ERROR` state. The process can be recovered
-   * by fixing the data that caused the error, followed by calling
-   * {@link protos.google.datastore.admin.v1.DatastoreAdmin.DeleteIndex|delete} again.
+   * Lists workflows in a given project and location.
+   * The default order is not specified.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Project ID against which to make the request.
-   * @param {string} request.indexId
-   *   The resource ID of the index to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/datastore_admin.delete_index.js</caption>
-   * region_tag:datastore_v1_generated_DatastoreAdmin_DeleteIndex_async
-   */
-  deleteIndex(
-    request?: protos.google.datastore.admin.v1.IDeleteIndexRequest,
-    options?: CallOptions,
-  ): Promise<
-    [
-      LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  deleteIndex(
-    request: protos.google.datastore.admin.v1.IDeleteIndexRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >,
-  ): void;
-  deleteIndex(
-    request: protos.google.datastore.admin.v1.IDeleteIndexRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >,
-  ): void;
-  deleteIndex(
-    request?: protos.google.datastore.admin.v1.IDeleteIndexRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.datastore.admin.v1.IIndex,
-            protos.google.datastore.admin.v1.IIndexOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >,
-  ): Promise<
-    [
-      LROperation<
-        protos.google.datastore.admin.v1.IIndex,
-        protos.google.datastore.admin.v1.IIndexOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId?.toString() ?? '',
-        index_id: request.indexId?.toString() ?? '',
-      });
-    this.initialize().catch((err) => {
-      throw err;
-    });
-    const wrappedCallback:
-      | Callback<
-          LROperation<
-            protos.google.datastore.admin.v1.IIndex,
-            protos.google.datastore.admin.v1.IIndexOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
-      ? (error, response, rawResponse, _) => {
-          this._log.info('deleteIndex response %j', rawResponse);
-          callback!(error, response, rawResponse, _); // We verified callback above.
-        }
-      : undefined;
-    this._log.info('deleteIndex request %j', request);
-    return this.innerApiCalls
-      .deleteIndex(request, options, wrappedCallback)
-      ?.then(
-        ([response, rawResponse, _]: [
-          LROperation<
-            protos.google.datastore.admin.v1.IIndex,
-            protos.google.datastore.admin.v1.IIndexOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('deleteIndex response %j', rawResponse);
-          return [response, rawResponse, _];
-        },
-      );
-  }
-  /**
-   * Check the status of the long running operation returned by `deleteIndex()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/datastore_admin.delete_index.js</caption>
-   * region_tag:datastore_v1_generated_DatastoreAdmin_DeleteIndex_async
-   */
-  async checkDeleteIndexProgress(
-    name: string,
-  ): Promise<
-    LROperation<
-      protos.google.datastore.admin.v1.Index,
-      protos.google.datastore.admin.v1.IndexOperationMetadata
-    >
-  > {
-    this._log.info('deleteIndex long-running');
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.deleteIndex,
-      this._gaxModule.createDefaultBackoffSettings(),
-    );
-    return decodeOperation as LROperation<
-      protos.google.datastore.admin.v1.Index,
-      protos.google.datastore.admin.v1.IndexOperationMetadata
-    >;
-  }
-  /**
-   * Lists the indexes that match the specified filters.  Datastore uses an
-   * eventually consistent query to fetch the list of indexes and may
-   * occasionally return stale results.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Project ID against which to make the request.
-   * @param {string} request.filter
+   * @param {string} request.parent
+   *   Required. Project and location from which the workflows should be listed.
+   *   Format: projects/{project}/locations/{location}
    * @param {number} request.pageSize
-   *   The maximum number of items to return.  If zero, then all results will be
-   *   returned.
+   *   Maximum number of workflows to return per call. The service might return
+   *   fewer than this value even if not at the end of the collection. If a value
+   *   is not specified, a default value of 500 is used. The maximum permitted
+   *   value is 1000 and values greater than 1000 are coerced down to 1000.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
+   *   A page token, received from a previous `ListWorkflows` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListWorkflows` must
+   *   match the call that provided the page token.
+   * @param {string} request.filter
+   *   Filter to restrict results to specific workflows.
+   *   For details, see <a href="https://google.aip.dev/160"
+   *   class="external">AIP-160</a>.
+   *
+   *   For example, if you are using the Google APIs Explorer:
+   *
+   *   `state="SUCCEEDED"`
+   *
+   *   or
+   *
+   *   `createTime>"2023-08-01" AND state="FAILED"`
+   * @param {string} request.orderBy
+   *   Comma-separated list of fields that specify the order of the results.
+   *   Default sorting order for a field is ascending. To specify descending order
+   *   for a field, append a "desc" suffix.
+   *   If not specified, the results are returned in an unspecified order.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.datastore.admin.v1.Index|Index}.
+   *   The first element of the array is Array of {@link protos.google.cloud.workflows.v1.Workflow|Workflow}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listIndexesAsync()`
+   *   We recommend using `listWorkflowsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listIndexes(
-    request?: protos.google.datastore.admin.v1.IListIndexesRequest,
+  listWorkflows(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
     options?: CallOptions,
   ): Promise<
     [
-      protos.google.datastore.admin.v1.IIndex[],
-      protos.google.datastore.admin.v1.IListIndexesRequest | null,
-      protos.google.datastore.admin.v1.IListIndexesResponse,
+      protos.google.cloud.workflows.v1.IWorkflow[],
+      protos.google.cloud.workflows.v1.IListWorkflowsRequest | null,
+      protos.google.cloud.workflows.v1.IListWorkflowsResponse,
     ]
   >;
-  listIndexes(
-    request: protos.google.datastore.admin.v1.IListIndexesRequest,
+  listWorkflows(
+    request: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.datastore.admin.v1.IListIndexesRequest,
-      protos.google.datastore.admin.v1.IListIndexesResponse | null | undefined,
-      protos.google.datastore.admin.v1.IIndex
+      protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      | protos.google.cloud.workflows.v1.IListWorkflowsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow
     >,
   ): void;
-  listIndexes(
-    request: protos.google.datastore.admin.v1.IListIndexesRequest,
+  listWorkflows(
+    request: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
     callback: PaginationCallback<
-      protos.google.datastore.admin.v1.IListIndexesRequest,
-      protos.google.datastore.admin.v1.IListIndexesResponse | null | undefined,
-      protos.google.datastore.admin.v1.IIndex
+      protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      | protos.google.cloud.workflows.v1.IListWorkflowsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow
     >,
   ): void;
-  listIndexes(
-    request?: protos.google.datastore.admin.v1.IListIndexesRequest,
+  listWorkflows(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.datastore.admin.v1.IListIndexesRequest,
-          | protos.google.datastore.admin.v1.IListIndexesResponse
+          protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+          | protos.google.cloud.workflows.v1.IListWorkflowsResponse
           | null
           | undefined,
-          protos.google.datastore.admin.v1.IIndex
+          protos.google.cloud.workflows.v1.IWorkflow
         >,
     callback?: PaginationCallback<
-      protos.google.datastore.admin.v1.IListIndexesRequest,
-      protos.google.datastore.admin.v1.IListIndexesResponse | null | undefined,
-      protos.google.datastore.admin.v1.IIndex
+      protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+      | protos.google.cloud.workflows.v1.IListWorkflowsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow
     >,
   ): Promise<
     [
-      protos.google.datastore.admin.v1.IIndex[],
-      protos.google.datastore.admin.v1.IListIndexesRequest | null,
-      protos.google.datastore.admin.v1.IListIndexesResponse,
+      protos.google.cloud.workflows.v1.IWorkflow[],
+      protos.google.cloud.workflows.v1.IListWorkflowsRequest | null,
+      protos.google.cloud.workflows.v1.IListWorkflowsResponse,
     ]
   > | void {
     request = request || {};
@@ -1492,65 +1275,88 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId?.toString() ?? '',
+        parent: request.parent ?? '',
       });
     this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
       | PaginationCallback<
-          protos.google.datastore.admin.v1.IListIndexesRequest,
-          | protos.google.datastore.admin.v1.IListIndexesResponse
+          protos.google.cloud.workflows.v1.IListWorkflowsRequest,
+          | protos.google.cloud.workflows.v1.IListWorkflowsResponse
           | null
           | undefined,
-          protos.google.datastore.admin.v1.IIndex
+          protos.google.cloud.workflows.v1.IWorkflow
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listIndexes values %j', values);
+          this._log.info('listWorkflows values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
         }
       : undefined;
-    this._log.info('listIndexes request %j', request);
+    this._log.info('listWorkflows request %j', request);
     return this.innerApiCalls
-      .listIndexes(request, options, wrappedCallback)
+      .listWorkflows(request, options, wrappedCallback)
       ?.then(
         ([response, input, output]: [
-          protos.google.datastore.admin.v1.IIndex[],
-          protos.google.datastore.admin.v1.IListIndexesRequest | null,
-          protos.google.datastore.admin.v1.IListIndexesResponse,
+          protos.google.cloud.workflows.v1.IWorkflow[],
+          protos.google.cloud.workflows.v1.IListWorkflowsRequest | null,
+          protos.google.cloud.workflows.v1.IListWorkflowsResponse,
         ]) => {
-          this._log.info('listIndexes values %j', response);
+          this._log.info('listWorkflows values %j', response);
           return [response, input, output];
         },
       );
   }
 
   /**
-   * Equivalent to `listIndexes`, but returns a NodeJS Stream object.
+   * Equivalent to `listWorkflows`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Project ID against which to make the request.
-   * @param {string} request.filter
+   * @param {string} request.parent
+   *   Required. Project and location from which the workflows should be listed.
+   *   Format: projects/{project}/locations/{location}
    * @param {number} request.pageSize
-   *   The maximum number of items to return.  If zero, then all results will be
-   *   returned.
+   *   Maximum number of workflows to return per call. The service might return
+   *   fewer than this value even if not at the end of the collection. If a value
+   *   is not specified, a default value of 500 is used. The maximum permitted
+   *   value is 1000 and values greater than 1000 are coerced down to 1000.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
+   *   A page token, received from a previous `ListWorkflows` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListWorkflows` must
+   *   match the call that provided the page token.
+   * @param {string} request.filter
+   *   Filter to restrict results to specific workflows.
+   *   For details, see <a href="https://google.aip.dev/160"
+   *   class="external">AIP-160</a>.
+   *
+   *   For example, if you are using the Google APIs Explorer:
+   *
+   *   `state="SUCCEEDED"`
+   *
+   *   or
+   *
+   *   `createTime>"2023-08-01" AND state="FAILED"`
+   * @param {string} request.orderBy
+   *   Comma-separated list of fields that specify the order of the results.
+   *   Default sorting order for a field is ascending. To specify descending order
+   *   for a field, append a "desc" suffix.
+   *   If not specified, the results are returned in an unspecified order.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.datastore.admin.v1.Index|Index} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.workflows.v1.Workflow|Workflow} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listIndexesAsync()`
+   *   We recommend using `listWorkflowsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listIndexesStream(
-    request?: protos.google.datastore.admin.v1.IListIndexesRequest,
+  listWorkflowsStream(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
     options?: CallOptions,
   ): Transform {
     request = request || {};
@@ -1559,71 +1365,404 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId?.toString() ?? '',
+        parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listIndexes'];
+    const defaultCallSettings = this._defaults['listWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch((err) => {
       throw err;
     });
-    this._log.info('listIndexes stream %j', request);
-    return this.descriptors.page.listIndexes.createStream(
-      this.innerApiCalls.listIndexes as GaxCall,
+    this._log.info('listWorkflows stream %j', request);
+    return this.descriptors.page.listWorkflows.createStream(
+      this.innerApiCalls.listWorkflows as GaxCall,
       request,
       callSettings,
     );
   }
 
   /**
-   * Equivalent to `listIndexes`, but returns an iterable object.
+   * Equivalent to `listWorkflows`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.projectId
-   *   Project ID against which to make the request.
-   * @param {string} request.filter
+   * @param {string} request.parent
+   *   Required. Project and location from which the workflows should be listed.
+   *   Format: projects/{project}/locations/{location}
    * @param {number} request.pageSize
-   *   The maximum number of items to return.  If zero, then all results will be
-   *   returned.
+   *   Maximum number of workflows to return per call. The service might return
+   *   fewer than this value even if not at the end of the collection. If a value
+   *   is not specified, a default value of 500 is used. The maximum permitted
+   *   value is 1000 and values greater than 1000 are coerced down to 1000.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any.
+   *   A page token, received from a previous `ListWorkflows` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListWorkflows` must
+   *   match the call that provided the page token.
+   * @param {string} request.filter
+   *   Filter to restrict results to specific workflows.
+   *   For details, see <a href="https://google.aip.dev/160"
+   *   class="external">AIP-160</a>.
+   *
+   *   For example, if you are using the Google APIs Explorer:
+   *
+   *   `state="SUCCEEDED"`
+   *
+   *   or
+   *
+   *   `createTime>"2023-08-01" AND state="FAILED"`
+   * @param {string} request.orderBy
+   *   Comma-separated list of fields that specify the order of the results.
+   *   Default sorting order for a field is ascending. To specify descending order
+   *   for a field, append a "desc" suffix.
+   *   If not specified, the results are returned in an unspecified order.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.datastore.admin.v1.Index|Index}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.workflows.v1.Workflow|Workflow}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/datastore_admin.list_indexes.js</caption>
-   * region_tag:datastore_v1_generated_DatastoreAdmin_ListIndexes_async
+   * @example <caption>include:samples/generated/v1/workflows.list_workflows.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_ListWorkflows_async
    */
-  listIndexesAsync(
-    request?: protos.google.datastore.admin.v1.IListIndexesRequest,
+  listWorkflowsAsync(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowsRequest,
     options?: CallOptions,
-  ): AsyncIterable<protos.google.datastore.admin.v1.IIndex> {
+  ): AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId?.toString() ?? '',
+        parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listIndexes'];
+    const defaultCallSettings = this._defaults['listWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize().catch((err) => {
       throw err;
     });
-    this._log.info('listIndexes iterate %j', request);
-    return this.descriptors.page.listIndexes.asyncIterate(
-      this.innerApiCalls['listIndexes'] as GaxCall,
+    this._log.info('listWorkflows iterate %j', request);
+    return this.descriptors.page.listWorkflows.asyncIterate(
+      this.innerApiCalls['listWorkflows'] as GaxCall,
       request as {},
       callSettings,
-    ) as AsyncIterable<protos.google.datastore.admin.v1.IIndex>;
+    ) as AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow>;
   }
+  /**
+   * Lists revisions for a given workflow.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Workflow for which the revisions should be listed.
+   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+   * @param {number} request.pageSize
+   *   The maximum number of revisions to return per page. If a value is not
+   *   specified, a default value of 20 is used. The maximum permitted value is
+   *   100. Values greater than 100 are coerced down to 100.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListWorkflowRevisions call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.workflows.v1.Workflow|Workflow}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listWorkflowRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listWorkflowRevisions(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.workflows.v1.IWorkflow[],
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest | null,
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse,
+    ]
+  >;
+  listWorkflowRevisions(
+    request: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow
+    >,
+  ): void;
+  listWorkflowRevisions(
+    request: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow
+    >,
+  ): void;
+  listWorkflowRevisions(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+          | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workflows.v1.IWorkflow
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.workflows.v1.IWorkflow[],
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest | null,
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+          | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workflows.v1.IWorkflow
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkflowRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkflowRevisions request %j', request);
+    return this.innerApiCalls
+      .listWorkflowRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workflows.v1.IWorkflow[],
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest | null,
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse,
+        ]) => {
+          this._log.info('listWorkflowRevisions values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listWorkflowRevisions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Workflow for which the revisions should be listed.
+   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+   * @param {number} request.pageSize
+   *   The maximum number of revisions to return per page. If a value is not
+   *   specified, a default value of 20 is used. The maximum permitted value is
+   *   100. Values greater than 100 are coerced down to 100.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListWorkflowRevisions call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.workflows.v1.Workflow|Workflow} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listWorkflowRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listWorkflowRevisionsStream(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['listWorkflowRevisions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listWorkflowRevisions stream %j', request);
+    return this.descriptors.page.listWorkflowRevisions.createStream(
+      this.innerApiCalls.listWorkflowRevisions as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listWorkflowRevisions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Workflow for which the revisions should be listed.
+   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+   * @param {number} request.pageSize
+   *   The maximum number of revisions to return per page. If a value is not
+   *   specified, a default value of 20 is used. The maximum permitted value is
+   *   100. Values greater than 100 are coerced down to 100.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListWorkflowRevisions call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.workflows.v1.Workflow|Workflow}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workflows.list_workflow_revisions.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_ListWorkflowRevisions_async
+   */
+  listWorkflowRevisionsAsync(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['listWorkflowRevisions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listWorkflowRevisions iterate %j', request);
+    return this.descriptors.page.listWorkflowRevisions.asyncIterate(
+      this.innerApiCalls['listWorkflowRevisions'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow>;
+  }
+
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
@@ -1847,6 +1986,257 @@ export class DatastoreAdminClient {
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} keyRing
+   * @param {string} cryptoKey
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      keyRing: keyRing,
+      cryptoKey: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the keyRing from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the keyRing.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .keyRing;
+  }
+
+  /**
+   * Parse the cryptoKey from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the cryptoKey.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .cryptoKey;
+  }
+
+  /**
+   * Return a fully-qualified cryptoKeyVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} keyRing
+   * @param {string} cryptoKey
+   * @param {string} cryptoKeyVersion
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyVersionPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+    cryptoKeyVersion: string,
+  ) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
+      project: project,
+      location: location,
+      keyRing: keyRing,
+      cryptoKey: cryptoKey,
+      cryptoKeyVersion: cryptoKeyVersion,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName,
+    ).location;
+  }
+
+  /**
+   * Parse the keyRing from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the keyRing.
+   */
+  matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName,
+    ).keyRing;
+  }
+
+  /**
+   * Parse the cryptoKey from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the cryptoKey.
+   */
+  matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName,
+    ).cryptoKey;
+  }
+
+  /**
+   * Parse the cryptoKeyVersion from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the cryptoKeyVersion.
+   */
+  matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName,
+    ).cryptoKeyVersion;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified workflow resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} workflow
+   * @returns {string} Resource name string.
+   */
+  workflowPath(project: string, location: string, workflow: string) {
+    return this.pathTemplates.workflowPathTemplate.render({
+      project: project,
+      location: location,
+      workflow: workflow,
+    });
+  }
+
+  /**
+   * Parse the project from Workflow resource.
+   *
+   * @param {string} workflowName
+   *   A fully-qualified path representing Workflow resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromWorkflowName(workflowName: string) {
+    return this.pathTemplates.workflowPathTemplate.match(workflowName).project;
+  }
+
+  /**
+   * Parse the location from Workflow resource.
+   *
+   * @param {string} workflowName
+   *   A fully-qualified path representing Workflow resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromWorkflowName(workflowName: string) {
+    return this.pathTemplates.workflowPathTemplate.match(workflowName).location;
+  }
+
+  /**
+   * Parse the workflow from Workflow resource.
+   *
+   * @param {string} workflowName
+   *   A fully-qualified path representing Workflow resource.
+   * @returns {string} A string representing the workflow.
+   */
+  matchWorkflowFromWorkflowName(workflowName: string) {
+    return this.pathTemplates.workflowPathTemplate.match(workflowName).workflow;
+  }
+
   /**
    * Terminate the gRPC channel and close the client.
    *
@@ -1854,11 +2244,14 @@ export class DatastoreAdminClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.datastoreAdminStub && !this._terminated) {
-      return this.datastoreAdminStub.then((stub) => {
+    if (this.workflowsStub && !this._terminated) {
+      return this.workflowsStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

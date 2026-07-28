@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'LoggingApi',
-    filename: './logging-api.js',
+    library: 'ConfigServiceV2',
+    filename: './config-service-v2.js',
   },
   node: {
     child_process: 'empty',

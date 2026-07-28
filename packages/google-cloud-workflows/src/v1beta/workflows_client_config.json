@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.datastore.admin.v1.DatastoreAdmin": {
+    "google.cloud.workflows.v1beta.Workflows": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [
@@ -20,34 +20,24 @@
         }
       },
       "methods": {
-        "ExportEntities": {
-          "timeout_millis": 60000,
+        "ListWorkflows": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "ImportEntities": {
-          "timeout_millis": 60000,
+        "GetWorkflow": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "CreateIndex": {
-          "timeout_millis": 60000,
+        "CreateWorkflow": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "DeleteIndex": {
-          "timeout_millis": 60000,
+        "DeleteWorkflow": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "GetIndex": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "ListIndexes": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+        "UpdateWorkflow": {
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
       }
