@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DeveloperKnowledgeClient} from './developer_knowledge_client';
+export { DeveloperKnowledgeClient } from './developer_knowledge_client';

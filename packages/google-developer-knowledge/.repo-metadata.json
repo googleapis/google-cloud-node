@@ -3,13 +3,13 @@
     "api_id": "developerknowledge.googleapis.com",
     "api_shortname": "developerknowledge",
     "default_version": "v1",
-    "distribution_name": "google-developer-knowledge",
+    "distribution_name": "@google/developer-knowledge",
     "issue_tracker": "https://issuetracker.google.com/issues/new?component=190865&template=1161103",
     "language": "nodejs",
     "library_type": "GAPIC_AUTO",
     "name": "developerknowledge",
     "name_pretty": "Developer Knowledge",
     "product_documentation": "https://developers.google.com/knowledge",
-    "release_level": "stable",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-node"
 }

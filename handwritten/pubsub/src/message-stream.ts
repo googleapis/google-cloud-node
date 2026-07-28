@@ -46,9 +46,10 @@ export const logs = {
 const KEEP_ALIVE_INTERVAL = 30000;
 
 /*!
- * Deadline for the stream.
+ * Deadline for the stream. This will need to go away and be replaced with something
+ * more graceful for pulling the config out of the pubsub-api package.
  */
-const PULL_TIMEOUT = require('./v1/subscriber_client_config.json').interfaces[
+const PULL_TIMEOUT = require('./v1-old/subscriber_client_config.json').interfaces[
   'google.pubsub.v1.Subscriber'
 ].methods.StreamingPull.timeout_millis;
 

@@ -36,7 +36,6 @@ import {
 } from './index';
 import {promisifyAll} from '@google-cloud/promisify';
 import {CallOptions, grpc} from 'google-gax';
-import extend = require('extend');
 
 export type IOperation = instanceAdmin.longrunning.IOperation;
 
@@ -316,7 +315,7 @@ class InstanceConfig extends common.GrpcServiceObject {
     callback?: SetInstanceConfigMetadataCallback,
   ): void | Promise<SetInstanceConfigMetadataResponse> {
     const reqOpts = {
-      instanceConfig: extend(
+      instanceConfig: Object.assign(
         {
           name: this.formattedName_,
         },

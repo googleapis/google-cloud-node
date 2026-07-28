@@ -1,6 +1,6 @@
 {
   "name": "jsdoc-region-tag",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "replace region tags with code samples",
   "main": "src/index.js",
   "scripts": {
@@ -43,6 +43,6 @@
     "typescript": "^5.1.6"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   }
 }

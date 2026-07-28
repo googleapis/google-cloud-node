@@ -15,16 +15,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const filesToDelete = [
-  'src/v1/workflows_client.ts',
-  'src/v1/workflows_client_config.json',
-  'src/v1/workflows_proto_list.json',
-  'src/v1beta/workflows_client.ts',
-  'src/v1beta/workflows_client_config.json',
-  'src/v1beta/workflows_proto_list.json',
-  'test/gapic_workflows_v1.ts',
-  'test/gapic_workflows_v1beta.ts',
-];
+const filesToDelete = [];
 
 filesToDelete.forEach(file => {
   try {

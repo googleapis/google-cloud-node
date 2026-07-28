@@ -2133,6 +2133,104 @@ describe('v1.AdUnitServiceClient', () => {
       });
     });
 
+    describe('adRule', async () => {
+      const fakePath = '/rendered/path/adRule';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        ad_rule: 'adRuleValue',
+      };
+      const client = new adunitserviceModule.v1.AdUnitServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.adRulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adRulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adRulePath', () => {
+        const result = client.adRulePath('networkCodeValue', 'adRuleValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adRulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAdRuleName', () => {
+        const result = client.matchNetworkCodeFromAdRuleName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.adRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAdRuleFromAdRuleName', () => {
+        const result = client.matchAdRuleFromAdRuleName(fakePath);
+        assert.strictEqual(result, 'adRuleValue');
+        assert(
+          (client.pathTemplates.adRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('adSpot', async () => {
+      const fakePath = '/rendered/path/adSpot';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        ad_spot: 'adSpotValue',
+      };
+      const client = new adunitserviceModule.v1.AdUnitServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.adSpotPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.adSpotPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('adSpotPath', () => {
+        const result = client.adSpotPath('networkCodeValue', 'adSpotValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAdSpotName', () => {
+        const result = client.matchNetworkCodeFromAdSpotName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAdSpotFromAdSpotName', () => {
+        const result = client.matchAdSpotFromAdSpotName(fakePath);
+        assert.strictEqual(result, 'adSpotValue');
+        assert(
+          (client.pathTemplates.adSpotPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('adUnit', async () => {
       const fakePath = '/rendered/path/adUnit';
       const expectedParameters = {
@@ -2436,6 +2534,58 @@ describe('v1.AdUnitServiceClient', () => {
         assert.strictEqual(result, 'browserLanguageValue');
         assert(
           (client.pathTemplates.browserLanguagePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('cdnConfig', async () => {
+      const fakePath = '/rendered/path/cdnConfig';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        cdn_config: 'cdnConfigValue',
+      };
+      const client = new adunitserviceModule.v1.AdUnitServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.cdnConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cdnConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cdnConfigPath', () => {
+        const result = client.cdnConfigPath(
+          'networkCodeValue',
+          'cdnConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCdnConfigName', () => {
+        const result = client.matchNetworkCodeFromCdnConfigName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCdnConfigFromCdnConfigName', () => {
+        const result = client.matchCdnConfigFromCdnConfigName(fakePath);
+        assert.strictEqual(result, 'cdnConfigValue');
+        assert(
+          (client.pathTemplates.cdnConfigPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -3533,6 +3683,58 @@ describe('v1.AdUnitServiceClient', () => {
       });
     });
 
+    describe('liveStream', async () => {
+      const fakePath = '/rendered/path/liveStream';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        live_stream: 'liveStreamValue',
+      };
+      const client = new adunitserviceModule.v1.AdUnitServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.liveStreamPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.liveStreamPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('liveStreamPath', () => {
+        const result = client.liveStreamPath(
+          'networkCodeValue',
+          'liveStreamValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromLiveStreamName', () => {
+        const result = client.matchNetworkCodeFromLiveStreamName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLiveStreamFromLiveStreamName', () => {
+        const result = client.matchLiveStreamFromLiveStreamName(fakePath);
+        assert.strictEqual(result, 'liveStreamValue');
+        assert(
+          (client.pathTemplates.liveStreamPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('liveStreamEvent', async () => {
       const fakePath = '/rendered/path/liveStreamEvent';
       const expectedParameters = {
@@ -4401,6 +4603,112 @@ describe('v1.AdUnitServiceClient', () => {
       });
     });
 
+    describe('suggestedAdUnit', async () => {
+      const fakePath = '/rendered/path/suggestedAdUnit';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        suggested_ad_unit: 'suggestedAdUnitValue',
+      };
+      const client = new adunitserviceModule.v1.AdUnitServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.suggestedAdUnitPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.suggestedAdUnitPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('suggestedAdUnitPath', () => {
+        const result = client.suggestedAdUnitPath(
+          'networkCodeValue',
+          'suggestedAdUnitValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromSuggestedAdUnitName', () => {
+        const result = client.matchNetworkCodeFromSuggestedAdUnitName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSuggestedAdUnitFromSuggestedAdUnitName', () => {
+        const result =
+          client.matchSuggestedAdUnitFromSuggestedAdUnitName(fakePath);
+        assert.strictEqual(result, 'suggestedAdUnitValue');
+        assert(
+          (client.pathTemplates.suggestedAdUnitPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('targetingPreset', async () => {
+      const fakePath = '/rendered/path/targetingPreset';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        targeting_preset: 'targetingPresetValue',
+      };
+      const client = new adunitserviceModule.v1.AdUnitServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.targetingPresetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.targetingPresetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('targetingPresetPath', () => {
+        const result = client.targetingPresetPath(
+          'networkCodeValue',
+          'targetingPresetValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromTargetingPresetName', () => {
+        const result = client.matchNetworkCodeFromTargetingPresetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchTargetingPresetFromTargetingPresetName', () => {
+        const result =
+          client.matchTargetingPresetFromTargetingPresetName(fakePath);
+        assert.strictEqual(result, 'targetingPresetValue');
+        assert(
+          (client.pathTemplates.targetingPresetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('taxonomyCategory', async () => {
       const fakePath = '/rendered/path/taxonomyCategory';
       const expectedParameters = {
@@ -4501,6 +4809,69 @@ describe('v1.AdUnitServiceClient', () => {
         assert.strictEqual(result, 'teamValue');
         assert(
           (client.pathTemplates.teamPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('thirdPartyCompany', async () => {
+      const fakePath = '/rendered/path/thirdPartyCompany';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        third_party_company: 'thirdPartyCompanyValue',
+      };
+      const client = new adunitserviceModule.v1.AdUnitServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.thirdPartyCompanyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.thirdPartyCompanyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('thirdPartyCompanyPath', () => {
+        const result = client.thirdPartyCompanyPath(
+          'networkCodeValue',
+          'thirdPartyCompanyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromThirdPartyCompanyName', () => {
+        const result =
+          client.matchNetworkCodeFromThirdPartyCompanyName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchThirdPartyCompanyFromThirdPartyCompanyName', () => {
+        const result =
+          client.matchThirdPartyCompanyFromThirdPartyCompanyName(fakePath);
+        assert.strictEqual(result, 'thirdPartyCompanyValue');
+        assert(
+          (
+            client.pathTemplates.thirdPartyCompanyPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );
