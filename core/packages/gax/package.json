@@ -13,7 +13,7 @@
     "@grpc/grpc-js": "^1.12.6",
     "@grpc/proto-loader": "^0.8.0",
     "duplexify": "^4.1.3",
-    "google-auth-library": "10.5.0",
+    "google-auth-library": "workspace:*",
     "google-logging-utils": "1.1.3",
     "node-fetch": "^3.3.2",
     "object-hash": "^3.0.0",
@@ -34,6 +34,7 @@
     "c8": "^10.1.3",
     "codecov": "^3.8.3",
     "execa": "^5.0.0",
+    "gapic-tools": "workspace:*",
     "glob": "10.5.0",
     "google-proto-files": "5.0.1",
     "gts": "^6.0.2",
@@ -73,15 +74,15 @@
     "compile-status-protos": "pbjs -t json google/rpc/status.proto google/rpc/error_details.proto -p ./protos > protos/status.json",
     "compile-http-protos": "pbjs -t static-module -r http_proto --keep-case google/api/http.proto -p ./protos > protos/http.js && pbts protos/http.js -o protos/http.d.ts",
     "fix": "gts fix",
-    "prepare": "pnpm run compile && cd ../tools && pnpm run compile && cd ../gax && pwd && node ../tools/build/src/prepublish.js . && mkdirp build/protos && cp -r protos/* build/protos/ && pnpm run minify-proto-json",
+    "prepare": "pnpm run compile && prepublishProtos . && mkdirp build/protos && cp -r protos/* build/protos/ && pnpm run minify-proto-json",
     "system-test": "c8 mocha build/test/system-test --timeout 600000 && pnpm run test-application",
     "samples-test": "cd samples/ && pnpm link ../ && pnpm test && cd ../",
     "browser-test": "cd test/browser-test && pnpm run prefetch && pnpm install && pnpm test",
     "test-application": "cd test/test-application && pnpm run prefetch && pnpm install && pnpm start",
     "prelint": "cd samples; pnpm link ../; pnpm install",
     "precompile": "gts clean",
-    "update-protos": "cd ../tools && pnpm run compile && cd ../gax && node ../tools/build/src/listProtos.js .",
-    "minify-proto-json": "cd ../tools && pnpm run compile && cd ../gax && node ../tools/build/src/minify.js"
+    "update-protos": "listProtos .",
+    "minify-proto-json": "minifyProtoJson"
   },
   "keywords": [
     "grpc"
