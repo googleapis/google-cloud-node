@@ -3436,6 +3436,42 @@ describe('storage', function () {
 
       assert.strictEqual(called, true);
     });
+
+    it('should maintain the same invocationId across the upload lifecycle', async () => {
+      const invocationIds: string[] = [];
+
+      const originalRequest = bucket.storageTransport.authClient.request.bind(
+        bucket.storageTransport.authClient,
+      );
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      bucket.storageTransport.authClient.request = async (config: any) => {
+        const headers = config.headers || {};
+        const apiHeaderKey = Object.keys(headers).find(
+          key => key.toLowerCase() === 'x-goog-api-client',
+        );
+
+        if (apiHeaderKey) {
+          const val = headers[apiHeaderKey];
+          const match = val.match(/gccl-invocation-id\/([a-f0-9-]+)/);
+          if (match) {
+            invocationIds.push(match[1]);
+          }
+        }
+        return originalRequest(config);
+      };
+
+      try {
+        const destination = `test-id-${Date.now()}.txt`;
+        await bucket.upload(FILES.big.path, {destination, resumable: false});
+
+        assert.ok(invocationIds.length >= 1);
+        const uniqueIds = [...new Set(invocationIds)];
+        assert.strictEqual(uniqueIds.length, 1);
+      } finally {
+        bucket.storageTransport.authClient.request = originalRequest;
+      }
+    });
   });
 
   describe('channels', () => {
