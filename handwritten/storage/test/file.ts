@@ -27,6 +27,7 @@ import {
   StorageTransport,
 } from '../src/storage-transport.js';
 import sinon, {createSandbox, stub, spy, restore} from 'sinon';
+import {GoogleAuth} from 'google-auth-library';
 import {
   FileExceptionMessages,
   FileMetadata,
@@ -38,6 +39,7 @@ import {
   RequestError,
   SetFileMetadataOptions,
   STORAGE_POST_POLICY_BASE_URL,
+  CreateWriteStreamOptionsInternal,
 } from '../src/file.js';
 import {Duplex, PassThrough, Readable, Stream, Transform} from 'stream';
 import * as crypto from 'crypto';
@@ -1142,6 +1144,7 @@ describe('File', () => {
               'Cache-Control': 'no-store',
             },
             decompress: true,
+            compress: false,
             responseType: 'stream',
             queryParameters: {
               alt: 'media',
@@ -4801,26 +4804,32 @@ describe('File', () => {
       });
     });
 
-    it('should accept an options object', done => {
-      const options = {};
+    it('should accept an options object', async () => {
+      const options = {resumable: false};
 
       sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
-        assert.strictEqual(options_, options);
-        setImmediate(done);
-        return new PassThrough();
+        const {invocationId, ...rest} = options_ as any;
+        assert.ok(invocationId);
+        assert.deepStrictEqual(rest, {resumable: false});
+        const ws = new PassThrough();
+        setImmediate(() => ws.emit('finish'));
+        return ws;
       });
 
-      file.save(DATA, options, assert.ifError);
+      await file.save(DATA, options, assert.ifError);
     });
 
-    it('should not require options', done => {
+    it('should not require options', async () => {
       sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
-        assert.deepStrictEqual(options_, {});
-        setImmediate(done);
-        return new PassThrough();
+        const {invocationId, ...rest} = options_ as any;
+        assert.ok(invocationId);
+        assert.deepStrictEqual(rest, {});
+        const ws = new PassThrough();
+        setImmediate(() => ws.emit('finish'));
+        return ws;
       });
 
-      file.save(DATA, assert.ifError);
+      await file.save(DATA, assert.ifError);
     });
 
     it('should register the error listener', done => {
@@ -4874,24 +4883,139 @@ describe('File', () => {
       file.save(DATA, assert.ifError);
     });
 
-    it('should return a promise when a callback is provided', async () => {
-      file.createWriteStream = () => {
-        const writeStream = new PassThrough();
-        setImmediate(() => {
-          writeStream.emit('finish');
+    it('should generate a single invocationId and pass it to createWriteStream', async () => {
+      const options = {resumable: false};
+      const createWriteStreamStub = sandbox
+        .stub(file, 'createWriteStream')
+        .callsFake(() => {
+          return new DelayedStreamNoError();
         });
-        return writeStream;
+
+      await file.save(DATA, options);
+
+      // Verify createWriteStream was called with an invocationId
+      const calledOptions = createWriteStreamStub.firstCall
+        .args[0] as CreateWriteStreamOptionsInternal;
+      assert.ok(calledOptions?.invocationId);
+      assert.strictEqual(typeof calledOptions?.invocationId, 'string');
+    });
+
+    it('should use the same invocationId across retries in a simple upload', async () => {
+      const options = {
+        resumable: false,
+        preconditionOpts: {ifGenerationMatch: 123},
+      };
+      let retryCount = 0;
+      let firstInvocationId: string | undefined;
+
+      file.storage.retryOptions.autoRetry = true;
+      file.storage.retryOptions.maxRetries = 2;
+      file.storage.retryOptions.idempotencyStrategy = 1;
+      file.storage.retryOptions.retryableErrorFn = () => true;
+
+      sandbox.stub(file, 'createWriteStream').callsFake(options_ => {
+        retryCount++;
+        const currentId = (options_ as CreateWriteStreamOptionsInternal)
+          ?.invocationId;
+
+        if (retryCount === 1) {
+          firstInvocationId = currentId;
+        } else {
+          assert.strictEqual(currentId, firstInvocationId);
+        }
+
+        return new DelayedStream500Error(retryCount);
+      });
+
+      await file.save(DATA, options);
+      assert.strictEqual(retryCount, 2);
+    });
+
+    it('should use the same invocationId in x-goog-api-client header across retries', async () => {
+      const options = {
+        resumable: false,
+        validation: false,
+        preconditionOpts: {ifGenerationMatch: 123},
       };
 
-      let callbackCalled = false;
-      const promise = file.save(DATA, (err?: Error | null) => {
-        assert.ifError(err);
-        callbackCalled = true;
-      }) as unknown as Promise<void>;
+      const authClient = new GoogleAuth();
+      sandbox.stub(authClient, 'request');
 
-      assert(promise instanceof Promise);
-      await promise;
-      assert.strictEqual(callbackCalled, true);
+      const realTransport = new StorageTransport({
+        apiEndpoint: 'https://storage.googleapis.com',
+        baseUrl: 'https://storage.googleapis.com',
+        authClient: authClient,
+        projectId: 'project-id',
+        retryOptions: file.storage.retryOptions,
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+      // Use real transport to verify StorageTransport header formatting
+      const originalTransport = file.storageTransport;
+      file.storageTransport = realTransport;
+
+      let retryCount = 0;
+      let firstInvocationId: string | undefined;
+
+      file.storage.retryOptions.autoRetry = true;
+      file.storage.retryOptions.maxRetries = 2;
+      file.storage.retryOptions.idempotencyStrategy = 1;
+      file.storage.retryOptions.retryableErrorFn = () => true;
+
+      // Stub the authClient.request method used by the transport
+      const requestStub = realTransport.authClient.request as sinon.SinonStub;
+      requestStub.callsFake(async reqOpts => {
+        if (reqOpts.method !== 'POST') {
+          return {
+            config: {},
+            data: {},
+            headers: {},
+            status: 204,
+            statusText: 'No Content',
+          } as any;
+        }
+
+        if (reqOpts.multipart && Array.isArray(reqOpts.multipart)) {
+          const part = reqOpts.multipart[1];
+          if (
+            part &&
+            part.content &&
+            typeof part.content.resume === 'function'
+          ) {
+            part.content.resume();
+          }
+        }
+
+        retryCount++;
+        const headers = reqOpts.headers || {};
+        const apiClientHeader = headers['x-goog-api-client'] || '';
+        const match = apiClientHeader.match(/gccl-invocation-id\/([a-f0-9-]+)/);
+        const currentId = match ? match[1] : undefined;
+
+        if (retryCount === 1) {
+          firstInvocationId = currentId;
+          const error = new Error('Retryable failure') as GaxiosError;
+          error.code = 500;
+          error.status = 500;
+          throw error;
+        } else {
+          assert.strictEqual(currentId, firstInvocationId);
+          return {
+            config: {},
+            data: {},
+            headers: {},
+            status: 200,
+            statusText: 'OK',
+          } as any;
+        }
+      });
+
+      try {
+        await file.save(DATA, options);
+      } finally {
+        file.storageTransport = originalTransport;
+      }
+      assert.strictEqual(retryCount, 2);
     });
   });
 
@@ -5591,6 +5715,25 @@ describe('File', () => {
             options_.queryParameters?.userProject,
             options.userProject,
           );
+        })
+        .resolves({});
+
+      await file.startSimpleUpload_(duplexify(), options);
+    });
+
+    it('should pass the invocationId to the storageTransport', async () => {
+      const options: CreateWriteStreamOptionsInternal = {
+        invocationId: 'test-uuid-1234',
+        userProject: 'user-project-id',
+      };
+      file.storageTransport.makeRequest = sandbox
+        .stub()
+        .callsFake((options_: StorageRequestOptions) => {
+          assert.strictEqual(
+            options_.queryParameters?.userProject,
+            options.userProject,
+          );
+          assert.strictEqual(options_.invocationId, options.invocationId);
         })
         .resolves({});
 
