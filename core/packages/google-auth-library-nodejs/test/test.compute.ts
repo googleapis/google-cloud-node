@@ -47,6 +47,11 @@ describe('compute', () => {
   const sandbox = sinon.createSandbox();
   let compute: Compute;
   beforeEach(() => {
+    sandbox.stub(process, 'env').value({
+      ...process.env,
+      GOOGLE_API_USE_CLIENT_CERTIFICATE: undefined,
+      GOOGLE_API_CERTIFICATE_CONFIG: undefined,
+    });
     compute = new Compute();
     sandbox
       .stub(Compute.prototype, 'getRegionalAccessBoundaryUrl')
@@ -348,6 +353,65 @@ describe('compute', () => {
 
       tokenScope.done();
       rabScope.done();
+    });
+
+    it('should trigger asynchronous RAB refresh using mTLS when enabled', async () => {
+      const compute = new Compute();
+      const fakeEmail = 'fake-default-sa@developer.gserviceaccount.com';
+      const metadataStub = sandbox.stub(gcpMetadata, 'instance');
+      metadataStub.callThrough();
+      metadataStub
+        .withArgs('service-accounts/default/email')
+        .resolves(fakeEmail);
+
+      process.env.GOOGLE_API_USE_CLIENT_CERTIFICATE = 'true';
+      process.env.GOOGLE_API_CERTIFICATE_CONFIG =
+        './test/fixtures/external-account-cert/cert_config.json';
+
+      const tokenScope = setupTokenNock('default');
+
+      // The lookup url should be replaced with iamcredentials.mtls.googleapis.com
+      const lookupUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(fakeEmail),
+      ).replace(
+        'iamcredentials.googleapis.com',
+        'iamcredentials.mtls.googleapis.com',
+      );
+
+      const rabScope = nock(new URL(lookupUrl).origin)
+        .get(new URL(lookupUrl).pathname)
+        .matchHeader('authorization', MOCK_AUTH_HEADER)
+        .reply(200, EXPECTED_RAB_DATA);
+
+      let rabLookupCalled = false;
+      rabScope.on('request', () => {
+        rabLookupCalled = true;
+      });
+
+      const url = 'https://pubsub.googleapis.com';
+      const headers = await compute.getRequestHeaders(url);
+
+      assert.strictEqual(headers.get('x-allowed-locations'), null);
+
+      let attempts = 0;
+      while (!rabLookupCalled && attempts < 10) {
+        await new Promise(r => setTimeout(r, 100));
+        attempts++;
+      }
+      assert.strictEqual(rabLookupCalled, true);
+
+      await new Promise(r => setTimeout(r, 50));
+      assert.deepStrictEqual(
+        compute.getRegionalAccessBoundary(),
+        EXPECTED_RAB_DATA,
+      );
+
+      tokenScope.done();
+      rabScope.done();
+
+      delete process.env.GOOGLE_API_USE_CLIENT_CERTIFICATE;
+      delete process.env.GOOGLE_API_CERTIFICATE_CONFIG;
     });
 
     it('should fail getRegionalAccessBoundaryUrl in background if metadata call fails', async () => {

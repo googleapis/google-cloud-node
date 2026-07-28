@@ -165,6 +165,11 @@ describe('BaseExternalAccountClient', () => {
   let sandbox: sinon.SinonSandbox;
   beforeEach(() => {
     sandbox = sinon.createSandbox();
+    sandbox.stub(process, 'env').value({
+      ...process.env,
+      GOOGLE_API_USE_CLIENT_CERTIFICATE: undefined,
+      GOOGLE_API_CERTIFICATE_CONFIG: undefined,
+    });
     sandbox
       .stub(BaseExternalAccountClient.prototype, 'getRegionalAccessBoundaryUrl')
       .resolves(undefined);
@@ -2938,6 +2943,27 @@ describe('BaseExternalAccountClient', () => {
       stsScope.done();
       rabScope.done();
       impersonatedScope.done();
+    });
+
+    it('should encode special characters in workload pool ID and project number when constructing the URL', async () => {
+      const projectNumber = '123?45';
+      const workloadPoolId = 'my-pool#name';
+      const workloadAudience = `//iam.googleapis.com/projects/${projectNumber}/locations/global/workloadIdentityPools/${workloadPoolId}/providers/my-provider`;
+      const workloadOptions = {
+        ...externalAccountOptions,
+        audience: workloadAudience,
+      };
+      const client = new TestExternalAccountClient(workloadOptions);
+
+      const url = await client.getRegionalAccessBoundaryUrl();
+      const expectedUrl = WORKLOAD_LOOKUP_ENDPOINT.replace(
+        '{project_id}',
+        encodeURIComponent(projectNumber),
+      ).replace('{pool_id}', encodeURIComponent(workloadPoolId));
+
+      assert.strictEqual(url, expectedUrl);
+      assert.ok(url.includes('123%3F45'));
+      assert.ok(url.includes('my-pool%23name'));
     });
   });
 });

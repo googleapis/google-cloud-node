@@ -39,7 +39,7 @@ import {
   CERTIFICATE_CONFIGURATION_ENV_VARIABLE,
   CertificateSourceUnavailableError,
   InvalidConfigurationError,
-} from '../src/auth/certificatesubjecttokensupplier';
+} from '../src/auth/mtlsutils';
 import * as sinon from 'sinon';
 import * as util from '../src/util';
 

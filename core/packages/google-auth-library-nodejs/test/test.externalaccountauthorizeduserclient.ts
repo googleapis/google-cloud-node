@@ -116,6 +116,11 @@ describe('ExternalAccountAuthorizedUserClient', () => {
     expires_in: 3600,
   };
   beforeEach(() => {
+    sinon.stub(process, 'env').value({
+      ...process.env,
+      GOOGLE_API_USE_CLIENT_CERTIFICATE: undefined,
+      GOOGLE_API_CERTIFICATE_CONFIG: undefined,
+    });
     clock = TestUtils.useFakeTimers(sinon, referenceDate);
   });
 
@@ -124,6 +129,7 @@ describe('ExternalAccountAuthorizedUserClient', () => {
     if (clock) {
       clock.restore();
     }
+    sinon.restore();
   });
 
   describe('Constructor', () => {

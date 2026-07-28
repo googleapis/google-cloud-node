@@ -12,8 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { Gaxios, GaxiosOptions } from 'gaxios';
-import { log as makeLog } from 'google-logging-utils';
+import {Gaxios, GaxiosOptions} from 'gaxios';
+import {log as makeLog} from 'google-logging-utils';
+import * as https from 'https';
+import {
+  canMtlsBeEnabled,
+  getClientCertAndKey,
+  getMtlsEndpointUsagePolicy,
+  MtlsEndpointUsagePolicy,
+  shouldMtlsEndpointBeUsed,
+} from './mtlsutils';
 
 const log = makeLog('auth');
 
@@ -25,6 +33,8 @@ export const WORKLOAD_LOOKUP_ENDPOINT =
 
 export const WORKFORCE_LOOKUP_ENDPOINT =
   'https://iamcredentials.googleapis.com/v1/locations/global/workforcePools/{pool_id}/allowedLocations';
+
+export const REGIONAL_ACCESS_BOUNDARY_HEADER = 'x-allowed-locations';
 
 /**
  * RAB is considered valid for 6 hours.
@@ -254,7 +264,37 @@ export class RegionalAccessBoundaryManager {
       url: this.lookupUrl,
     };
 
-    const { data: regionalAccessBoundaryData } =
+    // Switch to the mTLS endpoint if configured or available
+    let mtlsApplied = false;
+    try {
+      if (await shouldMtlsEndpointBeUsed()) {
+        if (await canMtlsBeEnabled()) {
+          const {cert, key} = await getClientCertAndKey();
+          opts.cert = cert.toString('utf8');
+          opts.key = key.toString('utf8');
+          mtlsApplied = true;
+        } else if (
+          getMtlsEndpointUsagePolicy() === MtlsEndpointUsagePolicy.ALWAYS
+        ) {
+          mtlsApplied = true;
+        }
+      }
+    } catch (e) {
+      log.error('RegionalAccessBoundary: Failed to initialize mTLS: ', e);
+      // If mTLS is configured to ALWAYS, propagate the error instead of falling back to the standard endpoint.
+      if (getMtlsEndpointUsagePolicy() === MtlsEndpointUsagePolicy.ALWAYS) {
+        throw e;
+      }
+    }
+
+    if (mtlsApplied) {
+      opts.url = this.lookupUrl.replace(
+        'iamcredentials.googleapis.com',
+        'iamcredentials.mtls.googleapis.com',
+      );
+    }
+
+    const {data: regionalAccessBoundaryData} =
       await this.options.transporter.request<RegionalAccessBoundaryData>(opts);
 
     if (!regionalAccessBoundaryData?.encodedLocations) {

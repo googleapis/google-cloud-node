@@ -72,6 +72,11 @@ describe('jwt', () => {
     json = createJSON();
     jwt = new JWT();
     sandbox = sinon.createSandbox();
+    sandbox.stub(process, 'env').value({
+      ...process.env,
+      GOOGLE_API_USE_CLIENT_CERTIFICATE: undefined,
+      GOOGLE_API_CERTIFICATE_CONFIG: undefined,
+    });
     sandbox
       .stub(JWT.prototype, 'getRegionalAccessBoundaryUrl')
       .resolves(undefined);
@@ -1277,12 +1282,17 @@ describe('jwt', () => {
         .reply(200, regionalAccessBoundaryData);
     }
 
+    let localSandbox: sinon.SinonSandbox;
+
     beforeEach(() => {
+      localSandbox = sinon.createSandbox();
+      localSandbox.stub(process, 'env').value({...process.env});
       (JWT.prototype.getRegionalAccessBoundaryUrl as sinon.SinonStub).restore();
     });
 
     afterEach(() => {
       nock.cleanAll();
+      localSandbox.restore();
     });
 
     it('should trigger asynchronous regional access boundaries refresh', async () => {
@@ -1317,6 +1327,117 @@ describe('jwt', () => {
         jwt.getRegionalAccessBoundary(),
         EXPECTED_RAB_DATA,
       );
+
+      tokenScope.done();
+      rabScope.done();
+    });
+
+    it('should fail RAB lookup if GOOGLE_API_USE_MTLS_ENDPOINT is always but client certificate is disabled', async () => {
+      process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'always';
+      process.env.GOOGLE_API_USE_CLIENT_CERTIFICATE = 'false';
+
+      const jwt = new JWT({
+        email: SERVICE_ACCOUNT_EMAIL,
+        keyFile: PEM_PATH,
+        scopes: ['http://bar', 'http://foo'],
+        subject: 'bar@subjectaccount.com',
+      });
+      jwt.credentials = {refresh_token: 'jwt-placeholder'};
+
+      const tokenScope = createGTokenMock({access_token: MOCK_ACCESS_TOKEN});
+
+      const lookupUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(SERVICE_ACCOUNT_EMAIL),
+      ).replace(
+        'iamcredentials.googleapis.com',
+        'iamcredentials.mtls.googleapis.com',
+      );
+
+      const rabScope = nock(new URL(lookupUrl).origin)
+        .get(new URL(lookupUrl).pathname)
+        .matchHeader('authorization', MOCK_AUTH_HEADER)
+        .reply(403, 'Forbidden');
+
+      // We trigger the background lookup by getting request headers.
+      await jwt.getRequestHeaders('https://pubsub.googleapis.com');
+
+      // Wait a bit for the async task to execute and fail
+      let attempts = 0;
+      while (!jwt.getRegionalAccessBoundaryCooldownTime() && attempts < 10) {
+        await new Promise(r => setTimeout(r, 50));
+        attempts++;
+      }
+
+      // It should enter cooldown because it failed to initialize mTLS
+      assert.ok(jwt.getRegionalAccessBoundaryCooldownTime() > Date.now());
+
+      tokenScope.done();
+      rabScope.done();
+    });
+
+    it('should use mTLS endpoint for RAB lookup if GOOGLE_API_USE_MTLS_ENDPOINT is always and valid cert config is present', async () => {
+      process.env.GOOGLE_API_USE_MTLS_ENDPOINT = 'always';
+      process.env.GOOGLE_API_CERTIFICATE_CONFIG =
+        './test/fixtures/external-account-cert/cert_config.json';
+
+      const jwt = new JWT({
+        email: SERVICE_ACCOUNT_EMAIL,
+        keyFile: PEM_PATH,
+        scopes: ['http://bar', 'http://foo'],
+        subject: 'bar@subjectaccount.com',
+      });
+      jwt.credentials = {refresh_token: 'jwt-placeholder'};
+
+      const tokenScope = createGTokenMock({access_token: MOCK_ACCESS_TOKEN});
+
+      const requestSpy = localSandbox.spy(jwt.transporter, 'request');
+
+      // Construct and mock the mTLS lookup URL
+      const lookupUrl = SERVICE_ACCOUNT_LOOKUP_ENDPOINT.replace(
+        '{service_account_email}',
+        encodeURIComponent(SERVICE_ACCOUNT_EMAIL),
+      ).replace(
+        'iamcredentials.googleapis.com',
+        'iamcredentials.mtls.googleapis.com',
+      );
+
+      let rabLookupCalled = false;
+      const rabScope = nock(new URL(lookupUrl).origin)
+        .get(new URL(lookupUrl).pathname)
+        .matchHeader('authorization', MOCK_AUTH_HEADER)
+        .reply(() => {
+          rabLookupCalled = true;
+          return [200, EXPECTED_RAB_DATA];
+        });
+
+      // We trigger the background lookup by getting request headers.
+      await jwt.getRequestHeaders('https://pubsub.googleapis.com');
+
+      // Wait a bit for the async task to execute
+      let attempts = 0;
+      while (!rabLookupCalled && attempts < 10) {
+        await new Promise(r => setTimeout(r, 50));
+        attempts++;
+      }
+
+      assert.strictEqual(rabLookupCalled, true);
+      assert.deepStrictEqual(
+        jwt.getRegionalAccessBoundary(),
+        EXPECTED_RAB_DATA,
+      );
+
+      // Verify transporter request options
+      const lookupCall = requestSpy.getCalls().find(c => {
+        const url = c.args[0]?.url;
+        return url && url.toString().includes('allowedLocations');
+      });
+      assert.ok(lookupCall);
+      const callOpts = lookupCall!.args[0];
+      assert.ok(callOpts);
+      assert.strictEqual(callOpts.agent, undefined);
+      assert.ok(callOpts.cert);
+      assert.ok(callOpts.key);
 
       tokenScope.done();
       rabScope.done();

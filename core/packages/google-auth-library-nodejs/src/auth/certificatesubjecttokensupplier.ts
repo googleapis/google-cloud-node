@@ -13,33 +13,16 @@
 // limitations under the License.
 
 import {SubjectTokenSupplier} from './identitypoolclient';
-import {getWellKnownCertificateConfigFileLocation, isValidFile} from '../util';
 import * as fs from 'fs';
-import {createPrivateKey, X509Certificate} from 'crypto';
+import {X509Certificate} from 'crypto';
 import * as https from 'https';
+import {
+  CertificateSourceUnavailableError,
+  InvalidConfigurationError,
+  getClientCertAndKey,
+} from './mtlsutils';
 
-export const CERTIFICATE_CONFIGURATION_ENV_VARIABLE =
-  'GOOGLE_API_CERTIFICATE_CONFIG';
-
-/**
- * Thrown when the certificate source cannot be located or accessed.
- */
-export class CertificateSourceUnavailableError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = 'CertificateSourceUnavailableError';
-  }
-}
-
-/**
- * Thrown for invalid configuration that is not related to file availability.
- */
-export class InvalidConfigurationError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = 'InvalidConfigurationError';
-  }
-}
+export {CertificateSourceUnavailableError, InvalidConfigurationError};
 
 /**
  * Defines options for creating a {@link CertificateSubjectTokenSupplier}.
@@ -65,21 +48,6 @@ export interface CertificateSubjectTokenSupplierOptions {
  * Represents the "workload" block within the certificate configuration file.
  * @internal
  */
-interface WorkloadCertConfigJson {
-  cert_path: string;
-  key_path: string;
-}
-
-/**
- * Represents the structure of the certificate_config.json file.
- * @internal
- */
-interface CertificateConfigFileJson {
-  version: number;
-  cert_configs: {
-    workload?: WorkloadCertConfigJson;
-  };
-}
 
 /**
  * A subject token supplier that uses a client certificate for authentication.
@@ -130,133 +98,12 @@ export class CertificateSubjectTokenSupplier implements SubjectTokenSupplier {
   public async getSubjectToken(): Promise<string> {
     // The "subject token" in this context is the processed certificate chain.
 
-    this.certificateConfigPath = await this.#resolveCertificateConfigFilePath();
-
-    const {certPath, keyPath} = await this.#getCertAndKeyPaths();
-
-    ({cert: this.cert, key: this.key} = await this.#getKeyAndCert(
-      certPath,
-      keyPath,
+    // getClientCertAndKey handles path resolution, file reading, and validation
+    ({cert: this.cert, key: this.key} = await getClientCertAndKey(
+      this.certificateConfigPath,
     ));
 
     return await this.#processChainFromPaths(this.cert);
-  }
-
-  /**
-   * Resolves the absolute path to the certificate configuration file
-   * by checking the "certificate_config_location" provided in the ADC file,
-   * or the "GOOGLE_API_CERTIFICATE_CONFIG" environment variable
-   * or in the default gcloud path.
-   * @param overridePath An optional path to check first.
-   * @returns The resolved file path.
-   */
-  async #resolveCertificateConfigFilePath(): Promise<string> {
-    // 1. Check for the override path from constructor options.
-    const overridePath = this.certificateConfigPath;
-    if (overridePath) {
-      if (await isValidFile(overridePath)) {
-        return overridePath;
-      }
-      throw new CertificateSourceUnavailableError(
-        `Provided certificate config path is invalid: ${overridePath}`,
-      );
-    }
-
-    // 2. Check the standard environment variable.
-    const envPath = process.env[CERTIFICATE_CONFIGURATION_ENV_VARIABLE];
-    if (envPath) {
-      if (await isValidFile(envPath)) {
-        return envPath;
-      }
-      throw new CertificateSourceUnavailableError(
-        `Path from environment variable "${CERTIFICATE_CONFIGURATION_ENV_VARIABLE}" is invalid: ${envPath}`,
-      );
-    }
-
-    // 3. Check the well-known gcloud config location.
-    const wellKnownPath = getWellKnownCertificateConfigFileLocation();
-    if (await isValidFile(wellKnownPath)) {
-      return wellKnownPath;
-    }
-
-    // 4. If none are found, throw an error.
-    throw new CertificateSourceUnavailableError(
-      'Could not find certificate configuration file. Searched override path, ' +
-        `the "${CERTIFICATE_CONFIGURATION_ENV_VARIABLE}" env var, and the gcloud path (${wellKnownPath}).`,
-    );
-  }
-
-  /**
-   * Reads and parses the certificate config JSON file to extract the certificate and key paths.
-   * @returns An object containing the certificate and key paths.
-   */
-  async #getCertAndKeyPaths(): Promise<{
-    certPath: string;
-    keyPath: string;
-  }> {
-    const configPath = this.certificateConfigPath;
-    let fileContents: string;
-    try {
-      fileContents = await fs.promises.readFile(configPath, 'utf8');
-    } catch (err) {
-      throw new CertificateSourceUnavailableError(
-        `Failed to read certificate config file at: ${configPath}`,
-      );
-    }
-
-    try {
-      const config = JSON.parse(fileContents) as CertificateConfigFileJson;
-      const certPath = config?.cert_configs?.workload?.cert_path;
-      const keyPath = config?.cert_configs?.workload?.key_path;
-
-      if (!certPath || !keyPath) {
-        throw new InvalidConfigurationError(
-          `Certificate config file (${configPath}) is missing required "cert_path" or "key_path" in the workload config.`,
-        );
-      }
-      return {certPath, keyPath};
-    } catch (e) {
-      if (e instanceof InvalidConfigurationError) throw e;
-      throw new InvalidConfigurationError(
-        `Failed to parse certificate config from ${configPath}: ${
-          (e as Error).message
-        }`,
-      );
-    }
-  }
-
-  /**
-   * Reads and parses the cert and key files get their content and check valid format.
-   * @returns An object containing the cert content and key content in buffer format.
-   */
-  async #getKeyAndCert(
-    certPath: string,
-    keyPath: string,
-  ): Promise<{
-    cert: Buffer;
-    key: Buffer;
-  }> {
-    let cert, key;
-    try {
-      cert = await fs.promises.readFile(certPath);
-      new X509Certificate(cert);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : String(err);
-      throw new CertificateSourceUnavailableError(
-        `Failed to read certificate file at ${certPath}: ${message}`,
-      );
-    }
-    try {
-      key = await fs.promises.readFile(keyPath);
-      createPrivateKey(key);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : String(err);
-      throw new CertificateSourceUnavailableError(
-        `Failed to read private key file at ${keyPath}: ${message}`,
-      );
-    }
-
-    return {cert, key};
   }
 
   /**
