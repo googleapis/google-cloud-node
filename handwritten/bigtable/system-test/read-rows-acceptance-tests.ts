@@ -13,8 +13,9 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {describe, it} from 'mocha';
+import {describe, beforeEach, afterEach, it} from 'mocha';
 import {Test} from './testTypes';
+import {logActiveResources} from './common';
 const testcases = require('../../system-test/read-rows-acceptance-test.json')
   .tests as Test[];
 import {PassThrough} from 'stream';
@@ -67,6 +68,15 @@ const CellChunk = root.lookupType(
   'google.bigtable.v2.ReadRowsResponse.CellChunk',
 );
 describe('Read Row Acceptance tests', () => {
+  beforeEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('BEFORE_TEST', testName);
+  });
+
+  afterEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('AFTER_TEST', testName);
+  });
   testcases.forEach(test => {
     it(test.name, done => {
       const table = new Table({id: 'xyz'} as Instance, 'my-table');

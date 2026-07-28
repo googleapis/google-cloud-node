@@ -29,7 +29,7 @@ import {
 import * as assert from 'assert';
 import {status as GrpcStatus} from '@grpc/grpc-js';
 import {createMetricsUnaryInterceptorProvider} from '../src/client-side-metrics/metric-interceptor';
-import {generateId, reapInstances} from './common';
+import {generateId, logActiveResources, reapInstances} from './common';
 
 const INSTANCE_ID = generateId('isolated-rmw-inst');
 const TABLE_ID = 'isolated-rmw-table';
@@ -150,6 +150,16 @@ async function getProjectIdFromClient(bigtable: Bigtable): Promise<string> {
 describe('Bigtable/ReadModifyWriteRowInterceptorMetrics', () => {
   let bigtable: Bigtable;
   let testMetricsHandler: TestMetricsHandler;
+
+  beforeEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('BEFORE_TEST', testName);
+  });
+
+  afterEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('AFTER_TEST', testName);
+  });
 
   before(async () => {
     bigtable = new Bigtable();

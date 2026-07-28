@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {after, describe, it} from 'mocha';
+import {after, beforeEach, afterEach, describe, it} from 'mocha';
 import {Bigtable} from '../src';
-import {generateId} from './common';
+import {generateId, logActiveResources} from './common';
 
 // INSTRUCTIONS FOR RUNNING TEST:
 // 1. Change describe.skip to describe.only below.
@@ -23,6 +23,15 @@ import {generateId} from './common';
 // 4. Run `npm run system-test`.
 
 describe.skip('Universe domain tests', () => {
+  beforeEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('BEFORE_TEST', testName);
+  });
+
+  afterEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('AFTER_TEST', testName);
+  });
   // These tests are only designed to pass when using the service account
   // credentials for the universe domain environment so we skip them in the CI pipeline.
   //

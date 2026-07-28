@@ -74,6 +74,48 @@ export async function reapInstances(
   }
 }
 
+export async function logActiveResources(tag: string, testName?: string) {
+  const bigtable = new Bigtable();
+  try {
+    const [instances] = await bigtable.getInstances();
+    let totalNodes = 0;
+    const instanceSummaries: string[] = [];
+
+    for (const instance of instances) {
+      try {
+        const [clusters] = await instance.getClusters();
+        let instanceNodes = 0;
+        const clusterDetails: string[] = [];
+
+        for (const cluster of clusters) {
+          const nodes = cluster.metadata?.serveNodes || 0;
+          instanceNodes += nodes;
+          clusterDetails.push(`${cluster.id}:${nodes}n`);
+        }
+
+        totalNodes += instanceNodes;
+        instanceSummaries.push(
+          `${instance.id}(${instanceNodes}n: [${clusterDetails.join(', ')}])`,
+        );
+      } catch (err: any) {
+        instanceSummaries.push(`${instance.id}(err:${err.message || err})`);
+      }
+    }
+
+    const testLabel = testName ? `"${testName}"` : 'Suite';
+    console.log(
+      `[RESOURCE AUDIT] [${tag}] [${testLabel}] Active Instances: ${instances.length} | Total Nodes: ${totalNodes}`,
+    );
+    if (instanceSummaries.length > 0) {
+      console.log(`   -> Instances: ${instanceSummaries.join(', ')}`);
+    }
+  } catch (err: any) {
+    console.log(
+      `[RESOURCE AUDIT] [${tag}] Failed to query Bigtable resources: ${err.message || err}`,
+    );
+  }
+}
+
 export class FakeCluster extends Cluster {
   calledWith_: Array<{}>;
   constructor(...args: [inst.Instance, string]) {

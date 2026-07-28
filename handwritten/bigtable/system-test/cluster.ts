@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {afterEach, before, beforeEach, describe, it} from 'mocha';
-import {generateId, reapInstances} from './common';
+import {generateId, logActiveResources, reapInstances} from './common';
 import {Bigtable, ClusterInfo, Instance, Cluster} from '../src';
 import assert = require('assert');
 import {ClusterUtils} from '../src/utils/cluster';
@@ -30,6 +30,16 @@ function isValidationError(err: any): err is ValidationError {
 describe('Cluster', () => {
   const bigtable = new Bigtable();
   let instance: Instance;
+
+  beforeEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('BEFORE_TEST', testName);
+  });
+
+  afterEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('AFTER_TEST', testName);
+  });
 
   before(async () => {
     await reapInstances(bigtable);

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {after, before, describe, it} from 'mocha';
+import {after, before, beforeEach, afterEach, describe, it} from 'mocha';
 import * as mocha from 'mocha';
 import {
   CloudMonitoringExporter,
@@ -38,7 +38,7 @@ import {PassThrough} from 'stream';
 import {generateChunksFromRequest} from '../test-common/utils/readRowsImpl';
 import {TabularApiSurface} from '../src/tabular-api-surface';
 import {MetricServiceClient} from '@google-cloud/monitoring';
-import {generateId, reapInstances} from './common';
+import {generateId, logActiveResources, reapInstances} from './common';
 
 const SECOND_PROJECT_ID = 'cfdb-sdk-node-tests';
 const instanceId1 = generateId('instance');
@@ -332,6 +332,16 @@ async function checkForPublishedMetrics(projectId: string) {
 
 describe('Bigtable/ClientSideMetrics', () => {
   let defaultProjectId: string;
+
+  beforeEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('BEFORE_TEST', testName);
+  });
+
+  afterEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('AFTER_TEST', testName);
+  });
 
   before(async () => {
     await reapInstances(new Bigtable());

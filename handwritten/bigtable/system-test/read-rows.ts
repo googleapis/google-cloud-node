@@ -29,7 +29,7 @@ import {PassThrough} from 'stream';
 import * as proxyquire from 'proxyquire';
 import {TabularApiSurface} from '../src/tabular-api-surface';
 import * as mocha from 'mocha';
-import {generateId} from './common';
+import {generateId, logActiveResources} from './common';
 
 const {grpc} = new GrpcClient();
 
@@ -81,6 +81,15 @@ function rowResponse(rowKey: {}) {
 }
 
 describe('Bigtable/Table', () => {
+  beforeEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('BEFORE_TEST', testName);
+  });
+
+  afterEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('AFTER_TEST', testName);
+  });
   /**
    * We have to mock out the metrics handler because the metrics handler with
    * open telemetry causes clock.runAll() to throw an infinite loop error. This

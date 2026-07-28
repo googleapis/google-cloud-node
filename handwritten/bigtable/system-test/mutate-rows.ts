@@ -27,6 +27,7 @@ import {Entry, PartialFailureError} from '../src/table';
 import {CancellableStream, GrpcClient, GoogleAuth} from 'google-gax';
 import {BigtableClient} from '../src/v2';
 import {PassThrough} from 'stream';
+import {logActiveResources} from './common';
 
 const {grpc} = new GrpcClient();
 
@@ -63,6 +64,15 @@ function entryResponses(statusCodes: number[]) {
 }
 
 describe('Bigtable/Table', () => {
+  beforeEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('BEFORE_TEST', testName);
+  });
+
+  afterEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('AFTER_TEST', testName);
+  });
   const bigtable = new Bigtable();
   bigtable.api = {};
   bigtable.auth = {

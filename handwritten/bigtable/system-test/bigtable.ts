@@ -35,7 +35,7 @@ import {Family} from '../src/family.js';
 import {Row} from '../src/row.js';
 import {Table} from '../src/table.js';
 import {RawFilter} from '../src/filter';
-import {generateId, reapBackups, reapInstances} from './common';
+import {generateId, logActiveResources, reapBackups, reapInstances} from './common';
 import {BigtableTableAdminClient} from '../src/v2';
 import {ServiceError} from 'google-gax';
 import {BigtableDate, QueryResultRow} from '../src/execute-query/values';
@@ -56,6 +56,16 @@ describe('Bigtable', () => {
   const APP_PROFILE = INSTANCE.appProfile(APP_PROFILE_ID);
   const CLUSTER_ID = generateId('cluster');
   const CLUSTER_ID_HDD = generateId('cluster');
+
+  beforeEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('BEFORE_TEST', testName);
+  });
+
+  afterEach(async function () {
+    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
+    await logActiveResources('AFTER_TEST', testName);
+  });
 
   before(async () => {
     await reapInstances(bigtable);
