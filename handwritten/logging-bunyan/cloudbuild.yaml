@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    corepack enable pnpm && pnpm install --filter .
+    cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/logging-bunyan}"
   dir: 'handwritten/logging-bunyan'
   id: 'install-dependencies'
 

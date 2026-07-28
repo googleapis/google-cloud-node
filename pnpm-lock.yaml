@@ -8,6 +8,12 @@ overrides:
   yargs: ^17.7.2
   c8: ^10.1.3
   mocha: ^10.8.2
+  '@sinonjs/fake-timers': 15.2.1
+  gcp-metadata: ^7.0.1
+  '@eslint-community/eslint-utils': <4.10.0
+  brace-expansion: ^2.0.1
+  tablesort: 5.6.0
+  cheerio: 1.0.0
 
 importers:
 
@@ -21,7 +27,7 @@ importers:
         version: 6.1.0
       gaxios:
         specifier: ^7.0.0-rc
-        version: 7.3.0
+        version: link:core/packages/gaxios
       parse-link-header:
         specifier: ^2.0.0
         version: 2.0.0
@@ -98,7 +104,7 @@ importers:
         version: 3.0.2
       google-auth-library:
         specifier: ^10.6.2
-        version: 10.9.1
+        version: link:../packages/google-auth-library-nodejs
       html-entities:
         specifier: ^2.5.2
         version: 2.6.0
@@ -275,7 +281,7 @@ importers:
     dependencies:
       '@google-cloud/storage':
         specifier: ^7.15.2
-        version: 7.21.0(encoding@0.1.13)
+        version: link:../../../handwritten/storage
       '@octokit/rest':
         specifier: ^20.0.0
         version: 20.1.2
@@ -318,7 +324,7 @@ importers:
         version: 7.0.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -629,7 +635,7 @@ importers:
     dependencies:
       gaxios:
         specifier: ^7.1.3
-        version: 7.3.0
+        version: link:../gaxios
       google-logging-utils:
         specifier: 1.1.3
         version: 1.1.3
@@ -639,7 +645,7 @@ importers:
     devDependencies:
       '@google-cloud/functions':
         specifier: ^4.0.0
-        version: 4.2.2
+        version: link:../../../packages/google-cloud-functions
       '@types/json-bigint':
         specifier: ^1.0.4
         version: 1.0.4
@@ -711,10 +717,10 @@ importers:
         version: 1.0.11
       gaxios:
         specifier: ^7.1.4
-        version: 7.3.0
+        version: link:../gaxios
       gcp-metadata:
-        specifier: 8.1.2
-        version: 8.1.2
+        specifier: ^7.0.1
+        version: 7.0.1
       google-logging-utils:
         specifier: 1.1.3
         version: 1.1.3
@@ -1518,7 +1524,7 @@ importers:
         version: 5.1.0
       '@google-cloud/promisify':
         specifier: ^5.0.0
-        version: 5.1.0
+        version: link:../../core/promisify
       arrify:
         specifier: ^3.0.0
         version: 3.0.0
@@ -1540,7 +1546,7 @@ importers:
     devDependencies:
       '@google-cloud/storage':
         specifier: ^7.16.0
-        version: 7.21.0(encoding@0.1.13)
+        version: link:../storage
       '@types/big.js':
         specifier: ^6.2.2
         version: 6.2.2
@@ -1618,7 +1624,7 @@ importers:
     dependencies:
       '@google-cloud/bigquery-storage-api':
         specifier: ^0.2.0
-        version: 0.2.0
+        version: link:../../packages/google-cloud-bigquery-storage-api
       '@google-cloud/paginator':
         specifier: ^6.0.0
         version: 6.0.2
@@ -1636,7 +1642,7 @@ importers:
         version: 3.0.2
       google-auth-library:
         specifier: ^10.0.0
-        version: 10.9.1
+        version: link:../../core/packages/google-auth-library-nodejs
       google-gax:
         specifier: ^5.0.0
         version: 5.0.7
@@ -1649,7 +1655,7 @@ importers:
     devDependencies:
       '@google-cloud/bigquery':
         specifier: ^8.0.0
-        version: 8.3.1
+        version: link:../bigquery
       '@types/extend':
         specifier: ^3.0.4
         version: 3.0.4
@@ -1670,7 +1676,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.1
-        version: 1.1.0(protobufjs@7.5.9)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -1718,13 +1724,13 @@ importers:
     dependencies:
       '@google-cloud/monitoring':
         specifier: ^5.0.1
-        version: 5.4.0
+        version: link:../../packages/google-cloud-monitoring
       '@google-cloud/opentelemetry-cloud-monitoring-exporter':
         specifier: ^0.20.0
         version: 0.20.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-metrics@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)
       '@google-cloud/opentelemetry-resource-util':
         specifier: ^2.4.0
-        version: 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)
+        version: 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))
       '@google-cloud/precise-date':
         specifier: ^5.0.0
         version: 5.1.0
@@ -1733,7 +1739,7 @@ importers:
         version: 5.1.0
       '@google-cloud/promisify':
         specifier: ^5.0.0
-        version: 5.1.0
+        version: link:../../core/promisify
       '@opentelemetry/api':
         specifier: ^1.9.0
         version: 1.9.1
@@ -1842,7 +1848,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.1
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -1919,8 +1925,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       gcp-metadata:
-        specifier: ^6.0.0
-        version: 6.1.1(encoding@0.1.13)
+        specifier: ^7.0.1
+        version: 7.0.1
       ms:
         specifier: ^2.1.3
         version: 2.1.3
@@ -2017,10 +2023,10 @@ importers:
     dependencies:
       '@google-cloud/datastore-api':
         specifier: ^0.2.0
-        version: 0.2.0
+        version: link:../../packages/google-cloud-datastore-api
       '@google-cloud/promisify':
         specifier: ^5.0.0
-        version: 5.1.0
+        version: link:../../core/promisify
       arrify:
         specifier: ^2.0.0
         version: 2.0.1
@@ -2051,7 +2057,7 @@ importers:
     devDependencies:
       '@google-cloud/storage':
         specifier: ^7.16.0
-        version: 7.21.0(encoding@0.1.13)
+        version: link:../storage
       '@types/extend':
         specifier: ^3.0.4
         version: 3.0.4
@@ -2081,7 +2087,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.2
-        version: 1.1.0(protobufjs@7.5.9)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2245,7 +2251,7 @@ importers:
         version: 3.0.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.10.0(@opentelemetry/api@1.9.1))(encoding@0.1.13)
       '@google-cloud/promisify':
         specifier: ^5.0.0
-        version: 5.1.0
+        version: link:../../core/promisify
       '@google-cloud/trace-agent':
         specifier: ^8.0.0
         version: 8.0.0(encoding@0.1.13)
@@ -2317,7 +2323,7 @@ importers:
         version: 11.4.0
       gapic-tools:
         specifier: ^1.0.2
-        version: 1.1.0(protobufjs@7.5.9)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2377,7 +2383,7 @@ importers:
         version: 6.0.2
       '@google-cloud/promisify':
         specifier: ^5.0.0
-        version: 5.1.0
+        version: link:../../core/promisify
       arrify:
         specifier: ^2.0.0
         version: 2.0.1
@@ -2453,7 +2459,7 @@ importers:
         version: 6.0.1
       '@google-cloud/logging-api':
         specifier: ^0.2.0
-        version: 0.2.0
+        version: link:../../packages/google-cloud-logging-api
       '@google-cloud/paginator':
         specifier: ^5.0.0
         version: 5.0.2
@@ -2479,11 +2485,11 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       gcp-metadata:
-        specifier: ^6.0.0
-        version: 6.1.1(encoding@0.1.13)
+        specifier: ^7.0.1
+        version: 7.0.1
       google-auth-library:
         specifier: ^10.6.2
-        version: 10.9.1
+        version: link:../../core/packages/google-auth-library-nodejs
       google-gax:
         specifier: ^4.0.3
         version: 4.6.1(encoding@0.1.13)
@@ -2511,7 +2517,7 @@ importers:
         version: 4.11.0(encoding@0.1.13)
       '@google-cloud/storage':
         specifier: ^7.0.0
-        version: 7.21.0(encoding@0.1.13)
+        version: link:../storage
       '@opentelemetry/resources':
         specifier: ^1.23.0
         version: 1.30.1(@opentelemetry/api@1.9.1)
@@ -2616,10 +2622,10 @@ importers:
     dependencies:
       '@google-cloud/logging':
         specifier: ^11.0.0
-        version: 11.3.0(encoding@0.1.13)
+        version: link:../logging
       google-auth-library:
         specifier: ^10.6.2
-        version: 10.9.1
+        version: link:../../core/packages/google-auth-library-nodejs
     devDependencies:
       '@google-cloud/common':
         specifier: ^6.0.0
@@ -2689,10 +2695,10 @@ importers:
     dependencies:
       '@google-cloud/logging':
         specifier: ^11.2.1
-        version: 11.3.0(encoding@0.1.13)
+        version: link:../logging
       google-auth-library:
         specifier: ^10.5.0
-        version: 10.9.1
+        version: link:../../core/packages/google-auth-library-nodejs
       lodash.mapvalues:
         specifier: ^4.6.0
         version: 4.6.0
@@ -2771,10 +2777,10 @@ importers:
         version: 5.1.0
       '@google-cloud/promisify':
         specifier: ^5.0.0
-        version: 5.1.0
+        version: link:../../core/promisify
       '@google-cloud/pubsub-api':
         specifier: ^0.2.1
-        version: 0.2.1
+        version: link:../../packages/google-cloud-pubsub-api
       '@opentelemetry/api':
         specifier: ~1.9.0
         version: 1.9.1
@@ -2792,7 +2798,7 @@ importers:
         version: 3.0.2
       google-auth-library:
         specifier: ^10.5.0
-        version: 10.9.1
+        version: link:../../core/packages/google-auth-library-nodejs
       google-gax:
         specifier: ^5.0.5
         version: 5.0.7
@@ -2862,7 +2868,7 @@ importers:
         version: 5.1.1
       gapic-tools:
         specifier: ^1.0.1
-        version: 1.1.0(protobufjs@7.5.9)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
@@ -2940,16 +2946,16 @@ importers:
         version: 6.0.1
       '@google-cloud/monitoring':
         specifier: ^5.0.0
-        version: 5.4.0
+        version: link:../../packages/google-cloud-monitoring
       '@google-cloud/opentelemetry-resource-util':
         specifier: ^2.4.0
-        version: 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)
+        version: 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))
       '@google-cloud/precise-date':
         specifier: ^5.0.0
         version: 5.1.0
       '@google-cloud/promisify':
         specifier: ^5.0.0
-        version: 5.1.0
+        version: link:../../core/promisify
       '@grpc/grpc-js':
         specifier: ^1.13.2
         version: 1.14.4
@@ -2997,7 +3003,7 @@ importers:
         version: 3.0.2
       google-auth-library:
         specifier: ^10.0.0-rc.1
-        version: 10.9.1
+        version: link:../../core/packages/google-auth-library-nodejs
       google-gax:
         specifier: 5.0.6
         version: 5.0.6
@@ -3109,7 +3115,7 @@ importers:
         version: 5.1.1
       gapic-tools:
         specifier: ^1.0.1
-        version: 1.1.0(protobufjs@7.5.9)
+        version: link:../../core/packages/tools
       grpc-health-check:
         specifier: ^2.1.0
         version: 2.1.0
@@ -3348,7 +3354,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3397,7 +3403,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3446,7 +3452,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3479,7 +3485,7 @@ importers:
     dependencies:
       google-auth-library:
         specifier: ^10.0.0-rc.1
-        version: 10.9.1
+        version: link:../../core/packages/google-auth-library-nodejs
       google-gax:
         specifier: ^5.0.0
         version: 5.0.7
@@ -3501,7 +3507,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3550,7 +3556,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3599,7 +3605,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3648,7 +3654,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3697,7 +3703,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3746,7 +3752,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3795,7 +3801,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3844,7 +3850,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3893,7 +3899,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3942,7 +3948,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3991,7 +3997,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4040,7 +4046,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4089,7 +4095,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4138,7 +4144,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4187,7 +4193,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -4236,7 +4242,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4285,7 +4291,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4334,7 +4340,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4383,7 +4389,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4432,7 +4438,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4493,7 +4499,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4542,7 +4548,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4591,7 +4597,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4640,7 +4646,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4692,7 +4698,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4741,7 +4747,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4790,7 +4796,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4842,7 +4848,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4903,7 +4909,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -4952,7 +4958,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5001,7 +5007,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5050,7 +5056,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5099,7 +5105,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5148,7 +5154,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5197,7 +5203,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5246,7 +5252,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5295,7 +5301,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5344,7 +5350,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5393,7 +5399,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5442,7 +5448,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5491,7 +5497,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5540,7 +5546,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5601,7 +5607,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5650,7 +5656,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -5699,7 +5705,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -5748,7 +5754,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5797,7 +5803,7 @@ importers:
         version: 5.3.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5846,7 +5852,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5895,7 +5901,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5944,7 +5950,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -5993,7 +5999,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6042,7 +6048,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6091,7 +6097,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6140,7 +6146,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6192,7 +6198,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6241,7 +6247,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6290,7 +6296,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6351,7 +6357,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -6403,7 +6409,7 @@ importers:
         version: 5.3.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6452,7 +6458,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6501,7 +6507,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6550,7 +6556,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6599,7 +6605,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6648,7 +6654,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6697,7 +6703,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6746,7 +6752,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6798,7 +6804,7 @@ importers:
         version: 5.3.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6847,7 +6853,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6896,7 +6902,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6945,7 +6951,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -6994,7 +7000,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7043,7 +7049,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7095,7 +7101,7 @@ importers:
         version: 5.3.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7147,7 +7153,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7196,7 +7202,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7245,7 +7251,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -7294,7 +7300,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7343,7 +7349,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7392,7 +7398,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7441,7 +7447,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7493,7 +7499,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7542,7 +7548,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7591,7 +7597,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7643,7 +7649,7 @@ importers:
         version: 5.3.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7692,7 +7698,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7741,7 +7747,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7790,7 +7796,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7839,7 +7845,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7888,7 +7894,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7937,7 +7943,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -7986,7 +7992,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8035,7 +8041,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8084,7 +8090,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -8133,7 +8139,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8182,7 +8188,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8231,7 +8237,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8280,7 +8286,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8329,7 +8335,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8378,7 +8384,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8427,7 +8433,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8476,7 +8482,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8525,7 +8531,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8574,7 +8580,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8623,7 +8629,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8672,7 +8678,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8721,7 +8727,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8770,7 +8776,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8819,7 +8825,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8871,7 +8877,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8920,7 +8926,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -8969,7 +8975,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9018,7 +9024,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9067,7 +9073,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -9116,7 +9122,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9165,7 +9171,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9214,7 +9220,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9263,7 +9269,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9312,7 +9318,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9361,7 +9367,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9410,7 +9416,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9459,7 +9465,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9508,7 +9514,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9557,7 +9563,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9658,7 +9664,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9707,7 +9713,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9756,7 +9762,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9805,7 +9811,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9854,7 +9860,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9903,7 +9909,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -9952,7 +9958,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10001,7 +10007,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10050,7 +10056,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10099,7 +10105,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10148,7 +10154,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10197,7 +10203,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10246,7 +10252,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10295,7 +10301,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10347,7 +10353,7 @@ importers:
         version: 5.3.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10396,7 +10402,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10445,7 +10451,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10494,7 +10500,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10543,7 +10549,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10592,7 +10598,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10641,7 +10647,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -10690,7 +10696,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -10739,7 +10745,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10788,7 +10794,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10837,7 +10843,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10889,7 +10895,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10938,7 +10944,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -10987,7 +10993,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11036,7 +11042,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11085,7 +11091,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11134,7 +11140,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11183,7 +11189,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11232,7 +11238,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11281,7 +11287,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11330,7 +11336,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11379,7 +11385,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11428,7 +11434,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11477,7 +11483,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11529,7 +11535,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11578,7 +11584,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11627,7 +11633,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11676,7 +11682,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -11740,7 +11746,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11789,7 +11795,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: 5.3.1
         version: 5.3.1(typescript@5.9.3)
@@ -11850,7 +11856,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11899,7 +11905,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11948,7 +11954,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -11997,7 +12003,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12061,7 +12067,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.1
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12119,7 +12125,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12171,7 +12177,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12220,7 +12226,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12256,7 +12262,7 @@ importers:
         version: 6.0.1
       '@google-cloud/promisify':
         specifier: ^5.0.0
-        version: 5.1.0
+        version: link:../../core/promisify
       arrify:
         specifier: ^2.0.0
         version: 2.0.1
@@ -12296,10 +12302,10 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.1
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       google-auth-library:
         specifier: ^10.0.0-rc.1
-        version: 10.9.1
+        version: link:../../core/packages/google-auth-library-nodejs
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12354,7 +12360,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12403,7 +12409,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12452,7 +12458,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12501,7 +12507,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12553,7 +12559,7 @@ importers:
         version: 17.24.0(eslint@8.57.1)(typescript@5.9.3)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12589,14 +12595,14 @@ importers:
     dependencies:
       '@google-cloud/promisify':
         specifier: ^5.0.0
-        version: 5.1.0
+        version: link:../../core/promisify
       google-gax:
         specifier: ^5.0.0
         version: 5.0.7
     devDependencies:
       '@google-cloud/storage':
         specifier: ^7.15.2
-        version: 7.21.0(encoding@0.1.13)
+        version: link:../../handwritten/storage
       '@types/is':
         specifier: ^0.0.25
         version: 0.0.25
@@ -12617,7 +12623,7 @@ importers:
         version: 3.8.3(encoding@0.1.13)
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12666,7 +12672,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12715,7 +12721,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12764,7 +12770,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12813,7 +12819,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12868,7 +12874,7 @@ importers:
         version: 4.5.0
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12920,7 +12926,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -12969,7 +12975,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13018,7 +13024,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13067,7 +13073,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13116,7 +13122,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13165,7 +13171,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13214,7 +13220,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -13263,7 +13269,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13312,7 +13318,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13361,7 +13367,7 @@ importers:
         version: 5.3.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13410,7 +13416,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13462,7 +13468,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13511,7 +13517,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13560,7 +13566,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13609,7 +13615,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13658,7 +13664,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13707,7 +13713,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13756,7 +13762,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13805,7 +13811,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13854,7 +13860,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -13903,7 +13909,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.3
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -13952,7 +13958,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14004,7 +14010,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14053,7 +14059,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14102,7 +14108,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14151,7 +14157,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14200,7 +14206,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14249,7 +14255,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14298,7 +14304,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14347,7 +14353,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14396,7 +14402,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14445,7 +14451,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14494,7 +14500,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14543,7 +14549,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14592,7 +14598,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14641,7 +14647,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14690,7 +14696,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14739,7 +14745,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14788,7 +14794,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14837,7 +14843,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14886,7 +14892,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14935,7 +14941,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -14984,7 +14990,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -15033,7 +15039,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -15082,7 +15088,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -15131,7 +15137,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -15183,7 +15189,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -15232,7 +15238,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -15281,7 +15287,7 @@ importers:
         version: 10.1.3
       gapic-tools:
         specifier: ^1.0.0
-        version: 1.1.0(protobufjs@7.6.5)
+        version: link:../../core/packages/tools
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -15924,8 +15930,8 @@ packages:
     resolution: {integrity: sha512-4B4OijXeVNOPZlYA2oEwWOTkzyltLao+xbotHQeqN++Rv27Y6s818+n2Qkp8q+Fxhn0t/5lA5X1Mxktud8eayQ==}
     engines: {node: '>=14.17.0'}
 
-  '@eslint-community/eslint-utils@4.10.1':
-    resolution: {integrity: sha512-cuadcxVFE8sDK6iWJbs8Sn0av2Nrh2QSGQhVlBW9AaAHqHwjWsZHT8LJ4hFGPh7ASBV2deFdM7H/DPjulmh8rg==}
+  '@eslint-community/eslint-utils@4.9.1':
+    resolution: {integrity: sha512-phrYmNiYppR7znFEdqgfWHXR6NCkZEK7hwWDHZUjit/2/U0r6XvkDl0SYnoM51Hq7FhCGdLDT6zxCCOY1hexsQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
@@ -15961,17 +15967,9 @@ packages:
   '@gar/promisify@1.1.3':
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
 
-  '@google-cloud/bigquery-storage-api@0.2.0':
-    resolution: {integrity: sha512-1b0aZ213TzYm+/7uYAf60oq49MLG7l9fFFi4r5mwq6gDqTPZ62OEYm2mvA5EqTf6gBNkFvwlj7moD/VpjlDw+g==}
-    engines: {node: '>=18'}
-
   '@google-cloud/bigquery@7.9.4':
     resolution: {integrity: sha512-C7jeI+9lnCDYK3cRDujcBsPgiwshWKn/f0BiaJmClplfyosCLfWE83iGQ0eKH113UZzjR9c9q7aZQg0nU388sw==}
     engines: {node: '>=14.0.0'}
-
-  '@google-cloud/bigquery@8.3.1':
-    resolution: {integrity: sha512-F4g9oMgI3EB5Uo+6npRHDSWn1HkVko8GebG1tJtzasn/gknAEFeobQzuLeGYC6SJ92RVdaBpGVisw86P70RrHQ==}
-    engines: {node: '>=18'}
 
   '@google-cloud/cloud-rad@0.4.10':
     resolution: {integrity: sha512-VS2birSP+Sp9u1HiNyJvKjqrVKp4YMBSUuSciCBROviS/RYE6n9qF/MS1JA6Vm7O+J3/t1/rj1JRE1Nvr+h73A==}
@@ -15986,33 +15984,13 @@ packages:
     resolution: {integrity: sha512-1uvKzbmAWUdchIYRsg0f4rUmezOamWuVBSWAPAhnYoUE5OiPEx6v6JOxFIdr3MsrqV+6fyLV3EI1vMPlHoeRvw==}
     engines: {node: '>=18'}
 
-  '@google-cloud/datastore-api@0.2.0':
-    resolution: {integrity: sha512-j1U4mGjfw1p1VobVMPQaxrh8XTAkSANcBl+E861M2fNzQYlJrrhtA4dZkpuDPp8YqdGWoyAYy+eh/Kr2PzNadw==}
-    engines: {node: '>=18'}
-
-  '@google-cloud/functions@4.2.2':
-    resolution: {integrity: sha512-I+PwHH2lDPYWGoRYG4TOjQ+N8EkzPgeCqEEbHr2gkqo3WGBWtQopP6r3f3ngHmuaiVDz7TwG7qydLbATHtOYLw==}
-    engines: {node: '>=18'}
-
   '@google-cloud/grafeas@6.1.2':
     resolution: {integrity: sha512-lnGu9yDvqh09Zd9V/ptae++BvV+S3jPDdpg0BKw0noOZU77PzUFYptJ38k1UGpkA/vMvvnWJxwmymWRUyM2veg==}
-    engines: {node: '>=18'}
-
-  '@google-cloud/logging-api@0.2.0':
-    resolution: {integrity: sha512-VQ9YohbLMh4wtWfrXLRfEbAjy8JyC1OSXA6dX/A2hpB/0sqnb/97Hs+Ai2fR8t83V4c3u1l2G7CPVuZN8wlG+A==}
     engines: {node: '>=18'}
 
   '@google-cloud/logging-min@11.2.2':
     resolution: {integrity: sha512-Ls/QEnjKqGK7da6K1pNhqN0Mfx6gMxvcO1J8P17AVW2EPZERMn1yiwx26rsPreRpRtRY2NuW/HsUrfcPDPEE3g==}
     engines: {node: '>=14.0.0'}
-
-  '@google-cloud/logging@11.3.0':
-    resolution: {integrity: sha512-8Y2lFRpPz6rZUQ+J//+toAZ7H0ZT/5KagS0NMhXWdT+sN3pPtNzgm+N0NJ46cf9XX3etj4yfE7HrjX3wMRLBZw==}
-    engines: {node: '>=18'}
-
-  '@google-cloud/monitoring@5.4.0':
-    resolution: {integrity: sha512-ILb/adzcSOiC4eK/uN8OaHp9EvC585IV2ANWBPp3djRWBxZWz2MXSsRVRsOIa6PsiWi2biDZRkS2iPUliQ3TOA==}
-    engines: {node: '>=18'}
 
   '@google-cloud/opentelemetry-cloud-monitoring-exporter@0.20.0':
     resolution: {integrity: sha512-oOUwPbzJujOxp6qKEGKPxAk3jNkdyCVnPWgBAp8SwHOH3fep85a173TzvAXL2NAq957GMEyxed41CgvHg+smig==}
@@ -16082,21 +16060,9 @@ packages:
     resolution: {integrity: sha512-Orxzlfb9c67A15cq2JQEyVc7wEsmFBmHjZWZYQMUyJ1qivXyMwdyNOs9odi79hze+2zqdTtu1E19IM/FtqZ10g==}
     engines: {node: '>=14'}
 
-  '@google-cloud/promisify@5.1.0':
-    resolution: {integrity: sha512-/j9zzWDxsgKg0hMuFBmLGI8ES9xj4DjXvQnDCKl0w5ed7WE3CGsgHmUoC35rvfBXshSW+5StQGnCUD+RBqITKA==}
-    engines: {node: '>=18'}
-
-  '@google-cloud/pubsub-api@0.2.1':
-    resolution: {integrity: sha512-TBMvacGZMzYTJgG+B/UWVCgfH+zFOZpOPpehgRiA3P1d9rQwIltcfPtGNJcsLnRr9y2ABffGJ5UXF7R72bp7Yg==}
-    engines: {node: '>=18'}
-
   '@google-cloud/pubsub@4.11.0':
     resolution: {integrity: sha512-xWxJAlyUGd6OPp97u8maMcI3xVXuHjxfwh6Dr7P/P+6NK9o446slJobsbgsmK0xKY4nTK8m5uuJrhEKapfZSmQ==}
     engines: {node: '>=14.0.0'}
-
-  '@google-cloud/storage@7.21.0':
-    resolution: {integrity: sha512-l+IFTkd+6Y5LoAuXyYCKNAKtw/Ci+rAMqgdTB1jv4iZiLhw0rtq+0qjIRbBizXkNzEFmXiXUW0H7sZQQvk1ffA==}
-    engines: {node: '>=14'}
 
   '@google-cloud/trace-agent@8.0.0':
     resolution: {integrity: sha512-Q9oLnemR7RCZZ5DGZHAtxIRvO+2B9gnP+2HcvBbDIXBCQAMt4EU4jySeI5UpiIHy6KRcL1YWisnsiBAj8zTfMg==}
@@ -16970,17 +16936,8 @@ packages:
   '@sinonjs/commons@3.0.1':
     resolution: {integrity: sha512-K3mCHKQ9sVh8o1C9cxkwxaOmXoAMlDxC1mYyHrjqOWEcBjYr76t96zL2zlj5dUGZ3HSw240X1qgH3Mjf1yJWpQ==}
 
-  '@sinonjs/fake-timers@11.2.2':
-    resolution: {integrity: sha512-G2piCSxQ7oWOxwGSAyFHfPIsyeJGXYtc6mFbnFA+kRXkiEnTl8c/8jul2S329iFBnDI9HGoeWWAZvuvOkZccgw==}
-
-  '@sinonjs/fake-timers@11.3.1':
-    resolution: {integrity: sha512-EVJO7nW5M/F5Tur0Rf2z/QoMo+1Ia963RiMtapiQrEWvY0iBUvADo8Beegwjpnle5BHkyHuoxSTW3jF43H1XRA==}
-
-  '@sinonjs/fake-timers@13.0.5':
-    resolution: {integrity: sha512-36/hTbH2uaWuGVERyC6da9YwGWnzUZXuPro/F2LfsdOsLnCojz/iSH8MxUt/FD2S5XBSVPhmArFUXcpCQ2Hkiw==}
-
-  '@sinonjs/fake-timers@15.4.0':
-    resolution: {integrity: sha512-DsG+8/LscQIQg68J6Ef3dv10u6nVyetYn923s3/sus5eaGfTo1of5WMZSLf0UJc9KDuKPilPH0UDJCjvNbDNCA==}
+  '@sinonjs/fake-timers@15.2.1':
+    resolution: {integrity: sha512-QdfpQFIwYrTK8lFsII4bJ1AO1ZLbw7B+oxfP+/qSsiTrVerFp7aY2O+d2GNGrTxP58ezEbjbf7mTTLMsd7M7XQ==}
 
   '@sinonjs/samsam@8.0.3':
     resolution: {integrity: sha512-hw6HbX+GyVZzmaYNh82Ecj1vdGZrqVIn/keDTg63IgAwiQPO+xCz99uG6Woqgb4tM0mUiFENKZ4cqd7IX94AXQ==}
@@ -17994,10 +17951,6 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  balanced-match@4.0.4:
-    resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
-    engines: {node: 18 || 20 || >=22}
-
   bare-events@2.9.1:
     resolution: {integrity: sha512-Z0oHEHAFDZkffN8Qc39zNZjQlMDkPJRyyyZieU1VH7u8c5S+qHZ2S8ixdKIAxEjfHO7FJxXmJWgteOghVanIsg==}
     peerDependencies:
@@ -18138,15 +18091,8 @@ packages:
     resolution: {integrity: sha512-9gYgQKXx+1nP8mP7CzFyaUARhg7D3n1dF/FnErWmu9l6JvGpNUN278h0aSb+QjoiKSWG+iZ3uHrcqk0qrY9RQQ==}
     engines: {node: '>=10'}
 
-  brace-expansion@1.1.16:
-    resolution: {integrity: sha512-IDw48K2/2kRkg9LdJxurvq3lV3aBgq0REY89duEqFRthjlPdXHKMj7EnQOXVckxzgisinf3nHfrcE2FufFLXMw==}
-
   brace-expansion@2.1.2:
     resolution: {integrity: sha512-w5JZcKgdhDOgOwm8H+KgbosopHMuGcl6qbulwjtz3SM7I7P3yW1eAjzMPLrIE+NQ9vjgANKHWeMHnrT0OXW1oA==}
-
-  brace-expansion@5.0.8:
-    resolution: {integrity: sha512-JZyDyq3D4AUifKTPOB7DELf6XsB3WdPuNxCtob1vFXPsSXhdAiHBWJ/tJ8HAc9aH84BK+5JFZLNkJKx3G9kzQg==}
-    engines: {node: 20 || >=22}
 
   braces@3.0.3:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
@@ -18380,9 +18326,9 @@ packages:
   cheerio-select@2.1.0:
     resolution: {integrity: sha512-9v9kG0LvzrlcungtnJtpGNxY+fzECQKhK4EGJX2vByejiMX84MFNQw4UxPJl3bFbTMw+Dfs37XaIkCwTZfLh4g==}
 
-  cheerio@1.2.0:
-    resolution: {integrity: sha512-WDrybc/gKFpTYQutKIK6UvfcuxijIZfMfXaYm8NMsPQxSYvf+13fXUJ4rztGGbJcBQ/GF55gvrZ0Bc0bj/mqvg==}
-    engines: {node: '>=20.18.1'}
+  cheerio@1.0.0:
+    resolution: {integrity: sha512-quS9HgjQpdaXOvsZz82Oz7uxtXiy6UIsIQcpBj7HRw2M63Skasm9qlDocAM7jNuaxdhpPU7c4kJN+gA5MCu4ww==}
+    engines: {node: '>=18.17'}
 
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -18549,9 +18495,6 @@ packages:
   common-tags@1.8.2:
     resolution: {integrity: sha512-gk/Z852D2Wtb//0I+kRFNKKE9dIIVirjoqPoA1wJU+XePVXZfGeBpk45+A1rKO4Q43prqWBNY/MiIeRLbPWUaA==}
     engines: {node: '>=4.0.0'}
-
-  concat-map@0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
   concat-stream@1.6.2:
     resolution: {integrity: sha512-27HBghJxjiZtIk3Ycvn/4kbJk/1uZuJFfuPEns6LaEvpvG1f0hTea8lilrouyo9mVc2GWdcEZ8OLoGmSADlrCw==}
@@ -19804,11 +19747,6 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  gapic-tools@1.1.0:
-    resolution: {integrity: sha512-5OGHGWtBlduL5tglrZSmJGBdgguwd2CkpAvjfycZZ7CIeJT5ru/Zm4mUftrYluSveN5FmB0m9EBB9g54Dmj7hQ==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   gauge@4.0.4:
     resolution: {integrity: sha512-f9m+BEN5jkg6a0fZjleidjN51VE1X+mPFQ2DJ0uv1V39oCLCbsGe6yjbBnp7eK7z/+GAon99a3nHuqbuuthyPg==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
@@ -19844,16 +19782,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  gcp-metadata@4.3.1:
-    resolution: {integrity: sha512-x850LS5N7V1F3UcV7PoupzGsyD6iVwTVvsh3tbXfkctZnBnjW5yu5z1/3k3SehF7TyoTIe78rJs02GMMy+LF+A==}
-    engines: {node: '>=10'}
-
-  gcp-metadata@6.1.1:
-    resolution: {integrity: sha512-a4tiq7E0/5fTjxPAaH4jpjkSv/uCaU2p5KC6HVGrvl0cDjA8iBZv4vv1gyzlmK0ZUKqwpOyQMKzZQe3lTit77A==}
-    engines: {node: '>=14'}
-
-  gcp-metadata@8.1.2:
-    resolution: {integrity: sha512-zV/5HKTfCeKWnxG0Dmrw51hEWFGfcF2xiXqcA3+J90WDuP0SvoiSO5ORvcBsifmx/FoIjgQN3oNOGaQ5PhLFkg==}
+  gcp-metadata@7.0.1:
+    resolution: {integrity: sha512-UcO3kefx6dCcZkgcTGgVOTFb7b1LlQ02hY1omMjjrrBzkajRMCFgYOjs7J71WqnuG1k2b+9ppGL7FsOfhZMQKQ==}
     engines: {node: '>=18'}
 
   generator-function@2.0.1:
@@ -20004,10 +19934,6 @@ packages:
   google-gax@5.1.1-rc.1:
     resolution: {integrity: sha512-HSHw7NytSxiyTp3WgWQXu4Cnl49VH2qRcAU047fmShUbbxkGwYX3MlipxhDkWIWMRl7Dktyq2gRvwQVP6ILgUA==}
     engines: {node: '>=18'}
-
-  google-logging-utils@0.0.2:
-    resolution: {integrity: sha512-NEgUnEcBiP5HrPzufUkBzJOD/Sxsco3rLNo1F1TNf7ieU8ryUzBhqba8r756CjLX7rn3fHl6iLEwPYuqpoKgQQ==}
-    engines: {node: '>=14'}
 
   google-logging-utils@1.1.3:
     resolution: {integrity: sha512-eAmLkjDjAFCVXg7A1unxHsLf961m6y17QFqXqAXGj/gVkKFrEICfStRfwUlGNfeCEjNRa32JEWOUTlYXPyyKvA==}
@@ -20223,6 +20149,9 @@ packages:
 
   htmlparser2@10.1.0:
     resolution: {integrity: sha512-VTZkM9GWRAtEpveh7MSF6SjjrpNVNNVJfFup7xTY3UpFtm67foy9HDVXneLtFVt4pMz5kZtgNcvCniNFb1hlEQ==}
+
+  htmlparser2@9.1.0:
+    resolution: {integrity: sha512-5zfg6mHUoaer/97TxnGpxmbR7zJtPwIYFMZ/H5ucTlPZhKvtum05yiPK3Mgai3a0DyVxv7qYqoweaEd2nrYQzQ==}
 
   http-assert@1.5.0:
     resolution: {integrity: sha512-uPpH7OKX4H25hBmU6G1jWNaqJGpTXxey+YOUizJUAgu0AjLUeC8D73hTrhvDS5D+GJN1DN1+hhc/eF/wpxtp0w==}
@@ -23356,9 +23285,9 @@ packages:
   syntax-error@1.4.0:
     resolution: {integrity: sha512-YPPlu67mdnHGTup2A8ff7BC2Pjq0e0Yp/IyTFN03zWO0RcK07uLcbi7C2KpGR2FvWbaB0+bfE27a+sBKebSo7w==}
 
-  tablesort@5.7.1:
-    resolution: {integrity: sha512-wm+xSponmlN1spiuwGlrvNGoG8fEso+y86OOjS+Pl0Qsje/cOVSfUvELcXILWc8/sgEdY/NGMPo0qhFGyYKnwQ==}
-    engines: {node: '>= 22', npm: '>= 10'}
+  tablesort@5.6.0:
+    resolution: {integrity: sha512-cZZXK3G089PbpxH8N7vN7Z21SEKqXAaCiSVOmZdR/v7z8TFCsF/OFr0rzjhQuFlQQHy9uQtW9P2oQFJzJFGVrg==}
+    engines: {node: '>= 16', npm: '>= 8'}
 
   tapable@2.3.3:
     resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
@@ -23724,9 +23653,9 @@ packages:
   undici-types@7.28.0:
     resolution: {integrity: sha512-LJAfY+2w6HGeT8d8J1wNQsUGUEGio6NWWpwdwurQe4f6oojzCFuGLizl1KSve4irsTxyLly1QhEeE6iapdaIvQ==}
 
-  undici@7.28.0:
-    resolution: {integrity: sha512-cRZYrTDwWznlnRiPjggAGxZXanty6M8RV1ff8Wm4LWXBp7/IG8v5DnOm74DtUBp9OONpK75YlPnIjQqX0dBDtA==}
-    engines: {node: '>=20.18.1'}
+  undici@6.28.0:
+    resolution: {integrity: sha512-LIY910g9TI13YS95lrMFrs8Rm/u/irgHeTWoKCoteeJ04CUJ92eEfj0rVn+7VKMPBpUPiUoBKfhNyLI23EE/KA==}
+    engines: {node: '>=18.17'}
 
   unicode-canonical-property-names-ecmascript@2.0.1:
     resolution: {integrity: sha512-dA8WbNeb2a6oQzAQ55YlT5vQAWGV9WXOsi3SskE3bcCdM0P4SDd+24zS/OCacdRq5BkdsRj9q3Pg6YyQoxIGqg==}
@@ -24981,7 +24910,7 @@ snapshots:
       '@compodoc/ngd-transformer': 2.1.3
       bootstrap.native: 5.1.10
       chalk: 4.1.2
-      cheerio: 1.2.0
+      cheerio: 1.0.0
       chokidar: 3.6.0
       colors: 1.4.0
       commander: 12.1.0
@@ -25008,7 +24937,7 @@ snapshots:
       prismjs: 1.30.0
       semver: 7.8.5
       svg-pan-zoom: 3.6.2
-      tablesort: 5.7.1
+      tablesort: 5.6.0
       traverse: 0.6.11
       ts-morph: 22.0.0
       uuid: 9.0.1
@@ -25064,12 +24993,12 @@ snapshots:
 
   '@discoveryjs/json-ext@0.6.3': {}
 
-  '@eslint-community/eslint-utils@4.10.1(eslint@8.57.0)':
+  '@eslint-community/eslint-utils@4.9.1(eslint@8.57.0)':
     dependencies:
       eslint: 8.57.0
       eslint-visitor-keys: 3.4.3
 
-  '@eslint-community/eslint-utils@4.10.1(eslint@8.57.1)':
+  '@eslint-community/eslint-utils@4.9.1(eslint@8.57.1)':
     dependencies:
       eslint: 8.57.1
       eslint-visitor-keys: 3.4.3
@@ -25122,12 +25051,6 @@ snapshots:
 
   '@gar/promisify@1.1.3': {}
 
-  '@google-cloud/bigquery-storage-api@0.2.0':
-    dependencies:
-      google-gax: 5.0.7
-    transitivePeerDependencies:
-      - supports-color
-
   '@google-cloud/bigquery@7.9.4(encoding@0.1.13)':
     dependencies:
       '@google-cloud/common': 5.0.2(encoding@0.1.13)
@@ -25143,21 +25066,6 @@ snapshots:
       uuid: 9.0.1
     transitivePeerDependencies:
       - encoding
-      - supports-color
-
-  '@google-cloud/bigquery@8.3.1':
-    dependencies:
-      '@google-cloud/common': 6.0.1
-      '@google-cloud/paginator': 6.0.2
-      '@google-cloud/precise-date': 5.1.0
-      '@google-cloud/promisify': 5.1.0
-      arrify: 3.0.0
-      big.js: 7.0.1
-      duplexify: 4.1.3
-      extend: 3.0.2
-      stream-events: 1.0.5
-      teeny-request: 10.1.3
-    transitivePeerDependencies:
       - supports-color
 
   '@google-cloud/cloud-rad@0.4.10(@types/node@24.13.3)':
@@ -25204,25 +25112,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@google-cloud/datastore-api@0.2.0':
-    dependencies:
-      google-gax: 5.0.7
-    transitivePeerDependencies:
-      - supports-color
-
-  '@google-cloud/functions@4.2.2':
-    dependencies:
-      google-gax: 5.0.7
-    transitivePeerDependencies:
-      - supports-color
-
   '@google-cloud/grafeas@6.1.2':
-    dependencies:
-      google-gax: 5.0.7
-    transitivePeerDependencies:
-      - supports-color
-
-  '@google-cloud/logging-api@0.2.0':
     dependencies:
       google-gax: 5.0.7
     transitivePeerDependencies:
@@ -25240,7 +25130,7 @@ snapshots:
       dot-prop: 6.0.0
       eventid: 2.0.1
       extend: 3.0.2
-      gcp-metadata: 6.1.1(encoding@0.1.13)
+      gcp-metadata: 7.0.1
       google-auth-library: 9.15.1(encoding@0.1.13)
       google-gax: 4.6.1(encoding@0.1.13)
       long: 5.3.2
@@ -25251,37 +25141,9 @@ snapshots:
       - encoding
       - supports-color
 
-  '@google-cloud/logging@11.3.0(encoding@0.1.13)':
-    dependencies:
-      '@google-cloud/common': 6.0.1
-      '@google-cloud/paginator': 5.0.2
-      '@google-cloud/projectify': 4.0.0
-      '@google-cloud/promisify': 4.0.0
-      '@grpc/grpc-js': 1.14.4
-      '@opentelemetry/api': 1.9.1
-      arrify: 2.0.1
-      dot-prop: 6.0.0
-      extend: 3.0.2
-      gcp-metadata: 6.1.1(encoding@0.1.13)
-      google-auth-library: 10.9.1
-      google-gax: 4.6.1(encoding@0.1.13)
-      long: 5.3.2
-      on-finished: 2.4.1
-      pumpify: 2.0.1
-      stream-events: 1.0.5
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-
-  '@google-cloud/monitoring@5.4.0':
-    dependencies:
-      google-gax: 5.0.7
-    transitivePeerDependencies:
-      - supports-color
-
   '@google-cloud/opentelemetry-cloud-monitoring-exporter@0.20.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-metrics@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)':
     dependencies:
-      '@google-cloud/opentelemetry-resource-util': 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)
+      '@google-cloud/opentelemetry-resource-util': 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))
       '@google-cloud/precise-date': 4.0.0
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/core': 2.10.0(@opentelemetry/api@1.9.1)
@@ -25295,7 +25157,7 @@ snapshots:
 
   '@google-cloud/opentelemetry-cloud-trace-exporter@2.4.1(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)':
     dependencies:
-      '@google-cloud/opentelemetry-resource-util': 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)
+      '@google-cloud/opentelemetry-resource-util': 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))
       '@grpc/grpc-js': 1.14.4
       '@grpc/proto-loader': 0.7.15
       '@opentelemetry/api': 1.9.1
@@ -25309,7 +25171,7 @@ snapshots:
 
   '@google-cloud/opentelemetry-cloud-trace-exporter@3.0.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.10.0(@opentelemetry/api@1.9.1))(encoding@0.1.13)':
     dependencies:
-      '@google-cloud/opentelemetry-resource-util': 3.0.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))(encoding@0.1.13)
+      '@google-cloud/opentelemetry-resource-util': 3.0.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))
       '@grpc/grpc-js': 1.14.4
       '@grpc/proto-loader': 0.8.1
       '@opentelemetry/api': 1.9.1
@@ -25321,23 +25183,21 @@ snapshots:
       - encoding
       - supports-color
 
-  '@google-cloud/opentelemetry-resource-util@2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)':
+  '@google-cloud/opentelemetry-resource-util@2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))':
     dependencies:
       '@opentelemetry/resources': 1.30.1(@opentelemetry/api@1.9.1)
       '@opentelemetry/semantic-conventions': 1.39.0
-      gcp-metadata: 6.1.1(encoding@0.1.13)
+      gcp-metadata: 7.0.1
     transitivePeerDependencies:
-      - encoding
       - supports-color
 
-  '@google-cloud/opentelemetry-resource-util@3.0.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))(encoding@0.1.13)':
+  '@google-cloud/opentelemetry-resource-util@3.0.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))':
     dependencies:
       '@opentelemetry/core': 2.10.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/resources': 2.10.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/semantic-conventions': 1.39.0
-      gcp-metadata: 6.1.1(encoding@0.1.13)
+      gcp-metadata: 7.0.1
     transitivePeerDependencies:
-      - encoding
       - supports-color
 
   '@google-cloud/paginator@5.0.2':
@@ -25359,14 +25219,6 @@ snapshots:
 
   '@google-cloud/promisify@4.0.0': {}
 
-  '@google-cloud/promisify@5.1.0': {}
-
-  '@google-cloud/pubsub-api@0.2.1':
-    dependencies:
-      google-gax: 5.0.7
-    transitivePeerDependencies:
-      - supports-color
-
   '@google-cloud/pubsub@4.11.0(encoding@0.1.13)':
     dependencies:
       '@google-cloud/paginator': 5.0.2
@@ -25387,26 +25239,6 @@ snapshots:
       - encoding
       - supports-color
 
-  '@google-cloud/storage@7.21.0(encoding@0.1.13)':
-    dependencies:
-      '@google-cloud/paginator': 5.0.2
-      '@google-cloud/projectify': 4.0.0
-      '@google-cloud/promisify': 4.0.0
-      abort-controller: 3.0.0
-      async-retry: 1.3.3
-      duplexify: 4.1.3
-      fast-xml-parser: 5.10.1
-      gaxios: 6.7.1(encoding@0.1.13)
-      google-auth-library: 9.15.1(encoding@0.1.13)
-      html-entities: 2.6.0
-      mime: 3.0.0
-      p-limit: 3.1.0
-      retry-request: 7.0.2(encoding@0.1.13)
-      teeny-request: 9.0.0(encoding@0.1.13)
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-
   '@google-cloud/trace-agent@8.0.0(encoding@0.1.13)':
     dependencies:
       '@google-cloud/common': 5.0.2(encoding@0.1.13)
@@ -25415,7 +25247,7 @@ snapshots:
       console-log-level: 1.4.1
       continuation-local-storage: 3.2.1
       extend: 3.0.2
-      gcp-metadata: 6.1.1(encoding@0.1.13)
+      gcp-metadata: 7.0.1
       google-auth-library: 9.15.1(encoding@0.1.13)
       hex2dec: 1.1.2
       is: 3.3.2
@@ -26667,19 +26499,7 @@ snapshots:
     dependencies:
       type-detect: 4.0.8
 
-  '@sinonjs/fake-timers@11.2.2':
-    dependencies:
-      '@sinonjs/commons': 3.0.1
-
-  '@sinonjs/fake-timers@11.3.1':
-    dependencies:
-      '@sinonjs/commons': 3.0.1
-
-  '@sinonjs/fake-timers@13.0.5':
-    dependencies:
-      '@sinonjs/commons': 3.0.1
-
-  '@sinonjs/fake-timers@15.4.0':
+  '@sinonjs/fake-timers@15.2.1':
     dependencies:
       '@sinonjs/commons': 3.0.1
 
@@ -27424,7 +27244,7 @@ snapshots:
 
   '@typescript-eslint/utils@5.62.0(eslint@8.57.0)(typescript@5.1.6)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.10.1(eslint@8.57.0)
+      '@eslint-community/eslint-utils': 4.9.1(eslint@8.57.0)
       '@types/json-schema': 7.0.15
       '@types/semver': 7.7.1
       '@typescript-eslint/scope-manager': 5.62.0
@@ -27439,7 +27259,7 @@ snapshots:
 
   '@typescript-eslint/utils@5.62.0(eslint@8.57.0)(typescript@5.9.3)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.10.1(eslint@8.57.0)
+      '@eslint-community/eslint-utils': 4.9.1(eslint@8.57.0)
       '@types/json-schema': 7.0.15
       '@types/semver': 7.7.1
       '@typescript-eslint/scope-manager': 5.62.0
@@ -27454,7 +27274,7 @@ snapshots:
 
   '@typescript-eslint/utils@5.62.0(eslint@8.57.1)(typescript@5.8.3)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.10.1(eslint@8.57.1)
+      '@eslint-community/eslint-utils': 4.9.1(eslint@8.57.1)
       '@types/json-schema': 7.0.15
       '@types/semver': 7.7.1
       '@typescript-eslint/scope-manager': 5.62.0
@@ -27469,7 +27289,7 @@ snapshots:
 
   '@typescript-eslint/utils@5.62.0(eslint@8.57.1)(typescript@5.9.3)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.10.1(eslint@8.57.1)
+      '@eslint-community/eslint-utils': 4.9.1(eslint@8.57.1)
       '@types/json-schema': 7.0.15
       '@types/semver': 7.7.1
       '@typescript-eslint/scope-manager': 5.62.0
@@ -27567,32 +27387,32 @@ snapshots:
 
   '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@5.1.4)
+      webpack: 5.109.0(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.109.0)
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@5.1.4)
+      webpack: 5.109.0(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.109.0)
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@5.1.4)
+      webpack: 5.109.0(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.109.0)
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@xtuc/ieee754@1.2.0': {}
@@ -27975,8 +27795,6 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  balanced-match@4.0.4: {}
-
   bare-events@2.9.1: {}
 
   bare-fs@4.7.4:
@@ -28132,18 +27950,9 @@ snapshots:
       widest-line: 3.1.0
       wrap-ansi: 7.0.0
 
-  brace-expansion@1.1.16:
-    dependencies:
-      balanced-match: 1.0.2
-      concat-map: 0.0.1
-
   brace-expansion@2.1.2:
     dependencies:
       balanced-match: 1.0.2
-
-  brace-expansion@5.0.8:
-    dependencies:
-      balanced-match: 4.0.4
 
   braces@3.0.3:
     dependencies:
@@ -28529,18 +28338,18 @@ snapshots:
       domhandler: 5.0.3
       domutils: 3.2.2
 
-  cheerio@1.2.0:
+  cheerio@1.0.0:
     dependencies:
       cheerio-select: 2.1.0
       dom-serializer: 2.0.0
       domhandler: 5.0.3
       domutils: 3.2.2
       encoding-sniffer: 0.2.1
-      htmlparser2: 10.1.0
+      htmlparser2: 9.1.0
       parse5: 7.3.0
       parse5-htmlparser2-tree-adapter: 7.1.0
       parse5-parser-stream: 7.1.2
-      undici: 7.28.0
+      undici: 6.28.0
       whatwg-mimetype: 4.0.0
 
   chokidar@3.6.0:
@@ -28686,8 +28495,6 @@ snapshots:
   common-tags@1.8.0: {}
 
   common-tags@1.8.2: {}
-
-  concat-map@0.0.1: {}
 
   concat-stream@1.6.2:
     dependencies:
@@ -29488,7 +29295,7 @@ snapshots:
 
   eslint-plugin-es-x@7.8.0(eslint@8.57.1):
     dependencies:
-      '@eslint-community/eslint-utils': 4.10.1(eslint@8.57.1)
+      '@eslint-community/eslint-utils': 4.9.1(eslint@8.57.1)
       '@eslint-community/regexpp': 4.12.2
       eslint: 8.57.1
       eslint-compat-utils: 0.5.1(eslint@8.57.1)
@@ -29566,7 +29373,7 @@ snapshots:
 
   eslint-plugin-n@17.24.0(eslint@8.57.1)(typescript@5.9.3):
     dependencies:
-      '@eslint-community/eslint-utils': 4.10.1(eslint@8.57.1)
+      '@eslint-community/eslint-utils': 4.9.1(eslint@8.57.1)
       enhanced-resolve: 5.24.3
       eslint: 8.57.1
       eslint-plugin-es-x: 7.8.0(eslint@8.57.1)
@@ -29652,7 +29459,7 @@ snapshots:
 
   eslint@8.57.0:
     dependencies:
-      '@eslint-community/eslint-utils': 4.10.1(eslint@8.57.0)
+      '@eslint-community/eslint-utils': 4.9.1(eslint@8.57.0)
       '@eslint-community/regexpp': 4.12.2
       '@eslint/eslintrc': 2.1.4
       '@eslint/js': 8.57.0
@@ -29695,7 +29502,7 @@ snapshots:
 
   eslint@8.57.1:
     dependencies:
-      '@eslint-community/eslint-utils': 4.10.1(eslint@8.57.1)
+      '@eslint-community/eslint-utils': 4.9.1(eslint@8.57.1)
       '@eslint-community/regexpp': 4.12.2
       '@eslint/eslintrc': 2.1.4
       '@eslint/js': 8.57.1
@@ -30238,34 +30045,6 @@ snapshots:
       - protobufjs
       - supports-color
 
-  gapic-tools@1.1.0(protobufjs@7.5.9):
-    dependencies:
-      '@babel/core': 7.27.7
-      '@babel/traverse': 7.27.7
-      google-gax: 5.0.7
-      google-proto-files: 5.0.1
-      protobufjs-cli: 1.3.3(protobufjs@7.5.9)
-      uglify-js: 3.19.3
-      walk-up-path: 3.0.1
-      walkdir: 0.4.1
-    transitivePeerDependencies:
-      - protobufjs
-      - supports-color
-
-  gapic-tools@1.1.0(protobufjs@7.6.5):
-    dependencies:
-      '@babel/core': 7.27.7
-      '@babel/traverse': 7.27.7
-      google-gax: 5.0.7
-      google-proto-files: 5.0.1
-      protobufjs-cli: 1.3.3(protobufjs@7.6.5)
-      uglify-js: 3.19.3
-      walk-up-path: 3.0.1
-      walkdir: 0.4.1
-    transitivePeerDependencies:
-      - protobufjs
-      - supports-color
-
   gauge@4.0.4:
     dependencies:
       aproba: 2.1.0
@@ -30351,24 +30130,7 @@ snapshots:
       - encoding
       - supports-color
 
-  gcp-metadata@4.3.1(encoding@0.1.13):
-    dependencies:
-      gaxios: 4.3.3(encoding@0.1.13)
-      json-bigint: 1.0.0
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-
-  gcp-metadata@6.1.1(encoding@0.1.13):
-    dependencies:
-      gaxios: 6.7.1(encoding@0.1.13)
-      google-logging-utils: 0.0.2
-      json-bigint: 1.0.0
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-
-  gcp-metadata@8.1.2:
+  gcp-metadata@7.0.1:
     dependencies:
       gaxios: 7.3.0
       google-logging-utils: 1.1.3
@@ -30532,7 +30294,7 @@ snapshots:
       base64-js: 1.5.1
       ecdsa-sig-formatter: 1.0.11
       gaxios: 7.3.0
-      gcp-metadata: 8.1.2
+      gcp-metadata: 7.0.1
       google-logging-utils: 1.1.3
       gtoken: 8.0.0
       jws: 4.0.1
@@ -30544,7 +30306,7 @@ snapshots:
       base64-js: 1.5.1
       ecdsa-sig-formatter: 1.0.11
       gaxios: 7.3.0
-      gcp-metadata: 8.1.2
+      gcp-metadata: 7.0.1
       google-logging-utils: 1.1.3
       jws: 4.0.1
     transitivePeerDependencies:
@@ -30557,7 +30319,7 @@ snapshots:
       ecdsa-sig-formatter: 1.0.11
       fast-text-encoding: 1.0.6
       gaxios: 4.3.3(encoding@0.1.13)
-      gcp-metadata: 4.3.1(encoding@0.1.13)
+      gcp-metadata: 7.0.1
       gtoken: 5.3.2(encoding@0.1.13)
       jws: 4.0.1
       lru-cache: 6.0.0
@@ -30570,7 +30332,7 @@ snapshots:
       base64-js: 1.5.1
       ecdsa-sig-formatter: 1.0.11
       gaxios: 6.7.1(encoding@0.1.13)
-      gcp-metadata: 6.1.1(encoding@0.1.13)
+      gcp-metadata: 7.0.1
       gtoken: 7.1.0(encoding@0.1.13)
       jws: 4.0.1
     transitivePeerDependencies:
@@ -30643,8 +30405,6 @@ snapshots:
       retry-request: 8.0.3
     transitivePeerDependencies:
       - supports-color
-
-  google-logging-utils@0.0.2: {}
 
   google-logging-utils@1.1.3: {}
 
@@ -30985,6 +30745,13 @@ snapshots:
       domhandler: 5.0.3
       domutils: 3.2.2
       entities: 7.0.1
+
+  htmlparser2@9.1.0:
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      domutils: 3.2.2
+      entities: 4.5.0
 
   http-assert@1.5.0:
     dependencies:
@@ -32235,11 +32002,11 @@ snapshots:
 
   minimatch@10.2.6:
     dependencies:
-      brace-expansion: 5.0.8
+      brace-expansion: 2.1.2
 
   minimatch@3.1.5:
     dependencies:
-      brace-expansion: 1.1.16
+      brace-expansion: 2.1.2
 
   minimatch@5.1.9:
     dependencies:
@@ -32464,7 +32231,7 @@ snapshots:
   nise@6.0.0:
     dependencies:
       '@sinonjs/commons': 3.0.1
-      '@sinonjs/fake-timers': 11.3.1
+      '@sinonjs/fake-timers': 15.2.1
       '@sinonjs/text-encoding': 0.7.3
       just-extend: 6.2.0
       path-to-regexp: 6.3.0
@@ -32472,7 +32239,7 @@ snapshots:
   nise@6.1.5:
     dependencies:
       '@sinonjs/commons': 3.0.1
-      '@sinonjs/fake-timers': 15.4.0
+      '@sinonjs/fake-timers': 15.2.1
       just-extend: 6.2.0
       path-to-regexp: 8.4.2
 
@@ -32729,7 +32496,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
 
   nunjucks@3.2.4(chokidar@3.6.0):
     dependencies:
@@ -33392,20 +33159,6 @@ snapshots:
       jsdoc: 4.0.5
       minimist: 1.2.8
       protobufjs: 7.5.9
-      semver: 7.8.5
-      tmp: 0.2.6
-      uglify-js: 3.19.3
-
-  protobufjs-cli@1.3.3(protobufjs@7.6.5):
-    dependencies:
-      chalk: 4.1.2
-      escodegen: 1.14.3
-      espree: 9.6.1
-      estraverse: 5.3.0
-      glob: 8.1.0
-      jsdoc: 4.0.5
-      minimist: 1.2.8
-      protobufjs: 7.6.5
       semver: 7.8.5
       tmp: 0.2.6
       uglify-js: 3.19.3
@@ -34261,7 +34014,7 @@ snapshots:
   sinon@18.0.1:
     dependencies:
       '@sinonjs/commons': 3.0.1
-      '@sinonjs/fake-timers': 11.2.2
+      '@sinonjs/fake-timers': 15.2.1
       '@sinonjs/samsam': 8.0.3
       diff: 5.2.2
       nise: 6.1.5
@@ -34270,7 +34023,7 @@ snapshots:
   sinon@19.0.5:
     dependencies:
       '@sinonjs/commons': 3.0.1
-      '@sinonjs/fake-timers': 13.0.5
+      '@sinonjs/fake-timers': 15.2.1
       '@sinonjs/samsam': 8.0.3
       diff: 7.0.0
       nise: 6.1.5
@@ -34279,7 +34032,7 @@ snapshots:
   sinon@20.0.0:
     dependencies:
       '@sinonjs/commons': 3.0.1
-      '@sinonjs/fake-timers': 13.0.5
+      '@sinonjs/fake-timers': 15.2.1
       '@sinonjs/samsam': 8.0.3
       diff: 7.0.0
       supports-color: 7.2.0
@@ -34287,7 +34040,7 @@ snapshots:
   sinon@21.0.3:
     dependencies:
       '@sinonjs/commons': 3.0.1
-      '@sinonjs/fake-timers': 15.4.0
+      '@sinonjs/fake-timers': 15.2.1
       '@sinonjs/samsam': 9.0.3
       diff: 8.0.4
       supports-color: 7.2.0
@@ -34724,7 +34477,7 @@ snapshots:
     dependencies:
       acorn-node: 1.8.2
 
-  tablesort@5.7.1: {}
+  tablesort@5.6.0: {}
 
   tapable@2.3.3: {}
 
@@ -34934,7 +34687,7 @@ snapshots:
       picomatch: 4.0.5
       source-map: 0.7.6
       typescript: 5.8.3
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
     optionalDependencies:
       loader-utils: 2.0.4
 
@@ -35151,7 +34904,7 @@ snapshots:
 
   undici-types@7.28.0: {}
 
-  undici@7.28.0: {}
+  undici@6.28.0: {}
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 
@@ -35366,7 +35119,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@5.1.4)
+      webpack: 5.109.0(webpack-cli@5.1.4)
       webpack-merge: 5.10.0
 
   webpack-cli@6.0.1(webpack@5.109.0):
@@ -35383,7 +35136,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
+      webpack: 5.109.0(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
 
   webpack-merge@4.2.2:

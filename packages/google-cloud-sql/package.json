@@ -70,10 +70,5 @@
   },
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }

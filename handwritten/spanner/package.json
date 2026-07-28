@@ -142,12 +142,5 @@
     "@sinonjs/fake-timers": "15.2.1",
     "@eslint-community/eslint-utils": "<4.10.0"
   },
-  "pnpm": {
-    "overrides": {
-      "gcp-metadata": "^7.0.1",
-      "@sinonjs/fake-timers": "15.2.1",
-      "@eslint-community/eslint-utils": "<4.10.0"
-    }
-  },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/spanner"
 }

@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    corepack enable pnpm && pnpm install --filter .
+    cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/bigquery-storage}"
   dir: 'handwritten/bigquery-storage'
   id: 'install-dependencies'
 

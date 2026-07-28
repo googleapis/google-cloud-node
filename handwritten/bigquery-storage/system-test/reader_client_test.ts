@@ -108,11 +108,12 @@ describe('reader.ReaderClient', () => {
     ],
   };
 
-  before(async () => {
+  before(async function () {
+    this.timeout(2 * 60 * 1000);
     await cleanupDatasets(bigquery, GCLOUD_TESTS_PREFIX);
 
     await bigquery.createDataset(datasetId);
-  }).timeout(2 * 60 * 1000);
+  });
 
   beforeEach(async () => {
     tableId = generateUuid();
