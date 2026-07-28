@@ -2301,7 +2301,7 @@ describe('resumable-upload', () => {
         up.destroy = (err: Error) => {
           assert.strictEqual(
             err.message,
-            `Retry limit exceeded - ${JSON.stringify(RESP.data)}`,
+            `Retry limit exceeded - status: ${RESP.status} - ${RESP.data}`,
           );
           done();
         };
@@ -2342,7 +2342,7 @@ describe('resumable-upload', () => {
             assert.strictEqual(up.numRetries, 3);
             assert.strictEqual(
               err.message,
-              `Retry limit exceeded - ${JSON.stringify(RESP.data)}`,
+              `Retry limit exceeded - status: ${RESP.status} - ${RESP.data}`,
             );
             done();
           });
@@ -2590,6 +2590,7 @@ describe('resumable-upload', () => {
         {
           status: 400,
           statusText: 'Bad Request',
+          bodyUsed: true,
           data: {
             error: {
               message: 'Invalid query parameter value',
