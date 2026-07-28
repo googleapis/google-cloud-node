@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {describe, it, before, after} from 'mocha';
-import {generateId} from './common';
+import {generateId, reapInstances} from './common';
 import {AppProfileOptions, Bigtable, Instance} from '../src';
 import {AppProfile} from '../src';
 import assert = require('assert');
@@ -38,6 +38,7 @@ describe('📦 App Profile', () => {
     }
 
     before(async () => {
+      await reapInstances(bigtable);
       // Creates an instance with clusters
       const instanceClusters = [
         'us-east1-c',

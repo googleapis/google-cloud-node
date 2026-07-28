@@ -38,7 +38,7 @@ import {PassThrough} from 'stream';
 import {generateChunksFromRequest} from '../test-common/utils/readRowsImpl';
 import {TabularApiSurface} from '../src/tabular-api-surface';
 import {MetricServiceClient} from '@google-cloud/monitoring';
-import {generateId} from './common';
+import {generateId, reapInstances} from './common';
 
 const SECOND_PROJECT_ID = 'cfdb-sdk-node-tests';
 const instanceId1 = generateId('instance');
@@ -334,6 +334,7 @@ describe('Bigtable/ClientSideMetrics', () => {
   let defaultProjectId: string;
 
   before(async () => {
+    await reapInstances(new Bigtable());
     /*
     For both the default project and the secondary project we need to create
     instances with some data in them so that the tests can collect all the
@@ -390,6 +391,7 @@ describe('Bigtable/ClientSideMetrics', () => {
         console.warn('The instance has been deleted already');
       }
     }
+    await reapInstances(new Bigtable());
   });
 
   describe('Bigtable/ClientSideMetricsToGCM', () => {
