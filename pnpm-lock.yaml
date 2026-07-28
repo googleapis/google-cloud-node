@@ -5,8 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  gaxios: 7.1.3
-  google-auth-library: 10.5.0
   c8: ^9.1.0
   yargs: 18.0.0
 
@@ -21,8 +19,8 @@ importers:
         specifier: ^6.0.0
         version: 6.1.0
       gaxios:
-        specifier: 7.1.3
-        version: 7.1.3
+        specifier: ^7.0.0-rc
+        version: 7.3.0
       parse-link-header:
         specifier: ^2.0.0
         version: 2.0.0
@@ -83,8 +81,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       google-auth-library:
-        specifier: 10.5.0
-        version: 10.5.0
+        specifier: ^10.6.2
+        version: 10.9.1
       html-entities:
         specifier: ^2.5.2
         version: 2.6.0
@@ -350,9 +348,6 @@ importers:
       retry-request:
         specifier: ^8.0.2
         version: 8.0.3
-      rimraf:
-        specifier: ^5.0.1
-        version: 5.0.10
     devDependencies:
       '@babel/plugin-proposal-private-methods':
         specifier: ^7.18.6
@@ -614,8 +609,8 @@ importers:
   core/packages/gcp-metadata:
     dependencies:
       gaxios:
-        specifier: 7.1.3
-        version: 7.1.3
+        specifier: ^7.1.3
+        version: 7.3.0
       google-logging-utils:
         specifier: 1.1.3
         version: 1.1.3
@@ -655,7 +650,7 @@ importers:
         version: 7.0.3
       gcbuild:
         specifier: ^1.3.39
-        version: 1.3.39
+        version: 1.3.39(encoding@0.1.13)
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.8.3)
@@ -696,8 +691,8 @@ importers:
         specifier: ^1.0.11
         version: 1.0.11
       gaxios:
-        specifier: 7.1.3
-        version: 7.1.3
+        specifier: ^7.1.4
+        version: 7.3.0
       gcp-metadata:
         specifier: 8.1.2
         version: 8.1.2
@@ -1621,8 +1616,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       google-auth-library:
-        specifier: 10.5.0
-        version: 10.5.0
+        specifier: ^10.0.0
+        version: 10.9.1
       google-gax:
         specifier: ^5.0.0
         version: 5.0.7
@@ -1707,10 +1702,10 @@ importers:
         version: 5.4.0
       '@google-cloud/opentelemetry-cloud-monitoring-exporter':
         specifier: ^0.20.0
-        version: 0.20.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-metrics@1.30.1(@opentelemetry/api@1.9.1))
+        version: 0.20.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-metrics@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)
       '@google-cloud/opentelemetry-resource-util':
         specifier: ^2.4.0
-        version: 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))
+        version: 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)
       '@google-cloud/precise-date':
         specifier: ^5.0.0
         version: 5.1.0
@@ -1906,7 +1901,7 @@ importers:
         version: 3.0.2
       gcp-metadata:
         specifier: ^6.0.0
-        version: 6.1.1
+        version: 6.1.1(encoding@0.1.13)
       ms:
         specifier: ^2.1.3
         version: 2.1.3
@@ -1964,7 +1959,7 @@ importers:
         version: 5.3.1(typescript@5.1.6)
       js-green-licenses:
         specifier: ^4.0.0
-        version: 4.0.0
+        version: 4.0.0(encoding@0.1.13)
       jsdoc:
         specifier: ^4.0.0
         version: 4.0.5
@@ -2001,6 +1996,9 @@ importers:
 
   handwritten/datastore:
     dependencies:
+      '@google-cloud/datastore-api':
+        specifier: ^0.2.0
+        version: 0.2.0
       '@google-cloud/promisify':
         specifier: ^5.0.0
         version: 5.1.0
@@ -2176,7 +2174,7 @@ importers:
         version: 17.13.4
       js-green-licenses:
         specifier: ^4.0.0
-        version: 4.0.0
+        version: 4.0.0(encoding@0.1.13)
       json-stable-stringify:
         specifier: ^1.3.0
         version: 1.3.0
@@ -2225,7 +2223,7 @@ importers:
         version: 0.4.10(@types/node@24.13.3)
       '@google-cloud/opentelemetry-cloud-trace-exporter':
         specifier: ^3.0.0
-        version: 3.0.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.10.0(@opentelemetry/api@1.9.1))
+        version: 3.0.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.10.0(@opentelemetry/api@1.9.1))(encoding@0.1.13)
       '@google-cloud/promisify':
         specifier: ^5.0.0
         version: 5.1.0
@@ -2463,10 +2461,10 @@ importers:
         version: 3.0.2
       gcp-metadata:
         specifier: ^6.0.0
-        version: 6.1.1
+        version: 6.1.1(encoding@0.1.13)
       google-auth-library:
-        specifier: 10.5.0
-        version: 10.5.0
+        specifier: ^10.6.2
+        version: 10.9.1
       google-gax:
         specifier: ^4.0.3
         version: 4.6.1(encoding@0.1.13)
@@ -2488,7 +2486,7 @@ importers:
         version: 7.9.4(encoding@0.1.13)
       '@google-cloud/opentelemetry-cloud-trace-exporter':
         specifier: ^2.1.0
-        version: 2.4.1(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.1))
+        version: 2.4.1(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)
       '@google-cloud/pubsub':
         specifier: ^4.0.0
         version: 4.11.0(encoding@0.1.13)
@@ -2601,8 +2599,8 @@ importers:
         specifier: ^11.0.0
         version: 11.3.0(encoding@0.1.13)
       google-auth-library:
-        specifier: 10.5.0
-        version: 10.5.0
+        specifier: ^10.6.2
+        version: 10.9.1
     devDependencies:
       '@google-cloud/common':
         specifier: ^6.0.0
@@ -2674,8 +2672,8 @@ importers:
         specifier: ^11.2.1
         version: 11.3.0(encoding@0.1.13)
       google-auth-library:
-        specifier: 10.5.0
-        version: 10.5.0
+        specifier: ^10.5.0
+        version: 10.9.1
       lodash.mapvalues:
         specifier: ^4.6.0
         version: 4.6.0
@@ -2774,8 +2772,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       google-auth-library:
-        specifier: 10.5.0
-        version: 10.5.0
+        specifier: ^10.5.0
+        version: 10.9.1
       google-gax:
         specifier: ^5.0.5
         version: 5.0.7
@@ -2926,7 +2924,7 @@ importers:
         version: 5.4.0
       '@google-cloud/opentelemetry-resource-util':
         specifier: ^2.4.0
-        version: 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))
+        version: 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)
       '@google-cloud/precise-date':
         specifier: ^5.0.0
         version: 5.1.0
@@ -2979,8 +2977,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       google-auth-library:
-        specifier: 10.5.0
-        version: 10.5.0
+        specifier: ^10.0.0-rc.1
+        version: 10.9.1
       google-gax:
         specifier: 5.0.6
         version: 5.0.6
@@ -3178,11 +3176,11 @@ importers:
         specifier: ^5.3.4
         version: 5.10.1
       gaxios:
-        specifier: 7.1.3
-        version: 7.1.3
+        specifier: ^6.0.2
+        version: 6.7.1(encoding@0.1.13)
       google-auth-library:
-        specifier: 10.5.0
-        version: 10.5.0
+        specifier: ^9.6.3
+        version: 9.15.1(encoding@0.1.13)
       html-entities:
         specifier: ^2.5.2
         version: 2.6.0
@@ -3461,8 +3459,8 @@ importers:
   packages/google-analytics-admin:
     dependencies:
       google-auth-library:
-        specifier: 10.5.0
-        version: 10.5.0
+        specifier: ^10.0.0-rc.1
+        version: 10.9.1
       google-gax:
         specifier: ^5.0.0
         version: 5.0.7
@@ -12281,8 +12279,8 @@ importers:
         specifier: ^1.0.1
         version: 1.1.0(protobufjs@7.6.5)
       google-auth-library:
-        specifier: 10.5.0
-        version: 10.5.0
+        specifier: ^10.0.0-rc.1
+        version: 10.9.1
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -15968,6 +15966,10 @@ packages:
     resolution: {integrity: sha512-1uvKzbmAWUdchIYRsg0f4rUmezOamWuVBSWAPAhnYoUE5OiPEx6v6JOxFIdr3MsrqV+6fyLV3EI1vMPlHoeRvw==}
     engines: {node: '>=18'}
 
+  '@google-cloud/datastore-api@0.2.0':
+    resolution: {integrity: sha512-j1U4mGjfw1p1VobVMPQaxrh8XTAkSANcBl+E861M2fNzQYlJrrhtA4dZkpuDPp8YqdGWoyAYy+eh/Kr2PzNadw==}
+    engines: {node: '>=18'}
+
   '@google-cloud/functions@4.2.2':
     resolution: {integrity: sha512-I+PwHH2lDPYWGoRYG4TOjQ+N8EkzPgeCqEEbHr2gkqo3WGBWtQopP6r3f3ngHmuaiVDz7TwG7qydLbATHtOYLw==}
     engines: {node: '>=18'}
@@ -19581,6 +19583,9 @@ packages:
   fast-safe-stringify@2.1.1:
     resolution: {integrity: sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==}
 
+  fast-text-encoding@1.0.6:
+    resolution: {integrity: sha512-VhXlQgj9ioXCqGstD37E/HBeqEGV/qOD/kmbVG8h5xKBYvM1L3lR1Zn4555cQ8GkYbJa8aJSipLPndE1k6zK2w==}
+
   fast-uri@3.1.4:
     resolution: {integrity: sha512-8JnbkQ4juDyvYs4mgFGQqg4yCYtFDtUtmp2QIQq11ZZe5CFQ5wcqm1rqDgAh/QdMySuBnPzMUiJUNZG5N/AiQw==}
 
@@ -19812,14 +19817,34 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     deprecated: This package is no longer supported.
 
+  gaxios@4.3.3:
+    resolution: {integrity: sha512-gSaYYIO1Y3wUtdfHmjDUZ8LWaxJQpiavzbF5Kq53akSzvmVg0RfyOcFDbO1KJ/KCGRFz2qG+lS81F0nkr7cRJA==}
+    engines: {node: '>=10'}
+
+  gaxios@5.1.3:
+    resolution: {integrity: sha512-95hVgBRgEIRQQQHIbnxBXeHbW4TqFk4ZDJW7wmVtvYar72FdhRIo1UGOLS2eRAKCPEdPBWu+M7+A33D9CdX9rA==}
+    engines: {node: '>=12'}
+
+  gaxios@6.7.1:
+    resolution: {integrity: sha512-LDODD4TMYx7XXdpwxAVRAIAuB0bzv0s+ywFonY46k126qzQHT9ygyoa9tncmOiQmmDrik65UYsEkv3lbfqQ3yQ==}
+    engines: {node: '>=14'}
+
   gaxios@7.1.3:
     resolution: {integrity: sha512-YGGyuEdVIjqxkxVH1pUTMY/XtmmsApXrCVv5EU25iX6inEPbV+VakJfLealkBtJN69AQmh1eGOdCl9Sm1UP6XQ==}
+    engines: {node: '>=18'}
+
+  gaxios@7.3.0:
+    resolution: {integrity: sha512-RB5vLV+vvQeoFPCX4QMK6/hjVkbIamPp1QSUD0CiZcnj12qbpiL+pLbYtgD+oZkWl0tl9z+o2Utp+MpM3QRhBA==}
     engines: {node: '>=18'}
 
   gcbuild@1.3.39:
     resolution: {integrity: sha512-NJqemT7EsE/a6fAGK8juUbDCTuaNwuxJxLHhmpsKZdyY0pFeUQ1Wxl5DPrZk9qCv0yE+t6uhmOGtD+rW50KomQ==}
     engines: {node: '>=10'}
     hasBin: true
+
+  gcp-metadata@4.3.1:
+    resolution: {integrity: sha512-x850LS5N7V1F3UcV7PoupzGsyD6iVwTVvsh3tbXfkctZnBnjW5yu5z1/3k3SehF7TyoTIe78rJs02GMMy+LF+A==}
+    engines: {node: '>=10'}
 
   gcp-metadata@6.1.1:
     resolution: {integrity: sha512-a4tiq7E0/5fTjxPAaH4jpjkSv/uCaU2p5KC6HVGrvl0cDjA8iBZv4vv1gyzlmK0ZUKqwpOyQMKzZQe3lTit77A==}
@@ -19958,6 +19983,18 @@ packages:
     resolution: {integrity: sha512-7ABviyMOlX5hIVD60YOfHw4/CxOfBhyduaYB+wbFWCWoni4N7SLcV46hrVRktuBbZjFC9ONyqamZITN7q3n32w==}
     engines: {node: '>=18'}
 
+  google-auth-library@10.9.1:
+    resolution: {integrity: sha512-i1ydyHrqcIxXkWh/uBmVkzCvIuq5yiK2ATndIe5XxKholrG/MTYP9xGYka4sQhrbIAgGjL2B6NOE7rFaiF3fXw==}
+    engines: {node: '>=18'}
+
+  google-auth-library@6.1.6:
+    resolution: {integrity: sha512-Q+ZjUEvLQj/lrVHF/IQwRo6p3s8Nc44Zk/DALsN+ac3T4HY/g/3rrufkgtl+nZ1TW7DNAw5cTChdVp4apUXVgQ==}
+    engines: {node: '>=10'}
+
+  google-auth-library@9.15.1:
+    resolution: {integrity: sha512-Jb6Z0+nvECVz+2lzSMt9u98UsoakXxA2HGHMCxh+so3n90XgYWkq5dur19JAJV7ONiJY22yBTyJB1TSkvPq9Ng==}
+    engines: {node: '>=14'}
+
   google-gax@4.6.1:
     resolution: {integrity: sha512-V6eky/xz2mcKfAd1Ioxyd6nmA61gao3n01C+YeuIwu3vzM9EDR6wcVzMSIbLMDXWeoi9SHYctXuKYC5uJUT3eQ==}
     engines: {node: '>=14'}
@@ -19981,6 +20018,12 @@ packages:
   google-logging-utils@1.1.3:
     resolution: {integrity: sha512-eAmLkjDjAFCVXg7A1unxHsLf961m6y17QFqXqAXGj/gVkKFrEICfStRfwUlGNfeCEjNRa32JEWOUTlYXPyyKvA==}
     engines: {node: '>=14'}
+
+  google-p12-pem@3.1.4:
+    resolution: {integrity: sha512-HHuHmkLgwjdmVRngf5+gSmpkyaRI6QmOg77J8tkNBHhNEI62sGHyw4/+UkgyZEI7h84NbWprXDJ+sa3xOYFvTg==}
+    engines: {node: '>=10'}
+    deprecated: Package is no longer maintained
+    hasBin: true
 
   google-proto-files@4.2.0:
     resolution: {integrity: sha512-Yl3ZtTSpkOLjHTqHn91NhDp2jMPzpHWowSGz3S30N6gkqOXrJwUu44alR9dX+NyHK3n165uR+jezOH365b1pPA==}
@@ -20038,6 +20081,14 @@ packages:
 
   grpc-health-check@2.1.0:
     resolution: {integrity: sha512-HH3WjwNtusMTEQAtRelFgsFyNcOdihvpjusNDIrGYfWG8tPNSHqELrSyriIjm70k65YSxetsKG1y4H1L5gi1wQ==}
+
+  gtoken@5.3.2:
+    resolution: {integrity: sha512-gkvEKREW7dXWF8NV8pVrKfW7WqReAmjjkMBh6lNCCGOM4ucS0r0YyXXl0r/9Yj8wcW/32ISkfc8h5mPTDbtifQ==}
+    engines: {node: '>=10'}
+
+  gtoken@7.1.0:
+    resolution: {integrity: sha512-pCcEwRi+TKpMlxAQObHDQ56KawURgyAf6jtIY046fJ5tIv3zDe/LEIubckAO8fj6JnAxLdmWkUfNyulQ2iKdEw==}
+    engines: {node: '>=14.0.0'}
 
   gtoken@8.0.0:
     resolution: {integrity: sha512-+CqsMbHPiSTdtSO14O51eMNlrp9N79gmeqmXeouJOhfucAedHw9noVe/n5uJk3tbKE6a+6ZCQg3RPhVhHByAIw==}
@@ -21623,6 +21674,10 @@ packages:
   node-fetch@3.3.2:
     resolution: {integrity: sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+
+  node-forge@1.4.0:
+    resolution: {integrity: sha512-LarFH0+6VfriEhqMMcLX2F7SwSXeWwnEAJEsYm5QKWchiVYVvJyV9v7UDvUv+w5HO23ZpQTXDv/GxdDdMyOuoQ==}
+    engines: {node: '>= 6.13.0'}
 
   node-gyp@11.5.0:
     resolution: {integrity: sha512-ra7Kvlhxn5V9Slyus0ygMa2h+UqExPqUIkfk7Pc8QTLT956JLSy51uWFwHtIYy0vI8cB4BDhc/S03+880My/LQ==}
@@ -25177,7 +25232,7 @@ snapshots:
       arrify: 2.0.1
       duplexify: 4.1.3
       extend: 3.0.2
-      google-auth-library: 10.5.0
+      google-auth-library: 9.15.1(encoding@0.1.13)
       html-entities: 2.6.0
       retry-request: 7.0.2(encoding@0.1.13)
       teeny-request: 9.0.0(encoding@0.1.13)
@@ -25192,10 +25247,16 @@ snapshots:
       arrify: 2.0.1
       duplexify: 4.1.3
       extend: 3.0.2
-      google-auth-library: 10.5.0
+      google-auth-library: 10.9.1
       html-entities: 2.6.0
       retry-request: 8.0.3
       teeny-request: 10.1.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@google-cloud/datastore-api@0.2.0':
+    dependencies:
+      google-gax: 5.0.7
     transitivePeerDependencies:
       - supports-color
 
@@ -25229,8 +25290,8 @@ snapshots:
       dot-prop: 6.0.0
       eventid: 2.0.1
       extend: 3.0.2
-      gcp-metadata: 6.1.1
-      google-auth-library: 10.5.0
+      gcp-metadata: 6.1.1(encoding@0.1.13)
+      google-auth-library: 9.15.1(encoding@0.1.13)
       google-gax: 4.6.1(encoding@0.1.13)
       long: 5.3.2
       on-finished: 2.4.1
@@ -25251,8 +25312,8 @@ snapshots:
       arrify: 2.0.1
       dot-prop: 6.0.0
       extend: 3.0.2
-      gcp-metadata: 6.1.1
-      google-auth-library: 10.5.0
+      gcp-metadata: 6.1.1(encoding@0.1.13)
+      google-auth-library: 10.9.1
       google-gax: 4.6.1(encoding@0.1.13)
       long: 5.3.2
       on-finished: 2.4.1
@@ -25268,60 +25329,65 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@google-cloud/opentelemetry-cloud-monitoring-exporter@0.20.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-metrics@1.30.1(@opentelemetry/api@1.9.1))':
+  '@google-cloud/opentelemetry-cloud-monitoring-exporter@0.20.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-metrics@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)':
     dependencies:
-      '@google-cloud/opentelemetry-resource-util': 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))
+      '@google-cloud/opentelemetry-resource-util': 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)
       '@google-cloud/precise-date': 4.0.0
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/core': 2.10.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/resources': 1.30.1(@opentelemetry/api@1.9.1)
       '@opentelemetry/sdk-metrics': 1.30.1(@opentelemetry/api@1.9.1)
-      google-auth-library: 10.5.0
-      googleapis: 137.1.0
+      google-auth-library: 9.15.1(encoding@0.1.13)
+      googleapis: 137.1.0(encoding@0.1.13)
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
-  '@google-cloud/opentelemetry-cloud-trace-exporter@2.4.1(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.1))':
+  '@google-cloud/opentelemetry-cloud-trace-exporter@2.4.1(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)':
     dependencies:
-      '@google-cloud/opentelemetry-resource-util': 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))
+      '@google-cloud/opentelemetry-resource-util': 2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)
       '@grpc/grpc-js': 1.14.4
       '@grpc/proto-loader': 0.7.15
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/core': 2.10.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/resources': 1.30.1(@opentelemetry/api@1.9.1)
       '@opentelemetry/sdk-trace-base': 1.30.1(@opentelemetry/api@1.9.1)
-      google-auth-library: 10.5.0
+      google-auth-library: 9.15.1(encoding@0.1.13)
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
-  '@google-cloud/opentelemetry-cloud-trace-exporter@3.0.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.10.0(@opentelemetry/api@1.9.1))':
+  '@google-cloud/opentelemetry-cloud-trace-exporter@3.0.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.10.0(@opentelemetry/api@1.9.1))(encoding@0.1.13)':
     dependencies:
-      '@google-cloud/opentelemetry-resource-util': 3.0.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))
+      '@google-cloud/opentelemetry-resource-util': 3.0.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))(encoding@0.1.13)
       '@grpc/grpc-js': 1.14.4
       '@grpc/proto-loader': 0.8.1
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/core': 2.10.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/resources': 2.10.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/sdk-trace-base': 2.10.0(@opentelemetry/api@1.9.1)
-      google-auth-library: 10.5.0
+      google-auth-library: 9.15.1(encoding@0.1.13)
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
-  '@google-cloud/opentelemetry-resource-util@2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))':
+  '@google-cloud/opentelemetry-resource-util@2.4.0(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.1))(encoding@0.1.13)':
     dependencies:
       '@opentelemetry/resources': 1.30.1(@opentelemetry/api@1.9.1)
       '@opentelemetry/semantic-conventions': 1.39.0
-      gcp-metadata: 6.1.1
+      gcp-metadata: 6.1.1(encoding@0.1.13)
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
-  '@google-cloud/opentelemetry-resource-util@3.0.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))':
+  '@google-cloud/opentelemetry-resource-util@3.0.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.10.0(@opentelemetry/api@1.9.1))(encoding@0.1.13)':
     dependencies:
       '@opentelemetry/core': 2.10.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/resources': 2.10.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/semantic-conventions': 1.39.0
-      gcp-metadata: 6.1.1
+      gcp-metadata: 6.1.1(encoding@0.1.13)
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
   '@google-cloud/paginator@5.0.2':
@@ -25361,7 +25427,7 @@ snapshots:
       '@opentelemetry/semantic-conventions': 1.30.0
       arrify: 2.0.1
       extend: 3.0.2
-      google-auth-library: 10.5.0
+      google-auth-library: 9.15.1(encoding@0.1.13)
       google-gax: 4.6.1(encoding@0.1.13)
       heap-js: 2.7.1
       is-stream-ended: 0.1.4
@@ -25380,8 +25446,8 @@ snapshots:
       async-retry: 1.3.3
       duplexify: 4.1.3
       fast-xml-parser: 5.10.1
-      gaxios: 7.1.3
-      google-auth-library: 10.5.0
+      gaxios: 6.7.1(encoding@0.1.13)
+      google-auth-library: 9.15.1(encoding@0.1.13)
       html-entities: 2.6.0
       mime: 3.0.0
       p-limit: 3.1.0
@@ -25399,8 +25465,8 @@ snapshots:
       console-log-level: 1.4.1
       continuation-local-storage: 3.2.1
       extend: 3.0.2
-      gcp-metadata: 6.1.1
-      google-auth-library: 10.5.0
+      gcp-metadata: 6.1.1(encoding@0.1.13)
+      google-auth-library: 9.15.1(encoding@0.1.13)
       hex2dec: 1.1.2
       is: 3.3.2
       methods: 1.1.2
@@ -29995,6 +30061,8 @@ snapshots:
 
   fast-safe-stringify@2.1.1: {}
 
+  fast-text-encoding@1.0.6: {}
+
   fast-uri@3.1.4: {}
 
   fast-url-parser@1.1.3:
@@ -30294,6 +30362,38 @@ snapshots:
       strip-ansi: 6.0.1
       wide-align: 1.1.5
 
+  gaxios@4.3.3(encoding@0.1.13):
+    dependencies:
+      abort-controller: 3.0.0
+      extend: 3.0.2
+      https-proxy-agent: 5.0.1
+      is-stream: 2.0.1
+      node-fetch: 2.7.0(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
+  gaxios@5.1.3(encoding@0.1.13):
+    dependencies:
+      extend: 3.0.2
+      https-proxy-agent: 5.0.1
+      is-stream: 2.0.1
+      node-fetch: 2.7.0(encoding@0.1.13)
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
+  gaxios@6.7.1(encoding@0.1.13):
+    dependencies:
+      extend: 3.0.2
+      https-proxy-agent: 7.0.6
+      is-stream: 2.0.1
+      node-fetch: 2.7.0(encoding@0.1.13)
+      uuid: 9.0.1
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
   gaxios@7.1.3:
     dependencies:
       extend: 3.0.2
@@ -30303,30 +30403,48 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  gcbuild@1.3.39:
+  gaxios@7.3.0:
+    dependencies:
+      extend: 3.0.2
+      https-proxy-agent: 7.0.6
+      node-fetch: 3.3.2
+    transitivePeerDependencies:
+      - supports-color
+
+  gcbuild@1.3.39(encoding@0.1.13):
     dependencies:
       chalk: 4.1.2
       globby: 11.1.0
-      googleapis: 66.0.0
+      googleapis: 66.0.0(encoding@0.1.13)
       js-yaml: 3.15.0
       meow: 8.1.2
       ora: 5.4.1
       tar: 6.2.1
       update-notifier: 5.1.0
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
-  gcp-metadata@6.1.1:
+  gcp-metadata@4.3.1(encoding@0.1.13):
     dependencies:
-      gaxios: 7.1.3
+      gaxios: 4.3.3(encoding@0.1.13)
+      json-bigint: 1.0.0
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
+  gcp-metadata@6.1.1(encoding@0.1.13):
+    dependencies:
+      gaxios: 6.7.1(encoding@0.1.13)
       google-logging-utils: 0.0.2
       json-bigint: 1.0.0
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
   gcp-metadata@8.1.2:
     dependencies:
-      gaxios: 7.1.3
+      gaxios: 7.3.0
       google-logging-utils: 1.1.3
       json-bigint: 1.0.0
     transitivePeerDependencies:
@@ -30498,12 +30616,50 @@ snapshots:
     dependencies:
       base64-js: 1.5.1
       ecdsa-sig-formatter: 1.0.11
-      gaxios: 7.1.3
+      gaxios: 7.3.0
       gcp-metadata: 8.1.2
       google-logging-utils: 1.1.3
       gtoken: 8.0.0
       jws: 4.0.1
     transitivePeerDependencies:
+      - supports-color
+
+  google-auth-library@10.9.1:
+    dependencies:
+      base64-js: 1.5.1
+      ecdsa-sig-formatter: 1.0.11
+      gaxios: 7.3.0
+      gcp-metadata: 8.1.2
+      google-logging-utils: 1.1.3
+      jws: 4.0.1
+    transitivePeerDependencies:
+      - supports-color
+
+  google-auth-library@6.1.6(encoding@0.1.13):
+    dependencies:
+      arrify: 2.0.1
+      base64-js: 1.5.1
+      ecdsa-sig-formatter: 1.0.11
+      fast-text-encoding: 1.0.6
+      gaxios: 4.3.3(encoding@0.1.13)
+      gcp-metadata: 4.3.1(encoding@0.1.13)
+      gtoken: 5.3.2(encoding@0.1.13)
+      jws: 4.0.1
+      lru-cache: 6.0.0
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
+  google-auth-library@9.15.1(encoding@0.1.13):
+    dependencies:
+      base64-js: 1.5.1
+      ecdsa-sig-formatter: 1.0.11
+      gaxios: 6.7.1(encoding@0.1.13)
+      gcp-metadata: 6.1.1(encoding@0.1.13)
+      gtoken: 7.1.0(encoding@0.1.13)
+      jws: 4.0.1
+    transitivePeerDependencies:
+      - encoding
       - supports-color
 
   google-gax@4.6.1(encoding@0.1.13):
@@ -30513,7 +30669,7 @@ snapshots:
       '@types/long': 4.0.2
       abort-controller: 3.0.0
       duplexify: 4.1.3
-      google-auth-library: 10.5.0
+      google-auth-library: 9.15.1(encoding@0.1.13)
       node-fetch: 2.7.0(encoding@0.1.13)
       object-hash: 3.0.0
       proto3-json-serializer: 2.0.2
@@ -30529,7 +30685,7 @@ snapshots:
       '@grpc/grpc-js': 1.14.4
       '@grpc/proto-loader': 0.8.1
       duplexify: 4.1.3
-      google-auth-library: 10.5.0
+      google-auth-library: 10.9.1
       google-logging-utils: 1.1.3
       node-fetch: 3.3.2
       object-hash: 3.0.0
@@ -30563,7 +30719,7 @@ snapshots:
       '@types/long': 5.0.0
       abort-controller: 3.0.0
       duplexify: 4.1.3
-      google-auth-library: 10.5.0
+      google-auth-library: 10.9.1
       google-logging-utils: 1.1.3
       node-fetch: 3.3.2
       object-hash: 3.0.0
@@ -30577,6 +30733,10 @@ snapshots:
 
   google-logging-utils@1.1.3: {}
 
+  google-p12-pem@3.1.4:
+    dependencies:
+      node-forge: 1.4.0
+
   google-proto-files@4.2.0:
     dependencies:
       protobufjs: 7.5.9
@@ -30587,26 +30747,28 @@ snapshots:
       protobufjs: 7.5.4
       walkdir: 0.4.1
 
-  googleapis-common@4.4.3:
+  googleapis-common@4.4.3(encoding@0.1.13):
     dependencies:
       extend: 3.0.2
-      gaxios: 7.1.3
-      google-auth-library: 10.5.0
+      gaxios: 4.3.3(encoding@0.1.13)
+      google-auth-library: 6.1.6(encoding@0.1.13)
       qs: 6.15.3
       url-template: 2.0.8
       uuid: 8.0.0
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
-  googleapis-common@7.2.0:
+  googleapis-common@7.2.0(encoding@0.1.13):
     dependencies:
       extend: 3.0.2
-      gaxios: 7.1.3
-      google-auth-library: 10.5.0
+      gaxios: 6.7.1(encoding@0.1.13)
+      google-auth-library: 9.15.1(encoding@0.1.13)
       qs: 6.15.3
       url-template: 2.0.8
       uuid: 9.0.1
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
   googleapis-common@8.0.2:
@@ -30620,18 +30782,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  googleapis@137.1.0:
+  googleapis@137.1.0(encoding@0.1.13):
     dependencies:
-      google-auth-library: 10.5.0
-      googleapis-common: 7.2.0
+      google-auth-library: 9.15.1(encoding@0.1.13)
+      googleapis-common: 7.2.0(encoding@0.1.13)
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
-  googleapis@66.0.0:
+  googleapis@66.0.0(encoding@0.1.13):
     dependencies:
-      google-auth-library: 10.5.0
-      googleapis-common: 4.4.3
+      google-auth-library: 6.1.6(encoding@0.1.13)
+      googleapis-common: 4.4.3(encoding@0.1.13)
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
   gopd@1.2.0: {}
@@ -30681,9 +30845,26 @@ snapshots:
     dependencies:
       '@grpc/proto-loader': 0.7.15
 
+  gtoken@5.3.2(encoding@0.1.13):
+    dependencies:
+      gaxios: 4.3.3(encoding@0.1.13)
+      google-p12-pem: 3.1.4
+      jws: 4.0.1
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
+  gtoken@7.1.0(encoding@0.1.13):
+    dependencies:
+      gaxios: 6.7.1(encoding@0.1.13)
+      jws: 4.0.1
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+
   gtoken@8.0.0:
     dependencies:
-      gaxios: 7.1.3
+      gaxios: 7.3.0
       jws: 4.0.1
     transitivePeerDependencies:
       - supports-color
@@ -31441,9 +31622,9 @@ snapshots:
 
   jpeg-exif@1.1.4: {}
 
-  js-green-licenses@4.0.0:
+  js-green-licenses@4.0.0(encoding@0.1.13):
     dependencies:
-      gaxios: 7.1.3
+      gaxios: 5.1.3(encoding@0.1.13)
       meow: 9.0.0
       npm-package-arg: 8.1.5
       package-json: 7.0.0
@@ -31452,6 +31633,7 @@ snapshots:
       spdx-satisfies: 5.0.1
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
   js-tokens@4.0.0: {}
@@ -31769,7 +31951,7 @@ snapshots:
     dependencies:
       chalk: 5.6.2
       escape-html: 1.0.3
-      gaxios: 7.1.3
+      gaxios: 6.7.1(encoding@0.1.13)
       glob: 10.5.0
       htmlparser2: 10.1.0
       marked: 13.0.3
@@ -31778,6 +31960,7 @@ snapshots:
       server-destroy: 1.0.1
       srcset: 5.0.3
     transitivePeerDependencies:
+      - encoding
       - supports-color
 
   load-json-file@4.0.0:
@@ -32480,6 +32663,8 @@ snapshots:
       data-uri-to-buffer: 4.0.1
       fetch-blob: 3.2.0
       formdata-polyfill: 4.0.10
+
+  node-forge@1.4.0: {}
 
   node-gyp@11.5.0:
     dependencies:
