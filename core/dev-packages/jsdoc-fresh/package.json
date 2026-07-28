@@ -1,6 +1,6 @@
 {
   "name": "jsdoc-fresh",
-  "version": "5.0.4",
+  "version": "5.1.0",
   "description": "Fresh JSDoc 3 Template",
   "scripts": {
     "prelint": "echo no prelint needed",
@@ -31,6 +31,6 @@
     "@jsdoc/salty": "^0.2.5"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   }
 }
