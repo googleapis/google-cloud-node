@@ -14,7 +14,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import {enrichPgError} from '../src/lib/errors.js';
+import {enrichPgError} from '../../src/lib/errors.js';
 
 describe('enrichPgError SQLSTATE Mapping', () => {
   it('should extract 42P01 when enriched with [SQLSTATE 42P01] by Go driver', () => {

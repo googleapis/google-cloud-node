@@ -14,8 +14,8 @@
 
 import * as assert from 'assert';
 import {describe, it, beforeEach} from 'mocha';
-import {types} from '../src/index.js';
-import {PgOid} from '../src/lib/codec.js';
+import {types} from '../../src/index.js';
+import {PgOid} from '../../src/lib/codec.js';
 
 describe('types (getTypeParser & setTypeParser)', () => {
   beforeEach(() => {
@@ -48,7 +48,7 @@ describe('types (getTypeParser & setTypeParser)', () => {
   });
 
   it('should automatically apply custom parser inside decodeValue', async () => {
-    const {decodeValue} = await import('../src/lib/codec.js');
+    const {decodeValue} = await import('../../src/lib/codec.js');
     types.setTypeParser(PgOid.INT8, (val: string) => `custom_int8_${val}`);
     const decoded = decodeValue('42', {code: 'INT64'});
     assert.strictEqual(decoded, 'custom_int8_42');

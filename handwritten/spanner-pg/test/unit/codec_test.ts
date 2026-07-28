@@ -20,7 +20,7 @@ import {
   PgOid,
   getSpannerType,
   getPgOid,
-} from '../src/lib/codec.js';
+} from '../../src/lib/codec.js';
 
 const google = pkg.google || (pkg as any).default?.google;
 const TypeCode = google.spanner.v1.TypeCode;
@@ -87,7 +87,7 @@ describe('Codec Type Transformations', () => {
 
     it('should encode generic object as JSON', () => {
       const obj = {foo: 'bar'};
-      const res = encodeValue(obj);
+      const res = encodeValue(obj, PgOid.JSON);
       assert.deepStrictEqual(res.valueProto, {
         stringValue: JSON.stringify(obj),
       });

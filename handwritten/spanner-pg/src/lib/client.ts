@@ -72,7 +72,9 @@ const poolCache = new Map<string, SpannerPool>();
  */
 export async function clearPoolCache(): Promise<void> {
   for (const [, pool] of poolCache.entries()) {
-    await pool.close().catch(() => {});
+    if (pool && typeof pool.close === 'function') {
+      await Promise.resolve(pool.close()).catch(() => {});
+    }
   }
   poolCache.clear();
 }

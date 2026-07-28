@@ -15,14 +15,16 @@
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {Pool as SpannerPool, Connection} from 'spannerlib-node';
-import {Client} from '../src/index.js';
+import {Client} from '../../src/index.js';
+import {clearPoolCache} from '../../src/lib/client.js';
 
 describe('Query Execution Combinations', () => {
   let createPoolStub: sinon.SinonStub;
   let fakePool: sinon.SinonStubbedInstance<SpannerPool>;
   let fakeConnection: any;
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    await clearPoolCache();
     fakeConnection = {
       execute: sinon.stub(),
       close: sinon.stub().resolves(),
@@ -236,13 +238,14 @@ describe('Query Execution Combinations', () => {
       };
     });
 
-    fakePool.close.callsFake(async () => {
+    let connectionClosed = false;
+    fakeConnection.close.callsFake(async () => {
       assert.strictEqual(
         queryResolved,
         true,
-        'Query should resolve before pool is closed',
+        'Query should resolve before connection is closed',
       );
-      poolClosed = true;
+      connectionClosed = true;
     });
 
     const client = new Client({
@@ -254,7 +257,7 @@ describe('Query Execution Combinations', () => {
       await client.connect();
       void client.query('SELECT 1');
       void client.end(() => {
-        assert.strictEqual(poolClosed, true);
+        assert.strictEqual(connectionClosed, true);
         done();
       });
     })();

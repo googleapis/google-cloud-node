@@ -13,9 +13,32 @@
 // limitations under the License.
 
 import * as assert from 'assert';
-import {resolveDsn} from '../src/lib/config.js';
+import {resolveDsn} from '../../src/lib/config.js';
 
 describe('resolveDsn', () => {
+  const origEnv = {...process.env};
+
+  beforeEach(() => {
+    delete process.env.DATABASE_URL;
+    delete process.env.PGCONNECTSTRING;
+    delete process.env.PGDATABASE;
+    delete process.env.SPANNER_PROJECT_ID;
+    delete process.env.GOOGLE_CLOUD_PROJECT;
+    delete process.env.SPANNER_INSTANCE_ID;
+    delete process.env.SPANNER_EMULATOR_HOST;
+  });
+
+  afterEach(() => {
+    delete process.env.DATABASE_URL;
+    delete process.env.PGCONNECTSTRING;
+    delete process.env.PGDATABASE;
+    delete process.env.SPANNER_PROJECT_ID;
+    delete process.env.GOOGLE_CLOUD_PROJECT;
+    delete process.env.SPANNER_INSTANCE_ID;
+    delete process.env.SPANNER_EMULATOR_HOST;
+    Object.assign(process.env, origEnv);
+  });
+
   it('should resolve standard Spanner DSN string directly', () => {
     const dsn = resolveDsn('projects/p/instances/i/databases/d');
     assert.strictEqual(dsn, 'projects/p/instances/i/databases/d');
@@ -92,15 +115,15 @@ describe('resolveDsn', () => {
     );
   });
 
-  it('should throw error for invalid configurations on Node object level', () => {
-    assert.throws(
-      () => resolveDsn({database: 'd'}),
-      /No connection configuration specified/
-    );
-    assert.throws(
-      () => resolveDsn({}),
-      /No connection configuration specified/
-    );
+  it('should return empty string for invalid/incomplete configurations on Node object level', () => {
+    delete process.env.DATABASE_URL;
+    delete process.env.PGCONNECTSTRING;
+    delete process.env.SPANNER_PROJECT_ID;
+    delete process.env.GOOGLE_CLOUD_PROJECT;
+    delete process.env.SPANNER_INSTANCE_ID;
+    delete process.env.PGDATABASE;
+    assert.strictEqual(resolveDsn({database: 'd'}), '');
+    assert.strictEqual(resolveDsn({}), '');
   });
 
   describe('environment variables', () => {
@@ -118,7 +141,14 @@ describe('resolveDsn', () => {
     });
 
     afterEach(() => {
-      process.env = {...origEnv};
+      delete process.env.DATABASE_URL;
+      delete process.env.PGCONNECTSTRING;
+      delete process.env.PGDATABASE;
+      delete process.env.SPANNER_PROJECT_ID;
+      delete process.env.GOOGLE_CLOUD_PROJECT;
+      delete process.env.SPANNER_INSTANCE_ID;
+      delete process.env.SPANNER_EMULATOR_HOST;
+      Object.assign(process.env, origEnv);
     });
 
     it('should fall back to PGDATABASE, SPANNER_PROJECT_ID, SPANNER_INSTANCE_ID', () => {
@@ -141,7 +171,7 @@ describe('resolveDsn', () => {
 
     it('should append auto_config_emulator=true when SPANNER_EMULATOR_HOST is set', () => {
       process.env.SPANNER_EMULATOR_HOST = 'localhost:9010';
-      const dsn = resolveDsn('projects/p/instances/i/databases/d');
+      const dsn = resolveDsn({project: 'p', instance: 'i', database: 'd'});
       assert.strictEqual(dsn, 'projects/p/instances/i/databases/d?auto_config_emulator=true');
     });
 

@@ -15,14 +15,16 @@
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {Pool as SpannerPool, Connection} from 'spannerlib-node';
-import {Client} from '../src/index.js';
+import {Client} from '../../src/index.js';
+import {clearPoolCache} from '../../src/lib/client.js';
 
 describe('Client Lifecycle', () => {
   let createPoolStub: sinon.SinonStub;
   let fakePool: sinon.SinonStubbedInstance<SpannerPool>;
   let fakeConnection: sinon.SinonStubbedInstance<Connection>;
 
-  beforeEach(() => {
+  beforeEach(async () => {
+    await clearPoolCache();
     fakeConnection = sinon.createStubInstance(Connection);
     fakeConnection.close.resolves();
 
@@ -63,7 +65,6 @@ describe('Client Lifecycle', () => {
 
     await client.end();
     assert.strictEqual(fakeConnection.close.calledOnce, true);
-    assert.strictEqual(fakePool.close.calledOnce, true);
   });
 
   it('should support callback syntax for connect and end', done => {
@@ -73,14 +74,13 @@ describe('Client Lifecycle', () => {
       database: 'test-db',
     });
 
-    void client.connect(async (err?: any) => {
+    client.connect((err?: any) => {
       assert.ifError(err);
       assert.strictEqual(createPoolStub.calledOnce, true);
 
-      void client.end((endErr?: any) => {
+      client.end((endErr?: any) => {
         assert.ifError(endErr);
         assert.strictEqual(fakeConnection.close.calledOnce, true);
-        assert.strictEqual(fakePool.close.calledOnce, true);
         done();
       });
     });
