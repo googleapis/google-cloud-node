@@ -54,7 +54,7 @@
     "compile:cjs": "tsc -p ./tsconfig.cjs.json",
     "compile:esm": "tsc -p .",
     "compile": "npm run compile:cjs && npm run compile:esm",
-    "conformance-test": "mocha --parallel build/cjs/conformance-test/ --require build/cjs/conformance-test/globalHooks.js",
+    "conformance-test": "cross-env NODE_OPTIONS=\"--no-deprecation\" mocha --parallel build/cjs/conformance-test/ --require build/cjs/conformance-test/globalHooks.js",
     "docs": "jsdoc -c .jsdoc.json",
     "fix": "gts fix",
     "lint": "gts check",
