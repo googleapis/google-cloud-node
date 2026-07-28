@@ -2784,7 +2784,7 @@ describe('resumable-upload', () => {
         up.destroy = (err: Error) => {
           assert.strictEqual(
             err.message,
-            'Retry limit exceeded - status: 500 - error message from server',
+            `Retry limit exceeded - status: ${RESP.status} - ${RESP.data}`,
           );
           done();
         };
@@ -2825,7 +2825,7 @@ describe('resumable-upload', () => {
             assert.strictEqual(up.numRetries, 3);
             assert.strictEqual(
               err.message,
-              'Retry limit exceeded - status: 500 - error message from server',
+              `Retry limit exceeded - status: ${RESP.status} - ${RESP.data}`,
             );
             done();
           });
@@ -3079,6 +3079,7 @@ describe('resumable-upload', () => {
         {
           status: 400,
           statusText: 'Bad Request',
+          bodyUsed: true,
           data: {
             error: {
               message: 'Invalid query parameter value',
@@ -3087,7 +3088,6 @@ describe('resumable-upload', () => {
           },
           config: {},
           headers: {},
-          bodyUsed: true,
         } as GaxiosResponse,
       );
 
