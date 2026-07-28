@@ -103,6 +103,20 @@ export namespace google {
                     public getPrivateOffer(request: google.cloud.commerceproducer.v1beta.IGetPrivateOfferRequest): Promise<google.cloud.commerceproducer.v1beta.PrivateOffer>;
 
                     /**
+                     * Calls ResolveAmendmentTarget.
+                     * @param request ResolveAmendmentTargetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ResolveAmendmentTargetResponse
+                     */
+                    public resolveAmendmentTarget(request: google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest, callback: google.cloud.commerceproducer.v1beta.CommerceTransaction.ResolveAmendmentTargetCallback): void;
+
+                    /**
+                     * Calls ResolveAmendmentTarget.
+                     * @param request ResolveAmendmentTargetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public resolveAmendmentTarget(request: google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest): Promise<google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse>;
+
+                    /**
                      * Calls CreatePrivateOffer.
                      * @param request CreatePrivateOfferRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and PrivateOffer
@@ -356,6 +370,13 @@ export namespace google {
                      * @param [response] PrivateOffer
                      */
                     type GetPrivateOfferCallback = (error: (Error|null), response?: google.cloud.commerceproducer.v1beta.PrivateOffer) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.commerceproducer.v1beta.CommerceTransaction|resolveAmendmentTarget}.
+                     * @param error Error, if any
+                     * @param [response] ResolveAmendmentTargetResponse
+                     */
+                    type ResolveAmendmentTargetCallback = (error: (Error|null), response?: google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.commerceproducer.v1beta.CommerceTransaction|createPrivateOffer}.
@@ -816,6 +837,327 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResolveAmendmentTargetRequest. */
+                interface IResolveAmendmentTargetRequest {
+
+                    /** ResolveAmendmentTargetRequest parent */
+                    parent?: (string|null);
+
+                    /** ResolveAmendmentTargetRequest targetBillingAccount */
+                    targetBillingAccount?: (string|null);
+
+                    /** ResolveAmendmentTargetRequest baseStandardOffer */
+                    baseStandardOffer?: (string|null);
+                }
+
+                /** Represents a ResolveAmendmentTargetRequest. */
+                class ResolveAmendmentTargetRequest implements IResolveAmendmentTargetRequest {
+
+                    /**
+                     * Constructs a new ResolveAmendmentTargetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest);
+
+                    /** ResolveAmendmentTargetRequest parent. */
+                    public parent: string;
+
+                    /** ResolveAmendmentTargetRequest targetBillingAccount. */
+                    public targetBillingAccount: string;
+
+                    /** ResolveAmendmentTargetRequest baseStandardOffer. */
+                    public baseStandardOffer: string;
+
+                    /**
+                     * Creates a new ResolveAmendmentTargetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResolveAmendmentTargetRequest instance
+                     */
+                    public static create(properties?: google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest;
+
+                    /**
+                     * Encodes the specified ResolveAmendmentTargetRequest message. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest.verify|verify} messages.
+                     * @param message ResolveAmendmentTargetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResolveAmendmentTargetRequest message, length delimited. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest.verify|verify} messages.
+                     * @param message ResolveAmendmentTargetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResolveAmendmentTargetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResolveAmendmentTargetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest;
+
+                    /**
+                     * Decodes a ResolveAmendmentTargetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResolveAmendmentTargetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest;
+
+                    /**
+                     * Verifies a ResolveAmendmentTargetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResolveAmendmentTargetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResolveAmendmentTargetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest;
+
+                    /**
+                     * Creates a plain object from a ResolveAmendmentTargetRequest message. Also converts values to other types if specified.
+                     * @param message ResolveAmendmentTargetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResolveAmendmentTargetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResolveAmendmentTargetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ResolveAmendmentTargetResponse. */
+                interface IResolveAmendmentTargetResponse {
+
+                    /** ResolveAmendmentTargetResponse requiredPrivateOffer */
+                    requiredPrivateOffer?: (string|null);
+
+                    /** ResolveAmendmentTargetResponse requiredStandardOffer */
+                    requiredStandardOffer?: (string|null);
+
+                    /** ResolveAmendmentTargetResponse optionalOffers */
+                    optionalOffers?: (google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers|null);
+                }
+
+                /** Represents a ResolveAmendmentTargetResponse. */
+                class ResolveAmendmentTargetResponse implements IResolveAmendmentTargetResponse {
+
+                    /**
+                     * Constructs a new ResolveAmendmentTargetResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse);
+
+                    /** ResolveAmendmentTargetResponse requiredPrivateOffer. */
+                    public requiredPrivateOffer?: (string|null);
+
+                    /** ResolveAmendmentTargetResponse requiredStandardOffer. */
+                    public requiredStandardOffer?: (string|null);
+
+                    /** ResolveAmendmentTargetResponse optionalOffers. */
+                    public optionalOffers?: (google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers|null);
+
+                    /** ResolveAmendmentTargetResponse amendmentRequirement. */
+                    public amendmentRequirement?: ("requiredPrivateOffer"|"requiredStandardOffer"|"optionalOffers");
+
+                    /**
+                     * Creates a new ResolveAmendmentTargetResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ResolveAmendmentTargetResponse instance
+                     */
+                    public static create(properties?: google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse;
+
+                    /**
+                     * Encodes the specified ResolveAmendmentTargetResponse message. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.verify|verify} messages.
+                     * @param message ResolveAmendmentTargetResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ResolveAmendmentTargetResponse message, length delimited. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.verify|verify} messages.
+                     * @param message ResolveAmendmentTargetResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ResolveAmendmentTargetResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ResolveAmendmentTargetResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse;
+
+                    /**
+                     * Decodes a ResolveAmendmentTargetResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ResolveAmendmentTargetResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse;
+
+                    /**
+                     * Verifies a ResolveAmendmentTargetResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ResolveAmendmentTargetResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ResolveAmendmentTargetResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse;
+
+                    /**
+                     * Creates a plain object from a ResolveAmendmentTargetResponse message. Also converts values to other types if specified.
+                     * @param message ResolveAmendmentTargetResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ResolveAmendmentTargetResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ResolveAmendmentTargetResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ResolveAmendmentTargetResponse {
+
+                    /** Properties of an OptionalOffers. */
+                    interface IOptionalOffers {
+
+                        /** OptionalOffers privateOffers */
+                        privateOffers?: (string[]|null);
+                    }
+
+                    /** Represents an OptionalOffers. */
+                    class OptionalOffers implements IOptionalOffers {
+
+                        /**
+                         * Constructs a new OptionalOffers.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers);
+
+                        /** OptionalOffers privateOffers. */
+                        public privateOffers: string[];
+
+                        /**
+                         * Creates a new OptionalOffers instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns OptionalOffers instance
+                         */
+                        public static create(properties?: google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers;
+
+                        /**
+                         * Encodes the specified OptionalOffers message. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers.verify|verify} messages.
+                         * @param message OptionalOffers message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified OptionalOffers message, length delimited. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers.verify|verify} messages.
+                         * @param message OptionalOffers message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an OptionalOffers message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns OptionalOffers
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers;
+
+                        /**
+                         * Decodes an OptionalOffers message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns OptionalOffers
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers;
+
+                        /**
+                         * Verifies an OptionalOffers message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an OptionalOffers message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns OptionalOffers
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers;
+
+                        /**
+                         * Creates a plain object from an OptionalOffers message. Also converts values to other types if specified.
+                         * @param message OptionalOffers
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this OptionalOffers to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for OptionalOffers
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a CreatePrivateOfferRequest. */
@@ -3868,6 +4210,9 @@ export namespace google {
 
                         /** Term endPolicy */
                         endPolicy?: (google.cloud.commerceproducer.v1beta.PrivateOffer.Term.EndPolicy|keyof typeof google.cloud.commerceproducer.v1beta.PrivateOffer.Term.EndPolicy|null);
+
+                        /** Term effectiveTermEndTime */
+                        effectiveTermEndTime?: (google.type.IDateTime|null);
                     }
 
                     /** Represents a Term. */
@@ -3899,6 +4244,9 @@ export namespace google {
 
                         /** Term endPolicy. */
                         public endPolicy: (google.cloud.commerceproducer.v1beta.PrivateOffer.Term.EndPolicy|keyof typeof google.cloud.commerceproducer.v1beta.PrivateOffer.Term.EndPolicy);
+
+                        /** Term effectiveTermEndTime. */
+                        public effectiveTermEndTime?: (google.type.IDateTime|null);
 
                         /** Term endPolicyData. */
                         public endPolicyData?: ("durationMonths"|"scheduledEndTime");
