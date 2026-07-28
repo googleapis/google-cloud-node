@@ -1,6 +1,6 @@
 {
   "core/common": "6.1.0",
-  "core/dev-packages/jsdoc-fresh": "5.0.4",
+  "core/dev-packages/jsdoc-fresh": "6.0.0",
   "core/dev-packages/jsdoc-region-tag": "4.0.3",
   "core/dev-packages/pack-n-play": "4.2.3",
   "core/generator/gapic-generator-typescript": "4.13.0",
@@ -18,8 +18,8 @@
   "core/packages/tools": "1.1.0",
   "core/packages/typeless-sample-bot": "3.1.3",
   "core/paginator": "6.1.0",
-  "core/precise-date": "5.1.0",
-  "core/projectify": "5.1.0",
+  "core/precise-date": "5.2.0",
+  "core/projectify": "5.2.0",
   "core/promisify": "5.1.0",
   "handwritten/bigquery": "8.3.1",
   "handwritten/bigquery-storage": "5.1.2",

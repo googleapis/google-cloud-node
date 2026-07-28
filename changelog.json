@@ -4,6 +4,58 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "234da8e6a49fe8c6efd9d585320e689efd3b0020",
+          "message": "Upgrade the node version to 22 for the js-doc-fresh core package",
+          "issues": [
+            "8977"
+          ],
+          "breakingChangeNote": "upgrade the node version to 22 for the js-doc-fresh core package ([#8977](https://github.com/googleapis/google-cloud-node/issues/8977))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "jsdoc-fresh",
+      "id": "97c53a27-8e0e-4ad0-a1b9-f47a17aa1f41",
+      "createTime": "2026-07-27T21:14:17.996Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
+      "version": "5.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "jsdoc-fresh",
+      "id": "ae8ef239-b02a-4e42-8c7b-1a088bdf1de0",
+      "createTime": "2026-07-23T06:10:31.909Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/precise-date",
+      "id": "3158ef00-e13a-4eca-b4fa-c488dcf39d0d",
+      "createTime": "2026-07-23T06:10:33.251Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "c2f51364b47c40e6793c55d3020329e1fa4a9f74",
           "message": "Move typescript to dependencies for AST runtime execution",
@@ -329,6 +381,23 @@
       "artifactName": "@google-cloud/paginator",
       "id": "daa94e13-c04b-4f1c-b683-207a94d0ed0f",
       "createTime": "2026-07-23T06:10:35.280Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e9d308b814c3d6d97bb39873a398ba0aea807718",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8914"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "3cebe31d-1349-4655-a7ae-fdf44d99fb54",
+      "createTime": "2026-07-23T06:10:32.251Z"
     },
     {
       "changes": [
@@ -83162,5 +83231,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-24T15:02:00.313Z"
+  "updateTime": "2026-07-27T21:14:17.996Z"
 }
