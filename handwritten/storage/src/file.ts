@@ -2808,14 +2808,14 @@ class File extends ServiceObject<File, FileMetadata> {
     const policyBase64 = Buffer.from(policyString).toString('base64');
 
     this.storage.authClient.sign(policyBase64, options.signingEndpoint).then(
-      signature => {
+      (signature: string) => {
         callback(null, {
           string: policyString,
           base64: policyBase64,
           signature,
         });
       },
-      err => {
+      (err: Error) => {
         callback(new SigningError(err.message));
       },
     );

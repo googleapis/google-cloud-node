@@ -4,7 +4,7 @@
   "description": "container to bootstrap initial files in a Node library",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_NO_WARNINGS=1 mocha tests/",
+    "test": "cross-env NODE_NO_WARNINGS=1 mocha tests/",
     "lint": "echo 'FIXME: no lint tests'",
     "samples-test": "echo 'no sample tests'",
     "system-test": "echo 'no system tests'"

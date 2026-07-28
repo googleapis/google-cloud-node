@@ -16,6 +16,7 @@
 
 set -eo pipefail
 
+mkdir -p ${HOME}/.npm-global
 export NPM_CONFIG_PREFIX=${HOME}/.npm-global
 
 ## cd to the parent directory, i.e. the root of the git repo
@@ -31,8 +32,8 @@ trap cleanup EXIT
 
 # Build and start the proxy in a separate process
 pushd .
-npm install
-nohup npm run testproxy &
+pnpm install
+nohup pnpm run testproxy &
 proxyPID=$!
 popd
 
