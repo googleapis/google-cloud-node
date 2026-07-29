@@ -82,7 +82,7 @@ subdirs=(
 )
 
 RETVAL=0
-# These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo). 
+# These following APIs need an explicit credential file to run properly (or oAuth2, which we don't support in this repo).
 # When we hit these packages, we will run the "samples with credentials" trigger, which contains the credentials as an env variable
 
 tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/google-analytics-admin/ packages/google-area120-tables/ packages/google-analytics-data/ packages/google-iam-credentials/ packages/google-apps-meet/ packages/google-chat/ packages/google-streetview-publish/ packages/google-cloud-developerconnect/"
@@ -90,7 +90,7 @@ tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/googl
 # Some packages are only used by our bots and automation. These packages do not need to run on Windows and
 # often employ platform specific code like file system interaction. Some packages may also fail
 # on Windows due to incompatible npm scripts.
-# 
+#
 # Until these packages can be updated to be OS agnostic, we will skip them on Windows.
 windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ core/packages/gapic-node-processing/ core/packages/typeless-sample-bot/ handwritten/cloud-profiler/"
 
@@ -116,7 +116,7 @@ for subdir in ${subdirs[@]}; do
         # System tests for packages are broken and blocking PRs.
         # See https://github.com/googleapis/google-cloud-node/issues/7976.
         #
-        # Per https://github.com/googleapis/google-cloud-node/issues/7921, 
+        # Per https://github.com/googleapis/google-cloud-node/issues/7921,
         # we are likely to permanently remove these tests in the near future.
         if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "system" ]]; then
             echo "Skipping ${TEST_TYPE} test for packages: ${d}"
@@ -126,7 +126,7 @@ for subdir in ${subdirs[@]}; do
         # Sample tests for packages are broken/flaky and blocking PRs.
         # See https://github.com/googleapis/google-cloud-node/issues/7976#issuecomment-4210458096.
         #
-        # Per https://github.com/googleapis/google-cloud-node/issues/7921, 
+        # Per https://github.com/googleapis/google-cloud-node/issues/7921,
         # we are likely to permanently remove these tests in the near future.
         if [[ "${subdir}" == "packages" && "${TEST_TYPE}" == "samples" ]]; then
             echo "Skipping ${TEST_TYPE} test for packages: ${d}"
@@ -205,20 +205,28 @@ for subdir in ${subdirs[@]}; do
         fi
         if [ "${should_test}" = true ]; then
             echo "running test in ${d}"
-            pushd ${d}
-            # Temporarily allow failure.
-            set +e
-            ${test_script}
-            ret=$?
-            set -e
-            if [ ${ret} -ne 0 ]; then
-                RETVAL=${ret}
-                # Since there are so many APIs, we should exit early if there's an error
-                exit ${RETVAL}
+            (
+                pushd ${d} >/dev/null
+                # Temporarily allow failure.
+                set +e
+                ${test_script}
+                ret=$?
+                set -e
+                if [ ${ret} -ne 0 ]; then
+                    exit ${ret}
+                fi
+                popd >/dev/null
+            ) &
+
+            if [[ $(jobs -r -p | wc -l) -ge 4 ]]; then
+                wait -n || exit $?
             fi
-            popd
         fi
     done
 done
 
-exit ${RETVAL}
+for job in $(jobs -p); do
+    wait $job || exit $?
+done
+
+exit 0
