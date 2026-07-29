@@ -20,11 +20,11 @@ on:
   push:
     branches:
     - main
-    paths:
-    - 'handwritten/bigtable/**'
+    # paths:
+    # - 'handwritten/bigtable/**'
   pull_request:
-    paths:
-    - 'handwritten/bigtable/**'
+    # paths:
+    # - 'handwritten/bigtable/**'
 name: conformance
 jobs:
   conformance:
