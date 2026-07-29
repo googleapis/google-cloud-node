@@ -23,6 +23,3744 @@ export namespace google {
         /** Namespace agentidentity. */
         namespace agentidentity {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Represents an AuthProviderService */
+                class AuthProviderService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new AuthProviderService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new AuthProviderService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AuthProviderService;
+
+                    /**
+                     * Calls ListAuthProviders.
+                     * @param request ListAuthProvidersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAuthProvidersResponse
+                     */
+                    public listAuthProviders(request: google.cloud.agentidentity.v1.IListAuthProvidersRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.ListAuthProvidersCallback): void;
+
+                    /**
+                     * Calls ListAuthProviders.
+                     * @param request ListAuthProvidersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAuthProviders(request: google.cloud.agentidentity.v1.IListAuthProvidersRequest): Promise<google.cloud.agentidentity.v1.ListAuthProvidersResponse>;
+
+                    /**
+                     * Calls GetAuthProvider.
+                     * @param request GetAuthProviderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuthProvider
+                     */
+                    public getAuthProvider(request: google.cloud.agentidentity.v1.IGetAuthProviderRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.GetAuthProviderCallback): void;
+
+                    /**
+                     * Calls GetAuthProvider.
+                     * @param request GetAuthProviderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAuthProvider(request: google.cloud.agentidentity.v1.IGetAuthProviderRequest): Promise<google.cloud.agentidentity.v1.AuthProvider>;
+
+                    /**
+                     * Calls CreateAuthProvider.
+                     * @param request CreateAuthProviderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuthProvider
+                     */
+                    public createAuthProvider(request: google.cloud.agentidentity.v1.ICreateAuthProviderRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.CreateAuthProviderCallback): void;
+
+                    /**
+                     * Calls CreateAuthProvider.
+                     * @param request CreateAuthProviderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAuthProvider(request: google.cloud.agentidentity.v1.ICreateAuthProviderRequest): Promise<google.cloud.agentidentity.v1.AuthProvider>;
+
+                    /**
+                     * Calls UpdateAuthProvider.
+                     * @param request UpdateAuthProviderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuthProvider
+                     */
+                    public updateAuthProvider(request: google.cloud.agentidentity.v1.IUpdateAuthProviderRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.UpdateAuthProviderCallback): void;
+
+                    /**
+                     * Calls UpdateAuthProvider.
+                     * @param request UpdateAuthProviderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAuthProvider(request: google.cloud.agentidentity.v1.IUpdateAuthProviderRequest): Promise<google.cloud.agentidentity.v1.AuthProvider>;
+
+                    /**
+                     * Calls DeleteAuthProvider.
+                     * @param request DeleteAuthProviderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteAuthProvider(request: google.cloud.agentidentity.v1.IDeleteAuthProviderRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.DeleteAuthProviderCallback): void;
+
+                    /**
+                     * Calls DeleteAuthProvider.
+                     * @param request DeleteAuthProviderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAuthProvider(request: google.cloud.agentidentity.v1.IDeleteAuthProviderRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UndeleteAuthProvider.
+                     * @param request UndeleteAuthProviderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuthProvider
+                     */
+                    public undeleteAuthProvider(request: google.cloud.agentidentity.v1.IUndeleteAuthProviderRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.UndeleteAuthProviderCallback): void;
+
+                    /**
+                     * Calls UndeleteAuthProvider.
+                     * @param request UndeleteAuthProviderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public undeleteAuthProvider(request: google.cloud.agentidentity.v1.IUndeleteAuthProviderRequest): Promise<google.cloud.agentidentity.v1.AuthProvider>;
+
+                    /**
+                     * Calls QueryAuthProviders.
+                     * @param request QueryAuthProvidersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QueryAuthProvidersResponse
+                     */
+                    public queryAuthProviders(request: google.cloud.agentidentity.v1.IQueryAuthProvidersRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.QueryAuthProvidersCallback): void;
+
+                    /**
+                     * Calls QueryAuthProviders.
+                     * @param request QueryAuthProvidersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryAuthProviders(request: google.cloud.agentidentity.v1.IQueryAuthProvidersRequest): Promise<google.cloud.agentidentity.v1.QueryAuthProvidersResponse>;
+
+                    /**
+                     * Calls QueryWorkloads.
+                     * @param request QueryWorkloadsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QueryWorkloadsResponse
+                     */
+                    public queryWorkloads(request: google.cloud.agentidentity.v1.IQueryWorkloadsRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.QueryWorkloadsCallback): void;
+
+                    /**
+                     * Calls QueryWorkloads.
+                     * @param request QueryWorkloadsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public queryWorkloads(request: google.cloud.agentidentity.v1.IQueryWorkloadsRequest): Promise<google.cloud.agentidentity.v1.QueryWorkloadsResponse>;
+
+                    /**
+                     * Calls ListAuthorizations.
+                     * @param request ListAuthorizationsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAuthorizationsResponse
+                     */
+                    public listAuthorizations(request: google.cloud.agentidentity.v1.IListAuthorizationsRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.ListAuthorizationsCallback): void;
+
+                    /**
+                     * Calls ListAuthorizations.
+                     * @param request ListAuthorizationsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAuthorizations(request: google.cloud.agentidentity.v1.IListAuthorizationsRequest): Promise<google.cloud.agentidentity.v1.ListAuthorizationsResponse>;
+
+                    /**
+                     * Calls GetAuthorization.
+                     * @param request GetAuthorizationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Authorization
+                     */
+                    public getAuthorization(request: google.cloud.agentidentity.v1.IGetAuthorizationRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.GetAuthorizationCallback): void;
+
+                    /**
+                     * Calls GetAuthorization.
+                     * @param request GetAuthorizationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAuthorization(request: google.cloud.agentidentity.v1.IGetAuthorizationRequest): Promise<google.cloud.agentidentity.v1.Authorization>;
+
+                    /**
+                     * Calls DeleteAuthorization.
+                     * @param request DeleteAuthorizationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteAuthorization(request: google.cloud.agentidentity.v1.IDeleteAuthorizationRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.DeleteAuthorizationCallback): void;
+
+                    /**
+                     * Calls DeleteAuthorization.
+                     * @param request DeleteAuthorizationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAuthorization(request: google.cloud.agentidentity.v1.IDeleteAuthorizationRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListAccessSummaries.
+                     * @param request ListAccessSummariesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAccessSummariesResponse
+                     */
+                    public listAccessSummaries(request: google.cloud.agentidentity.v1.IListAccessSummariesRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.ListAccessSummariesCallback): void;
+
+                    /**
+                     * Calls ListAccessSummaries.
+                     * @param request ListAccessSummariesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAccessSummaries(request: google.cloud.agentidentity.v1.IListAccessSummariesRequest): Promise<google.cloud.agentidentity.v1.ListAccessSummariesResponse>;
+
+                    /**
+                     * Calls GetAccessSummary.
+                     * @param request GetAccessSummaryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AccessSummary
+                     */
+                    public getAccessSummary(request: google.cloud.agentidentity.v1.IGetAccessSummaryRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.GetAccessSummaryCallback): void;
+
+                    /**
+                     * Calls GetAccessSummary.
+                     * @param request GetAccessSummaryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAccessSummary(request: google.cloud.agentidentity.v1.IGetAccessSummaryRequest): Promise<google.cloud.agentidentity.v1.AccessSummary>;
+
+                    /**
+                     * Calls RevokeAuthorization.
+                     * @param request RevokeAuthorizationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RevokeAuthorizationResponse
+                     */
+                    public revokeAuthorization(request: google.cloud.agentidentity.v1.IRevokeAuthorizationRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.RevokeAuthorizationCallback): void;
+
+                    /**
+                     * Calls RevokeAuthorization.
+                     * @param request RevokeAuthorizationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public revokeAuthorization(request: google.cloud.agentidentity.v1.IRevokeAuthorizationRequest): Promise<google.cloud.agentidentity.v1.RevokeAuthorizationResponse>;
+
+                    /**
+                     * Calls EnableAuthProvider.
+                     * @param request EnableAuthProviderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuthProvider
+                     */
+                    public enableAuthProvider(request: google.cloud.agentidentity.v1.IEnableAuthProviderRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.EnableAuthProviderCallback): void;
+
+                    /**
+                     * Calls EnableAuthProvider.
+                     * @param request EnableAuthProviderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public enableAuthProvider(request: google.cloud.agentidentity.v1.IEnableAuthProviderRequest): Promise<google.cloud.agentidentity.v1.AuthProvider>;
+
+                    /**
+                     * Calls DisableAuthProvider.
+                     * @param request DisableAuthProviderRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AuthProvider
+                     */
+                    public disableAuthProvider(request: google.cloud.agentidentity.v1.IDisableAuthProviderRequest, callback: google.cloud.agentidentity.v1.AuthProviderService.DisableAuthProviderCallback): void;
+
+                    /**
+                     * Calls DisableAuthProvider.
+                     * @param request DisableAuthProviderRequest message or plain object
+                     * @returns Promise
+                     */
+                    public disableAuthProvider(request: google.cloud.agentidentity.v1.IDisableAuthProviderRequest): Promise<google.cloud.agentidentity.v1.AuthProvider>;
+                }
+
+                namespace AuthProviderService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|listAuthProviders}.
+                     * @param error Error, if any
+                     * @param [response] ListAuthProvidersResponse
+                     */
+                    type ListAuthProvidersCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.ListAuthProvidersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|getAuthProvider}.
+                     * @param error Error, if any
+                     * @param [response] AuthProvider
+                     */
+                    type GetAuthProviderCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.AuthProvider) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|createAuthProvider}.
+                     * @param error Error, if any
+                     * @param [response] AuthProvider
+                     */
+                    type CreateAuthProviderCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.AuthProvider) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|updateAuthProvider}.
+                     * @param error Error, if any
+                     * @param [response] AuthProvider
+                     */
+                    type UpdateAuthProviderCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.AuthProvider) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|deleteAuthProvider}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteAuthProviderCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|undeleteAuthProvider}.
+                     * @param error Error, if any
+                     * @param [response] AuthProvider
+                     */
+                    type UndeleteAuthProviderCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.AuthProvider) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|queryAuthProviders}.
+                     * @param error Error, if any
+                     * @param [response] QueryAuthProvidersResponse
+                     */
+                    type QueryAuthProvidersCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.QueryAuthProvidersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|queryWorkloads}.
+                     * @param error Error, if any
+                     * @param [response] QueryWorkloadsResponse
+                     */
+                    type QueryWorkloadsCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.QueryWorkloadsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|listAuthorizations}.
+                     * @param error Error, if any
+                     * @param [response] ListAuthorizationsResponse
+                     */
+                    type ListAuthorizationsCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.ListAuthorizationsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|getAuthorization}.
+                     * @param error Error, if any
+                     * @param [response] Authorization
+                     */
+                    type GetAuthorizationCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.Authorization) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|deleteAuthorization}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteAuthorizationCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|listAccessSummaries}.
+                     * @param error Error, if any
+                     * @param [response] ListAccessSummariesResponse
+                     */
+                    type ListAccessSummariesCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.ListAccessSummariesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|getAccessSummary}.
+                     * @param error Error, if any
+                     * @param [response] AccessSummary
+                     */
+                    type GetAccessSummaryCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.AccessSummary) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|revokeAuthorization}.
+                     * @param error Error, if any
+                     * @param [response] RevokeAuthorizationResponse
+                     */
+                    type RevokeAuthorizationCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.RevokeAuthorizationResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|enableAuthProvider}.
+                     * @param error Error, if any
+                     * @param [response] AuthProvider
+                     */
+                    type EnableAuthProviderCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.AuthProvider) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.agentidentity.v1.AuthProviderService|disableAuthProvider}.
+                     * @param error Error, if any
+                     * @param [response] AuthProvider
+                     */
+                    type DisableAuthProviderCallback = (error: (Error|null), response?: google.cloud.agentidentity.v1.AuthProvider) => void;
+                }
+
+                /** AuthProviderType enum. */
+                enum AuthProviderType {
+                    AUTH_PROVIDER_TYPE_UNSPECIFIED = 0,
+                    AUTH_PROVIDER_TYPE_THREE_LEGGED_OAUTH = 1,
+                    AUTH_PROVIDER_TYPE_TWO_LEGGED_OAUTH = 2,
+                    AUTH_PROVIDER_TYPE_API_KEY = 3,
+                    AUTH_PROVIDER_TYPE_GEMINI_ENTERPRISE = 4
+                }
+
+                /** Properties of an AuthProvider. */
+                interface IAuthProvider {
+
+                    /** AuthProvider name */
+                    name?: (string|null);
+
+                    /** AuthProvider createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthProvider updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthProvider labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** AuthProvider authProviderTypeParams */
+                    authProviderTypeParams?: (google.cloud.agentidentity.v1.AuthProvider.IAuthProviderTypeParams|null);
+
+                    /** AuthProvider allowedScopes */
+                    allowedScopes?: (string[]|null);
+
+                    /** AuthProvider blockedScopes */
+                    blockedScopes?: (string[]|null);
+
+                    /** AuthProvider description */
+                    description?: (string|null);
+
+                    /** AuthProvider deleted */
+                    deleted?: (boolean|null);
+
+                    /** AuthProvider expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthProvider state */
+                    state?: (google.cloud.agentidentity.v1.AuthProvider.State|keyof typeof google.cloud.agentidentity.v1.AuthProvider.State|null);
+
+                    /** AuthProvider workloadIds */
+                    workloadIds?: (string[]|null);
+                }
+
+                /** Represents an AuthProvider. */
+                class AuthProvider implements IAuthProvider {
+
+                    /**
+                     * Constructs a new AuthProvider.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IAuthProvider);
+
+                    /** AuthProvider name. */
+                    public name: string;
+
+                    /** AuthProvider createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthProvider updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthProvider labels. */
+                    public labels: { [k: string]: string };
+
+                    /** AuthProvider authProviderTypeParams. */
+                    public authProviderTypeParams?: (google.cloud.agentidentity.v1.AuthProvider.IAuthProviderTypeParams|null);
+
+                    /** AuthProvider allowedScopes. */
+                    public allowedScopes: string[];
+
+                    /** AuthProvider blockedScopes. */
+                    public blockedScopes: string[];
+
+                    /** AuthProvider description. */
+                    public description: string;
+
+                    /** AuthProvider deleted. */
+                    public deleted: boolean;
+
+                    /** AuthProvider expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AuthProvider state. */
+                    public state: (google.cloud.agentidentity.v1.AuthProvider.State|keyof typeof google.cloud.agentidentity.v1.AuthProvider.State);
+
+                    /** AuthProvider workloadIds. */
+                    public workloadIds: string[];
+
+                    /**
+                     * Creates a new AuthProvider instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuthProvider instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IAuthProvider): google.cloud.agentidentity.v1.AuthProvider;
+
+                    /**
+                     * Encodes the specified AuthProvider message. Does not implicitly {@link google.cloud.agentidentity.v1.AuthProvider.verify|verify} messages.
+                     * @param message AuthProvider message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IAuthProvider, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AuthProvider message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.AuthProvider.verify|verify} messages.
+                     * @param message AuthProvider message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IAuthProvider, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AuthProvider message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuthProvider
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.AuthProvider;
+
+                    /**
+                     * Decodes an AuthProvider message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuthProvider
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.AuthProvider;
+
+                    /**
+                     * Verifies an AuthProvider message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AuthProvider message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuthProvider
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.AuthProvider;
+
+                    /**
+                     * Creates a plain object from an AuthProvider message. Also converts values to other types if specified.
+                     * @param message AuthProvider
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.AuthProvider, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AuthProvider to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AuthProvider
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AuthProvider {
+
+                    /** Properties of an AuthProviderTypeParams. */
+                    interface IAuthProviderTypeParams {
+
+                        /** AuthProviderTypeParams threeLeggedOauth */
+                        threeLeggedOauth?: (google.cloud.agentidentity.v1.IThreeLeggedOAuth|null);
+
+                        /** AuthProviderTypeParams twoLeggedOauth */
+                        twoLeggedOauth?: (google.cloud.agentidentity.v1.ITwoLeggedOAuth|null);
+
+                        /** AuthProviderTypeParams apiKey */
+                        apiKey?: (google.cloud.agentidentity.v1.IApiKeyParams|null);
+
+                        /** AuthProviderTypeParams geAuthProvider */
+                        geAuthProvider?: (google.cloud.agentidentity.v1.IGeminiEnterpriseAuthProviderParams|null);
+                    }
+
+                    /** Represents an AuthProviderTypeParams. */
+                    class AuthProviderTypeParams implements IAuthProviderTypeParams {
+
+                        /**
+                         * Constructs a new AuthProviderTypeParams.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.agentidentity.v1.AuthProvider.IAuthProviderTypeParams);
+
+                        /** AuthProviderTypeParams threeLeggedOauth. */
+                        public threeLeggedOauth?: (google.cloud.agentidentity.v1.IThreeLeggedOAuth|null);
+
+                        /** AuthProviderTypeParams twoLeggedOauth. */
+                        public twoLeggedOauth?: (google.cloud.agentidentity.v1.ITwoLeggedOAuth|null);
+
+                        /** AuthProviderTypeParams apiKey. */
+                        public apiKey?: (google.cloud.agentidentity.v1.IApiKeyParams|null);
+
+                        /** AuthProviderTypeParams geAuthProvider. */
+                        public geAuthProvider?: (google.cloud.agentidentity.v1.IGeminiEnterpriseAuthProviderParams|null);
+
+                        /** AuthProviderTypeParams type. */
+                        public type?: ("threeLeggedOauth"|"twoLeggedOauth"|"apiKey"|"geAuthProvider");
+
+                        /**
+                         * Creates a new AuthProviderTypeParams instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AuthProviderTypeParams instance
+                         */
+                        public static create(properties?: google.cloud.agentidentity.v1.AuthProvider.IAuthProviderTypeParams): google.cloud.agentidentity.v1.AuthProvider.AuthProviderTypeParams;
+
+                        /**
+                         * Encodes the specified AuthProviderTypeParams message. Does not implicitly {@link google.cloud.agentidentity.v1.AuthProvider.AuthProviderTypeParams.verify|verify} messages.
+                         * @param message AuthProviderTypeParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.agentidentity.v1.AuthProvider.IAuthProviderTypeParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AuthProviderTypeParams message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.AuthProvider.AuthProviderTypeParams.verify|verify} messages.
+                         * @param message AuthProviderTypeParams message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.agentidentity.v1.AuthProvider.IAuthProviderTypeParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AuthProviderTypeParams message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AuthProviderTypeParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.AuthProvider.AuthProviderTypeParams;
+
+                        /**
+                         * Decodes an AuthProviderTypeParams message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AuthProviderTypeParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.AuthProvider.AuthProviderTypeParams;
+
+                        /**
+                         * Verifies an AuthProviderTypeParams message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AuthProviderTypeParams message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AuthProviderTypeParams
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.AuthProvider.AuthProviderTypeParams;
+
+                        /**
+                         * Creates a plain object from an AuthProviderTypeParams message. Also converts values to other types if specified.
+                         * @param message AuthProviderTypeParams
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.agentidentity.v1.AuthProvider.AuthProviderTypeParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AuthProviderTypeParams to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AuthProviderTypeParams
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        DISABLED = 2
+                    }
+                }
+
+                /** Properties of a ThreeLeggedOAuth. */
+                interface IThreeLeggedOAuth {
+
+                    /** ThreeLeggedOAuth clientSecret */
+                    clientSecret?: (string|null);
+
+                    /** ThreeLeggedOAuth clientId */
+                    clientId?: (string|null);
+
+                    /** ThreeLeggedOAuth redirectUrl */
+                    redirectUrl?: (string|null);
+
+                    /** ThreeLeggedOAuth authorizationUrl */
+                    authorizationUrl?: (string|null);
+
+                    /** ThreeLeggedOAuth tokenUrl */
+                    tokenUrl?: (string|null);
+
+                    /** ThreeLeggedOAuth enablePkce */
+                    enablePkce?: (boolean|null);
+
+                    /** ThreeLeggedOAuth defaultContinueUri */
+                    defaultContinueUri?: (string|null);
+                }
+
+                /** Represents a ThreeLeggedOAuth. */
+                class ThreeLeggedOAuth implements IThreeLeggedOAuth {
+
+                    /**
+                     * Constructs a new ThreeLeggedOAuth.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IThreeLeggedOAuth);
+
+                    /** ThreeLeggedOAuth clientSecret. */
+                    public clientSecret: string;
+
+                    /** ThreeLeggedOAuth clientId. */
+                    public clientId: string;
+
+                    /** ThreeLeggedOAuth redirectUrl. */
+                    public redirectUrl: string;
+
+                    /** ThreeLeggedOAuth authorizationUrl. */
+                    public authorizationUrl: string;
+
+                    /** ThreeLeggedOAuth tokenUrl. */
+                    public tokenUrl: string;
+
+                    /** ThreeLeggedOAuth enablePkce. */
+                    public enablePkce: boolean;
+
+                    /** ThreeLeggedOAuth defaultContinueUri. */
+                    public defaultContinueUri: string;
+
+                    /**
+                     * Creates a new ThreeLeggedOAuth instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ThreeLeggedOAuth instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IThreeLeggedOAuth): google.cloud.agentidentity.v1.ThreeLeggedOAuth;
+
+                    /**
+                     * Encodes the specified ThreeLeggedOAuth message. Does not implicitly {@link google.cloud.agentidentity.v1.ThreeLeggedOAuth.verify|verify} messages.
+                     * @param message ThreeLeggedOAuth message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IThreeLeggedOAuth, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ThreeLeggedOAuth message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.ThreeLeggedOAuth.verify|verify} messages.
+                     * @param message ThreeLeggedOAuth message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IThreeLeggedOAuth, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ThreeLeggedOAuth message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ThreeLeggedOAuth
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.ThreeLeggedOAuth;
+
+                    /**
+                     * Decodes a ThreeLeggedOAuth message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ThreeLeggedOAuth
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.ThreeLeggedOAuth;
+
+                    /**
+                     * Verifies a ThreeLeggedOAuth message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ThreeLeggedOAuth message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ThreeLeggedOAuth
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.ThreeLeggedOAuth;
+
+                    /**
+                     * Creates a plain object from a ThreeLeggedOAuth message. Also converts values to other types if specified.
+                     * @param message ThreeLeggedOAuth
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.ThreeLeggedOAuth, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ThreeLeggedOAuth to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ThreeLeggedOAuth
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TwoLeggedOAuth. */
+                interface ITwoLeggedOAuth {
+
+                    /** TwoLeggedOAuth clientSecret */
+                    clientSecret?: (string|null);
+
+                    /** TwoLeggedOAuth clientId */
+                    clientId?: (string|null);
+
+                    /** TwoLeggedOAuth tokenUrl */
+                    tokenUrl?: (string|null);
+                }
+
+                /** Represents a TwoLeggedOAuth. */
+                class TwoLeggedOAuth implements ITwoLeggedOAuth {
+
+                    /**
+                     * Constructs a new TwoLeggedOAuth.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.ITwoLeggedOAuth);
+
+                    /** TwoLeggedOAuth clientSecret. */
+                    public clientSecret: string;
+
+                    /** TwoLeggedOAuth clientId. */
+                    public clientId: string;
+
+                    /** TwoLeggedOAuth tokenUrl. */
+                    public tokenUrl: string;
+
+                    /**
+                     * Creates a new TwoLeggedOAuth instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TwoLeggedOAuth instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.ITwoLeggedOAuth): google.cloud.agentidentity.v1.TwoLeggedOAuth;
+
+                    /**
+                     * Encodes the specified TwoLeggedOAuth message. Does not implicitly {@link google.cloud.agentidentity.v1.TwoLeggedOAuth.verify|verify} messages.
+                     * @param message TwoLeggedOAuth message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.ITwoLeggedOAuth, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TwoLeggedOAuth message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.TwoLeggedOAuth.verify|verify} messages.
+                     * @param message TwoLeggedOAuth message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.ITwoLeggedOAuth, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TwoLeggedOAuth message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TwoLeggedOAuth
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.TwoLeggedOAuth;
+
+                    /**
+                     * Decodes a TwoLeggedOAuth message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TwoLeggedOAuth
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.TwoLeggedOAuth;
+
+                    /**
+                     * Verifies a TwoLeggedOAuth message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TwoLeggedOAuth message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TwoLeggedOAuth
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.TwoLeggedOAuth;
+
+                    /**
+                     * Creates a plain object from a TwoLeggedOAuth message. Also converts values to other types if specified.
+                     * @param message TwoLeggedOAuth
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.TwoLeggedOAuth, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TwoLeggedOAuth to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TwoLeggedOAuth
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ApiKeyParams. */
+                interface IApiKeyParams {
+
+                    /** ApiKeyParams apiKey */
+                    apiKey?: (string|null);
+                }
+
+                /** Represents an ApiKeyParams. */
+                class ApiKeyParams implements IApiKeyParams {
+
+                    /**
+                     * Constructs a new ApiKeyParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IApiKeyParams);
+
+                    /** ApiKeyParams apiKey. */
+                    public apiKey: string;
+
+                    /**
+                     * Creates a new ApiKeyParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApiKeyParams instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IApiKeyParams): google.cloud.agentidentity.v1.ApiKeyParams;
+
+                    /**
+                     * Encodes the specified ApiKeyParams message. Does not implicitly {@link google.cloud.agentidentity.v1.ApiKeyParams.verify|verify} messages.
+                     * @param message ApiKeyParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IApiKeyParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApiKeyParams message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.ApiKeyParams.verify|verify} messages.
+                     * @param message ApiKeyParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IApiKeyParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApiKeyParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApiKeyParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.ApiKeyParams;
+
+                    /**
+                     * Decodes an ApiKeyParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApiKeyParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.ApiKeyParams;
+
+                    /**
+                     * Verifies an ApiKeyParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApiKeyParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApiKeyParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.ApiKeyParams;
+
+                    /**
+                     * Creates a plain object from an ApiKeyParams message. Also converts values to other types if specified.
+                     * @param message ApiKeyParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.ApiKeyParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApiKeyParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ApiKeyParams
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GeminiEnterpriseAuthProviderParams. */
+                interface IGeminiEnterpriseAuthProviderParams {
+                }
+
+                /** Represents a GeminiEnterpriseAuthProviderParams. */
+                class GeminiEnterpriseAuthProviderParams implements IGeminiEnterpriseAuthProviderParams {
+
+                    /**
+                     * Constructs a new GeminiEnterpriseAuthProviderParams.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IGeminiEnterpriseAuthProviderParams);
+
+                    /**
+                     * Creates a new GeminiEnterpriseAuthProviderParams instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GeminiEnterpriseAuthProviderParams instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IGeminiEnterpriseAuthProviderParams): google.cloud.agentidentity.v1.GeminiEnterpriseAuthProviderParams;
+
+                    /**
+                     * Encodes the specified GeminiEnterpriseAuthProviderParams message. Does not implicitly {@link google.cloud.agentidentity.v1.GeminiEnterpriseAuthProviderParams.verify|verify} messages.
+                     * @param message GeminiEnterpriseAuthProviderParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IGeminiEnterpriseAuthProviderParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GeminiEnterpriseAuthProviderParams message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.GeminiEnterpriseAuthProviderParams.verify|verify} messages.
+                     * @param message GeminiEnterpriseAuthProviderParams message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IGeminiEnterpriseAuthProviderParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GeminiEnterpriseAuthProviderParams message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GeminiEnterpriseAuthProviderParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.GeminiEnterpriseAuthProviderParams;
+
+                    /**
+                     * Decodes a GeminiEnterpriseAuthProviderParams message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GeminiEnterpriseAuthProviderParams
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.GeminiEnterpriseAuthProviderParams;
+
+                    /**
+                     * Verifies a GeminiEnterpriseAuthProviderParams message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GeminiEnterpriseAuthProviderParams message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GeminiEnterpriseAuthProviderParams
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.GeminiEnterpriseAuthProviderParams;
+
+                    /**
+                     * Creates a plain object from a GeminiEnterpriseAuthProviderParams message. Also converts values to other types if specified.
+                     * @param message GeminiEnterpriseAuthProviderParams
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.GeminiEnterpriseAuthProviderParams, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GeminiEnterpriseAuthProviderParams to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GeminiEnterpriseAuthProviderParams
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAuthProvidersRequest. */
+                interface IListAuthProvidersRequest {
+
+                    /** ListAuthProvidersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAuthProvidersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAuthProvidersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAuthProvidersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListAuthProvidersRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListAuthProvidersRequest showDeleted */
+                    showDeleted?: (boolean|null);
+                }
+
+                /** Represents a ListAuthProvidersRequest. */
+                class ListAuthProvidersRequest implements IListAuthProvidersRequest {
+
+                    /**
+                     * Constructs a new ListAuthProvidersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IListAuthProvidersRequest);
+
+                    /** ListAuthProvidersRequest parent. */
+                    public parent: string;
+
+                    /** ListAuthProvidersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAuthProvidersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAuthProvidersRequest filter. */
+                    public filter: string;
+
+                    /** ListAuthProvidersRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListAuthProvidersRequest showDeleted. */
+                    public showDeleted: boolean;
+
+                    /**
+                     * Creates a new ListAuthProvidersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAuthProvidersRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IListAuthProvidersRequest): google.cloud.agentidentity.v1.ListAuthProvidersRequest;
+
+                    /**
+                     * Encodes the specified ListAuthProvidersRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.ListAuthProvidersRequest.verify|verify} messages.
+                     * @param message ListAuthProvidersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IListAuthProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAuthProvidersRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.ListAuthProvidersRequest.verify|verify} messages.
+                     * @param message ListAuthProvidersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IListAuthProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAuthProvidersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAuthProvidersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.ListAuthProvidersRequest;
+
+                    /**
+                     * Decodes a ListAuthProvidersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAuthProvidersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.ListAuthProvidersRequest;
+
+                    /**
+                     * Verifies a ListAuthProvidersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAuthProvidersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAuthProvidersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.ListAuthProvidersRequest;
+
+                    /**
+                     * Creates a plain object from a ListAuthProvidersRequest message. Also converts values to other types if specified.
+                     * @param message ListAuthProvidersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.ListAuthProvidersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAuthProvidersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAuthProvidersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAuthProvidersResponse. */
+                interface IListAuthProvidersResponse {
+
+                    /** ListAuthProvidersResponse authProviders */
+                    authProviders?: (google.cloud.agentidentity.v1.IAuthProvider[]|null);
+
+                    /** ListAuthProvidersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAuthProvidersResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAuthProvidersResponse. */
+                class ListAuthProvidersResponse implements IListAuthProvidersResponse {
+
+                    /**
+                     * Constructs a new ListAuthProvidersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IListAuthProvidersResponse);
+
+                    /** ListAuthProvidersResponse authProviders. */
+                    public authProviders: google.cloud.agentidentity.v1.IAuthProvider[];
+
+                    /** ListAuthProvidersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAuthProvidersResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAuthProvidersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAuthProvidersResponse instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IListAuthProvidersResponse): google.cloud.agentidentity.v1.ListAuthProvidersResponse;
+
+                    /**
+                     * Encodes the specified ListAuthProvidersResponse message. Does not implicitly {@link google.cloud.agentidentity.v1.ListAuthProvidersResponse.verify|verify} messages.
+                     * @param message ListAuthProvidersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IListAuthProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAuthProvidersResponse message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.ListAuthProvidersResponse.verify|verify} messages.
+                     * @param message ListAuthProvidersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IListAuthProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAuthProvidersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAuthProvidersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.ListAuthProvidersResponse;
+
+                    /**
+                     * Decodes a ListAuthProvidersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAuthProvidersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.ListAuthProvidersResponse;
+
+                    /**
+                     * Verifies a ListAuthProvidersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAuthProvidersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAuthProvidersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.ListAuthProvidersResponse;
+
+                    /**
+                     * Creates a plain object from a ListAuthProvidersResponse message. Also converts values to other types if specified.
+                     * @param message ListAuthProvidersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.ListAuthProvidersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAuthProvidersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAuthProvidersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAuthProviderRequest. */
+                interface IGetAuthProviderRequest {
+
+                    /** GetAuthProviderRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAuthProviderRequest. */
+                class GetAuthProviderRequest implements IGetAuthProviderRequest {
+
+                    /**
+                     * Constructs a new GetAuthProviderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IGetAuthProviderRequest);
+
+                    /** GetAuthProviderRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAuthProviderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAuthProviderRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IGetAuthProviderRequest): google.cloud.agentidentity.v1.GetAuthProviderRequest;
+
+                    /**
+                     * Encodes the specified GetAuthProviderRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.GetAuthProviderRequest.verify|verify} messages.
+                     * @param message GetAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IGetAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAuthProviderRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.GetAuthProviderRequest.verify|verify} messages.
+                     * @param message GetAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IGetAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAuthProviderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.GetAuthProviderRequest;
+
+                    /**
+                     * Decodes a GetAuthProviderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.GetAuthProviderRequest;
+
+                    /**
+                     * Verifies a GetAuthProviderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAuthProviderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAuthProviderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.GetAuthProviderRequest;
+
+                    /**
+                     * Creates a plain object from a GetAuthProviderRequest message. Also converts values to other types if specified.
+                     * @param message GetAuthProviderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.GetAuthProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAuthProviderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAuthProviderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAuthProviderRequest. */
+                interface ICreateAuthProviderRequest {
+
+                    /** CreateAuthProviderRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAuthProviderRequest authProviderId */
+                    authProviderId?: (string|null);
+
+                    /** CreateAuthProviderRequest authProvider */
+                    authProvider?: (google.cloud.agentidentity.v1.IAuthProvider|null);
+
+                    /** CreateAuthProviderRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateAuthProviderRequest. */
+                class CreateAuthProviderRequest implements ICreateAuthProviderRequest {
+
+                    /**
+                     * Constructs a new CreateAuthProviderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.ICreateAuthProviderRequest);
+
+                    /** CreateAuthProviderRequest parent. */
+                    public parent: string;
+
+                    /** CreateAuthProviderRequest authProviderId. */
+                    public authProviderId: string;
+
+                    /** CreateAuthProviderRequest authProvider. */
+                    public authProvider?: (google.cloud.agentidentity.v1.IAuthProvider|null);
+
+                    /** CreateAuthProviderRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateAuthProviderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAuthProviderRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.ICreateAuthProviderRequest): google.cloud.agentidentity.v1.CreateAuthProviderRequest;
+
+                    /**
+                     * Encodes the specified CreateAuthProviderRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.CreateAuthProviderRequest.verify|verify} messages.
+                     * @param message CreateAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.ICreateAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAuthProviderRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.CreateAuthProviderRequest.verify|verify} messages.
+                     * @param message CreateAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.ICreateAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAuthProviderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.CreateAuthProviderRequest;
+
+                    /**
+                     * Decodes a CreateAuthProviderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.CreateAuthProviderRequest;
+
+                    /**
+                     * Verifies a CreateAuthProviderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAuthProviderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAuthProviderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.CreateAuthProviderRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAuthProviderRequest message. Also converts values to other types if specified.
+                     * @param message CreateAuthProviderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.CreateAuthProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAuthProviderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAuthProviderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateAuthProviderRequest. */
+                interface IUpdateAuthProviderRequest {
+
+                    /** UpdateAuthProviderRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAuthProviderRequest authProvider */
+                    authProvider?: (google.cloud.agentidentity.v1.IAuthProvider|null);
+
+                    /** UpdateAuthProviderRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateAuthProviderRequest. */
+                class UpdateAuthProviderRequest implements IUpdateAuthProviderRequest {
+
+                    /**
+                     * Constructs a new UpdateAuthProviderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IUpdateAuthProviderRequest);
+
+                    /** UpdateAuthProviderRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAuthProviderRequest authProvider. */
+                    public authProvider?: (google.cloud.agentidentity.v1.IAuthProvider|null);
+
+                    /** UpdateAuthProviderRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateAuthProviderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAuthProviderRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IUpdateAuthProviderRequest): google.cloud.agentidentity.v1.UpdateAuthProviderRequest;
+
+                    /**
+                     * Encodes the specified UpdateAuthProviderRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.UpdateAuthProviderRequest.verify|verify} messages.
+                     * @param message UpdateAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IUpdateAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAuthProviderRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.UpdateAuthProviderRequest.verify|verify} messages.
+                     * @param message UpdateAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IUpdateAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAuthProviderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.UpdateAuthProviderRequest;
+
+                    /**
+                     * Decodes an UpdateAuthProviderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.UpdateAuthProviderRequest;
+
+                    /**
+                     * Verifies an UpdateAuthProviderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAuthProviderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAuthProviderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.UpdateAuthProviderRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAuthProviderRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAuthProviderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.UpdateAuthProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAuthProviderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAuthProviderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAuthProviderRequest. */
+                interface IDeleteAuthProviderRequest {
+
+                    /** DeleteAuthProviderRequest name */
+                    name?: (string|null);
+
+                    /** DeleteAuthProviderRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteAuthProviderRequest. */
+                class DeleteAuthProviderRequest implements IDeleteAuthProviderRequest {
+
+                    /**
+                     * Constructs a new DeleteAuthProviderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IDeleteAuthProviderRequest);
+
+                    /** DeleteAuthProviderRequest name. */
+                    public name: string;
+
+                    /** DeleteAuthProviderRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteAuthProviderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAuthProviderRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IDeleteAuthProviderRequest): google.cloud.agentidentity.v1.DeleteAuthProviderRequest;
+
+                    /**
+                     * Encodes the specified DeleteAuthProviderRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.DeleteAuthProviderRequest.verify|verify} messages.
+                     * @param message DeleteAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IDeleteAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAuthProviderRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.DeleteAuthProviderRequest.verify|verify} messages.
+                     * @param message DeleteAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IDeleteAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAuthProviderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.DeleteAuthProviderRequest;
+
+                    /**
+                     * Decodes a DeleteAuthProviderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.DeleteAuthProviderRequest;
+
+                    /**
+                     * Verifies a DeleteAuthProviderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAuthProviderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAuthProviderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.DeleteAuthProviderRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAuthProviderRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAuthProviderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.DeleteAuthProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAuthProviderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAuthProviderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UndeleteAuthProviderRequest. */
+                interface IUndeleteAuthProviderRequest {
+
+                    /** UndeleteAuthProviderRequest name */
+                    name?: (string|null);
+
+                    /** UndeleteAuthProviderRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UndeleteAuthProviderRequest. */
+                class UndeleteAuthProviderRequest implements IUndeleteAuthProviderRequest {
+
+                    /**
+                     * Constructs a new UndeleteAuthProviderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IUndeleteAuthProviderRequest);
+
+                    /** UndeleteAuthProviderRequest name. */
+                    public name: string;
+
+                    /** UndeleteAuthProviderRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UndeleteAuthProviderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UndeleteAuthProviderRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IUndeleteAuthProviderRequest): google.cloud.agentidentity.v1.UndeleteAuthProviderRequest;
+
+                    /**
+                     * Encodes the specified UndeleteAuthProviderRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.UndeleteAuthProviderRequest.verify|verify} messages.
+                     * @param message UndeleteAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IUndeleteAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UndeleteAuthProviderRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.UndeleteAuthProviderRequest.verify|verify} messages.
+                     * @param message UndeleteAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IUndeleteAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UndeleteAuthProviderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UndeleteAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.UndeleteAuthProviderRequest;
+
+                    /**
+                     * Decodes an UndeleteAuthProviderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UndeleteAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.UndeleteAuthProviderRequest;
+
+                    /**
+                     * Verifies an UndeleteAuthProviderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UndeleteAuthProviderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UndeleteAuthProviderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.UndeleteAuthProviderRequest;
+
+                    /**
+                     * Creates a plain object from an UndeleteAuthProviderRequest message. Also converts values to other types if specified.
+                     * @param message UndeleteAuthProviderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.UndeleteAuthProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UndeleteAuthProviderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UndeleteAuthProviderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EnableAuthProviderRequest. */
+                interface IEnableAuthProviderRequest {
+
+                    /** EnableAuthProviderRequest name */
+                    name?: (string|null);
+
+                    /** EnableAuthProviderRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an EnableAuthProviderRequest. */
+                class EnableAuthProviderRequest implements IEnableAuthProviderRequest {
+
+                    /**
+                     * Constructs a new EnableAuthProviderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IEnableAuthProviderRequest);
+
+                    /** EnableAuthProviderRequest name. */
+                    public name: string;
+
+                    /** EnableAuthProviderRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new EnableAuthProviderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnableAuthProviderRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IEnableAuthProviderRequest): google.cloud.agentidentity.v1.EnableAuthProviderRequest;
+
+                    /**
+                     * Encodes the specified EnableAuthProviderRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.EnableAuthProviderRequest.verify|verify} messages.
+                     * @param message EnableAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IEnableAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnableAuthProviderRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.EnableAuthProviderRequest.verify|verify} messages.
+                     * @param message EnableAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IEnableAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnableAuthProviderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnableAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.EnableAuthProviderRequest;
+
+                    /**
+                     * Decodes an EnableAuthProviderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnableAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.EnableAuthProviderRequest;
+
+                    /**
+                     * Verifies an EnableAuthProviderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnableAuthProviderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnableAuthProviderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.EnableAuthProviderRequest;
+
+                    /**
+                     * Creates a plain object from an EnableAuthProviderRequest message. Also converts values to other types if specified.
+                     * @param message EnableAuthProviderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.EnableAuthProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnableAuthProviderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EnableAuthProviderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DisableAuthProviderRequest. */
+                interface IDisableAuthProviderRequest {
+
+                    /** DisableAuthProviderRequest name */
+                    name?: (string|null);
+
+                    /** DisableAuthProviderRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DisableAuthProviderRequest. */
+                class DisableAuthProviderRequest implements IDisableAuthProviderRequest {
+
+                    /**
+                     * Constructs a new DisableAuthProviderRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IDisableAuthProviderRequest);
+
+                    /** DisableAuthProviderRequest name. */
+                    public name: string;
+
+                    /** DisableAuthProviderRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DisableAuthProviderRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisableAuthProviderRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IDisableAuthProviderRequest): google.cloud.agentidentity.v1.DisableAuthProviderRequest;
+
+                    /**
+                     * Encodes the specified DisableAuthProviderRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.DisableAuthProviderRequest.verify|verify} messages.
+                     * @param message DisableAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IDisableAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisableAuthProviderRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.DisableAuthProviderRequest.verify|verify} messages.
+                     * @param message DisableAuthProviderRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IDisableAuthProviderRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisableAuthProviderRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisableAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.DisableAuthProviderRequest;
+
+                    /**
+                     * Decodes a DisableAuthProviderRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisableAuthProviderRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.DisableAuthProviderRequest;
+
+                    /**
+                     * Verifies a DisableAuthProviderRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisableAuthProviderRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisableAuthProviderRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.DisableAuthProviderRequest;
+
+                    /**
+                     * Creates a plain object from a DisableAuthProviderRequest message. Also converts values to other types if specified.
+                     * @param message DisableAuthProviderRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.DisableAuthProviderRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisableAuthProviderRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DisableAuthProviderRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Authorization. */
+                interface IAuthorization {
+
+                    /** Authorization name */
+                    name?: (string|null);
+
+                    /** Authorization createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Authorization updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Authorization clientUserId */
+                    clientUserId?: (string|null);
+
+                    /** Authorization scopes */
+                    scopes?: (string[]|null);
+
+                    /** Authorization state */
+                    state?: (google.cloud.agentidentity.v1.Authorization.State|keyof typeof google.cloud.agentidentity.v1.Authorization.State|null);
+                }
+
+                /** Represents an Authorization. */
+                class Authorization implements IAuthorization {
+
+                    /**
+                     * Constructs a new Authorization.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IAuthorization);
+
+                    /** Authorization name. */
+                    public name: string;
+
+                    /** Authorization createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Authorization updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Authorization clientUserId. */
+                    public clientUserId: string;
+
+                    /** Authorization scopes. */
+                    public scopes: string[];
+
+                    /** Authorization state. */
+                    public state: (google.cloud.agentidentity.v1.Authorization.State|keyof typeof google.cloud.agentidentity.v1.Authorization.State);
+
+                    /**
+                     * Creates a new Authorization instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Authorization instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IAuthorization): google.cloud.agentidentity.v1.Authorization;
+
+                    /**
+                     * Encodes the specified Authorization message. Does not implicitly {@link google.cloud.agentidentity.v1.Authorization.verify|verify} messages.
+                     * @param message Authorization message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IAuthorization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Authorization message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.Authorization.verify|verify} messages.
+                     * @param message Authorization message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IAuthorization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Authorization message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Authorization
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.Authorization;
+
+                    /**
+                     * Decodes an Authorization message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Authorization
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.Authorization;
+
+                    /**
+                     * Verifies an Authorization message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Authorization message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Authorization
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.Authorization;
+
+                    /**
+                     * Creates a plain object from an Authorization message. Also converts values to other types if specified.
+                     * @param message Authorization
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.Authorization, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Authorization to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Authorization
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Authorization {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        SUSPENDED = 2
+                    }
+                }
+
+                /** Properties of a ListAuthorizationsRequest. */
+                interface IListAuthorizationsRequest {
+
+                    /** ListAuthorizationsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAuthorizationsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAuthorizationsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAuthorizationsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListAuthorizationsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListAuthorizationsRequest. */
+                class ListAuthorizationsRequest implements IListAuthorizationsRequest {
+
+                    /**
+                     * Constructs a new ListAuthorizationsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IListAuthorizationsRequest);
+
+                    /** ListAuthorizationsRequest parent. */
+                    public parent: string;
+
+                    /** ListAuthorizationsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAuthorizationsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAuthorizationsRequest filter. */
+                    public filter: string;
+
+                    /** ListAuthorizationsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListAuthorizationsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAuthorizationsRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IListAuthorizationsRequest): google.cloud.agentidentity.v1.ListAuthorizationsRequest;
+
+                    /**
+                     * Encodes the specified ListAuthorizationsRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.ListAuthorizationsRequest.verify|verify} messages.
+                     * @param message ListAuthorizationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IListAuthorizationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAuthorizationsRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.ListAuthorizationsRequest.verify|verify} messages.
+                     * @param message ListAuthorizationsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IListAuthorizationsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAuthorizationsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAuthorizationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.ListAuthorizationsRequest;
+
+                    /**
+                     * Decodes a ListAuthorizationsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAuthorizationsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.ListAuthorizationsRequest;
+
+                    /**
+                     * Verifies a ListAuthorizationsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAuthorizationsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAuthorizationsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.ListAuthorizationsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAuthorizationsRequest message. Also converts values to other types if specified.
+                     * @param message ListAuthorizationsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.ListAuthorizationsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAuthorizationsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAuthorizationsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAuthorizationsResponse. */
+                interface IListAuthorizationsResponse {
+
+                    /** ListAuthorizationsResponse authorizations */
+                    authorizations?: (google.cloud.agentidentity.v1.IAuthorization[]|null);
+
+                    /** ListAuthorizationsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAuthorizationsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAuthorizationsResponse. */
+                class ListAuthorizationsResponse implements IListAuthorizationsResponse {
+
+                    /**
+                     * Constructs a new ListAuthorizationsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IListAuthorizationsResponse);
+
+                    /** ListAuthorizationsResponse authorizations. */
+                    public authorizations: google.cloud.agentidentity.v1.IAuthorization[];
+
+                    /** ListAuthorizationsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAuthorizationsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAuthorizationsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAuthorizationsResponse instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IListAuthorizationsResponse): google.cloud.agentidentity.v1.ListAuthorizationsResponse;
+
+                    /**
+                     * Encodes the specified ListAuthorizationsResponse message. Does not implicitly {@link google.cloud.agentidentity.v1.ListAuthorizationsResponse.verify|verify} messages.
+                     * @param message ListAuthorizationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IListAuthorizationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAuthorizationsResponse message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.ListAuthorizationsResponse.verify|verify} messages.
+                     * @param message ListAuthorizationsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IListAuthorizationsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAuthorizationsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAuthorizationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.ListAuthorizationsResponse;
+
+                    /**
+                     * Decodes a ListAuthorizationsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAuthorizationsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.ListAuthorizationsResponse;
+
+                    /**
+                     * Verifies a ListAuthorizationsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAuthorizationsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAuthorizationsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.ListAuthorizationsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAuthorizationsResponse message. Also converts values to other types if specified.
+                     * @param message ListAuthorizationsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.ListAuthorizationsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAuthorizationsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAuthorizationsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAuthorizationRequest. */
+                interface IGetAuthorizationRequest {
+
+                    /** GetAuthorizationRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAuthorizationRequest. */
+                class GetAuthorizationRequest implements IGetAuthorizationRequest {
+
+                    /**
+                     * Constructs a new GetAuthorizationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IGetAuthorizationRequest);
+
+                    /** GetAuthorizationRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAuthorizationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAuthorizationRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IGetAuthorizationRequest): google.cloud.agentidentity.v1.GetAuthorizationRequest;
+
+                    /**
+                     * Encodes the specified GetAuthorizationRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.GetAuthorizationRequest.verify|verify} messages.
+                     * @param message GetAuthorizationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IGetAuthorizationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAuthorizationRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.GetAuthorizationRequest.verify|verify} messages.
+                     * @param message GetAuthorizationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IGetAuthorizationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAuthorizationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAuthorizationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.GetAuthorizationRequest;
+
+                    /**
+                     * Decodes a GetAuthorizationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAuthorizationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.GetAuthorizationRequest;
+
+                    /**
+                     * Verifies a GetAuthorizationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAuthorizationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAuthorizationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.GetAuthorizationRequest;
+
+                    /**
+                     * Creates a plain object from a GetAuthorizationRequest message. Also converts values to other types if specified.
+                     * @param message GetAuthorizationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.GetAuthorizationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAuthorizationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAuthorizationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAuthorizationRequest. */
+                interface IDeleteAuthorizationRequest {
+
+                    /** DeleteAuthorizationRequest name */
+                    name?: (string|null);
+
+                    /** DeleteAuthorizationRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteAuthorizationRequest. */
+                class DeleteAuthorizationRequest implements IDeleteAuthorizationRequest {
+
+                    /**
+                     * Constructs a new DeleteAuthorizationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IDeleteAuthorizationRequest);
+
+                    /** DeleteAuthorizationRequest name. */
+                    public name: string;
+
+                    /** DeleteAuthorizationRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteAuthorizationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAuthorizationRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IDeleteAuthorizationRequest): google.cloud.agentidentity.v1.DeleteAuthorizationRequest;
+
+                    /**
+                     * Encodes the specified DeleteAuthorizationRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.DeleteAuthorizationRequest.verify|verify} messages.
+                     * @param message DeleteAuthorizationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IDeleteAuthorizationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAuthorizationRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.DeleteAuthorizationRequest.verify|verify} messages.
+                     * @param message DeleteAuthorizationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IDeleteAuthorizationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAuthorizationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAuthorizationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.DeleteAuthorizationRequest;
+
+                    /**
+                     * Decodes a DeleteAuthorizationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAuthorizationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.DeleteAuthorizationRequest;
+
+                    /**
+                     * Verifies a DeleteAuthorizationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAuthorizationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAuthorizationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.DeleteAuthorizationRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAuthorizationRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAuthorizationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.DeleteAuthorizationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAuthorizationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAuthorizationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AccessSummary. */
+                interface IAccessSummary {
+
+                    /** AccessSummary name */
+                    name?: (string|null);
+
+                    /** AccessSummary firstAccessTime */
+                    firstAccessTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessSummary lastAccessTime */
+                    lastAccessTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessSummary labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** AccessSummary userId */
+                    userId?: (string|null);
+
+                    /** AccessSummary workloadId */
+                    workloadId?: (string|null);
+
+                    /** AccessSummary tokenUrl */
+                    tokenUrl?: (string|null);
+
+                    /** AccessSummary scopes */
+                    scopes?: (string[]|null);
+
+                    /** AccessSummary authProvider */
+                    authProvider?: (string|null);
+
+                    /** AccessSummary purgeTime */
+                    purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessSummary authProviderType */
+                    authProviderType?: (google.cloud.agentidentity.v1.AuthProviderType|keyof typeof google.cloud.agentidentity.v1.AuthProviderType|null);
+                }
+
+                /** Represents an AccessSummary. */
+                class AccessSummary implements IAccessSummary {
+
+                    /**
+                     * Constructs a new AccessSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IAccessSummary);
+
+                    /** AccessSummary name. */
+                    public name: string;
+
+                    /** AccessSummary firstAccessTime. */
+                    public firstAccessTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessSummary lastAccessTime. */
+                    public lastAccessTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessSummary labels. */
+                    public labels: { [k: string]: string };
+
+                    /** AccessSummary userId. */
+                    public userId: string;
+
+                    /** AccessSummary workloadId. */
+                    public workloadId: string;
+
+                    /** AccessSummary tokenUrl. */
+                    public tokenUrl: string;
+
+                    /** AccessSummary scopes. */
+                    public scopes: string[];
+
+                    /** AccessSummary authProvider. */
+                    public authProvider: string;
+
+                    /** AccessSummary purgeTime. */
+                    public purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AccessSummary authProviderType. */
+                    public authProviderType: (google.cloud.agentidentity.v1.AuthProviderType|keyof typeof google.cloud.agentidentity.v1.AuthProviderType);
+
+                    /**
+                     * Creates a new AccessSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessSummary instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IAccessSummary): google.cloud.agentidentity.v1.AccessSummary;
+
+                    /**
+                     * Encodes the specified AccessSummary message. Does not implicitly {@link google.cloud.agentidentity.v1.AccessSummary.verify|verify} messages.
+                     * @param message AccessSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IAccessSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessSummary message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.AccessSummary.verify|verify} messages.
+                     * @param message AccessSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IAccessSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.AccessSummary;
+
+                    /**
+                     * Decodes an AccessSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.AccessSummary;
+
+                    /**
+                     * Verifies an AccessSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.AccessSummary;
+
+                    /**
+                     * Creates a plain object from an AccessSummary message. Also converts values to other types if specified.
+                     * @param message AccessSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.AccessSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAccessSummariesRequest. */
+                interface IListAccessSummariesRequest {
+
+                    /** ListAccessSummariesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAccessSummariesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAccessSummariesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAccessSummariesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListAccessSummariesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListAccessSummariesRequest. */
+                class ListAccessSummariesRequest implements IListAccessSummariesRequest {
+
+                    /**
+                     * Constructs a new ListAccessSummariesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IListAccessSummariesRequest);
+
+                    /** ListAccessSummariesRequest parent. */
+                    public parent: string;
+
+                    /** ListAccessSummariesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAccessSummariesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAccessSummariesRequest filter. */
+                    public filter: string;
+
+                    /** ListAccessSummariesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListAccessSummariesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAccessSummariesRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IListAccessSummariesRequest): google.cloud.agentidentity.v1.ListAccessSummariesRequest;
+
+                    /**
+                     * Encodes the specified ListAccessSummariesRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.ListAccessSummariesRequest.verify|verify} messages.
+                     * @param message ListAccessSummariesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IListAccessSummariesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAccessSummariesRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.ListAccessSummariesRequest.verify|verify} messages.
+                     * @param message ListAccessSummariesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IListAccessSummariesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAccessSummariesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAccessSummariesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.ListAccessSummariesRequest;
+
+                    /**
+                     * Decodes a ListAccessSummariesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAccessSummariesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.ListAccessSummariesRequest;
+
+                    /**
+                     * Verifies a ListAccessSummariesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAccessSummariesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAccessSummariesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.ListAccessSummariesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAccessSummariesRequest message. Also converts values to other types if specified.
+                     * @param message ListAccessSummariesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.ListAccessSummariesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAccessSummariesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAccessSummariesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAccessSummariesResponse. */
+                interface IListAccessSummariesResponse {
+
+                    /** ListAccessSummariesResponse accessSummaries */
+                    accessSummaries?: (google.cloud.agentidentity.v1.IAccessSummary[]|null);
+
+                    /** ListAccessSummariesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAccessSummariesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAccessSummariesResponse. */
+                class ListAccessSummariesResponse implements IListAccessSummariesResponse {
+
+                    /**
+                     * Constructs a new ListAccessSummariesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IListAccessSummariesResponse);
+
+                    /** ListAccessSummariesResponse accessSummaries. */
+                    public accessSummaries: google.cloud.agentidentity.v1.IAccessSummary[];
+
+                    /** ListAccessSummariesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAccessSummariesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAccessSummariesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAccessSummariesResponse instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IListAccessSummariesResponse): google.cloud.agentidentity.v1.ListAccessSummariesResponse;
+
+                    /**
+                     * Encodes the specified ListAccessSummariesResponse message. Does not implicitly {@link google.cloud.agentidentity.v1.ListAccessSummariesResponse.verify|verify} messages.
+                     * @param message ListAccessSummariesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IListAccessSummariesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAccessSummariesResponse message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.ListAccessSummariesResponse.verify|verify} messages.
+                     * @param message ListAccessSummariesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IListAccessSummariesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAccessSummariesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAccessSummariesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.ListAccessSummariesResponse;
+
+                    /**
+                     * Decodes a ListAccessSummariesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAccessSummariesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.ListAccessSummariesResponse;
+
+                    /**
+                     * Verifies a ListAccessSummariesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAccessSummariesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAccessSummariesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.ListAccessSummariesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAccessSummariesResponse message. Also converts values to other types if specified.
+                     * @param message ListAccessSummariesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.ListAccessSummariesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAccessSummariesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAccessSummariesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAccessSummaryRequest. */
+                interface IGetAccessSummaryRequest {
+
+                    /** GetAccessSummaryRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAccessSummaryRequest. */
+                class GetAccessSummaryRequest implements IGetAccessSummaryRequest {
+
+                    /**
+                     * Constructs a new GetAccessSummaryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IGetAccessSummaryRequest);
+
+                    /** GetAccessSummaryRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAccessSummaryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAccessSummaryRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IGetAccessSummaryRequest): google.cloud.agentidentity.v1.GetAccessSummaryRequest;
+
+                    /**
+                     * Encodes the specified GetAccessSummaryRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.GetAccessSummaryRequest.verify|verify} messages.
+                     * @param message GetAccessSummaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IGetAccessSummaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAccessSummaryRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.GetAccessSummaryRequest.verify|verify} messages.
+                     * @param message GetAccessSummaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IGetAccessSummaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAccessSummaryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAccessSummaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.GetAccessSummaryRequest;
+
+                    /**
+                     * Decodes a GetAccessSummaryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAccessSummaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.GetAccessSummaryRequest;
+
+                    /**
+                     * Verifies a GetAccessSummaryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAccessSummaryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAccessSummaryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.GetAccessSummaryRequest;
+
+                    /**
+                     * Creates a plain object from a GetAccessSummaryRequest message. Also converts values to other types if specified.
+                     * @param message GetAccessSummaryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.GetAccessSummaryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAccessSummaryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAccessSummaryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryAuthProvidersRequest. */
+                interface IQueryAuthProvidersRequest {
+
+                    /** QueryAuthProvidersRequest parent */
+                    parent?: (string|null);
+
+                    /** QueryAuthProvidersRequest workloadId */
+                    workloadId?: (string|null);
+
+                    /** QueryAuthProvidersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** QueryAuthProvidersRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a QueryAuthProvidersRequest. */
+                class QueryAuthProvidersRequest implements IQueryAuthProvidersRequest {
+
+                    /**
+                     * Constructs a new QueryAuthProvidersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IQueryAuthProvidersRequest);
+
+                    /** QueryAuthProvidersRequest parent. */
+                    public parent: string;
+
+                    /** QueryAuthProvidersRequest workloadId. */
+                    public workloadId: string;
+
+                    /** QueryAuthProvidersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** QueryAuthProvidersRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new QueryAuthProvidersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryAuthProvidersRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IQueryAuthProvidersRequest): google.cloud.agentidentity.v1.QueryAuthProvidersRequest;
+
+                    /**
+                     * Encodes the specified QueryAuthProvidersRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.QueryAuthProvidersRequest.verify|verify} messages.
+                     * @param message QueryAuthProvidersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IQueryAuthProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryAuthProvidersRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.QueryAuthProvidersRequest.verify|verify} messages.
+                     * @param message QueryAuthProvidersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IQueryAuthProvidersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryAuthProvidersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryAuthProvidersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.QueryAuthProvidersRequest;
+
+                    /**
+                     * Decodes a QueryAuthProvidersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryAuthProvidersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.QueryAuthProvidersRequest;
+
+                    /**
+                     * Verifies a QueryAuthProvidersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryAuthProvidersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryAuthProvidersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.QueryAuthProvidersRequest;
+
+                    /**
+                     * Creates a plain object from a QueryAuthProvidersRequest message. Also converts values to other types if specified.
+                     * @param message QueryAuthProvidersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.QueryAuthProvidersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryAuthProvidersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryAuthProvidersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryAuthProvidersResponse. */
+                interface IQueryAuthProvidersResponse {
+
+                    /** QueryAuthProvidersResponse authProviderNames */
+                    authProviderNames?: (string[]|null);
+
+                    /** QueryAuthProvidersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a QueryAuthProvidersResponse. */
+                class QueryAuthProvidersResponse implements IQueryAuthProvidersResponse {
+
+                    /**
+                     * Constructs a new QueryAuthProvidersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IQueryAuthProvidersResponse);
+
+                    /** QueryAuthProvidersResponse authProviderNames. */
+                    public authProviderNames: string[];
+
+                    /** QueryAuthProvidersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new QueryAuthProvidersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryAuthProvidersResponse instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IQueryAuthProvidersResponse): google.cloud.agentidentity.v1.QueryAuthProvidersResponse;
+
+                    /**
+                     * Encodes the specified QueryAuthProvidersResponse message. Does not implicitly {@link google.cloud.agentidentity.v1.QueryAuthProvidersResponse.verify|verify} messages.
+                     * @param message QueryAuthProvidersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IQueryAuthProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryAuthProvidersResponse message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.QueryAuthProvidersResponse.verify|verify} messages.
+                     * @param message QueryAuthProvidersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IQueryAuthProvidersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryAuthProvidersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryAuthProvidersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.QueryAuthProvidersResponse;
+
+                    /**
+                     * Decodes a QueryAuthProvidersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryAuthProvidersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.QueryAuthProvidersResponse;
+
+                    /**
+                     * Verifies a QueryAuthProvidersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryAuthProvidersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryAuthProvidersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.QueryAuthProvidersResponse;
+
+                    /**
+                     * Creates a plain object from a QueryAuthProvidersResponse message. Also converts values to other types if specified.
+                     * @param message QueryAuthProvidersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.QueryAuthProvidersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryAuthProvidersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryAuthProvidersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryWorkloadsRequest. */
+                interface IQueryWorkloadsRequest {
+
+                    /** QueryWorkloadsRequest name */
+                    name?: (string|null);
+
+                    /** QueryWorkloadsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** QueryWorkloadsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a QueryWorkloadsRequest. */
+                class QueryWorkloadsRequest implements IQueryWorkloadsRequest {
+
+                    /**
+                     * Constructs a new QueryWorkloadsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IQueryWorkloadsRequest);
+
+                    /** QueryWorkloadsRequest name. */
+                    public name: string;
+
+                    /** QueryWorkloadsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** QueryWorkloadsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new QueryWorkloadsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryWorkloadsRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IQueryWorkloadsRequest): google.cloud.agentidentity.v1.QueryWorkloadsRequest;
+
+                    /**
+                     * Encodes the specified QueryWorkloadsRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.QueryWorkloadsRequest.verify|verify} messages.
+                     * @param message QueryWorkloadsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IQueryWorkloadsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryWorkloadsRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.QueryWorkloadsRequest.verify|verify} messages.
+                     * @param message QueryWorkloadsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IQueryWorkloadsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryWorkloadsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryWorkloadsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.QueryWorkloadsRequest;
+
+                    /**
+                     * Decodes a QueryWorkloadsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryWorkloadsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.QueryWorkloadsRequest;
+
+                    /**
+                     * Verifies a QueryWorkloadsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryWorkloadsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryWorkloadsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.QueryWorkloadsRequest;
+
+                    /**
+                     * Creates a plain object from a QueryWorkloadsRequest message. Also converts values to other types if specified.
+                     * @param message QueryWorkloadsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.QueryWorkloadsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryWorkloadsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryWorkloadsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QueryWorkloadsResponse. */
+                interface IQueryWorkloadsResponse {
+
+                    /** QueryWorkloadsResponse workloadIds */
+                    workloadIds?: (string[]|null);
+
+                    /** QueryWorkloadsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a QueryWorkloadsResponse. */
+                class QueryWorkloadsResponse implements IQueryWorkloadsResponse {
+
+                    /**
+                     * Constructs a new QueryWorkloadsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IQueryWorkloadsResponse);
+
+                    /** QueryWorkloadsResponse workloadIds. */
+                    public workloadIds: string[];
+
+                    /** QueryWorkloadsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new QueryWorkloadsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QueryWorkloadsResponse instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IQueryWorkloadsResponse): google.cloud.agentidentity.v1.QueryWorkloadsResponse;
+
+                    /**
+                     * Encodes the specified QueryWorkloadsResponse message. Does not implicitly {@link google.cloud.agentidentity.v1.QueryWorkloadsResponse.verify|verify} messages.
+                     * @param message QueryWorkloadsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IQueryWorkloadsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QueryWorkloadsResponse message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.QueryWorkloadsResponse.verify|verify} messages.
+                     * @param message QueryWorkloadsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IQueryWorkloadsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QueryWorkloadsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QueryWorkloadsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.QueryWorkloadsResponse;
+
+                    /**
+                     * Decodes a QueryWorkloadsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QueryWorkloadsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.QueryWorkloadsResponse;
+
+                    /**
+                     * Verifies a QueryWorkloadsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QueryWorkloadsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QueryWorkloadsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.QueryWorkloadsResponse;
+
+                    /**
+                     * Creates a plain object from a QueryWorkloadsResponse message. Also converts values to other types if specified.
+                     * @param message QueryWorkloadsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.QueryWorkloadsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QueryWorkloadsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QueryWorkloadsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RevokeAuthorizationRequest. */
+                interface IRevokeAuthorizationRequest {
+
+                    /** RevokeAuthorizationRequest name */
+                    name?: (string|null);
+
+                    /** RevokeAuthorizationRequest userId */
+                    userId?: (string|null);
+                }
+
+                /** Represents a RevokeAuthorizationRequest. */
+                class RevokeAuthorizationRequest implements IRevokeAuthorizationRequest {
+
+                    /**
+                     * Constructs a new RevokeAuthorizationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IRevokeAuthorizationRequest);
+
+                    /** RevokeAuthorizationRequest name. */
+                    public name: string;
+
+                    /** RevokeAuthorizationRequest userId. */
+                    public userId: string;
+
+                    /**
+                     * Creates a new RevokeAuthorizationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RevokeAuthorizationRequest instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IRevokeAuthorizationRequest): google.cloud.agentidentity.v1.RevokeAuthorizationRequest;
+
+                    /**
+                     * Encodes the specified RevokeAuthorizationRequest message. Does not implicitly {@link google.cloud.agentidentity.v1.RevokeAuthorizationRequest.verify|verify} messages.
+                     * @param message RevokeAuthorizationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IRevokeAuthorizationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RevokeAuthorizationRequest message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.RevokeAuthorizationRequest.verify|verify} messages.
+                     * @param message RevokeAuthorizationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IRevokeAuthorizationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RevokeAuthorizationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RevokeAuthorizationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.RevokeAuthorizationRequest;
+
+                    /**
+                     * Decodes a RevokeAuthorizationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RevokeAuthorizationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.RevokeAuthorizationRequest;
+
+                    /**
+                     * Verifies a RevokeAuthorizationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RevokeAuthorizationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RevokeAuthorizationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.RevokeAuthorizationRequest;
+
+                    /**
+                     * Creates a plain object from a RevokeAuthorizationRequest message. Also converts values to other types if specified.
+                     * @param message RevokeAuthorizationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.RevokeAuthorizationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RevokeAuthorizationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RevokeAuthorizationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RevokeAuthorizationResponse. */
+                interface IRevokeAuthorizationResponse {
+                }
+
+                /** Represents a RevokeAuthorizationResponse. */
+                class RevokeAuthorizationResponse implements IRevokeAuthorizationResponse {
+
+                    /**
+                     * Constructs a new RevokeAuthorizationResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.agentidentity.v1.IRevokeAuthorizationResponse);
+
+                    /**
+                     * Creates a new RevokeAuthorizationResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RevokeAuthorizationResponse instance
+                     */
+                    public static create(properties?: google.cloud.agentidentity.v1.IRevokeAuthorizationResponse): google.cloud.agentidentity.v1.RevokeAuthorizationResponse;
+
+                    /**
+                     * Encodes the specified RevokeAuthorizationResponse message. Does not implicitly {@link google.cloud.agentidentity.v1.RevokeAuthorizationResponse.verify|verify} messages.
+                     * @param message RevokeAuthorizationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.agentidentity.v1.IRevokeAuthorizationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RevokeAuthorizationResponse message, length delimited. Does not implicitly {@link google.cloud.agentidentity.v1.RevokeAuthorizationResponse.verify|verify} messages.
+                     * @param message RevokeAuthorizationResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.agentidentity.v1.IRevokeAuthorizationResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RevokeAuthorizationResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RevokeAuthorizationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.agentidentity.v1.RevokeAuthorizationResponse;
+
+                    /**
+                     * Decodes a RevokeAuthorizationResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RevokeAuthorizationResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.agentidentity.v1.RevokeAuthorizationResponse;
+
+                    /**
+                     * Verifies a RevokeAuthorizationResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RevokeAuthorizationResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RevokeAuthorizationResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.agentidentity.v1.RevokeAuthorizationResponse;
+
+                    /**
+                     * Creates a plain object from a RevokeAuthorizationResponse message. Also converts values to other types if specified.
+                     * @param message RevokeAuthorizationResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.agentidentity.v1.RevokeAuthorizationResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RevokeAuthorizationResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RevokeAuthorizationResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
             /** Namespace v1beta. */
             namespace v1beta {
 
