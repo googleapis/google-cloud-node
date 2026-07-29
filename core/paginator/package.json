@@ -51,7 +51,7 @@
     "extend": "^3.0.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/paginator"
 }
