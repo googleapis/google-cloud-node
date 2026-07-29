@@ -1,8 +1,0 @@
-[
-  "../../protos/google/showcase/v1beta1/compliance.proto",
-  "../../protos/google/showcase/v1beta1/echo.proto",
-  "../../protos/google/showcase/v1beta1/identity.proto",
-  "../../protos/google/showcase/v1beta1/messaging.proto",
-  "../../protos/google/showcase/v1beta1/sequence.proto",
-  "../../protos/google/showcase/v1beta1/testing.proto"
-]
