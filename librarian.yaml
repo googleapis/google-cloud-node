@@ -210,6 +210,10 @@ libraries:
       nodejs_apis:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
+  - name: google-cloud-agentidentity
+    apis:
+      - path: google/cloud/agentidentity/v1beta
+    copyright_year: "2026"
   - name: google-cloud-agentregistry
     version: 0.2.0
     apis:

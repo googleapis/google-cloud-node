@@ -52,6 +52,7 @@
   "packages/google-chat": "0.27.0",
   "packages/google-cloud-accessapproval": "4.2.2",
   "packages/google-cloud-advisorynotifications": "2.2.2",
+  "packages/google-cloud-agentidentity": "0.0.0",
   "packages/google-cloud-agentregistry": "0.2.0",
   "packages/google-cloud-aiplatform": "6.11.0",
   "packages/google-cloud-alloydb": "2.7.0",
