@@ -14,7 +14,7 @@ const INSTANCE = 'suvham-testing';
 const DATABASE = 'benchmark_db_async';
 const TABLE    = 'AsyncBenchmarkTable';
 
-const SQL = `SELECT idx as col_int, CAST(idx AS STRING) as col_str, CAST(idx AS FLOAT64) / 3.14 as col_float, MOD(idx, 2) = 0 as col_bool, CURRENT_TIMESTAMP() as col_ts, CURRENT_DATE() as col_date, [idx, idx+1, idx+2, idx+3, idx+4] as col_arr, [CAST(idx AS STRING), 'a', 'b', 'c'] as col_str_arr, GENERATE_UUID() as col_uuid, 'CONSTANT' as col_const FROM UNNEST(GENERATE_ARRAY(1, 10000)) AS idx`;
+const SQL = `SELECT 1 as col_int, 'CONSTANT' as col_const`;
 const WARMUP_MS = 10_000;
 const DURATION_MS = 30_000;
 const CONCURRENCY_LEVELS = [1, 8, 12, 32];
