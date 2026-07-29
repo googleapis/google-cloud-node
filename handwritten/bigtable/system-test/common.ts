@@ -47,7 +47,12 @@ export async function reapInstances(
   try {
     const [instances] = await bigtable.getInstances();
     const testInstances = instances
-      .filter(i => i.id.match(PREFIX))
+      .filter(
+        i =>
+          i.id.match(PREFIX) ||
+          i.id.startsWith('instance-for-views') ||
+          i.id.startsWith('instance-'),
+      )
       .filter(i => {
         const timeCreated = i.metadata!.labels!.time_created as {} as Date;
         // Only delete stale resources.
