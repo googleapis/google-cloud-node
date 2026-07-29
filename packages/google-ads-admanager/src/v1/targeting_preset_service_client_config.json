@@ -36,6 +36,14 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "UpdateTargetingPreset": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchUpdateTargetingPresets": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "BatchDeactivateTargetingPresets": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

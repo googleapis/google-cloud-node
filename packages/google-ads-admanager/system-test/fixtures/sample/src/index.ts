@@ -35,6 +35,7 @@ import {
   ContentBundleServiceClient,
   ContentLabelServiceClient,
   ContentServiceClient,
+  CreativeSetServiceClient,
   CreativeTemplateServiceClient,
   CustomFieldServiceClient,
   CustomTargetingKeyServiceClient,
@@ -64,6 +65,7 @@ import {
   RichMediaAdsCompanyServiceClient,
   RoleServiceClient,
   SiteServiceClient,
+  SlateServiceClient,
   SuggestedAdUnitServiceClient,
   TargetingPresetServiceClient,
   TaxonomyCategoryServiceClient,
@@ -141,6 +143,9 @@ function doStuffWithContentLabelServiceClient(
   client.close();
 }
 function doStuffWithContentServiceClient(client: ContentServiceClient) {
+  client.close();
+}
+function doStuffWithCreativeSetServiceClient(client: CreativeSetServiceClient) {
   client.close();
 }
 function doStuffWithCreativeTemplateServiceClient(
@@ -264,6 +269,9 @@ function doStuffWithRoleServiceClient(client: RoleServiceClient) {
 function doStuffWithSiteServiceClient(client: SiteServiceClient) {
   client.close();
 }
+function doStuffWithSlateServiceClient(client: SlateServiceClient) {
+  client.close();
+}
 function doStuffWithSuggestedAdUnitServiceClient(
   client: SuggestedAdUnitServiceClient,
 ) {
@@ -346,6 +354,9 @@ function main() {
   // check that the client instance can be created
   const contentServiceClient = new ContentServiceClient();
   doStuffWithContentServiceClient(contentServiceClient);
+  // check that the client instance can be created
+  const creativeSetServiceClient = new CreativeSetServiceClient();
+  doStuffWithCreativeSetServiceClient(creativeSetServiceClient);
   // check that the client instance can be created
   const creativeTemplateServiceClient = new CreativeTemplateServiceClient();
   doStuffWithCreativeTemplateServiceClient(creativeTemplateServiceClient);
@@ -446,6 +457,9 @@ function main() {
   // check that the client instance can be created
   const siteServiceClient = new SiteServiceClient();
   doStuffWithSiteServiceClient(siteServiceClient);
+  // check that the client instance can be created
+  const slateServiceClient = new SlateServiceClient();
+  doStuffWithSlateServiceClient(slateServiceClient);
   // check that the client instance can be created
   const suggestedAdUnitServiceClient = new SuggestedAdUnitServiceClient();
   doStuffWithSuggestedAdUnitServiceClient(suggestedAdUnitServiceClient);
