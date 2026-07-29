@@ -105,7 +105,7 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/gax",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "browser": "build/src/fallback.js"
 }

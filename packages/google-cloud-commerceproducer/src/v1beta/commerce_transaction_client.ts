@@ -209,6 +209,9 @@ export class CommerceTransactionClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      billingAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'billingAccounts/{billing_account}',
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}',
       ),
@@ -326,6 +329,7 @@ export class CommerceTransactionClient {
       'getService',
       'listPrivateOffers',
       'getPrivateOffer',
+      'resolveAmendmentTarget',
       'createPrivateOffer',
       'updatePrivateOffer',
       'publishPrivateOffer',
@@ -728,6 +732,159 @@ export class CommerceTransactionClient {
           {} | undefined,
         ]) => {
           this._log.info('getPrivateOffer response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Resolves the existing offer that must be amended when creating a new
+   * PrivateOffer. Use this method to determine the correct amendment target
+   * before creating or publishing an offer.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ResolveAmendmentTargetRequest
+   * @param {string} request.targetBillingAccount
+   *   Required. The customer's billing account targeted by the offer. This is the
+   *   billing account for which the new private offer will be created on. Format:
+   *   billingAccounts/{billing_account}.
+   * @param {string} request.baseStandardOffer
+   *   Required. The base standard offer that the private offer will be based on.
+   *   Format:
+   *   projects/{project}/locations/{location}/services/{service}/standardOffers/{standard_offer}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse|ResolveAmendmentTargetResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/commerce_transaction.resolve_amendment_target.js</caption>
+   * region_tag:commerceproducer_v1beta_generated_CommerceTransaction_ResolveAmendmentTarget_async
+   */
+  resolveAmendmentTarget(
+    request?: protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse,
+      (
+        | protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  resolveAmendmentTarget(
+    request: protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse,
+      | protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  resolveAmendmentTarget(
+    request: protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest,
+    callback: Callback<
+      protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse,
+      | protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  resolveAmendmentTarget(
+    request?: protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse,
+          | protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse,
+      | protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse,
+      (
+        | protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('resolveAmendmentTarget request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse,
+          | protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resolveAmendmentTarget response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resolveAmendmentTarget(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse,
+          (
+            | protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('resolveAmendmentTarget response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -4070,6 +4227,31 @@ export class CommerceTransactionClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified billingAccount resource name string.
+   *
+   * @param {string} billing_account
+   * @returns {string} Resource name string.
+   */
+  billingAccountPath(billingAccount: string) {
+    return this.pathTemplates.billingAccountPathTemplate.render({
+      billing_account: billingAccount,
+    });
+  }
+
+  /**
+   * Parse the billing_account from BillingAccount resource.
+   *
+   * @param {string} billingAccountName
+   *   A fully-qualified path representing BillingAccount resource.
+   * @returns {string} A string representing the billing_account.
+   */
+  matchBillingAccountFromBillingAccountName(billingAccountName: string) {
+    return this.pathTemplates.billingAccountPathTemplate.match(
+      billingAccountName,
+    ).billing_account;
+  }
 
   /**
    * Return a fully-qualified location resource name string.

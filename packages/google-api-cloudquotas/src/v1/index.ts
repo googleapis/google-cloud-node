@@ -17,3 +17,4 @@
 // ** All changes to this file may be overwritten. **
 
 export { CloudQuotasClient } from './cloud_quotas_client';
+export { QuotaAdjusterSettingsManagerClient } from './quota_adjuster_settings_manager_client';

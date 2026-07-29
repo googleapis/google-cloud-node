@@ -1336,6 +1336,38 @@
                 "availabilityImpact": {
                   "type": "Impact",
                   "id": 12
+                },
+                "attackRequirements": {
+                  "type": "AttackRequirements",
+                  "id": 13
+                },
+                "vulnerableSystemConfidentialityImpact": {
+                  "type": "Impact",
+                  "id": 14
+                },
+                "vulnerableSystemIntegrityImpact": {
+                  "type": "Impact",
+                  "id": 15
+                },
+                "vulnerableSystemAvailabilityImpact": {
+                  "type": "Impact",
+                  "id": 16
+                },
+                "subsequentSystemConfidentialityImpact": {
+                  "type": "Impact",
+                  "id": 17
+                },
+                "subsequentSystemIntegrityImpact": {
+                  "type": "Impact",
+                  "id": 18
+                },
+                "subsequentSystemAvailabilityImpact": {
+                  "type": "Impact",
+                  "id": 19
+                },
+                "exploitMaturity": {
+                  "type": "ExploitMaturity",
+                  "id": 20
                 }
               },
               "nested": {
@@ -1376,7 +1408,9 @@
                   "values": {
                     "USER_INTERACTION_UNSPECIFIED": 0,
                     "USER_INTERACTION_NONE": 1,
-                    "USER_INTERACTION_REQUIRED": 2
+                    "USER_INTERACTION_REQUIRED": 2,
+                    "USER_INTERACTION_PASSIVE": 3,
+                    "USER_INTERACTION_ACTIVE": 4
                   }
                 },
                 "Scope": {
@@ -1395,6 +1429,22 @@
                     "IMPACT_PARTIAL": 4,
                     "IMPACT_COMPLETE": 5
                   }
+                },
+                "AttackRequirements": {
+                  "values": {
+                    "ATTACK_REQUIREMENTS_UNSPECIFIED": 0,
+                    "ATTACK_REQUIREMENTS_NONE": 1,
+                    "ATTACK_REQUIREMENTS_PRESENT": 2
+                  }
+                },
+                "ExploitMaturity": {
+                  "values": {
+                    "EXPLOIT_MATURITY_UNSPECIFIED": 0,
+                    "EXPLOIT_MATURITY_NOT_DEFINED": 1,
+                    "EXPLOIT_MATURITY_ATTACKED": 2,
+                    "EXPLOIT_MATURITY_POC": 3,
+                    "EXPLOIT_MATURITY_UNREPORTED": 4
+                  }
                 }
               }
             },
@@ -1402,7 +1452,8 @@
               "values": {
                 "CVSS_VERSION_UNSPECIFIED": 0,
                 "CVSS_VERSION_2": 1,
-                "CVSS_VERSION_3": 2
+                "CVSS_VERSION_3": 2,
+                "CVSS_VERSION_4": 3
               }
             },
             "DeploymentNote": {
@@ -3343,6 +3394,10 @@
                 "advisoryPublishTime": {
                   "type": "google.protobuf.Timestamp",
                   "id": 9
+                },
+                "cvssV4": {
+                  "type": "CVSS",
+                  "id": 10
                 }
               },
               "nested": {
@@ -3506,6 +3561,10 @@
                 "risk": {
                   "type": "Risk",
                   "id": 15
+                },
+                "cvssV4": {
+                  "type": "CVSS",
+                  "id": 16
                 }
               },
               "nested": {
