@@ -31,25 +31,27 @@ fi
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
 
-if [ ${BUILD_TYPE} == "presubmit" ]; then
-    # For presubmit build, we want to know the difference from the
-    # common commit in origin/main.
-    GIT_DIFF_ARG="origin/main..."
+if [ -z "${GIT_DIFF_ARG}" ]; then
+    if [ ${BUILD_TYPE} == "presubmit" ]; then
+        # For presubmit build, we want to know the difference from the
+        # common commit in origin/main.
+        GIT_DIFF_ARG="origin/main..."
 
-    # Then fetch enough history for finding the common commit.
-    git fetch origin main --deepen=300
+        # Then fetch enough history for finding the common commit.
+        git fetch origin main --deepen=300
 
-elif [ ${BUILD_TYPE} == "continuous" ]; then
-    # For continuous build, we want to know the difference in the last
-    # commit. This assumes we use squash commit when merging PRs.
-    GIT_DIFF_ARG="HEAD~.."
+    elif [ ${BUILD_TYPE} == "continuous" ]; then
+        # For continuous build, we want to know the difference in the last
+        # commit. This assumes we use squash commit when merging PRs.
+        GIT_DIFF_ARG="HEAD~.."
 
-    # Then fetch one last commit for getting the diff.
-    git fetch origin main --deepen=1
+        # Then fetch one last commit for getting the diff.
+        git fetch origin main --deepen=1
 
-else
-    # Run everything.
-    GIT_DIFF_ARG=""
+    else
+        # Run everything.
+        GIT_DIFF_ARG=""
+    fi
 fi
 
 # Then detect changes in the test scripts.
@@ -223,26 +225,16 @@ for i in "${!test_dirs[@]}"; do
     fi
 
     echo "running test in ${d}"
-    (
-        pushd ${d} >/dev/null
-        # Temporarily allow failure.
-        set +e
-        ${test_script}
-        ret=$?
-        set -e
-        if [ ${ret} -ne 0 ]; then
-            exit ${ret}
-        fi
-        popd >/dev/null
-    ) &
-
-    if [[ $(jobs -r -p | wc -l) -ge 4 ]]; then
-        wait -n || exit $?
+    pushd ${d} >/dev/null
+    # Temporarily allow failure.
+    set +e
+    ${test_script}
+    ret=$?
+    set -e
+    if [ ${ret} -ne 0 ]; then
+        exit ${ret}
     fi
-done
-
-for job in $(jobs -p); do
-    wait $job || exit $?
+    popd >/dev/null
 done
 
 exit 0
