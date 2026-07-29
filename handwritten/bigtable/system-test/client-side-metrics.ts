@@ -335,6 +335,7 @@ describe('Bigtable/ClientSideMetrics', () => {
 
   before(async () => {
     await reapInstances(new Bigtable());
+    await reapInstances(new Bigtable({projectId: SECOND_PROJECT_ID}));
     /*
     For both the default project and the secondary project we need to create
     instances with some data in them so that the tests can collect all the
@@ -390,8 +391,8 @@ describe('Bigtable/ClientSideMetrics', () => {
       } catch (e) {
         console.warn('The instance has been deleted already');
       }
+      await reapInstances(bigtable);
     }
-    await reapInstances(new Bigtable());
   });
 
   describe('Bigtable/ClientSideMetricsToGCM', () => {
