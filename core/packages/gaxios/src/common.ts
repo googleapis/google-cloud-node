@@ -282,8 +282,7 @@ export class GaxiosError<T = ReturnType<JSON['parse']>> extends Error {
 }
 
 type GaxiosResponseData =
-  | ReturnType<JSON['parse']>
-  | GaxiosOptionsPrepared['data'];
+  ReturnType<JSON['parse']> | GaxiosOptionsPrepared['data'];
 
 export type GaxiosPromise<T = GaxiosResponseData> = Promise<GaxiosResponse<T>>;
 
@@ -389,12 +388,7 @@ export interface GaxiosOptions extends RequestInit {
    * stream is a `ReadableStream`, otherwise `readable.Stream`
    */
   responseType?:
-    | 'arraybuffer'
-    | 'blob'
-    | 'json'
-    | 'text'
-    | 'stream'
-    | 'unknown';
+    'arraybuffer' | 'blob' | 'json' | 'text' | 'stream' | 'unknown';
   agent?: Agent | ((parsedUrl: URL) => Agent);
   validateStatus?: (status: number) => boolean;
   retryConfig?: RetryConfig;

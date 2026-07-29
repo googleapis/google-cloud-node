@@ -194,7 +194,9 @@ describe('🚙 error handling', () => {
       const chunks = [
         new Uint8Array(Buffer.from('{"error": {"code": 400, ')),
         new Uint8Array(Buffer.from('"message": "Invalid ')),
-        new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+        new Uint8Array(
+          Buffer.from('argument", "status": "INVALID_ARGUMENT"}}'),
+        ),
       ];
       const readableStream = Readable.from(chunks);
       const scope = nock(url).get('/').reply(400, readableStream);
@@ -217,7 +219,9 @@ describe('🚙 error handling', () => {
       const chunks = [
         '{"error": {"code": 400, ',
         Buffer.from('"message": "Invalid '),
-        new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+        new Uint8Array(
+          Buffer.from('argument", "status": "INVALID_ARGUMENT"}}'),
+        ),
       ];
       const readableStream = Readable.from(chunks);
       const scope = nock(url).get('/').reply(400, readableStream);
