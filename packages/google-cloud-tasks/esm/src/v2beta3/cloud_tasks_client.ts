@@ -23,6 +23,8 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
   LocationsClient,
@@ -84,6 +86,7 @@ export class CloudTasksClient {
   innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
   pathTemplates: { [name: string]: gax.PathTemplate };
+  operationsClient: gax.OperationsClient;
   cloudTasksStub?: Promise<{ [name: string]: Function }>;
 
   /**
@@ -231,6 +234,9 @@ export class CloudTasksClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      cmekConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmekConfig',
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}',
       ),
@@ -258,6 +264,60 @@ export class CloudTasksClient {
         'pageToken',
         'nextPageToken',
         'tasks',
+      ),
+    };
+
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback === 'rest') {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v2beta3/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v2beta3/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v2beta3/{name=projects/*/locations/*/operations/*}',
+        },
+      ];
+    }
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
+    const batchCreateTasksResponse = protoFilesRoot.lookup(
+      '.google.cloud.tasks.v2beta3.BatchCreateTasksResponse',
+    ) as gax.protobuf.Type;
+    const batchCreateTasksMetadata = protoFilesRoot.lookup(
+      '.google.cloud.tasks.v2beta3.BatchCreateTasksMetadata',
+    ) as gax.protobuf.Type;
+    const batchDeleteTasksResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const batchDeleteTasksMetadata = protoFilesRoot.lookup(
+      '.google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata',
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      batchCreateTasks: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchCreateTasksResponse.decode.bind(batchCreateTasksResponse),
+        batchCreateTasksMetadata.decode.bind(batchCreateTasksMetadata),
+      ),
+      batchDeleteTasks: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        batchDeleteTasksResponse.decode.bind(batchDeleteTasksResponse),
+        batchDeleteTasksMetadata.decode.bind(batchDeleteTasksMetadata),
       ),
     };
 
@@ -325,8 +385,12 @@ export class CloudTasksClient {
       'listTasks',
       'getTask',
       'createTask',
+      'batchCreateTasks',
       'deleteTask',
+      'batchDeleteTasks',
       'runTask',
+      'updateCmekConfig',
+      'getCmekConfig',
     ];
     for (const methodName of cloudTasksStubMethods) {
       const callPromise = this.cloudTasksStub.then(
@@ -343,7 +407,10 @@ export class CloudTasksClient {
         },
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -880,8 +947,15 @@ export class CloudTasksClient {
    *
    * This command will delete the queue even if it has tasks in it.
    *
-   * Note: If you delete a queue, a queue with the same name can't be created
-   * for 7 days.
+   * Note : If you delete a queue, you may be prevented from creating a new
+   * queue with the same name as the deleted queue for a tombstone window of up
+   * to 3 days. During this window, the CreateQueue operation may appear to
+   * recreate the queue, but this can be misleading. If you attempt to create
+   * a queue with the same name as one that is in the tombstone window, run
+   * GetQueue to confirm that the queue creation was successful. If GetQueue
+   * returns 200 response code, your queue was successfully created with the
+   * name of the previously deleted queue. Otherwise, your queue did not
+   * successfully recreate.
    *
    * WARNING: Using this method may have unintended side effects if you are
    * using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
@@ -1851,6 +1925,10 @@ export class CloudTasksClient {
   /**
    * Gets a task.
    *
+   * After a task is successfully executed or has exhausted its retry attempts,
+   * the task is deleted. A `GetTask` request for a deleted task returns a
+   * `NOT_FOUND` error.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -2020,11 +2098,10 @@ export class CloudTasksClient {
    *   a task's ID is identical to that of an existing task or a task
    *   that was deleted or executed recently then the call will fail
    *   with {@link protos.google.rpc.Code.ALREADY_EXISTS|ALREADY_EXISTS}.
-   *   If the task's queue was created using Cloud Tasks, then another task with
-   *   the same name can't be created for ~1 hour after the original task was
-   *   deleted or executed. If the task's queue was created using queue.yaml or
-   *   queue.xml, then another task with the same name can't be created
-   *   for ~9 days after the original task was deleted or executed.
+   *   The IDs of deleted tasks are not immediately available for reuse.  It can
+   *   take up to 24 hours (or 9 days if the task's queue was created using a
+   *   queue.yaml or queue.xml) for the task ID to be released and made available
+   *   again.
    *
    *   Because there is an extra lookup cost to identify duplicate task
    *   names, these {@link protos.google.cloud.tasks.v2beta3.CloudTasks.CreateTask|CreateTask}
@@ -2317,8 +2394,8 @@ export class CloudTasksClient {
    * a task to be dispatched now.
    *
    * The dispatched task is returned. That is, the task that is returned
-   * contains the {@link protos.Task.status|status} after the task is dispatched but
-   * before the task is received by its target.
+   * contains the {@link protos.google.cloud.tasks.v2beta3.Task.first_attempt|status} after
+   * the task is dispatched but before the task is received by its target.
    *
    * If Cloud Tasks receives a successful response from the task's
    * target, then the task will be deleted; otherwise the task's
@@ -2468,7 +2545,661 @@ export class CloudTasksClient {
         throw error;
       });
   }
+  /**
+   * Creates or Updates a CMEK config.
+   *
+   * Updates the Customer Managed Encryption Key associated with the Cloud Tasks
+   * location (Creates if the key does not already exist). All new tasks created
+   * in the location will be encrypted at-rest with the KMS-key provided in the
+   * config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.tasks.v2beta3.CmekConfig} request.cmekConfig
+   *   Required. The config to update.  Its name attribute distinguishes it.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   List of fields to be updated in this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta3.CmekConfig|CmekConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.update_cmek_config.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_UpdateCmekConfig_async
+   */
+  updateCmekConfig(
+    request?: protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.ICmekConfig,
+      protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateCmekConfig(
+    request: protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.ICmekConfig,
+      | protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateCmekConfig(
+    request: protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.ICmekConfig,
+      | protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateCmekConfig(
+    request?: protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.ICmekConfig,
+          | protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.tasks.v2beta3.ICmekConfig,
+      | protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.ICmekConfig,
+      protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'cmek_config.name': request.cmekConfig!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateCmekConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.ICmekConfig,
+          | protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCmekConfig response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCmekConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tasks.v2beta3.ICmekConfig,
+          (
+            | protos.google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCmekConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets the CMEK config.
+   *
+   * Gets the Customer Managed Encryption Key configured with the Cloud Tasks
+   * lcoation. By default there is no kms_key configured.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The config resource name. For example:
+   *   projects/PROJECT_ID/locations/LOCATION_ID/cmekConfig`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.tasks.v2beta3.CmekConfig|CmekConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.get_cmek_config.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_GetCmekConfig_async
+   */
+  getCmekConfig(
+    request?: protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.ICmekConfig,
+      protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getCmekConfig(
+    request: protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.ICmekConfig,
+      | protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getCmekConfig(
+    request: protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest,
+    callback: Callback<
+      protos.google.cloud.tasks.v2beta3.ICmekConfig,
+      | protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getCmekConfig(
+    request?: protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.ICmekConfig,
+          | protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.tasks.v2beta3.ICmekConfig,
+      | protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.tasks.v2beta3.ICmekConfig,
+      protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getCmekConfig request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.tasks.v2beta3.ICmekConfig,
+          | protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCmekConfig response %j', response);
+          callback!(error, response, options, rawResponse);
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCmekConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.tasks.v2beta3.ICmekConfig,
+          protos.google.cloud.tasks.v2beta3.IGetCmekConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCmekConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
+  /**
+   * Creates a batch of tasks and adds them to a queue.
+   * This call is not atomic.
+   *
+   * All tasks must be for the same queue.
+   * A maximum of 100 tasks can be created in a single batch.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The queue name. For example:
+   *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+   *
+   *   The queue must already exist.
+   * @param {number[]} request.requests
+   *   Required. The list of requests to create tasks.
+   *   The queue specified in parent field of each CreateTaskRequest will be
+   *   the same. This validation happens on the client side as well as in the
+   *   handler.
+   *   BatchCreateTasksRequest.parent will also be the same value as the
+   *   individual CreateTaskRequest.parent .
+   *   The maximum number of requests is 100.
+   * @param {string} [request.requestId]
+   *   Optional. This field will be used to identify the long running operation,
+   *   avoiding duplication when user retries. If not provided, then a UUID will
+   *   be generated at server side.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.batch_create_tasks.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_BatchCreateTasks_async
+   */
+  batchCreateTasks(
+    request?: protos.google.cloud.tasks.v2beta3.IBatchCreateTasksRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.tasks.v2beta3.IBatchCreateTasksResponse,
+        protos.google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchCreateTasks(
+    request: protos.google.cloud.tasks.v2beta3.IBatchCreateTasksRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.tasks.v2beta3.IBatchCreateTasksResponse,
+        protos.google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateTasks(
+    request: protos.google.cloud.tasks.v2beta3.IBatchCreateTasksRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.tasks.v2beta3.IBatchCreateTasksResponse,
+        protos.google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateTasks(
+    request?: protos.google.cloud.tasks.v2beta3.IBatchCreateTasksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.tasks.v2beta3.IBatchCreateTasksResponse,
+            protos.google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.tasks.v2beta3.IBatchCreateTasksResponse,
+        protos.google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.tasks.v2beta3.IBatchCreateTasksResponse,
+        protos.google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.tasks.v2beta3.IBatchCreateTasksResponse,
+            protos.google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchCreateTasks response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified `callback` above.
+        }
+      : undefined;
+    this._log.info('batchCreateTasks request %j', request);
+    return this.innerApiCalls
+      .batchCreateTasks(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.tasks.v2beta3.IBatchCreateTasksResponse,
+            protos.google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateTasks response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `batchCreateTasks()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.batch_create_tasks.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_BatchCreateTasks_async
+   */
+  async checkBatchCreateTasksProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.tasks.v2beta3.BatchCreateTasksResponse,
+      protos.google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+    >
+  > {
+    this._log.info('batchCreateTasks long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchCreateTasks,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.tasks.v2beta3.BatchCreateTasksResponse,
+      protos.google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+    >;
+  }
+  /**
+   * Deletes a batch of tasks.
+   * This is a non-atomic operation: if deletion fails for some tasks, it
+   * can still succeed for others. The metadata field of
+   * google.longrunning.Operation contains details of failed deletions.
+   * A maximum of 1000 tasks can be deleted in a batch.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The queue name. For example:
+   *   Format: `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+   * @param {string[]} request.names
+   *   Required. The names of the tasks to delete.
+   *   A maximum of 1000 tasks can be deleted in a batch.
+   *   For example:
+   *   Format:
+   *   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
+   * @param {string} [request.requestId]
+   *   Optional. This field will be used to identify the long running operation,
+   *   avoiding duplication when user retries. If not provided, then a UUID will
+   *   be generated at server side.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.batch_delete_tasks.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_BatchDeleteTasks_async
+   */
+  batchDeleteTasks(
+    request?: protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchDeleteTasks(
+    request: protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeleteTasks(
+    request: protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeleteTasks(
+    request?: protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('batchDeleteTasks response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified `callback` above.
+        }
+      : undefined;
+    this._log.info('batchDeleteTasks request %j', request);
+    return this.innerApiCalls
+      .batchDeleteTasks(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteTasks response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `batchDeleteTasks()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta3/cloud_tasks.batch_delete_tasks.js</caption>
+   * region_tag:cloudtasks_v2beta3_generated_CloudTasks_BatchDeleteTasks_async
+   */
+  async checkBatchDeleteTasksProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+    >
+  > {
+    this._log.info('batchDeleteTasks long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchDeleteTasks,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+    >;
+  }
   /**
    * Lists queues.
    *
@@ -3171,9 +3902,270 @@ export class CloudTasksClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >,
+  ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions,
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >,
+  ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >,
+  ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified cmekConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  cmekConfigPath(project: string, location: string) {
+    return this.pathTemplates.cmekConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from CmekConfig resource.
+   *
+   * @param {string} cmekConfigName
+   *   A fully-qualified path representing CmekConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCmekConfigName(cmekConfigName: string) {
+    return this.pathTemplates.cmekConfigPathTemplate.match(cmekConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CmekConfig resource.
+   *
+   * @param {string} cmekConfigName
+   *   A fully-qualified path representing CmekConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCmekConfigName(cmekConfigName: string) {
+    return this.pathTemplates.cmekConfigPathTemplate.match(cmekConfigName)
+      .location;
+  }
 
   /**
    * Return a fully-qualified location resource name string.
@@ -3360,6 +4352,7 @@ export class CloudTasksClient {
         this.locationsClient.close().catch((err) => {
           throw err;
         });
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

@@ -15382,6 +15382,9 @@ export namespace google {
 
                         /** Maps placeAnswerSources */
                         placeAnswerSources?: (google.cloud.aiplatform.v1.GroundingChunk.Maps.IPlaceAnswerSources|null);
+
+                        /** Maps route */
+                        route?: (google.cloud.aiplatform.v1.GroundingChunk.Maps.IRoute|null);
                     }
 
                     /** Represents a Maps. */
@@ -15407,6 +15410,9 @@ export namespace google {
 
                         /** Maps placeAnswerSources. */
                         public placeAnswerSources?: (google.cloud.aiplatform.v1.GroundingChunk.Maps.IPlaceAnswerSources|null);
+
+                        /** Maps route. */
+                        public route?: (google.cloud.aiplatform.v1.GroundingChunk.Maps.IRoute|null);
 
                         /**
                          * Creates a new Maps instance using the specified properties.
@@ -15695,6 +15701,115 @@ export namespace google {
                                  */
                                 public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
+                        }
+
+                        /** Properties of a Route. */
+                        interface IRoute {
+
+                            /** Route distanceMeters */
+                            distanceMeters?: (number|null);
+
+                            /** Route duration */
+                            duration?: (google.protobuf.IDuration|null);
+
+                            /** Route encodedPolyline */
+                            encodedPolyline?: (string|null);
+                        }
+
+                        /** Represents a Route. */
+                        class Route implements IRoute {
+
+                            /**
+                             * Constructs a new Route.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1.GroundingChunk.Maps.IRoute);
+
+                            /** Route distanceMeters. */
+                            public distanceMeters: number;
+
+                            /** Route duration. */
+                            public duration?: (google.protobuf.IDuration|null);
+
+                            /** Route encodedPolyline. */
+                            public encodedPolyline: string;
+
+                            /**
+                             * Creates a new Route instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Route instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1.GroundingChunk.Maps.IRoute): google.cloud.aiplatform.v1.GroundingChunk.Maps.Route;
+
+                            /**
+                             * Encodes the specified Route message. Does not implicitly {@link google.cloud.aiplatform.v1.GroundingChunk.Maps.Route.verify|verify} messages.
+                             * @param message Route message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1.GroundingChunk.Maps.IRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Route message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GroundingChunk.Maps.Route.verify|verify} messages.
+                             * @param message Route message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1.GroundingChunk.Maps.IRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Route message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Route
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GroundingChunk.Maps.Route;
+
+                            /**
+                             * Decodes a Route message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Route
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GroundingChunk.Maps.Route;
+
+                            /**
+                             * Verifies a Route message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Route message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Route
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GroundingChunk.Maps.Route;
+
+                            /**
+                             * Creates a plain object from a Route message. Also converts values to other types if specified.
+                             * @param message Route
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1.GroundingChunk.Maps.Route, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Route to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Route
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
                 }
@@ -168361,6 +168476,9 @@ export namespace google {
 
                         /** Maps placeAnswerSources */
                         placeAnswerSources?: (google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.IPlaceAnswerSources|null);
+
+                        /** Maps route */
+                        route?: (google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.IRoute|null);
                     }
 
                     /** Represents a Maps. */
@@ -168386,6 +168504,9 @@ export namespace google {
 
                         /** Maps placeAnswerSources. */
                         public placeAnswerSources?: (google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.IPlaceAnswerSources|null);
+
+                        /** Maps route. */
+                        public route?: (google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.IRoute|null);
 
                         /**
                          * Creates a new Maps instance using the specified properties.
@@ -168674,6 +168795,115 @@ export namespace google {
                                  */
                                 public static getTypeUrl(typeUrlPrefix?: string): string;
                             }
+                        }
+
+                        /** Properties of a Route. */
+                        interface IRoute {
+
+                            /** Route distanceMeters */
+                            distanceMeters?: (number|null);
+
+                            /** Route duration */
+                            duration?: (google.protobuf.IDuration|null);
+
+                            /** Route encodedPolyline */
+                            encodedPolyline?: (string|null);
+                        }
+
+                        /** Represents a Route. */
+                        class Route implements IRoute {
+
+                            /**
+                             * Constructs a new Route.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.IRoute);
+
+                            /** Route distanceMeters. */
+                            public distanceMeters: number;
+
+                            /** Route duration. */
+                            public duration?: (google.protobuf.IDuration|null);
+
+                            /** Route encodedPolyline. */
+                            public encodedPolyline: string;
+
+                            /**
+                             * Creates a new Route instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Route instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.IRoute): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.Route;
+
+                            /**
+                             * Encodes the specified Route message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.Route.verify|verify} messages.
+                             * @param message Route message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.IRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Route message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.Route.verify|verify} messages.
+                             * @param message Route message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.IRoute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Route message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Route
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.Route;
+
+                            /**
+                             * Decodes a Route message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Route
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.Route;
+
+                            /**
+                             * Verifies a Route message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Route message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Route
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.Route;
+
+                            /**
+                             * Creates a plain object from a Route message. Also converts values to other types if specified.
+                             * @param message Route
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.GroundingChunk.Maps.Route, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Route to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Route
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
                 }

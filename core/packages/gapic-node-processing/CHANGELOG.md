@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.11](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.10...gapic-node-processing-v0.1.11) (2026-07-24)
+
+
+### Bug Fixes
+
+* **gapic-node-processing:** Move typescript to dependencies for AST runtime execution ([#8962](https://github.com/googleapis/google-cloud-node/issues/8962)) ([c2f5136](https://github.com/googleapis/google-cloud-node/commit/c2f51364b47c40e6793c55d3020329e1fa4a9f74))
+
 ## [0.1.10](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.9...gapic-node-processing-v0.1.10) (2026-07-23)
 
 

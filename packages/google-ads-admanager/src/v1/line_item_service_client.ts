@@ -265,6 +265,12 @@ export class LineItemServiceClient {
       contentLabelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/contentLabels/{content_label}',
       ),
+      creativePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creatives/{creative}',
+      ),
+      creativeSetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeSets/{creative_set}',
+      ),
       creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/creativeTemplates/{creative_template}',
       ),
@@ -351,6 +357,9 @@ export class LineItemServiceClient {
       ),
       sitePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/sites/{site}',
+      ),
+      slatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/slates/{slate}',
       ),
       suggestedAdUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/suggestedAdUnits/{suggested_ad_unit}',
@@ -704,13 +713,40 @@ export class LineItemServiceClient {
    *
    *   <b>Filterable fields:</b>
    *   <ul style="list-style-type:none">
+   *     <li><code>archived</code></li>
+   *     <li><code>contractedUnitsBought</code></li>
+   *     <li><code>costType</code></li>
+   *     <li><code>createTime</code></li>
+   *     <li><code>creativePlaceholders.size.canonicalName</code></li>
+   *     <li><code>dealInfo.externalDealId</code></li>
+   *     <li><code>deliveryRateType</code></li>
    *     <li><code>displayName</code></li>
    *     <li><code>endTime</code></li>
+   *     <li><code>environmentType</code></li>
+   *     <li><code>externalLineItemId</code></li>
    *     <li><code>goal.units</code></li>
+   *     <li><code>grpSettings.growbirdNielsenEnabled</code></li>
+   *     <li><code>grpSettings.inTargetRatioEstimateMilliPercent</code></li>
    *     <li><code>lineItemType</code></li>
+   *     <li><code>missingCreatives</code></li>
    *     <li><code>name</code></li>
+   *     <li><code>notes</code></li>
    *     <li><code>order</code></li>
+   *     <li><code>orderDisplayName</code></li>
+   *     <li><code>priority</code></li>
+   *     <li><code>roadblockingType</code></li>
    *     <li><code>startTime</code></li>
+   *     <li><code>stats.clickThroughRate</code></li>
+   *     <li><code>stats.clicksDelivered</code></li>
+   *     <li><code>stats.impressionsDelivered</code></li>
+   *     <li><code>stats.viewableImpressionsDelivered</code></li>
+   *     <li><code>status</code></li>
+   *     <li><code>targeting.inventoryTargeting.targetedAdUnits.adUnit</code></li>
+   *     <li><code>targeting.inventoryTargeting.targetedPlacements</code></li>
+   *     <li><code>targeting.mobileApplicationTargeting.firstPartyTargeting.targetedApplications</code></li>
+   *     <li><code>updateSource</code></li>
+   *     <li><code>updateTime</code></li>
+   *     <li><code>webPropertyCode</code></li>
    *   </ul>
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
@@ -852,13 +888,40 @@ export class LineItemServiceClient {
    *
    *   <b>Filterable fields:</b>
    *   <ul style="list-style-type:none">
+   *     <li><code>archived</code></li>
+   *     <li><code>contractedUnitsBought</code></li>
+   *     <li><code>costType</code></li>
+   *     <li><code>createTime</code></li>
+   *     <li><code>creativePlaceholders.size.canonicalName</code></li>
+   *     <li><code>dealInfo.externalDealId</code></li>
+   *     <li><code>deliveryRateType</code></li>
    *     <li><code>displayName</code></li>
    *     <li><code>endTime</code></li>
+   *     <li><code>environmentType</code></li>
+   *     <li><code>externalLineItemId</code></li>
    *     <li><code>goal.units</code></li>
+   *     <li><code>grpSettings.growbirdNielsenEnabled</code></li>
+   *     <li><code>grpSettings.inTargetRatioEstimateMilliPercent</code></li>
    *     <li><code>lineItemType</code></li>
+   *     <li><code>missingCreatives</code></li>
    *     <li><code>name</code></li>
+   *     <li><code>notes</code></li>
    *     <li><code>order</code></li>
+   *     <li><code>orderDisplayName</code></li>
+   *     <li><code>priority</code></li>
+   *     <li><code>roadblockingType</code></li>
    *     <li><code>startTime</code></li>
+   *     <li><code>stats.clickThroughRate</code></li>
+   *     <li><code>stats.clicksDelivered</code></li>
+   *     <li><code>stats.impressionsDelivered</code></li>
+   *     <li><code>stats.viewableImpressionsDelivered</code></li>
+   *     <li><code>status</code></li>
+   *     <li><code>targeting.inventoryTargeting.targetedAdUnits.adUnit</code></li>
+   *     <li><code>targeting.inventoryTargeting.targetedPlacements</code></li>
+   *     <li><code>targeting.mobileApplicationTargeting.firstPartyTargeting.targetedApplications</code></li>
+   *     <li><code>updateSource</code></li>
+   *     <li><code>updateTime</code></li>
+   *     <li><code>webPropertyCode</code></li>
    *   </ul>
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
@@ -929,13 +992,40 @@ export class LineItemServiceClient {
    *
    *   <b>Filterable fields:</b>
    *   <ul style="list-style-type:none">
+   *     <li><code>archived</code></li>
+   *     <li><code>contractedUnitsBought</code></li>
+   *     <li><code>costType</code></li>
+   *     <li><code>createTime</code></li>
+   *     <li><code>creativePlaceholders.size.canonicalName</code></li>
+   *     <li><code>dealInfo.externalDealId</code></li>
+   *     <li><code>deliveryRateType</code></li>
    *     <li><code>displayName</code></li>
    *     <li><code>endTime</code></li>
+   *     <li><code>environmentType</code></li>
+   *     <li><code>externalLineItemId</code></li>
    *     <li><code>goal.units</code></li>
+   *     <li><code>grpSettings.growbirdNielsenEnabled</code></li>
+   *     <li><code>grpSettings.inTargetRatioEstimateMilliPercent</code></li>
    *     <li><code>lineItemType</code></li>
+   *     <li><code>missingCreatives</code></li>
    *     <li><code>name</code></li>
+   *     <li><code>notes</code></li>
    *     <li><code>order</code></li>
+   *     <li><code>orderDisplayName</code></li>
+   *     <li><code>priority</code></li>
+   *     <li><code>roadblockingType</code></li>
    *     <li><code>startTime</code></li>
+   *     <li><code>stats.clickThroughRate</code></li>
+   *     <li><code>stats.clicksDelivered</code></li>
+   *     <li><code>stats.impressionsDelivered</code></li>
+   *     <li><code>stats.viewableImpressionsDelivered</code></li>
+   *     <li><code>status</code></li>
+   *     <li><code>targeting.inventoryTargeting.targetedAdUnits.adUnit</code></li>
+   *     <li><code>targeting.inventoryTargeting.targetedPlacements</code></li>
+   *     <li><code>targeting.mobileApplicationTargeting.firstPartyTargeting.targetedApplications</code></li>
+   *     <li><code>updateSource</code></li>
+   *     <li><code>updateTime</code></li>
+   *     <li><code>webPropertyCode</code></li>
    *   </ul>
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
@@ -1738,6 +1828,81 @@ export class LineItemServiceClient {
   matchContentLabelFromContentLabelName(contentLabelName: string) {
     return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName)
       .content_label;
+  }
+
+  /**
+   * Return a fully-qualified creative resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  creativePath(networkCode: string, creative: string) {
+    return this.pathTemplates.creativePathTemplate.render({
+      network_code: networkCode,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName).creative;
+  }
+
+  /**
+   * Return a fully-qualified creativeSet resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_set
+   * @returns {string} Resource name string.
+   */
+  creativeSetPath(networkCode: string, creativeSet: string) {
+    return this.pathTemplates.creativeSetPathTemplate.render({
+      network_code: networkCode,
+      creative_set: creativeSet,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative_set from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the creative_set.
+   */
+  matchCreativeSetFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .creative_set;
   }
 
   /**
@@ -2875,6 +3040,42 @@ export class LineItemServiceClient {
    */
   matchSiteFromSiteName(siteName: string) {
     return this.pathTemplates.sitePathTemplate.match(siteName).site;
+  }
+
+  /**
+   * Return a fully-qualified slate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} slate
+   * @returns {string} Resource name string.
+   */
+  slatePath(networkCode: string, slate: string) {
+    return this.pathTemplates.slatePathTemplate.render({
+      network_code: networkCode,
+      slate: slate,
+    });
+  }
+
+  /**
+   * Parse the network_code from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).network_code;
+  }
+
+  /**
+   * Parse the slate from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the slate.
+   */
+  matchSlateFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).slate;
   }
 
   /**

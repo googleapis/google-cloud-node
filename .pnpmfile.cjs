@@ -21,10 +21,29 @@ module.exports = {
         mutateC8(pkg.devDependencies, pkg.name, 'devDependencies', context);
       }
 
+      // Check if this package has brace-expansion as a dependency or devDependency
+      if (pkg.dependencies && pkg.dependencies['brace-expansion']) {
+        mutateBraceExpansion(pkg.dependencies, pkg.name, 'dependencies', context);
+      }
+      if (pkg.devDependencies && pkg.devDependencies['brace-expansion']) {
+        mutateBraceExpansion(pkg.devDependencies, pkg.name, 'devDependencies', context);
+      }
       return pkg;
     }
   }
 };
+
+function mutateBraceExpansion(deps, pkgName, depType, context) {
+  const nodeVersion = process.version;
+  const majorVersion = parseInt(nodeVersion.replace('v', '').split('.')[0], 10);
+
+  if (majorVersion === 18) {
+    if (deps['brace-expansion'] && deps['brace-expansion'].startsWith('^5.')) {
+      console.log(`[pnpmfile] Node.js version is 18. Overriding brace-expansion to 5.0.7 in ${pkgName}`);
+      deps['brace-expansion'] = '5.0.7';
+    }
+  }
+}
 
 function mutateYargs(deps, pkgName, depType, context) {
   const nodeVersion = process.version;

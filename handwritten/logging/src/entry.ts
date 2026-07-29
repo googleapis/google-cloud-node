@@ -16,7 +16,8 @@
 
 import * as extend from 'extend';
 import {EventId} from './utils/event-id';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/logging-api';
+import google = protos.google;
 import {
   objToStruct,
   structToObj,
