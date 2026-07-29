@@ -5,6 +5,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/paginator-v6.1.0...paginator-v7.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update paginator to minimum Node version of 22. ([#9006](https://github.com/googleapis/google-cloud-node/issues/9006))
+
+### Features
+
+* Update paginator to minimum Node version of 22. ([#9006](https://github.com/googleapis/google-cloud-node/issues/9006)) ([0503db4](https://github.com/googleapis/google-cloud-node/commit/0503db46bb99b1d314eb305963f1802221bbd956)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/paginator-v6.0.2...paginator-v6.1.0) (2026-07-23)
 
 

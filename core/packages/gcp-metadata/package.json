@@ -1,6 +1,6 @@
 {
   "name": "gcp-metadata",
-  "version": "8.1.4",
+  "version": "9.0.0",
   "description": "Get the metadata from a Google Cloud Platform environment",
   "repository": {
     "type": "git",

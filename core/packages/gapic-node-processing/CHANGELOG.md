@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.11...gapic-node-processing-v0.2.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update gapic-node-processing to minimum Node version of 22. ([#8990](https://github.com/googleapis/google-cloud-node/issues/8990))
+
+### Features
+
+* Update gapic-node-processing to minimum Node version of 22. ([#8990](https://github.com/googleapis/google-cloud-node/issues/8990)) ([ec833e1](https://github.com/googleapis/google-cloud-node/commit/ec833e18a70397baef6c52e82c4237a275ba8ce6)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [0.1.11](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.10...gapic-node-processing-v0.1.11) (2026-07-24)
 
 
