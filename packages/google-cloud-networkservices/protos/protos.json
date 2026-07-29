@@ -154,6 +154,15 @@
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "*"
                               }
+                            },
+                            "resourceUris": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "*"
+                              }
                             }
                           }
                         },
@@ -2182,6 +2191,7 @@
                           "type": "string",
                           "id": 13,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "networksecurity.googleapis.com/ClientTlsPolicy"
                           }
@@ -8113,6 +8123,7 @@
                           "type": "string",
                           "id": 13,
                           "options": {
+                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "networksecurity.googleapis.com/ClientTlsPolicy"
                           }

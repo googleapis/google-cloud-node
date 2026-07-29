@@ -16528,6 +16528,9 @@ export namespace google {
 
                 /** Membership deleteTime */
                 deleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Membership affiliation */
+                affiliation?: (google.chat.v1.Membership.Affiliation|keyof typeof google.chat.v1.Membership.Affiliation|null);
             }
 
             /** Represents a Membership. */
@@ -16559,6 +16562,9 @@ export namespace google {
 
                 /** Membership deleteTime. */
                 public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Membership affiliation. */
+                public affiliation: (google.chat.v1.Membership.Affiliation|keyof typeof google.chat.v1.Membership.Affiliation);
 
                 /** Membership memberType. */
                 public memberType?: ("member"|"groupMember");
@@ -16657,6 +16663,14 @@ export namespace google {
                     ROLE_MEMBER = 1,
                     ROLE_MANAGER = 2,
                     ROLE_ASSISTANT_MANAGER = 4
+                }
+
+                /** Affiliation enum. */
+                enum Affiliation {
+                    AFFILIATION_UNSPECIFIED = 0,
+                    INTERNAL = 1,
+                    EXTERNAL = 2,
+                    MANAGED_EXTERNAL = 3
                 }
             }
 

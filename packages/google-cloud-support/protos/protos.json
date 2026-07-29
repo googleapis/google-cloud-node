@@ -955,14 +955,14 @@
                           "requestType": "CreateSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).post": "/v2/{parent=*/*}/supportEventSubscriptions",
+                            "(google.api.http).post": "/v2/{parent=organizations/*}/supportEventSubscriptions",
                             "(google.api.http).body": "support_event_subscription",
                             "(google.api.method_signature)": "parent,support_event_subscription"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v2/{parent=*/*}/supportEventSubscriptions",
+                                "post": "/v2/{parent=organizations/*}/supportEventSubscriptions",
                                 "body": "support_event_subscription"
                               }
                             },
@@ -975,13 +975,13 @@
                           "requestType": "GetSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).get": "/v2/{name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).get": "/v2/{name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=*/*/supportEventSubscriptions/*}"
+                                "get": "/v2/{name=organizations/*/supportEventSubscriptions/*}"
                               }
                             },
                             {
@@ -993,13 +993,13 @@
                           "requestType": "ListSupportEventSubscriptionsRequest",
                           "responseType": "ListSupportEventSubscriptionsResponse",
                           "options": {
-                            "(google.api.http).get": "/v2/{parent=*/*}/supportEventSubscriptions",
+                            "(google.api.http).get": "/v2/{parent=organizations/*}/supportEventSubscriptions",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=*/*}/supportEventSubscriptions"
+                                "get": "/v2/{parent=organizations/*}/supportEventSubscriptions"
                               }
                             },
                             {
@@ -1011,14 +1011,14 @@
                           "requestType": "UpdateSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).patch": "/v2/{support_event_subscription.name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).patch": "/v2/{support_event_subscription.name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.http).body": "support_event_subscription",
                             "(google.api.method_signature)": "support_event_subscription,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "patch": "/v2/{support_event_subscription.name=*/*/supportEventSubscriptions/*}",
+                                "patch": "/v2/{support_event_subscription.name=organizations/*/supportEventSubscriptions/*}",
                                 "body": "support_event_subscription"
                               }
                             },
@@ -1031,13 +1031,13 @@
                           "requestType": "DeleteSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).delete": "/v2/{name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).delete": "/v2/{name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2/{name=*/*/supportEventSubscriptions/*}"
+                                "delete": "/v2/{name=organizations/*/supportEventSubscriptions/*}"
                               }
                             },
                             {
@@ -1049,15 +1049,35 @@
                           "requestType": "UndeleteSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).post": "/v2/{name=*/*/supportEventSubscriptions/*}:undelete",
+                            "(google.api.http).post": "/v2/{name=organizations/*/supportEventSubscriptions/*}:undelete",
                             "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v2/{name=*/*/supportEventSubscriptions/*}:undelete",
+                                "post": "/v2/{name=organizations/*/supportEventSubscriptions/*}:undelete",
                                 "body": "*"
                               }
+                            }
+                          ]
+                        },
+                        "ExpungeSupportEventSubscription": {
+                          "requestType": "ExpungeSupportEventSubscriptionRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=organizations/*/supportEventSubscriptions/*}:expunge",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=organizations/*/supportEventSubscriptions/*}:expunge",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         }
@@ -1178,6 +1198,18 @@
                       }
                     },
                     "UndeleteSupportEventSubscriptionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudsupport.googleapis.com/SupportEventSubscription"
+                          }
+                        }
+                      }
+                    },
+                    "ExpungeSupportEventSubscriptionRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2374,14 +2406,14 @@
                           "requestType": "CreateSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).post": "/v2beta/{parent=*/*}/supportEventSubscriptions",
+                            "(google.api.http).post": "/v2beta/{parent=organizations/*}/supportEventSubscriptions",
                             "(google.api.http).body": "support_event_subscription",
                             "(google.api.method_signature)": "parent,support_event_subscription"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v2beta/{parent=*/*}/supportEventSubscriptions",
+                                "post": "/v2beta/{parent=organizations/*}/supportEventSubscriptions",
                                 "body": "support_event_subscription"
                               }
                             },
@@ -2394,13 +2426,13 @@
                           "requestType": "GetSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).get": "/v2beta/{name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).get": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2beta/{name=*/*/supportEventSubscriptions/*}"
+                                "get": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}"
                               }
                             },
                             {
@@ -2412,13 +2444,13 @@
                           "requestType": "ListSupportEventSubscriptionsRequest",
                           "responseType": "ListSupportEventSubscriptionsResponse",
                           "options": {
-                            "(google.api.http).get": "/v2beta/{parent=*/*}/supportEventSubscriptions",
+                            "(google.api.http).get": "/v2beta/{parent=organizations/*}/supportEventSubscriptions",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2beta/{parent=*/*}/supportEventSubscriptions"
+                                "get": "/v2beta/{parent=organizations/*}/supportEventSubscriptions"
                               }
                             },
                             {
@@ -2430,14 +2462,14 @@
                           "requestType": "UpdateSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).patch": "/v2beta/{support_event_subscription.name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).patch": "/v2beta/{support_event_subscription.name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.http).body": "support_event_subscription",
                             "(google.api.method_signature)": "support_event_subscription,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "patch": "/v2beta/{support_event_subscription.name=*/*/supportEventSubscriptions/*}",
+                                "patch": "/v2beta/{support_event_subscription.name=organizations/*/supportEventSubscriptions/*}",
                                 "body": "support_event_subscription"
                               }
                             },
@@ -2450,13 +2482,13 @@
                           "requestType": "DeleteSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).delete": "/v2beta/{name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).delete": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2beta/{name=*/*/supportEventSubscriptions/*}"
+                                "delete": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}"
                               }
                             },
                             {
@@ -2468,15 +2500,35 @@
                           "requestType": "UndeleteSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).post": "/v2beta/{name=*/*/supportEventSubscriptions/*}:undelete",
+                            "(google.api.http).post": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}:undelete",
                             "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v2beta/{name=*/*/supportEventSubscriptions/*}:undelete",
+                                "post": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}:undelete",
                                 "body": "*"
                               }
+                            }
+                          ]
+                        },
+                        "ExpungeSupportEventSubscription": {
+                          "requestType": "ExpungeSupportEventSubscriptionRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}:expunge",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}:expunge",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         }
@@ -2597,6 +2649,18 @@
                       }
                     },
                     "UndeleteSupportEventSubscriptionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudsupport.googleapis.com/SupportEventSubscription"
+                          }
+                        }
+                      }
+                    },
+                    "ExpungeSupportEventSubscriptionRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -4637,6 +4701,9 @@
                   "id": 1
                 }
               }
+            },
+            "Empty": {
+              "fields": {}
             }
           }
         }
