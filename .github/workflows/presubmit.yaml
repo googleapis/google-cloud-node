@@ -8,8 +8,10 @@ jobs:
   units:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node-version: [22, 24, 26]
+        shard-index: [0, 1, 2, 3, 4]
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
@@ -28,6 +30,8 @@ jobs:
         env:
           BUILD_TYPE: presubmit
           TEST_TYPE: units
+          SHARD_TOTAL: 5
+          SHARD_INDEX: ${{ matrix.shard-index }}
   lint:
     runs-on: ubuntu-latest
     continue-on-error: true

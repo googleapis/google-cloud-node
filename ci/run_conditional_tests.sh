@@ -94,6 +94,9 @@ tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/googl
 # Until these packages can be updated to be OS agnostic, we will skip them on Windows.
 windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ core/packages/gapic-node-processing/ core/packages/typeless-sample-bot/ handwritten/cloud-profiler/"
 
+# Gather all test directories into an array
+test_dirs=()
+
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
         if [ -s "ignore.json" ] && jq -e ".ignored[] | select(. == \"$d\")" ignore.json > /dev/null 2>&1; then
@@ -204,10 +207,25 @@ for subdir in ${subdirs[@]}; do
             fi
         fi
         if [ "${should_test}" = true ]; then
-            echo "running test in ${d}"
-            (
-                pushd ${d} >/dev/null
-                # Temporarily allow failure.
+            test_dirs+=("${d}")
+        fi
+    done
+done
+
+# If SHARD_TOTAL and SHARD_INDEX are provided, we will only run a subset of the tests.
+for i in "${!test_dirs[@]}"; do
+    d="${test_dirs[$i]}"
+
+    if [[ -n "${SHARD_TOTAL}" && -n "${SHARD_INDEX}" ]]; then
+        if (( i % SHARD_TOTAL != SHARD_INDEX )); then
+            continue
+        fi
+    fi
+
+    echo "running test in ${d}"
+    (
+        pushd ${d} >/dev/null
+        # Temporarily allow failure.
                 set +e
                 ${test_script}
                 ret=$?

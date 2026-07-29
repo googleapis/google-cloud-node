@@ -49,8 +49,8 @@ if command -v cygpath >/dev/null 2>&1; then
     PNPMFILE_PATH=$(cygpath -m "${PNPMFILE_PATH}")
 fi
 
-echo "pnpm install --reporter=silent --ignore-scripts --engine-strict --prod --pnpmfile \"${PNPMFILE_PATH}\"; pnpm install --reporter=silent --pnpmfile \"${PNPMFILE_PATH}\""
-pnpm install --reporter=silent --ignore-scripts --engine-strict --prod --pnpmfile "${PNPMFILE_PATH}"; pnpm install --reporter=silent --pnpmfile "${PNPMFILE_PATH}"
+echo "pnpm install --reporter=silent --ignore-scripts --engine-strict --pnpmfile \"${PNPMFILE_PATH}\""
+pnpm install --reporter=silent --ignore-scripts --engine-strict --pnpmfile "${PNPMFILE_PATH}"
 
 
 retval=0
