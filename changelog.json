@@ -5,6 +5,52 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "b4cef8341fce750686fb48e57a819b883dc708ba",
+          "message": "Onboard a new library",
+          "issues": [
+            "9014"
+          ],
+          "scope": "google/cloud/agentidentity/v1"
+        },
+        {
+          "type": "feat",
+          "sha": "acd5989d9f5e94df3f895795a318547b97e5554b",
+          "message": "Onboard a new library",
+          "issues": [
+            "9013"
+          ],
+          "scope": "google/cloud/agentidentity/v1beta"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentidentity",
+      "id": "7ff63c56-1743-46d8-94aa-4e9c930609de",
+      "createTime": "2026-07-29T20:49:49.925Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d38c05a5e14cec57b66b4106d6bbd511ac4fd6f2",
+          "message": "Update common to minimum Node version of 22.",
+          "issues": [
+            "8988",
+            "8985"
+          ],
+          "breakingChangeNote": "Update common to minimum Node version of 22. ([#8988](https://github.com/googleapis/google-cloud-node/issues/8988))"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/common",
+      "id": "4c8b9ecd-553e-4776-b907-e47e652ac4e9",
+      "createTime": "2026-07-29T20:49:49.883Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "212868e75ebddbdb07ff4d478acb1a858130fd1d",
           "message": "Update promisify to minimum Node version of 22.",
           "issues": [
@@ -83862,5 +83908,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-29T19:47:29.586Z"
+  "updateTime": "2026-07-29T20:49:49.925Z"
 }

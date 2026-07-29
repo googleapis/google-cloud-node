@@ -215,6 +215,7 @@ libraries:
       - path: google/cloud/agentidentity/v1
       - path: google/cloud/agentidentity/v1beta
     copyright_year: "2026"
+    version: 0.1.0
   - name: google-cloud-agentregistry
     version: 0.2.0
     apis:
