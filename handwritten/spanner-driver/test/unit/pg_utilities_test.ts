@@ -14,23 +14,24 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import {escapeIdentifier, escapeLiteral} from '../../src/index.js';
+import {escapeIdentifier, escapeLiteral} from '../../src/lib/pg/utilities.js';
 
-describe('@google-cloud/spanner-driver index exports', () => {
-  it('should escape identifiers correctly', () => {
+describe('PostgreSQL Dialect Utilities', () => {
+  it('should escape PostgreSQL identifiers with double quotes', () => {
+    assert.strictEqual(escapeIdentifier('foo'), '"foo"');
     assert.strictEqual(escapeIdentifier('my_table'), '"my_table"');
-    assert.strictEqual(
-      escapeIdentifier('my_"quoted"_table'),
-      '"my_""quoted""_table"',
-    );
+    assert.strictEqual(escapeIdentifier('b"ar'), '"b""ar"');
   });
 
-  it('should escape string literals correctly', () => {
-    assert.strictEqual(escapeLiteral('hello world'), "'hello world'");
+  it('should escape PostgreSQL string literals with single quotes', () => {
+    assert.strictEqual(escapeLiteral('hello'), "'hello'");
     assert.strictEqual(escapeLiteral("O'Connor"), "'O''Connor'");
   });
 
-  it('should escape backslashes with E string syntax', () => {
-    assert.strictEqual(escapeLiteral('hello\\world'), "E'hello\\\\world'");
+  it('should escape backslashes using PostgreSQL E string syntax', () => {
+    assert.strictEqual(
+      escapeLiteral('C:\\path\\to\\file'),
+      "E'C:\\\\path\\\\to\\\\file'",
+    );
   });
 });

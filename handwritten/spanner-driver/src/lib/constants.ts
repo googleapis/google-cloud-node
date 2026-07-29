@@ -12,8 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {DatabaseError} from './lib/errors.js';
-import {ClientConfig} from './lib/config.js';
-import {escapeIdentifier, escapeLiteral} from './lib/pg/utilities.js';
+/**
+ * Supported SQL dialects for Google Cloud Spanner.
+ * Note: Currently 'pg' (PostgreSQL) dialect is supported.
+ */
+export type Dialect = 'pg' | 'googlesql';
 
-export {DatabaseError, ClientConfig, escapeIdentifier, escapeLiteral};
+/** Default SQL dialect used by the Spanner driver. */
+export const DEFAULT_DIALECT: Dialect = 'pg';
