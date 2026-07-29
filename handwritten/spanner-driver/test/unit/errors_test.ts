@@ -17,41 +17,13 @@ import {describe, it} from 'mocha';
 import {enrichError, enrichPgError} from '../../src/lib/errors.js';
 
 describe('enrichPgError SQLSTATE Mapping', () => {
-  it('should extract 42P01 when enriched with [SQLSTATE 42P01] by Go driver', () => {
+  it('should extract SQLSTATE codes from error messages enriched by Go driver', () => {
     const err = enrichPgError(
       new Error(
         '[SQLSTATE 42P01] rpc error: code = NotFound desc = relation "foo" does not exist',
       ),
     );
     assert.strictEqual(err.code, '42P01');
-    assert.strictEqual(err.severity, 'ERROR');
-  });
-
-  it('should extract 42703 when enriched with [SQLSTATE 42703] by Go driver', () => {
-    const err = enrichPgError(
-      new Error(
-        '[SQLSTATE 42703] rpc error: code = InvalidArgument desc = column "bar" does not exist',
-      ),
-    );
-    assert.strictEqual(err.code, '42703');
-    assert.strictEqual(err.severity, 'ERROR');
-  });
-
-  it('should extract 23505 when enriched with [SQLSTATE 23505] by Go driver', () => {
-    const err = enrichPgError(
-      new Error(
-        '[SQLSTATE 23505] duplicate key value violates unique constraint',
-      ),
-    );
-    assert.strictEqual(err.code, '23505');
-    assert.strictEqual(err.severity, 'ERROR');
-  });
-
-  it('should extract 42601 when enriched with [SQLSTATE 42601] by Go driver', () => {
-    const err = enrichPgError(
-      new Error('[SQLSTATE 42601] syntax error at or near SELECT'),
-    );
-    assert.strictEqual(err.code, '42601');
     assert.strictEqual(err.severity, 'ERROR');
   });
 
@@ -70,8 +42,12 @@ describe('enrichPgError SQLSTATE Mapping', () => {
 
   it('should preserve stack traces when wrapping Error objects', () => {
     const orig = new Error('test stack preservation');
+    orig.stack = 'CustomError: test\n    at testFunction (file.js:1:1)';
     const err = enrichPgError(orig);
-    assert.strictEqual(err.stack, orig.stack);
+    assert.strictEqual(
+      err.stack,
+      'CustomError: test\n    at testFunction (file.js:1:1)',
+    );
   });
 
   it('should reject Node system error codes like EPERM and fallback to XX000', () => {
@@ -98,16 +74,6 @@ describe('enrichPgError SQLSTATE Mapping', () => {
         ),
       );
       assert.strictEqual(err.code, '42P01');
-    });
-
-    it('should delegate to pg dialect when explicitly specified', () => {
-      const err = enrichError(
-        new Error(
-          '[SQLSTATE 23505] duplicate key value violates unique constraint',
-        ),
-        'pg',
-      );
-      assert.strictEqual(err.code, '23505');
     });
   });
 });

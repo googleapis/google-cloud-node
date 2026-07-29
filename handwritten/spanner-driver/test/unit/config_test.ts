@@ -19,23 +19,11 @@ describe('resolveDsn', () => {
   const origEnv = {...process.env};
 
   beforeEach(() => {
-    delete process.env.DATABASE_URL;
-    delete process.env.PGCONNECTSTRING;
-    delete process.env.PGDATABASE;
-    delete process.env.SPANNER_PROJECT_ID;
     delete process.env.GOOGLE_CLOUD_PROJECT;
-    delete process.env.SPANNER_INSTANCE_ID;
-    delete process.env.SPANNER_EMULATOR_HOST;
   });
 
   afterEach(() => {
-    delete process.env.DATABASE_URL;
-    delete process.env.PGCONNECTSTRING;
-    delete process.env.PGDATABASE;
-    delete process.env.SPANNER_PROJECT_ID;
     delete process.env.GOOGLE_CLOUD_PROJECT;
-    delete process.env.SPANNER_INSTANCE_ID;
-    delete process.env.SPANNER_EMULATOR_HOST;
     Object.assign(process.env, origEnv);
   });
 
@@ -60,7 +48,20 @@ describe('resolveDsn', () => {
     assert.strictEqual(dsn, 'projects/p/instances/i/databases/d');
   });
 
-  it('should append host and port as api_endpoint', () => {
+  it('should prioritize explicit cfg.project over process.env.GOOGLE_CLOUD_PROJECT', () => {
+    process.env.GOOGLE_CLOUD_PROJECT = 'env-project';
+    const dsn = resolveDsn({
+      project: 'explicit_project',
+      instance: 'i',
+      database: 'd',
+    });
+    assert.strictEqual(
+      dsn,
+      'projects/explicit_project/instances/i/databases/d',
+    );
+  });
+
+  it('should prepend custom host and port to resource path', () => {
     const dsn = resolveDsn({
       project: 'p',
       instance: 'i',
@@ -70,73 +71,11 @@ describe('resolveDsn', () => {
     });
     assert.strictEqual(
       dsn,
-      'projects/p/instances/i/databases/d?api_endpoint=localhost:9010',
+      'localhost:9010/projects/p/instances/i/databases/d',
     );
   });
 
-  it('should preserve existing query parameters on baseDsn when no cfg overrides are provided', () => {
-    process.env.DATABASE_URL =
-      'projects/p/instances/i/databases/d?custom_param=val';
-    const dsn = resolveDsn({});
-    assert.strictEqual(
-      dsn,
-      'projects/p/instances/i/databases/d?custom_param=val',
-    );
-  });
-
-  it('should preserve baseDsn query parameters when constructing DSN with cfg database override', () => {
-    process.env.DATABASE_URL =
-      'projects/p/instances/i/databases/d?min_opened=5;max_opened=10';
-    const dsn = resolveDsn({database: 'override_db'});
-    assert.strictEqual(
-      dsn,
-      'projects/p/instances/i/databases/override_db?min_opened=5;max_opened=10',
-    );
-  });
-
-  it('should extract project and instance from postgresql:// DATABASE_URL when database override is provided', () => {
-    process.env.DATABASE_URL =
-      'postgresql://localhost:5432/projects/p/instances/i/databases/d';
-    const dsn = resolveDsn({database: 'override_db'});
-    assert.strictEqual(dsn, 'projects/p/instances/i/databases/override_db');
-  });
-
-  it('should prioritize explicit cfg.database over process.env.PGDATABASE', () => {
-    process.env.DATABASE_URL = 'projects/p/instances/i/databases/env_db';
-    process.env.PGDATABASE = 'env_db';
-    const dsn = resolveDsn({database: 'explicit_db'});
-    assert.strictEqual(dsn, 'projects/p/instances/i/databases/explicit_db');
-  });
-
-  it('should append localhost:5432 as api_endpoint when specified', () => {
-    const dsn = resolveDsn({
-      project: 'p',
-      instance: 'i',
-      database: 'd',
-      host: 'localhost',
-      port: 5432,
-    });
-    assert.strictEqual(
-      dsn,
-      'projects/p/instances/i/databases/d?api_endpoint=localhost:5432',
-    );
-  });
-
-  it('should append custom host and port as api_endpoint', () => {
-    const dsn = resolveDsn({
-      project: 'p',
-      instance: 'i',
-      database: 'd',
-      host: '10.0.0.1',
-      port: 5007,
-    });
-    assert.strictEqual(
-      dsn,
-      'projects/p/instances/i/databases/d?api_endpoint=10.0.0.1:5007',
-    );
-  });
-
-  it('should append custom host without port as api_endpoint', () => {
+  it('should prepend custom host without port to resource path', () => {
     const dsn = resolveDsn({
       project: 'p',
       instance: 'i',
@@ -145,17 +84,12 @@ describe('resolveDsn', () => {
     });
     assert.strictEqual(
       dsn,
-      'projects/p/instances/i/databases/d?api_endpoint=spanner.googleapis.com',
+      'spanner.googleapis.com/projects/p/instances/i/databases/d',
     );
   });
 
   it('should return empty string for invalid/incomplete configurations on Node object level', () => {
-    delete process.env.DATABASE_URL;
-    delete process.env.PGCONNECTSTRING;
-    delete process.env.SPANNER_PROJECT_ID;
     delete process.env.GOOGLE_CLOUD_PROJECT;
-    delete process.env.SPANNER_INSTANCE_ID;
-    delete process.env.PGDATABASE;
     assert.strictEqual(resolveDsn({database: 'd'}), '');
     assert.strictEqual(resolveDsn({}), '');
   });
@@ -164,67 +98,22 @@ describe('resolveDsn', () => {
     const origEnv = {...process.env};
 
     beforeEach(() => {
-      // Clear env variables that might affect tests
-      delete process.env.PGDATABASE;
-      delete process.env.SPANNER_PROJECT_ID;
       delete process.env.GOOGLE_CLOUD_PROJECT;
-      delete process.env.SPANNER_INSTANCE_ID;
-      delete process.env.DATABASE_URL;
-      delete process.env.PGCONNECTSTRING;
-      delete process.env.SPANNER_EMULATOR_HOST;
     });
 
     afterEach(() => {
-      delete process.env.DATABASE_URL;
-      delete process.env.PGCONNECTSTRING;
-      delete process.env.PGDATABASE;
-      delete process.env.SPANNER_PROJECT_ID;
       delete process.env.GOOGLE_CLOUD_PROJECT;
-      delete process.env.SPANNER_INSTANCE_ID;
-      delete process.env.SPANNER_EMULATOR_HOST;
       Object.assign(process.env, origEnv);
     });
 
-    it('should fall back to PGDATABASE, SPANNER_PROJECT_ID, SPANNER_INSTANCE_ID', () => {
-      process.env.PGDATABASE = 'd';
-      process.env.SPANNER_PROJECT_ID = 'p';
-      process.env.SPANNER_INSTANCE_ID = 'i';
-
-      const dsn = resolveDsn({});
-      assert.strictEqual(dsn, 'projects/p/instances/i/databases/d');
-    });
-
-    it('should fall back to GOOGLE_CLOUD_PROJECT if SPANNER_PROJECT_ID is missing', () => {
-      process.env.PGDATABASE = 'd';
+    it('should fall back to GOOGLE_CLOUD_PROJECT if project is missing in config object', () => {
       process.env.GOOGLE_CLOUD_PROJECT = 'gcp-project';
-      process.env.SPANNER_INSTANCE_ID = 'i';
 
-      const dsn = resolveDsn({});
-      assert.strictEqual(dsn, 'projects/gcp-project/instances/i/databases/d');
-    });
-
-    it('should append auto_config_emulator=true when SPANNER_EMULATOR_HOST is set', () => {
-      process.env.SPANNER_EMULATOR_HOST = 'localhost:9010';
-      const dsn = resolveDsn({project: 'p', instance: 'i', database: 'd'});
-      assert.strictEqual(
-        dsn,
-        'projects/p/instances/i/databases/d?auto_config_emulator=true',
-      );
-    });
-
-    it('should append auto_config_emulator=true and join with semicolon for object config with host', () => {
-      process.env.SPANNER_EMULATOR_HOST = 'localhost:9010';
       const dsn = resolveDsn({
-        project: 'p',
         instance: 'i',
         database: 'd',
-        host: 'localhost',
-        port: 9010,
       });
-      assert.strictEqual(
-        dsn,
-        'projects/p/instances/i/databases/d?api_endpoint=localhost:9010;auto_config_emulator=true',
-      );
+      assert.strictEqual(dsn, 'projects/gcp-project/instances/i/databases/d');
     });
   });
 });

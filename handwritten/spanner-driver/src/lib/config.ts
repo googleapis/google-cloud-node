@@ -26,7 +26,7 @@ export interface ClientConfig {
   project?: string;
   /** Spanner Instance ID. */
   instance?: string;
-  /** Spanner Database ID or full database resource path. */
+  /** Spanner Database ID. */
   database?: string;
   /** Custom type parsers registry. */
   types?: unknown;
@@ -37,10 +37,11 @@ export interface ClientConfig {
  *
  * Priority order:
  * 1. String connection DSN or postgresql:// URL passed directly.
- * 2. `config.connectionString` or explicit `config.database` resource path (`projects/...`).
- * 3. `config` object parts (`project`, `instance`, `database`, `host`, `port`). Explicit `config.database` overrides environment variables.
- * 4. Environment variable fallbacks (`DATABASE_URL`, `PGCONNECTSTRING`, `SPANNER_PROJECT_ID`, `SPANNER_INSTANCE_ID`, `PGDATABASE`).
- * 5. Preserves existing DSN query parameters and appends `auto_config_emulator=true` if `SPANNER_EMULATOR_HOST` is set.
+ * 2. `config.connectionString`.
+ * 3. `config` object parts (`project`, `instance`, `database`, `host`, `port`).
+ * 4. GCP Project environment variable fallback (`GOOGLE_CLOUD_PROJECT`).
+ *
+ * Formats host prefix as `[host:port/]projects/project/instances/instance/databases/database` matching `go-sql-spanner`.
  *
  * @param config - String DSN URL or ClientConfig configuration object.
  * @returns Fully formatted Spanner DSN resource string or connection URL.
@@ -57,88 +58,18 @@ export function resolveDsn(config?: string | ClientConfig): string {
     return cfg.connectionString;
   }
 
-  if (cfg?.database && cfg.database.startsWith('projects/')) {
-    return cfg.database;
-  }
+  const project = cfg?.project || process.env.GOOGLE_CLOUD_PROJECT;
+  const instance = cfg?.instance;
+  const database = cfg?.database;
 
-  const baseDsn = process.env.DATABASE_URL || process.env.PGCONNECTSTRING || '';
-  let project =
-    cfg?.project ||
-    process.env.SPANNER_PROJECT_ID ||
-    process.env.GOOGLE_CLOUD_PROJECT;
-  let instance = cfg?.instance || process.env.SPANNER_INSTANCE_ID;
-  let database = cfg?.database || process.env.PGDATABASE;
-
-  if (database && database.startsWith('projects/')) {
-    return database;
-  }
-
-  const projectsIndex = baseDsn ? baseDsn.indexOf('projects/') : -1;
-  if (baseDsn && projectsIndex !== -1) {
-    const resourcePath = baseDsn.substring(projectsIndex);
-    const parts = resourcePath.split('/');
-    if (parts.length >= 6) {
-      if (!project) project = parts[1];
-      if (!instance) instance = parts[3];
-      if (
-        !cfg?.database &&
-        (!database ||
-          database === 'postgres' ||
-          (process.env.PGDATABASE && database === process.env.PGDATABASE))
-      ) {
-        database = parts[5].split('?')[0];
-      }
-    }
-  }
-
-  let resolvedDsn = '';
-  const hasCfgOverrides = !!(
-    cfg &&
-    (cfg.project || cfg.instance || cfg.database || cfg.host)
-  );
-
-  const isFullDsn =
-    baseDsn &&
-    (baseDsn.startsWith('projects/') ||
-      baseDsn.startsWith('postgresql://') ||
-      baseDsn.startsWith('postgres://'));
-
-  if (isFullDsn && !hasCfgOverrides) {
-    resolvedDsn = baseDsn;
-  } else if (project && instance && database) {
-    resolvedDsn = `projects/${project}/instances/${instance}/databases/${database}`;
-    const params: string[] = [];
+  if (project && instance && database) {
+    const resourcePath = `projects/${project}/instances/${instance}/databases/${database}`;
     if (cfg?.host) {
       const endpoint = cfg.port ? `${cfg.host}:${cfg.port}` : cfg.host;
-      params.push(`api_endpoint=${endpoint}`);
+      return `${endpoint}/${resourcePath}`;
     }
-    if (baseDsn && baseDsn.includes('?')) {
-      const queryParams = baseDsn.substring(baseDsn.indexOf('?') + 1);
-      if (queryParams) {
-        params.push(queryParams);
-      }
-    }
-    if (params.length > 0) {
-      resolvedDsn += '?' + params.join(';');
-    }
-  } else {
-    resolvedDsn = baseDsn;
+    return resourcePath;
   }
 
-  // Unified emulator host parameter injection
-  if (
-    resolvedDsn &&
-    process.env.SPANNER_EMULATOR_HOST &&
-    !resolvedDsn.includes('auto_config_emulator=')
-  ) {
-    const isPostgresUrl =
-      resolvedDsn.startsWith('postgresql://') ||
-      resolvedDsn.startsWith('postgres://');
-    const separator = isPostgresUrl ? '&' : ';';
-    resolvedDsn = resolvedDsn.includes('?')
-      ? `${resolvedDsn}${separator}auto_config_emulator=true`
-      : `${resolvedDsn}?auto_config_emulator=true`;
-  }
-
-  return resolvedDsn;
+  return '';
 }
