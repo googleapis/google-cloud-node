@@ -5,6 +5,310 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "212868e75ebddbdb07ff4d478acb1a858130fd1d",
+          "message": "Update promisify to minimum Node version of 22.",
+          "issues": [
+            "9009",
+            "8985"
+          ],
+          "breakingChangeNote": "Update promisify to minimum Node version of 22. ([#9009](https://github.com/googleapis/google-cloud-node/issues/9009))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/promisify",
+      "id": "919d966b-2f22-43bb-adde-02518a0bf4e5",
+      "createTime": "2026-07-29T19:47:29.586Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "abccebe23a680122d2728fa6802cc5fde1075303",
+          "message": "Update projectify to minimum Node version of 22.",
+          "issues": [
+            "9008",
+            "8985"
+          ],
+          "breakingChangeNote": "Update projectify to minimum Node version of 22. ([#9008](https://github.com/googleapis/google-cloud-node/issues/9008))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "39cad7fa-8578-4506-affc-9b906cf6f84b",
+      "createTime": "2026-07-29T19:47:29.560Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6ff774a4eab054fe7491c645bb7a627a8e70f1f8",
+          "message": "Update precise-date to minimum Node version of 22.",
+          "issues": [
+            "9007",
+            "8985"
+          ],
+          "breakingChangeNote": "Update precise-date to minimum Node version of 22. ([#9007](https://github.com/googleapis/google-cloud-node/issues/9007))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/precise-date",
+      "id": "13bc848a-c717-40a7-b239-0be8e7207fdb",
+      "createTime": "2026-07-29T19:47:29.534Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0503db46bb99b1d314eb305963f1802221bbd956",
+          "message": "Update paginator to minimum Node version of 22.",
+          "issues": [
+            "9006",
+            "8985"
+          ],
+          "breakingChangeNote": "Update paginator to minimum Node version of 22. ([#9006](https://github.com/googleapis/google-cloud-node/issues/9006))"
+        }
+      ],
+      "version": "7.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/paginator",
+      "id": "59647ebf-cfd8-4d1d-9385-78cef41e39c2",
+      "createTime": "2026-07-29T19:47:29.511Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "aa1c26447b5dbb0ebc845377a56493facffd3f23",
+          "message": "Update typeless-sample-bot to minimum Node version of 22.",
+          "issues": [
+            "9005",
+            "8985"
+          ],
+          "breakingChangeNote": "Update typeless-sample-bot to minimum Node version of 22. ([#9005](https://github.com/googleapis/google-cloud-node/issues/9005))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/typeless-sample-bot",
+      "id": "c8f20ca8-4826-4d38-ba01-11779f74c7c4",
+      "createTime": "2026-07-29T19:47:29.482Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "858ecbd6ef2516c078e4d719fc273126f0c32914",
+          "message": "Update gapic-tools to minimum Node version of 22.",
+          "issues": [
+            "9004",
+            "8985"
+          ],
+          "breakingChangeNote": "Update gapic-tools to minimum Node version of 22. ([#9004](https://github.com/googleapis/google-cloud-node/issues/9004))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-tools",
+      "id": "7ba099c5-b215-486c-b859-8bf7d84d9915",
+      "createTime": "2026-07-29T19:47:29.452Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7288bb91c6a6402d93ada7542d7c1e1c5b5f9614",
+          "message": "Update teeny-request to minimum Node version of 22.",
+          "issues": [
+            "9003",
+            "8985"
+          ],
+          "breakingChangeNote": "Update teeny-request to minimum Node version of 22. ([#9003](https://github.com/googleapis/google-cloud-node/issues/9003))"
+        }
+      ],
+      "version": "11.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "teeny-request",
+      "id": "19b02a52-c540-4044-a005-999a9bab9cfd",
+      "createTime": "2026-07-29T19:47:29.425Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8a36d40b93f194fe4ea554aa70af1d087c053633",
+          "message": "Update retry-request to minimum Node version of 22.",
+          "issues": [
+            "9002",
+            "8985"
+          ],
+          "breakingChangeNote": "Update retry-request to minimum Node version of 22. ([#9002](https://github.com/googleapis/google-cloud-node/issues/9002))"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "retry-request",
+      "id": "b121de05-0584-46c0-91ca-28d4e511f344",
+      "createTime": "2026-07-29T19:47:29.402Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a74f04b4d174270b6c77909d39538ac3298b6a44",
+          "message": "Update proto3-json-serializer-nodejs to minimum Node version of 22.",
+          "issues": [
+            "9001",
+            "8985"
+          ],
+          "breakingChangeNote": "Update proto3-json-serializer-nodejs to minimum Node version of 22. ([#9001](https://github.com/googleapis/google-cloud-node/issues/9001))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "proto3-json-serializer",
+      "id": "46a7746c-8397-49f9-a62b-35ac216aa1bb",
+      "createTime": "2026-07-29T19:47:29.373Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fa044c6ba896fc8e304edce2c28d259501fb8daa",
+          "message": "Update nodejs-proto-files to minimum Node version of 22.",
+          "issues": [
+            "8998",
+            "8985"
+          ],
+          "breakingChangeNote": "Update nodejs-proto-files to minimum Node version of 22. ([#8998](https://github.com/googleapis/google-cloud-node/issues/8998))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-proto-files",
+      "id": "4004ab83-dbd6-453c-91f5-1ffa20a3280e",
+      "createTime": "2026-07-29T19:47:29.349Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5f9dfeb5767c115975e5a9a67c2e7cade199022c",
+          "message": "Update nodejs-googleapis-common to minimum Node version of 22.",
+          "issues": [
+            "8997",
+            "8985"
+          ],
+          "breakingChangeNote": "Update nodejs-googleapis-common to minimum Node version of 22. ([#8997](https://github.com/googleapis/google-cloud-node/issues/8997))"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "googleapis-common",
+      "id": "69e9ed9e-6879-4c70-928c-f782b433643b",
+      "createTime": "2026-07-29T19:47:29.322Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c7f8234c1dd42f2836e7c0bacbca7514bfff75e2",
+          "message": "Update logging-utils to minimum Node version of 22.",
+          "issues": [
+            "8996",
+            "8985"
+          ],
+          "breakingChangeNote": "Update logging-utils to minimum Node version of 22. ([#8996](https://github.com/googleapis/google-cloud-node/issues/8996))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-logging-utils",
+      "id": "7c9666f9-997f-487a-8540-723a958a9796",
+      "createTime": "2026-07-29T19:47:29.300Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "152f68682850e30936597c732a62eca9c7a60eee",
+          "message": "Update google-auth-library-nodejs to minimum Node version of 22.",
+          "issues": [
+            "8995",
+            "8985"
+          ],
+          "breakingChangeNote": "Update google-auth-library-nodejs to minimum Node version of 22. ([#8995](https://github.com/googleapis/google-cloud-node/issues/8995))"
+        }
+      ],
+      "version": "11.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "734a5018-1999-4045-8c01-02ae0f32e6af",
+      "createTime": "2026-07-29T19:47:29.260Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "91e17a1ab4bc4c19a50547fa6e28ee262efc43f9",
+          "message": "Update gcp-metadata to minimum Node version of 22.",
+          "issues": [
+            "8991",
+            "8985"
+          ],
+          "breakingChangeNote": "Update gcp-metadata to minimum Node version of 22. ([#8991](https://github.com/googleapis/google-cloud-node/issues/8991))"
+        }
+      ],
+      "version": "9.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "cb096ded-0bd7-4dee-b21f-dfc84d67e682",
+      "createTime": "2026-07-29T19:47:29.220Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "792ffaf7389e601b906ad9870707f89326af4257",
+          "message": "Update gax to minimum Node version of 22.",
+          "issues": [
+            "8989",
+            "8985"
+          ],
+          "breakingChangeNote": "Update gax to minimum Node version of 22. ([#8989](https://github.com/googleapis/google-cloud-node/issues/8989))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "476e71c5-880a-4e2a-9d58-4581292585b7",
+      "createTime": "2026-07-29T19:47:29.197Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ec833e18a70397baef6c52e82c4237a275ba8ce6",
+          "message": "Update gapic-node-processing to minimum Node version of 22.",
+          "issues": [
+            "8990",
+            "8985"
+          ],
+          "breakingChangeNote": "Update gapic-node-processing to minimum Node version of 22. ([#8990](https://github.com/googleapis/google-cloud-node/issues/8990))"
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "6a1c11b6-a668-435a-a3c1-5560a0e49090",
+      "createTime": "2026-07-29T19:47:29.175Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "5c363650ee4de08a81b1856e16693bdd8ad99ca9",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -83558,5 +83862,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-29T00:10:12.840Z"
+  "updateTime": "2026-07-29T19:47:29.586Z"
 }
