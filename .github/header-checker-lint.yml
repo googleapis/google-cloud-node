@@ -11,6 +11,7 @@ sourceFileExtensions:
 ignoreFiles:
   - 'packages/*/webpack.config.js'
   - 'packages/*/__snapshots__/**/*.js'
+  - '**/protos/protos.js'
   - 'core/packages/typeless-sample-bot/test/fixtures/**/*.ts'
   - 'core/packages/typeless-sample-bot/test/fixtures/**/*.js'
 ignoreLicenseYear: true

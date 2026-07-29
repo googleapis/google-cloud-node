@@ -306,6 +306,9 @@ export namespace google {
 
                         /** SelfManaged resourceUri */
                         resourceUri?: (string|null);
+
+                        /** SelfManaged resourceUris */
+                        resourceUris?: (string[]|null);
                     }
 
                     /** Represents a SelfManaged. */
@@ -319,6 +322,9 @@ export namespace google {
 
                         /** SelfManaged resourceUri. */
                         public resourceUri: string;
+
+                        /** SelfManaged resourceUris. */
+                        public resourceUris: string[];
 
                         /**
                          * Creates a new SelfManaged instance using the specified properties.
