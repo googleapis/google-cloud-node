@@ -12,8 +12,8 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudSqlUsersProto",
                     "java_package": "com.google.cloud.sql.v1",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
-                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
+                    "(google.api.resource_definition).type": "secretmanager.googleapis.com/SecretVersion",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}"
                   },
                   "nested": {
                     "SqlAvailableDatabaseVersionsService": {
@@ -5886,6 +5886,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "databaseCenterIntegrationEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 72,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -6551,6 +6558,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "dmsManaged": {
+                          "type": "bool",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -6613,6 +6627,7 @@
                       "oneofs": {
                         "userPassword": {
                           "oneof": [
+                            "passwordSecretVersion",
                             "autoIamAuthn"
                           ]
                         }
@@ -6637,6 +6652,14 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "passwordSecretVersion": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                           }
                         },
                         "autoIamAuthn": {
@@ -7612,6 +7635,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -7632,6 +7662,13 @@
                         "project": {
                           "type": "string",
                           "id": 4
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -7661,6 +7698,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8067,6 +8111,11 @@
                           "oneof": [
                             "revokeExistingRoles"
                           ]
+                        },
+                        "_revokeExistingServerRoles": {
+                          "oneof": [
+                            "revokeExistingServerRoles"
+                          ]
                         }
                       },
                       "fields": {
@@ -8100,6 +8149,22 @@
                         "revokeExistingRoles": {
                           "type": "bool",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "serverRoles": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "revokeExistingServerRoles": {
+                          "type": "bool",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -8240,6 +8305,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "serverRoles": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -8313,8 +8386,8 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "CloudSqlUsersProto",
                     "java_package": "com.google.cloud.sql.v1beta4",
-                    "(google.api.resource_definition).type": "cloudsql.googleapis.com/Instance",
-                    "(google.api.resource_definition).pattern": "projects/{project}/instances/{instance}"
+                    "(google.api.resource_definition).type": "secretmanager.googleapis.com/SecretVersion",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}"
                   },
                   "nested": {
                     "SqlBackupRunsService": {
@@ -10477,6 +10550,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10497,6 +10577,13 @@
                         "project": {
                           "type": "string",
                           "id": 4
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10509,6 +10596,13 @@
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -10694,6 +10788,7 @@
                       "oneofs": {
                         "userPassword": {
                           "oneof": [
+                            "passwordSecretVersion",
                             "autoIamAuthn"
                           ]
                         }
@@ -10718,6 +10813,14 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "passwordSecretVersion": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                           }
                         },
                         "autoIamAuthn": {
@@ -11065,7 +11168,11 @@
                         },
                         "replicationLogArchivingEnabled": {
                           "type": "google.protobuf.BoolValue",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "location": {
                           "type": "string",
@@ -12001,6 +12108,13 @@
                           "id": 67,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "databaseCenterIntegrationEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 72,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -14140,6 +14254,13 @@
                           "id": 18,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dmsManaged": {
+                          "type": "bool",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       },
@@ -16541,6 +16662,11 @@
                           "oneof": [
                             "revokeExistingRoles"
                           ]
+                        },
+                        "_revokeExistingServerRoles": {
+                          "oneof": [
+                            "revokeExistingServerRoles"
+                          ]
                         }
                       },
                       "fields": {
@@ -16574,6 +16700,22 @@
                         "revokeExistingRoles": {
                           "type": "bool",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "serverRoles": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "revokeExistingServerRoles": {
+                          "type": "bool",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -16711,6 +16853,14 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serverRoles": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 16,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

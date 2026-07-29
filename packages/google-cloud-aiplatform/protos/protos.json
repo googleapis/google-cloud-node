@@ -4277,6 +4277,13 @@
                             "placeAnswerSources": {
                               "type": "PlaceAnswerSources",
                               "id": 5
+                            },
+                            "route": {
+                              "type": "Route",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -4304,6 +4311,22 @@
                                       "id": 3
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "Route": {
+                              "fields": {
+                                "distanceMeters": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "duration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 2
+                                },
+                                "encodedPolyline": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             }
@@ -45607,6 +45630,13 @@
                             "placeAnswerSources": {
                               "type": "PlaceAnswerSources",
                               "id": 5
+                            },
+                            "route": {
+                              "type": "Route",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -45634,6 +45664,22 @@
                                       "id": 3
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "Route": {
+                              "fields": {
+                                "distanceMeters": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "duration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 2
+                                },
+                                "encodedPolyline": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             }
