@@ -12,7 +12,8 @@
                     "go_package": "cloud.google.com/go/commerceproducer/apiv1beta/commerceproducerpb;commerceproducerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "StandardOfferProto",
-                    "java_package": "com.google.cloud.commerceproducer.v1beta"
+                    "java_package": "com.google.cloud.commerceproducer.v1beta",
+                    "ruby_package": "Google::Cloud::CommerceProducer::V1beta"
                   },
                   "nested": {
                     "CommerceTransaction": {
@@ -90,6 +91,24 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ResolveAmendmentTarget": {
+                          "requestType": "ResolveAmendmentTargetRequest",
+                          "responseType": "ResolveAmendmentTargetResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*}/privateOffers:resolveAmendmentTarget",
+                            "(google.api.method_signature)": "parent,target_billing_account,base_standard_offer"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*}/privateOffers:resolveAmendmentTarget"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,target_billing_account,base_standard_offer"
                             }
                           ]
                         },
@@ -476,6 +495,79 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ResolveAmendmentTargetRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "commerceproducer.googleapis.com/PrivateOffer"
+                          }
+                        },
+                        "targetBillingAccount": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbilling.googleapis.com/BillingAccount"
+                          }
+                        },
+                        "baseStandardOffer": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "commerceproducer.googleapis.com/StandardOffer"
+                          }
+                        }
+                      }
+                    },
+                    "ResolveAmendmentTargetResponse": {
+                      "oneofs": {
+                        "amendmentRequirement": {
+                          "oneof": [
+                            "requiredPrivateOffer",
+                            "requiredStandardOffer",
+                            "optionalOffers"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "requiredPrivateOffer": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "commerceproducer.googleapis.com/PrivateOffer"
+                          }
+                        },
+                        "requiredStandardOffer": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "commerceproducer.googleapis.com/StandardOffer"
+                          }
+                        },
+                        "optionalOffers": {
+                          "type": "OptionalOffers",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "OptionalOffers": {
+                          "fields": {
+                            "privateOffers": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "commerceproducer.googleapis.com/PrivateOffer"
+                              }
+                            }
                           }
                         }
                       }
@@ -1215,6 +1307,13 @@
                               "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "effectiveTermEndTime": {
+                              "type": "google.type.DateTime",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           },

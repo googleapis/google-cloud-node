@@ -19,9 +19,12 @@
 import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 
-const FirestoreClient = v1beta1.FirestoreClient;
-type FirestoreClient = v1beta1.FirestoreClient;
-export {v1, v1beta1, FirestoreClient};
-export default {v1, v1beta1, FirestoreClient};
+const FirestoreAdminClient = v1.FirestoreAdminClient;
+type FirestoreAdminClient = v1.FirestoreAdminClient;
+const FirestoreClient = v1.FirestoreClient;
+type FirestoreClient = v1.FirestoreClient;
+
+export {v1, v1beta1, FirestoreAdminClient, FirestoreClient};
+export default {v1, v1beta1, FirestoreAdminClient, FirestoreClient};
 import * as protos from '../protos/protos';
 export {protos};
