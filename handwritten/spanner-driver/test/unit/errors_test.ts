@@ -14,7 +14,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import {enrichPgError} from '../../src/lib/errors.js';
+import {enrichError, enrichPgError} from '../../src/lib/errors.js';
 
 describe('enrichPgError SQLSTATE Mapping', () => {
   it('should extract 42P01 when enriched with [SQLSTATE 42P01] by Go driver', () => {
@@ -55,11 +55,11 @@ describe('enrichPgError SQLSTATE Mapping', () => {
     assert.strictEqual(err.severity, 'ERROR');
   });
 
-  it('should preserve existing 5-character SQLSTATE string codes', () => {
+  it('should preserve valid 5-character PostgreSQL SQLSTATE string codes', () => {
     const orig = new Error('custom error') as Error & {code?: string};
-    orig.code = '12345';
+    orig.code = '42P01';
     const err = enrichPgError(orig);
-    assert.strictEqual(err.code, '12345');
+    assert.strictEqual(err.code, '42P01');
   });
 
   it('should fallback to XX000 for unknown errors without SQLSTATE prefix', () => {
@@ -74,10 +74,40 @@ describe('enrichPgError SQLSTATE Mapping', () => {
     assert.strictEqual(err.stack, orig.stack);
   });
 
-  it('should overwrite non-SQLSTATE code properties with XX000', () => {
-    const orig = new Error('file not found error') as Error & {code?: string};
-    orig.code = 'ENOENT';
+  it('should reject Node system error codes like EPERM and fallback to XX000', () => {
+    const orig = new Error('permission denied error') as Error & {
+      code?: string;
+    };
+    orig.code = 'EPERM';
     const err = enrichPgError(orig);
     assert.strictEqual(err.code, 'XX000');
+  });
+
+  it('should handle gRPC numeric error codes and fallback to XX000', () => {
+    const orig = {message: 'not found', code: 5};
+    const err = enrichPgError(orig);
+    assert.strictEqual(err.code, 'XX000');
+    assert.strictEqual(err.message, 'not found');
+  });
+
+  describe('enrichError dispatcher', () => {
+    it('should default to pg dialect enrichment', () => {
+      const err = enrichError(
+        new Error(
+          '[SQLSTATE 42P01] rpc error: code = NotFound desc = relation "foo" does not exist',
+        ),
+      );
+      assert.strictEqual(err.code, '42P01');
+    });
+
+    it('should delegate to pg dialect when explicitly specified', () => {
+      const err = enrichError(
+        new Error(
+          '[SQLSTATE 23505] duplicate key value violates unique constraint',
+        ),
+        'pg',
+      );
+      assert.strictEqual(err.code, '23505');
+    });
   });
 });
