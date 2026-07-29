@@ -65,6 +65,6 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/tools",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   }
 }
