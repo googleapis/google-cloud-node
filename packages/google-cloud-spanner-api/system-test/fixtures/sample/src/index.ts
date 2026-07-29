@@ -16,17 +16,17 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { InstanceAdminClient } from '@google-cloud/spanner-api';
+import { SpannerClient } from '@google-cloud/spanner-api';
 
 // check that the client class type name can be used
-function doStuffWithInstanceAdminClient(client: InstanceAdminClient) {
+function doStuffWithSpannerClient(client: SpannerClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const instanceAdminClient = new InstanceAdminClient();
-  doStuffWithInstanceAdminClient(instanceAdminClient);
+  const spannerClient = new SpannerClient();
+  doStuffWithSpannerClient(spannerClient);
 }
 
 main();

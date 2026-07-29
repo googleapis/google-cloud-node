@@ -16,28 +16,17 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {
-  BigtableInstanceAdminClient,
-  BigtableTableAdminClient,
-} from '@google-cloud/bigtable-api';
+import { BigtableClient } from '@google-cloud/bigtable-api';
 
 // check that the client class type name can be used
-function doStuffWithBigtableInstanceAdminClient(
-  client: BigtableInstanceAdminClient,
-) {
-  client.close();
-}
-function doStuffWithBigtableTableAdminClient(client: BigtableTableAdminClient) {
+function doStuffWithBigtableClient(client: BigtableClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const bigtableInstanceAdminClient = new BigtableInstanceAdminClient();
-  doStuffWithBigtableInstanceAdminClient(bigtableInstanceAdminClient);
-  // check that the client instance can be created
-  const bigtableTableAdminClient = new BigtableTableAdminClient();
-  doStuffWithBigtableTableAdminClient(bigtableTableAdminClient);
+  const bigtableClient = new BigtableClient();
+  doStuffWithBigtableClient(bigtableClient);
 }
 
 main();

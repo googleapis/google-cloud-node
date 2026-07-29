@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'Adaptation',
-    filename: './adaptation.js',
+    library: 'Speech',
+    filename: './speech.js',
   },
   node: {
     child_process: 'empty',
