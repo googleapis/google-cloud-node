@@ -499,6 +499,145 @@ describe('v1beta.TransportManagerClient', () => {
     });
   });
 
+  describe('parseFromActivationKey', () => {
+    it('invokes parseFromActivationKey without error', async () => {
+      const client = new transportmanagerModule.v1beta.TransportManagerClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse(),
+      );
+      client.innerApiCalls.parseFromActivationKey =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.parseFromActivationKey(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.parseFromActivationKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.parseFromActivationKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes parseFromActivationKey without error using callback', async () => {
+      const client = new transportmanagerModule.v1beta.TransportManagerClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse(),
+      );
+      client.innerApiCalls.parseFromActivationKey =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.parseFromActivationKey(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.parseFromActivationKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.parseFromActivationKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes parseFromActivationKey with error', async () => {
+      const client = new transportmanagerModule.v1beta.TransportManagerClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.parseFromActivationKey = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.parseFromActivationKey(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.parseFromActivationKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.parseFromActivationKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes parseFromActivationKey with closed client', async () => {
+      const client = new transportmanagerModule.v1beta.TransportManagerClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.parseFromActivationKey(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('getTransport', () => {
     it('invokes getTransport without error', async () => {
       const client = new transportmanagerModule.v1beta.TransportManagerClient({
