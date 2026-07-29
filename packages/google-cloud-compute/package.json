@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "repository": {
     "type": "git",
@@ -123,7 +123,7 @@
     "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "google-gax": "^5.0.0"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

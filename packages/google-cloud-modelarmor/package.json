@@ -43,7 +43,7 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^5.0.0"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
@@ -62,7 +62,7 @@
     "typescript": "^5.1.6"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"

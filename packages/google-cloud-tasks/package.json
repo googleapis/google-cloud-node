@@ -76,7 +76,7 @@
     "compile": "npm run compile:esm && rm -rf esm/src/json-helper.d.cts && npm run compile:cjs && rm -rf build/protos && cp -r protos build/protos"
   },
   "dependencies": {
-    "google-gax": "^5.0.0"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
@@ -103,7 +103,7 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-tasks",
   "overrides": {

@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "google-auth-library": "^10.0.0-rc.1",
-    "google-gax": "^5.0.0",
+    "google-gax": "^6.0.0",
     "server-destroy": "^1.0.1"
   },
   "devDependencies": {
@@ -64,7 +64,7 @@
     "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-analytics-admin",
   "overrides": {

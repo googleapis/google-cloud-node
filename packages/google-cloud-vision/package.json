@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "repository": {
     "type": "git",
@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@google-cloud/promisify": "^5.0.0",
-    "google-gax": "^5.0.0"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@google-cloud/storage": "^7.15.2",

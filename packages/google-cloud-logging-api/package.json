@@ -42,7 +42,7 @@
     "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "google-gax": "^5.0.0"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -61,7 +61,7 @@
     "sinon": "^20.0.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "types": "build/src/index.d.ts"
 }

@@ -43,7 +43,7 @@
     "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "google-gax": "^5.0.0"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -62,7 +62,7 @@
     "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-video-livestream",
   "overrides": {

@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@google-cloud/grafeas": "^6.0.0",
-    "google-gax": "^5.0.0"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -65,7 +65,7 @@
     "typescript": "^5.8.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
