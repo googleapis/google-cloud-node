@@ -212,6 +212,13 @@ export class SqlDatabasesServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
       ),
+      projectLocationSecretSecretVersionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}',
+        ),
+      projectSecretSecretVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/secrets/{secret}/versions/{secret_version}',
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -1381,6 +1388,156 @@ export class SqlDatabasesServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationSecretSecretVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} secret
+   * @param {string} secret_version
+   * @returns {string} Resource name string.
+   */
+  projectLocationSecretSecretVersionPath(
+    project: string,
+    location: string,
+    secret: string,
+    secretVersion: string,
+  ) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        secret: secret,
+        secret_version: secretVersion,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationSecretSecretVersionName(
+    projectLocationSecretSecretVersionName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(
+      projectLocationSecretSecretVersionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationSecretSecretVersionName(
+    projectLocationSecretSecretVersionName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(
+      projectLocationSecretSecretVersionName,
+    ).location;
+  }
+
+  /**
+   * Parse the secret from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the secret.
+   */
+  matchSecretFromProjectLocationSecretSecretVersionName(
+    projectLocationSecretSecretVersionName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(
+      projectLocationSecretSecretVersionName,
+    ).secret;
+  }
+
+  /**
+   * Parse the secret_version from ProjectLocationSecretSecretVersion resource.
+   *
+   * @param {string} projectLocationSecretSecretVersionName
+   *   A fully-qualified path representing project_location_secret_secret_version resource.
+   * @returns {string} A string representing the secret_version.
+   */
+  matchSecretVersionFromProjectLocationSecretSecretVersionName(
+    projectLocationSecretSecretVersionName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecretSecretVersionPathTemplate.match(
+      projectLocationSecretSecretVersionName,
+    ).secret_version;
+  }
+
+  /**
+   * Return a fully-qualified projectSecretSecretVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} secret
+   * @param {string} secret_version
+   * @returns {string} Resource name string.
+   */
+  projectSecretSecretVersionPath(
+    project: string,
+    secret: string,
+    secretVersion: string,
+  ) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.render({
+      project: project,
+      secret: secret,
+      secret_version: secretVersion,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectSecretSecretVersion resource.
+   *
+   * @param {string} projectSecretSecretVersionName
+   *   A fully-qualified path representing project_secret_secret_version resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectSecretSecretVersionName(
+    projectSecretSecretVersionName: string,
+  ) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.match(
+      projectSecretSecretVersionName,
+    ).project;
+  }
+
+  /**
+   * Parse the secret from ProjectSecretSecretVersion resource.
+   *
+   * @param {string} projectSecretSecretVersionName
+   *   A fully-qualified path representing project_secret_secret_version resource.
+   * @returns {string} A string representing the secret.
+   */
+  matchSecretFromProjectSecretSecretVersionName(
+    projectSecretSecretVersionName: string,
+  ) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.match(
+      projectSecretSecretVersionName,
+    ).secret;
+  }
+
+  /**
+   * Parse the secret_version from ProjectSecretSecretVersion resource.
+   *
+   * @param {string} projectSecretSecretVersionName
+   *   A fully-qualified path representing project_secret_secret_version resource.
+   * @returns {string} A string representing the secret_version.
+   */
+  matchSecretVersionFromProjectSecretSecretVersionName(
+    projectSecretSecretVersionName: string,
+  ) {
+    return this.pathTemplates.projectSecretSecretVersionPathTemplate.match(
+      projectSecretSecretVersionName,
+    ).secret_version;
   }
 
   /**

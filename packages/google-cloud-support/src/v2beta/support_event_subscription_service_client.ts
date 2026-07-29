@@ -305,6 +305,7 @@ export class SupportEventSubscriptionServiceClient {
       'updateSupportEventSubscription',
       'deleteSupportEventSubscription',
       'undeleteSupportEventSubscription',
+      'expungeSupportEventSubscription',
     ];
     for (const methodName of supportEventSubscriptionServiceStubMethods) {
       const callPromise = this.supportEventSubscriptionServiceStub.then(
@@ -1172,9 +1173,190 @@ export class SupportEventSubscriptionServiceClient {
         throw error;
       });
   }
+  /**
+   * Expunges a support event subscription.
+   *
+   * EXAMPLES:
+   *
+   * cURL:
+   *
+   * ```shell
+   * support_event_subscription="organizations/123456789/supportEventSubscriptions/abcdef123456"
+   * curl \
+   *   --request POST \
+   *   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
+   *   "https://cloudsupport.googleapis.com/v2beta/$support_event_subscription:expunge"
+   * ```
+   *
+   * Python:
+   *
+   * ```python
+   * import googleapiclient.discovery
+   *
+   * api_version = "v2beta"
+   * supportApiService = googleapiclient.discovery.build(
+   *     serviceName="cloudsupport",
+   *     version=api_version,
+   *     discoveryServiceUrl=f"https://cloudsupport.googleapis.com/$discovery/rest?version={api_version}",
+   * )
+   *
+   * request = supportApiService.supportEventSubscriptions().expunge(
+   *     name="organizations/123456789/supportEventSubscriptions/abcdef123456"
+   * )
+   * print(request.execute())
+   * ```
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the support event subscription to expunge.
+   *   Format:
+   *   organizations/{organization_id}/supportEventSubscriptions/{subscription_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/support_event_subscription_service.expunge_support_event_subscription.js</caption>
+   * region_tag:cloudsupport_v2beta_generated_SupportEventSubscriptionService_ExpungeSupportEventSubscription_async
+   */
+  expungeSupportEventSubscription(
+    request?: protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  expungeSupportEventSubscription(
+    request: protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  expungeSupportEventSubscription(
+    request: protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  expungeSupportEventSubscription(
+    request?: protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('expungeSupportEventSubscription request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'expungeSupportEventSubscription response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .expungeSupportEventSubscription(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'expungeSupportEventSubscription response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
-   * Lists support event subscriptions.
+   * Lists support event subscriptions for an organization.
    *
    * @param {Object} request
    *   The request object that will be sent.

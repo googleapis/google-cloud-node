@@ -40,7 +40,7 @@
     "snap-shot-it": "^7.9.10"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "repository": {
     "type": "git",
