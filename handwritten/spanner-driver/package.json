@@ -1,11 +1,11 @@
 {
-  "name": "@google-cloud/spanner-pg",
+  "name": "@google-cloud/spanner-driver",
   "version": "0.1.0",
-  "description": "Node.js pg-compatible driver wrapper for Google Cloud Spanner",
+  "description": "Node.js driver for Google Cloud Spanner",
   "repository": {
     "type": "git",
     "url": "https://github.com/googleapis/google-cloud-node.git",
-    "directory": "handwritten/spanner-pg"
+    "directory": "handwritten/spanner-driver"
   },
   "license": "Apache-2.0",
   "author": "Google LLC",

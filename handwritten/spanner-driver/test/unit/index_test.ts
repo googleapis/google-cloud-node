@@ -16,7 +16,7 @@ import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import {escapeIdentifier, escapeLiteral} from '../../src/index.js';
 
-describe('@google-cloud/spanner-pg index exports', () => {
+describe('@google-cloud/spanner-driver index exports', () => {
   it('should escape identifiers correctly', () => {
     assert.strictEqual(escapeIdentifier('my_table'), '"my_table"');
     assert.strictEqual(

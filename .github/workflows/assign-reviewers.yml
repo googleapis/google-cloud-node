@@ -111,7 +111,7 @@ jobs:
               { prefix: 'handwritten/storage/', team: 'gcs-team' },
               { prefix: 'handwritten/firestore/', team: 'firestore-team' },
               { prefix: 'handwritten/spanner/', team: 'spanner-team' },
-              { prefix: 'handwritten/spanner-pg/', team: 'spanner-team' },
+              { prefix: 'handwritten/spanner-driver/', team: 'spanner-team' },
               { prefix: 'handwritten/bigquery-storage/', team: 'bigquery-team' },
               { prefix: 'core/packages/google-auth-library-nodejs/', team: 'aion-team' }
             ];
