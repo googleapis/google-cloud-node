@@ -226,21 +226,19 @@ for i in "${!test_dirs[@]}"; do
     (
         pushd ${d} >/dev/null
         # Temporarily allow failure.
-                set +e
-                ${test_script}
-                ret=$?
-                set -e
-                if [ ${ret} -ne 0 ]; then
-                    exit ${ret}
-                fi
-                popd >/dev/null
-            ) &
-
-            if [[ $(jobs -r -p | wc -l) -ge 4 ]]; then
-                wait -n || exit $?
-            fi
+        set +e
+        ${test_script}
+        ret=$?
+        set -e
+        if [ ${ret} -ne 0 ]; then
+            exit ${ret}
         fi
-    done
+        popd >/dev/null
+    ) &
+
+    if [[ $(jobs -r -p | wc -l) -ge 4 ]]; then
+        wait -n || exit $?
+    fi
 done
 
 for job in $(jobs -p); do

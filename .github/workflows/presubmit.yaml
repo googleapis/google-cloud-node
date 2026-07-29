@@ -6,6 +6,7 @@ on:
 name: presubmit
 jobs:
   units:
+    name: units (Node ${{ matrix.node-version }}, Shard ${{ matrix.shard-index }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
