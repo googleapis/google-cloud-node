@@ -4787,6 +4787,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "affiliation": {
+                      "type": "Affiliation",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -4804,6 +4811,14 @@
                         "ROLE_MEMBER": 1,
                         "ROLE_MANAGER": 2,
                         "ROLE_ASSISTANT_MANAGER": 4
+                      }
+                    },
+                    "Affiliation": {
+                      "values": {
+                        "AFFILIATION_UNSPECIFIED": 0,
+                        "INTERNAL": 1,
+                        "EXTERNAL": 2,
+                        "MANAGED_EXTERNAL": 3
                       }
                     }
                   }

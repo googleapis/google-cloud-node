@@ -266,6 +266,12 @@ export class TargetingPresetServiceClient {
       contentLabelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/contentLabels/{content_label}',
       ),
+      creativePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creatives/{creative}',
+      ),
+      creativeSetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeSets/{creative_set}',
+      ),
       creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/creativeTemplates/{creative_template}',
       ),
@@ -352,6 +358,9 @@ export class TargetingPresetServiceClient {
       ),
       sitePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/sites/{site}',
+      ),
+      slatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/slates/{slate}',
       ),
       suggestedAdUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/suggestedAdUnits/{suggested_ad_unit}',
@@ -441,6 +450,8 @@ export class TargetingPresetServiceClient {
       'listTargetingPresets',
       'createTargetingPreset',
       'batchCreateTargetingPresets',
+      'updateTargetingPreset',
+      'batchUpdateTargetingPresets',
       'batchDeactivateTargetingPresets',
     ];
     for (const methodName of targetingPresetServiceStubMethods) {
@@ -966,6 +977,297 @@ export class TargetingPresetServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('batchCreateTargetingPresets response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a `TargetingPreset` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ads.admanager.v1.TargetingPreset} request.targetingPreset
+   *   Required. The `TargetingPreset` to update.
+   *
+   *   The `TargetingPreset`'s `name` is used to identify the `TargetingPreset` to
+   *   update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.TargetingPreset|TargetingPreset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/targeting_preset_service.update_targeting_preset.js</caption>
+   * region_tag:admanager_v1_generated_TargetingPresetService_UpdateTargetingPreset_async
+   */
+  updateTargetingPreset(
+    request?: protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ITargetingPreset,
+      protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateTargetingPreset(
+    request: protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ITargetingPreset,
+      | protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateTargetingPreset(
+    request: protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ITargetingPreset,
+      | protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateTargetingPreset(
+    request?: protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.ITargetingPreset,
+          | protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.ITargetingPreset,
+      | protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ITargetingPreset,
+      protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'targeting_preset.name': request.targetingPreset!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateTargetingPreset request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ITargetingPreset,
+          | protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTargetingPreset response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTargetingPreset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ITargetingPreset,
+          (
+            | protos.google.ads.admanager.v1.IUpdateTargetingPresetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTargetingPreset response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch updates `TargetingPreset` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `TargetingPresets` will be updated.
+   *   Format: `networks/{network_code}`
+   *   The parent field in the UpdateTargetingPresetRequest must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The `TargetingPreset` objects to update.
+   *   A maximum of 100 objects can be updated in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateTargetingPresetsResponse|BatchUpdateTargetingPresetsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/targeting_preset_service.batch_update_targeting_presets.js</caption>
+   * region_tag:admanager_v1_generated_TargetingPresetService_BatchUpdateTargetingPresets_async
+   */
+  batchUpdateTargetingPresets(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchUpdateTargetingPresets(
+    request: protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateTargetingPresets(
+    request: protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateTargetingPresets(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('batchUpdateTargetingPresets request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateTargetingPresets response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateTargetingPresets(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchUpdateTargetingPresetsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateTargetingPresets response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2195,6 +2497,81 @@ export class TargetingPresetServiceClient {
   }
 
   /**
+   * Return a fully-qualified creative resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  creativePath(networkCode: string, creative: string) {
+    return this.pathTemplates.creativePathTemplate.render({
+      network_code: networkCode,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName).creative;
+  }
+
+  /**
+   * Return a fully-qualified creativeSet resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_set
+   * @returns {string} Resource name string.
+   */
+  creativeSetPath(networkCode: string, creativeSet: string) {
+    return this.pathTemplates.creativeSetPathTemplate.render({
+      network_code: networkCode,
+      creative_set: creativeSet,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative_set from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the creative_set.
+   */
+  matchCreativeSetFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .creative_set;
+  }
+
+  /**
    * Return a fully-qualified creativeTemplate resource name string.
    *
    * @param {string} network_code
@@ -3329,6 +3706,42 @@ export class TargetingPresetServiceClient {
    */
   matchSiteFromSiteName(siteName: string) {
     return this.pathTemplates.sitePathTemplate.match(siteName).site;
+  }
+
+  /**
+   * Return a fully-qualified slate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} slate
+   * @returns {string} Resource name string.
+   */
+  slatePath(networkCode: string, slate: string) {
+    return this.pathTemplates.slatePathTemplate.render({
+      network_code: networkCode,
+      slate: slate,
+    });
+  }
+
+  /**
+   * Parse the network_code from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).network_code;
+  }
+
+  /**
+   * Parse the slate from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the slate.
+   */
+  matchSlateFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).slate;
   }
 
   /**
