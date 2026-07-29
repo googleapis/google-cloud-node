@@ -32,9 +32,10 @@ trap cleanup EXIT
 
 # Build and start the proxy in a separate process
 pushd .
-cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/bigtable}"
+cd ../.. && corepack enable pnpm && pnpm install -g pnpm@9
+pnpm install --filter "...{./handwritten/bigtable}"
 cd handwritten/bigtable
-nohup pnpm run testproxy &
+nohup ppnpm run testproxy &
 proxyPID=$!
 popd
 
