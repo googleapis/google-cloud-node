@@ -22349,6 +22349,39 @@ export const google = $root.google = (() => {
                      */
 
                     /**
+                     * Callback as used by {@link google.cloud.tasks.v2beta3.CloudTasks|batchCreateTasks}.
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @typedef BatchCreateTasksCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+
+                    /**
+                     * Calls BatchCreateTasks.
+                     * @function batchCreateTasks
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @instance
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksRequest} request BatchCreateTasksRequest message or plain object
+                     * @param {google.cloud.tasks.v2beta3.CloudTasks.BatchCreateTasksCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(CloudTasks.prototype.batchCreateTasks = function batchCreateTasks(request, callback) {
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, batchCreateTasks, $root.google.cloud.tasks.v2beta3.BatchCreateTasksRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "BatchCreateTasks" });
+
+                    /**
+                     * Calls BatchCreateTasks.
+                     * @function batchCreateTasks
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @instance
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksRequest} request BatchCreateTasksRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+
+                    /**
                      * Callback as used by {@link google.cloud.tasks.v2beta3.CloudTasks|deleteTask}.
                      * @memberof google.cloud.tasks.v2beta3.CloudTasks
                      * @typedef DeleteTaskCallback
@@ -22382,6 +22415,39 @@ export const google = $root.google = (() => {
                      */
 
                     /**
+                     * Callback as used by {@link google.cloud.tasks.v2beta3.CloudTasks|batchDeleteTasks}.
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @typedef BatchDeleteTasksCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.longrunning.Operation} [response] Operation
+                     */
+
+                    /**
+                     * Calls BatchDeleteTasks.
+                     * @function batchDeleteTasks
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @instance
+                     * @param {google.cloud.tasks.v2beta3.IBatchDeleteTasksRequest} request BatchDeleteTasksRequest message or plain object
+                     * @param {google.cloud.tasks.v2beta3.CloudTasks.BatchDeleteTasksCallback} callback Node-style callback called with the error, if any, and Operation
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(CloudTasks.prototype.batchDeleteTasks = function batchDeleteTasks(request, callback) {
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, batchDeleteTasks, $root.google.cloud.tasks.v2beta3.BatchDeleteTasksRequest, $root.google.longrunning.Operation, request, callback);
+                    }, "name", { value: "BatchDeleteTasks" });
+
+                    /**
+                     * Calls BatchDeleteTasks.
+                     * @function batchDeleteTasks
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @instance
+                     * @param {google.cloud.tasks.v2beta3.IBatchDeleteTasksRequest} request BatchDeleteTasksRequest message or plain object
+                     * @returns {Promise<google.longrunning.Operation>} Promise
+                     * @variation 2
+                     */
+
+                    /**
                      * Callback as used by {@link google.cloud.tasks.v2beta3.CloudTasks|runTask}.
                      * @memberof google.cloud.tasks.v2beta3.CloudTasks
                      * @typedef RunTaskCallback
@@ -22411,6 +22477,72 @@ export const google = $root.google = (() => {
                      * @instance
                      * @param {google.cloud.tasks.v2beta3.IRunTaskRequest} request RunTaskRequest message or plain object
                      * @returns {Promise<google.cloud.tasks.v2beta3.Task>} Promise
+                     * @variation 2
+                     */
+
+                    /**
+                     * Callback as used by {@link google.cloud.tasks.v2beta3.CloudTasks|updateCmekConfig}.
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @typedef UpdateCmekConfigCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.cloud.tasks.v2beta3.CmekConfig} [response] CmekConfig
+                     */
+
+                    /**
+                     * Calls UpdateCmekConfig.
+                     * @function updateCmekConfig
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @instance
+                     * @param {google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest} request UpdateCmekConfigRequest message or plain object
+                     * @param {google.cloud.tasks.v2beta3.CloudTasks.UpdateCmekConfigCallback} callback Node-style callback called with the error, if any, and CmekConfig
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(CloudTasks.prototype.updateCmekConfig = function updateCmekConfig(request, callback) {
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, updateCmekConfig, $root.google.cloud.tasks.v2beta3.UpdateCmekConfigRequest, $root.google.cloud.tasks.v2beta3.CmekConfig, request, callback);
+                    }, "name", { value: "UpdateCmekConfig" });
+
+                    /**
+                     * Calls UpdateCmekConfig.
+                     * @function updateCmekConfig
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @instance
+                     * @param {google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest} request UpdateCmekConfigRequest message or plain object
+                     * @returns {Promise<google.cloud.tasks.v2beta3.CmekConfig>} Promise
+                     * @variation 2
+                     */
+
+                    /**
+                     * Callback as used by {@link google.cloud.tasks.v2beta3.CloudTasks|getCmekConfig}.
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @typedef GetCmekConfigCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.cloud.tasks.v2beta3.CmekConfig} [response] CmekConfig
+                     */
+
+                    /**
+                     * Calls GetCmekConfig.
+                     * @function getCmekConfig
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @instance
+                     * @param {google.cloud.tasks.v2beta3.IGetCmekConfigRequest} request GetCmekConfigRequest message or plain object
+                     * @param {google.cloud.tasks.v2beta3.CloudTasks.GetCmekConfigCallback} callback Node-style callback called with the error, if any, and CmekConfig
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(CloudTasks.prototype.getCmekConfig = function getCmekConfig(request, callback) {
+                        return $protobuf.rpc.Service.prototype.rpcCall.call(this, getCmekConfig, $root.google.cloud.tasks.v2beta3.GetCmekConfigRequest, $root.google.cloud.tasks.v2beta3.CmekConfig, request, callback);
+                    }, "name", { value: "GetCmekConfig" });
+
+                    /**
+                     * Calls GetCmekConfig.
+                     * @function getCmekConfig
+                     * @memberof google.cloud.tasks.v2beta3.CloudTasks
+                     * @instance
+                     * @param {google.cloud.tasks.v2beta3.IGetCmekConfigRequest} request GetCmekConfigRequest message or plain object
+                     * @returns {Promise<google.cloud.tasks.v2beta3.CmekConfig>} Promise
                      * @variation 2
                      */
 
@@ -25866,6 +25998,302 @@ export const google = $root.google = (() => {
                     return CreateTaskRequest;
                 })();
 
+                v2beta3.BatchCreateTasksRequest = (function() {
+
+                    /**
+                     * Properties of a BatchCreateTasksRequest.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @interface IBatchCreateTasksRequest
+                     * @property {string|null} [parent] BatchCreateTasksRequest parent
+                     * @property {Array.<google.cloud.tasks.v2beta3.ICreateTaskRequest>|null} [requests] BatchCreateTasksRequest requests
+                     * @property {string|null} [requestId] BatchCreateTasksRequest requestId
+                     */
+
+                    /**
+                     * Constructs a new BatchCreateTasksRequest.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @classdesc Represents a BatchCreateTasksRequest.
+                     * @implements IBatchCreateTasksRequest
+                     * @constructor
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksRequest=} [properties] Properties to set
+                     */
+                    function BatchCreateTasksRequest(properties) {
+                        this.requests = [];
+                        if (properties)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * BatchCreateTasksRequest parent.
+                     * @member {string} parent
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @instance
+                     */
+                    BatchCreateTasksRequest.prototype.parent = "";
+
+                    /**
+                     * BatchCreateTasksRequest requests.
+                     * @member {Array.<google.cloud.tasks.v2beta3.ICreateTaskRequest>} requests
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @instance
+                     */
+                    BatchCreateTasksRequest.prototype.requests = $util.emptyArray;
+
+                    /**
+                     * BatchCreateTasksRequest requestId.
+                     * @member {string} requestId
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @instance
+                     */
+                    BatchCreateTasksRequest.prototype.requestId = "";
+
+                    /**
+                     * Creates a new BatchCreateTasksRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksRequest=} [properties] Properties to set
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksRequest} BatchCreateTasksRequest instance
+                     */
+                    BatchCreateTasksRequest.create = function create(properties) {
+                        return new BatchCreateTasksRequest(properties);
+                    };
+
+                    /**
+                     * Encodes the specified BatchCreateTasksRequest message. Does not implicitly {@link google.cloud.tasks.v2beta3.BatchCreateTasksRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksRequest} message BatchCreateTasksRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BatchCreateTasksRequest.encode = function encode(message, writer, q) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.requests != null && message.requests.length)
+                            for (let i = 0; i < message.requests.length; ++i)
+                                $root.google.cloud.tasks.v2beta3.CreateTaskRequest.encode(message.requests[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
+                        if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified BatchCreateTasksRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.BatchCreateTasksRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksRequest} message BatchCreateTasksRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BatchCreateTasksRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes a BatchCreateTasksRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksRequest} BatchCreateTasksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BatchCreateTasksRequest.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.BatchCreateTasksRequest();
+                        while (reader.pos < end) {
+                            let tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.requests && message.requests.length))
+                                        message.requests = [];
+                                    message.requests.push($root.google.cloud.tasks.v2beta3.CreateTaskRequest.decode(reader, reader.uint32(), undefined, long + 1));
+                                    break;
+                                }
+                            case 3: {
+                                    message.requestId = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes a BatchCreateTasksRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksRequest} BatchCreateTasksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BatchCreateTasksRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies a BatchCreateTasksRequest message.
+                     * @function verify
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    BatchCreateTasksRequest.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.requests != null && Object.hasOwnProperty.call(message, "requests")) {
+                            if (!Array.isArray(message.requests))
+                                return "requests: array expected";
+                            for (let i = 0; i < message.requests.length; ++i) {
+                                let error = $root.google.cloud.tasks.v2beta3.CreateTaskRequest.verify(message.requests[i], long + 1);
+                                if (error)
+                                    return "requests." + error;
+                            }
+                        }
+                        if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                            if (!$util.isString(message.requestId))
+                                return "requestId: string expected";
+                        return null;
+                    };
+
+                    /**
+                     * Creates a BatchCreateTasksRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksRequest} BatchCreateTasksRequest
+                     */
+                    BatchCreateTasksRequest.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.cloud.tasks.v2beta3.BatchCreateTasksRequest)
+                            return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.cloud.tasks.v2beta3.BatchCreateTasksRequest: object expected");
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let message = new $root.google.cloud.tasks.v2beta3.BatchCreateTasksRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.requests) {
+                            if (!Array.isArray(object.requests))
+                                throw TypeError(".google.cloud.tasks.v2beta3.BatchCreateTasksRequest.requests: array expected");
+                            message.requests = [];
+                            for (let i = 0; i < object.requests.length; ++i) {
+                                if (!$util.isObject(object.requests[i]))
+                                    throw TypeError(".google.cloud.tasks.v2beta3.BatchCreateTasksRequest.requests: object expected");
+                                message.requests[i] = $root.google.cloud.tasks.v2beta3.CreateTaskRequest.fromObject(object.requests[i], long + 1);
+                            }
+                        }
+                        if (object.requestId != null)
+                            message.requestId = String(object.requestId);
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from a BatchCreateTasksRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.BatchCreateTasksRequest} message BatchCreateTasksRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    BatchCreateTasksRequest.toObject = function toObject(message, options, q) {
+                        if (!options)
+                            options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        let object = {};
+                        if (options.arrays || options.defaults)
+                            object.requests = [];
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.requestId = "";
+                        }
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            object.parent = message.parent;
+                        if (message.requests && message.requests.length) {
+                            object.requests = [];
+                            for (let j = 0; j < message.requests.length; ++j)
+                                object.requests[j] = $root.google.cloud.tasks.v2beta3.CreateTaskRequest.toObject(message.requests[j], options, q + 1);
+                        }
+                        if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                            object.requestId = message.requestId;
+                        return object;
+                    };
+
+                    /**
+                     * Converts this BatchCreateTasksRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    BatchCreateTasksRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    /**
+                     * Gets the default type url for BatchCreateTasksRequest
+                     * @function getTypeUrl
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BatchCreateTasksRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.cloud.tasks.v2beta3.BatchCreateTasksRequest";
+                    };
+
+                    return BatchCreateTasksRequest;
+                })();
+
                 v2beta3.DeleteTaskRequest = (function() {
 
                     /**
@@ -26091,6 +26519,710 @@ export const google = $root.google = (() => {
                     };
 
                     return DeleteTaskRequest;
+                })();
+
+                v2beta3.BatchDeleteTasksRequest = (function() {
+
+                    /**
+                     * Properties of a BatchDeleteTasksRequest.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @interface IBatchDeleteTasksRequest
+                     * @property {string|null} [parent] BatchDeleteTasksRequest parent
+                     * @property {Array.<string>|null} [names] BatchDeleteTasksRequest names
+                     * @property {string|null} [requestId] BatchDeleteTasksRequest requestId
+                     */
+
+                    /**
+                     * Constructs a new BatchDeleteTasksRequest.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @classdesc Represents a BatchDeleteTasksRequest.
+                     * @implements IBatchDeleteTasksRequest
+                     * @constructor
+                     * @param {google.cloud.tasks.v2beta3.IBatchDeleteTasksRequest=} [properties] Properties to set
+                     */
+                    function BatchDeleteTasksRequest(properties) {
+                        this.names = [];
+                        if (properties)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * BatchDeleteTasksRequest parent.
+                     * @member {string} parent
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @instance
+                     */
+                    BatchDeleteTasksRequest.prototype.parent = "";
+
+                    /**
+                     * BatchDeleteTasksRequest names.
+                     * @member {Array.<string>} names
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @instance
+                     */
+                    BatchDeleteTasksRequest.prototype.names = $util.emptyArray;
+
+                    /**
+                     * BatchDeleteTasksRequest requestId.
+                     * @member {string} requestId
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @instance
+                     */
+                    BatchDeleteTasksRequest.prototype.requestId = "";
+
+                    /**
+                     * Creates a new BatchDeleteTasksRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchDeleteTasksRequest=} [properties] Properties to set
+                     * @returns {google.cloud.tasks.v2beta3.BatchDeleteTasksRequest} BatchDeleteTasksRequest instance
+                     */
+                    BatchDeleteTasksRequest.create = function create(properties) {
+                        return new BatchDeleteTasksRequest(properties);
+                    };
+
+                    /**
+                     * Encodes the specified BatchDeleteTasksRequest message. Does not implicitly {@link google.cloud.tasks.v2beta3.BatchDeleteTasksRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchDeleteTasksRequest} message BatchDeleteTasksRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BatchDeleteTasksRequest.encode = function encode(message, writer, q) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.names != null && message.names.length)
+                            for (let i = 0; i < message.names.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.names[i]);
+                        if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified BatchDeleteTasksRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.BatchDeleteTasksRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchDeleteTasksRequest} message BatchDeleteTasksRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BatchDeleteTasksRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes a BatchDeleteTasksRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.cloud.tasks.v2beta3.BatchDeleteTasksRequest} BatchDeleteTasksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BatchDeleteTasksRequest.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.BatchDeleteTasksRequest();
+                        while (reader.pos < end) {
+                            let tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.names && message.names.length))
+                                        message.names = [];
+                                    message.names.push(reader.string());
+                                    break;
+                                }
+                            case 3: {
+                                    message.requestId = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes a BatchDeleteTasksRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.cloud.tasks.v2beta3.BatchDeleteTasksRequest} BatchDeleteTasksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BatchDeleteTasksRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies a BatchDeleteTasksRequest message.
+                     * @function verify
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    BatchDeleteTasksRequest.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.names != null && Object.hasOwnProperty.call(message, "names")) {
+                            if (!Array.isArray(message.names))
+                                return "names: array expected";
+                            for (let i = 0; i < message.names.length; ++i)
+                                if (!$util.isString(message.names[i]))
+                                    return "names: string[] expected";
+                        }
+                        if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                            if (!$util.isString(message.requestId))
+                                return "requestId: string expected";
+                        return null;
+                    };
+
+                    /**
+                     * Creates a BatchDeleteTasksRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.cloud.tasks.v2beta3.BatchDeleteTasksRequest} BatchDeleteTasksRequest
+                     */
+                    BatchDeleteTasksRequest.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.cloud.tasks.v2beta3.BatchDeleteTasksRequest)
+                            return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.cloud.tasks.v2beta3.BatchDeleteTasksRequest: object expected");
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let message = new $root.google.cloud.tasks.v2beta3.BatchDeleteTasksRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.names) {
+                            if (!Array.isArray(object.names))
+                                throw TypeError(".google.cloud.tasks.v2beta3.BatchDeleteTasksRequest.names: array expected");
+                            message.names = [];
+                            for (let i = 0; i < object.names.length; ++i)
+                                message.names[i] = String(object.names[i]);
+                        }
+                        if (object.requestId != null)
+                            message.requestId = String(object.requestId);
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from a BatchDeleteTasksRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.BatchDeleteTasksRequest} message BatchDeleteTasksRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    BatchDeleteTasksRequest.toObject = function toObject(message, options, q) {
+                        if (!options)
+                            options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        let object = {};
+                        if (options.arrays || options.defaults)
+                            object.names = [];
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.requestId = "";
+                        }
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            object.parent = message.parent;
+                        if (message.names && message.names.length) {
+                            object.names = [];
+                            for (let j = 0; j < message.names.length; ++j)
+                                object.names[j] = message.names[j];
+                        }
+                        if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                            object.requestId = message.requestId;
+                        return object;
+                    };
+
+                    /**
+                     * Converts this BatchDeleteTasksRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    BatchDeleteTasksRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    /**
+                     * Gets the default type url for BatchDeleteTasksRequest
+                     * @function getTypeUrl
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BatchDeleteTasksRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.cloud.tasks.v2beta3.BatchDeleteTasksRequest";
+                    };
+
+                    return BatchDeleteTasksRequest;
+                })();
+
+                v2beta3.BatchDeleteTasksMetadata = (function() {
+
+                    /**
+                     * Properties of a BatchDeleteTasksMetadata.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @interface IBatchDeleteTasksMetadata
+                     * @property {google.protobuf.ITimestamp|null} [startTime] BatchDeleteTasksMetadata startTime
+                     * @property {google.protobuf.ITimestamp|null} [endTime] BatchDeleteTasksMetadata endTime
+                     * @property {google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata.State|null} [state] BatchDeleteTasksMetadata state
+                     * @property {Object.<string,google.rpc.IStatus>|null} [failedRequests] BatchDeleteTasksMetadata failedRequests
+                     */
+
+                    /**
+                     * Constructs a new BatchDeleteTasksMetadata.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @classdesc Represents a BatchDeleteTasksMetadata.
+                     * @implements IBatchDeleteTasksMetadata
+                     * @constructor
+                     * @param {google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata=} [properties] Properties to set
+                     */
+                    function BatchDeleteTasksMetadata(properties) {
+                        this.failedRequests = {};
+                        if (properties)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * BatchDeleteTasksMetadata startTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @instance
+                     */
+                    BatchDeleteTasksMetadata.prototype.startTime = null;
+
+                    /**
+                     * BatchDeleteTasksMetadata endTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @instance
+                     */
+                    BatchDeleteTasksMetadata.prototype.endTime = null;
+
+                    /**
+                     * BatchDeleteTasksMetadata state.
+                     * @member {google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata.State} state
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @instance
+                     */
+                    BatchDeleteTasksMetadata.prototype.state = 0;
+
+                    /**
+                     * BatchDeleteTasksMetadata failedRequests.
+                     * @member {Object.<string,google.rpc.IStatus>} failedRequests
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @instance
+                     */
+                    BatchDeleteTasksMetadata.prototype.failedRequests = $util.emptyObject;
+
+                    /**
+                     * Creates a new BatchDeleteTasksMetadata instance using the specified properties.
+                     * @function create
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata=} [properties] Properties to set
+                     * @returns {google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata} BatchDeleteTasksMetadata instance
+                     */
+                    BatchDeleteTasksMetadata.create = function create(properties) {
+                        return new BatchDeleteTasksMetadata(properties);
+                    };
+
+                    /**
+                     * Encodes the specified BatchDeleteTasksMetadata message. Does not implicitly {@link google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata} message BatchDeleteTasksMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BatchDeleteTasksMetadata.encode = function encode(message, writer, q) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                            $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                            $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                        if (message.failedRequests != null && Object.hasOwnProperty.call(message, "failedRequests"))
+                            for (let keys = Object.keys(message.failedRequests), i = 0; i < keys.length; ++i) {
+                                writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 0 =*/8).int32(keys[i]);
+                                $root.google.rpc.Status.encode(message.failedRequests[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim().ldelim();
+                            }
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified BatchDeleteTasksMetadata message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchDeleteTasksMetadata} message BatchDeleteTasksMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BatchDeleteTasksMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes a BatchDeleteTasksMetadata message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata} BatchDeleteTasksMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BatchDeleteTasksMetadata.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata(), key, value;
+                        while (reader.pos < end) {
+                            let tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 2: {
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 3: {
+                                    message.state = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    if (message.failedRequests === $util.emptyObject)
+                                        message.failedRequests = {};
+                                    let end2 = reader.uint32() + reader.pos;
+                                    key = 0;
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        let tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.int32();
+                                            break;
+                                        case 2:
+                                            value = $root.google.rpc.Status.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    message.failedRequests[key] = value;
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes a BatchDeleteTasksMetadata message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata} BatchDeleteTasksMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BatchDeleteTasksMetadata.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies a BatchDeleteTasksMetadata message.
+                     * @function verify
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    BatchDeleteTasksMetadata.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime")) {
+                            let error = $root.google.protobuf.Timestamp.verify(message.startTime, long + 1);
+                            if (error)
+                                return "startTime." + error;
+                        }
+                        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime")) {
+                            let error = $root.google.protobuf.Timestamp.verify(message.endTime, long + 1);
+                            if (error)
+                                return "endTime." + error;
+                        }
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            switch (message.state) {
+                            default:
+                                return "state: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                                break;
+                            }
+                        if (message.failedRequests != null && Object.hasOwnProperty.call(message, "failedRequests")) {
+                            if (!$util.isObject(message.failedRequests))
+                                return "failedRequests: object expected";
+                            let key = Object.keys(message.failedRequests);
+                            for (let i = 0; i < key.length; ++i) {
+                                if (!$util.key32Re.test(key[i]))
+                                    return "failedRequests: integer key{k:int32} expected";
+                                {
+                                    let error = $root.google.rpc.Status.verify(message.failedRequests[key[i]], long + 1);
+                                    if (error)
+                                        return "failedRequests." + error;
+                                }
+                            }
+                        }
+                        return null;
+                    };
+
+                    /**
+                     * Creates a BatchDeleteTasksMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata} BatchDeleteTasksMetadata
+                     */
+                    BatchDeleteTasksMetadata.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata)
+                            return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata: object expected");
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let message = new $root.google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata();
+                        if (object.startTime != null) {
+                            if (!$util.isObject(object.startTime))
+                                throw TypeError(".google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata.startTime: object expected");
+                            message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime, long + 1);
+                        }
+                        if (object.endTime != null) {
+                            if (!$util.isObject(object.endTime))
+                                throw TypeError(".google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata.endTime: object expected");
+                            message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime, long + 1);
+                        }
+                        switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
+                        case "STATE_UNSPECIFIED":
+                        case 0:
+                            message.state = 0;
+                            break;
+                        case "RUNNING":
+                        case 1:
+                            message.state = 1;
+                            break;
+                        case "SUCCEEDED":
+                        case 2:
+                            message.state = 2;
+                            break;
+                        case "PARTIALLY_SUCCEEDED":
+                        case 3:
+                            message.state = 3;
+                            break;
+                        case "FAILED":
+                        case 4:
+                            message.state = 4;
+                            break;
+                        }
+                        if (object.failedRequests) {
+                            if (!$util.isObject(object.failedRequests))
+                                throw TypeError(".google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata.failedRequests: object expected");
+                            message.failedRequests = {};
+                            for (let keys = Object.keys(object.failedRequests), i = 0; i < keys.length; ++i) {
+                                if (keys[i] === "__proto__")
+                                    $util.makeProp(message.failedRequests, keys[i]);
+                                if (!$util.isObject(object.failedRequests[keys[i]]))
+                                    throw TypeError(".google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata.failedRequests: object expected");
+                                message.failedRequests[keys[i]] = $root.google.rpc.Status.fromObject(object.failedRequests[keys[i]], long + 1);
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from a BatchDeleteTasksMetadata message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata} message BatchDeleteTasksMetadata
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    BatchDeleteTasksMetadata.toObject = function toObject(message, options, q) {
+                        if (!options)
+                            options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        let object = {};
+                        if (options.objects || options.defaults)
+                            object.failedRequests = {};
+                        if (options.defaults) {
+                            object.startTime = null;
+                            object.endTime = null;
+                            object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                        }
+                        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                            object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options, q + 1);
+                        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                            object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options, q + 1);
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            object.state = options.enums === String ? $root.google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata.State[message.state] === undefined ? message.state : $root.google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata.State[message.state] : message.state;
+                        let keys2;
+                        if (message.failedRequests && (keys2 = Object.keys(message.failedRequests)).length) {
+                            object.failedRequests = {};
+                            for (let j = 0; j < keys2.length; ++j) {
+                                if (keys2[j] === "__proto__")
+                                    $util.makeProp(object.failedRequests, keys2[j]);
+                                object.failedRequests[keys2[j]] = $root.google.rpc.Status.toObject(message.failedRequests[keys2[j]], options, q + 1);
+                            }
+                        }
+                        return object;
+                    };
+
+                    /**
+                     * Converts this BatchDeleteTasksMetadata to JSON.
+                     * @function toJSON
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    BatchDeleteTasksMetadata.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    /**
+                     * Gets the default type url for BatchDeleteTasksMetadata
+                     * @function getTypeUrl
+                     * @memberof google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BatchDeleteTasksMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata";
+                    };
+
+                    /**
+                     * State enum.
+                     * @name google.cloud.tasks.v2beta3.BatchDeleteTasksMetadata.State
+                     * @enum {number}
+                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                     * @property {number} RUNNING=1 RUNNING value
+                     * @property {number} SUCCEEDED=2 SUCCEEDED value
+                     * @property {number} PARTIALLY_SUCCEEDED=3 PARTIALLY_SUCCEEDED value
+                     * @property {number} FAILED=4 FAILED value
+                     */
+                    BatchDeleteTasksMetadata.State = (function() {
+                        const valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "RUNNING"] = 1;
+                        values[valuesById[2] = "SUCCEEDED"] = 2;
+                        values[valuesById[3] = "PARTIALLY_SUCCEEDED"] = 3;
+                        values[valuesById[4] = "FAILED"] = 4;
+                        return values;
+                    })();
+
+                    return BatchDeleteTasksMetadata;
                 })();
 
                 v2beta3.RunTaskRequest = (function() {
@@ -26366,6 +27498,1413 @@ export const google = $root.google = (() => {
                     };
 
                     return RunTaskRequest;
+                })();
+
+                v2beta3.BatchCreateTasksResponse = (function() {
+
+                    /**
+                     * Properties of a BatchCreateTasksResponse.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @interface IBatchCreateTasksResponse
+                     * @property {Array.<google.cloud.tasks.v2beta3.ITask>|null} [tasks] BatchCreateTasksResponse tasks
+                     */
+
+                    /**
+                     * Constructs a new BatchCreateTasksResponse.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @classdesc Represents a BatchCreateTasksResponse.
+                     * @implements IBatchCreateTasksResponse
+                     * @constructor
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksResponse=} [properties] Properties to set
+                     */
+                    function BatchCreateTasksResponse(properties) {
+                        this.tasks = [];
+                        if (properties)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * BatchCreateTasksResponse tasks.
+                     * @member {Array.<google.cloud.tasks.v2beta3.ITask>} tasks
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksResponse
+                     * @instance
+                     */
+                    BatchCreateTasksResponse.prototype.tasks = $util.emptyArray;
+
+                    /**
+                     * Creates a new BatchCreateTasksResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksResponse
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksResponse=} [properties] Properties to set
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksResponse} BatchCreateTasksResponse instance
+                     */
+                    BatchCreateTasksResponse.create = function create(properties) {
+                        return new BatchCreateTasksResponse(properties);
+                    };
+
+                    /**
+                     * Encodes the specified BatchCreateTasksResponse message. Does not implicitly {@link google.cloud.tasks.v2beta3.BatchCreateTasksResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksResponse
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksResponse} message BatchCreateTasksResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BatchCreateTasksResponse.encode = function encode(message, writer, q) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        if (message.tasks != null && message.tasks.length)
+                            for (let i = 0; i < message.tasks.length; ++i)
+                                $root.google.cloud.tasks.v2beta3.Task.encode(message.tasks[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified BatchCreateTasksResponse message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.BatchCreateTasksResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksResponse
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksResponse} message BatchCreateTasksResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BatchCreateTasksResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes a BatchCreateTasksResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksResponse} BatchCreateTasksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BatchCreateTasksResponse.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.BatchCreateTasksResponse();
+                        while (reader.pos < end) {
+                            let tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.tasks && message.tasks.length))
+                                        message.tasks = [];
+                                    message.tasks.push($root.google.cloud.tasks.v2beta3.Task.decode(reader, reader.uint32(), undefined, long + 1));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes a BatchCreateTasksResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksResponse} BatchCreateTasksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BatchCreateTasksResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies a BatchCreateTasksResponse message.
+                     * @function verify
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    BatchCreateTasksResponse.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.tasks != null && Object.hasOwnProperty.call(message, "tasks")) {
+                            if (!Array.isArray(message.tasks))
+                                return "tasks: array expected";
+                            for (let i = 0; i < message.tasks.length; ++i) {
+                                let error = $root.google.cloud.tasks.v2beta3.Task.verify(message.tasks[i], long + 1);
+                                if (error)
+                                    return "tasks." + error;
+                            }
+                        }
+                        return null;
+                    };
+
+                    /**
+                     * Creates a BatchCreateTasksResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksResponse} BatchCreateTasksResponse
+                     */
+                    BatchCreateTasksResponse.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.cloud.tasks.v2beta3.BatchCreateTasksResponse)
+                            return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.cloud.tasks.v2beta3.BatchCreateTasksResponse: object expected");
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let message = new $root.google.cloud.tasks.v2beta3.BatchCreateTasksResponse();
+                        if (object.tasks) {
+                            if (!Array.isArray(object.tasks))
+                                throw TypeError(".google.cloud.tasks.v2beta3.BatchCreateTasksResponse.tasks: array expected");
+                            message.tasks = [];
+                            for (let i = 0; i < object.tasks.length; ++i) {
+                                if (!$util.isObject(object.tasks[i]))
+                                    throw TypeError(".google.cloud.tasks.v2beta3.BatchCreateTasksResponse.tasks: object expected");
+                                message.tasks[i] = $root.google.cloud.tasks.v2beta3.Task.fromObject(object.tasks[i], long + 1);
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from a BatchCreateTasksResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksResponse
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.BatchCreateTasksResponse} message BatchCreateTasksResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    BatchCreateTasksResponse.toObject = function toObject(message, options, q) {
+                        if (!options)
+                            options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        let object = {};
+                        if (options.arrays || options.defaults)
+                            object.tasks = [];
+                        if (message.tasks && message.tasks.length) {
+                            object.tasks = [];
+                            for (let j = 0; j < message.tasks.length; ++j)
+                                object.tasks[j] = $root.google.cloud.tasks.v2beta3.Task.toObject(message.tasks[j], options, q + 1);
+                        }
+                        return object;
+                    };
+
+                    /**
+                     * Converts this BatchCreateTasksResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    BatchCreateTasksResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    /**
+                     * Gets the default type url for BatchCreateTasksResponse
+                     * @function getTypeUrl
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BatchCreateTasksResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.cloud.tasks.v2beta3.BatchCreateTasksResponse";
+                    };
+
+                    return BatchCreateTasksResponse;
+                })();
+
+                v2beta3.BatchCreateTasksMetadata = (function() {
+
+                    /**
+                     * Properties of a BatchCreateTasksMetadata.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @interface IBatchCreateTasksMetadata
+                     * @property {google.protobuf.ITimestamp|null} [startTime] BatchCreateTasksMetadata startTime
+                     * @property {google.protobuf.ITimestamp|null} [endTime] BatchCreateTasksMetadata endTime
+                     * @property {google.cloud.tasks.v2beta3.BatchCreateTasksMetadata.State|null} [state] BatchCreateTasksMetadata state
+                     * @property {Object.<string,google.rpc.IStatus>|null} [failedRequests] BatchCreateTasksMetadata failedRequests
+                     */
+
+                    /**
+                     * Constructs a new BatchCreateTasksMetadata.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @classdesc Represents a BatchCreateTasksMetadata.
+                     * @implements IBatchCreateTasksMetadata
+                     * @constructor
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata=} [properties] Properties to set
+                     */
+                    function BatchCreateTasksMetadata(properties) {
+                        this.failedRequests = {};
+                        if (properties)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * BatchCreateTasksMetadata startTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @instance
+                     */
+                    BatchCreateTasksMetadata.prototype.startTime = null;
+
+                    /**
+                     * BatchCreateTasksMetadata endTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @instance
+                     */
+                    BatchCreateTasksMetadata.prototype.endTime = null;
+
+                    /**
+                     * BatchCreateTasksMetadata state.
+                     * @member {google.cloud.tasks.v2beta3.BatchCreateTasksMetadata.State} state
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @instance
+                     */
+                    BatchCreateTasksMetadata.prototype.state = 0;
+
+                    /**
+                     * BatchCreateTasksMetadata failedRequests.
+                     * @member {Object.<string,google.rpc.IStatus>} failedRequests
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @instance
+                     */
+                    BatchCreateTasksMetadata.prototype.failedRequests = $util.emptyObject;
+
+                    /**
+                     * Creates a new BatchCreateTasksMetadata instance using the specified properties.
+                     * @function create
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata=} [properties] Properties to set
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksMetadata} BatchCreateTasksMetadata instance
+                     */
+                    BatchCreateTasksMetadata.create = function create(properties) {
+                        return new BatchCreateTasksMetadata(properties);
+                    };
+
+                    /**
+                     * Encodes the specified BatchCreateTasksMetadata message. Does not implicitly {@link google.cloud.tasks.v2beta3.BatchCreateTasksMetadata.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata} message BatchCreateTasksMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BatchCreateTasksMetadata.encode = function encode(message, writer, q) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                            $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                            $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                        if (message.failedRequests != null && Object.hasOwnProperty.call(message, "failedRequests"))
+                            for (let keys = Object.keys(message.failedRequests), i = 0; i < keys.length; ++i) {
+                                writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 0 =*/8).int32(keys[i]);
+                                $root.google.rpc.Status.encode(message.failedRequests[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim().ldelim();
+                            }
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified BatchCreateTasksMetadata message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.BatchCreateTasksMetadata.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IBatchCreateTasksMetadata} message BatchCreateTasksMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BatchCreateTasksMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes a BatchCreateTasksMetadata message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksMetadata} BatchCreateTasksMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BatchCreateTasksMetadata.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.BatchCreateTasksMetadata(), key, value;
+                        while (reader.pos < end) {
+                            let tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 2: {
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 3: {
+                                    message.state = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    if (message.failedRequests === $util.emptyObject)
+                                        message.failedRequests = {};
+                                    let end2 = reader.uint32() + reader.pos;
+                                    key = 0;
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        let tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.int32();
+                                            break;
+                                        case 2:
+                                            value = $root.google.rpc.Status.decode(reader, reader.uint32(), undefined, long + 1);
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7, long);
+                                            break;
+                                        }
+                                    }
+                                    message.failedRequests[key] = value;
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes a BatchCreateTasksMetadata message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksMetadata} BatchCreateTasksMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BatchCreateTasksMetadata.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies a BatchCreateTasksMetadata message.
+                     * @function verify
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    BatchCreateTasksMetadata.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime")) {
+                            let error = $root.google.protobuf.Timestamp.verify(message.startTime, long + 1);
+                            if (error)
+                                return "startTime." + error;
+                        }
+                        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime")) {
+                            let error = $root.google.protobuf.Timestamp.verify(message.endTime, long + 1);
+                            if (error)
+                                return "endTime." + error;
+                        }
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            switch (message.state) {
+                            default:
+                                return "state: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 5:
+                            case 3:
+                            case 4:
+                                break;
+                            }
+                        if (message.failedRequests != null && Object.hasOwnProperty.call(message, "failedRequests")) {
+                            if (!$util.isObject(message.failedRequests))
+                                return "failedRequests: object expected";
+                            let key = Object.keys(message.failedRequests);
+                            for (let i = 0; i < key.length; ++i) {
+                                if (!$util.key32Re.test(key[i]))
+                                    return "failedRequests: integer key{k:int32} expected";
+                                {
+                                    let error = $root.google.rpc.Status.verify(message.failedRequests[key[i]], long + 1);
+                                    if (error)
+                                        return "failedRequests." + error;
+                                }
+                            }
+                        }
+                        return null;
+                    };
+
+                    /**
+                     * Creates a BatchCreateTasksMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.cloud.tasks.v2beta3.BatchCreateTasksMetadata} BatchCreateTasksMetadata
+                     */
+                    BatchCreateTasksMetadata.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.cloud.tasks.v2beta3.BatchCreateTasksMetadata)
+                            return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.cloud.tasks.v2beta3.BatchCreateTasksMetadata: object expected");
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let message = new $root.google.cloud.tasks.v2beta3.BatchCreateTasksMetadata();
+                        if (object.startTime != null) {
+                            if (!$util.isObject(object.startTime))
+                                throw TypeError(".google.cloud.tasks.v2beta3.BatchCreateTasksMetadata.startTime: object expected");
+                            message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime, long + 1);
+                        }
+                        if (object.endTime != null) {
+                            if (!$util.isObject(object.endTime))
+                                throw TypeError(".google.cloud.tasks.v2beta3.BatchCreateTasksMetadata.endTime: object expected");
+                            message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime, long + 1);
+                        }
+                        switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
+                        case "STATE_UNSPECIFIED":
+                        case 0:
+                            message.state = 0;
+                            break;
+                        case "RUNNING":
+                        case 1:
+                            message.state = 1;
+                            break;
+                        case "SUCCEEDED":
+                        case 2:
+                            message.state = 2;
+                            break;
+                        case "PARTIALLY_SUCCEEDED":
+                        case 5:
+                            message.state = 5;
+                            break;
+                        case "FAILED":
+                        case 3:
+                            message.state = 3;
+                            break;
+                        case "CANCELLED":
+                        case 4:
+                            message.state = 4;
+                            break;
+                        }
+                        if (object.failedRequests) {
+                            if (!$util.isObject(object.failedRequests))
+                                throw TypeError(".google.cloud.tasks.v2beta3.BatchCreateTasksMetadata.failedRequests: object expected");
+                            message.failedRequests = {};
+                            for (let keys = Object.keys(object.failedRequests), i = 0; i < keys.length; ++i) {
+                                if (keys[i] === "__proto__")
+                                    $util.makeProp(message.failedRequests, keys[i]);
+                                if (!$util.isObject(object.failedRequests[keys[i]]))
+                                    throw TypeError(".google.cloud.tasks.v2beta3.BatchCreateTasksMetadata.failedRequests: object expected");
+                                message.failedRequests[keys[i]] = $root.google.rpc.Status.fromObject(object.failedRequests[keys[i]], long + 1);
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from a BatchCreateTasksMetadata message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.BatchCreateTasksMetadata} message BatchCreateTasksMetadata
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    BatchCreateTasksMetadata.toObject = function toObject(message, options, q) {
+                        if (!options)
+                            options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        let object = {};
+                        if (options.objects || options.defaults)
+                            object.failedRequests = {};
+                        if (options.defaults) {
+                            object.startTime = null;
+                            object.endTime = null;
+                            object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                        }
+                        if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                            object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options, q + 1);
+                        if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                            object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options, q + 1);
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            object.state = options.enums === String ? $root.google.cloud.tasks.v2beta3.BatchCreateTasksMetadata.State[message.state] === undefined ? message.state : $root.google.cloud.tasks.v2beta3.BatchCreateTasksMetadata.State[message.state] : message.state;
+                        let keys2;
+                        if (message.failedRequests && (keys2 = Object.keys(message.failedRequests)).length) {
+                            object.failedRequests = {};
+                            for (let j = 0; j < keys2.length; ++j) {
+                                if (keys2[j] === "__proto__")
+                                    $util.makeProp(object.failedRequests, keys2[j]);
+                                object.failedRequests[keys2[j]] = $root.google.rpc.Status.toObject(message.failedRequests[keys2[j]], options, q + 1);
+                            }
+                        }
+                        return object;
+                    };
+
+                    /**
+                     * Converts this BatchCreateTasksMetadata to JSON.
+                     * @function toJSON
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    BatchCreateTasksMetadata.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    /**
+                     * Gets the default type url for BatchCreateTasksMetadata
+                     * @function getTypeUrl
+                     * @memberof google.cloud.tasks.v2beta3.BatchCreateTasksMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BatchCreateTasksMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.cloud.tasks.v2beta3.BatchCreateTasksMetadata";
+                    };
+
+                    /**
+                     * State enum.
+                     * @name google.cloud.tasks.v2beta3.BatchCreateTasksMetadata.State
+                     * @enum {number}
+                     * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                     * @property {number} RUNNING=1 RUNNING value
+                     * @property {number} SUCCEEDED=2 SUCCEEDED value
+                     * @property {number} PARTIALLY_SUCCEEDED=5 PARTIALLY_SUCCEEDED value
+                     * @property {number} FAILED=3 FAILED value
+                     * @property {number} CANCELLED=4 CANCELLED value
+                     */
+                    BatchCreateTasksMetadata.State = (function() {
+                        const valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "RUNNING"] = 1;
+                        values[valuesById[2] = "SUCCEEDED"] = 2;
+                        values[valuesById[5] = "PARTIALLY_SUCCEEDED"] = 5;
+                        values[valuesById[3] = "FAILED"] = 3;
+                        values[valuesById[4] = "CANCELLED"] = 4;
+                        return values;
+                    })();
+
+                    return BatchCreateTasksMetadata;
+                })();
+
+                v2beta3.UpdateCmekConfigRequest = (function() {
+
+                    /**
+                     * Properties of an UpdateCmekConfigRequest.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @interface IUpdateCmekConfigRequest
+                     * @property {google.cloud.tasks.v2beta3.ICmekConfig|null} [cmekConfig] UpdateCmekConfigRequest cmekConfig
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateCmekConfigRequest updateMask
+                     */
+
+                    /**
+                     * Constructs a new UpdateCmekConfigRequest.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @classdesc Represents an UpdateCmekConfigRequest.
+                     * @implements IUpdateCmekConfigRequest
+                     * @constructor
+                     * @param {google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest=} [properties] Properties to set
+                     */
+                    function UpdateCmekConfigRequest(properties) {
+                        if (properties)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * UpdateCmekConfigRequest cmekConfig.
+                     * @member {google.cloud.tasks.v2beta3.ICmekConfig|null|undefined} cmekConfig
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @instance
+                     */
+                    UpdateCmekConfigRequest.prototype.cmekConfig = null;
+
+                    /**
+                     * UpdateCmekConfigRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @instance
+                     */
+                    UpdateCmekConfigRequest.prototype.updateMask = null;
+
+                    /**
+                     * Creates a new UpdateCmekConfigRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest=} [properties] Properties to set
+                     * @returns {google.cloud.tasks.v2beta3.UpdateCmekConfigRequest} UpdateCmekConfigRequest instance
+                     */
+                    UpdateCmekConfigRequest.create = function create(properties) {
+                        return new UpdateCmekConfigRequest(properties);
+                    };
+
+                    /**
+                     * Encodes the specified UpdateCmekConfigRequest message. Does not implicitly {@link google.cloud.tasks.v2beta3.UpdateCmekConfigRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest} message UpdateCmekConfigRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateCmekConfigRequest.encode = function encode(message, writer, q) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        if (message.cmekConfig != null && Object.hasOwnProperty.call(message, "cmekConfig"))
+                            $root.google.cloud.tasks.v2beta3.CmekConfig.encode(message.cmekConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified UpdateCmekConfigRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.UpdateCmekConfigRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IUpdateCmekConfigRequest} message UpdateCmekConfigRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    UpdateCmekConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes an UpdateCmekConfigRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.cloud.tasks.v2beta3.UpdateCmekConfigRequest} UpdateCmekConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateCmekConfigRequest.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.UpdateCmekConfigRequest();
+                        while (reader.pos < end) {
+                            let tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.cmekConfig = $root.google.cloud.tasks.v2beta3.CmekConfig.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 2: {
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes an UpdateCmekConfigRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.cloud.tasks.v2beta3.UpdateCmekConfigRequest} UpdateCmekConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    UpdateCmekConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies an UpdateCmekConfigRequest message.
+                     * @function verify
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    UpdateCmekConfigRequest.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.cmekConfig != null && Object.hasOwnProperty.call(message, "cmekConfig")) {
+                            let error = $root.google.cloud.tasks.v2beta3.CmekConfig.verify(message.cmekConfig, long + 1);
+                            if (error)
+                                return "cmekConfig." + error;
+                        }
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask")) {
+                            let error = $root.google.protobuf.FieldMask.verify(message.updateMask, long + 1);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+
+                    /**
+                     * Creates an UpdateCmekConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.cloud.tasks.v2beta3.UpdateCmekConfigRequest} UpdateCmekConfigRequest
+                     */
+                    UpdateCmekConfigRequest.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.cloud.tasks.v2beta3.UpdateCmekConfigRequest)
+                            return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.cloud.tasks.v2beta3.UpdateCmekConfigRequest: object expected");
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let message = new $root.google.cloud.tasks.v2beta3.UpdateCmekConfigRequest();
+                        if (object.cmekConfig != null) {
+                            if (!$util.isObject(object.cmekConfig))
+                                throw TypeError(".google.cloud.tasks.v2beta3.UpdateCmekConfigRequest.cmekConfig: object expected");
+                            message.cmekConfig = $root.google.cloud.tasks.v2beta3.CmekConfig.fromObject(object.cmekConfig, long + 1);
+                        }
+                        if (object.updateMask != null) {
+                            if (!$util.isObject(object.updateMask))
+                                throw TypeError(".google.cloud.tasks.v2beta3.UpdateCmekConfigRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask, long + 1);
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from an UpdateCmekConfigRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.UpdateCmekConfigRequest} message UpdateCmekConfigRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    UpdateCmekConfigRequest.toObject = function toObject(message, options, q) {
+                        if (!options)
+                            options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        let object = {};
+                        if (options.defaults) {
+                            object.cmekConfig = null;
+                            object.updateMask = null;
+                        }
+                        if (message.cmekConfig != null && Object.hasOwnProperty.call(message, "cmekConfig"))
+                            object.cmekConfig = $root.google.cloud.tasks.v2beta3.CmekConfig.toObject(message.cmekConfig, options, q + 1);
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options, q + 1);
+                        return object;
+                    };
+
+                    /**
+                     * Converts this UpdateCmekConfigRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    UpdateCmekConfigRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    /**
+                     * Gets the default type url for UpdateCmekConfigRequest
+                     * @function getTypeUrl
+                     * @memberof google.cloud.tasks.v2beta3.UpdateCmekConfigRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    UpdateCmekConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.cloud.tasks.v2beta3.UpdateCmekConfigRequest";
+                    };
+
+                    return UpdateCmekConfigRequest;
+                })();
+
+                v2beta3.GetCmekConfigRequest = (function() {
+
+                    /**
+                     * Properties of a GetCmekConfigRequest.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @interface IGetCmekConfigRequest
+                     * @property {string|null} [name] GetCmekConfigRequest name
+                     */
+
+                    /**
+                     * Constructs a new GetCmekConfigRequest.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @classdesc Represents a GetCmekConfigRequest.
+                     * @implements IGetCmekConfigRequest
+                     * @constructor
+                     * @param {google.cloud.tasks.v2beta3.IGetCmekConfigRequest=} [properties] Properties to set
+                     */
+                    function GetCmekConfigRequest(properties) {
+                        if (properties)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * GetCmekConfigRequest name.
+                     * @member {string} name
+                     * @memberof google.cloud.tasks.v2beta3.GetCmekConfigRequest
+                     * @instance
+                     */
+                    GetCmekConfigRequest.prototype.name = "";
+
+                    /**
+                     * Creates a new GetCmekConfigRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.cloud.tasks.v2beta3.GetCmekConfigRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IGetCmekConfigRequest=} [properties] Properties to set
+                     * @returns {google.cloud.tasks.v2beta3.GetCmekConfigRequest} GetCmekConfigRequest instance
+                     */
+                    GetCmekConfigRequest.create = function create(properties) {
+                        return new GetCmekConfigRequest(properties);
+                    };
+
+                    /**
+                     * Encodes the specified GetCmekConfigRequest message. Does not implicitly {@link google.cloud.tasks.v2beta3.GetCmekConfigRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.cloud.tasks.v2beta3.GetCmekConfigRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IGetCmekConfigRequest} message GetCmekConfigRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetCmekConfigRequest.encode = function encode(message, writer, q) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified GetCmekConfigRequest message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.GetCmekConfigRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.GetCmekConfigRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.IGetCmekConfigRequest} message GetCmekConfigRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetCmekConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes a GetCmekConfigRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.cloud.tasks.v2beta3.GetCmekConfigRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.cloud.tasks.v2beta3.GetCmekConfigRequest} GetCmekConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetCmekConfigRequest.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.GetCmekConfigRequest();
+                        while (reader.pos < end) {
+                            let tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes a GetCmekConfigRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.GetCmekConfigRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.cloud.tasks.v2beta3.GetCmekConfigRequest} GetCmekConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetCmekConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies a GetCmekConfigRequest message.
+                     * @function verify
+                     * @memberof google.cloud.tasks.v2beta3.GetCmekConfigRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetCmekConfigRequest.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+
+                    /**
+                     * Creates a GetCmekConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.cloud.tasks.v2beta3.GetCmekConfigRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.cloud.tasks.v2beta3.GetCmekConfigRequest} GetCmekConfigRequest
+                     */
+                    GetCmekConfigRequest.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.cloud.tasks.v2beta3.GetCmekConfigRequest)
+                            return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.cloud.tasks.v2beta3.GetCmekConfigRequest: object expected");
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let message = new $root.google.cloud.tasks.v2beta3.GetCmekConfigRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from a GetCmekConfigRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.cloud.tasks.v2beta3.GetCmekConfigRequest
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.GetCmekConfigRequest} message GetCmekConfigRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetCmekConfigRequest.toObject = function toObject(message, options, q) {
+                        if (!options)
+                            options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        let object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            object.name = message.name;
+                        return object;
+                    };
+
+                    /**
+                     * Converts this GetCmekConfigRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.cloud.tasks.v2beta3.GetCmekConfigRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetCmekConfigRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    /**
+                     * Gets the default type url for GetCmekConfigRequest
+                     * @function getTypeUrl
+                     * @memberof google.cloud.tasks.v2beta3.GetCmekConfigRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetCmekConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.cloud.tasks.v2beta3.GetCmekConfigRequest";
+                    };
+
+                    return GetCmekConfigRequest;
+                })();
+
+                v2beta3.CmekConfig = (function() {
+
+                    /**
+                     * Properties of a CmekConfig.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @interface ICmekConfig
+                     * @property {string|null} [name] CmekConfig name
+                     * @property {string|null} [kmsKey] CmekConfig kmsKey
+                     */
+
+                    /**
+                     * Constructs a new CmekConfig.
+                     * @memberof google.cloud.tasks.v2beta3
+                     * @classdesc Represents a CmekConfig.
+                     * @implements ICmekConfig
+                     * @constructor
+                     * @param {google.cloud.tasks.v2beta3.ICmekConfig=} [properties] Properties to set
+                     */
+                    function CmekConfig(properties) {
+                        if (properties)
+                            for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+
+                    /**
+                     * CmekConfig name.
+                     * @member {string} name
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @instance
+                     */
+                    CmekConfig.prototype.name = "";
+
+                    /**
+                     * CmekConfig kmsKey.
+                     * @member {string} kmsKey
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @instance
+                     */
+                    CmekConfig.prototype.kmsKey = "";
+
+                    /**
+                     * Creates a new CmekConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.ICmekConfig=} [properties] Properties to set
+                     * @returns {google.cloud.tasks.v2beta3.CmekConfig} CmekConfig instance
+                     */
+                    CmekConfig.create = function create(properties) {
+                        return new CmekConfig(properties);
+                    };
+
+                    /**
+                     * Encodes the specified CmekConfig message. Does not implicitly {@link google.cloud.tasks.v2beta3.CmekConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.ICmekConfig} message CmekConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CmekConfig.encode = function encode(message, writer, q) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.kmsKey);
+                        return writer;
+                    };
+
+                    /**
+                     * Encodes the specified CmekConfig message, length delimited. Does not implicitly {@link google.cloud.tasks.v2beta3.CmekConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.ICmekConfig} message CmekConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CmekConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                    };
+
+                    /**
+                     * Decodes a CmekConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.cloud.tasks.v2beta3.CmekConfig} CmekConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CmekConfig.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tasks.v2beta3.CmekConfig();
+                        while (reader.pos < end) {
+                            let tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.kmsKey = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+
+                    /**
+                     * Decodes a CmekConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.cloud.tasks.v2beta3.CmekConfig} CmekConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CmekConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+
+                    /**
+                     * Verifies a CmekConfig message.
+                     * @function verify
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CmekConfig.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                            if (!$util.isString(message.kmsKey))
+                                return "kmsKey: string expected";
+                        return null;
+                    };
+
+                    /**
+                     * Creates a CmekConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.cloud.tasks.v2beta3.CmekConfig} CmekConfig
+                     */
+                    CmekConfig.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.cloud.tasks.v2beta3.CmekConfig)
+                            return object;
+                        if (!$util.isObject(object))
+                            throw TypeError(".google.cloud.tasks.v2beta3.CmekConfig: object expected");
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        let message = new $root.google.cloud.tasks.v2beta3.CmekConfig();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.kmsKey != null)
+                            message.kmsKey = String(object.kmsKey);
+                        return message;
+                    };
+
+                    /**
+                     * Creates a plain object from a CmekConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @static
+                     * @param {google.cloud.tasks.v2beta3.CmekConfig} message CmekConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CmekConfig.toObject = function toObject(message, options, q) {
+                        if (!options)
+                            options = {};
+                        if (q === undefined)
+                            q = 0;
+                        if (q > $util.recursionLimit)
+                            throw Error("max depth exceeded");
+                        let object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.kmsKey = "";
+                        }
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            object.name = message.name;
+                        if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                            object.kmsKey = message.kmsKey;
+                        return object;
+                    };
+
+                    /**
+                     * Converts this CmekConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CmekConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+
+                    /**
+                     * Gets the default type url for CmekConfig
+                     * @function getTypeUrl
+                     * @memberof google.cloud.tasks.v2beta3.CmekConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CmekConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.cloud.tasks.v2beta3.CmekConfig";
+                    };
+
+                    return CmekConfig;
                 })();
 
                 v2beta3.Queue = (function() {
@@ -32303,6 +34842,7 @@ export const google = $root.google = (() => {
                      * @property {google.cloud.tasks.v2beta3.IAttempt|null} [firstAttempt] Task firstAttempt
                      * @property {google.cloud.tasks.v2beta3.IAttempt|null} [lastAttempt] Task lastAttempt
                      * @property {google.cloud.tasks.v2beta3.Task.View|null} [view] Task view
+                     * @property {google.cloud.tasks.v2beta3.IRetryConfig|null} [retryConfig] Task retryConfig
                      */
 
                     /**
@@ -32416,6 +34956,14 @@ export const google = $root.google = (() => {
                      */
                     Task.prototype.view = 0;
 
+                    /**
+                     * Task retryConfig.
+                     * @member {google.cloud.tasks.v2beta3.IRetryConfig|null|undefined} retryConfig
+                     * @memberof google.cloud.tasks.v2beta3.Task
+                     * @instance
+                     */
+                    Task.prototype.retryConfig = null;
+
                     // OneOf field names bound to virtual getters and setters
                     let $oneOfFields;
 
@@ -32482,6 +35030,8 @@ export const google = $root.google = (() => {
                             $root.google.protobuf.Duration.encode(message.dispatchDeadline, writer.uint32(/* id 12, wireType 2 =*/98).fork(), q + 1).ldelim();
                         if (message.pullMessage != null && Object.hasOwnProperty.call(message, "pullMessage"))
                             $root.google.cloud.tasks.v2beta3.PullMessage.encode(message.pullMessage, writer.uint32(/* id 13, wireType 2 =*/106).fork(), q + 1).ldelim();
+                        if (message.retryConfig != null && Object.hasOwnProperty.call(message, "retryConfig"))
+                            $root.google.cloud.tasks.v2beta3.RetryConfig.encode(message.retryConfig, writer.uint32(/* id 14, wireType 2 =*/114).fork(), q + 1).ldelim();
                         return writer;
                     };
 
@@ -32568,6 +35118,10 @@ export const google = $root.google = (() => {
                                 }
                             case 10: {
                                     message.view = reader.int32();
+                                    break;
+                                }
+                            case 14: {
+                                    message.retryConfig = $root.google.cloud.tasks.v2beta3.RetryConfig.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -32681,6 +35235,11 @@ export const google = $root.google = (() => {
                             case 2:
                                 break;
                             }
+                        if (message.retryConfig != null && Object.hasOwnProperty.call(message, "retryConfig")) {
+                            let error = $root.google.cloud.tasks.v2beta3.RetryConfig.verify(message.retryConfig, long + 1);
+                            if (error)
+                                return "retryConfig." + error;
+                        }
                         return null;
                     };
 
@@ -32768,6 +35327,11 @@ export const google = $root.google = (() => {
                             message.view = 2;
                             break;
                         }
+                        if (object.retryConfig != null) {
+                            if (!$util.isObject(object.retryConfig))
+                                throw TypeError(".google.cloud.tasks.v2beta3.Task.retryConfig: object expected");
+                            message.retryConfig = $root.google.cloud.tasks.v2beta3.RetryConfig.fromObject(object.retryConfig, long + 1);
+                        }
                         return message;
                     };
 
@@ -32798,6 +35362,7 @@ export const google = $root.google = (() => {
                             object.lastAttempt = null;
                             object.view = options.enums === String ? "VIEW_UNSPECIFIED" : 0;
                             object.dispatchDeadline = null;
+                            object.retryConfig = null;
                         }
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             object.name = message.name;
@@ -32832,6 +35397,8 @@ export const google = $root.google = (() => {
                             if (options.oneofs)
                                 object.payloadType = "pullMessage";
                         }
+                        if (message.retryConfig != null && Object.hasOwnProperty.call(message, "retryConfig"))
+                            object.retryConfig = $root.google.cloud.tasks.v2beta3.RetryConfig.toObject(message.retryConfig, options, q + 1);
                         return object;
                     };
 
@@ -40269,6 +42836,559 @@ export const google = $root.google = (() => {
             return HttpBody;
         })();
 
+        api.FieldInfo = (function() {
+
+            /**
+             * Properties of a FieldInfo.
+             * @memberof google.api
+             * @interface IFieldInfo
+             * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+             * @property {Array.<google.api.ITypeReference>|null} [referencedTypes] FieldInfo referencedTypes
+             */
+
+            /**
+             * Constructs a new FieldInfo.
+             * @memberof google.api
+             * @classdesc Represents a FieldInfo.
+             * @implements IFieldInfo
+             * @constructor
+             * @param {google.api.IFieldInfo=} [properties] Properties to set
+             */
+            function FieldInfo(properties) {
+                this.referencedTypes = [];
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * FieldInfo format.
+             * @member {google.api.FieldInfo.Format} format
+             * @memberof google.api.FieldInfo
+             * @instance
+             */
+            FieldInfo.prototype.format = 0;
+
+            /**
+             * FieldInfo referencedTypes.
+             * @member {Array.<google.api.ITypeReference>} referencedTypes
+             * @memberof google.api.FieldInfo
+             * @instance
+             */
+            FieldInfo.prototype.referencedTypes = $util.emptyArray;
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @function create
+             * @memberof google.api.FieldInfo
+             * @static
+             * @param {google.api.IFieldInfo=} [properties] Properties to set
+             * @returns {google.api.FieldInfo} FieldInfo instance
+             */
+            FieldInfo.create = function create(properties) {
+                return new FieldInfo(properties);
+            };
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @function encode
+             * @memberof google.api.FieldInfo
+             * @static
+             * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FieldInfo.encode = function encode(message, writer, q) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                if (message.referencedTypes != null && message.referencedTypes.length)
+                    for (let i = 0; i < message.referencedTypes.length; ++i)
+                        $root.google.api.TypeReference.encode(message.referencedTypes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof google.api.FieldInfo
+             * @static
+             * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+            };
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @function decode
+             * @memberof google.api.FieldInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {google.api.FieldInfo} FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FieldInfo.decode = function decode(reader, length, error, long) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                if (long === undefined)
+                    long = 0;
+                if (long > $Reader.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.format = reader.int32();
+                            break;
+                        }
+                    case 2: {
+                            if (!(message.referencedTypes && message.referencedTypes.length))
+                                message.referencedTypes = [];
+                            message.referencedTypes.push($root.google.api.TypeReference.decode(reader, reader.uint32(), undefined, long + 1));
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7, long);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof google.api.FieldInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {google.api.FieldInfo} FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a FieldInfo message.
+             * @function verify
+             * @memberof google.api.FieldInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            FieldInfo.verify = function verify(message, long) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    return "maximum nesting depth exceeded";
+                if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                    switch (message.format) {
+                    default:
+                        return "format: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        break;
+                    }
+                if (message.referencedTypes != null && Object.hasOwnProperty.call(message, "referencedTypes")) {
+                    if (!Array.isArray(message.referencedTypes))
+                        return "referencedTypes: array expected";
+                    for (let i = 0; i < message.referencedTypes.length; ++i) {
+                        let error = $root.google.api.TypeReference.verify(message.referencedTypes[i], long + 1);
+                        if (error)
+                            return "referencedTypes." + error;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.api.FieldInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.api.FieldInfo} FieldInfo
+             */
+            FieldInfo.fromObject = function fromObject(object, long) {
+                if (object instanceof $root.google.api.FieldInfo)
+                    return object;
+                if (!$util.isObject(object))
+                    throw TypeError(".google.api.FieldInfo: object expected");
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let message = new $root.google.api.FieldInfo();
+                switch (object.format) {
+                default:
+                    if (typeof object.format === "number") {
+                        message.format = object.format;
+                        break;
+                    }
+                    break;
+                case "FORMAT_UNSPECIFIED":
+                case 0:
+                    message.format = 0;
+                    break;
+                case "UUID4":
+                case 1:
+                    message.format = 1;
+                    break;
+                case "IPV4":
+                case 2:
+                    message.format = 2;
+                    break;
+                case "IPV6":
+                case 3:
+                    message.format = 3;
+                    break;
+                case "IPV4_OR_IPV6":
+                case 4:
+                    message.format = 4;
+                    break;
+                }
+                if (object.referencedTypes) {
+                    if (!Array.isArray(object.referencedTypes))
+                        throw TypeError(".google.api.FieldInfo.referencedTypes: array expected");
+                    message.referencedTypes = [];
+                    for (let i = 0; i < object.referencedTypes.length; ++i) {
+                        if (!$util.isObject(object.referencedTypes[i]))
+                            throw TypeError(".google.api.FieldInfo.referencedTypes: object expected");
+                        message.referencedTypes[i] = $root.google.api.TypeReference.fromObject(object.referencedTypes[i], long + 1);
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.api.FieldInfo
+             * @static
+             * @param {google.api.FieldInfo} message FieldInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            FieldInfo.toObject = function toObject(message, options, q) {
+                if (!options)
+                    options = {};
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.referencedTypes = [];
+                if (options.defaults)
+                    object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                    object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                if (message.referencedTypes && message.referencedTypes.length) {
+                    object.referencedTypes = [];
+                    for (let j = 0; j < message.referencedTypes.length; ++j)
+                        object.referencedTypes[j] = $root.google.api.TypeReference.toObject(message.referencedTypes[j], options, q + 1);
+                }
+                return object;
+            };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @function toJSON
+             * @memberof google.api.FieldInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            FieldInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @function getTypeUrl
+             * @memberof google.api.FieldInfo
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/google.api.FieldInfo";
+            };
+
+            /**
+             * Format enum.
+             * @name google.api.FieldInfo.Format
+             * @enum {number}
+             * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+             * @property {number} UUID4=1 UUID4 value
+             * @property {number} IPV4=2 IPV4 value
+             * @property {number} IPV6=3 IPV6 value
+             * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+             */
+            FieldInfo.Format = (function() {
+                const valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "UUID4"] = 1;
+                values[valuesById[2] = "IPV4"] = 2;
+                values[valuesById[3] = "IPV6"] = 3;
+                values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                return values;
+            })();
+
+            return FieldInfo;
+        })();
+
+        api.TypeReference = (function() {
+
+            /**
+             * Properties of a TypeReference.
+             * @memberof google.api
+             * @interface ITypeReference
+             * @property {string|null} [typeName] TypeReference typeName
+             */
+
+            /**
+             * Constructs a new TypeReference.
+             * @memberof google.api
+             * @classdesc Represents a TypeReference.
+             * @implements ITypeReference
+             * @constructor
+             * @param {google.api.ITypeReference=} [properties] Properties to set
+             */
+            function TypeReference(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * TypeReference typeName.
+             * @member {string} typeName
+             * @memberof google.api.TypeReference
+             * @instance
+             */
+            TypeReference.prototype.typeName = "";
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @function create
+             * @memberof google.api.TypeReference
+             * @static
+             * @param {google.api.ITypeReference=} [properties] Properties to set
+             * @returns {google.api.TypeReference} TypeReference instance
+             */
+            TypeReference.create = function create(properties) {
+                return new TypeReference(properties);
+            };
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @function encode
+             * @memberof google.api.TypeReference
+             * @static
+             * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TypeReference.encode = function encode(message, writer, q) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.typeName);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof google.api.TypeReference
+             * @static
+             * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+            };
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @function decode
+             * @memberof google.api.TypeReference
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {google.api.TypeReference} TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TypeReference.decode = function decode(reader, length, error, long) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                if (long === undefined)
+                    long = 0;
+                if (long > $Reader.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.TypeReference();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.typeName = reader.string();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7, long);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof google.api.TypeReference
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {google.api.TypeReference} TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            TypeReference.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a TypeReference message.
+             * @function verify
+             * @memberof google.api.TypeReference
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            TypeReference.verify = function verify(message, long) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    return "maximum nesting depth exceeded";
+                if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
+                    if (!$util.isString(message.typeName))
+                        return "typeName: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.api.TypeReference
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.api.TypeReference} TypeReference
+             */
+            TypeReference.fromObject = function fromObject(object, long) {
+                if (object instanceof $root.google.api.TypeReference)
+                    return object;
+                if (!$util.isObject(object))
+                    throw TypeError(".google.api.TypeReference: object expected");
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let message = new $root.google.api.TypeReference();
+                if (object.typeName != null)
+                    message.typeName = String(object.typeName);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.api.TypeReference
+             * @static
+             * @param {google.api.TypeReference} message TypeReference
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            TypeReference.toObject = function toObject(message, options, q) {
+                if (!options)
+                    options = {};
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                let object = {};
+                if (options.defaults)
+                    object.typeName = "";
+                if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
+                    object.typeName = message.typeName;
+                return object;
+            };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @function toJSON
+             * @memberof google.api.TypeReference
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            TypeReference.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @function getTypeUrl
+             * @memberof google.api.TypeReference
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            TypeReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/google.api.TypeReference";
+            };
+
+            return TypeReference;
+        })();
+
         return api;
     })();
 
@@ -46968,6 +50088,7 @@ export const google = $root.google = (() => {
              * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
              * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
              * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
+             * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
              */
 
             /**
@@ -47118,6 +50239,14 @@ export const google = $root.google = (() => {
             FieldOptions.prototype[".google.api.resourceReference"] = null;
 
             /**
+             * FieldOptions .google.api.fieldInfo.
+             * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+             * @memberof google.protobuf.FieldOptions
+             * @instance
+             */
+            FieldOptions.prototype[".google.api.fieldInfo"] = null;
+
+            /**
              * Creates a new FieldOptions instance using the specified properties.
              * @function create
              * @memberof google.protobuf.FieldOptions
@@ -47181,6 +50310,8 @@ export const google = $root.google = (() => {
                         writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                 if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                     $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork(), q + 1).ldelim();
+                if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                    $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork(), q + 1).ldelim();
                 return writer;
             };
 
@@ -47301,6 +50432,10 @@ export const google = $root.google = (() => {
                         }
                     case 1055: {
                             message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32(), undefined, long + 1);
+                            break;
+                        }
+                    case 291403980: {
+                            message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32(), undefined, long + 1);
                             break;
                         }
                     default:
@@ -47458,6 +50593,11 @@ export const google = $root.google = (() => {
                     let error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"], long + 1);
                     if (error)
                         return ".google.api.resourceReference." + error;
+                }
+                if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo")) {
+                    let error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"], long + 1);
+                    if (error)
+                        return ".google.api.fieldInfo." + error;
                 }
                 return null;
             };
@@ -47689,6 +50829,11 @@ export const google = $root.google = (() => {
                         throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
                     message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"], long + 1);
                 }
+                if (object[".google.api.fieldInfo"] != null) {
+                    if (!$util.isObject(object[".google.api.fieldInfo"]))
+                        throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                    message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"], long + 1);
+                }
                 return message;
             };
 
@@ -47728,6 +50873,7 @@ export const google = $root.google = (() => {
                     object.features = null;
                     object.featureSupport = null;
                     object[".google.api.resourceReference"] = null;
+                    object[".google.api.fieldInfo"] = null;
                 }
                 if (message.ctype != null && Object.hasOwnProperty.call(message, "ctype"))
                     object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -47773,6 +50919,8 @@ export const google = $root.google = (() => {
                 }
                 if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                     object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options, q + 1);
+                if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                    object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options, q + 1);
                 return object;
             };
 
@@ -50065,6 +53213,7 @@ export const google = $root.google = (() => {
              * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] MethodOptions uninterpretedOption
              * @property {google.api.IHttpRule|null} [".google.api.http"] MethodOptions .google.api.http
              * @property {Array.<string>|null} [".google.api.methodSignature"] MethodOptions .google.api.methodSignature
+             * @property {google.longrunning.IOperationInfo|null} [".google.longrunning.operationInfo"] MethodOptions .google.longrunning.operationInfo
              */
 
             /**
@@ -50133,6 +53282,14 @@ export const google = $root.google = (() => {
             MethodOptions.prototype[".google.api.methodSignature"] = $util.emptyArray;
 
             /**
+             * MethodOptions .google.longrunning.operationInfo.
+             * @member {google.longrunning.IOperationInfo|null|undefined} .google.longrunning.operationInfo
+             * @memberof google.protobuf.MethodOptions
+             * @instance
+             */
+            MethodOptions.prototype[".google.longrunning.operationInfo"] = null;
+
+            /**
              * Creates a new MethodOptions instance using the specified properties.
              * @function create
              * @memberof google.protobuf.MethodOptions
@@ -50169,6 +53326,8 @@ export const google = $root.google = (() => {
                 if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                     for (let i = 0; i < message.uninterpretedOption.length; ++i)
                         $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork(), q + 1).ldelim();
+                if (message[".google.longrunning.operationInfo"] != null && Object.hasOwnProperty.call(message, ".google.longrunning.operationInfo"))
+                    $root.google.longrunning.OperationInfo.encode(message[".google.longrunning.operationInfo"], writer.uint32(/* id 1049, wireType 2 =*/8394).fork(), q + 1).ldelim();
                 if (message[".google.api.methodSignature"] != null && message[".google.api.methodSignature"].length)
                     for (let i = 0; i < message[".google.api.methodSignature"].length; ++i)
                         writer.uint32(/* id 1051, wireType 2 =*/8410).string(message[".google.api.methodSignature"][i]);
@@ -50240,6 +53399,10 @@ export const google = $root.google = (() => {
                             if (!(message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length))
                                 message[".google.api.methodSignature"] = [];
                             message[".google.api.methodSignature"].push(reader.string());
+                            break;
+                        }
+                    case 1049: {
+                            message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.decode(reader, reader.uint32(), undefined, long + 1);
                             break;
                         }
                     default:
@@ -50319,6 +53482,11 @@ export const google = $root.google = (() => {
                         if (!$util.isString(message[".google.api.methodSignature"][i]))
                             return ".google.api.methodSignature: string[] expected";
                 }
+                if (message[".google.longrunning.operationInfo"] != null && Object.hasOwnProperty.call(message, ".google.longrunning.operationInfo")) {
+                    let error = $root.google.longrunning.OperationInfo.verify(message[".google.longrunning.operationInfo"], long + 1);
+                    if (error)
+                        return ".google.longrunning.operationInfo." + error;
+                }
                 return null;
             };
 
@@ -50389,6 +53557,11 @@ export const google = $root.google = (() => {
                     for (let i = 0; i < object[".google.api.methodSignature"].length; ++i)
                         message[".google.api.methodSignature"][i] = String(object[".google.api.methodSignature"][i]);
                 }
+                if (object[".google.longrunning.operationInfo"] != null) {
+                    if (!$util.isObject(object[".google.longrunning.operationInfo"]))
+                        throw TypeError(".google.protobuf.MethodOptions..google.longrunning.operationInfo: object expected");
+                    message[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.fromObject(object[".google.longrunning.operationInfo"], long + 1);
+                }
                 return message;
             };
 
@@ -50417,6 +53590,7 @@ export const google = $root.google = (() => {
                     object.deprecated = false;
                     object.idempotencyLevel = options.enums === String ? "IDEMPOTENCY_UNKNOWN" : 0;
                     object.features = null;
+                    object[".google.longrunning.operationInfo"] = null;
                     object[".google.api.http"] = null;
                 }
                 if (message.deprecated != null && Object.hasOwnProperty.call(message, "deprecated"))
@@ -50430,6 +53604,8 @@ export const google = $root.google = (() => {
                     for (let j = 0; j < message.uninterpretedOption.length; ++j)
                         object.uninterpretedOption[j] = $root.google.protobuf.UninterpretedOption.toObject(message.uninterpretedOption[j], options, q + 1);
                 }
+                if (message[".google.longrunning.operationInfo"] != null && Object.hasOwnProperty.call(message, ".google.longrunning.operationInfo"))
+                    object[".google.longrunning.operationInfo"] = $root.google.longrunning.OperationInfo.toObject(message[".google.longrunning.operationInfo"], options, q + 1);
                 if (message[".google.api.methodSignature"] && message[".google.api.methodSignature"].length) {
                     object[".google.api.methodSignature"] = [];
                     for (let j = 0; j < message[".google.api.methodSignature"].length; ++j)
@@ -59637,6 +62813,2337 @@ export const google = $root.google = (() => {
         })();
 
         return type;
+    })();
+
+    google.longrunning = (function() {
+
+        /**
+         * Namespace longrunning.
+         * @memberof google
+         * @namespace
+         */
+        const longrunning = {};
+
+        longrunning.Operations = (function() {
+
+            /**
+             * Constructs a new Operations service.
+             * @memberof google.longrunning
+             * @classdesc Represents an Operations
+             * @extends $protobuf.rpc.Service
+             * @constructor
+             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+             */
+            function Operations(rpcImpl, requestDelimited, responseDelimited) {
+                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+            }
+
+            (Operations.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Operations;
+
+            /**
+             * Creates new Operations service using the specified rpc implementation.
+             * @function create
+             * @memberof google.longrunning.Operations
+             * @static
+             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+             * @returns {Operations} RPC service. Useful where requests and/or responses are streamed.
+             */
+            Operations.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                return new this(rpcImpl, requestDelimited, responseDelimited);
+            };
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|listOperations}.
+             * @memberof google.longrunning.Operations
+             * @typedef ListOperationsCallback
+             * @type {function}
+             * @param {Error|null} error Error, if any
+             * @param {google.longrunning.ListOperationsResponse} [response] ListOperationsResponse
+             */
+
+            /**
+             * Calls ListOperations.
+             * @function listOperations
+             * @memberof google.longrunning.Operations
+             * @instance
+             * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+             * @param {google.longrunning.Operations.ListOperationsCallback} callback Node-style callback called with the error, if any, and ListOperationsResponse
+             * @returns {undefined}
+             * @variation 1
+             */
+            Object.defineProperty(Operations.prototype.listOperations = function listOperations(request, callback) {
+                return $protobuf.rpc.Service.prototype.rpcCall.call(this, listOperations, $root.google.longrunning.ListOperationsRequest, $root.google.longrunning.ListOperationsResponse, request, callback);
+            }, "name", { value: "ListOperations" });
+
+            /**
+             * Calls ListOperations.
+             * @function listOperations
+             * @memberof google.longrunning.Operations
+             * @instance
+             * @param {google.longrunning.IListOperationsRequest} request ListOperationsRequest message or plain object
+             * @returns {Promise<google.longrunning.ListOperationsResponse>} Promise
+             * @variation 2
+             */
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|getOperation}.
+             * @memberof google.longrunning.Operations
+             * @typedef GetOperationCallback
+             * @type {function}
+             * @param {Error|null} error Error, if any
+             * @param {google.longrunning.Operation} [response] Operation
+             */
+
+            /**
+             * Calls GetOperation.
+             * @function getOperation
+             * @memberof google.longrunning.Operations
+             * @instance
+             * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+             * @param {google.longrunning.Operations.GetOperationCallback} callback Node-style callback called with the error, if any, and Operation
+             * @returns {undefined}
+             * @variation 1
+             */
+            Object.defineProperty(Operations.prototype.getOperation = function getOperation(request, callback) {
+                return $protobuf.rpc.Service.prototype.rpcCall.call(this, getOperation, $root.google.longrunning.GetOperationRequest, $root.google.longrunning.Operation, request, callback);
+            }, "name", { value: "GetOperation" });
+
+            /**
+             * Calls GetOperation.
+             * @function getOperation
+             * @memberof google.longrunning.Operations
+             * @instance
+             * @param {google.longrunning.IGetOperationRequest} request GetOperationRequest message or plain object
+             * @returns {Promise<google.longrunning.Operation>} Promise
+             * @variation 2
+             */
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|deleteOperation}.
+             * @memberof google.longrunning.Operations
+             * @typedef DeleteOperationCallback
+             * @type {function}
+             * @param {Error|null} error Error, if any
+             * @param {google.protobuf.Empty} [response] Empty
+             */
+
+            /**
+             * Calls DeleteOperation.
+             * @function deleteOperation
+             * @memberof google.longrunning.Operations
+             * @instance
+             * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+             * @param {google.longrunning.Operations.DeleteOperationCallback} callback Node-style callback called with the error, if any, and Empty
+             * @returns {undefined}
+             * @variation 1
+             */
+            Object.defineProperty(Operations.prototype.deleteOperation = function deleteOperation(request, callback) {
+                return $protobuf.rpc.Service.prototype.rpcCall.call(this, deleteOperation, $root.google.longrunning.DeleteOperationRequest, $root.google.protobuf.Empty, request, callback);
+            }, "name", { value: "DeleteOperation" });
+
+            /**
+             * Calls DeleteOperation.
+             * @function deleteOperation
+             * @memberof google.longrunning.Operations
+             * @instance
+             * @param {google.longrunning.IDeleteOperationRequest} request DeleteOperationRequest message or plain object
+             * @returns {Promise<google.protobuf.Empty>} Promise
+             * @variation 2
+             */
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|cancelOperation}.
+             * @memberof google.longrunning.Operations
+             * @typedef CancelOperationCallback
+             * @type {function}
+             * @param {Error|null} error Error, if any
+             * @param {google.protobuf.Empty} [response] Empty
+             */
+
+            /**
+             * Calls CancelOperation.
+             * @function cancelOperation
+             * @memberof google.longrunning.Operations
+             * @instance
+             * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+             * @param {google.longrunning.Operations.CancelOperationCallback} callback Node-style callback called with the error, if any, and Empty
+             * @returns {undefined}
+             * @variation 1
+             */
+            Object.defineProperty(Operations.prototype.cancelOperation = function cancelOperation(request, callback) {
+                return $protobuf.rpc.Service.prototype.rpcCall.call(this, cancelOperation, $root.google.longrunning.CancelOperationRequest, $root.google.protobuf.Empty, request, callback);
+            }, "name", { value: "CancelOperation" });
+
+            /**
+             * Calls CancelOperation.
+             * @function cancelOperation
+             * @memberof google.longrunning.Operations
+             * @instance
+             * @param {google.longrunning.ICancelOperationRequest} request CancelOperationRequest message or plain object
+             * @returns {Promise<google.protobuf.Empty>} Promise
+             * @variation 2
+             */
+
+            /**
+             * Callback as used by {@link google.longrunning.Operations|waitOperation}.
+             * @memberof google.longrunning.Operations
+             * @typedef WaitOperationCallback
+             * @type {function}
+             * @param {Error|null} error Error, if any
+             * @param {google.longrunning.Operation} [response] Operation
+             */
+
+            /**
+             * Calls WaitOperation.
+             * @function waitOperation
+             * @memberof google.longrunning.Operations
+             * @instance
+             * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+             * @param {google.longrunning.Operations.WaitOperationCallback} callback Node-style callback called with the error, if any, and Operation
+             * @returns {undefined}
+             * @variation 1
+             */
+            Object.defineProperty(Operations.prototype.waitOperation = function waitOperation(request, callback) {
+                return $protobuf.rpc.Service.prototype.rpcCall.call(this, waitOperation, $root.google.longrunning.WaitOperationRequest, $root.google.longrunning.Operation, request, callback);
+            }, "name", { value: "WaitOperation" });
+
+            /**
+             * Calls WaitOperation.
+             * @function waitOperation
+             * @memberof google.longrunning.Operations
+             * @instance
+             * @param {google.longrunning.IWaitOperationRequest} request WaitOperationRequest message or plain object
+             * @returns {Promise<google.longrunning.Operation>} Promise
+             * @variation 2
+             */
+
+            return Operations;
+        })();
+
+        longrunning.Operation = (function() {
+
+            /**
+             * Properties of an Operation.
+             * @memberof google.longrunning
+             * @interface IOperation
+             * @property {string|null} [name] Operation name
+             * @property {google.protobuf.IAny|null} [metadata] Operation metadata
+             * @property {boolean|null} [done] Operation done
+             * @property {google.rpc.IStatus|null} [error] Operation error
+             * @property {google.protobuf.IAny|null} [response] Operation response
+             */
+
+            /**
+             * Constructs a new Operation.
+             * @memberof google.longrunning
+             * @classdesc Represents an Operation.
+             * @implements IOperation
+             * @constructor
+             * @param {google.longrunning.IOperation=} [properties] Properties to set
+             */
+            function Operation(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * Operation name.
+             * @member {string} name
+             * @memberof google.longrunning.Operation
+             * @instance
+             */
+            Operation.prototype.name = "";
+
+            /**
+             * Operation metadata.
+             * @member {google.protobuf.IAny|null|undefined} metadata
+             * @memberof google.longrunning.Operation
+             * @instance
+             */
+            Operation.prototype.metadata = null;
+
+            /**
+             * Operation done.
+             * @member {boolean} done
+             * @memberof google.longrunning.Operation
+             * @instance
+             */
+            Operation.prototype.done = false;
+
+            /**
+             * Operation error.
+             * @member {google.rpc.IStatus|null|undefined} error
+             * @memberof google.longrunning.Operation
+             * @instance
+             */
+            Operation.prototype.error = null;
+
+            /**
+             * Operation response.
+             * @member {google.protobuf.IAny|null|undefined} response
+             * @memberof google.longrunning.Operation
+             * @instance
+             */
+            Operation.prototype.response = null;
+
+            // OneOf field names bound to virtual getters and setters
+            let $oneOfFields;
+
+            /**
+             * Operation result.
+             * @member {"error"|"response"|undefined} result
+             * @memberof google.longrunning.Operation
+             * @instance
+             */
+            Object.defineProperty(Operation.prototype, "result", {
+                get: $util.oneOfGetter($oneOfFields = ["error", "response"]),
+                set: $util.oneOfSetter($oneOfFields)
+            });
+
+            /**
+             * Creates a new Operation instance using the specified properties.
+             * @function create
+             * @memberof google.longrunning.Operation
+             * @static
+             * @param {google.longrunning.IOperation=} [properties] Properties to set
+             * @returns {google.longrunning.Operation} Operation instance
+             */
+            Operation.create = function create(properties) {
+                return new Operation(properties);
+            };
+
+            /**
+             * Encodes the specified Operation message. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @function encode
+             * @memberof google.longrunning.Operation
+             * @static
+             * @param {google.longrunning.IOperation} message Operation message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Operation.encode = function encode(message, writer, q) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                    $root.google.protobuf.Any.encode(message.metadata, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
+                if (message.done != null && Object.hasOwnProperty.call(message, "done"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.done);
+                if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                    $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork(), q + 1).ldelim();
+                if (message.response != null && Object.hasOwnProperty.call(message, "response"))
+                    $root.google.protobuf.Any.encode(message.response, writer.uint32(/* id 5, wireType 2 =*/42).fork(), q + 1).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified Operation message, length delimited. Does not implicitly {@link google.longrunning.Operation.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof google.longrunning.Operation
+             * @static
+             * @param {google.longrunning.IOperation} message Operation message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            Operation.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+            };
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer.
+             * @function decode
+             * @memberof google.longrunning.Operation
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {google.longrunning.Operation} Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Operation.decode = function decode(reader, length, error, long) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                if (long === undefined)
+                    long = 0;
+                if (long > $Reader.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.Operation();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.name = reader.string();
+                            break;
+                        }
+                    case 2: {
+                            message.metadata = $root.google.protobuf.Any.decode(reader, reader.uint32(), undefined, long + 1);
+                            break;
+                        }
+                    case 3: {
+                            message.done = reader.bool();
+                            break;
+                        }
+                    case 4: {
+                            message.error = $root.google.rpc.Status.decode(reader, reader.uint32(), undefined, long + 1);
+                            break;
+                        }
+                    case 5: {
+                            message.response = $root.google.protobuf.Any.decode(reader, reader.uint32(), undefined, long + 1);
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7, long);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes an Operation message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof google.longrunning.Operation
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {google.longrunning.Operation} Operation
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            Operation.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an Operation message.
+             * @function verify
+             * @memberof google.longrunning.Operation
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            Operation.verify = function verify(message, long) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    return "maximum nesting depth exceeded";
+                let properties = {};
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata")) {
+                    let error = $root.google.protobuf.Any.verify(message.metadata, long + 1);
+                    if (error)
+                        return "metadata." + error;
+                }
+                if (message.done != null && Object.hasOwnProperty.call(message, "done"))
+                    if (typeof message.done !== "boolean")
+                        return "done: boolean expected";
+                if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
+                    properties.result = 1;
+                    {
+                        let error = $root.google.rpc.Status.verify(message.error, long + 1);
+                        if (error)
+                            return "error." + error;
+                    }
+                }
+                if (message.response != null && Object.hasOwnProperty.call(message, "response")) {
+                    if (properties.result === 1)
+                        return "result: multiple values";
+                    properties.result = 1;
+                    {
+                        let error = $root.google.protobuf.Any.verify(message.response, long + 1);
+                        if (error)
+                            return "response." + error;
+                    }
+                }
+                return null;
+            };
+
+            /**
+             * Creates an Operation message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.longrunning.Operation
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.longrunning.Operation} Operation
+             */
+            Operation.fromObject = function fromObject(object, long) {
+                if (object instanceof $root.google.longrunning.Operation)
+                    return object;
+                if (!$util.isObject(object))
+                    throw TypeError(".google.longrunning.Operation: object expected");
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let message = new $root.google.longrunning.Operation();
+                if (object.name != null)
+                    message.name = String(object.name);
+                if (object.metadata != null) {
+                    if (!$util.isObject(object.metadata))
+                        throw TypeError(".google.longrunning.Operation.metadata: object expected");
+                    message.metadata = $root.google.protobuf.Any.fromObject(object.metadata, long + 1);
+                }
+                if (object.done != null)
+                    message.done = Boolean(object.done);
+                if (object.error != null) {
+                    if (!$util.isObject(object.error))
+                        throw TypeError(".google.longrunning.Operation.error: object expected");
+                    message.error = $root.google.rpc.Status.fromObject(object.error, long + 1);
+                }
+                if (object.response != null) {
+                    if (!$util.isObject(object.response))
+                        throw TypeError(".google.longrunning.Operation.response: object expected");
+                    message.response = $root.google.protobuf.Any.fromObject(object.response, long + 1);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an Operation message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.longrunning.Operation
+             * @static
+             * @param {google.longrunning.Operation} message Operation
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            Operation.toObject = function toObject(message, options, q) {
+                if (!options)
+                    options = {};
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                let object = {};
+                if (options.defaults) {
+                    object.name = "";
+                    object.metadata = null;
+                    object.done = false;
+                }
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    object.name = message.name;
+                if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                    object.metadata = $root.google.protobuf.Any.toObject(message.metadata, options, q + 1);
+                if (message.done != null && Object.hasOwnProperty.call(message, "done"))
+                    object.done = message.done;
+                if (message.error != null && Object.hasOwnProperty.call(message, "error")) {
+                    object.error = $root.google.rpc.Status.toObject(message.error, options, q + 1);
+                    if (options.oneofs)
+                        object.result = "error";
+                }
+                if (message.response != null && Object.hasOwnProperty.call(message, "response")) {
+                    object.response = $root.google.protobuf.Any.toObject(message.response, options, q + 1);
+                    if (options.oneofs)
+                        object.result = "response";
+                }
+                return object;
+            };
+
+            /**
+             * Converts this Operation to JSON.
+             * @function toJSON
+             * @memberof google.longrunning.Operation
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            Operation.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for Operation
+             * @function getTypeUrl
+             * @memberof google.longrunning.Operation
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            Operation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/google.longrunning.Operation";
+            };
+
+            return Operation;
+        })();
+
+        longrunning.GetOperationRequest = (function() {
+
+            /**
+             * Properties of a GetOperationRequest.
+             * @memberof google.longrunning
+             * @interface IGetOperationRequest
+             * @property {string|null} [name] GetOperationRequest name
+             */
+
+            /**
+             * Constructs a new GetOperationRequest.
+             * @memberof google.longrunning
+             * @classdesc Represents a GetOperationRequest.
+             * @implements IGetOperationRequest
+             * @constructor
+             * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+             */
+            function GetOperationRequest(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * GetOperationRequest name.
+             * @member {string} name
+             * @memberof google.longrunning.GetOperationRequest
+             * @instance
+             */
+            GetOperationRequest.prototype.name = "";
+
+            /**
+             * Creates a new GetOperationRequest instance using the specified properties.
+             * @function create
+             * @memberof google.longrunning.GetOperationRequest
+             * @static
+             * @param {google.longrunning.IGetOperationRequest=} [properties] Properties to set
+             * @returns {google.longrunning.GetOperationRequest} GetOperationRequest instance
+             */
+            GetOperationRequest.create = function create(properties) {
+                return new GetOperationRequest(properties);
+            };
+
+            /**
+             * Encodes the specified GetOperationRequest message. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @function encode
+             * @memberof google.longrunning.GetOperationRequest
+             * @static
+             * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            GetOperationRequest.encode = function encode(message, writer, q) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified GetOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.GetOperationRequest.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof google.longrunning.GetOperationRequest
+             * @static
+             * @param {google.longrunning.IGetOperationRequest} message GetOperationRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            GetOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+            };
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer.
+             * @function decode
+             * @memberof google.longrunning.GetOperationRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            GetOperationRequest.decode = function decode(reader, length, error, long) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                if (long === undefined)
+                    long = 0;
+                if (long > $Reader.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.GetOperationRequest();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.name = reader.string();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7, long);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a GetOperationRequest message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof google.longrunning.GetOperationRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            GetOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a GetOperationRequest message.
+             * @function verify
+             * @memberof google.longrunning.GetOperationRequest
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            GetOperationRequest.verify = function verify(message, long) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    return "maximum nesting depth exceeded";
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a GetOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.longrunning.GetOperationRequest
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.longrunning.GetOperationRequest} GetOperationRequest
+             */
+            GetOperationRequest.fromObject = function fromObject(object, long) {
+                if (object instanceof $root.google.longrunning.GetOperationRequest)
+                    return object;
+                if (!$util.isObject(object))
+                    throw TypeError(".google.longrunning.GetOperationRequest: object expected");
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let message = new $root.google.longrunning.GetOperationRequest();
+                if (object.name != null)
+                    message.name = String(object.name);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a GetOperationRequest message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.longrunning.GetOperationRequest
+             * @static
+             * @param {google.longrunning.GetOperationRequest} message GetOperationRequest
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            GetOperationRequest.toObject = function toObject(message, options, q) {
+                if (!options)
+                    options = {};
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                let object = {};
+                if (options.defaults)
+                    object.name = "";
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    object.name = message.name;
+                return object;
+            };
+
+            /**
+             * Converts this GetOperationRequest to JSON.
+             * @function toJSON
+             * @memberof google.longrunning.GetOperationRequest
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            GetOperationRequest.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for GetOperationRequest
+             * @function getTypeUrl
+             * @memberof google.longrunning.GetOperationRequest
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            GetOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/google.longrunning.GetOperationRequest";
+            };
+
+            return GetOperationRequest;
+        })();
+
+        longrunning.ListOperationsRequest = (function() {
+
+            /**
+             * Properties of a ListOperationsRequest.
+             * @memberof google.longrunning
+             * @interface IListOperationsRequest
+             * @property {string|null} [name] ListOperationsRequest name
+             * @property {string|null} [filter] ListOperationsRequest filter
+             * @property {number|null} [pageSize] ListOperationsRequest pageSize
+             * @property {string|null} [pageToken] ListOperationsRequest pageToken
+             */
+
+            /**
+             * Constructs a new ListOperationsRequest.
+             * @memberof google.longrunning
+             * @classdesc Represents a ListOperationsRequest.
+             * @implements IListOperationsRequest
+             * @constructor
+             * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+             */
+            function ListOperationsRequest(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * ListOperationsRequest name.
+             * @member {string} name
+             * @memberof google.longrunning.ListOperationsRequest
+             * @instance
+             */
+            ListOperationsRequest.prototype.name = "";
+
+            /**
+             * ListOperationsRequest filter.
+             * @member {string} filter
+             * @memberof google.longrunning.ListOperationsRequest
+             * @instance
+             */
+            ListOperationsRequest.prototype.filter = "";
+
+            /**
+             * ListOperationsRequest pageSize.
+             * @member {number} pageSize
+             * @memberof google.longrunning.ListOperationsRequest
+             * @instance
+             */
+            ListOperationsRequest.prototype.pageSize = 0;
+
+            /**
+             * ListOperationsRequest pageToken.
+             * @member {string} pageToken
+             * @memberof google.longrunning.ListOperationsRequest
+             * @instance
+             */
+            ListOperationsRequest.prototype.pageToken = "";
+
+            /**
+             * Creates a new ListOperationsRequest instance using the specified properties.
+             * @function create
+             * @memberof google.longrunning.ListOperationsRequest
+             * @static
+             * @param {google.longrunning.IListOperationsRequest=} [properties] Properties to set
+             * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest instance
+             */
+            ListOperationsRequest.create = function create(properties) {
+                return new ListOperationsRequest(properties);
+            };
+
+            /**
+             * Encodes the specified ListOperationsRequest message. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @function encode
+             * @memberof google.longrunning.ListOperationsRequest
+             * @static
+             * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ListOperationsRequest.encode = function encode(message, writer, q) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.filter);
+                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ListOperationsRequest message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsRequest.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof google.longrunning.ListOperationsRequest
+             * @static
+             * @param {google.longrunning.IListOperationsRequest} message ListOperationsRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ListOperationsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+            };
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer.
+             * @function decode
+             * @memberof google.longrunning.ListOperationsRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ListOperationsRequest.decode = function decode(reader, length, error, long) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                if (long === undefined)
+                    long = 0;
+                if (long > $Reader.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsRequest();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 4: {
+                            message.name = reader.string();
+                            break;
+                        }
+                    case 1: {
+                            message.filter = reader.string();
+                            break;
+                        }
+                    case 2: {
+                            message.pageSize = reader.int32();
+                            break;
+                        }
+                    case 3: {
+                            message.pageToken = reader.string();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7, long);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a ListOperationsRequest message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof google.longrunning.ListOperationsRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ListOperationsRequest.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ListOperationsRequest message.
+             * @function verify
+             * @memberof google.longrunning.ListOperationsRequest
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ListOperationsRequest.verify = function verify(message, long) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    return "maximum nesting depth exceeded";
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                    if (!$util.isString(message.filter))
+                        return "filter: string expected";
+                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                    if (!$util.isInteger(message.pageSize))
+                        return "pageSize: integer expected";
+                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                    if (!$util.isString(message.pageToken))
+                        return "pageToken: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a ListOperationsRequest message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.longrunning.ListOperationsRequest
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.longrunning.ListOperationsRequest} ListOperationsRequest
+             */
+            ListOperationsRequest.fromObject = function fromObject(object, long) {
+                if (object instanceof $root.google.longrunning.ListOperationsRequest)
+                    return object;
+                if (!$util.isObject(object))
+                    throw TypeError(".google.longrunning.ListOperationsRequest: object expected");
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let message = new $root.google.longrunning.ListOperationsRequest();
+                if (object.name != null)
+                    message.name = String(object.name);
+                if (object.filter != null)
+                    message.filter = String(object.filter);
+                if (object.pageSize != null)
+                    message.pageSize = object.pageSize | 0;
+                if (object.pageToken != null)
+                    message.pageToken = String(object.pageToken);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ListOperationsRequest message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.longrunning.ListOperationsRequest
+             * @static
+             * @param {google.longrunning.ListOperationsRequest} message ListOperationsRequest
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ListOperationsRequest.toObject = function toObject(message, options, q) {
+                if (!options)
+                    options = {};
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                let object = {};
+                if (options.defaults) {
+                    object.filter = "";
+                    object.pageSize = 0;
+                    object.pageToken = "";
+                    object.name = "";
+                }
+                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                    object.filter = message.filter;
+                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                    object.pageSize = message.pageSize;
+                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                    object.pageToken = message.pageToken;
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    object.name = message.name;
+                return object;
+            };
+
+            /**
+             * Converts this ListOperationsRequest to JSON.
+             * @function toJSON
+             * @memberof google.longrunning.ListOperationsRequest
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ListOperationsRequest.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ListOperationsRequest
+             * @function getTypeUrl
+             * @memberof google.longrunning.ListOperationsRequest
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ListOperationsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/google.longrunning.ListOperationsRequest";
+            };
+
+            return ListOperationsRequest;
+        })();
+
+        longrunning.ListOperationsResponse = (function() {
+
+            /**
+             * Properties of a ListOperationsResponse.
+             * @memberof google.longrunning
+             * @interface IListOperationsResponse
+             * @property {Array.<google.longrunning.IOperation>|null} [operations] ListOperationsResponse operations
+             * @property {string|null} [nextPageToken] ListOperationsResponse nextPageToken
+             */
+
+            /**
+             * Constructs a new ListOperationsResponse.
+             * @memberof google.longrunning
+             * @classdesc Represents a ListOperationsResponse.
+             * @implements IListOperationsResponse
+             * @constructor
+             * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+             */
+            function ListOperationsResponse(properties) {
+                this.operations = [];
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * ListOperationsResponse operations.
+             * @member {Array.<google.longrunning.IOperation>} operations
+             * @memberof google.longrunning.ListOperationsResponse
+             * @instance
+             */
+            ListOperationsResponse.prototype.operations = $util.emptyArray;
+
+            /**
+             * ListOperationsResponse nextPageToken.
+             * @member {string} nextPageToken
+             * @memberof google.longrunning.ListOperationsResponse
+             * @instance
+             */
+            ListOperationsResponse.prototype.nextPageToken = "";
+
+            /**
+             * Creates a new ListOperationsResponse instance using the specified properties.
+             * @function create
+             * @memberof google.longrunning.ListOperationsResponse
+             * @static
+             * @param {google.longrunning.IListOperationsResponse=} [properties] Properties to set
+             * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse instance
+             */
+            ListOperationsResponse.create = function create(properties) {
+                return new ListOperationsResponse(properties);
+            };
+
+            /**
+             * Encodes the specified ListOperationsResponse message. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @function encode
+             * @memberof google.longrunning.ListOperationsResponse
+             * @static
+             * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ListOperationsResponse.encode = function encode(message, writer, q) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                if (message.operations != null && message.operations.length)
+                    for (let i = 0; i < message.operations.length; ++i)
+                        $root.google.longrunning.Operation.encode(message.operations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork(), q + 1).ldelim();
+                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ListOperationsResponse message, length delimited. Does not implicitly {@link google.longrunning.ListOperationsResponse.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof google.longrunning.ListOperationsResponse
+             * @static
+             * @param {google.longrunning.IListOperationsResponse} message ListOperationsResponse message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ListOperationsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+            };
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer.
+             * @function decode
+             * @memberof google.longrunning.ListOperationsResponse
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ListOperationsResponse.decode = function decode(reader, length, error, long) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                if (long === undefined)
+                    long = 0;
+                if (long > $Reader.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.ListOperationsResponse();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            if (!(message.operations && message.operations.length))
+                                message.operations = [];
+                            message.operations.push($root.google.longrunning.Operation.decode(reader, reader.uint32(), undefined, long + 1));
+                            break;
+                        }
+                    case 2: {
+                            message.nextPageToken = reader.string();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7, long);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a ListOperationsResponse message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof google.longrunning.ListOperationsResponse
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ListOperationsResponse.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a ListOperationsResponse message.
+             * @function verify
+             * @memberof google.longrunning.ListOperationsResponse
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ListOperationsResponse.verify = function verify(message, long) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    return "maximum nesting depth exceeded";
+                if (message.operations != null && Object.hasOwnProperty.call(message, "operations")) {
+                    if (!Array.isArray(message.operations))
+                        return "operations: array expected";
+                    for (let i = 0; i < message.operations.length; ++i) {
+                        let error = $root.google.longrunning.Operation.verify(message.operations[i], long + 1);
+                        if (error)
+                            return "operations." + error;
+                    }
+                }
+                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                    if (!$util.isString(message.nextPageToken))
+                        return "nextPageToken: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a ListOperationsResponse message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.longrunning.ListOperationsResponse
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.longrunning.ListOperationsResponse} ListOperationsResponse
+             */
+            ListOperationsResponse.fromObject = function fromObject(object, long) {
+                if (object instanceof $root.google.longrunning.ListOperationsResponse)
+                    return object;
+                if (!$util.isObject(object))
+                    throw TypeError(".google.longrunning.ListOperationsResponse: object expected");
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let message = new $root.google.longrunning.ListOperationsResponse();
+                if (object.operations) {
+                    if (!Array.isArray(object.operations))
+                        throw TypeError(".google.longrunning.ListOperationsResponse.operations: array expected");
+                    message.operations = [];
+                    for (let i = 0; i < object.operations.length; ++i) {
+                        if (!$util.isObject(object.operations[i]))
+                            throw TypeError(".google.longrunning.ListOperationsResponse.operations: object expected");
+                        message.operations[i] = $root.google.longrunning.Operation.fromObject(object.operations[i], long + 1);
+                    }
+                }
+                if (object.nextPageToken != null)
+                    message.nextPageToken = String(object.nextPageToken);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a ListOperationsResponse message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.longrunning.ListOperationsResponse
+             * @static
+             * @param {google.longrunning.ListOperationsResponse} message ListOperationsResponse
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ListOperationsResponse.toObject = function toObject(message, options, q) {
+                if (!options)
+                    options = {};
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                let object = {};
+                if (options.arrays || options.defaults)
+                    object.operations = [];
+                if (options.defaults)
+                    object.nextPageToken = "";
+                if (message.operations && message.operations.length) {
+                    object.operations = [];
+                    for (let j = 0; j < message.operations.length; ++j)
+                        object.operations[j] = $root.google.longrunning.Operation.toObject(message.operations[j], options, q + 1);
+                }
+                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                    object.nextPageToken = message.nextPageToken;
+                return object;
+            };
+
+            /**
+             * Converts this ListOperationsResponse to JSON.
+             * @function toJSON
+             * @memberof google.longrunning.ListOperationsResponse
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ListOperationsResponse.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for ListOperationsResponse
+             * @function getTypeUrl
+             * @memberof google.longrunning.ListOperationsResponse
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            ListOperationsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/google.longrunning.ListOperationsResponse";
+            };
+
+            return ListOperationsResponse;
+        })();
+
+        longrunning.CancelOperationRequest = (function() {
+
+            /**
+             * Properties of a CancelOperationRequest.
+             * @memberof google.longrunning
+             * @interface ICancelOperationRequest
+             * @property {string|null} [name] CancelOperationRequest name
+             */
+
+            /**
+             * Constructs a new CancelOperationRequest.
+             * @memberof google.longrunning
+             * @classdesc Represents a CancelOperationRequest.
+             * @implements ICancelOperationRequest
+             * @constructor
+             * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+             */
+            function CancelOperationRequest(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * CancelOperationRequest name.
+             * @member {string} name
+             * @memberof google.longrunning.CancelOperationRequest
+             * @instance
+             */
+            CancelOperationRequest.prototype.name = "";
+
+            /**
+             * Creates a new CancelOperationRequest instance using the specified properties.
+             * @function create
+             * @memberof google.longrunning.CancelOperationRequest
+             * @static
+             * @param {google.longrunning.ICancelOperationRequest=} [properties] Properties to set
+             * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest instance
+             */
+            CancelOperationRequest.create = function create(properties) {
+                return new CancelOperationRequest(properties);
+            };
+
+            /**
+             * Encodes the specified CancelOperationRequest message. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @function encode
+             * @memberof google.longrunning.CancelOperationRequest
+             * @static
+             * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CancelOperationRequest.encode = function encode(message, writer, q) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified CancelOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.CancelOperationRequest.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof google.longrunning.CancelOperationRequest
+             * @static
+             * @param {google.longrunning.ICancelOperationRequest} message CancelOperationRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            CancelOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+            };
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer.
+             * @function decode
+             * @memberof google.longrunning.CancelOperationRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CancelOperationRequest.decode = function decode(reader, length, error, long) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                if (long === undefined)
+                    long = 0;
+                if (long > $Reader.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.CancelOperationRequest();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.name = reader.string();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7, long);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a CancelOperationRequest message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof google.longrunning.CancelOperationRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            CancelOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a CancelOperationRequest message.
+             * @function verify
+             * @memberof google.longrunning.CancelOperationRequest
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            CancelOperationRequest.verify = function verify(message, long) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    return "maximum nesting depth exceeded";
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a CancelOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.longrunning.CancelOperationRequest
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.longrunning.CancelOperationRequest} CancelOperationRequest
+             */
+            CancelOperationRequest.fromObject = function fromObject(object, long) {
+                if (object instanceof $root.google.longrunning.CancelOperationRequest)
+                    return object;
+                if (!$util.isObject(object))
+                    throw TypeError(".google.longrunning.CancelOperationRequest: object expected");
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let message = new $root.google.longrunning.CancelOperationRequest();
+                if (object.name != null)
+                    message.name = String(object.name);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a CancelOperationRequest message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.longrunning.CancelOperationRequest
+             * @static
+             * @param {google.longrunning.CancelOperationRequest} message CancelOperationRequest
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            CancelOperationRequest.toObject = function toObject(message, options, q) {
+                if (!options)
+                    options = {};
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                let object = {};
+                if (options.defaults)
+                    object.name = "";
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    object.name = message.name;
+                return object;
+            };
+
+            /**
+             * Converts this CancelOperationRequest to JSON.
+             * @function toJSON
+             * @memberof google.longrunning.CancelOperationRequest
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            CancelOperationRequest.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for CancelOperationRequest
+             * @function getTypeUrl
+             * @memberof google.longrunning.CancelOperationRequest
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            CancelOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/google.longrunning.CancelOperationRequest";
+            };
+
+            return CancelOperationRequest;
+        })();
+
+        longrunning.DeleteOperationRequest = (function() {
+
+            /**
+             * Properties of a DeleteOperationRequest.
+             * @memberof google.longrunning
+             * @interface IDeleteOperationRequest
+             * @property {string|null} [name] DeleteOperationRequest name
+             */
+
+            /**
+             * Constructs a new DeleteOperationRequest.
+             * @memberof google.longrunning
+             * @classdesc Represents a DeleteOperationRequest.
+             * @implements IDeleteOperationRequest
+             * @constructor
+             * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+             */
+            function DeleteOperationRequest(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * DeleteOperationRequest name.
+             * @member {string} name
+             * @memberof google.longrunning.DeleteOperationRequest
+             * @instance
+             */
+            DeleteOperationRequest.prototype.name = "";
+
+            /**
+             * Creates a new DeleteOperationRequest instance using the specified properties.
+             * @function create
+             * @memberof google.longrunning.DeleteOperationRequest
+             * @static
+             * @param {google.longrunning.IDeleteOperationRequest=} [properties] Properties to set
+             * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest instance
+             */
+            DeleteOperationRequest.create = function create(properties) {
+                return new DeleteOperationRequest(properties);
+            };
+
+            /**
+             * Encodes the specified DeleteOperationRequest message. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @function encode
+             * @memberof google.longrunning.DeleteOperationRequest
+             * @static
+             * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DeleteOperationRequest.encode = function encode(message, writer, q) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified DeleteOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.DeleteOperationRequest.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof google.longrunning.DeleteOperationRequest
+             * @static
+             * @param {google.longrunning.IDeleteOperationRequest} message DeleteOperationRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            DeleteOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+            };
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer.
+             * @function decode
+             * @memberof google.longrunning.DeleteOperationRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DeleteOperationRequest.decode = function decode(reader, length, error, long) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                if (long === undefined)
+                    long = 0;
+                if (long > $Reader.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.DeleteOperationRequest();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.name = reader.string();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7, long);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a DeleteOperationRequest message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof google.longrunning.DeleteOperationRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            DeleteOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a DeleteOperationRequest message.
+             * @function verify
+             * @memberof google.longrunning.DeleteOperationRequest
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            DeleteOperationRequest.verify = function verify(message, long) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    return "maximum nesting depth exceeded";
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                return null;
+            };
+
+            /**
+             * Creates a DeleteOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.longrunning.DeleteOperationRequest
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.longrunning.DeleteOperationRequest} DeleteOperationRequest
+             */
+            DeleteOperationRequest.fromObject = function fromObject(object, long) {
+                if (object instanceof $root.google.longrunning.DeleteOperationRequest)
+                    return object;
+                if (!$util.isObject(object))
+                    throw TypeError(".google.longrunning.DeleteOperationRequest: object expected");
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let message = new $root.google.longrunning.DeleteOperationRequest();
+                if (object.name != null)
+                    message.name = String(object.name);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a DeleteOperationRequest message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.longrunning.DeleteOperationRequest
+             * @static
+             * @param {google.longrunning.DeleteOperationRequest} message DeleteOperationRequest
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            DeleteOperationRequest.toObject = function toObject(message, options, q) {
+                if (!options)
+                    options = {};
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                let object = {};
+                if (options.defaults)
+                    object.name = "";
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    object.name = message.name;
+                return object;
+            };
+
+            /**
+             * Converts this DeleteOperationRequest to JSON.
+             * @function toJSON
+             * @memberof google.longrunning.DeleteOperationRequest
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            DeleteOperationRequest.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for DeleteOperationRequest
+             * @function getTypeUrl
+             * @memberof google.longrunning.DeleteOperationRequest
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            DeleteOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/google.longrunning.DeleteOperationRequest";
+            };
+
+            return DeleteOperationRequest;
+        })();
+
+        longrunning.WaitOperationRequest = (function() {
+
+            /**
+             * Properties of a WaitOperationRequest.
+             * @memberof google.longrunning
+             * @interface IWaitOperationRequest
+             * @property {string|null} [name] WaitOperationRequest name
+             * @property {google.protobuf.IDuration|null} [timeout] WaitOperationRequest timeout
+             */
+
+            /**
+             * Constructs a new WaitOperationRequest.
+             * @memberof google.longrunning
+             * @classdesc Represents a WaitOperationRequest.
+             * @implements IWaitOperationRequest
+             * @constructor
+             * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+             */
+            function WaitOperationRequest(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * WaitOperationRequest name.
+             * @member {string} name
+             * @memberof google.longrunning.WaitOperationRequest
+             * @instance
+             */
+            WaitOperationRequest.prototype.name = "";
+
+            /**
+             * WaitOperationRequest timeout.
+             * @member {google.protobuf.IDuration|null|undefined} timeout
+             * @memberof google.longrunning.WaitOperationRequest
+             * @instance
+             */
+            WaitOperationRequest.prototype.timeout = null;
+
+            /**
+             * Creates a new WaitOperationRequest instance using the specified properties.
+             * @function create
+             * @memberof google.longrunning.WaitOperationRequest
+             * @static
+             * @param {google.longrunning.IWaitOperationRequest=} [properties] Properties to set
+             * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest instance
+             */
+            WaitOperationRequest.create = function create(properties) {
+                return new WaitOperationRequest(properties);
+            };
+
+            /**
+             * Encodes the specified WaitOperationRequest message. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @function encode
+             * @memberof google.longrunning.WaitOperationRequest
+             * @static
+             * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            WaitOperationRequest.encode = function encode(message, writer, q) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
+                    $root.google.protobuf.Duration.encode(message.timeout, writer.uint32(/* id 2, wireType 2 =*/18).fork(), q + 1).ldelim();
+                return writer;
+            };
+
+            /**
+             * Encodes the specified WaitOperationRequest message, length delimited. Does not implicitly {@link google.longrunning.WaitOperationRequest.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof google.longrunning.WaitOperationRequest
+             * @static
+             * @param {google.longrunning.IWaitOperationRequest} message WaitOperationRequest message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            WaitOperationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+            };
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer.
+             * @function decode
+             * @memberof google.longrunning.WaitOperationRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            WaitOperationRequest.decode = function decode(reader, length, error, long) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                if (long === undefined)
+                    long = 0;
+                if (long > $Reader.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.WaitOperationRequest();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.name = reader.string();
+                            break;
+                        }
+                    case 2: {
+                            message.timeout = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7, long);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a WaitOperationRequest message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof google.longrunning.WaitOperationRequest
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            WaitOperationRequest.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a WaitOperationRequest message.
+             * @function verify
+             * @memberof google.longrunning.WaitOperationRequest
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            WaitOperationRequest.verify = function verify(message, long) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    return "maximum nesting depth exceeded";
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout")) {
+                    let error = $root.google.protobuf.Duration.verify(message.timeout, long + 1);
+                    if (error)
+                        return "timeout." + error;
+                }
+                return null;
+            };
+
+            /**
+             * Creates a WaitOperationRequest message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.longrunning.WaitOperationRequest
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.longrunning.WaitOperationRequest} WaitOperationRequest
+             */
+            WaitOperationRequest.fromObject = function fromObject(object, long) {
+                if (object instanceof $root.google.longrunning.WaitOperationRequest)
+                    return object;
+                if (!$util.isObject(object))
+                    throw TypeError(".google.longrunning.WaitOperationRequest: object expected");
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let message = new $root.google.longrunning.WaitOperationRequest();
+                if (object.name != null)
+                    message.name = String(object.name);
+                if (object.timeout != null) {
+                    if (!$util.isObject(object.timeout))
+                        throw TypeError(".google.longrunning.WaitOperationRequest.timeout: object expected");
+                    message.timeout = $root.google.protobuf.Duration.fromObject(object.timeout, long + 1);
+                }
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a WaitOperationRequest message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.longrunning.WaitOperationRequest
+             * @static
+             * @param {google.longrunning.WaitOperationRequest} message WaitOperationRequest
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            WaitOperationRequest.toObject = function toObject(message, options, q) {
+                if (!options)
+                    options = {};
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                let object = {};
+                if (options.defaults) {
+                    object.name = "";
+                    object.timeout = null;
+                }
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    object.name = message.name;
+                if (message.timeout != null && Object.hasOwnProperty.call(message, "timeout"))
+                    object.timeout = $root.google.protobuf.Duration.toObject(message.timeout, options, q + 1);
+                return object;
+            };
+
+            /**
+             * Converts this WaitOperationRequest to JSON.
+             * @function toJSON
+             * @memberof google.longrunning.WaitOperationRequest
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            WaitOperationRequest.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for WaitOperationRequest
+             * @function getTypeUrl
+             * @memberof google.longrunning.WaitOperationRequest
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            WaitOperationRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/google.longrunning.WaitOperationRequest";
+            };
+
+            return WaitOperationRequest;
+        })();
+
+        longrunning.OperationInfo = (function() {
+
+            /**
+             * Properties of an OperationInfo.
+             * @memberof google.longrunning
+             * @interface IOperationInfo
+             * @property {string|null} [responseType] OperationInfo responseType
+             * @property {string|null} [metadataType] OperationInfo metadataType
+             */
+
+            /**
+             * Constructs a new OperationInfo.
+             * @memberof google.longrunning
+             * @classdesc Represents an OperationInfo.
+             * @implements IOperationInfo
+             * @constructor
+             * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+             */
+            function OperationInfo(properties) {
+                if (properties)
+                    for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * OperationInfo responseType.
+             * @member {string} responseType
+             * @memberof google.longrunning.OperationInfo
+             * @instance
+             */
+            OperationInfo.prototype.responseType = "";
+
+            /**
+             * OperationInfo metadataType.
+             * @member {string} metadataType
+             * @memberof google.longrunning.OperationInfo
+             * @instance
+             */
+            OperationInfo.prototype.metadataType = "";
+
+            /**
+             * Creates a new OperationInfo instance using the specified properties.
+             * @function create
+             * @memberof google.longrunning.OperationInfo
+             * @static
+             * @param {google.longrunning.IOperationInfo=} [properties] Properties to set
+             * @returns {google.longrunning.OperationInfo} OperationInfo instance
+             */
+            OperationInfo.create = function create(properties) {
+                return new OperationInfo(properties);
+            };
+
+            /**
+             * Encodes the specified OperationInfo message. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @function encode
+             * @memberof google.longrunning.OperationInfo
+             * @static
+             * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            OperationInfo.encode = function encode(message, writer, q) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                if (message.responseType != null && Object.hasOwnProperty.call(message, "responseType"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.responseType);
+                if (message.metadataType != null && Object.hasOwnProperty.call(message, "metadataType"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.metadataType);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified OperationInfo message, length delimited. Does not implicitly {@link google.longrunning.OperationInfo.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof google.longrunning.OperationInfo
+             * @static
+             * @param {google.longrunning.IOperationInfo} message OperationInfo message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            OperationInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+            };
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer.
+             * @function decode
+             * @memberof google.longrunning.OperationInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {google.longrunning.OperationInfo} OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            OperationInfo.decode = function decode(reader, length, error, long) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                if (long === undefined)
+                    long = 0;
+                if (long > $Reader.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.longrunning.OperationInfo();
+                while (reader.pos < end) {
+                    let tag = reader.uint32();
+                    if (tag === error)
+                        break;
+                    switch (tag >>> 3) {
+                    case 1: {
+                            message.responseType = reader.string();
+                            break;
+                        }
+                    case 2: {
+                            message.metadataType = reader.string();
+                            break;
+                        }
+                    default:
+                        reader.skipType(tag & 7, long);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes an OperationInfo message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof google.longrunning.OperationInfo
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {google.longrunning.OperationInfo} OperationInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            OperationInfo.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an OperationInfo message.
+             * @function verify
+             * @memberof google.longrunning.OperationInfo
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            OperationInfo.verify = function verify(message, long) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    return "maximum nesting depth exceeded";
+                if (message.responseType != null && Object.hasOwnProperty.call(message, "responseType"))
+                    if (!$util.isString(message.responseType))
+                        return "responseType: string expected";
+                if (message.metadataType != null && Object.hasOwnProperty.call(message, "metadataType"))
+                    if (!$util.isString(message.metadataType))
+                        return "metadataType: string expected";
+                return null;
+            };
+
+            /**
+             * Creates an OperationInfo message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof google.longrunning.OperationInfo
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {google.longrunning.OperationInfo} OperationInfo
+             */
+            OperationInfo.fromObject = function fromObject(object, long) {
+                if (object instanceof $root.google.longrunning.OperationInfo)
+                    return object;
+                if (!$util.isObject(object))
+                    throw TypeError(".google.longrunning.OperationInfo: object expected");
+                if (long === undefined)
+                    long = 0;
+                if (long > $util.recursionLimit)
+                    throw Error("maximum nesting depth exceeded");
+                let message = new $root.google.longrunning.OperationInfo();
+                if (object.responseType != null)
+                    message.responseType = String(object.responseType);
+                if (object.metadataType != null)
+                    message.metadataType = String(object.metadataType);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an OperationInfo message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof google.longrunning.OperationInfo
+             * @static
+             * @param {google.longrunning.OperationInfo} message OperationInfo
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            OperationInfo.toObject = function toObject(message, options, q) {
+                if (!options)
+                    options = {};
+                if (q === undefined)
+                    q = 0;
+                if (q > $util.recursionLimit)
+                    throw Error("max depth exceeded");
+                let object = {};
+                if (options.defaults) {
+                    object.responseType = "";
+                    object.metadataType = "";
+                }
+                if (message.responseType != null && Object.hasOwnProperty.call(message, "responseType"))
+                    object.responseType = message.responseType;
+                if (message.metadataType != null && Object.hasOwnProperty.call(message, "metadataType"))
+                    object.metadataType = message.metadataType;
+                return object;
+            };
+
+            /**
+             * Converts this OperationInfo to JSON.
+             * @function toJSON
+             * @memberof google.longrunning.OperationInfo
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            OperationInfo.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * Gets the default type url for OperationInfo
+             * @function getTypeUrl
+             * @memberof google.longrunning.OperationInfo
+             * @static
+             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns {string} The default type url
+             */
+            OperationInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                if (typeUrlPrefix === undefined) {
+                    typeUrlPrefix = "type.googleapis.com";
+                }
+                return typeUrlPrefix + "/google.longrunning.OperationInfo";
+            };
+
+            return OperationInfo;
+        })();
+
+        return longrunning;
     })();
 
     return google;

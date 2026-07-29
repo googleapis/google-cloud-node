@@ -231,6 +231,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.commerceproducer.v1beta.CommerceTransaction|resolveAmendmentTarget}.
+                         * @memberof google.cloud.commerceproducer.v1beta.CommerceTransaction
+                         * @typedef ResolveAmendmentTargetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse} [response] ResolveAmendmentTargetResponse
+                         */
+    
+                        /**
+                         * Calls ResolveAmendmentTarget.
+                         * @function resolveAmendmentTarget
+                         * @memberof google.cloud.commerceproducer.v1beta.CommerceTransaction
+                         * @instance
+                         * @param {google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest} request ResolveAmendmentTargetRequest message or plain object
+                         * @param {google.cloud.commerceproducer.v1beta.CommerceTransaction.ResolveAmendmentTargetCallback} callback Node-style callback called with the error, if any, and ResolveAmendmentTargetResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CommerceTransaction.prototype.resolveAmendmentTarget = function resolveAmendmentTarget(request, callback) {
+                            return $protobuf.rpc.Service.prototype.rpcCall.call(this, resolveAmendmentTarget, $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest, $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse, request, callback);
+                        }, "name", { value: "ResolveAmendmentTarget" });
+    
+                        /**
+                         * Calls ResolveAmendmentTarget.
+                         * @function resolveAmendmentTarget
+                         * @memberof google.cloud.commerceproducer.v1beta.CommerceTransaction
+                         * @instance
+                         * @param {google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest} request ResolveAmendmentTargetRequest message or plain object
+                         * @returns {Promise<google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.commerceproducer.v1beta.CommerceTransaction|createPrivateOffer}.
                          * @memberof google.cloud.commerceproducer.v1beta.CommerceTransaction
                          * @typedef CreatePrivateOfferCallback
@@ -1674,6 +1707,832 @@
                         };
     
                         return GetPrivateOfferRequest;
+                    })();
+    
+                    v1beta.ResolveAmendmentTargetRequest = (function() {
+    
+                        /**
+                         * Properties of a ResolveAmendmentTargetRequest.
+                         * @memberof google.cloud.commerceproducer.v1beta
+                         * @interface IResolveAmendmentTargetRequest
+                         * @property {string|null} [parent] ResolveAmendmentTargetRequest parent
+                         * @property {string|null} [targetBillingAccount] ResolveAmendmentTargetRequest targetBillingAccount
+                         * @property {string|null} [baseStandardOffer] ResolveAmendmentTargetRequest baseStandardOffer
+                         */
+    
+                        /**
+                         * Constructs a new ResolveAmendmentTargetRequest.
+                         * @memberof google.cloud.commerceproducer.v1beta
+                         * @classdesc Represents a ResolveAmendmentTargetRequest.
+                         * @implements IResolveAmendmentTargetRequest
+                         * @constructor
+                         * @param {google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest=} [properties] Properties to set
+                         */
+                        function ResolveAmendmentTargetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResolveAmendmentTargetRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @instance
+                         */
+                        ResolveAmendmentTargetRequest.prototype.parent = "";
+    
+                        /**
+                         * ResolveAmendmentTargetRequest targetBillingAccount.
+                         * @member {string} targetBillingAccount
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @instance
+                         */
+                        ResolveAmendmentTargetRequest.prototype.targetBillingAccount = "";
+    
+                        /**
+                         * ResolveAmendmentTargetRequest baseStandardOffer.
+                         * @member {string} baseStandardOffer
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @instance
+                         */
+                        ResolveAmendmentTargetRequest.prototype.baseStandardOffer = "";
+    
+                        /**
+                         * Creates a new ResolveAmendmentTargetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @static
+                         * @param {google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest} ResolveAmendmentTargetRequest instance
+                         */
+                        ResolveAmendmentTargetRequest.create = function create(properties) {
+                            return new ResolveAmendmentTargetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResolveAmendmentTargetRequest message. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @static
+                         * @param {google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest} message ResolveAmendmentTargetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResolveAmendmentTargetRequest.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.targetBillingAccount != null && Object.hasOwnProperty.call(message, "targetBillingAccount"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.targetBillingAccount);
+                            if (message.baseStandardOffer != null && Object.hasOwnProperty.call(message, "baseStandardOffer"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.baseStandardOffer);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResolveAmendmentTargetRequest message, length delimited. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @static
+                         * @param {google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetRequest} message ResolveAmendmentTargetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResolveAmendmentTargetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResolveAmendmentTargetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest} ResolveAmendmentTargetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResolveAmendmentTargetRequest.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.targetBillingAccount = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.baseStandardOffer = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResolveAmendmentTargetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest} ResolveAmendmentTargetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResolveAmendmentTargetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResolveAmendmentTargetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResolveAmendmentTargetRequest.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.targetBillingAccount != null && Object.hasOwnProperty.call(message, "targetBillingAccount"))
+                                if (!$util.isString(message.targetBillingAccount))
+                                    return "targetBillingAccount: string expected";
+                            if (message.baseStandardOffer != null && Object.hasOwnProperty.call(message, "baseStandardOffer"))
+                                if (!$util.isString(message.baseStandardOffer))
+                                    return "baseStandardOffer: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResolveAmendmentTargetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest} ResolveAmendmentTargetRequest
+                         */
+                        ResolveAmendmentTargetRequest.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.targetBillingAccount != null)
+                                message.targetBillingAccount = String(object.targetBillingAccount);
+                            if (object.baseStandardOffer != null)
+                                message.baseStandardOffer = String(object.baseStandardOffer);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResolveAmendmentTargetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @static
+                         * @param {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest} message ResolveAmendmentTargetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResolveAmendmentTargetRequest.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.targetBillingAccount = "";
+                                object.baseStandardOffer = "";
+                            }
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                object.parent = message.parent;
+                            if (message.targetBillingAccount != null && Object.hasOwnProperty.call(message, "targetBillingAccount"))
+                                object.targetBillingAccount = message.targetBillingAccount;
+                            if (message.baseStandardOffer != null && Object.hasOwnProperty.call(message, "baseStandardOffer"))
+                                object.baseStandardOffer = message.baseStandardOffer;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResolveAmendmentTargetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResolveAmendmentTargetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResolveAmendmentTargetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResolveAmendmentTargetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest";
+                        };
+    
+                        return ResolveAmendmentTargetRequest;
+                    })();
+    
+                    v1beta.ResolveAmendmentTargetResponse = (function() {
+    
+                        /**
+                         * Properties of a ResolveAmendmentTargetResponse.
+                         * @memberof google.cloud.commerceproducer.v1beta
+                         * @interface IResolveAmendmentTargetResponse
+                         * @property {string|null} [requiredPrivateOffer] ResolveAmendmentTargetResponse requiredPrivateOffer
+                         * @property {string|null} [requiredStandardOffer] ResolveAmendmentTargetResponse requiredStandardOffer
+                         * @property {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers|null} [optionalOffers] ResolveAmendmentTargetResponse optionalOffers
+                         */
+    
+                        /**
+                         * Constructs a new ResolveAmendmentTargetResponse.
+                         * @memberof google.cloud.commerceproducer.v1beta
+                         * @classdesc Represents a ResolveAmendmentTargetResponse.
+                         * @implements IResolveAmendmentTargetResponse
+                         * @constructor
+                         * @param {google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse=} [properties] Properties to set
+                         */
+                        function ResolveAmendmentTargetResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResolveAmendmentTargetResponse requiredPrivateOffer.
+                         * @member {string|null|undefined} requiredPrivateOffer
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @instance
+                         */
+                        ResolveAmendmentTargetResponse.prototype.requiredPrivateOffer = null;
+    
+                        /**
+                         * ResolveAmendmentTargetResponse requiredStandardOffer.
+                         * @member {string|null|undefined} requiredStandardOffer
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @instance
+                         */
+                        ResolveAmendmentTargetResponse.prototype.requiredStandardOffer = null;
+    
+                        /**
+                         * ResolveAmendmentTargetResponse optionalOffers.
+                         * @member {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers|null|undefined} optionalOffers
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @instance
+                         */
+                        ResolveAmendmentTargetResponse.prototype.optionalOffers = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ResolveAmendmentTargetResponse amendmentRequirement.
+                         * @member {"requiredPrivateOffer"|"requiredStandardOffer"|"optionalOffers"|undefined} amendmentRequirement
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @instance
+                         */
+                        Object.defineProperty(ResolveAmendmentTargetResponse.prototype, "amendmentRequirement", {
+                            get: $util.oneOfGetter($oneOfFields = ["requiredPrivateOffer", "requiredStandardOffer", "optionalOffers"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ResolveAmendmentTargetResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @static
+                         * @param {google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse=} [properties] Properties to set
+                         * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse} ResolveAmendmentTargetResponse instance
+                         */
+                        ResolveAmendmentTargetResponse.create = function create(properties) {
+                            return new ResolveAmendmentTargetResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResolveAmendmentTargetResponse message. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @static
+                         * @param {google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse} message ResolveAmendmentTargetResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResolveAmendmentTargetResponse.encode = function encode(message, writer, q) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            if (message.requiredPrivateOffer != null && Object.hasOwnProperty.call(message, "requiredPrivateOffer"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.requiredPrivateOffer);
+                            if (message.requiredStandardOffer != null && Object.hasOwnProperty.call(message, "requiredStandardOffer"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requiredStandardOffer);
+                            if (message.optionalOffers != null && Object.hasOwnProperty.call(message, "optionalOffers"))
+                                $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers.encode(message.optionalOffers, writer.uint32(/* id 3, wireType 2 =*/26).fork(), q + 1).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResolveAmendmentTargetResponse message, length delimited. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @static
+                         * @param {google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse} message ResolveAmendmentTargetResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResolveAmendmentTargetResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResolveAmendmentTargetResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse} ResolveAmendmentTargetResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResolveAmendmentTargetResponse.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.requiredPrivateOffer = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requiredStandardOffer = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.optionalOffers = $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResolveAmendmentTargetResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse} ResolveAmendmentTargetResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResolveAmendmentTargetResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResolveAmendmentTargetResponse message.
+                         * @function verify
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResolveAmendmentTargetResponse.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.requiredPrivateOffer != null && Object.hasOwnProperty.call(message, "requiredPrivateOffer")) {
+                                properties.amendmentRequirement = 1;
+                                if (!$util.isString(message.requiredPrivateOffer))
+                                    return "requiredPrivateOffer: string expected";
+                            }
+                            if (message.requiredStandardOffer != null && Object.hasOwnProperty.call(message, "requiredStandardOffer")) {
+                                if (properties.amendmentRequirement === 1)
+                                    return "amendmentRequirement: multiple values";
+                                properties.amendmentRequirement = 1;
+                                if (!$util.isString(message.requiredStandardOffer))
+                                    return "requiredStandardOffer: string expected";
+                            }
+                            if (message.optionalOffers != null && Object.hasOwnProperty.call(message, "optionalOffers")) {
+                                if (properties.amendmentRequirement === 1)
+                                    return "amendmentRequirement: multiple values";
+                                properties.amendmentRequirement = 1;
+                                {
+                                    var error = $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers.verify(message.optionalOffers, long + 1);
+                                    if (error)
+                                        return "optionalOffers." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResolveAmendmentTargetResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse} ResolveAmendmentTargetResponse
+                         */
+                        ResolveAmendmentTargetResponse.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse)
+                                return object;
+                            if (!$util.isObject(object))
+                                throw TypeError(".google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse: object expected");
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse();
+                            if (object.requiredPrivateOffer != null)
+                                message.requiredPrivateOffer = String(object.requiredPrivateOffer);
+                            if (object.requiredStandardOffer != null)
+                                message.requiredStandardOffer = String(object.requiredStandardOffer);
+                            if (object.optionalOffers != null) {
+                                if (!$util.isObject(object.optionalOffers))
+                                    throw TypeError(".google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.optionalOffers: object expected");
+                                message.optionalOffers = $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers.fromObject(object.optionalOffers, long + 1);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResolveAmendmentTargetResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @static
+                         * @param {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse} message ResolveAmendmentTargetResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResolveAmendmentTargetResponse.toObject = function toObject(message, options, q) {
+                            if (!options)
+                                options = {};
+                            if (q === undefined)
+                                q = 0;
+                            if (q > $util.recursionLimit)
+                                throw Error("max depth exceeded");
+                            var object = {};
+                            if (message.requiredPrivateOffer != null && Object.hasOwnProperty.call(message, "requiredPrivateOffer")) {
+                                object.requiredPrivateOffer = message.requiredPrivateOffer;
+                                if (options.oneofs)
+                                    object.amendmentRequirement = "requiredPrivateOffer";
+                            }
+                            if (message.requiredStandardOffer != null && Object.hasOwnProperty.call(message, "requiredStandardOffer")) {
+                                object.requiredStandardOffer = message.requiredStandardOffer;
+                                if (options.oneofs)
+                                    object.amendmentRequirement = "requiredStandardOffer";
+                            }
+                            if (message.optionalOffers != null && Object.hasOwnProperty.call(message, "optionalOffers")) {
+                                object.optionalOffers = $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers.toObject(message.optionalOffers, options, q + 1);
+                                if (options.oneofs)
+                                    object.amendmentRequirement = "optionalOffers";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResolveAmendmentTargetResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResolveAmendmentTargetResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResolveAmendmentTargetResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResolveAmendmentTargetResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse";
+                        };
+    
+                        ResolveAmendmentTargetResponse.OptionalOffers = (function() {
+    
+                            /**
+                             * Properties of an OptionalOffers.
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                             * @interface IOptionalOffers
+                             * @property {Array.<string>|null} [privateOffers] OptionalOffers privateOffers
+                             */
+    
+                            /**
+                             * Constructs a new OptionalOffers.
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse
+                             * @classdesc Represents an OptionalOffers.
+                             * @implements IOptionalOffers
+                             * @constructor
+                             * @param {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers=} [properties] Properties to set
+                             */
+                            function OptionalOffers(properties) {
+                                this.privateOffers = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * OptionalOffers privateOffers.
+                             * @member {Array.<string>} privateOffers
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers
+                             * @instance
+                             */
+                            OptionalOffers.prototype.privateOffers = $util.emptyArray;
+    
+                            /**
+                             * Creates a new OptionalOffers instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers
+                             * @static
+                             * @param {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers=} [properties] Properties to set
+                             * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers} OptionalOffers instance
+                             */
+                            OptionalOffers.create = function create(properties) {
+                                return new OptionalOffers(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified OptionalOffers message. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers
+                             * @static
+                             * @param {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers} message OptionalOffers message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OptionalOffers.encode = function encode(message, writer, q) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
+                                if (message.privateOffers != null && message.privateOffers.length)
+                                    for (var i = 0; i < message.privateOffers.length; ++i)
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.privateOffers[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified OptionalOffers message, length delimited. Does not implicitly {@link google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers
+                             * @static
+                             * @param {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.IOptionalOffers} message OptionalOffers message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            OptionalOffers.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer && writer.len ? writer.fork() : writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an OptionalOffers message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers} OptionalOffers
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OptionalOffers.decode = function decode(reader, length, error, long) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $Reader.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.privateOffers && message.privateOffers.length))
+                                                message.privateOffers = [];
+                                            message.privateOffers.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7, long);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an OptionalOffers message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers} OptionalOffers
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            OptionalOffers.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an OptionalOffers message.
+                             * @function verify
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            OptionalOffers.verify = function verify(message, long) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    return "maximum nesting depth exceeded";
+                                if (message.privateOffers != null && Object.hasOwnProperty.call(message, "privateOffers")) {
+                                    if (!Array.isArray(message.privateOffers))
+                                        return "privateOffers: array expected";
+                                    for (var i = 0; i < message.privateOffers.length; ++i)
+                                        if (!$util.isString(message.privateOffers[i]))
+                                            return "privateOffers: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an OptionalOffers message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers} OptionalOffers
+                             */
+                            OptionalOffers.fromObject = function fromObject(object, long) {
+                                if (object instanceof $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers)
+                                    return object;
+                                if (!$util.isObject(object))
+                                    throw TypeError(".google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers: object expected");
+                                if (long === undefined)
+                                    long = 0;
+                                if (long > $util.recursionLimit)
+                                    throw Error("maximum nesting depth exceeded");
+                                var message = new $root.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers();
+                                if (object.privateOffers) {
+                                    if (!Array.isArray(object.privateOffers))
+                                        throw TypeError(".google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers.privateOffers: array expected");
+                                    message.privateOffers = [];
+                                    for (var i = 0; i < object.privateOffers.length; ++i)
+                                        message.privateOffers[i] = String(object.privateOffers[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an OptionalOffers message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers
+                             * @static
+                             * @param {google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers} message OptionalOffers
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            OptionalOffers.toObject = function toObject(message, options, q) {
+                                if (!options)
+                                    options = {};
+                                if (q === undefined)
+                                    q = 0;
+                                if (q > $util.recursionLimit)
+                                    throw Error("max depth exceeded");
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.privateOffers = [];
+                                if (message.privateOffers && message.privateOffers.length) {
+                                    object.privateOffers = [];
+                                    for (var j = 0; j < message.privateOffers.length; ++j)
+                                        object.privateOffers[j] = message.privateOffers[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this OptionalOffers to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            OptionalOffers.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for OptionalOffers
+                             * @function getTypeUrl
+                             * @memberof google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            OptionalOffers.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse.OptionalOffers";
+                            };
+    
+                            return OptionalOffers;
+                        })();
+    
+                        return ResolveAmendmentTargetResponse;
                     })();
     
                     v1beta.CreatePrivateOfferRequest = (function() {
@@ -9594,6 +10453,7 @@
                              * @property {google.cloud.commerceproducer.v1beta.PrivateOffer.Term.StartPolicy|null} [startPolicy] Term startPolicy
                              * @property {google.type.IDateTime|null} [scheduledStartTime] Term scheduledStartTime
                              * @property {google.cloud.commerceproducer.v1beta.PrivateOffer.Term.EndPolicy|null} [endPolicy] Term endPolicy
+                             * @property {google.type.IDateTime|null} [effectiveTermEndTime] Term effectiveTermEndTime
                              */
     
                             /**
@@ -9667,6 +10527,14 @@
                              */
                             Term.prototype.endPolicy = 0;
     
+                            /**
+                             * Term effectiveTermEndTime.
+                             * @member {google.type.IDateTime|null|undefined} effectiveTermEndTime
+                             * @memberof google.cloud.commerceproducer.v1beta.PrivateOffer.Term
+                             * @instance
+                             */
+                            Term.prototype.effectiveTermEndTime = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -9734,6 +10602,8 @@
                                     writer.uint32(/* id 6, wireType 0 =*/48).int32(message.maxRenewalCount);
                                 if (message.unlimitedRenewal != null && Object.hasOwnProperty.call(message, "unlimitedRenewal"))
                                     writer.uint32(/* id 7, wireType 0 =*/56).bool(message.unlimitedRenewal);
+                                if (message.effectiveTermEndTime != null && Object.hasOwnProperty.call(message, "effectiveTermEndTime"))
+                                    $root.google.type.DateTime.encode(message.effectiveTermEndTime, writer.uint32(/* id 8, wireType 2 =*/66).fork(), q + 1).ldelim();
                                 return writer;
                             };
     
@@ -9800,6 +10670,10 @@
                                         }
                                     case 3: {
                                             message.endPolicy = reader.int32();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.effectiveTermEndTime = $root.google.type.DateTime.decode(reader, reader.uint32(), undefined, long + 1);
                                             break;
                                         }
                                     default:
@@ -9893,6 +10767,11 @@
                                     case 3:
                                         break;
                                     }
+                                if (message.effectiveTermEndTime != null && Object.hasOwnProperty.call(message, "effectiveTermEndTime")) {
+                                    var error = $root.google.type.DateTime.verify(message.effectiveTermEndTime, long + 1);
+                                    if (error)
+                                        return "effectiveTermEndTime." + error;
+                                }
                                 return null;
                             };
     
@@ -9974,6 +10853,11 @@
                                     message.endPolicy = 3;
                                     break;
                                 }
+                                if (object.effectiveTermEndTime != null) {
+                                    if (!$util.isObject(object.effectiveTermEndTime))
+                                        throw TypeError(".google.cloud.commerceproducer.v1beta.PrivateOffer.Term.effectiveTermEndTime: object expected");
+                                    message.effectiveTermEndTime = $root.google.type.DateTime.fromObject(object.effectiveTermEndTime, long + 1);
+                                }
                                 return message;
                             };
     
@@ -9998,6 +10882,7 @@
                                     object.startPolicy = options.enums === String ? "START_POLICY_UNSPECIFIED" : 0;
                                     object.scheduledStartTime = null;
                                     object.endPolicy = options.enums === String ? "END_POLICY_UNSPECIFIED" : 0;
+                                    object.effectiveTermEndTime = null;
                                 }
                                 if (message.startPolicy != null && Object.hasOwnProperty.call(message, "startPolicy"))
                                     object.startPolicy = options.enums === String ? $root.google.cloud.commerceproducer.v1beta.PrivateOffer.Term.StartPolicy[message.startPolicy] === undefined ? message.startPolicy : $root.google.cloud.commerceproducer.v1beta.PrivateOffer.Term.StartPolicy[message.startPolicy] : message.startPolicy;
@@ -10025,6 +10910,8 @@
                                     if (options.oneofs)
                                         object.renewal = "unlimitedRenewal";
                                 }
+                                if (message.effectiveTermEndTime != null && Object.hasOwnProperty.call(message, "effectiveTermEndTime"))
+                                    object.effectiveTermEndTime = $root.google.type.DateTime.toObject(message.effectiveTermEndTime, options, q + 1);
                                 return object;
                             };
     
