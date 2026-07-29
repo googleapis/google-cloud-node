@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'QuotaController',
-    filename: './quota-controller.js',
+    library: 'ServiceController',
+    filename: './service-controller.js',
   },
   node: {
     child_process: 'empty',
