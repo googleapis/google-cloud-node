@@ -8,12 +8,19 @@ on:
     types: [opened, ready_for_review, reopened, synchronize]
 
 permissions:
-  pull-requests: write
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   assign-reviewers:
+    name: assign-reviewers
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # Required to add requested reviewers and teams to pull requests
+      contents: read
     if: github.event.pull_request.draft == false
     steps:
       - name: Assign Reviewers

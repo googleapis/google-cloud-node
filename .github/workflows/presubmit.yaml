@@ -4,8 +4,13 @@ permissions:
 on:
   pull_request:
 name: presubmit
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   units:
+    name: units
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,6 +34,7 @@ jobs:
           BUILD_TYPE: presubmit
           TEST_TYPE: units
   lint:
+    name: lint
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
