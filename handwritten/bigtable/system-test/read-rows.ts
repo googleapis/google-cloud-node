@@ -124,38 +124,43 @@ describe('Bigtable/Table', () => {
     it('should fail when invoking readRows with closed client', async () => {
       const instance = bigtable.instance(INSTANCE_NAME);
       const table = instance.table('fake-table');
-      const [, operation] = await instance.create({
-        clusters: {
-          id: 'fake-cluster3',
-          location: 'us-west1-c',
-          nodes: 1,
-        },
-      });
-      await operation.promise();
-      const gaxOptions: CallOptions = {
-        retry: {
-          retryCodes: [grpc.status.DEADLINE_EXCEEDED, grpc.status.NOT_FOUND],
-        },
-        maxRetries: 10,
-      };
-      await table.create({
-        gaxOptions,
-      });
-      await table.getRows(); // This is done to initialize the data client
-      await bigtable.close();
       try {
-        await table.getRows();
-        assert.fail(
-          'An error should have been thrown because the client is closed',
-        );
-      } catch (err: any) {
-        assert.strictEqual(err.message, 'The client has already been closed.');
+        const [, operation] = await instance.create({
+          clusters: {
+            id: 'fake-cluster3',
+            location: 'us-west1-c',
+            nodes: 1,
+          },
+        });
+        await operation.promise();
+        const gaxOptions: CallOptions = {
+          retry: {
+            retryCodes: [grpc.status.DEADLINE_EXCEEDED, grpc.status.NOT_FOUND],
+          },
+          maxRetries: 10,
+        };
+        await table.create({
+          gaxOptions,
+        });
+        await table.getRows(); // This is done to initialize the data client
+        await bigtable.close();
+        try {
+          await table.getRows();
+          assert.fail(
+            'An error should have been thrown because the client is closed',
+          );
+        } catch (err: any) {
+          assert.strictEqual(err.message, 'The client has already been closed.');
+        }
+      } finally {
+        try {
+          const bigtableSecondClient = new Bigtable();
+          const cleanInstance = bigtableSecondClient.instance(INSTANCE_NAME);
+          await cleanInstance.delete({});
+        } catch (e) {
+          // ignore error if already deleted
+        }
       }
-    });
-    after(async () => {
-      const bigtableSecondClient = new Bigtable();
-      const instance = bigtableSecondClient.instance(INSTANCE_NAME);
-      await instance.delete({});
     });
   });
 

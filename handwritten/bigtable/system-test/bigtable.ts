@@ -74,7 +74,7 @@ describe('Bigtable', () => {
         {
           id: CLUSTER_ID,
           location: 'us-central2-c',
-          nodes: 3,
+          nodes: 1,
           storage: 'ssd',
         },
       ],
@@ -87,7 +87,7 @@ describe('Bigtable', () => {
         {
           id: CLUSTER_ID_HDD,
           location: 'us-central2-c',
-          nodes: 3,
+          nodes: 1,
           storage: 'hdd',
         },
       ],
@@ -183,7 +183,7 @@ describe('Bigtable', () => {
           {
             id: clusteId,
             location: 'us-central2-c',
-            nodes: 3,
+            nodes: 1,
           },
         ],
         labels: {
@@ -236,7 +236,7 @@ describe('Bigtable', () => {
           {
             id: CMEK_CLUSTER.id,
             location: 'us-central2-a',
-            nodes: 3,
+            nodes: 1,
             key: kmsKeyName,
           },
         ],
@@ -268,7 +268,7 @@ describe('Bigtable', () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [_, operation] = await cluster.create({
         location: 'us-central2-b',
-        nodes: 3,
+        nodes: 1,
         key: kmsKeyName,
       });
       await operation.promise();
@@ -284,7 +284,7 @@ describe('Bigtable', () => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [_, operation] = await cluster.create({
           location: 'us-central2-b',
-          nodes: 3,
+          nodes: 1,
         });
         await operation.promise();
         throw new Error('Cluster creation should not have succeeded');
@@ -400,7 +400,7 @@ describe('Bigtable', () => {
 
     it('should update a cluster', async () => {
       const metadata = {
-        nodes: 4,
+        nodes: 2,
       };
       const [operation] = await CLUSTER.setMetadata(metadata);
       await operation.promise();
@@ -1684,7 +1684,7 @@ describe('Bigtable', () => {
               clusters: [
                 {
                   id: destinationClusterId,
-                  nodes: 3,
+                  nodes: 1,
                   location: 'us-central2-d',
                   storage: 'ssd',
                 },
@@ -1728,7 +1728,7 @@ describe('Bigtable', () => {
               destinationClusterId,
             ).create({
               location: 'us-central2-b',
-              nodes: 3,
+              nodes: 1,
             });
             await operation.promise();
           }
@@ -1773,7 +1773,7 @@ describe('Bigtable', () => {
               clusters: [
                 {
                   id: destinationClusterId,
-                  nodes: 3,
+                  nodes: 1,
                   location: 'us-central2-d',
                   storage: 'ssd',
                 },
