@@ -71,7 +71,7 @@ jobs:
       run: |
         mkdir -p ~/artifacts
         cp bazel-testlogs/unit_tests/test.outputs/outputs.zip ~/artifacts/
-        bazelisk run -- @pnpm//:pnpm --dir $PWD install
+        bazelisk run -- @pnpm//:pnpm --dir $PWD install --ignore-scripts
         tar cfz ~/artifacts/node_modules.tar.gz node_modules
 
     - name: Save artifacts
