@@ -13,7 +13,6 @@
 
 import * as fs from 'fs';
 import {Gaxios} from 'gaxios';
-import resolve = require('url');
 import * as util from 'util';
 
 import {GlobalOptions, ServiceOptions, APIRequestParams} from './api';
@@ -136,8 +135,15 @@ export class Discovery {
     apiDiscoveryUrl: string | {url?: string},
   ): Promise<EndpointCreator> {
     if (typeof apiDiscoveryUrl === 'string') {
-      const parts = resolve.parse(apiDiscoveryUrl);
-      if (apiDiscoveryUrl && !parts.protocol) {
+      let isUrl = false;
+      try {
+        new URL(apiDiscoveryUrl);
+        isUrl = true;
+      } catch (e) {
+        // Not a valid URL
+      }
+
+      if (apiDiscoveryUrl && !isUrl) {
         this.log('Reading from file ' + apiDiscoveryUrl);
         const file = await readFile(apiDiscoveryUrl, {encoding: 'utf8'});
         return this.makeEndpoint(JSON.parse(file));

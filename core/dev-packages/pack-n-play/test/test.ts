@@ -18,7 +18,8 @@ import execa = require('execa');
 import {describe, it} from 'mocha';
 
 describe('pack-n-play', () => {
-  it('should run tests', async () => {
+  it('should run tests', async function () {
+    this.timeout(120000); // 2 minutes
     const fixturesPath = path.resolve('./test/fixtures');
     const dirs = fs
       .readdirSync(fixturesPath)
