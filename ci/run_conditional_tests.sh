@@ -213,6 +213,18 @@ for subdir in ${subdirs[@]}; do
         fi
     done
 done
+# If DRY_RUN_SHARDS is set, output dynamic matrix values to GitHub Actions and exit
+if [[ "${DRY_RUN_SHARDS}" == "true" ]]; then
+    count=${#test_dirs[@]}
+    if [[ $count -gt 15 ]]; then
+        echo "shard_matrix=[0, 1, 2, 3, 4]" >> $GITHUB_OUTPUT
+        echo "shard_total=5" >> $GITHUB_OUTPUT
+    else
+        echo "shard_matrix=[0]" >> $GITHUB_OUTPUT
+        echo "shard_total=1" >> $GITHUB_OUTPUT
+    fi
+    exit 0
+fi
 
 # If SHARD_TOTAL and SHARD_INDEX are provided, we will only run a subset of the tests.
 for i in "${!test_dirs[@]}"; do
