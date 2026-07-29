@@ -18,7 +18,7 @@
                     "csharp_namespace": "Google.Cloud.CloudQuotas.V1",
                     "go_package": "cloud.google.com/go/cloudquotas/apiv1/cloudquotaspb;cloudquotaspb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "ResourcesProto",
+                    "java_outer_classname": "QuotaAdjusterSettingsProto",
                     "java_package": "com.google.api.cloudquotas.v1",
                     "php_namespace": "Google\\Cloud\\CloudQuotas\\V1",
                     "ruby_package": "Google::Cloud::CloudQuotas::V1",
@@ -215,7 +215,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.field_behavior)": "IDENTIFIER",
                             "(google.api.resource_reference).child_type": "cloudquotas.googleapis.com/QuotaInfo"
                           }
                         },
@@ -254,7 +254,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.field_behavior)": "IDENTIFIER",
                             "(google.api.resource_reference).type": "cloudquotas.googleapis.com/QuotaInfo"
                           }
                         }
@@ -266,7 +266,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.field_behavior)": "IDENTIFIER",
                             "(google.api.resource_reference).child_type": "cloudquotas.googleapis.com/QuotaPreference"
                           }
                         },
@@ -324,7 +324,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.field_behavior)": "IDENTIFIER",
                             "(google.api.resource_reference).type": "cloudquotas.googleapis.com/QuotaPreference"
                           }
                         }
@@ -336,7 +336,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.field_behavior)": "IDENTIFIER",
                             "(google.api.resource_reference).child_type": "cloudquotas.googleapis.com/QuotaPreference"
                           }
                         },
@@ -683,6 +683,172 @@
                         "ongoingRollout": {
                           "type": "bool",
                           "id": 1
+                        }
+                      }
+                    },
+                    "QuotaAdjusterSettingsManager": {
+                      "options": {
+                        "(google.api.default_host)": "cloudquotas.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "UpdateQuotaAdjusterSettings": {
+                          "requestType": "UpdateQuotaAdjusterSettingsRequest",
+                          "responseType": "QuotaAdjusterSettings",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{quota_adjuster_settings.name=projects/*/locations/*/quotaAdjusterSettings}",
+                            "(google.api.http).body": "quota_adjuster_settings",
+                            "(google.api.http).additional_bindings.patch": "/v1/{quota_adjuster_settings.name=organizations/*/locations/*/quotaAdjusterSettings}",
+                            "(google.api.http).additional_bindings.body": "quota_adjuster_settings",
+                            "(google.api.method_signature)": "quota_adjuster_settings,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{quota_adjuster_settings.name=projects/*/locations/*/quotaAdjusterSettings}",
+                                "body": "quota_adjuster_settings",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{quota_adjuster_settings.name=folders/*/locations/*/quotaAdjusterSettings}",
+                                    "body": "quota_adjuster_settings"
+                                  },
+                                  {
+                                    "patch": "/v1/{quota_adjuster_settings.name=organizations/*/locations/*/quotaAdjusterSettings}",
+                                    "body": "quota_adjuster_settings"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "quota_adjuster_settings,update_mask"
+                            }
+                          ]
+                        },
+                        "GetQuotaAdjusterSettings": {
+                          "requestType": "GetQuotaAdjusterSettingsRequest",
+                          "responseType": "QuotaAdjusterSettings",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/quotaAdjusterSettings}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=organizations/*/locations/*/quotaAdjusterSettings}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/quotaAdjusterSettings}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/locations/*/quotaAdjusterSettings}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=organizations/*/locations/*/quotaAdjusterSettings}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "GetQuotaAdjusterSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER",
+                            "(google.api.resource_reference).type": "cloudquotas.googleapis.com/QuotaAdjusterSettings"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateQuotaAdjusterSettingsRequest": {
+                      "fields": {
+                        "quotaAdjusterSettings": {
+                          "type": "QuotaAdjusterSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "QuotaAdjusterSettings": {
+                      "options": {
+                        "(google.api.resource).type": "cloudquotas.googleapis.com/QuotaAdjusterSettings",
+                        "(google.api.resource).pattern": "folders/{folder}/locations/{location}/quotaAdjusterSettings",
+                        "(google.api.resource).plural": "quotaAdjusterSettings",
+                        "(google.api.resource).singular": "quotaAdjusterSettings",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "enablement": {
+                          "type": "Enablement",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inherited": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inheritedFrom": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Enablement": {
+                          "values": {
+                            "ENABLEMENT_UNSPECIFIED": 0,
+                            "ENABLED": 2,
+                            "DISABLED": 3
+                          }
                         }
                       }
                     }

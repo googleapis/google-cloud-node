@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v6.2.0...grafeas-v6.3.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v6.1.2...grafeas-v6.2.0) (2026-06-16)
 
 

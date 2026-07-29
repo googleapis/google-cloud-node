@@ -208,6 +208,10 @@ export class CloudQuotasClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      folderLocationQuotaAdjusterSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/quotaAdjusterSettings',
+        ),
       folderLocationQuotaPreferencePathTemplate:
         new this._gaxModule.PathTemplate(
           'folders/{folder}/locations/{location}/quotaPreferences/{quota_preference}',
@@ -215,6 +219,10 @@ export class CloudQuotasClient {
       folderLocationServiceQuotaInfoPathTemplate:
         new this._gaxModule.PathTemplate(
           'folders/{folder}/locations/{location}/services/{service}/quotaInfos/{quota_info}',
+        ),
+      organizationLocationQuotaAdjusterSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/quotaAdjusterSettings',
         ),
       organizationLocationQuotaPreferencePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -227,6 +235,10 @@ export class CloudQuotasClient {
       projectLocationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}',
       ),
+      projectLocationQuotaAdjusterSettingsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/quotaAdjusterSettings',
+        ),
       projectLocationQuotaPreferencePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/quotaPreferences/{quota_preference}',
@@ -432,7 +444,7 @@ export class CloudQuotasClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the quota info.
+   *   Required. Identifier. The resource name of the quota info.
    *
    *   An example name:
    *   `projects/123/locations/global/services/compute.googleapis.com/quotaInfos/CpusPerProjectPerRegion`
@@ -563,7 +575,7 @@ export class CloudQuotasClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the resource
+   *   Required. Identifier. Name of the resource
    *
    *   Example name:
    *   `projects/123/locations/global/quota_preferences/my-config-for-us-east1`
@@ -703,7 +715,7 @@ export class CloudQuotasClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Value for parent.
+   *   Required. Identifier. Value for parent.
    *
    *   Example:
    *   `projects/123/locations/global`
@@ -1016,7 +1028,7 @@ export class CloudQuotasClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent value of QuotaInfo resources.
+   *   Required. Identifier. Parent value of QuotaInfo resources.
    *   Listing across different resource containers (such as 'projects/-') is not
    *   allowed.
    *
@@ -1149,7 +1161,7 @@ export class CloudQuotasClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent value of QuotaInfo resources.
+   *   Required. Identifier. Parent value of QuotaInfo resources.
    *   Listing across different resource containers (such as 'projects/-') is not
    *   allowed.
    *
@@ -1205,7 +1217,7 @@ export class CloudQuotasClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent value of QuotaInfo resources.
+   *   Required. Identifier. Parent value of QuotaInfo resources.
    *   Listing across different resource containers (such as 'projects/-') is not
    *   allowed.
    *
@@ -1260,7 +1272,7 @@ export class CloudQuotasClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent value of QuotaPreference resources.
+   *   Required. Identifier. Parent value of QuotaPreference resources.
    *   Listing across different resource containers (such as 'projects/-') is not
    *   allowed.
    *
@@ -1409,7 +1421,7 @@ export class CloudQuotasClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent value of QuotaPreference resources.
+   *   Required. Identifier. Parent value of QuotaPreference resources.
    *   Listing across different resource containers (such as 'projects/-') is not
    *   allowed.
    *
@@ -1481,7 +1493,7 @@ export class CloudQuotasClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent value of QuotaPreference resources.
+   *   Required. Identifier. Parent value of QuotaPreference resources.
    *   Listing across different resource containers (such as 'projects/-') is not
    *   allowed.
    *
@@ -1549,6 +1561,52 @@ export class CloudQuotasClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified folderLocationQuotaAdjusterSettings resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  folderLocationQuotaAdjusterSettingsPath(folder: string, location: string) {
+    return this.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+      },
+    );
+  }
+
+  /**
+   * Parse the folder from FolderLocationQuotaAdjusterSettings resource.
+   *
+   * @param {string} folderLocationQuotaAdjusterSettingsName
+   *   A fully-qualified path representing folder_location_quotaAdjusterSettings resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationQuotaAdjusterSettingsName(
+    folderLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.match(
+      folderLocationQuotaAdjusterSettingsName,
+    ).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationQuotaAdjusterSettings resource.
+   *
+   * @param {string} folderLocationQuotaAdjusterSettingsName
+   *   A fully-qualified path representing folder_location_quotaAdjusterSettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationQuotaAdjusterSettingsName(
+    folderLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.match(
+      folderLocationQuotaAdjusterSettingsName,
+    ).location;
+  }
 
   /**
    * Return a fully-qualified folderLocationQuotaPreference resource name string.
@@ -1698,6 +1756,55 @@ export class CloudQuotasClient {
     return this.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match(
       folderLocationServiceQuotaInfoName,
     ).quota_info;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationQuotaAdjusterSettings resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  organizationLocationQuotaAdjusterSettingsPath(
+    organization: string,
+    location: string,
+  ) {
+    return this.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+      },
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationQuotaAdjusterSettings resource.
+   *
+   * @param {string} organizationLocationQuotaAdjusterSettingsName
+   *   A fully-qualified path representing organization_location_quotaAdjusterSettings resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationQuotaAdjusterSettingsName(
+    organizationLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.match(
+      organizationLocationQuotaAdjusterSettingsName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationQuotaAdjusterSettings resource.
+   *
+   * @param {string} organizationLocationQuotaAdjusterSettingsName
+   *   A fully-qualified path representing organization_location_quotaAdjusterSettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationQuotaAdjusterSettingsName(
+    organizationLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.match(
+      organizationLocationQuotaAdjusterSettingsName,
+    ).location;
   }
 
   /**
@@ -1889,6 +1996,52 @@ export class CloudQuotasClient {
   matchLocationFromProjectLocationName(projectLocationName: string) {
     return this.pathTemplates.projectLocationPathTemplate.match(
       projectLocationName,
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationQuotaAdjusterSettings resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationQuotaAdjusterSettingsPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationQuotaAdjusterSettings resource.
+   *
+   * @param {string} projectLocationQuotaAdjusterSettingsName
+   *   A fully-qualified path representing project_location_quotaAdjusterSettings resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationQuotaAdjusterSettingsName(
+    projectLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.match(
+      projectLocationQuotaAdjusterSettingsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationQuotaAdjusterSettings resource.
+   *
+   * @param {string} projectLocationQuotaAdjusterSettingsName
+   *   A fully-qualified path representing project_location_quotaAdjusterSettings resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationQuotaAdjusterSettingsName(
+    projectLocationQuotaAdjusterSettingsName: string,
+  ) {
+    return this.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.match(
+      projectLocationQuotaAdjusterSettingsName,
     ).location;
   }
 

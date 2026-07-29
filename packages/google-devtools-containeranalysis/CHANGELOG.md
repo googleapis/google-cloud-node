@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.8.0...containeranalysis-v6.9.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
 ## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.7.2...containeranalysis-v6.8.0) (2026-06-16)
 
 

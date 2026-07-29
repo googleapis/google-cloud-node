@@ -22635,7 +22635,8 @@ export namespace google {
                     ROUTE_TYPE_UNSPECIFIED = 0,
                     VPC_PRIMARY_SUBNET = 1,
                     VPC_SECONDARY_SUBNET = 2,
-                    DYNAMIC_ROUTE = 3
+                    DYNAMIC_ROUTE = 3,
+                    PSC_GLOBAL_GAPI = 4
                 }
 
                 /** State enum. */
@@ -22682,7 +22683,8 @@ export namespace google {
                     LOCATION_FEATURE_UNSPECIFIED = 0,
                     SITE_TO_CLOUD_SPOKES = 1,
                     SITE_TO_SITE_SPOKES = 2,
-                    GATEWAY_SPOKES = 3
+                    GATEWAY_SPOKES = 3,
+                    TRANSPORTS = 4
                 }
 
                 /** Properties of a Hub. */
@@ -22726,6 +22728,9 @@ export namespace google {
 
                     /** Hub exportPsc */
                     exportPsc?: (boolean|null);
+
+                    /** Hub exportPscConfig */
+                    exportPscConfig?: (google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig|null);
                 }
 
                 /** Represents a Hub. */
@@ -22775,6 +22780,9 @@ export namespace google {
 
                     /** Hub exportPsc. */
                     public exportPsc?: (boolean|null);
+
+                    /** Hub exportPscConfig. */
+                    public exportPscConfig?: (google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig|null);
 
                     /**
                      * Creates a new Hub instance using the specified properties.
@@ -22852,6 +22860,112 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Hub {
+
+                    /** Properties of an ExportPscConfig. */
+                    interface IExportPscConfig {
+
+                        /** ExportPscConfig publishedServicesAndRegionalGoogleApis */
+                        publishedServicesAndRegionalGoogleApis?: (boolean|null);
+
+                        /** ExportPscConfig globalGoogleApis */
+                        globalGoogleApis?: (boolean|null);
+                    }
+
+                    /** Represents an ExportPscConfig. */
+                    class ExportPscConfig implements IExportPscConfig {
+
+                        /**
+                         * Constructs a new ExportPscConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig);
+
+                        /** ExportPscConfig publishedServicesAndRegionalGoogleApis. */
+                        public publishedServicesAndRegionalGoogleApis?: (boolean|null);
+
+                        /** ExportPscConfig globalGoogleApis. */
+                        public globalGoogleApis?: (boolean|null);
+
+                        /**
+                         * Creates a new ExportPscConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExportPscConfig instance
+                         */
+                        public static create(properties?: google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig): google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig;
+
+                        /**
+                         * Encodes the specified ExportPscConfig message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig.verify|verify} messages.
+                         * @param message ExportPscConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExportPscConfig message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig.verify|verify} messages.
+                         * @param message ExportPscConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.Hub.IExportPscConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExportPscConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExportPscConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig;
+
+                        /**
+                         * Decodes an ExportPscConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExportPscConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig;
+
+                        /**
+                         * Verifies an ExportPscConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExportPscConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExportPscConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig;
+
+                        /**
+                         * Creates a plain object from an ExportPscConfig message. Also converts values to other types if specified.
+                         * @param message ExportPscConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.networkconnectivity.v1beta.Hub.ExportPscConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExportPscConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExportPscConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a RoutingVPC. */
@@ -27649,6 +27763,15 @@ export namespace google {
 
                     /** LinkedVpnTunnels includeImportRanges */
                     includeImportRanges?: (string[]|null);
+
+                    /** LinkedVpnTunnels excludeImportRanges */
+                    excludeImportRanges?: (string[]|null);
+
+                    /** LinkedVpnTunnels includeExportRanges */
+                    includeExportRanges?: (string[]|null);
+
+                    /** LinkedVpnTunnels excludeExportRanges */
+                    excludeExportRanges?: (string[]|null);
                 }
 
                 /** Represents a LinkedVpnTunnels. */
@@ -27671,6 +27794,15 @@ export namespace google {
 
                     /** LinkedVpnTunnels includeImportRanges. */
                     public includeImportRanges: string[];
+
+                    /** LinkedVpnTunnels excludeImportRanges. */
+                    public excludeImportRanges: string[];
+
+                    /** LinkedVpnTunnels includeExportRanges. */
+                    public includeExportRanges: string[];
+
+                    /** LinkedVpnTunnels excludeExportRanges. */
+                    public excludeExportRanges: string[];
 
                     /**
                      * Creates a new LinkedVpnTunnels instance using the specified properties.
@@ -27764,6 +27896,15 @@ export namespace google {
 
                     /** LinkedInterconnectAttachments includeImportRanges */
                     includeImportRanges?: (string[]|null);
+
+                    /** LinkedInterconnectAttachments excludeImportRanges */
+                    excludeImportRanges?: (string[]|null);
+
+                    /** LinkedInterconnectAttachments includeExportRanges */
+                    includeExportRanges?: (string[]|null);
+
+                    /** LinkedInterconnectAttachments excludeExportRanges */
+                    excludeExportRanges?: (string[]|null);
                 }
 
                 /** Represents a LinkedInterconnectAttachments. */
@@ -27786,6 +27927,15 @@ export namespace google {
 
                     /** LinkedInterconnectAttachments includeImportRanges. */
                     public includeImportRanges: string[];
+
+                    /** LinkedInterconnectAttachments excludeImportRanges. */
+                    public excludeImportRanges: string[];
+
+                    /** LinkedInterconnectAttachments includeExportRanges. */
+                    public includeExportRanges: string[];
+
+                    /** LinkedInterconnectAttachments excludeExportRanges. */
+                    public excludeExportRanges: string[];
 
                     /**
                      * Creates a new LinkedInterconnectAttachments instance using the specified properties.
@@ -27879,6 +28029,15 @@ export namespace google {
 
                     /** LinkedRouterApplianceInstances includeImportRanges */
                     includeImportRanges?: (string[]|null);
+
+                    /** LinkedRouterApplianceInstances excludeImportRanges */
+                    excludeImportRanges?: (string[]|null);
+
+                    /** LinkedRouterApplianceInstances includeExportRanges */
+                    includeExportRanges?: (string[]|null);
+
+                    /** LinkedRouterApplianceInstances excludeExportRanges */
+                    excludeExportRanges?: (string[]|null);
                 }
 
                 /** Represents a LinkedRouterApplianceInstances. */
@@ -27901,6 +28060,15 @@ export namespace google {
 
                     /** LinkedRouterApplianceInstances includeImportRanges. */
                     public includeImportRanges: string[];
+
+                    /** LinkedRouterApplianceInstances excludeImportRanges. */
+                    public excludeImportRanges: string[];
+
+                    /** LinkedRouterApplianceInstances includeExportRanges. */
+                    public includeExportRanges: string[];
+
+                    /** LinkedRouterApplianceInstances excludeExportRanges. */
+                    public excludeExportRanges: string[];
 
                     /**
                      * Creates a new LinkedRouterApplianceInstances instance using the specified properties.
@@ -31973,6 +32141,20 @@ export namespace google {
                     public getRemoteTransportProfile(request: google.cloud.networkconnectivity.v1beta.IGetRemoteTransportProfileRequest): Promise<google.cloud.networkconnectivity.v1beta.RemoteTransportProfile>;
 
                     /**
+                     * Calls ParseFromActivationKey.
+                     * @param request ParseFromActivationKeyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ParseFromActivationKeyResponse
+                     */
+                    public parseFromActivationKey(request: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest, callback: google.cloud.networkconnectivity.v1beta.TransportManager.ParseFromActivationKeyCallback): void;
+
+                    /**
+                     * Calls ParseFromActivationKey.
+                     * @param request ParseFromActivationKeyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public parseFromActivationKey(request: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest): Promise<google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse>;
+
+                    /**
                      * Calls ListTransports.
                      * @param request ListTransportsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListTransportsResponse
@@ -32074,6 +32256,13 @@ export namespace google {
                     type GetRemoteTransportProfileCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.RemoteTransportProfile) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|parseFromActivationKey}.
+                     * @param error Error, if any
+                     * @param [response] ParseFromActivationKeyResponse
+                     */
+                    type ParseFromActivationKeyCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.networkconnectivity.v1beta.TransportManager|listTransports}.
                      * @param error Error, if any
                      * @param [response] ListTransportsResponse
@@ -32148,6 +32337,9 @@ export namespace google {
 
                     /** RemoteTransportProfile displayName */
                     displayName?: (string|null);
+
+                    /** RemoteTransportProfile providerType */
+                    providerType?: (google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ProviderType|keyof typeof google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ProviderType|null);
                 }
 
                 /** Represents a RemoteTransportProfile. */
@@ -32188,6 +32380,9 @@ export namespace google {
 
                     /** RemoteTransportProfile displayName. */
                     public displayName: string;
+
+                    /** RemoteTransportProfile providerType. */
+                    public providerType: (google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ProviderType|keyof typeof google.cloud.networkconnectivity.v1beta.RemoteTransportProfile.ProviderType);
 
                     /**
                      * Creates a new RemoteTransportProfile instance using the specified properties.
@@ -32307,6 +32502,13 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         CLOSED = 1,
                         OPEN = 2
+                    }
+
+                    /** ProviderType enum. */
+                    enum ProviderType {
+                        PROVIDER_TYPE_UNSPECIFIED = 0,
+                        CLOUD = 1,
+                        NETWORK = 2
                     }
                 }
 
@@ -32637,6 +32839,206 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ParseFromActivationKeyRequest. */
+                interface IParseFromActivationKeyRequest {
+
+                    /** ParseFromActivationKeyRequest parent */
+                    parent?: (string|null);
+
+                    /** ParseFromActivationKeyRequest activationKey */
+                    activationKey?: (string|null);
+                }
+
+                /** Represents a ParseFromActivationKeyRequest. */
+                class ParseFromActivationKeyRequest implements IParseFromActivationKeyRequest {
+
+                    /**
+                     * Constructs a new ParseFromActivationKeyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest);
+
+                    /** ParseFromActivationKeyRequest parent. */
+                    public parent: string;
+
+                    /** ParseFromActivationKeyRequest activationKey. */
+                    public activationKey: string;
+
+                    /**
+                     * Creates a new ParseFromActivationKeyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ParseFromActivationKeyRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest;
+
+                    /**
+                     * Encodes the specified ParseFromActivationKeyRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest.verify|verify} messages.
+                     * @param message ParseFromActivationKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ParseFromActivationKeyRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest.verify|verify} messages.
+                     * @param message ParseFromActivationKeyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ParseFromActivationKeyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ParseFromActivationKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest;
+
+                    /**
+                     * Decodes a ParseFromActivationKeyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ParseFromActivationKeyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest;
+
+                    /**
+                     * Verifies a ParseFromActivationKeyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ParseFromActivationKeyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ParseFromActivationKeyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest;
+
+                    /**
+                     * Creates a plain object from a ParseFromActivationKeyRequest message. Also converts values to other types if specified.
+                     * @param message ParseFromActivationKeyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ParseFromActivationKeyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ParseFromActivationKeyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ParseFromActivationKeyResponse. */
+                interface IParseFromActivationKeyResponse {
+
+                    /** ParseFromActivationKeyResponse remoteTransportProfile */
+                    remoteTransportProfile?: (google.cloud.networkconnectivity.v1beta.IRemoteTransportProfile|null);
+                }
+
+                /** Represents a ParseFromActivationKeyResponse. */
+                class ParseFromActivationKeyResponse implements IParseFromActivationKeyResponse {
+
+                    /**
+                     * Constructs a new ParseFromActivationKeyResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyResponse);
+
+                    /** ParseFromActivationKeyResponse remoteTransportProfile. */
+                    public remoteTransportProfile?: (google.cloud.networkconnectivity.v1beta.IRemoteTransportProfile|null);
+
+                    /**
+                     * Creates a new ParseFromActivationKeyResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ParseFromActivationKeyResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyResponse): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse;
+
+                    /**
+                     * Encodes the specified ParseFromActivationKeyResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse.verify|verify} messages.
+                     * @param message ParseFromActivationKeyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ParseFromActivationKeyResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse.verify|verify} messages.
+                     * @param message ParseFromActivationKeyResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1beta.IParseFromActivationKeyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ParseFromActivationKeyResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ParseFromActivationKeyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse;
+
+                    /**
+                     * Decodes a ParseFromActivationKeyResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ParseFromActivationKeyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse;
+
+                    /**
+                     * Verifies a ParseFromActivationKeyResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ParseFromActivationKeyResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ParseFromActivationKeyResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse;
+
+                    /**
+                     * Creates a plain object from a ParseFromActivationKeyResponse message. Also converts values to other types if specified.
+                     * @param message ParseFromActivationKeyResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1beta.ParseFromActivationKeyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ParseFromActivationKeyResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ParseFromActivationKeyResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Transport. */
                 interface ITransport {
 
@@ -32690,6 +33092,15 @@ export namespace google {
 
                     /** Transport peeringNetwork */
                     peeringNetwork?: (string|null);
+
+                    /** Transport hub */
+                    hub?: (string|null);
+
+                    /** Transport pscRoutingEnabled */
+                    pscRoutingEnabled?: (boolean|null);
+
+                    /** Transport autoAccept */
+                    autoAccept?: (boolean|null);
                 }
 
                 /** Represents a Transport. */
@@ -32751,6 +33162,15 @@ export namespace google {
 
                     /** Transport peeringNetwork. */
                     public peeringNetwork: string;
+
+                    /** Transport hub. */
+                    public hub: string;
+
+                    /** Transport pscRoutingEnabled. */
+                    public pscRoutingEnabled: boolean;
+
+                    /** Transport autoAccept. */
+                    public autoAccept: boolean;
 
                     /**
                      * Creates a new Transport instance using the specified properties.
@@ -33201,6 +33621,9 @@ export namespace google {
 
                     /** GetStatusRequest name */
                     name?: (string|null);
+
+                    /** GetStatusRequest skipCache */
+                    skipCache?: (boolean|null);
                 }
 
                 /** Represents a GetStatusRequest. */
@@ -33214,6 +33637,9 @@ export namespace google {
 
                     /** GetStatusRequest name. */
                     public name: string;
+
+                    /** GetStatusRequest skipCache. */
+                    public skipCache: boolean;
 
                     /**
                      * Creates a new GetStatusRequest instance using the specified properties.
