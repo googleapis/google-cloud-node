@@ -1,6 +1,17 @@
 # Changelog
 
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/jsdoc-region-tag-v4.0.3...jsdoc-region-tag-v5.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update jsdoc-region-tag to minimum Node version of 22. ([#8984](https://github.com/googleapis/google-cloud-node/issues/8984))
+
+### Features
+
+* Update jsdoc-region-tag to minimum Node version of 22. ([#8984](https://github.com/googleapis/google-cloud-node/issues/8984)) ([9c26691](https://github.com/googleapis/google-cloud-node/commit/9c26691675b420008ef713054f8c320e290c5714)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [4.0.3](https://github.com/googleapis/google-cloud-node/compare/jsdoc-region-tag-v4.0.2...jsdoc-region-tag-v4.0.3) (2026-07-23)
 
 
