@@ -86,6 +86,7 @@
     "packages/google-chat": {},
     "packages/google-cloud-accessapproval": {},
     "packages/google-cloud-advisorynotifications": {},
+    "packages/google-cloud-agentidentity": {},
     "packages/google-cloud-agentregistry": {},
     "packages/google-cloud-aiplatform": {},
     "packages/google-cloud-alloydb": {},
