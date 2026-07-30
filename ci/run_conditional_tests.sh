@@ -33,6 +33,7 @@ test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 if [[ "$(node -v)" == v22* ]]; then
   export NODE_OPTIONS="${NODE_OPTIONS} --no-warnings=DEP0040"
 fi
+export NODE_OPTIONS="${NODE_OPTIONS} --no-experimental-require-module"
 
 if [ -z "${GIT_DIFF_ARG}" ]; then
     if [ "${BUILD_TYPE}" == "presubmit" ]; then
