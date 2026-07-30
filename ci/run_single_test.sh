@@ -37,6 +37,8 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER_OUTPUT=${PROJECT}_sponge_log.xml
     export MOCHA_REPORTER_SUITENAME=${PROJECT}
     export MOCHA_REPORTER=xunit
+else
+    export MOCHA_REPORTER=dot
 fi
 
 # Dependencies are pre-installed globally at the workspace root.

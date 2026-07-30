@@ -5,18 +5,40 @@ on:
   pull_request:
 name: presubmit-windows
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      shard-matrix: ${{ steps.set-matrix.outputs.shard_matrix }}
+      shard-total: ${{ steps.set-matrix.outputs.shard_total }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Calculate Matrix
+        id: set-matrix
+        run: |
+          export DRY_RUN_SHARDS=true
+          export BUILD_TYPE=presubmit
+          export TEST_TYPE=units
+          export GIT_DIFF_ARG=HEAD^1
+          bash ci/run_conditional_tests.sh
   units:
+    needs: setup
+    name: units (Node ${{ matrix.node-version }}, Shard ${{ matrix.shard-index }})
     runs-on: windows-latest
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [18, 22, 24, 26]
+        node-version: [22, 24, 26]
+        shard-index: ${{ fromJSON(needs.setup.outputs.shard-matrix) }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
-          fetch-depth: 300
+          fetch-depth: 2
           persist-credentials: false
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: ${{ matrix.node-version }}
       - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
@@ -30,3 +52,40 @@ jobs:
         env:
           BUILD_TYPE: presubmit
           TEST_TYPE: units
+          SHARD_TOTAL: ${{ needs.setup.outputs.shard-total }}
+          SHARD_INDEX: ${{ matrix.shard-index }}
+          GIT_DIFF_ARG: HEAD^1
+
+  # Dummy jobs to satisfy branch protection requirements for each node version
+  units-status:
+    name: units (${{ matrix.node-version }})
+    needs: units
+    runs-on: ubuntu-latest
+    if: always()
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
+    steps:
+      - name: Check shard status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: { jobs } } = await github.rest.actions.listJobsForWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+            });
+            const nodeVersion = '${{ matrix.node-version }}';
+            const shardJobs = jobs.filter(j => j.name.includes(`units (Node ${nodeVersion},`));
+            if (shardJobs.length === 0) {
+              core.setFailed(`No shard jobs found for Node ${nodeVersion}`);
+              return;
+            }
+            const failed = shardJobs.filter(j => j.conclusion === 'failure' || j.conclusion === 'cancelled');
+            if (failed.length > 0) {
+              const failedLinks = failed.map(j => `- ${j.name}: ${j.html_url}`).join('\n');
+              core.setFailed(`${failed.length} shards failed for Node ${nodeVersion}:\n${failedLinks}`);
+            } else {
+              core.info(`All shards passed for Node ${nodeVersion}`);
+            }
