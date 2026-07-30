@@ -32,7 +32,7 @@ test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
 
 if [ -z "${GIT_DIFF_ARG}" ]; then
-    if [ ${BUILD_TYPE} == "presubmit" ]; then
+    if [ "${BUILD_TYPE}" == "presubmit" ]; then
         # For presubmit build, we want to know the difference from the
         # common commit in origin/main.
         GIT_DIFF_ARG="origin/main..."
@@ -40,7 +40,7 @@ if [ -z "${GIT_DIFF_ARG}" ]; then
         # Then fetch enough history for finding the common commit.
         git fetch origin main --deepen=300
 
-    elif [ ${BUILD_TYPE} == "continuous" ]; then
+    elif [ "${BUILD_TYPE}" == "continuous" ]; then
         # For continuous build, we want to know the difference in the last
         # commit. This assumes we use squash commit when merging PRs.
         GIT_DIFF_ARG="HEAD~.."
@@ -244,10 +244,10 @@ for i in "${!test_dirs[@]}"; do
     fi
 
     echo "running test in ${d}"
-    pushd ${d} >/dev/null
+    pushd "${d}" >/dev/null
     # Temporarily allow failure.
     set +e
-    ${test_script}
+    "${test_script}"
     ret=$?
     set -e
     if [ ${ret} -ne 0 ]; then
