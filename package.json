@@ -17,6 +17,7 @@
     "lint": "node ./bin/linter.mjs",
     "clean": "echo nothing to clean",
     "precompile": "echo nothing to precompile",
+    "compile": "turbo run compile",
     "system-test": "echo nothing to system test",
     "samples-test": "echo nothing to sample test"
   },
@@ -52,6 +53,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "gts": "^6.0.2",
     "prettier": "^3.3.3",
+    "turbo": "^2.0.14",
     "typescript": "^5.1.6"
   },
   "engines": {

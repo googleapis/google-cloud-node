@@ -44,7 +44,15 @@ jobs:
       - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
       - name: Install Workspace Dependencies (Frozen Lockfile)
         run: pnpm install --frozen-lockfile --ignore-scripts
-      - run: pnpm -r run compile
+      - name: Cache Turborepo
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+      - name: Compile Workspace (Turborepo Caching)
+        run: pnpm run compile
       - run: node --version
       - run: ci/run_conditional_tests.sh
         name: Run unit tests
@@ -69,7 +77,15 @@ jobs:
       - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
       - name: Install Workspace Dependencies (Frozen Lockfile)
         run: pnpm install --frozen-lockfile --ignore-scripts
-      - run: pnpm -r run compile
+      - name: Cache Turborepo
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+      - name: Compile Workspace (Turborepo Caching)
+        run: pnpm run compile
       - run: pnpm run lint
         name: Run monorepo linter
 
