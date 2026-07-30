@@ -5,6 +5,23 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9",
+          "message": "Update googleapis source and regenerate client libraries",
+          "issues": [
+            "8821"
+          ]
+        }
+      ],
+      "version": "6.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-winston",
+      "id": "125cde5b-cb6a-4c6b-838c-69358e5604ed",
+      "createTime": "2026-07-30T21:40:21.811Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b4cef8341fce750686fb48e57a819b883dc708ba",
           "message": "Onboard a new library",
           "issues": [
@@ -83908,5 +83925,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-29T20:49:49.925Z"
+  "updateTime": "2026-07-30T21:40:21.811Z"
 }
