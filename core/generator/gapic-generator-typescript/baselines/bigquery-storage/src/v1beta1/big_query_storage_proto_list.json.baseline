@@ -1,0 +1,7 @@
+[
+  "../../protos/google/cloud/bigquery/storage/v1beta1/arrow.proto",
+  "../../protos/google/cloud/bigquery/storage/v1beta1/avro.proto",
+  "../../protos/google/cloud/bigquery/storage/v1beta1/read_options.proto",
+  "../../protos/google/cloud/bigquery/storage/v1beta1/storage.proto",
+  "../../protos/google/cloud/bigquery/storage/v1beta1/table_reference.proto"
+]

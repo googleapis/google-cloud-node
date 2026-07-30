@@ -1,0 +1,269 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+
+package google.showcase.v1beta1;
+
+option go_package = "github.com/googleapis/gapic-showcase/server/genproto";
+option java_package = "com.google.showcase.v1beta1";
+option java_multiple_files = true;
+option ruby_package = "Google::Showcase::V1beta1";
+
+// This service is used to test that GAPICs implement various REST-related features correctly. This mostly means transcoding proto3 requests to REST format
+// correctly for various types of HTTP annotations, but it also includes verifying that unknown (numeric) enums received by clients can be round-tripped
+// correctly.
+service Compliance {
+  // This service is meant to only run locally on the port 7469 (keypad digits
+  // for "show").
+  option (google.api.default_host) = "localhost:7469";
+
+  // This method echoes the ComplianceData request. This method exercises
+  // sending the entire request object in the REST body.
+  rpc RepeatDataBody(RepeatRequest) returns (RepeatResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/repeat:body"
+      body: "*"
+    };
+  }
+
+  // This method echoes the ComplianceData request. This method exercises
+  // sending the a message-type field in the REST body. Per AIP-127, only
+  // top-level, non-repeated fields can be sent this way.
+  rpc RepeatDataBodyInfo(RepeatRequest) returns (RepeatResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/repeat:bodyinfo"
+      body: "info"
+    };
+  }
+
+  // This method echoes the ComplianceData request. This method exercises
+  // sending all request fields as query parameters.
+  rpc RepeatDataQuery(RepeatRequest) returns (RepeatResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/repeat:query"
+    };
+  }
+
+  // This method echoes the ComplianceData request. This method exercises
+  // sending some parameters as "simple" path variables (i.e., of the form
+  // "/bar/{foo}" rather than "/{foo=bar/*}"), and the rest as query parameters.
+  rpc RepeatDataSimplePath(RepeatRequest) returns (RepeatResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/repeat/{info.f_string}/{info.f_int32}/{info.f_double}/{info.f_bool}/{info.f_kingdom}:simplepath"
+    };
+  }
+
+  // Same as RepeatDataSimplePath, but with a path resource.
+  rpc RepeatDataPathResource(RepeatRequest) returns (RepeatResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/repeat/{info.f_string=first/*}/{info.f_child.f_string=second/*}/bool/{info.f_bool}:pathresource"
+      additional_bindings {
+        get: "/v1beta1/repeat/{info.f_child.f_string=first/*}/{info.f_string=second/*}/bool/{info.f_bool}:childfirstpathresource"
+      }
+    };
+  }
+
+  // Same as RepeatDataSimplePath, but with a trailing resource.
+  rpc RepeatDataPathTrailingResource(RepeatRequest) returns (RepeatResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/repeat/{info.f_string=first/*}/{info.f_child.f_string=second/**}:pathtrailingresource"
+    };
+  }
+
+  // This method echoes the ComplianceData request, using the HTTP PUT method.
+  rpc RepeatDataBodyPut(RepeatRequest) returns (RepeatResponse) {
+    option (google.api.http) = {
+      put: "/v1beta1/repeat:bodyput"
+      body: "*"
+    };
+  }
+
+  // This method echoes the ComplianceData request, using the HTTP PATCH method.
+  rpc RepeatDataBodyPatch(RepeatRequest) returns (RepeatResponse) {
+    option (google.api.http) = {
+      patch: "/v1beta1/repeat:bodypatch"
+      body: "*"
+    };
+  }
+
+  // This method requests an enum value from the server. Depending on the contents of EnumRequest, the enum value returned will be a known enum declared in the
+  // .proto file, or a made-up enum value the is unknown to the client. To verify that clients can round-trip unknown enum vaues they receive, use the
+  // response from this RPC as the request to VerifyEnum()
+  //
+  // The values of enums sent by the server when a known or unknown value is requested will be the same within a single Showcase server run (this is needed for
+  // VerifyEnum() to work) but are not guaranteed to be the same across separate Showcase server runs.
+  rpc GetEnum(EnumRequest) returns (EnumResponse) {
+    option (google.api.http) = {
+      get: "/v1beta1/compliance/enum"
+    };
+  }
+
+  // This method is used to verify that clients can round-trip enum values, which is particularly important for unknown enum values over REST. VerifyEnum()
+  // verifies that its request, which is presumably the response that the client previously got to a GetEnum(), contains the correct data. If so, it responds
+  // with the same EnumResponse; otherwise, the RPC errors.
+  //
+  // This works because the values of enums sent by the server when a known or unknown value is requested will be the same within a single Showcase server run,
+  // although they are not guaranteed to be the same across separate Showcase server runs.
+  rpc VerifyEnum(EnumResponse) returns (EnumResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/compliance/enum"
+    };
+  }
+
+}
+
+message RepeatRequest {
+  string name = 1;
+  ComplianceData info = 2;
+
+  // If true, the server will verify that the received request matches
+  // the request with the same name in the compliance test suite.
+  bool server_verify = 3;
+
+  // The URI template this request is expected to be bound to server-side.
+  optional string intended_binding_uri = 10;
+
+  // Some top level fields, to test that these are encoded correctly
+  // in query params.
+  int32 f_int32 = 4;
+  int64 f_int64 = 5;
+  double f_double = 6;
+
+  optional int32 p_int32 = 7;
+  optional int64 p_int64 = 8;
+  optional double p_double = 9;
+}
+
+message RepeatResponse {
+  RepeatRequest request = 1;
+
+  // The URI template the request was bound to server-side.
+  string binding_uri = 2;
+}
+
+// ComplianceSuite contains a set of requests that microgenerators should issue
+// over REST to the Compliance service to test their gRPC-to-REST transcoding
+// implementation.
+message ComplianceSuite {
+  repeated ComplianceGroup group = 1;
+}
+
+// ComplianceGroups encapsulates a group of RPC requests to the Compliance
+// server: one request for each combination of elements of `rpcs` and of
+// `requests`.
+message ComplianceGroup {
+  string name = 1;
+  repeated string rpcs = 2;
+  repeated RepeatRequest requests = 3;
+}
+
+// ComplianceData is a message used for testing REST transcoding of
+// different data types.
+message ComplianceData {
+  enum LifeKingdom {
+    LIFE_KINGDOM_UNSPECIFIED = 0;
+    ARCHAEBACTERIA = 1;
+    EUBACTERIA = 2;
+    PROTISTA = 3;
+    FUNGI = 4;
+    PLANTAE = 5;
+    ANIMALIA = 6;
+}
+  // scalar types
+
+  string f_string = 1;
+
+  int32 f_int32 = 2;
+  sint32 f_sint32 = 3;
+  sfixed32 f_sfixed32 = 4;
+
+  uint32 f_uint32 = 5;
+  fixed32 f_fixed32 = 6;
+
+  int64 f_int64 = 7;
+  sint64 f_sint64 = 8;
+  sfixed64 f_sfixed64 = 9;
+
+  uint64 f_uint64 = 10;
+  fixed64 f_fixed64 = 11;
+
+  double f_double = 12;
+  float f_float = 13;
+
+  bool f_bool = 14;
+
+  bytes f_bytes = 15;
+
+  LifeKingdom f_kingdom = 22;
+
+  ComplianceDataChild f_child = 16;
+
+  // optional fields
+
+  optional string p_string = 17;
+  optional int32 p_int32 = 18;
+  optional double p_double = 19;
+  optional bool p_bool = 20;
+  optional LifeKingdom p_kingdom = 23;
+  optional ComplianceDataChild p_child = 21;
+}
+
+message ComplianceDataChild {
+  string f_string = 1;
+  float f_float = 2;
+  double f_double = 3;
+  bool f_bool = 4;
+  Continent f_continent = 11;
+  ComplianceDataGrandchild f_child = 5;
+
+  optional string p_string = 6;
+  optional float p_float = 7;
+  optional double p_double = 8;
+  optional bool p_bool = 9;
+  Continent p_continent = 12;
+  optional ComplianceDataGrandchild p_child = 10;
+}
+
+message ComplianceDataGrandchild {
+  string f_string = 1;
+  double f_double = 2;
+  bool f_bool = 3;
+}
+
+enum Continent {
+  CONTINENT_UNSPECIFIED = 0;
+  AFRICA = 1;
+  AMERICA = 2;
+  ANTARTICA = 3;
+  AUSTRALIA = 4;
+  EUROPE = 5;
+}
+
+
+message EnumRequest {
+  // Whether the client is requesting a new, unknown enum value or a known enum value already declard in this proto file.
+  bool unknown_enum = 1;
+}
+
+message EnumResponse {
+  // The original request for a known or unknown enum from the server.
+  EnumRequest request = 1;
+
+  // The actual enum the server provided.
+  Continent continent = 2;
+}

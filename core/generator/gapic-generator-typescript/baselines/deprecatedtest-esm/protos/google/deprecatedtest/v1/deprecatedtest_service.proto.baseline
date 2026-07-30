@@ -1,0 +1,49 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/protobuf/empty.proto";
+
+package google.deprecatedtest.v1;
+
+option java_package = "com.google.deprecatedtest.v1";
+option java_multiple_files = true;
+
+// This is a service description.
+// It takes up multiple lines, like so.
+service DeprecatedService {
+  option (google.api.default_host) = "localhost:7469";
+  option (google.api.oauth_scopes) =
+      "https://www.googleapis.com/auth/cloud-platform";
+
+  option deprecated = true;
+
+  // Calculates Fibonacci on the provided value, quickly.
+  rpc FastFibonacci(FibonacciRequest) returns (google.protobuf.Empty);
+
+  // Calculates Fibonacci on the provided value, slowly.
+  rpc SlowFibonacci(FibonacciRequest) returns (google.protobuf.Empty) {
+    option deprecated = true;
+  };
+}
+
+// This is a message descxription.
+// Lorum ipsum dolor sit amet consectetur adipiscing elit.
+message FibonacciRequest {
+  // The nth term to retrieve in the Fibonacci sequence.
+  int32 value = 1;
+}

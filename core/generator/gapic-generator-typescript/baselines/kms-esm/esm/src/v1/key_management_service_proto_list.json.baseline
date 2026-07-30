@@ -1,0 +1,4 @@
+[
+  "../../protos/google/cloud/kms/v1/resources.proto",
+  "../../protos/google/cloud/kms/v1/service.proto"
+]
