@@ -12,23 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, beforeEach, afterEach, it} from 'mocha';
+import {describe, it} from 'mocha';
 import * as assert from 'assert';
 import {ServiceError} from 'google-gax';
 import {Bigtable} from '../src';
 import {BigtableClient, BigtableInstanceAdminClient} from '../src/v2';
-import {logActiveResources} from './common';
 
 describe('Service Path', () => {
-  beforeEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('BEFORE_TEST', testName);
-  });
-
-  afterEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('AFTER_TEST', testName);
-  });
   it('Setting universe domain should set the service path', async () => {
     // Set the environment variable
     process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'otherDomain';

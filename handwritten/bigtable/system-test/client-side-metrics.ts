@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {after, before, beforeEach, afterEach, describe, it} from 'mocha';
+import {after, before, describe, it} from 'mocha';
 import * as mocha from 'mocha';
 import {
   CloudMonitoringExporter,
@@ -38,7 +38,7 @@ import {PassThrough} from 'stream';
 import {generateChunksFromRequest} from '../test-common/utils/readRowsImpl';
 import {TabularApiSurface} from '../src/tabular-api-surface';
 import {MetricServiceClient} from '@google-cloud/monitoring';
-import {generateId, logActiveResources, reapInstances} from './common';
+import {generateId} from './common';
 
 const SECOND_PROJECT_ID = 'cfdb-sdk-node-tests';
 const instanceId1 = generateId('instance');
@@ -333,19 +333,7 @@ async function checkForPublishedMetrics(projectId: string) {
 describe('Bigtable/ClientSideMetrics', () => {
   let defaultProjectId: string;
 
-  beforeEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('BEFORE_TEST', testName);
-  });
-
-  afterEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('AFTER_TEST', testName);
-  });
-
   before(async () => {
-    await reapInstances(new Bigtable());
-    await reapInstances(new Bigtable({projectId: SECOND_PROJECT_ID}));
     /*
     For both the default project and the secondary project we need to create
     instances with some data in them so that the tests can collect all the
@@ -401,7 +389,6 @@ describe('Bigtable/ClientSideMetrics', () => {
       } catch (e) {
         console.warn('The instance has been deleted already');
       }
-      await reapInstances(bigtable);
     }
   });
 

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, beforeEach, afterEach} from 'mocha';
+import {describe} from 'mocha';
 import {expectedRequestsHandled} from '../test-common/metrics-handler-fixture';
 import {
   OnAttemptCompleteData,
@@ -27,7 +27,6 @@ import {ResourceMetrics} from '@opentelemetry/sdk-metrics';
 import * as assert from 'assert';
 import {ClientOptions} from 'google-gax';
 import * as proxyquire from 'proxyquire';
-import {logActiveResources} from './common';
 
 function getHandler(Exporter: typeof CloudMonitoringExporter) {
   const FakeCGPMetricsHandler = proxyquire(
@@ -42,15 +41,6 @@ function getHandler(Exporter: typeof CloudMonitoringExporter) {
 }
 
 describe('Bigtable/GCPMetricsHandler', () => {
-  beforeEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('BEFORE_TEST', testName);
-  });
-
-  afterEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('AFTER_TEST', testName);
-  });
   it('Should export a value to the GCPMetricsHandler', done => {
     (async () => {
       /*

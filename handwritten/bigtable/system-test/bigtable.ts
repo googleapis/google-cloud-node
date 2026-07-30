@@ -35,7 +35,7 @@ import {Family} from '../src/family.js';
 import {Row} from '../src/row.js';
 import {Table} from '../src/table.js';
 import {RawFilter} from '../src/filter';
-import {generateId, logActiveResources, reapBackups, reapInstances} from './common';
+import {generateId, PREFIX} from './common';
 import {BigtableTableAdminClient} from '../src/v2';
 import {ServiceError} from 'google-gax';
 import {BigtableDate, QueryResultRow} from '../src/execute-query/values';
@@ -57,24 +57,55 @@ describe('Bigtable', () => {
   const CLUSTER_ID = generateId('cluster');
   const CLUSTER_ID_HDD = generateId('cluster');
 
-  beforeEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('BEFORE_TEST', testName);
-  });
+  async function reapBackups(instance: Instance) {
+    try {
+      const [backups] = await instance.getBackups();
+      for (const backup of backups) {
+        try {
+          await backup.delete({timeout: 50 * 1000});
+        } catch (e) {
+          console.log(`Error deleting backup: ${backup.id}: ${e}`);
+        }
+      }
+    } catch (e) {
+      console.error(`Error listing backups from ${instance.name}: ${e}`);
+    }
+  }
 
-  afterEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('AFTER_TEST', testName);
-  });
+  async function reapInstances() {
+    const [instances] = await bigtable.getInstances();
+    const testInstances = instances
+      .filter(i => i.id.match(PREFIX))
+      .filter(i => {
+        const timeCreated = i.metadata!.labels!.time_created as {} as Date;
+        // Only delete stale resources.
+        const oneHourAgo = new Date(Date.now() - 3600000);
+        return !timeCreated || timeCreated <= oneHourAgo;
+      });
+    // need to delete backups first due to instance deletion precondition
+    const deleteBackupPromises = testInstances.map(instance =>
+      reapBackups(instance),
+    );
+    for (const backupPromise of deleteBackupPromises) {
+      await backupPromise;
+    }
+    for (const instance of testInstances) {
+      try {
+        await instance.delete();
+      } catch (e) {
+        console.log(`Error deleting instance: ${instance.id}`);
+      }
+    }
+  }
 
   before(async () => {
-    await reapInstances(bigtable);
+    await reapInstances();
     const [, operation] = await INSTANCE.create({
       clusters: [
         {
           id: CLUSTER_ID,
           location: 'us-central2-c',
-          nodes: 1,
+          nodes: 3,
           storage: 'ssd',
         },
       ],
@@ -87,7 +118,7 @@ describe('Bigtable', () => {
         {
           id: CLUSTER_ID_HDD,
           location: 'us-central2-c',
-          nodes: 1,
+          nodes: 3,
           storage: 'hdd',
         },
       ],
@@ -110,20 +141,22 @@ describe('Bigtable', () => {
   });
 
   after(async () => {
+    const q = [];
     const instances = [INSTANCE, DIFF_INSTANCE, CMEK_INSTANCE, INSTANCE_HDD];
 
     // need to delete backups first due to instance deletion precondition
     await Promise.all(instances.map(instance => reapBackups(instance)));
     await Promise.all(
-      instances.map(async instance => {
-        try {
-          await instance.delete();
-        } catch (e) {
-          console.log(`Error deleting instance: ${instance.id}`);
-        }
+      instances.map(instance => {
+        q.push(async () => {
+          try {
+            await instance.delete();
+          } catch (e) {
+            console.log(`Error deleting instance: ${instance.id}`);
+          }
+        });
       }),
     );
-    await reapInstances(bigtable);
   });
 
   describe('instances', () => {
@@ -183,7 +216,7 @@ describe('Bigtable', () => {
           {
             id: clusteId,
             location: 'us-central2-c',
-            nodes: 1,
+            nodes: 3,
           },
         ],
         labels: {
@@ -236,7 +269,7 @@ describe('Bigtable', () => {
           {
             id: CMEK_CLUSTER.id,
             location: 'us-central2-a',
-            nodes: 1,
+            nodes: 3,
             key: kmsKeyName,
           },
         ],
@@ -268,7 +301,7 @@ describe('Bigtable', () => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [_, operation] = await cluster.create({
         location: 'us-central2-b',
-        nodes: 1,
+        nodes: 3,
         key: kmsKeyName,
       });
       await operation.promise();
@@ -284,7 +317,7 @@ describe('Bigtable', () => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [_, operation] = await cluster.create({
           location: 'us-central2-b',
-          nodes: 1,
+          nodes: 3,
         });
         await operation.promise();
         throw new Error('Cluster creation should not have succeeded');
@@ -400,7 +433,7 @@ describe('Bigtable', () => {
 
     it('should update a cluster', async () => {
       const metadata = {
-        nodes: 2,
+        nodes: 4,
       };
       const [operation] = await CLUSTER.setMetadata(metadata);
       await operation.promise();
@@ -1684,7 +1717,7 @@ describe('Bigtable', () => {
               clusters: [
                 {
                   id: destinationClusterId,
-                  nodes: 1,
+                  nodes: 3,
                   location: 'us-central2-d',
                   storage: 'ssd',
                 },
@@ -1728,7 +1761,7 @@ describe('Bigtable', () => {
               destinationClusterId,
             ).create({
               location: 'us-central2-b',
-              nodes: 1,
+              nodes: 3,
             });
             await operation.promise();
           }
@@ -1773,7 +1806,7 @@ describe('Bigtable', () => {
               clusters: [
                 {
                   id: destinationClusterId,
-                  nodes: 1,
+                  nodes: 3,
                   location: 'us-central2-d',
                   storage: 'ssd',
                 },

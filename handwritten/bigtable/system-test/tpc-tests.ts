@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {after, beforeEach, afterEach, describe, it} from 'mocha';
+import {after, describe, it} from 'mocha';
 import {Bigtable} from '../src';
-import {generateId, logActiveResources} from './common';
 
 // INSTRUCTIONS FOR RUNNING TEST:
 // 1. Change describe.skip to describe.only below.
@@ -23,15 +22,6 @@ import {generateId, logActiveResources} from './common';
 // 4. Run `npm run system-test`.
 
 describe.skip('Universe domain tests', () => {
-  beforeEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('BEFORE_TEST', testName);
-  });
-
-  afterEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('AFTER_TEST', testName);
-  });
   // These tests are only designed to pass when using the service account
   // credentials for the universe domain environment so we skip them in the CI pipeline.
   //
@@ -80,17 +70,19 @@ describe.skip('Universe domain tests', () => {
     }
   }
 
-  const instanceId = generateId('emu-test-inst');
+  const instanceId = 'emulator-test-instance';
   const tableId = 'my-table';
   const columnFamilyId = 'cf1';
 
   after(async () => {
-    try {
-      const instance = new Bigtable().instance(instanceId);
-      await instance.delete({});
-    } catch (e) {
-      console.log(`Error deleting instance ${instanceId}: ${e}`);
-    }
+    // TODO: Solve the issue where tests fail because instances don't get created on time.
+    // Notes: Creating instances can take time and if they are not ready in
+    // time then tests can fail. This shouldn't happen because if the create
+    // instance long running operation completes then the instance should be
+    // ready and shouldn't produce the `Error: 5 NOT_FOUND` error.
+    // Uncomment the code below when the task above is addressed:
+    // const instance = bigtable.instance(instanceId);
+    // await instance.delete({});
   });
 
   it('should set the universe with a client option', done => {

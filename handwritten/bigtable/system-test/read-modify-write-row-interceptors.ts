@@ -29,9 +29,8 @@ import {
 import * as assert from 'assert';
 import {status as GrpcStatus} from '@grpc/grpc-js';
 import {createMetricsUnaryInterceptorProvider} from '../src/client-side-metrics/metric-interceptor';
-import {generateId, logActiveResources, reapInstances} from './common';
 
-const INSTANCE_ID = generateId('isolated-rmw-inst');
+const INSTANCE_ID = 'isolated-rmw-instance';
 const TABLE_ID = 'isolated-rmw-table';
 const ZONE = 'us-central2-a';
 const CLUSTER = 'fake-cluster';
@@ -151,19 +150,8 @@ describe('Bigtable/ReadModifyWriteRowInterceptorMetrics', () => {
   let bigtable: Bigtable;
   let testMetricsHandler: TestMetricsHandler;
 
-  beforeEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('BEFORE_TEST', testName);
-  });
-
-  afterEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('AFTER_TEST', testName);
-  });
-
   before(async () => {
     bigtable = new Bigtable();
-    await reapInstances(bigtable);
     await getProjectIdFromClient(bigtable);
     await createInstance(bigtable, INSTANCE_ID, CLUSTER, ZONE);
     await createTable(bigtable, INSTANCE_ID, TABLE_ID, COLUMN_FAMILIES);

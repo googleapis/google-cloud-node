@@ -12,24 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it, before, after, beforeEach, afterEach} from 'mocha';
-import {generateId, logActiveResources, reapInstances} from './common';
+import {describe, it, before, after} from 'mocha';
+import {generateId} from './common';
 import {AppProfileOptions, Bigtable, Instance} from '../src';
 import {AppProfile} from '../src';
 import assert = require('assert');
 
 describe('📦 App Profile', () => {
   const bigtable = new Bigtable();
-
-  beforeEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('BEFORE_TEST', testName);
-  });
-
-  afterEach(async function () {
-    const testName = this.currentTest?.fullTitle() || 'Unknown Test';
-    await logActiveResources('AFTER_TEST', testName);
-  });
 
   describe('📦 Create a profile', () => {
     let instance: Instance;
@@ -48,7 +38,6 @@ describe('📦 App Profile', () => {
     }
 
     before(async () => {
-      await reapInstances(bigtable);
       // Creates an instance with clusters
       const instanceClusters = [
         'us-east1-c',
