@@ -47,7 +47,7 @@
     "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "@google-cloud/promisify": "^5.0.0",
+    "@google-cloud/promisify": "^6.0.0",
     "google-gax": "^6.0.0"
   },
   "devDependencies": {

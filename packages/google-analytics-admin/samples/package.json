@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@google-analytics/admin": "^9.2.0",
-    "google-auth-library": "^10.0.0",
+    "google-auth-library": "^11.0.0",
     "google-gax": "^6.0.0",
     "http": "0.0.1-security",
     "open": "^8.0.0",
