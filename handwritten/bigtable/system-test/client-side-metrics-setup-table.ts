@@ -44,6 +44,11 @@ export async function setupBigtable(
       }
       await new Promise(resolve => setTimeout(resolve, 2000));
     }
+    if (!instanceExists) {
+      throw new Error(
+        `Failed to setup Bigtable: Instance ${instanceId} does not exist or creation failed.`,
+      );
+    }
   }
   const tables = tableIds.map(tableId => instance.table(tableId));
   for (const currentTable of tables) {

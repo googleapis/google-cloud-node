@@ -312,21 +312,31 @@ async function checkForPublishedMetrics(projectId: string) {
   ];
   for (let i = 0; i < filters.length; i++) {
     const filter = filters[i];
-    const [series] = await monitoringClient.listTimeSeries({
-      name: `projects/${projectId}`,
-      interval: {
-        endTime: {
-          seconds: now,
-          nanos: 0,
+    // A race condition with the metrics submission can cause this to check too
+    // early. Check up to 5 times with 2 seconds between checks.
+    let seriesLength = 0;
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const [series] = await monitoringClient.listTimeSeries({
+        name: `projects/${projectId}`,
+        interval: {
+          endTime: {
+            seconds: now,
+            nanos: 0,
+          },
+          startTime: {
+            seconds: now - 1000 * 60 * 60 * 24,
+            nanos: 0,
+          },
         },
-        startTime: {
-          seconds: now - 1000 * 60 * 60 * 24,
-          nanos: 0,
-        },
-      },
-      filter,
-    });
-    assert(series.length > 0);
+        filter,
+      });
+      if (series.length > 0) {
+        seriesLength = series.length;
+        break;
+      }
+      await new Promise(r => setTimeout(r, 2000));
+    }
+    assert(seriesLength > 0);
   }
 }
 
@@ -464,12 +474,10 @@ describe('Bigtable/ClientSideMetrics', () => {
                       done();
                     })
                     .catch(err => {
-                      done(new Error('Metrics have not been published'));
                       done(err);
                     });
                 } catch (error) {
                   // The code here isn't 0 so we report the original error to the mocha test runner.
-                  done(result);
                   done(error);
                 }
               } else {

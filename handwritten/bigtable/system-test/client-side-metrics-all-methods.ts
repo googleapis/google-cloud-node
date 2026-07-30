@@ -324,7 +324,7 @@ const rules = [
  *   Cloud Monitoring.
  */
 async function checkForPublishedMetrics(projectId: string) {
-  const monitoringClient = new MetricServiceClient(); // Correct instantiation
+  const monitoringClient = new MetricServiceClient({projectId}); // Correct instantiation
   const now = Math.floor(Date.now() / 1000);
   const filters = [
     'metric.type="bigtable.googleapis.com/client/attempt_latencies"',
@@ -334,22 +334,32 @@ async function checkForPublishedMetrics(projectId: string) {
     'metric.type="bigtable.googleapis.com/client/first_response_latencies"',
   ];
   for (let i = 0; i < filters.length; i++) {
+    // A race condition with the metrics submission can cause this to check too
+    // early. Check up to 5 times with 2 seconds between checks.
     const filter = filters[i];
-    const [series] = await monitoringClient.listTimeSeries({
-      name: `projects/${projectId}`,
-      interval: {
-        endTime: {
-          seconds: now,
-          nanos: 0,
+    let seriesLength = 0;
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const [series] = await monitoringClient.listTimeSeries({
+        name: `projects/${projectId}`,
+        interval: {
+          endTime: {
+            seconds: now,
+            nanos: 0,
+          },
+          startTime: {
+            seconds: now - 1000 * 60 * 60 * 24,
+            nanos: 0,
+          },
         },
-        startTime: {
-          seconds: now - 1000 * 60 * 60 * 24,
-          nanos: 0,
-        },
-      },
-      filter,
-    });
-    assert(series.length > 0);
+        filter,
+      });
+      if (series.length > 0) {
+        seriesLength = series.length;
+        break;
+      }
+      await new Promise(r => setTimeout(r, 2000));
+    }
+    assert(seriesLength > 0);
   }
 }
 
@@ -482,12 +492,15 @@ describe('Bigtable/ClientSideMetricsAllMethods', () => {
                   // result from calling export was successful.
                   assert.strictEqual(result.code, 0);
                   resultCallback({code: 0});
-                  void checkForPublishedMetrics(projectId).then(() => {
-                    done();
-                  });
+                  void checkForPublishedMetrics(projectId)
+                    .then(() => {
+                      done();
+                    })
+                    .catch(err => {
+                      done(err);
+                    });
                 } catch (error) {
                   // The code here isn't 0 so we report the original error to the mocha test runner.
-                  done(result);
                   done(error);
                 }
               } else {
