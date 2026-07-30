@@ -64,72 +64,83 @@ function runGit(args, options = {}) {
 }
 
 /**
+ * Helper to get modified/added TypeScript files against a given git ref.
+ * Uses merge-base when possible to compare against the common ancestor (e.g. when base and branch have both moved).
+ */
+function getDiffFiles(ref) {
+  let diffTarget = ref;
+  try {
+    const mergeBase = runGit(['merge-base', ref, 'HEAD']).trim();
+    if (mergeBase) {
+      diffTarget = mergeBase;
+    }
+  } catch {
+    // If merge-base fails (e.g. shallow clone or invalid ref), fall back to using ref directly
+  }
+
+  const output = runGit([
+    'diff',
+    '--name-only',
+    '--diff-filter=ACMRT',
+    diffTarget,
+    '--',
+    '*.ts',
+  ]);
+  return output
+    .split('\n')
+    .map(f => f.trim())
+    .filter(f => f.length > 0 && existsSync(f));
+}
+
+/**
  * Returns a list of changed TypeScript files comparing against target branches/references.
  */
 function getChangedFiles() {
-  const base = process.env.GITHUB_BASE_REF || 'main';
+  const isCI = Boolean(process.env.CI || process.env.GITHUB_ACTIONS || process.env.GITHUB_BASE_REF);
 
-  // Attempt to fetch the base branch and set origin/${base} so it doesn't compare against itself
-  if (process.env.GITHUB_BASE_REF) {
+  if (isCI) {
+    const baseRef = process.env.GITHUB_BASE_REF;
+    if (!baseRef) {
+      throw new Error('Running in CI but GITHUB_BASE_REF environment variable is not set.');
+    }
     try {
-      runGit([
-        'fetch',
-        'origin',
-        `+refs/heads/${base}:refs/remotes/origin/${base}`,
-        '--depth=1',
-      ]);
+      const files = getDiffFiles(baseRef);
+      console.log(`Comparing against base reference: ${baseRef}`);
+      return files;
     } catch {
-      // Continue if network fetch fails or remote does not exist
+      throw new Error(`Failed to determine changed files against GITHUB_BASE_REF '${baseRef}' in CI.`);
     }
   }
 
-  const refsToTry = [
-    `origin/${base}...HEAD`,
-    `${base}...HEAD`,
-    `upstream/${base}...HEAD`,
-    `origin/${base}`,
-    base,
-    `upstream/${base}`,
-    'HEAD~1',
-    'HEAD^',
-  ];
+  let currentBranch = '';
+  try {
+    currentBranch = runGit(['rev-parse', '--abbrev-ref', 'HEAD']).trim();
+  } catch {
+    // Continue with fallback refs if branch detection fails
+  }
 
+  if (currentBranch === 'main') {
+    try {
+      const files = getDiffFiles('HEAD~1');
+      console.log('Comparing against base reference: HEAD~1');
+      return files;
+    } catch {
+      throw new Error("Failed to determine changed files against 'HEAD~1' on main branch.");
+    }
+  }
+
+  const refsToTry = ['upstream/main', 'origin/main', 'main'];
   for (const ref of refsToTry) {
     try {
-      const output = runGit([
-        'diff',
-        '--name-only',
-        '--diff-filter=ACMRT',
-        ref,
-        '--',
-        '*.ts',
-      ]);
-      return output
-        .split('\n')
-        .map(f => f.trim())
-        .filter(f => f.length > 0 && existsSync(f));
+      const files = getDiffFiles(ref);
+      console.log(`Comparing against base reference: ${ref}`);
+      return files;
     } catch {
-      // Continue to the next fallback ref
+      // Continue to next ref if this one fails/does not exist
     }
   }
 
-  // Fallback to checking uncommitted working tree changes against HEAD if all specific refs fail
-  try {
-    const output = runGit([
-      'diff',
-      '--name-only',
-      '--diff-filter=ACMRT',
-      'HEAD',
-      '--',
-      '*.ts',
-    ]);
-    return output
-      .split('\n')
-      .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
-  } catch {
-    return [];
-  }
+  throw new Error(`Failed to determine changed files. Tried refs: ${refsToTry.join(', ')}`);
 }
 
 // --- ESLint Checker ---
