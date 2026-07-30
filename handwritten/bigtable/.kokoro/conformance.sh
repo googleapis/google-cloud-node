@@ -16,23 +16,21 @@
 
 #set -eo pipefail
 
-export NPM_CONFIG_PREFIX=${HOME}/.npm-global
-
-## cd to the parent directory, i.e. the root of the git repo
+## cd to the parent directory, i.e. handwritten/bigtable
 cd $(dirname $0)/..
 
 # Stop the testbench & cleanup environment variables
 function cleanup() {
     echo "Cleanup testbench"
     # Stop the proxy
-    kill $proxyPID
+    if [ -n "$proxyPID" ]; then
+        kill $proxyPID || true
+    fi
 }
 trap cleanup EXIT
 
-# Build and start the proxy in a separate process
+# Start the proxy in a separate process
 pushd .
-npm install -g pnpm@9
-pnpm install
 nohup pnpm run testproxy &
 proxyPID=$!
 popd
