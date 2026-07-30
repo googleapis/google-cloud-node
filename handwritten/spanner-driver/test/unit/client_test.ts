@@ -14,7 +14,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import {Client, DatabaseError} from '../../src/index.js';
+import {Client, DatabaseError, Query, QueryResult} from '../../src/index.js';
 
 describe('Client Class', () => {
   it('should instantiate Client with config object or string', () => {
@@ -57,7 +57,7 @@ describe('Client Class', () => {
     });
   });
 
-  it('should update txStatus to T when BEGIN statement is executed', async () => {
+  it('should update txStatus to T on BEGIN and reset to I on COMMIT or ROLLBACK', async () => {
     const client = new Client({
       project: 'p',
       instance: 'i',
@@ -66,8 +66,37 @@ describe('Client Class', () => {
     assert.strictEqual(client.txStatus, 'I');
     await client.query('BEGIN');
     assert.strictEqual(client.txStatus, 'T');
-    await client.end();
+    await client.query('COMMIT');
     assert.strictEqual(client.txStatus, 'I');
+
+    await client.query('START TRANSACTION');
+    assert.strictEqual(client.txStatus, 'T');
+    await client.query('ROLLBACK');
+    assert.strictEqual(client.txStatus, 'I');
+    await client.end();
+  });
+
+  it('should parse command verb and txStatus correctly when SQL contains leading comments', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    assert.strictEqual(client.txStatus, 'I');
+
+    // Query with leading block comment
+    const res1 = await client.query('/* knex: query */ SELECT * FROM users');
+    assert.strictEqual(res1.command, 'SELECT');
+
+    // Transaction query with leading line comment
+    await client.query('-- Start transaction\nBEGIN;');
+    assert.strictEqual(client.txStatus, 'T');
+
+    // Commit query with block comment
+    await client.query('/* Context */ COMMIT;');
+    assert.strictEqual(client.txStatus, 'I');
+
+    await client.end();
   });
 
   it('should execute query with async/await and return QueryResult', async () => {
@@ -90,6 +119,20 @@ describe('Client Class', () => {
       database: 'd',
     });
     void client.query('SELECT 1', (err, res) => {
+      assert.strictEqual(err, null);
+      assert.strictEqual(res?.command, 'SELECT');
+      void client.end().then(() => done());
+    });
+  });
+
+  it('should resolve callback when passing Query instance and 3rd argument callback function', done => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    const q = new Query<QueryResult>('SELECT $1', [42]);
+    void client.query(q, [42], (err, res) => {
       assert.strictEqual(err, null);
       assert.strictEqual(res?.command, 'SELECT');
       void client.end().then(() => done());

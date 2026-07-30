@@ -31,7 +31,7 @@ interface QueryTask<T = unknown> {
  * Client class representing a single database connection to Google Cloud Spanner.
  * Compatible with node-postgres (`pg.Client`) interface.
  *
- * Handles DSN resolution, connection lifecycle (`connect`/`end`), sequential query
+ * Handles DSN resolution, connection lifecycle (`connect`/`end`/`release`), sequential query
  * execution, transaction state tracking (`txStatus`), and dialect-aware error enrichment.
  */
 export class Client extends EventEmitter {
@@ -68,13 +68,9 @@ export class Client extends EventEmitter {
    */
   constructor(config?: string | ClientConfig) {
     super();
-    if (typeof config === 'string') {
-      this.dsn = resolveDsn(config);
-      this.config = {connectionString: config};
-    } else {
-      this.config = config || {};
-      this.dsn = resolveDsn(this.config);
-    }
+    this.config =
+      typeof config === 'string' ? {connectionString: config} : config || {};
+    this.dsn = resolveDsn(config);
   }
 
   /**
@@ -105,6 +101,7 @@ export class Client extends EventEmitter {
           'Invalid Spanner connection configuration: project, instance, and database must be provided.',
         );
       }
+      // TODO(PR 4 - Native CGO Bridge): Instantiate native CGO Spanner connection handle via spannerlib-node
       this.isConnected = true;
     } catch (err) {
       throw enrichError(err, this.dialect);
@@ -136,6 +133,8 @@ export class Client extends EventEmitter {
       query.callback;
     if (typeof values === 'function') {
       actualCallback = values as QueryCallback<QueryResult<R>>;
+    } else if (typeof callback === 'function') {
+      actualCallback = callback;
     }
 
     const task: QueryTask<QueryResult<R>> = {
@@ -180,30 +179,39 @@ export class Client extends EventEmitter {
             await this.connect();
           }
 
-          const trimmedUpper = sqlText.trim().toUpperCase();
+          // Strip SQL block and line comments to accurately inspect lead statement verbs
+          const cleanSql = sqlText
+            .replace(/\/\*[\s\S]*?\*\//g, '')
+            .replace(/--.*$/gm, '')
+            .trim();
+          const cleanUpper = cleanSql.toUpperCase();
+
           if (
-            trimmedUpper.startsWith('BEGIN') ||
-            trimmedUpper.startsWith('START TRANSACTION')
+            cleanUpper.startsWith('BEGIN') ||
+            cleanUpper.startsWith('START TRANSACTION')
           ) {
             this.txStatus = 'T';
           }
 
-          const statements = sqlText
-            .split(';')
-            .map(s => s.trim())
-            .filter(s => s.length > 0);
+          const command = cleanUpper
+            ? cleanUpper.replace(/^[^A-Z]+/, '').split(/\s+/)[0]
+            : 'SELECT';
 
-          const command =
-            statements.length > 0
-              ? statements[0].split(/\s+/)[0].toUpperCase()
-              : 'SELECT';
-
+          // TODO(PR 4 - Native CGO Bridge): Execute query through native CGO bridge (spannerlib-node)
           const result: QueryResult<R> = {
             rows: [],
             fields: [],
             rowCount: 0,
             command,
           };
+
+          if (
+            cleanUpper.startsWith('COMMIT') ||
+            cleanUpper.startsWith('ROLLBACK') ||
+            cleanUpper.startsWith('ABORT')
+          ) {
+            this.txStatus = 'I';
+          }
 
           query.emit('end', result);
           if (actualCallback) {
@@ -217,7 +225,7 @@ export class Client extends EventEmitter {
           }
           if (actualCallback) {
             process.nextTick(() => actualCallback!(enriched));
-          } else {
+          } else if (query.listenerCount('error') > 0) {
             query.emit('error', enriched);
           }
           throw enriched;
@@ -233,9 +241,8 @@ export class Client extends EventEmitter {
           resolve(res);
           return res;
         } catch (err: unknown) {
-          const enriched = enrichError(err, this.dialect);
-          reject(enriched);
-          throw enriched;
+          reject(err);
+          throw err;
         }
       };
     });
@@ -270,6 +277,23 @@ export class Client extends EventEmitter {
   }
 
   /**
+   * Releases the client connection.
+   * Compatible with node-postgres (`client.release()`) interface.
+   *
+   * TODO(PR 4 - Connection Pooling): Full connection pool recycling (returning active
+   * clients back to an idle connection queue instead of closing them) will be implemented in PR 4.
+   * Currently in PR 3 basic pool scaffolding, release() delegates to end() to close the connection.
+   *
+   * @param callback - Optional Node callback function.
+   * @returns Promise resolving when connection is released, or void if callback is passed.
+   */
+  public release(): Promise<void>;
+  public release(callback: (err: Error | null) => void): void;
+  public release(callback?: (err: Error | null) => void): Promise<void> | void {
+    return this.end(callback as (err: Error | null) => void);
+  }
+
+  /**
    * Closes the client connection and resets transaction status.
    * Supports both Promise (`await client.end()`) and Node callback (`client.end(cb)`) forms.
    *
@@ -291,6 +315,7 @@ export class Client extends EventEmitter {
     if (!this.isConnected) {
       return;
     }
+    // TODO(PR 4 - Native CGO Bridge): Close native CGO Spanner connection handle via spannerlib-node
     this.isConnected = false;
     this.txStatus = 'I';
   }

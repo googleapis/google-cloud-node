@@ -1,6 +1,6 @@
-# `@google-cloud/spanner-driver`
+# Google Cloud Spanner Node.js Driver (`@google-cloud/spanner-driver`)
 
-> A high-performance, `node-postgres` (`pg`) compatible Node.js driver for **Google Cloud Spanner**.
+The `@google-cloud/spanner-driver` package provides a high-performance, `node-postgres` (`pg`) compatible client and connection pool interface for Google Cloud Spanner. It bridges Node.js applications directly to Spanner using a native Go CGO engine, delivering full PostgreSQL dialect support.
 
 [![npm version](https://img.shields.io/npm/v/@google-cloud/spanner-driver.svg)](https://www.npmjs.com/package/@google-cloud/spanner-driver)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
@@ -53,15 +53,14 @@ async function main() {
   console.log(`Returned ${result.rowCount} rows:`);
   console.log(result.rows);
 
+  // Close connection (or call client.release())
   await client.end();
 }
 
 main().catch(console.error);
 ```
 
----
-
-### 2. Using Connection Pooling (`Pool`)
+### 2. Connection Pooling via `Pool`
 
 ```typescript
 import { Pool } from '@google-cloud/spanner-driver';
@@ -72,10 +71,20 @@ const pool = new Pool({
   database: 'my-spanner-database',
 });
 
-async function queryDatabase() {
-  // pool.query automatically acquires a client, runs the query, and releases it
+async function runPoolQueries() {
+  // Query executed using auto-acquired and auto-released pool connection
   const res = await pool.query('SELECT current_timestamp()');
   console.log('Result:', res.rows);
+
+  // Manually checkout client from pool
+  const client = await pool.connect();
+  try {
+    const userRes = await client.query('SELECT * FROM users WHERE user_id = $1', [101]);
+    console.log('User:', userRes.rows);
+  } finally {
+    // Release client back to pool
+    client.release();
+  }
 }
 
 // Drain pool on application shutdown
@@ -84,18 +93,15 @@ async function shutdown() {
 }
 ```
 
----
-
-### 3. Callback & Event-Based Invocation
+### 3. Streaming Rows & Callbacks
 
 ```typescript
-// Callback syntax
-client.query('SELECT 1', (err, result) => {
-  if (err) {
-    console.error('Query Error:', err.code, err.message);
-    return;
-  }
-  console.log('Rows:', result.rows);
+import { Client } from '@google-cloud/spanner-driver';
+
+const client = new Client({
+  project: 'my-gcp-project',
+  instance: 'my-spanner-instance',
+  database: 'my-spanner-database',
 });
 
 // Streaming row events
@@ -111,7 +117,7 @@ client.query('SELECT * FROM large_table')
 
 | Export | Type | Description |
 | :--- | :--- | :--- |
-| `Client` | Class | Database connection client (`connect()`, `query()`, `end()`). |
+| `Client` | Class | Database connection client (`connect()`, `query()`, `release()`, `end()`). |
 | `Pool` | Class | Connection pool (`connect()`, `query()`, `end()`). |
 | `DatabaseError` | Class | Enriched database error containing PostgreSQL SQLSTATE `.code` and `.severity`. |
 | `ClientConfig` | Interface | Client configuration options (`project`, `instance`, `database`, `host`, `port`, `connectionString`). |

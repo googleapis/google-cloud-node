@@ -24,6 +24,10 @@ import {QueryConfig, QueryResult} from './types.js';
  *
  * Facilitates client acquisition (`connect`), automatic query execution with connection
  * auto-release (`query`), and graceful pool shutdown (`end`).
+ *
+ * TODO(PR 4 - Connection Pooling): Full connection pooling features (max connections,
+ * min idle connections, idle timeouts, connection queueing, and pool event emitters)
+ * will be expanded in PR 4.
  */
 export class Pool extends EventEmitter {
   /** Resolved ClientConfig object used when instantiating connections. */
@@ -58,7 +62,7 @@ export class Pool extends EventEmitter {
   ): Promise<Client> | void {
     if (callback) {
       this._doConnect()
-        .then(client => callback(null, client, () => void client.end()))
+        .then(client => callback(null, client, () => void client.release()))
         .catch(err => callback(err));
       return;
     }
@@ -71,6 +75,8 @@ export class Pool extends EventEmitter {
     }
     const client = new Client(this.config);
     await client.connect();
+    // TODO(PR 4 - Connection Pooling): Override client.release to return client to idle connection pool
+    client.release = client.end.bind(client);
     return client;
   }
 
@@ -94,12 +100,39 @@ export class Pool extends EventEmitter {
         ? queryText
         : new Query<QueryResult<R>>(queryText, values as unknown[], callback);
 
+    let actualCallback: QueryCallback<QueryResult<R>> | undefined =
+      query.callback;
+    if (typeof values === 'function') {
+      actualCallback = values as QueryCallback<QueryResult<R>>;
+    } else if (typeof callback === 'function') {
+      actualCallback = callback;
+    }
+
     const executionPromise = (async () => {
-      const client = await this._doConnect();
+      let client: Client;
+
+      // 1. Connection acquisition stage:
+      // Catches connection failures from _doConnect() before client.query is invoked.
+      // Notifies actualCallback or error listeners so callback-based queries do not hang.
       try {
-        return await client.query(query);
+        client = await this._doConnect();
+      } catch (err: unknown) {
+        const errorObj = err instanceof Error ? err : new Error(String(err));
+        if (actualCallback) {
+          process.nextTick(() => actualCallback!(errorObj));
+        } else if (query.listenerCount('error') > 0) {
+          query.emit('error', errorObj);
+        }
+        throw errorObj;
+      }
+
+      // 2. Query execution stage:
+      // Executed on the acquired client. client.query() handles its own query callbacks and
+      // error events. We do NOT catch or re-notify actualCallback here to prevent double callbacks.
+      try {
+        return await client.query(query, values as unknown[], callback);
       } finally {
-        await client.end();
+        await client.release();
       }
     })();
 

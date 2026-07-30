@@ -14,7 +14,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import {Pool} from '../../src/index.js';
+import {Pool, Query, QueryResult} from '../../src/index.js';
 
 describe('Pool Class', () => {
   it('should instantiate Pool with config object or connection string', () => {
@@ -32,7 +32,7 @@ describe('Pool Class', () => {
     );
   });
 
-  it('should acquire client via connect() promise and callback', async () => {
+  it('should acquire client via connect() promise and callback with release()', async () => {
     const pool = new Pool({
       project: 'p',
       instance: 'i',
@@ -40,7 +40,9 @@ describe('Pool Class', () => {
     });
     const client = await pool.connect();
     assert.strictEqual(client.isConnected, true);
-    await client.end();
+    assert.strictEqual(typeof client.release, 'function');
+    await client.release();
+    assert.strictEqual(client.isConnected, false);
     await pool.end();
   });
 
@@ -81,6 +83,56 @@ describe('Pool Class', () => {
     void pool.query('SELECT 1', (err, res) => {
       assert.strictEqual(err, null);
       assert.strictEqual(res?.command, 'SELECT');
+      void pool.end().then(() => done());
+    });
+  });
+
+  it('should resolve callback when passing Query instance and 3rd argument callback to pool.query()', done => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    const q = new Query<QueryResult>('SELECT $1', [42]);
+    void pool.query(q, [42], (err, res) => {
+      assert.strictEqual(err, null);
+      assert.strictEqual(res?.command, 'SELECT');
+      void pool.end().then(() => done());
+    });
+  });
+
+  it('should invoke callback exactly once when pool.query() fails during connection acquisition', done => {
+    const originalProject = process.env.GOOGLE_CLOUD_PROJECT;
+    delete process.env.GOOGLE_CLOUD_PROJECT;
+    const pool = new Pool({});
+    let callCount = 0;
+    void pool.query('SELECT 1', (err, res) => {
+      if (originalProject !== undefined) {
+        process.env.GOOGLE_CLOUD_PROJECT = originalProject;
+      } else {
+        delete process.env.GOOGLE_CLOUD_PROJECT;
+      }
+      callCount++;
+      assert.strictEqual(res, undefined);
+      assert.strictEqual(callCount, 1);
+      assert.strictEqual(err instanceof Error, true);
+      assert.match(err!.message, /Invalid Spanner connection configuration/);
+      done();
+    });
+  });
+
+  it('should invoke callback exactly once when pool.query() fails during query execution', done => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    let callCount = 0;
+    void pool.query('', (err, res) => {
+      callCount++;
+      assert.strictEqual(res, undefined);
+      assert.strictEqual(callCount, 1);
+      assert.strictEqual(err instanceof Error, true);
       void pool.end().then(() => done());
     });
   });

@@ -34,11 +34,27 @@ describe('Query Class', () => {
     assert.strictEqual(q.rowMode, 'array');
   });
 
+  it('should handle null argument safely in Query constructor', () => {
+    // @ts-expect-error Testing runtime null text argument
+    const q = new Query(null);
+    assert.strictEqual(q.text, null);
+    assert.strictEqual(q.values, undefined);
+  });
+
   it('should copy properties when constructed from existing Query instance', () => {
     const orig = new Query('SELECT 1', [10]);
     const q = new Query(orig);
     assert.strictEqual(q.text, 'SELECT 1');
     assert.deepStrictEqual(q.values, [10]);
+  });
+
+  it('should allow overriding values and callback when constructed from existing Query instance', () => {
+    const orig = new Query('SELECT $1');
+    const cb = () => {};
+    const q = new Query(orig, [99], cb);
+    assert.strictEqual(q.text, 'SELECT $1');
+    assert.deepStrictEqual(q.values, [99]);
+    assert.strictEqual(q.callback, cb);
   });
 
   it('should handle callback argument overload correctly', () => {

@@ -1,6 +1,17 @@
 # Changelog
 
 
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v1.1.0...gapic-tools-v2.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update gapic-tools to minimum Node version of 22. ([#9004](https://github.com/googleapis/google-cloud-node/issues/9004))
+
+### Features
+
+* Update gapic-tools to minimum Node version of 22. ([#9004](https://github.com/googleapis/google-cloud-node/issues/9004)) ([858ecbd](https://github.com/googleapis/google-cloud-node/commit/858ecbd6ef2516c078e4d719fc273126f0c32914)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v1.0.6...gapic-tools-v1.1.0) (2026-07-16)
 
 

@@ -16,26 +16,26 @@ import {EventEmitter} from 'events';
 import {QueryConfig} from './types.js';
 
 /**
- * Standard callback function signature for query execution.
+ * Node callback function signature receiving `(err, result)`.
  *
- * @template T - Type of query result data returned on success.
+ * @template T - Result object type.
  */
-export type QueryCallback<T = unknown> = (
-  err: Error | null,
-  result?: T,
-) => void;
+export type QueryCallback<T> = (err: Error | null, result?: T) => void;
 
 /**
- * Query subclass extending EventEmitter and implementing the Thenable interface.
- * Supports async/await, Node callbacks, and streaming row events matching node-postgres (`pg.Query`).
+ * Query class representing a SQL statement execution.
+ * Compatible with node-postgres (`pg.Query`) interface.
  *
- * @template T - Shape of query result returned on promise resolution.
+ * Extends `EventEmitter` to support streaming row events (`.on('row', cb)`, `.on('end', cb)`),
+ * while implementing the Thenable interface (`then`, `catch`, `finally`) to support `async`/`await`.
+ *
+ * @template T - Query result return type (defaults to `QueryResult`).
  */
 export class Query<T = unknown> extends EventEmitter {
-  /** SQL statement query string text. */
-  public text: string;
+  /** SQL statement string text. */
+  public text?: string;
 
-  /** Optional array of query parameter values ($1, $2, etc.). */
+  /** Positional parameter value array. */
   public values?: unknown[];
 
   /** Optional Node callback function attached to this query execution. */
@@ -66,14 +66,15 @@ export class Query<T = unknown> extends EventEmitter {
 
     if (text instanceof Query) {
       this.text = text.text;
-      this.values = text.values;
-      this.callback = text.callback;
+      this.values = Array.isArray(values) ? values : text.values;
       this.rowMode = text.rowMode;
       this.types = text.types;
+      this.callback =
+        typeof values === 'function' ? values : callback || text.callback;
       return;
     }
 
-    if (typeof text === 'object') {
+    if (typeof text === 'object' && text !== null) {
       this.text = text.text;
       this.values = Array.isArray(values) ? values : text.values;
       this.rowMode = text.rowMode;
@@ -112,10 +113,10 @@ export class Query<T = unknown> extends EventEmitter {
   }
 
   /**
-   * Implements the thenable `.catch()` method for error handling.
+   * Implements the `.catch()` method enabling error handling on awaited queries.
    *
-   * @param onRejected - Error handler callback.
-   * @returns Promise resolving to error handler result.
+   * @param onRejected - Handler called when query promise is rejected.
+   * @returns Promise resolving to handler return value.
    */
   public catch<TResult = never>(
     onRejected?:
@@ -127,19 +128,19 @@ export class Query<T = unknown> extends EventEmitter {
   }
 
   /**
-   * Implements the thenable `.finally()` method.
+   * Implements the `.finally()` method called when query execution finishes.
    *
-   * @param onFinally - Cleanup callback invoked regardless of query outcome.
-   * @returns Promise settling when cleanup completes.
+   * @param onFinally - Cleanup callback invoked on completion.
+   * @returns Promise resolving when query finishes.
    */
   public finally(onFinally?: (() => void) | undefined | null): Promise<T> {
     return this.promise.finally(onFinally);
   }
 
   /**
-   * Internal setter linking query execution task to thenable promise.
+   * Binds internal Promise backing Thenable operations.
    *
-   * @param promise - Backing promise managing execution resolution/rejection.
+   * @param promise - Internal execution Promise.
    */
   public setPromise(promise: Promise<T>): void {
     this.promise = promise;
