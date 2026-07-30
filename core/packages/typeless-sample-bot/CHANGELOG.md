@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v3.1.3...typeless-sample-bot-v4.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update typeless-sample-bot to minimum Node version of 22. ([#9005](https://github.com/googleapis/google-cloud-node/issues/9005))
+
+### Features
+
+* Update typeless-sample-bot to minimum Node version of 22. ([#9005](https://github.com/googleapis/google-cloud-node/issues/9005)) ([aa1c264](https://github.com/googleapis/google-cloud-node/commit/aa1c26447b5dbb0ebc845377a56493facffd3f23)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [3.1.3](https://github.com/googleapis/google-cloud-node/compare/typeless-sample-bot-v3.1.2...typeless-sample-bot-v3.1.3) (2026-07-23)
 
 
