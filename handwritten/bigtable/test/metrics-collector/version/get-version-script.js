@@ -81,5 +81,6 @@ async function main() {
   ) {
     throw Error('The wrong version is being recorded');
   }
+  process.exit(0);
 }
 main();
