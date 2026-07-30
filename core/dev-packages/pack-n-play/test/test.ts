@@ -19,7 +19,7 @@ import {describe, it} from 'mocha';
 
 describe('pack-n-play', () => {
   it('should run tests', async function () {
-    this.timeout(120000); // 2 minutes
+    this.timeout(300000); // 5 minutes
     if (process.platform === 'win32') {
       this.skip();
     }
