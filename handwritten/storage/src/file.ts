@@ -4548,7 +4548,7 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   startSimpleUpload_(
     dup: Duplexify,
-    options: CreateWriteStreamOptions = {},
+    options: CreateWriteStreamOptionsInternal = {},
   ): void {
     const opts = options as CreateWriteStreamOptionsInternal;
     opts.metadata ??= {};
