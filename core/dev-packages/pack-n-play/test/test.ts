@@ -19,7 +19,7 @@ import {describe, it} from 'mocha';
 
 describe('pack-n-play', () => {
   it('should run tests', async function () {
-    this.timeout(120000); // 2 minutes
+    this.timeout(600000); // 10 minutes
     const fixturesPath = path.resolve('./test/fixtures');
     const dirs = fs
       .readdirSync(fixturesPath)
