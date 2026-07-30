@@ -14,4 +14,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-require('../build/src/compileProtos.js');
+const {main} = require('../build/src/compileProtos.js');
+if (process.argv.length <= 2 || process.argv[2] === '--help') {
+  console.log(`Usage: node ${process.argv[1]} [--skip-json] [--esm] directory ...`);
+  process.exit(1);
+}
+main(process.argv.slice(2));

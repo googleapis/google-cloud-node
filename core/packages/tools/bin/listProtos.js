@@ -14,4 +14,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-require('../build/src/listProtos.js');
+const {main} = require('../build/src/listProtos.js');
+if (process.argv.length < 3 || process.argv[2] === '--help') {
+  console.log(`Usage: node ${process.argv[1]} directory ...`);
+  process.exit(1);
+}
+main(process.argv[2]);
