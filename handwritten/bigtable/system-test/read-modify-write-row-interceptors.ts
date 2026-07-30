@@ -31,7 +31,7 @@ import {status as GrpcStatus} from '@grpc/grpc-js';
 import {createMetricsUnaryInterceptorProvider} from '../src/client-side-metrics/metric-interceptor';
 import {generateId, reapInstances} from './common';
 
-const INSTANCE_ID = generateId('isolated-rmw-inst');
+const INSTANCE_ID = generateId('rmw-inst');
 const TABLE_ID = 'isolated-rmw-table';
 const ZONE = 'us-central2-a';
 const CLUSTER = 'fake-cluster';
