@@ -68,7 +68,9 @@ function mockAuthorizeRequest(
     access_token: 'abc123',
   }
 ) {
-  return nock('https://oauth2.googleapis.com').post('/token').reply(code, data);
+  return nock('https://www.googleapis.com')
+    .post('/oauth2/v4/token')
+    .reply(code, data);
 }
 
 describe('resumable-upload', () => {
@@ -1958,7 +1960,10 @@ describe('resumable-upload', () => {
         nock(REQ_OPTS.url!).get(queryPath).reply(200, {}),
       ];
       const res: GaxiosResponse = await up.makeRequest(REQ_OPTS);
-      assert.strictEqual(res.config.url!.toString(), REQ_OPTS.url + queryPath);
+      assert.strictEqual(
+        res.config.url!.toString(),
+        `${REQ_OPTS.url}?userProject=user-project-id`
+      );
       scopes.forEach(x => x.done());
     });
 
@@ -1990,7 +1995,10 @@ describe('resumable-upload', () => {
       ];
       const res = await up.makeRequest(REQ_OPTS);
       scopes.forEach(x => x.done());
-      assert.strictEqual(res.config.url!.toString(), REQ_OPTS.url + queryPath);
+      assert.strictEqual(
+        res.config.url!.toString(),
+        `${REQ_OPTS.url}?userProject=user-project-id`
+      );
       assert.ok(res.headers);
     });
 
@@ -2014,7 +2022,10 @@ describe('resumable-upload', () => {
       ];
       const res = await up.makeRequest(REQ_OPTS);
       scopes.forEach(x => x.done());
-      assert.strictEqual(res.config.url!.toString(), REQ_OPTS.url + queryPath);
+      assert.strictEqual(
+        res.config.url!.toString(),
+        `${REQ_OPTS.url}?userProject=user-project-id`
+      );
       assert.ok(res.headers);
     });
 
@@ -2048,7 +2059,10 @@ describe('resumable-upload', () => {
 
       const res = await up.makeRequest(REQ_OPTS);
       scopes.forEach(x => x.done());
-      assert.strictEqual(res.config.url!.toString(), REQ_OPTS.url + queryPath);
+      assert.strictEqual(
+        res.config.url!.toString(),
+        `${REQ_OPTS.url}?userProject=user-project-id`
+      );
       // Headers should include authorization
       assert.ok(
         (res.config.headers as any).get
@@ -2081,7 +2095,10 @@ describe('resumable-upload', () => {
       ];
       const res = await up.makeRequest(REQ_OPTS);
       scopes.forEach(x => x.done());
-      assert.strictEqual(res.config.url!.toString(), REQ_OPTS.url + queryPath);
+      assert.strictEqual(
+        res.config.url!.toString(),
+        `${REQ_OPTS.url}?userProject=user-project-id`
+      );
       // When auth is bypassed, no auth headers should be present
       assert.ok(res.headers);
     });
@@ -2108,7 +2125,10 @@ describe('resumable-upload', () => {
       ];
       const res = await up.makeRequest(REQ_OPTS);
       scopes.forEach(x => x.done());
-      assert.strictEqual(res.config.url!.toString(), REQ_OPTS.url + queryPath);
+      assert.strictEqual(
+        res.config.url!.toString(),
+        `${REQ_OPTS.url}?userProject=user-project-id`
+      );
       // When auth is bypassed (backward compatibility), no auth headers should be present
       assert.ok(res.headers);
     });
