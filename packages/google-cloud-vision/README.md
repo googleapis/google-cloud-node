@@ -180,3 +180,5 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/samples
 [homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision/CHANGELOG.md
 [homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vision
+
+
