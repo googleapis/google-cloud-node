@@ -54,3 +54,37 @@ jobs:
           SHARD_TOTAL: ${{ needs.setup.outputs.shard-total }}
           SHARD_INDEX: ${{ matrix.shard-index }}
           GIT_DIFF_ARG: HEAD^1
+
+  # Dummy jobs to satisfy branch protection requirements for each node version
+  units-status:
+    name: units (${{ matrix.node-version }})
+    needs: units
+    runs-on: ubuntu-latest
+    if: always()
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
+    steps:
+      - name: Check shard status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: { jobs } } = await github.rest.actions.listJobsForWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+            });
+            const nodeVersion = '${{ matrix.node-version }}';
+            const shardJobs = jobs.filter(j => j.name.includes(`units (Node ${nodeVersion},`));
+            if (shardJobs.length === 0) {
+              core.setFailed(`No shard jobs found for Node ${nodeVersion}`);
+              return;
+            }
+            const failed = shardJobs.filter(j => j.conclusion === 'failure' || j.conclusion === 'cancelled');
+            if (failed.length > 0) {
+              const failedLinks = failed.map(j => `- ${j.name}: ${j.html_url}`).join('\n');
+              core.setFailed(`${failed.length} shards failed for Node ${nodeVersion}:\n${failedLinks}`);
+            } else {
+              core.info(`All shards passed for Node ${nodeVersion}`);
+            }
