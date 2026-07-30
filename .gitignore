@@ -10,6 +10,7 @@ packages/*/COPYING
 package-lock.json
 yarn.lock
 bun.lockb
+bun.lock
 **/pnpm-lock.yaml
 !/pnpm-lock.yaml
 __pycache__

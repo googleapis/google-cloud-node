@@ -39,18 +39,14 @@ export interface ExportResult {
  */
 function isCounterValue(
   dataPoint:
-    | DataPoint<number>
-    | DataPoint<Histogram>
-    | DataPoint<ExponentialHistogram>,
+    DataPoint<number> | DataPoint<Histogram> | DataPoint<ExponentialHistogram>,
 ): dataPoint is DataPoint<number> {
   return typeof dataPoint.value === 'number';
 }
 
 function getInterval(
   dataPoint:
-    | DataPoint<number>
-    | DataPoint<Histogram>
-    | DataPoint<ExponentialHistogram>,
+    DataPoint<number> | DataPoint<Histogram> | DataPoint<ExponentialHistogram>,
 ) {
   let endSec = dataPoint.endTime[0];
   let endNanos = dataPoint.endTime[1];
@@ -134,9 +130,7 @@ function getIntegerPoints(dataPoint: DataPoint<number>) {
  */
 function getResource(
   dataPoint:
-    | DataPoint<number>
-    | DataPoint<Histogram>
-    | DataPoint<ExponentialHistogram>,
+    DataPoint<number> | DataPoint<Histogram> | DataPoint<ExponentialHistogram>,
 ) {
   const resourceLabels = {
     cluster: dataPoint.attributes.cluster,
@@ -162,9 +156,7 @@ function getResource(
 function getMetric(
   metricName: string,
   dataPoint:
-    | DataPoint<number>
-    | DataPoint<Histogram>
-    | DataPoint<ExponentialHistogram>,
+    DataPoint<number> | DataPoint<Histogram> | DataPoint<ExponentialHistogram>,
 ) {
   const streaming = dataPoint.attributes.streaming;
   const app_profile = dataPoint.attributes.app_profile;

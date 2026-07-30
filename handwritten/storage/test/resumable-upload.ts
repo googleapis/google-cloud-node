@@ -68,9 +68,7 @@ function mockAuthorizeRequest(
     access_token: 'abc123',
   }
 ) {
-  return nock('https://oauth2.googleapis.com')
-    .post('/token')
-    .reply(code, data);
+  return nock('https://oauth2.googleapis.com').post('/token').reply(code, data);
 }
 
 describe('resumable-upload', () => {
@@ -1942,15 +1940,12 @@ describe('resumable-upload', () => {
       const res = await up.makeRequest(REQ_OPTS);
       scopes.forEach(x => x.done());
       const headers = res.config.headers;
-      const getHeader = (name: string) => (headers as any).get ? (headers as any).get(name) : (headers as any)[name];
-      assert.strictEqual(
-        getHeader('x-goog-encryption-algorithm'),
-        'AES256'
-      );
-      assert.strictEqual(
-        getHeader('x-goog-encryption-key'),
-        up.encryption.key
-      );
+      const getHeader = (name: string) =>
+        (headers as any).get
+          ? (headers as any).get(name)
+          : (headers as any)[name];
+      assert.strictEqual(getHeader('x-goog-encryption-algorithm'), 'AES256');
+      assert.strictEqual(getHeader('x-goog-encryption-key'), up.encryption.key);
       assert.strictEqual(
         getHeader('x-goog-encryption-key-sha256'),
         up.encryption.hash
@@ -2055,7 +2050,13 @@ describe('resumable-upload', () => {
       scopes.forEach(x => x.done());
       assert.strictEqual(res.config.url!.toString(), REQ_OPTS.url + queryPath);
       // Headers should include authorization
-      assert.ok(((res.config.headers as any).get ? (res.config.headers as any).get('Authorization') || (res.config.headers as any).get('authorization') : res.config.headers?.['Authorization'] || (res.config.headers as any)?.['authorization']));
+      assert.ok(
+        (res.config.headers as any).get
+          ? (res.config.headers as any).get('Authorization') ||
+              (res.config.headers as any).get('authorization')
+          : res.config.headers?.['Authorization'] ||
+              (res.config.headers as any)?.['authorization']
+      );
     });
 
     it('should bypass authentication with custom endpoint when useAuthWithCustomEndpoint is false', async () => {

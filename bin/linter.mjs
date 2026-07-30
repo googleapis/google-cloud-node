@@ -90,7 +90,7 @@ function getChangedFiles() {
       return output
         .split('\n')
         .map(f => f.trim())
-        .filter(f => f.length > 0 && existsSync(f));
+        .filter(f => f.length > 0 && existsSync(f) && !f.includes('/fixtures/'));
     } catch {
       // Continue to the next fallback ref
     }
@@ -109,7 +109,7 @@ function getChangedFiles() {
     return output
       .split('\n')
       .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
+      .filter(f => f.length > 0 && existsSync(f) && !f.includes('/fixtures/'));
   } catch {
     return [];
   }
