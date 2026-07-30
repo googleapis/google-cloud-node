@@ -56,5 +56,10 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "pnpm": {
+    "overrides": {
+      "yargs": "^17.7.2"
+    }
   }
 }
