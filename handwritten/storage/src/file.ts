@@ -4548,9 +4548,10 @@ class File extends ServiceObject<File, FileMetadata> {
    */
   startSimpleUpload_(
     dup: Duplexify,
-    options: CreateWriteStreamOptionsInternal = {},
+    options: CreateWriteStreamOptions = {},
   ): void {
-    options.metadata ??= {};
+    const opts = options as CreateWriteStreamOptionsInternal;
+    opts.metadata ??= {};
 
     const apiEndpoint = this.storage.apiEndpoint;
     const bucketName = this.bucket.name;
@@ -4562,7 +4563,7 @@ class File extends ServiceObject<File, FileMetadata> {
         uploadType: 'multipart',
       },
       url,
-      invocationId: options.invocationId,
+      invocationId: opts.invocationId,
       [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
       method: 'POST',
       responseType: 'json',
@@ -4606,12 +4607,12 @@ class File extends ServiceObject<File, FileMetadata> {
     reqOpts.multipart = [
       {
         headers: new Headers({'Content-Type': 'application/json'}),
-        content: JSON.stringify(options.metadata),
+        content: JSON.stringify(opts.metadata),
       },
       {
         headers: new Headers({
           'Content-Type':
-            options.metadata.contentType || 'application/octet-stream',
+            opts.metadata?.contentType || 'application/octet-stream',
         }),
         content: writeStream,
       },
