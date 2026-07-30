@@ -52,7 +52,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-turbo-
       - name: Compile Workspace (Turborepo Caching)
-        run: pnpm run compile
+        run: pnpm run compile --concurrency=4
       - run: node --version
       - run: bash ci/run_conditional_tests.sh
         name: Run windows unit tests
