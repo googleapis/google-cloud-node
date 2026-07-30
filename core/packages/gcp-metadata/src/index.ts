@@ -391,9 +391,9 @@ export async function isAvailable() {
             const codes =
               errObj instanceof Error && errObj.name === 'AggregateError'
                 ? (errObj as any).errors.map((error: any) =>
-                    error.code ? error.code.toString() : 'UNKNOWN',
+                    error?.code ? error.code.toString() : 'UNKNOWN',
                   )
-                : [errObj.code ? errObj.code.toString() : 'UNKNOWN'];
+                : [errObj?.code ? errObj.code.toString() : 'UNKNOWN'];
 
             const isExpected = codes.every((code: string) =>
               [

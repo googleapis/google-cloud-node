@@ -217,11 +217,18 @@ done
 if [[ "${DRY_RUN_SHARDS}" == "true" ]]; then
     count=${#test_dirs[@]}
     if [[ $count -gt 15 ]]; then
-        echo "shard_matrix=[0, 1, 2, 3, 4]" >> $GITHUB_OUTPUT
-        echo "shard_total=5" >> $GITHUB_OUTPUT
+        matrix="[0, 1, 2, 3, 4]"
+        total="5"
     else
-        echo "shard_matrix=[0]" >> $GITHUB_OUTPUT
-        echo "shard_total=1" >> $GITHUB_OUTPUT
+        matrix="[0]"
+        total="1"
+    fi
+    if [[ -n "${GITHUB_OUTPUT}" ]]; then
+        echo "shard_matrix=${matrix}" >> "${GITHUB_OUTPUT}"
+        echo "shard_total=${total}" >> "${GITHUB_OUTPUT}"
+    else
+        echo "shard_matrix=${matrix}"
+        echo "shard_total=${total}"
     fi
     exit 0
 fi
@@ -231,7 +238,7 @@ for i in "${!test_dirs[@]}"; do
     d="${test_dirs[$i]}"
 
     if [[ -n "${SHARD_TOTAL}" && -n "${SHARD_INDEX}" ]]; then
-        if (( i % SHARD_TOTAL != SHARD_INDEX )); then
+        if (( SHARD_TOTAL > 0 && i % SHARD_TOTAL != SHARD_INDEX )); then
             continue
         fi
     fi

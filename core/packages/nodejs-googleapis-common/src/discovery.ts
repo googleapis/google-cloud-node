@@ -137,8 +137,8 @@ export class Discovery {
     if (typeof apiDiscoveryUrl === 'string') {
       let isUrl = false;
       try {
-        new URL(apiDiscoveryUrl);
-        isUrl = true;
+        const parsed = new URL(apiDiscoveryUrl);
+        isUrl = parsed.protocol === 'http:' || parsed.protocol === 'https:';
       } catch (e) {
         // Not a valid URL
       }
