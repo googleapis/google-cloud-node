@@ -106,7 +106,7 @@ function getChangedFiles() {
     if (!baseRef) {
       throw new Error('Running in CI but GITHUB_BASE_REF environment variable is not set.');
     }
-    refsToTry = [baseRef];
+    refsToTry = baseRef.startsWith('origin/') ? [baseRef] : [`origin/${baseRef}`, baseRef];
     isStrictCI = true;
   } else {
     let currentBranch = '';
