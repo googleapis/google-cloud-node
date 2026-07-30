@@ -54,10 +54,16 @@ export async function reapInstances(
           i.id.startsWith('instance-'),
       )
       .filter(i => {
-        const timeCreated = i.metadata!.labels!.time_created as {} as Date;
-        // Only delete stale resources.
+        const timeCreatedRaw = i.metadata?.labels?.time_created;
+        if (!timeCreatedRaw) {
+          return true;
+        }
+        const timeCreatedNum = Number(timeCreatedRaw);
+        const timeCreated = new Date(
+          isNaN(timeCreatedNum) ? timeCreatedRaw : timeCreatedNum,
+        );
         const staleThreshold = new Date(Date.now() - maxAgeMs);
-        return !timeCreated || timeCreated <= staleThreshold;
+        return timeCreated <= staleThreshold;
       });
 
     // need to delete backups first due to instance deletion precondition

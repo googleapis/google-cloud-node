@@ -68,7 +68,7 @@ describe('Bigtable', () => {
         },
       ],
       labels: {
-        time_created: Date.now(),
+        time_created: String(Date.now()),
       },
     });
     const [, operationHDD] = await INSTANCE_HDD.create({
@@ -81,7 +81,7 @@ describe('Bigtable', () => {
         },
       ],
       labels: {
-        time_created: Date.now(),
+        time_created: String(Date.now()),
       },
     });
 
@@ -176,7 +176,7 @@ describe('Bigtable', () => {
           },
         ],
         labels: {
-          time_created: Date.now(),
+          time_created: String(Date.now()),
         },
       });
       await operation.promise();
@@ -230,7 +230,7 @@ describe('Bigtable', () => {
           },
         ],
         labels: {
-          time_created: Date.now(),
+          time_created: String(Date.now()),
         },
       });
       await operation.promise();

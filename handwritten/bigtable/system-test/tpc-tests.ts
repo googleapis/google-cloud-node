@@ -76,11 +76,14 @@ describe.skip('Universe domain tests', () => {
   const columnFamilyId = 'cf1';
 
   after(async () => {
+    const cleanClient = new Bigtable();
     try {
-      const instance = new Bigtable().instance(instanceId);
+      const instance = cleanClient.instance(instanceId);
       await instance.delete({});
     } catch (e) {
       console.log(`Error deleting instance ${instanceId}: ${e}`);
+    } finally {
+      await cleanClient.close();
     }
   });
 

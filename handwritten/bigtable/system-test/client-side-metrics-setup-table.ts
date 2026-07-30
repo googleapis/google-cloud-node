@@ -30,7 +30,7 @@ export async function setupBigtable(
           nodes: 1,
         },
         labels: {
-          time_created: Date.now(),
+          time_created: String(Date.now()),
         },
       });
       await operation.promise();

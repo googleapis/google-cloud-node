@@ -72,7 +72,7 @@ async function createInstance(
       },
     ],
     labels: {
-      time_created: Date.now(),
+      time_created: String(Date.now()),
     },
   });
   await operation.promise();

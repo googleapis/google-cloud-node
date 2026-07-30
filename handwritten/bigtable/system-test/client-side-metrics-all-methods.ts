@@ -357,8 +357,14 @@ describe('Bigtable/ClientSideMetricsAllMethods', () => {
   let defaultProjectId: string;
 
   before(async () => {
-    await reapInstances(new Bigtable());
-    await reapInstances(new Bigtable({projectId: SECOND_PROJECT_ID}));
+    const reapClient1 = new Bigtable();
+    const reapClient2 = new Bigtable({projectId: SECOND_PROJECT_ID});
+    try {
+      await reapInstances(reapClient1);
+      await reapInstances(reapClient2);
+    } finally {
+      await Promise.all([reapClient1.close(), reapClient2.close()]);
+    }
     /*
     For both the default project and the secondary project we need to create
     instances with some data in them so that the tests can collect all the
@@ -371,50 +377,60 @@ describe('Bigtable/ClientSideMetricsAllMethods', () => {
     metrics actually get written for that other project instead of the default
     project.
      */
-    for (const bigtable of [
+    const setupClients = [
       new Bigtable(),
       new Bigtable({projectId: SECOND_PROJECT_ID}),
-    ]) {
-      for (const instanceId of [instanceId1, instanceId2]) {
-        await setupBigtableWithInsert(bigtable, columnFamilyId, instanceId, [
-          tableId1,
-          tableId2,
-        ]);
-      }
-      defaultProjectId = await new Promise((resolve, reject) => {
-        bigtable.getProjectId_((err: Error | null, projectId?: string) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId as string);
-          }
+    ];
+    try {
+      for (const bigtable of setupClients) {
+        for (const instanceId of [instanceId1, instanceId2]) {
+          await setupBigtableWithInsert(bigtable, columnFamilyId, instanceId, [
+            tableId1,
+            tableId2,
+          ]);
+        }
+        defaultProjectId = await new Promise((resolve, reject) => {
+          bigtable.getProjectId_((err: Error | null, projectId?: string) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(projectId as string);
+            }
+          });
         });
-      });
+      }
+    } finally {
+      await Promise.all(setupClients.map(c => c.close()));
     }
   });
 
   after(async () => {
-    for (const bigtable of [
+    const cleanupClients = [
       new Bigtable(),
       new Bigtable({projectId: SECOND_PROJECT_ID}),
-    ]) {
-      try {
-        // If the instance has been deleted already by another source, we don't
-        // want this after hook to block the continuous integration pipeline.
-        const instance = bigtable.instance(instanceId1);
-        await instance.delete({});
-      } catch (e) {
-        console.warn('The instance has been deleted already');
+    ];
+    try {
+      for (const bigtable of cleanupClients) {
+        try {
+          // If the instance has been deleted already by another source, we don't
+          // want this after hook to block the continuous integration pipeline.
+          const instance = bigtable.instance(instanceId1);
+          await instance.delete({});
+        } catch (e) {
+          console.warn('The instance has been deleted already');
+        }
+        try {
+          // If the instance has been deleted already by another source, we don't
+          // want this after hook to block the continuous integration pipeline.
+          const instance = bigtable.instance(instanceId2);
+          await instance.delete({});
+        } catch (e) {
+          console.warn('The instance has been deleted already');
+        }
+        await reapInstances(bigtable);
       }
-      try {
-        // If the instance has been deleted already by another source, we don't
-        // want this after hook to block the continuous integration pipeline.
-        const instance = bigtable.instance(instanceId2);
-        await instance.delete({});
-      } catch (e) {
-        console.warn('The instance has been deleted already');
-      }
-      await reapInstances(bigtable);
+    } finally {
+      await Promise.all(cleanupClients.map(c => c.close()));
     }
   });
 

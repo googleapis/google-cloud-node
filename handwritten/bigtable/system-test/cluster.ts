@@ -71,7 +71,7 @@ describe('Cluster', () => {
     const [, operation] = await instance.create({
       clusters,
       labels: {
-        time_created: Date.now(),
+        time_created: String(Date.now()),
       },
     });
     await operation.promise();

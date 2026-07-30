@@ -143,12 +143,14 @@ describe('Bigtable/Table', () => {
           assert.strictEqual(err.message, 'The client has already been closed.');
         }
       } finally {
+        const bigtableSecondClient = new Bigtable();
         try {
-          const bigtableSecondClient = new Bigtable();
           const cleanInstance = bigtableSecondClient.instance(INSTANCE_NAME);
           await cleanInstance.delete({});
         } catch (e) {
           // ignore error if already deleted
+        } finally {
+          await bigtableSecondClient.close();
         }
       }
     });
