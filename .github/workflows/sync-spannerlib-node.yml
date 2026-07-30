@@ -1,0 +1,35 @@
+name: Sync SpannerLib Node code from go-sql-spanner
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  sync-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          persist-credentials: false
+
+      - name: Copy SpannerLib code
+        run: ./scripts/sync_spannerlib_node.sh false main
+        working-directory: handwritten/spanner-driver
+        shell: bash
+
+      - uses: googleapis/code-suggester@f9fef85aa02459e30e62526abe950341cbbd768b # v5
+        env:
+          ACCESS_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
+        with:
+          command: pr
+          upstream_owner: googleapis
+          upstream_repo: google-cloud-node
+          description: 'Update the Spanner Node.js driver with the latest spannerlib-node code from go-sql-spanner.'
+          title: 'chore(spanner-driver): sync spannerlib-node code'
+          message: 'chore(spanner-driver): sync spannerlib-node code'
+          branch: automated-spanner-lib-code-update
+          git_dir: '.'
+          force: true
