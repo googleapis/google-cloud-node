@@ -120,13 +120,17 @@ function getChangedFiles() {
   }
 
   if (currentBranch === 'main') {
-    try {
-      const files = getDiffFiles('HEAD~1');
-      console.log('Comparing against base reference: HEAD~1');
-      return files;
-    } catch {
-      throw new Error("Failed to determine changed files against 'HEAD~1' on main branch.");
+    const mainRefs = ['origin/main', 'upstream/main', 'HEAD~1'];
+    for (const ref of mainRefs) {
+      try {
+        const files = getDiffFiles(ref);
+        console.log(`Comparing against base reference: ${ref}`);
+        return files;
+      } catch {
+        // Continue to next ref
+      }
     }
+    throw new Error("Failed to determine changed files on main branch.");
   }
 
   const refsToTry = ['upstream/main', 'origin/main', 'main'];
