@@ -94,7 +94,6 @@ function getDiffFiles(ref) {
 
 /**
  * Returns a list of changed TypeScript files comparing against target branches/references.
- * Fully hermetic (uses local git references and merge-base with no network calls).
  */
 function getChangedFiles() {
   const isCI = Boolean(process.env.CI || process.env.GITHUB_ACTIONS || process.env.GITHUB_BASE_REF);
@@ -117,7 +116,7 @@ function getChangedFiles() {
       // Continue with fallback refs if branch detection fails
     }
 
-    refsToTry = currentBranch === 'main'
+    refsToTry = (currentBranch === 'main')
       ? ['origin/main', 'upstream/main', 'HEAD~1']
       : ['upstream/main', 'origin/main', 'main'];
   }
