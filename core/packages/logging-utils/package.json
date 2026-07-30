@@ -1,6 +1,6 @@
 {
   "name": "google-logging-utils",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "A debug logger package for other Google libraries",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -42,6 +42,6 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/logging-utils",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   }
 }

@@ -1,6 +1,17 @@
 # Changelog
 
 
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v1.2.0...google-logging-utils-v2.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update logging-utils to minimum Node version of 22. ([#8996](https://github.com/googleapis/google-cloud-node/issues/8996))
+
+### Features
+
+* Update logging-utils to minimum Node version of 22. ([#8996](https://github.com/googleapis/google-cloud-node/issues/8996)) ([c7f8234](https://github.com/googleapis/google-cloud-node/commit/c7f8234c1dd42f2836e7c0bacbca7514bfff75e2)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v1.1.4...google-logging-utils-v1.2.0) (2026-07-23)
 
 
