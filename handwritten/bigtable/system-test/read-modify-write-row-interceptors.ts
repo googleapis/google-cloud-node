@@ -174,7 +174,7 @@ describe('Bigtable/ReadModifyWriteRowInterceptorMetrics', () => {
     const instance = bigtable.instance(INSTANCE_ID);
     try {
       await instance.delete();
-    } catch(e: any) {
+    } catch (e: any) {
       console.warn("Skipping delete due to error", e.message);
     }
   });

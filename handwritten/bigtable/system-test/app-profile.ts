@@ -76,12 +76,10 @@ describe('📦 App Profile', () => {
 
     after(async () => {
       try {
-        try {
-          await instance.delete();
-        } catch(e: any) {
-          console.warn("Skipping delete due to error", e.message);
-        }
-      } catch (err) {}
+        await instance.delete();
+      } catch (e: any) {
+        console.warn("Skipping delete due to error", e.message);
+      }
     });
 
     it('should create a profile with a single cluster', async function() {

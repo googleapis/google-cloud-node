@@ -154,17 +154,13 @@ describe('Bigtable/Table', () => {
       const bigtableSecondClient = new Bigtable();
       const instance = bigtableSecondClient.instance(INSTANCE_NAME);
       try {
-        try {
-          await instance.delete({});
-        } catch(e: any) {
-          console.warn("Skipping delete due to error", e.message);
-        }
+        await instance.delete({});
       } catch (e: any) {
         if (e.code === 8 || e.message.includes('RESOURCE_EXHAUSTED')) {
           console.warn('Skipping instance.delete() due to RESOURCE_EXHAUSTED');
           return;
         }
-        throw e;
+        console.warn("Skipping delete due to error", e.message);
       }
     });
   });

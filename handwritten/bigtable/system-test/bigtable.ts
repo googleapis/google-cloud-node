@@ -90,12 +90,9 @@ describe('Bigtable', () => {
     }
     for (const instance of testInstances) {
       try {
-        try {
-          await instance.delete();
-        } catch(e: any) {
-          console.warn("Skipping delete due to error", e.message);
-        }
-      } catch (e) {
+        await instance.delete();
+      } catch (e: any) {
+        console.warn("Skipping delete due to error", e.message);
         console.log(`Error deleting instance: ${instance.id}`);
       }
     }
@@ -160,12 +157,9 @@ describe('Bigtable', () => {
       instances.map(instance => {
         q.push(async () => {
           try {
-            try {
-              await instance.delete();
-            } catch(e: any) {
-              console.warn("Skipping delete due to error", e.message);
-            }
-          } catch (e) {
+            await instance.delete();
+          } catch (e: any) {
+            console.warn("Skipping delete due to error", e.message);
             console.log(`Error deleting instance: ${instance.id}`);
           }
         });

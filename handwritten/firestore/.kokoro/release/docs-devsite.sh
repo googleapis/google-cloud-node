@@ -26,6 +26,5 @@ fi
 
 npm install -g pnpm@9
 pnpm install
-npm install -g pnpm@9
 pnpm install --no-save @google-cloud/cloud-rad@^0.4.0
 npx @google-cloud/cloud-rad

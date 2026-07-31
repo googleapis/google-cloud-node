@@ -101,12 +101,10 @@ describe('Cluster', () => {
   }
   afterEach(async () => {
     try {
-      try {
-        await instance.delete();
-      } catch(e: any) {
-        console.warn("Skipping delete due to error", e.message);
-      }
-    } catch (e) {}
+      await instance.delete();
+    } catch (e: any) {
+      console.warn("Skipping delete due to error", e.message);
+    }
   });
   describe('Create cluster', () => {
     describe('With manual scaling', () => {
