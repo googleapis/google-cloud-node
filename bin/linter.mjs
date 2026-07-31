@@ -70,7 +70,7 @@ function runGit(args, options = {}) {
 }
 
 function getChangedFilesStrict() {
-  const gitDiffArg = getGitDiffArg();
+  const gitDiffArg = process.env.GIT_DIFF_ARG;
 
   if (!gitDiffArg) {
     throw new Error(
@@ -107,10 +107,6 @@ function getChangedFilesStrict() {
     .split('\n')
     .map(f => f.trim())
     .filter(f => f.length > 0 && existsSync(f));
-}
-
-function getGitDiffArg() {
-  return process.env.GIT_DIFF_ARG;
 }
 
 /**
