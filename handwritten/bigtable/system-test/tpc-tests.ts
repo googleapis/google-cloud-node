@@ -82,7 +82,7 @@ describe.skip('Universe domain tests', () => {
     // ready and shouldn't produce the `Error: 5 NOT_FOUND` error.
     // Uncomment the code below when the task above is addressed:
     // const instance = bigtable.instance(instanceId);
-    // try {   await instance.delete({}); } catch(e: any) {   console.warn("Skipping delete due to error", e.message); }
+    // await instance.delete({});
   });
 
   it('should set the universe with a client option', done => {
