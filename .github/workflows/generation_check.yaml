@@ -14,16 +14,15 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
+  contents: read # Read repository contents
 
 jobs:
   regeneration:
     name: Regenerate and verify clean git tree
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      # zizmor: ignore[excessive-permissions,undocumented-permissions] - Required for creating issue on main branch failure
-      issues: write
+      contents: read # Read repository contents
+      issues: write # Required for creating issue on main branch failure
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
