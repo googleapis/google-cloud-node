@@ -93,9 +93,74 @@ function getDiffFiles(ref) {
 }
 
 /**
+ * Helper to get modified/added TypeScript files in strict mode given GIT_DIFF_ARG.
+ * Validates that `git diff --quiet ${gitDiffArg}` succeeds (exit code 0 or 1).
+ */
+function getStrictDiffFiles(gitDiffArg) {
+  const args = gitDiffArg.trim().split(/\s+/);
+
+  try {
+    runGit(['diff', '--quiet', ...args]);
+  } catch (err) {
+    if (err.status !== 1) {
+      throw new Error(
+        `Strict mode error: git diff --quiet ${gitDiffArg} failed with exit code ${err.status}.\n` +
+        `Ensure that the git reference '${gitDiffArg}' exists locally and that you have fetched the required commits/branches.\n` +
+        `Details: ${String(err.stderr || err.message || '').trim()}`
+      );
+    }
+  }
+
+  const output = runGit([
+    'diff',
+    '--name-only',
+    '--diff-filter=ACMRT',
+    ...args,
+    '--',
+    '*.ts',
+  ]);
+  return output
+    .split('\n')
+    .map(f => f.trim())
+    .filter(f => f.length > 0 && existsSync(f));
+}
+
+/**
+ * Retrieves the GIT_DIFF_ARG from CLI flags or environment variable.
+ */
+function getGitDiffArg() {
+  const cliIndex = process.argv.findIndex(arg => arg.startsWith('--git-diff-arg'));
+  if (cliIndex !== -1) {
+    const arg = process.argv[cliIndex];
+    if (arg.includes('=')) {
+      return arg.substring(arg.indexOf('=') + 1);
+    }
+    if (process.argv[cliIndex + 1] && !process.argv[cliIndex + 1].startsWith('-')) {
+      return process.argv[cliIndex + 1];
+    }
+  }
+  return process.env.GIT_DIFF_ARG;
+}
+
+/**
  * Returns a list of changed TypeScript files comparing against target branches/references.
  */
 function getChangedFiles() {
+  const isStrict = process.argv.includes('--strict');
+
+  const gitDiffArg = getGitDiffArg();
+
+  if (isStrict) {
+    if (!gitDiffArg) {
+      throw new Error(
+        'Strict mode is enabled (--strict), but GIT_DIFF_ARG was not provided. ' +
+        'Please supply --git-diff-arg <arg> or set the GIT_DIFF_ARG environment variable.'
+      );
+    }
+    console.log(`Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`);
+    return getStrictDiffFiles(gitDiffArg);
+  }
+
   const isCI = Boolean(process.env.CI || process.env.GITHUB_ACTIONS || process.env.GITHUB_BASE_REF);
 
   let refsToTry = [];
