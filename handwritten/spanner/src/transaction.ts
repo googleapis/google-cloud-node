@@ -75,13 +75,9 @@ import {performance} from 'perf_hooks';
 let globalReqId = 0;
 function safeMeasure(name: string, startMark: string, endMark: string) {
   try {
-    const startExists = performance.getEntriesByName(startMark).length > 0;
-    const endExists = performance.getEntriesByName(endMark).length > 0;
-    if (startExists && endExists) {
-      performance.measure(name, startMark, endMark);
-    }
+    performance.measure(name, startMark, endMark);
   } catch (e) {
-    // Ignore if marks are missing on stream error
+    // Ignore if startMark/endMark is missing on stream error
   }
 }
 
