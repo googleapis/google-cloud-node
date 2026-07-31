@@ -29,7 +29,10 @@ jobs:
             if (author === 'release-please[bot]' || author === 'release-please') {
               console.log(`PR opened by ${author}. Ensuring cloud-sdk-nodejs-team is assigned as a reviewer.`);
               const requestedTeams = context.payload.pull_request.requested_teams || [];
-              const hasDefaultTeam = requestedTeams.some(team => team.slug === 'cloud-sdk-nodejs-team');
+              const hasDefaultTeam = requestedTeams.some(team =>
+                (team.slug && team.slug.toLowerCase() === 'cloud-sdk-nodejs-team') ||
+                (team.name && team.name.toLowerCase() === 'cloud-sdk-nodejs-team')
+              );
               if (!hasDefaultTeam) {
                 try {
                   await github.rest.pulls.requestReviewers({
@@ -48,8 +51,14 @@ jobs:
             const requestedReviewers = context.payload.pull_request.requested_reviewers || [];
             const requestedTeams = context.payload.pull_request.requested_teams || [];
 
-            const hasDefaultTeam = requestedTeams.some(team => team.slug === 'cloud-sdk-nodejs-team');
-            const hasRouteSpecificTeam = requestedTeams.some(team => team.slug !== 'cloud-sdk-nodejs-team');
+            const hasDefaultTeam = requestedTeams.some(team =>
+              (team.slug && team.slug.toLowerCase() === 'cloud-sdk-nodejs-team') ||
+              (team.name && team.name.toLowerCase() === 'cloud-sdk-nodejs-team')
+            );
+            const hasRouteSpecificTeam = requestedTeams.some(team =>
+              (team.slug && team.slug.toLowerCase() !== 'cloud-sdk-nodejs-team') &&
+              (!team.name || team.name.toLowerCase() !== 'cloud-sdk-nodejs-team')
+            );
 
             // Check if PR has already been reviewed
             let hasReviews = false;
@@ -72,7 +81,7 @@ jobs:
               console.log(`PR already has requested reviewers: ${requestedReviewers.map(r => r.login).join(', ')}.`);
               shouldExit = true;
             } else if (hasRouteSpecificTeam) {
-              console.log(`PR already has route-specific team reviewer requested: ${requestedTeams.map(t => t.slug).join(', ')}.`);
+              console.log(`PR already has route-specific team reviewer requested: ${requestedTeams.map(t => t.slug || t.name).join(', ')}.`);
               shouldExit = true;
             } else if (hasReviews) {
               shouldExit = true;
@@ -99,11 +108,18 @@ jobs:
 
 
             // 2. Get list of files modified in the PR
-            const { data: files } = await github.rest.pulls.listFiles({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-            });
+            let files = [];
+            try {
+              const res = await github.rest.pulls.listFiles({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                per_page: 100,
+              });
+              files = res.data;
+            } catch (err) {
+              console.error("Failed to list PR files:", err.message || err);
+            }
 
             const PATH_ROUTING = [
               { prefix: 'handwritten/bigquery/', team: 'bigquery-team' },
@@ -142,14 +158,15 @@ jobs:
             }
 
             if (!assigned) {
-              console.log("Fetching .github/CODEOWNERS to identify default reviewers...");
+              const baseRef = context.payload.pull_request.base.ref || context.payload.pull_request.base.sha || 'main';
+              console.log(`Fetching .github/CODEOWNERS (ref: ${baseRef}) to identify default reviewers...`);
               let defaultReviewers = [];
               try {
                 const { data: codeownersData } = await github.rest.repos.getContent({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   path: '.github/CODEOWNERS',
-                  ref: context.payload.pull_request.head.sha,
+                  ref: baseRef,
                 });
                 const content = Buffer.from(codeownersData.content, 'base64').toString('utf-8');
                 const lines = content.split('\n');
@@ -163,17 +180,27 @@ jobs:
                       defaultReviewers = parts
                         .filter(p => p.startsWith('@'))
                         .map(p => p.substring(1))
-                        .filter(login => login !== author);
+                        .filter(login => login.toLowerCase() !== author.toLowerCase());
                       break;
                     }
                   }
                 }
               } catch (err) {
-                console.error("Failed to read or parse CODEOWNERS:", err);
+                console.error("Failed to read or parse CODEOWNERS:", err.message || err);
+              }
+
+              // Hardcoded fallback list if CODEOWNERS could not be fetched or contained no reviewers (excluding author)
+              if (defaultReviewers.length === 0) {
+                console.warn("No default reviewers found in CODEOWNERS. Using fallback team members.");
+                const FALLBACK_TEAM = ['pearigee', 'feywind', 'danieljbruce', 'shivanee-p'];
+                defaultReviewers = FALLBACK_TEAM.filter(login => login.toLowerCase() !== author.toLowerCase());
               }
 
               if (defaultReviewers.length > 0) {
                 console.log(`Found default reviewers: ${defaultReviewers.join(', ')}. Load balancing among them.`);
+                let candidateLogins = defaultReviewers;
+                let minLoad = 0;
+
                 try {
                   // Retrieve active open PRs to calculate load
                   const { data: openPRs } = await github.rest.pulls.list({
@@ -185,23 +212,25 @@ jobs:
 
                   const loadMap = {};
                   for (const member of defaultReviewers) {
-                    loadMap[member] = 0;
+                    loadMap[member.toLowerCase()] = 0;
                   }
 
                   for (const pr of openPRs) {
                     // Count pending review requests
                     if (pr.requested_reviewers) {
                       for (const reviewer of pr.requested_reviewers) {
-                        if (loadMap[reviewer.login] !== undefined) {
-                          loadMap[reviewer.login]++;
+                        const lower = (reviewer.login || '').toLowerCase();
+                        if (loadMap[lower] !== undefined) {
+                          loadMap[lower]++;
                         }
                       }
                     }
                     // Count assignees
                     if (pr.assignees) {
                       for (const assignee of pr.assignees) {
-                        if (loadMap[assignee.login] !== undefined) {
-                          loadMap[assignee.login]++;
+                        const lower = (assignee.login || '').toLowerCase();
+                        if (loadMap[lower] !== undefined) {
+                          loadMap[lower]++;
                         }
                       }
                     }
@@ -210,33 +239,45 @@ jobs:
                   console.log("Current team workload:", loadMap);
 
                   // Find members with the minimum load
-                  let minLoad = Infinity;
-                  let selectedReviewers = [];
+                  minLoad = Infinity;
+                  candidateLogins = [];
                   for (const member of defaultReviewers) {
-                    const load = loadMap[member];
+                    const load = loadMap[member.toLowerCase()];
                     if (load < minLoad) {
                       minLoad = load;
-                      selectedReviewers = [member];
+                      candidateLogins = [member];
                     } else if (load === minLoad) {
-                      selectedReviewers.push(member);
+                      candidateLogins.push(member);
                     }
                   }
-
-                  const leastLoadedReviewer = selectedReviewers[Math.floor(Math.random() * selectedReviewers.length)];
-                  console.log(`Selected reviewer with least load (load: ${minLoad}): ${leastLoadedReviewer}`);
-
-                  await github.rest.pulls.requestReviewers({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    pull_number: context.payload.pull_request.number,
-                    reviewers: [leastLoadedReviewer],
-                  });
-                  assigned = true;
                 } catch (err) {
-                  console.error("Failed to assign reviewers using load balancing:", err);
+                  console.error("Failed to calculate workload from open PRs, proceeding with all default reviewers:", err.message || err);
+                }
+
+                // Shuffle candidates and attempt to request review from least loaded candidates first, then any default reviewer
+                const candidateQueue = [
+                  ...candidateLogins.sort(() => Math.random() - 0.5),
+                  ...defaultReviewers.filter(m => !candidateLogins.includes(m)).sort(() => Math.random() - 0.5)
+                ];
+
+                for (const candidate of candidateQueue) {
+                  console.log(`Attempting to assign reviewer: ${candidate}`);
+                  try {
+                    await github.rest.pulls.requestReviewers({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      pull_number: context.payload.pull_request.number,
+                      reviewers: [candidate],
+                    });
+                    assigned = true;
+                    console.log(`Successfully assigned reviewer: ${candidate}`);
+                    break;
+                  } catch (reqErr) {
+                    console.error(`Failed to assign reviewer ${candidate}:`, reqErr.message || reqErr);
+                  }
                 }
               } else {
-                console.warn("No default reviewers found in CODEOWNERS (or they only contained teams/author).");
+                console.warn("No default reviewers available to assign.");
               }
             }
 
@@ -254,3 +295,4 @@ jobs:
                 console.warn("Failed to remove default cloud-sdk-nodejs-team reviewer:", err.message || err);
               }
             }
+
