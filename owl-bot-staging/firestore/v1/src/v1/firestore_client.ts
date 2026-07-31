@@ -487,6 +487,8 @@ export class FirestoreClient {
    *   This must be a microsecond precision timestamp within the past one hour,
    *   or if Point-in-Time Recovery is enabled, can additionally be a whole
    *   minute timestamp within the past 7 days.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -628,6 +630,8 @@ export class FirestoreClient {
    * @param {google.firestore.v1.Precondition} request.currentDocument
    *   An optional precondition on the document.
    *   The request will fail if this is set and not met by the target document.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -756,6 +760,8 @@ export class FirestoreClient {
    * @param {google.firestore.v1.Precondition} request.currentDocument
    *   An optional precondition on the document.
    *   The request will fail if this is set and not met by the target document.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -884,6 +890,8 @@ export class FirestoreClient {
    * @param {google.firestore.v1.TransactionOptions} request.options
    *   The options for the transaction.
    *   Defaults to a read-write transaction.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1019,6 +1027,8 @@ export class FirestoreClient {
    *   Always executed atomically and in order.
    * @param {Buffer} request.transaction
    *   If set, applies all writes in this transaction, and commits it.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1146,6 +1156,8 @@ export class FirestoreClient {
    *   `projects/{project_id}/databases/{database_id}`.
    * @param {Buffer} request.transaction
    *   Required. The transaction to roll back.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1288,6 +1300,8 @@ export class FirestoreClient {
    *   document more than once per request.
    * @param {number[]} request.labels
    *   Labels associated with this batch write.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1428,6 +1442,8 @@ export class FirestoreClient {
    *
    *   If the document has a field that is not present in this mask, that field
    *   will not be returned in the response.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1581,6 +1597,8 @@ export class FirestoreClient {
    *   This must be a microsecond precision timestamp within the past one hour,
    *   or if Point-in-Time Recovery is enabled, can additionally be a whole
    *   minute timestamp within the past 7 days.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1641,6 +1659,8 @@ export class FirestoreClient {
    * @param {google.firestore.v1.ExplainOptions} [request.explainOptions]
    *   Optional. Explain options for the query. If set, additional query
    *   statistics will be returned. If not, only query results will be returned.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1698,6 +1718,8 @@ export class FirestoreClient {
    *   Optional. Automatically commits the transaction after the pipeline has been
    *   executed. Only permitted in combination with `transaction` or
    *   `new_transaction`.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1795,6 +1817,8 @@ export class FirestoreClient {
    * @param {google.firestore.v1.ExplainOptions} [request.explainOptions]
    *   Optional. Explain options for the query. If set, additional query
    *   statistics will be returned. If not, only query results will be returned.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1930,6 +1954,8 @@ export class FirestoreClient {
    *   {@link protos.google.firestore.v1.Document.update_time|`update_time`} set.
    *
    *   Requests with `show_missing` may not specify `where` or `order_by`.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2096,6 +2122,8 @@ export class FirestoreClient {
    *   {@link protos.google.firestore.v1.Document.update_time|`update_time`} set.
    *
    *   Requests with `show_missing` may not specify `where` or `order_by`.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2195,6 +2223,8 @@ export class FirestoreClient {
    *   {@link protos.google.firestore.v1.Document.update_time|`update_time`} set.
    *
    *   Requests with `show_missing` may not specify `where` or `order_by`.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2286,6 +2316,8 @@ export class FirestoreClient {
    *   This must be a microsecond precision timestamp within the past one hour,
    *   or if Point-in-Time Recovery is enabled, can additionally be a whole
    *   minute timestamp within the past 7 days.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2442,6 +2474,8 @@ export class FirestoreClient {
    *   This must be a microsecond precision timestamp within the past one hour,
    *   or if Point-in-Time Recovery is enabled, can additionally be a whole
    *   minute timestamp within the past 7 days.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2531,6 +2565,8 @@ export class FirestoreClient {
    *   This must be a microsecond precision timestamp within the past one hour,
    *   or if Point-in-Time Recovery is enabled, can additionally be a whole
    *   minute timestamp within the past 7 days.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2591,6 +2627,8 @@ export class FirestoreClient {
    *   This must be a microsecond precision timestamp within the past one hour,
    *   or if Point-in-Time Recovery is enabled, can additionally be a whole
    *   minute timestamp within the past 7 days.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2723,6 +2761,8 @@ export class FirestoreClient {
    *   This must be a microsecond precision timestamp within the past one hour,
    *   or if Point-in-Time Recovery is enabled, can additionally be a whole
    *   minute timestamp within the past 7 days.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2784,6 +2824,8 @@ export class FirestoreClient {
    *   This must be a microsecond precision timestamp within the past one hour,
    *   or if Point-in-Time Recovery is enabled, can additionally be a whole
    *   minute timestamp within the past 7 days.
+   * @param {google.firestore.v1.RequestOptions} [request.requestOptions]
+   *   Optional. Any additional options for the request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

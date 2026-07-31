@@ -38,6 +38,10 @@ function main(database) {
    *  Defaults to a read-write transaction.
    */
   // const options = {}
+  /**
+   *  Optional. Any additional options for the request.
+   */
+  // const requestOptions = {}
 
   // Imports the Firestore library
   const {FirestoreClient} = require('@google-cloud/firestore').v1;

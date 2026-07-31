@@ -53,6 +53,10 @@ function main(document) {
    *  The request will fail if this is set and not met by the target document.
    */
   // const currentDocument = {}
+  /**
+   *  Optional. Any additional options for the request.
+   */
+  // const requestOptions = {}
 
   // Imports the Firestore library
   const {FirestoreClient} = require('@google-cloud/firestore').v1;

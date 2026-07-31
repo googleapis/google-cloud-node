@@ -44,6 +44,10 @@ function main(database) {
    *  Labels associated with this batch write.
    */
   // const labels = [1,2,3,4]
+  /**
+   *  Optional. Any additional options for the request.
+   */
+  // const requestOptions = {}
 
   // Imports the Firestore library
   const {FirestoreClient} = require('@google-cloud/firestore').v1;

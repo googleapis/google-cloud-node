@@ -4592,6 +4592,239 @@
                     return TransactionOptions;
                 })();
     
+                v1.RequestOptions = (function() {
+    
+                    /**
+                     * Properties of a RequestOptions.
+                     * @memberof google.firestore.v1
+                     * @interface IRequestOptions
+                     * @property {Array.<string>|null} [requestTags] RequestOptions requestTags
+                     */
+    
+                    /**
+                     * Constructs a new RequestOptions.
+                     * @memberof google.firestore.v1
+                     * @classdesc Represents a RequestOptions.
+                     * @implements IRequestOptions
+                     * @constructor
+                     * @param {google.firestore.v1.IRequestOptions=} [properties] Properties to set
+                     */
+                    function RequestOptions(properties) {
+                        this.requestTags = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * RequestOptions requestTags.
+                     * @member {Array.<string>} requestTags
+                     * @memberof google.firestore.v1.RequestOptions
+                     * @instance
+                     */
+                    RequestOptions.prototype.requestTags = $util.emptyArray;
+    
+                    /**
+                     * Creates a new RequestOptions instance using the specified properties.
+                     * @function create
+                     * @memberof google.firestore.v1.RequestOptions
+                     * @static
+                     * @param {google.firestore.v1.IRequestOptions=} [properties] Properties to set
+                     * @returns {google.firestore.v1.RequestOptions} RequestOptions instance
+                     */
+                    RequestOptions.create = function create(properties) {
+                        return new RequestOptions(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified RequestOptions message. Does not implicitly {@link google.firestore.v1.RequestOptions.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.firestore.v1.RequestOptions
+                     * @static
+                     * @param {google.firestore.v1.IRequestOptions} message RequestOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RequestOptions.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.requestTags != null && message.requestTags.length)
+                            for (var i = 0; i < message.requestTags.length; ++i)
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.requestTags[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified RequestOptions message, length delimited. Does not implicitly {@link google.firestore.v1.RequestOptions.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.firestore.v1.RequestOptions
+                     * @static
+                     * @param {google.firestore.v1.IRequestOptions} message RequestOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    RequestOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a RequestOptions message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.firestore.v1.RequestOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.firestore.v1.RequestOptions} RequestOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RequestOptions.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.firestore.v1.RequestOptions();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.requestTags && message.requestTags.length))
+                                        message.requestTags = [];
+                                    message.requestTags.push(reader.string());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a RequestOptions message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.firestore.v1.RequestOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.firestore.v1.RequestOptions} RequestOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    RequestOptions.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a RequestOptions message.
+                     * @function verify
+                     * @memberof google.firestore.v1.RequestOptions
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    RequestOptions.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.requestTags != null && message.hasOwnProperty("requestTags")) {
+                            if (!Array.isArray(message.requestTags))
+                                return "requestTags: array expected";
+                            for (var i = 0; i < message.requestTags.length; ++i)
+                                if (!$util.isString(message.requestTags[i]))
+                                    return "requestTags: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a RequestOptions message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.firestore.v1.RequestOptions
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.firestore.v1.RequestOptions} RequestOptions
+                     */
+                    RequestOptions.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.firestore.v1.RequestOptions)
+                            return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var message = new $root.google.firestore.v1.RequestOptions();
+                        if (object.requestTags) {
+                            if (!Array.isArray(object.requestTags))
+                                throw TypeError(".google.firestore.v1.RequestOptions.requestTags: array expected");
+                            message.requestTags = [];
+                            for (var i = 0; i < object.requestTags.length; ++i)
+                                message.requestTags[i] = String(object.requestTags[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a RequestOptions message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.firestore.v1.RequestOptions
+                     * @static
+                     * @param {google.firestore.v1.RequestOptions} message RequestOptions
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    RequestOptions.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.requestTags = [];
+                        if (message.requestTags && message.requestTags.length) {
+                            object.requestTags = [];
+                            for (var j = 0; j < message.requestTags.length; ++j)
+                                object.requestTags[j] = message.requestTags[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this RequestOptions to JSON.
+                     * @function toJSON
+                     * @memberof google.firestore.v1.RequestOptions
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    RequestOptions.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for RequestOptions
+                     * @function getTypeUrl
+                     * @memberof google.firestore.v1.RequestOptions
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    RequestOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.firestore.v1.RequestOptions";
+                    };
+    
+                    return RequestOptions;
+                })();
+    
                 v1.ExplainStats = (function() {
     
                     /**
@@ -5420,6 +5653,7 @@
                      * @property {google.firestore.v1.IDocumentMask|null} [mask] GetDocumentRequest mask
                      * @property {Uint8Array|null} [transaction] GetDocumentRequest transaction
                      * @property {google.protobuf.ITimestamp|null} [readTime] GetDocumentRequest readTime
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] GetDocumentRequest requestOptions
                      */
     
                     /**
@@ -5469,6 +5703,14 @@
                      */
                     GetDocumentRequest.prototype.readTime = null;
     
+                    /**
+                     * GetDocumentRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.GetDocumentRequest
+                     * @instance
+                     */
+                    GetDocumentRequest.prototype.requestOptions = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -5515,6 +5757,8 @@
                             writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.transaction);
                         if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
                             $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         return writer;
                     };
     
@@ -5569,6 +5813,10 @@
                                 }
                             case 5: {
                                     message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 10: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -5634,6 +5882,11 @@
                                     return "readTime." + error;
                             }
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -5670,6 +5923,11 @@
                                 throw TypeError(".google.firestore.v1.GetDocumentRequest.readTime: object expected");
                             message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime, long + 1);
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.GetDocumentRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -5689,6 +5947,7 @@
                         if (options.defaults) {
                             object.name = "";
                             object.mask = null;
+                            object.requestOptions = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -5704,6 +5963,8 @@
                             if (options.oneofs)
                                 object.consistencySelector = "readTime";
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -5751,6 +6012,7 @@
                      * @property {Uint8Array|null} [transaction] ListDocumentsRequest transaction
                      * @property {google.protobuf.ITimestamp|null} [readTime] ListDocumentsRequest readTime
                      * @property {boolean|null} [showMissing] ListDocumentsRequest showMissing
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] ListDocumentsRequest requestOptions
                      */
     
                     /**
@@ -5840,6 +6102,14 @@
                      */
                     ListDocumentsRequest.prototype.showMissing = false;
     
+                    /**
+                     * ListDocumentsRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.ListDocumentsRequest
+                     * @instance
+                     */
+                    ListDocumentsRequest.prototype.requestOptions = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -5896,6 +6166,8 @@
                             $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         if (message.showMissing != null && Object.hasOwnProperty.call(message, "showMissing"))
                             writer.uint32(/* id 12, wireType 0 =*/96).bool(message.showMissing);
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                         return writer;
                     };
     
@@ -5970,6 +6242,10 @@
                                 }
                             case 12: {
                                     message.showMissing = reader.bool();
+                                    break;
+                                }
+                            case 13: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -6050,6 +6326,11 @@
                         if (message.showMissing != null && message.hasOwnProperty("showMissing"))
                             if (typeof message.showMissing !== "boolean")
                                 return "showMissing: boolean expected";
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -6096,6 +6377,11 @@
                         }
                         if (object.showMissing != null)
                             message.showMissing = Boolean(object.showMissing);
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.ListDocumentsRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -6120,6 +6406,7 @@
                             object.orderBy = "";
                             object.mask = null;
                             object.showMissing = false;
+                            object.requestOptions = null;
                         }
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
@@ -6145,6 +6432,8 @@
                         }
                         if (message.showMissing != null && message.hasOwnProperty("showMissing"))
                             object.showMissing = message.showMissing;
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -6450,6 +6739,7 @@
                      * @property {string|null} [documentId] CreateDocumentRequest documentId
                      * @property {google.firestore.v1.IDocument|null} [document] CreateDocumentRequest document
                      * @property {google.firestore.v1.IDocumentMask|null} [mask] CreateDocumentRequest mask
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] CreateDocumentRequest requestOptions
                      */
     
                     /**
@@ -6508,6 +6798,14 @@
                     CreateDocumentRequest.prototype.mask = null;
     
                     /**
+                     * CreateDocumentRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.CreateDocumentRequest
+                     * @instance
+                     */
+                    CreateDocumentRequest.prototype.requestOptions = null;
+    
+                    /**
                      * Creates a new CreateDocumentRequest instance using the specified properties.
                      * @function create
                      * @memberof google.firestore.v1.CreateDocumentRequest
@@ -6541,6 +6839,8 @@
                             $root.google.firestore.v1.Document.encode(message.document, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         if (message.mask != null && Object.hasOwnProperty.call(message, "mask"))
                             $root.google.firestore.v1.DocumentMask.encode(message.mask, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -6601,6 +6901,10 @@
                                     message.mask = $root.google.firestore.v1.DocumentMask.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
+                            case 6: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7, long);
                                 break;
@@ -6659,6 +6963,11 @@
                             if (error)
                                 return "mask." + error;
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -6694,6 +7003,11 @@
                                 throw TypeError(".google.firestore.v1.CreateDocumentRequest.mask: object expected");
                             message.mask = $root.google.firestore.v1.DocumentMask.fromObject(object.mask, long + 1);
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.CreateDocumentRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -6716,6 +7030,7 @@
                             object.documentId = "";
                             object.document = null;
                             object.mask = null;
+                            object.requestOptions = null;
                         }
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
@@ -6727,6 +7042,8 @@
                             object.document = $root.google.firestore.v1.Document.toObject(message.document, options);
                         if (message.mask != null && message.hasOwnProperty("mask"))
                             object.mask = $root.google.firestore.v1.DocumentMask.toObject(message.mask, options);
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -6769,6 +7086,7 @@
                      * @property {google.firestore.v1.IDocumentMask|null} [updateMask] UpdateDocumentRequest updateMask
                      * @property {google.firestore.v1.IDocumentMask|null} [mask] UpdateDocumentRequest mask
                      * @property {google.firestore.v1.IPrecondition|null} [currentDocument] UpdateDocumentRequest currentDocument
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] UpdateDocumentRequest requestOptions
                      */
     
                     /**
@@ -6819,6 +7137,14 @@
                     UpdateDocumentRequest.prototype.currentDocument = null;
     
                     /**
+                     * UpdateDocumentRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.UpdateDocumentRequest
+                     * @instance
+                     */
+                    UpdateDocumentRequest.prototype.requestOptions = null;
+    
+                    /**
                      * Creates a new UpdateDocumentRequest instance using the specified properties.
                      * @function create
                      * @memberof google.firestore.v1.UpdateDocumentRequest
@@ -6850,6 +7176,8 @@
                             $root.google.firestore.v1.DocumentMask.encode(message.mask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         if (message.currentDocument != null && Object.hasOwnProperty.call(message, "currentDocument"))
                             $root.google.firestore.v1.Precondition.encode(message.currentDocument, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -6904,6 +7232,10 @@
                                 }
                             case 4: {
                                     message.currentDocument = $root.google.firestore.v1.Precondition.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 5: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -6965,6 +7297,11 @@
                             if (error)
                                 return "currentDocument." + error;
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -7004,6 +7341,11 @@
                                 throw TypeError(".google.firestore.v1.UpdateDocumentRequest.currentDocument: object expected");
                             message.currentDocument = $root.google.firestore.v1.Precondition.fromObject(object.currentDocument, long + 1);
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.UpdateDocumentRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -7025,6 +7367,7 @@
                             object.updateMask = null;
                             object.mask = null;
                             object.currentDocument = null;
+                            object.requestOptions = null;
                         }
                         if (message.document != null && message.hasOwnProperty("document"))
                             object.document = $root.google.firestore.v1.Document.toObject(message.document, options);
@@ -7034,6 +7377,8 @@
                             object.mask = $root.google.firestore.v1.DocumentMask.toObject(message.mask, options);
                         if (message.currentDocument != null && message.hasOwnProperty("currentDocument"))
                             object.currentDocument = $root.google.firestore.v1.Precondition.toObject(message.currentDocument, options);
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -7074,6 +7419,7 @@
                      * @interface IDeleteDocumentRequest
                      * @property {string|null} [name] DeleteDocumentRequest name
                      * @property {google.firestore.v1.IPrecondition|null} [currentDocument] DeleteDocumentRequest currentDocument
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] DeleteDocumentRequest requestOptions
                      */
     
                     /**
@@ -7108,6 +7454,14 @@
                     DeleteDocumentRequest.prototype.currentDocument = null;
     
                     /**
+                     * DeleteDocumentRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.DeleteDocumentRequest
+                     * @instance
+                     */
+                    DeleteDocumentRequest.prototype.requestOptions = null;
+    
+                    /**
                      * Creates a new DeleteDocumentRequest instance using the specified properties.
                      * @function create
                      * @memberof google.firestore.v1.DeleteDocumentRequest
@@ -7135,6 +7489,8 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                         if (message.currentDocument != null && Object.hasOwnProperty.call(message, "currentDocument"))
                             $root.google.firestore.v1.Precondition.encode(message.currentDocument, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         return writer;
                     };
     
@@ -7181,6 +7537,10 @@
                                 }
                             case 2: {
                                     message.currentDocument = $root.google.firestore.v1.Precondition.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 3: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -7230,6 +7590,11 @@
                             if (error)
                                 return "currentDocument." + error;
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -7256,6 +7621,11 @@
                                 throw TypeError(".google.firestore.v1.DeleteDocumentRequest.currentDocument: object expected");
                             message.currentDocument = $root.google.firestore.v1.Precondition.fromObject(object.currentDocument, long + 1);
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.DeleteDocumentRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -7275,11 +7645,14 @@
                         if (options.defaults) {
                             object.name = "";
                             object.currentDocument = null;
+                            object.requestOptions = null;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.currentDocument != null && message.hasOwnProperty("currentDocument"))
                             object.currentDocument = $root.google.firestore.v1.Precondition.toObject(message.currentDocument, options);
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -7324,6 +7697,7 @@
                      * @property {Uint8Array|null} [transaction] BatchGetDocumentsRequest transaction
                      * @property {google.firestore.v1.ITransactionOptions|null} [newTransaction] BatchGetDocumentsRequest newTransaction
                      * @property {google.protobuf.ITimestamp|null} [readTime] BatchGetDocumentsRequest readTime
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] BatchGetDocumentsRequest requestOptions
                      */
     
                     /**
@@ -7390,6 +7764,14 @@
                      */
                     BatchGetDocumentsRequest.prototype.readTime = null;
     
+                    /**
+                     * BatchGetDocumentsRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.BatchGetDocumentsRequest
+                     * @instance
+                     */
+                    BatchGetDocumentsRequest.prototype.requestOptions = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -7441,6 +7823,8 @@
                             $root.google.firestore.v1.TransactionOptions.encode(message.newTransaction, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
                             $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                         return writer;
                     };
     
@@ -7505,6 +7889,10 @@
                                 }
                             case 7: {
                                     message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 8: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -7587,6 +7975,11 @@
                                     return "readTime." + error;
                             }
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -7635,6 +8028,11 @@
                                 throw TypeError(".google.firestore.v1.BatchGetDocumentsRequest.readTime: object expected");
                             message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime, long + 1);
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.BatchGetDocumentsRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -7656,6 +8054,7 @@
                         if (options.defaults) {
                             object.database = "";
                             object.mask = null;
+                            object.requestOptions = null;
                         }
                         if (message.database != null && message.hasOwnProperty("database"))
                             object.database = message.database;
@@ -7681,6 +8080,8 @@
                             if (options.oneofs)
                                 object.consistencySelector = "readTime";
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -8053,6 +8454,7 @@
                      * @interface IBeginTransactionRequest
                      * @property {string|null} [database] BeginTransactionRequest database
                      * @property {google.firestore.v1.ITransactionOptions|null} [options] BeginTransactionRequest options
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] BeginTransactionRequest requestOptions
                      */
     
                     /**
@@ -8087,6 +8489,14 @@
                     BeginTransactionRequest.prototype.options = null;
     
                     /**
+                     * BeginTransactionRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.BeginTransactionRequest
+                     * @instance
+                     */
+                    BeginTransactionRequest.prototype.requestOptions = null;
+    
+                    /**
                      * Creates a new BeginTransactionRequest instance using the specified properties.
                      * @function create
                      * @memberof google.firestore.v1.BeginTransactionRequest
@@ -8114,6 +8524,8 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.database);
                         if (message.options != null && Object.hasOwnProperty.call(message, "options"))
                             $root.google.firestore.v1.TransactionOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         return writer;
                     };
     
@@ -8160,6 +8572,10 @@
                                 }
                             case 2: {
                                     message.options = $root.google.firestore.v1.TransactionOptions.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 3: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -8209,6 +8625,11 @@
                             if (error)
                                 return "options." + error;
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -8235,6 +8656,11 @@
                                 throw TypeError(".google.firestore.v1.BeginTransactionRequest.options: object expected");
                             message.options = $root.google.firestore.v1.TransactionOptions.fromObject(object.options, long + 1);
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.BeginTransactionRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -8254,11 +8680,14 @@
                         if (options.defaults) {
                             object.database = "";
                             object.options = null;
+                            object.requestOptions = null;
                         }
                         if (message.database != null && message.hasOwnProperty("database"))
                             object.database = message.database;
                         if (message.options != null && message.hasOwnProperty("options"))
                             object.options = $root.google.firestore.v1.TransactionOptions.toObject(message.options, options);
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -8526,6 +8955,7 @@
                      * @property {string|null} [database] CommitRequest database
                      * @property {Array.<google.firestore.v1.IWrite>|null} [writes] CommitRequest writes
                      * @property {Uint8Array|null} [transaction] CommitRequest transaction
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] CommitRequest requestOptions
                      */
     
                     /**
@@ -8569,6 +8999,14 @@
                     CommitRequest.prototype.transaction = $util.newBuffer([]);
     
                     /**
+                     * CommitRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.CommitRequest
+                     * @instance
+                     */
+                    CommitRequest.prototype.requestOptions = null;
+    
+                    /**
                      * Creates a new CommitRequest instance using the specified properties.
                      * @function create
                      * @memberof google.firestore.v1.CommitRequest
@@ -8599,6 +9037,8 @@
                                 $root.google.firestore.v1.Write.encode(message.writes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.transaction != null && Object.hasOwnProperty.call(message, "transaction"))
                             writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.transaction);
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         return writer;
                     };
     
@@ -8651,6 +9091,10 @@
                                 }
                             case 3: {
                                     message.transaction = reader.bytes();
+                                    break;
+                                }
+                            case 4: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -8707,6 +9151,11 @@
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             if (!(message.transaction && typeof message.transaction.length === "number" || $util.isString(message.transaction)))
                                 return "transaction: buffer expected";
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -8743,6 +9192,11 @@
                                 $util.base64.decode(object.transaction, message.transaction = $util.newBuffer($util.base64.length(object.transaction)), 0);
                             else if (object.transaction.length >= 0)
                                 message.transaction = object.transaction;
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.CommitRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -8770,6 +9224,7 @@
                                 if (options.bytes !== Array)
                                     object.transaction = $util.newBuffer(object.transaction);
                             }
+                            object.requestOptions = null;
                         }
                         if (message.database != null && message.hasOwnProperty("database"))
                             object.database = message.database;
@@ -8780,6 +9235,8 @@
                         }
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             object.transaction = options.bytes === String ? $util.base64.encode(message.transaction, 0, message.transaction.length) : options.bytes === Array ? Array.prototype.slice.call(message.transaction) : message.transaction;
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -9087,6 +9544,7 @@
                      * @interface IRollbackRequest
                      * @property {string|null} [database] RollbackRequest database
                      * @property {Uint8Array|null} [transaction] RollbackRequest transaction
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] RollbackRequest requestOptions
                      */
     
                     /**
@@ -9121,6 +9579,14 @@
                     RollbackRequest.prototype.transaction = $util.newBuffer([]);
     
                     /**
+                     * RollbackRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.RollbackRequest
+                     * @instance
+                     */
+                    RollbackRequest.prototype.requestOptions = null;
+    
+                    /**
                      * Creates a new RollbackRequest instance using the specified properties.
                      * @function create
                      * @memberof google.firestore.v1.RollbackRequest
@@ -9148,6 +9614,8 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.database);
                         if (message.transaction != null && Object.hasOwnProperty.call(message, "transaction"))
                             writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.transaction);
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         return writer;
                     };
     
@@ -9196,6 +9664,10 @@
                                     message.transaction = reader.bytes();
                                     break;
                                 }
+                            case 3: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7, long);
                                 break;
@@ -9241,6 +9713,11 @@
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             if (!(message.transaction && typeof message.transaction.length === "number" || $util.isString(message.transaction)))
                                 return "transaction: buffer expected";
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -9267,6 +9744,11 @@
                                 $util.base64.decode(object.transaction, message.transaction = $util.newBuffer($util.base64.length(object.transaction)), 0);
                             else if (object.transaction.length >= 0)
                                 message.transaction = object.transaction;
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.RollbackRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -9292,11 +9774,14 @@
                                 if (options.bytes !== Array)
                                     object.transaction = $util.newBuffer(object.transaction);
                             }
+                            object.requestOptions = null;
                         }
                         if (message.database != null && message.hasOwnProperty("database"))
                             object.database = message.database;
                         if (message.transaction != null && message.hasOwnProperty("transaction"))
                             object.transaction = options.bytes === String ? $util.base64.encode(message.transaction, 0, message.transaction.length) : options.bytes === Array ? Array.prototype.slice.call(message.transaction) : message.transaction;
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -9341,6 +9826,7 @@
                      * @property {google.firestore.v1.ITransactionOptions|null} [newTransaction] RunQueryRequest newTransaction
                      * @property {google.protobuf.ITimestamp|null} [readTime] RunQueryRequest readTime
                      * @property {google.firestore.v1.IExplainOptions|null} [explainOptions] RunQueryRequest explainOptions
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] RunQueryRequest requestOptions
                      */
     
                     /**
@@ -9406,6 +9892,14 @@
                      */
                     RunQueryRequest.prototype.explainOptions = null;
     
+                    /**
+                     * RunQueryRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.RunQueryRequest
+                     * @instance
+                     */
+                    RunQueryRequest.prototype.requestOptions = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -9467,6 +9961,8 @@
                             $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                         if (message.explainOptions != null && Object.hasOwnProperty.call(message, "explainOptions"))
                             $root.google.firestore.v1.ExplainOptions.encode(message.explainOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                         return writer;
                     };
     
@@ -9529,6 +10025,10 @@
                                 }
                             case 10: {
                                     message.explainOptions = $root.google.firestore.v1.ExplainOptions.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 11: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -9612,6 +10112,11 @@
                             if (error)
                                 return "explainOptions." + error;
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -9658,6 +10163,11 @@
                                 throw TypeError(".google.firestore.v1.RunQueryRequest.explainOptions: object expected");
                             message.explainOptions = $root.google.firestore.v1.ExplainOptions.fromObject(object.explainOptions, long + 1);
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.RunQueryRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -9677,6 +10187,7 @@
                         if (options.defaults) {
                             object.parent = "";
                             object.explainOptions = null;
+                            object.requestOptions = null;
                         }
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
@@ -9702,6 +10213,8 @@
                         }
                         if (message.explainOptions != null && message.hasOwnProperty("explainOptions"))
                             object.explainOptions = $root.google.firestore.v1.ExplainOptions.toObject(message.explainOptions, options);
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -10122,6 +10635,7 @@
                      * @property {google.firestore.v1.ITransactionOptions|null} [newTransaction] ExecutePipelineRequest newTransaction
                      * @property {google.protobuf.ITimestamp|null} [readTime] ExecutePipelineRequest readTime
                      * @property {boolean|null} [autoCommitTransaction] ExecutePipelineRequest autoCommitTransaction
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] ExecutePipelineRequest requestOptions
                      */
     
                     /**
@@ -10187,6 +10701,14 @@
                      */
                     ExecutePipelineRequest.prototype.autoCommitTransaction = false;
     
+                    /**
+                     * ExecutePipelineRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.ExecutePipelineRequest
+                     * @instance
+                     */
+                    ExecutePipelineRequest.prototype.requestOptions = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -10248,6 +10770,8 @@
                             $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                         if (message.autoCommitTransaction != null && Object.hasOwnProperty.call(message, "autoCommitTransaction"))
                             writer.uint32(/* id 9, wireType 0 =*/72).bool(message.autoCommitTransaction);
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         return writer;
                     };
     
@@ -10310,6 +10834,10 @@
                                 }
                             case 9: {
                                     message.autoCommitTransaction = reader.bool();
+                                    break;
+                                }
+                            case 10: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -10391,6 +10919,11 @@
                         if (message.autoCommitTransaction != null && message.hasOwnProperty("autoCommitTransaction"))
                             if (typeof message.autoCommitTransaction !== "boolean")
                                 return "autoCommitTransaction: boolean expected";
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -10434,6 +10967,11 @@
                         }
                         if (object.autoCommitTransaction != null)
                             message.autoCommitTransaction = Boolean(object.autoCommitTransaction);
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.ExecutePipelineRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -10453,6 +10991,7 @@
                         if (options.defaults) {
                             object.database = "";
                             object.autoCommitTransaction = false;
+                            object.requestOptions = null;
                         }
                         if (message.database != null && message.hasOwnProperty("database"))
                             object.database = message.database;
@@ -10478,6 +11017,8 @@
                         }
                         if (message.autoCommitTransaction != null && message.hasOwnProperty("autoCommitTransaction"))
                             object.autoCommitTransaction = message.autoCommitTransaction;
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -10850,6 +11391,7 @@
                      * @property {google.firestore.v1.ITransactionOptions|null} [newTransaction] RunAggregationQueryRequest newTransaction
                      * @property {google.protobuf.ITimestamp|null} [readTime] RunAggregationQueryRequest readTime
                      * @property {google.firestore.v1.IExplainOptions|null} [explainOptions] RunAggregationQueryRequest explainOptions
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] RunAggregationQueryRequest requestOptions
                      */
     
                     /**
@@ -10915,6 +11457,14 @@
                      */
                     RunAggregationQueryRequest.prototype.explainOptions = null;
     
+                    /**
+                     * RunAggregationQueryRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.RunAggregationQueryRequest
+                     * @instance
+                     */
+                    RunAggregationQueryRequest.prototype.requestOptions = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -10976,6 +11526,8 @@
                             $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         if (message.explainOptions != null && Object.hasOwnProperty.call(message, "explainOptions"))
                             $root.google.firestore.v1.ExplainOptions.encode(message.explainOptions, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                         return writer;
                     };
     
@@ -11038,6 +11590,10 @@
                                 }
                             case 8: {
                                     message.explainOptions = $root.google.firestore.v1.ExplainOptions.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 9: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -11121,6 +11677,11 @@
                             if (error)
                                 return "explainOptions." + error;
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -11167,6 +11728,11 @@
                                 throw TypeError(".google.firestore.v1.RunAggregationQueryRequest.explainOptions: object expected");
                             message.explainOptions = $root.google.firestore.v1.ExplainOptions.fromObject(object.explainOptions, long + 1);
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.RunAggregationQueryRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -11186,6 +11752,7 @@
                         if (options.defaults) {
                             object.parent = "";
                             object.explainOptions = null;
+                            object.requestOptions = null;
                         }
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
@@ -11211,6 +11778,8 @@
                         }
                         if (message.explainOptions != null && message.hasOwnProperty("explainOptions"))
                             object.explainOptions = $root.google.firestore.v1.ExplainOptions.toObject(message.explainOptions, options);
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -11566,6 +12135,7 @@
                      * @property {string|null} [pageToken] PartitionQueryRequest pageToken
                      * @property {number|null} [pageSize] PartitionQueryRequest pageSize
                      * @property {google.protobuf.ITimestamp|null} [readTime] PartitionQueryRequest readTime
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] PartitionQueryRequest requestOptions
                      */
     
                     /**
@@ -11631,6 +12201,14 @@
                      */
                     PartitionQueryRequest.prototype.readTime = null;
     
+                    /**
+                     * PartitionQueryRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.PartitionQueryRequest
+                     * @instance
+                     */
+                    PartitionQueryRequest.prototype.requestOptions = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -11692,6 +12270,8 @@
                             writer.uint32(/* id 5, wireType 0 =*/40).int32(message.pageSize);
                         if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
                             $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                         return writer;
                     };
     
@@ -11754,6 +12334,10 @@
                                 }
                             case 6: {
                                     message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 7: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -11824,6 +12408,11 @@
                                     return "readTime." + error;
                             }
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -11868,6 +12457,11 @@
                                 throw TypeError(".google.firestore.v1.PartitionQueryRequest.readTime: object expected");
                             message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime, long + 1);
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.PartitionQueryRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -11893,6 +12487,7 @@
                                 object.partitionCount = options.longs === String ? "0" : 0;
                             object.pageToken = "";
                             object.pageSize = 0;
+                            object.requestOptions = null;
                         }
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
@@ -11915,6 +12510,8 @@
                             if (options.oneofs)
                                 object.consistencySelector = "readTime";
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -12220,6 +12817,7 @@
                      * @property {Array.<google.firestore.v1.IWrite>|null} [writes] WriteRequest writes
                      * @property {Uint8Array|null} [streamToken] WriteRequest streamToken
                      * @property {Object.<string,string>|null} [labels] WriteRequest labels
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] WriteRequest requestOptions
                      */
     
                     /**
@@ -12280,6 +12878,14 @@
                     WriteRequest.prototype.labels = $util.emptyObject;
     
                     /**
+                     * WriteRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.WriteRequest
+                     * @instance
+                     */
+                    WriteRequest.prototype.requestOptions = null;
+    
+                    /**
                      * Creates a new WriteRequest instance using the specified properties.
                      * @function create
                      * @memberof google.firestore.v1.WriteRequest
@@ -12315,6 +12921,8 @@
                         if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                             for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                 writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                         return writer;
                     };
     
@@ -12398,6 +13006,10 @@
                                     message.labels[key] = value;
                                     break;
                                 }
+                            case 6: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7, long);
                                 break;
@@ -12463,6 +13075,11 @@
                                 if (!$util.isString(message.labels[key[i]]))
                                     return "labels: string{k:string} expected";
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -12511,6 +13128,11 @@
                                 message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.WriteRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -12541,6 +13163,7 @@
                                 if (options.bytes !== Array)
                                     object.streamToken = $util.newBuffer(object.streamToken);
                             }
+                            object.requestOptions = null;
                         }
                         if (message.database != null && message.hasOwnProperty("database"))
                             object.database = message.database;
@@ -12562,6 +13185,8 @@
                                 object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -12927,6 +13552,7 @@
                      * @property {google.firestore.v1.ITarget|null} [addTarget] ListenRequest addTarget
                      * @property {number|null} [removeTarget] ListenRequest removeTarget
                      * @property {Object.<string,string>|null} [labels] ListenRequest labels
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] ListenRequest requestOptions
                      */
     
                     /**
@@ -12977,6 +13603,14 @@
                      */
                     ListenRequest.prototype.labels = $util.emptyObject;
     
+                    /**
+                     * ListenRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.ListenRequest
+                     * @instance
+                     */
+                    ListenRequest.prototype.requestOptions = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -13024,6 +13658,8 @@
                         if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                             for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                 writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -13101,6 +13737,10 @@
                                     message.labels[key] = value;
                                     break;
                                 }
+                            case 5: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7, long);
                                 break;
@@ -13167,6 +13807,11 @@
                                 if (!$util.isString(message.labels[key[i]]))
                                     return "labels: string{k:string} expected";
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -13205,6 +13850,11 @@
                                 message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.ListenRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -13223,8 +13873,10 @@
                         var object = {};
                         if (options.objects || options.defaults)
                             object.labels = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.database = "";
+                            object.requestOptions = null;
+                        }
                         if (message.database != null && message.hasOwnProperty("database"))
                             object.database = message.database;
                         if (message.addTarget != null && message.hasOwnProperty("addTarget")) {
@@ -13246,6 +13898,8 @@
                                 object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -15003,6 +15657,7 @@
                      * @property {number|null} [pageSize] ListCollectionIdsRequest pageSize
                      * @property {string|null} [pageToken] ListCollectionIdsRequest pageToken
                      * @property {google.protobuf.ITimestamp|null} [readTime] ListCollectionIdsRequest readTime
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] ListCollectionIdsRequest requestOptions
                      */
     
                     /**
@@ -15052,6 +15707,14 @@
                      */
                     ListCollectionIdsRequest.prototype.readTime = null;
     
+                    /**
+                     * ListCollectionIdsRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.ListCollectionIdsRequest
+                     * @instance
+                     */
+                    ListCollectionIdsRequest.prototype.requestOptions = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -15098,6 +15761,8 @@
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                         if (message.readTime != null && Object.hasOwnProperty.call(message, "readTime"))
                             $root.google.protobuf.Timestamp.encode(message.readTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -15152,6 +15817,10 @@
                                 }
                             case 4: {
                                     message.readTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 5: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -15211,6 +15880,11 @@
                                     return "readTime." + error;
                             }
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -15241,6 +15915,11 @@
                                 throw TypeError(".google.firestore.v1.ListCollectionIdsRequest.readTime: object expected");
                             message.readTime = $root.google.protobuf.Timestamp.fromObject(object.readTime, long + 1);
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.ListCollectionIdsRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -15261,6 +15940,7 @@
                             object.parent = "";
                             object.pageSize = 0;
                             object.pageToken = "";
+                            object.requestOptions = null;
                         }
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
@@ -15273,6 +15953,8 @@
                             if (options.oneofs)
                                 object.consistencySelector = "readTime";
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     
@@ -15571,6 +16253,7 @@
                      * @property {string|null} [database] BatchWriteRequest database
                      * @property {Array.<google.firestore.v1.IWrite>|null} [writes] BatchWriteRequest writes
                      * @property {Object.<string,string>|null} [labels] BatchWriteRequest labels
+                     * @property {google.firestore.v1.IRequestOptions|null} [requestOptions] BatchWriteRequest requestOptions
                      */
     
                     /**
@@ -15615,6 +16298,14 @@
                     BatchWriteRequest.prototype.labels = $util.emptyObject;
     
                     /**
+                     * BatchWriteRequest requestOptions.
+                     * @member {google.firestore.v1.IRequestOptions|null|undefined} requestOptions
+                     * @memberof google.firestore.v1.BatchWriteRequest
+                     * @instance
+                     */
+                    BatchWriteRequest.prototype.requestOptions = null;
+    
+                    /**
                      * Creates a new BatchWriteRequest instance using the specified properties.
                      * @function create
                      * @memberof google.firestore.v1.BatchWriteRequest
@@ -15646,6 +16337,8 @@
                         if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                             for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                 writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                        if (message.requestOptions != null && Object.hasOwnProperty.call(message, "requestOptions"))
+                            $root.google.firestore.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         return writer;
                     };
     
@@ -15721,6 +16414,10 @@
                                     message.labels[key] = value;
                                     break;
                                 }
+                            case 4: {
+                                    message.requestOptions = $root.google.firestore.v1.RequestOptions.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7, long);
                                 break;
@@ -15780,6 +16477,11 @@
                                 if (!$util.isString(message.labels[key[i]]))
                                     return "labels: string{k:string} expected";
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions")) {
+                            var error = $root.google.firestore.v1.RequestOptions.verify(message.requestOptions, long + 1);
+                            if (error)
+                                return "requestOptions." + error;
+                        }
                         return null;
                     };
     
@@ -15821,6 +16523,11 @@
                                 message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
                         }
+                        if (object.requestOptions != null) {
+                            if (typeof object.requestOptions !== "object")
+                                throw TypeError(".google.firestore.v1.BatchWriteRequest.requestOptions: object expected");
+                            message.requestOptions = $root.google.firestore.v1.RequestOptions.fromObject(object.requestOptions, long + 1);
+                        }
                         return message;
                     };
     
@@ -15841,8 +16548,10 @@
                             object.writes = [];
                         if (options.objects || options.defaults)
                             object.labels = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.database = "";
+                            object.requestOptions = null;
+                        }
                         if (message.database != null && message.hasOwnProperty("database"))
                             object.database = message.database;
                         if (message.writes && message.writes.length) {
@@ -15859,6 +16568,8 @@
                                 object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
                         }
+                        if (message.requestOptions != null && message.hasOwnProperty("requestOptions"))
+                            object.requestOptions = $root.google.firestore.v1.RequestOptions.toObject(message.requestOptions, options);
                         return object;
                     };
     

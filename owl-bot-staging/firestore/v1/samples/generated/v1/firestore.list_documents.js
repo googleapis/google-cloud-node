@@ -91,6 +91,10 @@ function main(parent) {
    *  Requests with `show_missing` may not specify `where` or `order_by`.
    */
   // const showMissing = true
+  /**
+   *  Optional. Any additional options for the request.
+   */
+  // const requestOptions = {}
 
   // Imports the Firestore library
   const {FirestoreClient} = require('@google-cloud/firestore').v1;

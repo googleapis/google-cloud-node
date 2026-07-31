@@ -37,6 +37,10 @@ function main(database, transaction) {
    *  Required. The transaction to roll back.
    */
   // const transaction = Buffer.from('string')
+  /**
+   *  Optional. Any additional options for the request.
+   */
+  // const requestOptions = {}
 
   // Imports the Firestore library
   const {FirestoreClient} = require('@google-cloud/firestore').v1;

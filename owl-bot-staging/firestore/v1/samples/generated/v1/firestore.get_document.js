@@ -50,6 +50,10 @@ function main(name) {
    *  minute timestamp within the past 7 days.
    */
   // const readTime = {}
+  /**
+   *  Optional. Any additional options for the request.
+   */
+  // const requestOptions = {}
 
   // Imports the Firestore library
   const {FirestoreClient} = require('@google-cloud/firestore').v1;
