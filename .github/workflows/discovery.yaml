@@ -30,8 +30,8 @@ jobs:
       - run: cd handwritten/bigquery && pnpm install
       # Generate types
       - run: cd handwritten/bigquery && pnpm run types
-      # Fix formatting
-      - run: cd handwritten/bigquery && pnpm run fix
+      # Fix formatting (scoped to generated types.d.ts and clean up untracked pnpm-lock.yaml)
+      - run: cd handwritten/bigquery && pnpm run fix && git checkout src/bigquery.ts system-test/ 2>/dev/null || true && rm -f pnpm-lock.yaml
       # Submit pull request
       - uses: googleapis/code-suggester@f9fef85aa02459e30e62526abe950341cbbd768b # v5
         env:
@@ -41,9 +41,9 @@ jobs:
           upstream_owner: googleapis
           upstream_repo: google-cloud-node
           description: 'Automated pull-request to keep BigQuery Discovery types up-to-date.'
-          title: 'chore: update types from Discovery'
-          message: 'chore: update types from Discovery'
+          title: 'chore(bigquery): update types from Discovery'
+          message: 'chore(bigquery): update types from Discovery'
           branch: update-discovery-patch
-          git_dir: 'handwritten/bigquery'
+          git_dir: '.'
           fork: true
           force: true
