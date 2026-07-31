@@ -3,7 +3,7 @@
     "private": true,
     "description": "tests for script",
     "scripts": {
-        "test": "mocha tests/close-invalid-link.test.cjs && mocha tests/close-or-remove-response-label.test.cjs",
+        "test": "mocha tests/close-or-remove-response-label.test.cjs",
         "samples-test": "echo 'no samples test!'",
         "system-test": "echo 'no system test!'"
     },

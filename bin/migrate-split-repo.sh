@@ -37,7 +37,7 @@ ${SCRIPT_DIR}/migrate-git-history.sh \
   "googleapis/google-cloud-node" \
   "" \
   "${PACKAGE_PATH}" \
-  "samples",".github/workflows/ci.yaml,.github/workflows/issues-no-repro.yaml,.github/workflows/response.yaml,SECURITY.md,renovate.json" \
+  "samples",".github/workflows/ci.yaml,.github/workflows/response.yaml,SECURITY.md,renovate.json" \
   "samples/generated",".github/.OwlBot.yaml,system-test/test/quickstart.js,system-test/test/quickstart.test.js"
  
 
