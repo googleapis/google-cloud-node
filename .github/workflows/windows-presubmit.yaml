@@ -22,7 +22,7 @@ jobs:
           export BUILD_TYPE=presubmit
           export TEST_TYPE=units
           export GIT_DIFF_ARG=HEAD^1
-          bash ci/run_conditional_tests.sh
+          bash ci/run_conditional_tests.sh --strict
   units:
     needs: setup
     name: units (Node ${{ matrix.node-version }}, Shard ${{ matrix.shard-index }})
@@ -45,7 +45,7 @@ jobs:
         with:
           version: ^10.0.0
       - run: node --version
-      - run: bash ci/run_conditional_tests.sh
+      - run: bash ci/run_conditional_tests.sh --strict
         name: Run windows unit tests
         shell: bash
         env:

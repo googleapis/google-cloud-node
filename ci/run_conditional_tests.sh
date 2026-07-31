@@ -31,26 +31,49 @@ fi
 test_script="${PROJECT_ROOT}/ci/run_single_test.sh"
 
 
-if [ -z "${GIT_DIFF_ARG}" ]; then
-    if [ "${BUILD_TYPE}" == "presubmit" ]; then
-        # For presubmit build, we want to know the difference from the
-        # common commit in origin/main.
-        GIT_DIFF_ARG="origin/main..."
+for arg in "$@"; do
+    case "${arg}" in
+        --strict)
+            STRICT=true
+            ;;
+    esac
+done
 
-        # Then fetch enough history for finding the common commit.
-        git fetch origin main --deepen=300
+if [[ "${STRICT}" == "true" || "${STRICT}" == "1" ]]; then
+    if [ -z "${GIT_DIFF_ARG}" ]; then
+        echo "Error: STRICT mode requires GIT_DIFF_ARG to be set." >&2
+        exit 1
+    fi
+    set +e
+    git diff --quiet ${GIT_DIFF_ARG}
+    diff_status=$?
+    set -e
+    if [[ ${diff_status} -ne 0 && ${diff_status} -ne 1 ]]; then
+        echo "Error: STRICT mode git diff ${GIT_DIFF_ARG} failed with exit code ${diff_status}." >&2
+        exit 1
+    fi
+else
+    if [ -z "${GIT_DIFF_ARG}" ]; then
+        if [ "${BUILD_TYPE}" == "presubmit" ]; then
+            # For presubmit build, we want to know the difference from the
+            # common commit in origin/main.
+            GIT_DIFF_ARG="origin/main..."
 
-    elif [ "${BUILD_TYPE}" == "continuous" ]; then
-        # For continuous build, we want to know the difference in the last
-        # commit. This assumes we use squash commit when merging PRs.
-        GIT_DIFF_ARG="HEAD~.."
+            # Then fetch enough history for finding the common commit.
+            git fetch origin main --deepen=300
 
-        # Then fetch one last commit for getting the diff.
-        git fetch origin main --deepen=1
+        elif [ "${BUILD_TYPE}" == "continuous" ]; then
+            # For continuous build, we want to know the difference in the last
+            # commit. This assumes we use squash commit when merging PRs.
+            GIT_DIFF_ARG="HEAD~.."
 
-    else
-        # Run everything.
-        GIT_DIFF_ARG=""
+            # Then fetch one last commit for getting the diff.
+            git fetch origin main --deepen=1
+
+        else
+            # Run everything.
+            GIT_DIFF_ARG=""
+        fi
     fi
 fi
 
