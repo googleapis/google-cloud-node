@@ -110,35 +110,7 @@ function getChangedFilesStrict() {
 }
 
 /**
- * Helper to get modified/added TypeScript files against a given git ref when not in "strict mode"
- */
-function getDiffFiles(ref) {
-  let diffTarget = ref;
-  try {
-    const mergeBase = runGit(['merge-base', ref, 'HEAD']).trim();
-    if (mergeBase) {
-      diffTarget = mergeBase;
-    }
-  } catch {
-    // If merge-base fails, fall back to using ref directly
-  }
-
-  const output = runGit([
-    'diff',
-    '--name-only',
-    '--diff-filter=ACMRT',
-    diffTarget,
-    '--',
-    '*.ts',
-  ]);
-  return output
-    .split('\n')
-    .map(f => f.trim())
-    .filter(f => f.length > 0 && existsSync(f));
-}
-
-/**
- * Returns a list of changed TypeScript files comparing against target branches/references when not in strict mode
+ * Returns a list of changed TypeScript files comparing against target branches/references when not in strict mode.
  */
 function getChangedFiles() {
   let currentBranch = '';
@@ -154,9 +126,19 @@ function getChangedFiles() {
 
   for (const ref of refsToTry) {
     try {
-      const files = getDiffFiles(ref);
+      const output = runGit([
+        'diff',
+        '--name-only',
+        '--diff-filter=ACMRT',
+        `${ref}...HEAD`,
+        '--',
+        '*.ts',
+      ]);
       console.log(`Comparing against base reference: ${ref}`);
-      return files;
+      return output
+        .split('\n')
+        .map(f => f.trim())
+        .filter(f => f.length > 0 && existsSync(f));
     } catch {
       // Continue to next ref if this one fails/does not exist
     }
