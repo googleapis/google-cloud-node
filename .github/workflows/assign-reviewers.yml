@@ -25,6 +25,8 @@ jobs:
       - name: Assign Reviewers
         continue-on-error: true
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        env:
+          GIT_DIFF_ARG: "origin/${{ github.base_ref }}...HEAD"
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -85,17 +87,77 @@ jobs:
 
             // 3. Obtain changed files hermetically from local git checkout
             let files = [];
-            try {
-              const baseRef = pr.base.ref || 'main';
-              const diffOutput = cp.execSync(`git diff --name-only origin/${baseRef}...HEAD`, { encoding: 'utf-8' });
-              files = diffOutput.split('\n').filter(Boolean);
-            } catch (err) {
-              console.warn("Could not get files from git diff, falling back to API:", err.message || err);
+            const baseRef = pr.base.ref || 'main';
+
+            const getGitDiffArg = () => {
+              const cliIndex = process.argv.findIndex(arg => arg.startsWith('--git-diff-arg'));
+              if (cliIndex !== -1) {
+                const arg = process.argv[cliIndex];
+                if (arg.includes('=')) {
+                  return arg.substring(arg.indexOf('=') + 1);
+                }
+                if (process.argv[cliIndex + 1] && !process.argv[cliIndex + 1].startsWith('-')) {
+                  return process.argv[cliIndex + 1];
+                }
+              }
+              return process.env.GIT_DIFF_ARG;
+            };
+
+            const isStrict = process.argv.includes('--strict') || process.env.STRICT === 'true' || Boolean(process.env.GIT_DIFF_ARG);
+            const gitDiffArg = getGitDiffArg();
+
+            if (isStrict) {
+              if (!gitDiffArg) {
+                throw new Error(
+                  'Strict mode is enabled (--strict), but GIT_DIFF_ARG was not provided. ' +
+                  'Please supply --git-diff-arg <arg> or set the GIT_DIFF_ARG environment variable.'
+                );
+              }
               try {
-                const res = await github.rest.pulls.listFiles({ owner, repo, pull_number, per_page: 100 });
-                files = res.data.map(f => f.filename);
-              } catch (apiErr) {
-                console.error("Failed to list PR files:", apiErr.message || apiErr);
+                cp.execSync(`git diff --quiet ${gitDiffArg}`);
+              } catch (err) {
+                if (err.status !== 1) {
+                  throw new Error(
+                    `Strict mode error: git diff --quiet ${gitDiffArg} failed with exit code ${err.status}.\n` +
+                    `Ensure that the git reference '${gitDiffArg}' exists locally and that you have fetched the required commits/branches.\n` +
+                    `Details: ${String(err.stderr || err.message || '').trim()}`
+                  );
+                }
+              }
+              const diffOutput = cp.execSync(`git diff --name-only --diff-filter=ACMRT ${gitDiffArg}`, { encoding: 'utf-8' });
+              files = diffOutput.split('\n').map(f => f.trim()).filter(Boolean);
+              console.log(`Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`);
+            } else {
+              const refsToTry = baseRef.startsWith('origin/') ? [baseRef] : [`origin/${baseRef}`, baseRef];
+
+              for (const ref of refsToTry) {
+                try {
+                  let diffTarget = ref;
+                  try {
+                    const mergeBase = cp.execSync(`git merge-base ${ref} HEAD`, { encoding: 'utf-8' }).trim();
+                    if (mergeBase) {
+                      diffTarget = mergeBase;
+                    }
+                  } catch {
+                    // Fall back to ref directly if merge-base fails
+                  }
+                  const diffOutput = cp.execSync(`git diff --name-only --diff-filter=ACMRT ${diffTarget}`, { encoding: 'utf-8' });
+                  files = diffOutput.split('\n').map(f => f.trim()).filter(Boolean);
+                  console.log(`Comparing against base reference: ${ref}`);
+                  break;
+                } catch (err) {
+                  console.warn(`Could not get files from git diff against ${ref}:`, err.message || err);
+                }
+              }
+
+              if (files.length === 0) {
+                try {
+                  console.log("Falling back to GitHub REST API to list PR files...");
+                  const res = await github.rest.pulls.listFiles({ owner, repo, pull_number, per_page: 100 });
+                  files = res.data.map(f => f.filename);
+                } catch (apiErr) {
+                  console.error("Failed to list PR files via API:", apiErr.message || apiErr);
+                }
               }
             }
 
