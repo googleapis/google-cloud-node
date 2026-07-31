@@ -136,7 +136,6 @@ export class Pool extends EventEmitter {
 
       try {
         result = await client.query(queryForClient);
-        query.emit('end', result);
       } catch (err: unknown) {
         queryErr = err instanceof Error ? err : new Error(String(err));
       } finally {
@@ -148,6 +147,7 @@ export class Pool extends EventEmitter {
         throw queryErr;
       }
 
+      query.emit('end', result!);
       if (actualCallback) {
         process.nextTick(() => actualCallback!(null, result!));
       }

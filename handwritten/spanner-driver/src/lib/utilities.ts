@@ -67,7 +67,11 @@ export function dispatchQueryError<T>(
 ): void {
   if (callback) {
     process.nextTick(() => callback(err));
-  } else if (query.listenerCount('error') > 0) {
-    query.emit('error', err);
+  } else {
+    process.nextTick(() => {
+      if (query.listenerCount('error') > 0) {
+        query.emit('error', err);
+      }
+    });
   }
 }

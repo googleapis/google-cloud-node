@@ -1,6 +1,6 @@
-# Google Cloud Spanner Node.js Driver (`@google-cloud/spanner-driver`)
+# Google Spanner Node.js Driver (`@google-cloud/spanner-driver`)
 
-The `@google-cloud/spanner-driver` package provides a high-performance, `node-postgres` (`pg`) compatible client and connection pool interface for Google Cloud Spanner. It bridges Node.js applications directly to Spanner using a native Go CGO engine, delivering full PostgreSQL dialect support.
+The `@google-cloud/spanner-driver` package provides a high-performance, `node-postgres` (`pg`) compatible client and connection pool interface for Google Spanner. It bridges Node.js applications directly to Spanner using a native Go CGO engine, delivering full PostgreSQL dialect support.
 
 [![npm version](https://img.shields.io/npm/v/@google-cloud/spanner-driver.svg)](https://www.npmjs.com/package/@google-cloud/spanner-driver)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)

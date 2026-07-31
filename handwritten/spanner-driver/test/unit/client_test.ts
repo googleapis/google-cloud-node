@@ -377,4 +377,28 @@ describe('Client Class', () => {
     });
     void q.catch(() => {});
   });
+
+  it('should emit error event on validation error even when listener is attached after client.query() returns', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    let errorEventEmitted = false;
+
+    await new Promise<void>(resolve => {
+      const q = client.query(''); // empty SQL triggers validation error
+      void q.on('error', () => {
+        errorEventEmitted = true;
+        resolve();
+      });
+      setTimeout(resolve, 50);
+    });
+
+    assert.strictEqual(
+      errorEventEmitted,
+      true,
+      'error event should be emitted even when listener is attached immediately after client.query() returns',
+    );
+  });
 });

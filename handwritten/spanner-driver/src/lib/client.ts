@@ -30,7 +30,7 @@ interface QueryTask<T = unknown> {
 }
 
 /**
- * Client class representing a single database connection to Google Cloud Spanner.
+ * Client class representing a single database connection to Google Spanner.
  *
  * Handles DSN resolution, connection lifecycle (`connect`/`end`/`release`), sequential query
  * execution, transaction state tracking (`txStatus`), and dialect-aware error enrichment.
@@ -83,7 +83,7 @@ export class Client extends EventEmitter {
   }
 
   /**
-   * Establishes a connection to Google Cloud Spanner using the resolved DSN.
+   * Establishes a connection to Google Spanner using the resolved DSN.
    * Supports both Promise (`await client.connect()`) and Node callback (`client.connect(cb)`) forms.
    *
    * @returns Promise resolving when connection is established, or void if callback is passed.
@@ -141,7 +141,7 @@ export class Client extends EventEmitter {
   }
 
   /**
-   * Executes a SQL query against Google Cloud Spanner.
+   * Executes a SQL query against Google Spanner.
    * Supports Promises (`await client.query(sql)`), callbacks (`client.query(sql, cb)`),
    * and streaming row events (`client.query(sql).on('row', cb)`).
    *

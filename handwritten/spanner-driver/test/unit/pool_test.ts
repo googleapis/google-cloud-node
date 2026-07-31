@@ -14,7 +14,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import {Pool, Query, QueryResult} from '../../src/index.js';
+import {Client, Pool, Query, QueryResult} from '../../src/index.js';
 
 describe('Pool Class', () => {
   it('should instantiate Pool with config object or connection string', () => {
@@ -263,5 +263,44 @@ describe('Pool Class', () => {
       done();
     });
     void pool.query(q).catch(() => {});
+  });
+
+  it('should emit end event on Pool.query() only after client.release() completes', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    let releaseCompleted = false;
+
+    const poolAny = pool as unknown as {
+      _doConnect: () => Promise<Client>;
+    };
+    const origConnect = poolAny._doConnect.bind(pool);
+    poolAny._doConnect = async () => {
+      const c = await origConnect();
+      const origRelease = c.release.bind(c);
+      c.release = async () => {
+        await new Promise(r => setTimeout(r, 40));
+        releaseCompleted = true;
+        return origRelease();
+      };
+      return c;
+    };
+
+    let releaseStatusWhenEndEmitted = false;
+    await new Promise<void>((resolve, reject) => {
+      const q = pool.query('SELECT 1');
+      void q.on('end', () => {
+        releaseStatusWhenEndEmitted = releaseCompleted;
+      });
+      void q.then(() => setTimeout(resolve, 50)).catch(reject);
+    });
+
+    assert.strictEqual(
+      releaseStatusWhenEndEmitted,
+      true,
+      'client.release() should complete before end event is emitted on pool.query()',
+    );
   });
 });
