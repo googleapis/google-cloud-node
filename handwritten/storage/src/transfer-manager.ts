@@ -240,14 +240,14 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
 
     // If the header isn't present, add it
     if (!headerFound) {
-      (headers as any)['x-goog-api-client'] = `${getRuntimeTrackingString()} gccl/${
+      headers['x-goog-api-client'] = `${getRuntimeTrackingString()} gccl/${
         packageJson.version
       } gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`;
     }
 
     // If the User-Agent isn't present, add it
     if (!userAgentFound) {
-      (headers as any)['User-Agent'] = getUserAgentString();
+      headers['User-Agent'] = getUserAgentString();
     }
 
     return headers;
@@ -304,7 +304,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     } else if (validation === 'crc32c') {
       const crc = new CRC32C();
       crc.update(chunk);
-      (headers as any)['x-goog-hash'] = `crc32c=${crc.toString()}`;
+      headers['x-goog-hash'] = `crc32c=${crc.toString()}`;
     }
 
     return AsyncRetry(async bail => {
@@ -318,7 +318,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
         if (res.data && res.data.error) {
           throw res.data.error;
         }
-        this.partsMap.set(partNumber, (res.headers as any)['etag']);
+        this.partsMap.set(partNumber, res.headers['etag']);
       } catch (e) {
         this.#handleErrorResponse(e as Error, bail);
       }

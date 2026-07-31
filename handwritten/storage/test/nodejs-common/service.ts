@@ -148,7 +148,7 @@ describe('Service', () => {
           return {token: '', res: undefined};
         }
 
-        async getRequestHeaders(): Promise<any> {
+        async getRequestHeaders() {
           return {};
         }
 
@@ -463,7 +463,7 @@ describe('Service', () => {
     it('should add the User Agent', done => {
       service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
         assert.strictEqual(
-          (reqOpts.headers as any)['User-Agent'],
+          reqOpts.headers!['User-Agent'],
           getUserAgentString()
         );
         done();
@@ -480,7 +480,7 @@ describe('Service', () => {
             pkg.version
           }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
         );
-        assert.ok(r.test((reqOpts.headers as any)['x-goog-api-client']));
+        assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();
       };
 
@@ -496,7 +496,7 @@ describe('Service', () => {
             pkg.version
           }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd/${expected}$`
         );
-        assert.ok(r.test((reqOpts.headers as any)['x-goog-api-client']));
+        assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();
       };
 
