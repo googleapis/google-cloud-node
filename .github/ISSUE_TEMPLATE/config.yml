@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Support Request
+    url: https://cloud.google.com/support/
+    about: If you have a support contract with Google, please file an issue in the Google Cloud Support console instead of GitHub.
+  - name: Question
+    url: https://github.com/googleapis/google-cloud-node/discussions
+    about: If you have a general question that goes beyond the library itself, please use Discussions to engage with fellow community members.
