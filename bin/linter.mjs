@@ -145,30 +145,16 @@ function getDiffFiles(ref) {
  * Returns a list of changed TypeScript files comparing against target branches/references when not in strict mode
  */
 function getChangedFiles() {
-  const isCI = Boolean(process.env.CI || process.env.GITHUB_ACTIONS || process.env.GITHUB_BASE_REF);
-
-  let refsToTry = [];
-  let isStrictCI = false;
-
-  if (isCI) {
-    const baseRef = process.env.GITHUB_BASE_REF;
-    if (!baseRef) {
-      throw new Error('Running in CI but GITHUB_BASE_REF environment variable is not set.');
-    }
-    refsToTry = baseRef.startsWith('origin/') ? [baseRef] : [`origin/${baseRef}`, baseRef];
-    isStrictCI = true;
-  } else {
-    let currentBranch = '';
-    try {
-      currentBranch = runGit(['rev-parse', '--abbrev-ref', 'HEAD']).trim();
-    } catch {
-      // Continue with fallback refs if branch detection fails
-    }
-
-    refsToTry = (currentBranch === 'main')
-      ? ['origin/main', 'upstream/main', 'HEAD~1']
-      : ['upstream/main', 'origin/main', 'main'];
+  let currentBranch = '';
+  try {
+    currentBranch = runGit(['rev-parse', '--abbrev-ref', 'HEAD']).trim();
+  } catch {
+    // Continue with fallback refs if branch detection fails
   }
+
+  const refsToTry = (currentBranch === 'main')
+    ? ['origin/main', 'upstream/main', 'HEAD~1']
+    : ['upstream/main', 'origin/main', 'main'];
 
   for (const ref of refsToTry) {
     try {
@@ -178,10 +164,6 @@ function getChangedFiles() {
     } catch {
       // Continue to next ref if this one fails/does not exist
     }
-  }
-
-  if (isStrictCI) {
-    throw new Error(`Failed to determine changed files against GITHUB_BASE_REF '${refsToTry[0]}' in CI.`);
   }
 
   throw new Error(`Failed to determine changed files. Tried refs: ${refsToTry.join(', ')}`);
