@@ -41,7 +41,7 @@ jobs:
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4
       - name: Install Workspace Dependencies (Frozen Lockfile)
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Cache Turborepo
@@ -74,7 +74,7 @@ jobs:
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 24
-      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4
       - name: Install Workspace Dependencies (Frozen Lockfile)
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Cache Turborepo
