@@ -17,17 +17,14 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
+import * as v1 from './v1';
+import * as v1 from './v1';
+import * as v1 from './v1';
 
-const DatabaseAdminClient = v1.DatabaseAdminClient;
-type DatabaseAdminClient = v1.DatabaseAdminClient;
-const InstanceAdminClient = v1.InstanceAdminClient;
-type InstanceAdminClient = v1.InstanceAdminClient;
 const SpannerClient = v1.SpannerClient;
 type SpannerClient = v1.SpannerClient;
-const SpannerExecutorProxyClient = v1.SpannerExecutorProxyClient;
-type SpannerExecutorProxyClient = v1.SpannerExecutorProxyClient;
 
-export {v1, DatabaseAdminClient, InstanceAdminClient, SpannerClient, SpannerExecutorProxyClient};
-export default {v1, DatabaseAdminClient, InstanceAdminClient, SpannerClient, SpannerExecutorProxyClient};
+export {v1, v1, v1, v1, SpannerClient};
+export default {v1, v1, v1, v1, SpannerClient};
 import * as protos from '../protos/protos';
 export {protos};

@@ -18,10 +18,10 @@
 
 import * as v1 from './v1';
 
-const AutokeyAdminClient = v1.AutokeyAdminClient;
-type AutokeyAdminClient = v1.AutokeyAdminClient;
 const AutokeyClient = v1.AutokeyClient;
 type AutokeyClient = v1.AutokeyClient;
+const AutokeyAdminClient = v1.AutokeyAdminClient;
+type AutokeyAdminClient = v1.AutokeyAdminClient;
 const EkmServiceClient = v1.EkmServiceClient;
 type EkmServiceClient = v1.EkmServiceClient;
 const HsmManagementClient = v1.HsmManagementClient;
@@ -29,7 +29,7 @@ type HsmManagementClient = v1.HsmManagementClient;
 const KeyManagementServiceClient = v1.KeyManagementServiceClient;
 type KeyManagementServiceClient = v1.KeyManagementServiceClient;
 
-export {v1, AutokeyAdminClient, AutokeyClient, EkmServiceClient, HsmManagementClient, KeyManagementServiceClient};
-export default {v1, AutokeyAdminClient, AutokeyClient, EkmServiceClient, HsmManagementClient, KeyManagementServiceClient};
+export {v1, AutokeyClient, AutokeyAdminClient, EkmServiceClient, HsmManagementClient, KeyManagementServiceClient};
+export default {v1, AutokeyClient, AutokeyAdminClient, EkmServiceClient, HsmManagementClient, KeyManagementServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

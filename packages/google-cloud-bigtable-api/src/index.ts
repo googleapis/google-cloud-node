@@ -17,15 +17,12 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v2 from './v2';
+import * as v2 from './v2';
 
 const BigtableClient = v2.BigtableClient;
 type BigtableClient = v2.BigtableClient;
-const BigtableInstanceAdminClient = v2.BigtableInstanceAdminClient;
-type BigtableInstanceAdminClient = v2.BigtableInstanceAdminClient;
-const BigtableTableAdminClient = v2.BigtableTableAdminClient;
-type BigtableTableAdminClient = v2.BigtableTableAdminClient;
 
-export {v2, BigtableClient, BigtableInstanceAdminClient, BigtableTableAdminClient};
-export default {v2, BigtableClient, BigtableInstanceAdminClient, BigtableTableAdminClient};
+export {v2, v2, BigtableClient};
+export default {v2, v2, BigtableClient};
 import * as protos from '../protos/protos';
 export {protos};
