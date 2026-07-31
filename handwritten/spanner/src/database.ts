@@ -121,6 +121,20 @@ import {
   newAtomicCounter,
 } from './request_id_header';
 
+import {performance} from 'perf_hooks';
+let globalReqId = 0;
+function safeMeasure(name: string, startMark: string, endMark: string) {
+  try {
+    const startExists = performance.getEntriesByName(startMark).length > 0;
+    const endExists = performance.getEntriesByName(endMark).length > 0;
+    if (startExists && endExists) {
+      performance.measure(name, startMark, endMark);
+    }
+  } catch (e) {
+    // Ignore if marks are missing on stream error
+  }
+}
+
 export type GetDatabaseRolesCallback = RequestCallback<
   IDatabaseRole,
   databaseAdmin.spanner.admin.database.v1.IListDatabaseRolesResponse
@@ -2904,6 +2918,14 @@ class Database extends common.GrpcServiceObject {
         ? (optionsOrCallback as TimestampBounds)
         : {};
 
+    // [M1 MARK]: SDK Method Entry
+    const reqId = ++globalReqId;
+    const m1Name = `M1_sdk_start_${reqId}`;
+    const m2Name = `M2_gax_start_${reqId}`;
+    const m3Name = `M3_gax_end_${reqId}`;
+    const m4Name = `M4_sdk_end_${reqId}`;
+    performance.mark(m1Name);
+
     return startTrace(
       'Database.run',
       {
@@ -2911,13 +2933,17 @@ class Database extends common.GrpcServiceObject {
         ...this._traceConfig,
       },
       span => {
-        this.runStream(query, options)
+        this.runStream(query, options, reqId)
           .on('error', err => {
             setSpanError(span, err);
             span.end();
             callback!(err as grpc.ServiceError, rows, stats, metadata);
           })
           .on('response', response => {
+            // [M3 MARK]: Mark M3 on first response header
+            if (!performance.getEntriesByName(m3Name).length) {
+              performance.mark(m3Name);
+            }
             if (response.metadata) {
               metadata = response.metadata;
             }
@@ -2927,6 +2953,12 @@ class Database extends common.GrpcServiceObject {
             rows.push(row);
           })
           .on('end', () => {
+            // [M4 MARK]: Mark M4 on completion
+            performance.mark(m4Name);
+            // Calculate isolated durations
+            safeMeasure(`1_SDK_PreProcessing_${reqId}`, m1Name, m2Name);
+            safeMeasure(`2_External_${reqId}`, m2Name, m3Name);
+            safeMeasure(`3_SDK_PostProcessing_${reqId}`, m3Name, m4Name);
             span.end();
             callback!(null, rows, stats, metadata);
           });
@@ -3149,6 +3181,7 @@ class Database extends common.GrpcServiceObject {
   runStream(
     query: string | ExecuteSqlRequest,
     options?: TimestampBounds,
+    reqId?: number,
   ): PartialResultStream {
     const proxyStream: Transform = through.obj();
     return startTrace(
@@ -3174,7 +3207,7 @@ class Database extends common.GrpcServiceObject {
           this._releaseOnEnd(session!, snapshot, span);
 
           let dataReceived = false;
-          let dataStream = snapshot.runStream(query);
+          let dataStream = snapshot.runStream(query, reqId);
 
           const endListener = () => {
             snapshot.end();

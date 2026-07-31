@@ -71,6 +71,19 @@ function injectGaxOpt(existingOpts: any, key: string, value: any): any {
     }),
   });
 }
+import {performance} from 'perf_hooks';
+let globalReqId = 0;
+function safeMeasure(name: string, startMark: string, endMark: string) {
+  try {
+    const startExists = performance.getEntriesByName(startMark).length > 0;
+    const endExists = performance.getEntriesByName(endMark).length > 0;
+    if (startExists && endExists) {
+      performance.measure(name, startMark, endMark);
+    }
+  } catch (e) {
+    // Ignore if marks are missing on stream error
+  }
+}
 
 export interface TimestampBounds {
   strong?: boolean;
@@ -1362,6 +1375,14 @@ export class Snapshot extends EventEmitter {
     let stats: google.spanner.v1.ResultSetStats;
     let metadata: google.spanner.v1.ResultSetMetadata;
 
+    // [M1 MARK]: SDK Method Entry
+    const reqId = ++globalReqId;
+    const m1Name = `M1_sdk_start_${reqId}`;
+    const m2Name = `M2_gax_start_${reqId}`;
+    const m3Name = `M3_gax_end_${reqId}`;
+    const m4Name = `M4_sdk_end_${reqId}`;
+    performance.mark(m1Name);
+
     startTrace(
       'Snapshot.run',
       {
@@ -1369,7 +1390,8 @@ export class Snapshot extends EventEmitter {
         ...this._traceConfig,
       },
       span => {
-        return this.runStream(query)
+        // Pass reqId explicitly to runStream
+        return this.runStream(query, reqId)
           .on('error', err => {
             setSpanError(span, err);
             span.end();
@@ -1383,6 +1405,10 @@ export class Snapshot extends EventEmitter {
             callback!(err as ServiceError, rows, stats, metadata);
           })
           .on('response', response => {
+            // [M3 MARK]: Mark M3 on first response header
+            if (!performance.getEntriesByName(m3Name).length) {
+              performance.mark(m3Name);
+            }
             if (response.metadata) {
               metadata = response.metadata;
               if (metadata.transaction && !this.id) {
@@ -1393,6 +1419,13 @@ export class Snapshot extends EventEmitter {
           .on('data', row => rows.push(row))
           .on('stats', _stats => (stats = _stats))
           .on('end', () => {
+            // [M4 MARK]: Mark M4 on completion
+            performance.mark(m4Name);
+            // Calculate isolated durations
+            safeMeasure(`1_SDK_PreProcessing_${reqId}`, m1Name, m2Name);
+            safeMeasure(`2_External_${reqId}`, m2Name, m3Name);
+            safeMeasure(`3_SDK_PostProcessing_${reqId}`, m3Name, m4Name);
+
             span.end();
             callback!(null, rows, stats, metadata);
           });
@@ -1499,7 +1532,10 @@ export class Snapshot extends EventEmitter {
    *   });
    * ```
    */
-  runStream(query: string | ExecuteSqlRequest): PartialResultStream {
+  runStream(
+    query: string | ExecuteSqlRequest,
+    reqId?: number,
+  ): PartialResultStream {
     if (typeof query === 'string') {
       query = {sql: query} as ExecuteSqlRequest;
     }
@@ -1582,6 +1618,8 @@ export class Snapshot extends EventEmitter {
       ...query,
       ...this._traceConfig,
     };
+
+    const currentReqId = reqId ?? ++globalReqId;
     return startTrace('Snapshot.runStream', traceConfig, span => {
       let attempt = 0;
       const database = this.session.parent as Database;
@@ -1590,7 +1628,10 @@ export class Snapshot extends EventEmitter {
         attempt++;
 
         if (!resumeToken) {
-          if (attempt === 1) {
+          // [M2 MARK]: Mark M2 on first attempt only
+          const m2Name = `M2_gax_start_${currentReqId}`;
+          if (attempt === 1 && !performance.getEntriesByName(m2Name).length) {
+            performance.mark(m2Name);
             span.addEvent('Starting stream');
           } else {
             span.addEvent('Re-attempting start stream', {attempt: attempt});
