@@ -86,6 +86,7 @@ export class Generator {
   restNumericEnums?: boolean;
   mixinsOverride?: string[];
   format?: string | string[];
+  enableTelemetryTracing?: boolean;
 
   private root: protobuf.Root;
 
@@ -227,6 +228,10 @@ export class Generator {
     }
   }
 
+  private readEnableTelemetryTracing() {
+    this.enableTelemetryTracing = this.paramMap['enable_telemetry_tracing'] === 'true';
+  }
+
   private readLegacyProtoLoad() {
     if (this.paramMap['legacy-proto-load'] === 'true') {
       this.legacyProtoLoad = true;
@@ -274,6 +279,7 @@ export class Generator {
       this.readLegacyProtoLoad();
       this.readRestNumericEnums();
       this.readFormat();
+      this.readEnableTelemetryTracing();
     }
   }
 
@@ -334,6 +340,7 @@ export class Generator {
       legacyProtoLoad: this.legacyProtoLoad,
       restNumericEnums: this.restNumericEnums,
       mixinsOverridden: this.mixinsOverride !== undefined,
+      enableTelemetryTracing: this.enableTelemetryTracing,
     });
     return api;
   }
