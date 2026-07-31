@@ -377,7 +377,11 @@ describe('Bigtable/ClientSideMetrics', () => {
         // If the instance has been deleted already by another source, we don't
         // want this after hook to block the continuous integration pipeline.
         const instance = bigtable.instance(instanceId1);
-        await instance.delete({});
+        try {
+          await instance.delete({});
+        } catch(e: any) {
+          console.warn("Skipping delete due to error", e.message);
+        }
       } catch (e) {
         console.warn('The instance has been deleted already');
       }
@@ -385,7 +389,11 @@ describe('Bigtable/ClientSideMetrics', () => {
         // If the instance has been deleted already by another source, we don't
         // want this after hook to block the continuous integration pipeline.
         const instance = bigtable.instance(instanceId2);
-        await instance.delete({});
+        try {
+          await instance.delete({});
+        } catch(e: any) {
+          console.warn("Skipping delete due to error", e.message);
+        }
       } catch (e) {
         console.warn('The instance has been deleted already');
       }

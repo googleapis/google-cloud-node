@@ -101,7 +101,11 @@ describe('Cluster', () => {
   }
   afterEach(async () => {
     try {
-      await instance.delete();
+      try {
+        await instance.delete();
+      } catch(e: any) {
+        console.warn("Skipping delete due to error", e.message);
+      }
     } catch (e) {}
   });
   describe('Create cluster', () => {
@@ -113,10 +117,10 @@ describe('Cluster', () => {
         await createStandardNewInstance(clusterId, 2, this);
         cluster = instance.cluster(clusterId);
       });
-      it('should create an instance with clusters for manual scaling', async () => {
+      it('should create an instance with clusters for manual scaling', async function() {
         await checkMetadata(cluster, {nodes: 2}, false);
       });
-      it('should create an instance and then create a cluster for manual scaling', async () => {
+      it('should create an instance and then create a cluster for manual scaling', async function() {
         const clusterId2: string = generateId('cluster');
         const cluster2 = instance.cluster(clusterId2);
         const [, operation] = await cluster2.create({
@@ -128,11 +132,11 @@ describe('Cluster', () => {
       });
       describe('Using an incorrect configuration', () => {
         let cluster2: Cluster;
-        beforeEach(async () => {
+        beforeEach(async function() {
           const clusterId2: string = generateId('cluster');
           cluster2 = instance.cluster(clusterId2);
         });
-        it('should throw an error when providing no cluster configuration', async () => {
+        it('should throw an error when providing no cluster configuration', async function() {
           try {
             const [, operation] = await cluster2.create({
               location: 'us-west1-c',
@@ -144,7 +148,7 @@ describe('Cluster', () => {
             assert.equal(e.message, ClusterUtils.noConfigError);
           }
         });
-        it('should throw an error when providing manual and autoscaling configurations', async () => {
+        it('should throw an error when providing manual and autoscaling configurations', async function() {
           try {
             const [, operation] = await cluster2.create({
               location: 'us-west1-c',
@@ -158,7 +162,7 @@ describe('Cluster', () => {
             assert.equal(e.message, ClusterUtils.allConfigError);
           }
         });
-        it('should throw an error when missing all autoscaling configurations', async () => {
+        it('should throw an error when missing all autoscaling configurations', async function() {
           try {
             const [, operation] = await cluster2.create({
               location: 'us-west1-c',
@@ -185,11 +189,11 @@ describe('Cluster', () => {
         maxServeNodes,
         cpuUtilizationPercent,
       };
-      it('should create an instance with clusters for automatic scaling', async () => {
+      it('should create an instance with clusters for automatic scaling', async function() {
         const clusterId = generateId('cluster');
         await createNewInstance([
           Object.assign({id: clusterId}, createClusterOptions),
-        ]);
+        ], this);
         const cluster: Cluster = instance.cluster(clusterId);
         await checkMetadata(
           cluster,
@@ -229,7 +233,7 @@ describe('Cluster', () => {
         cluster = instance.cluster(clusterId);
       });
 
-      it('should change nodes for manual scaling', async () => {
+      it('should change nodes for manual scaling', async function() {
         const updateNodes = 5;
         const [operation] = await cluster.setMetadata({nodes: updateNodes});
         await operation.promise();
@@ -241,7 +245,7 @@ describe('Cluster', () => {
           false,
         );
       });
-      it('should change cluster to autoscaling', async () => {
+      it('should change cluster to autoscaling', async function() {
         const minServeNodes = 3;
         const maxServeNodes = 4;
         const cpuUtilizationPercent = 50;
@@ -263,7 +267,7 @@ describe('Cluster', () => {
         );
       });
       describe('Using an incorrect configuration', () => {
-        it('should throw an error when providing no cluster configuration', async () => {
+        it('should throw an error when providing no cluster configuration', async function() {
           try {
             const [operation] = await cluster.setMetadata({});
             await operation.promise();
@@ -273,7 +277,7 @@ describe('Cluster', () => {
             assert.equal(e.message, ClusterUtils.noConfigError);
           }
         });
-        it('should throw an error when providing manual and autoscaling configurations', async () => {
+        it('should throw an error when providing manual and autoscaling configurations', async function() {
           try {
             const [operation] = await cluster.setMetadata({
               nodes: 2,
@@ -286,7 +290,7 @@ describe('Cluster', () => {
             assert.equal(e.message, ClusterUtils.allConfigError);
           }
         });
-        it('should throw an error when missing some autoscaling configurations', async () => {
+        it('should throw an error when missing some autoscaling configurations', async function() {
           try {
             const [operation] = await cluster.setMetadata({
               minServeNodes: 3,
@@ -314,15 +318,15 @@ describe('Cluster', () => {
         cpuUtilizationPercent,
       };
 
-      beforeEach(async () => {
+      beforeEach(async function() {
         const clusterId = generateId('cluster');
         await createNewInstance([
           Object.assign({id: clusterId}, createClusterOptions),
-        ]);
+        ], this);
         cluster = instance.cluster(clusterId);
       });
 
-      it('should change cluster to manual scaling', async () => {
+      it('should change cluster to manual scaling', async function() {
         const updateNodes = 5;
         const [operation] = await cluster.setMetadata({
           nodes: updateNodes,
@@ -336,7 +340,7 @@ describe('Cluster', () => {
           false,
         );
       });
-      it('should change autoscaling properties', async () => {
+      it('should change autoscaling properties', async function() {
         const newMinServeNodes = 5;
         const newMaxServeNodes = 6;
         const newCpuUtilizationPercent = 53;
