@@ -631,7 +631,7 @@ export class Upload extends Writable {
     }
 
     if (checksums.length > 0) {
-      headers!['X-Goog-Hash'] = checksums.join(',');
+      (headers as any)['X-Goog-Hash'] = checksums.join(',');
     }
   }
 
@@ -797,12 +797,12 @@ export class Upload extends Writable {
     // Delete content length and content type from metadata if they exist.
     // These are headers and should not be sent as part of the metadata.
     if (metadata.contentLength) {
-      headers['X-Upload-Content-Length'] = metadata.contentLength.toString();
+      (headers as any)['X-Upload-Content-Length'] = metadata.contentLength.toString();
       delete metadata.contentLength;
     }
 
     if (metadata.contentType) {
-      headers!['X-Upload-Content-Type'] = metadata.contentType;
+      (headers as any)['X-Upload-Content-Type'] = metadata.contentType;
       delete metadata.contentType;
     }
 
@@ -834,12 +834,12 @@ export class Upload extends Writable {
     };
 
     if (metadata.contentLength) {
-      reqOpts.headers!['X-Upload-Content-Length'] =
+      (reqOpts.headers as any)['X-Upload-Content-Length'] =
         metadata.contentLength.toString();
     }
 
     if (metadata.contentType) {
-      reqOpts.headers!['X-Upload-Content-Type'] = metadata.contentType;
+      (reqOpts.headers as any)['X-Upload-Content-Type'] = metadata.contentType;
     }
 
     if (typeof this.generation !== 'undefined') {
@@ -1050,8 +1050,8 @@ export class Upload extends Writable {
 
       // `Content-Length` for multiple chunk uploads is the size of the chunk,
       // not the overall object
-      headers['Content-Length'] = bytesToUpload;
-      headers['Content-Range'] =
+      (headers as any)['Content-Length'] = bytesToUpload;
+      (headers as any)['Content-Range'] =
         `bytes ${this.offset}-${endingByte}/${totalObjectSize}`;
 
       // Apply X-Goog-Hash header ONLY on the final chunk (WriteObject call)
@@ -1059,7 +1059,7 @@ export class Upload extends Writable {
         this.#applyChecksumHeaders(headers);
       }
     } else {
-      headers['Content-Range'] = `bytes ${this.offset}-*/${this.contentLength}`;
+      (headers as any)['Content-Range'] = `bytes ${this.offset}-*/${this.contentLength}`;
 
       if (this.#hashValidator) {
         this.#hashValidator.end();
@@ -1288,9 +1288,9 @@ export class Upload extends Writable {
   private async makeRequest(reqOpts: GaxiosOptions): GaxiosPromise {
     if (this.encryption) {
       reqOpts.headers = reqOpts.headers || {};
-      reqOpts.headers['x-goog-encryption-algorithm'] = 'AES256';
-      reqOpts.headers['x-goog-encryption-key'] = this.encryption.key.toString();
-      reqOpts.headers['x-goog-encryption-key-sha256'] =
+      (reqOpts.headers as any)['x-goog-encryption-algorithm'] = 'AES256';
+      (reqOpts.headers as any)['x-goog-encryption-key'] = this.encryption.key.toString();
+      (reqOpts.headers as any)['x-goog-encryption-key-sha256'] =
         this.encryption.hash.toString();
     }
 
