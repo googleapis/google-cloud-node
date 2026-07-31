@@ -72,6 +72,22 @@ describe('Query Class', () => {
     assert.strictEqual(res.rowCount, 1);
   });
 
+  it('should clear promiseResolver after setPromise is called to prevent memory retention on multiple calls', async () => {
+    const q = new Query<{rowCount: number}>('SELECT 1');
+    assert.notStrictEqual(
+      (q as unknown as {promiseResolver: unknown}).promiseResolver,
+      undefined,
+    );
+    q.setPromise(Promise.resolve({rowCount: 1}));
+    assert.strictEqual(
+      (q as unknown as {promiseResolver: unknown}).promiseResolver,
+      undefined,
+    );
+    q.setPromise(Promise.resolve({rowCount: 2}));
+    const res = await q;
+    assert.strictEqual(res.rowCount, 2);
+  });
+
   it('should reject thenable promise on .catch()', async () => {
     const q = new Query('SELECT 1');
     q.setPromise(Promise.reject(new Error('Query failed')));

@@ -122,8 +122,14 @@ export class Pool extends EventEmitter {
         query.text ?? '',
         query.values,
       );
-      queryForClient.on('row', row => query.emit('row', row));
-      queryForClient.on('fields', fields => query.emit('fields', fields));
+      queryForClient.rowMode = query.rowMode;
+      queryForClient.types = query.types;
+      void queryForClient.on('row', row => {
+        void query.emit('row', row);
+      });
+      void queryForClient.on('fields', fields => {
+        void query.emit('fields', fields);
+      });
 
       let result: QueryResult<R>;
       let queryErr: Error | undefined;

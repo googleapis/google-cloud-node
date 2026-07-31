@@ -26,6 +26,7 @@ import {dispatchQueryError, normalizeQueryArgs} from './utilities.js';
  */
 interface QueryTask<T = unknown> {
   run: () => Promise<T>;
+  cancel?: (err: Error) => void;
 }
 
 /**
@@ -90,6 +91,14 @@ export class Client extends EventEmitter {
   async connect(): Promise<void>;
   connect(callback: (err: Error | null) => void): void;
   connect(callback?: (err: Error | null) => void): Promise<void> | void {
+    if (this.isConnected) {
+      if (callback) {
+        process.nextTick(() => callback(null));
+        return;
+      }
+      return Promise.resolve();
+    }
+
     if (!this.connectPromise) {
       this.connectPromise = (async () => {
         try {
@@ -113,6 +122,9 @@ export class Client extends EventEmitter {
     if (this.isConnected) {
       return;
     }
+    if (this.isEnded) {
+      throw new Error('Client was closed');
+    }
     try {
       if (!this.dsn) {
         throw new Error(
@@ -120,7 +132,9 @@ export class Client extends EventEmitter {
         );
       }
       // TODO(PR 4 - Native CGO Bridge): Instantiate native CGO Spanner connection handle via spannerlib-node
-      this.isConnected = true;
+      if (!this.isEnded) {
+        this.isConnected = true;
+      }
     } catch (err) {
       throw enrichError(err, this.dialect);
     }
@@ -148,6 +162,37 @@ export class Client extends EventEmitter {
       callback,
     );
 
+    const sqlText = query.text;
+    const sqlValues = query.values;
+
+    if (typeof sqlText !== 'string' || !sqlText.trim()) {
+      const err = enrichError(
+        new Error('Query text must be a non-empty string'),
+        this.dialect,
+      );
+      dispatchQueryError(err, query, actualCallback);
+      const executionPromise = Promise.reject<QueryResult<R>>(err);
+      executionPromise.catch(() => {});
+      query.setPromise(executionPromise);
+      return query;
+    }
+
+    if (
+      sqlValues !== undefined &&
+      sqlValues !== null &&
+      !Array.isArray(sqlValues)
+    ) {
+      const err = enrichError(
+        new Error('Query values must be an Array'),
+        this.dialect,
+      );
+      dispatchQueryError(err, query, actualCallback);
+      const executionPromise = Promise.reject<QueryResult<R>>(err);
+      executionPromise.catch(() => {});
+      query.setPromise(executionPromise);
+      return query;
+    }
+
     let resolveTask!: (val: QueryResult<R>) => void;
     let rejectTask!: (err: unknown) => void;
     const executionPromise = new Promise<QueryResult<R>>((res, rej) => {
@@ -160,33 +205,6 @@ export class Client extends EventEmitter {
 
     const task: QueryTask<QueryResult<R>> = {
       run: async () => {
-        const sqlText = query.text;
-        const sqlValues = query.values;
-
-        if (typeof sqlText !== 'string' || !sqlText.trim()) {
-          const err = enrichError(
-            new Error('Query text must be a non-empty string'),
-            this.dialect,
-          );
-          dispatchQueryError(err, query, actualCallback);
-          rejectTask(err);
-          throw err;
-        }
-
-        if (
-          sqlValues !== undefined &&
-          sqlValues !== null &&
-          !Array.isArray(sqlValues)
-        ) {
-          const err = enrichError(
-            new Error('Query values must be an Array'),
-            this.dialect,
-          );
-          dispatchQueryError(err, query, actualCallback);
-          rejectTask(err);
-          throw err;
-        }
-
         try {
           if (this.isEnded) {
             throw new Error('Client was closed');
@@ -217,6 +235,10 @@ export class Client extends EventEmitter {
           throw enriched;
         }
       },
+      cancel: (err: Error) => {
+        dispatchQueryError(err, query, actualCallback);
+        rejectTask(err);
+      },
     };
 
     this.queryQueue.push(task as QueryTask<unknown>);
@@ -234,13 +256,12 @@ export class Client extends EventEmitter {
     }
     if (this.isExecuting) return;
     this.isExecuting = true;
-    const task = this.queryQueue[0];
+    const task = this.queryQueue.shift()!;
     try {
       await task.run();
     } catch {
       // Handled in executionPromise reject
     } finally {
-      this.queryQueue.shift();
       this.isExecuting = false;
       void this.processQueue();
     }
@@ -283,7 +304,14 @@ export class Client extends EventEmitter {
   private async _doEnd(): Promise<void> {
     this.isEnded = true;
     this.isConnected = false;
-    // Clear pending queries in queue to prevent execution after client close
+    // Cancel pending queries in queue to prevent execution after client close
+    const pendingTasks = this.queryQueue;
     this.queryQueue = [];
+    const closeError = new Error('Client was closed');
+    for (const task of pendingTasks) {
+      if (task.cancel) {
+        task.cancel(closeError);
+      }
+    }
   }
 }

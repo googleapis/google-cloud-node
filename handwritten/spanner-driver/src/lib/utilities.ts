@@ -33,20 +33,22 @@ export function normalizeQueryArgs<R = Record<string, unknown>>(
   query: Query<QueryResult<R>>;
   actualCallback: QueryCallback<QueryResult<R>> | undefined;
 } {
-  const query =
-    queryText instanceof Query
-      ? queryText
-      : new Query<QueryResult<R>>(queryText, values as unknown[], callback);
-
-  let actualCallback: QueryCallback<QueryResult<R>> | undefined =
-    query.callback;
-  if (typeof values === 'function') {
-    actualCallback = values as QueryCallback<QueryResult<R>>;
-  } else if (typeof callback === 'function') {
-    actualCallback = callback;
+  let query: Query<QueryResult<R>>;
+  if (queryText instanceof Query) {
+    query = queryText;
+    if (Array.isArray(values)) {
+      query.values = values;
+    }
+    if (typeof values === 'function') {
+      query.callback = values;
+    } else if (typeof callback === 'function') {
+      query.callback = callback;
+    }
+  } else {
+    query = new Query<QueryResult<R>>(queryText, values as unknown[], callback);
   }
 
-  return {query, actualCallback};
+  return {query, actualCallback: query.callback};
 }
 
 /**

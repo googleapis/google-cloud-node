@@ -154,7 +154,9 @@ export class Query<T = unknown> extends EventEmitter {
    */
   public setPromise(promise: Promise<T>): void {
     if (this.promiseResolver) {
-      promise.then(this.promiseResolver.resolve, this.promiseResolver.reject);
+      const resolver = this.promiseResolver;
+      this.promiseResolver = undefined;
+      promise.then(resolver.resolve, resolver.reject);
     } else {
       this.promise = promise;
     }

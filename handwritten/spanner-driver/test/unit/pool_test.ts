@@ -131,7 +131,7 @@ describe('Pool Class', () => {
     let errorEventEmitted = false;
 
     const q = new Query<QueryResult>('');
-    q.on('error', () => {
+    void q.on('error', () => {
       errorEventEmitted = true;
     });
 
@@ -171,6 +171,22 @@ describe('Pool Class', () => {
     }
   });
 
+  it('should reject pool.query() calls after pool.end() and invoke callback with error', done => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    void pool.end().then(() => {
+      void pool.query('SELECT 1', (err, res) => {
+        assert.strictEqual(res, undefined);
+        assert.strictEqual(err instanceof Error, true);
+        assert.match(err!.message, /Cannot acquire client from ending pool/);
+        done();
+      });
+    });
+  });
+
   it('should ensure client is released before user callback executes in pool.query()', done => {
     const pool = new Pool({
       project: 'p',
@@ -180,16 +196,27 @@ describe('Pool Class', () => {
     let clientReleased = false;
 
     // Override _doConnect to track client.release call sequence
-    const originalDoConnect = (pool as unknown as {_doConnect: () => Promise<{release: () => Promise<void>; query: (q: unknown, v?: unknown[]) => Promise<{command: string; rows: []; fields: []; rowCount: 0}>}>})._doConnect.bind(pool);
-    (pool as unknown as {_doConnect: () => Promise<unknown>})._doConnect = async () => {
-      const client = await originalDoConnect();
-      const originalRelease = client.release.bind(client);
-      client.release = async () => {
-        clientReleased = true;
-        await originalRelease();
+    const originalDoConnect = (
+      pool as unknown as {
+        _doConnect: () => Promise<{
+          release: () => Promise<void>;
+          query: (
+            q: unknown,
+            v?: unknown[],
+          ) => Promise<{command: string; rows: []; fields: []; rowCount: 0}>;
+        }>;
+      }
+    )._doConnect.bind(pool);
+    (pool as unknown as {_doConnect: () => Promise<unknown>})._doConnect =
+      async () => {
+        const client = await originalDoConnect();
+        const originalRelease = client.release.bind(client);
+        client.release = async () => {
+          clientReleased = true;
+          await originalRelease();
+        };
+        return client;
       };
-      return client;
-    };
 
     void pool.query('SELECT 1', (err, res) => {
       assert.strictEqual(err, null);
@@ -221,9 +248,19 @@ describe('Pool Class', () => {
       database: 'd',
     });
     const q = new Query<QueryResult>('');
-    q.on('error', err => {
+    void q.on('error', err => {
       assert.strictEqual(err instanceof Error, true);
       void pool.end().then(() => done());
+    });
+    void pool.query(q).catch(() => {});
+  });
+
+  it('should emit error event on Query when pool.query() connection acquisition fails without callback', done => {
+    const pool = new Pool({});
+    const q = new Query<QueryResult>('SELECT 1');
+    void q.on('error', err => {
+      assert.match(err.message, /Invalid Spanner connection configuration/);
+      done();
     });
     void pool.query(q).catch(() => {});
   });

@@ -57,6 +57,15 @@ describe('Client Class', () => {
     });
   });
 
+  it('should invoke callback with error when client.connect(cb) fails', done => {
+    const client = new Client({});
+    client.connect(err => {
+      assert.strictEqual(err instanceof DatabaseError, true);
+      assert.match(err!.message, /Invalid Spanner connection configuration/);
+      done();
+    });
+  });
+
   it('should execute query with async/await and return QueryResult', async () => {
     const client = new Client({
       project: 'p',
@@ -144,12 +153,12 @@ describe('Client Class', () => {
     let callbackInvoked = false;
 
     const q = new Query<QueryResult>('');
-    q.on('error', () => {
+    void q.on('error', () => {
       errorEventEmitted = true;
     });
 
     await new Promise<void>(resolve => {
-      client.query(q, undefined, err => {
+      void client.query(q, undefined, err => {
         assert.strictEqual(err instanceof DatabaseError, true);
         callbackInvoked = true;
         setTimeout(resolve, 20);
@@ -212,6 +221,17 @@ describe('Client Class', () => {
     );
   });
 
+  it('should handle multiple client.end() calls safely without error', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    await client.connect();
+    await client.end();
+    await assert.doesNotReject(async () => client.end());
+  });
+
   it('should clear pending query queue when client.end() is called', async () => {
     const client = new Client({
       project: 'p',
@@ -237,6 +257,59 @@ describe('Client Class', () => {
     }
   });
 
+  it('should reject pending queries in queryQueue with Client was closed error when client.end() is called', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    let finishConnect!: () => void;
+    const connectGate = new Promise<void>(resolve => {
+      finishConnect = resolve;
+    });
+    const origDoConnect = (
+      client as unknown as {_doConnect: () => Promise<void>}
+    )._doConnect.bind(client);
+    (client as unknown as {_doConnect: () => Promise<void>})._doConnect =
+      async () => {
+        await connectGate;
+        return origDoConnect();
+      };
+
+    const p1 = client.query('SELECT 1');
+    const p2 = client.query('SELECT 2');
+    const p3 = client.query('SELECT 3');
+
+    p1.catch(() => {});
+
+    await client.end();
+    finishConnect();
+
+    assert.strictEqual(
+      (client as unknown as {queryQueue: unknown[]}).queryQueue.length,
+      0,
+    );
+    await assert.rejects(async () => p2, /Client was closed/);
+    await assert.rejects(async () => p3, /Client was closed/);
+  });
+
+  it('should reject connect() calls on an ended client and handle concurrent connect/end', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    const connectPromise = client.connect();
+    await client.end();
+    try {
+      await connectPromise;
+    } catch {
+      // Ignored if race rejected
+    }
+    assert.strictEqual(client.isConnected, false);
+    await assert.rejects(async () => client.connect(), /Client was closed/);
+  });
+
   it('should emit end event on Query when query execution completes', done => {
     const client = new Client({
       project: 'p',
@@ -245,7 +318,7 @@ describe('Client Class', () => {
     });
     let endEventEmitted = false;
     const q = client.query('SELECT 1');
-    q.on('end', res => {
+    void q.on('end', res => {
       endEventEmitted = true;
       assert.strictEqual(res.command, 'SELECT');
       void client.end().then(() => {
@@ -274,10 +347,34 @@ describe('Client Class', () => {
       database: 'd',
     });
     const q = new Query<QueryResult>('');
-    q.on('error', err => {
+    void q.on('error', err => {
       assert.strictEqual(err instanceof DatabaseError, true);
       void client.end().then(() => done());
     });
     void client.query(q).catch(() => {});
+  });
+
+  it('should delegate release(cb) to end(cb) using callback syntax', done => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    client.release(err => {
+      assert.strictEqual(err, null);
+      assert.strictEqual(client.isConnected, false);
+      done();
+    });
+  });
+
+  it('should emit error event on Query when client.query() connection fails without callback', done => {
+    const client = new Client({});
+    const q = client.query('SELECT 1');
+    void q.on('error', err => {
+      assert.strictEqual(err instanceof DatabaseError, true);
+      assert.match(err.message, /Invalid Spanner connection configuration/);
+      done();
+    });
+    void q.catch(() => {});
   });
 });
