@@ -31,8 +31,7 @@ if [ -f .kokoro/pre-system-test.sh ]; then
     set -x
 fi
 
-npm install -g pnpm@9
-pnpm install
+npm install
 
 # If tests are running against main branch, configure flakybot
 # to open issues on failures:
@@ -46,7 +45,7 @@ if [[ $KOKORO_BUILD_ARTIFACTS_SUBDIR = *"continuous"* ]] || [[ $KOKORO_BUILD_ART
   trap cleanup EXIT HUP
 fi
 
-pnpm run system-test
+npm run system-test
 
 # codecov combines coverage across integration and unit tests. Include
 # the logic below for any environment you wish to collect coverage for:

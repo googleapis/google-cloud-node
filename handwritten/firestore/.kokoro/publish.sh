@@ -27,6 +27,5 @@ cd $(dirname $0)/..
 NPM_TOKEN=$(cat $KOKORO_KEYSTORE_DIR/73713_google-cloud-npm-token-1)
 echo "//wombat-dressing-room.appspot.com/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
-npm install -g pnpm@9
-pnpm install
+npm install
 npm publish --access=public --registry=https://wombat-dressing-room.appspot.com

@@ -31,9 +31,8 @@ trap cleanup EXIT
 
 # Build and start the proxy in a separate process
 pushd .
-npm install -g pnpm@9
-pnpm install
-nohup pnpm run testproxy &
+npm install
+nohup npm run testproxy &
 proxyPID=$!
 popd
 

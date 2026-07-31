@@ -20,16 +20,14 @@ export NPM_CONFIG_PREFIX=/home/node/.npm-global
 
 cd $(dirname $0)/..
 
-npm install -g pnpm@9
-pnpm install
+npm install
 
 # Install and link samples
 if [ -f samples/package.json ]; then
   cd samples/
   npm link ../
-  npm install -g pnpm@9
-pnpm install
+  npm install
   cd ..
 fi
 
-pnpm run lint
+npm run lint
