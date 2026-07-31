@@ -145,7 +145,6 @@ function getDiffFiles(ref) {
  * Returns a list of changed TypeScript files comparing against target branches/references when not in strict mode
  */
 function getChangedFiles() {
-
   const isCI = Boolean(process.env.CI || process.env.GITHUB_ACTIONS || process.env.GITHUB_BASE_REF);
 
   let refsToTry = [];
