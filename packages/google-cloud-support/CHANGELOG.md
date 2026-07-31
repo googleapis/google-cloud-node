@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/support-v2.5.0...support-v2.6.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
 ## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/support-v2.4.0...support-v2.5.0) (2026-07-13)
 
 

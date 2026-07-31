@@ -1641,6 +1641,107 @@ describe('v1.McmEarningsServiceClient', () => {
       });
     });
 
+    describe('creative', async () => {
+      const fakePath = '/rendered/path/creative';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative: 'creativeValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.creativePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativePath', () => {
+        const result = client.creativePath('networkCodeValue', 'creativeValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeName', () => {
+        const result = client.matchNetworkCodeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeFromCreativeName', () => {
+        const result = client.matchCreativeFromCreativeName(fakePath);
+        assert.strictEqual(result, 'creativeValue');
+        assert(
+          (client.pathTemplates.creativePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('creativeSet', async () => {
+      const fakePath = '/rendered/path/creativeSet';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        creative_set: 'creativeSetValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.creativeSetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.creativeSetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('creativeSetPath', () => {
+        const result = client.creativeSetPath(
+          'networkCodeValue',
+          'creativeSetValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromCreativeSetName', () => {
+        const result = client.matchNetworkCodeFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeSetFromCreativeSetName', () => {
+        const result = client.matchCreativeSetFromCreativeSetName(fakePath);
+        assert.strictEqual(result, 'creativeSetValue');
+        assert(
+          (client.pathTemplates.creativeSetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('creativeTemplate', async () => {
       const fakePath = '/rendered/path/creativeTemplate';
       const expectedParameters = {
@@ -3232,6 +3333,55 @@ describe('v1.McmEarningsServiceClient', () => {
         assert.strictEqual(result, 'siteValue');
         assert(
           (client.pathTemplates.sitePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('slate', async () => {
+      const fakePath = '/rendered/path/slate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        slate: 'slateValue',
+      };
+      const client = new mcmearningsserviceModule.v1.McmEarningsServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.slatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.slatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('slatePath', () => {
+        const result = client.slatePath('networkCodeValue', 'slateValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.slatePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromSlateName', () => {
+        const result = client.matchNetworkCodeFromSlateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSlateFromSlateName', () => {
+        const result = client.matchSlateFromSlateName(fakePath);
+        assert.strictEqual(result, 'slateValue');
+        assert(
+          (client.pathTemplates.slatePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

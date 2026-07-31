@@ -16,14 +16,14 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
 import * as v2 from './v2';
+import * as v1 from './v1';
 import * as v2alpha1 from './v2alpha1';
 
 const TpuClient = v1.TpuClient;
 type TpuClient = v1.TpuClient;
 
-export {v1, v2, v2alpha1, TpuClient};
-export default {v1, v2, v2alpha1, TpuClient};
+export {v2, v1, v2alpha1, TpuClient};
+export default {v2, v1, v2alpha1, TpuClient};
 import * as protos from '../protos/protos';
 export {protos};

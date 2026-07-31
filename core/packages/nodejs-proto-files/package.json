@@ -1,11 +1,11 @@
 {
   "name": "google-proto-files",
   "description": "All of the Google API's protocol buffer files",
-  "version": "5.0.3",
+  "version": "6.0.0",
   "license": "Apache-2.0",
   "author": "google-proto-files project authors",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "repository": {
     "type": "git",

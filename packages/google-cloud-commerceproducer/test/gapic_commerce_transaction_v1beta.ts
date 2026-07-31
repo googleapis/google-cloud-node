@@ -608,6 +608,149 @@ describe('v1beta.CommerceTransactionClient', () => {
     });
   });
 
+  describe('resolveAmendmentTarget', () => {
+    it('invokes resolveAmendmentTarget without error', async () => {
+      const client =
+        new commercetransactionModule.v1beta.CommerceTransactionClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse(),
+      );
+      client.innerApiCalls.resolveAmendmentTarget =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.resolveAmendmentTarget(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resolveAmendmentTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resolveAmendmentTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resolveAmendmentTarget without error using callback', async () => {
+      const client =
+        new commercetransactionModule.v1beta.CommerceTransactionClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetResponse(),
+      );
+      client.innerApiCalls.resolveAmendmentTarget =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.resolveAmendmentTarget(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.commerceproducer.v1beta.IResolveAmendmentTargetResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.resolveAmendmentTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resolveAmendmentTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resolveAmendmentTarget with error', async () => {
+      const client =
+        new commercetransactionModule.v1beta.CommerceTransactionClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.resolveAmendmentTarget = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.resolveAmendmentTarget(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.resolveAmendmentTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resolveAmendmentTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes resolveAmendmentTarget with closed client', async () => {
+      const client =
+        new commercetransactionModule.v1beta.CommerceTransactionClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerceproducer.v1beta.ResolveAmendmentTargetRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.resolveAmendmentTarget(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('createPrivateOffer', () => {
     it('invokes createPrivateOffer without error', async () => {
       const client =
@@ -4543,6 +4686,46 @@ describe('v1beta.CommerceTransactionClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('billingAccount', async () => {
+      const fakePath = '/rendered/path/billingAccount';
+      const expectedParameters = {
+        billing_account: 'billingAccountValue',
+      };
+      const client =
+        new commercetransactionModule.v1beta.CommerceTransactionClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.billingAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.billingAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('billingAccountPath', () => {
+        const result = client.billingAccountPath('billingAccountValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchBillingAccountFromBillingAccountName', () => {
+        const result =
+          client.matchBillingAccountFromBillingAccountName(fakePath);
+        assert.strictEqual(result, 'billingAccountValue');
+        assert(
+          (client.pathTemplates.billingAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {

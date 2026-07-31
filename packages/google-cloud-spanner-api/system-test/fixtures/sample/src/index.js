@@ -18,10 +18,10 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const instance = require('@google-cloud/spanner-api');
+const spanner = require('@google-cloud/spanner-api');
 
 function main() {
-  const instanceAdminClient = new instance.InstanceAdminClient();
+  const spannerClient = new spanner.SpannerClient();
 }
 
 main();
