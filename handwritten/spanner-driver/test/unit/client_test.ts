@@ -57,48 +57,6 @@ describe('Client Class', () => {
     });
   });
 
-  it('should update txStatus to T on BEGIN and reset to I on COMMIT or ROLLBACK', async () => {
-    const client = new Client({
-      project: 'p',
-      instance: 'i',
-      database: 'd',
-    });
-    assert.strictEqual(client.txStatus, 'I');
-    await client.query('BEGIN');
-    assert.strictEqual(client.txStatus, 'T');
-    await client.query('COMMIT');
-    assert.strictEqual(client.txStatus, 'I');
-
-    await client.query('START TRANSACTION');
-    assert.strictEqual(client.txStatus, 'T');
-    await client.query('ROLLBACK');
-    assert.strictEqual(client.txStatus, 'I');
-    await client.end();
-  });
-
-  it('should parse command verb and txStatus correctly when SQL contains leading comments', async () => {
-    const client = new Client({
-      project: 'p',
-      instance: 'i',
-      database: 'd',
-    });
-    assert.strictEqual(client.txStatus, 'I');
-
-    // Query with leading block comment
-    const res1 = await client.query('/* knex: query */ SELECT * FROM users');
-    assert.strictEqual(res1.command, 'SELECT');
-
-    // Transaction query with leading line comment
-    await client.query('-- Start transaction\nBEGIN;');
-    assert.strictEqual(client.txStatus, 'T');
-
-    // Commit query with block comment
-    await client.query('/* Context */ COMMIT;');
-    assert.strictEqual(client.txStatus, 'I');
-
-    await client.end();
-  });
-
   it('should execute query with async/await and return QueryResult', async () => {
     const client = new Client({
       project: 'p',
@@ -227,32 +185,6 @@ describe('Client Class', () => {
         /Client has already been connected|Connection terminated|Client was closed/,
       );
     }
-  });
-
-  it('should parse command verb as SELECT for CTE WITH queries', async () => {
-    const client = new Client({
-      project: 'p',
-      instance: 'i',
-      database: 'd',
-    });
-    const res = await client.query('WITH cte AS (SELECT 1) SELECT * FROM cte');
-    assert.strictEqual(res.command, 'SELECT');
-    await client.end();
-  });
-
-  it('should not transition txStatus to T when statement starts with BEGIN identifier prefix', async () => {
-    const client = new Client({
-      project: 'p',
-      instance: 'i',
-      database: 'd',
-    });
-    await client.query('BEGIN_LOG(1)');
-    assert.strictEqual(
-      client.txStatus,
-      'I',
-      'txStatus should remain I for regular queries starting with BEGIN prefix',
-    );
-    await client.end();
   });
 
   it('should deduplicate concurrent connect() calls and initiate connection exactly once', async () => {

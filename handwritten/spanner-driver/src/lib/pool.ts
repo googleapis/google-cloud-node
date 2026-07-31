@@ -21,7 +21,6 @@ import {dispatchQueryError, normalizeQueryArgs} from './utilities.js';
 
 /**
  * Basic Pool class managing database connection instances.
- * Compatible with node-postgres (`pg.Pool`) interface.
  *
  * Facilitates client acquisition (`connect`), automatic query execution with connection
  * auto-release (`query`), and graceful pool shutdown (`end`).

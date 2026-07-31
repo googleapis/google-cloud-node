@@ -23,7 +23,7 @@ export interface FieldDef {
 }
 
 /**
- * Standard query result set structure compatible with node-postgres (pg).
+ * Standard query result.
  *
  * @template R - Shape of returned result set row objects or tuples.
  */

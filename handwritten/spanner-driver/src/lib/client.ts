@@ -30,7 +30,6 @@ interface QueryTask<T = unknown> {
 
 /**
  * Client class representing a single database connection to Google Cloud Spanner.
- * Compatible with node-postgres (`pg.Client`) interface.
  *
  * Handles DSN resolution, connection lifecycle (`connect`/`end`/`release`), sequential query
  * execution, transaction state tracking (`txStatus`), and dialect-aware error enrichment.
@@ -51,8 +50,10 @@ export class Client extends EventEmitter {
   /**
    * Active transaction status code:
    * - `'I'` (Idle): Outside transaction block.
-   * - `'T'` (Transaction): Active transaction started (`BEGIN`).
-   * - `'E'` (Error): Transaction failed due to query error.
+   * - `'T'` (Transaction): Active transaction block.
+   * - `'E'` (Error): Transaction failed due to query error inside transaction block.
+   *
+   * Updated dynamically from the native backend driver (`spannerlib-node`) upon query execution.
    */
   public txStatus: 'I' | 'T' | 'E' = 'I';
 
@@ -194,40 +195,14 @@ export class Client extends EventEmitter {
             await this.connect();
           }
 
-          // Strip SQL block and line comments to accurately inspect lead statement verbs
-          const cleanSql = sqlText
-            .replace(/\/\*[\s\S]*?\*\//g, '')
-            .replace(/--.*$/gm, '')
-            .trim();
-          const cleanUpper = cleanSql.toUpperCase();
-
-          if (/\bBEGIN\b|\bSTART\s+TRANSACTION\b/.test(cleanUpper)) {
-            this.txStatus = 'T';
-          }
-
-          let command = 'SELECT';
-          if (cleanUpper.startsWith('WITH')) {
-            const verbMatch = cleanUpper.match(
-              /\b(SELECT|INSERT|UPDATE|DELETE)\b/,
-            );
-            if (verbMatch) {
-              command = verbMatch[1];
-            }
-          } else if (cleanUpper) {
-            command = cleanUpper.replace(/^[^A-Z]+/, '').split(/\s+/)[0];
-          }
-
-          // TODO(PR 4 - Native CGO Bridge): Execute query through native CGO bridge (spannerlib-node)
+          // TODO(PR 4 - Native CGO Bridge): Execute query through native CGO bridge (spannerlib-node).
+          // Both `command` and `txStatus` ('I', 'T', or 'E') will be returned by the native backend driver.
           const result: QueryResult<R> = {
             rows: [],
             fields: [],
             rowCount: 0,
-            command,
+            command: 'SELECT',
           };
-
-          if (/\b(COMMIT|ROLLBACK|ABORT)\b/.test(cleanUpper)) {
-            this.txStatus = 'I';
-          }
 
           query.emit('end', result);
           if (actualCallback) {
@@ -237,9 +212,6 @@ export class Client extends EventEmitter {
           return result;
         } catch (err: unknown) {
           const enriched = enrichError(err, this.dialect);
-          if (this.txStatus === 'T') {
-            this.txStatus = 'E';
-          }
           dispatchQueryError(enriched, query, actualCallback);
           rejectTask(enriched);
           throw enriched;
@@ -276,7 +248,6 @@ export class Client extends EventEmitter {
 
   /**
    * Releases the client connection.
-   * Compatible with node-postgres (`client.release()`) interface.
    *
    * TODO(PR 4 - Connection Pooling): Full connection pool recycling (returning active
    * clients back to an idle connection queue instead of closing them) will be implemented in PR 4.
@@ -312,7 +283,6 @@ export class Client extends EventEmitter {
   private async _doEnd(): Promise<void> {
     this.isEnded = true;
     this.isConnected = false;
-    this.txStatus = 'I';
     // Clear pending queries in queue to prevent execution after client close
     this.queryQueue = [];
   }
