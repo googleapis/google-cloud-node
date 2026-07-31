@@ -4,6 +4,17 @@
 [npm history][1]
 
 [1]: https://www.npmjs.com/package/@google-cloud/projectify?activeTab=versions
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/projectify-v5.2.0...projectify-v6.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update projectify to minimum Node version of 22. ([#9008](https://github.com/googleapis/google-cloud-node/issues/9008))
+
+### Features
+
+* Update projectify to minimum Node version of 22. ([#9008](https://github.com/googleapis/google-cloud-node/issues/9008)) ([abccebe](https://github.com/googleapis/google-cloud-node/commit/abccebe23a680122d2728fa6802cc5fde1075303)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/projectify-v5.1.0...projectify-v5.2.0) (2026-07-23)
 
 

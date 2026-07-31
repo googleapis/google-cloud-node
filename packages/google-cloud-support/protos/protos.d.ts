@@ -3288,6 +3288,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public undeleteSupportEventSubscription(request: google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest): Promise<google.cloud.support.v2.SupportEventSubscription>;
+
+                    /**
+                     * Calls ExpungeSupportEventSubscription.
+                     * @param request ExpungeSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public expungeSupportEventSubscription(request: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest, callback: google.cloud.support.v2.SupportEventSubscriptionService.ExpungeSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls ExpungeSupportEventSubscription.
+                     * @param request ExpungeSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public expungeSupportEventSubscription(request: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace SupportEventSubscriptionService {
@@ -3333,6 +3347,13 @@ export namespace google {
                      * @param [response] SupportEventSubscription
                      */
                     type UndeleteSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|expungeSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type ExpungeSupportEventSubscriptionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a CreateSupportEventSubscriptionRequest. */
@@ -4050,6 +4071,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UndeleteSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExpungeSupportEventSubscriptionRequest. */
+                interface IExpungeSupportEventSubscriptionRequest {
+
+                    /** ExpungeSupportEventSubscriptionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ExpungeSupportEventSubscriptionRequest. */
+                class ExpungeSupportEventSubscriptionRequest implements IExpungeSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new ExpungeSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest);
+
+                    /** ExpungeSupportEventSubscriptionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ExpungeSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExpungeSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest): google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified ExpungeSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message ExpungeSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExpungeSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message ExpungeSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExpungeSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes an ExpungeSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies an ExpungeSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExpungeSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from an ExpungeSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message ExpungeSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExpungeSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExpungeSupportEventSubscriptionRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -8061,6 +8179,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public undeleteSupportEventSubscription(request: google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest): Promise<google.cloud.support.v2beta.SupportEventSubscription>;
+
+                    /**
+                     * Calls ExpungeSupportEventSubscription.
+                     * @param request ExpungeSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public expungeSupportEventSubscription(request: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest, callback: google.cloud.support.v2beta.SupportEventSubscriptionService.ExpungeSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls ExpungeSupportEventSubscription.
+                     * @param request ExpungeSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public expungeSupportEventSubscription(request: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest): Promise<google.protobuf.Empty>;
                 }
 
                 namespace SupportEventSubscriptionService {
@@ -8106,6 +8238,13 @@ export namespace google {
                      * @param [response] SupportEventSubscription
                      */
                     type UndeleteSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2beta.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|expungeSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type ExpungeSupportEventSubscriptionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
                 }
 
                 /** Properties of a CreateSupportEventSubscriptionRequest. */
@@ -8823,6 +8962,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UndeleteSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExpungeSupportEventSubscriptionRequest. */
+                interface IExpungeSupportEventSubscriptionRequest {
+
+                    /** ExpungeSupportEventSubscriptionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ExpungeSupportEventSubscriptionRequest. */
+                class ExpungeSupportEventSubscriptionRequest implements IExpungeSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new ExpungeSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest);
+
+                    /** ExpungeSupportEventSubscriptionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ExpungeSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExpungeSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest): google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified ExpungeSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message ExpungeSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExpungeSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message ExpungeSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExpungeSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes an ExpungeSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies an ExpungeSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExpungeSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from an ExpungeSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message ExpungeSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExpungeSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExpungeSupportEventSubscriptionRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -15873,6 +16109,97 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
