@@ -2934,6 +2934,10 @@ class Database extends common.GrpcServiceObject {
           .on('error', err => {
             setSpanError(span, err);
             span.end();
+            performance.clearMarks(m1Name);
+            performance.clearMarks(m2Name);
+            performance.clearMarks(m3Name);
+            performance.clearMarks(m4Name);
             callback!(err as grpc.ServiceError, rows, stats, metadata);
           })
           .on('response', response => {
@@ -2957,6 +2961,10 @@ class Database extends common.GrpcServiceObject {
             safeMeasure(`1_SDK_PreProcessing_${reqId}`, m1Name, m2Name);
             safeMeasure(`2_External_${reqId}`, m2Name, m3Name);
             safeMeasure(`3_SDK_PostProcessing_${reqId}`, m3Name, m4Name);
+            performance.clearMarks(m1Name);
+            performance.clearMarks(m2Name);
+            performance.clearMarks(m3Name);
+            performance.clearMarks(m4Name);
             span.end();
             callback!(null, rows, stats, metadata);
           });

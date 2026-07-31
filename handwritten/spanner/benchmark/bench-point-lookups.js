@@ -18,16 +18,10 @@ function bytesToMB(bytes) {
   return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
 }
 
-async function main(
-  instanceId = process.env.SPANNER_INSTANCE_ID || 'test-instance',
-  databaseId = process.env.SPANNER_DATABASE_ID || 'test-database',
-  projectId = process.env.SPANNER_PROJECT_ID || 'test-project',
-  workersArg = '50',
-  queriesArg = '100',
-) {
-  const CONCURRENCY_WORKERS = parseInt(workersArg, 10) || 50; // N concurrent workers
-  const QUERIES_PER_WORKER = parseInt(queriesArg, 10) || 100; // M sequential queries per worker
-  const TOTAL_LOOKUPS = CONCURRENCY_WORKERS * QUERIES_PER_WORKER; // Total Operations
+async function main(instanceId, databaseId, projectId, workersArg, queriesArg) {
+  const CONCURRENCY_WORKERS = parseInt(workersArg, 10) || 50;
+  const QUERIES_PER_WORKER = parseInt(queriesArg, 10) || 100;
+  const TOTAL_LOOKUPS = CONCURRENCY_WORKERS * QUERIES_PER_WORKER;
 
   const spanner = new Spanner({projectId, disableBuiltInMetrics: true});
   const instance = spanner.instance(instanceId);
@@ -52,16 +46,16 @@ async function main(
   );
 
   // -------------------------------------------------------------------
-  // TIMED PARALLEL WARMUP PHASE (5 Seconds under Concurrency)
+  // TIMED PARALLEL WARMUP PHASE (5 Minutes under Concurrency)
   // Warm up V8 JIT compiler, gRPC HTTP/2 channels, TLS & Multiplexed Session
   // -------------------------------------------------------------------
-  console.log('Warming up V8 JIT & gRPC channels for 5 seconds...');
-  const warmupEndTime = Date.now() + 5000;
+  console.log('Warming up V8 JIT & gRPC channels for 5 minutes...');
+  const warmupEndTime = Date.now() + 300000;
   const warmupWorkers = [];
 
   async function runWarmupWorker() {
     while (Date.now() < warmupEndTime) {
-      await database.run({ sql: 'SELECT 1' });
+      await database.run({sql: 'SELECT 1'});
     }
   }
 

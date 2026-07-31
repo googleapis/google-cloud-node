@@ -1391,6 +1391,10 @@ export class Snapshot extends EventEmitter {
           .on('error', err => {
             setSpanError(span, err);
             span.end();
+            performance.clearMarks(m1Name);
+            performance.clearMarks(m2Name);
+            performance.clearMarks(m3Name);
+            performance.clearMarks(m4Name);
             if (!('code' in err)) {
               Object.assign(err, {
                 code: grpc.status.UNKNOWN,
@@ -1422,6 +1426,11 @@ export class Snapshot extends EventEmitter {
             safeMeasure(`1_SDK_PreProcessing_${reqId}`, m1Name, m2Name);
             safeMeasure(`2_External_${reqId}`, m2Name, m3Name);
             safeMeasure(`3_SDK_PostProcessing_${reqId}`, m3Name, m4Name);
+
+            performance.clearMarks(m1Name);
+            performance.clearMarks(m2Name);
+            performance.clearMarks(m3Name);
+            performance.clearMarks(m4Name);
 
             span.end();
             callback!(null, rows, stats, metadata);
@@ -1625,10 +1634,7 @@ export class Snapshot extends EventEmitter {
         attempt++;
 
         if (!resumeToken) {
-          // [M2 MARK]: Mark M2 on first attempt only
-          const m2Name = `M2_gax_start_${currentReqId}`;
           if (attempt === 1) {
-            performance.mark(m2Name);
             span.addEvent('Starting stream');
           } else {
             span.addEvent('Re-attempting start stream', {attempt: attempt});
@@ -1650,6 +1656,11 @@ export class Snapshot extends EventEmitter {
             setImmediate(() => errorStream.destroy(e as Error));
             return errorStream;
           }
+        }
+
+        if (!resumeToken && attempt === 1) {
+          // [M2 MARK]: Mark M2 on first attempt only, right before making the request
+          performance.mark(`M2_gax_start_${currentReqId}`);
         }
 
         return this.requestStream({
