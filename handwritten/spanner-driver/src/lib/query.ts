@@ -49,6 +49,10 @@ export class Query<T = unknown> extends EventEmitter {
 
   /** Internal promise backing Thenable async/await integration. */
   private promise!: Promise<T>;
+  private promiseResolver?: {
+    resolve: (value: T | PromiseLike<T>) => void;
+    reject: (reason?: unknown) => void;
+  };
 
   /**
    * Instantiates a new Query instance.
@@ -63,6 +67,12 @@ export class Query<T = unknown> extends EventEmitter {
     callback?: QueryCallback<T>,
   ) {
     super();
+
+    this.promise = new Promise<T>((resolve, reject) => {
+      this.promiseResolver = {resolve, reject};
+    });
+    // Suppress unhandled rejection warnings on default un-awaited promise
+    this.promise.catch(() => {});
 
     if (text instanceof Query) {
       this.text = text.text;
@@ -143,6 +153,10 @@ export class Query<T = unknown> extends EventEmitter {
    * @param promise - Internal execution Promise.
    */
   public setPromise(promise: Promise<T>): void {
-    this.promise = promise;
+    if (this.promiseResolver) {
+      promise.then(this.promiseResolver.resolve, this.promiseResolver.reject);
+    } else {
+      this.promise = promise;
+    }
   }
 }

@@ -18,6 +18,7 @@ import {DEFAULT_DIALECT, Dialect} from './constants.js';
 import {enrichError} from './errors.js';
 import {Query, QueryCallback} from './query.js';
 import {QueryConfig, QueryResult} from './types.js';
+import {dispatchQueryError, normalizeQueryArgs} from './utilities.js';
 
 /**
  * Task entry stored in single-connection query execution queue.
@@ -61,6 +62,12 @@ export class Client extends EventEmitter {
   /** Boolean flag tracking active query execution state. */
   private isExecuting = false;
 
+  /** Boolean flag tracking whether client has been explicitly closed via end(). */
+  private isEnded = false;
+
+  /** Cached Promise for in-flight connect() calls. */
+  private connectPromise?: Promise<void>;
+
   /**
    * Instantiates a new Spanner Client connection handle.
    *
@@ -82,13 +89,23 @@ export class Client extends EventEmitter {
   async connect(): Promise<void>;
   connect(callback: (err: Error | null) => void): void;
   connect(callback?: (err: Error | null) => void): Promise<void> | void {
+    if (!this.connectPromise) {
+      this.connectPromise = (async () => {
+        try {
+          await this._doConnect();
+        } finally {
+          this.connectPromise = undefined;
+        }
+      })();
+    }
+
     if (callback) {
-      this._doConnect()
+      this.connectPromise
         .then(() => callback(null))
         .catch(err => callback(err));
       return;
     }
-    return this._doConnect();
+    return this.connectPromise;
   }
 
   private async _doConnect(): Promise<void> {
@@ -124,18 +141,21 @@ export class Client extends EventEmitter {
     values?: unknown[] | QueryCallback<QueryResult<R>>,
     callback?: QueryCallback<QueryResult<R>>,
   ): Query<QueryResult<R>> {
-    const query =
-      queryText instanceof Query
-        ? queryText
-        : new Query<QueryResult<R>>(queryText, values as unknown[], callback);
+    const {query, actualCallback} = normalizeQueryArgs(
+      queryText,
+      values,
+      callback,
+    );
 
-    let actualCallback: QueryCallback<QueryResult<R>> | undefined =
-      query.callback;
-    if (typeof values === 'function') {
-      actualCallback = values as QueryCallback<QueryResult<R>>;
-    } else if (typeof callback === 'function') {
-      actualCallback = callback;
-    }
+    let resolveTask!: (val: QueryResult<R>) => void;
+    let rejectTask!: (err: unknown) => void;
+    const executionPromise = new Promise<QueryResult<R>>((res, rej) => {
+      resolveTask = res;
+      rejectTask = rej;
+    });
+
+    query.setPromise(executionPromise);
+    executionPromise.catch(() => {});
 
     const task: QueryTask<QueryResult<R>> = {
       run: async () => {
@@ -147,12 +167,8 @@ export class Client extends EventEmitter {
             new Error('Query text must be a non-empty string'),
             this.dialect,
           );
-          if (query.listenerCount('error') > 0) {
-            query.emit('error', err);
-          }
-          if (actualCallback) {
-            process.nextTick(() => actualCallback!(err));
-          }
+          dispatchQueryError(err, query, actualCallback);
+          rejectTask(err);
           throw err;
         }
 
@@ -165,16 +181,15 @@ export class Client extends EventEmitter {
             new Error('Query values must be an Array'),
             this.dialect,
           );
-          if (query.listenerCount('error') > 0) {
-            query.emit('error', err);
-          }
-          if (actualCallback) {
-            process.nextTick(() => actualCallback!(err));
-          }
+          dispatchQueryError(err, query, actualCallback);
+          rejectTask(err);
           throw err;
         }
 
         try {
+          if (this.isEnded) {
+            throw new Error('Client was closed');
+          }
           if (!this.isConnected) {
             await this.connect();
           }
@@ -186,16 +201,21 @@ export class Client extends EventEmitter {
             .trim();
           const cleanUpper = cleanSql.toUpperCase();
 
-          if (
-            cleanUpper.startsWith('BEGIN') ||
-            cleanUpper.startsWith('START TRANSACTION')
-          ) {
+          if (/\bBEGIN\b|\bSTART\s+TRANSACTION\b/.test(cleanUpper)) {
             this.txStatus = 'T';
           }
 
-          const command = cleanUpper
-            ? cleanUpper.replace(/^[^A-Z]+/, '').split(/\s+/)[0]
-            : 'SELECT';
+          let command = 'SELECT';
+          if (cleanUpper.startsWith('WITH')) {
+            const verbMatch = cleanUpper.match(
+              /\b(SELECT|INSERT|UPDATE|DELETE)\b/,
+            );
+            if (verbMatch) {
+              command = verbMatch[1];
+            }
+          } else if (cleanUpper) {
+            command = cleanUpper.replace(/^[^A-Z]+/, '').split(/\s+/)[0];
+          }
 
           // TODO(PR 4 - Native CGO Bridge): Execute query through native CGO bridge (spannerlib-node)
           const result: QueryResult<R> = {
@@ -205,11 +225,7 @@ export class Client extends EventEmitter {
             command,
           };
 
-          if (
-            cleanUpper.startsWith('COMMIT') ||
-            cleanUpper.startsWith('ROLLBACK') ||
-            cleanUpper.startsWith('ABORT')
-          ) {
+          if (/\b(COMMIT|ROLLBACK|ABORT)\b/.test(cleanUpper)) {
             this.txStatus = 'I';
           }
 
@@ -217,38 +233,20 @@ export class Client extends EventEmitter {
           if (actualCallback) {
             process.nextTick(() => actualCallback!(null, result));
           }
+          resolveTask(result);
           return result;
         } catch (err: unknown) {
           const enriched = enrichError(err, this.dialect);
           if (this.txStatus === 'T') {
             this.txStatus = 'E';
           }
-          if (actualCallback) {
-            process.nextTick(() => actualCallback!(enriched));
-          } else if (query.listenerCount('error') > 0) {
-            query.emit('error', enriched);
-          }
+          dispatchQueryError(enriched, query, actualCallback);
+          rejectTask(enriched);
           throw enriched;
         }
       },
     };
 
-    const executionPromise = new Promise<QueryResult<R>>((resolve, reject) => {
-      const originalRun = task.run;
-      task.run = async () => {
-        try {
-          const res = await originalRun();
-          resolve(res);
-          return res;
-        } catch (err: unknown) {
-          reject(err);
-          throw err;
-        }
-      };
-    });
-
-    query.setPromise(executionPromise);
-    executionPromise.catch(() => {});
     this.queryQueue.push(task as QueryTask<unknown>);
     void this.processQueue();
     return query;
@@ -312,11 +310,10 @@ export class Client extends EventEmitter {
   }
 
   private async _doEnd(): Promise<void> {
-    if (!this.isConnected) {
-      return;
-    }
-    // TODO(PR 4 - Native CGO Bridge): Close native CGO Spanner connection handle via spannerlib-node
+    this.isEnded = true;
     this.isConnected = false;
     this.txStatus = 'I';
+    // Clear pending queries in queue to prevent execution after client close
+    this.queryQueue = [];
   }
 }

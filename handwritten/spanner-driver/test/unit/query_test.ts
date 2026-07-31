@@ -92,4 +92,11 @@ describe('Query Class', () => {
     });
     assert.strictEqual(finallyInvoked, true);
   });
+
+  it('should not throw TypeError when calling catch() or then() on a newly constructed Query', () => {
+    const q = new Query('SELECT 1');
+    assert.doesNotThrow(() => {
+      q.catch(() => {});
+    });
+  });
 });

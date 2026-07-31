@@ -17,6 +17,7 @@ import {Client} from './client.js';
 import {ClientConfig} from './config.js';
 import {Query, QueryCallback} from './query.js';
 import {QueryConfig, QueryResult} from './types.js';
+import {dispatchQueryError, normalizeQueryArgs} from './utilities.js';
 
 /**
  * Basic Pool class managing database connection instances.
@@ -95,18 +96,11 @@ export class Pool extends EventEmitter {
     values?: unknown[] | QueryCallback<QueryResult<R>>,
     callback?: QueryCallback<QueryResult<R>>,
   ): Query<QueryResult<R>> {
-    const query =
-      queryText instanceof Query
-        ? queryText
-        : new Query<QueryResult<R>>(queryText, values as unknown[], callback);
-
-    let actualCallback: QueryCallback<QueryResult<R>> | undefined =
-      query.callback;
-    if (typeof values === 'function') {
-      actualCallback = values as QueryCallback<QueryResult<R>>;
-    } else if (typeof callback === 'function') {
-      actualCallback = callback;
-    }
+    const {query, actualCallback} = normalizeQueryArgs(
+      queryText,
+      values,
+      callback,
+    );
 
     const executionPromise = (async () => {
       let client: Client;
@@ -118,22 +112,41 @@ export class Pool extends EventEmitter {
         client = await this._doConnect();
       } catch (err: unknown) {
         const errorObj = err instanceof Error ? err : new Error(String(err));
-        if (actualCallback) {
-          process.nextTick(() => actualCallback!(errorObj));
-        } else if (query.listenerCount('error') > 0) {
-          query.emit('error', errorObj);
-        }
+        dispatchQueryError(errorObj, query, actualCallback);
         throw errorObj;
       }
 
       // 2. Query execution stage:
-      // Executed on the acquired client. client.query() handles its own query callbacks and
-      // error events. We do NOT catch or re-notify actualCallback here to prevent double callbacks.
+      // Executed on the acquired client using an internal query instance without callback.
+      // This ensures client.query does not fire actualCallback prematurely before client.release() completes.
+      const queryForClient = new Query<QueryResult<R>>(
+        query.text ?? '',
+        query.values,
+      );
+      queryForClient.on('row', row => query.emit('row', row));
+      queryForClient.on('fields', fields => query.emit('fields', fields));
+
+      let result: QueryResult<R>;
+      let queryErr: Error | undefined;
+
       try {
-        return await client.query(query, values as unknown[], callback);
+        result = await client.query(queryForClient);
+        query.emit('end', result);
+      } catch (err: unknown) {
+        queryErr = err instanceof Error ? err : new Error(String(err));
       } finally {
         await client.release();
       }
+
+      if (queryErr) {
+        dispatchQueryError(queryErr, query, actualCallback);
+        throw queryErr;
+      }
+
+      if (actualCallback) {
+        process.nextTick(() => actualCallback!(null, result!));
+      }
+      return result!;
     })();
 
     query.setPromise(executionPromise);

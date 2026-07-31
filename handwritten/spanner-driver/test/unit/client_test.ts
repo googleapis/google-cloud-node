@@ -175,4 +175,177 @@ describe('Client Class', () => {
       await client.end();
     }
   });
+
+  it('should invoke callback and NOT emit error event when callback is provided on query error', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    let errorEventEmitted = false;
+    let callbackInvoked = false;
+
+    const q = new Query<QueryResult>('');
+    q.on('error', () => {
+      errorEventEmitted = true;
+    });
+
+    await new Promise<void>(resolve => {
+      client.query(q, undefined, err => {
+        assert.strictEqual(err instanceof DatabaseError, true);
+        callbackInvoked = true;
+        setTimeout(resolve, 20);
+      });
+    });
+
+    assert.strictEqual(
+      errorEventEmitted,
+      false,
+      'error event should not be emitted when callback is provided',
+    );
+    assert.strictEqual(callbackInvoked, true);
+  });
+
+  it('should reject queries executed after client.end() without reconnecting', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    await client.connect();
+    assert.strictEqual(client.isConnected, true);
+    await client.end();
+    assert.strictEqual(client.isConnected, false);
+
+    try {
+      await client.query('SELECT 1');
+      assert.fail('Should have thrown an error when querying an ended client');
+    } catch (err: unknown) {
+      assert.strictEqual(client.isConnected, false);
+      assert.match(
+        (err as Error).message,
+        /Client has already been connected|Connection terminated|Client was closed/,
+      );
+    }
+  });
+
+  it('should parse command verb as SELECT for CTE WITH queries', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    const res = await client.query('WITH cte AS (SELECT 1) SELECT * FROM cte');
+    assert.strictEqual(res.command, 'SELECT');
+    await client.end();
+  });
+
+  it('should not transition txStatus to T when statement starts with BEGIN identifier prefix', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    await client.query('BEGIN_LOG(1)');
+    assert.strictEqual(
+      client.txStatus,
+      'I',
+      'txStatus should remain I for regular queries starting with BEGIN prefix',
+    );
+    await client.end();
+  });
+
+  it('should deduplicate concurrent connect() calls and initiate connection exactly once', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    let connectInvocations = 0;
+
+    (client as unknown as {_doConnect: () => Promise<void>})['_doConnect'] =
+      async () => {
+        if (client.isConnected) return;
+        connectInvocations++;
+        await new Promise(r => setTimeout(r, 20));
+        client.isConnected = true;
+      };
+
+    await Promise.all([client.connect(), client.connect(), client.connect()]);
+
+    assert.strictEqual(
+      connectInvocations,
+      1,
+      'concurrent connect() calls should only initiate connection once',
+    );
+  });
+
+  it('should clear pending query queue when client.end() is called', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    await client.connect();
+
+    // Queue query without awaiting
+    const p1 = client.query('SELECT 1');
+    await client.end();
+
+    // Verify queue was emptied
+    assert.strictEqual(
+      (client as unknown as {queryQueue: unknown[]}).queryQueue.length,
+      0,
+      'query queue should be emptied when client is closed',
+    );
+    try {
+      await p1;
+    } catch {
+      // Expect rejection on ended client
+    }
+  });
+
+  it('should emit end event on Query when query execution completes', done => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    let endEventEmitted = false;
+    const q = client.query('SELECT 1');
+    q.on('end', res => {
+      endEventEmitted = true;
+      assert.strictEqual(res.command, 'SELECT');
+      void client.end().then(() => {
+        assert.strictEqual(endEventEmitted, true);
+        done();
+      });
+    });
+  });
+
+  it('should delegate release() to end()', async () => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    await client.connect();
+    assert.strictEqual(client.isConnected, true);
+    await client.release();
+    assert.strictEqual(client.isConnected, false);
+  });
+
+  it('should emit error event on Query when no callback is provided on query error', done => {
+    const client = new Client({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    const q = new Query<QueryResult>('');
+    q.on('error', err => {
+      assert.strictEqual(err instanceof DatabaseError, true);
+      void client.end().then(() => done());
+    });
+    void client.query(q).catch(() => {});
+  });
 });

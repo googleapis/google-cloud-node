@@ -121,20 +121,36 @@ describe('Pool Class', () => {
     });
   });
 
-  it('should invoke callback exactly once when pool.query() fails during query execution', done => {
+  it('should invoke callback exactly once and NOT emit error event when pool.query() fails', async () => {
     const pool = new Pool({
       project: 'p',
       instance: 'i',
       database: 'd',
     });
     let callCount = 0;
-    void pool.query('', (err, res) => {
-      callCount++;
-      assert.strictEqual(res, undefined);
-      assert.strictEqual(callCount, 1);
-      assert.strictEqual(err instanceof Error, true);
-      void pool.end().then(() => done());
+    let errorEventEmitted = false;
+
+    const q = new Query<QueryResult>('');
+    q.on('error', () => {
+      errorEventEmitted = true;
     });
+
+    await new Promise<void>(resolve => {
+      void pool.query(q, undefined, (err, res) => {
+        callCount++;
+        assert.strictEqual(res, undefined);
+        assert.strictEqual(callCount, 1);
+        assert.strictEqual(err instanceof Error, true);
+        setTimeout(resolve, 20);
+      });
+    });
+
+    assert.strictEqual(
+      errorEventEmitted,
+      false,
+      'error event should not be emitted when callback is provided',
+    );
+    await pool.end();
   });
 
   it('should prevent new client acquisitions after pool.end()', async () => {
@@ -153,5 +169,62 @@ describe('Pool Class', () => {
         'Cannot acquire client from ending pool',
       );
     }
+  });
+
+  it('should ensure client is released before user callback executes in pool.query()', done => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    let clientReleased = false;
+
+    // Override _doConnect to track client.release call sequence
+    const originalDoConnect = (pool as unknown as {_doConnect: () => Promise<{release: () => Promise<void>; query: (q: unknown, v?: unknown[]) => Promise<{command: string; rows: []; fields: []; rowCount: 0}>}>})._doConnect.bind(pool);
+    (pool as unknown as {_doConnect: () => Promise<unknown>})._doConnect = async () => {
+      const client = await originalDoConnect();
+      const originalRelease = client.release.bind(client);
+      client.release = async () => {
+        clientReleased = true;
+        await originalRelease();
+      };
+      return client;
+    };
+
+    void pool.query('SELECT 1', (err, res) => {
+      assert.strictEqual(err, null);
+      assert.strictEqual(res?.command, 'SELECT');
+      assert.strictEqual(
+        clientReleased,
+        true,
+        'Client release must complete BEFORE user callback is executed',
+      );
+      void pool.end().then(() => done());
+    });
+  });
+
+  it('should end pool using pool.end() callback syntax', done => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    pool.end(() => {
+      done();
+    });
+  });
+
+  it('should emit error event on Query when pool.query() query execution fails without callback', done => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    const q = new Query<QueryResult>('');
+    q.on('error', err => {
+      assert.strictEqual(err instanceof Error, true);
+      void pool.end().then(() => done());
+    });
+    void pool.query(q).catch(() => {});
   });
 });
