@@ -333,7 +333,7 @@ async function checkForPublishedMetrics(projectId: string) {
 describe('Bigtable/ClientSideMetrics', () => {
   let defaultProjectId: string;
 
-  before(async () => {
+  before(async function() {
     /*
     For both the default project and the secondary project we need to create
     instances with some data in them so that the tests can collect all the
@@ -354,7 +354,7 @@ describe('Bigtable/ClientSideMetrics', () => {
         await setupBigtableWithInsert(bigtable, columnFamilyId, instanceId, [
           tableId1,
           tableId2,
-        ]);
+        ], this);
       }
       defaultProjectId = await new Promise((resolve, reject) => {
         bigtable.getProjectId_((err: Error | null, projectId?: string) => {

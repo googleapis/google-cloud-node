@@ -53,6 +53,7 @@ async function createInstance(
   instanceId: string,
   clusterId: string,
   locationId: string,
+  mochaContext?: any,
 ) {
   const instance = bigtable.instance(instanceId);
 
@@ -62,21 +63,29 @@ async function createInstance(
     return instance;
   }
 
-  const [i, operation] = await instance.create({
-    clusters: [
-      {
-        id: clusterId,
-        location: locationId,
-        nodes: 3,
+  try {
+    const [i, operation] = await instance.create({
+      clusters: [
+        {
+          id: clusterId,
+          location: locationId,
+          nodes: 3,
+        },
+      ],
+      labels: {
+        time_created: Date.now(),
       },
-    ],
-    labels: {
-      time_created: Date.now(),
-    },
-  });
-  await operation.promise();
-  console.log(`Created instance ${instanceId}`);
-  return i;
+    });
+    await operation.promise();
+    console.log(`Created instance ${instanceId}`);
+    return i;
+  } catch (e: any) {
+    if (mochaContext && (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED')))) {
+      console.log('Skipping due to quota');
+      mochaContext.skip();
+    }
+    throw e;
+  }
 }
 
 /**
@@ -150,10 +159,10 @@ describe('Bigtable/ReadModifyWriteRowInterceptorMetrics', () => {
   let bigtable: Bigtable;
   let testMetricsHandler: TestMetricsHandler;
 
-  before(async () => {
+  before(async function() {
     bigtable = new Bigtable();
     await getProjectIdFromClient(bigtable);
-    await createInstance(bigtable, INSTANCE_ID, CLUSTER, ZONE);
+    await createInstance(bigtable, INSTANCE_ID, CLUSTER, ZONE, this);
     await createTable(bigtable, INSTANCE_ID, TABLE_ID, COLUMN_FAMILIES);
     testMetricsHandler = getTestMetricsHandler();
     bigtable._metricsConfigManager = new ClientSideMetricsConfigManager([
