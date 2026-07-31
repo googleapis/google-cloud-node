@@ -43,5 +43,8 @@ jobs:
         with:
           node-version: 24
       - run: npm install
-      - run: node ./bin/linter.mjs --strict --git-diff-arg "origin/${{ github.base_ref }}...HEAD"
+      - run: node ./bin/linter.mjs
         name: Run monorepo linter
+        env:
+          STRICT: "true"
+          GIT_DIFF_ARG: "origin/${{ github.base_ref }}...HEAD"
