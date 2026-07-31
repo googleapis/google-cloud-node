@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.30.1
+version: v0.31.1
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: e82c753169134e7eb263394d5e77ba6ec28596c2
-    sha256: 4427fc14f395abf744386f8b5a21158bc81b2cff57eb29dbf873f040998afbdc
+    commit: 62da249e76b878fa8d667a0d7bfa4dc33d790cb8
+    sha256: abd8967d4827cb1c849ee49cf9f22c3acb0a498018684361fa690b2922c781b3
 tools:
   pnpm:
     - name: gapic-generator-typescript
@@ -50,7 +50,7 @@ default:
   output: packages
 libraries:
   - name: google-ads-admanager
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/ads/admanager/v1
     copyright_year: "2026"
@@ -107,7 +107,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/apikeys'
   - name: google-api-cloudquotas
-    version: 2.3.1
+    version: 2.4.0
     apis:
       - path: google/api/cloudquotas/v1
       - path: google/api/cloudquotas/v1beta
@@ -184,7 +184,7 @@ libraries:
       package_name: '@google/area120-tables'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
   - name: google-chat
-    version: 0.26.0
+    version: 0.27.0
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
@@ -210,13 +210,19 @@ libraries:
       nodejs_apis:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
+  - name: google-cloud-agentidentity
+    apis:
+      - path: google/cloud/agentidentity/v1
+      - path: google/cloud/agentidentity/v1beta
+    copyright_year: "2026"
+    version: 0.1.0
   - name: google-cloud-agentregistry
     version: 0.2.0
     apis:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
   - name: google-cloud-aiplatform
-    version: 6.10.0
+    version: 6.11.0
     apis:
       - path: google/cloud/aiplatform/v1
       - path: google/cloud/aiplatform/v1beta1
@@ -431,7 +437,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/bare-metal-solution'
   - name: google-cloud-batch
-    version: 2.4.0
+    version: 2.5.0
     apis:
       - path: google/cloud/batch/v1
       - path: google/cloud/batch/v1alpha
@@ -654,12 +660,12 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/procurement'
   - name: google-cloud-commerceproducer
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 6.14.0
+    version: 6.15.0
     apis:
       - path: google/cloud/compute/v1
       - path: google/cloud/compute/v1beta
@@ -961,7 +967,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-firestore-api
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/firestore/v1
       - path: google/firestore/admin/v1
@@ -1249,7 +1255,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-networkconnectivity
-    version: 4.6.1
+    version: 4.7.0
     apis:
       - path: google/cloud/networkconnectivity/v1
       - path: google/cloud/networkconnectivity/v1beta
@@ -1278,7 +1284,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/network-security'
   - name: google-cloud-networkservices
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/cloud/networkservices/v1
       - path: google/cloud/networkservices/v1beta1
@@ -1620,7 +1626,7 @@ libraries:
         pumpify: ^2.0.1
         stream-events: ^1.0.5
   - name: google-cloud-sql
-    version: 0.25.0
+    version: 0.26.0
     apis:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
@@ -1642,7 +1648,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-support
-    version: 2.5.0
+    version: 2.6.0
     apis:
       - path: google/cloud/support/v2
       - path: google/cloud/support/v2beta
@@ -1659,7 +1665,7 @@ libraries:
       default_version: v4
       main_service: talent
   - name: google-cloud-tasks
-    version: 6.2.3
+    version: 6.3.0
     apis:
       - path: google/cloud/tasks/v2
       - path: google/cloud/tasks/v2beta3
@@ -1882,7 +1888,7 @@ libraries:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
   - name: google-developer-knowledge
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/developers/knowledge/v1
     copyright_year: "2026"
@@ -1925,7 +1931,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/cloudprofiler'
   - name: google-devtools-containeranalysis
-    version: 6.8.0
+    version: 6.9.0
     apis:
       - path: google/devtools/containeranalysis/v1
       - path: google/devtools/containeranalysis/v1beta1
@@ -2038,7 +2044,7 @@ libraries:
       package_name: '@googlemaps/maps-platform-datasets'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/mapsplatformdatasets/latest
   - name: google-maps-navconnect
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/maps/navconnect/v1
     copyright_year: "2026"
@@ -2289,7 +2295,7 @@ libraries:
       package_name: '@googlemaps/streetview-publish'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/publish/latest
   - name: grafeas
-    version: 6.2.0
+    version: 6.3.0
     apis:
       - path: grafeas/v1
     copyright_year: "2026"

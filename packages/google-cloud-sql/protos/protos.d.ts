@@ -18282,6 +18282,9 @@ export namespace google {
 
                     /** DatabaseInstance dnsNames */
                     dnsNames?: (google.cloud.sql.v1.IDnsNameMapping[]|null);
+
+                    /** DatabaseInstance databaseCenterIntegrationEnabled */
+                    databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -18445,6 +18448,9 @@ export namespace google {
 
                     /** DatabaseInstance dnsNames. */
                     public dnsNames: google.cloud.sql.v1.IDnsNameMapping[];
+
+                    /** DatabaseInstance databaseCenterIntegrationEnabled. */
+                    public databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -20734,6 +20740,9 @@ export namespace google {
 
                     /** OnPremisesConfiguration sslOption */
                     sslOption?: (google.cloud.sql.v1.OnPremisesConfiguration.SslOption|keyof typeof google.cloud.sql.v1.OnPremisesConfiguration.SslOption|null);
+
+                    /** OnPremisesConfiguration dmsManaged */
+                    dmsManaged?: (boolean|null);
                 }
 
                 /** Represents an OnPremisesConfiguration. */
@@ -20777,6 +20786,9 @@ export namespace google {
 
                     /** OnPremisesConfiguration sslOption. */
                     public sslOption: (google.cloud.sql.v1.OnPremisesConfiguration.SslOption|keyof typeof google.cloud.sql.v1.OnPremisesConfiguration.SslOption);
+
+                    /** OnPremisesConfiguration dmsManaged. */
+                    public dmsManaged: boolean;
 
                     /**
                      * Creates a new OnPremisesConfiguration instance using the specified properties.
@@ -21103,6 +21115,9 @@ export namespace google {
                     /** ExecuteSqlPayload database */
                     database?: (string|null);
 
+                    /** ExecuteSqlPayload passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
                     /** ExecuteSqlPayload autoIamAuthn */
                     autoIamAuthn?: (boolean|null);
 
@@ -21134,6 +21149,9 @@ export namespace google {
                     /** ExecuteSqlPayload database. */
                     public database: string;
 
+                    /** ExecuteSqlPayload passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
                     /** ExecuteSqlPayload autoIamAuthn. */
                     public autoIamAuthn?: (boolean|null);
 
@@ -21147,7 +21165,7 @@ export namespace google {
                     public application: string;
 
                     /** ExecuteSqlPayload userPassword. */
-                    public userPassword?: "autoIamAuthn";
+                    public userPassword?: ("passwordSecretVersion"|"autoIamAuthn");
 
                     /**
                      * Creates a new ExecuteSqlPayload instance using the specified properties.
@@ -24762,6 +24780,9 @@ export namespace google {
 
                     /** SqlOperationsGetRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsGetRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsGetRequest. */
@@ -24778,6 +24799,9 @@ export namespace google {
 
                     /** SqlOperationsGetRequest project. */
                     public project: string;
+
+                    /** SqlOperationsGetRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsGetRequest instance using the specified properties.
@@ -24871,6 +24895,9 @@ export namespace google {
 
                     /** SqlOperationsListRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsListRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsListRequest. */
@@ -24893,6 +24920,9 @@ export namespace google {
 
                     /** SqlOperationsListRequest project. */
                     public project: string;
+
+                    /** SqlOperationsListRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsListRequest instance using the specified properties.
@@ -25089,6 +25119,9 @@ export namespace google {
 
                     /** SqlOperationsCancelRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsCancelRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsCancelRequest. */
@@ -25105,6 +25138,9 @@ export namespace google {
 
                     /** SqlOperationsCancelRequest project. */
                     public project: string;
+
+                    /** SqlOperationsCancelRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsCancelRequest instance using the specified properties.
@@ -27016,6 +27052,12 @@ export namespace google {
                     /** SqlUsersUpdateRequest revokeExistingRoles */
                     revokeExistingRoles?: (boolean|null);
 
+                    /** SqlUsersUpdateRequest serverRoles */
+                    serverRoles?: (string[]|null);
+
+                    /** SqlUsersUpdateRequest revokeExistingServerRoles */
+                    revokeExistingServerRoles?: (boolean|null);
+
                     /** SqlUsersUpdateRequest body */
                     body?: (google.cloud.sql.v1.IUser|null);
                 }
@@ -27046,6 +27088,12 @@ export namespace google {
 
                     /** SqlUsersUpdateRequest revokeExistingRoles. */
                     public revokeExistingRoles?: (boolean|null);
+
+                    /** SqlUsersUpdateRequest serverRoles. */
+                    public serverRoles: string[];
+
+                    /** SqlUsersUpdateRequest revokeExistingServerRoles. */
+                    public revokeExistingServerRoles?: (boolean|null);
 
                     /** SqlUsersUpdateRequest body. */
                     public body?: (google.cloud.sql.v1.IUser|null);
@@ -27396,6 +27444,9 @@ export namespace google {
 
                     /** User databaseRoles */
                     databaseRoles?: (string[]|null);
+
+                    /** User serverRoles */
+                    serverRoles?: (string[]|null);
                 }
 
                 /** Represents a User. */
@@ -27448,6 +27499,9 @@ export namespace google {
 
                     /** User databaseRoles. */
                     public databaseRoles: string[];
+
+                    /** User serverRoles. */
+                    public serverRoles: string[];
 
                     /** User userDetails. */
                     public userDetails?: "sqlserverUserDetails";
@@ -35248,6 +35302,9 @@ export namespace google {
 
                     /** SqlOperationsGetRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsGetRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsGetRequest. */
@@ -35264,6 +35321,9 @@ export namespace google {
 
                     /** SqlOperationsGetRequest project. */
                     public project: string;
+
+                    /** SqlOperationsGetRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsGetRequest instance using the specified properties.
@@ -35357,6 +35417,9 @@ export namespace google {
 
                     /** SqlOperationsListRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsListRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsListRequest. */
@@ -35379,6 +35442,9 @@ export namespace google {
 
                     /** SqlOperationsListRequest project. */
                     public project: string;
+
+                    /** SqlOperationsListRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsListRequest instance using the specified properties.
@@ -35466,6 +35532,9 @@ export namespace google {
 
                     /** SqlOperationsCancelRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsCancelRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsCancelRequest. */
@@ -35482,6 +35551,9 @@ export namespace google {
 
                     /** SqlOperationsCancelRequest project. */
                     public project: string;
+
+                    /** SqlOperationsCancelRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsCancelRequest instance using the specified properties.
@@ -36742,6 +36814,9 @@ export namespace google {
                     /** ExecuteSqlPayload database */
                     database?: (string|null);
 
+                    /** ExecuteSqlPayload passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
                     /** ExecuteSqlPayload autoIamAuthn */
                     autoIamAuthn?: (boolean|null);
 
@@ -36773,6 +36848,9 @@ export namespace google {
                     /** ExecuteSqlPayload database. */
                     public database: string;
 
+                    /** ExecuteSqlPayload passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
                     /** ExecuteSqlPayload autoIamAuthn. */
                     public autoIamAuthn?: (boolean|null);
 
@@ -36786,7 +36864,7 @@ export namespace google {
                     public application: string;
 
                     /** ExecuteSqlPayload userPassword. */
-                    public userPassword?: "autoIamAuthn";
+                    public userPassword?: ("passwordSecretVersion"|"autoIamAuthn");
 
                     /**
                      * Creates a new ExecuteSqlPayload instance using the specified properties.
@@ -40231,6 +40309,9 @@ export namespace google {
 
                     /** DatabaseInstance dnsNames */
                     dnsNames?: (google.cloud.sql.v1beta4.IDnsNameMapping[]|null);
+
+                    /** DatabaseInstance databaseCenterIntegrationEnabled */
+                    databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -40394,6 +40475,9 @@ export namespace google {
 
                     /** DatabaseInstance dnsNames. */
                     public dnsNames: google.cloud.sql.v1beta4.IDnsNameMapping[];
+
+                    /** DatabaseInstance databaseCenterIntegrationEnabled. */
+                    public databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -48145,6 +48229,9 @@ export namespace google {
 
                     /** OnPremisesConfiguration sslOption */
                     sslOption?: (google.cloud.sql.v1beta4.OnPremisesConfiguration.SslOption|keyof typeof google.cloud.sql.v1beta4.OnPremisesConfiguration.SslOption|null);
+
+                    /** OnPremisesConfiguration dmsManaged */
+                    dmsManaged?: (boolean|null);
                 }
 
                 /** Represents an OnPremisesConfiguration. */
@@ -48188,6 +48275,9 @@ export namespace google {
 
                     /** OnPremisesConfiguration sslOption. */
                     public sslOption: (google.cloud.sql.v1beta4.OnPremisesConfiguration.SslOption|keyof typeof google.cloud.sql.v1beta4.OnPremisesConfiguration.SslOption);
+
+                    /** OnPremisesConfiguration dmsManaged. */
+                    public dmsManaged: boolean;
 
                     /**
                      * Creates a new OnPremisesConfiguration instance using the specified properties.
@@ -55573,6 +55663,12 @@ export namespace google {
                     /** SqlUsersUpdateRequest revokeExistingRoles */
                     revokeExistingRoles?: (boolean|null);
 
+                    /** SqlUsersUpdateRequest serverRoles */
+                    serverRoles?: (string[]|null);
+
+                    /** SqlUsersUpdateRequest revokeExistingServerRoles */
+                    revokeExistingServerRoles?: (boolean|null);
+
                     /** SqlUsersUpdateRequest body */
                     body?: (google.cloud.sql.v1beta4.IUser|null);
                 }
@@ -55603,6 +55699,12 @@ export namespace google {
 
                     /** SqlUsersUpdateRequest revokeExistingRoles. */
                     public revokeExistingRoles?: (boolean|null);
+
+                    /** SqlUsersUpdateRequest serverRoles. */
+                    public serverRoles: string[];
+
+                    /** SqlUsersUpdateRequest revokeExistingServerRoles. */
+                    public revokeExistingServerRoles?: (boolean|null);
 
                     /** SqlUsersUpdateRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IUser|null);
@@ -55953,6 +56055,9 @@ export namespace google {
 
                     /** User databaseRoles */
                     databaseRoles?: (string[]|null);
+
+                    /** User serverRoles */
+                    serverRoles?: (string[]|null);
                 }
 
                 /** Represents a User. */
@@ -56005,6 +56110,9 @@ export namespace google {
 
                     /** User databaseRoles. */
                     public databaseRoles: string[];
+
+                    /** User serverRoles. */
+                    public serverRoles: string[];
 
                     /** User userDetails. */
                     public userDetails?: "sqlserverUserDetails";

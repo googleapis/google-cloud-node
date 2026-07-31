@@ -5,6 +5,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/common?activeTab=versions
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/common-v6.1.0...common-v7.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update common to minimum Node version of 22. ([#8988](https://github.com/googleapis/google-cloud-node/issues/8988))
+
+### Features
+
+* Update common to minimum Node version of 22. ([#8988](https://github.com/googleapis/google-cloud-node/issues/8988)) ([d38c05a](https://github.com/googleapis/google-cloud-node/commit/d38c05a5e14cec57b66b4106d6bbd511ac4fd6f2)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/common-v6.0.1...common-v6.1.0) (2026-07-23)
 
 

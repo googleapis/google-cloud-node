@@ -5,6 +5,17 @@
 
 [1]: https://www.npmjs.com/package/nodejs-googleapis-common?activeTab=versions
 
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v8.0.3...googleapis-common-v9.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update nodejs-googleapis-common to minimum Node version of 22. ([#8997](https://github.com/googleapis/google-cloud-node/issues/8997))
+
+### Features
+
+* Update nodejs-googleapis-common to minimum Node version of 22. ([#8997](https://github.com/googleapis/google-cloud-node/issues/8997)) ([5f9dfeb](https://github.com/googleapis/google-cloud-node/commit/5f9dfeb5767c115975e5a9a67c2e7cade199022c)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [8.0.3](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v8.0.2...googleapis-common-v8.0.3) (2026-07-23)
 
 

@@ -29,7 +29,7 @@ function main(parent, quotaPreference) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Value for parent.
+   *  Required. Identifier. Value for parent.
    *  Example:
    *  `projects/123/locations/global`
    */

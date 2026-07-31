@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/navconnect-v0.1.1...navconnect-v0.2.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/navconnect-v0.1.0...navconnect-v0.1.1) (2026-05-01)
 
 

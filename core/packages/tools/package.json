@@ -1,6 +1,6 @@
 {
   "name": "gapic-tools",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "compiles, updates, and minifies protos",
   "main": "build/src/compileProtos.js",
   "files": [
@@ -65,6 +65,6 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/tools",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   }
 }

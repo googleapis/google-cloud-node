@@ -1,6 +1,6 @@
 {
   "name": "googleapis-common",
-  "version": "8.0.3",
+  "version": "9.0.0",
   "description": "A common tooling library used by the googleapis npm module. You probably don't want to use this directly.",
   "repository": {
     "type": "git",
@@ -87,7 +87,7 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/nodejs-googleapis-common"
 }
