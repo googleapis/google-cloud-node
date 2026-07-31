@@ -1378,7 +1378,7 @@ export class Snapshot extends EventEmitter {
     const m3Name = `M3_gax_end_${reqId}`;
     const m4Name = `M4_sdk_end_${reqId}`;
     performance.mark(m1Name);
-
+    let m3Marked = false;
     startTrace(
       'Snapshot.run',
       {
@@ -1402,7 +1402,8 @@ export class Snapshot extends EventEmitter {
           })
           .on('response', response => {
             // [M3 MARK]: Mark M3 on first response header
-            if (!performance.getEntriesByName(m3Name).length) {
+            if (!m3Marked) {
+              m3Marked = true;
               performance.mark(m3Name);
             }
             if (response.metadata) {
@@ -1626,7 +1627,7 @@ export class Snapshot extends EventEmitter {
         if (!resumeToken) {
           // [M2 MARK]: Mark M2 on first attempt only
           const m2Name = `M2_gax_start_${currentReqId}`;
-          if (attempt === 1 && !performance.getEntriesByName(m2Name).length) {
+          if (attempt === 1) {
             performance.mark(m2Name);
             span.addEvent('Starting stream');
           } else {

@@ -2922,6 +2922,7 @@ class Database extends common.GrpcServiceObject {
     const m4Name = `M4_sdk_end_${reqId}`;
     performance.mark(m1Name);
 
+    let m3Marked = false;
     return startTrace(
       'Database.run',
       {
@@ -2937,7 +2938,8 @@ class Database extends common.GrpcServiceObject {
           })
           .on('response', response => {
             // [M3 MARK]: Mark M3 on first response header
-            if (!performance.getEntriesByName(m3Name).length) {
+            if (!m3Marked) {
+              m3Marked = true;
               performance.mark(m3Name);
             }
             if (response.metadata) {
