@@ -1,5 +1,6 @@
 ---
 name: generation-check
+
 on:
   push:
     branches:
@@ -7,12 +8,22 @@ on:
   pull_request:
   # Allows manual triggering for debugging purpose.
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
-  issues: write
+
 jobs:
   regeneration:
+    name: Regenerate and verify clean git tree
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # zizmor: ignore[undocumented-permissions] - Required for creating issue on main branch failure
+      issues: write
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
@@ -24,8 +35,8 @@ jobs:
             librarian:
               - 'librarian.yaml'
       # Version of librarian is pulled from librarian.yaml,
-      # main corresponds to the action's source definition.
-      - uses: googleapis/librarian@main # zizmor: ignore[unpinned-uses]
+      # action is pinned to commit SHA to satisfy blanket security policy.
+      - uses: googleapis/librarian@a02c28273b3c9ddb33bbe5849a44b6a678d28404 # v0.31.1
         if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
       - name: Install tools
         if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
@@ -44,7 +55,7 @@ jobs:
           fi
       - name: Create issue if previous step fails
         if: ${{ failure() && github.ref == 'refs/heads/main' }}
-        uses: googleapis/librarian/.github/actions/create-issue-on-failure@main # zizmor: ignore[unpinned-uses]
+        uses: googleapis/librarian/.github/actions/create-issue-on-failure@a02c28273b3c9ddb33bbe5849a44b6a678d28404 # v0.31.1
         with:
           title: "Librarian generate diff check failed on main branch"
           body: |
