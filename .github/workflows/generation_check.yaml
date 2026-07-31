@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: 22
 
-      - uses: googleapis/librarian@a02c28273b3c9ddb33bbe5849a44b6a678d28404 # v0.27.1
+      - uses: googleapis/librarian@35997441eafc2b02716804f9baba1e3f04f8a44f # v0.31.1
         if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
 
       - name: Install tools
