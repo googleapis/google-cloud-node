@@ -76,11 +76,15 @@ describe('📦 App Profile', () => {
 
     after(async () => {
       try {
-        await instance.delete();
+        try {
+          await instance.delete();
+        } catch(e: any) {
+          console.warn("Skipping delete due to error", e.message);
+        }
       } catch (err) {}
     });
 
-    it('should create a profile with a single cluster', async () => {
+    it('should create a profile with a single cluster', async function() {
       const options = {
         routing: instance.cluster(clusterIds[1]),
       };
@@ -91,7 +95,7 @@ describe('📦 App Profile', () => {
       );
     });
 
-    it('should create a profile with multiple clusters', async () => {
+    it('should create a profile with multiple clusters', async function() {
       const options = {
         routing: new Set([
           instance.cluster(clusterIds[1]),
@@ -105,7 +109,7 @@ describe('📦 App Profile', () => {
       );
     });
 
-    it('should create a profile with multiple clusters using strings', async () => {
+    it('should create a profile with multiple clusters using strings', async function() {
       const options = {
         routing: new Set([clusterIds[1], clusterIds[2]]),
       };
@@ -116,7 +120,7 @@ describe('📦 App Profile', () => {
       );
     });
 
-    it('should create a profile with no clusters', async () => {
+    it('should create a profile with no clusters', async function() {
       const options: {routing: 'any'} = {
         routing: 'any',
       };
@@ -127,7 +131,7 @@ describe('📦 App Profile', () => {
       );
     });
 
-    it('should ensure clusters match an updated profile', async () => {
+    it('should ensure clusters match an updated profile', async function() {
       const options = {
         routing: instance.cluster(clusterIds[1]),
       };

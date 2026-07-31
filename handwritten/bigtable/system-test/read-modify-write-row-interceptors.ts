@@ -172,10 +172,14 @@ describe('Bigtable/ReadModifyWriteRowInterceptorMetrics', () => {
 
   after(async () => {
     const instance = bigtable.instance(INSTANCE_ID);
-    await instance.delete();
+    try {
+      await instance.delete();
+    } catch(e: any) {
+      console.warn("Skipping delete due to error", e.message);
+    }
   });
 
-  it('should record and export correct metrics for ReadModifyWriteRow via interceptors', async () => {
+  it('should record and export correct metrics for ReadModifyWriteRow via interceptors', async function() {
     const instance = bigtable.instance(INSTANCE_ID);
 
     const table = instance.table(TABLE_ID);

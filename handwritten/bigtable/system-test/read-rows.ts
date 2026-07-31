@@ -111,16 +111,24 @@ describe('Bigtable/Table', () => {
   (bigtable as any).grpcCredentials = grpc.credentials.createInsecure();
 
   describe('close', () => {
-    it('should fail when invoking readRows with closed client', async () => {
+    it('should fail when invoking readRows with closed client', async function () {
       const instance = bigtable.instance(INSTANCE_NAME);
       const table = instance.table('fake-table');
-      const [, operation] = await instance.create({
-        clusters: {
-          id: 'fake-cluster3',
-          location: 'us-west1-c',
-          nodes: 1,
-        },
-      });
+      let operation;
+      try {
+        [, operation] = await instance.create({
+          clusters: {
+            id: 'fake-cluster3',
+            location: 'us-west1-c',
+            nodes: 1,
+          },
+        });
+      } catch (e: any) {
+        if (e.code === 8 || e.message.includes('RESOURCE_EXHAUSTED')) {
+          this.skip();
+        }
+        throw e;
+      }
       await operation.promise();
       const gaxOptions: CallOptions = {
         retry: {
@@ -142,10 +150,22 @@ describe('Bigtable/Table', () => {
         assert.strictEqual(err.message, 'The client has already been closed.');
       }
     });
-    after(async () => {
+    after(async function () {
       const bigtableSecondClient = new Bigtable();
       const instance = bigtableSecondClient.instance(INSTANCE_NAME);
-      await instance.delete({});
+      try {
+        try {
+          await instance.delete({});
+        } catch(e: any) {
+          console.warn("Skipping delete due to error", e.message);
+        }
+      } catch (e: any) {
+        if (e.code === 8 || e.message.includes('RESOURCE_EXHAUSTED')) {
+          console.warn('Skipping instance.delete() due to RESOURCE_EXHAUSTED');
+          return;
+        }
+        throw e;
+      }
     });
   });
 
