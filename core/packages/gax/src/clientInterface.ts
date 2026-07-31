@@ -42,6 +42,8 @@ export interface ClientOptions
   // No preference; exception will be thrown if both are set to different values.
   universeDomain?: string;
   universe_domain?: string;
+  enableTelemetryTracing?: boolean;
+  internalTelemetryInfo?: InternalTelemetry;
 }
 
 export interface Descriptors {
@@ -92,4 +94,11 @@ export interface PaginationResponse<
   values?: ResponseType[];
   nextPageRequest?: RequestObject;
   rawResponse?: ResponseObject;
+}
+
+export interface InternalTelemetry {
+  gcpClientService?: string;
+  gcpVersion?: string;
+  gcpRepo?: string;
+  gcpArtifact?: string;
 }
