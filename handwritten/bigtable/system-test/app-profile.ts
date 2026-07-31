@@ -37,37 +37,47 @@ describe('📦 App Profile', () => {
       return getAppProfileResponse[0];
     }
 
-    before(async () => {
-      // Creates an instance with clusters
-      const instanceClusters = [
-        'us-east1-c',
-        'us-central2-b',
-        'us-west1-b',
-      ].map(location => {
-        return {
-          id: generateId('cluster'),
-          location,
-        };
-      });
-      clusterIds = instanceClusters.map(cluster => cluster.id);
-      const instanceId = generateId('instance');
-      instance = bigtable.instance(instanceId);
-      const [, operation] = await instance.create({
-        clusters: instanceClusters.map(cluster => {
+    before(async function() {
+      try {
+        // Creates an instance with clusters
+        const instanceClusters = [
+          'us-east1-c',
+          'us-central2-b',
+          'us-west1-b',
+        ].map(location => {
           return {
-            ...cluster,
-            nodes: 1,
+            id: generateId('cluster'),
+            location,
           };
-        }),
-        labels: {
-          time_created: Date.now(),
-        },
-      });
-      await operation.promise();
+        });
+        clusterIds = instanceClusters.map(cluster => cluster.id);
+        const instanceId = generateId('instance');
+        instance = bigtable.instance(instanceId);
+        const [, operation] = await instance.create({
+          clusters: instanceClusters.map(cluster => {
+            return {
+              ...cluster,
+              nodes: 1,
+            };
+          }),
+          labels: {
+            time_created: Date.now(),
+          },
+        });
+        await operation.promise();
+      } catch (e: any) {
+        if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
+          console.log('Skipping app-profile tests due to quota');
+          this.skip();
+        }
+        throw e;
+      }
     });
 
     after(async () => {
-      await instance.delete();
+      try {
+        await instance.delete();
+      } catch (err) {}
     });
 
     it('should create a profile with a single cluster', async () => {

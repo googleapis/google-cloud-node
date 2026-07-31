@@ -18,18 +18,27 @@ export async function setupBigtable(
   columnFamilyId: string,
   instanceId: string,
   tableIds: string[],
+  mochaContext?: any,
 ) {
   const instance = bigtable.instance(instanceId);
   const [instanceInfo] = await instance.exists();
   while (!instanceInfo) {
-    const [, operation] = await instance.create({
-      clusters: {
-        id: 'fake-cluster3',
-        location: 'us-west1-c',
-        nodes: 1,
-      },
-    });
-    await operation.promise();
+    try {
+      const [, operation] = await instance.create({
+        clusters: {
+          id: 'fake-cluster3',
+          location: 'us-west1-c',
+          nodes: 1,
+        },
+      });
+      await operation.promise();
+    } catch (e: any) {
+      if (mochaContext && (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED')))) {
+        console.log('Skipping due to quota');
+        mochaContext.skip();
+      }
+      throw e;
+    }
     /**
      * For whatever reason, even after waiting for an operation.promise()
      * call to complete, the instance still doesn't seem to be ready yet so
@@ -64,8 +73,9 @@ export async function setupBigtableWithInsert(
   columnFamilyId: string,
   instanceId: string,
   tableIds: string[],
+  mochaContext?: any,
 ) {
-  await setupBigtable(bigtable, columnFamilyId, instanceId, tableIds);
+  await setupBigtable(bigtable, columnFamilyId, instanceId, tableIds, mochaContext);
   const instance = bigtable.instance(instanceId);
   const tables = tableIds.map(tableId => instance.table(tableId));
   for (const currentTable of tables) {

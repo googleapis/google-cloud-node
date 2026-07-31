@@ -207,28 +207,36 @@ describe('Bigtable', () => {
       });
     });
 
-    it('should set Iam Policy on the instance', async () => {
-      const instance = bigtable.instance(generateId('instance'));
-      const clusteId = generateId('cluster');
-      const [, operation] = await instance.create({
-        clusters: [
-          {
-            id: clusteId,
-            location: 'us-central2-c',
-            nodes: 3,
+    it('should set Iam Policy on the instance', async function() {
+      try {
+        const instance = bigtable.instance(generateId('instance'));
+        const clusteId = generateId('cluster');
+        const [, operation] = await instance.create({
+          clusters: [
+            {
+              id: clusteId,
+              location: 'us-central2-c',
+              nodes: 3,
+            },
+          ],
+          labels: {
+            time_created: Date.now(),
           },
-        ],
-        labels: {
-          time_created: Date.now(),
-        },
-      });
-      await operation.promise();
+        });
+        await operation.promise();
 
-      const [policy] = await instance.getIamPolicy();
-      const [updatedPolicy] = await instance.setIamPolicy(policy);
-      Object.keys(policy).forEach(key => assert(key in updatedPolicy));
+        const [policy] = await instance.getIamPolicy();
+        const [updatedPolicy] = await instance.setIamPolicy(policy);
+        Object.keys(policy).forEach(key => assert(key in updatedPolicy));
 
-      await instance.delete();
+        await instance.delete();
+      } catch (e: any) {
+        if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
+          this.skip();
+        } else {
+          throw e;
+        }
+      }
     });
   });
 
@@ -1696,7 +1704,7 @@ describe('Bigtable', () => {
           );
         });
       });
-      it('should create backup of a table and copy it on another cluster of another instance', async () => {
+      it('should create backup of a table and copy it on another cluster of another instance', async function() {
         const [backup, op] = await TABLE.createBackup(generateId('backup'), {
           expireTime: sourceExpireTime,
         });
@@ -1738,11 +1746,17 @@ describe('Bigtable', () => {
             instance,
           );
           await instance.delete();
+        } catch(e: any) {
+          if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
+            this.skip();
+          } else {
+            throw e;
+          }
         } finally {
           await backup.delete();
         }
       });
-      it('should create backup of a table and copy it on another cluster of the same instance', async () => {
+      it('should create backup of a table and copy it on another cluster of the same instance', async function() {
         const [backup, op] = await TABLE.createBackup(generateId('backup'), {
           expireTime: sourceExpireTime,
         });
@@ -1774,6 +1788,13 @@ describe('Bigtable', () => {
             },
             INSTANCE,
           );
+          await INSTANCE.cluster(destinationClusterId).delete();
+        } catch (e: any) {
+          if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
+            this.skip();
+          } else {
+            throw e;
+          }
         } finally {
           await backup.delete();
         }
