@@ -1725,6 +1725,8 @@ describe('Bigtable', () => {
         const [backup, op] = await TABLE.createBackup(generateId('backup'), {
           expireTime: sourceExpireTime,
         });
+        const instance = bigtable.instance(generateId('instance'));
+        const destinationClusterId = generateId('cluster');
         try {
           {
             await op.promise();
@@ -1732,9 +1734,6 @@ describe('Bigtable', () => {
             await backup.getMetadata();
             assert.deepStrictEqual(backup.expireDate, sourceExpireTime);
           }
-          // Create another instance
-          const instance = bigtable.instance(generateId('instance'));
-          const destinationClusterId = generateId('cluster');
           {
             // Create production instance with given options
             const instanceOptions: InstanceOptions = {
@@ -1762,11 +1761,6 @@ describe('Bigtable', () => {
             },
             instance,
           );
-          try {
-            await instance.delete();
-          } catch(e: any) {
-            console.warn("Skipping delete due to error", e.message);
-          }
         } catch(e: any) {
           if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
             this.skip();
@@ -1774,6 +1768,11 @@ describe('Bigtable', () => {
             throw e;
           }
         } finally {
+          try {
+            await instance.delete();
+          } catch(e: any) {
+            console.warn("Skipping delete due to error", e.message);
+          }
           await backup.delete();
         }
       });
@@ -1781,6 +1780,7 @@ describe('Bigtable', () => {
         const [backup, op] = await TABLE.createBackup(generateId('backup'), {
           expireTime: sourceExpireTime,
         });
+        const destinationClusterId = generateId('cluster');
         try {
           {
             await op.promise();
@@ -1788,7 +1788,6 @@ describe('Bigtable', () => {
             await backup.getMetadata();
             assert.deepStrictEqual(backup.expireDate, sourceExpireTime);
           }
-          const destinationClusterId = generateId('cluster');
           {
             // Create destination cluster with given options
             const [, operation] = await INSTANCE.cluster(
@@ -1809,7 +1808,6 @@ describe('Bigtable', () => {
             },
             INSTANCE,
           );
-          await INSTANCE.cluster(destinationClusterId).delete();
         } catch (e: any) {
           if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
             this.skip();
@@ -1817,6 +1815,11 @@ describe('Bigtable', () => {
             throw e;
           }
         } finally {
+          try {
+            await INSTANCE.cluster(destinationClusterId).delete();
+          } catch (e: any) {
+            console.warn("Skipping delete due to error", e.message);
+          }
           await backup.delete();
         }
       });
@@ -1824,6 +1827,16 @@ describe('Bigtable', () => {
         const [backup, op] = await TABLE.createBackup(generateId('backup'), {
           expireTime: sourceExpireTime,
         });
+        // Create client, instance, cluster for second project
+        const bigtableSecondaryProject = new Bigtable(
+          process.env.GCLOUD_PROJECT2
+            ? {projectId: process.env.GCLOUD_PROJECT2}
+            : {},
+        );
+        const secondInstance = bigtableSecondaryProject.instance(
+          generateId('instance'),
+        );
+        const destinationClusterId = generateId('cluster');
         try {
           {
             await op.promise();
@@ -1831,16 +1844,6 @@ describe('Bigtable', () => {
             await backup.getMetadata();
             assert.deepStrictEqual(backup.expireDate, sourceExpireTime);
           }
-          // Create client, instance, cluster for second project
-          const bigtableSecondaryProject = new Bigtable(
-            process.env.GCLOUD_PROJECT2
-              ? {projectId: process.env.GCLOUD_PROJECT2}
-              : {},
-          );
-          const secondInstance = bigtableSecondaryProject.instance(
-            generateId('instance'),
-          );
-          const destinationClusterId = generateId('cluster');
           {
             // Create production instance with given options
             const instanceOptions: InstanceOptions = {
@@ -1868,8 +1871,18 @@ describe('Bigtable', () => {
             },
             secondInstance,
           );
-          await secondInstance.delete();
+        } catch (e: any) {
+          if (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED'))) {
+            this.skip();
+          } else {
+            throw e;
+          }
         } finally {
+          try {
+            await secondInstance.delete();
+          } catch (e: any) {
+            console.warn("Skipping delete due to error", e.message);
+          }
           await backup.delete();
         }
       });
