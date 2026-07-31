@@ -22,6 +22,9 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
+      - name: Fetch base branch for diff
+        run: git fetch origin ${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+
       - name: Assign Reviewers
         continue-on-error: true
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
