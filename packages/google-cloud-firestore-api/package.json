@@ -11,6 +11,19 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-firestore-admin",
   "author": "Google LLC",
   "main": "build/src/index.js",
+  "exports": {
+    ".": "./build/src/index.js",
+    "./v1": "./build/src/v1/index.js",
+    "./v1/*": "./build/src/v1/*",
+    "./client_v1": "./build/src/v1/firestore_client.js",
+    "./admin_v1": "./build/src/v1/firestore_admin_client.js",
+    "./protos": "./build/protos/protos.js",
+    "./protos/*": "./build/protos/*",
+    "./build/protos/protos": "./build/protos/protos.js",
+    "./build/src/v1": "./build/src/v1/index.js",
+    "./build/*": "./build/*",
+    "./package.json": "./package.json"
+  },
   "files": [
     "build/src",
     "build/protos"
