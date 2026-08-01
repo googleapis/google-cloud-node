@@ -1,6 +1,6 @@
 {
   "name": "retry-request",
-  "version": "8.0.3",
+  "version": "9.0.0",
   "description": "Retry a request.",
   "main": "index.js",
   "repository": {
@@ -30,7 +30,7 @@
   "author": "Stephen Sawchuk <sawchuk@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "dependencies": {
     "extend": "^3.0.2",

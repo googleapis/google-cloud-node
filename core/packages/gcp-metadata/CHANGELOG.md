@@ -5,6 +5,24 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v8.1.4...gcp-metadata-v9.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update gcp-metadata to minimum Node version of 22. ([#8991](https://github.com/googleapis/google-cloud-node/issues/8991))
+
+### Features
+
+* Update gcp-metadata to minimum Node version of 22. ([#8991](https://github.com/googleapis/google-cloud-node/issues/8991)) ([91e17a1](https://github.com/googleapis/google-cloud-node/commit/91e17a1ab4bc4c19a50547fa6e28ee262efc43f9)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [8.1.4](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v8.1.3...gcp-metadata-v8.1.4) (2026-07-23)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+
 ## [8.1.3](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v8.1.2...gcp-metadata-v8.1.3) (2026-05-11)
 
 

@@ -1,11 +1,11 @@
 {
   "name": "teeny-request",
-  "version": "10.1.3",
+  "version": "11.0.0",
   "description": "Like request, but smaller.",
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "scripts": {
     "test": "c8 mocha build/test",

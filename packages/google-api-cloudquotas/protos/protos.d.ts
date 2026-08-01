@@ -1970,6 +1970,415 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Represents a QuotaAdjusterSettingsManager */
+                class QuotaAdjusterSettingsManager extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new QuotaAdjusterSettingsManager service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new QuotaAdjusterSettingsManager service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): QuotaAdjusterSettingsManager;
+
+                    /**
+                     * Calls UpdateQuotaAdjusterSettings.
+                     * @param request UpdateQuotaAdjusterSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QuotaAdjusterSettings
+                     */
+                    public updateQuotaAdjusterSettings(request: google.api.cloudquotas.v1.IUpdateQuotaAdjusterSettingsRequest, callback: google.api.cloudquotas.v1.QuotaAdjusterSettingsManager.UpdateQuotaAdjusterSettingsCallback): void;
+
+                    /**
+                     * Calls UpdateQuotaAdjusterSettings.
+                     * @param request UpdateQuotaAdjusterSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateQuotaAdjusterSettings(request: google.api.cloudquotas.v1.IUpdateQuotaAdjusterSettingsRequest): Promise<google.api.cloudquotas.v1.QuotaAdjusterSettings>;
+
+                    /**
+                     * Calls GetQuotaAdjusterSettings.
+                     * @param request GetQuotaAdjusterSettingsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and QuotaAdjusterSettings
+                     */
+                    public getQuotaAdjusterSettings(request: google.api.cloudquotas.v1.IGetQuotaAdjusterSettingsRequest, callback: google.api.cloudquotas.v1.QuotaAdjusterSettingsManager.GetQuotaAdjusterSettingsCallback): void;
+
+                    /**
+                     * Calls GetQuotaAdjusterSettings.
+                     * @param request GetQuotaAdjusterSettingsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getQuotaAdjusterSettings(request: google.api.cloudquotas.v1.IGetQuotaAdjusterSettingsRequest): Promise<google.api.cloudquotas.v1.QuotaAdjusterSettings>;
+                }
+
+                namespace QuotaAdjusterSettingsManager {
+
+                    /**
+                     * Callback as used by {@link google.api.cloudquotas.v1.QuotaAdjusterSettingsManager|updateQuotaAdjusterSettings}.
+                     * @param error Error, if any
+                     * @param [response] QuotaAdjusterSettings
+                     */
+                    type UpdateQuotaAdjusterSettingsCallback = (error: (Error|null), response?: google.api.cloudquotas.v1.QuotaAdjusterSettings) => void;
+
+                    /**
+                     * Callback as used by {@link google.api.cloudquotas.v1.QuotaAdjusterSettingsManager|getQuotaAdjusterSettings}.
+                     * @param error Error, if any
+                     * @param [response] QuotaAdjusterSettings
+                     */
+                    type GetQuotaAdjusterSettingsCallback = (error: (Error|null), response?: google.api.cloudquotas.v1.QuotaAdjusterSettings) => void;
+                }
+
+                /** Properties of a GetQuotaAdjusterSettingsRequest. */
+                interface IGetQuotaAdjusterSettingsRequest {
+
+                    /** GetQuotaAdjusterSettingsRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetQuotaAdjusterSettingsRequest. */
+                class GetQuotaAdjusterSettingsRequest implements IGetQuotaAdjusterSettingsRequest {
+
+                    /**
+                     * Constructs a new GetQuotaAdjusterSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1.IGetQuotaAdjusterSettingsRequest);
+
+                    /** GetQuotaAdjusterSettingsRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetQuotaAdjusterSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetQuotaAdjusterSettingsRequest instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1.IGetQuotaAdjusterSettingsRequest): google.api.cloudquotas.v1.GetQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Encodes the specified GetQuotaAdjusterSettingsRequest message. Does not implicitly {@link google.api.cloudquotas.v1.GetQuotaAdjusterSettingsRequest.verify|verify} messages.
+                     * @param message GetQuotaAdjusterSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1.IGetQuotaAdjusterSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetQuotaAdjusterSettingsRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1.GetQuotaAdjusterSettingsRequest.verify|verify} messages.
+                     * @param message GetQuotaAdjusterSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1.IGetQuotaAdjusterSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetQuotaAdjusterSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetQuotaAdjusterSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1.GetQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Decodes a GetQuotaAdjusterSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetQuotaAdjusterSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1.GetQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Verifies a GetQuotaAdjusterSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetQuotaAdjusterSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetQuotaAdjusterSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1.GetQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Creates a plain object from a GetQuotaAdjusterSettingsRequest message. Also converts values to other types if specified.
+                     * @param message GetQuotaAdjusterSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1.GetQuotaAdjusterSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetQuotaAdjusterSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetQuotaAdjusterSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateQuotaAdjusterSettingsRequest. */
+                interface IUpdateQuotaAdjusterSettingsRequest {
+
+                    /** UpdateQuotaAdjusterSettingsRequest quotaAdjusterSettings */
+                    quotaAdjusterSettings?: (google.api.cloudquotas.v1.IQuotaAdjusterSettings|null);
+
+                    /** UpdateQuotaAdjusterSettingsRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateQuotaAdjusterSettingsRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateQuotaAdjusterSettingsRequest. */
+                class UpdateQuotaAdjusterSettingsRequest implements IUpdateQuotaAdjusterSettingsRequest {
+
+                    /**
+                     * Constructs a new UpdateQuotaAdjusterSettingsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1.IUpdateQuotaAdjusterSettingsRequest);
+
+                    /** UpdateQuotaAdjusterSettingsRequest quotaAdjusterSettings. */
+                    public quotaAdjusterSettings?: (google.api.cloudquotas.v1.IQuotaAdjusterSettings|null);
+
+                    /** UpdateQuotaAdjusterSettingsRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateQuotaAdjusterSettingsRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateQuotaAdjusterSettingsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateQuotaAdjusterSettingsRequest instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1.IUpdateQuotaAdjusterSettingsRequest): google.api.cloudquotas.v1.UpdateQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Encodes the specified UpdateQuotaAdjusterSettingsRequest message. Does not implicitly {@link google.api.cloudquotas.v1.UpdateQuotaAdjusterSettingsRequest.verify|verify} messages.
+                     * @param message UpdateQuotaAdjusterSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1.IUpdateQuotaAdjusterSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateQuotaAdjusterSettingsRequest message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1.UpdateQuotaAdjusterSettingsRequest.verify|verify} messages.
+                     * @param message UpdateQuotaAdjusterSettingsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1.IUpdateQuotaAdjusterSettingsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateQuotaAdjusterSettingsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateQuotaAdjusterSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1.UpdateQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Decodes an UpdateQuotaAdjusterSettingsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateQuotaAdjusterSettingsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1.UpdateQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Verifies an UpdateQuotaAdjusterSettingsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateQuotaAdjusterSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateQuotaAdjusterSettingsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1.UpdateQuotaAdjusterSettingsRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateQuotaAdjusterSettingsRequest message. Also converts values to other types if specified.
+                     * @param message UpdateQuotaAdjusterSettingsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1.UpdateQuotaAdjusterSettingsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateQuotaAdjusterSettingsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateQuotaAdjusterSettingsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a QuotaAdjusterSettings. */
+                interface IQuotaAdjusterSettings {
+
+                    /** QuotaAdjusterSettings name */
+                    name?: (string|null);
+
+                    /** QuotaAdjusterSettings enablement */
+                    enablement?: (google.api.cloudquotas.v1.QuotaAdjusterSettings.Enablement|keyof typeof google.api.cloudquotas.v1.QuotaAdjusterSettings.Enablement|null);
+
+                    /** QuotaAdjusterSettings updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QuotaAdjusterSettings etag */
+                    etag?: (string|null);
+
+                    /** QuotaAdjusterSettings inherited */
+                    inherited?: (boolean|null);
+
+                    /** QuotaAdjusterSettings inheritedFrom */
+                    inheritedFrom?: (string|null);
+                }
+
+                /** Represents a QuotaAdjusterSettings. */
+                class QuotaAdjusterSettings implements IQuotaAdjusterSettings {
+
+                    /**
+                     * Constructs a new QuotaAdjusterSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.cloudquotas.v1.IQuotaAdjusterSettings);
+
+                    /** QuotaAdjusterSettings name. */
+                    public name: string;
+
+                    /** QuotaAdjusterSettings enablement. */
+                    public enablement: (google.api.cloudquotas.v1.QuotaAdjusterSettings.Enablement|keyof typeof google.api.cloudquotas.v1.QuotaAdjusterSettings.Enablement);
+
+                    /** QuotaAdjusterSettings updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** QuotaAdjusterSettings etag. */
+                    public etag: string;
+
+                    /** QuotaAdjusterSettings inherited. */
+                    public inherited: boolean;
+
+                    /** QuotaAdjusterSettings inheritedFrom. */
+                    public inheritedFrom: string;
+
+                    /**
+                     * Creates a new QuotaAdjusterSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns QuotaAdjusterSettings instance
+                     */
+                    public static create(properties?: google.api.cloudquotas.v1.IQuotaAdjusterSettings): google.api.cloudquotas.v1.QuotaAdjusterSettings;
+
+                    /**
+                     * Encodes the specified QuotaAdjusterSettings message. Does not implicitly {@link google.api.cloudquotas.v1.QuotaAdjusterSettings.verify|verify} messages.
+                     * @param message QuotaAdjusterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.cloudquotas.v1.IQuotaAdjusterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified QuotaAdjusterSettings message, length delimited. Does not implicitly {@link google.api.cloudquotas.v1.QuotaAdjusterSettings.verify|verify} messages.
+                     * @param message QuotaAdjusterSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.cloudquotas.v1.IQuotaAdjusterSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a QuotaAdjusterSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns QuotaAdjusterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.cloudquotas.v1.QuotaAdjusterSettings;
+
+                    /**
+                     * Decodes a QuotaAdjusterSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns QuotaAdjusterSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.cloudquotas.v1.QuotaAdjusterSettings;
+
+                    /**
+                     * Verifies a QuotaAdjusterSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a QuotaAdjusterSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns QuotaAdjusterSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.cloudquotas.v1.QuotaAdjusterSettings;
+
+                    /**
+                     * Creates a plain object from a QuotaAdjusterSettings message. Also converts values to other types if specified.
+                     * @param message QuotaAdjusterSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.cloudquotas.v1.QuotaAdjusterSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this QuotaAdjusterSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for QuotaAdjusterSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace QuotaAdjusterSettings {
+
+                    /** Enablement enum. */
+                    enum Enablement {
+                        ENABLEMENT_UNSPECIFIED = 0,
+                        ENABLED = 2,
+                        DISABLED = 3
+                    }
+                }
             }
 
             /** Namespace v1beta. */
