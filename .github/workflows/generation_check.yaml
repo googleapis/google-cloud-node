@@ -24,10 +24,10 @@ jobs:
       contents: read # Read repository contents
       issues: write # Required for creating issue on main branch failure
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v4.2.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
-      - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v3.0.2
+      - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         id: changes
         with:
           filters: |
@@ -35,7 +35,7 @@ jobs:
               - 'librarian.yaml'
       # Version of librarian is pulled from librarian.yaml,
       # action is pinned to commit SHA to satisfy blanket security policy.
-      - uses: googleapis/librarian@a02c28273b3c9ddb33bbe5849a44b6a678d28404 # v0.31.1
+      - uses: googleapis/librarian@35997441eafc2b02716804f9baba1e3f04f8a44f # v0.31.1
         if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
       - name: Install tools
         if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
@@ -54,7 +54,7 @@ jobs:
           fi
       - name: Create issue if previous step fails
         if: ${{ failure() && github.ref == 'refs/heads/main' }}
-        uses: googleapis/librarian/.github/actions/create-issue-on-failure@a02c28273b3c9ddb33bbe5849a44b6a678d28404 # v0.31.1
+        uses: googleapis/librarian/.github/actions/create-issue-on-failure@35997441eafc2b02716804f9baba1e3f04f8a44f # v0.31.1
         with:
           title: "Librarian generate diff check failed on main branch"
           body: |
