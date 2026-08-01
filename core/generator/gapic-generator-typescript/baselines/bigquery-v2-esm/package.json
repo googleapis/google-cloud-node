@@ -64,7 +64,7 @@
   "scripts": {
     "clean": "gts clean",
     "compile-protos": "compileProtos esm/src --esm ",
-    "docs": "jsdoc -c .jsdoc.cjs",
+    "docs": "jsdoc -c ../../.jsdoc.js",
     "postpack": "minifyProtoJson build/cjs && minifyProtoJson build/esm",
     "fix": "gts fix",
     "lint": "gts check",

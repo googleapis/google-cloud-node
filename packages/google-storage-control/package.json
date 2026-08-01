@@ -33,7 +33,7 @@
     "fix-and-gen": "tsc src/util/storage_control_utils.ts && cd src/util && node storage_control_utils.js && rm *.js",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "docs": "jsdoc -c .jsdoc.js",
+    "docs": "jsdoc -c ../../.jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
     "postpack": "minifyProtoJson",

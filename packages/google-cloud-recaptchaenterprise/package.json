@@ -52,7 +52,7 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "docs": "jsdoc -c .jsdoc.js",
+    "docs": "jsdoc -c ../../.jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",

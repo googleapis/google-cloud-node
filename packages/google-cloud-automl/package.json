@@ -37,7 +37,7 @@
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
     "system-test": "npm run compile && c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
-    "docs": "jsdoc -c .jsdoc.js",
+    "docs": "jsdoc -c ../../.jsdoc.js",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",

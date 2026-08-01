@@ -33,7 +33,7 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
     "compile-protos": "compileProtos src",
-    "docs": "jsdoc -c .jsdoc.js",
+    "docs": "jsdoc -c ../../.jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm i",

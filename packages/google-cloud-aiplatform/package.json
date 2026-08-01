@@ -40,7 +40,7 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
-    "docs": "NODE_OPTIONS=--max-old-space-size=8192 jsdoc -c .jsdoc.js",
+    "docs": "NODE_OPTIONS=--max-old-space-size=8192 jsdoc -c ../../.jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",

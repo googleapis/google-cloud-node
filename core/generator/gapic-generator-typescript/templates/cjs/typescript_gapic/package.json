@@ -32,7 +32,7 @@
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/{% if not api.legacyProtoLoad %} && minifyProtoJson{% endif %}",
     "compile-protos": "compileProtos {% if api.legacyProtoLoad %}--skip-json {% endif %}src",
-    "docs": "jsdoc -c .jsdoc.js",
+    "docs": "jsdoc -c ../../.jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
