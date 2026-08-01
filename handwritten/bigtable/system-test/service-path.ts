@@ -19,7 +19,7 @@ import {Bigtable} from '../src';
 import {BigtableClient, BigtableInstanceAdminClient} from '../src/v2';
 
 describe('Service Path', () => {
-  it('Setting universe domain should set the service path', async function() {
+  it('Setting universe domain should set the service path', async () => {
     // Set the environment variable
     process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'otherDomain';
 
@@ -81,7 +81,7 @@ describe('Service Path', () => {
     // Clean up the environment variable after the test
     delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
   });
-  it('Setting universe domain and custom endpoint should set the service path to custom endpoint', async function() {
+  it('Setting universe domain and custom endpoint should set the service path to custom endpoint', async () => {
     // Set the environment variable
     process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN = 'otherDomain';
 
@@ -145,7 +145,7 @@ describe('Service Path', () => {
     // Clean up the environment variable after the test
     delete process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN;
   });
-  it('Setting GOOGLE_CLOUD_UNIVERSE_DOMAIN should set the service path', async function() {
+  it('Setting GOOGLE_CLOUD_UNIVERSE_DOMAIN should set the service path', async () => {
     const universeDomain = 'someUniverseDomain'; // or your universe domain if not using emulator
 
     // Set the environment variable
