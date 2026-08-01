@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import {Transform} from 'stream';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -66,10 +66,10 @@ export class DeveloperKnowledgeClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('google-developer-knowledge');
+  private _log = logging.log('developer-knowledge');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
@@ -79,9 +79,9 @@ export class DeveloperKnowledgeClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  developerKnowledgeStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  developerKnowledgeStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DeveloperKnowledgeClient.
@@ -157,7 +157,7 @@ export class DeveloperKnowledgeClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -238,7 +238,7 @@ export class DeveloperKnowledgeClient {
       'google.developers.knowledge.v1.DeveloperKnowledge',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      { 'x-goog-api-client': clientHeader.join(' ') },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -279,7 +279,7 @@ export class DeveloperKnowledgeClient {
             .DeveloperKnowledge,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{[method: string]: Function}>;
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -287,10 +287,11 @@ export class DeveloperKnowledgeClient {
       'searchDocumentChunks',
       'getDocument',
       'batchGetDocuments',
+      'answerQuery',
     ];
     for (const methodName of developerKnowledgeStubMethods) {
       const callPromise = this.developerKnowledgeStub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -496,7 +497,7 @@ export class DeveloperKnowledgeClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('getDocument request %j', request);
@@ -555,6 +556,7 @@ export class DeveloperKnowledgeClient {
    *
    *   Format: `documents/{uri_without_scheme}`
    *   Example: `documents/docs.cloud.google.com/storage/docs/creating-buckets`
+   *
    * @param {google.developers.knowledge.v1.DocumentView} [request.view]
    *   Optional. Specifies the
    *   {@link protos.google.developers.knowledge.v1.DocumentView|DocumentView} of the
@@ -643,7 +645,7 @@ export class DeveloperKnowledgeClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('batchGetDocuments request %j', request);
@@ -693,6 +695,136 @@ export class DeveloperKnowledgeClient {
         throw error;
       });
   }
+  /**
+   * Answers a query using grounded generation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.query
+   *   Required. The query to answer.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.developers.knowledge.v1.AnswerQueryResponse|AnswerQueryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/developer_knowledge.answer_query.js</caption>
+   * region_tag:developerknowledge_v1_generated_DeveloperKnowledge_AnswerQuery_async
+   */
+  answerQuery(
+    request?: protos.google.developers.knowledge.v1.IAnswerQueryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+      protos.google.developers.knowledge.v1.IAnswerQueryRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  answerQuery(
+    request: protos.google.developers.knowledge.v1.IAnswerQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+      | protos.google.developers.knowledge.v1.IAnswerQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  answerQuery(
+    request: protos.google.developers.knowledge.v1.IAnswerQueryRequest,
+    callback: Callback<
+      protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+      | protos.google.developers.knowledge.v1.IAnswerQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  answerQuery(
+    request?: protos.google.developers.knowledge.v1.IAnswerQueryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+          | protos.google.developers.knowledge.v1.IAnswerQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+      | protos.google.developers.knowledge.v1.IAnswerQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+      protos.google.developers.knowledge.v1.IAnswerQueryRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('answerQuery request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+          | protos.google.developers.knowledge.v1.IAnswerQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('answerQuery response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .answerQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.developers.knowledge.v1.IAnswerQueryResponse,
+          protos.google.developers.knowledge.v1.IAnswerQueryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('answerQuery response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Searches for developer knowledge across Google's developer documentation.
@@ -719,8 +851,7 @@ export class DeveloperKnowledgeClient {
    *
    *   If unspecified, at most 5 results will be returned.
    *
-   *   The maximum value is 20; values above 20 will result in an INVALID_ARGUMENT
-   *   error.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. Contains a page token, received from a previous
    *   `SearchDocumentChunks` call. Provide this to retrieve the subsequent page.
@@ -751,6 +882,10 @@ export class DeveloperKnowledgeClient {
    *   TIMESTAMP fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *   Timestamps must be in RFC-3339 format, e.g., `"2025-01-01T00:00:00Z"`.
    *
+   *   Note: Field names must be in `snake_case` (e.g., `data_source`). Values on
+   *   the right-hand side of filtering expressions must be string literals
+   *   enclosed in double quotes (e.g., `"docs.cloud.google.com"`).
+   *
    *   You can combine expressions using `AND`, `OR`, and `NOT` (or `-`) logical
    *   operators. `OR` has higher precedence than `AND`. Use parentheses for
    *   explicit precedence grouping.
@@ -758,11 +893,11 @@ export class DeveloperKnowledgeClient {
    *   Examples:
    *
    *   * `data_source = "docs.cloud.google.com" OR data_source =
-   *   "firebase.google.com"`
+   *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
    *   * `update_time < "2024-01-01T00:00:00Z"`
    *   * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
-   *   "developer.chrome.com" OR data_source = "web.dev")`
+   *     "developer.chrome.com" OR data_source = "web.dev")`
    *   * `uri = "https://docs.cloud.google.com/release-notes"`
    *
    *   The `filter` string must not exceed 500 characters; values longer than 500
@@ -846,7 +981,7 @@ export class DeveloperKnowledgeClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     const wrappedCallback:
@@ -891,8 +1026,7 @@ export class DeveloperKnowledgeClient {
    *
    *   If unspecified, at most 5 results will be returned.
    *
-   *   The maximum value is 20; values above 20 will result in an INVALID_ARGUMENT
-   *   error.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. Contains a page token, received from a previous
    *   `SearchDocumentChunks` call. Provide this to retrieve the subsequent page.
@@ -923,6 +1057,10 @@ export class DeveloperKnowledgeClient {
    *   TIMESTAMP fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *   Timestamps must be in RFC-3339 format, e.g., `"2025-01-01T00:00:00Z"`.
    *
+   *   Note: Field names must be in `snake_case` (e.g., `data_source`). Values on
+   *   the right-hand side of filtering expressions must be string literals
+   *   enclosed in double quotes (e.g., `"docs.cloud.google.com"`).
+   *
    *   You can combine expressions using `AND`, `OR`, and `NOT` (or `-`) logical
    *   operators. `OR` has higher precedence than `AND`. Use parentheses for
    *   explicit precedence grouping.
@@ -930,11 +1068,11 @@ export class DeveloperKnowledgeClient {
    *   Examples:
    *
    *   * `data_source = "docs.cloud.google.com" OR data_source =
-   *   "firebase.google.com"`
+   *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
    *   * `update_time < "2024-01-01T00:00:00Z"`
    *   * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
-   *   "developer.chrome.com" OR data_source = "web.dev")`
+   *     "developer.chrome.com" OR data_source = "web.dev")`
    *   * `uri = "https://docs.cloud.google.com/release-notes"`
    *
    *   The `filter` string must not exceed 500 characters; values longer than 500
@@ -960,7 +1098,7 @@ export class DeveloperKnowledgeClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchDocumentChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('searchDocumentChunks stream %j', request);
@@ -986,8 +1124,7 @@ export class DeveloperKnowledgeClient {
    *
    *   If unspecified, at most 5 results will be returned.
    *
-   *   The maximum value is 20; values above 20 will result in an INVALID_ARGUMENT
-   *   error.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
    * @param {string} [request.pageToken]
    *   Optional. Contains a page token, received from a previous
    *   `SearchDocumentChunks` call. Provide this to retrieve the subsequent page.
@@ -1018,6 +1155,10 @@ export class DeveloperKnowledgeClient {
    *   TIMESTAMP fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *   Timestamps must be in RFC-3339 format, e.g., `"2025-01-01T00:00:00Z"`.
    *
+   *   Note: Field names must be in `snake_case` (e.g., `data_source`). Values on
+   *   the right-hand side of filtering expressions must be string literals
+   *   enclosed in double quotes (e.g., `"docs.cloud.google.com"`).
+   *
    *   You can combine expressions using `AND`, `OR`, and `NOT` (or `-`) logical
    *   operators. `OR` has higher precedence than `AND`. Use parentheses for
    *   explicit precedence grouping.
@@ -1025,11 +1166,11 @@ export class DeveloperKnowledgeClient {
    *   Examples:
    *
    *   * `data_source = "docs.cloud.google.com" OR data_source =
-   *   "firebase.google.com"`
+   *     "firebase.google.com"`
    *   * `data_source != "firebase.google.com"`
    *   * `update_time < "2024-01-01T00:00:00Z"`
    *   * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
-   *   "developer.chrome.com" OR data_source = "web.dev")`
+   *     "developer.chrome.com" OR data_source = "web.dev")`
    *   * `uri = "https://docs.cloud.google.com/release-notes"`
    *
    *   The `filter` string must not exceed 500 characters; values longer than 500
@@ -1056,7 +1197,7 @@ export class DeveloperKnowledgeClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchDocumentChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {
+    this.initialize().catch((err) => {
       throw err;
     });
     this._log.info('searchDocumentChunks iterate %j', request);
@@ -1101,7 +1242,7 @@ export class DeveloperKnowledgeClient {
    */
   close(): Promise<void> {
     if (this.developerKnowledgeStub && !this._terminated) {
-      return this.developerKnowledgeStub.then(stub => {
+      return this.developerKnowledgeStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

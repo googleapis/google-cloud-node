@@ -19,12 +19,15 @@
 import {
   AdBreakServiceClient,
   AdReviewCenterAdServiceClient,
+  AdRuleServiceClient,
+  AdSpotServiceClient,
   AdUnitServiceClient,
   ApplicationServiceClient,
   AudienceSegmentServiceClient,
   BandwidthGroupServiceClient,
   BrowserLanguageServiceClient,
   BrowserServiceClient,
+  CdnConfigServiceClient,
   CmsMetadataKeyServiceClient,
   CmsMetadataValueServiceClient,
   CompanyServiceClient,
@@ -32,6 +35,7 @@ import {
   ContentBundleServiceClient,
   ContentLabelServiceClient,
   ContentServiceClient,
+  CreativeSetServiceClient,
   CreativeTemplateServiceClient,
   CustomFieldServiceClient,
   CustomTargetingKeyServiceClient,
@@ -44,6 +48,7 @@ import {
   LabelServiceClient,
   LineItemServiceClient,
   LinkedDeviceServiceClient,
+  LiveStreamServiceClient,
   McmEarningsServiceClient,
   MobileCarrierServiceClient,
   MobileDeviceServiceClient,
@@ -60,8 +65,12 @@ import {
   RichMediaAdsCompanyServiceClient,
   RoleServiceClient,
   SiteServiceClient,
+  SlateServiceClient,
+  SuggestedAdUnitServiceClient,
+  TargetingPresetServiceClient,
   TaxonomyCategoryServiceClient,
   TeamServiceClient,
+  ThirdPartyCompanyServiceClient,
   UserServiceClient,
 } from '@google-ads/admanager';
 
@@ -72,6 +81,12 @@ function doStuffWithAdBreakServiceClient(client: AdBreakServiceClient) {
 function doStuffWithAdReviewCenterAdServiceClient(
   client: AdReviewCenterAdServiceClient,
 ) {
+  client.close();
+}
+function doStuffWithAdRuleServiceClient(client: AdRuleServiceClient) {
+  client.close();
+}
+function doStuffWithAdSpotServiceClient(client: AdSpotServiceClient) {
   client.close();
 }
 function doStuffWithAdUnitServiceClient(client: AdUnitServiceClient) {
@@ -96,6 +111,9 @@ function doStuffWithBrowserLanguageServiceClient(
   client.close();
 }
 function doStuffWithBrowserServiceClient(client: BrowserServiceClient) {
+  client.close();
+}
+function doStuffWithCdnConfigServiceClient(client: CdnConfigServiceClient) {
   client.close();
 }
 function doStuffWithCmsMetadataKeyServiceClient(
@@ -125,6 +143,9 @@ function doStuffWithContentLabelServiceClient(
   client.close();
 }
 function doStuffWithContentServiceClient(client: ContentServiceClient) {
+  client.close();
+}
+function doStuffWithCreativeSetServiceClient(client: CreativeSetServiceClient) {
   client.close();
 }
 function doStuffWithCreativeTemplateServiceClient(
@@ -177,6 +198,9 @@ function doStuffWithLineItemServiceClient(client: LineItemServiceClient) {
 function doStuffWithLinkedDeviceServiceClient(
   client: LinkedDeviceServiceClient,
 ) {
+  client.close();
+}
+function doStuffWithLiveStreamServiceClient(client: LiveStreamServiceClient) {
   client.close();
 }
 function doStuffWithMcmEarningsServiceClient(client: McmEarningsServiceClient) {
@@ -245,12 +269,30 @@ function doStuffWithRoleServiceClient(client: RoleServiceClient) {
 function doStuffWithSiteServiceClient(client: SiteServiceClient) {
   client.close();
 }
+function doStuffWithSlateServiceClient(client: SlateServiceClient) {
+  client.close();
+}
+function doStuffWithSuggestedAdUnitServiceClient(
+  client: SuggestedAdUnitServiceClient,
+) {
+  client.close();
+}
+function doStuffWithTargetingPresetServiceClient(
+  client: TargetingPresetServiceClient,
+) {
+  client.close();
+}
 function doStuffWithTaxonomyCategoryServiceClient(
   client: TaxonomyCategoryServiceClient,
 ) {
   client.close();
 }
 function doStuffWithTeamServiceClient(client: TeamServiceClient) {
+  client.close();
+}
+function doStuffWithThirdPartyCompanyServiceClient(
+  client: ThirdPartyCompanyServiceClient,
+) {
   client.close();
 }
 function doStuffWithUserServiceClient(client: UserServiceClient) {
@@ -264,6 +306,12 @@ function main() {
   // check that the client instance can be created
   const adReviewCenterAdServiceClient = new AdReviewCenterAdServiceClient();
   doStuffWithAdReviewCenterAdServiceClient(adReviewCenterAdServiceClient);
+  // check that the client instance can be created
+  const adRuleServiceClient = new AdRuleServiceClient();
+  doStuffWithAdRuleServiceClient(adRuleServiceClient);
+  // check that the client instance can be created
+  const adSpotServiceClient = new AdSpotServiceClient();
+  doStuffWithAdSpotServiceClient(adSpotServiceClient);
   // check that the client instance can be created
   const adUnitServiceClient = new AdUnitServiceClient();
   doStuffWithAdUnitServiceClient(adUnitServiceClient);
@@ -282,6 +330,9 @@ function main() {
   // check that the client instance can be created
   const browserServiceClient = new BrowserServiceClient();
   doStuffWithBrowserServiceClient(browserServiceClient);
+  // check that the client instance can be created
+  const cdnConfigServiceClient = new CdnConfigServiceClient();
+  doStuffWithCdnConfigServiceClient(cdnConfigServiceClient);
   // check that the client instance can be created
   const cmsMetadataKeyServiceClient = new CmsMetadataKeyServiceClient();
   doStuffWithCmsMetadataKeyServiceClient(cmsMetadataKeyServiceClient);
@@ -303,6 +354,9 @@ function main() {
   // check that the client instance can be created
   const contentServiceClient = new ContentServiceClient();
   doStuffWithContentServiceClient(contentServiceClient);
+  // check that the client instance can be created
+  const creativeSetServiceClient = new CreativeSetServiceClient();
+  doStuffWithCreativeSetServiceClient(creativeSetServiceClient);
   // check that the client instance can be created
   const creativeTemplateServiceClient = new CreativeTemplateServiceClient();
   doStuffWithCreativeTemplateServiceClient(creativeTemplateServiceClient);
@@ -345,6 +399,9 @@ function main() {
   // check that the client instance can be created
   const linkedDeviceServiceClient = new LinkedDeviceServiceClient();
   doStuffWithLinkedDeviceServiceClient(linkedDeviceServiceClient);
+  // check that the client instance can be created
+  const liveStreamServiceClient = new LiveStreamServiceClient();
+  doStuffWithLiveStreamServiceClient(liveStreamServiceClient);
   // check that the client instance can be created
   const mcmEarningsServiceClient = new McmEarningsServiceClient();
   doStuffWithMcmEarningsServiceClient(mcmEarningsServiceClient);
@@ -401,11 +458,23 @@ function main() {
   const siteServiceClient = new SiteServiceClient();
   doStuffWithSiteServiceClient(siteServiceClient);
   // check that the client instance can be created
+  const slateServiceClient = new SlateServiceClient();
+  doStuffWithSlateServiceClient(slateServiceClient);
+  // check that the client instance can be created
+  const suggestedAdUnitServiceClient = new SuggestedAdUnitServiceClient();
+  doStuffWithSuggestedAdUnitServiceClient(suggestedAdUnitServiceClient);
+  // check that the client instance can be created
+  const targetingPresetServiceClient = new TargetingPresetServiceClient();
+  doStuffWithTargetingPresetServiceClient(targetingPresetServiceClient);
+  // check that the client instance can be created
   const taxonomyCategoryServiceClient = new TaxonomyCategoryServiceClient();
   doStuffWithTaxonomyCategoryServiceClient(taxonomyCategoryServiceClient);
   // check that the client instance can be created
   const teamServiceClient = new TeamServiceClient();
   doStuffWithTeamServiceClient(teamServiceClient);
+  // check that the client instance can be created
+  const thirdPartyCompanyServiceClient = new ThirdPartyCompanyServiceClient();
+  doStuffWithThirdPartyCompanyServiceClient(thirdPartyCompanyServiceClient);
   // check that the client instance can be created
   const userServiceClient = new UserServiceClient();
   doStuffWithUserServiceClient(userServiceClient);

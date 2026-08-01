@@ -3631,10 +3631,220 @@
                     }
                   }
                 },
+                "Audience": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "Availability": {
+                  "options": {
+                    "(google.api.resource).type": "chat.googleapis.com/Availability",
+                    "(google.api.resource).pattern": "users/{user}/availability",
+                    "(google.api.resource).plural": "availabilities",
+                    "(google.api.resource).singular": "availability"
+                  },
+                  "oneofs": {
+                    "stateMetadata": {
+                      "oneof": [
+                        "doNotDisturbMetadata"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
+                    },
+                    "state": {
+                      "type": "State",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "doNotDisturbMetadata": {
+                      "type": "DoNotDisturbMetadata",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "customStatus": {
+                      "type": "CustomStatus",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "State": {
+                      "values": {
+                        "STATE_UNSPECIFIED": 0,
+                        "ACTIVE": 1,
+                        "IDLE": 2,
+                        "AWAY": 3,
+                        "DO_NOT_DISTURB": 4
+                      }
+                    }
+                  }
+                },
+                "CustomStatus": {
+                  "oneofs": {
+                    "expiration": {
+                      "oneof": [
+                        "expireTime",
+                        "ttl"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "text": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "emoji": {
+                      "type": "Emoji",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "expireTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 3
+                    },
+                    "ttl": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "INPUT_ONLY"
+                      }
+                    }
+                  }
+                },
+                "DoNotDisturbMetadata": {
+                  "fields": {
+                    "expirationTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  }
+                },
+                "GetAvailabilityRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Availability"
+                      }
+                    }
+                  }
+                },
+                "UpdateAvailabilityRequest": {
+                  "fields": {
+                    "availability": {
+                      "type": "Availability",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "MarkAsActiveRequest": {
+                  "oneofs": {
+                    "expiration": {
+                      "oneof": [
+                        "expireTime",
+                        "ttl"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Availability"
+                      }
+                    },
+                    "expireTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    },
+                    "ttl": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    }
+                  }
+                },
+                "MarkAsAwayRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Availability"
+                      }
+                    }
+                  }
+                },
+                "MarkAsDoNotDisturbRequest": {
+                  "oneofs": {
+                    "expiration": {
+                      "oneof": [
+                        "expireTime",
+                        "ttl"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Availability"
+                      }
+                    },
+                    "expireTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    },
+                    "ttl": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    }
+                  }
+                },
                 "ChatService": {
                   "options": {
                     "(google.api.default_host)": "chat.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.admin.delete,https://www.googleapis.com/auth/chat.admin.memberships,https://www.googleapis.com/auth/chat.admin.memberships.readonly,https://www.googleapis.com/auth/chat.admin.spaces,https://www.googleapis.com/auth/chat.admin.spaces.readonly,https://www.googleapis.com/auth/chat.app.delete,https://www.googleapis.com/auth/chat.app.memberships,https://www.googleapis.com/auth/chat.app.memberships.readonly,https://www.googleapis.com/auth/chat.app.messages.readonly,https://www.googleapis.com/auth/chat.app.spaces,https://www.googleapis.com/auth/chat.app.spaces.create,https://www.googleapis.com/auth/chat.app.spaces.readonly,https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.customemojis,https://www.googleapis.com/auth/chat.customemojis.readonly,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly,https://www.googleapis.com/auth/chat.users.sections,https://www.googleapis.com/auth/chat.users.sections.readonly,https://www.googleapis.com/auth/chat.users.spacesettings"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.admin.delete,https://www.googleapis.com/auth/chat.admin.memberships,https://www.googleapis.com/auth/chat.admin.memberships.readonly,https://www.googleapis.com/auth/chat.admin.spaces,https://www.googleapis.com/auth/chat.admin.spaces.readonly,https://www.googleapis.com/auth/chat.app.delete,https://www.googleapis.com/auth/chat.app.memberships,https://www.googleapis.com/auth/chat.app.memberships.readonly,https://www.googleapis.com/auth/chat.app.messages.readonly,https://www.googleapis.com/auth/chat.app.spaces,https://www.googleapis.com/auth/chat.app.spaces.create,https://www.googleapis.com/auth/chat.app.spaces.readonly,https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.customemojis,https://www.googleapis.com/auth/chat.customemojis.readonly,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.availability,https://www.googleapis.com/auth/chat.users.availability.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly,https://www.googleapis.com/auth/chat.users.sections,https://www.googleapis.com/auth/chat.users.sections.readonly,https://www.googleapis.com/auth/chat.users.spacesettings"
                   },
                   "methods": {
                     "CreateMessage": {
@@ -4223,6 +4433,92 @@
                         }
                       ]
                     },
+                    "GetAvailability": {
+                      "requestType": "GetAvailabilityRequest",
+                      "responseType": "Availability",
+                      "options": {
+                        "(google.api.http).get": "/v1/{name=users/*/availability}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{name=users/*/availability}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "MarkAsActive": {
+                      "requestType": "MarkAsActiveRequest",
+                      "responseType": "Availability",
+                      "options": {
+                        "(google.api.http).post": "/v1/{name=users/*/availability}:markAsActive",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{name=users/*/availability}:markAsActive",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "MarkAsAway": {
+                      "requestType": "MarkAsAwayRequest",
+                      "responseType": "Availability",
+                      "options": {
+                        "(google.api.http).post": "/v1/{name=users/*/availability}:markAsAway",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{name=users/*/availability}:markAsAway",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "MarkAsDoNotDisturb": {
+                      "requestType": "MarkAsDoNotDisturbRequest",
+                      "responseType": "Availability",
+                      "options": {
+                        "(google.api.http).post": "/v1/{name=users/*/availability}:markAsDoNotDisturb",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{name=users/*/availability}:markAsDoNotDisturb",
+                            "body": "*"
+                          }
+                        }
+                      ]
+                    },
+                    "UpdateAvailability": {
+                      "requestType": "UpdateAvailabilityRequest",
+                      "responseType": "Availability",
+                      "options": {
+                        "(google.api.http).patch": "/v1/{availability.name=users/*/availability}",
+                        "(google.api.http).body": "availability",
+                        "(google.api.method_signature)": "availability,update_mask"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "patch": "/v1/{availability.name=users/*/availability}",
+                            "body": "availability"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "availability,update_mask"
+                        }
+                      ]
+                    },
                     "GetSpaceEvent": {
                       "requestType": "GetSpaceEventRequest",
                       "responseType": "SpaceEvent",
@@ -4491,6 +4787,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "affiliation": {
+                      "type": "Affiliation",
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -4508,6 +4811,14 @@
                         "ROLE_MEMBER": 1,
                         "ROLE_MANAGER": 2,
                         "ROLE_ASSISTANT_MANAGER": 4
+                      }
+                    },
+                    "Affiliation": {
+                      "values": {
+                        "AFFILIATION_UNSPECIFIED": 0,
+                        "INTERNAL": 1,
+                        "EXTERNAL": 2,
+                        "MANAGED_EXTERNAL": 3
                       }
                     }
                   }
@@ -5983,6 +6294,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "accessPermissionSettings": {
+                          "type": "AccessPermissionSettings",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -5992,6 +6310,51 @@
                             "PRIVATE": 1,
                             "DISCOVERABLE": 2
                           }
+                        }
+                      }
+                    },
+                    "AccessPermissionSettings": {
+                      "fields": {
+                        "discoverSpaceSetting": {
+                          "type": "AccessPermissionSetting",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "joinSpaceSetting": {
+                          "type": "AccessPermissionSetting",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AccessPermissionSetting": {
+                      "fields": {
+                        "principals": {
+                          "rule": "repeated",
+                          "type": "Principal",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        }
+                      }
+                    },
+                    "Principal": {
+                      "oneofs": {
+                        "principalType": {
+                          "oneof": [
+                            "audience"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "audience": {
+                          "type": "Audience",
+                          "id": 1
                         }
                       }
                     },

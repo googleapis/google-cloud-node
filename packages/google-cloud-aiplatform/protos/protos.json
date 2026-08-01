@@ -4277,6 +4277,13 @@
                             "placeAnswerSources": {
                               "type": "PlaceAnswerSources",
                               "id": 5
+                            },
+                            "route": {
+                              "type": "Route",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -4304,6 +4311,22 @@
                                       "id": 3
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "Route": {
+                              "fields": {
+                                "distanceMeters": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "duration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 2
+                                },
+                                "encodedPolyline": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             }
@@ -4372,6 +4395,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "retrievalQueries": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "groundingChunks": {
@@ -33815,6 +33846,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "identityType": {
+                          "type": "IdentityType",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -34066,6 +34104,13 @@
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
+                          }
+                        },
+                        "IdentityType": {
+                          "values": {
+                            "IDENTITY_TYPE_UNSPECIFIED": 0,
+                            "SERVICE_ACCOUNT": 2,
+                            "AGENT_IDENTITY": 3
                           }
                         }
                       }
@@ -45585,6 +45630,13 @@
                             "placeAnswerSources": {
                               "type": "PlaceAnswerSources",
                               "id": 5
+                            },
+                            "route": {
+                              "type": "Route",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -45612,6 +45664,22 @@
                                       "id": 3
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "Route": {
+                              "fields": {
+                                "distanceMeters": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "duration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 2
+                                },
+                                "encodedPolyline": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             }
@@ -84451,6 +84519,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "identityType": {
+                          "type": "IdentityType",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -84702,6 +84777,13 @@
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
+                          }
+                        },
+                        "IdentityType": {
+                          "values": {
+                            "IDENTITY_TYPE_UNSPECIFIED": 0,
+                            "SERVICE_ACCOUNT": 2,
+                            "AGENT_IDENTITY": 3
                           }
                         }
                       }

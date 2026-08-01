@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DatastoreClient} from './datastore_client';
-export {DatastoreAdminClient} from './datastore_admin_client';
+export {DatastoreClient} from '@google-cloud/datastore-api';
+export {DatastoreAdminClient} from '@google-cloud/datastore-api';

@@ -14510,6 +14510,969 @@ export namespace google {
                 }
             }
 
+            /** Properties of an Audience. */
+            interface IAudience {
+
+                /** Audience name */
+                name?: (string|null);
+            }
+
+            /** Represents an Audience. */
+            class Audience implements IAudience {
+
+                /**
+                 * Constructs a new Audience.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IAudience);
+
+                /** Audience name. */
+                public name: string;
+
+                /**
+                 * Creates a new Audience instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Audience instance
+                 */
+                public static create(properties?: google.chat.v1.IAudience): google.chat.v1.Audience;
+
+                /**
+                 * Encodes the specified Audience message. Does not implicitly {@link google.chat.v1.Audience.verify|verify} messages.
+                 * @param message Audience message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IAudience, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Audience message, length delimited. Does not implicitly {@link google.chat.v1.Audience.verify|verify} messages.
+                 * @param message Audience message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IAudience, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Audience message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Audience
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Audience;
+
+                /**
+                 * Decodes an Audience message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Audience
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Audience;
+
+                /**
+                 * Verifies an Audience message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Audience message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Audience
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.Audience;
+
+                /**
+                 * Creates a plain object from an Audience message. Also converts values to other types if specified.
+                 * @param message Audience
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.Audience, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Audience to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Audience
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an Availability. */
+            interface IAvailability {
+
+                /** Availability name */
+                name?: (string|null);
+
+                /** Availability state */
+                state?: (google.chat.v1.Availability.State|keyof typeof google.chat.v1.Availability.State|null);
+
+                /** Availability doNotDisturbMetadata */
+                doNotDisturbMetadata?: (google.chat.v1.IDoNotDisturbMetadata|null);
+
+                /** Availability customStatus */
+                customStatus?: (google.chat.v1.ICustomStatus|null);
+            }
+
+            /** Represents an Availability. */
+            class Availability implements IAvailability {
+
+                /**
+                 * Constructs a new Availability.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IAvailability);
+
+                /** Availability name. */
+                public name: string;
+
+                /** Availability state. */
+                public state: (google.chat.v1.Availability.State|keyof typeof google.chat.v1.Availability.State);
+
+                /** Availability doNotDisturbMetadata. */
+                public doNotDisturbMetadata?: (google.chat.v1.IDoNotDisturbMetadata|null);
+
+                /** Availability customStatus. */
+                public customStatus?: (google.chat.v1.ICustomStatus|null);
+
+                /** Availability stateMetadata. */
+                public stateMetadata?: "doNotDisturbMetadata";
+
+                /**
+                 * Creates a new Availability instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Availability instance
+                 */
+                public static create(properties?: google.chat.v1.IAvailability): google.chat.v1.Availability;
+
+                /**
+                 * Encodes the specified Availability message. Does not implicitly {@link google.chat.v1.Availability.verify|verify} messages.
+                 * @param message Availability message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IAvailability, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Availability message, length delimited. Does not implicitly {@link google.chat.v1.Availability.verify|verify} messages.
+                 * @param message Availability message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IAvailability, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Availability message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Availability
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Availability;
+
+                /**
+                 * Decodes an Availability message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Availability
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Availability;
+
+                /**
+                 * Verifies an Availability message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Availability message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Availability
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.Availability;
+
+                /**
+                 * Creates a plain object from an Availability message. Also converts values to other types if specified.
+                 * @param message Availability
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.Availability, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Availability to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Availability
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace Availability {
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    ACTIVE = 1,
+                    IDLE = 2,
+                    AWAY = 3,
+                    DO_NOT_DISTURB = 4
+                }
+            }
+
+            /** Properties of a CustomStatus. */
+            interface ICustomStatus {
+
+                /** CustomStatus text */
+                text?: (string|null);
+
+                /** CustomStatus emoji */
+                emoji?: (google.chat.v1.IEmoji|null);
+
+                /** CustomStatus expireTime */
+                expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** CustomStatus ttl */
+                ttl?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a CustomStatus. */
+            class CustomStatus implements ICustomStatus {
+
+                /**
+                 * Constructs a new CustomStatus.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ICustomStatus);
+
+                /** CustomStatus text. */
+                public text: string;
+
+                /** CustomStatus emoji. */
+                public emoji?: (google.chat.v1.IEmoji|null);
+
+                /** CustomStatus expireTime. */
+                public expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** CustomStatus ttl. */
+                public ttl?: (google.protobuf.IDuration|null);
+
+                /** CustomStatus expiration. */
+                public expiration?: ("expireTime"|"ttl");
+
+                /**
+                 * Creates a new CustomStatus instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CustomStatus instance
+                 */
+                public static create(properties?: google.chat.v1.ICustomStatus): google.chat.v1.CustomStatus;
+
+                /**
+                 * Encodes the specified CustomStatus message. Does not implicitly {@link google.chat.v1.CustomStatus.verify|verify} messages.
+                 * @param message CustomStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ICustomStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CustomStatus message, length delimited. Does not implicitly {@link google.chat.v1.CustomStatus.verify|verify} messages.
+                 * @param message CustomStatus message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ICustomStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CustomStatus message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CustomStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.CustomStatus;
+
+                /**
+                 * Decodes a CustomStatus message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CustomStatus
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.CustomStatus;
+
+                /**
+                 * Verifies a CustomStatus message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CustomStatus message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CustomStatus
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.CustomStatus;
+
+                /**
+                 * Creates a plain object from a CustomStatus message. Also converts values to other types if specified.
+                 * @param message CustomStatus
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.CustomStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CustomStatus to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CustomStatus
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a DoNotDisturbMetadata. */
+            interface IDoNotDisturbMetadata {
+
+                /** DoNotDisturbMetadata expirationTime */
+                expirationTime?: (google.protobuf.ITimestamp|null);
+            }
+
+            /** Represents a DoNotDisturbMetadata. */
+            class DoNotDisturbMetadata implements IDoNotDisturbMetadata {
+
+                /**
+                 * Constructs a new DoNotDisturbMetadata.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IDoNotDisturbMetadata);
+
+                /** DoNotDisturbMetadata expirationTime. */
+                public expirationTime?: (google.protobuf.ITimestamp|null);
+
+                /**
+                 * Creates a new DoNotDisturbMetadata instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DoNotDisturbMetadata instance
+                 */
+                public static create(properties?: google.chat.v1.IDoNotDisturbMetadata): google.chat.v1.DoNotDisturbMetadata;
+
+                /**
+                 * Encodes the specified DoNotDisturbMetadata message. Does not implicitly {@link google.chat.v1.DoNotDisturbMetadata.verify|verify} messages.
+                 * @param message DoNotDisturbMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IDoNotDisturbMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DoNotDisturbMetadata message, length delimited. Does not implicitly {@link google.chat.v1.DoNotDisturbMetadata.verify|verify} messages.
+                 * @param message DoNotDisturbMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IDoNotDisturbMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DoNotDisturbMetadata message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DoNotDisturbMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.DoNotDisturbMetadata;
+
+                /**
+                 * Decodes a DoNotDisturbMetadata message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DoNotDisturbMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.DoNotDisturbMetadata;
+
+                /**
+                 * Verifies a DoNotDisturbMetadata message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DoNotDisturbMetadata message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DoNotDisturbMetadata
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.DoNotDisturbMetadata;
+
+                /**
+                 * Creates a plain object from a DoNotDisturbMetadata message. Also converts values to other types if specified.
+                 * @param message DoNotDisturbMetadata
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.DoNotDisturbMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DoNotDisturbMetadata to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DoNotDisturbMetadata
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetAvailabilityRequest. */
+            interface IGetAvailabilityRequest {
+
+                /** GetAvailabilityRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a GetAvailabilityRequest. */
+            class GetAvailabilityRequest implements IGetAvailabilityRequest {
+
+                /**
+                 * Constructs a new GetAvailabilityRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IGetAvailabilityRequest);
+
+                /** GetAvailabilityRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new GetAvailabilityRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetAvailabilityRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IGetAvailabilityRequest): google.chat.v1.GetAvailabilityRequest;
+
+                /**
+                 * Encodes the specified GetAvailabilityRequest message. Does not implicitly {@link google.chat.v1.GetAvailabilityRequest.verify|verify} messages.
+                 * @param message GetAvailabilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IGetAvailabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetAvailabilityRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetAvailabilityRequest.verify|verify} messages.
+                 * @param message GetAvailabilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IGetAvailabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetAvailabilityRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetAvailabilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.GetAvailabilityRequest;
+
+                /**
+                 * Decodes a GetAvailabilityRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetAvailabilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.GetAvailabilityRequest;
+
+                /**
+                 * Verifies a GetAvailabilityRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetAvailabilityRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetAvailabilityRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.GetAvailabilityRequest;
+
+                /**
+                 * Creates a plain object from a GetAvailabilityRequest message. Also converts values to other types if specified.
+                 * @param message GetAvailabilityRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.GetAvailabilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetAvailabilityRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetAvailabilityRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an UpdateAvailabilityRequest. */
+            interface IUpdateAvailabilityRequest {
+
+                /** UpdateAvailabilityRequest availability */
+                availability?: (google.chat.v1.IAvailability|null);
+
+                /** UpdateAvailabilityRequest updateMask */
+                updateMask?: (google.protobuf.IFieldMask|null);
+            }
+
+            /** Represents an UpdateAvailabilityRequest. */
+            class UpdateAvailabilityRequest implements IUpdateAvailabilityRequest {
+
+                /**
+                 * Constructs a new UpdateAvailabilityRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IUpdateAvailabilityRequest);
+
+                /** UpdateAvailabilityRequest availability. */
+                public availability?: (google.chat.v1.IAvailability|null);
+
+                /** UpdateAvailabilityRequest updateMask. */
+                public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /**
+                 * Creates a new UpdateAvailabilityRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns UpdateAvailabilityRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IUpdateAvailabilityRequest): google.chat.v1.UpdateAvailabilityRequest;
+
+                /**
+                 * Encodes the specified UpdateAvailabilityRequest message. Does not implicitly {@link google.chat.v1.UpdateAvailabilityRequest.verify|verify} messages.
+                 * @param message UpdateAvailabilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IUpdateAvailabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified UpdateAvailabilityRequest message, length delimited. Does not implicitly {@link google.chat.v1.UpdateAvailabilityRequest.verify|verify} messages.
+                 * @param message UpdateAvailabilityRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IUpdateAvailabilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an UpdateAvailabilityRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns UpdateAvailabilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.UpdateAvailabilityRequest;
+
+                /**
+                 * Decodes an UpdateAvailabilityRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns UpdateAvailabilityRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.UpdateAvailabilityRequest;
+
+                /**
+                 * Verifies an UpdateAvailabilityRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an UpdateAvailabilityRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns UpdateAvailabilityRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.UpdateAvailabilityRequest;
+
+                /**
+                 * Creates a plain object from an UpdateAvailabilityRequest message. Also converts values to other types if specified.
+                 * @param message UpdateAvailabilityRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.UpdateAvailabilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this UpdateAvailabilityRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for UpdateAvailabilityRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MarkAsActiveRequest. */
+            interface IMarkAsActiveRequest {
+
+                /** MarkAsActiveRequest name */
+                name?: (string|null);
+
+                /** MarkAsActiveRequest expireTime */
+                expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** MarkAsActiveRequest ttl */
+                ttl?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a MarkAsActiveRequest. */
+            class MarkAsActiveRequest implements IMarkAsActiveRequest {
+
+                /**
+                 * Constructs a new MarkAsActiveRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMarkAsActiveRequest);
+
+                /** MarkAsActiveRequest name. */
+                public name: string;
+
+                /** MarkAsActiveRequest expireTime. */
+                public expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** MarkAsActiveRequest ttl. */
+                public ttl?: (google.protobuf.IDuration|null);
+
+                /** MarkAsActiveRequest expiration. */
+                public expiration?: ("expireTime"|"ttl");
+
+                /**
+                 * Creates a new MarkAsActiveRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MarkAsActiveRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IMarkAsActiveRequest): google.chat.v1.MarkAsActiveRequest;
+
+                /**
+                 * Encodes the specified MarkAsActiveRequest message. Does not implicitly {@link google.chat.v1.MarkAsActiveRequest.verify|verify} messages.
+                 * @param message MarkAsActiveRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMarkAsActiveRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MarkAsActiveRequest message, length delimited. Does not implicitly {@link google.chat.v1.MarkAsActiveRequest.verify|verify} messages.
+                 * @param message MarkAsActiveRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMarkAsActiveRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MarkAsActiveRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MarkAsActiveRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MarkAsActiveRequest;
+
+                /**
+                 * Decodes a MarkAsActiveRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MarkAsActiveRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MarkAsActiveRequest;
+
+                /**
+                 * Verifies a MarkAsActiveRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MarkAsActiveRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MarkAsActiveRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MarkAsActiveRequest;
+
+                /**
+                 * Creates a plain object from a MarkAsActiveRequest message. Also converts values to other types if specified.
+                 * @param message MarkAsActiveRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MarkAsActiveRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MarkAsActiveRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MarkAsActiveRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MarkAsAwayRequest. */
+            interface IMarkAsAwayRequest {
+
+                /** MarkAsAwayRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a MarkAsAwayRequest. */
+            class MarkAsAwayRequest implements IMarkAsAwayRequest {
+
+                /**
+                 * Constructs a new MarkAsAwayRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMarkAsAwayRequest);
+
+                /** MarkAsAwayRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new MarkAsAwayRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MarkAsAwayRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IMarkAsAwayRequest): google.chat.v1.MarkAsAwayRequest;
+
+                /**
+                 * Encodes the specified MarkAsAwayRequest message. Does not implicitly {@link google.chat.v1.MarkAsAwayRequest.verify|verify} messages.
+                 * @param message MarkAsAwayRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMarkAsAwayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MarkAsAwayRequest message, length delimited. Does not implicitly {@link google.chat.v1.MarkAsAwayRequest.verify|verify} messages.
+                 * @param message MarkAsAwayRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMarkAsAwayRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MarkAsAwayRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MarkAsAwayRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MarkAsAwayRequest;
+
+                /**
+                 * Decodes a MarkAsAwayRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MarkAsAwayRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MarkAsAwayRequest;
+
+                /**
+                 * Verifies a MarkAsAwayRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MarkAsAwayRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MarkAsAwayRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MarkAsAwayRequest;
+
+                /**
+                 * Creates a plain object from a MarkAsAwayRequest message. Also converts values to other types if specified.
+                 * @param message MarkAsAwayRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MarkAsAwayRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MarkAsAwayRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MarkAsAwayRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MarkAsDoNotDisturbRequest. */
+            interface IMarkAsDoNotDisturbRequest {
+
+                /** MarkAsDoNotDisturbRequest name */
+                name?: (string|null);
+
+                /** MarkAsDoNotDisturbRequest expireTime */
+                expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** MarkAsDoNotDisturbRequest ttl */
+                ttl?: (google.protobuf.IDuration|null);
+            }
+
+            /** Represents a MarkAsDoNotDisturbRequest. */
+            class MarkAsDoNotDisturbRequest implements IMarkAsDoNotDisturbRequest {
+
+                /**
+                 * Constructs a new MarkAsDoNotDisturbRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMarkAsDoNotDisturbRequest);
+
+                /** MarkAsDoNotDisturbRequest name. */
+                public name: string;
+
+                /** MarkAsDoNotDisturbRequest expireTime. */
+                public expireTime?: (google.protobuf.ITimestamp|null);
+
+                /** MarkAsDoNotDisturbRequest ttl. */
+                public ttl?: (google.protobuf.IDuration|null);
+
+                /** MarkAsDoNotDisturbRequest expiration. */
+                public expiration?: ("expireTime"|"ttl");
+
+                /**
+                 * Creates a new MarkAsDoNotDisturbRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MarkAsDoNotDisturbRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IMarkAsDoNotDisturbRequest): google.chat.v1.MarkAsDoNotDisturbRequest;
+
+                /**
+                 * Encodes the specified MarkAsDoNotDisturbRequest message. Does not implicitly {@link google.chat.v1.MarkAsDoNotDisturbRequest.verify|verify} messages.
+                 * @param message MarkAsDoNotDisturbRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMarkAsDoNotDisturbRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MarkAsDoNotDisturbRequest message, length delimited. Does not implicitly {@link google.chat.v1.MarkAsDoNotDisturbRequest.verify|verify} messages.
+                 * @param message MarkAsDoNotDisturbRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMarkAsDoNotDisturbRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MarkAsDoNotDisturbRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MarkAsDoNotDisturbRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MarkAsDoNotDisturbRequest;
+
+                /**
+                 * Decodes a MarkAsDoNotDisturbRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MarkAsDoNotDisturbRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MarkAsDoNotDisturbRequest;
+
+                /**
+                 * Verifies a MarkAsDoNotDisturbRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MarkAsDoNotDisturbRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MarkAsDoNotDisturbRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MarkAsDoNotDisturbRequest;
+
+                /**
+                 * Creates a plain object from a MarkAsDoNotDisturbRequest message. Also converts values to other types if specified.
+                 * @param message MarkAsDoNotDisturbRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MarkAsDoNotDisturbRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MarkAsDoNotDisturbRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MarkAsDoNotDisturbRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Represents a ChatService */
             class ChatService extends $protobuf.rpc.Service {
 
@@ -14979,6 +15942,76 @@ export namespace google {
                 public getThreadReadState(request: google.chat.v1.IGetThreadReadStateRequest): Promise<google.chat.v1.ThreadReadState>;
 
                 /**
+                 * Calls GetAvailability.
+                 * @param request GetAvailabilityRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Availability
+                 */
+                public getAvailability(request: google.chat.v1.IGetAvailabilityRequest, callback: google.chat.v1.ChatService.GetAvailabilityCallback): void;
+
+                /**
+                 * Calls GetAvailability.
+                 * @param request GetAvailabilityRequest message or plain object
+                 * @returns Promise
+                 */
+                public getAvailability(request: google.chat.v1.IGetAvailabilityRequest): Promise<google.chat.v1.Availability>;
+
+                /**
+                 * Calls MarkAsActive.
+                 * @param request MarkAsActiveRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Availability
+                 */
+                public markAsActive(request: google.chat.v1.IMarkAsActiveRequest, callback: google.chat.v1.ChatService.MarkAsActiveCallback): void;
+
+                /**
+                 * Calls MarkAsActive.
+                 * @param request MarkAsActiveRequest message or plain object
+                 * @returns Promise
+                 */
+                public markAsActive(request: google.chat.v1.IMarkAsActiveRequest): Promise<google.chat.v1.Availability>;
+
+                /**
+                 * Calls MarkAsAway.
+                 * @param request MarkAsAwayRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Availability
+                 */
+                public markAsAway(request: google.chat.v1.IMarkAsAwayRequest, callback: google.chat.v1.ChatService.MarkAsAwayCallback): void;
+
+                /**
+                 * Calls MarkAsAway.
+                 * @param request MarkAsAwayRequest message or plain object
+                 * @returns Promise
+                 */
+                public markAsAway(request: google.chat.v1.IMarkAsAwayRequest): Promise<google.chat.v1.Availability>;
+
+                /**
+                 * Calls MarkAsDoNotDisturb.
+                 * @param request MarkAsDoNotDisturbRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Availability
+                 */
+                public markAsDoNotDisturb(request: google.chat.v1.IMarkAsDoNotDisturbRequest, callback: google.chat.v1.ChatService.MarkAsDoNotDisturbCallback): void;
+
+                /**
+                 * Calls MarkAsDoNotDisturb.
+                 * @param request MarkAsDoNotDisturbRequest message or plain object
+                 * @returns Promise
+                 */
+                public markAsDoNotDisturb(request: google.chat.v1.IMarkAsDoNotDisturbRequest): Promise<google.chat.v1.Availability>;
+
+                /**
+                 * Calls UpdateAvailability.
+                 * @param request UpdateAvailabilityRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Availability
+                 */
+                public updateAvailability(request: google.chat.v1.IUpdateAvailabilityRequest, callback: google.chat.v1.ChatService.UpdateAvailabilityCallback): void;
+
+                /**
+                 * Calls UpdateAvailability.
+                 * @param request UpdateAvailabilityRequest message or plain object
+                 * @returns Promise
+                 */
+                public updateAvailability(request: google.chat.v1.IUpdateAvailabilityRequest): Promise<google.chat.v1.Availability>;
+
+                /**
                  * Calls GetSpaceEvent.
                  * @param request GetSpaceEventRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and SpaceEvent
@@ -15360,6 +16393,41 @@ export namespace google {
                 type GetThreadReadStateCallback = (error: (Error|null), response?: google.chat.v1.ThreadReadState) => void;
 
                 /**
+                 * Callback as used by {@link google.chat.v1.ChatService|getAvailability}.
+                 * @param error Error, if any
+                 * @param [response] Availability
+                 */
+                type GetAvailabilityCallback = (error: (Error|null), response?: google.chat.v1.Availability) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|markAsActive}.
+                 * @param error Error, if any
+                 * @param [response] Availability
+                 */
+                type MarkAsActiveCallback = (error: (Error|null), response?: google.chat.v1.Availability) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|markAsAway}.
+                 * @param error Error, if any
+                 * @param [response] Availability
+                 */
+                type MarkAsAwayCallback = (error: (Error|null), response?: google.chat.v1.Availability) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|markAsDoNotDisturb}.
+                 * @param error Error, if any
+                 * @param [response] Availability
+                 */
+                type MarkAsDoNotDisturbCallback = (error: (Error|null), response?: google.chat.v1.Availability) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|updateAvailability}.
+                 * @param error Error, if any
+                 * @param [response] Availability
+                 */
+                type UpdateAvailabilityCallback = (error: (Error|null), response?: google.chat.v1.Availability) => void;
+
+                /**
                  * Callback as used by {@link google.chat.v1.ChatService|getSpaceEvent}.
                  * @param error Error, if any
                  * @param [response] SpaceEvent
@@ -15460,6 +16528,9 @@ export namespace google {
 
                 /** Membership deleteTime */
                 deleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Membership affiliation */
+                affiliation?: (google.chat.v1.Membership.Affiliation|keyof typeof google.chat.v1.Membership.Affiliation|null);
             }
 
             /** Represents a Membership. */
@@ -15491,6 +16562,9 @@ export namespace google {
 
                 /** Membership deleteTime. */
                 public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Membership affiliation. */
+                public affiliation: (google.chat.v1.Membership.Affiliation|keyof typeof google.chat.v1.Membership.Affiliation);
 
                 /** Membership memberType. */
                 public memberType?: ("member"|"groupMember");
@@ -15589,6 +16663,14 @@ export namespace google {
                     ROLE_MEMBER = 1,
                     ROLE_MANAGER = 2,
                     ROLE_ASSISTANT_MANAGER = 4
+                }
+
+                /** Affiliation enum. */
+                enum Affiliation {
+                    AFFILIATION_UNSPECIFIED = 0,
+                    INTERNAL = 1,
+                    EXTERNAL = 2,
+                    MANAGED_EXTERNAL = 3
                 }
             }
 
@@ -21238,6 +22320,9 @@ export namespace google {
 
                     /** AccessSettings audience */
                     audience?: (string|null);
+
+                    /** AccessSettings accessPermissionSettings */
+                    accessPermissionSettings?: (google.chat.v1.Space.IAccessPermissionSettings|null);
                 }
 
                 /** Represents an AccessSettings. */
@@ -21254,6 +22339,9 @@ export namespace google {
 
                     /** AccessSettings audience. */
                     public audience: string;
+
+                    /** AccessSettings accessPermissionSettings. */
+                    public accessPermissionSettings?: (google.chat.v1.Space.IAccessPermissionSettings|null);
 
                     /**
                      * Creates a new AccessSettings instance using the specified properties.
@@ -21341,6 +22429,306 @@ export namespace google {
                         PRIVATE = 1,
                         DISCOVERABLE = 2
                     }
+                }
+
+                /** Properties of an AccessPermissionSettings. */
+                interface IAccessPermissionSettings {
+
+                    /** AccessPermissionSettings discoverSpaceSetting */
+                    discoverSpaceSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
+
+                    /** AccessPermissionSettings joinSpaceSetting */
+                    joinSpaceSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
+                }
+
+                /** Represents an AccessPermissionSettings. */
+                class AccessPermissionSettings implements IAccessPermissionSettings {
+
+                    /**
+                     * Constructs a new AccessPermissionSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.Space.IAccessPermissionSettings);
+
+                    /** AccessPermissionSettings discoverSpaceSetting. */
+                    public discoverSpaceSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
+
+                    /** AccessPermissionSettings joinSpaceSetting. */
+                    public joinSpaceSetting?: (google.chat.v1.Space.IAccessPermissionSetting|null);
+
+                    /**
+                     * Creates a new AccessPermissionSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessPermissionSettings instance
+                     */
+                    public static create(properties?: google.chat.v1.Space.IAccessPermissionSettings): google.chat.v1.Space.AccessPermissionSettings;
+
+                    /**
+                     * Encodes the specified AccessPermissionSettings message. Does not implicitly {@link google.chat.v1.Space.AccessPermissionSettings.verify|verify} messages.
+                     * @param message AccessPermissionSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.Space.IAccessPermissionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessPermissionSettings message, length delimited. Does not implicitly {@link google.chat.v1.Space.AccessPermissionSettings.verify|verify} messages.
+                     * @param message AccessPermissionSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.Space.IAccessPermissionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessPermissionSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessPermissionSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Space.AccessPermissionSettings;
+
+                    /**
+                     * Decodes an AccessPermissionSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessPermissionSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Space.AccessPermissionSettings;
+
+                    /**
+                     * Verifies an AccessPermissionSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessPermissionSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessPermissionSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.Space.AccessPermissionSettings;
+
+                    /**
+                     * Creates a plain object from an AccessPermissionSettings message. Also converts values to other types if specified.
+                     * @param message AccessPermissionSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.Space.AccessPermissionSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessPermissionSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessPermissionSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AccessPermissionSetting. */
+                interface IAccessPermissionSetting {
+
+                    /** AccessPermissionSetting principals */
+                    principals?: (google.chat.v1.Space.IPrincipal[]|null);
+                }
+
+                /** Represents an AccessPermissionSetting. */
+                class AccessPermissionSetting implements IAccessPermissionSetting {
+
+                    /**
+                     * Constructs a new AccessPermissionSetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.Space.IAccessPermissionSetting);
+
+                    /** AccessPermissionSetting principals. */
+                    public principals: google.chat.v1.Space.IPrincipal[];
+
+                    /**
+                     * Creates a new AccessPermissionSetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessPermissionSetting instance
+                     */
+                    public static create(properties?: google.chat.v1.Space.IAccessPermissionSetting): google.chat.v1.Space.AccessPermissionSetting;
+
+                    /**
+                     * Encodes the specified AccessPermissionSetting message. Does not implicitly {@link google.chat.v1.Space.AccessPermissionSetting.verify|verify} messages.
+                     * @param message AccessPermissionSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.Space.IAccessPermissionSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessPermissionSetting message, length delimited. Does not implicitly {@link google.chat.v1.Space.AccessPermissionSetting.verify|verify} messages.
+                     * @param message AccessPermissionSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.Space.IAccessPermissionSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessPermissionSetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessPermissionSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Space.AccessPermissionSetting;
+
+                    /**
+                     * Decodes an AccessPermissionSetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessPermissionSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Space.AccessPermissionSetting;
+
+                    /**
+                     * Verifies an AccessPermissionSetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessPermissionSetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessPermissionSetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.Space.AccessPermissionSetting;
+
+                    /**
+                     * Creates a plain object from an AccessPermissionSetting message. Also converts values to other types if specified.
+                     * @param message AccessPermissionSetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.Space.AccessPermissionSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessPermissionSetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessPermissionSetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Principal. */
+                interface IPrincipal {
+
+                    /** Principal audience */
+                    audience?: (google.chat.v1.IAudience|null);
+                }
+
+                /** Represents a Principal. */
+                class Principal implements IPrincipal {
+
+                    /**
+                     * Constructs a new Principal.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.Space.IPrincipal);
+
+                    /** Principal audience. */
+                    public audience?: (google.chat.v1.IAudience|null);
+
+                    /** Principal principalType. */
+                    public principalType?: "audience";
+
+                    /**
+                     * Creates a new Principal instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Principal instance
+                     */
+                    public static create(properties?: google.chat.v1.Space.IPrincipal): google.chat.v1.Space.Principal;
+
+                    /**
+                     * Encodes the specified Principal message. Does not implicitly {@link google.chat.v1.Space.Principal.verify|verify} messages.
+                     * @param message Principal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.Space.IPrincipal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Principal message, length delimited. Does not implicitly {@link google.chat.v1.Space.Principal.verify|verify} messages.
+                     * @param message Principal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.Space.IPrincipal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Principal message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Principal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Space.Principal;
+
+                    /**
+                     * Decodes a Principal message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Principal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Space.Principal;
+
+                    /**
+                     * Verifies a Principal message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Principal message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Principal
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.Space.Principal;
+
+                    /**
+                     * Creates a plain object from a Principal message. Also converts values to other types if specified.
+                     * @param message Principal
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.Space.Principal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Principal to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Principal
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** PredefinedPermissionSettings enum. */

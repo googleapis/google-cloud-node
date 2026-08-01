@@ -16,6 +16,8 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+
+
 'use strict';
 
 function main(query) {
@@ -35,8 +37,7 @@ function main(query) {
    *  Optional. Specifies the maximum number of results to return. The service
    *  may return fewer than this value.
    *  If unspecified, at most 5 results will be returned.
-   *  The maximum value is 20; values above 20 will result in an INVALID_ARGUMENT
-   *  error.
+   *  The maximum value is 100; values above 100 will be coerced to 100.
    */
   // const pageSize = 1234
   /**
@@ -65,16 +66,19 @@ function main(query) {
    *  regexp match are not supported.
    *  TIMESTAMP fields support `=`, `<`, `<=`, `>`, and `>=` operators.
    *  Timestamps must be in RFC-3339 format, e.g., `"2025-01-01T00:00:00Z"`.
+   *  Note: Field names must be in `snake_case` (e.g., `data_source`). Values on
+   *  the right-hand side of filtering expressions must be string literals
+   *  enclosed in double quotes (e.g., `"docs.cloud.google.com"`).
    *  You can combine expressions using `AND`, `OR`, and `NOT` (or `-`) logical
    *  operators. `OR` has higher precedence than `AND`. Use parentheses for
    *  explicit precedence grouping.
    *  Examples:
    *  * `data_source = "docs.cloud.google.com" OR data_source =
-   *  "firebase.google.com"`
+   *    "firebase.google.com"`
    *  * `data_source != "firebase.google.com"`
    *  * `update_time < "2024-01-01T00:00:00Z"`
    *  * `update_time >= "2025-01-22T00:00:00Z" AND (data_source =
-   *  "developer.chrome.com" OR data_source = "web.dev")`
+   *    "developer.chrome.com" OR data_source = "web.dev")`
    *  * `uri = "https://docs.cloud.google.com/release-notes"`
    *  The `filter` string must not exceed 500 characters; values longer than 500
    *  characters will result in an `INVALID_ARGUMENT` error.
@@ -82,7 +86,7 @@ function main(query) {
   // const filter = 'abc123'
 
   // Imports the Knowledge library
-  const {DeveloperKnowledgeClient} = require('google-developer-knowledge').v1;
+  const {DeveloperKnowledgeClient} = require('@google/developer-knowledge').v1;
 
   // Instantiates a client
   const knowledgeClient = new DeveloperKnowledgeClient();
@@ -96,7 +100,7 @@ function main(query) {
     // Run request
     const iterable = knowledgeClient.searchDocumentChunksAsync(request);
     for await (const response of iterable) {
-      console.log(response);
+        console.log(response);
     }
   }
 

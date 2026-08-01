@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as developerknowledgeModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf} from 'google-gax';
+import { protobuf } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
+            return Promise.resolve({ done: true, value: undefined });
           }
-          return Promise.resolve({done: false, value: responses![counter++]});
+          return Promise.resolve({ done: false, value: responses![counter++] });
         },
       };
     },
@@ -244,7 +244,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       assert.strictEqual(client.developerKnowledgeStub, undefined);
@@ -252,12 +252,12 @@ describe('v1.DeveloperKnowledgeClient', () => {
       assert(client.developerKnowledgeStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.developerKnowledgeStub);
@@ -266,14 +266,14 @@ describe('v1.DeveloperKnowledgeClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       assert.strictEqual(client.developerKnowledgeStub, undefined);
@@ -282,7 +282,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -290,7 +290,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -302,7 +302,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -325,7 +325,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
   describe('getDocument', () => {
     it('invokes getDocument without error', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -356,7 +356,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('invokes getDocument without error using callback', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -403,7 +403,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('invokes getDocument with error', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('invokes getDocument with closed client', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -447,7 +447,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getDocument(request), expectedError);
@@ -457,7 +457,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
   describe('batchGetDocuments', () => {
     it('invokes batchGetDocuments without error', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('invokes batchGetDocuments without error using callback', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -507,7 +507,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('invokes batchGetDocuments with error', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('invokes batchGetDocuments with closed client', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -532,17 +532,102 @@ describe('v1.DeveloperKnowledgeClient', () => {
         new protos.google.developers.knowledge.v1.BatchGetDocumentsRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.batchGetDocuments(request), expectedError);
     });
   });
 
+  describe('answerQuery', () => {
+    it('invokes answerQuery without error', async () => {
+      const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryResponse(),
+      );
+      client.innerApiCalls.answerQuery = stubSimpleCall(expectedResponse);
+      const [response] = await client.answerQuery(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes answerQuery without error using callback', async () => {
+      const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryResponse(),
+      );
+      client.innerApiCalls.answerQuery =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.answerQuery(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.developers.knowledge.v1.IAnswerQueryResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes answerQuery with error', async () => {
+      const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.answerQuery = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.answerQuery(request), expectedError);
+    });
+
+    it('invokes answerQuery with closed client', async () => {
+      const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.developers.knowledge.v1.AnswerQueryRequest(),
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.answerQuery(request), expectedError);
+    });
+  });
+
   describe('searchDocumentChunks', () => {
     it('invokes searchDocumentChunks without error', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +653,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('invokes searchDocumentChunks without error using callback', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -594,7 +679,8 @@ describe('v1.DeveloperKnowledgeClient', () => {
           (
             err?: Error | null,
             result?:
-              protos.google.developers.knowledge.v1.IDocumentChunk[] | null,
+              | protos.google.developers.knowledge.v1.IDocumentChunk[]
+              | null,
           ) => {
             if (err) {
               reject(err);
@@ -610,7 +696,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('invokes searchDocumentChunks with error', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -627,7 +713,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('invokes searchDocumentChunksStream without error', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -675,7 +761,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('invokes searchDocumentChunksStream with error', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -712,7 +798,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('uses async iteration with searchDocumentChunks without error', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -749,7 +835,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
 
     it('uses async iteration with searchDocumentChunks with error', async () => {
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -783,7 +869,7 @@ describe('v1.DeveloperKnowledgeClient', () => {
         document: 'documentValue',
       };
       const client = new developerknowledgeModule.v1.DeveloperKnowledgeClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();

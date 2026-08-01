@@ -15,3 +15,4 @@ system-test/*key.json
 package-lock.json
 __pycache__
 *.tsbuildinfo
+local-work/

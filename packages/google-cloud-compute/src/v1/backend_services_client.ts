@@ -150,9 +150,6 @@ export class BackendServicesClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
-    // Request numeric enum values if REST transport is used.
-    opts.numericEnums = true;
-
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -3252,7 +3249,10 @@ export class BackendServicesClient {
     ) as AsyncIterable<protos.google.cloud.compute.v1.IBackendService>;
   }
   /**
-   * Retrieves a list of all usable backend services in the specified project.
+   * Retrieves a list of all usable backend services for Application Load
+   * Balancers and Proxy Network Load Balancers in the specified project.
+   * Backend services for external and internal passthrough Network Load
+   * Balancers are not included in the response.
    *
    * @param {Object} request
    *   The request object that will be sent.

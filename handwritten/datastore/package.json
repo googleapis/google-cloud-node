@@ -28,13 +28,12 @@
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r proto* build/ && cp -r system-test/data build/system-test",
-    "compile-protos": "compileProtos src",
+    "compile": "tsc -p . && cp -r protos build && cp -r system-test/data build/system-test",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
     "presystem-test": "npm run compile",
     "system-test": "mocha build/system-test --timeout 600000",
@@ -43,6 +42,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
+    "@google-cloud/datastore-api": "^0.2.0",
     "@google-cloud/promisify": "^5.0.0",
     "arrify": "^2.0.0",
     "async-mutex": "^0.5.0",

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.25.0...sql-v0.26.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
 ## [0.25.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.24.1...sql-v0.25.0) (2026-07-13)
 
 

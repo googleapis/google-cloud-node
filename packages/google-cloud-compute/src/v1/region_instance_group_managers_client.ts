@@ -151,9 +151,6 @@ export class RegionInstanceGroupManagersClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
-    // Request numeric enum values if REST transport is used.
-    opts.numericEnums = true;
-
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -944,6 +941,9 @@ export class RegionInstanceGroupManagersClient {
    *   The request object that will be sent.
    * @param {string} request.instanceGroupManager
    *   Name of the managed instance group to delete.
+   * @param {boolean} request.noGracefulShutdown
+   *   When set, graceful shutdown is skipped for instance deletion even if it's
+   *   configured for the instances.
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -1126,6 +1126,9 @@ export class RegionInstanceGroupManagersClient {
    *   The request object that will be sent.
    * @param {string} request.instanceGroupManager
    *   Name of the managed instance group.
+   * @param {boolean} request.noGracefulShutdown
+   *   When set, graceful shutdown is skipped for instance deletion even if it's
+   *   configured for the instances.
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -2146,6 +2149,9 @@ export class RegionInstanceGroupManagersClient {
    *   The request object that will be sent.
    * @param {string} request.instanceGroupManager
    *   Name of the managed instance group.
+   * @param {boolean} request.noGracefulShutdown
+   *   When set, graceful shutdown is skipped for instance recreation even if it's
+   *   configured for the instances.
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -3235,6 +3241,9 @@ export class RegionInstanceGroupManagersClient {
    *   The request object that will be sent.
    * @param {string} request.instanceGroupManager
    *   The name of the managed instance group.
+   * @param {boolean} request.noGracefulShutdown
+   *   When set, graceful shutdown is skipped for instance stopping even if it's
+   *   configured for the instances.
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region

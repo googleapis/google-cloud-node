@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/developer-knowledge-v0.2.0...developer-knowledge-v0.3.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/developer-knowledge-v0.1.1...developer-knowledge-v0.2.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/developer-knowledge-v0.1.0...developer-knowledge-v0.1.1) (2026-07-15)
 
 

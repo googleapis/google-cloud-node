@@ -18,10 +18,8 @@
 
 import * as v1 from './v1';
 
-const CloudProductRegistryReadServiceClient =
-  v1.CloudProductRegistryReadServiceClient;
-type CloudProductRegistryReadServiceClient =
-  v1.CloudProductRegistryReadServiceClient;
+const CloudProductRegistryReadServiceClient = v1.CloudProductRegistryReadServiceClient;
+type CloudProductRegistryReadServiceClient = v1.CloudProductRegistryReadServiceClient;
 
 export {v1, CloudProductRegistryReadServiceClient};
 export default {v1, CloudProductRegistryReadServiceClient};
