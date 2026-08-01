@@ -18,11 +18,10 @@ export async function setupBigtable(
   columnFamilyId: string,
   instanceId: string,
   tableIds: string[],
-  mochaContext?: any,
 ) {
   const instance = bigtable.instance(instanceId);
-  const [instanceInfo] = await instance.exists();
-  while (!instanceInfo) {
+  let [instanceExists] = await instance.exists();
+  if (!instanceExists) {
     try {
       const [, operation] = await instance.create({
         clusters: {
@@ -30,23 +29,25 @@ export async function setupBigtable(
           location: 'us-west1-c',
           nodes: 1,
         },
+        labels: {
+          time_created: String(Date.now()),
+        },
       });
       await operation.promise();
-    } catch (e: any) {
-      if (mochaContext && (e.code === 8 || (e.message && e.message.includes('RESOURCE_EXHAUSTED')))) {
-        console.log('Skipping due to quota');
-        mochaContext.skip();
-      }
-      throw e;
+    } catch (e) {
+      // Instance creation might already be in progress or completed
     }
-    /**
-     * For whatever reason, even after waiting for an operation.promise()
-     * call to complete, the instance still doesn't seem to be ready yet so
-     * we do another check to ensure the instance is ready.
-     */
-    const [instanceInfoAgain] = await instance.exists();
-    if (instanceInfoAgain) {
-      break;
+    for (let attempt = 0; attempt < 5; attempt++) {
+      [instanceExists] = await instance.exists();
+      if (instanceExists) {
+        break;
+      }
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    }
+    if (!instanceExists) {
+      throw new Error(
+        `Failed to setup Bigtable: Instance ${instanceId} does not exist or creation failed.`,
+      );
     }
   }
   const tables = tableIds.map(tableId => instance.table(tableId));
@@ -73,9 +74,8 @@ export async function setupBigtableWithInsert(
   columnFamilyId: string,
   instanceId: string,
   tableIds: string[],
-  mochaContext?: any,
 ) {
-  await setupBigtable(bigtable, columnFamilyId, instanceId, tableIds, mochaContext);
+  await setupBigtable(bigtable, columnFamilyId, instanceId, tableIds);
   const instance = bigtable.instance(instanceId);
   const tables = tableIds.map(tableId => instance.table(tableId));
   for (const currentTable of tables) {

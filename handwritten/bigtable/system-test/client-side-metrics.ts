@@ -38,7 +38,7 @@ import {PassThrough} from 'stream';
 import {generateChunksFromRequest} from '../test-common/utils/readRowsImpl';
 import {TabularApiSurface} from '../src/tabular-api-surface';
 import {MetricServiceClient} from '@google-cloud/monitoring';
-import {generateId} from './common';
+import {generateId, reapInstances} from './common';
 
 const SECOND_PROJECT_ID = 'cfdb-sdk-node-tests';
 const instanceId1 = generateId('instance');
@@ -312,28 +312,46 @@ async function checkForPublishedMetrics(projectId: string) {
   ];
   for (let i = 0; i < filters.length; i++) {
     const filter = filters[i];
-    const [series] = await monitoringClient.listTimeSeries({
-      name: `projects/${projectId}`,
-      interval: {
-        endTime: {
-          seconds: now,
-          nanos: 0,
+    // A race condition with the metrics submission can cause this to check too
+    // early. Check up to 5 times with 2 seconds between checks.
+    let seriesLength = 0;
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const [series] = await monitoringClient.listTimeSeries({
+        name: `projects/${projectId}`,
+        interval: {
+          endTime: {
+            seconds: now,
+            nanos: 0,
+          },
+          startTime: {
+            seconds: now - 1000 * 60 * 60 * 24,
+            nanos: 0,
+          },
         },
-        startTime: {
-          seconds: now - 1000 * 60 * 60 * 24,
-          nanos: 0,
-        },
-      },
-      filter,
-    });
-    assert(series.length > 0);
+        filter,
+      });
+      if (series.length > 0) {
+        seriesLength = series.length;
+        break;
+      }
+      await new Promise(r => setTimeout(r, 2000));
+    }
+    assert(seriesLength > 0);
   }
 }
 
 describe('Bigtable/ClientSideMetrics', () => {
   let defaultProjectId: string;
 
-  before(async function() {
+  before(async () => {
+    const reapClient1 = new Bigtable();
+    const reapClient2 = new Bigtable({projectId: SECOND_PROJECT_ID});
+    try {
+      await reapInstances(reapClient1);
+      await reapInstances(reapClient2);
+    } finally {
+      await Promise.all([reapClient1.close(), reapClient2.close()]);
+    }
     /*
     For both the default project and the secondary project we need to create
     instances with some data in them so that the tests can collect all the
@@ -346,49 +364,60 @@ describe('Bigtable/ClientSideMetrics', () => {
     metrics actually get written for that other project instead of the default
     project.
      */
-    for (const bigtable of [
+    const setupClients = [
       new Bigtable(),
       new Bigtable({projectId: SECOND_PROJECT_ID}),
-    ]) {
-      for (const instanceId of [instanceId1, instanceId2]) {
-        await setupBigtableWithInsert(bigtable, columnFamilyId, instanceId, [
-          tableId1,
-          tableId2,
-        ], this);
-      }
-      defaultProjectId = await new Promise((resolve, reject) => {
-        bigtable.getProjectId_((err: Error | null, projectId?: string) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(projectId as string);
-          }
+    ];
+    try {
+      for (const bigtable of setupClients) {
+        for (const instanceId of [instanceId1, instanceId2]) {
+          await setupBigtableWithInsert(bigtable, columnFamilyId, instanceId, [
+            tableId1,
+            tableId2,
+          ]);
+        }
+        defaultProjectId = await new Promise((resolve, reject) => {
+          bigtable.getProjectId_((err: Error | null, projectId?: string) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(projectId as string);
+            }
+          });
         });
-      });
+      }
+    } finally {
+      await Promise.all(setupClients.map(c => c.close()));
     }
   });
 
   after(async () => {
-    for (const bigtable of [
+    const cleanupClients = [
       new Bigtable(),
       new Bigtable({projectId: SECOND_PROJECT_ID}),
-    ]) {
-      try {
-        // If the instance has been deleted already by another source, we don't
-        // want this after hook to block the continuous integration pipeline.
-        const instance = bigtable.instance(instanceId1);
-        await instance.delete({});
-      } catch (e: any) {
-        console.warn("Skipping delete due to error", e.message);
+    ];
+    try {
+      for (const bigtable of cleanupClients) {
+        try {
+          // If the instance has been deleted already by another source, we don't
+          // want this after hook to block the continuous integration pipeline.
+          const instance = bigtable.instance(instanceId1);
+          await instance.delete({});
+        } catch (e) {
+          console.warn('The instance has been deleted already');
+        }
+        try {
+          // If the instance has been deleted already by another source, we don't
+          // want this after hook to block the continuous integration pipeline.
+          const instance = bigtable.instance(instanceId2);
+          await instance.delete({});
+        } catch (e) {
+          console.warn('The instance has been deleted already');
+        }
+        await reapInstances(bigtable);
       }
-      try {
-        // If the instance has been deleted already by another source, we don't
-        // want this after hook to block the continuous integration pipeline.
-        const instance = bigtable.instance(instanceId2);
-        await instance.delete({});
-      } catch (e: any) {
-        console.warn("Skipping delete due to error", e.message);
-      }
+    } finally {
+      await Promise.all(cleanupClients.map(c => c.close()));
     }
   });
 
@@ -445,12 +474,10 @@ describe('Bigtable/ClientSideMetrics', () => {
                       done();
                     })
                     .catch(err => {
-                      done(new Error('Metrics have not been published'));
                       done(err);
                     });
                 } catch (error) {
                   // The code here isn't 0 so we report the original error to the mocha test runner.
-                  done(result);
                   done(error);
                 }
               } else {
