@@ -1946,8 +1946,8 @@ describe('runs query on a large collection', () => {
   let randomCol: CollectionReference;
 
   beforeEach(async () => {
-    firestore = new Firestore({});
-    randomCol = getTestRoot(firestore);
+    randomCol = getTestRoot();
+    firestore = randomCol.firestore;
 
     const promises: Array<Promise<DocumentReference<DocumentData>>> = [];
     for (let i = 0; i < 1000; i++) {
