@@ -383,22 +383,24 @@ export async function isAvailable() {
           if (err.response && err.response.status === 404) {
             return false;
           } else {
-            let errObj = e as any;
-            if (
-              errObj instanceof Error &&
-              errObj.cause &&
-              !('code' in errObj) &&
-              errObj.name !== 'AggregateError'
-            ) {
-              errObj = errObj.cause;
-            }
+            const errObj = e as any;
+            const getErrorCode = (err: any): string => {
+              let target = err;
+              if (
+                target instanceof Error &&
+                target.cause &&
+                !('code' in target) &&
+                target.name !== 'AggregateError'
+              ) {
+                target = target.cause;
+              }
+              return target?.code ? target.code.toString() : 'UNKNOWN';
+            };
 
             const codes =
               errObj instanceof Error && errObj.name === 'AggregateError'
-                ? (errObj as any).errors.map((error: any) =>
-                    error?.code ? error.code.toString() : 'UNKNOWN',
-                  )
-                : [errObj?.code ? errObj.code.toString() : 'UNKNOWN'];
+                ? (errObj as any).errors.map(getErrorCode)
+                : [getErrorCode(errObj)];
 
             const isExpected = codes.every((code: string) =>
               [
