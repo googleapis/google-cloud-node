@@ -55,6 +55,7 @@ import {loggingUtils as logging} from 'google-gax';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 {%- endif %}
+{% if api.enableTelemetryTracing %} import { getGaxTracer } from 'google-gax'; {% endif %}
 
 /**
  * Client JSON configuration object, loaded from

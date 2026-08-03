@@ -50,6 +50,7 @@ import {fileURLToPath} from 'url';
 import {getJSON} from '../json-helper.cjs';
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
+{% if api.enableTelemetryTracing %} import { getGaxTracer } from 'google-gax'; {% endif %}
 
 /**
  * Client JSON configuration object, loaded from
