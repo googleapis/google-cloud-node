@@ -41,8 +41,7 @@ jobs:
         with:
           node-version: 24
       - run: npm install
-      - run: node ./bin/linter.mjs
+      - run: node ./bin/linter.mjs --strict
         name: Run monorepo linter
         env:
-          STRICT: "true"
           GIT_DIFF_ARG: "HEAD^1"

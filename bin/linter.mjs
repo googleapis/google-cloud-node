@@ -26,7 +26,7 @@ const tsconfigCache = new Map();
 // --- Main Runner (Entry Point) ---
 async function run() {
   try {
-    const isStrict = Boolean(process.env.STRICT || process.argv.includes('--strict'));
+    const isStrict = Boolean(process.argv.includes('--strict'));
     let changedTsFiles;
     if (isStrict) {
       changedTsFiles = getChangedFilesStrict();
@@ -69,22 +69,8 @@ function runGit(args, options = {}) {
   });
 }
 
-function getGitDiffArg() {
-  const cliIndex = process.argv.findIndex(arg => arg.startsWith('--git-diff-arg'));
-  if (cliIndex !== -1) {
-    const arg = process.argv[cliIndex];
-    if (arg.includes('=')) {
-      return arg.substring(arg.indexOf('=') + 1);
-    }
-    if (process.argv[cliIndex + 1] && !process.argv[cliIndex + 1].startsWith('-')) {
-      return process.argv[cliIndex + 1];
-    }
-  }
-  return process.env.GIT_DIFF_ARG;
-}
-
 function getChangedFilesStrict() {
-  const gitDiffArg = getGitDiffArg();
+  const gitDiffArg = process.env.GIT_DIFF_ARG;
 
   if (!gitDiffArg) {
     throw new Error(
@@ -98,7 +84,18 @@ function getChangedFilesStrict() {
   const args = gitDiffArg.trim().split(/\s+/);
 
   try {
-    runGit(['diff', '--quiet', ...args]);
+    const output = runGit([
+      'diff',
+      '--name-only',
+      '--diff-filter=ACMRT',
+      ...args,
+      '--',
+      '*.ts',
+    ]);
+    return output
+      .split('\n')
+      .map(f => f.trim())
+      .filter(f => f.length > 0 && existsSync(f));
   } catch (err) {
     if (err.status !== 1) {
       throw new Error(
@@ -108,19 +105,6 @@ function getChangedFilesStrict() {
       );
     }
   }
-
-  const output = runGit([
-    'diff',
-    '--name-only',
-    '--diff-filter=ACMRT',
-    ...args,
-    '--',
-    '*.ts',
-  ]);
-  return output
-    .split('\n')
-    .map(f => f.trim())
-    .filter(f => f.length > 0 && existsSync(f));
 }
 
 /**
@@ -128,15 +112,6 @@ function getChangedFilesStrict() {
  */
 function getChangedFiles() {
   const base = process.env.GITHUB_BASE_REF || 'main';
-
-  // Attempt to fetch the base branch and set origin/${base} so it doesn't compare against itself
-  if (process.env.GITHUB_BASE_REF) {
-    try {
-      runGit(['fetch', 'origin', base, '--depth=1']);
-    } catch {
-      // Continue if network fetch fails or remote does not exist
-    }
-  }
 
   const refsToTry = [
     `origin/${base}...HEAD`,
