@@ -2024,7 +2024,7 @@ module.exports = Object.assign(module.exports, existingExports);
  * @internal
  * @name Firestore.v1beta1
  * @type {function}
- * @deprecated Use v1 instead.
+ * @deprecated Prefer the v1 client instead of the v1beta1 client. If your use case requires the v1beta1 client, it is published as part of the standalone @google-cloud/firestore-api package.
  */
 Object.defineProperty(module.exports, 'v1beta1', {
   // The v1beta1 module is very large. To avoid pulling it in from static
@@ -2045,7 +2045,7 @@ Object.defineProperty(module.exports, 'v1beta1', {
  * @internal
  * @name Firestore.v1
  * @type {function}
- * @deprecated Use the top-level Firestore client instead.
+ * @deprecated Prefer the top-level Firestore client instead of the Firestore.v1 client. If your use case requires the Firestore.v1 client, this is now being published as a separate package at @google-cloud/firestore-api.
  */
 Object.defineProperty(module.exports, 'v1', {
   // The v1 module is very large. To avoid pulling it in from static
