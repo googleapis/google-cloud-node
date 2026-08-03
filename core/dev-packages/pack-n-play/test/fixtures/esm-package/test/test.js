@@ -16,8 +16,7 @@ import {packNTest} from 'pack-n-play';
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 
-describe('ESM package', function () {
-  this.timeout(120000);
+describe('ESM package', () => {
   it('should support esm property', () =>
     packNTest({
       sample: {
