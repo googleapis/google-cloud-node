@@ -124,19 +124,30 @@ function getChangedFilesStrict() {
 }
 
 /**
- * Returns a list of changed TypeScript files comparing against target branches/references when not in strict mode.
+ * Returns a list of changed TypeScript files comparing against target branches/references.
  */
 function getChangedFiles() {
-  let currentBranch = '';
-  try {
-    currentBranch = runGit(['rev-parse', '--abbrev-ref', 'HEAD']).trim();
-  } catch {
-    // Continue with fallback refs if branch detection fails
+  const base = process.env.GITHUB_BASE_REF || 'main';
+
+  // Attempt to fetch the base branch and set origin/${base} so it doesn't compare against itself
+  if (process.env.GITHUB_BASE_REF) {
+    try {
+      runGit(['fetch', 'origin', base, '--depth=1']);
+    } catch {
+      // Continue if network fetch fails or remote does not exist
+    }
   }
 
-  const refsToTry = (currentBranch === 'main')
-    ? ['origin/main', 'upstream/main', 'HEAD~1']
-    : ['upstream/main', 'origin/main', 'main'];
+  const refsToTry = [
+    `origin/${base}...HEAD`,
+    `${base}...HEAD`,
+    `upstream/${base}...HEAD`,
+    `origin/${base}`,
+    base,
+    `upstream/${base}`,
+    'HEAD~1',
+    'HEAD^',
+  ];
 
   for (const ref of refsToTry) {
     try {
@@ -144,21 +155,36 @@ function getChangedFiles() {
         'diff',
         '--name-only',
         '--diff-filter=ACMRT',
-        `${ref}...HEAD`,
+        ref,
         '--',
         '*.ts',
       ]);
-      console.log(`Comparing against base reference: ${ref}`);
       return output
         .split('\n')
         .map(f => f.trim())
         .filter(f => f.length > 0 && existsSync(f));
     } catch {
-      // Continue to next ref if this one fails/does not exist
+      // Continue to the next fallback ref
     }
   }
 
-  throw new Error(`Failed to determine changed files. Tried refs: ${refsToTry.join(', ')}`);
+  // Fallback to checking uncommitted working tree changes against HEAD if all specific refs fail
+  try {
+    const output = runGit([
+      'diff',
+      '--name-only',
+      '--diff-filter=ACMRT',
+      'HEAD',
+      '--',
+      '*.ts',
+    ]);
+    return output
+      .split('\n')
+      .map(f => f.trim())
+      .filter(f => f.length > 0 && existsSync(f));
+  } catch {
+    return [];
+  }
 }
 
 // --- ESLint Checker ---
