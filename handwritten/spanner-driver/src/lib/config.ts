@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Configuration options for establishing a connection to Google Cloud Spanner.
+ * Configuration options for establishing a connection to Google Spanner.
  */
 export interface ClientConfig {
   /** Connection DSN string or postgresql:// URL. */
