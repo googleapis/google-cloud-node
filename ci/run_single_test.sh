@@ -37,8 +37,6 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER_OUTPUT=${PROJECT}_sponge_log.xml
     export MOCHA_REPORTER_SUITENAME=${PROJECT}
     export MOCHA_REPORTER=xunit
-else
-    export MOCHA_REPORTER=dot
 fi
 
 # Install dependencies
@@ -49,8 +47,8 @@ if command -v cygpath >/dev/null 2>&1; then
     PNPMFILE_PATH=$(cygpath -m "${PNPMFILE_PATH}")
 fi
 
-echo "pnpm install --reporter=silent --engine-strict --pnpmfile \"${PNPMFILE_PATH}\""
-pnpm install --reporter=silent --engine-strict --pnpmfile "${PNPMFILE_PATH}"
+echo "pnpm install --ignore-scripts --engine-strict --prod --pnpmfile \"${PNPMFILE_PATH}\"; pnpm install --pnpmfile \"${PNPMFILE_PATH}\""
+pnpm install --ignore-scripts --engine-strict --prod --pnpmfile "${PNPMFILE_PATH}"; pnpm install --pnpmfile "${PNPMFILE_PATH}"
 
 
 retval=0
