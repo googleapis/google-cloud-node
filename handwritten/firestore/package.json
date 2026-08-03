@@ -69,7 +69,7 @@
     "functional-red-black-tree": "^1.0.1",
     "google-gax": "^5.0.1",
     "protobufjs": "^7.5.3",
-    "@google-cloud/firestore-api": "^0.2.0"
+    "@google-cloud/firestore-api": "^0.3.0"
   },
   "devDependencies": {
     "@google-cloud/cloud-rad": "^0.4.10",

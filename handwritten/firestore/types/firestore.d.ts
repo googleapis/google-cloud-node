@@ -2998,7 +2998,7 @@ declare namespace FirebaseFirestore {
    * API and the underlying Firestore v1 RPCs.
    * @deprecated Prefer the top-level Firestore client instead of the Firestore.v1 client. If your use case requires the Firestore.v1 client, this is now being published as a separate package at @google-cloud/firestore-api.
    */
-  export const v1: typeof import('@google-cloud/firestore-api').v1;
+  export const v1: typeof import('@google-cloud/firestore-api/build/src/v1');
   /**
    * Status codes returned by Firestore's gRPC calls.
    */
