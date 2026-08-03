@@ -55,10 +55,16 @@ export async function reapInstances(
       )
       .filter(i => {
         const timeCreatedRaw = i.metadata?.labels?.time_created;
-        if (!timeCreatedRaw) {
-          return false;
+        let timeCreatedNum = Number(timeCreatedRaw);
+        if (!timeCreatedRaw || isNaN(timeCreatedNum)) {
+          const parts = i.id.split('-');
+          const possibleTimestamp = Number(parts[parts.length - 1]);
+          if (!isNaN(possibleTimestamp) && possibleTimestamp > 1000000000000) {
+            timeCreatedNum = possibleTimestamp;
+          } else {
+            return true;
+          }
         }
-        const timeCreatedNum = Number(timeCreatedRaw);
         const timeCreated = new Date(
           isNaN(timeCreatedNum) ? timeCreatedRaw : timeCreatedNum,
         );
