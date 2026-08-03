@@ -46,7 +46,7 @@ function isCounterValue(
   return typeof dataPoint.value === 'number';
 }
 
-function getInterval(
+export function getInterval(
   dataPoint:
     | DataPoint<number>
     | DataPoint<Histogram>
@@ -57,9 +57,12 @@ function getInterval(
   const startSec = dataPoint.startTime[0];
   const startNanos = dataPoint.startTime[1];
 
+  // ensure `endTime` is at least 1 nanosecond after `startTime` to prevent
+  // "INVALID_ARGUMENT: startTime must be before endTime" API exception.
   if (startSec > endSec || (startSec === endSec && startNanos >= endNanos)) {
     endSec = startSec;
     endNanos = startNanos + 1;
+    // check for overflow at 1B nanos
     if (endNanos >= 1000000000) {
       endSec += 1;
       endNanos = 0;
