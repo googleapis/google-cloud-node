@@ -112,7 +112,6 @@ function getChangedFilesStrict() {
  */
 function getChangedFiles() {
   const base = process.env.GITHUB_BASE_REF || 'main';
-
   const refsToTry = [
     `origin/${base}...HEAD`,
     `${base}...HEAD`,
