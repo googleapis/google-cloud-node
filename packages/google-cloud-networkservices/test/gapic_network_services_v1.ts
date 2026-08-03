@@ -2074,6 +2074,138 @@ describe('v1.NetworkServicesClient', () => {
     });
   });
 
+  describe('getAgentGateway', () => {
+    it('invokes getAgentGateway without error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.GetAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.GetAgentGatewayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.AgentGateway(),
+      );
+      client.innerApiCalls.getAgentGateway = stubSimpleCall(expectedResponse);
+      const [response] = await client.getAgentGateway(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAgentGateway without error using callback', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.GetAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.GetAgentGatewayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.AgentGateway(),
+      );
+      client.innerApiCalls.getAgentGateway =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getAgentGateway(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.networkservices.v1.IAgentGateway | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAgentGateway with error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.GetAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.GetAgentGatewayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getAgentGateway = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getAgentGateway(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getAgentGateway with closed client', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.GetAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.GetAgentGatewayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getAgentGateway(request), expectedError);
+    });
+  });
+
   describe('createEndpointPolicy', () => {
     it('invokes createEndpointPolicy without error', async () => {
       const client = new networkservicesModule.v1.NetworkServicesClient({
@@ -8327,6 +8459,592 @@ describe('v1.NetworkServicesClient', () => {
     });
   });
 
+  describe('createAgentGateway', () => {
+    it('invokes createAgentGateway without error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.CreateAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.CreateAgentGatewayRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createAgentGateway =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createAgentGateway(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAgentGateway without error using callback', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.CreateAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.CreateAgentGatewayRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createAgentGateway =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createAgentGateway(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.networkservices.v1.IAgentGateway,
+              protos.google.cloud.networkservices.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAgentGateway with call error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.CreateAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.CreateAgentGatewayRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAgentGateway = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createAgentGateway(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createAgentGateway with LRO error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.CreateAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.CreateAgentGatewayRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createAgentGateway = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createAgentGateway(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateAgentGatewayProgress without error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateAgentGatewayProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateAgentGatewayProgress with error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateAgentGatewayProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateAgentGateway', () => {
+    it('invokes updateAgentGateway without error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.UpdateAgentGatewayRequest(),
+      );
+      request.agentGateway ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.UpdateAgentGatewayRequest',
+        ['agentGateway', 'name'],
+      );
+      request.agentGateway.name = defaultValue1;
+      const expectedHeaderRequestParams = `agent_gateway.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateAgentGateway =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateAgentGateway(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAgentGateway without error using callback', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.UpdateAgentGatewayRequest(),
+      );
+      request.agentGateway ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.UpdateAgentGatewayRequest',
+        ['agentGateway', 'name'],
+      );
+      request.agentGateway.name = defaultValue1;
+      const expectedHeaderRequestParams = `agent_gateway.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateAgentGateway =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAgentGateway(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.networkservices.v1.IAgentGateway,
+              protos.google.cloud.networkservices.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAgentGateway with call error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.UpdateAgentGatewayRequest(),
+      );
+      request.agentGateway ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.UpdateAgentGatewayRequest',
+        ['agentGateway', 'name'],
+      );
+      request.agentGateway.name = defaultValue1;
+      const expectedHeaderRequestParams = `agent_gateway.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAgentGateway = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateAgentGateway(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAgentGateway with LRO error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.UpdateAgentGatewayRequest(),
+      );
+      request.agentGateway ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.UpdateAgentGatewayRequest',
+        ['agentGateway', 'name'],
+      );
+      request.agentGateway.name = defaultValue1;
+      const expectedHeaderRequestParams = `agent_gateway.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAgentGateway = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.updateAgentGateway(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateAgentGatewayProgress without error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateAgentGatewayProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateAgentGatewayProgress with error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkUpdateAgentGatewayProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteAgentGateway', () => {
+    it('invokes deleteAgentGateway without error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.DeleteAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.DeleteAgentGatewayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAgentGateway =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteAgentGateway(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAgentGateway without error using callback', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.DeleteAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.DeleteAgentGatewayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteAgentGateway =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteAgentGateway(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.networkservices.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAgentGateway with call error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.DeleteAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.DeleteAgentGatewayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAgentGateway = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteAgentGateway(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteAgentGateway with LRO error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.DeleteAgentGatewayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.DeleteAgentGatewayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteAgentGateway = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteAgentGateway(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteAgentGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAgentGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteAgentGatewayProgress without error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteAgentGatewayProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteAgentGatewayProgress with error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteAgentGatewayProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listEndpointPolicies', () => {
     it('invokes listEndpointPolicies without error', async () => {
       const client = new networkservicesModule.v1.NetworkServicesClient({
@@ -12694,6 +13412,337 @@ describe('v1.NetworkServicesClient', () => {
       );
     });
   });
+
+  describe('listAgentGateways', () => {
+    it('invokes listAgentGateways without error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.ListAgentGatewaysRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.ListAgentGatewaysRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+      ];
+      client.innerApiCalls.listAgentGateways = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAgentGateways(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAgentGateways as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAgentGateways as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAgentGateways without error using callback', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.ListAgentGatewaysRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.ListAgentGatewaysRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+      ];
+      client.innerApiCalls.listAgentGateways =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAgentGateways(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.networkservices.v1.IAgentGateway[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listAgentGateways as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAgentGateways as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAgentGateways with error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.ListAgentGatewaysRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.ListAgentGatewaysRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAgentGateways = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listAgentGateways(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listAgentGateways as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAgentGateways as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listAgentGatewaysStream without error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.ListAgentGatewaysRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.ListAgentGatewaysRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+      ];
+      client.descriptors.page.listAgentGateways.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAgentGatewaysStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.networkservices.v1.AgentGateway[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.networkservices.v1.AgentGateway) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAgentGateways.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAgentGateways, request),
+      );
+      assert(
+        (client.descriptors.page.listAgentGateways.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listAgentGatewaysStream with error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.ListAgentGatewaysRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.ListAgentGatewaysRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAgentGateways.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listAgentGatewaysStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.networkservices.v1.AgentGateway[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.networkservices.v1.AgentGateway) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAgentGateways.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAgentGateways, request),
+      );
+      assert(
+        (client.descriptors.page.listAgentGateways.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listAgentGateways without error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.ListAgentGatewaysRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.ListAgentGatewaysRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.networkservices.v1.AgentGateway(),
+        ),
+      ];
+      client.descriptors.page.listAgentGateways.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.networkservices.v1.IAgentGateway[] =
+        [];
+      const iterable = client.listAgentGatewaysAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAgentGateways.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAgentGateways.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listAgentGateways with error', async () => {
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.networkservices.v1.ListAgentGatewaysRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkservices.v1.ListAgentGatewaysRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAgentGateways.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listAgentGatewaysAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.networkservices.v1.IAgentGateway[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listAgentGateways.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listAgentGateways.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new networkservicesModule.v1.NetworkServicesClient({
@@ -13545,6 +14594,70 @@ describe('v1.NetworkServicesClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('agentGateway', async () => {
+      const fakePath = '/rendered/path/agentGateway';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent_gateway: 'agentGatewayValue',
+      };
+      const client = new networkservicesModule.v1.NetworkServicesClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.agentGatewayPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.agentGatewayPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('agentGatewayPath', () => {
+        const result = client.agentGatewayPath(
+          'projectValue',
+          'locationValue',
+          'agentGatewayValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.agentGatewayPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAgentGatewayName', () => {
+        const result = client.matchProjectFromAgentGatewayName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.agentGatewayPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAgentGatewayName', () => {
+        const result = client.matchLocationFromAgentGatewayName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.agentGatewayPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAgentGatewayFromAgentGatewayName', () => {
+        const result = client.matchAgentGatewayFromAgentGatewayName(fakePath);
+        assert.strictEqual(result, 'agentGatewayValue');
+        assert(
+          (client.pathTemplates.agentGatewayPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('authzExtension', async () => {
       const fakePath = '/rendered/path/authzExtension';
       const expectedParameters = {

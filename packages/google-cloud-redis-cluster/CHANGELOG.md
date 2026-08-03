@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.12.0...redis-cluster-v0.13.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.11.0...redis-cluster-v0.12.0) (2026-07-07)
+
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.10.0...redis-cluster-v0.11.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 1 ([#8612](https://github.com/googleapis/google-cloud-node/issues/8612)) ([b4d5da7](https://github.com/googleapis/google-cloud-node/commit/b4d5da72a41c4d961eaeee7b7633c7885ecb9166))
+
 ## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/redis-cluster-v0.9.1...redis-cluster-v0.10.0) (2026-05-01)
 
 

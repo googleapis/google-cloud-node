@@ -82,11 +82,25 @@ describe('codec', () => {
         assert.strictEqual(json, '1986-03-22');
       });
 
+      it('should interpret pre-1970 ISO date strings correctly without 2-digit year mapping', () => {
+        const date = new codec.SpannerDate('0050-03-22');
+        const json = date.toJSON();
+
+        assert.strictEqual(json, '0050-03-22');
+      });
+
       it('should accept y/m/d number values', () => {
         const date = new codec.SpannerDate(1986, 2, 22);
         const json = date.toJSON();
 
         assert.strictEqual(json, '1986-03-22');
+      });
+
+      it('should accept 2-digit years in y/m/d number values correctly', () => {
+        const date = new codec.SpannerDate(50, 2, 22);
+        const json = date.toJSON();
+
+        assert.strictEqual(json, '0050-03-22');
       });
 
       it('should accept year zero in y/m/d number values', () => {
@@ -1247,15 +1261,49 @@ describe('codec', () => {
       assert.deepStrictEqual(decoded, expected);
     });
 
-    it('should decode ProtoEnum', () => {
-      const expected = Buffer.from('bytes value');
-      const encoded = expected.toString('base64');
+    it('should decode ProtoEnum (non-JSON mode)', () => {
+      const type = {
+        code: google.spanner.v1.TypeCode.ENUM,
+        protoTypeFqn: 'examples.spanner.music.Genre',
+      };
 
-      const decoded = codec.decode(encoded, {
-        code: google.spanner.v1.TypeCode.BYTES,
+      const decoded = codec.decode(1, type as any, music.Genre);
+      assert(decoded instanceof codec.ProtoEnum);
+      assert.strictEqual(decoded.value, '1');
+    });
+
+    it('should decode ProtoEnum (JSON mode)', () => {
+      const type = {
+        code: google.spanner.v1.TypeCode.ENUM,
+        protoTypeFqn: 'examples.spanner.music.Genre',
+      };
+
+      const decoder = codec.getDecoder(type as any, music.Genre, {
+        wrapStructs: false,
       });
 
-      assert.deepStrictEqual(decoded, expected);
+      // 1. Passing a numeric value (1 maps to JAZZ in music.Genre)
+      assert.strictEqual(decoder(1), 'JAZZ');
+
+      // 2. Passing an enum name string
+      assert.strictEqual(decoder('POP'), 'POP');
+    });
+
+    it('should safely handle prototype properties like "toString" as enum values and throw/ignore them', () => {
+      const type = {
+        code: google.spanner.v1.TypeCode.ENUM,
+        protoTypeFqn: 'examples.spanner.music.Genre',
+      };
+
+      const decoder = codec.getDecoder(type as any, music.Genre, {
+        wrapStructs: false,
+      });
+
+      // Since "toString" is a prototype property of music.Genre (via Object.prototype.toString),
+      // it should NOT be resolved, and attempting to decode it should throw.
+      assert.throws(() => {
+        decoder('toString');
+      }, /protoEnumParams cannot be used for constructing the ProtoEnum/);
     });
 
     it('should decode UUID', () => {
@@ -1404,12 +1452,114 @@ describe('codec', () => {
       assert.deepStrictEqual(decoded, expected);
     });
 
+    it('should decode pre-1970 TIMESTAMP preserving -0 nanosecond sign correctness', () => {
+      const timestampStr = '1933-03-03T00:00:00.000Z';
+      const expected = new PreciseDate(timestampStr);
+      const decoded = codec.decode(timestampStr, {
+        code: google.spanner.v1.TypeCode.TIMESTAMP,
+      });
+
+      assert.deepStrictEqual(decoded, expected);
+    });
+
     it('should decode DATE', () => {
       const value = new Date();
       const expected = new codec.SpannerDate(value.toISOString());
       const decoded = codec.decode(value.toJSON(), {
         code: google.spanner.v1.TypeCode.DATE,
       });
+
+      assert.deepStrictEqual(decoded, expected);
+    });
+
+    it('should decode DATE and gracefully handle malformed strings by falling back', () => {
+      // In the legacy code, '2020-0b-15' would not match /^\d{4}-\d{1,2}-\d{1,2}/ and would result in an Invalid Date.
+      // But a fast path using loose parseInt could silently parse '0b' as '0' and produce '2019-12-15'.
+      // This test ensures we fall back and get an Invalid Date exactly like the native Date constructor.
+      const malformedDateStr = '2020-0b-15';
+      const decoded = codec.decode(malformedDateStr, {
+        code: google.spanner.v1.TypeCode.DATE,
+      });
+
+      assert.ok(decoded instanceof codec.SpannerDate);
+      assert.ok(isNaN(decoded.getTime()));
+    });
+
+    it('should decode DATE and fallback when month/day out of range causes silent rollover', () => {
+      // 1. Month 00 is out of bounds
+      const invalidMonthStr = '2020-00-12';
+      const decodedMonth = codec.decode(invalidMonthStr, {
+        code: google.spanner.v1.TypeCode.DATE,
+      });
+      assert.ok(decodedMonth instanceof codec.SpannerDate);
+      assert.ok(isNaN(decodedMonth.getTime()));
+
+      // 2. Day 35 is out of bounds
+      const invalidDayStr = '2020-12-35';
+      const decodedDay = codec.decode(invalidDayStr, {
+        code: google.spanner.v1.TypeCode.DATE,
+      });
+      assert.ok(decodedDay instanceof codec.SpannerDate);
+      assert.ok(isNaN(decodedDay.getTime()));
+
+      // 3. February 30 causes rollover, yielding same output as native SpannerDate
+      const rolloverFebStr = '2020-02-30';
+      const decodedFeb = codec.decode(rolloverFebStr, {
+        code: google.spanner.v1.TypeCode.DATE,
+      });
+      const expectedFeb = new codec.SpannerDate(rolloverFebStr);
+      assert.deepStrictEqual(decodedFeb, expectedFeb);
+    });
+
+    it('should decode TIMESTAMP and gracefully handle malformed strings by falling back', () => {
+      // A string like '2020-0b-15T10:20:30.123456789Z' has correct length and format dividers but contains '0b' as month.
+      // Loose parseInt would parse it as 2019-12-15T10:20:30.123456789Z.
+      // The robust parser should detect NaN and fall back to native constructor, returning an Invalid Date.
+      const malformedTimestampStr = '2020-0b-15T10:20:30.123456789Z';
+      const decoded = codec.decode(malformedTimestampStr, {
+        code: google.spanner.v1.TypeCode.TIMESTAMP,
+      });
+
+      assert.ok(decoded instanceof PreciseDate);
+      assert.ok(isNaN(decoded.getTime()));
+    });
+
+    it('should decode TIMESTAMP and fallback when sub-seconds contain non-digits after 9th decimal', () => {
+      const malformedTimestampStr = '2021-05-11T16:46:04.872345678abcZ';
+      const decoded = codec.decode(malformedTimestampStr, {
+        code: google.spanner.v1.TypeCode.TIMESTAMP,
+      });
+
+      assert.ok(decoded instanceof PreciseDate);
+      assert.ok(isNaN(decoded.getTime()));
+    });
+
+    it('should decode TIMESTAMP and fallback when no dot and extra characters exist', () => {
+      const malformedTimestampStr = '2021-05-11T16:46:04abcZ';
+      const decoded = codec.decode(malformedTimestampStr, {
+        code: google.spanner.v1.TypeCode.TIMESTAMP,
+      });
+
+      assert.ok(decoded instanceof PreciseDate);
+      assert.ok(isNaN(decoded.getTime()));
+    });
+
+    it('should decode TIMESTAMP and fallback when month/day out of range causes silent rollover', () => {
+      const malformedTimestampStr = '2021-13-11T16:46:04Z';
+      const decoded = codec.decode(malformedTimestampStr, {
+        code: google.spanner.v1.TypeCode.TIMESTAMP,
+      });
+
+      assert.ok(decoded instanceof PreciseDate);
+      assert.ok(isNaN(decoded.getTime()));
+    });
+
+    it('should decode TIMESTAMP and fallback when February 30 causes silent rollover, yielding same output as native PreciseDate', () => {
+      const rolloverTimestampStr = '2021-02-30T16:46:04.123456789Z';
+      const decoded = codec.decode(rolloverTimestampStr, {
+        code: google.spanner.v1.TypeCode.TIMESTAMP,
+      });
+      const expected = new PreciseDate(rolloverTimestampStr);
 
       assert.deepStrictEqual(decoded, expected);
     });
@@ -1479,6 +1629,91 @@ describe('codec', () => {
       assert.deepStrictEqual(decoded, expectedStruct);
     });
 
+    it('should decode object STRUCT value and inner members with falsy values', () => {
+      const value = {
+        intField: '0',
+        boolField: false,
+        stringField: '',
+        floatField: 0.0,
+        nullField: null,
+        nanField: NaN,
+      };
+
+      const decoded = codec.decode(value, {
+        code: google.spanner.v1.TypeCode.STRUCT,
+        structType: {
+          fields: [
+            {
+              name: 'intField',
+              type: {
+                code: google.spanner.v1.TypeCode.INT64,
+              },
+            },
+            {
+              name: 'boolField',
+              type: {
+                code: google.spanner.v1.TypeCode.BOOL,
+              },
+            },
+            {
+              name: 'stringField',
+              type: {
+                code: google.spanner.v1.TypeCode.STRING,
+              },
+            },
+            {
+              name: 'floatField',
+              type: {
+                code: google.spanner.v1.TypeCode.FLOAT64,
+              },
+            },
+            {
+              name: 'nullField',
+              type: {
+                code: google.spanner.v1.TypeCode.STRING,
+              },
+            },
+            {
+              name: 'nanField',
+              type: {
+                code: google.spanner.v1.TypeCode.FLOAT64,
+              },
+            },
+          ],
+        },
+      });
+
+      const expectedStruct = new codec.Struct(
+        {
+          name: 'intField',
+          value: new codec.Int('0'),
+        },
+        {
+          name: 'boolField',
+          value: false,
+        },
+        {
+          name: 'stringField',
+          value: '',
+        },
+        {
+          name: 'floatField',
+          value: new codec.Float(0.0),
+        },
+        {
+          name: 'nullField',
+          value: null,
+        },
+        {
+          name: 'nanField',
+          value: new codec.Float(NaN),
+        },
+      );
+
+      assert(decoded instanceof codec.Struct);
+      assert.deepStrictEqual(decoded, expectedStruct);
+    });
+
     it('should decode array STRUCT value and inner members', () => {
       const value = ['1', '2'];
 
@@ -1515,6 +1750,329 @@ describe('codec', () => {
 
       assert(decoded instanceof codec.Struct);
       assert.deepStrictEqual(decoded, expectedStruct);
+    });
+
+    describe('getDecoder STRUCT options', () => {
+      it('should recursively pass field-specific metadata to nested decoders', () => {
+        const type = {
+          code: google.spanner.v1.TypeCode.STRUCT,
+          structType: {
+            fields: [
+              {
+                name: 'singer',
+                type: {
+                  code: google.spanner.v1.TypeCode.PROTO,
+                  protoTypeFqn: 'examples.spanner.music.SingerInfo',
+                },
+              },
+            ],
+          },
+        };
+
+        const mockMetadata = {
+          singer: music.SingerInfo,
+        };
+
+        // 1. In standard mode (options = undefined)
+        const decoder = codec.getDecoder(type as any, mockMetadata, undefined);
+
+        const testData = {
+          singer: music.SingerInfo.encode({
+            singerId: 1,
+            genre: music.Genre.POP,
+            birthDate: 'January',
+            nationality: 'Country1',
+          })
+            .finish()
+            .toString('base64'),
+        };
+
+        const result = decoder(testData) as any;
+        assert(result instanceof codec.Struct);
+        const singerField = result[0].value;
+        assert(singerField instanceof codec.ProtoMessage);
+        assert.strictEqual(
+          singerField.fullName,
+          'examples.spanner.music.SingerInfo',
+        );
+
+        // 2. In JSON mode (options = {wrapStructs: false})
+        const jsonDecoder = codec.getDecoder(type as any, mockMetadata, {
+          wrapStructs: false,
+        });
+        const jsonResult = jsonDecoder(testData) as any;
+        assert.strictEqual(jsonResult.singer.birthDate, 'January');
+        assert.strictEqual(jsonResult.singer.nationality, 'Country1');
+        assert.strictEqual(jsonResult.singer.genre, 0);
+        assert.strictEqual(jsonResult.singer.singerId.toString(), '1');
+      });
+
+      it('should recursively pass field-specific metadata to empty-string nameless fields', () => {
+        const type = {
+          code: google.spanner.v1.TypeCode.STRUCT,
+          structType: {
+            fields: [
+              {
+                name: '',
+                type: {
+                  code: google.spanner.v1.TypeCode.PROTO,
+                  protoTypeFqn: 'examples.spanner.music.SingerInfo',
+                },
+              },
+            ],
+          },
+        };
+
+        const mockMetadata = {
+          '': music.SingerInfo,
+        };
+
+        const decoder = codec.getDecoder(type as any, mockMetadata, undefined);
+
+        const testData = {
+          '': music.SingerInfo.encode({
+            singerId: 1,
+            genre: music.Genre.POP,
+            birthDate: 'January',
+            nationality: 'Country1',
+          })
+            .finish()
+            .toString('base64'),
+        };
+
+        const result = decoder(testData) as any;
+        assert(result instanceof codec.Struct);
+        const singerField = result[0].value;
+        assert(singerField instanceof codec.ProtoMessage);
+        assert.strictEqual(
+          singerField.fullName,
+          'examples.spanner.music.SingerInfo',
+        );
+      });
+
+      it('should safely handle prototype properties like "toString" as field names and not pollute metadata lookup', () => {
+        const type = {
+          code: google.spanner.v1.TypeCode.STRUCT,
+          structType: {
+            fields: [
+              {
+                name: 'toString',
+                type: {
+                  code: google.spanner.v1.TypeCode.PROTO,
+                  protoTypeFqn: 'examples.spanner.music.SingerInfo',
+                },
+              },
+            ],
+          },
+        };
+
+        // columnMetadata lacks the own-property "toString" but inherits it from Object.prototype.
+        const mockMetadata = Object.create({
+          toString: music.SingerInfo,
+        });
+
+        // It should NOT resolve the prototype's toString property, but instead pass undefined to the nested decoder
+        const decoder = codec.getDecoder(type as any, mockMetadata, undefined);
+
+        const testData = {
+          toString: music.SingerInfo.encode({
+            singerId: 1,
+            genre: music.Genre.POP,
+            birthDate: 'January',
+            nationality: 'Country1',
+          })
+            .finish()
+            .toString('base64'),
+        };
+
+        const result = decoder(testData) as any;
+        assert(result instanceof codec.Struct);
+        const field = result[0].value;
+
+        // Since toString is not an own property of mockMetadata, no metadata was passed down,
+        // so the nested decoder's messageFunction is undefined instead of the prototype function.
+        assert(field instanceof codec.ProtoMessage);
+        assert.strictEqual(field.messageFunction, undefined);
+      });
+
+      it('should safely handle prototype properties in row objects and fall back correctly', () => {
+        const type = {
+          code: google.spanner.v1.TypeCode.STRUCT,
+          structType: {
+            fields: [
+              {
+                name: 'toString',
+                type: {
+                  code: google.spanner.v1.TypeCode.STRING,
+                },
+              },
+            ],
+          },
+        };
+
+        const decoder = codec.getDecoder(type as any, undefined, undefined);
+
+        // input data lacks the own-property 'toString' (since it is an array), or is an object with a fallback index value
+        const inputData = Object.create(null);
+        // Fallback value at index 0
+        inputData[0] = 'actual_value';
+
+        const result = decoder(inputData) as any;
+        assert(result instanceof codec.Struct);
+        assert.strictEqual(result[0].value, 'actual_value');
+      });
+
+      it('should correctly decode empty-string field names using name != null', () => {
+        const type = {
+          code: google.spanner.v1.TypeCode.STRUCT,
+          structType: {
+            fields: [
+              {
+                name: '',
+                type: {
+                  code: google.spanner.v1.TypeCode.STRING,
+                },
+              },
+            ],
+          },
+        };
+
+        const inputObj = {'': 'hello'};
+
+        // 1. JSON mode (wrapStructs = false) with includeNameless = false (default)
+        const jsonDecoderDefault = codec.getDecoder(type as any, undefined, {
+          wrapStructs: false,
+        });
+        const resultDefault = jsonDecoderDefault(inputObj);
+        assert.deepStrictEqual(resultDefault, {});
+
+        // 2. JSON mode (wrapStructs = false) with includeNameless = true
+        const jsonDecoderInclude = codec.getDecoder(type as any, undefined, {
+          wrapStructs: false,
+          includeNameless: true,
+        });
+        const resultInclude = jsonDecoderInclude(inputObj);
+        assert.deepStrictEqual(resultInclude, {_0: 'hello'});
+
+        // 3. Wrapped mode (wrapStructs = true)
+        const wrappedDecoder = codec.getDecoder(type as any, undefined, {
+          wrapStructs: true,
+        });
+        const wrappedResult = wrappedDecoder(inputObj) as any;
+        assert(wrappedResult instanceof codec.Struct);
+        // default toJSON() should omit the nameless field
+        assert.deepStrictEqual(wrappedResult.toJSON(), {});
+        // toJSON({includeNameless: true}) should include it as _0
+        assert.deepStrictEqual(wrappedResult.toJSON({includeNameless: true}), {
+          _0: 'hello',
+        });
+      });
+
+      it('should default wrapStructs to false when options is specified as empty object, and true when undefined', () => {
+        const type = {
+          code: google.spanner.v1.TypeCode.STRUCT,
+          structType: {
+            fields: [
+              {
+                name: 'field',
+                type: {
+                  code: google.spanner.v1.TypeCode.STRING,
+                },
+              },
+            ],
+          },
+        };
+
+        const input = {field: 'test-value'};
+
+        // 1. When options is undefined (standard mode) -> should wrap struct
+        const standardDecoder = codec.getDecoder(
+          type as any,
+          undefined,
+          undefined,
+        );
+        const standardResult = standardDecoder(input);
+        assert(standardResult instanceof codec.Struct);
+
+        // 2. When options is {} (JSON mode default) -> should NOT wrap struct (should return plain object)
+        const jsonDefaultDecoder = codec.getDecoder(type as any, undefined, {});
+        const jsonDefaultResult = jsonDefaultDecoder(input);
+        assert(!(jsonDefaultResult instanceof codec.Struct));
+        assert.deepStrictEqual(jsonDefaultResult, {field: 'test-value'});
+      });
+    });
+
+    describe('getDecoder wrapNumbers options', () => {
+      it('should decode FLOAT32 and FLOAT64 based on wrapNumbers', () => {
+        const float32Type = {code: google.spanner.v1.TypeCode.FLOAT32};
+        const float64Type = {code: google.spanner.v1.TypeCode.FLOAT64};
+
+        // wrapNumbers = true (default/standard mode)
+        const decoder32Wrapped = codec.getDecoder(
+          float32Type as any,
+          undefined,
+          undefined,
+        );
+        const decoder64Wrapped = codec.getDecoder(
+          float64Type as any,
+          undefined,
+          undefined,
+        );
+        assert(decoder32Wrapped('3.14') instanceof codec.Float32);
+        assert(decoder64Wrapped('3.14') instanceof codec.Float);
+
+        // wrapNumbers = false (JSON mode default)
+        const decoder32Raw = codec.getDecoder(float32Type as any, undefined, {
+          wrapNumbers: false,
+        });
+        const decoder64Raw = codec.getDecoder(float64Type as any, undefined, {
+          wrapNumbers: false,
+        });
+        assert.strictEqual(decoder32Raw('3.14'), 3.14);
+        assert.strictEqual(decoder64Raw('3.14'), 3.14);
+      });
+
+      it('should decode INT64 and PG_OID based on wrapNumbers', () => {
+        const int64Type = {code: google.spanner.v1.TypeCode.INT64};
+        const pgOidType = {
+          code: google.spanner.v1.TypeCode.INT64,
+          typeAnnotation: google.spanner.v1.TypeAnnotationCode.PG_OID,
+        };
+
+        // wrapNumbers = true
+        const decoder64Wrapped = codec.getDecoder(
+          int64Type as any,
+          undefined,
+          undefined,
+        );
+        const decoderOidWrapped = codec.getDecoder(
+          pgOidType as any,
+          undefined,
+          undefined,
+        );
+        assert(decoder64Wrapped('123') instanceof codec.Int);
+        assert(decoderOidWrapped('123') instanceof codec.PGOid);
+
+        // wrapNumbers = false
+        const decoder64Raw = codec.getDecoder(int64Type as any, undefined, {
+          wrapNumbers: false,
+        });
+        const decoderOidRaw = codec.getDecoder(pgOidType as any, undefined, {
+          wrapNumbers: false,
+        });
+        assert.strictEqual(decoder64Raw('123'), 123);
+        assert.strictEqual(decoderOidRaw('123'), 123);
+
+        // Should throw error if number is out of bounds
+        assert.throws(
+          () => decoder64Raw('9007199254740992'),
+          /Integer 9007199254740992 is out of bounds/,
+        );
+        assert.throws(
+          () => decoderOidRaw('9007199254740992'),
+          /PG.OID 9007199254740992 is out of bounds/,
+        );
+      });
     });
   });
 

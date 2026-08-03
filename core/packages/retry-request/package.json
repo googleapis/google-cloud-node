@@ -1,12 +1,12 @@
 {
   "name": "retry-request",
-  "version": "8.0.3",
+  "version": "9.0.0",
   "description": "Retry a request.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "directory": "packages/retry-request",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/retry-request",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
@@ -30,7 +30,7 @@
   "author": "Stephen Sawchuk <sawchuk@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "dependencies": {
     "extend": "^3.0.2",
@@ -47,5 +47,5 @@
     "mocha": "^11.1.0",
     "typescript": "5.8.3"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/retry-request"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/retry-request"
 }

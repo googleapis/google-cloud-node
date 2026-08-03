@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/run-v3.2.1...run-v3.3.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 1 ([#8612](https://github.com/googleapis/google-cloud-node/issues/8612)) ([b4d5da7](https://github.com/googleapis/google-cloud-node/commit/b4d5da72a41c4d961eaeee7b7633c7885ecb9166))
+
 ## [3.2.1](https://github.com/googleapis/google-cloud-node/compare/run-v3.2.0...run-v3.2.1) (2026-05-01)
 
 

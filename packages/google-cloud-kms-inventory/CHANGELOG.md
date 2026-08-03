@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.8.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.7.0...kms-inventory-v2.8.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.6.1...kms-inventory-v2.7.0) (2026-07-13)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
 ## [2.6.1](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.6.0...kms-inventory-v2.6.1) (2026-05-01)
 
 

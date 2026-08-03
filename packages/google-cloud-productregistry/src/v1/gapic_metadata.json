@@ -1,0 +1,105 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.productregistry.v1",
+  "libraryPackage": "@google-cloud/productregistry",
+  "services": {
+    "CloudProductRegistryReadService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudProductRegistryReadServiceClient",
+          "rpcs": {
+            "GetProductSuite": {
+              "methods": [
+                "getProductSuite"
+              ]
+            },
+            "GetLogicalProduct": {
+              "methods": [
+                "getLogicalProduct"
+              ]
+            },
+            "GetLogicalProductVariant": {
+              "methods": [
+                "getLogicalProductVariant"
+              ]
+            },
+            "LookupEntity": {
+              "methods": [
+                "lookupEntity"
+              ]
+            },
+            "ListProductSuites": {
+              "methods": [
+                "listProductSuites",
+                "listProductSuitesStream",
+                "listProductSuitesAsync"
+              ]
+            },
+            "ListLogicalProducts": {
+              "methods": [
+                "listLogicalProducts",
+                "listLogicalProductsStream",
+                "listLogicalProductsAsync"
+              ]
+            },
+            "ListLogicalProductVariants": {
+              "methods": [
+                "listLogicalProductVariants",
+                "listLogicalProductVariantsStream",
+                "listLogicalProductVariantsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudProductRegistryReadServiceClient",
+          "rpcs": {
+            "GetProductSuite": {
+              "methods": [
+                "getProductSuite"
+              ]
+            },
+            "GetLogicalProduct": {
+              "methods": [
+                "getLogicalProduct"
+              ]
+            },
+            "GetLogicalProductVariant": {
+              "methods": [
+                "getLogicalProductVariant"
+              ]
+            },
+            "LookupEntity": {
+              "methods": [
+                "lookupEntity"
+              ]
+            },
+            "ListProductSuites": {
+              "methods": [
+                "listProductSuites",
+                "listProductSuitesStream",
+                "listProductSuitesAsync"
+              ]
+            },
+            "ListLogicalProducts": {
+              "methods": [
+                "listLogicalProducts",
+                "listLogicalProductsStream",
+                "listLogicalProductsAsync"
+              ]
+            },
+            "ListLogicalProductVariants": {
+              "methods": [
+                "listLogicalProductVariants",
+                "listLogicalProductVariantsStream",
+                "listLogicalProductVariantsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

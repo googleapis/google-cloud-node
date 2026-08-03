@@ -16,6 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { StorageControlClient } from './storage_control_client';
-
+export {StorageControlClient} from './storage_control_client';
 export {StorageClient} from './storage_client';

@@ -1,6 +1,29 @@
 # Changelog
 
 
+## [4.13.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.2...gapic-generator-v4.13.0) (2026-07-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [4.12.2](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.1...gapic-generator-v4.12.2) (2026-07-13)
+
+
+### Bug Fixes
+
+* **generator:** Add long dependency to CJS template and update baselines ([#8685](https://github.com/googleapis/google-cloud-node/issues/8685)) ([8e51888](https://github.com/googleapis/google-cloud-node/commit/8e5188877da05a226e9976b2e5057eaec5054d1f))
+* **generator:** Update package.json template to monorepo repository/homepage schema and &gt;=18 engines range ([#8840](https://github.com/googleapis/google-cloud-node/issues/8840)) ([f120e17](https://github.com/googleapis/google-cloud-node/commit/f120e17e588d0a0d7fbf037aa17ab1c869dda90e))
+
+## [4.12.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.0...gapic-generator-v4.12.1) (2026-06-26)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+* **generator:** Filter out empty services from api.services ([#8686](https://github.com/googleapis/google-cloud-node/issues/8686)) ([aae55b3](https://github.com/googleapis/google-cloud-node/commit/aae55b30b22c27d004d2eaa0fc25b61cbd742832))
+
 ## [4.12.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.14...gapic-generator-v4.12.0) (2026-06-08)
 
 

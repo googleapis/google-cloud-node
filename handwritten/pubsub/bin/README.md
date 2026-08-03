@@ -1,12 +1,12 @@
 # benchwrapper
 
 benchwrapper is a lightweight gRPC server that wraps the pubsub library for
-bencharmking purposes.
+benchmarking purposes.
 
 ## Running
 
 ```
-cd nodejs-pubsub
+cd handwritten/pubsub
 npm install
 export PUBSUB_EMULATOR_HOST=localhost:8080
 npm run benchwrapper -- --port 50051

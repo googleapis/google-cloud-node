@@ -1493,6 +1493,71 @@ describe('v1.CloudQuotasClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('folderLocationQuotaAdjusterSettings', async () => {
+      const fakePath = '/rendered/path/folderLocationQuotaAdjusterSettings';
+      const expectedParameters = {
+        folder: 'folderValue',
+        location: 'locationValue',
+      };
+      const client = new cloudquotasModule.v1.CloudQuotasClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('folderLocationQuotaAdjusterSettingsPath', () => {
+        const result = client.folderLocationQuotaAdjusterSettingsPath(
+          'folderValue',
+          'locationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchFolderFromFolderLocationQuotaAdjusterSettingsName', () => {
+        const result =
+          client.matchFolderFromFolderLocationQuotaAdjusterSettingsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFolderLocationQuotaAdjusterSettingsName', () => {
+        const result =
+          client.matchLocationFromFolderLocationQuotaAdjusterSettingsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationQuotaAdjusterSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('folderLocationQuotaPreference', async () => {
       const fakePath = '/rendered/path/folderLocationQuotaPreference';
       const expectedParameters = {
@@ -1657,6 +1722,75 @@ describe('v1.CloudQuotasClient', () => {
         assert(
           (
             client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('organizationLocationQuotaAdjusterSettings', async () => {
+      const fakePath =
+        '/rendered/path/organizationLocationQuotaAdjusterSettings';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+      };
+      const client = new cloudquotasModule.v1.CloudQuotasClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationQuotaAdjusterSettingsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationQuotaAdjusterSettingsPath', () => {
+        const result = client.organizationLocationQuotaAdjusterSettingsPath(
+          'organizationValue',
+          'locationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationQuotaAdjusterSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationQuotaAdjusterSettingsName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationQuotaAdjusterSettingsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationQuotaAdjusterSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationQuotaAdjusterSettingsName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationQuotaAdjusterSettingsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationQuotaAdjusterSettingsPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -1900,6 +2034,74 @@ describe('v1.CloudQuotasClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.projectLocationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationQuotaAdjusterSettings', async () => {
+      const fakePath = '/rendered/path/projectLocationQuotaAdjusterSettings';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new cloudquotasModule.v1.CloudQuotasClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationQuotaAdjusterSettingsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationQuotaAdjusterSettingsPath', () => {
+        const result = client.projectLocationQuotaAdjusterSettingsPath(
+          'projectValue',
+          'locationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationQuotaAdjusterSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationQuotaAdjusterSettingsName', () => {
+        const result =
+          client.matchProjectFromProjectLocationQuotaAdjusterSettingsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationQuotaAdjusterSettingsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationQuotaAdjusterSettingsName', () => {
+        const result =
+          client.matchLocationFromProjectLocationQuotaAdjusterSettingsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationQuotaAdjusterSettingsPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );

@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [7.9.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.8.0...dialogflow-v7.9.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [7.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.7.0...dialogflow-v7.8.0) (2026-07-13)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
+## [7.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.6.2...dialogflow-v7.7.0) (2026-06-25)
+
+
+### Features
+
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
 ## [7.6.2](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.6.1...dialogflow-v7.6.2) (2026-06-01)
 
 

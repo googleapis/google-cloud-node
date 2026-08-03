@@ -171,6 +171,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public sanitizeModelResponse(request: google.cloud.modelarmor.v1.ISanitizeModelResponseRequest): Promise<google.cloud.modelarmor.v1.SanitizeModelResponseResponse>;
+
+                    /**
+                     * Calls StreamSanitizeUserPrompt.
+                     * @param request SanitizeUserPromptRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SanitizeUserPromptResponse
+                     */
+                    public streamSanitizeUserPrompt(request: google.cloud.modelarmor.v1.ISanitizeUserPromptRequest, callback: google.cloud.modelarmor.v1.ModelArmor.StreamSanitizeUserPromptCallback): void;
+
+                    /**
+                     * Calls StreamSanitizeUserPrompt.
+                     * @param request SanitizeUserPromptRequest message or plain object
+                     * @returns Promise
+                     */
+                    public streamSanitizeUserPrompt(request: google.cloud.modelarmor.v1.ISanitizeUserPromptRequest): Promise<google.cloud.modelarmor.v1.SanitizeUserPromptResponse>;
+
+                    /**
+                     * Calls StreamSanitizeModelResponse.
+                     * @param request SanitizeModelResponseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SanitizeModelResponseResponse
+                     */
+                    public streamSanitizeModelResponse(request: google.cloud.modelarmor.v1.ISanitizeModelResponseRequest, callback: google.cloud.modelarmor.v1.ModelArmor.StreamSanitizeModelResponseCallback): void;
+
+                    /**
+                     * Calls StreamSanitizeModelResponse.
+                     * @param request SanitizeModelResponseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public streamSanitizeModelResponse(request: google.cloud.modelarmor.v1.ISanitizeModelResponseRequest): Promise<google.cloud.modelarmor.v1.SanitizeModelResponseResponse>;
                 }
 
                 namespace ModelArmor {
@@ -237,6 +265,20 @@ export namespace google {
                      * @param [response] SanitizeModelResponseResponse
                      */
                     type SanitizeModelResponseCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1.SanitizeModelResponseResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1.ModelArmor|streamSanitizeUserPrompt}.
+                     * @param error Error, if any
+                     * @param [response] SanitizeUserPromptResponse
+                     */
+                    type StreamSanitizeUserPromptCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1.SanitizeUserPromptResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.modelarmor.v1.ModelArmor|streamSanitizeModelResponse}.
+                     * @param error Error, if any
+                     * @param [response] SanitizeModelResponseResponse
+                     */
+                    type StreamSanitizeModelResponseCallback = (error: (Error|null), response?: google.cloud.modelarmor.v1.SanitizeModelResponseResponse) => void;
                 }
 
                 /** FilterMatchState enum. */
@@ -286,6 +328,20 @@ export namespace google {
                     SUCCESS = 1,
                     PARTIAL = 2,
                     FAILURE = 3
+                }
+
+                /** StreamingMode enum. */
+                enum StreamingMode {
+                    STREAMING_MODE_UNSPECIFIED = 0,
+                    STREAMING_MODE_BUFFERED = 1,
+                    STREAMING_MODE_REALTIME = 2
+                }
+
+                /** Modality enum. */
+                enum Modality {
+                    MODALITY_UNSPECIFIED = 0,
+                    MODALITY_TEXT = 1,
+                    MODALITY_IMAGE = 2
                 }
 
                 /** Properties of a Template. */
@@ -446,6 +502,9 @@ export namespace google {
 
                         /** TemplateMetadata multiLanguageDetection */
                         multiLanguageDetection?: (google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection|null);
+
+                        /** TemplateMetadata modalities */
+                        modalities?: (google.cloud.modelarmor.v1.Modality[]|null);
                     }
 
                     /** Represents a TemplateMetadata. */
@@ -483,6 +542,9 @@ export namespace google {
 
                         /** TemplateMetadata multiLanguageDetection. */
                         public multiLanguageDetection?: (google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection|null);
+
+                        /** TemplateMetadata modalities. */
+                        public modalities: google.cloud.modelarmor.v1.Modality[];
 
                         /**
                          * Creates a new TemplateMetadata instance using the specified properties.
@@ -2846,6 +2908,9 @@ export namespace google {
 
                     /** SanitizeUserPromptRequest multiLanguageDetectionMetadata */
                     multiLanguageDetectionMetadata?: (google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null);
+
+                    /** SanitizeUserPromptRequest streamingMode */
+                    streamingMode?: (google.cloud.modelarmor.v1.StreamingMode|keyof typeof google.cloud.modelarmor.v1.StreamingMode|null);
                 }
 
                 /** Represents a SanitizeUserPromptRequest. */
@@ -2865,6 +2930,9 @@ export namespace google {
 
                     /** SanitizeUserPromptRequest multiLanguageDetectionMetadata. */
                     public multiLanguageDetectionMetadata?: (google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null);
+
+                    /** SanitizeUserPromptRequest streamingMode. */
+                    public streamingMode?: (google.cloud.modelarmor.v1.StreamingMode|keyof typeof google.cloud.modelarmor.v1.StreamingMode|null);
 
                     /**
                      * Creates a new SanitizeUserPromptRequest instance using the specified properties.
@@ -2958,6 +3026,9 @@ export namespace google {
 
                     /** SanitizeModelResponseRequest multiLanguageDetectionMetadata */
                     multiLanguageDetectionMetadata?: (google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null);
+
+                    /** SanitizeModelResponseRequest streamingMode */
+                    streamingMode?: (google.cloud.modelarmor.v1.StreamingMode|keyof typeof google.cloud.modelarmor.v1.StreamingMode|null);
                 }
 
                 /** Represents a SanitizeModelResponseRequest. */
@@ -2980,6 +3051,9 @@ export namespace google {
 
                     /** SanitizeModelResponseRequest multiLanguageDetectionMetadata. */
                     public multiLanguageDetectionMetadata?: (google.cloud.modelarmor.v1.IMultiLanguageDetectionMetadata|null);
+
+                    /** SanitizeModelResponseRequest streamingMode. */
+                    public streamingMode?: (google.cloud.modelarmor.v1.StreamingMode|keyof typeof google.cloud.modelarmor.v1.StreamingMode|null);
 
                     /**
                      * Creates a new SanitizeModelResponseRequest instance using the specified properties.
@@ -3381,6 +3455,9 @@ export namespace google {
 
                         /** SanitizationMetadata ignorePartialInvocationFailures */
                         ignorePartialInvocationFailures?: (boolean|null);
+
+                        /** SanitizationMetadata streamChunkProcessed */
+                        streamChunkProcessed?: (google.cloud.modelarmor.v1.IDataItem|null);
                     }
 
                     /** Represents a SanitizationMetadata. */
@@ -3400,6 +3477,9 @@ export namespace google {
 
                         /** SanitizationMetadata ignorePartialInvocationFailures. */
                         public ignorePartialInvocationFailures: boolean;
+
+                        /** SanitizationMetadata streamChunkProcessed. */
+                        public streamChunkProcessed?: (google.cloud.modelarmor.v1.IDataItem|null);
 
                         /**
                          * Creates a new SanitizationMetadata instance using the specified properties.
@@ -3948,6 +4028,9 @@ export namespace google {
 
                     /** SdpFilterResult deidentifyResult */
                     deidentifyResult?: (google.cloud.modelarmor.v1.ISdpDeidentifyResult|null);
+
+                    /** SdpFilterResult redactResult */
+                    redactResult?: (google.cloud.modelarmor.v1.ISdpRedactResult|null);
                 }
 
                 /** Represents a SdpFilterResult. */
@@ -3965,8 +4048,11 @@ export namespace google {
                     /** SdpFilterResult deidentifyResult. */
                     public deidentifyResult?: (google.cloud.modelarmor.v1.ISdpDeidentifyResult|null);
 
+                    /** SdpFilterResult redactResult. */
+                    public redactResult?: (google.cloud.modelarmor.v1.ISdpRedactResult|null);
+
                     /** SdpFilterResult result. */
-                    public result?: ("inspectResult"|"deidentifyResult");
+                    public result?: ("inspectResult"|"deidentifyResult"|"redactResult");
 
                     /**
                      * Creates a new SdpFilterResult instance using the specified properties.
@@ -4063,6 +4149,9 @@ export namespace google {
 
                     /** SdpInspectResult findingsTruncated */
                     findingsTruncated?: (boolean|null);
+
+                    /** SdpInspectResult extractedImageText */
+                    extractedImageText?: (string|null);
                 }
 
                 /** Represents a SdpInspectResult. */
@@ -4088,6 +4177,9 @@ export namespace google {
 
                     /** SdpInspectResult findingsTruncated. */
                     public findingsTruncated: boolean;
+
+                    /** SdpInspectResult extractedImageText. */
+                    public extractedImageText: string;
 
                     /**
                      * Creates a new SdpInspectResult instance using the specified properties.
@@ -4387,7 +4479,8 @@ export namespace google {
                         EXCEL_DOCUMENT = 4,
                         POWERPOINT_DOCUMENT = 5,
                         TXT = 6,
-                        CSV = 7
+                        CSV = 7,
+                        IMAGE = 8
                     }
                 }
 
@@ -4518,6 +4611,327 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SdpImageFindingLocation. */
+                interface ISdpImageFindingLocation {
+
+                    /** SdpImageFindingLocation boundingBoxes */
+                    boundingBoxes?: (google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox[]|null);
+                }
+
+                /** Represents a SdpImageFindingLocation. */
+                class SdpImageFindingLocation implements ISdpImageFindingLocation {
+
+                    /**
+                     * Constructs a new SdpImageFindingLocation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1.ISdpImageFindingLocation);
+
+                    /** SdpImageFindingLocation boundingBoxes. */
+                    public boundingBoxes: google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox[];
+
+                    /**
+                     * Creates a new SdpImageFindingLocation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SdpImageFindingLocation instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1.ISdpImageFindingLocation): google.cloud.modelarmor.v1.SdpImageFindingLocation;
+
+                    /**
+                     * Encodes the specified SdpImageFindingLocation message. Does not implicitly {@link google.cloud.modelarmor.v1.SdpImageFindingLocation.verify|verify} messages.
+                     * @param message SdpImageFindingLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1.ISdpImageFindingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SdpImageFindingLocation message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.SdpImageFindingLocation.verify|verify} messages.
+                     * @param message SdpImageFindingLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1.ISdpImageFindingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SdpImageFindingLocation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SdpImageFindingLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1.SdpImageFindingLocation;
+
+                    /**
+                     * Decodes a SdpImageFindingLocation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SdpImageFindingLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1.SdpImageFindingLocation;
+
+                    /**
+                     * Verifies a SdpImageFindingLocation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SdpImageFindingLocation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SdpImageFindingLocation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1.SdpImageFindingLocation;
+
+                    /**
+                     * Creates a plain object from a SdpImageFindingLocation message. Also converts values to other types if specified.
+                     * @param message SdpImageFindingLocation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1.SdpImageFindingLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SdpImageFindingLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SdpImageFindingLocation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SdpImageFindingLocation {
+
+                    /** Properties of a SdpBoundingBox. */
+                    interface ISdpBoundingBox {
+
+                        /** SdpBoundingBox top */
+                        top?: (number|null);
+
+                        /** SdpBoundingBox left */
+                        left?: (number|null);
+
+                        /** SdpBoundingBox width */
+                        width?: (number|null);
+
+                        /** SdpBoundingBox height */
+                        height?: (number|null);
+                    }
+
+                    /** Represents a SdpBoundingBox. */
+                    class SdpBoundingBox implements ISdpBoundingBox {
+
+                        /**
+                         * Constructs a new SdpBoundingBox.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox);
+
+                        /** SdpBoundingBox top. */
+                        public top: number;
+
+                        /** SdpBoundingBox left. */
+                        public left: number;
+
+                        /** SdpBoundingBox width. */
+                        public width: number;
+
+                        /** SdpBoundingBox height. */
+                        public height: number;
+
+                        /**
+                         * Creates a new SdpBoundingBox instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SdpBoundingBox instance
+                         */
+                        public static create(properties?: google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox): google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox;
+
+                        /**
+                         * Encodes the specified SdpBoundingBox message. Does not implicitly {@link google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox.verify|verify} messages.
+                         * @param message SdpBoundingBox message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SdpBoundingBox message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox.verify|verify} messages.
+                         * @param message SdpBoundingBox message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.modelarmor.v1.SdpImageFindingLocation.ISdpBoundingBox, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SdpBoundingBox message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SdpBoundingBox
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox;
+
+                        /**
+                         * Decodes a SdpBoundingBox message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SdpBoundingBox
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox;
+
+                        /**
+                         * Verifies a SdpBoundingBox message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SdpBoundingBox message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SdpBoundingBox
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox;
+
+                        /**
+                         * Creates a plain object from a SdpBoundingBox message. Also converts values to other types if specified.
+                         * @param message SdpBoundingBox
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SdpBoundingBox to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SdpBoundingBox
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a SdpContentLocation. */
+                interface ISdpContentLocation {
+
+                    /** SdpContentLocation imageFindingLocation */
+                    imageFindingLocation?: (google.cloud.modelarmor.v1.ISdpImageFindingLocation|null);
+
+                    /** SdpContentLocation containerName */
+                    containerName?: (string|null);
+                }
+
+                /** Represents a SdpContentLocation. */
+                class SdpContentLocation implements ISdpContentLocation {
+
+                    /**
+                     * Constructs a new SdpContentLocation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1.ISdpContentLocation);
+
+                    /** SdpContentLocation imageFindingLocation. */
+                    public imageFindingLocation?: (google.cloud.modelarmor.v1.ISdpImageFindingLocation|null);
+
+                    /** SdpContentLocation containerName. */
+                    public containerName: string;
+
+                    /** SdpContentLocation location. */
+                    public location?: "imageFindingLocation";
+
+                    /**
+                     * Creates a new SdpContentLocation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SdpContentLocation instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1.ISdpContentLocation): google.cloud.modelarmor.v1.SdpContentLocation;
+
+                    /**
+                     * Encodes the specified SdpContentLocation message. Does not implicitly {@link google.cloud.modelarmor.v1.SdpContentLocation.verify|verify} messages.
+                     * @param message SdpContentLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1.ISdpContentLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SdpContentLocation message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.SdpContentLocation.verify|verify} messages.
+                     * @param message SdpContentLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1.ISdpContentLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SdpContentLocation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SdpContentLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1.SdpContentLocation;
+
+                    /**
+                     * Decodes a SdpContentLocation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SdpContentLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1.SdpContentLocation;
+
+                    /**
+                     * Verifies a SdpContentLocation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SdpContentLocation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SdpContentLocation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1.SdpContentLocation;
+
+                    /**
+                     * Creates a plain object from a SdpContentLocation message. Also converts values to other types if specified.
+                     * @param message SdpContentLocation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1.SdpContentLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SdpContentLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SdpContentLocation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SdpFinding. */
                 interface ISdpFinding {
 
@@ -4637,6 +5051,9 @@ export namespace google {
 
                         /** SdpFindingLocation codepointRange */
                         codepointRange?: (google.cloud.modelarmor.v1.IRangeInfo|null);
+
+                        /** SdpFindingLocation contentLocations */
+                        contentLocations?: (google.cloud.modelarmor.v1.ISdpContentLocation[]|null);
                     }
 
                     /** Represents a SdpFindingLocation. */
@@ -4653,6 +5070,9 @@ export namespace google {
 
                         /** SdpFindingLocation codepointRange. */
                         public codepointRange?: (google.cloud.modelarmor.v1.IRangeInfo|null);
+
+                        /** SdpFindingLocation contentLocations. */
+                        public contentLocations: google.cloud.modelarmor.v1.ISdpContentLocation[];
 
                         /**
                          * Creates a new SdpFindingLocation instance using the specified properties.
@@ -4731,6 +5151,133 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a SdpRedactResult. */
+                interface ISdpRedactResult {
+
+                    /** SdpRedactResult executionState */
+                    executionState?: (google.cloud.modelarmor.v1.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1.FilterExecutionState|null);
+
+                    /** SdpRedactResult messageItems */
+                    messageItems?: (google.cloud.modelarmor.v1.IMessageItem[]|null);
+
+                    /** SdpRedactResult matchState */
+                    matchState?: (google.cloud.modelarmor.v1.FilterMatchState|keyof typeof google.cloud.modelarmor.v1.FilterMatchState|null);
+
+                    /** SdpRedactResult redactedImage */
+                    redactedImage?: (Uint8Array|Buffer|string|null);
+
+                    /** SdpRedactResult findings */
+                    findings?: (google.cloud.modelarmor.v1.ISdpFinding[]|null);
+
+                    /** SdpRedactResult extractedImageText */
+                    extractedImageText?: (string|null);
+                }
+
+                /** Represents a SdpRedactResult. */
+                class SdpRedactResult implements ISdpRedactResult {
+
+                    /**
+                     * Constructs a new SdpRedactResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1.ISdpRedactResult);
+
+                    /** SdpRedactResult executionState. */
+                    public executionState: (google.cloud.modelarmor.v1.FilterExecutionState|keyof typeof google.cloud.modelarmor.v1.FilterExecutionState);
+
+                    /** SdpRedactResult messageItems. */
+                    public messageItems: google.cloud.modelarmor.v1.IMessageItem[];
+
+                    /** SdpRedactResult matchState. */
+                    public matchState: (google.cloud.modelarmor.v1.FilterMatchState|keyof typeof google.cloud.modelarmor.v1.FilterMatchState);
+
+                    /** SdpRedactResult redactedImage. */
+                    public redactedImage: (Uint8Array|Buffer|string);
+
+                    /** SdpRedactResult findings. */
+                    public findings: google.cloud.modelarmor.v1.ISdpFinding[];
+
+                    /** SdpRedactResult extractedImageText. */
+                    public extractedImageText: string;
+
+                    /**
+                     * Creates a new SdpRedactResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SdpRedactResult instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1.ISdpRedactResult): google.cloud.modelarmor.v1.SdpRedactResult;
+
+                    /**
+                     * Encodes the specified SdpRedactResult message. Does not implicitly {@link google.cloud.modelarmor.v1.SdpRedactResult.verify|verify} messages.
+                     * @param message SdpRedactResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1.ISdpRedactResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SdpRedactResult message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.SdpRedactResult.verify|verify} messages.
+                     * @param message SdpRedactResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1.ISdpRedactResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SdpRedactResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SdpRedactResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1.SdpRedactResult;
+
+                    /**
+                     * Decodes a SdpRedactResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SdpRedactResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1.SdpRedactResult;
+
+                    /**
+                     * Verifies a SdpRedactResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SdpRedactResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SdpRedactResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1.SdpRedactResult;
+
+                    /**
+                     * Creates a plain object from a SdpRedactResult message. Also converts values to other types if specified.
+                     * @param message SdpRedactResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1.SdpRedactResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SdpRedactResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SdpRedactResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a PiAndJailbreakFilterResult. */
@@ -18831,6 +19378,119 @@ export namespace google {
 
             /**
              * Gets the default type url for Timestamp
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Date
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

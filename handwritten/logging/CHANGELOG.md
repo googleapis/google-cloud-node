@@ -6,6 +6,25 @@
 [1]: https://www.npmjs.com/package/nodejs-logging?activeTab=versions
 
 
+## [11.3.0](https://github.com/googleapis/google-cloud-node/compare/logging-v11.2.3...logging-v11.3.0) (2026-07-10)
+
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+
+
+### Bug Fixes
+
+* Remove dependency on the eventid package ([#8687](https://github.com/googleapis/google-cloud-node/issues/8687)) ([d258379](https://github.com/googleapis/google-cloud-node/commit/d258379599691e0a7bb9d99e6f655ff4e1918893))
+
+## [11.2.3](https://github.com/googleapis/google-cloud-node/compare/logging-v11.2.2...logging-v11.2.3) (2026-06-16)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [11.2.2](https://github.com/googleapis/google-cloud-node/compare/logging-v11.2.1...logging-v11.2.2) (2026-05-11)
 
 

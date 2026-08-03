@@ -150,9 +150,6 @@ export class ForwardingRulesClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
-    // Request numeric enum values if REST transport is used.
-    opts.numericEnums = true;
-
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -571,6 +568,9 @@ export class ForwardingRulesClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region scoping this request.
+   * @param {string} request.view
+   *
+   *   Check the View enum for the list of possible values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

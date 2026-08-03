@@ -6993,6 +6993,30 @@ export namespace grafeas {
 
             /** CVSS availabilityImpact */
             availabilityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS attackRequirements */
+            attackRequirements?: (grafeas.v1.CVSS.AttackRequirements|keyof typeof grafeas.v1.CVSS.AttackRequirements|null);
+
+            /** CVSS vulnerableSystemConfidentialityImpact */
+            vulnerableSystemConfidentialityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS vulnerableSystemIntegrityImpact */
+            vulnerableSystemIntegrityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS vulnerableSystemAvailabilityImpact */
+            vulnerableSystemAvailabilityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS subsequentSystemConfidentialityImpact */
+            subsequentSystemConfidentialityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS subsequentSystemIntegrityImpact */
+            subsequentSystemIntegrityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS subsequentSystemAvailabilityImpact */
+            subsequentSystemAvailabilityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS exploitMaturity */
+            exploitMaturity?: (grafeas.v1.CVSS.ExploitMaturity|keyof typeof grafeas.v1.CVSS.ExploitMaturity|null);
         }
 
         /** Represents a CVSS. */
@@ -7039,6 +7063,30 @@ export namespace grafeas {
 
             /** CVSS availabilityImpact. */
             public availabilityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS attackRequirements. */
+            public attackRequirements: (grafeas.v1.CVSS.AttackRequirements|keyof typeof grafeas.v1.CVSS.AttackRequirements);
+
+            /** CVSS vulnerableSystemConfidentialityImpact. */
+            public vulnerableSystemConfidentialityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS vulnerableSystemIntegrityImpact. */
+            public vulnerableSystemIntegrityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS vulnerableSystemAvailabilityImpact. */
+            public vulnerableSystemAvailabilityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS subsequentSystemConfidentialityImpact. */
+            public subsequentSystemConfidentialityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS subsequentSystemIntegrityImpact. */
+            public subsequentSystemIntegrityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS subsequentSystemAvailabilityImpact. */
+            public subsequentSystemAvailabilityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS exploitMaturity. */
+            public exploitMaturity: (grafeas.v1.CVSS.ExploitMaturity|keyof typeof grafeas.v1.CVSS.ExploitMaturity);
 
             /**
              * Creates a new CVSS instance using the specified properties.
@@ -7157,7 +7205,9 @@ export namespace grafeas {
             enum UserInteraction {
                 USER_INTERACTION_UNSPECIFIED = 0,
                 USER_INTERACTION_NONE = 1,
-                USER_INTERACTION_REQUIRED = 2
+                USER_INTERACTION_REQUIRED = 2,
+                USER_INTERACTION_PASSIVE = 3,
+                USER_INTERACTION_ACTIVE = 4
             }
 
             /** Scope enum. */
@@ -7176,13 +7226,30 @@ export namespace grafeas {
                 IMPACT_PARTIAL = 4,
                 IMPACT_COMPLETE = 5
             }
+
+            /** AttackRequirements enum. */
+            enum AttackRequirements {
+                ATTACK_REQUIREMENTS_UNSPECIFIED = 0,
+                ATTACK_REQUIREMENTS_NONE = 1,
+                ATTACK_REQUIREMENTS_PRESENT = 2
+            }
+
+            /** ExploitMaturity enum. */
+            enum ExploitMaturity {
+                EXPLOIT_MATURITY_UNSPECIFIED = 0,
+                EXPLOIT_MATURITY_NOT_DEFINED = 1,
+                EXPLOIT_MATURITY_ATTACKED = 2,
+                EXPLOIT_MATURITY_POC = 3,
+                EXPLOIT_MATURITY_UNREPORTED = 4
+            }
         }
 
         /** CVSSVersion enum. */
         enum CVSSVersion {
             CVSS_VERSION_UNSPECIFIED = 0,
             CVSS_VERSION_2 = 1,
-            CVSS_VERSION_3 = 2
+            CVSS_VERSION_3 = 2,
+            CVSS_VERSION_4 = 3
         }
 
         /** Properties of a DeploymentNote. */
@@ -14663,6 +14730,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote advisoryPublishTime */
             advisoryPublishTime?: (google.protobuf.ITimestamp|null);
+
+            /** VulnerabilityNote cvssV4 */
+            cvssV4?: (grafeas.v1.ICVSS|null);
         }
 
         /** Represents a VulnerabilityNote. */
@@ -14700,6 +14770,9 @@ export namespace grafeas {
 
             /** VulnerabilityNote advisoryPublishTime. */
             public advisoryPublishTime?: (google.protobuf.ITimestamp|null);
+
+            /** VulnerabilityNote cvssV4. */
+            public cvssV4?: (grafeas.v1.ICVSS|null);
 
             /**
              * Creates a new VulnerabilityNote instance using the specified properties.
@@ -15225,6 +15298,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence risk */
             risk?: (grafeas.v1.IRisk|null);
+
+            /** VulnerabilityOccurrence cvssV4 */
+            cvssV4?: (grafeas.v1.ICVSS|null);
         }
 
         /** Represents a VulnerabilityOccurrence. */
@@ -15280,6 +15356,9 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence risk. */
             public risk?: (grafeas.v1.IRisk|null);
+
+            /** VulnerabilityOccurrence cvssV4. */
+            public cvssV4?: (grafeas.v1.ICVSS|null);
 
             /**
              * Creates a new VulnerabilityOccurrence instance using the specified properties.

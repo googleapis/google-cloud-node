@@ -70,6 +70,12 @@ export namespace google {
 
                     /** Secret tags */
                     tags?: ({ [k: string]: string }|null);
+
+                    /** Secret secretType */
+                    secretType?: (google.cloud.secretmanager.v1.Secret.SecretType|keyof typeof google.cloud.secretmanager.v1.Secret.SecretType|null);
+
+                    /** Secret policyMember */
+                    policyMember?: (google.iam.v1.IResourcePolicyMember|null);
                 }
 
                 /** Represents a Secret. */
@@ -122,6 +128,12 @@ export namespace google {
 
                     /** Secret tags. */
                     public tags: { [k: string]: string };
+
+                    /** Secret secretType. */
+                    public secretType: (google.cloud.secretmanager.v1.Secret.SecretType|keyof typeof google.cloud.secretmanager.v1.Secret.SecretType);
+
+                    /** Secret policyMember. */
+                    public policyMember?: (google.iam.v1.IResourcePolicyMember|null);
 
                     /** Secret expiration. */
                     public expiration?: ("expireTime"|"ttl");
@@ -202,6 +214,19 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Secret {
+
+                    /** SecretType enum. */
+                    enum SecretType {
+                        SECRET_TYPE_UNSPECIFIED = 0,
+                        CLOUD_SQL_DB_CREDENTIALS = 1,
+                        ACCESS_KEY = 2,
+                        CERTIFICATE = 3,
+                        OTHER_DB_CREDENTIALS = 4,
+                        OTHER = 50
+                    }
                 }
 
                 /** Properties of a SecretVersion. */
@@ -1477,6 +1502,9 @@ export namespace google {
 
                     /** Rotation rotationPeriod */
                     rotationPeriod?: (google.protobuf.IDuration|null);
+
+                    /** Rotation managedRotationStatus */
+                    managedRotationStatus?: (google.cloud.secretmanager.v1.Rotation.IManagedRotationStatus|null);
                 }
 
                 /** Represents a Rotation. */
@@ -1493,6 +1521,9 @@ export namespace google {
 
                     /** Rotation rotationPeriod. */
                     public rotationPeriod?: (google.protobuf.IDuration|null);
+
+                    /** Rotation managedRotationStatus. */
+                    public managedRotationStatus?: (google.cloud.secretmanager.v1.Rotation.IManagedRotationStatus|null);
 
                     /**
                      * Creates a new Rotation instance using the specified properties.
@@ -1570,6 +1601,122 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Rotation {
+
+                    /** Properties of a ManagedRotationStatus. */
+                    interface IManagedRotationStatus {
+
+                        /** ManagedRotationStatus state */
+                        state?: (google.cloud.secretmanager.v1.Rotation.ManagedRotationStatus.State|keyof typeof google.cloud.secretmanager.v1.Rotation.ManagedRotationStatus.State|null);
+
+                        /** ManagedRotationStatus error */
+                        error?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents a ManagedRotationStatus. */
+                    class ManagedRotationStatus implements IManagedRotationStatus {
+
+                        /**
+                         * Constructs a new ManagedRotationStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.secretmanager.v1.Rotation.IManagedRotationStatus);
+
+                        /** ManagedRotationStatus state. */
+                        public state: (google.cloud.secretmanager.v1.Rotation.ManagedRotationStatus.State|keyof typeof google.cloud.secretmanager.v1.Rotation.ManagedRotationStatus.State);
+
+                        /** ManagedRotationStatus error. */
+                        public error?: (google.rpc.IStatus|null);
+
+                        /**
+                         * Creates a new ManagedRotationStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ManagedRotationStatus instance
+                         */
+                        public static create(properties?: google.cloud.secretmanager.v1.Rotation.IManagedRotationStatus): google.cloud.secretmanager.v1.Rotation.ManagedRotationStatus;
+
+                        /**
+                         * Encodes the specified ManagedRotationStatus message. Does not implicitly {@link google.cloud.secretmanager.v1.Rotation.ManagedRotationStatus.verify|verify} messages.
+                         * @param message ManagedRotationStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.secretmanager.v1.Rotation.IManagedRotationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ManagedRotationStatus message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.Rotation.ManagedRotationStatus.verify|verify} messages.
+                         * @param message ManagedRotationStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.secretmanager.v1.Rotation.IManagedRotationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ManagedRotationStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ManagedRotationStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.Rotation.ManagedRotationStatus;
+
+                        /**
+                         * Decodes a ManagedRotationStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ManagedRotationStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.Rotation.ManagedRotationStatus;
+
+                        /**
+                         * Verifies a ManagedRotationStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ManagedRotationStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ManagedRotationStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.Rotation.ManagedRotationStatus;
+
+                        /**
+                         * Creates a plain object from a ManagedRotationStatus message. Also converts values to other types if specified.
+                         * @param message ManagedRotationStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.secretmanager.v1.Rotation.ManagedRotationStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ManagedRotationStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ManagedRotationStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ManagedRotationStatus {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTIVE = 1,
+                            INACTIVE = 2
+                        }
+                    }
                 }
 
                 /** Properties of a SecretPayload. */
@@ -1904,6 +2051,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+
+                    /**
+                     * Calls EnableManagedRotation.
+                     * @param request EnableManagedRotationRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecretVersion
+                     */
+                    public enableManagedRotation(request: google.cloud.secretmanager.v1.IEnableManagedRotationRequest, callback: google.cloud.secretmanager.v1.SecretManagerService.EnableManagedRotationCallback): void;
+
+                    /**
+                     * Calls EnableManagedRotation.
+                     * @param request EnableManagedRotationRequest message or plain object
+                     * @returns Promise
+                     */
+                    public enableManagedRotation(request: google.cloud.secretmanager.v1.IEnableManagedRotationRequest): Promise<google.cloud.secretmanager.v1.SecretVersion>;
+
+                    /**
+                     * Calls RotateSecret.
+                     * @param request RotateSecretRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SecretVersion
+                     */
+                    public rotateSecret(request: google.cloud.secretmanager.v1.IRotateSecretRequest, callback: google.cloud.secretmanager.v1.SecretManagerService.RotateSecretCallback): void;
+
+                    /**
+                     * Calls RotateSecret.
+                     * @param request RotateSecretRequest message or plain object
+                     * @returns Promise
+                     */
+                    public rotateSecret(request: google.cloud.secretmanager.v1.IRotateSecretRequest): Promise<google.cloud.secretmanager.v1.SecretVersion>;
                 }
 
                 namespace SecretManagerService {
@@ -2012,6 +2187,20 @@ export namespace google {
                      * @param [response] TestIamPermissionsResponse
                      */
                     type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1.SecretManagerService|enableManagedRotation}.
+                     * @param error Error, if any
+                     * @param [response] SecretVersion
+                     */
+                    type EnableManagedRotationCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1.SecretVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.secretmanager.v1.SecretManagerService|rotateSecret}.
+                     * @param error Error, if any
+                     * @param [response] SecretVersion
+                     */
+                    type RotateSecretCallback = (error: (Error|null), response?: google.cloud.secretmanager.v1.SecretVersion) => void;
                 }
 
                 /** Properties of a ListSecretsRequest. */
@@ -2444,6 +2633,321 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AddSecretVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EnableManagedRotationRequest. */
+                interface IEnableManagedRotationRequest {
+
+                    /** EnableManagedRotationRequest parent */
+                    parent?: (string|null);
+
+                    /** EnableManagedRotationRequest cloudSqlSingleUserCredentials */
+                    cloudSqlSingleUserCredentials?: (google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials|null);
+                }
+
+                /** Represents an EnableManagedRotationRequest. */
+                class EnableManagedRotationRequest implements IEnableManagedRotationRequest {
+
+                    /**
+                     * Constructs a new EnableManagedRotationRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1.IEnableManagedRotationRequest);
+
+                    /** EnableManagedRotationRequest parent. */
+                    public parent: string;
+
+                    /** EnableManagedRotationRequest cloudSqlSingleUserCredentials. */
+                    public cloudSqlSingleUserCredentials?: (google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials|null);
+
+                    /** EnableManagedRotationRequest credentials. */
+                    public credentials?: "cloudSqlSingleUserCredentials";
+
+                    /**
+                     * Creates a new EnableManagedRotationRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnableManagedRotationRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1.IEnableManagedRotationRequest): google.cloud.secretmanager.v1.EnableManagedRotationRequest;
+
+                    /**
+                     * Encodes the specified EnableManagedRotationRequest message. Does not implicitly {@link google.cloud.secretmanager.v1.EnableManagedRotationRequest.verify|verify} messages.
+                     * @param message EnableManagedRotationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1.IEnableManagedRotationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnableManagedRotationRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.EnableManagedRotationRequest.verify|verify} messages.
+                     * @param message EnableManagedRotationRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1.IEnableManagedRotationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnableManagedRotationRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnableManagedRotationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.EnableManagedRotationRequest;
+
+                    /**
+                     * Decodes an EnableManagedRotationRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnableManagedRotationRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.EnableManagedRotationRequest;
+
+                    /**
+                     * Verifies an EnableManagedRotationRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnableManagedRotationRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnableManagedRotationRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.EnableManagedRotationRequest;
+
+                    /**
+                     * Creates a plain object from an EnableManagedRotationRequest message. Also converts values to other types if specified.
+                     * @param message EnableManagedRotationRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1.EnableManagedRotationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnableManagedRotationRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EnableManagedRotationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EnableManagedRotationRequest {
+
+                    /** Properties of a CloudSQLSingleUserCredentials. */
+                    interface ICloudSQLSingleUserCredentials {
+
+                        /** CloudSQLSingleUserCredentials instanceId */
+                        instanceId?: (string|null);
+
+                        /** CloudSQLSingleUserCredentials username */
+                        username?: (string|null);
+
+                        /** CloudSQLSingleUserCredentials password */
+                        password?: (string|null);
+                    }
+
+                    /** Represents a CloudSQLSingleUserCredentials. */
+                    class CloudSQLSingleUserCredentials implements ICloudSQLSingleUserCredentials {
+
+                        /**
+                         * Constructs a new CloudSQLSingleUserCredentials.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials);
+
+                        /** CloudSQLSingleUserCredentials instanceId. */
+                        public instanceId: string;
+
+                        /** CloudSQLSingleUserCredentials username. */
+                        public username: string;
+
+                        /** CloudSQLSingleUserCredentials password. */
+                        public password: string;
+
+                        /**
+                         * Creates a new CloudSQLSingleUserCredentials instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudSQLSingleUserCredentials instance
+                         */
+                        public static create(properties?: google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials): google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials;
+
+                        /**
+                         * Encodes the specified CloudSQLSingleUserCredentials message. Does not implicitly {@link google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials.verify|verify} messages.
+                         * @param message CloudSQLSingleUserCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudSQLSingleUserCredentials message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials.verify|verify} messages.
+                         * @param message CloudSQLSingleUserCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.secretmanager.v1.EnableManagedRotationRequest.ICloudSQLSingleUserCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudSQLSingleUserCredentials message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudSQLSingleUserCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials;
+
+                        /**
+                         * Decodes a CloudSQLSingleUserCredentials message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudSQLSingleUserCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials;
+
+                        /**
+                         * Verifies a CloudSQLSingleUserCredentials message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudSQLSingleUserCredentials message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudSQLSingleUserCredentials
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials;
+
+                        /**
+                         * Creates a plain object from a CloudSQLSingleUserCredentials message. Also converts values to other types if specified.
+                         * @param message CloudSQLSingleUserCredentials
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudSQLSingleUserCredentials to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudSQLSingleUserCredentials
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a RotateSecretRequest. */
+                interface IRotateSecretRequest {
+
+                    /** RotateSecretRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a RotateSecretRequest. */
+                class RotateSecretRequest implements IRotateSecretRequest {
+
+                    /**
+                     * Constructs a new RotateSecretRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.secretmanager.v1.IRotateSecretRequest);
+
+                    /** RotateSecretRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new RotateSecretRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RotateSecretRequest instance
+                     */
+                    public static create(properties?: google.cloud.secretmanager.v1.IRotateSecretRequest): google.cloud.secretmanager.v1.RotateSecretRequest;
+
+                    /**
+                     * Encodes the specified RotateSecretRequest message. Does not implicitly {@link google.cloud.secretmanager.v1.RotateSecretRequest.verify|verify} messages.
+                     * @param message RotateSecretRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.secretmanager.v1.IRotateSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RotateSecretRequest message, length delimited. Does not implicitly {@link google.cloud.secretmanager.v1.RotateSecretRequest.verify|verify} messages.
+                     * @param message RotateSecretRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.secretmanager.v1.IRotateSecretRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RotateSecretRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RotateSecretRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.secretmanager.v1.RotateSecretRequest;
+
+                    /**
+                     * Decodes a RotateSecretRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RotateSecretRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.secretmanager.v1.RotateSecretRequest;
+
+                    /**
+                     * Verifies a RotateSecretRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RotateSecretRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RotateSecretRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.secretmanager.v1.RotateSecretRequest;
+
+                    /**
+                     * Creates a plain object from a RotateSecretRequest message. Also converts values to other types if specified.
+                     * @param message RotateSecretRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.secretmanager.v1.RotateSecretRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RotateSecretRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RotateSecretRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -14091,6 +14595,109 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|Buffer|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|Buffer|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a FieldMask. */
         interface IFieldMask {
 
@@ -14285,6 +14892,109 @@ export namespace google {
 
         /** Namespace v1. */
         namespace v1 {
+
+            /** Properties of a ResourcePolicyMember. */
+            interface IResourcePolicyMember {
+
+                /** ResourcePolicyMember iamPolicyNamePrincipal */
+                iamPolicyNamePrincipal?: (string|null);
+
+                /** ResourcePolicyMember iamPolicyUidPrincipal */
+                iamPolicyUidPrincipal?: (string|null);
+            }
+
+            /** Represents a ResourcePolicyMember. */
+            class ResourcePolicyMember implements IResourcePolicyMember {
+
+                /**
+                 * Constructs a new ResourcePolicyMember.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IResourcePolicyMember);
+
+                /** ResourcePolicyMember iamPolicyNamePrincipal. */
+                public iamPolicyNamePrincipal: string;
+
+                /** ResourcePolicyMember iamPolicyUidPrincipal. */
+                public iamPolicyUidPrincipal: string;
+
+                /**
+                 * Creates a new ResourcePolicyMember instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ResourcePolicyMember instance
+                 */
+                public static create(properties?: google.iam.v1.IResourcePolicyMember): google.iam.v1.ResourcePolicyMember;
+
+                /**
+                 * Encodes the specified ResourcePolicyMember message. Does not implicitly {@link google.iam.v1.ResourcePolicyMember.verify|verify} messages.
+                 * @param message ResourcePolicyMember message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IResourcePolicyMember, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ResourcePolicyMember message, length delimited. Does not implicitly {@link google.iam.v1.ResourcePolicyMember.verify|verify} messages.
+                 * @param message ResourcePolicyMember message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IResourcePolicyMember, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ResourcePolicyMember message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ResourcePolicyMember
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.ResourcePolicyMember;
+
+                /**
+                 * Decodes a ResourcePolicyMember message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ResourcePolicyMember
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.ResourcePolicyMember;
+
+                /**
+                 * Verifies a ResourcePolicyMember message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ResourcePolicyMember message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ResourcePolicyMember
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.ResourcePolicyMember;
+
+                /**
+                 * Creates a plain object from a ResourcePolicyMember message. Also converts values to other types if specified.
+                 * @param message ResourcePolicyMember
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.ResourcePolicyMember, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ResourcePolicyMember to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ResourcePolicyMember
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
 
             /** Represents a IAMPolicy */
             class IAMPolicy extends $protobuf.rpc.Service {
@@ -15675,6 +16385,119 @@ export namespace google {
                     REMOVE = 2
                 }
             }
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 

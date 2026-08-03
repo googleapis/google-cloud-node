@@ -1,5 +1,26 @@
 # Changelog
 
+## [6.11.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.10.0...aiplatform-v6.11.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
+## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.9.0...aiplatform-v6.10.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.8.1...aiplatform-v6.9.0) (2026-07-13)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
 ## [6.8.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.8.0...aiplatform-v6.8.1) (2026-06-01)
 
 

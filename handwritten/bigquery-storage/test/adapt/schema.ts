@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {google} from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
+import google = protos.google;
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import * as adapt from '../../src/adapt';

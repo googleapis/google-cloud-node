@@ -111,6 +111,7 @@ export {
   CombineCallback,
   CombineOptions,
   CombineResponse,
+  ComposeCleanupError,
   CreateChannelCallback,
   CreateChannelConfig,
   CreateChannelOptions,

@@ -5,6 +5,57 @@
 
 [1]: https://www.npmjs.com/package/google-auth-library?activeTab=versions
 
+## [11.0.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.9.1...google-auth-library-v11.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update google-auth-library-nodejs to minimum Node version of 22. ([#8995](https://github.com/googleapis/google-cloud-node/issues/8995))
+
+### Features
+
+* Update google-auth-library-nodejs to minimum Node version of 22. ([#8995](https://github.com/googleapis/google-cloud-node/issues/8995)) ([152f686](https://github.com/googleapis/google-cloud-node/commit/152f68682850e30936597c732a62eca9c7a60eee)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [10.9.1](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.9.0...google-auth-library-v10.9.1) (2026-07-23)
+
+
+### Bug Fixes
+
+* **auth:** Add GOOGLE_APPLICATION_CREDENTIALS context to credential load errors ([#8800](https://github.com/googleapis/google-cloud-node/issues/8800)) ([829990f](https://github.com/googleapis/google-cloud-node/commit/829990f297b287c43d6f7761c7a5e3a9ec322c1d)), refs [#8799](https://github.com/googleapis/google-cloud-node/issues/8799)
+* **auth:** Honor CLOUDSDK_CONFIG when locating the ADC well-known file ([#8798](https://github.com/googleapis/google-cloud-node/issues/8798)) ([6e912cf](https://github.com/googleapis/google-cloud-node/commit/6e912cf5f6309a2d2a0f0207296dd807396c064a)), refs [#8797](https://github.com/googleapis/google-cloud-node/issues/8797)
+
+## [10.9.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.8.1...google-auth-library-v10.9.0) (2026-06-24)
+
+
+### Features
+
+* **auth:** Regional access boundaries main merge ([#8665](https://github.com/googleapis/google-cloud-node/issues/8665)) ([76e6d3b](https://github.com/googleapis/google-cloud-node/commit/76e6d3b6dea6032547780155c045e41552e27f40))
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+
+## [10.8.1](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.8.0...google-auth-library-v10.8.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* Strip trailing slashes from automatic GDCH audience ([#8692](https://github.com/googleapis/google-cloud-node/issues/8692)) ([4e4badf](https://github.com/googleapis/google-cloud-node/commit/4e4badf1a5c6fde28fa099fb184b02cf794d8dfd))
+
+## [10.8.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.7.0...google-auth-library-v10.8.0) (2026-06-18)
+
+
+### Features
+
+* Port GDCH credentials support to Node.js Auth SDK ([#8301](https://github.com/googleapis/google-cloud-node/issues/8301)) ([75f148c](https://github.com/googleapis/google-cloud-node/commit/75f148ca83618193c884e139ff8ed76e28854d2d))
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+
 ## [10.7.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v10.6.3...google-auth-library-v10.7.0) (2026-06-03)
 
 
