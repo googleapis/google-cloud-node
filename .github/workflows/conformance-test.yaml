@@ -11,8 +11,13 @@ on:
     paths:
       - 'handwritten/storage/**'
 name: conformance
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   conformance-test:
+    name: conformance-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1

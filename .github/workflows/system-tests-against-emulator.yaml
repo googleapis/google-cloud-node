@@ -1,34 +1,50 @@
-# on:
-#   push:
-#     branches:
-#       - main
-#     paths:
-#       - 'handwritten/spanner/**'
-#   pull_request:
-#     paths:
-#       - 'handwritten/spanner/**'
-# name: system-tests-against-emulator
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest
+name: system-tests-against-emulator
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'handwritten/spanner/**'
+  pull_request:
+    paths:
+      - 'handwritten/spanner/**'
+  workflow_dispatch:
 
-#     services:
-#       emulator:
-#         image: gcr.io/cloud-spanner-emulator/emulator:latest
-#         ports:
-#           - 9010:9010
-#           - 9020:9020
+permissions:
+  contents: read
 
-#     steps:
-#       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
-#       - uses: actions/setup-node@v5
-#         with:
-#           node-version: 22
-#       - run: node --version
-#       - run: npm install
-#         working-directory: handwritten/spanner
-#       - run: npm run system-test
-#         working-directory: handwritten/spanner
-#         env:
-#           SPANNER_EMULATOR_HOST: localhost:9010
-#           GCLOUD_PROJECT: emulator-test-project
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: test
+    # Temporarily disabled (previously commented out in 28f56445a637f3e8cbef61ab8e2a2669bd388278)
+    if: false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    services:
+      emulator:
+        image: gcr.io/cloud-spanner-emulator/emulator@sha256:ad54472fe7b161b9214f7f816f304b649a4779e348229c375ac067f5ed5a6422
+        ports:
+          - 9010:9010
+          - 9020:9020
+
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 22
+      - run: node --version
+      - run: npm install
+        working-directory: handwritten/spanner
+      - run: npm run system-test
+        working-directory: handwritten/spanner
+        env:
+          SPANNER_EMULATOR_HOST: localhost:9010
+          GCLOUD_PROJECT: emulator-test-project

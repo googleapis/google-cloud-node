@@ -26,8 +26,13 @@ on:
     paths:
     - 'handwritten/bigtable/**'
 name: conformance
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   conformance:
+    name: conformance
     runs-on: ubuntu-latest
     defaults:
       run:

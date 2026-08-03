@@ -26,8 +26,13 @@ on:
     paths:
     - 'handwritten/bigtable/**'
 name: mandatory-conformance
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   mandatory-conformance:
+    name: mandatory-conformance
     runs-on: ubuntu-latest
     defaults:
       run:

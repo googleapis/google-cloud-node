@@ -15,11 +15,17 @@ on:
       - '.github/workflows/generator-tests.yaml'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   presubmit:
+    name: presubmit
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    container: gcr.io/gapic-images/googleapis:20250404
+    environment: presubmit
+    container: gcr.io/gapic-images/googleapis@sha256:cd3f791dfc4267f522ed0714d95e0b5c64741c69cbeb732dbf99078813d63ade # 20250404
     steps:
     - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
       with:

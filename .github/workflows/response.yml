@@ -8,13 +8,18 @@ on:
   workflow_dispatch:
   issue_comment:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   close:
+    name: close
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
-      issues: write
-      pull-requests: write
+      issues: write # Required to comment on and close unresponsive issues labeled awaiting response
+      pull-requests: write # Required to comment on and close unresponsive pull requests labeled awaiting response
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
@@ -26,11 +31,12 @@ jobs:
             await script({github, context})
 
   remove_label:
+    name: remove_label
     if: github.event_name == 'issue_comment'
     runs-on: ubuntu-latest
     permissions:
-      issues: write
-      pull-requests: write
+      issues: write # Required to remove response labels from issues when the author replies
+      pull-requests: write # Required to remove response labels from pull requests when the author replies
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:

@@ -4,8 +4,13 @@ permissions:
 on:
   pull_request:
 name: presubmit-windows
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   units:
+    name: units
     runs-on: windows-latest
     strategy:
       matrix:
