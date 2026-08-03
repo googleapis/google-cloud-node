@@ -1,6 +1,6 @@
 {
   "name": "spanner-driver",
-  "name_pretty": "Cloud Spanner Driver",
+  "name_pretty": "Spanner Driver",
   "product_documentation": "https://cloud.google.com/spanner/docs/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/spanner/latest",
   "issue_tracker": "https://issuetracker.google.com/issues?q=componentid:190851%2B%20status:open",
