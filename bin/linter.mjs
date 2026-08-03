@@ -26,7 +26,7 @@ const tsconfigCache = new Map();
 // --- Main Runner (Entry Point) ---
 async function run() {
   try {
-    const isStrict = Boolean(process.env.STRICT);
+    const isStrict = Boolean(process.env.STRICT || process.argv.includes('--strict'));
     let changedTsFiles;
     if (isStrict) {
       changedTsFiles = getChangedFilesStrict();
@@ -69,13 +69,27 @@ function runGit(args, options = {}) {
   });
 }
 
+function getGitDiffArg() {
+  const cliIndex = process.argv.findIndex(arg => arg.startsWith('--git-diff-arg'));
+  if (cliIndex !== -1) {
+    const arg = process.argv[cliIndex];
+    if (arg.includes('=')) {
+      return arg.substring(arg.indexOf('=') + 1);
+    }
+    if (process.argv[cliIndex + 1] && !process.argv[cliIndex + 1].startsWith('-')) {
+      return process.argv[cliIndex + 1];
+    }
+  }
+  return process.env.GIT_DIFF_ARG;
+}
+
 function getChangedFilesStrict() {
-  const gitDiffArg = process.env.GIT_DIFF_ARG;
+  const gitDiffArg = getGitDiffArg();
 
   if (!gitDiffArg) {
     throw new Error(
-      'Strict mode is enabled, but GIT_DIFF_ARG environment variable was not provided. ' +
-      'Please set the GIT_DIFF_ARG environment variable.'
+      'Strict mode is enabled, but GIT_DIFF_ARG environment variable or --git-diff-arg flag was not provided. ' +
+      'Please set the GIT_DIFF_ARG environment variable or provide --git-diff-arg <arg>.'
     );
   }
 

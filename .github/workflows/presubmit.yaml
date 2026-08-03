@@ -34,10 +34,8 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
-          fetch-depth: 300
+          fetch-depth: 2
           persist-credentials: false
-      - name: Fetch base branch for linter diff
-        run: git fetch origin ${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
       - name: Use Node.js 24
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
@@ -47,4 +45,4 @@ jobs:
         name: Run monorepo linter
         env:
           STRICT: "true"
-          GIT_DIFF_ARG: "origin/${{ github.base_ref }}...HEAD"
+          GIT_DIFF_ARG: "HEAD^1"
