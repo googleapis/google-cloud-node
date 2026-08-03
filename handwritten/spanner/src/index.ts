@@ -420,8 +420,10 @@ class Spanner extends GrpcService {
         libName: 'gccl',
         libVersion: require('../../package.json').version,
         scopes,
+        'grpc.tcp_nodelay': 1,
         // Add grpc keep alive setting
         'grpc.keepalive_time_ms': 120000,
+        'grpc.http2.min_time_between_pings_ms': 10000,
         // Enable grpc-gcp support
         'grpc.callInvocationTransformer': grpcGcp.gcpCallInvocationTransformer,
         'grpc.channelFactoryOverride': grpcGcp.gcpChannelFactoryOverride,
