@@ -20,17 +20,14 @@ jobs:
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           persist-credentials: false
-          fetch-depth: 0
-
-      - name: Fetch base branch for diff
-        run: git fetch origin ${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+          fetch-depth: 2
 
       - name: Assign Reviewers
         continue-on-error: true
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         env:
           STRICT: "true"
-          GIT_DIFF_ARG: "origin/${{ github.base_ref }}...HEAD"
+          GIT_DIFF_ARG: "HEAD^1"
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
