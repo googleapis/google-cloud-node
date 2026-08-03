@@ -66,7 +66,7 @@ export async function reapInstances(
           }
         }
         const timeCreated = new Date(
-          isNaN(timeCreatedNum) ? timeCreatedRaw : timeCreatedNum,
+          isNaN(timeCreatedNum) ? (timeCreatedRaw || 0) : timeCreatedNum,
         );
         const staleThreshold = new Date(Date.now() - maxAgeMs);
         return timeCreated <= staleThreshold;
