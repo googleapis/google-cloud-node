@@ -1,15 +1,15 @@
 {
-  "api_id": "agentidentity.googleapis.com",
-  "api_shortname": "agentidentity",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/agentidentity/latest",
-  "default_version": "v1",
-  "distribution_name": "@google-cloud/agentidentity",
-  "issue_tracker": "https://issuetracker.google.com/issues/new?component=961386",
-  "language": "nodejs",
-  "library_type": "GAPIC_AUTO",
-  "name": "agentidentity",
-  "name_pretty": "Agent Identity",
-  "product_documentation": "https://cloud.google.com/agentidentity/docs",
-  "release_level": "stable",
-  "repo": "googleapis/google-cloud-node"
+    "api_id": "agentidentity.googleapis.com",
+    "api_shortname": "agentidentity",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/agentidentity/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/agentidentity",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=961386",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "agentidentity",
+    "name_pretty": "Agent Identity",
+    "product_documentation": "https://cloud.google.com/agentidentity/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }

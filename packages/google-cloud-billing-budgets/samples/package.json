@@ -9,7 +9,7 @@
   "author": "Google LLC",
   "repository": "googleapis/nodejs-billing-budgets",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "scripts": {
     "test": "c8 mocha test --timeout=800000"
