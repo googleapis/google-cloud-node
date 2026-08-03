@@ -20,14 +20,11 @@ jobs:
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           persist-credentials: false
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Assign Reviewers
         continue-on-error: true
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
-        env:
-          STRICT: "true"
-          GIT_DIFF_ARG: "HEAD^1"
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -93,29 +90,6 @@ jobs:
 
             // 3. Obtain changed files (via local git diff or API fallback)
             const getChangedFiles = async () => {
-              const isStrict = Boolean(process.env.STRICT);
-              if (isStrict) {
-                const gitDiffArg = process.env.GIT_DIFF_ARG;
-                if (!gitDiffArg) {
-                  throw new Error(
-                    'Strict mode is enabled, but GIT_DIFF_ARG environment variable was not provided.'
-                  );
-                }
-                try {
-                  cp.execSync(`git diff --quiet ${gitDiffArg}`);
-                } catch (err) {
-                  if (err.status !== 1) {
-                    throw new Error(
-                      `Strict mode error: git diff --quiet ${gitDiffArg} failed with exit code ${err.status}.\n` +
-                      `Details: ${String(err.stderr || err.message || '').trim()}`
-                    );
-                  }
-                }
-                const diffOutput = cp.execSync(`git diff --name-only --diff-filter=ACMRT ${gitDiffArg}`, { encoding: 'utf-8' });
-                console.log(`Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`);
-                return diffOutput.split('\n').map(f => f.trim()).filter(Boolean);
-              }
-
               const baseRef = pr.base.ref || 'main';
               const refsToTry = baseRef.startsWith('origin/') ? [baseRef] : [`origin/${baseRef}`, baseRef];
 
