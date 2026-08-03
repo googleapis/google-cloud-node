@@ -46,6 +46,7 @@
     "system-test:emulator:rest": "FIRESTORE_EMULATOR_HOST=localhost:8080 FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
     "system-test:enterprise:emulator:rest": "RUN_ENTERPRISE_TESTS=yes FIRESTORE_DATABASE_ID=firestore-enterprise FIRESTORE_EMULATOR_HOST=localhost:8080 FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
     "system-test:emulator:grpc": "FIRESTORE_EMULATOR_HOST=localhost:8080 mocha build/system-test --timeout 1200000",
+    "system-test:enterprise:emulator:grpc": "RUN_ENTERPRISE_TESTS=yes FIRESTORE_DATABASE_ID=firestore-enterprise FIRESTORE_EMULATOR_HOST=localhost:8080 mocha build/system-test --timeout 1200000",
     "system-test:standard": "npm run system-test:grpc && npm run system-test:rest",
     "system-test:enterprise": "npm run system-test:enterprise:grpc && npm run system-test:enterprise:rest",
     "system-test": "concurrently -p \"[{name}]\" -n \"standard,enterprise\" -c \"cyan,yellow\" \"npm:system-test:standard\" \"npm:system-test:enterprise\"",

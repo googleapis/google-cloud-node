@@ -384,7 +384,12 @@ export async function isAvailable() {
             return false;
           } else {
             let errObj = e as any;
-            if (errObj instanceof Error && errObj.cause) {
+            if (
+              errObj instanceof Error &&
+              errObj.cause &&
+              !('code' in errObj) &&
+              errObj.name !== 'AggregateError'
+            ) {
               errObj = errObj.cause;
             }
 

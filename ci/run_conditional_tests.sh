@@ -36,6 +36,7 @@ if [[ "$(node -v)" == v22* ]]; then
   export NODE_OPTIONS="${NODE_OPTIONS} --no-experimental-require-module"
 fi
 
+STRICT=false
 for arg in "$@"; do
     case "${arg}" in
         --strict)
