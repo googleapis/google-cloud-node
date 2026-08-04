@@ -43,7 +43,7 @@
     "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "google-auth-library": "^10.6.2",
+    "google-auth-library": "^11.0.0",
     "google-gax": "^6.0.0",
     "server-destroy": "^1.0.1"
   },
