@@ -55,7 +55,6 @@ import {loggingUtils as logging} from 'google-gax';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 {%- endif %}
-{% if api.enableTelemetryTracing %} import { getGaxTracer } from 'google-gax'; {% endif %}
 
 /**
  * Client JSON configuration object, loaded from
@@ -196,6 +195,15 @@ export class {{ service.name }}Client {
     if (!gaxInstance) {
       gaxInstance = require('google-gax') as typeof gax;
     }
+    {%- endif %}
+
+    {%- if api.enableTelemetryTracing %}
+      opts.internalTelemetryInfo = {
+        gcpClientService: '{{ api.loggingName }}',
+        gcpClientVersion: '{{ api.naming.version }}',
+        gcpRepo: 'googleapis/google-cloud-node',
+        gcpArtifact: '{{ api.publishName }}',
+      }
     {%- endif %}
 
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
