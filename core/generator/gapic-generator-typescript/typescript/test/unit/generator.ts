@@ -300,10 +300,10 @@ apis:
           {name: 'google/cloud/test/v1/test.proto'},
           {name: 'google/cloud/test/v1/other.proto'},
         ],
-      } as protos.google.protobuf.compiler.CodeGeneratorRequest;
+      } as unknown as protos.google.protobuf.compiler.CodeGeneratorRequest;
       generator.response = {
         file: [],
-      } as protos.google.protobuf.compiler.CodeGeneratorResponse;
+      } as unknown as protos.google.protobuf.compiler.CodeGeneratorResponse;
 
       getTestGenerator(generator).addProtosToResponse();
 
@@ -382,7 +382,7 @@ apis:
       try {
         generator.request = {
           protoFile: [],
-        } as protos.google.protobuf.compiler.CodeGeneratorRequest;
+        } as unknown as protos.google.protobuf.compiler.CodeGeneratorRequest;
 
         await generator.generate();
 
