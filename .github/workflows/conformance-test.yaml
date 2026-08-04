@@ -10,7 +10,7 @@ on:
   pull_request:
     paths:
       - 'handwritten/storage/**'
-name: storage-conformance
+name: conformance
 jobs:
   conformance-test:
     runs-on: ubuntu-latest

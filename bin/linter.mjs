@@ -17,10 +17,7 @@ import {existsSync} from 'fs';
 import path from 'path';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
-import * as tsImport from 'typescript';
-
-// Support both default-wrapped CJS in ESM and standard namespace exports across Node runtimes
-const ts = tsImport.default && typeof tsImport.default.findConfigFile === 'function' ? tsImport.default : tsImport;
+import ts from 'typescript';
 
 // --- Globals & Promisified API Wrappers ---
 const execFileAsync = promisify(execFile);
@@ -29,13 +26,7 @@ const tsconfigCache = new Map();
 // --- Main Runner (Entry Point) ---
 async function run() {
   try {
-    const isStrict = Boolean(process.argv.includes('--strict'));
-    let changedTsFiles;
-    if (isStrict) {
-      changedTsFiles = getChangedFilesStrict();
-    } else {
-      changedTsFiles = getChangedFiles();
-    }
+    const changedTsFiles = getChangedFiles();
 
     if (changedTsFiles.length === 0) {
       console.log('No TypeScript files changed. Skipping checks.');
@@ -72,56 +63,16 @@ function runGit(args, options = {}) {
   });
 }
 
-function getChangedFilesStrict() {
-  const gitDiffArg = process.env.GIT_DIFF_ARG;
-
-  if (!gitDiffArg) {
-    throw new Error(
-      'Strict mode is enabled, but GIT_DIFF_ARG environment variable or --git-diff-arg flag was not provided. ' +
-      'Please set the GIT_DIFF_ARG environment variable or provide --git-diff-arg <arg>.'
-    );
-  }
-
-  console.log(`Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`);
-
-  const args = gitDiffArg.trim().split(/\s+/);
-
-  try {
-    const output = runGit([
-      'diff',
-      '--name-only',
-      '--diff-filter=ACMRT',
-      ...args,
-      '--',
-      '*.ts',
-    ]);
-    return output
-      .split('\n')
-      .map(f => f.trim())
-      .filter(f => f.length > 0 && existsSync(f));
-  } catch (err) {
-    if (err.status !== 1) {
-      throw new Error(
-        `Strict mode error: git diff --quiet ${gitDiffArg} failed with exit code ${err.status}.\n` +
-        `Ensure that the git reference '${gitDiffArg}' exists locally and that you have fetched the required commits/branches.\n` +
-        `Details: ${String(err.stderr || err.message || '').trim()}`
-      );
-    }
-  }
-}
-
 /**
  * Returns a list of changed TypeScript files comparing against target branches/references.
  */
 function getChangedFiles() {
   const base = process.env.GITHUB_BASE_REF || 'main';
   const refsToTry = [
-    `origin/${base}...HEAD`,
-    `${base}...HEAD`,
-    `upstream/${base}...HEAD`,
-    `origin/${base}`,
     base,
     `upstream/${base}`,
+    `origin/${base}`,
+    'FETCH_HEAD',
     'HEAD~1',
     'HEAD^',
   ];
@@ -175,39 +126,37 @@ async function checkEslint(filesToCheck) {
     return true;
   }
 
-  const filesByPkg = new Map();
-  for (const file of filesToCheck) {
-    const pkg = findTsconfigDir(file) || '.';
-    if (!filesByPkg.has(pkg)) filesByPkg.set(pkg, []);
-    filesByPkg.get(pkg).push(file);
-  }
+  try {
+    const eslint = new ESLint();
+    const results = await eslint.lintFiles(filesToCheck);
+    const formatter = await eslint.loadFormatter('stylish');
+    const resultText = formatter.format(results);
 
-  let hasBlockingErrors = false;
-
-  for (const [pkg, pkgFiles] of filesByPkg.entries()) {
-    try {
-      const eslintPath = existsSync(path.join(pkg, 'node_modules/eslint/bin/eslint.js'))
-        ? path.resolve(path.join(pkg, 'node_modules/eslint/bin/eslint.js'))
-        : path.resolve('node_modules/eslint/bin/eslint.js');
-      await execFileAsync(
-        'node',
-        [eslintPath, ...pkgFiles.map(f => path.resolve(f))],
-        {cwd: path.resolve(pkg)}
-      );
-    } catch (err) {
-      console.error(`\n[ERROR] ESLint check failed in ${pkg}:`);
-      if (err.stdout) console.log(err.stdout);
-      if (err.stderr) console.error(err.stderr);
-      hasBlockingErrors = true;
+    if (resultText) {
+      console.log(resultText);
     }
-  }
 
-  if (hasBlockingErrors) {
-    console.error('\n[ERROR] ESLint violations were detected.');
+    let hasBlockingErrors = false;
+
+    for (const fileResult of results) {
+      for (const message of fileResult.messages) {
+        // message.severity === 2 indicates an error-level rule configuration.
+        if (message.severity === 2) {
+          hasBlockingErrors = true;
+        }
+      }
+    }
+
+    if (hasBlockingErrors) {
+      console.error('\n[ERROR] ESLint violations were detected.');
+      return false;
+    }
+
+    return true;
+  } catch (err) {
+    console.error('\n[ERROR] Failed running ESLint:', err.message);
     return false;
   }
-
-  return true;
 }
 
 // --- TypeScript Type Checker ---
@@ -221,8 +170,7 @@ function findTsconfigDir(filePath) {
   if (tsconfigCache.has(dir)) {
     return tsconfigCache.get(dir);
   }
-  const fileExists = ts.sys && typeof ts.sys.fileExists === 'function' ? ts.sys.fileExists : existsSync;
-  const configPath = typeof ts.findConfigFile === 'function' ? ts.findConfigFile(dir, fileExists) : null;
+  const configPath = ts.findConfigFile(dir, ts.sys.fileExists);
   const result = configPath ? path.dirname(configPath) : null;
   tsconfigCache.set(dir, result);
   return result;
@@ -255,19 +203,13 @@ async function checkTypeSafety(filesToCheck) {
 
   const checks = Array.from(packagesToCheck).map(async pkg => {
     try {
-      const tscPath = existsSync(path.join(pkg, 'node_modules/typescript/bin/tsc'))
-        ? path.resolve(path.join(pkg, 'node_modules/typescript/bin/tsc'))
-        : path.resolve('node_modules/typescript/bin/tsc');
-      await execFileAsync(
-        'node',
-        [
-          tscPath,
-          '--noEmit',
-          '--project',
-          'tsconfig.json',
-        ],
-        {cwd: path.resolve(pkg)}
-      );
+      console.log(`  Type checking ${pkg}...`);
+      await execFileAsync('node', [
+        'node_modules/typescript/bin/tsc',
+        '--noEmit',
+        '--project',
+        path.join(pkg, 'tsconfig.json'),
+      ]);
       return { pkg, passed: true };
     } catch (err) {
       console.error(`\n[ERROR] TypeScript type check failed in ${pkg}`);
