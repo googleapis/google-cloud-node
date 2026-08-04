@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.2...bigquery-storage-v5.2.0) (2026-08-04)
+
+
+### Features
+
+* **bigquery-storage:** Split GAPIC from the bigquery-storage handwritten package ([#8930](https://github.com/googleapis/google-cloud-node/issues/8930)) ([93c7200](https://github.com/googleapis/google-cloud-node/commit/93c7200475f6844cdf5b63437543f680033c1f8b))
+
 ## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-storage-v5.1.1...bigquery-storage-v5.1.2) (2026-06-16)
 
 

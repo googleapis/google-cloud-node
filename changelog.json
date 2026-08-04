@@ -5,6 +5,24 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "93c7200475f6844cdf5b63437543f680033c1f8b",
+          "message": "Split GAPIC from the bigquery-storage handwritten package",
+          "issues": [
+            "8930"
+          ],
+          "scope": "bigquery-storage"
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage",
+      "id": "d996591d-a840-4830-924b-ec8396134c77",
+      "createTime": "2026-08-04T02:57:11.075Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b4cef8341fce750686fb48e57a819b883dc708ba",
           "message": "Onboard a new library",
           "issues": [
@@ -83908,5 +83926,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-29T20:49:49.925Z"
+  "updateTime": "2026-08-04T02:57:11.075Z"
 }
