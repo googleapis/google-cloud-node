@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## [3.0.7](https://github.com/googleapis/google-cloud-node/compare/error-reporting-v3.0.6...error-reporting-v3.0.7) (2026-08-04)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [3.0.6](https://github.com/googleapis/google-cloud-node/compare/error-reporting-v3.0.5...error-reporting-v3.0.6) (2026-05-06)
 
 

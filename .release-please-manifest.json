@@ -26,7 +26,7 @@
   "handwritten/bigtable": "6.5.1",
   "handwritten/cloud-profiler": "7.0.1",
   "handwritten/datastore": "10.1.1",
-  "handwritten/error-reporting": "3.0.6",
+  "handwritten/error-reporting": "3.0.7",
   "handwritten/firestore": "8.7.0",
   "handwritten/google-cloud-dns": "5.3.2",
   "handwritten/logging": "11.3.0",
