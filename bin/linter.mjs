@@ -17,7 +17,10 @@ import {existsSync} from 'fs';
 import path from 'path';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
-import ts from 'typescript';
+import * as tsImport from 'typescript';
+
+// Support both default-wrapped CJS in ESM and standard namespace exports across Node runtimes
+const ts = tsImport.default && typeof tsImport.default.findConfigFile === 'function' ? tsImport.default : tsImport;
 
 // --- Globals & Promisified API Wrappers ---
 const execFileAsync = promisify(execFile);
@@ -172,37 +175,39 @@ async function checkEslint(filesToCheck) {
     return true;
   }
 
-  try {
-    const eslint = new ESLint();
-    const results = await eslint.lintFiles(filesToCheck);
-    const formatter = await eslint.loadFormatter('stylish');
-    const resultText = formatter.format(results);
+  const filesByPkg = new Map();
+  for (const file of filesToCheck) {
+    const pkg = findTsconfigDir(file) || '.';
+    if (!filesByPkg.has(pkg)) filesByPkg.set(pkg, []);
+    filesByPkg.get(pkg).push(file);
+  }
 
-    if (resultText) {
-      console.log(resultText);
+  let hasBlockingErrors = false;
+
+  for (const [pkg, pkgFiles] of filesByPkg.entries()) {
+    try {
+      const eslintPath = existsSync(path.join(pkg, 'node_modules/eslint/bin/eslint.js'))
+        ? path.resolve(path.join(pkg, 'node_modules/eslint/bin/eslint.js'))
+        : path.resolve('node_modules/eslint/bin/eslint.js');
+      await execFileAsync(
+        'node',
+        [eslintPath, ...pkgFiles.map(f => path.resolve(f))],
+        {cwd: path.resolve(pkg)}
+      );
+    } catch (err) {
+      console.error(`\n[ERROR] ESLint check failed in ${pkg}:`);
+      if (err.stdout) console.log(err.stdout);
+      if (err.stderr) console.error(err.stderr);
+      hasBlockingErrors = true;
     }
+  }
 
-    let hasBlockingErrors = false;
-
-    for (const fileResult of results) {
-      for (const message of fileResult.messages) {
-        // message.severity === 2 indicates an error-level rule configuration.
-        if (message.severity === 2) {
-          hasBlockingErrors = true;
-        }
-      }
-    }
-
-    if (hasBlockingErrors) {
-      console.error('\n[ERROR] ESLint violations were detected.');
-      return false;
-    }
-
-    return true;
-  } catch (err) {
-    console.error('\n[ERROR] Failed running ESLint:', err.message);
+  if (hasBlockingErrors) {
+    console.error('\n[ERROR] ESLint violations were detected.');
     return false;
   }
+
+  return true;
 }
 
 // --- TypeScript Type Checker ---
@@ -216,7 +221,8 @@ function findTsconfigDir(filePath) {
   if (tsconfigCache.has(dir)) {
     return tsconfigCache.get(dir);
   }
-  const configPath = ts.findConfigFile(dir, ts.sys.fileExists);
+  const fileExists = ts.sys && typeof ts.sys.fileExists === 'function' ? ts.sys.fileExists : existsSync;
+  const configPath = typeof ts.findConfigFile === 'function' ? ts.findConfigFile(dir, fileExists) : null;
   const result = configPath ? path.dirname(configPath) : null;
   tsconfigCache.set(dir, result);
   return result;
@@ -249,13 +255,19 @@ async function checkTypeSafety(filesToCheck) {
 
   const checks = Array.from(packagesToCheck).map(async pkg => {
     try {
-      console.log(`  Type checking ${pkg}...`);
-      await execFileAsync('node', [
-        'node_modules/typescript/bin/tsc',
-        '--noEmit',
-        '--project',
-        path.join(pkg, 'tsconfig.json'),
-      ]);
+      const tscPath = existsSync(path.join(pkg, 'node_modules/typescript/bin/tsc'))
+        ? path.resolve(path.join(pkg, 'node_modules/typescript/bin/tsc'))
+        : path.resolve('node_modules/typescript/bin/tsc');
+      await execFileAsync(
+        'node',
+        [
+          tscPath,
+          '--noEmit',
+          '--project',
+          'tsconfig.json',
+        ],
+        {cwd: path.resolve(pkg)}
+      );
       return { pkg, passed: true };
     } catch (err) {
       console.error(`\n[ERROR] TypeScript type check failed in ${pkg}`);
