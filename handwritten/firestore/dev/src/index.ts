@@ -2026,15 +2026,19 @@ module.exports = Object.assign(module.exports, existingExports);
  * @type {function}
  * @deprecated Prefer the v1 client instead of the v1beta1 client. If your use case requires the v1beta1 client, it is published as part of the standalone @google-cloud/firestore-api package.
  */
+let cachedV1beta1: any;
 Object.defineProperty(module.exports, 'v1beta1', {
   // The v1beta1 module is very large. To avoid pulling it in from static
-  // scope, we lazy-load  the module.
+  // scope, we lazy-load the module and cache the evaluated wrapper.
   get: () => {
-    const api = require('@google-cloud/firestore-api').v1beta1;
-    const fn = function(this: any, ...args: any[]) {
-      return new (api.FirestoreClient as any)(...args);
-    };
-    return Object.assign(fn, api);
+    if (!cachedV1beta1) {
+      const api = require('@google-cloud/firestore-api').v1beta1;
+      const fn = function(this: any, ...args: any[]) {
+        return new (api.FirestoreClient as any)(...args);
+      };
+      cachedV1beta1 = Object.assign(fn, api);
+    }
+    return cachedV1beta1;
   },
 });
 
@@ -2047,17 +2051,22 @@ Object.defineProperty(module.exports, 'v1beta1', {
  * @type {function}
  * @deprecated Prefer the top-level Firestore client instead of the Firestore.v1 client. If your use case requires the Firestore.v1 client, this is now being published as a separate package at @google-cloud/firestore-api.
  */
+let cachedV1: any;
 Object.defineProperty(module.exports, 'v1', {
   // The v1 module is very large. To avoid pulling it in from static
-  // scope, we lazy-load  the module.
+  // scope, we lazy-load the module and cache the evaluated wrapper.
   get: () => {
-    const api = require('@google-cloud/firestore-api').v1;
-    const fn = function(this: any, ...args: any[]) {
-      return new (api.FirestoreClient as any)(...args);
-    };
-    return Object.assign(fn, api);
+    if (!cachedV1) {
+      const api = require('@google-cloud/firestore-api').v1;
+      const fn = function(this: any, ...args: any[]) {
+        return new (api.FirestoreClient as any)(...args);
+      };
+      cachedV1 = Object.assign(fn, api);
+    }
+    return cachedV1;
   },
 });
+
 
 /**
  * {@link Status} factory function.
