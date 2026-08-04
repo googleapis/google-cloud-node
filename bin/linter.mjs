@@ -24,6 +24,41 @@ const execFileAsync = promisify(execFile);
 const tsconfigCache = new Map();
 
 // --- Main Runner (Entry Point) ---
+
+/**
+ * Ensures that node_modules exists in all affected packages so ESLint can resolve
+ * configs (e.g. node_modules/gts) and TypeScript can resolve imported types.
+ */
+async function ensurePackageDependencies(filesToCheck) {
+  const affectedPackages = new Set();
+  for (const file of filesToCheck) {
+    const tsconfigDir = findTsconfigDir(file);
+    if (tsconfigDir && tsconfigDir !== process.cwd()) {
+      affectedPackages.add(tsconfigDir);
+    }
+  }
+
+  if (affectedPackages.size === 0) {
+    return;
+  }
+
+  console.log(`\nEnsuring package dependencies are installed in ${affectedPackages.size} package(s)...`);
+  for (const pkg of affectedPackages) {
+    if (!existsSync(path.join(pkg, 'node_modules'))) {
+      console.log(`  Installing dependencies in ${pkg}...`);
+      try {
+        await execFileAsync('pnpm', ['install', '--ignore-scripts'], { cwd: pkg });
+      } catch (err) {
+        try {
+          await execFileAsync('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund'], { cwd: pkg });
+        } catch (npmErr) {
+          console.warn(`  [WARN] Failed to install dependencies in ${pkg}: ${npmErr.message}`);
+        }
+      }
+    }
+  }
+}
+
 async function run() {
   try {
     const isStrict = Boolean(process.argv.includes('--strict'));
@@ -38,6 +73,8 @@ async function run() {
       console.log('No TypeScript files changed. Skipping checks.');
       return;
     }
+
+    await ensurePackageDependencies(changedTsFiles);
 
     // Run ESLint and Type checks in parallel to optimize CPU utilization
     const [eslintPassed, typeSafetyPassed] = await Promise.all([
