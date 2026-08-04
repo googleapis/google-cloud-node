@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigtable",
-  "version": "6.5.1",
+  "version": "7.0.0",
   "description": "Cloud Bigtable Client Library for Node.js",
   "keywords": [
     "bigtable",
