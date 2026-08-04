@@ -30,7 +30,7 @@
   "handwritten/firestore": "8.7.0",
   "handwritten/google-cloud-dns": "5.3.2",
   "handwritten/logging": "11.3.0",
-  "handwritten/logging-bunyan": "5.1.2",
+  "handwritten/logging-bunyan": "5.2.0",
   "handwritten/logging-winston": "6.0.2",
   "handwritten/pubsub": "5.3.1",
   "handwritten/spanner": "8.10.0",

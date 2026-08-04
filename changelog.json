@@ -5,6 +5,32 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-bunyan",
+      "id": "e8d8a5ad-de2a-4053-a280-d6524ea84d5e",
+      "createTime": "2026-08-04T02:57:11.740Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b4cef8341fce750686fb48e57a819b883dc708ba",
           "message": "Onboard a new library",
           "issues": [
@@ -83908,5 +83934,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-29T20:49:49.925Z"
+  "updateTime": "2026-08-04T02:57:11.740Z"
 }
