@@ -20,10 +20,7 @@
       "types": "./build/src/v1/index.d.ts",
       "default": "./build/src/v1/index.js"
     },
-    "./v1/*": {
-      "types": "./build/src/v1/*.d.ts",
-      "default": "./build/src/v1/*"
-    },
+    "./v1/firestore_client_config.json": "./build/src/v1/firestore_client_config.json",
     "./client_v1": {
       "types": "./build/src/v1/firestore_client.d.ts",
       "default": "./build/src/v1/firestore_client.js"
@@ -36,19 +33,17 @@
       "types": "./build/protos/protos.d.ts",
       "default": "./build/protos/protos.js"
     },
-    "./protos/*": {
-      "types": "./build/protos/*.d.ts",
-      "default": "./build/protos/*"
-    },
+    "./protos/protos.json": "./build/protos/protos.json",
     "./build/protos/protos": {
       "types": "./build/protos/protos.d.ts",
       "default": "./build/protos/protos.js"
     },
+    "./build/protos/protos.json": "./build/protos/protos.json",
     "./build/src/v1": {
       "types": "./build/src/v1/index.d.ts",
       "default": "./build/src/v1/index.js"
     },
-    "./build/*": "./build/*",
+    "./build/src/v1/firestore_client_config.json": "./build/src/v1/firestore_client_config.json",
     "./package.json": "./package.json"
   },
   "files": [
