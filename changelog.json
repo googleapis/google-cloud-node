@@ -4,6 +4,24 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "305459ad78f6bf9e981d41a98468a586d15841d5",
+          "message": "Fix discovery.yaml by installing root dependencies",
+          "issues": [
+            "8955"
+          ],
+          "scope": "ci"
+        }
+      ],
+      "version": "8.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "c28465b4-bc4b-4811-af5d-c6f3f6b7c62d",
+      "createTime": "2026-08-04T02:57:10.866Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "b4cef8341fce750686fb48e57a819b883dc708ba",
           "message": "Onboard a new library",
@@ -83908,5 +83926,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-29T20:49:49.925Z"
+  "updateTime": "2026-08-04T02:57:10.866Z"
 }

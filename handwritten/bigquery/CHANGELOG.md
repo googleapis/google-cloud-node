@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery?activeTab=versions
 
+## [8.3.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-v8.3.1...bigquery-v8.3.2) (2026-08-04)
+
+
+### Bug Fixes
+
+* **ci:** Fix discovery.yaml by installing root dependencies ([#8955](https://github.com/googleapis/google-cloud-node/issues/8955)) ([305459a](https://github.com/googleapis/google-cloud-node/commit/305459ad78f6bf9e981d41a98468a586d15841d5))
+
 ## [8.3.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-v8.3.0...bigquery-v8.3.1) (2026-05-11)
 
 
