@@ -17,7 +17,7 @@
 import * as firestore from '@google-cloud/firestore';
 
 import {FieldPath} from './path';
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 
 import IAggregation = google.firestore.v1.StructuredAggregationQuery.IAggregation;
 import * as assert from 'assert';

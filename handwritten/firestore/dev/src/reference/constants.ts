@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as protos from '../../protos/firestore_v1_proto_api';
+import * as protos from "@google-cloud/firestore-api/build/protos/protos";
 import api = protos.google.firestore.v1;
 
 /**
@@ -26,8 +26,8 @@ import api = protos.google.firestore.v1;
  */
 export const directionOperators: {[k: string]: api.StructuredQuery.Direction} =
   {
-    asc: 'ASCENDING',
-    desc: 'DESCENDING',
+    asc: api.StructuredQuery.Direction.ASCENDING,
+    desc: api.StructuredQuery.Direction.DESCENDING,
   };
 
 /**
@@ -41,16 +41,16 @@ export const directionOperators: {[k: string]: api.StructuredQuery.Direction} =
 export const comparisonOperators: {
   [k: string]: api.StructuredQuery.FieldFilter.Operator;
 } = {
-  '<': 'LESS_THAN',
-  '<=': 'LESS_THAN_OR_EQUAL',
-  '==': 'EQUAL',
-  '!=': 'NOT_EQUAL',
-  '>': 'GREATER_THAN',
-  '>=': 'GREATER_THAN_OR_EQUAL',
-  'array-contains': 'ARRAY_CONTAINS',
-  in: 'IN',
-  'not-in': 'NOT_IN',
-  'array-contains-any': 'ARRAY_CONTAINS_ANY',
+  '<': api.StructuredQuery.FieldFilter.Operator.LESS_THAN,
+  '<=': api.StructuredQuery.FieldFilter.Operator.LESS_THAN_OR_EQUAL,
+  '==': api.StructuredQuery.FieldFilter.Operator.EQUAL,
+  '!=': api.StructuredQuery.FieldFilter.Operator.NOT_EQUAL,
+  '>': api.StructuredQuery.FieldFilter.Operator.GREATER_THAN,
+  '>=': api.StructuredQuery.FieldFilter.Operator.GREATER_THAN_OR_EQUAL,
+  'array-contains': api.StructuredQuery.FieldFilter.Operator.ARRAY_CONTAINS,
+  in: api.StructuredQuery.FieldFilter.Operator.IN,
+  'not-in': api.StructuredQuery.FieldFilter.Operator.NOT_IN,
+  'array-contains-any': api.StructuredQuery.FieldFilter.Operator.ARRAY_CONTAINS_ANY,
 };
 
 export const NOOP_MESSAGE = Symbol('a noop message');

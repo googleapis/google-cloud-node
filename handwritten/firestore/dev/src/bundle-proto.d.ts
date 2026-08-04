@@ -46,4 +46,9 @@ export namespace firestore {
     structuredQuery?: any | null;
     limitType?: string | null;
   }
+  export type IBundleElement = BundleElement;
+  export type IBundleMetadata = BundleMetadata;
+  export type INamedQuery = NamedQuery;
+  export type IBundledDocumentMetadata = BundledDocumentMetadata;
+  export type IBundledQuery = BundledQuery;
 }

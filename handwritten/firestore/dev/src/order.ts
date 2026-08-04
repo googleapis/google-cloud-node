@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 import {detectValueType} from './convert';
 import {QualifiedResourcePath} from './path';
 import {ApiMapValue} from './types';
@@ -80,8 +80,8 @@ function typeOrder(val: api.IValue): TypeOrder {
  * @internal
  */
 export function primitiveComparator(
-  left: string | boolean | number,
-  right: string | boolean | number,
+  left: string | boolean | number | any,
+  right: string | boolean | number | any,
 ): number {
   if (left < right) {
     return -1;
@@ -152,7 +152,7 @@ function compareTimestamps(
  * @private
  * @internal
  */
-function compareBlobs(left: Uint8Array, right: Uint8Array): number {
+function compareBlobs(left: Uint8Array | any, right: Uint8Array | any): number {
   if (!(left instanceof Buffer) || !(right instanceof Buffer)) {
     throw new Error('Blobs can only be compared if they are Buffers.');
   }

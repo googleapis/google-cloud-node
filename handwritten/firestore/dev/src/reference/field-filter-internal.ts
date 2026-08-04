@@ -16,7 +16,7 @@
 
 import * as deepEqual from 'fast-deep-equal';
 
-import * as protos from '../../protos/firestore_v1_proto_api';
+import * as protos from "@google-cloud/firestore-api/build/protos/protos";
 import api = protos.google.firestore.v1;
 import {FilterInternal} from './filter-internal';
 import {Serializer} from '../serializer';
@@ -48,7 +48,7 @@ export class FieldFilterInternal extends FilterInternal {
   constructor(
     private readonly serializer: Serializer,
     readonly field: FieldPath,
-    readonly op: api.StructuredQuery.FieldFilter.Operator,
+    readonly op: api.StructuredQuery.FieldFilter.Operator | any,
     readonly value: unknown,
   ) {
     super();
@@ -62,12 +62,12 @@ export class FieldFilterInternal extends FilterInternal {
    */
   isInequalityFilter(): boolean {
     switch (this.op) {
-      case 'GREATER_THAN':
-      case 'GREATER_THAN_OR_EQUAL':
-      case 'LESS_THAN':
-      case 'LESS_THAN_OR_EQUAL':
-      case 'NOT_EQUAL':
-      case 'NOT_IN':
+      case 'GREATER_THAN': case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN:
+      case 'GREATER_THAN_OR_EQUAL': case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN_OR_EQUAL:
+      case 'LESS_THAN': case api.StructuredQuery.FieldFilter.Operator.LESS_THAN:
+      case 'LESS_THAN_OR_EQUAL': case api.StructuredQuery.FieldFilter.Operator.LESS_THAN_OR_EQUAL:
+      case 'NOT_EQUAL': case api.StructuredQuery.FieldFilter.Operator.NOT_EQUAL:
+      case 'NOT_IN': case api.StructuredQuery.FieldFilter.Operator.NOT_IN:
         return true;
       default:
         return false;
@@ -87,7 +87,7 @@ export class FieldFilterInternal extends FilterInternal {
    * @internal
    */
   nanOp(): 'IS_NAN' | 'IS_NOT_NAN' {
-    return this.op === 'EQUAL' ? 'IS_NAN' : 'IS_NOT_NAN';
+    return (this.op === 'EQUAL' || this.op === api.StructuredQuery.FieldFilter.Operator.EQUAL) ? 'IS_NAN' : 'IS_NOT_NAN';
   }
 
   /**
@@ -103,7 +103,7 @@ export class FieldFilterInternal extends FilterInternal {
    * @internal
    */
   nullOp(): 'IS_NULL' | 'IS_NOT_NULL' {
-    return this.op === 'EQUAL' ? 'IS_NULL' : 'IS_NOT_NULL';
+    return (this.op === 'EQUAL' || this.op === api.StructuredQuery.FieldFilter.Operator.EQUAL) ? 'IS_NULL' : 'IS_NOT_NULL';
   }
 
   /**

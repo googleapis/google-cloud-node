@@ -20,7 +20,7 @@ import * as deepEqual from 'fast-deep-equal';
 
 import * as assert from 'assert';
 
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 import {FieldTransform} from './field-value';
 import {FieldPath, validateFieldPath} from './path';
 import {DocumentReference} from './reference/document-reference';

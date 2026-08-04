@@ -18,7 +18,7 @@ import {afterEach, beforeEach, describe, it} from 'mocha';
 import {expect} from 'chai';
 import {GoogleError, Status} from 'google-gax';
 
-import * as proto from '../protos/firestore_v1_proto_api';
+import * as proto from "@google-cloud/firestore-api/build/protos/protos";
 import {
   BulkWriter,
   Firestore,

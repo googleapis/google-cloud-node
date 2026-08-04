@@ -850,7 +850,5 @@
         return firestore;
     })();
     
-    $root.google = require('@google-cloud/firestore-api/build/protos/protos').google;
-
     return $root;
 });

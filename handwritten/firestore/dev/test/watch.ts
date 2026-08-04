@@ -22,7 +22,7 @@ import {GoogleError, Status} from 'google-gax';
 import {Duplex, Transform} from 'stream';
 import * as through2 from 'through2';
 
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 
 import {
   CollectionReference,
@@ -599,7 +599,7 @@ describe('Query watch', () => {
             from: [{collectionId: 'col'}],
             orderBy: [
               {
-                direction: 'ASCENDING' as api.StructuredQuery.Direction,
+                direction: api.StructuredQuery.Direction.ASCENDING,
                 field: {fieldPath: '__name__'},
               },
             ],
@@ -628,7 +628,7 @@ describe('Query watch', () => {
                 field: {
                   fieldPath: 'included',
                 },
-                op: 'EQUAL',
+                op: api.StructuredQuery.FieldFilter.Operator.EQUAL,
                 value: {
                   stringValue: 'yes',
                 },
@@ -636,7 +636,7 @@ describe('Query watch', () => {
             },
             orderBy: [
               {
-                direction: 'ASCENDING' as api.StructuredQuery.Direction,
+                direction: api.StructuredQuery.Direction.ASCENDING,
                 field: {fieldPath: '__name__'},
               },
             ],
@@ -660,7 +660,7 @@ describe('Query watch', () => {
             from: [{collectionId: 'col'}],
             orderBy: [
               {
-                direction: 'ASCENDING',
+                direction: api.StructuredQuery.Direction.ASCENDING,
                 field: {
                   fieldPath: '__name__',
                 },
@@ -689,11 +689,11 @@ describe('Query watch', () => {
             from: [{collectionId: 'col'}],
             orderBy: [
               {
-                direction: 'DESCENDING' as api.StructuredQuery.Direction,
+                direction: api.StructuredQuery.Direction.DESCENDING,
                 field: {fieldPath: 'foo'},
               },
               {
-                direction: 'DESCENDING' as api.StructuredQuery.Direction,
+                direction: api.StructuredQuery.Direction.DESCENDING,
                 field: {fieldPath: '__name__'},
               },
             ],
@@ -836,17 +836,17 @@ describe('Query watch', () => {
             where: {
               fieldFilter: {
                 field: {fieldPath: 'foo'},
-                op: 'GREATER_THAN' as api.StructuredQuery.FieldFilter.Operator,
+                op: api.StructuredQuery.FieldFilter.Operator.GREATER_THAN,
                 value: {stringValue: 'bar'},
               },
             },
             orderBy: [
               {
-                direction: 'ASCENDING' as api.StructuredQuery.Direction,
+                direction: api.StructuredQuery.Direction.ASCENDING,
                 field: {fieldPath: 'foo'},
               },
               {
-                direction: 'ASCENDING' as api.StructuredQuery.Direction,
+                direction: api.StructuredQuery.Direction.ASCENDING,
                 field: {fieldPath: '__name__'},
               },
             ],

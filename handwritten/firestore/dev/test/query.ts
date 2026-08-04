@@ -20,7 +20,8 @@ import * as chaiAsPromised from 'chai-as-promised';
 import * as extend from 'extend';
 import * as assert from 'assert';
 
-import {firestore, google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
+import {firestore} from "../src/bundle-proto";
 import {
   DocumentReference,
   FieldPath,
@@ -90,10 +91,10 @@ function where(filter: api.StructuredQuery.IFilter): api.IStructuredQuery {
 
 export function fieldFiltersQuery(
   fieldPath: string,
-  op: api.StructuredQuery.FieldFilter.Operator,
+  op: api.StructuredQuery.FieldFilter.Operator | any,
   value: string | api.IValue,
   ...fieldPathOpAndValues: Array<
-    string | api.StructuredQuery.FieldFilter.Operator | string | api.IValue
+    string | api.StructuredQuery.FieldFilter.Operator | any | string | api.IValue
   >
 ): api.IStructuredQuery {
   return {
@@ -103,10 +104,10 @@ export function fieldFiltersQuery(
 
 export function fieldFilters(
   fieldPath: string,
-  op: api.StructuredQuery.FieldFilter.Operator,
+  op: api.StructuredQuery.FieldFilter.Operator | any,
   value: string | api.IValue,
   ...fieldPathOpAndValues: Array<
-    string | api.StructuredQuery.FieldFilter.Operator | string | api.IValue
+    string | api.StructuredQuery.FieldFilter.Operator | any | string | api.IValue
   >
 ): api.StructuredQuery.IFilter {
   const filters: api.StructuredQuery.IFilter[] = [];
@@ -117,7 +118,7 @@ export function fieldFilters(
     fieldPath = fieldPathOpAndValues[i] as string;
     op = fieldPathOpAndValues[
       i + 1
-    ] as api.StructuredQuery.FieldFilter.Operator;
+    ] as api.StructuredQuery.FieldFilter.Operator | any;
     value = fieldPathOpAndValues[i + 2] as string | api.IValue;
 
     const filter: api.StructuredQuery.IFieldFilter = {
@@ -143,7 +144,7 @@ export function fieldFilters(
   } else {
     return {
       compositeFilter: {
-        op: 'AND',
+        op: api.StructuredQuery.CompositeFilter.Operator.AND,
         filters,
       },
     };
@@ -152,14 +153,14 @@ export function fieldFilters(
 
 export function fieldFilter(
   fieldPath: string,
-  op: api.StructuredQuery.FieldFilter.Operator,
+  op: api.StructuredQuery.FieldFilter.Operator | any,
   value: string | api.IValue,
 ): api.StructuredQuery.IFilter {
   return fieldFilters(fieldPath, op, value);
 }
 
 export function compositeFilter(
-  op: api.StructuredQuery.CompositeFilter.Operator,
+  op: api.StructuredQuery.CompositeFilter.Operator | any,
   ...filters: api.StructuredQuery.IFilter[]
 ): api.StructuredQuery.IFilter {
   return {
@@ -171,14 +172,14 @@ export function compositeFilter(
 }
 
 export function orFilter(
-  op: api.StructuredQuery.CompositeFilter.Operator,
+  op: api.StructuredQuery.CompositeFilter.Operator | any,
   ...filters: api.StructuredQuery.IFilter[]
 ): api.StructuredQuery.IFilter {
   return compositeFilter('OR', ...filters);
 }
 
 export function andFilter(
-  op: api.StructuredQuery.CompositeFilter.Operator,
+  op: api.StructuredQuery.CompositeFilter.Operator | any,
   ...filters: api.StructuredQuery.IFilter[]
 ): api.StructuredQuery.IFilter {
   return compositeFilter('AND', ...filters);
@@ -231,7 +232,7 @@ function unaryFilters(
   } else {
     return {
       compositeFilter: {
-        op: 'AND',
+        op: api.StructuredQuery.CompositeFilter.Operator.AND,
         filters,
       },
     };
@@ -240,8 +241,8 @@ function unaryFilters(
 
 export function orderBy(
   fieldPath: string,
-  direction: api.StructuredQuery.Direction,
-  ...fieldPathAndOrderBys: Array<string | api.StructuredQuery.Direction>
+  direction: api.StructuredQuery.Direction | any,
+  ...fieldPathAndOrderBys: Array<string | api.StructuredQuery.Direction | any>
 ): api.IStructuredQuery {
   const orderBy: api.StructuredQuery.IOrder[] = [];
 
@@ -251,7 +252,7 @@ export function orderBy(
     const fieldPath = fieldPathAndOrderBys[i] as string;
     const direction = fieldPathAndOrderBys[
       i + 1
-    ] as api.StructuredQuery.Direction;
+    ] as api.StructuredQuery.Direction | any;
     orderBy.push({
       field: {
         fieldPath,
@@ -406,7 +407,7 @@ export function queryEquals(
 
 function bundledQueryEquals(
   actual: firestore.IBundledQuery | undefined,
-  limitType: firestore.BundledQuery.LimitType | undefined,
+  limitType: any | undefined,
   ...protoComponents: api.IStructuredQuery[]
 ) {
   expect(actual).to.not.be.undefined;
@@ -619,11 +620,11 @@ describe('query interface', () => {
             orderBy: [
               {
                 field: {fieldPath: 'foo'},
-                direction: 'DESCENDING',
+                direction: api.StructuredQuery.Direction.DESCENDING,
               },
               {
                 field: {fieldPath: '__name__'},
-                direction: 'DESCENDING',
+                direction: api.StructuredQuery.Direction.DESCENDING,
               },
             ],
             limit: {value: 1},

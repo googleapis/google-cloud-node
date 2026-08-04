@@ -19,7 +19,7 @@ import * as extend from 'extend';
 import {GoogleError, GrpcClient, Status} from 'google-gax';
 import * as sinon from 'sinon';
 
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 
 import * as Firestore from '../src';
 import {DocumentSnapshot, FieldPath, FieldValue} from '../src';

@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {firestore, google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
+import {firestore} from "./bundle-proto";
 
 import {DocumentSnapshot} from './document';
 import {QuerySnapshot} from './reference/query-snapshot';
@@ -149,7 +150,7 @@ export class BundleBuilder {
     // This take cares of stuff like converting internal byte array fields
     // to Base64 encodings.
     // We lazy-load the Proto file to reduce cold-start times.
-    const message = require('../protos/firestore_v1_proto_api')
+    const message = require("@google-cloud/firestore-api/build/protos/protos")
       .firestore.BundleElement.fromObject(bundleElement)
       .toJSON();
     const buffer = Buffer.from(JSON.stringify(message), 'utf-8');

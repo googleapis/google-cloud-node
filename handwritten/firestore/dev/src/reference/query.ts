@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import * as protos from '../../protos/firestore_v1_proto_api';
+import * as protos from "@google-cloud/firestore-api/build/protos/protos";
+import {firestore as bundleProtos} from "../bundle-proto";
 import api = protos.google.firestore.v1;
 import * as firestore from '@google-cloud/firestore';
 import {GoogleError} from 'google-gax';
@@ -355,7 +356,7 @@ export class Query<
     }
     return new CompositeFilterInternal(
       parsedFilters,
-      compositeFilterData._getOperator() === 'AND' ? 'AND' : 'OR',
+      (compositeFilterData._getOperator() === 'AND' ? api.StructuredQuery.CompositeFilter.Operator.AND : api.StructuredQuery.CompositeFilter.Operator.OR),
     );
   }
 
@@ -791,11 +792,11 @@ export class Query<
     const orderings = this.createImplicitOrderBy().map(fieldOrder => {
       let dir: 'ascending' | 'descending' | undefined = undefined;
       switch (fieldOrder.direction) {
-        case 'ASCENDING': {
+        case 'ASCENDING': case api.StructuredQuery.Direction.ASCENDING: {
           dir = 'ascending';
           break;
         }
-        case 'DESCENDING': {
+        case 'DESCENDING': case api.StructuredQuery.Direction.DESCENDING: {
           dir = 'descending';
           break;
         }
@@ -1498,7 +1499,7 @@ export class Query<
       structuredQuery.orderBy = fieldOrders.map(order => {
         // Flip the orderBy directions since we want the last results
         const dir =
-          order.direction === 'DESCENDING' ? 'ASCENDING' : 'DESCENDING';
+          (order.direction === 'DESCENDING' || order.direction === api.StructuredQuery.Direction.DESCENDING) ? api.StructuredQuery.Direction.ASCENDING : api.StructuredQuery.Direction.DESCENDING;
         return new FieldOrder(order.field, dir).toProto();
       });
 
@@ -1543,7 +1544,7 @@ export class Query<
    * @private
    * @internal
    */
-  _toBundledQuery(): protos.firestore.IBundledQuery {
+  _toBundledQuery(): bundleProtos.IBundledQuery {
     const projectId = this.firestore.projectId;
     const databaseId = this.firestore.databaseId;
     const parentPath = this._queryOptions.parentPath.toQualifiedResourcePath(
@@ -1552,7 +1553,7 @@ export class Query<
     );
     const structuredQuery = this.toStructuredQuery();
 
-    const bundledQuery: protos.firestore.IBundledQuery = {
+    const bundledQuery: bundleProtos.IBundledQuery = {
       parent: parentPath.formattedName,
       structuredQuery,
     };
@@ -1722,7 +1723,7 @@ export class Query<
         ? this._queryOptions.fieldOrders[
             this._queryOptions.fieldOrders.length - 1
           ].direction
-        : 'ASCENDING';
+        : api.StructuredQuery.Direction.ASCENDING;
       const orderBys = this._queryOptions.fieldOrders.concat(
         new FieldOrder(FieldPath.documentId(), lastDirection),
       );
@@ -1745,7 +1746,7 @@ export class Query<
         }
 
         if (comp !== 0) {
-          const direction = orderBy.direction === 'ASCENDING' ? 1 : -1;
+          const direction = (orderBy.direction === 'ASCENDING' || orderBy.direction === api.StructuredQuery.Direction.ASCENDING) ? 1 : -1;
           return direction * comp;
         }
       }

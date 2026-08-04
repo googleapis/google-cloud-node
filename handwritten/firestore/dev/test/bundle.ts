@@ -15,7 +15,8 @@
 import {expect} from 'chai';
 import * as extend from 'extend';
 import {afterEach, beforeEach, describe, it} from 'mocha';
-import {firestore, google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
+import {firestore} from "../src/bundle-proto";
 import {Firestore, QuerySnapshot, Timestamp} from '../src';
 import {
   bundleToElementArray,
