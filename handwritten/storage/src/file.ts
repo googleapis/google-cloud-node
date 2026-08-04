@@ -197,14 +197,14 @@ export interface GetSignedUrlConfig
   /**
    * The expiration timestamp for the link. Any provided value is passed directly to `new Date()`.
    * @throws {Error} If an expiration timestamp from the past is given.
-   * @note `'v4'` signing supports a maximum duration of 7 days (604,800 seconds) from the creation time.
+   * Note: `'v4'` signing supports a maximum duration of 7 days (604,800 seconds) from the creation time.
    */
   expires: string | number | Date;
 
   /**
    * The timestamp when this link becomes usable. Any provided value is passed directly to `new Date()`.
    * @default Date.now()
-   * @note Only supported/applicable when `version` is set to `'v4'`.
+   * Note: Only supported/applicable when `version` is set to `'v4'`.
    */
   accessibleAt?: string | number | Date;
 
