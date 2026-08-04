@@ -48,7 +48,7 @@ describe('src/generator.ts', () => {
     generator = new Generator();
   });
 
-  function getPrivate(gen: Generator): TestGenerator {
+  function getTestGenerator(gen: Generator): TestGenerator {
     return gen as unknown as TestGenerator;
   }
 
@@ -66,7 +66,7 @@ describe('src/generator.ts', () => {
 
   describe('parameter parsing', () => {
     it('should parse parameter options string', () => {
-      getPrivate(generator).getParamMap(
+      getTestGenerator(generator).getParamMap(
         'package-name=@google-cloud/test,transport=rest,diregapic=true',
       );
       assert.strictEqual(
@@ -78,17 +78,17 @@ describe('src/generator.ts', () => {
     });
 
     it('should handle parameter without explicit value', () => {
-      getPrivate(generator).getParamMap('handwritten-layer');
+      getTestGenerator(generator).getParamMap('handwritten-layer');
       assert.strictEqual(generator.paramMap['handwritten-layer'], 'true');
     });
 
     it('should handle quoted parameters', () => {
-      getPrivate(generator).getParamMap('"main-service=TestService"');
+      getTestGenerator(generator).getParamMap('"main-service=TestService"');
       assert.strictEqual(generator.paramMap['main-service'], 'TestService');
     });
 
     it('should convert parameter keys to kebab-case', () => {
-      getPrivate(generator).getParamMap(
+      getTestGenerator(generator).getParamMap(
         'main_service=TestService,legacy_proto_load=true',
       );
       assert.strictEqual(generator.paramMap['main-service'], 'TestService');
@@ -99,20 +99,20 @@ describe('src/generator.ts', () => {
   describe('option readers', () => {
     it('should read publish package name', () => {
       generator.paramMap['package-name'] = '@google-cloud/speech';
-      getPrivate(generator).readPublishPackageName();
+      getTestGenerator(generator).readPublishPackageName();
       assert.strictEqual(generator.publishName, '@google-cloud/speech');
     });
 
     it('should read main service name', () => {
       generator.paramMap['main-service'] = 'Speech';
-      getPrivate(generator).readMainServiceName();
+      getTestGenerator(generator).readMainServiceName();
       assert.strictEqual(generator.mainServiceName, 'Speech');
     });
 
     it('should read custom templates and metadata flag', () => {
       generator.paramMap['template'] = 'custom_template_1;custom_template_2';
       generator.paramMap['metadata'] = 'true';
-      getPrivate(generator).readTemplates();
+      getTestGenerator(generator).readTemplates();
       assert.deepStrictEqual(generator.templates, [
         'custom_template_1',
         'custom_template_2',
@@ -122,51 +122,51 @@ describe('src/generator.ts', () => {
 
     it('should read transport rest option', () => {
       generator.paramMap['transport'] = 'rest';
-      getPrivate(generator).readRest();
+      getTestGenerator(generator).readRest();
       assert.strictEqual(generator.rest, true);
     });
 
     it('should read diregapic option', () => {
       generator.paramMap['diregapic'] = 'true';
-      getPrivate(generator).readDiregapic();
+      getTestGenerator(generator).readDiregapic();
       assert.strictEqual(generator.diregapic, true);
       assert.strictEqual(generator.rest, true);
     });
 
     it('should read handwritten-layer option', () => {
       generator.paramMap['handwritten-layer'] = 'true';
-      getPrivate(generator).readHandwrittenLayer();
+      getTestGenerator(generator).readHandwrittenLayer();
       assert.strictEqual(generator.handwrittenLayer, true);
     });
 
     it('should read format option', () => {
       generator.paramMap['format'] = 'esm;cjs';
-      getPrivate(generator).readFormat();
+      getTestGenerator(generator).readFormat();
       assert.deepStrictEqual(generator.format, ['esm', 'cjs']);
     });
 
     it('should read telemetry tracing option', () => {
       generator.paramMap['enable-telemetry-tracing'] = 'true';
-      getPrivate(generator).readEnableTelemetryTracing();
+      getTestGenerator(generator).readEnableTelemetryTracing();
       assert.strictEqual(generator.enableTelemetryTracing, true);
     });
 
     it('should read legacy proto load option', () => {
       generator.paramMap['legacy-proto-load'] = 'true';
-      getPrivate(generator).readLegacyProtoLoad();
+      getTestGenerator(generator).readLegacyProtoLoad();
       assert.strictEqual(generator.legacyProtoLoad, true);
     });
 
     it('should read rest numeric enums option', () => {
       generator.paramMap['rest-numeric-enums'] = 'true';
-      getPrivate(generator).readRestNumericEnums();
+      getTestGenerator(generator).readRestNumericEnums();
       assert.strictEqual(generator.restNumericEnums, true);
     });
 
     it('should read mixins option', () => {
       generator.paramMap['mixins'] =
         'google.iam.v1.IAMPolicy;google.longrunning.Operations';
-      getPrivate(generator).readMixins();
+      getTestGenerator(generator).readMixins();
       assert.deepStrictEqual(generator.mixinsOverride, [
         'google.iam.v1.IAMPolicy',
         'google.longrunning.Operations',
@@ -191,7 +191,7 @@ describe('src/generator.ts', () => {
         'nonexistent.json',
       );
       await assert.rejects(async () => {
-        await getPrivate(generator).readGrpcServiceConfig();
+        await getTestGenerator(generator).readGrpcServiceConfig();
       }, /ERROR: File .* cannot be opened\./);
     });
 
@@ -209,7 +209,7 @@ describe('src/generator.ts', () => {
         }),
       );
       generator.paramMap['grpc-service-config'] = grpcConfigPath;
-      await getPrivate(generator).readGrpcServiceConfig();
+      await getTestGenerator(generator).readGrpcServiceConfig();
       assert.ok(generator.grpcServiceConfig.methodConfig);
       assert.strictEqual(generator.grpcServiceConfig.methodConfig.length, 1);
     });
@@ -220,7 +220,7 @@ describe('src/generator.ts', () => {
         'nonexistent.yaml',
       );
       assert.throws(() => {
-        getPrivate(generator).readBundleConfig();
+        getTestGenerator(generator).readBundleConfig();
       }, /ERROR: File .* cannot be opened\./);
     });
 
@@ -230,7 +230,7 @@ describe('src/generator.ts', () => {
         'nonexistent.yaml',
       );
       assert.throws(() => {
-        getPrivate(generator).readServiceYaml();
+        getTestGenerator(generator).readServiceYaml();
       }, /ERROR: File .* cannot be opened\./);
     });
 
@@ -245,7 +245,7 @@ apis:
 `,
       );
       generator.paramMap['service-yaml'] = serviceYamlPath;
-      getPrivate(generator).readServiceYaml();
+      getTestGenerator(generator).readServiceYaml();
       assert.strictEqual(generator.serviceYaml?.title, 'Test Service');
       assert.deepStrictEqual(generator.serviceYaml?.apis, [
         'google.iam.v1.IAMPolicy',
@@ -255,13 +255,13 @@ apis:
 
     it('should override mixins when mixinsOverride is set', () => {
       generator.mixinsOverride = ['google.iam.v1.IAMPolicy'];
-      getPrivate(generator).readServiceYaml();
+      getTestGenerator(generator).readServiceYaml();
       assert.deepStrictEqual(generator.serviceYaml?.apis, [
         'google.iam.v1.IAMPolicy',
       ]);
 
       generator.mixinsOverride = ['none'];
-      getPrivate(generator).readServiceYaml();
+      getTestGenerator(generator).readServiceYaml();
       assert.deepStrictEqual(generator.serviceYaml?.apis, []);
     });
 
@@ -286,7 +286,7 @@ apis:
 `,
       );
       generator.paramMap['bundle-config'] = bundleConfigPath;
-      getPrivate(generator).readBundleConfig();
+      getTestGenerator(generator).readBundleConfig();
       assert.strictEqual(generator.bundleConfigs.length, 1);
       assert.strictEqual(generator.bundleConfigs[0].serviceName, 'TestService');
       assert.strictEqual(generator.bundleConfigs[0].methodName, 'ListItems');
@@ -305,7 +305,7 @@ apis:
         file: [],
       } as protos.google.protobuf.compiler.CodeGeneratorResponse;
 
-      getPrivate(generator).addProtosToResponse();
+      getTestGenerator(generator).addProtosToResponse();
 
       assert.strictEqual(generator.response.file?.length, 1);
       assert.strictEqual(generator.response.file?.[0].name, 'proto.list');
@@ -329,7 +329,7 @@ apis:
       } as protos.google.protobuf.compiler.CodeGeneratorRequest;
 
       assert.throws(() => {
-        getPrivate(generator).buildAPIObject();
+        getTestGenerator(generator).buildAPIObject();
       }, /ERROR: Protos do not define any service/);
     });
 
@@ -352,7 +352,7 @@ apis:
         fileToGenerate: ['google/cloud/test/v1/test.proto'],
       } as protos.google.protobuf.compiler.CodeGeneratorRequest;
 
-      const api = getPrivate(generator).buildAPIObject();
+      const api = getTestGenerator(generator).buildAPIObject();
       assert.ok(api);
       assert.strictEqual(api.packageName, 'google.cloud.test.v1');
     });
