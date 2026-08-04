@@ -229,7 +229,9 @@ export class Generator {
   }
 
   private readEnableTelemetryTracing() {
-    this.enableTelemetryTracing = this.paramMap['enable_telemetry_tracing'] === 'true';
+    if (this.paramMap['enable-telemetry-tracing'] === 'true') {
+      this.enableTelemetryTracing = true;
+    }
   }
 
   private readLegacyProtoLoad() {
