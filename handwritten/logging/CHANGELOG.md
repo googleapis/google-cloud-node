@@ -6,6 +6,13 @@
 [1]: https://www.npmjs.com/package/nodejs-logging?activeTab=versions
 
 
+## [11.4.0](https://github.com/googleapis/google-cloud-node/compare/logging-v11.3.0...logging-v11.4.0) (2026-08-04)
+
+
+### Features
+
+* **logging:** Split GAPIC from the logging handwritten package ([#8929](https://github.com/googleapis/google-cloud-node/issues/8929)) ([ee21766](https://github.com/googleapis/google-cloud-node/commit/ee217669702485cde6d292740f8bb04a82d62600))
+
 ## [11.3.0](https://github.com/googleapis/google-cloud-node/compare/logging-v11.2.3...logging-v11.3.0) (2026-07-10)
 
 

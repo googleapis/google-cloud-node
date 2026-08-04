@@ -23,6 +23,24 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "ee217669702485cde6d292740f8bb04a82d62600",
+          "message": "Split GAPIC from the logging handwritten package",
+          "issues": [
+            "8929"
+          ],
+          "scope": "logging"
+        }
+      ],
+      "version": "11.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging",
+      "id": "3d414cc1-2f0c-4d66-aaf9-d0224a334b8c",
+      "createTime": "2026-08-04T02:57:11.657Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b4cef8341fce750686fb48e57a819b883dc708ba",
           "message": "Onboard a new library",
           "issues": [
