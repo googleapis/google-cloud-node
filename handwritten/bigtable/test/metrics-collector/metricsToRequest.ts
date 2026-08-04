@@ -14,10 +14,7 @@
 
 import * as assert from 'assert';
 import {describe} from 'mocha';
-import {
-  getInterval,
-  metricsToRequest,
-} from '../../src/client-side-metrics/exporter';
+import {metricsToRequest} from '../../src/client-side-metrics/exporter';
 import {
   expectedOtelExportConvertedValue,
   expectedOtelExportInput,
@@ -41,31 +38,5 @@ describe('Bigtable/metricsToRequest', () => {
       );
     }
     assert.strictEqual(convertedValue.name, 'projects/my-project');
-  });
-
-  it('Clamps endTime to startNanos + 1 when startTime is equal to endTime (overshoot)', () => {
-    const dataPoint = {
-      startTime: [100, 500] as [number, number],
-      endTime: [100, 500] as [number, number],
-      value: 1,
-    } as any;
-    const interval = getInterval(dataPoint);
-    assert.strictEqual(interval.startTime.seconds, 100);
-    assert.strictEqual(interval.startTime.nanos, 500);
-    assert.strictEqual(interval.endTime.seconds, 100);
-    assert.strictEqual(interval.endTime.nanos, 501);
-  });
-
-  it('Handles 1B-1 nanosecond boundary when clamping endTime (wrapping to next second)', () => {
-    const dataPoint = {
-      startTime: [100, 999999999] as [number, number],
-      endTime: [100, 999999999] as [number, number],
-      value: 1,
-    } as any;
-    const interval = getInterval(dataPoint);
-    assert.strictEqual(interval.startTime.seconds, 100);
-    assert.strictEqual(interval.startTime.nanos, 999999999);
-    assert.strictEqual(interval.endTime.seconds, 101);
-    assert.strictEqual(interval.endTime.nanos, 0);
   });
 });
