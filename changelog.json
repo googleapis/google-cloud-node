@@ -22,6 +22,24 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "1d3c655992216e4e79a86480f84ff7eae9a5e6c5",
+          "message": "Prevent adding telemetry events to ended spans (#8847)",
+          "issues": [
+            "8939"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "8.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "df4dea8f-90fd-4d79-b41e-75745b5bda94",
+      "createTime": "2026-08-04T02:57:11.545Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "b4cef8341fce750686fb48e57a819b883dc708ba",
           "message": "Onboard a new library",
