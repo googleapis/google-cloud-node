@@ -11,6 +11,41 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-firestore-admin",
   "author": "Google LLC",
   "main": "build/src/index.js",
+  "exports": {
+    ".": {
+      "types": "./build/src/index.d.ts",
+      "default": "./build/src/index.js"
+    },
+    "./v1": {
+      "types": "./build/src/v1/index.d.ts",
+      "default": "./build/src/v1/index.js"
+    },
+    "./v1/firestore_client_config.json": "./build/src/v1/firestore_client_config.json",
+    "./client_v1": {
+      "types": "./build/src/v1/firestore_client.d.ts",
+      "default": "./build/src/v1/firestore_client.js"
+    },
+    "./admin_v1": {
+      "types": "./build/src/v1/firestore_admin_client.d.ts",
+      "default": "./build/src/v1/firestore_admin_client.js"
+    },
+    "./protos": {
+      "types": "./build/protos/protos.d.ts",
+      "default": "./build/protos/protos.js"
+    },
+    "./protos/protos.json": "./build/protos/protos.json",
+    "./build/protos/protos": {
+      "types": "./build/protos/protos.d.ts",
+      "default": "./build/protos/protos.js"
+    },
+    "./build/protos/protos.json": "./build/protos/protos.json",
+    "./build/src/v1": {
+      "types": "./build/src/v1/index.d.ts",
+      "default": "./build/src/v1/index.js"
+    },
+    "./build/src/v1/firestore_client_config.json": "./build/src/v1/firestore_client_config.json",
+    "./package.json": "./package.json"
+  },
   "files": [
     "build/src",
     "build/protos"
@@ -40,7 +75,8 @@
     "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "google-gax": "^6.0.0"
+    "google-gax": "^6.0.0",
+    "long": "^5.3.2"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -52,7 +88,6 @@
     "jsdoc": "^4.0.5",
     "jsdoc-fresh": "^6.0.0",
     "jsdoc-region-tag": "^5.0.0",
-    "long": "^5.3.2",
     "mocha": "^11.7.4",
     "pack-n-play": "^5.0.0",
     "typescript": "5.8.3",

@@ -211,11 +211,11 @@ libraries:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
   - name: google-cloud-agentidentity
+    version: 0.1.0
     apis:
       - path: google/cloud/agentidentity/v1
       - path: google/cloud/agentidentity/v1beta
     copyright_year: "2026"
-    version: 0.1.0
   - name: google-cloud-agentregistry
     version: 0.2.0
     apis:
@@ -971,8 +971,9 @@ libraries:
     apis:
       - path: google/firestore/v1
       - path: google/firestore/admin/v1
-      - path: google/firestore/v1beta1
     copyright_year: "2026"
+    keep:
+      - package.json
     nodejs:
       package_name: '@google-cloud/firestore-api'
       metadata_name_override: firestore-api
