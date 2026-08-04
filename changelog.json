@@ -5,6 +5,59 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "3c04d32f30085db6ee657f3f0871a08e55326bbc",
+          "message": "Split GAPIC from the pubsub handwritten package",
+          "issues": [
+            "8854"
+          ],
+          "scope": "pubsub"
+        },
+        {
+          "type": "feat",
+          "sha": "3881dca9c22aff41739a19a7078c568bc05033c0",
+          "message": "Add support for streaming pull keepalives from the server",
+          "issues": [
+            "7819"
+          ],
+          "scope": "pubsub"
+        },
+        {
+          "type": "feat",
+          "sha": "a2415320b9c840f6ae27894451abb561a080ff82",
+          "message": "Consolidate prettierignore and prettierrc files: handwritten",
+          "issues": [
+            "8081"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        },
+        {
+          "type": "fix",
+          "sha": "08959de575487690194fe851414ac7f6357e29e2",
+          "message": "Increase streaming pull timeout",
+          "issues": [
+            "8345"
+          ],
+          "scope": "pubsub"
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub",
+      "id": "a69f47f7-c158-4336-a91b-58c79bffbc51",
+      "createTime": "2026-08-04T02:57:11.826Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b4cef8341fce750686fb48e57a819b883dc708ba",
           "message": "Onboard a new library",
           "issues": [
@@ -83908,5 +83961,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-29T20:49:49.925Z"
+  "updateTime": "2026-08-04T02:57:11.826Z"
 }

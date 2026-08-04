@@ -5,6 +5,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/pubsub?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-v5.3.1...pubsub-v5.4.0) (2026-08-04)
+
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+* **pubsub:** Add support for streaming pull keepalives from the server ([#7819](https://github.com/googleapis/google-cloud-node/issues/7819)) ([3881dca](https://github.com/googleapis/google-cloud-node/commit/3881dca9c22aff41739a19a7078c568bc05033c0))
+* **pubsub:** Split GAPIC from the pubsub handwritten package ([#8854](https://github.com/googleapis/google-cloud-node/issues/8854)) ([3c04d32](https://github.com/googleapis/google-cloud-node/commit/3c04d32f30085db6ee657f3f0871a08e55326bbc))
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+* **pubsub:** Increase streaming pull timeout ([#8345](https://github.com/googleapis/google-cloud-node/issues/8345)) ([08959de](https://github.com/googleapis/google-cloud-node/commit/08959de575487690194fe851414ac7f6357e29e2))
+
 ## [5.3.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-v5.3.0...pubsub-v5.3.1) (2026-05-11)
 
 
