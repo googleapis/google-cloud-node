@@ -27,6 +27,7 @@ import {
   RequestType,
   SimpleCallbackFunction,
 } from './apitypes';
+import { ClientOptions } from './clientInterface';
 import {Descriptor} from './descriptor';
 import {CallOptions, CallSettings, convertRetryOptions} from './gax';
 import {retryable} from './normalCalls/retries';
@@ -59,6 +60,7 @@ export function createApiCall(
   descriptor?: Descriptor,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _fallback?: boolean | 'proto' | 'rest', // unused here, used in fallback.ts implementation
+  clientOptions?: ClientOptions
 ): GaxCall {
   // we want to be able to accept both promise resolving to a function and a
   // function. Currently client librares are only calling this method with a
@@ -67,6 +69,7 @@ export function createApiCall(
   // the following apiCaller will be used for all calls of this function...
   const apiCaller = createAPICaller(settings, descriptor);
 
+  const tracingEnabled = clientOptions?.enableTelemetryTracing && process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
   return (
     request: RequestType,
     callOptions?: CallOptions,
