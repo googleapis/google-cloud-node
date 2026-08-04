@@ -69,8 +69,9 @@ export function createApiCall(
   // the following apiCaller will be used for all calls of this function...
   const apiCaller = createAPICaller(settings, descriptor);
 
-  const tracingEnabled = clientOptions?.enableTelemetryTracing && process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
-  return (
+  // Check if telemetry tracing is enabled and also check if internal telemetry information has been passed through the templates
+  const tracingEnabled = clientOptions?.enableTelemetryTracing && process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED && clientOptions?.internalTelemetryInfo !== undefined;
+  const invokeCall = (
     request: RequestType,
     callOptions?: CallOptions,
     callback?: APICallback,
@@ -167,4 +168,9 @@ export function createApiCall(
     // or to cancel the ongoing call.
     return currentApiCaller.result(ongoingCall);
   };
+  if (tracingEnabled) {
+    return invokeCall;
+  } else {
+    return invokeCall;
+  }
 }
