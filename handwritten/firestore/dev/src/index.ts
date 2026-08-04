@@ -2053,8 +2053,7 @@ Object.defineProperty(module.exports, 'v1beta1', {
  */
 let cachedV1: any;
 Object.defineProperty(module.exports, 'v1', {
-  // The v1 module is very large. To avoid pulling it in from static
-  // scope, we lazy-load the module and cache the evaluated wrapper.
+  get: () => {
     if (!cachedV1) {
       const api = require('@google-cloud/firestore-api/build/src/v1');
       const fn = function(this: any, ...args: any[]) {
