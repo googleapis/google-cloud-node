@@ -5,6 +5,24 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "182bda2c8e92b27c93cd36e586d490d84a793e2d",
+          "message": "Split gapic and proto usage from the handwritten library into datastore-api",
+          "issues": [
+            "8938"
+          ],
+          "scope": "datastore"
+        }
+      ],
+      "version": "10.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastore",
+      "id": "c2174cd4-2073-402c-86f0-51221de0d188",
+      "createTime": "2026-08-04T02:57:11.452Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b4cef8341fce750686fb48e57a819b883dc708ba",
           "message": "Onboard a new library",
           "issues": [
@@ -83908,5 +83926,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-29T20:49:49.925Z"
+  "updateTime": "2026-08-04T02:57:11.452Z"
 }
