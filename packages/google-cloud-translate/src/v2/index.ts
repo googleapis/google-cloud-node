@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Service, util, Metadata} from '@google-cloud/common';
+import {Service, ServiceOptions, util, Metadata} from '@google-cloud/common';
 import {promisifyAll} from '@google-cloud/promisify';
 import arrify = require('arrify');
 import * as extend from 'extend';
@@ -149,7 +149,7 @@ export class Translate extends Service {
       projectIdRequired: false,
     };
 
-    super(config, options);
+    super(config, options as ServiceOptions);
     this.options = options || {};
     if (this.options.key) {
       this.key = this.options.key;
