@@ -23,7 +23,7 @@
   "core/promisify": "6.0.0",
   "handwritten/bigquery": "8.3.1",
   "handwritten/bigquery-storage": "5.1.2",
-  "handwritten/bigtable": "6.5.1",
+  "handwritten/bigtable": "6.5.2",
   "handwritten/cloud-profiler": "7.0.1",
   "handwritten/datastore": "10.1.1",
   "handwritten/error-reporting": "3.0.6",

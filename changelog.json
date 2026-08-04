@@ -4,6 +4,32 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "0712c05113745b0512bf78097c0eb416cac38488",
+          "message": "Test resource leaks, timestamp clamping",
+          "issues": [
+            "9059"
+          ],
+          "scope": "bigtable"
+        },
+        {
+          "type": "fix",
+          "sha": "66f5c91d832a90e50401eaf4cac0dfe3069c1b66",
+          "message": "Remove kokoro bigtable system tests",
+          "issues": [
+            "8319"
+          ]
+        }
+      ],
+      "version": "6.5.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable",
+      "id": "eafae15d-4bec-4085-826c-5f91867fa1b5",
+      "createTime": "2026-08-04T02:57:11.281Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "b4cef8341fce750686fb48e57a819b883dc708ba",
           "message": "Onboard a new library",
@@ -83908,5 +83934,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-29T20:49:49.925Z"
+  "updateTime": "2026-08-04T02:57:11.281Z"
 }
