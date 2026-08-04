@@ -28,7 +28,7 @@
   "handwritten/datastore": "10.1.1",
   "handwritten/error-reporting": "3.0.6",
   "handwritten/firestore": "8.7.0",
-  "handwritten/google-cloud-dns": "5.3.2",
+  "handwritten/google-cloud-dns": "5.3.3",
   "handwritten/logging": "11.3.0",
   "handwritten/logging-bunyan": "5.1.2",
   "handwritten/logging-winston": "6.0.2",

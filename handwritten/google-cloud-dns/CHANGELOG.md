@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [5.3.3](https://github.com/googleapis/google-cloud-node/compare/dns-v5.3.2...dns-v5.3.3) (2026-08-04)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [5.3.2](https://github.com/googleapis/google-cloud-node/compare/dns-v5.3.1...dns-v5.3.2) (2026-05-01)
 
 

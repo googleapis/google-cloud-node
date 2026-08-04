@@ -4,6 +4,24 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a",
+          "message": "Remove vulnerable dependency `uuid`",
+          "issues": [
+            "8120"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "5.3.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dns",
+      "id": "22d2002e-4ea9-46c2-9207-b07a2bbef721",
+      "createTime": "2026-08-04T02:57:11.376Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "b4cef8341fce750686fb48e57a819b883dc708ba",
           "message": "Onboard a new library",
@@ -83908,5 +83926,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-07-29T20:49:49.925Z"
+  "updateTime": "2026-08-04T02:57:11.376Z"
 }
