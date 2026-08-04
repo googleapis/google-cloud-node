@@ -150,27 +150,26 @@ export interface SignedPostPolicyV4Output {
 }
 export interface GetSignedUrlConfig
   extends Pick<SignerGetSignedUrlConfig, 'host' | 'signingEndpoint'> {
-  
   /**
    * The action to permit with the signed URL.
    * - `'read'`: Allows downloading/viewing the file (HTTP GET).
    * - `'write'`: Allows uploading/overwriting the file (HTTP PUT).
    * - `'delete'`: Allows removing the file (HTTP DELETE).
-   * - `'resumable'`: Allows resumable uploads (HTTP POST). 
+   * - `'resumable'`: Allows resumable uploads (HTTP POST).
    * Note: When using `'resumable'`, the header `X-Goog-Resumable: start` must be sent in the client request.
    */
   action: 'read' | 'write' | 'delete' | 'resumable';
 
   /**
-   * The signing version to use. 
+   * The signing version to use.
    * @default 'v2'
    */
   version?: 'v2' | 'v4';
 
   /**
    * Determines the URL structure for accessing bucket resources.
-   * - `true`: Uses virtual hosted-style URLs (e.g., `https://mybucket.storage.googleapis.com/...`) 
-   * - `false`: Uses path-style URLs (e.g., `https://storage.googleapis.com/mybucket/...`). 
+   * - `true`: Uses virtual hosted-style URLs (e.g., `https://mybucket.storage.googleapis.com/...`)
+   * - `false`: Uses path-style URLs (e.g., `https://storage.googleapis.com/mybucket/...`).
    * Virtual hosted-style URLs are generally preferred.
    * @default false
    */
@@ -182,20 +181,22 @@ export interface GetSignedUrlConfig
   cname?: string;
 
   /**
-   * The MD5 digest value in base64. If provided, the client request **must** * include an identical `Content-MD5` HTTP header. 
+   * The MD5 digest value in base64. If provided, the client request **must**
+   * include an identical `Content-MD5` HTTP header.
    * If omitted, the client request must not include this header.
    */
   contentMd5?: string;
 
   /**
-   * The expected Content-Type of the file. If provided, the client request **must** * include an identical `Content-Type` HTTP header. 
+   * The expected Content-Type of the file. If provided, the client request **must**
+   * include an identical `Content-Type` HTTP header.
    * If omitted, the client request must not include this header.
    */
   contentType?: string;
 
   /**
    * The expiration timestamp for the link. Any provided value is passed directly to `new Date()`.
-   * * @throws {Error} If an expiration timestamp from the past is given.
+   * @throws {Error} If an expiration timestamp from the past is given.
    * @note `'v4'` signing supports a maximum duration of 7 days (604,800 seconds) from the creation time.
    */
   expires: string | number | Date;
@@ -209,9 +210,9 @@ export interface GetSignedUrlConfig
 
   /**
    * Canonical extension headers that the server will validate against the client's request.
-   * * Requirements:
+   * Requirements:
    * - Header names must be prefixed with `x-goog-` and must be entirely lowercase.
-   * - Multi-valued headers passed as an array are converted into a comma-separated string (no spaces). 
+   * - Multi-valued headers passed as an array are converted into a comma-separated string (no spaces).
    * The client must format them identically to prevent signature mismatches.
    */
   extensionHeaders?: http.OutgoingHttpHeaders;
