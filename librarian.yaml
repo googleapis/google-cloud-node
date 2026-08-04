@@ -971,7 +971,6 @@ libraries:
     apis:
       - path: google/firestore/v1
       - path: google/firestore/admin/v1
-      - path: google/firestore/v1beta1
     copyright_year: "2026"
     keep:
       - package.json

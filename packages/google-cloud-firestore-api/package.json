@@ -12,15 +12,42 @@
   "author": "Google LLC",
   "main": "build/src/index.js",
   "exports": {
-    ".": "./build/src/index.js",
-    "./v1": "./build/src/v1/index.js",
-    "./v1/*": "./build/src/v1/*",
-    "./client_v1": "./build/src/v1/firestore_client.js",
-    "./admin_v1": "./build/src/v1/firestore_admin_client.js",
-    "./protos": "./build/protos/protos.js",
-    "./protos/*": "./build/protos/*",
-    "./build/protos/protos": "./build/protos/protos.js",
-    "./build/src/v1": "./build/src/v1/index.js",
+    ".": {
+      "types": "./build/src/index.d.ts",
+      "default": "./build/src/index.js"
+    },
+    "./v1": {
+      "types": "./build/src/v1/index.d.ts",
+      "default": "./build/src/v1/index.js"
+    },
+    "./v1/*": {
+      "types": "./build/src/v1/*.d.ts",
+      "default": "./build/src/v1/*"
+    },
+    "./client_v1": {
+      "types": "./build/src/v1/firestore_client.d.ts",
+      "default": "./build/src/v1/firestore_client.js"
+    },
+    "./admin_v1": {
+      "types": "./build/src/v1/firestore_admin_client.d.ts",
+      "default": "./build/src/v1/firestore_admin_client.js"
+    },
+    "./protos": {
+      "types": "./build/protos/protos.d.ts",
+      "default": "./build/protos/protos.js"
+    },
+    "./protos/*": {
+      "types": "./build/protos/*.d.ts",
+      "default": "./build/protos/*"
+    },
+    "./build/protos/protos": {
+      "types": "./build/protos/protos.d.ts",
+      "default": "./build/protos/protos.js"
+    },
+    "./build/src/v1": {
+      "types": "./build/src/v1/index.d.ts",
+      "default": "./build/src/v1/index.js"
+    },
     "./build/*": "./build/*",
     "./package.json": "./package.json"
   },
