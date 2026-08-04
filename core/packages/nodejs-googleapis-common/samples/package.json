@@ -3,7 +3,7 @@
   "license": "MIT",
   "author": "Google LLC",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "files": [
     "*.js",
