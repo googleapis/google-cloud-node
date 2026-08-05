@@ -15,8 +15,7 @@
 import {packNTest} from 'pack-n-play';
 import {describe, it} from 'mocha';
 
-describe('passing tests', function () {
-  this.timeout(120000);
+describe('passing tests', () => {
   it('should pass the test', async () => {
     await packNTest({
       sample: {

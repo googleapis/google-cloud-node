@@ -16,8 +16,7 @@ import {packNTest} from 'pack-n-play';
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 
-describe('leaky tests', function () {
-  this.timeout(120000);
+describe('leaky tests', () => {
   it('should fail packing n testing', async () => {
     await assert.rejects(
       packNTest({
