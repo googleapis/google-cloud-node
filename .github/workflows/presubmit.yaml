@@ -42,16 +42,15 @@ jobs:
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
-          fetch-depth: 2
+          fetch-depth: 300
           persist-credentials: false
       - name: Use Node.js 24
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 24
       - run: npm install
-      - run: node ./bin/linter.mjs --strict
-        env:
-          GIT_DIFF_ARG: "HEAD^1"
+      - run: npm run lint
+        name: Run monorepo linter
 
   # Dummy jobs to satisfy branch protection requirements for each node version
   units-status:
@@ -71,4 +70,3 @@ jobs:
         uses: ./.github/actions/check-shard-status
         with:
           node-version: ${{ matrix.node-version }}
->>>>>>> 657c33a5f3 (feat(ci): run unit-tests in parallel to speed them up)
