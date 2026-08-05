@@ -2027,7 +2027,7 @@ describe('Database', () => {
       const proxyStream = database.runStream(QUERY);
 
       const query = runStreamStub.lastCall.args[0];
-      assert.strictEqual(query, QUERY);
+      assert.strictEqual(query.sql, QUERY.sql);
 
       const stream = pipeStub.lastCall.args[0];
       assert.strictEqual(stream, proxyStream);

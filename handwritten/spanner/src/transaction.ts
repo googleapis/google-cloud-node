@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import {performance} from 'perf_hooks';
 import {DateStruct, PreciseDate} from '@google-cloud/precise-date';
 import {promisifyAll} from '@google-cloud/promisify';
 import {isEmpty, toArray} from './helper';
@@ -56,6 +56,16 @@ import {injectRequestIDIntoHeaders, nextNthRequest} from './request_id_header';
 export type Rows = Array<Row | Json>;
 const RETRY_INFO_TYPE = 'type.googleapis.com/google.rpc.retryinfo';
 const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
+
+let globalReqId = 0;
+
+function safeMeasure(name: string, startMark: string, endMark: string) {
+  try {
+    performance.measure(name, startMark, endMark);
+  } catch (e) {
+    // Ignore if startMark/endMark is missing on stream error
+  }
+}
 
 let nextAffinityId = 0;
 
@@ -1509,7 +1519,10 @@ export class Snapshot extends EventEmitter {
    *   });
    * ```
    */
-  runStream(query: string | ExecuteSqlRequest): PartialResultStream {
+  runStream(
+    query: string | ExecuteSqlRequest,
+    reqId?: number,
+  ): PartialResultStream {
     if (typeof query === 'string') {
       query = {sql: query} as ExecuteSqlRequest;
     }
@@ -1592,6 +1605,9 @@ export class Snapshot extends EventEmitter {
       ...query,
       ...this._traceConfig,
     };
+    const currentReqId =
+      reqId ?? (query as any)?.gaxOptions?.reqId ?? ++globalReqId;
+
     return startTrace('Snapshot.runStream', traceConfig, span => {
       let attempt = 0;
       const database = this.session.parent as Database;
@@ -1624,11 +1640,15 @@ export class Snapshot extends EventEmitter {
           }
         }
 
+        if (!resumeToken && attempt === 1) {
+          performance.mark(`M2_gax_start_${currentReqId}`);
+        }
+
         return this.requestStream({
           client: 'SpannerClient',
           method: 'executeStreamingSql',
           reqOpts: Object.assign({}, reqOpts, {resumeToken}),
-          gaxOpts: gaxOptions,
+          gaxOpts: injectGaxOpt(gaxOptions, 'reqId', currentReqId),
           headers: injectRequestIDIntoHeaders(
             headers,
             this.session,

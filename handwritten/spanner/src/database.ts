@@ -120,6 +120,15 @@ import {
   newAtomicCounter,
 } from './request_id_header';
 
+let globalReqId = 0;
+function safeMeasure(name: string, startMark: string, endMark: string) {
+  try {
+    performance.measure(name, startMark, endMark);
+  } catch (e) {
+    // ignore
+  }
+}
+
 export type GetDatabaseRolesCallback = RequestCallback<
   IDatabaseRole,
   databaseAdmin.spanner.admin.database.v1.IListDatabaseRolesResponse
@@ -2902,6 +2911,17 @@ class Database extends common.GrpcServiceObject {
         ? (optionsOrCallback as TimestampBounds)
         : {};
 
+    const reqId = ++globalReqId;
+    const m1Name = `M1_sdk_start_${reqId}`;
+    const m2Name = `M2_gax_start_${reqId}`;
+    const m3Name = `M3_gax_end_${reqId}`;
+    const m4Name = `M4_sdk_end_${reqId}`;
+
+    let m3Marked = false;
+
+    // [MARK M1]: SDK Entry Point
+    performance.mark(m1Name);
+
     return startTrace(
       'Database.run',
       {
@@ -2909,13 +2929,28 @@ class Database extends common.GrpcServiceObject {
         ...this._traceConfig,
       },
       span => {
-        this.runStream(query, options)
+        // [MARK M2]: GAX Entry Point (Right before calling runStream)
+        performance.mark(m2Name);
+        this.runStream(query, options, reqId)
           .on('error', err => {
+            // Clear all 7 marks
+            performance.clearMarks(`M1_sdk_start_${reqId}`);
+            performance.clearMarks(`M2_gax_start_${reqId}`);
+            performance.clearMarks(`M2_gcp_start_${reqId}`);
+            performance.clearMarks(`M2_gcp_end_${reqId}`);
+            performance.clearMarks(`M2_socket_write_${reqId}`);
+            performance.clearMarks(`M3_gax_end_${reqId}`);
+            performance.clearMarks(`M4_sdk_end_${reqId}`);
             setSpanError(span, err);
             span.end();
             callback!(err as grpc.ServiceError, rows, stats, metadata);
           })
           .on('response', response => {
+            // [MARK M3]: First HTTP/2 Response Header Received
+            if (!m3Marked) {
+              m3Marked = true;
+              performance.mark(m3Name);
+            }
             if (response.metadata) {
               metadata = response.metadata;
             }
@@ -2925,6 +2960,38 @@ class Database extends common.GrpcServiceObject {
             rows.push(row);
           })
           .on('end', () => {
+            performance.mark(m4Name);
+            safeMeasure(`1_SDK_PreProcessing_${reqId}`, m1Name, m2Name);
+            safeMeasure(
+              `2_GAX_Overhead_${reqId}`,
+              m2Name,
+              `M2_gcp_start_${reqId}`,
+            );
+            safeMeasure(
+              `3_grpc_gcp_Overhead_${reqId}`,
+              `M2_gcp_start_${reqId}`,
+              `M2_gcp_end_${reqId}`,
+            );
+            safeMeasure(
+              `4_grpc_js_Cpu_${reqId}`,
+              `M2_gcp_end_${reqId}`,
+              `M2_socket_write_${reqId}`,
+            );
+            safeMeasure(
+              `5_True_External_${reqId}`,
+              `M2_socket_write_${reqId}`,
+              m3Name,
+            );
+            safeMeasure(`6_SDK_PostProcessing_${reqId}`, m3Name, m4Name);
+            // Backward-compatible coarse metric:
+            safeMeasure(`2_External_${reqId}`, m2Name, m3Name);
+            performance.clearMarks(m1Name);
+            performance.clearMarks(m2Name);
+            performance.clearMarks(`M2_gcp_start_${reqId}`);
+            performance.clearMarks(`M2_gcp_end_${reqId}`);
+            performance.clearMarks(`M2_socket_write_${reqId}`);
+            performance.clearMarks(m3Name);
+            performance.clearMarks(m4Name);
             span.end();
             callback!(null, rows, stats, metadata);
           });
@@ -3147,6 +3214,7 @@ class Database extends common.GrpcServiceObject {
   runStream(
     query: string | ExecuteSqlRequest,
     options?: TimestampBounds,
+    reqId?: number,
   ): PartialResultStream {
     const proxyStream: Transform = through.obj();
     return startTrace(
@@ -3171,8 +3239,18 @@ class Database extends common.GrpcServiceObject {
 
           this._releaseOnEnd(session!, snapshot, span);
 
+          let queryObj: ExecuteSqlRequest;
+          if (typeof query === 'string') {
+            queryObj = {sql: query} as ExecuteSqlRequest;
+          } else {
+            queryObj = Object.assign({}, query) as ExecuteSqlRequest;
+          }
+          queryObj.gaxOptions = Object.assign({}, queryObj.gaxOptions, {
+            reqId,
+          });
+
           let dataReceived = false;
-          let dataStream = snapshot.runStream(query);
+          let dataStream = snapshot.runStream(queryObj, reqId);
 
           const endListener = () => {
             snapshot.end();
