@@ -235,19 +235,13 @@ describe('storage', function () {
         );
       });
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should get access controls', async () => {
         const accessControls = await bucket.acl.get();
         assert(Array.isArray(accessControls));
       });
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should add entity to default access controls', async () => {
         const [accessControl] = await bucket.acl.default.add({
           entity: USER_ACCOUNT,
@@ -263,19 +257,13 @@ describe('storage', function () {
         await bucket.acl.default.delete({entity: USER_ACCOUNT});
       });
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should get default access controls', async () => {
         const accessControls = await bucket.acl.default.get();
         assert(Array.isArray(accessControls));
       });
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should grant an account access', async () => {
         const [accessControl] = await bucket.acl.add({
           entity: USER_ACCOUNT,
@@ -291,10 +279,7 @@ describe('storage', function () {
         await bucket.acl.delete(opts);
       });
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should update an account', async () => {
         const [accessControl] = await bucket.acl.add({
           entity: USER_ACCOUNT,
@@ -370,10 +355,7 @@ describe('storage', function () {
         }
       });
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should make files private', async () => {
         await Promise.all(
           ['a', 'b', 'c'].map(text => createFileWithContentPromise(text)),
@@ -405,10 +387,7 @@ describe('storage', function () {
         await file.delete();
       });
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should get access controls', async () => {
         const [accessControls] = await file.acl.get();
         assert(Array.isArray(accessControls));
@@ -419,10 +398,7 @@ describe('storage', function () {
         assert.strictEqual(typeof (file as any).default, 'undefined');
       });
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should grant an account access', async () => {
         const [accessControl] = await file.acl.add({
           entity: USER_ACCOUNT,
@@ -437,10 +413,7 @@ describe('storage', function () {
         await file.acl.delete({entity: USER_ACCOUNT});
       });
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should update an account', async () => {
         const [accessControl] = await file.acl.add({
           entity: USER_ACCOUNT,
@@ -470,10 +443,7 @@ describe('storage', function () {
         await file.acl.delete({entity: 'allUsers'});
       });
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should make a file private', async () => {
         const validateMakeFilePrivateRejects = (err: ApiError) => {
           assert.strictEqual(err.code, 404);
@@ -547,10 +517,7 @@ describe('storage', function () {
         });
       });
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should make a file private from a resumable upload', async () => {
         const validateMakeFilePrivateRejects = (err: ApiError) => {
           assert.strictEqual((err as ApiError)!.code, 404);
@@ -1203,10 +1170,7 @@ describe('storage', function () {
     describe('preserves bucket/file ACL over uniform bucket-level access on/off', () => {
       beforeEach(createBucket);
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should preserve default bucket ACL', async () => {
         await bucket.acl.default.update(customAcl);
         const [aclBefore] = await bucket.acl.default.get();
@@ -1226,10 +1190,7 @@ describe('storage', function () {
         }
       }).timeout(UNIFORM_ACCESS_TIMEOUT);
 
-       /**
-       * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-       * Currently disabled because uniform bucket-level access disables ACLs.
-       */
+      // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
       it.skip('should preserve file ACL', async () => {
         const file = bucket.file(`file-${crypto.randomUUID()}`);
         await file.save('data', {resumable: false});
@@ -3191,10 +3152,7 @@ describe('storage', function () {
       await Promise.all([file.delete, copiedFile.delete()]);
     });
 
-    /**
-     * TODO: Re-enable once the test environment is configured without uniform bucket-level access.
-     * Currently disabled because uniform bucket-level access disables ACLs.
-     */
+    // TODO: Re-enable once the test environment is configured without uniform bucket-level access.
     it.skip('should respect predefined Acl at file#copy', async () => {
       const opts = {destination: 'CloudLogo'};
       const [file] = await bucket.upload(FILES.logo.path, opts);
