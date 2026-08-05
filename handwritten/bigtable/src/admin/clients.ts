@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Bigtable} from '../';
+import {Bigtable} from '..';
 import {TableAdminClient} from './table';
 import {InstanceAdminClient} from './instance';
 import * as gax from 'google-gax';
