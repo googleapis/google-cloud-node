@@ -48,7 +48,7 @@
     "@google-cloud/common": "^8.0.0",
     "@google-cloud/paginator": "^7.0.0",
     "@google-cloud/projectify": "^6.0.0",
-    "@google-cloud/promisify": "4.0.0",
+    "@google-cloud/promisify": "^6.0.0",
     "@grpc/grpc-js": "^1.14.3",
     "@opentelemetry/api": "^1.7.0",
     "arrify": "^2.0.1",
