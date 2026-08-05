@@ -68,13 +68,19 @@ function runGit(args, options = {}) {
 }
 
 function getChangedFilesStrict() {
-  const gitDiffArg = process.env.GIT_DIFF_ARG;
+  let gitDiffArg = process.env.GIT_DIFF_ARG;
 
   if (!gitDiffArg) {
     throw new Error(
       'Strict mode is enabled, but GIT_DIFF_ARG environment variable or --git-diff-arg flag was not provided. ' +
       'Please set the GIT_DIFF_ARG environment variable or provide --git-diff-arg <arg>.'
     );
+  }
+
+  // If a single ref is provided (e.g. "HEAD^1" or "origin/main"), convert to three-dot diff ("ref...HEAD")
+  // to compare against the merge-base and avoid listing files modified on the base branch.
+  if (!gitDiffArg.includes('..')) {
+    gitDiffArg = `${gitDiffArg}...HEAD`;
   }
 
   console.log(`Strict mode enabled. Comparing using GIT_DIFF_ARG: ${gitDiffArg}`);
@@ -97,7 +103,7 @@ function getChangedFilesStrict() {
   } catch (err) {
     if (err.status !== 1) {
       throw new Error(
-        `Strict mode error: git diff --quiet ${gitDiffArg} failed with exit code ${err.status}.\n` +
+        `Strict mode error: git diff ${gitDiffArg} failed with exit code ${err.status}.\n` +
         `Ensure that the git reference '${gitDiffArg}' exists locally and that you have fetched the required commits/branches.\n` +
         `Details: ${String(err.stderr || err.message || '').trim()}`
       );
@@ -121,11 +127,12 @@ function getChangedFiles() {
 
   for (const ref of refsToTry) {
     try {
+      const diffRef = ref.includes('..') ? ref : `${ref}...HEAD`;
       const output = runGit([
         'diff',
         '--name-only',
         '--diff-filter=ACMRT',
-        ref,
+        diffRef,
         '--',
         '*.ts',
       ]);

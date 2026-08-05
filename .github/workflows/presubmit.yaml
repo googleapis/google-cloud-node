@@ -52,7 +52,7 @@ jobs:
       - run: node ./bin/linter.mjs --strict
         name: Run monorepo linter
         env:
-          GIT_DIFF_ARG: "HEAD^1"
+          GIT_DIFF_ARG: "HEAD^1...HEAD"
 
   # Consolidate shards into jobs representing aggregate status to simplify branch protection requirements
   units-status:
