@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.31.1
+version: v0.32.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: 62da249e76b878fa8d667a0d7bfa4dc33d790cb8
-    sha256: abd8967d4827cb1c849ee49cf9f22c3acb0a498018684361fa690b2922c781b3
+    commit: 57394718a71457aa37ab002352b22081976bdd91
+    sha256: 633d12eb239bf48648613a8e8f1e4b4875ae8116150fdee0ba4abc910ffb9777
 tools:
   pnpm:
     - name: gapic-generator-typescript

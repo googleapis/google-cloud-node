@@ -214,6 +214,13 @@
                 "listMembershipsAsync"
               ]
             },
+            "SearchMessages": {
+              "methods": [
+                "searchMessages",
+                "searchMessagesStream",
+                "searchMessagesAsync"
+              ]
+            },
             "ListSpaces": {
               "methods": [
                 "listSpaces",
@@ -477,6 +484,13 @@
                 "listMemberships",
                 "listMembershipsStream",
                 "listMembershipsAsync"
+              ]
+            },
+            "SearchMessages": {
+              "methods": [
+                "searchMessages",
+                "searchMessagesStream",
+                "searchMessagesAsync"
               ]
             },
             "ListSpaces": {
