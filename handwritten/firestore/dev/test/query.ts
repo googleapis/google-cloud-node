@@ -125,7 +125,7 @@ export function fieldFilters(
       field: {
         fieldPath,
       },
-      op,
+      op: (typeof op === "string" ? (api.StructuredQuery.FieldFilter.Operator as any)[op] ?? op : op),
     };
 
     if (typeof value === 'string') {
@@ -165,7 +165,7 @@ export function compositeFilter(
 ): api.StructuredQuery.IFilter {
   return {
     compositeFilter: {
-      op: op,
+      op: (typeof op === "string" ? (api.StructuredQuery.CompositeFilter.Operator as any)[op] ?? op : op),
       filters,
     },
   };
@@ -220,7 +220,7 @@ function unaryFilters(
         field: {
           fieldPath,
         },
-        op: equals as 'IS_NAN' | 'IS_NULL' | 'IS_NOT_NAN' | 'IS_NOT_NULL',
+        op: (typeof equals === "string" ? (api.StructuredQuery.UnaryFilter.Operator as any)[equals] ?? equals : equals),
       },
     });
   }
@@ -257,7 +257,7 @@ export function orderBy(
       field: {
         fieldPath,
       },
-      direction,
+      direction: (typeof direction === "string" ? (api.StructuredQuery.Direction as any)[direction] ?? direction : direction),
     });
   }
 

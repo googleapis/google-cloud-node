@@ -31,6 +31,8 @@
     
     // Exported root namespace
     var $root = $protobuf.roots.firestore_v1 || ($protobuf.roots.firestore_v1 = {});
+    $root.google = require("@google-cloud/firestore-api/build/protos/protos").google;
+
     
     $root.firestore = (function() {
     

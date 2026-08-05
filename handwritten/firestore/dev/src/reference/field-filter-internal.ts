@@ -119,7 +119,7 @@ export class FieldFilterInternal extends FilterInternal {
           field: {
             fieldPath: this.field.formattedName,
           },
-          op: this.nanOp(),
+          op: (api.StructuredQuery.UnaryFilter.Operator as any)[this.nanOp()] ?? this.nanOp(),
         },
       };
     }
@@ -130,7 +130,7 @@ export class FieldFilterInternal extends FilterInternal {
           field: {
             fieldPath: this.field.formattedName,
           },
-          op: this.nullOp(),
+          op: (api.StructuredQuery.UnaryFilter.Operator as any)[this.nullOp()] ?? this.nullOp(),
         },
       };
     }
@@ -140,7 +140,7 @@ export class FieldFilterInternal extends FilterInternal {
         field: {
           fieldPath: this.field.formattedName,
         },
-        op: this.op,
+        op: (typeof this.op === "string" ? (api.StructuredQuery.FieldFilter.Operator as any)[this.op] ?? this.op : this.op),
         value: this.serializer.encodeValue(this.value),
       },
     };

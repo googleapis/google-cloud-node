@@ -150,7 +150,7 @@ export class BundleBuilder {
     // This take cares of stuff like converting internal byte array fields
     // to Base64 encodings.
     // We lazy-load the Proto file to reduce cold-start times.
-    const message = require("@google-cloud/firestore-api/build/protos/protos")
+    const message = require("./bundle-proto")
       .firestore.BundleElement.fromObject(bundleElement)
       .toJSON();
     const buffer = Buffer.from(JSON.stringify(message), 'utf-8');
