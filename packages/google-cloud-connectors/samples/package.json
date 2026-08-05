@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/connectors": "^0.5.2"
+    "@google-cloud/connectors": "^0.6.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",
