@@ -28,6 +28,7 @@ tools:
         - pnpm install --frozen-lockfile --config.auto-install-peers=true
         - pnpm run compile
         - pnpm add -g "$PWD"
+      src_dir: core/generator/gapic-generator-typescript
     - name: gapic-node-processing
       version: 0.1.11
     - name: gapic-tools
