@@ -14,10 +14,13 @@
 
 import {execFileSync, execFile} from 'child_process';
 import {existsSync} from 'fs';
+import {createRequire} from 'module';
 import path from 'path';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
-import ts from 'typescript';
+
+const require = createRequire(import.meta.url);
+const ts = require('typescript');
 const execFileAsync = promisify(execFile);
 const tsconfigCache = new Map();
 
