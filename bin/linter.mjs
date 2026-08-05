@@ -235,7 +235,7 @@ function findTsconfigDir(filePath) {
   if (tsconfigCache.has(dir)) {
     return tsconfigCache.get(dir);
   }
-  const configPath = ts.findConfigFile(dir, ts.sys.fileExists);
+  const configPath = ts.findConfigFile(dir, ts.sys?.fileExists ?? existsSync);
   const result = configPath ? path.dirname(configPath) : null;
   tsconfigCache.set(dir, result);
   return result;
