@@ -14,13 +14,10 @@
 
 import {execFileSync, execFile} from 'child_process';
 import {existsSync} from 'fs';
-import {createRequire} from 'module';
 import path from 'path';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
 
-const require = createRequire(import.meta.url);
-const ts = require('typescript');
 const execFileAsync = promisify(execFile);
 const tsconfigCache = new Map();
 
@@ -233,14 +230,23 @@ async function checkEslint(filesToCheck) {
  * Caches directories to avoid redundant disk operations.
  */
 function findTsconfigDir(filePath) {
-  const dir = path.dirname(filePath);
-  if (tsconfigCache.has(dir)) {
-    return tsconfigCache.get(dir);
+  let currentDir = path.resolve(path.dirname(filePath));
+  const root = path.parse(currentDir).root;
+
+  while (currentDir && currentDir !== root) {
+    if (tsconfigCache.has(currentDir)) {
+      return tsconfigCache.get(currentDir);
+    }
+    const candidate = path.join(currentDir, 'tsconfig.json');
+    if (existsSync(candidate)) {
+      tsconfigCache.set(path.dirname(filePath), currentDir);
+      return currentDir;
+    }
+    currentDir = path.dirname(currentDir);
   }
-  const configPath = ts.findConfigFile(dir, ts.sys?.fileExists ?? existsSync);
-  const result = configPath ? path.dirname(configPath) : null;
-  tsconfigCache.set(dir, result);
-  return result;
+
+  tsconfigCache.set(path.dirname(filePath), null);
+  return null;
 }
 
 /**
