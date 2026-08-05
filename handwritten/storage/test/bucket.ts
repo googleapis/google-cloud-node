@@ -100,10 +100,17 @@ class FakeNotification {
 }
 
 let fsStatOverride: Function | null;
+let fsCreateReadStreamOverride: Function | null;
 const fakeFs = {
   ...fs,
   stat: (filePath: string, callback: Function) => {
     return (fsStatOverride || fs.stat)(filePath, callback);
+  },
+  createReadStream: (filePath: string, options?: Parameters<typeof fs.createReadStream>[1]) => {
+    return (fsCreateReadStreamOverride || fs.createReadStream)(
+      filePath,
+      options
+    );
   },
 };
 
@@ -234,6 +241,7 @@ describe('Bucket', () => {
 
   beforeEach(() => {
     fsStatOverride = null;
+    fsCreateReadStreamOverride = null;
     pLimitOverride = null;
     bucket = new Bucket(STORAGE, BUCKET_NAME);
   });
@@ -3228,6 +3236,44 @@ describe('Bucket', () => {
           assert.ok(retryCount === 1);
           done();
         });
+      });
+    });
+
+    it('should destroy the local read stream if write stream fails', done => {
+      const fakeFile = new FakeFile(bucket, 'file-name');
+      const options = {destination: fakeFile, resumable: false};
+      const originalCreateReadStream = fs.createReadStream;
+      let readStream: fs.ReadStream;
+      fsCreateReadStreamOverride = (path: string, opts: any) => {
+        readStream = originalCreateReadStream(path, opts);
+        return readStream;
+      };
+
+      fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
+        const ws = new stream.Writable({
+          write(chunk, encoding, callback) {
+            callback(new Error('write error'));
+          },
+        });
+        return ws;
+      };
+
+      const textfilepath = path.join(
+        getDirName(),
+        '../../../test/testdata/textfile.txt'
+      );
+
+      bucket.upload(textfilepath, options, (err: Error) => {
+        try {
+          assert.strictEqual(err.message, 'write error');
+          assert.ok(readStream);
+          assert.ok(readStream.destroyed);
+          done();
+        } catch (e) {
+          done(e);
+        } finally {
+          fsCreateReadStreamOverride = null;
+        }
       });
     });
 
