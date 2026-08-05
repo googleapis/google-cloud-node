@@ -1679,7 +1679,10 @@ describe('Bigtable', () => {
                   storage: 'ssd',
                 },
               ],
-              labels: {'prod-label': 'prod-label'},
+              labels: {
+                'prod-label': 'prod-label',
+                time_created: String(Date.now()),
+              },
               type: 'production',
             };
             const [, operation] = await instance.create(instanceOptions);

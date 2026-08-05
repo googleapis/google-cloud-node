@@ -5,6 +5,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/error-reporting-v3.0.6...error-reporting-v4.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update error-reporting to minimum Node version of 22. ([#9046](https://github.com/googleapis/google-cloud-node/issues/9046))
+
+### Features
+
+* Update error-reporting to minimum Node version of 22. ([#9046](https://github.com/googleapis/google-cloud-node/issues/9046)) ([5128d75](https://github.com/googleapis/google-cloud-node/commit/5128d753ef2b46913f8739eb61340ce2bf58776d)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [3.0.6](https://github.com/googleapis/google-cloud-node/compare/error-reporting-v3.0.5...error-reporting-v3.0.6) (2026-05-06)
 
 
