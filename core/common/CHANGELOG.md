@@ -5,6 +5,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/common?activeTab=versions
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/common-v7.0.0...common-v8.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update common to minimum Node version of 22. ([#8988](https://github.com/googleapis/google-cloud-node/issues/8988))
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+* Update common to minimum Node version of 22. ([#8988](https://github.com/googleapis/google-cloud-node/issues/8988)) ([d38c05a](https://github.com/googleapis/google-cloud-node/commit/d38c05a5e14cec57b66b4106d6bbd511ac4fd6f2)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/common-v6.1.0...common-v7.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update common to minimum Node version of 22. ([#8988](https://github.com/googleapis/google-cloud-node/issues/8988))
+
+### Features
+
+* Update common to minimum Node version of 22. ([#8988](https://github.com/googleapis/google-cloud-node/issues/8988)) ([d38c05a](https://github.com/googleapis/google-cloud-node/commit/d38c05a5e14cec57b66b4106d6bbd511ac4fd6f2)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/common-v6.0.1...common-v6.1.0) (2026-07-23)
 
 

@@ -69,6 +69,39 @@
     "core/promisify": {
       "component": "promisify"
     },
+    "handwritten/bigquery": {
+      "component": "bigquery"
+    },
+    "handwritten/bigquery-storage": {
+      "component": "bigquery-storage"
+    },
+    "handwritten/bigtable": {
+      "component": "bigtable"
+    },
+    "handwritten/cloud-profiler": {
+      "component": "cloud-profiler"
+    },
+    "handwritten/datastore": {
+      "component": "datastore"
+    },
+    "handwritten/error-reporting": {
+      "component": "error-reporting"
+    },
+    "handwritten/google-cloud-dns": {
+      "component": "dns"
+    },
+    "handwritten/logging": {
+      "component": "logging"
+    },
+    "handwritten/logging-bunyan": {
+      "component": "logging-bunyan"
+    },
+    "handwritten/logging-winston": {
+      "component": "logging-winston"
+    },
+    "handwritten/pubsub": {
+      "component": "pubsub"
+    },
     "packages/google-ads-admanager": {},
     "packages/google-ads-datamanager": {},
     "packages/google-ai-generativelanguage": {},
@@ -86,6 +119,7 @@
     "packages/google-chat": {},
     "packages/google-cloud-accessapproval": {},
     "packages/google-cloud-advisorynotifications": {},
+    "packages/google-cloud-agentidentity": {},
     "packages/google-cloud-agentregistry": {},
     "packages/google-cloud-aiplatform": {},
     "packages/google-cloud-alloydb": {},
