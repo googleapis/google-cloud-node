@@ -7,6 +7,6 @@
     "node": ">=22"
   },
   "dependencies": {
-    "gcp-metadata": "file:./gcp-metadata.tgz"
+    "gcp-metadata": "^9.0.0"
   }
 }

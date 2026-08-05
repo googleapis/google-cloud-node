@@ -14,7 +14,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "gcp-metadata": "file:./gcp-metadata.tgz"
+    "gcp-metadata": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
