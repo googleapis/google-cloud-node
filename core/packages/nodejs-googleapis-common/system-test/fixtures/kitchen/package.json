@@ -14,7 +14,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "googleapis-common": "file:./googleapis-common.tgz"
+    "googleapis-common": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

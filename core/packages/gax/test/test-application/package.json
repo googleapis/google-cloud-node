@@ -25,13 +25,13 @@
   },
   "dependencies": {
     "@grpc/grpc-js": "~1.6.0",
-    "google-gax": "file:./google-gax.tgz",
+    "google-gax": "^6.0.0",
     "protobufjs": "^7.0.0",
     "pumpify": "^2.0.1",
-    "showcase-echo-client": "./showcase-echo-client.tgz",
-    "showcase-server": "./showcase-server.tgz"
+    "showcase-echo-client": "^0.0.1",
+    "showcase-server": "^0.0.1-security"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   }
 }

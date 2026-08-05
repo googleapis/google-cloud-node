@@ -53,8 +53,8 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "@google-cloud/logging": "^11.0.0",
-    "google-auth-library": "^10.6.2"
+    "@google-cloud/logging": "^12.0.0",
+    "google-auth-library": "^11.0.0"
   },
   "devDependencies": {
     "@google-cloud/common": "^6.0.0",

@@ -54,7 +54,7 @@
     "@google-cloud/paginator": "^6.0.0",
     "@google-cloud/precise-date": "^5.0.0",
     "@google-cloud/promisify": "^5.0.0",
-    "teeny-request": "^10.0.0",
+    "teeny-request": "^11.0.0",
     "arrify": "^3.0.0",
     "big.js": "^7.0.0",
     "duplexify": "^4.1.3",
