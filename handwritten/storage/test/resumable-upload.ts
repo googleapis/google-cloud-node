@@ -2549,8 +2549,7 @@ describe('resumable-upload', () => {
       );
 
       up.on('error', (err: Error) => {
-        // Let's check for the presence of key details rather than an exact string if we are unsure of exact GaxiosError fields,
-        // or assert the expected string. Let's assert the expected string:
+        // Assert that the formatted error message includes key HTTP details from the GaxiosError.
         assert(err.message.includes('Retry limit exceeded'));
         assert(err.message.includes('Request failed with status code 429'));
         assert(err.message.includes('status: 429') || err.message.includes('code: 429'));
