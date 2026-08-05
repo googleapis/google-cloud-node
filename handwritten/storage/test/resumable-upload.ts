@@ -2562,6 +2562,45 @@ describe('resumable-upload', () => {
         data: gaxiosError,
       });
     });
+
+    it('should include correct details for GaxiosErrors with populated error responses', done => {
+      up.numRetries = 3;
+      up.retryLimit = 3;
+
+      const gaxiosError = new GaxiosError(
+        'Request failed with status code 400',
+        {
+          method: 'POST',
+          url: 'https://example.com',
+        } as any,
+        {
+          status: 400,
+          statusText: 'Bad Request',
+          data: {
+            error: {
+              message: 'Invalid query parameter value',
+              code: 400,
+            },
+          },
+          config: {},
+          headers: {},
+        } as any
+      );
+
+      up.on('error', (err: Error) => {
+        // Assert that the formatted error message includes key HTTP details and the inner API error message.
+        assert(err.message.includes('Retry limit exceeded'));
+        assert(err.message.includes('Request failed with status code 400'));
+        assert(err.message.includes('status: 400') || err.message.includes('code: 400'));
+        assert(err.message.includes('Invalid query parameter value'));
+        done();
+      });
+
+      up.attemptDelayedRetry({
+        status: NaN,
+        data: gaxiosError,
+      });
+    });
   });
 
   describe('PROTOCOL_REGEX', () => {
