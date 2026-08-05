@@ -32,6 +32,11 @@ function main(workspace) {
    *  Required. The workspace's name.
    */
   // const workspace = 'abc123'
+  /**
+   *  Optional. The pipeline options which defines the pipeline type and path
+   *  within the Git repository.
+   */
+  // const pipelineConfig = {}
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;
