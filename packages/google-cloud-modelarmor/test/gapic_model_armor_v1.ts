@@ -66,6 +66,20 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
+function stubBidiStreamingCall<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  return sinon.stub().returns(mockStream);
+}
+
 function stubPageStreamingCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error,
@@ -1384,6 +1398,186 @@ describe('v1.ModelArmorClient', () => {
       await assert.rejects(
         client.sanitizeModelResponse(request),
         expectedError,
+      );
+    });
+  });
+
+  describe('streamSanitizeUserPrompt', () => {
+    it('invokes streamSanitizeUserPrompt without error', async () => {
+      const client = new modelarmorModule.v1.ModelArmorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.modelarmor.v1.SanitizeUserPromptRequest(),
+      );
+
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.modelarmor.v1.SanitizeUserPromptResponse(),
+      );
+      client.innerApiCalls.streamSanitizeUserPrompt =
+        stubBidiStreamingCall(expectedResponse);
+      const stream = client.streamSanitizeUserPrompt();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.modelarmor.v1.SanitizeUserPromptResponse,
+          ) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.streamSanitizeUserPrompt as SinonStub)
+          .getCall(0)
+          .calledWith(null),
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request,
+      );
+    });
+
+    it('invokes streamSanitizeUserPrompt with error', async () => {
+      const client = new modelarmorModule.v1.ModelArmorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.modelarmor.v1.SanitizeUserPromptRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamSanitizeUserPrompt = stubBidiStreamingCall(
+        undefined,
+        expectedError,
+      );
+      const stream = client.streamSanitizeUserPrompt();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.modelarmor.v1.SanitizeUserPromptResponse,
+          ) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.innerApiCalls.streamSanitizeUserPrompt as SinonStub)
+          .getCall(0)
+          .calledWith(null),
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request,
+      );
+    });
+  });
+
+  describe('streamSanitizeModelResponse', () => {
+    it('invokes streamSanitizeModelResponse without error', async () => {
+      const client = new modelarmorModule.v1.ModelArmorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.modelarmor.v1.SanitizeModelResponseRequest(),
+      );
+
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.modelarmor.v1.SanitizeModelResponseResponse(),
+      );
+      client.innerApiCalls.streamSanitizeModelResponse =
+        stubBidiStreamingCall(expectedResponse);
+      const stream = client.streamSanitizeModelResponse();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.modelarmor.v1.SanitizeModelResponseResponse,
+          ) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.streamSanitizeModelResponse as SinonStub)
+          .getCall(0)
+          .calledWith(null),
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request,
+      );
+    });
+
+    it('invokes streamSanitizeModelResponse with error', async () => {
+      const client = new modelarmorModule.v1.ModelArmorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.modelarmor.v1.SanitizeModelResponseRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamSanitizeModelResponse = stubBidiStreamingCall(
+        undefined,
+        expectedError,
+      );
+      const stream = client.streamSanitizeModelResponse();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.modelarmor.v1.SanitizeModelResponseResponse,
+          ) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.innerApiCalls.streamSanitizeModelResponse as SinonStub)
+          .getCall(0)
+          .calledWith(null),
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request,
       );
     });
   });

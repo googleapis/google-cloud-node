@@ -16,20 +16,14 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CapacityPlanningServiceClient, UsageServiceClient} from '@google-cloud/capacityplanner';
+import { UsageServiceClient } from '@google-cloud/capacityplanner';
 
 // check that the client class type name can be used
-function doStuffWithCapacityPlanningServiceClient(client: CapacityPlanningServiceClient) {
-  client.close();
-}
 function doStuffWithUsageServiceClient(client: UsageServiceClient) {
   client.close();
 }
 
 function main() {
-  // check that the client instance can be created
-  const capacityPlanningServiceClient = new CapacityPlanningServiceClient();
-  doStuffWithCapacityPlanningServiceClient(capacityPlanningServiceClient);
   // check that the client instance can be created
   const usageServiceClient = new UsageServiceClient();
   doStuffWithUsageServiceClient(usageServiceClient);

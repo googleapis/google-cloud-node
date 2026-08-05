@@ -1799,6 +1799,12 @@ export namespace google {
 
                     /** Repository initialConfig */
                     initialConfig?: (google.cloud.securesourcemanager.v1.Repository.IInitialConfig|null);
+
+                    /** Repository serviceAccount */
+                    serviceAccount?: (string|null);
+
+                    /** Repository scanConfig */
+                    scanConfig?: (google.cloud.securesourcemanager.v1.Repository.IScanConfig|null);
                 }
 
                 /** Represents a Repository. */
@@ -1836,6 +1842,12 @@ export namespace google {
 
                     /** Repository initialConfig. */
                     public initialConfig?: (google.cloud.securesourcemanager.v1.Repository.IInitialConfig|null);
+
+                    /** Repository serviceAccount. */
+                    public serviceAccount: string;
+
+                    /** Repository scanConfig. */
+                    public scanConfig?: (google.cloud.securesourcemanager.v1.Repository.IScanConfig|null);
 
                     /**
                      * Creates a new Repository instance using the specified properties.
@@ -2139,6 +2151,209 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ScanConfig. */
+                    interface IScanConfig {
+
+                        /** ScanConfig secretScanConfig */
+                        secretScanConfig?: (google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig|null);
+                    }
+
+                    /** Represents a ScanConfig. */
+                    class ScanConfig implements IScanConfig {
+
+                        /**
+                         * Constructs a new ScanConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securesourcemanager.v1.Repository.IScanConfig);
+
+                        /** ScanConfig secretScanConfig. */
+                        public secretScanConfig?: (google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig|null);
+
+                        /**
+                         * Creates a new ScanConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ScanConfig instance
+                         */
+                        public static create(properties?: google.cloud.securesourcemanager.v1.Repository.IScanConfig): google.cloud.securesourcemanager.v1.Repository.ScanConfig;
+
+                        /**
+                         * Encodes the specified ScanConfig message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Repository.ScanConfig.verify|verify} messages.
+                         * @param message ScanConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securesourcemanager.v1.Repository.IScanConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ScanConfig message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Repository.ScanConfig.verify|verify} messages.
+                         * @param message ScanConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securesourcemanager.v1.Repository.IScanConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ScanConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ScanConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.Repository.ScanConfig;
+
+                        /**
+                         * Decodes a ScanConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ScanConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.Repository.ScanConfig;
+
+                        /**
+                         * Verifies a ScanConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ScanConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ScanConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.Repository.ScanConfig;
+
+                        /**
+                         * Creates a plain object from a ScanConfig message. Also converts values to other types if specified.
+                         * @param message ScanConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securesourcemanager.v1.Repository.ScanConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ScanConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ScanConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ScanConfig {
+
+                        /** Properties of a SecretScanConfig. */
+                        interface ISecretScanConfig {
+
+                            /** SecretScanConfig enabled */
+                            enabled?: (boolean|null);
+
+                            /** SecretScanConfig inspectTemplate */
+                            inspectTemplate?: (string|null);
+                        }
+
+                        /** Represents a SecretScanConfig. */
+                        class SecretScanConfig implements ISecretScanConfig {
+
+                            /**
+                             * Constructs a new SecretScanConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig);
+
+                            /** SecretScanConfig enabled. */
+                            public enabled: boolean;
+
+                            /** SecretScanConfig inspectTemplate. */
+                            public inspectTemplate: string;
+
+                            /**
+                             * Creates a new SecretScanConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns SecretScanConfig instance
+                             */
+                            public static create(properties?: google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig): google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig;
+
+                            /**
+                             * Encodes the specified SecretScanConfig message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig.verify|verify} messages.
+                             * @param message SecretScanConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified SecretScanConfig message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig.verify|verify} messages.
+                             * @param message SecretScanConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.securesourcemanager.v1.Repository.ScanConfig.ISecretScanConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a SecretScanConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns SecretScanConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig;
+
+                            /**
+                             * Decodes a SecretScanConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns SecretScanConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig;
+
+                            /**
+                             * Verifies a SecretScanConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a SecretScanConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns SecretScanConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig;
+
+                            /**
+                             * Creates a plain object from a SecretScanConfig message. Also converts values to other types if specified.
+                             * @param message SecretScanConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.securesourcemanager.v1.Repository.ScanConfig.SecretScanConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this SecretScanConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for SecretScanConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
                 }
 

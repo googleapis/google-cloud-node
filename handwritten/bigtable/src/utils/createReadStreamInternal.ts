@@ -26,7 +26,8 @@ import {
 } from '../chunktransformer';
 import {TableUtils} from './table';
 import {Duplex, PassThrough, Transform} from 'stream';
-import {google} from '../../protos/protos';
+import {protos} from '..';
+import google = protos.google;
 const pumpify = require('pumpify');
 import {grpc, ServiceError} from 'google-gax';
 import {

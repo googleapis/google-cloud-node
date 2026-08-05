@@ -362,8 +362,8 @@ describe('Spanner with mock server', () => {
     instance = spanner.instance('instance');
   });
 
-  after(() => {
-    spanner.close();
+  after(async () => {
+    await spanner.close();
     server.tryShutdown(() => {});
     delete process.env.SPANNER_EMULATOR_HOST;
     sandbox.restore();
@@ -907,6 +907,41 @@ describe('Spanner with mock server', () => {
         assert.strictEqual(metadata.rowType!.fields!.length, 1);
         assert.strictEqual(metadata.rowType!.fields![0].name, '');
         assert.strictEqual(rows[0]['_0'], 1);
+      } finally {
+        await database.close();
+      }
+    });
+
+    it('should support JSON mode with wrapNumbers and wrapStructs options', async () => {
+      const database = newTestDatabase();
+      try {
+        // 1. With wrapNumbers = false, wrapStructs = false
+        const [rowsRaw] = (await database.run({
+          sql: selectAllTypes,
+          json: true,
+          jsonOptions: {wrapNumbers: false, wrapStructs: false},
+        })) as any;
+        assert.strictEqual(rowsRaw.length, 3);
+        const rowRaw = rowsRaw[0];
+        // INT64 / FLOAT64 should be native numbers
+        assert.strictEqual(typeof rowRaw.COLINT64, 'number');
+        assert.strictEqual(rowRaw.COLINT64, 1);
+        assert.strictEqual(typeof rowRaw.COLFLOAT64, 'number');
+        assert.strictEqual(rowRaw.COLFLOAT64, 3.14);
+
+        // 2. With wrapNumbers = true, wrapStructs = true
+        const [rowsWrapped] = (await database.run({
+          sql: selectAllTypes,
+          json: true,
+          jsonOptions: {wrapNumbers: true, wrapStructs: true},
+        })) as any;
+        assert.strictEqual(rowsWrapped.length, 3);
+        const rowWrapped = rowsWrapped[0];
+        // INT64 / FLOAT64 should be wrapped objects
+        assert(rowWrapped.COLINT64 instanceof Int);
+        assert.strictEqual(rowWrapped.COLINT64.value, '1');
+        assert(rowWrapped.COLFLOAT64 instanceof Float);
+        assert.strictEqual(rowWrapped.COLFLOAT64.value, 3.14);
       } finally {
         await database.close();
       }
@@ -2111,7 +2146,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
       it('should make a request to BatchCreateSessions', async () => {
@@ -2218,7 +2253,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
 
@@ -2245,7 +2280,7 @@ describe('Spanner with mock server', () => {
           'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env
           .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
       });
@@ -2274,7 +2309,7 @@ describe('Spanner with mock server', () => {
           'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
         delete process.env
           .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
@@ -2339,7 +2374,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       });
 
@@ -2377,7 +2412,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
       });
 
@@ -2416,7 +2451,7 @@ describe('Spanner with mock server', () => {
         process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
         delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW;
       });
@@ -2590,7 +2625,7 @@ describe('Spanner with mock server', () => {
         instanceWithEnvVar = spannerWithEnvVar.instance('instance');
       });
 
-      after(() => {
+      after(async () => {
         delete process.env.SPANNER_OPTIMIZER_VERSION;
         delete process.env.SPANNER_OPTIMIZER_STATISTICS_PACKAGE;
       });
@@ -2844,7 +2879,7 @@ describe('Spanner with mock server', () => {
       process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
     });
 
-    after(() => {
+    after(async () => {
       delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       delete process.env
         .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
@@ -3285,7 +3320,7 @@ describe('Spanner with mock server', () => {
       process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_FOR_RW = 'false';
     });
 
-    after(() => {
+    after(async () => {
       delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
       delete process.env
         .GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS_PARTITIONED_OPS;
@@ -4213,7 +4248,7 @@ describe('Spanner with mock server', () => {
         before(() => {
           process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
         });
-        after(() => {
+        after(async () => {
           delete process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS;
         });
         it('should use session from pool', async () => {
@@ -7333,7 +7368,7 @@ describe('Spanner with mock server', () => {
         .callsFake(() => originalNow.call(Date) + warpOffset);
     });
 
-    afterEach(() => {
+    afterEach(async () => {
       ttlSandbox.restore();
     });
 
@@ -7472,7 +7507,7 @@ describe('Spanner with mock server', () => {
 
       // Cleanup
       await provider.shutdown();
-      localSpanner.close();
+      await localSpanner.close();
     });
   });
 });

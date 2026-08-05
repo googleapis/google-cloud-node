@@ -1,13 +1,13 @@
 {
   "name": "pack-n-play",
   "description": "Ensure your library installs and compiles",
-  "version": "4.2.2",
+  "version": "5.0.0",
   "author": "Google LLC",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "directory": "dev-packages/pack-n-play",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/dev-packages/pack-n-play",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
@@ -53,12 +53,12 @@
     "tmp": "^0.2.3"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "c8": {
     "exclude": [
       "build/test"
     ]
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/dev-packages/pack-n-play"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/dev-packages/pack-n-play"
 }

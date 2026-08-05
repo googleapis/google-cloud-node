@@ -3,19 +3,19 @@
   "license": "MIT",
   "author": "Google LLC",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18"
   },
   "files": [
     "*.js",
     "!test/"
   ],
-  "repository": "googleapis/nodejs-googleapis-common",
+  "repository": "googleapis/google-cloud-node",
   "private": true,
   "scripts": {
     "test": "echo \"There are no sample tests 👻\""
   },
   "dependencies": {
-    "googleapis-common": "^8.0.2"
+    "googleapis-common": "^9.0.0"
   },
   "devDependencies": {
     "mocha": "^8.0.0"

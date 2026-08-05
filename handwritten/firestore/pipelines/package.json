@@ -5,6 +5,6 @@
   "typings": "../types/pipelines.d.ts",
   "private": true,
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18"
   }
 }

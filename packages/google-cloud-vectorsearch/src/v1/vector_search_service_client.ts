@@ -1238,6 +1238,10 @@ export class VectorSearchServiceClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any Indexes and DataObjects from this Collection
+   *   will also be deleted. (Otherwise, the request will only work if the
+   *   Collection has no Indexes and DataObjects.)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2160,6 +2164,14 @@ export class VectorSearchServiceClient {
    *   Required. The resource name of the Collection from which we want to export
    *   Data Objects. Format:
    *   `projects/{project}/locations/{location}/collections/{collection}`.
+   * @param {google.cloud.vectorsearch.v1.ExportDataObjectsRequest.FieldFilter} [request.fieldFilter]
+   *   Optional. Restricts which top-level Data Object fields appear in each
+   *   exported JSONL record. If unset, every field is exported (the existing
+   *   behavior). The primary use case is excluding the per-object `etag` so
+   *   that the exported records can be imported into a Collection in a
+   *   different region without optimistic-concurrency conflicts.
+   *
+   *   Allowed field names are `id`, `data`, `vectors`, `etag`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

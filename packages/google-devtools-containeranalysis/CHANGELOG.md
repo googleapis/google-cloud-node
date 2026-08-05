@@ -4,6 +4,36 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.9.0...containeranalysis-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.8.0...containeranalysis-v6.9.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.7.2...containeranalysis-v6.8.0) (2026-06-16)
+
+
+### Features
+
+* Migrate google-devtools-containeranalysis to librarian ([#8534](https://github.com/googleapis/google-cloud-node/issues/8534)) ([48cfd70](https://github.com/googleapis/google-cloud-node/commit/48cfd703e8632bc2b219a298a98301de23dc3ea9))
+
+
+### Bug Fixes
+
+* Update librarian.js for containeranalysis to fix postproccessing issue ([#8489](https://github.com/googleapis/google-cloud-node/issues/8489)) ([9f7d7b9](https://github.com/googleapis/google-cloud-node/commit/9f7d7b9132694b89908243d7c284c0a6e121826d))
+
 ## [6.7.2](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v6.7.1...containeranalysis-v6.7.2) (2026-06-01)
 
 

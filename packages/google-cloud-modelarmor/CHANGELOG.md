@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/modelarmor-v0.7.0...modelarmor-v0.8.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/modelarmor-v0.6.0...modelarmor-v0.7.0) (2026-07-13)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/modelarmor-v0.5.0...modelarmor-v0.6.0) (2026-06-25)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/modelarmor-v0.4.1...modelarmor-v0.5.0) (2026-05-01)
 
 

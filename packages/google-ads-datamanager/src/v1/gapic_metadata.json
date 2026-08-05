@@ -25,6 +25,11 @@
                 "ingestEvents"
               ]
             },
+            "IngestAdEvents": {
+              "methods": [
+                "ingestAdEvents"
+              ]
+            },
             "RetrieveRequestStatus": {
               "methods": [
                 "retrieveRequestStatus"
@@ -48,6 +53,11 @@
             "IngestEvents": {
               "methods": [
                 "ingestEvents"
+              ]
+            },
+            "IngestAdEvents": {
+              "methods": [
+                "ingestAdEvents"
               ]
             },
             "RetrieveRequestStatus": {

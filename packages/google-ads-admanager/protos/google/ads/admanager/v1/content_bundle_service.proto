@@ -37,7 +37,7 @@ service ContentBundleService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `ContentBundle` object.
+  // Retrieves a `ContentBundle` object.
   rpc GetContentBundle(GetContentBundleRequest) returns (ContentBundle) {
     option (google.api.http) = {
       get: "/v1/{name=networks/*/contentBundles/*}"
@@ -45,13 +45,33 @@ service ContentBundleService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `ContentBundle` objects.
+  // Lists `ContentBundle` objects.
   rpc ListContentBundles(ListContentBundlesRequest)
       returns (ListContentBundlesResponse) {
     option (google.api.http) = {
       get: "/v1/{parent=networks/*}/contentBundles"
     };
     option (google.api.method_signature) = "parent";
+  }
+
+  // Activate a list of `ContentBundle` objects.
+  rpc BatchActivateContentBundles(BatchActivateContentBundlesRequest)
+      returns (BatchActivateContentBundlesResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=networks/*}/contentBundles:batchActivate"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,names";
+  }
+
+  // Deactivates a list of `ContentBundle` objects.
+  rpc BatchDeactivateContentBundles(BatchDeactivateContentBundlesRequest)
+      returns (BatchDeactivateContentBundlesResponse) {
+    option (google.api.http) = {
+      post: "/v1/{parent=networks/*}/contentBundles:batchDeactivate"
+      body: "*"
+    };
+    option (google.api.method_signature) = "parent,names";
   }
 }
 
@@ -99,6 +119,8 @@ message ListContentBundlesRequest {
   // <ul style="list-style-type:none">
   //   <li><code>displayName</code></li>
   //   <li><code>name</code></li>
+  //   <li><code>status</code></li>
+  //   <li><code>updateTime</code></li>
   // </ul>
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
@@ -134,3 +156,52 @@ message ListContentBundlesResponse {
   // https://developers.google.com/ad-manager/api/beta/field-masks
   int32 total_size = 3;
 }
+
+// Request message for `BatchActivateContentBundles` method.
+message BatchActivateContentBundlesRequest {
+  // Required. The parent resource where `ContentBundles` will be activated.
+  // Format: `networks/{network_code}`
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Network"
+    }
+  ];
+
+  // Required. The resource names of the `ContentBundle`s to activate.
+  // Format: `networks/{network_code}/contentBundles/{content_bundle_id}`
+  repeated string names = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/ContentBundle"
+    }
+  ];
+}
+
+// Response object for `BatchActivateContentBundles` method.
+message BatchActivateContentBundlesResponse {}
+
+// Request message for `BatchDeactivateContentBundles` method.
+message BatchDeactivateContentBundlesRequest {
+  // Required. The parent resource where `ContentBundles` will be
+  // deactivated.
+  // Format: `networks/{network_code}`
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/Network"
+    }
+  ];
+
+  // Required. The resource names of the `ContentBundle`s to deactivate.
+  // Format: `networks/{network_code}/contentBundles/{content_bundle_id}`
+  repeated string names = 2 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "admanager.googleapis.com/ContentBundle"
+    }
+  ];
+}
+
+// Response object for `BatchDeactivateContentBundles` method.
+message BatchDeactivateContentBundlesResponse {}

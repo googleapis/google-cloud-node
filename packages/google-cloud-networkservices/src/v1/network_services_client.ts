@@ -217,6 +217,9 @@ export class NetworkServicesClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      agentGatewayPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agentGateways/{agent_gateway}',
+      ),
       authzExtensionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/authzExtensions/{authz_extension}',
       ),
@@ -338,6 +341,11 @@ export class NetworkServicesClient {
         'pageToken',
         'nextPageToken',
         'meshRouteViews',
+      ),
+      listAgentGateways: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'agentGateways',
       ),
     };
 
@@ -660,6 +668,24 @@ export class NetworkServicesClient {
     const deleteServiceLbPolicyMetadata = protoFilesRoot.lookup(
       '.google.cloud.networkservices.v1.OperationMetadata',
     ) as gax.protobuf.Type;
+    const createAgentGatewayResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.AgentGateway',
+    ) as gax.protobuf.Type;
+    const createAgentGatewayMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const updateAgentGatewayResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.AgentGateway',
+    ) as gax.protobuf.Type;
+    const updateAgentGatewayMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteAgentGatewayResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteAgentGatewayMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEndpointPolicy: new this._gaxModule.LongrunningDescriptor(
@@ -842,6 +868,21 @@ export class NetworkServicesClient {
           deleteServiceLbPolicyMetadata,
         ),
       ),
+      createAgentGateway: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createAgentGatewayResponse.decode.bind(createAgentGatewayResponse),
+        createAgentGatewayMetadata.decode.bind(createAgentGatewayMetadata),
+      ),
+      updateAgentGateway: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateAgentGatewayResponse.decode.bind(updateAgentGatewayResponse),
+        updateAgentGatewayMetadata.decode.bind(updateAgentGatewayMetadata),
+      ),
+      deleteAgentGateway: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteAgentGatewayResponse.decode.bind(deleteAgentGatewayResponse),
+        deleteAgentGatewayMetadata.decode.bind(deleteAgentGatewayMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -952,6 +993,11 @@ export class NetworkServicesClient {
       'getMeshRouteView',
       'listGatewayRouteViews',
       'listMeshRouteViews',
+      'listAgentGateways',
+      'getAgentGateway',
+      'createAgentGateway',
+      'updateAgentGateway',
+      'deleteAgentGateway',
     ];
     for (const methodName of networkServicesStubMethods) {
       const callPromise = this.networkServicesStub.then(
@@ -1076,7 +1122,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the EndpointPolicy to get. Must be in the format
-   *   `projects/* /locations/global/endpointPolicies/*`.
+   *   `projects/* /locations/* /endpointPolicies/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1641,7 +1687,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the GrpcRoute to get. Must be in the format
-   *   `projects/* /locations/global/grpcRoutes/*`.
+   *   `projects/* /locations/* /grpcRoutes/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1779,7 +1825,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the HttpRoute to get. Must be in the format
-   *   `projects/* /locations/global/httpRoutes/*`.
+   *   `projects/* /locations/* /httpRoutes/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1917,7 +1963,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the TcpRoute to get. Must be in the format
-   *   `projects/* /locations/global/tcpRoutes/*`.
+   *   `projects/* /locations/* /tcpRoutes/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2055,7 +2101,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the TlsRoute to get. Must be in the format
-   *   `projects/* /locations/global/tlsRoutes/*`.
+   *   `projects/* /locations/* /tlsRoutes/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2337,7 +2383,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the Mesh to get. Must be in the format
-   *   `projects/* /locations/global/meshes/*`.
+   *   `projects/* /locations/* /meshes/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2893,6 +2939,150 @@ export class NetworkServicesClient {
         throw error;
       });
   }
+  /**
+   * Gets details of a single AgentGateway.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the AgentGateway to get. Must be in the format
+   *   `projects/* /locations/* /agentGateways/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1.AgentGateway|AgentGateway}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/network_services.get_agent_gateway.js</caption>
+   * region_tag:networkservices_v1_generated_NetworkServices_GetAgentGateway_async
+   */
+  getAgentGateway(
+    request?: protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1.IAgentGateway,
+      (
+        | protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAgentGateway(
+    request: protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networkservices.v1.IAgentGateway,
+      | protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAgentGateway(
+    request: protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest,
+    callback: Callback<
+      protos.google.cloud.networkservices.v1.IAgentGateway,
+      | protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAgentGateway(
+    request?: protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.networkservices.v1.IAgentGateway,
+          | protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networkservices.v1.IAgentGateway,
+      | protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1.IAgentGateway,
+      (
+        | protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getAgentGateway request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1.IAgentGateway,
+          | protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAgentGateway response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAgentGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1.IAgentGateway,
+          (
+            | protos.google.cloud.networkservices.v1.IGetAgentGatewayRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAgentGateway response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Creates a new EndpointPolicy in a given project and location.
@@ -2901,7 +3091,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource of the EndpointPolicy. Must be in the
-   *   format `projects/* /locations/global`.
+   *   format `projects/* /locations/*`.
    * @param {string} request.endpointPolicyId
    *   Required. Short name of the EndpointPolicy resource to be created.
    *   E.g. "CustomECS".
@@ -3251,7 +3441,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the EndpointPolicy to delete. Must be in the format
-   *   `projects/* /locations/global/endpointPolicies/*`.
+   *   `projects/* /locations/* /endpointPolicies/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4813,7 +5003,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource of the GrpcRoute. Must be in the
-   *   format `projects/* /locations/global`.
+   *   format `projects/* /locations/*`.
    * @param {string} request.grpcRouteId
    *   Required. Short name of the GrpcRoute resource to be created.
    * @param {google.cloud.networkservices.v1.GrpcRoute} request.grpcRoute
@@ -5162,7 +5352,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the GrpcRoute to delete. Must be in the format
-   *   `projects/* /locations/global/grpcRoutes/*`.
+   *   `projects/* /locations/* /grpcRoutes/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5332,11 +5522,13 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource of the HttpRoute. Must be in the
-   *   format `projects/* /locations/global`.
+   *   format `projects/* /locations/*`.
    * @param {string} request.httpRouteId
    *   Required. Short name of the HttpRoute resource to be created.
    * @param {google.cloud.networkservices.v1.HttpRoute} request.httpRoute
    *   Required. HttpRoute resource to be created.
+   * @param {string} [request.requestId]
+   *   Optional. Idempotent request UUID.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5681,7 +5873,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the HttpRoute to delete. Must be in the format
-   *   `projects/* /locations/global/httpRoutes/*`.
+   *   `projects/* /locations/* /httpRoutes/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5851,7 +6043,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource of the TcpRoute. Must be in the
-   *   format `projects/* /locations/global`.
+   *   format `projects/* /locations/*`.
    * @param {string} request.tcpRouteId
    *   Required. Short name of the TcpRoute resource to be created.
    * @param {google.cloud.networkservices.v1.TcpRoute} request.tcpRoute
@@ -6200,7 +6392,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the TcpRoute to delete. Must be in the format
-   *   `projects/* /locations/global/tcpRoutes/*`.
+   *   `projects/* /locations/* /tcpRoutes/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -6370,7 +6562,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource of the TlsRoute. Must be in the
-   *   format `projects/* /locations/global`.
+   *   format `projects/* /locations/*`.
    * @param {string} request.tlsRouteId
    *   Required. Short name of the TlsRoute resource to be created.
    * @param {google.cloud.networkservices.v1.TlsRoute} request.tlsRoute
@@ -6719,7 +6911,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the TlsRoute to delete. Must be in the format
-   *   `projects/* /locations/global/tlsRoutes/*`.
+   *   `projects/* /locations/* /tlsRoutes/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -7408,7 +7600,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource of the Mesh. Must be in the
-   *   format `projects/* /locations/global`.
+   *   format `projects/* /locations/*`.
    * @param {string} request.meshId
    *   Required. Short name of the Mesh resource to be created.
    * @param {google.cloud.networkservices.v1.Mesh} request.mesh
@@ -7757,7 +7949,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. A name of the Mesh to delete. Must be in the format
-   *   `projects/* /locations/global/meshes/*`.
+   *   `projects/* /locations/* /meshes/*`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -8443,13 +8635,534 @@ export class NetworkServicesClient {
     >;
   }
   /**
+   * Creates a new AgentGateway in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the AgentGateway. Must be in the
+   *   format `projects/* /locations/*`.
+   * @param {string} request.agentGatewayId
+   *   Required. Short name of the AgentGateway resource to be created.
+   * @param {google.cloud.networkservices.v1.AgentGateway} request.agentGateway
+   *   Required. AgentGateway resource to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/network_services.create_agent_gateway.js</caption>
+   * region_tag:networkservices_v1_generated_NetworkServices_CreateAgentGateway_async
+   */
+  createAgentGateway(
+    request?: protos.google.cloud.networkservices.v1.ICreateAgentGatewayRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createAgentGateway(
+    request: protos.google.cloud.networkservices.v1.ICreateAgentGatewayRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAgentGateway(
+    request: protos.google.cloud.networkservices.v1.ICreateAgentGatewayRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAgentGateway(
+    request?: protos.google.cloud.networkservices.v1.ICreateAgentGatewayRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IAgentGateway,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IAgentGateway,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createAgentGateway response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createAgentGateway request %j', request);
+    return this.innerApiCalls
+      .createAgentGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IAgentGateway,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAgentGateway response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createAgentGateway()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/network_services.create_agent_gateway.js</caption>
+   * region_tag:networkservices_v1_generated_NetworkServices_CreateAgentGateway_async
+   */
+  async checkCreateAgentGatewayProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networkservices.v1.AgentGateway,
+      protos.google.cloud.networkservices.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createAgentGateway long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAgentGateway,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networkservices.v1.AgentGateway,
+      protos.google.cloud.networkservices.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the parameters of a single AgentGateway.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   AgentGateway resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.networkservices.v1.AgentGateway} request.agentGateway
+   *   Required. Updated AgentGateway resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/network_services.update_agent_gateway.js</caption>
+   * region_tag:networkservices_v1_generated_NetworkServices_UpdateAgentGateway_async
+   */
+  updateAgentGateway(
+    request?: protos.google.cloud.networkservices.v1.IUpdateAgentGatewayRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateAgentGateway(
+    request: protos.google.cloud.networkservices.v1.IUpdateAgentGatewayRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAgentGateway(
+    request: protos.google.cloud.networkservices.v1.IUpdateAgentGatewayRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAgentGateway(
+    request?: protos.google.cloud.networkservices.v1.IUpdateAgentGatewayRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IAgentGateway,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1.IAgentGateway,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'agent_gateway.name': request.agentGateway!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1.IAgentGateway,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAgentGateway response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAgentGateway request %j', request);
+    return this.innerApiCalls
+      .updateAgentGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1.IAgentGateway,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAgentGateway response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateAgentGateway()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/network_services.update_agent_gateway.js</caption>
+   * region_tag:networkservices_v1_generated_NetworkServices_UpdateAgentGateway_async
+   */
+  async checkUpdateAgentGatewayProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networkservices.v1.AgentGateway,
+      protos.google.cloud.networkservices.v1.OperationMetadata
+    >
+  > {
+    this._log.info('updateAgentGateway long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateAgentGateway,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networkservices.v1.AgentGateway,
+      protos.google.cloud.networkservices.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single AgentGateway.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the AgentGateway to delete. Must be in the format
+   *   `projects/* /locations/* /agentGateways/*`.
+   * @param {string} [request.etag]
+   *   Optional. The etag of the AgentGateway to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/network_services.delete_agent_gateway.js</caption>
+   * region_tag:networkservices_v1_generated_NetworkServices_DeleteAgentGateway_async
+   */
+  deleteAgentGateway(
+    request?: protos.google.cloud.networkservices.v1.IDeleteAgentGatewayRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteAgentGateway(
+    request: protos.google.cloud.networkservices.v1.IDeleteAgentGatewayRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteAgentGateway(
+    request: protos.google.cloud.networkservices.v1.IDeleteAgentGatewayRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteAgentGateway(
+    request?: protos.google.cloud.networkservices.v1.IDeleteAgentGatewayRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAgentGateway response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAgentGateway request %j', request);
+    return this.innerApiCalls
+      .deleteAgentGateway(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAgentGateway response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteAgentGateway()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/network_services.delete_agent_gateway.js</caption>
+   * region_tag:networkservices_v1_generated_NetworkServices_DeleteAgentGateway_async
+   */
+  async checkDeleteAgentGatewayProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networkservices.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteAgentGateway long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteAgentGateway,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networkservices.v1.OperationMetadata
+    >;
+  }
+  /**
    * Lists EndpointPolicies in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the EndpointPolicies should
-   *   be listed, specified in the format `projects/* /locations/global`.
+   *   be listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of EndpointPolicies to return per call.
    * @param {string} request.pageToken
@@ -8582,7 +9295,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the EndpointPolicies should
-   *   be listed, specified in the format `projects/* /locations/global`.
+   *   be listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of EndpointPolicies to return per call.
    * @param {string} request.pageToken
@@ -8638,7 +9351,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the EndpointPolicies should
-   *   be listed, specified in the format `projects/* /locations/global`.
+   *   be listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of EndpointPolicies to return per call.
    * @param {string} request.pageToken
@@ -9409,7 +10122,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the GrpcRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of GrpcRoutes to return per call.
    * @param {string} request.pageToken
@@ -9541,7 +10254,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the GrpcRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of GrpcRoutes to return per call.
    * @param {string} request.pageToken
@@ -9596,7 +10309,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the GrpcRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of GrpcRoutes to return per call.
    * @param {string} request.pageToken
@@ -9650,7 +10363,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the HttpRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of HttpRoutes to return per call.
    * @param {string} request.pageToken
@@ -9661,6 +10374,8 @@ export class NetworkServicesClient {
    *   Optional. If true, allow partial responses for multi-regional Aggregated
    *   List requests. Otherwise if one of the locations is down or unreachable,
    *   the Aggregated List request will fail.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the list.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -9782,7 +10497,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the HttpRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of HttpRoutes to return per call.
    * @param {string} request.pageToken
@@ -9793,6 +10508,8 @@ export class NetworkServicesClient {
    *   Optional. If true, allow partial responses for multi-regional Aggregated
    *   List requests. Otherwise if one of the locations is down or unreachable,
    *   the Aggregated List request will fail.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the list.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -9837,7 +10554,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the HttpRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of HttpRoutes to return per call.
    * @param {string} request.pageToken
@@ -9848,6 +10565,8 @@ export class NetworkServicesClient {
    *   Optional. If true, allow partial responses for multi-regional Aggregated
    *   List requests. Otherwise if one of the locations is down or unreachable,
    *   the Aggregated List request will fail.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the list.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -9891,7 +10610,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the TcpRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of TcpRoutes to return per call.
    * @param {string} request.pageToken
@@ -10023,7 +10742,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the TcpRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of TcpRoutes to return per call.
    * @param {string} request.pageToken
@@ -10078,7 +10797,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the TcpRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of TcpRoutes to return per call.
    * @param {string} request.pageToken
@@ -10132,7 +10851,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the TlsRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of TlsRoutes to return per call.
    * @param {string} request.pageToken
@@ -10264,7 +10983,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the TlsRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of TlsRoutes to return per call.
    * @param {string} request.pageToken
@@ -10319,7 +11038,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the TlsRoutes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of TlsRoutes to return per call.
    * @param {string} request.pageToken
@@ -10602,7 +11321,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the Meshes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of Meshes to return per call.
    * @param {string} request.pageToken
@@ -10734,7 +11453,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the Meshes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of Meshes to return per call.
    * @param {string} request.pageToken
@@ -10789,7 +11508,7 @@ export class NetworkServicesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The project and location from which the Meshes should be
-   *   listed, specified in the format `projects/* /locations/global`.
+   *   listed, specified in the format `projects/* /locations/*`.
    * @param {number} request.pageSize
    *   Maximum number of Meshes to return per call.
    * @param {string} request.pageToken
@@ -11533,6 +12252,247 @@ export class NetworkServicesClient {
     ) as AsyncIterable<protos.google.cloud.networkservices.v1.IMeshRouteView>;
   }
   /**
+   * Lists AgentGateways in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the AgentGateways should be
+   *   listed, specified in the format `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of AgentGateways to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListAgentGatewaysResponse`
+   *   Indicates that this is a continuation of a prior `ListAgentGateways`
+   *   call, and that the system should return the next page of data.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If true, allow partial responses for multi-regional Aggregated
+   *   List requests. Otherwise if one of the locations is down or unreachable,
+   *   the Aggregated List request will fail.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1.AgentGateway|AgentGateway}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAgentGatewaysAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAgentGateways(
+    request?: protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1.IAgentGateway[],
+      protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest | null,
+      protos.google.cloud.networkservices.v1.IListAgentGatewaysResponse,
+    ]
+  >;
+  listAgentGateways(
+    request: protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest,
+      | protos.google.cloud.networkservices.v1.IListAgentGatewaysResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkservices.v1.IAgentGateway
+    >,
+  ): void;
+  listAgentGateways(
+    request: protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest,
+      | protos.google.cloud.networkservices.v1.IListAgentGatewaysResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkservices.v1.IAgentGateway
+    >,
+  ): void;
+  listAgentGateways(
+    request?: protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest,
+          | protos.google.cloud.networkservices.v1.IListAgentGatewaysResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.IAgentGateway
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest,
+      | protos.google.cloud.networkservices.v1.IListAgentGatewaysResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkservices.v1.IAgentGateway
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1.IAgentGateway[],
+      protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest | null,
+      protos.google.cloud.networkservices.v1.IListAgentGatewaysResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest,
+          | protos.google.cloud.networkservices.v1.IListAgentGatewaysResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1.IAgentGateway
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAgentGateways values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAgentGateways request %j', request);
+    return this.innerApiCalls
+      .listAgentGateways(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1.IAgentGateway[],
+          protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest | null,
+          protos.google.cloud.networkservices.v1.IListAgentGatewaysResponse,
+        ]) => {
+          this._log.info('listAgentGateways values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listAgentGateways`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the AgentGateways should be
+   *   listed, specified in the format `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of AgentGateways to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListAgentGatewaysResponse`
+   *   Indicates that this is a continuation of a prior `ListAgentGateways`
+   *   call, and that the system should return the next page of data.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If true, allow partial responses for multi-regional Aggregated
+   *   List requests. Otherwise if one of the locations is down or unreachable,
+   *   the Aggregated List request will fail.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1.AgentGateway|AgentGateway} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAgentGatewaysAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAgentGatewaysStream(
+    request?: protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAgentGateways'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listAgentGateways stream %j', request);
+    return this.descriptors.page.listAgentGateways.createStream(
+      this.innerApiCalls.listAgentGateways as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listAgentGateways`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the AgentGateways should be
+   *   listed, specified in the format `projects/* /locations/*`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of AgentGateways to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListAgentGatewaysResponse`
+   *   Indicates that this is a continuation of a prior `ListAgentGateways`
+   *   call, and that the system should return the next page of data.
+   * @param {boolean} [request.returnPartialSuccess]
+   *   Optional. If true, allow partial responses for multi-regional Aggregated
+   *   List requests. Otherwise if one of the locations is down or unreachable,
+   *   the Aggregated List request will fail.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networkservices.v1.AgentGateway|AgentGateway}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/network_services.list_agent_gateways.js</caption>
+   * region_tag:networkservices_v1_generated_NetworkServices_ListAgentGateways_async
+   */
+  listAgentGatewaysAsync(
+    request?: protos.google.cloud.networkservices.v1.IListAgentGatewaysRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networkservices.v1.IAgentGateway> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAgentGateways'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listAgentGateways iterate %j', request);
+    return this.descriptors.page.listAgentGateways.asyncIterate(
+      this.innerApiCalls['listAgentGateways'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.networkservices.v1.IAgentGateway>;
+  }
+  /**
    * Gets the access control policy for a resource. Returns an empty policy
    * if the resource exists and does not have a policy set.
    *
@@ -11973,6 +12933,58 @@ export class NetworkServicesClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified agentGateway resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent_gateway
+   * @returns {string} Resource name string.
+   */
+  agentGatewayPath(project: string, location: string, agentGateway: string) {
+    return this.pathTemplates.agentGatewayPathTemplate.render({
+      project: project,
+      location: location,
+      agent_gateway: agentGateway,
+    });
+  }
+
+  /**
+   * Parse the project from AgentGateway resource.
+   *
+   * @param {string} agentGatewayName
+   *   A fully-qualified path representing AgentGateway resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAgentGatewayName(agentGatewayName: string) {
+    return this.pathTemplates.agentGatewayPathTemplate.match(agentGatewayName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AgentGateway resource.
+   *
+   * @param {string} agentGatewayName
+   *   A fully-qualified path representing AgentGateway resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAgentGatewayName(agentGatewayName: string) {
+    return this.pathTemplates.agentGatewayPathTemplate.match(agentGatewayName)
+      .location;
+  }
+
+  /**
+   * Parse the agent_gateway from AgentGateway resource.
+   *
+   * @param {string} agentGatewayName
+   *   A fully-qualified path representing AgentGateway resource.
+   * @returns {string} A string representing the agent_gateway.
+   */
+  matchAgentGatewayFromAgentGatewayName(agentGatewayName: string) {
+    return this.pathTemplates.agentGatewayPathTemplate.match(agentGatewayName)
+      .agent_gateway;
+  }
 
   /**
    * Return a fully-qualified authzExtension resource name string.

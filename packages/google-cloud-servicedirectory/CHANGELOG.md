@@ -1,5 +1,23 @@
 # Changelog
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/service-directory-v6.2.0...service-directory-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/service-directory-v6.1.3...service-directory-v6.2.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 3 ([#8614](https://github.com/googleapis/google-cloud-node/issues/8614)) ([fae15ec](https://github.com/googleapis/google-cloud-node/commit/fae15ecca725f8e978341156e2c99c623ce74fcc))
+
 ## [6.1.3](https://github.com/googleapis/google-cloud-node/compare/service-directory-v6.1.2...service-directory-v6.1.3) (2026-06-01)
 
 

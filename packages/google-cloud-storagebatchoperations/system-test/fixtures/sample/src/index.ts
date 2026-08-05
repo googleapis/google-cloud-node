@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {StorageBatchOperationsClient} from '@google-cloud/storagebatchoperations';
+import { StorageBatchOperationsClient } from '@google-cloud/storagebatchoperations';
 
 // check that the client class type name can be used
-function doStuffWithStorageBatchOperationsClient(client: StorageBatchOperationsClient) {
+function doStuffWithStorageBatchOperationsClient(
+  client: StorageBatchOperationsClient,
+) {
   client.close();
 }
 

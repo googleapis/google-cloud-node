@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/tasks",
   "description": "Cloud Tasks API client for Node.js",
-  "version": "6.2.3",
+  "version": "7.0.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "repository": {
@@ -62,11 +62,11 @@
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
-    "system-test:cjs": "c8 mocha build/cjs/system-test",
-    "system-test:esm": "c8 mocha build/esm/system-test",
+    "system-test:cjs": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/cjs/system-test",
+    "system-test:esm": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/esm/system-test",
     "system-test": "npm run system-test:esm && npm run system-test:cjs",
-    "test:cjs": "c8 mocha build/cjs/test",
-    "test:esm": "c8 mocha build/esm/test",
+    "test:cjs": "c8 mocha --config ../../.mocharc.cjs build/cjs/test",
+    "test:esm": "c8 mocha --config ../../.mocharc.cjs build/esm/test",
     "prelint": "cd samples; npm link ../; npm i",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
     "test": "npm run test:esm && npm run test:cjs",
@@ -76,7 +76,7 @@
     "compile": "npm run compile:esm && rm -rf esm/src/json-helper.d.cts && npm run compile:cjs && rm -rf build/protos && cp -r protos build/protos"
   },
   "dependencies": {
-    "google-gax": "^5.0.0"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
@@ -88,14 +88,14 @@
     "@types/sinon": "^17.0.4",
     "babel-plugin-replace-import-extension": "^1.1.5",
     "c8": "^10.1.3",
-    "gapic-tools": "^1.0.1",
+    "gapic-tools": "^2.0.0",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^4.0.0",
-    "jsdoc-region-tag": "^3.0.0",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
-    "pack-n-play": "3.0.1",
+    "pack-n-play": "^5.0.0",
     "sinon": "21.0.3",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.2",
@@ -103,7 +103,7 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-tasks",
   "overrides": {

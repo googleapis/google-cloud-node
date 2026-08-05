@@ -1,5 +1,23 @@
 # Changelog
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.6.0...cloudbuild-v6.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.5.1...cloudbuild-v5.6.0) (2026-06-25)
+
+
+### Features
+
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
 ## [5.5.1](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.5.0...cloudbuild-v5.5.1) (2026-05-01)
 
 

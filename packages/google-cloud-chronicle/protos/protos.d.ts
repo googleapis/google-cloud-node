@@ -18890,6 +18890,2387 @@ export namespace google {
                     }
                 }
 
+                /** Represents a FindingsRefinementService */
+                class FindingsRefinementService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new FindingsRefinementService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new FindingsRefinementService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): FindingsRefinementService;
+
+                    /**
+                     * Calls GetFindingsRefinement.
+                     * @param request GetFindingsRefinementRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FindingsRefinement
+                     */
+                    public getFindingsRefinement(request: google.cloud.chronicle.v1.IGetFindingsRefinementRequest, callback: google.cloud.chronicle.v1.FindingsRefinementService.GetFindingsRefinementCallback): void;
+
+                    /**
+                     * Calls GetFindingsRefinement.
+                     * @param request GetFindingsRefinementRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFindingsRefinement(request: google.cloud.chronicle.v1.IGetFindingsRefinementRequest): Promise<google.cloud.chronicle.v1.FindingsRefinement>;
+
+                    /**
+                     * Calls ListFindingsRefinements.
+                     * @param request ListFindingsRefinementsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFindingsRefinementsResponse
+                     */
+                    public listFindingsRefinements(request: google.cloud.chronicle.v1.IListFindingsRefinementsRequest, callback: google.cloud.chronicle.v1.FindingsRefinementService.ListFindingsRefinementsCallback): void;
+
+                    /**
+                     * Calls ListFindingsRefinements.
+                     * @param request ListFindingsRefinementsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFindingsRefinements(request: google.cloud.chronicle.v1.IListFindingsRefinementsRequest): Promise<google.cloud.chronicle.v1.ListFindingsRefinementsResponse>;
+
+                    /**
+                     * Calls CreateFindingsRefinement.
+                     * @param request CreateFindingsRefinementRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FindingsRefinement
+                     */
+                    public createFindingsRefinement(request: google.cloud.chronicle.v1.ICreateFindingsRefinementRequest, callback: google.cloud.chronicle.v1.FindingsRefinementService.CreateFindingsRefinementCallback): void;
+
+                    /**
+                     * Calls CreateFindingsRefinement.
+                     * @param request CreateFindingsRefinementRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createFindingsRefinement(request: google.cloud.chronicle.v1.ICreateFindingsRefinementRequest): Promise<google.cloud.chronicle.v1.FindingsRefinement>;
+
+                    /**
+                     * Calls UpdateFindingsRefinement.
+                     * @param request UpdateFindingsRefinementRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FindingsRefinement
+                     */
+                    public updateFindingsRefinement(request: google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest, callback: google.cloud.chronicle.v1.FindingsRefinementService.UpdateFindingsRefinementCallback): void;
+
+                    /**
+                     * Calls UpdateFindingsRefinement.
+                     * @param request UpdateFindingsRefinementRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateFindingsRefinement(request: google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest): Promise<google.cloud.chronicle.v1.FindingsRefinement>;
+
+                    /**
+                     * Calls GetFindingsRefinementDeployment.
+                     * @param request GetFindingsRefinementDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FindingsRefinementDeployment
+                     */
+                    public getFindingsRefinementDeployment(request: google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest, callback: google.cloud.chronicle.v1.FindingsRefinementService.GetFindingsRefinementDeploymentCallback): void;
+
+                    /**
+                     * Calls GetFindingsRefinementDeployment.
+                     * @param request GetFindingsRefinementDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFindingsRefinementDeployment(request: google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest): Promise<google.cloud.chronicle.v1.FindingsRefinementDeployment>;
+
+                    /**
+                     * Calls UpdateFindingsRefinementDeployment.
+                     * @param request UpdateFindingsRefinementDeploymentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FindingsRefinementDeployment
+                     */
+                    public updateFindingsRefinementDeployment(request: google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest, callback: google.cloud.chronicle.v1.FindingsRefinementService.UpdateFindingsRefinementDeploymentCallback): void;
+
+                    /**
+                     * Calls UpdateFindingsRefinementDeployment.
+                     * @param request UpdateFindingsRefinementDeploymentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateFindingsRefinementDeployment(request: google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest): Promise<google.cloud.chronicle.v1.FindingsRefinementDeployment>;
+
+                    /**
+                     * Calls ListAllFindingsRefinementDeployments.
+                     * @param request ListAllFindingsRefinementDeploymentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAllFindingsRefinementDeploymentsResponse
+                     */
+                    public listAllFindingsRefinementDeployments(request: google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest, callback: google.cloud.chronicle.v1.FindingsRefinementService.ListAllFindingsRefinementDeploymentsCallback): void;
+
+                    /**
+                     * Calls ListAllFindingsRefinementDeployments.
+                     * @param request ListAllFindingsRefinementDeploymentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAllFindingsRefinementDeployments(request: google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest): Promise<google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse>;
+
+                    /**
+                     * Calls ComputeFindingsRefinementActivity.
+                     * @param request ComputeFindingsRefinementActivityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ComputeFindingsRefinementActivityResponse
+                     */
+                    public computeFindingsRefinementActivity(request: google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest, callback: google.cloud.chronicle.v1.FindingsRefinementService.ComputeFindingsRefinementActivityCallback): void;
+
+                    /**
+                     * Calls ComputeFindingsRefinementActivity.
+                     * @param request ComputeFindingsRefinementActivityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public computeFindingsRefinementActivity(request: google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest): Promise<google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse>;
+
+                    /**
+                     * Calls ComputeAllFindingsRefinementActivities.
+                     * @param request ComputeAllFindingsRefinementActivitiesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ComputeAllFindingsRefinementActivitiesResponse
+                     */
+                    public computeAllFindingsRefinementActivities(request: google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest, callback: google.cloud.chronicle.v1.FindingsRefinementService.ComputeAllFindingsRefinementActivitiesCallback): void;
+
+                    /**
+                     * Calls ComputeAllFindingsRefinementActivities.
+                     * @param request ComputeAllFindingsRefinementActivitiesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public computeAllFindingsRefinementActivities(request: google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest): Promise<google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse>;
+                }
+
+                namespace FindingsRefinementService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|getFindingsRefinement}.
+                     * @param error Error, if any
+                     * @param [response] FindingsRefinement
+                     */
+                    type GetFindingsRefinementCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.FindingsRefinement) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|listFindingsRefinements}.
+                     * @param error Error, if any
+                     * @param [response] ListFindingsRefinementsResponse
+                     */
+                    type ListFindingsRefinementsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ListFindingsRefinementsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|createFindingsRefinement}.
+                     * @param error Error, if any
+                     * @param [response] FindingsRefinement
+                     */
+                    type CreateFindingsRefinementCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.FindingsRefinement) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|updateFindingsRefinement}.
+                     * @param error Error, if any
+                     * @param [response] FindingsRefinement
+                     */
+                    type UpdateFindingsRefinementCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.FindingsRefinement) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|getFindingsRefinementDeployment}.
+                     * @param error Error, if any
+                     * @param [response] FindingsRefinementDeployment
+                     */
+                    type GetFindingsRefinementDeploymentCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.FindingsRefinementDeployment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|updateFindingsRefinementDeployment}.
+                     * @param error Error, if any
+                     * @param [response] FindingsRefinementDeployment
+                     */
+                    type UpdateFindingsRefinementDeploymentCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.FindingsRefinementDeployment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|listAllFindingsRefinementDeployments}.
+                     * @param error Error, if any
+                     * @param [response] ListAllFindingsRefinementDeploymentsResponse
+                     */
+                    type ListAllFindingsRefinementDeploymentsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|computeFindingsRefinementActivity}.
+                     * @param error Error, if any
+                     * @param [response] ComputeFindingsRefinementActivityResponse
+                     */
+                    type ComputeFindingsRefinementActivityCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.FindingsRefinementService|computeAllFindingsRefinementActivities}.
+                     * @param error Error, if any
+                     * @param [response] ComputeAllFindingsRefinementActivitiesResponse
+                     */
+                    type ComputeAllFindingsRefinementActivitiesCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse) => void;
+                }
+
+                /** FindingsRefinementType enum. */
+                enum FindingsRefinementType {
+                    FINDINGS_REFINEMENT_TYPE_UNSPECIFIED = 0,
+                    DETECTION_EXCLUSION = 1
+                }
+
+                /** Properties of a FindingsRefinement. */
+                interface IFindingsRefinement {
+
+                    /** FindingsRefinement name */
+                    name?: (string|null);
+
+                    /** FindingsRefinement displayName */
+                    displayName?: (string|null);
+
+                    /** FindingsRefinement type */
+                    type?: (google.cloud.chronicle.v1.FindingsRefinementType|keyof typeof google.cloud.chronicle.v1.FindingsRefinementType|null);
+
+                    /** FindingsRefinement createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FindingsRefinement updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FindingsRefinement query */
+                    query?: (string|null);
+
+                    /** FindingsRefinement outcomeFilters */
+                    outcomeFilters?: (google.cloud.chronicle.v1.IOutcomeFilter[]|null);
+                }
+
+                /** Represents a FindingsRefinement. */
+                class FindingsRefinement implements IFindingsRefinement {
+
+                    /**
+                     * Constructs a new FindingsRefinement.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IFindingsRefinement);
+
+                    /** FindingsRefinement name. */
+                    public name: string;
+
+                    /** FindingsRefinement displayName. */
+                    public displayName: string;
+
+                    /** FindingsRefinement type. */
+                    public type: (google.cloud.chronicle.v1.FindingsRefinementType|keyof typeof google.cloud.chronicle.v1.FindingsRefinementType);
+
+                    /** FindingsRefinement createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FindingsRefinement updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FindingsRefinement query. */
+                    public query: string;
+
+                    /** FindingsRefinement outcomeFilters. */
+                    public outcomeFilters: google.cloud.chronicle.v1.IOutcomeFilter[];
+
+                    /**
+                     * Creates a new FindingsRefinement instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FindingsRefinement instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IFindingsRefinement): google.cloud.chronicle.v1.FindingsRefinement;
+
+                    /**
+                     * Encodes the specified FindingsRefinement message. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinement.verify|verify} messages.
+                     * @param message FindingsRefinement message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IFindingsRefinement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FindingsRefinement message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinement.verify|verify} messages.
+                     * @param message FindingsRefinement message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IFindingsRefinement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FindingsRefinement message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FindingsRefinement
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.FindingsRefinement;
+
+                    /**
+                     * Decodes a FindingsRefinement message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FindingsRefinement
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.FindingsRefinement;
+
+                    /**
+                     * Verifies a FindingsRefinement message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FindingsRefinement message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FindingsRefinement
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.FindingsRefinement;
+
+                    /**
+                     * Creates a plain object from a FindingsRefinement message. Also converts values to other types if specified.
+                     * @param message FindingsRefinement
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.FindingsRefinement, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FindingsRefinement to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FindingsRefinement
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FindingsRefinementDeployment. */
+                interface IFindingsRefinementDeployment {
+
+                    /** FindingsRefinementDeployment detectionExclusionApplication */
+                    detectionExclusionApplication?: (google.cloud.chronicle.v1.IDetectionExclusionApplication|null);
+
+                    /** FindingsRefinementDeployment name */
+                    name?: (string|null);
+
+                    /** FindingsRefinementDeployment enabled */
+                    enabled?: (boolean|null);
+
+                    /** FindingsRefinementDeployment archived */
+                    archived?: (boolean|null);
+
+                    /** FindingsRefinementDeployment updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a FindingsRefinementDeployment. */
+                class FindingsRefinementDeployment implements IFindingsRefinementDeployment {
+
+                    /**
+                     * Constructs a new FindingsRefinementDeployment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IFindingsRefinementDeployment);
+
+                    /** FindingsRefinementDeployment detectionExclusionApplication. */
+                    public detectionExclusionApplication?: (google.cloud.chronicle.v1.IDetectionExclusionApplication|null);
+
+                    /** FindingsRefinementDeployment name. */
+                    public name: string;
+
+                    /** FindingsRefinementDeployment enabled. */
+                    public enabled: boolean;
+
+                    /** FindingsRefinementDeployment archived. */
+                    public archived: boolean;
+
+                    /** FindingsRefinementDeployment updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FindingsRefinementDeployment FindingsRefinementApplication. */
+                    public FindingsRefinementApplication?: "detectionExclusionApplication";
+
+                    /**
+                     * Creates a new FindingsRefinementDeployment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FindingsRefinementDeployment instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IFindingsRefinementDeployment): google.cloud.chronicle.v1.FindingsRefinementDeployment;
+
+                    /**
+                     * Encodes the specified FindingsRefinementDeployment message. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinementDeployment.verify|verify} messages.
+                     * @param message FindingsRefinementDeployment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IFindingsRefinementDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FindingsRefinementDeployment message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinementDeployment.verify|verify} messages.
+                     * @param message FindingsRefinementDeployment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IFindingsRefinementDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FindingsRefinementDeployment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FindingsRefinementDeployment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.FindingsRefinementDeployment;
+
+                    /**
+                     * Decodes a FindingsRefinementDeployment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FindingsRefinementDeployment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.FindingsRefinementDeployment;
+
+                    /**
+                     * Verifies a FindingsRefinementDeployment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FindingsRefinementDeployment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FindingsRefinementDeployment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.FindingsRefinementDeployment;
+
+                    /**
+                     * Creates a plain object from a FindingsRefinementDeployment message. Also converts values to other types if specified.
+                     * @param message FindingsRefinementDeployment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.FindingsRefinementDeployment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FindingsRefinementDeployment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FindingsRefinementDeployment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DetectionExclusionApplication. */
+                interface IDetectionExclusionApplication {
+
+                    /** DetectionExclusionApplication curatedRuleSets */
+                    curatedRuleSets?: (string[]|null);
+
+                    /** DetectionExclusionApplication curatedRules */
+                    curatedRules?: (string[]|null);
+
+                    /** DetectionExclusionApplication rules */
+                    rules?: (string[]|null);
+
+                    /** DetectionExclusionApplication deletedCuratedRuleSets */
+                    deletedCuratedRuleSets?: (string[]|null);
+                }
+
+                /** Represents a DetectionExclusionApplication. */
+                class DetectionExclusionApplication implements IDetectionExclusionApplication {
+
+                    /**
+                     * Constructs a new DetectionExclusionApplication.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDetectionExclusionApplication);
+
+                    /** DetectionExclusionApplication curatedRuleSets. */
+                    public curatedRuleSets: string[];
+
+                    /** DetectionExclusionApplication curatedRules. */
+                    public curatedRules: string[];
+
+                    /** DetectionExclusionApplication rules. */
+                    public rules: string[];
+
+                    /** DetectionExclusionApplication deletedCuratedRuleSets. */
+                    public deletedCuratedRuleSets: string[];
+
+                    /**
+                     * Creates a new DetectionExclusionApplication instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DetectionExclusionApplication instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDetectionExclusionApplication): google.cloud.chronicle.v1.DetectionExclusionApplication;
+
+                    /**
+                     * Encodes the specified DetectionExclusionApplication message. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionApplication.verify|verify} messages.
+                     * @param message DetectionExclusionApplication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDetectionExclusionApplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DetectionExclusionApplication message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionApplication.verify|verify} messages.
+                     * @param message DetectionExclusionApplication message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDetectionExclusionApplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DetectionExclusionApplication message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DetectionExclusionApplication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DetectionExclusionApplication;
+
+                    /**
+                     * Decodes a DetectionExclusionApplication message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DetectionExclusionApplication
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DetectionExclusionApplication;
+
+                    /**
+                     * Verifies a DetectionExclusionApplication message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DetectionExclusionApplication message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DetectionExclusionApplication
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DetectionExclusionApplication;
+
+                    /**
+                     * Creates a plain object from a DetectionExclusionApplication message. Also converts values to other types if specified.
+                     * @param message DetectionExclusionApplication
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DetectionExclusionApplication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DetectionExclusionApplication to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DetectionExclusionApplication
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FindingsRefinementActivity. */
+                interface IFindingsRefinementActivity {
+
+                    /** FindingsRefinementActivity detectionExclusionActivity */
+                    detectionExclusionActivity?: (google.cloud.chronicle.v1.IDetectionExclusionActivity|null);
+
+                    /** FindingsRefinementActivity findingsRefinement */
+                    findingsRefinement?: (string|null);
+                }
+
+                /** Represents a FindingsRefinementActivity. */
+                class FindingsRefinementActivity implements IFindingsRefinementActivity {
+
+                    /**
+                     * Constructs a new FindingsRefinementActivity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IFindingsRefinementActivity);
+
+                    /** FindingsRefinementActivity detectionExclusionActivity. */
+                    public detectionExclusionActivity?: (google.cloud.chronicle.v1.IDetectionExclusionActivity|null);
+
+                    /** FindingsRefinementActivity findingsRefinement. */
+                    public findingsRefinement: string;
+
+                    /** FindingsRefinementActivity Activity. */
+                    public Activity?: "detectionExclusionActivity";
+
+                    /**
+                     * Creates a new FindingsRefinementActivity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FindingsRefinementActivity instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IFindingsRefinementActivity): google.cloud.chronicle.v1.FindingsRefinementActivity;
+
+                    /**
+                     * Encodes the specified FindingsRefinementActivity message. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinementActivity.verify|verify} messages.
+                     * @param message FindingsRefinementActivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IFindingsRefinementActivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FindingsRefinementActivity message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.FindingsRefinementActivity.verify|verify} messages.
+                     * @param message FindingsRefinementActivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IFindingsRefinementActivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FindingsRefinementActivity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FindingsRefinementActivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.FindingsRefinementActivity;
+
+                    /**
+                     * Decodes a FindingsRefinementActivity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FindingsRefinementActivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.FindingsRefinementActivity;
+
+                    /**
+                     * Verifies a FindingsRefinementActivity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FindingsRefinementActivity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FindingsRefinementActivity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.FindingsRefinementActivity;
+
+                    /**
+                     * Creates a plain object from a FindingsRefinementActivity message. Also converts values to other types if specified.
+                     * @param message FindingsRefinementActivity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.FindingsRefinementActivity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FindingsRefinementActivity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FindingsRefinementActivity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DetectionExclusionActivity. */
+                interface IDetectionExclusionActivity {
+
+                    /** DetectionExclusionActivity detectionExclusionDetectorActivities */
+                    detectionExclusionDetectorActivities?: (google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity[]|null);
+                }
+
+                /** Represents a DetectionExclusionActivity. */
+                class DetectionExclusionActivity implements IDetectionExclusionActivity {
+
+                    /**
+                     * Constructs a new DetectionExclusionActivity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IDetectionExclusionActivity);
+
+                    /** DetectionExclusionActivity detectionExclusionDetectorActivities. */
+                    public detectionExclusionDetectorActivities: google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity[];
+
+                    /**
+                     * Creates a new DetectionExclusionActivity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DetectionExclusionActivity instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IDetectionExclusionActivity): google.cloud.chronicle.v1.DetectionExclusionActivity;
+
+                    /**
+                     * Encodes the specified DetectionExclusionActivity message. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionActivity.verify|verify} messages.
+                     * @param message DetectionExclusionActivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IDetectionExclusionActivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DetectionExclusionActivity message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionActivity.verify|verify} messages.
+                     * @param message DetectionExclusionActivity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IDetectionExclusionActivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DetectionExclusionActivity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DetectionExclusionActivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DetectionExclusionActivity;
+
+                    /**
+                     * Decodes a DetectionExclusionActivity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DetectionExclusionActivity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DetectionExclusionActivity;
+
+                    /**
+                     * Verifies a DetectionExclusionActivity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DetectionExclusionActivity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DetectionExclusionActivity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DetectionExclusionActivity;
+
+                    /**
+                     * Creates a plain object from a DetectionExclusionActivity message. Also converts values to other types if specified.
+                     * @param message DetectionExclusionActivity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.DetectionExclusionActivity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DetectionExclusionActivity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DetectionExclusionActivity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DetectionExclusionActivity {
+
+                    /** Properties of a DetectionExclusionDetectorActivity. */
+                    interface IDetectionExclusionDetectorActivity {
+
+                        /** DetectionExclusionDetectorActivity curatedRule */
+                        curatedRule?: (string|null);
+
+                        /** DetectionExclusionDetectorActivity curatedRuleSet */
+                        curatedRuleSet?: (string|null);
+
+                        /** DetectionExclusionDetectorActivity rule */
+                        rule?: (string|null);
+
+                        /** DetectionExclusionDetectorActivity deletedCuratedRuleSet */
+                        deletedCuratedRuleSet?: (string|null);
+
+                        /** DetectionExclusionDetectorActivity excludedDetectionCount */
+                        excludedDetectionCount?: (number|Long|string|null);
+
+                        /** DetectionExclusionDetectorActivity totalDetectionCount */
+                        totalDetectionCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a DetectionExclusionDetectorActivity. */
+                    class DetectionExclusionDetectorActivity implements IDetectionExclusionDetectorActivity {
+
+                        /**
+                         * Constructs a new DetectionExclusionDetectorActivity.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity);
+
+                        /** DetectionExclusionDetectorActivity curatedRule. */
+                        public curatedRule?: (string|null);
+
+                        /** DetectionExclusionDetectorActivity curatedRuleSet. */
+                        public curatedRuleSet?: (string|null);
+
+                        /** DetectionExclusionDetectorActivity rule. */
+                        public rule?: (string|null);
+
+                        /** DetectionExclusionDetectorActivity deletedCuratedRuleSet. */
+                        public deletedCuratedRuleSet?: (string|null);
+
+                        /** DetectionExclusionDetectorActivity excludedDetectionCount. */
+                        public excludedDetectionCount: (number|Long|string);
+
+                        /** DetectionExclusionDetectorActivity totalDetectionCount. */
+                        public totalDetectionCount: (number|Long|string);
+
+                        /** DetectionExclusionDetectorActivity detectorName. */
+                        public detectorName?: ("curatedRule"|"curatedRuleSet"|"rule"|"deletedCuratedRuleSet");
+
+                        /**
+                         * Creates a new DetectionExclusionDetectorActivity instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DetectionExclusionDetectorActivity instance
+                         */
+                        public static create(properties?: google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity): google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity;
+
+                        /**
+                         * Encodes the specified DetectionExclusionDetectorActivity message. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity.verify|verify} messages.
+                         * @param message DetectionExclusionDetectorActivity message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DetectionExclusionDetectorActivity message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity.verify|verify} messages.
+                         * @param message DetectionExclusionDetectorActivity message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.chronicle.v1.DetectionExclusionActivity.IDetectionExclusionDetectorActivity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DetectionExclusionDetectorActivity message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DetectionExclusionDetectorActivity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity;
+
+                        /**
+                         * Decodes a DetectionExclusionDetectorActivity message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DetectionExclusionDetectorActivity
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity;
+
+                        /**
+                         * Verifies a DetectionExclusionDetectorActivity message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DetectionExclusionDetectorActivity message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DetectionExclusionDetectorActivity
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity;
+
+                        /**
+                         * Creates a plain object from a DetectionExclusionDetectorActivity message. Also converts values to other types if specified.
+                         * @param message DetectionExclusionDetectorActivity
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DetectionExclusionDetectorActivity to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DetectionExclusionDetectorActivity
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a GetFindingsRefinementRequest. */
+                interface IGetFindingsRefinementRequest {
+
+                    /** GetFindingsRefinementRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFindingsRefinementRequest. */
+                class GetFindingsRefinementRequest implements IGetFindingsRefinementRequest {
+
+                    /**
+                     * Constructs a new GetFindingsRefinementRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetFindingsRefinementRequest);
+
+                    /** GetFindingsRefinementRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFindingsRefinementRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFindingsRefinementRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetFindingsRefinementRequest): google.cloud.chronicle.v1.GetFindingsRefinementRequest;
+
+                    /**
+                     * Encodes the specified GetFindingsRefinementRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetFindingsRefinementRequest.verify|verify} messages.
+                     * @param message GetFindingsRefinementRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetFindingsRefinementRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFindingsRefinementRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetFindingsRefinementRequest.verify|verify} messages.
+                     * @param message GetFindingsRefinementRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetFindingsRefinementRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFindingsRefinementRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFindingsRefinementRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetFindingsRefinementRequest;
+
+                    /**
+                     * Decodes a GetFindingsRefinementRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFindingsRefinementRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetFindingsRefinementRequest;
+
+                    /**
+                     * Verifies a GetFindingsRefinementRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFindingsRefinementRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFindingsRefinementRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetFindingsRefinementRequest;
+
+                    /**
+                     * Creates a plain object from a GetFindingsRefinementRequest message. Also converts values to other types if specified.
+                     * @param message GetFindingsRefinementRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetFindingsRefinementRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFindingsRefinementRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFindingsRefinementRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFindingsRefinementsRequest. */
+                interface IListFindingsRefinementsRequest {
+
+                    /** ListFindingsRefinementsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFindingsRefinementsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFindingsRefinementsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListFindingsRefinementsRequest. */
+                class ListFindingsRefinementsRequest implements IListFindingsRefinementsRequest {
+
+                    /**
+                     * Constructs a new ListFindingsRefinementsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListFindingsRefinementsRequest);
+
+                    /** ListFindingsRefinementsRequest parent. */
+                    public parent: string;
+
+                    /** ListFindingsRefinementsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFindingsRefinementsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListFindingsRefinementsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFindingsRefinementsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListFindingsRefinementsRequest): google.cloud.chronicle.v1.ListFindingsRefinementsRequest;
+
+                    /**
+                     * Encodes the specified ListFindingsRefinementsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListFindingsRefinementsRequest.verify|verify} messages.
+                     * @param message ListFindingsRefinementsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListFindingsRefinementsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFindingsRefinementsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListFindingsRefinementsRequest.verify|verify} messages.
+                     * @param message ListFindingsRefinementsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListFindingsRefinementsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFindingsRefinementsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFindingsRefinementsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListFindingsRefinementsRequest;
+
+                    /**
+                     * Decodes a ListFindingsRefinementsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFindingsRefinementsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListFindingsRefinementsRequest;
+
+                    /**
+                     * Verifies a ListFindingsRefinementsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFindingsRefinementsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFindingsRefinementsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListFindingsRefinementsRequest;
+
+                    /**
+                     * Creates a plain object from a ListFindingsRefinementsRequest message. Also converts values to other types if specified.
+                     * @param message ListFindingsRefinementsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListFindingsRefinementsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFindingsRefinementsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingsRefinementsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFindingsRefinementsResponse. */
+                interface IListFindingsRefinementsResponse {
+
+                    /** ListFindingsRefinementsResponse findingsRefinements */
+                    findingsRefinements?: (google.cloud.chronicle.v1.IFindingsRefinement[]|null);
+
+                    /** ListFindingsRefinementsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListFindingsRefinementsResponse. */
+                class ListFindingsRefinementsResponse implements IListFindingsRefinementsResponse {
+
+                    /**
+                     * Constructs a new ListFindingsRefinementsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListFindingsRefinementsResponse);
+
+                    /** ListFindingsRefinementsResponse findingsRefinements. */
+                    public findingsRefinements: google.cloud.chronicle.v1.IFindingsRefinement[];
+
+                    /** ListFindingsRefinementsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListFindingsRefinementsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFindingsRefinementsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListFindingsRefinementsResponse): google.cloud.chronicle.v1.ListFindingsRefinementsResponse;
+
+                    /**
+                     * Encodes the specified ListFindingsRefinementsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListFindingsRefinementsResponse.verify|verify} messages.
+                     * @param message ListFindingsRefinementsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListFindingsRefinementsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFindingsRefinementsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListFindingsRefinementsResponse.verify|verify} messages.
+                     * @param message ListFindingsRefinementsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListFindingsRefinementsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFindingsRefinementsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFindingsRefinementsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListFindingsRefinementsResponse;
+
+                    /**
+                     * Decodes a ListFindingsRefinementsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFindingsRefinementsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListFindingsRefinementsResponse;
+
+                    /**
+                     * Verifies a ListFindingsRefinementsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFindingsRefinementsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFindingsRefinementsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListFindingsRefinementsResponse;
+
+                    /**
+                     * Creates a plain object from a ListFindingsRefinementsResponse message. Also converts values to other types if specified.
+                     * @param message ListFindingsRefinementsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListFindingsRefinementsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFindingsRefinementsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingsRefinementsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateFindingsRefinementRequest. */
+                interface ICreateFindingsRefinementRequest {
+
+                    /** CreateFindingsRefinementRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateFindingsRefinementRequest findingsRefinement */
+                    findingsRefinement?: (google.cloud.chronicle.v1.IFindingsRefinement|null);
+                }
+
+                /** Represents a CreateFindingsRefinementRequest. */
+                class CreateFindingsRefinementRequest implements ICreateFindingsRefinementRequest {
+
+                    /**
+                     * Constructs a new CreateFindingsRefinementRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.ICreateFindingsRefinementRequest);
+
+                    /** CreateFindingsRefinementRequest parent. */
+                    public parent: string;
+
+                    /** CreateFindingsRefinementRequest findingsRefinement. */
+                    public findingsRefinement?: (google.cloud.chronicle.v1.IFindingsRefinement|null);
+
+                    /**
+                     * Creates a new CreateFindingsRefinementRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateFindingsRefinementRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.ICreateFindingsRefinementRequest): google.cloud.chronicle.v1.CreateFindingsRefinementRequest;
+
+                    /**
+                     * Encodes the specified CreateFindingsRefinementRequest message. Does not implicitly {@link google.cloud.chronicle.v1.CreateFindingsRefinementRequest.verify|verify} messages.
+                     * @param message CreateFindingsRefinementRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.ICreateFindingsRefinementRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateFindingsRefinementRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.CreateFindingsRefinementRequest.verify|verify} messages.
+                     * @param message CreateFindingsRefinementRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.ICreateFindingsRefinementRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateFindingsRefinementRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateFindingsRefinementRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.CreateFindingsRefinementRequest;
+
+                    /**
+                     * Decodes a CreateFindingsRefinementRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateFindingsRefinementRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.CreateFindingsRefinementRequest;
+
+                    /**
+                     * Verifies a CreateFindingsRefinementRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateFindingsRefinementRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateFindingsRefinementRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.CreateFindingsRefinementRequest;
+
+                    /**
+                     * Creates a plain object from a CreateFindingsRefinementRequest message. Also converts values to other types if specified.
+                     * @param message CreateFindingsRefinementRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.CreateFindingsRefinementRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateFindingsRefinementRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateFindingsRefinementRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateFindingsRefinementRequest. */
+                interface IUpdateFindingsRefinementRequest {
+
+                    /** UpdateFindingsRefinementRequest findingsRefinement */
+                    findingsRefinement?: (google.cloud.chronicle.v1.IFindingsRefinement|null);
+
+                    /** UpdateFindingsRefinementRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateFindingsRefinementRequest. */
+                class UpdateFindingsRefinementRequest implements IUpdateFindingsRefinementRequest {
+
+                    /**
+                     * Constructs a new UpdateFindingsRefinementRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest);
+
+                    /** UpdateFindingsRefinementRequest findingsRefinement. */
+                    public findingsRefinement?: (google.cloud.chronicle.v1.IFindingsRefinement|null);
+
+                    /** UpdateFindingsRefinementRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateFindingsRefinementRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateFindingsRefinementRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest): google.cloud.chronicle.v1.UpdateFindingsRefinementRequest;
+
+                    /**
+                     * Encodes the specified UpdateFindingsRefinementRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateFindingsRefinementRequest.verify|verify} messages.
+                     * @param message UpdateFindingsRefinementRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateFindingsRefinementRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateFindingsRefinementRequest.verify|verify} messages.
+                     * @param message UpdateFindingsRefinementRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IUpdateFindingsRefinementRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateFindingsRefinementRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateFindingsRefinementRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.UpdateFindingsRefinementRequest;
+
+                    /**
+                     * Decodes an UpdateFindingsRefinementRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateFindingsRefinementRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.UpdateFindingsRefinementRequest;
+
+                    /**
+                     * Verifies an UpdateFindingsRefinementRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateFindingsRefinementRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateFindingsRefinementRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.UpdateFindingsRefinementRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateFindingsRefinementRequest message. Also converts values to other types if specified.
+                     * @param message UpdateFindingsRefinementRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.UpdateFindingsRefinementRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateFindingsRefinementRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateFindingsRefinementRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetFindingsRefinementDeploymentRequest. */
+                interface IGetFindingsRefinementDeploymentRequest {
+
+                    /** GetFindingsRefinementDeploymentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFindingsRefinementDeploymentRequest. */
+                class GetFindingsRefinementDeploymentRequest implements IGetFindingsRefinementDeploymentRequest {
+
+                    /**
+                     * Constructs a new GetFindingsRefinementDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest);
+
+                    /** GetFindingsRefinementDeploymentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFindingsRefinementDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFindingsRefinementDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest): google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest;
+
+                    /**
+                     * Encodes the specified GetFindingsRefinementDeploymentRequest message. Does not implicitly {@link google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest.verify|verify} messages.
+                     * @param message GetFindingsRefinementDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFindingsRefinementDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest.verify|verify} messages.
+                     * @param message GetFindingsRefinementDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IGetFindingsRefinementDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFindingsRefinementDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFindingsRefinementDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest;
+
+                    /**
+                     * Decodes a GetFindingsRefinementDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFindingsRefinementDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest;
+
+                    /**
+                     * Verifies a GetFindingsRefinementDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFindingsRefinementDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFindingsRefinementDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from a GetFindingsRefinementDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message GetFindingsRefinementDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.GetFindingsRefinementDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFindingsRefinementDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFindingsRefinementDeploymentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateFindingsRefinementDeploymentRequest. */
+                interface IUpdateFindingsRefinementDeploymentRequest {
+
+                    /** UpdateFindingsRefinementDeploymentRequest findingsRefinementDeployment */
+                    findingsRefinementDeployment?: (google.cloud.chronicle.v1.IFindingsRefinementDeployment|null);
+
+                    /** UpdateFindingsRefinementDeploymentRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateFindingsRefinementDeploymentRequest. */
+                class UpdateFindingsRefinementDeploymentRequest implements IUpdateFindingsRefinementDeploymentRequest {
+
+                    /**
+                     * Constructs a new UpdateFindingsRefinementDeploymentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest);
+
+                    /** UpdateFindingsRefinementDeploymentRequest findingsRefinementDeployment. */
+                    public findingsRefinementDeployment?: (google.cloud.chronicle.v1.IFindingsRefinementDeployment|null);
+
+                    /** UpdateFindingsRefinementDeploymentRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateFindingsRefinementDeploymentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateFindingsRefinementDeploymentRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest): google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest;
+
+                    /**
+                     * Encodes the specified UpdateFindingsRefinementDeploymentRequest message. Does not implicitly {@link google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest.verify|verify} messages.
+                     * @param message UpdateFindingsRefinementDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateFindingsRefinementDeploymentRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest.verify|verify} messages.
+                     * @param message UpdateFindingsRefinementDeploymentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IUpdateFindingsRefinementDeploymentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateFindingsRefinementDeploymentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateFindingsRefinementDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest;
+
+                    /**
+                     * Decodes an UpdateFindingsRefinementDeploymentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateFindingsRefinementDeploymentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest;
+
+                    /**
+                     * Verifies an UpdateFindingsRefinementDeploymentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateFindingsRefinementDeploymentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateFindingsRefinementDeploymentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateFindingsRefinementDeploymentRequest message. Also converts values to other types if specified.
+                     * @param message UpdateFindingsRefinementDeploymentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.UpdateFindingsRefinementDeploymentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateFindingsRefinementDeploymentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateFindingsRefinementDeploymentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAllFindingsRefinementDeploymentsRequest. */
+                interface IListAllFindingsRefinementDeploymentsRequest {
+
+                    /** ListAllFindingsRefinementDeploymentsRequest instance */
+                    instance?: (string|null);
+
+                    /** ListAllFindingsRefinementDeploymentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAllFindingsRefinementDeploymentsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListAllFindingsRefinementDeploymentsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListAllFindingsRefinementDeploymentsRequest. */
+                class ListAllFindingsRefinementDeploymentsRequest implements IListAllFindingsRefinementDeploymentsRequest {
+
+                    /**
+                     * Constructs a new ListAllFindingsRefinementDeploymentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest);
+
+                    /** ListAllFindingsRefinementDeploymentsRequest instance. */
+                    public instance: string;
+
+                    /** ListAllFindingsRefinementDeploymentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAllFindingsRefinementDeploymentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListAllFindingsRefinementDeploymentsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListAllFindingsRefinementDeploymentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAllFindingsRefinementDeploymentsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest): google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest;
+
+                    /**
+                     * Encodes the specified ListAllFindingsRefinementDeploymentsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest.verify|verify} messages.
+                     * @param message ListAllFindingsRefinementDeploymentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAllFindingsRefinementDeploymentsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest.verify|verify} messages.
+                     * @param message ListAllFindingsRefinementDeploymentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAllFindingsRefinementDeploymentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAllFindingsRefinementDeploymentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest;
+
+                    /**
+                     * Decodes a ListAllFindingsRefinementDeploymentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAllFindingsRefinementDeploymentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest;
+
+                    /**
+                     * Verifies a ListAllFindingsRefinementDeploymentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAllFindingsRefinementDeploymentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAllFindingsRefinementDeploymentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAllFindingsRefinementDeploymentsRequest message. Also converts values to other types if specified.
+                     * @param message ListAllFindingsRefinementDeploymentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAllFindingsRefinementDeploymentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAllFindingsRefinementDeploymentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAllFindingsRefinementDeploymentsResponse. */
+                interface IListAllFindingsRefinementDeploymentsResponse {
+
+                    /** ListAllFindingsRefinementDeploymentsResponse allFindingsRefinementDeployments */
+                    allFindingsRefinementDeployments?: (google.cloud.chronicle.v1.IFindingsRefinementDeployment[]|null);
+
+                    /** ListAllFindingsRefinementDeploymentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAllFindingsRefinementDeploymentsResponse. */
+                class ListAllFindingsRefinementDeploymentsResponse implements IListAllFindingsRefinementDeploymentsResponse {
+
+                    /**
+                     * Constructs a new ListAllFindingsRefinementDeploymentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsResponse);
+
+                    /** ListAllFindingsRefinementDeploymentsResponse allFindingsRefinementDeployments. */
+                    public allFindingsRefinementDeployments: google.cloud.chronicle.v1.IFindingsRefinementDeployment[];
+
+                    /** ListAllFindingsRefinementDeploymentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAllFindingsRefinementDeploymentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAllFindingsRefinementDeploymentsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsResponse): google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse;
+
+                    /**
+                     * Encodes the specified ListAllFindingsRefinementDeploymentsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse.verify|verify} messages.
+                     * @param message ListAllFindingsRefinementDeploymentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAllFindingsRefinementDeploymentsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse.verify|verify} messages.
+                     * @param message ListAllFindingsRefinementDeploymentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListAllFindingsRefinementDeploymentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAllFindingsRefinementDeploymentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAllFindingsRefinementDeploymentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse;
+
+                    /**
+                     * Decodes a ListAllFindingsRefinementDeploymentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAllFindingsRefinementDeploymentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse;
+
+                    /**
+                     * Verifies a ListAllFindingsRefinementDeploymentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAllFindingsRefinementDeploymentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAllFindingsRefinementDeploymentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAllFindingsRefinementDeploymentsResponse message. Also converts values to other types if specified.
+                     * @param message ListAllFindingsRefinementDeploymentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAllFindingsRefinementDeploymentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAllFindingsRefinementDeploymentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OutcomeFilter. */
+                interface IOutcomeFilter {
+
+                    /** OutcomeFilter outcomeVariable */
+                    outcomeVariable?: (string|null);
+
+                    /** OutcomeFilter outcomeValue */
+                    outcomeValue?: (string|null);
+
+                    /** OutcomeFilter outcomeFilterOperator */
+                    outcomeFilterOperator?: (google.cloud.chronicle.v1.OutcomeFilter.Operator|keyof typeof google.cloud.chronicle.v1.OutcomeFilter.Operator|null);
+                }
+
+                /** Represents an OutcomeFilter. */
+                class OutcomeFilter implements IOutcomeFilter {
+
+                    /**
+                     * Constructs a new OutcomeFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IOutcomeFilter);
+
+                    /** OutcomeFilter outcomeVariable. */
+                    public outcomeVariable: string;
+
+                    /** OutcomeFilter outcomeValue. */
+                    public outcomeValue: string;
+
+                    /** OutcomeFilter outcomeFilterOperator. */
+                    public outcomeFilterOperator: (google.cloud.chronicle.v1.OutcomeFilter.Operator|keyof typeof google.cloud.chronicle.v1.OutcomeFilter.Operator);
+
+                    /**
+                     * Creates a new OutcomeFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OutcomeFilter instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IOutcomeFilter): google.cloud.chronicle.v1.OutcomeFilter;
+
+                    /**
+                     * Encodes the specified OutcomeFilter message. Does not implicitly {@link google.cloud.chronicle.v1.OutcomeFilter.verify|verify} messages.
+                     * @param message OutcomeFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IOutcomeFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OutcomeFilter message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.OutcomeFilter.verify|verify} messages.
+                     * @param message OutcomeFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IOutcomeFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OutcomeFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OutcomeFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.OutcomeFilter;
+
+                    /**
+                     * Decodes an OutcomeFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OutcomeFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.OutcomeFilter;
+
+                    /**
+                     * Verifies an OutcomeFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OutcomeFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OutcomeFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.OutcomeFilter;
+
+                    /**
+                     * Creates a plain object from an OutcomeFilter message. Also converts values to other types if specified.
+                     * @param message OutcomeFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.OutcomeFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OutcomeFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OutcomeFilter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OutcomeFilter {
+
+                    /** Operator enum. */
+                    enum Operator {
+                        OPERATOR_UNSPECIFIED = 0,
+                        EQUAL = 1,
+                        CONTAINS = 2,
+                        MATCHES_REGEX = 3,
+                        MATCHES_CIDR = 4
+                    }
+                }
+
+                /** Properties of a ComputeFindingsRefinementActivityRequest. */
+                interface IComputeFindingsRefinementActivityRequest {
+
+                    /** ComputeFindingsRefinementActivityRequest name */
+                    name?: (string|null);
+
+                    /** ComputeFindingsRefinementActivityRequest interval */
+                    interval?: (google.type.IInterval|null);
+                }
+
+                /** Represents a ComputeFindingsRefinementActivityRequest. */
+                class ComputeFindingsRefinementActivityRequest implements IComputeFindingsRefinementActivityRequest {
+
+                    /**
+                     * Constructs a new ComputeFindingsRefinementActivityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest);
+
+                    /** ComputeFindingsRefinementActivityRequest name. */
+                    public name: string;
+
+                    /** ComputeFindingsRefinementActivityRequest interval. */
+                    public interval?: (google.type.IInterval|null);
+
+                    /**
+                     * Creates a new ComputeFindingsRefinementActivityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ComputeFindingsRefinementActivityRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest): google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest;
+
+                    /**
+                     * Encodes the specified ComputeFindingsRefinementActivityRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest.verify|verify} messages.
+                     * @param message ComputeFindingsRefinementActivityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ComputeFindingsRefinementActivityRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest.verify|verify} messages.
+                     * @param message ComputeFindingsRefinementActivityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IComputeFindingsRefinementActivityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ComputeFindingsRefinementActivityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ComputeFindingsRefinementActivityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest;
+
+                    /**
+                     * Decodes a ComputeFindingsRefinementActivityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ComputeFindingsRefinementActivityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest;
+
+                    /**
+                     * Verifies a ComputeFindingsRefinementActivityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ComputeFindingsRefinementActivityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ComputeFindingsRefinementActivityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest;
+
+                    /**
+                     * Creates a plain object from a ComputeFindingsRefinementActivityRequest message. Also converts values to other types if specified.
+                     * @param message ComputeFindingsRefinementActivityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ComputeFindingsRefinementActivityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ComputeFindingsRefinementActivityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ComputeFindingsRefinementActivityRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ComputeFindingsRefinementActivityResponse. */
+                interface IComputeFindingsRefinementActivityResponse {
+
+                    /** ComputeFindingsRefinementActivityResponse activity */
+                    activity?: (google.cloud.chronicle.v1.IFindingsRefinementActivity|null);
+                }
+
+                /** Represents a ComputeFindingsRefinementActivityResponse. */
+                class ComputeFindingsRefinementActivityResponse implements IComputeFindingsRefinementActivityResponse {
+
+                    /**
+                     * Constructs a new ComputeFindingsRefinementActivityResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IComputeFindingsRefinementActivityResponse);
+
+                    /** ComputeFindingsRefinementActivityResponse activity. */
+                    public activity?: (google.cloud.chronicle.v1.IFindingsRefinementActivity|null);
+
+                    /**
+                     * Creates a new ComputeFindingsRefinementActivityResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ComputeFindingsRefinementActivityResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IComputeFindingsRefinementActivityResponse): google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse;
+
+                    /**
+                     * Encodes the specified ComputeFindingsRefinementActivityResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse.verify|verify} messages.
+                     * @param message ComputeFindingsRefinementActivityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IComputeFindingsRefinementActivityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ComputeFindingsRefinementActivityResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse.verify|verify} messages.
+                     * @param message ComputeFindingsRefinementActivityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IComputeFindingsRefinementActivityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ComputeFindingsRefinementActivityResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ComputeFindingsRefinementActivityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse;
+
+                    /**
+                     * Decodes a ComputeFindingsRefinementActivityResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ComputeFindingsRefinementActivityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse;
+
+                    /**
+                     * Verifies a ComputeFindingsRefinementActivityResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ComputeFindingsRefinementActivityResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ComputeFindingsRefinementActivityResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse;
+
+                    /**
+                     * Creates a plain object from a ComputeFindingsRefinementActivityResponse message. Also converts values to other types if specified.
+                     * @param message ComputeFindingsRefinementActivityResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ComputeFindingsRefinementActivityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ComputeFindingsRefinementActivityResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ComputeFindingsRefinementActivityResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ComputeAllFindingsRefinementActivitiesRequest. */
+                interface IComputeAllFindingsRefinementActivitiesRequest {
+
+                    /** ComputeAllFindingsRefinementActivitiesRequest instance */
+                    instance?: (string|null);
+
+                    /** ComputeAllFindingsRefinementActivitiesRequest interval */
+                    interval?: (google.type.IInterval|null);
+                }
+
+                /** Represents a ComputeAllFindingsRefinementActivitiesRequest. */
+                class ComputeAllFindingsRefinementActivitiesRequest implements IComputeAllFindingsRefinementActivitiesRequest {
+
+                    /**
+                     * Constructs a new ComputeAllFindingsRefinementActivitiesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest);
+
+                    /** ComputeAllFindingsRefinementActivitiesRequest instance. */
+                    public instance: string;
+
+                    /** ComputeAllFindingsRefinementActivitiesRequest interval. */
+                    public interval?: (google.type.IInterval|null);
+
+                    /**
+                     * Creates a new ComputeAllFindingsRefinementActivitiesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ComputeAllFindingsRefinementActivitiesRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest): google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest;
+
+                    /**
+                     * Encodes the specified ComputeAllFindingsRefinementActivitiesRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest.verify|verify} messages.
+                     * @param message ComputeAllFindingsRefinementActivitiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ComputeAllFindingsRefinementActivitiesRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest.verify|verify} messages.
+                     * @param message ComputeAllFindingsRefinementActivitiesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ComputeAllFindingsRefinementActivitiesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ComputeAllFindingsRefinementActivitiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest;
+
+                    /**
+                     * Decodes a ComputeAllFindingsRefinementActivitiesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ComputeAllFindingsRefinementActivitiesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest;
+
+                    /**
+                     * Verifies a ComputeAllFindingsRefinementActivitiesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ComputeAllFindingsRefinementActivitiesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ComputeAllFindingsRefinementActivitiesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest;
+
+                    /**
+                     * Creates a plain object from a ComputeAllFindingsRefinementActivitiesRequest message. Also converts values to other types if specified.
+                     * @param message ComputeAllFindingsRefinementActivitiesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ComputeAllFindingsRefinementActivitiesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ComputeAllFindingsRefinementActivitiesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ComputeAllFindingsRefinementActivitiesResponse. */
+                interface IComputeAllFindingsRefinementActivitiesResponse {
+
+                    /** ComputeAllFindingsRefinementActivitiesResponse activities */
+                    activities?: (google.cloud.chronicle.v1.IFindingsRefinementActivity[]|null);
+                }
+
+                /** Represents a ComputeAllFindingsRefinementActivitiesResponse. */
+                class ComputeAllFindingsRefinementActivitiesResponse implements IComputeAllFindingsRefinementActivitiesResponse {
+
+                    /**
+                     * Constructs a new ComputeAllFindingsRefinementActivitiesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesResponse);
+
+                    /** ComputeAllFindingsRefinementActivitiesResponse activities. */
+                    public activities: google.cloud.chronicle.v1.IFindingsRefinementActivity[];
+
+                    /**
+                     * Creates a new ComputeAllFindingsRefinementActivitiesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ComputeAllFindingsRefinementActivitiesResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesResponse): google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse;
+
+                    /**
+                     * Encodes the specified ComputeAllFindingsRefinementActivitiesResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse.verify|verify} messages.
+                     * @param message ComputeAllFindingsRefinementActivitiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ComputeAllFindingsRefinementActivitiesResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse.verify|verify} messages.
+                     * @param message ComputeAllFindingsRefinementActivitiesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IComputeAllFindingsRefinementActivitiesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ComputeAllFindingsRefinementActivitiesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ComputeAllFindingsRefinementActivitiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse;
+
+                    /**
+                     * Decodes a ComputeAllFindingsRefinementActivitiesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ComputeAllFindingsRefinementActivitiesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse;
+
+                    /**
+                     * Verifies a ComputeAllFindingsRefinementActivitiesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ComputeAllFindingsRefinementActivitiesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ComputeAllFindingsRefinementActivitiesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse;
+
+                    /**
+                     * Creates a plain object from a ComputeAllFindingsRefinementActivitiesResponse message. Also converts values to other types if specified.
+                     * @param message ComputeAllFindingsRefinementActivitiesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ComputeAllFindingsRefinementActivitiesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ComputeAllFindingsRefinementActivitiesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ComputeAllFindingsRefinementActivitiesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents an InstanceService */
                 class InstanceService extends $protobuf.rpc.Service {
 
@@ -19204,6 +21585,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateReferenceList(request: google.cloud.chronicle.v1.IUpdateReferenceListRequest): Promise<google.cloud.chronicle.v1.ReferenceList>;
+
+                    /**
+                     * Calls VerifyReferenceList.
+                     * @param request VerifyReferenceListRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and VerifyReferenceListResponse
+                     */
+                    public verifyReferenceList(request: google.cloud.chronicle.v1.IVerifyReferenceListRequest, callback: google.cloud.chronicle.v1.ReferenceListService.VerifyReferenceListCallback): void;
+
+                    /**
+                     * Calls VerifyReferenceList.
+                     * @param request VerifyReferenceListRequest message or plain object
+                     * @returns Promise
+                     */
+                    public verifyReferenceList(request: google.cloud.chronicle.v1.IVerifyReferenceListRequest): Promise<google.cloud.chronicle.v1.VerifyReferenceListResponse>;
                 }
 
                 namespace ReferenceListService {
@@ -19235,6 +21630,13 @@ export namespace google {
                      * @param [response] ReferenceList
                      */
                     type UpdateReferenceListCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ReferenceList) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.ReferenceListService|verifyReferenceList}.
+                     * @param error Error, if any
+                     * @param [response] VerifyReferenceListResponse
+                     */
+                    type VerifyReferenceListCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.VerifyReferenceListResponse) => void;
                 }
 
                 /** ReferenceListSyntaxType enum. */
@@ -19979,6 +22381,218 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a VerifyReferenceListRequest. */
+                interface IVerifyReferenceListRequest {
+
+                    /** VerifyReferenceListRequest instance */
+                    instance?: (string|null);
+
+                    /** VerifyReferenceListRequest syntaxType */
+                    syntaxType?: (google.cloud.chronicle.v1.ReferenceListSyntaxType|keyof typeof google.cloud.chronicle.v1.ReferenceListSyntaxType|null);
+
+                    /** VerifyReferenceListRequest entries */
+                    entries?: (google.cloud.chronicle.v1.IReferenceListEntry[]|null);
+                }
+
+                /** Represents a VerifyReferenceListRequest. */
+                class VerifyReferenceListRequest implements IVerifyReferenceListRequest {
+
+                    /**
+                     * Constructs a new VerifyReferenceListRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IVerifyReferenceListRequest);
+
+                    /** VerifyReferenceListRequest instance. */
+                    public instance: string;
+
+                    /** VerifyReferenceListRequest syntaxType. */
+                    public syntaxType: (google.cloud.chronicle.v1.ReferenceListSyntaxType|keyof typeof google.cloud.chronicle.v1.ReferenceListSyntaxType);
+
+                    /** VerifyReferenceListRequest entries. */
+                    public entries: google.cloud.chronicle.v1.IReferenceListEntry[];
+
+                    /**
+                     * Creates a new VerifyReferenceListRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyReferenceListRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IVerifyReferenceListRequest): google.cloud.chronicle.v1.VerifyReferenceListRequest;
+
+                    /**
+                     * Encodes the specified VerifyReferenceListRequest message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListRequest.verify|verify} messages.
+                     * @param message VerifyReferenceListRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IVerifyReferenceListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyReferenceListRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListRequest.verify|verify} messages.
+                     * @param message VerifyReferenceListRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IVerifyReferenceListRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyReferenceListRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyReferenceListRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.VerifyReferenceListRequest;
+
+                    /**
+                     * Decodes a VerifyReferenceListRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyReferenceListRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.VerifyReferenceListRequest;
+
+                    /**
+                     * Verifies a VerifyReferenceListRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyReferenceListRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyReferenceListRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.VerifyReferenceListRequest;
+
+                    /**
+                     * Creates a plain object from a VerifyReferenceListRequest message. Also converts values to other types if specified.
+                     * @param message VerifyReferenceListRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.VerifyReferenceListRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyReferenceListRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyReferenceListRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerifyReferenceListResponse. */
+                interface IVerifyReferenceListResponse {
+
+                    /** VerifyReferenceListResponse success */
+                    success?: (boolean|null);
+
+                    /** VerifyReferenceListResponse errors */
+                    errors?: (google.cloud.chronicle.v1.IReferenceListError[]|null);
+                }
+
+                /** Represents a VerifyReferenceListResponse. */
+                class VerifyReferenceListResponse implements IVerifyReferenceListResponse {
+
+                    /**
+                     * Constructs a new VerifyReferenceListResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IVerifyReferenceListResponse);
+
+                    /** VerifyReferenceListResponse success. */
+                    public success: boolean;
+
+                    /** VerifyReferenceListResponse errors. */
+                    public errors: google.cloud.chronicle.v1.IReferenceListError[];
+
+                    /**
+                     * Creates a new VerifyReferenceListResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyReferenceListResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IVerifyReferenceListResponse): google.cloud.chronicle.v1.VerifyReferenceListResponse;
+
+                    /**
+                     * Encodes the specified VerifyReferenceListResponse message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListResponse.verify|verify} messages.
+                     * @param message VerifyReferenceListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IVerifyReferenceListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyReferenceListResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyReferenceListResponse.verify|verify} messages.
+                     * @param message VerifyReferenceListResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IVerifyReferenceListResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyReferenceListResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyReferenceListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.VerifyReferenceListResponse;
+
+                    /**
+                     * Decodes a VerifyReferenceListResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyReferenceListResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.VerifyReferenceListResponse;
+
+                    /**
+                     * Verifies a VerifyReferenceListResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyReferenceListResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyReferenceListResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.VerifyReferenceListResponse;
+
+                    /**
+                     * Creates a plain object from a VerifyReferenceListResponse message. Also converts values to other types if specified.
+                     * @param message VerifyReferenceListResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.VerifyReferenceListResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyReferenceListResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyReferenceListResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ReferenceList. */
                 interface IReferenceList {
 
@@ -20221,6 +22835,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ReferenceListError. */
+                interface IReferenceListError {
+
+                    /** ReferenceListError lineNumber */
+                    lineNumber?: (number|null);
+
+                    /** ReferenceListError errorMessage */
+                    errorMessage?: (string|null);
+                }
+
+                /** Represents a ReferenceListError. */
+                class ReferenceListError implements IReferenceListError {
+
+                    /**
+                     * Constructs a new ReferenceListError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IReferenceListError);
+
+                    /** ReferenceListError lineNumber. */
+                    public lineNumber: number;
+
+                    /** ReferenceListError errorMessage. */
+                    public errorMessage: string;
+
+                    /**
+                     * Creates a new ReferenceListError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReferenceListError instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IReferenceListError): google.cloud.chronicle.v1.ReferenceListError;
+
+                    /**
+                     * Encodes the specified ReferenceListError message. Does not implicitly {@link google.cloud.chronicle.v1.ReferenceListError.verify|verify} messages.
+                     * @param message ReferenceListError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IReferenceListError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReferenceListError message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ReferenceListError.verify|verify} messages.
+                     * @param message ReferenceListError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IReferenceListError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReferenceListError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReferenceListError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ReferenceListError;
+
+                    /**
+                     * Decodes a ReferenceListError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReferenceListError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ReferenceListError;
+
+                    /**
+                     * Verifies a ReferenceListError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReferenceListError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReferenceListError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ReferenceListError;
+
+                    /**
+                     * Creates a plain object from a ReferenceListError message. Also converts values to other types if specified.
+                     * @param message ReferenceListError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ReferenceListError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReferenceListError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReferenceListError
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a RuleService */
                 class RuleService extends $protobuf.rpc.Service {
 
@@ -20310,6 +23027,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteRule(request: google.cloud.chronicle.v1.IDeleteRuleRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls VerifyRuleText.
+                     * @param request VerifyRuleTextRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and VerifyRuleTextResponse
+                     */
+                    public verifyRuleText(request: google.cloud.chronicle.v1.IVerifyRuleTextRequest, callback: google.cloud.chronicle.v1.RuleService.VerifyRuleTextCallback): void;
+
+                    /**
+                     * Calls VerifyRuleText.
+                     * @param request VerifyRuleTextRequest message or plain object
+                     * @returns Promise
+                     */
+                    public verifyRuleText(request: google.cloud.chronicle.v1.IVerifyRuleTextRequest): Promise<google.cloud.chronicle.v1.VerifyRuleTextResponse>;
 
                     /**
                      * Calls ListRuleRevisions.
@@ -20446,6 +23177,13 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteRuleCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.RuleService|verifyRuleText}.
+                     * @param error Error, if any
+                     * @param [response] VerifyRuleTextResponse
+                     */
+                    type VerifyRuleTextCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.VerifyRuleTextResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.chronicle.v1.RuleService|listRuleRevisions}.
@@ -21654,6 +24392,212 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeleteRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerifyRuleTextRequest. */
+                interface IVerifyRuleTextRequest {
+
+                    /** VerifyRuleTextRequest instance */
+                    instance?: (string|null);
+
+                    /** VerifyRuleTextRequest ruleText */
+                    ruleText?: (string|null);
+                }
+
+                /** Represents a VerifyRuleTextRequest. */
+                class VerifyRuleTextRequest implements IVerifyRuleTextRequest {
+
+                    /**
+                     * Constructs a new VerifyRuleTextRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IVerifyRuleTextRequest);
+
+                    /** VerifyRuleTextRequest instance. */
+                    public instance: string;
+
+                    /** VerifyRuleTextRequest ruleText. */
+                    public ruleText: string;
+
+                    /**
+                     * Creates a new VerifyRuleTextRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyRuleTextRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IVerifyRuleTextRequest): google.cloud.chronicle.v1.VerifyRuleTextRequest;
+
+                    /**
+                     * Encodes the specified VerifyRuleTextRequest message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextRequest.verify|verify} messages.
+                     * @param message VerifyRuleTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IVerifyRuleTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyRuleTextRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextRequest.verify|verify} messages.
+                     * @param message VerifyRuleTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IVerifyRuleTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyRuleTextRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyRuleTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.VerifyRuleTextRequest;
+
+                    /**
+                     * Decodes a VerifyRuleTextRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyRuleTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.VerifyRuleTextRequest;
+
+                    /**
+                     * Verifies a VerifyRuleTextRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyRuleTextRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyRuleTextRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.VerifyRuleTextRequest;
+
+                    /**
+                     * Creates a plain object from a VerifyRuleTextRequest message. Also converts values to other types if specified.
+                     * @param message VerifyRuleTextRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.VerifyRuleTextRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyRuleTextRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyRuleTextRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VerifyRuleTextResponse. */
+                interface IVerifyRuleTextResponse {
+
+                    /** VerifyRuleTextResponse success */
+                    success?: (boolean|null);
+
+                    /** VerifyRuleTextResponse compilationDiagnostics */
+                    compilationDiagnostics?: (google.cloud.chronicle.v1.ICompilationDiagnostic[]|null);
+                }
+
+                /** Represents a VerifyRuleTextResponse. */
+                class VerifyRuleTextResponse implements IVerifyRuleTextResponse {
+
+                    /**
+                     * Constructs a new VerifyRuleTextResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IVerifyRuleTextResponse);
+
+                    /** VerifyRuleTextResponse success. */
+                    public success: boolean;
+
+                    /** VerifyRuleTextResponse compilationDiagnostics. */
+                    public compilationDiagnostics: google.cloud.chronicle.v1.ICompilationDiagnostic[];
+
+                    /**
+                     * Creates a new VerifyRuleTextResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VerifyRuleTextResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IVerifyRuleTextResponse): google.cloud.chronicle.v1.VerifyRuleTextResponse;
+
+                    /**
+                     * Encodes the specified VerifyRuleTextResponse message. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextResponse.verify|verify} messages.
+                     * @param message VerifyRuleTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IVerifyRuleTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VerifyRuleTextResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.VerifyRuleTextResponse.verify|verify} messages.
+                     * @param message VerifyRuleTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IVerifyRuleTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VerifyRuleTextResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VerifyRuleTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.VerifyRuleTextResponse;
+
+                    /**
+                     * Decodes a VerifyRuleTextResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VerifyRuleTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.VerifyRuleTextResponse;
+
+                    /**
+                     * Verifies a VerifyRuleTextResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VerifyRuleTextResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VerifyRuleTextResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.VerifyRuleTextResponse;
+
+                    /**
+                     * Creates a plain object from a VerifyRuleTextResponse message. Also converts values to other types if specified.
+                     * @param message VerifyRuleTextResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.VerifyRuleTextResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VerifyRuleTextResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VerifyRuleTextResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -23263,6 +26207,393 @@ export namespace google {
 
                     /**
                      * Gets the default type url for InputsUsed
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a RuleExecutionErrorService */
+                class RuleExecutionErrorService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new RuleExecutionErrorService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new RuleExecutionErrorService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): RuleExecutionErrorService;
+
+                    /**
+                     * Calls ListRuleExecutionErrors.
+                     * @param request ListRuleExecutionErrorsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRuleExecutionErrorsResponse
+                     */
+                    public listRuleExecutionErrors(request: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest, callback: google.cloud.chronicle.v1.RuleExecutionErrorService.ListRuleExecutionErrorsCallback): void;
+
+                    /**
+                     * Calls ListRuleExecutionErrors.
+                     * @param request ListRuleExecutionErrorsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRuleExecutionErrors(request: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest): Promise<google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse>;
+                }
+
+                namespace RuleExecutionErrorService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.chronicle.v1.RuleExecutionErrorService|listRuleExecutionErrors}.
+                     * @param error Error, if any
+                     * @param [response] ListRuleExecutionErrorsResponse
+                     */
+                    type ListRuleExecutionErrorsCallback = (error: (Error|null), response?: google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse) => void;
+                }
+
+                /** Properties of a ListRuleExecutionErrorsRequest. */
+                interface IListRuleExecutionErrorsRequest {
+
+                    /** ListRuleExecutionErrorsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRuleExecutionErrorsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRuleExecutionErrorsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListRuleExecutionErrorsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListRuleExecutionErrorsRequest. */
+                class ListRuleExecutionErrorsRequest implements IListRuleExecutionErrorsRequest {
+
+                    /**
+                     * Constructs a new ListRuleExecutionErrorsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest);
+
+                    /** ListRuleExecutionErrorsRequest parent. */
+                    public parent: string;
+
+                    /** ListRuleExecutionErrorsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRuleExecutionErrorsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListRuleExecutionErrorsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListRuleExecutionErrorsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRuleExecutionErrorsRequest instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest): google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest;
+
+                    /**
+                     * Encodes the specified ListRuleExecutionErrorsRequest message. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest.verify|verify} messages.
+                     * @param message ListRuleExecutionErrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRuleExecutionErrorsRequest message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest.verify|verify} messages.
+                     * @param message ListRuleExecutionErrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListRuleExecutionErrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRuleExecutionErrorsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRuleExecutionErrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest;
+
+                    /**
+                     * Decodes a ListRuleExecutionErrorsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRuleExecutionErrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest;
+
+                    /**
+                     * Verifies a ListRuleExecutionErrorsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRuleExecutionErrorsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRuleExecutionErrorsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest;
+
+                    /**
+                     * Creates a plain object from a ListRuleExecutionErrorsRequest message. Also converts values to other types if specified.
+                     * @param message ListRuleExecutionErrorsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListRuleExecutionErrorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRuleExecutionErrorsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRuleExecutionErrorsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRuleExecutionErrorsResponse. */
+                interface IListRuleExecutionErrorsResponse {
+
+                    /** ListRuleExecutionErrorsResponse ruleExecutionErrors */
+                    ruleExecutionErrors?: (google.cloud.chronicle.v1.IRuleExecutionError[]|null);
+
+                    /** ListRuleExecutionErrorsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListRuleExecutionErrorsResponse. */
+                class ListRuleExecutionErrorsResponse implements IListRuleExecutionErrorsResponse {
+
+                    /**
+                     * Constructs a new ListRuleExecutionErrorsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse);
+
+                    /** ListRuleExecutionErrorsResponse ruleExecutionErrors. */
+                    public ruleExecutionErrors: google.cloud.chronicle.v1.IRuleExecutionError[];
+
+                    /** ListRuleExecutionErrorsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListRuleExecutionErrorsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRuleExecutionErrorsResponse instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse): google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse;
+
+                    /**
+                     * Encodes the specified ListRuleExecutionErrorsResponse message. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse.verify|verify} messages.
+                     * @param message ListRuleExecutionErrorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRuleExecutionErrorsResponse message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse.verify|verify} messages.
+                     * @param message ListRuleExecutionErrorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IListRuleExecutionErrorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRuleExecutionErrorsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRuleExecutionErrorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse;
+
+                    /**
+                     * Decodes a ListRuleExecutionErrorsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRuleExecutionErrorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse;
+
+                    /**
+                     * Verifies a ListRuleExecutionErrorsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRuleExecutionErrorsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRuleExecutionErrorsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse;
+
+                    /**
+                     * Creates a plain object from a ListRuleExecutionErrorsResponse message. Also converts values to other types if specified.
+                     * @param message ListRuleExecutionErrorsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.ListRuleExecutionErrorsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRuleExecutionErrorsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRuleExecutionErrorsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RuleExecutionError. */
+                interface IRuleExecutionError {
+
+                    /** RuleExecutionError rule */
+                    rule?: (string|null);
+
+                    /** RuleExecutionError curatedRule */
+                    curatedRule?: (string|null);
+
+                    /** RuleExecutionError name */
+                    name?: (string|null);
+
+                    /** RuleExecutionError error */
+                    error?: (google.rpc.IStatus|null);
+
+                    /** RuleExecutionError timeRange */
+                    timeRange?: (google.type.IInterval|null);
+                }
+
+                /** Represents a RuleExecutionError. */
+                class RuleExecutionError implements IRuleExecutionError {
+
+                    /**
+                     * Constructs a new RuleExecutionError.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.chronicle.v1.IRuleExecutionError);
+
+                    /** RuleExecutionError rule. */
+                    public rule?: (string|null);
+
+                    /** RuleExecutionError curatedRule. */
+                    public curatedRule?: (string|null);
+
+                    /** RuleExecutionError name. */
+                    public name: string;
+
+                    /** RuleExecutionError error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /** RuleExecutionError timeRange. */
+                    public timeRange?: (google.type.IInterval|null);
+
+                    /** RuleExecutionError source. */
+                    public source?: ("rule"|"curatedRule");
+
+                    /**
+                     * Creates a new RuleExecutionError instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RuleExecutionError instance
+                     */
+                    public static create(properties?: google.cloud.chronicle.v1.IRuleExecutionError): google.cloud.chronicle.v1.RuleExecutionError;
+
+                    /**
+                     * Encodes the specified RuleExecutionError message. Does not implicitly {@link google.cloud.chronicle.v1.RuleExecutionError.verify|verify} messages.
+                     * @param message RuleExecutionError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.chronicle.v1.IRuleExecutionError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RuleExecutionError message, length delimited. Does not implicitly {@link google.cloud.chronicle.v1.RuleExecutionError.verify|verify} messages.
+                     * @param message RuleExecutionError message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.chronicle.v1.IRuleExecutionError, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RuleExecutionError message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RuleExecutionError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.chronicle.v1.RuleExecutionError;
+
+                    /**
+                     * Decodes a RuleExecutionError message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RuleExecutionError
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.chronicle.v1.RuleExecutionError;
+
+                    /**
+                     * Verifies a RuleExecutionError message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RuleExecutionError message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RuleExecutionError
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.chronicle.v1.RuleExecutionError;
+
+                    /**
+                     * Creates a plain object from a RuleExecutionError message. Also converts values to other types if specified.
+                     * @param message RuleExecutionError
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.chronicle.v1.RuleExecutionError, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RuleExecutionError to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RuleExecutionError
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

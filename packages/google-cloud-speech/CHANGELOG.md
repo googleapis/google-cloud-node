@@ -4,6 +4,31 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.5.0...speech-v8.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.4.0...speech-v7.5.0) (2026-06-25)
+
+
+### Features
+
+* Migrate google-cloud-speech to librarian (keep helpers) ([#8648](https://github.com/googleapis/google-cloud-node/issues/8648)) ([4436002](https://github.com/googleapis/google-cloud-node/commit/44360026d32a0461beb10de497803b658c96c668))
+
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.2...speech-v7.4.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 4 ([#8615](https://github.com/googleapis/google-cloud-node/issues/8615)) ([f629251](https://github.com/googleapis/google-cloud-node/commit/f629251e27e51aa06003b4846a497d5a7c411cc2))
+
 ## [7.3.2](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.1...speech-v7.3.2) (2026-06-01)
 
 

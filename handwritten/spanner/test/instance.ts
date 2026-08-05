@@ -20,7 +20,6 @@ import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import {ApiError} from '@google-cloud/common';
 import {grpc} from 'google-gax';
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import * as pfy from '@google-cloud/promisify';
 import * as sinon from 'sinon';
@@ -36,7 +35,7 @@ import {PreciseDate} from '@google-cloud/precise-date';
 import {CLOUD_RESOURCE_HEADER, AFE_SERVER_TIMING_HEADER} from '../src/common';
 
 let promisified = false;
-const fakePfy = extend({}, pfy, {
+const fakePfy = Object.assign({}, pfy, {
   promisifyAll(klass, options) {
     if (klass.name !== 'Instance') {
       return;
@@ -129,7 +128,7 @@ describe('Instance', () => {
     });
 
     it('should localize the request function', done => {
-      const spannerInstance = extend({}, SPANNER);
+      const spannerInstance = Object.assign({}, SPANNER);
 
       spannerInstance.request = function () {
         assert.strictEqual(this, spannerInstance);
@@ -142,7 +141,7 @@ describe('Instance', () => {
     });
 
     it('should localize the requestStream function', done => {
-      const spannerInstance = extend({}, SPANNER);
+      const spannerInstance = Object.assign({}, SPANNER);
       const CONFIG = {};
 
       spannerInstance.requestStream = function (config) {
@@ -157,7 +156,7 @@ describe('Instance', () => {
 
     it('should inherit from ServiceObject', done => {
       const options = {};
-      const spannerInstance = extend({}, SPANNER, {
+      const spannerInstance = Object.assign({}, SPANNER, {
         createInstance(name, options_, callback) {
           assert.strictEqual(name, instance.formattedName_);
           assert.strictEqual(options_, options);
@@ -205,7 +204,7 @@ describe('Instance', () => {
     const OPTIONS = {
       a: 'b',
     } as inst.CreateDatabaseOptions;
-    const ORIGINAL_OPTIONS = extend({}, OPTIONS);
+    const ORIGINAL_OPTIONS = Object.assign({}, OPTIONS);
 
     it('should throw if a name is not provided', () => {
       assert.throws(() => {
@@ -234,7 +233,7 @@ describe('Instance', () => {
       instance.request = config => {
         assert.deepStrictEqual(OPTIONS, ORIGINAL_OPTIONS);
 
-        const expectedReqOpts = extend(
+        const expectedReqOpts = Object.assign(
           {
             parent: instance.formattedName_,
             createStatement: 'CREATE DATABASE `' + NAME + '`',
@@ -284,7 +283,7 @@ describe('Instance', () => {
 
     it('should only use the name in the createStatement', done => {
       instance.request = config => {
-        const expectedReqOpts = extend(
+        const expectedReqOpts = Object.assign(
           {
             parent: instance.formattedName_,
             createStatement: 'CREATE DATABASE `' + NAME + '`',
@@ -304,7 +303,7 @@ describe('Instance', () => {
       it('should allow specifying session pool options', done => {
         const poolOptions = {};
 
-        const options = extend({}, OPTIONS, {
+        const options = Object.assign({}, OPTIONS, {
           poolOptions,
         });
 
@@ -325,7 +324,7 @@ describe('Instance', () => {
       it('should allow specifying session pool constructor', done => {
         const poolCtor = {};
 
-        const options = extend({}, OPTIONS, {
+        const options = Object.assign({}, OPTIONS, {
           poolCtor,
         });
 
@@ -348,7 +347,7 @@ describe('Instance', () => {
       it('should arrify and rename to extraStatements', done => {
         const SCHEMA = 'schema';
 
-        const options = extend({}, OPTIONS, {
+        const options = Object.assign({}, OPTIONS, {
           schema: SCHEMA,
         });
 
@@ -364,7 +363,7 @@ describe('Instance', () => {
       it('should arrify and rename to extraStatements from array style schema filed', done => {
         const SCHEMA = ['schema', 'schema2'];
 
-        const options = extend({}, OPTIONS, {
+        const options = Object.assign({}, OPTIONS, {
           schema: SCHEMA,
         });
 
@@ -917,10 +916,10 @@ describe('Instance', () => {
       pageSize,
       gaxOptions: {autoPaginate: false},
     } as inst.GetDatabasesOptions;
-    const ORIGINAL_OPTIONS = extend({}, OPTIONS);
+    const ORIGINAL_OPTIONS = Object.assign({}, OPTIONS);
 
     it('should make the correct request', done => {
-      const expectedReqOpts = extend({}, OPTIONS, {
+      const expectedReqOpts = Object.assign({}, OPTIONS, {
         parent: instance.formattedName_,
       });
       delete expectedReqOpts.gaxOptions;
@@ -947,7 +946,7 @@ describe('Instance', () => {
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
       const options = {gaxOptions};
-      const expectedReqOpts: {gaxOptions?: {}} = extend(
+      const expectedReqOpts: {gaxOptions?: {}} = Object.assign(
         {},
         options,
         {
@@ -981,7 +980,7 @@ describe('Instance', () => {
         pageToken: optionsPageToken,
         gaxOptions,
       };
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         OPTIONS,
         {
@@ -1087,7 +1086,7 @@ describe('Instance', () => {
           filter,
           gaxOptions: {timeout: 1000, autoPaginate: false},
         };
-        const EXPECTEDNEXTQUERY = extend(
+        const EXPECTEDNEXTQUERY = Object.assign(
           {},
           GETDATABASESOPTIONS,
           NEXTPAGEREQUEST,
@@ -1111,7 +1110,7 @@ describe('Instance', () => {
     const returnValue = {} as Duplex;
 
     it('should make and return the correct gax API call', () => {
-      const expectedReqOpts = extend({}, OPTIONS, {
+      const expectedReqOpts = Object.assign({}, OPTIONS, {
         parent: instance.formattedName_,
       });
       delete expectedReqOpts.gaxOptions;
@@ -1139,7 +1138,7 @@ describe('Instance', () => {
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
       const options = {gaxOptions};
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         {
           parent: instance.formattedName_,
@@ -1173,7 +1172,7 @@ describe('Instance', () => {
         pageToken: optionsPageToken,
         gaxOptions,
       };
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         OPTIONS,
         {
@@ -1299,7 +1298,7 @@ describe('Instance', () => {
     const METADATA = {
       needsToBeSnakeCased: true,
     } as inst.IInstance;
-    const ORIGINAL_METADATA = extend({}, METADATA);
+    const ORIGINAL_METADATA = Object.assign({}, METADATA);
 
     it('should make and return the request', () => {
       const requestReturnValue = {};
@@ -1310,7 +1309,7 @@ describe('Instance', () => {
         assert.strictEqual(config.client, 'InstanceAdminClient');
         assert.strictEqual(config.method, 'updateInstance');
 
-        const expectedReqOpts = extend({}, METADATA, {
+        const expectedReqOpts = Object.assign({}, METADATA, {
           name: instance.formattedName_,
         });
 
@@ -1352,7 +1351,7 @@ describe('Instance', () => {
     const OPTIONS = {
       a: 'b',
     } as inst.GetBackupsOptions;
-    const ORIGINAL_OPTIONS = extend({}, OPTIONS);
+    const ORIGINAL_OPTIONS = Object.assign({}, OPTIONS);
 
     it('should make the correct request', done => {
       const gaxOpts = {
@@ -1360,7 +1359,7 @@ describe('Instance', () => {
       };
       const options = {a: 'b', gaxOptions: gaxOpts};
 
-      const expectedReqOpts = extend({}, OPTIONS, {
+      const expectedReqOpts = Object.assign({}, OPTIONS, {
         parent: instance.formattedName_,
       });
 
@@ -1386,7 +1385,7 @@ describe('Instance', () => {
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
       const options = {gaxOptions};
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         {
           parent: instance.formattedName_,
@@ -1419,7 +1418,7 @@ describe('Instance', () => {
         pageToken: optionsPageToken,
         gaxOptions,
       };
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         {
           parent: instance.formattedName_,
@@ -1522,7 +1521,7 @@ describe('Instance', () => {
           filter,
           gaxOptions: {timeout: 1000, autoPaginate: false},
         };
-        const EXPECTEDNEXTQUERY = extend(
+        const EXPECTEDNEXTQUERY = Object.assign(
           {},
           GETBACKUPSOPTIONS,
           NEXTPAGEREQUEST,
@@ -1546,7 +1545,7 @@ describe('Instance', () => {
     const returnValue = {} as Duplex;
 
     it('should make and return the correct gax API call', () => {
-      const expectedReqOpts = extend({}, OPTIONS, {
+      const expectedReqOpts = Object.assign({}, OPTIONS, {
         parent: instance.formattedName_,
       });
       delete expectedReqOpts.gaxOptions;
@@ -1574,7 +1573,7 @@ describe('Instance', () => {
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
       const options = {gaxOptions};
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         {
           parent: instance.formattedName_,
@@ -1608,7 +1607,7 @@ describe('Instance', () => {
         pageToken: optionsPageToken,
         gaxOptions,
       };
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         OPTIONS,
         {
@@ -1668,7 +1667,7 @@ describe('Instance', () => {
     const OPTIONS = {
       a: 'b',
     } as inst.GetBackupOperationsOptions;
-    const ORIGINAL_OPTIONS = extend({}, OPTIONS);
+    const ORIGINAL_OPTIONS = Object.assign({}, OPTIONS);
 
     it('should make the correct request', done => {
       const gaxOpts = {
@@ -1676,7 +1675,7 @@ describe('Instance', () => {
       };
       const options = {a: 'b', gaxOptions: gaxOpts};
 
-      const expectedReqOpts = extend({}, OPTIONS, {
+      const expectedReqOpts = Object.assign({}, OPTIONS, {
         parent: instance.formattedName_,
       });
 
@@ -1701,7 +1700,7 @@ describe('Instance', () => {
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
       const options = Object.assign({}, OPTIONS, {gaxOptions});
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         OPTIONS,
         {
@@ -1735,7 +1734,7 @@ describe('Instance', () => {
         pageToken: optionsPageToken,
         gaxOptions,
       });
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         OPTIONS,
         {
@@ -1785,7 +1784,7 @@ describe('Instance', () => {
         filter,
         gaxOptions: {timeout: 1000, autoPaginate: false},
       };
-      const EXPECTEDNEXTQUERY = extend(
+      const EXPECTEDNEXTQUERY = Object.assign(
         {},
         GETBACKUPOPSOPTIONS,
         NEXTPAGEREQUEST,
@@ -1805,7 +1804,7 @@ describe('Instance', () => {
     const OPTIONS = {
       a: 'b',
     } as inst.GetDatabaseOperationsOptions;
-    const ORIGINAL_OPTIONS = extend({}, OPTIONS);
+    const ORIGINAL_OPTIONS = Object.assign({}, OPTIONS);
 
     it('should make the correct request', done => {
       const gaxOpts = {
@@ -1813,7 +1812,7 @@ describe('Instance', () => {
       };
       const options = {a: 'b', gaxOptions: gaxOpts};
 
-      const expectedReqOpts = extend({}, OPTIONS, {
+      const expectedReqOpts = Object.assign({}, OPTIONS, {
         parent: instance.formattedName_,
       });
 
@@ -1839,7 +1838,7 @@ describe('Instance', () => {
       const gaxOptions = {pageSize, pageToken, timeout: 1000};
       const expectedGaxOpts = {timeout: 1000};
       const options = Object.assign({}, OPTIONS, {gaxOptions});
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         OPTIONS,
         {
@@ -1873,7 +1872,7 @@ describe('Instance', () => {
         pageToken: optionsPageToken,
         gaxOptions,
       });
-      const expectedReqOpts = extend(
+      const expectedReqOpts = Object.assign(
         {},
         OPTIONS,
         {
@@ -1923,7 +1922,7 @@ describe('Instance', () => {
         filter,
         gaxOptions: {timeout: 1000, autoPaginate: false},
       };
-      const EXPECTEDNEXTQUERY = extend(
+      const EXPECTEDNEXTQUERY = Object.assign(
         {},
         GETDATABASEOPSOPTIONS,
         NEXTPAGEREQUEST,

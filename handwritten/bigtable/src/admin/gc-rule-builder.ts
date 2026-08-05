@@ -13,7 +13,8 @@
 // limitations under the License.
 
 import * as util from 'node:util';
-import {google} from '../../protos/protos';
+import {protos} from '@google-cloud/bigtable-api';
+import google = protos.google;
 
 export type IGcRule = google.bigtable.admin.v2.IGcRule;
 export type IDuration = google.protobuf.IDuration;

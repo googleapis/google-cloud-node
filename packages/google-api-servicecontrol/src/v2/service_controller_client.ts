@@ -57,7 +57,7 @@ export class ServiceControllerClient {
   private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('servicecontrol');
+  private _log = logging.log('service-control');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {

@@ -3,7 +3,7 @@
   "private": true,
   "main": "quickstart.js",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "files": [
     "*.js"
@@ -14,7 +14,7 @@
     "test": "mocha --timeout 10000 --exit"
   },
   "dependencies": {
-    "@google-cloud/scheduler": "^5.3.2",
+    "@google-cloud/scheduler": "^6.0.0",
     "body-parser": "^2.0.0",
     "express": "^5.0.0"
   },

@@ -6245,6 +6245,9 @@ export namespace google {
 
                     /** GceClusterConfig confidentialInstanceConfig */
                     confidentialInstanceConfig?: (google.cloud.dataproc.v1.IConfidentialInstanceConfig|null);
+
+                    /** GceClusterConfig resourceManagerTags */
+                    resourceManagerTags?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a GceClusterConfig. */
@@ -6294,6 +6297,9 @@ export namespace google {
 
                     /** GceClusterConfig confidentialInstanceConfig. */
                     public confidentialInstanceConfig?: (google.cloud.dataproc.v1.IConfidentialInstanceConfig|null);
+
+                    /** GceClusterConfig resourceManagerTags. */
+                    public resourceManagerTags: { [k: string]: string };
 
                     /**
                      * Creates a new GceClusterConfig instance using the specified properties.
@@ -6595,6 +6601,9 @@ export namespace google {
 
                     /** ConfidentialInstanceConfig enableConfidentialCompute */
                     enableConfidentialCompute?: (boolean|null);
+
+                    /** ConfidentialInstanceConfig confidentialInstanceType */
+                    confidentialInstanceType?: (google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType|keyof typeof google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType|null);
                 }
 
                 /** Represents a ConfidentialInstanceConfig. */
@@ -6608,6 +6617,9 @@ export namespace google {
 
                     /** ConfidentialInstanceConfig enableConfidentialCompute. */
                     public enableConfidentialCompute: boolean;
+
+                    /** ConfidentialInstanceConfig confidentialInstanceType. */
+                    public confidentialInstanceType: (google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType|keyof typeof google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType);
 
                     /**
                      * Creates a new ConfidentialInstanceConfig instance using the specified properties.
@@ -6685,6 +6697,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConfidentialInstanceConfig {
+
+                    /** ConfidentialInstanceType enum. */
+                    enum ConfidentialInstanceType {
+                        CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED = 0,
+                        SEV = 1,
+                        SEV_SNP = 2,
+                        TDX = 3
+                    }
                 }
 
                 /** Properties of an InstanceGroupConfig. */
@@ -7416,6 +7439,9 @@ export namespace google {
 
                         /** InstanceSelection rank */
                         rank?: (number|null);
+
+                        /** InstanceSelection diskConfig */
+                        diskConfig?: (google.cloud.dataproc.v1.IDiskConfig|null);
                     }
 
                     /** Represents an InstanceSelection. */
@@ -7432,6 +7458,9 @@ export namespace google {
 
                         /** InstanceSelection rank. */
                         public rank: number;
+
+                        /** InstanceSelection diskConfig. */
+                        public diskConfig?: (google.cloud.dataproc.v1.IDiskConfig|null);
 
                         /**
                          * Creates a new InstanceSelection instance using the specified properties.
@@ -7738,6 +7767,9 @@ export namespace google {
 
                     /** DiskConfig bootDiskProvisionedThroughput */
                     bootDiskProvisionedThroughput?: (number|Long|string|null);
+
+                    /** DiskConfig attachedDiskConfigs */
+                    attachedDiskConfigs?: (google.cloud.dataproc.v1.IAttachedDiskConfig[]|null);
                 }
 
                 /** Represents a DiskConfig. */
@@ -7766,6 +7798,9 @@ export namespace google {
 
                     /** DiskConfig bootDiskProvisionedThroughput. */
                     public bootDiskProvisionedThroughput?: (number|Long|string|null);
+
+                    /** DiskConfig attachedDiskConfigs. */
+                    public attachedDiskConfigs: google.cloud.dataproc.v1.IAttachedDiskConfig[];
 
                     /**
                      * Creates a new DiskConfig instance using the specified properties.
@@ -7843,6 +7878,133 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AttachedDiskConfig. */
+                interface IAttachedDiskConfig {
+
+                    /** AttachedDiskConfig diskType */
+                    diskType?: (google.cloud.dataproc.v1.AttachedDiskConfig.DiskType|keyof typeof google.cloud.dataproc.v1.AttachedDiskConfig.DiskType|null);
+
+                    /** AttachedDiskConfig diskSizeGb */
+                    diskSizeGb?: (number|null);
+
+                    /** AttachedDiskConfig provisionedIops */
+                    provisionedIops?: (number|Long|string|null);
+
+                    /** AttachedDiskConfig provisionedThroughput */
+                    provisionedThroughput?: (number|Long|string|null);
+                }
+
+                /** Represents an AttachedDiskConfig. */
+                class AttachedDiskConfig implements IAttachedDiskConfig {
+
+                    /**
+                     * Constructs a new AttachedDiskConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IAttachedDiskConfig);
+
+                    /** AttachedDiskConfig diskType. */
+                    public diskType: (google.cloud.dataproc.v1.AttachedDiskConfig.DiskType|keyof typeof google.cloud.dataproc.v1.AttachedDiskConfig.DiskType);
+
+                    /** AttachedDiskConfig diskSizeGb. */
+                    public diskSizeGb: number;
+
+                    /** AttachedDiskConfig provisionedIops. */
+                    public provisionedIops?: (number|Long|string|null);
+
+                    /** AttachedDiskConfig provisionedThroughput. */
+                    public provisionedThroughput?: (number|Long|string|null);
+
+                    /**
+                     * Creates a new AttachedDiskConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AttachedDiskConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IAttachedDiskConfig): google.cloud.dataproc.v1.AttachedDiskConfig;
+
+                    /**
+                     * Encodes the specified AttachedDiskConfig message. Does not implicitly {@link google.cloud.dataproc.v1.AttachedDiskConfig.verify|verify} messages.
+                     * @param message AttachedDiskConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IAttachedDiskConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AttachedDiskConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.AttachedDiskConfig.verify|verify} messages.
+                     * @param message AttachedDiskConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IAttachedDiskConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AttachedDiskConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AttachedDiskConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.AttachedDiskConfig;
+
+                    /**
+                     * Decodes an AttachedDiskConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AttachedDiskConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.AttachedDiskConfig;
+
+                    /**
+                     * Verifies an AttachedDiskConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AttachedDiskConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AttachedDiskConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.AttachedDiskConfig;
+
+                    /**
+                     * Creates a plain object from an AttachedDiskConfig message. Also converts values to other types if specified.
+                     * @param message AttachedDiskConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.AttachedDiskConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AttachedDiskConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AttachedDiskConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AttachedDiskConfig {
+
+                    /** DiskType enum. */
+                    enum DiskType {
+                        DISK_TYPE_UNSPECIFIED = 0,
+                        HYPERDISK_BALANCED = 1,
+                        HYPERDISK_EXTREME = 2,
+                        HYPERDISK_ML = 3,
+                        HYPERDISK_THROUGHPUT = 4
+                    }
                 }
 
                 /** Properties of an AuxiliaryNodeGroup. */
@@ -13497,6 +13659,12 @@ export namespace google {
 
                     /** YarnApplication trackingUrl */
                     trackingUrl?: (string|null);
+
+                    /** YarnApplication vcoreSeconds */
+                    vcoreSeconds?: (number|Long|string|null);
+
+                    /** YarnApplication memoryMbSeconds */
+                    memoryMbSeconds?: (number|Long|string|null);
                 }
 
                 /** Represents a YarnApplication. */
@@ -13519,6 +13687,12 @@ export namespace google {
 
                     /** YarnApplication trackingUrl. */
                     public trackingUrl: string;
+
+                    /** YarnApplication vcoreSeconds. */
+                    public vcoreSeconds: (number|Long|string);
+
+                    /** YarnApplication memoryMbSeconds. */
+                    public memoryMbSeconds: (number|Long|string);
 
                     /**
                      * Creates a new YarnApplication instance using the specified properties.

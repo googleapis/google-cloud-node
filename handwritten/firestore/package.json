@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/firestore",
   "description": "Firestore Client Library for Node.js",
-  "version": "8.6.0",
+  "version": "8.7.1",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -39,23 +39,21 @@
     "api-report": "node scripts/api-report.mjs",
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",
-    "system-test:rest": "FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
-    "system-test:enterprise:rest": "RUN_ENTERPRISE_TESTS=yes FIRESTORE_DATABASE_ID=enterprise FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
-    "system-test:grpc": "mocha build/system-test --timeout 1200000",
-    "system-test:enterprise:grpc": "RUN_ENTERPRISE_TESTS=yes FIRESTORE_DATABASE_ID=enterprise mocha build/system-test --timeout 1200000",
+    "system-test:rest": "FIRESTORE_DATABASE_ID=firestore-standard FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
+    "system-test:enterprise:rest": "RUN_ENTERPRISE_TESTS=yes FIRESTORE_DATABASE_ID=firestore-enterprise FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
+    "system-test:grpc": "FIRESTORE_DATABASE_ID=firestore-standard mocha build/system-test --timeout 1200000",
+    "system-test:enterprise:grpc": "RUN_ENTERPRISE_TESTS=yes FIRESTORE_DATABASE_ID=firestore-enterprise mocha build/system-test --timeout 1200000",
     "system-test:emulator:rest": "FIRESTORE_EMULATOR_HOST=localhost:8080 FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
-    "system-test:enterprise:emulator:rest": "RUN_ENTERPRISE_TESTS=yes FIRESTORE_DATABASE_ID=enterprise FIRESTORE_EMULATOR_HOST=localhost:8080 FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
+    "system-test:enterprise:emulator:rest": "RUN_ENTERPRISE_TESTS=yes FIRESTORE_DATABASE_ID=firestore-enterprise FIRESTORE_EMULATOR_HOST=localhost:8080 FIRESTORE_PREFER_REST=true mocha build/system-test --timeout 1200000",
     "system-test:emulator:grpc": "FIRESTORE_EMULATOR_HOST=localhost:8080 mocha build/system-test --timeout 1200000",
-    "system-test:enterprise:emulator:grpc": "RUN_ENTERPRISE_TESTS=yes FIRESTORE_DATABASE_ID=enterprise FIRESTORE_EMULATOR_HOST=localhost:8080 mocha build/system-test --timeout 1200000",
+    "system-test:enterprise:emulator:grpc": "RUN_ENTERPRISE_TESTS=yes FIRESTORE_DATABASE_ID=firestore-enterprise FIRESTORE_EMULATOR_HOST=localhost:8080 mocha build/system-test --timeout 1200000",
     "system-test": "concurrently -p \"[{name}]\" -n \"grpc,rest,enterprise-grpc,enterprise-rest\" -c \"cyan,magenta,blue,yellow\" \"npm:system-test:grpc\" \"npm:system-test:rest\" \"npm:system-test:enterprise:grpc\" \"npm:system-test:enterprise:rest\"",
     "system-test:nightly": "FIRESTORE_TARGET_BACKEND=nightly FIRESTORE_DATABASE_ID=enterprise RUN_ENTERPRISE_TESTS=yes GCLOUD_PROJECT=firestore-sdk-nightly mocha build/system-test --timeout 1200000",
     "system-test:emulator": "concurrently -p \"[{name}]\" -n \"grpc,rest,enterprise-grpc,enterprise-rest\" -c \"cyan,magenta,blue,yellow\" \"npm:system-test:emulator:grpc\" \"npm:system-test:emulator:rest\" \"npm:system-test:enterprise:emulator:grpc\" \"npm:system-test:enterprise:emulator:rest\"",
     "presystem-test": "npm run compile",
-    "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "conformance": "mocha build/conformance",
-    "preconformance": "npm run compile",
     "test-only": "c8 mocha build/test",
-    "pretest-only": "npm run compile",
+    "pretest": "npm run compile",
     "test": "npm run test-only && npm run conformance",
     "lint": "gts check",
     "clean": "gts clean",
@@ -63,7 +61,6 @@
     "postcompile": "node scripts/init-directories.js && cp -r dev/protos build && cp dev/src/v1beta1/*.json build/src/v1beta1/ && cp dev/src/v1/*.json build/src/v1/ && cp dev/conformance/test-definition.proto build/conformance && cp dev/conformance/conformance-tests/*.json build/conformance/conformance-tests && minifyProtoJson",
     "fix": "gts fix",
     "prepare": "npm run compile",
-    "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean"
   },
   "dependencies": {
@@ -120,10 +117,18 @@
   },
   "//_comment": "TODO: Remove @sinonjs/fake-timers overrides/resolutions when version > 15.3.0 fixes the duplicate identifier 'withGlobal' issue.",
   "overrides": {
-    "@sinonjs/fake-timers": "15.1.1"
+    "@sinonjs/fake-timers": "15.1.1",
+    "brace-expansion": "^2.0.1"
   },
   "resolutions": {
-    "@sinonjs/fake-timers": "15.1.1"
+    "@sinonjs/fake-timers": "15.1.1",
+    "brace-expansion": "^2.0.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sinonjs/fake-timers": "15.1.1",
+      "brace-expansion": "^2.0.1"
+    }
   },
   "exports": {
     ".": {
