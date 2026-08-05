@@ -187,6 +187,7 @@ async function checkEslint(filesToCheck) {
       const absPkgDir = path.resolve(pkgDir);
       const eslint = new ESLint({
         cwd: absPkgDir,
+        resolvePluginsRelativeTo: process.cwd(),
         overrideConfig: {
           parserOptions: {
             tsconfigRootDir: absPkgDir,
