@@ -6,7 +6,7 @@
     "*.js"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "repository": "googleapis/google-cloud-node",
   "private": true,
