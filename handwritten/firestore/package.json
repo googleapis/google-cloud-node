@@ -52,6 +52,7 @@
     "system-test:emulator": "concurrently -p \"[{name}]\" -n \"grpc,rest,enterprise-grpc,enterprise-rest\" -c \"cyan,magenta,blue,yellow\" \"npm:system-test:emulator:grpc\" \"npm:system-test:emulator:rest\" \"npm:system-test:enterprise:emulator:grpc\" \"npm:system-test:enterprise:emulator:rest\"",
     "presystem-test": "npm run compile",
     "conformance": "mocha build/conformance",
+    "precheck-bundle-size": "npm run compile",
     "check-bundle-size": "node scripts/check-bundle-size.js",
     "test-only": "c8 mocha build/test",
     "pretest": "npm run compile",
@@ -70,7 +71,7 @@
     "functional-red-black-tree": "^1.0.1",
     "google-gax": "^5.0.1",
     "protobufjs": "^7.5.3",
-    "@google-cloud/firestore-api": "^0.3.0"
+    "@google-cloud/firestore-api": "^0.4.0"
   },
   "devDependencies": {
     "@google-cloud/cloud-rad": "^0.4.10",
