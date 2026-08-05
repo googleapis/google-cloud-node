@@ -50,7 +50,7 @@ default:
   output: packages
 libraries:
   - name: google-ads-admanager
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/ads/admanager/v1
     copyright_year: "2026"
@@ -58,7 +58,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/admanager/latest
   - name: google-ads-datamanager
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/ads/datamanager/v1
     copyright_year: "2026"
@@ -66,7 +66,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/datamanager/latest
   - name: google-ai-generativelanguage
-    version: 3.7.1
+    version: 4.0.0
     apis:
       - path: google/ai/generativelanguage/v1
       - path: google/ai/generativelanguage/v1beta3
@@ -78,7 +78,7 @@ libraries:
       default_version: v1beta
       client_documentation_override: https://developers.generativeai.google/guide/palm_api_overview
   - name: google-analytics-admin
-    version: 9.2.0
+    version: 10.0.0
     apis:
       - path: google/analytics/admin/v1beta
       - path: google/analytics/admin/v1alpha
@@ -90,7 +90,7 @@ libraries:
         server-destroy: ^1.0.1
       client_documentation_override: https://googleapis.dev/nodejs/analytics-admin/latest/
   - name: google-analytics-data
-    version: 6.1.0
+    version: 7.0.0
     apis:
       - path: google/analytics/data/v1beta
       - path: google/analytics/data/v1alpha
@@ -99,7 +99,7 @@ libraries:
       default_version: v1beta
       client_documentation_override: https://googleapis.dev/nodejs/analytics-data/latest/
   - name: google-api-apikeys
-    version: 2.2.2
+    version: 3.0.0
     apis:
       - path: google/api/apikeys/v2
     copyright_year: "2026"
@@ -107,7 +107,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/apikeys'
   - name: google-api-cloudquotas
-    version: 2.4.0
+    version: 3.0.0
     apis:
       - path: google/api/cloudquotas/v1
       - path: google/api/cloudquotas/v1beta
@@ -121,7 +121,7 @@ libraries:
           path: google/api/cloudquotas/v1beta
       package_name: '@google-cloud/cloudquotas'
   - name: google-api-servicecontrol
-    version: 4.4.0
+    version: 5.0.0
     apis:
       - path: google/api/servicecontrol/v2
       - path: google/api/servicecontrol/v1
@@ -130,7 +130,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/service-control'
   - name: google-api-servicemanagement
-    version: 3.2.2
+    version: 4.0.0
     apis:
       - path: google/api/servicemanagement/v1
     copyright_year: "2026"
@@ -138,7 +138,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/service-management'
   - name: google-api-serviceusage
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/api/serviceusage/v1
       - path: google/api/serviceusage/v1beta1
@@ -148,7 +148,7 @@ libraries:
       package_name: '@google-cloud/service-usage'
       client_documentation_override: https://cloud.google.com/service-usage/docs/overview
   - name: google-appengine
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/appengine/v1
     copyright_year: "2026"
@@ -156,7 +156,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/appengine-admin'
   - name: google-apps-events-subscriptions
-    version: 0.1.2
+    version: 0.2.0
     apis:
       - path: google/apps/events/subscriptions/v1
       - path: google/apps/events/subscriptions/v1beta
@@ -166,7 +166,7 @@ libraries:
       package_name: '@google-cloud/subscriptions'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/workspaceevents/latest
   - name: google-apps-meet
-    version: 0.7.2
+    version: 0.8.0
     apis:
       - path: google/apps/meet/v2
       - path: google/apps/meet/v2beta
@@ -175,7 +175,7 @@ libraries:
       default_version: v2
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/meet/latest
   - name: google-area120-tables
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/area120/tables/v1alpha1
     copyright_year: "2026"
@@ -184,7 +184,7 @@ libraries:
       package_name: '@google/area120-tables'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
   - name: google-chat
-    version: 0.27.0
+    version: 0.28.0
     apis:
       - path: google/chat/v1
     copyright_year: "2026"
@@ -193,7 +193,7 @@ libraries:
       package_name: '@google-apps/chat'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/chat/latest
   - name: google-cloud-accessapproval
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/accessapproval/v1
     copyright_year: "2026"
@@ -201,7 +201,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/access-approval'
   - name: google-cloud-advisorynotifications
-    version: 2.2.2
+    version: 3.0.0
     apis:
       - path: google/cloud/advisorynotifications/v1
     copyright_year: "2026"
@@ -211,18 +211,18 @@ libraries:
         - omit_common_resources: true
           path: google/cloud/advisorynotifications/v1
   - name: google-cloud-agentidentity
+    version: 0.1.0
     apis:
       - path: google/cloud/agentidentity/v1
       - path: google/cloud/agentidentity/v1beta
     copyright_year: "2026"
-    version: 0.1.0
   - name: google-cloud-agentregistry
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
   - name: google-cloud-aiplatform
-    version: 6.11.0
+    version: 7.0.0
     apis:
       - path: google/cloud/aiplatform/v1
       - path: google/cloud/aiplatform/v1beta1
@@ -323,7 +323,7 @@ libraries:
             - google/cloud/aiplatform/v1beta1/schema/dataset_metadata.proto
           path: google/cloud/aiplatform/v1beta1
   - name: google-cloud-alloydb
-    version: 2.7.0
+    version: 3.0.0
     apis:
       - path: google/cloud/alloydb/v1
       - path: google/cloud/alloydb/v1beta
@@ -332,7 +332,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-apigateway
-    version: 4.3.0
+    version: 5.0.0
     apis:
       - path: google/cloud/apigateway/v1
     copyright_year: "2026"
@@ -340,7 +340,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/api-gateway'
   - name: google-cloud-apigeeconnect
-    version: 4.3.0
+    version: 5.0.0
     apis:
       - path: google/cloud/apigeeconnect/v1
     copyright_year: "2026"
@@ -348,7 +348,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/apigee-connect'
   - name: google-cloud-apigeeregistry
-    version: 2.2.2
+    version: 3.0.0
     apis:
       - path: google/cloud/apigeeregistry/v1
     copyright_year: "2026"
@@ -357,14 +357,14 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/apigee-registry'
   - name: google-cloud-apihub
-    version: 0.5.2
+    version: 0.6.0
     apis:
       - path: google/cloud/apihub/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-apiregistry
-    version: 0.2.1
+    version: 0.3.0
     apis:
       - path: google/cloud/apiregistry/v1
       - path: google/cloud/apiregistry/v1beta
@@ -372,21 +372,21 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-apphub
-    version: 0.6.2
+    version: 0.7.0
     apis:
       - path: google/cloud/apphub/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-appoptimize
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/appoptimize/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1beta
   - name: google-cloud-asset
-    version: 6.3.3
+    version: 7.0.0
     apis:
       - path: google/cloud/asset/v1
       - path: google/cloud/asset/v1p7beta1
@@ -397,7 +397,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-assuredworkloads
-    version: 5.1.2
+    version: 6.0.0
     apis:
       - path: google/cloud/assuredworkloads/v1
       - path: google/cloud/assuredworkloads/v1beta1
@@ -406,14 +406,14 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/assured-workloads'
   - name: google-cloud-auditmanager
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/cloud/auditmanager/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-automl
-    version: 5.1.3
+    version: 6.0.0
     apis:
       - path: google/cloud/automl/v1
       - path: google/cloud/automl/v1beta1
@@ -422,14 +422,14 @@ libraries:
       default_version: v1
       main_service: automl
   - name: google-cloud-backupdr
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/cloud/backupdr/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-baremetalsolution
-    version: 2.1.2
+    version: 3.0.0
     apis:
       - path: google/cloud/baremetalsolution/v2
     copyright_year: "2026"
@@ -437,7 +437,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/bare-metal-solution'
   - name: google-cloud-batch
-    version: 2.5.0
+    version: 3.0.0
     apis:
       - path: google/cloud/batch/v1
       - path: google/cloud/batch/v1alpha
@@ -445,7 +445,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-beyondcorp-appconnections
-    version: 2.1.2
+    version: 3.0.0
     apis:
       - path: google/cloud/beyondcorp/appconnections/v1
     copyright_year: "2026"
@@ -453,7 +453,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/appconnections'
   - name: google-cloud-beyondcorp-appconnectors
-    version: 2.1.2
+    version: 3.0.0
     apis:
       - path: google/cloud/beyondcorp/appconnectors/v1
     copyright_year: "2026"
@@ -461,7 +461,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/appconnectors'
   - name: google-cloud-beyondcorp-appgateways
-    version: 2.1.2
+    version: 3.0.0
     apis:
       - path: google/cloud/beyondcorp/appgateways/v1
     copyright_year: "2026"
@@ -469,7 +469,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/appgateways'
   - name: google-cloud-beyondcorp-clientconnectorservices
-    version: 3.1.2
+    version: 4.0.0
     apis:
       - path: google/cloud/beyondcorp/clientconnectorservices/v1
     copyright_year: "2026"
@@ -477,7 +477,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/clientconnectorservices'
   - name: google-cloud-beyondcorp-clientgateways
-    version: 2.1.2
+    version: 3.0.0
     apis:
       - path: google/cloud/beyondcorp/clientgateways/v1
     copyright_year: "2026"
@@ -485,14 +485,14 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/clientgateways'
   - name: google-cloud-bigquery-analyticshub
-    version: 2.4.1
+    version: 3.0.0
     apis:
       - path: google/cloud/bigquery/analyticshub/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-bigquery-connection
-    version: 4.1.2
+    version: 5.0.0
     apis:
       - path: google/cloud/bigquery/connection/v1
       - path: google/cloud/bigquery/connection/v1beta1
@@ -500,7 +500,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-bigquery-dataexchange
-    version: 2.1.2
+    version: 3.0.0
     apis:
       - path: google/cloud/bigquery/dataexchange/v1beta1
     copyright_year: "2026"
@@ -508,7 +508,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/bigquery-data-exchange'
   - name: google-cloud-bigquery-datapolicies
-    version: 2.3.2
+    version: 3.0.0
     apis:
       - path: google/cloud/bigquery/datapolicies/v2
       - path: google/cloud/bigquery/datapolicies/v1
@@ -518,7 +518,7 @@ libraries:
     nodejs:
       default_version: v1beta1
   - name: google-cloud-bigquery-datatransfer
-    version: 5.1.3
+    version: 6.0.0
     apis:
       - path: google/cloud/bigquery/datatransfer/v1
     copyright_year: "2026"
@@ -528,7 +528,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/bigquery-data-transfer'
   - name: google-cloud-bigquery-migration
-    version: 2.2.0
+    version: 3.0.0
     apis:
       - path: google/cloud/bigquery/migration/v2
       - path: google/cloud/bigquery/migration/v2alpha
@@ -536,14 +536,14 @@ libraries:
     nodejs:
       default_version: v2
   - name: google-cloud-bigquery-reservation
-    version: 4.4.1
+    version: 5.0.0
     apis:
       - path: google/cloud/bigquery/reservation/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-bigquery-storage-api
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/bigquery/storage/v1
     copyright_year: "2026"
@@ -552,7 +552,7 @@ libraries:
       metadata_name_override: bigquerystorage-api
       name_pretty_override: BigQuery Storage API
   - name: google-cloud-bigtable-api
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/bigtable/v2
       - path: google/bigtable/admin/v2
@@ -562,7 +562,7 @@ libraries:
       metadata_name_override: bigtable-api
       name_pretty_override: Bigtable API
   - name: google-cloud-billing
-    version: 5.1.2
+    version: 6.0.0
     apis:
       - path: google/cloud/billing/v1
     copyright_year: "2026"
@@ -572,7 +572,7 @@ libraries:
         - omit_common_resources: true
           path: google/cloud/billing/v1
   - name: google-cloud-billing-budgets
-    version: 6.1.2
+    version: 7.0.0
     apis:
       - path: google/cloud/billing/budgets/v1
       - path: google/cloud/billing/budgets/v1beta1
@@ -582,7 +582,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-binaryauthorization
-    version: 4.5.0
+    version: 5.0.0
     apis:
       - path: google/cloud/binaryauthorization/v1
       - path: google/cloud/binaryauthorization/v1beta1
@@ -591,14 +591,14 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/binary-authorization'
   - name: google-cloud-capacityplanner
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/capacityplanner/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1beta
   - name: google-cloud-certificatemanager
-    version: 2.1.3
+    version: 3.0.0
     apis:
       - path: google/cloud/certificatemanager/v1
     copyright_year: "2026"
@@ -606,7 +606,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/certificate-manager'
   - name: google-cloud-ces
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/cloud/ces/v1
       - path: google/cloud/ces/v1beta
@@ -614,21 +614,21 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-channel
-    version: 4.1.3
+    version: 5.0.0
     apis:
       - path: google/cloud/channel/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-chronicle
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/cloud/chronicle/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-cloudcontrolspartner
-    version: 0.6.2
+    version: 0.7.0
     apis:
       - path: google/cloud/cloudcontrolspartner/v1
       - path: google/cloud/cloudcontrolspartner/v1beta
@@ -636,7 +636,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-clouddms
-    version: 4.1.2
+    version: 5.0.0
     apis:
       - path: google/cloud/clouddms/v1
     copyright_year: "2026"
@@ -644,14 +644,14 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/dms'
   - name: google-cloud-cloudsecuritycompliance
-    version: 0.2.1
+    version: 0.3.0
     apis:
       - path: google/cloud/cloudsecuritycompliance/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-commerce-consumer-procurement
-    version: 0.7.2
+    version: 0.8.0
     apis:
       - path: google/cloud/commerce/consumer/procurement/v1
       - path: google/cloud/commerce/consumer/procurement/v1alpha1
@@ -660,12 +660,12 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/procurement'
   - name: google-cloud-commerceproducer
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 6.15.0
+    version: 7.0.0
     apis:
       - path: google/cloud/compute/v1
       - path: google/cloud/compute/v1beta
@@ -696,7 +696,7 @@ libraries:
         - diregapic: true
           path: google/cloud/compute/v1beta
   - name: google-cloud-confidentialcomputing
-    version: 2.3.0
+    version: 3.0.0
     apis:
       - path: google/cloud/confidentialcomputing/v1
       - path: google/cloud/confidentialcomputing/v1alpha1
@@ -704,14 +704,14 @@ libraries:
     nodejs:
       default_version: v1alpha1
   - name: google-cloud-config
-    version: 0.12.1
+    version: 0.13.0
     apis:
       - path: google/cloud/config/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-configdelivery
-    version: 0.1.2
+    version: 0.2.0
     apis:
       - path: google/cloud/configdelivery/v1
       - path: google/cloud/configdelivery/v1beta
@@ -720,14 +720,14 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-connectors
-    version: 0.5.2
+    version: 0.6.0
     apis:
       - path: google/cloud/connectors/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-contactcenterinsights
-    version: 4.1.3
+    version: 5.0.0
     apis:
       - path: google/cloud/contactcenterinsights/v1
     copyright_year: "2026"
@@ -735,21 +735,21 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/contact-center-insights'
   - name: google-cloud-contentwarehouse
-    version: 2.4.1
+    version: 3.0.0
     apis:
       - path: google/cloud/contentwarehouse/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-databasecenter
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/databasecenter/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1beta
   - name: google-cloud-datacatalog
-    version: 5.2.2
+    version: 6.0.0
     apis:
       - path: google/cloud/datacatalog/v1
         nodejs:
@@ -762,7 +762,7 @@ libraries:
       default_version: v1
       main_service: DataCatalog
   - name: google-cloud-datacatalog-lineage
-    version: 2.2.0
+    version: 3.0.0
     apis:
       - path: google/cloud/datacatalog/lineage/v1
     copyright_year: "2026"
@@ -770,7 +770,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/lineage'
   - name: google-cloud-datacatalog-lineage-configmanagement
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/cloud/datacatalog/lineage/configmanagement/v1
     copyright_year: "2026"
@@ -778,7 +778,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/configmanagement'
   - name: google-cloud-dataform
-    version: 2.5.0
+    version: 3.0.0
     apis:
       - path: google/cloud/dataform/v1
       - path: google/cloud/dataform/v1beta1
@@ -786,7 +786,7 @@ libraries:
     nodejs:
       default_version: v1beta1
   - name: google-cloud-datafusion
-    version: 4.1.2
+    version: 5.0.0
     apis:
       - path: google/cloud/datafusion/v1
       - path: google/cloud/datafusion/v1beta1
@@ -795,7 +795,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/data-fusion'
   - name: google-cloud-datalabeling
-    version: 5.1.2
+    version: 6.0.0
     apis:
       - path: google/cloud/datalabeling/v1beta1
     copyright_year: "2026"
@@ -803,7 +803,7 @@ libraries:
       default_version: v1beta1
       main_service: datalabeling
   - name: google-cloud-dataplex
-    version: 5.6.0
+    version: 6.0.0
     apis:
       - path: google/cloud/dataplex/v1
         nodejs:
@@ -813,7 +813,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/dataplex
   - name: google-cloud-dataproc
-    version: 6.8.0
+    version: 7.0.0
     apis:
       - path: google/cloud/dataproc/v1
     copyright_year: "2026"
@@ -821,7 +821,7 @@ libraries:
       default_version: v1
       main_service: dataproc
   - name: google-cloud-dataqna
-    version: 4.1.2
+    version: 5.0.0
     apis:
       - path: google/cloud/dataqna/v1alpha
     copyright_year: "2026"
@@ -829,7 +829,7 @@ libraries:
       default_version: v1alpha
       package_name: '@google-cloud/data-qna'
   - name: google-cloud-datastore-api
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/datastore/v1
       - path: google/datastore/admin/v1
@@ -839,7 +839,7 @@ libraries:
       metadata_name_override: datastore-api
       name_pretty_override: Datastore API
   - name: google-cloud-datastream
-    version: 4.3.2
+    version: 5.0.0
     apis:
       - path: google/cloud/datastream/v1
       - path: google/cloud/datastream/v1alpha1
@@ -847,28 +847,28 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-deploy
-    version: 5.2.2
+    version: 6.0.0
     apis:
       - path: google/cloud/deploy/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-developerconnect
-    version: 0.7.1
+    version: 0.8.0
     apis:
       - path: google/cloud/developerconnect/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-devicestreaming
-    version: 0.2.2
+    version: 0.3.0
     apis:
       - path: google/cloud/devicestreaming/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-dialogflow
-    version: 7.9.0
+    version: 8.0.0
     apis:
       - path: google/cloud/dialogflow/v2
       - path: google/cloud/dialogflow/v2beta1
@@ -877,7 +877,7 @@ libraries:
       default_version: v2
       main_service: dialogflow
   - name: google-cloud-dialogflow-cx
-    version: 5.8.2
+    version: 6.0.0
     apis:
       - path: google/cloud/dialogflow/cx/v3
         nodejs:
@@ -889,7 +889,7 @@ libraries:
       metadata_name_override: dialogflow-cx
       name_pretty_override: Dialogflow CX API
   - name: google-cloud-discoveryengine
-    version: 2.9.0
+    version: 3.0.0
     apis:
       - path: google/cloud/discoveryengine/v1
       - path: google/cloud/discoveryengine/v1beta
@@ -898,7 +898,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-documentai
-    version: 9.6.2
+    version: 10.0.0
     apis:
       - path: google/cloud/documentai/v1
       - path: google/cloud/documentai/v1beta3
@@ -906,7 +906,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-domains
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/domains/v1
       - path: google/cloud/domains/v1beta1
@@ -915,21 +915,21 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-edgecontainer
-    version: 0.8.2
+    version: 0.9.0
     apis:
       - path: google/cloud/edgecontainer/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-edgenetwork
-    version: 0.11.1
+    version: 0.12.0
     apis:
       - path: google/cloud/edgenetwork/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-essentialcontacts
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/essentialcontacts/v1
     copyright_year: "2026"
@@ -937,14 +937,14 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/essential-contacts'
   - name: google-cloud-eventarc
-    version: 4.3.1
+    version: 5.0.0
     apis:
       - path: google/cloud/eventarc/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-eventarc-publishing
-    version: 4.3.0
+    version: 5.0.0
     apis:
       - path: google/cloud/eventarc/publishing/v1
     copyright_year: "2026"
@@ -952,7 +952,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://googleapis.dev/nodejs/publishing/latest/
   - name: google-cloud-filestore
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/filestore/v1
       - path: google/cloud/filestore/v1beta1
@@ -960,25 +960,26 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-financialservices
-    version: 0.4.2
+    version: 0.5.0
     apis:
       - path: google/cloud/financialservices/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-firestore-api
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/firestore/v1
       - path: google/firestore/admin/v1
-      - path: google/firestore/v1beta1
     copyright_year: "2026"
+    keep:
+      - package.json
     nodejs:
       package_name: '@google-cloud/firestore-api'
       metadata_name_override: firestore-api
       name_pretty_override: Firestore API
   - name: google-cloud-functions
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/functions/v2
         nodejs:
@@ -996,14 +997,14 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-gdchardwaremanagement
-    version: 0.10.1
+    version: 0.11.0
     apis:
       - path: google/cloud/gdchardwaremanagement/v1alpha
     copyright_year: "2026"
     nodejs:
       default_version: v1alpha
   - name: google-cloud-geminidataanalytics
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
       - path: google/cloud/geminidataanalytics/v1beta
@@ -1012,7 +1013,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-gkebackup
-    version: 2.2.2
+    version: 3.0.0
     apis:
       - path: google/cloud/gkebackup/v1
     copyright_year: "2026"
@@ -1020,7 +1021,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/gke-backup'
   - name: google-cloud-gkeconnect-gateway
-    version: 5.2.2
+    version: 6.0.0
     apis:
       - path: google/cloud/gkeconnect/gateway/v1
       - path: google/cloud/gkeconnect/gateway/v1beta1
@@ -1029,7 +1030,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/gke-connect-gateway'
   - name: google-cloud-gkehub
-    version: 6.4.1
+    version: 7.0.0
     apis:
       - path: google/cloud/gkehub/v1
       - path: google/cloud/gkehub/v1beta1
@@ -1040,28 +1041,28 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/gke-hub'
   - name: google-cloud-gkemulticloud
-    version: 2.4.0
+    version: 3.0.0
     apis:
       - path: google/cloud/gkemulticloud/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-gkerecommender
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/cloud/gkerecommender/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-gsuiteaddons
-    version: 2.2.2
+    version: 3.0.0
     apis:
       - path: google/cloud/gsuiteaddons/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-hypercomputecluster
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/cloud/hypercomputecluster/v1
       - path: google/cloud/hypercomputecluster/v1beta
@@ -1070,7 +1071,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-iap
-    version: 4.4.1
+    version: 5.0.0
     apis:
       - path: google/cloud/iap/v1
       - path: google/cloud/iap/v1beta1
@@ -1078,7 +1079,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-ids
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/ids/v1
     copyright_year: "2026"
@@ -1086,7 +1087,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/intrusion-detection-system
   - name: google-cloud-iot
-    version: 5.2.3
+    version: 6.0.0
     apis:
       - path: google/cloud/iot/v1
     copyright_year: "2026"
@@ -1096,21 +1097,21 @@ libraries:
       default_version: v1
       main_service: iot
   - name: google-cloud-kms
-    version: 5.7.0
+    version: 6.0.0
     apis:
       - path: google/cloud/kms/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-kms-inventory
-    version: 2.8.0
+    version: 3.0.0
     apis:
       - path: google/cloud/kms/inventory/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-language
-    version: 7.2.3
+    version: 8.0.0
     apis:
       - path: google/cloud/language/v2
       - path: google/cloud/language/v1
@@ -1119,14 +1120,14 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-licensemanager
-    version: 0.1.2
+    version: 0.2.0
     apis:
       - path: google/cloud/licensemanager/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-lifesciences
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/lifesciences/v2beta
     copyright_year: "2026"
@@ -1134,14 +1135,14 @@ libraries:
       default_version: v2beta
       package_name: '@google-cloud/life-sciences'
   - name: google-cloud-locationfinder
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/cloud/locationfinder/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-logging-api
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/logging/v2
     copyright_year: "2026"
@@ -1150,14 +1151,14 @@ libraries:
       metadata_name_override: logging-api
       name_pretty_override: Logging API
   - name: google-cloud-lustre
-    version: 0.2.2
+    version: 0.3.0
     apis:
       - path: google/cloud/lustre/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-maintenance-api
-    version: 0.4.1
+    version: 0.5.0
     apis:
       - path: google/cloud/maintenance/api/v1
       - path: google/cloud/maintenance/api/v1beta
@@ -1165,7 +1166,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-managedidentities
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/managedidentities/v1
       - path: google/cloud/managedidentities/v1beta1
@@ -1174,14 +1175,14 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/managed-identities'
   - name: google-cloud-managedkafka
-    version: 0.8.2
+    version: 0.9.0
     apis:
       - path: google/cloud/managedkafka/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-managedkafka-schemaregistry
-    version: 0.1.2
+    version: 0.2.0
     apis:
       - path: google/cloud/managedkafka/schemaregistry/v1
     copyright_year: "2026"
@@ -1189,7 +1190,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/managedkafka/latest
   - name: google-cloud-mediatranslation
-    version: 5.2.2
+    version: 6.0.0
     apis:
       - path: google/cloud/mediatranslation/v1beta1
     copyright_year: "2026"
@@ -1199,7 +1200,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/media-translation'
   - name: google-cloud-memcache
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/memcache/v1
       - path: google/cloud/memcache/v1beta2
@@ -1207,7 +1208,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-memorystore
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/cloud/memorystore/v1
       - path: google/cloud/memorystore/v1beta
@@ -1215,7 +1216,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-metastore
-    version: 5.2.2
+    version: 6.0.0
     apis:
       - path: google/cloud/metastore/v1
       - path: google/cloud/metastore/v1beta
@@ -1225,14 +1226,14 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/dataproc-metastore'
   - name: google-cloud-migrationcenter
-    version: 2.2.2
+    version: 3.0.0
     apis:
       - path: google/cloud/migrationcenter/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-modelarmor
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/cloud/modelarmor/v1
       - path: google/cloud/modelarmor/v1beta
@@ -1240,7 +1241,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-monitoring
-    version: 5.4.0
+    version: 6.0.0
     apis:
       - path: google/monitoring/v3
     copyright_year: "2026"
@@ -1248,14 +1249,14 @@ libraries:
       default_version: v3
       main_service: monitoring
   - name: google-cloud-netapp
-    version: 0.18.0
+    version: 0.19.0
     apis:
       - path: google/cloud/netapp/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-networkconnectivity
-    version: 4.7.0
+    version: 5.0.0
     apis:
       - path: google/cloud/networkconnectivity/v1
       - path: google/cloud/networkconnectivity/v1beta
@@ -1265,7 +1266,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/network-connectivity'
   - name: google-cloud-networkmanagement
-    version: 5.5.0
+    version: 6.0.0
     apis:
       - path: google/cloud/networkmanagement/v1
       - path: google/cloud/networkmanagement/v1beta1
@@ -1274,7 +1275,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/network-management'
   - name: google-cloud-networksecurity
-    version: 3.6.0
+    version: 4.0.0
     apis:
       - path: google/cloud/networksecurity/v1
       - path: google/cloud/networksecurity/v1beta1
@@ -1284,7 +1285,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/network-security'
   - name: google-cloud-networkservices
-    version: 0.14.0
+    version: 0.15.0
     apis:
       - path: google/cloud/networkservices/v1
       - path: google/cloud/networkservices/v1beta1
@@ -1292,7 +1293,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-notebooks
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/notebooks/v2
       - path: google/cloud/notebooks/v1
@@ -1301,14 +1302,14 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-oracledatabase
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/cloud/oracledatabase/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-orchestration-airflow-service
-    version: 4.3.2
+    version: 5.0.0
     apis:
       - path: google/cloud/orchestration/airflow/service/v1
       - path: google/cloud/orchestration/airflow/service/v1beta1
@@ -1317,7 +1318,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/orchestration-airflow'
   - name: google-cloud-orgpolicy
-    version: 4.3.2
+    version: 5.0.0
     apis:
       - path: google/cloud/orgpolicy/v2
     copyright_year: "2026"
@@ -1325,7 +1326,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/org-policy'
   - name: google-cloud-osconfig
-    version: 4.3.2
+    version: 5.0.0
     apis:
       - path: google/cloud/osconfig/v1
       - path: google/cloud/osconfig/v1beta
@@ -1336,7 +1337,7 @@ libraries:
       main_service: OsConfigServiceClient
       package_name: '@google-cloud/os-config'
   - name: google-cloud-oslogin
-    version: 6.2.2
+    version: 7.0.0
     apis:
       - path: google/cloud/oslogin/v1
       - path: google/cloud/oslogin/v1beta
@@ -1345,7 +1346,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/os-login'
   - name: google-cloud-parallelstore
-    version: 0.12.1
+    version: 0.13.0
     apis:
       - path: google/cloud/parallelstore/v1
       - path: google/cloud/parallelstore/v1beta
@@ -1353,14 +1354,14 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-parametermanager
-    version: 0.5.2
+    version: 0.6.0
     apis:
       - path: google/cloud/parametermanager/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-phishingprotection
-    version: 5.2.2
+    version: 6.0.0
     apis:
       - path: google/cloud/phishingprotection/v1beta1
     copyright_year: "2026"
@@ -1368,14 +1369,14 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/phishing-protection'
   - name: google-cloud-policysimulator
-    version: 0.8.2
+    version: 0.9.0
     apis:
       - path: google/cloud/policysimulator/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-policytroubleshooter
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/policytroubleshooter/v1
     copyright_year: "2026"
@@ -1383,7 +1384,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/policy-troubleshooter'
   - name: google-cloud-policytroubleshooter-iam
-    version: 0.8.2
+    version: 0.9.0
     apis:
       - path: google/cloud/policytroubleshooter/iam/v3
       - path: google/cloud/policytroubleshooter/iam/v3beta
@@ -1393,7 +1394,7 @@ libraries:
       package_name: '@google-cloud/policy-troubleshooter-iam'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/iam/latest
   - name: google-cloud-privatecatalog
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/privatecatalog/v1beta1
     copyright_year: "2026"
@@ -1401,32 +1402,32 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/private-catalog'
   - name: google-cloud-privilegedaccessmanager
-    version: 0.6.2
+    version: 0.7.0
     apis:
       - path: google/cloud/privilegedaccessmanager/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-productregistry
-    version: 1.1.0
+    version: 2.0.0
     apis:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
   - name: google-cloud-pubsub-api
-    version: 0.2.1
+    version: 0.3.0
     apis:
       - path: google/pubsub/v1
     nodejs:
       package_name: '@google-cloud/pubsub-api'
   - name: google-cloud-rapidmigrationassessment
-    version: 2.2.2
+    version: 3.0.0
     apis:
       - path: google/cloud/rapidmigrationassessment/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-recaptchaenterprise
-    version: 6.4.2
+    version: 7.0.0
     apis:
       - path: google/cloud/recaptchaenterprise/v1
       - path: google/cloud/recaptchaenterprise/v1beta1
@@ -1435,7 +1436,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/recaptcha-enterprise'
   - name: google-cloud-recommender
-    version: 7.3.0
+    version: 8.0.0
     apis:
       - path: google/cloud/recommender/v1
       - path: google/cloud/recommender/v1beta1
@@ -1443,7 +1444,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis
-    version: 5.3.0
+    version: 6.0.0
     apis:
       - path: google/cloud/redis/v1
       - path: google/cloud/redis/v1beta1
@@ -1451,7 +1452,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis-cluster
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
@@ -1460,7 +1461,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/redis/latest
   - name: google-cloud-resourcemanager
-    version: 6.3.0
+    version: 7.0.0
     apis:
       - path: google/cloud/resourcemanager/v3
     copyright_year: "2026"
@@ -1471,7 +1472,7 @@ libraries:
           path: google/cloud/resourcemanager/v3
       package_name: '@google-cloud/resource-manager'
   - name: google-cloud-retail
-    version: 4.4.0
+    version: 5.0.0
     apis:
       - path: google/cloud/retail/v2
         nodejs:
@@ -1486,14 +1487,14 @@ libraries:
     nodejs:
       default_version: v2beta
   - name: google-cloud-run
-    version: 3.3.0
+    version: 4.0.0
     apis:
       - path: google/cloud/run/v2
     copyright_year: "2026"
     nodejs:
       default_version: v2
   - name: google-cloud-saasplatform-saasservicemgmt
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/cloud/saasplatform/saasservicemgmt/v1beta1
     copyright_year: "2026"
@@ -1501,7 +1502,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/saasservicemgmt'
   - name: google-cloud-scheduler
-    version: 5.4.0
+    version: 6.0.0
     apis:
       - path: google/cloud/scheduler/v1
       - path: google/cloud/scheduler/v1beta1
@@ -1510,7 +1511,7 @@ libraries:
       default_version: v1
       main_service: scheduler
   - name: google-cloud-secretmanager
-    version: 6.3.0
+    version: 7.0.0
     apis:
       - path: google/cloud/secretmanager/v1
       - path: google/cloud/secretmanager/v1beta2
@@ -1519,14 +1520,14 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/secret-manager'
   - name: google-cloud-securesourcemanager
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/securesourcemanager/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-security-privateca
-    version: 7.2.0
+    version: 8.0.0
     apis:
       - path: google/cloud/security/privateca/v1
       - path: google/cloud/security/privateca/v1beta1
@@ -1535,7 +1536,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/security-private-ca'
   - name: google-cloud-security-publicca
-    version: 2.3.0
+    version: 3.0.0
     apis:
       - path: google/cloud/security/publicca/v1
       - path: google/cloud/security/publicca/v1beta1
@@ -1545,7 +1546,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/publicca'
   - name: google-cloud-securitycenter
-    version: 9.5.0
+    version: 10.0.0
     apis:
       - path: google/cloud/securitycenter/v2
       - path: google/cloud/securitycenter/v1
@@ -1556,14 +1557,14 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/security-center'
   - name: google-cloud-securitycentermanagement
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/cloud/securitycentermanagement/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-servicedirectory
-    version: 6.2.0
+    version: 7.0.0
     apis:
       - path: google/cloud/servicedirectory/v1
       - path: google/cloud/servicedirectory/v1beta1
@@ -1575,21 +1576,21 @@ libraries:
       main_service: ServiceDirectory
       package_name: '@google-cloud/service-directory'
   - name: google-cloud-servicehealth
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/cloud/servicehealth/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-shell
-    version: 4.2.0
+    version: 5.0.0
     apis:
       - path: google/cloud/shell/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-spanner-api
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/spanner/v1
       - path: google/spanner/executor/v1
@@ -1601,7 +1602,7 @@ libraries:
       metadata_name_override: spanner-api
       name_pretty_override: Spanner API
   - name: google-cloud-speech
-    version: 7.5.0
+    version: 8.0.0
     apis:
       - path: google/cloud/speech/v2
       - path: google/cloud/speech/v1
@@ -1626,7 +1627,7 @@ libraries:
         pumpify: ^2.0.1
         stream-events: ^1.0.5
   - name: google-cloud-sql
-    version: 0.26.0
+    version: 0.27.0
     apis:
       - path: google/cloud/sql/v1
       - path: google/cloud/sql/v1beta4
@@ -1634,21 +1635,21 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-storagebatchoperations
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/cloud/storagebatchoperations/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-storageinsights
-    version: 2.3.0
+    version: 3.0.0
     apis:
       - path: google/cloud/storageinsights/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-support
-    version: 2.6.0
+    version: 3.0.0
     apis:
       - path: google/cloud/support/v2
       - path: google/cloud/support/v2beta
@@ -1656,7 +1657,7 @@ libraries:
     nodejs:
       default_version: v2
   - name: google-cloud-talent
-    version: 7.2.0
+    version: 8.0.0
     apis:
       - path: google/cloud/talent/v4
       - path: google/cloud/talent/v4beta1
@@ -1665,7 +1666,7 @@ libraries:
       default_version: v4
       main_service: talent
   - name: google-cloud-tasks
-    version: 6.3.0
+    version: 7.0.0
     apis:
       - path: google/cloud/tasks/v2
       - path: google/cloud/tasks/v2beta3
@@ -1675,7 +1676,7 @@ libraries:
       esm: true
       main_service: tasks
   - name: google-cloud-telcoautomation
-    version: 0.5.2
+    version: 0.6.0
     apis:
       - path: google/cloud/telcoautomation/v1
       - path: google/cloud/telcoautomation/v1alpha1
@@ -1683,7 +1684,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-texttospeech
-    version: 6.4.1
+    version: 7.0.0
     apis:
       - path: google/cloud/texttospeech/v1
       - path: google/cloud/texttospeech/v1beta1
@@ -1692,7 +1693,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/text-to-speech'
   - name: google-cloud-tpu
-    version: 4.1.2
+    version: 5.0.0
     apis:
       - path: google/cloud/tpu/v2
       - path: google/cloud/tpu/v1
@@ -1701,7 +1702,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-translate
-    version: 9.4.2
+    version: 10.0.0
     apis:
       - path: google/cloud/translate/v3
       - path: google/cloud/translate/v3beta1
@@ -1722,7 +1723,7 @@ libraries:
         extend: ^3.0.2
         is-html: ^2.0.0
   - name: google-cloud-vectorsearch
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/cloud/vectorsearch/v1
       - path: google/cloud/vectorsearch/v1beta
@@ -1730,7 +1731,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-video-livestream
-    version: 2.2.3
+    version: 3.0.0
     apis:
       - path: google/cloud/video/livestream/v1
     copyright_year: "2026"
@@ -1738,7 +1739,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/livestream'
   - name: google-cloud-video-stitcher
-    version: 3.2.2
+    version: 4.0.0
     apis:
       - path: google/cloud/video/stitcher/v1
     copyright_year: "2026"
@@ -1746,14 +1747,14 @@ libraries:
       default_version: v1
       client_documentation_override: https://googleapis.dev/nodejs/videostitcher/latest/
   - name: google-cloud-video-transcoder
-    version: 4.4.3
+    version: 5.0.0
     apis:
       - path: google/cloud/video/transcoder/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-videointelligence
-    version: 6.2.2
+    version: 7.0.0
     apis:
       - path: google/cloud/videointelligence/v1
       - path: google/cloud/videointelligence/v1p3beta1
@@ -1766,7 +1767,7 @@ libraries:
       main_service: videointelligence
       package_name: '@google-cloud/video-intelligence'
   - name: google-cloud-vision
-    version: 5.3.7
+    version: 6.0.0
     apis:
       - path: google/cloud/vision/v1
       - path: google/cloud/vision/v1p4beta1
@@ -1794,28 +1795,28 @@ libraries:
         '@google-cloud/promisify': ^5.0.0
       main_service: vision
   - name: google-cloud-visionai
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/cloud/visionai/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-vmmigration
-    version: 4.3.3
+    version: 5.0.0
     apis:
       - path: google/cloud/vmmigration/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-vmwareengine
-    version: 2.2.2
+    version: 3.0.0
     apis:
       - path: google/cloud/vmwareengine/v1
     copyright_year: "2026"
     nodejs:
       default_version: v1
   - name: google-cloud-vpcaccess
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/vpcaccess/v1
     copyright_year: "2026"
@@ -1823,7 +1824,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/vpc-access'
   - name: google-cloud-webrisk
-    version: 5.3.2
+    version: 6.0.0
     apis:
       - path: google/cloud/webrisk/v1
       - path: google/cloud/webrisk/v1beta1
@@ -1835,7 +1836,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/web-risk'
   - name: google-cloud-websecurityscanner
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/cloud/websecurityscanner/v1
       - path: google/cloud/websecurityscanner/v1beta
@@ -1845,7 +1846,7 @@ libraries:
       default_version: v1beta
       package_name: '@google-cloud/web-security-scanner'
   - name: google-cloud-workflows
-    version: 5.1.1
+    version: 6.0.0
     apis:
       - path: google/cloud/workflows/v1
       - path: google/cloud/workflows/executions/v1
@@ -1855,7 +1856,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-workloadmanager
-    version: 0.2.1
+    version: 0.3.0
     apis:
       - path: google/cloud/workloadmanager/v1
     copyright_year: "2026"
@@ -1863,7 +1864,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://docs.cloud.google.com/nodejs/docs/reference/workloadmanager/latest
   - name: google-cloud-workstations
-    version: 2.3.0
+    version: 3.0.0
     apis:
       - path: google/cloud/workstations/v1
       - path: google/cloud/workstations/v1beta
@@ -1871,7 +1872,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-container
-    version: 6.10.0
+    version: 7.0.0
     apis:
       - path: google/container/v1
       - path: google/container/v1beta1
@@ -1880,7 +1881,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/container'
   - name: google-dataflow
-    version: 4.1.2
+    version: 5.0.0
     apis:
       - path: google/dataflow/v1beta3
     copyright_year: "2026"
@@ -1888,14 +1889,14 @@ libraries:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
   - name: google-developer-knowledge
-    version: 0.3.0
+    version: 0.4.0
     apis:
       - path: google/developers/knowledge/v1
     copyright_year: "2026"
     nodejs:
       package_name: '@google/developer-knowledge'
   - name: google-devicesandservices-health
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/devicesandservices/health/v4
     copyright_year: "2026"
@@ -1903,7 +1904,7 @@ libraries:
       default_version: v4
       package_name: '@google-cloud/health'
   - name: google-devtools-artifactregistry
-    version: 4.7.1
+    version: 5.0.0
     apis:
       - path: google/devtools/artifactregistry/v1
       - path: google/devtools/artifactregistry/v1beta2
@@ -1912,7 +1913,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/artifact-registry'
   - name: google-devtools-cloudbuild
-    version: 5.6.0
+    version: 6.0.0
     apis:
       - path: google/devtools/cloudbuild/v2
       - path: google/devtools/cloudbuild/v1
@@ -1923,7 +1924,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/cloudbuild'
   - name: google-devtools-cloudprofiler
-    version: 0.9.2
+    version: 0.10.0
     apis:
       - path: google/devtools/cloudprofiler/v2
     copyright_year: "2026"
@@ -1931,7 +1932,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/cloudprofiler'
   - name: google-devtools-containeranalysis
-    version: 6.9.0
+    version: 7.0.0
     apis:
       - path: google/devtools/containeranalysis/v1
       - path: google/devtools/containeranalysis/v1beta1
@@ -1950,7 +1951,7 @@ libraries:
           path: google/devtools/containeranalysis/v1beta1
       package_name: '@google-cloud/containeranalysis'
   - name: google-iam
-    version: 2.4.0
+    version: 3.0.0
     apis:
       - path: google/iam/v3
       - path: google/iam/v2
@@ -1962,7 +1963,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/iam'
   - name: google-iam-credentials
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/iam/credentials/v1
     copyright_year: "2026"
@@ -1970,7 +1971,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/iam-credentials'
   - name: google-identity-accesscontextmanager
-    version: 4.2.2
+    version: 5.0.0
     apis:
       - path: google/identity/accesscontextmanager/v1
     copyright_year: "2026"
@@ -1978,7 +1979,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/access-context-manager'
   - name: google-maps-addressvalidation
-    version: 3.2.2
+    version: 4.0.0
     apis:
       - path: google/maps/addressvalidation/v1
     copyright_year: "2026"
@@ -1987,7 +1988,7 @@ libraries:
       package_name: '@googlemaps/addressvalidation'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/addressvalidation/latest
   - name: google-maps-areainsights
-    version: 0.5.2
+    version: 0.6.0
     apis:
       - path: google/maps/areainsights/v1
     copyright_year: "2026"
@@ -1996,7 +1997,7 @@ libraries:
       package_name: '@googlemaps/areainsights'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/area-insights/latest
   - name: google-maps-fleetengine
-    version: 0.8.2
+    version: 0.9.0
     apis:
       - path: google/maps/fleetengine/v1
     copyright_year: "2026"
@@ -2005,7 +2006,7 @@ libraries:
       package_name: '@googlemaps/fleetengine'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/fleetengine/latest
   - name: google-maps-fleetengine-delivery
-    version: 0.6.2
+    version: 0.7.0
     apis:
       - path: google/maps/fleetengine/delivery/v1
     copyright_year: "2026"
@@ -2014,7 +2015,7 @@ libraries:
       package_name: '@googlemaps/fleetengine-delivery'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/fleetengine-delivery/latest
   - name: google-maps-geocode
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/maps/geocode/v4
     copyright_year: "2026"
@@ -2022,12 +2023,12 @@ libraries:
       default_version: v4
       package_name: '@google-cloud/geocode'
   - name: google-maps-isochrones
-    version: 0.1.0
+    version: 0.2.0
     apis:
       - path: google/maps/isochrones/v1
     copyright_year: "2026"
   - name: google-maps-mapmanagement
-    version: 0.1.1
+    version: 0.2.0
     apis:
       - path: google/maps/mapmanagement/v2beta
     copyright_year: "2026"
@@ -2035,7 +2036,7 @@ libraries:
       default_version: v2beta
       package_name: '@google-cloud/mapmanagement'
   - name: google-maps-mapsplatformdatasets
-    version: 3.1.2
+    version: 4.0.0
     apis:
       - path: google/maps/mapsplatformdatasets/v1
     copyright_year: "2026"
@@ -2044,7 +2045,7 @@ libraries:
       package_name: '@googlemaps/maps-platform-datasets'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/mapsplatformdatasets/latest
   - name: google-maps-navconnect
-    version: 0.2.0
+    version: 0.3.0
     apis:
       - path: google/maps/navconnect/v1
     copyright_year: "2026"
@@ -2052,7 +2053,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/navconnect'
   - name: google-maps-places
-    version: 2.5.0
+    version: 3.0.0
     apis:
       - path: google/maps/places/v1
     copyright_year: "2026"
@@ -2061,7 +2062,7 @@ libraries:
       package_name: '@googlemaps/places'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/places/latest
   - name: google-maps-routeoptimization
-    version: 0.6.1
+    version: 0.7.0
     apis:
       - path: google/maps/routeoptimization/v1
     copyright_year: "2026"
@@ -2070,7 +2071,7 @@ libraries:
       package_name: '@googlemaps/routeoptimization'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/routeoptimization/latest
   - name: google-maps-routing
-    version: 2.2.1
+    version: 3.0.0
     apis:
       - path: google/maps/routing/v2
     copyright_year: "2026"
@@ -2079,7 +2080,7 @@ libraries:
       package_name: '@googlemaps/routing'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/routing/latest
   - name: google-maps-solar
-    version: 0.5.2
+    version: 0.6.0
     apis:
       - path: google/maps/solar/v1
     copyright_year: "2026"
@@ -2088,7 +2089,7 @@ libraries:
       package_name: '@googlemaps/solar'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/solar/latest
   - name: google-marketingplatform-admin
-    version: 0.4.1
+    version: 0.5.0
     apis:
       - path: google/marketingplatform/admin/v1alpha
     copyright_year: "2026"
@@ -2100,7 +2101,7 @@ libraries:
       package_name: '@google-ads/marketing-platform-admin'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/marketingplatformadminapi/latest
   - name: google-monitoring-dashboard
-    version: 4.2.0
+    version: 5.0.0
     apis:
       - path: google/monitoring/dashboard/v1
     copyright_year: "2026"
@@ -2108,7 +2109,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/monitoring-dashboards'
   - name: google-privacy-dlp
-    version: 6.7.0
+    version: 7.0.0
     apis:
       - path: google/privacy/dlp/v2
     copyright_year: "2026"
@@ -2116,7 +2117,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/dlp'
   - name: google-shopping-css
-    version: 0.11.1
+    version: 0.12.0
     apis:
       - path: google/shopping/css/v1
     copyright_year: "2026"
@@ -2124,7 +2125,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/css/latest
   - name: google-shopping-merchant-accounts
-    version: 3.2.1
+    version: 4.0.0
     apis:
       - path: google/shopping/merchant/accounts/v1
       - path: google/shopping/merchant/accounts/v1beta
@@ -2134,7 +2135,7 @@ libraries:
       package_name: '@google-shopping/accounts'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-conversions
-    version: 0.7.2
+    version: 0.8.0
     apis:
       - path: google/shopping/merchant/conversions/v1
       - path: google/shopping/merchant/conversions/v1beta
@@ -2144,7 +2145,7 @@ libraries:
       package_name: '@google-shopping/conversions'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-datasources
-    version: 0.11.1
+    version: 0.12.0
     apis:
       - path: google/shopping/merchant/datasources/v1
       - path: google/shopping/merchant/datasources/v1beta
@@ -2154,7 +2155,7 @@ libraries:
       package_name: '@google-shopping/datasources'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-inventories
-    version: 0.13.0
+    version: 0.14.0
     apis:
       - path: google/shopping/merchant/inventories/v1
       - path: google/shopping/merchant/inventories/v1beta
@@ -2164,7 +2165,7 @@ libraries:
       package_name: '@google-shopping/inventories'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-issueresolution
-    version: 0.4.1
+    version: 0.5.0
     apis:
       - path: google/shopping/merchant/issueresolution/v1
       - path: google/shopping/merchant/issueresolution/v1beta
@@ -2174,7 +2175,7 @@ libraries:
       package_name: '@google-shopping/issueresolution'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-lfp
-    version: 0.10.1
+    version: 0.11.0
     apis:
       - path: google/shopping/merchant/lfp/v1
       - path: google/shopping/merchant/lfp/v1beta
@@ -2184,7 +2185,7 @@ libraries:
       package_name: '@google-shopping/lfp'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-notifications
-    version: 0.9.1
+    version: 0.10.0
     apis:
       - path: google/shopping/merchant/notifications/v1
       - path: google/shopping/merchant/notifications/v1beta
@@ -2194,7 +2195,7 @@ libraries:
       package_name: '@google-shopping/notifications'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-ordertracking
-    version: 0.4.1
+    version: 0.5.0
     apis:
       - path: google/shopping/merchant/ordertracking/v1
       - path: google/shopping/merchant/ordertracking/v1beta
@@ -2204,7 +2205,7 @@ libraries:
       package_name: '@google-shopping/ordertracking'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-products
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/shopping/merchant/products/v1
       - path: google/shopping/merchant/products/v1beta
@@ -2214,7 +2215,7 @@ libraries:
       package_name: '@google-shopping/products'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-promotions
-    version: 0.6.1
+    version: 0.7.0
     apis:
       - path: google/shopping/merchant/promotions/v1
       - path: google/shopping/merchant/promotions/v1beta
@@ -2224,7 +2225,7 @@ libraries:
       package_name: '@google-shopping/promotions'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-quota
-    version: 0.9.1
+    version: 0.10.0
     apis:
       - path: google/shopping/merchant/quota/v1
       - path: google/shopping/merchant/quota/v1beta
@@ -2234,7 +2235,7 @@ libraries:
       package_name: '@google-shopping/quota'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-reports
-    version: 0.16.0
+    version: 0.17.0
     apis:
       - path: google/shopping/merchant/reports/v1
       - path: google/shopping/merchant/reports/v1beta
@@ -2245,7 +2246,7 @@ libraries:
       package_name: '@google-shopping/reports'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-reviews
-    version: 0.6.1
+    version: 0.7.0
     apis:
       - path: google/shopping/merchant/reviews/v1beta
     copyright_year: "2026"
@@ -2254,7 +2255,7 @@ libraries:
       package_name: '@google-shopping/reviews'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-storage-control
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/storage/v2
       - path: google/storage/control/v2
@@ -2272,7 +2273,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/storage-control'
   - name: google-storagetransfer
-    version: 4.2.3
+    version: 5.0.0
     apis:
       - path: google/storagetransfer/v1
     copyright_year: "2026"
@@ -2286,7 +2287,7 @@ libraries:
       package_name: '@google-cloud/storage-transfer'
       client_documentation_override: https://googleapis.dev/nodejs/storagetransfer/latest/
   - name: google-streetview-publish
-    version: 0.4.2
+    version: 0.5.0
     apis:
       - path: google/streetview/publish/v1
     copyright_year: "2026"
@@ -2295,7 +2296,7 @@ libraries:
       package_name: '@googlemaps/streetview-publish'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/publish/latest
   - name: grafeas
-    version: 6.3.0
+    version: 7.0.0
     apis:
       - path: grafeas/v1
     copyright_year: "2026"
