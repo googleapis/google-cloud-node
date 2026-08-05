@@ -17,10 +17,7 @@ import {existsSync} from 'fs';
 import path from 'path';
 import {promisify} from 'util';
 import {ESLint} from 'eslint';
-import * as tsModule from 'typescript';
-
-// --- Globals & Promisified API Wrappers ---
-const ts = tsModule.findConfigFile ? tsModule : (tsModule.default ?? tsModule);
+import ts from 'typescript';
 const execFileAsync = promisify(execFile);
 const tsconfigCache = new Map();
 
