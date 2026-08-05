@@ -48,7 +48,7 @@
     "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "@google-cloud/common": "^7.0.0",
+    "@google-cloud/common": "^8.0.0",
     "@types/pumpify": "^1.4.4",
     "google-gax": "^6.0.0",
     "pumpify": "^2.0.1",

@@ -7,9 +7,9 @@
     "start": "node index.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "dependencies": {
-    "gcp-metadata": "file:./gcp-metadata.tgz"
+    "gcp-metadata": "^9.0.0"
   }
 }
