@@ -106,7 +106,7 @@ const fakeFs = {
   stat: (filePath: string, callback: Function) => {
     return (fsStatOverride || fs.stat)(filePath, callback);
   },
-  createReadStream: (filePath: string, options?: any) => {
+  createReadStream: (filePath: string, options?: Parameters<typeof fs.createReadStream>[1]) => {
     return (fsCreateReadStreamOverride || fs.createReadStream)(
       filePath,
       options
