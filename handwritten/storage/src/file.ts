@@ -4224,7 +4224,23 @@ class File extends ServiceObject<File, FileMetadata> {
       options.preconditionOpts?.ifGenerationMatch !== undefined
         ? {preconditionOpts: options.preconditionOpts}
         : {};
-    this.copy(newFile, copyOptions, callback!);
+    this.copy(newFile, copyOptions, (err, file, resp) => {
+      if (!err) {
+        if (options.encryptionKey !== undefined) {
+          this.setEncryptionKey(options.encryptionKey);
+        } else {
+          this.setEncryptionKey(null);
+        }
+        if (options.kmsKeyName !== undefined) {
+          this.kmsKeyName = options.kmsKeyName;
+        } else {
+          this.kmsKeyName = undefined;
+        }
+      }
+      if (callback) {
+        callback(err, file, resp);
+      }
+    });
   }
 
   save(data: SaveData, options?: SaveOptions): Promise<void>;

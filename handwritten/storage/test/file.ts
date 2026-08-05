@@ -4781,6 +4781,83 @@ describe('File', () => {
 
       file.rotateEncryptionKey({}, done);
     });
+
+    it('should update encryption key on success', done => {
+      const oldKey = 'old-key';
+      const newKey = 'new-key';
+      file.setEncryptionKey(oldKey);
+
+      const newFile = {};
+      file.bucket.file = () => {
+        return newFile;
+      };
+
+      file.copy = (
+        destination: string,
+        options: object,
+        callback: Function
+      ) => {
+        callback();
+      };
+
+      file.rotateEncryptionKey(newKey, (err: any) => {
+        assert.ifError(err);
+        assert.strictEqual(file.encryptionKey, newKey);
+        done();
+      });
+    });
+
+    it('should update KMS key on success', done => {
+      const oldKey = 'old-key';
+      const kmsKeyName = 'kms-key';
+      file.setEncryptionKey(oldKey);
+
+      const newFile = {};
+      file.bucket.file = () => {
+        return newFile;
+      };
+
+      file.copy = (
+        destination: string,
+        options: object,
+        callback: Function
+      ) => {
+        callback();
+      };
+
+      file.rotateEncryptionKey({kmsKeyName}, (err: any) => {
+        assert.ifError(err);
+        assert.strictEqual(file.encryptionKey, null);
+        assert.strictEqual(file.kmsKeyName, kmsKeyName);
+        done();
+      });
+    });
+
+    it('should not update encryption key on failure', done => {
+      const oldKey = 'old-key';
+      const newKey = 'new-key';
+      file.setEncryptionKey(oldKey);
+
+      const newFile = {};
+      file.bucket.file = () => {
+        return newFile;
+      };
+
+      const copyError = new Error('Copy failed');
+      file.copy = (
+        destination: string,
+        options: object,
+        callback: Function
+      ) => {
+        callback(copyError);
+      };
+
+      file.rotateEncryptionKey(newKey, (err: any) => {
+        assert.strictEqual(err, copyError);
+        assert.strictEqual(file.encryptionKey, oldKey);
+        done();
+      });
+    });
   });
 
   describe('save', () => {
