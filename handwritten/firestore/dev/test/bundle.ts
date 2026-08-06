@@ -184,7 +184,9 @@ describe('Bundle Builder', () => {
         {},
         {
           parent: query.toProto().parent,
-          structuredQuery: require("@google-cloud/firestore-api/build/protos/protos").google.firestore.v1.StructuredQuery.fromObject(query.toProto().structuredQuery).toJSON(),
+          structuredQuery: google.firestore.v1.StructuredQuery.fromObject(
+            query.toProto().structuredQuery!,
+          ).toJSON(),
         },
       ),
     });
@@ -196,7 +198,9 @@ describe('Bundle Builder', () => {
         {},
         {
           parent: newQuery.toProto().parent,
-          structuredQuery: require("@google-cloud/firestore-api/build/protos/protos").google.firestore.v1.StructuredQuery.fromObject(newQuery.toProto().structuredQuery).toJSON(),
+          structuredQuery: google.firestore.v1.StructuredQuery.fromObject(
+            newQuery.toProto().structuredQuery!,
+          ).toJSON(),
         },
       ),
     });
