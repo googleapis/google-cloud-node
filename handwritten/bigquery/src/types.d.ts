@@ -389,10 +389,7 @@ declare namespace bigquery {
      * The log type that this config enables.
      */
     logType?:
-      | 'LOG_TYPE_UNSPECIFIED'
-      | 'ADMIN_READ'
-      | 'DATA_WRITE'
-      | 'DATA_READ';
+      'LOG_TYPE_UNSPECIFIED' | 'ADMIN_READ' | 'DATA_WRITE' | 'DATA_READ';
   };
 
   /**
@@ -457,10 +454,7 @@ declare namespace bigquery {
      * Output only. Specifies which mode of BI Engine acceleration was performed (if any).
      */
     biEngineMode?:
-      | 'ACCELERATION_MODE_UNSPECIFIED'
-      | 'DISABLED'
-      | 'PARTIAL'
-      | 'FULL';
+      'ACCELERATION_MODE_UNSPECIFIED' | 'DISABLED' | 'PARTIAL' | 'FULL';
     /**
      * In case of DISABLED or PARTIAL bi_engine_mode, these contain the explanatory reasons as to why BI Engine could not accelerate. In case the full query was accelerated, this field is not populated.
      */
@@ -1140,9 +1134,7 @@ declare namespace bigquery {
      * Optional. Updates storage_billing_model for the dataset.
      */
     storageBillingModel?:
-      | 'STORAGE_BILLING_MODEL_UNSPECIFIED'
-      | 'LOGICAL'
-      | 'PHYSICAL';
+      'STORAGE_BILLING_MODEL_UNSPECIFIED' | 'LOGICAL' | 'PHYSICAL';
     /**
      * Output only. Tags for the dataset. To provide tags as inputs, use the `resourceTags` field.
      */
@@ -1335,9 +1327,7 @@ declare namespace bigquery {
      * Output only. DML mode used.
      */
     dmlMode?:
-      | 'DML_MODE_UNSPECIFIED'
-      | 'COARSE_GRAINED_DML'
-      | 'FINE_GRAINED_DML';
+      'DML_MODE_UNSPECIFIED' | 'COARSE_GRAINED_DML' | 'FINE_GRAINED_DML';
     /**
      * Output only. Reason for disabling fine-grained DML if applicable.
      */
@@ -1773,9 +1763,7 @@ declare namespace bigquery {
      * Optional. Metadata Cache Mode for the table. Set this to enable caching of metadata from external data source.
      */
     metadataCacheMode?:
-      | 'METADATA_CACHE_MODE_UNSPECIFIED'
-      | 'AUTOMATIC'
-      | 'MANUAL';
+      'METADATA_CACHE_MODE_UNSPECIFIED' | 'AUTOMATIC' | 'MANUAL';
     /**
      * Optional. ObjectMetadata is used to create Object Tables. Object Tables contain a listing of objects (with their metadata) found at the source_uris. If ObjectMetadata is set, source_format should be omitted. Currently SIMPLE is the only supported Object Metadata type.
      */
@@ -2376,9 +2364,7 @@ declare namespace bigquery {
      * Output only. Reason why incremental query results are/were not written by the query.
      */
     disabledReason?:
-      | 'DISABLED_REASON_UNSPECIFIED'
-      | 'OTHER'
-      | 'UNSUPPORTED_OPERATOR';
+      'DISABLED_REASON_UNSPECIFIED' | 'OTHER' | 'UNSUPPORTED_OPERATOR';
     /**
      * Output only. Additional human-readable clarification, if available, for DisabledReason.
      */
@@ -2751,10 +2737,7 @@ declare namespace bigquery {
      * Optional. Character map supported for column names in CSV/Parquet loads. Defaults to STRICT and can be overridden by Project Config Service. Using this option with unsupporting load formats will result in an error.
      */
     columnNameCharacterMap?:
-      | 'COLUMN_NAME_CHARACTER_MAP_UNSPECIFIED'
-      | 'STRICT'
-      | 'V1'
-      | 'V2';
+      'COLUMN_NAME_CHARACTER_MAP_UNSPECIFIED' | 'STRICT' | 'V1' | 'V2';
     /**
      * Optional. Connection properties which can modify the load job behavior. Currently, only the 'session_id' connection property is supported, and is used to resolve _SESSION appearing as the dataset id.
      */
@@ -3063,11 +3046,7 @@ declare namespace bigquery {
      * Optional. Supported operation types in table copy job.
      */
     operationType?:
-      | 'OPERATION_TYPE_UNSPECIFIED'
-      | 'COPY'
-      | 'SNAPSHOT'
-      | 'RESTORE'
-      | 'CLONE';
+      'OPERATION_TYPE_UNSPECIFIED' | 'COPY' | 'SNAPSHOT' | 'RESTORE' | 'CLONE';
     /**
      * [Pick one] Source table to copy.
      */
@@ -3893,9 +3872,7 @@ declare namespace bigquery {
      * Output only. Training type of the job.
      */
     trainingType?:
-      | 'TRAINING_TYPE_UNSPECIFIED'
-      | 'SINGLE_TRAINING'
-      | 'HPARAM_TUNING';
+      'TRAINING_TYPE_UNSPECIFIED' | 'SINGLE_TRAINING' | 'HPARAM_TUNING';
   };
 
   type IModel = {
@@ -4505,9 +4482,7 @@ declare namespace bigquery {
      * Optional. The query results format. If the value is anything other than `STRUCT_ENCODING` or unspecified: * The schema of the results will be provided in `QueryResponse.results_schema` field. * The results of the first page will be provided in `QueryResponse.results` field. * The `QueryResponse.rows` will not be populated. * The `QueryResponse.schema` for `QueryResponse.rows` will also not be populated since it is the schema of the `QueryResponse.rows`. This feature is not yet available.
      */
     queryResultsFormat?:
-      | 'QUERY_RESULTS_FORMAT_UNSPECIFIED'
-      | 'STRUCT_ENCODING'
-      | 'ARROW';
+      'QUERY_RESULTS_FORMAT_UNSPECIFIED' | 'STRUCT_ENCODING' | 'ARROW';
     /**
      * Optional. A unique user provided identifier to ensure idempotent behavior for queries. Note that this is different from the job_id. It has the following properties: 1. It is case-sensitive, limited to up to 36 ASCII characters. A UUID is recommended. 2. Read only queries can ignore this token since they are nullipotent by definition. 3. For the purposes of idempotency ensured by the request_id, a request is considered duplicate of another only if they have the same request_id and are actually duplicates. When determining whether a request is a duplicate of another request, all parameters in the request that may affect the result are considered. For example, query, connection_properties, query_parameters, use_legacy_sql are parameters that affect the result and are considered when determining whether a request is a duplicate, but properties like timeout_ms don't affect the result and are thus not considered. Dry run query requests are never considered duplicate of another request. 4. When a duplicate mutating query request is detected, it returns: a. the results of the mutation if it completes successfully within the timeout. b. the running operation if it is still in progress at the end of the timeout. 5. Its lifetime is limited to 15 minutes. In other words, if two requests are sent with the same request_id, but more than 15 minutes apart, idempotency is not guaranteed.
      */
@@ -4853,9 +4828,7 @@ declare namespace bigquery {
      * Optional. The determinism level of the JavaScript UDF, if defined.
      */
     determinismLevel?:
-      | 'DETERMINISM_LEVEL_UNSPECIFIED'
-      | 'DETERMINISTIC'
-      | 'NOT_DETERMINISTIC';
+      'DETERMINISM_LEVEL_UNSPECIFIED' | 'DETERMINISTIC' | 'NOT_DETERMINISTIC';
     /**
      * Output only. A hash of this resource.
      */
@@ -4937,10 +4910,7 @@ declare namespace bigquery {
      * Output only. The current build state of the routine.
      */
     buildState?:
-      | 'BUILD_STATE_UNSPECIFIED'
-      | 'IN_PROGRESS'
-      | 'SUCCEEDED'
-      | 'FAILED';
+      'BUILD_STATE_UNSPECIFIED' | 'IN_PROGRESS' | 'SUCCEEDED' | 'FAILED';
     /**
      * Output only. The time when the build state was updated last.
      */
@@ -5057,9 +5027,7 @@ declare namespace bigquery {
      * Determines which statement in the script represents the "key result", used to populate the schema and query results of the script job. Default is LAST.
      */
     keyResultStatement?:
-      | 'KEY_RESULT_STATEMENT_KIND_UNSPECIFIED'
-      | 'LAST'
-      | 'FIRST_SELECT';
+      'KEY_RESULT_STATEMENT_KIND_UNSPECIFIED' | 'LAST' | 'FIRST_SELECT';
     /**
      * Limit on the number of bytes billed per statement. Exceeding this budget results in an error.
      */
@@ -6285,12 +6253,7 @@ declare namespace bigquery {
      * Enums for color space, used for processing images in Object Table. See more details at https://www.tensorflow.org/io/tutorials/colorspace.
      */
     colorSpace?:
-      | 'COLOR_SPACE_UNSPECIFIED'
-      | 'RGB'
-      | 'HSV'
-      | 'YIQ'
-      | 'YUV'
-      | 'GRAYSCALE';
+      'COLOR_SPACE_UNSPECIFIED' | 'RGB' | 'HSV' | 'YIQ' | 'YUV' | 'GRAYSCALE';
     /**
      * Subsample ratio of columns for each level for boosted tree models.
      */
@@ -6631,9 +6594,7 @@ declare namespace bigquery {
      * The strategy to determine learn rate for the current iteration.
      */
     learnRateStrategy?:
-      | 'LEARN_RATE_STRATEGY_UNSPECIFIED'
-      | 'LINE_SEARCH'
-      | 'CONSTANT';
+      'LEARN_RATE_STRATEGY_UNSPECIFIED' | 'LINE_SEARCH' | 'CONSTANT';
     /**
      * Type of loss function used during training run.
      */
@@ -6801,11 +6762,7 @@ declare namespace bigquery {
      * Tree construction algorithm for boosted tree models.
      */
     treeMethod?:
-      | 'TREE_METHOD_UNSPECIFIED'
-      | 'AUTO'
-      | 'EXACT'
-      | 'APPROX'
-      | 'HIST';
+      'TREE_METHOD_UNSPECIFIED' | 'AUTO' | 'EXACT' | 'APPROX' | 'HIST';
     /**
      * Smoothing window size for the trend component. When a positive value is specified, a center moving average smoothing is applied on the history trend. When the smoothing window is out of the boundary at the beginning or the end of the trend, the first element or the last element is padded to fill the smoothing window before the average is applied.
      */
@@ -7325,10 +7282,7 @@ declare namespace bigquery {
        * Optional. Specifies the view that determines which table information is returned. By default, basic table information and storage statistics (STORAGE_STATS) are returned.
        */
       view?:
-        | 'TABLE_METADATA_VIEW_UNSPECIFIED'
-        | 'BASIC'
-        | 'STORAGE_STATS'
-        | 'FULL';
+        'TABLE_METADATA_VIEW_UNSPECIFIED' | 'BASIC' | 'STORAGE_STATS' | 'FULL';
     };
 
     /**
