@@ -21,11 +21,19 @@ import {FilterInternal} from './filter-internal';
 import {FieldFilterInternal} from './field-filter-internal';
 
 export class CompositeFilterInternal extends FilterInternal {
+  readonly operator: api.StructuredQuery.CompositeFilter.Operator;
+
   constructor(
     private filters: FilterInternal[],
-    private operator: api.StructuredQuery.CompositeFilter.Operator | any,
+    _operator:
+      | api.StructuredQuery.CompositeFilter.Operator
+      | keyof typeof api.StructuredQuery.CompositeFilter.Operator = api.StructuredQuery.CompositeFilter.Operator.AND,
   ) {
     super();
+    this.operator =
+      typeof _operator === 'string'
+        ? api.StructuredQuery.CompositeFilter.Operator[_operator]
+        : _operator;
   }
 
   // Memoized list of all field filters that can be found by traversing the tree of filters
@@ -37,14 +45,14 @@ export class CompositeFilterInternal extends FilterInternal {
   }
 
   public isConjunction(): boolean {
-    return (this.operator === 'AND' || this.operator === api.StructuredQuery.CompositeFilter.Operator.AND);
+    return this.operator === api.StructuredQuery.CompositeFilter.Operator.AND;
   }
 
   /**
    * @private
    * @internal
    */
-  public _getOperator(): api.StructuredQuery.CompositeFilter.Operator | any {
+  public _getOperator(): api.StructuredQuery.CompositeFilter.Operator {
     return this.operator;
   }
 
@@ -69,7 +77,7 @@ export class CompositeFilterInternal extends FilterInternal {
 
     const proto: api.StructuredQuery.IFilter = {
       compositeFilter: {
-        op: (typeof this.operator === "string" ? (api.StructuredQuery.CompositeFilter.Operator as any)[this.operator] ?? this.operator : this.operator),
+        op: this.operator,
         filters: this.filters.map(filter => filter.toProto()),
       },
     };

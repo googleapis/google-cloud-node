@@ -507,29 +507,29 @@ export function toPipelineBooleanExpr(
       ? f.value
       : serializer.encodeValue(f.value);
     switch (f.op) {
-      case 'LESS_THAN': case api.StructuredQuery.FieldFilter.Operator.LESS_THAN:
+      case api.StructuredQuery.FieldFilter.Operator.LESS_THAN:
         return and(field.exists(), field.lessThan(value));
-      case 'LESS_THAN_OR_EQUAL': case api.StructuredQuery.FieldFilter.Operator.LESS_THAN_OR_EQUAL:
+      case api.StructuredQuery.FieldFilter.Operator.LESS_THAN_OR_EQUAL:
         return and(field.exists(), field.lessThanOrEqual(value));
-      case 'GREATER_THAN': case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN:
+      case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN:
         return and(field.exists(), field.greaterThan(value));
-      case 'GREATER_THAN_OR_EQUAL': case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN_OR_EQUAL:
+      case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN_OR_EQUAL:
         return and(field.exists(), field.greaterThanOrEqual(value));
-      case 'EQUAL': case api.StructuredQuery.FieldFilter.Operator.EQUAL:
+      case api.StructuredQuery.FieldFilter.Operator.EQUAL:
         return and(field.exists(), field.equal(value));
-      case 'NOT_EQUAL': case api.StructuredQuery.FieldFilter.Operator.NOT_EQUAL:
+      case api.StructuredQuery.FieldFilter.Operator.NOT_EQUAL:
         return and(field.exists(), field.notEqual(value));
-      case 'ARRAY_CONTAINS': case api.StructuredQuery.FieldFilter.Operator.ARRAY_CONTAINS:
+      case api.StructuredQuery.FieldFilter.Operator.ARRAY_CONTAINS:
         return and(field.exists(), field.arrayContains(value));
-      case 'IN': case api.StructuredQuery.FieldFilter.Operator.IN: {
+      case api.StructuredQuery.FieldFilter.Operator.IN: {
         const values = value?.arrayValue?.values?.map(val => constant(val));
         return and(field.exists(), field.equalAny(values!));
       }
-      case 'ARRAY_CONTAINS_ANY': case api.StructuredQuery.FieldFilter.Operator.ARRAY_CONTAINS_ANY: {
+      case api.StructuredQuery.FieldFilter.Operator.ARRAY_CONTAINS_ANY: {
         const values = value?.arrayValue?.values?.map(val => constant(val));
         return and(field.exists(), field.arrayContainsAny(values!));
       }
-      case 'NOT_IN': case api.StructuredQuery.FieldFilter.Operator.NOT_IN: {
+      case api.StructuredQuery.FieldFilter.Operator.NOT_IN: {
         const values = value?.arrayValue?.values?.map(val => constant(val));
         // In Enterprise DB's NOT_IN will match a field that does not exist,
         // therefore we do not want an existence filter for the NOT_IN conversion
@@ -539,13 +539,13 @@ export function toPipelineBooleanExpr(
     }
   } else if (f instanceof CompositeFilterInternal) {
     switch (f._getOperator()) {
-      case 'AND': case api.StructuredQuery.CompositeFilter.Operator.AND: {
+      case api.StructuredQuery.CompositeFilter.Operator.AND: {
         const conditions = f
           .getFilters()
           .map(f => toPipelineBooleanExpr(f, serializer));
         return and(conditions[0], conditions[1], ...conditions.slice(2));
       }
-      case 'OR': case api.StructuredQuery.CompositeFilter.Operator.OR: {
+      case api.StructuredQuery.CompositeFilter.Operator.OR: {
         const conditions = f
           .getFilters()
           .map(f => toPipelineBooleanExpr(f, serializer));
