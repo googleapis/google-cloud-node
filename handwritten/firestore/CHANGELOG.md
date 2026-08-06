@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [8.7.1](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.7.0...firestore-v8.7.1) (2026-08-04)
+
+
+### Bug Fixes
+
+* **firestore:** Prevent adding telemetry events to ended spans ([#8847](https://github.com/googleapis/google-cloud-node/issues/8847)) ([#8939](https://github.com/googleapis/google-cloud-node/issues/8939)) ([1d3c655](https://github.com/googleapis/google-cloud-node/commit/1d3c655992216e4e79a86480f84ff7eae9a5e6c5))
+
 ## [8.7.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.6.0...firestore-v8.7.0) (2026-07-21)
 
 

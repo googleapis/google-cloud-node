@@ -25,7 +25,7 @@ type GoogleAuthLike = Pick<GoogleAuth, 'getCredentials' | 'sign'>;
  * @deprecated Use {@link GoogleAuth} instead
  */
 export interface AuthClient {
-  sign(blobToSign: string): Promise<string>;
+  sign(blobToSign: string, signingEndpoint?: string): Promise<string>;
   getCredentials(): Promise<{
     client_email?: string;
   }>;

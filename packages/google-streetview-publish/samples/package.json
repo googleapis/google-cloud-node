@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@googlemaps/streetview-publish": "^0.4.2"
+    "@googlemaps/streetview-publish": "^0.5.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",

@@ -286,7 +286,12 @@ describe('storage', function () {
         await bucket.acl.delete({entity: USER_ACCOUNT});
       });
 
-      it('should make a bucket public', async () => {
+      /**
+       * TODO: Re-enable once the test environment allows public IAM roles.
+       * Currently disabled to avoid 403 errors when adding 'allUsers' or
+       * 'allAuthenticatedUsers' permissions.
+       */
+      it.skip('should make a bucket public', async () => {
         await bucket.makePublic();
         const [aclObject] = await bucket.acl.get({entity: 'allUsers'});
         assert.deepStrictEqual(aclObject, {
@@ -299,7 +304,12 @@ describe('storage', function () {
         await bucket.acl.delete({entity: 'allUsers'});
       });
 
-      it('should make files public', async () => {
+      /**
+       * TODO: Re-enable once the test environment allows public IAM roles.
+       * Currently disabled to avoid 403 errors when adding 'allUsers' or
+       * 'allAuthenticatedUsers' permissions.
+       */
+      it.skip('should make files public', async () => {
         await Promise.all(
           ['a', 'b', 'c'].map(text => createFileWithContentPromise(text)),
         );
@@ -316,7 +326,12 @@ describe('storage', function () {
         ]);
       });
 
-      it('should make a bucket private', async () => {
+      /**
+       * TODO: Re-enable once the test environment allows public IAM roles.
+       * Currently disabled to avoid 403 errors when adding 'allUsers' or
+       * 'allAuthenticatedUsers' permissions.
+       */
+      it.skip('should make a bucket private', async () => {
         try {
           await bucket.makePublic();
           await new Promise(resolve =>
@@ -401,7 +416,12 @@ describe('storage', function () {
         await file.acl.delete({entity: USER_ACCOUNT});
       });
 
-      it('should make a file public', async () => {
+      /**
+       * TODO: Re-enable once the test environment allows public IAM roles.
+       * Currently disabled to avoid 403 errors when adding 'allUsers' or
+       * 'allAuthenticatedUsers' permissions.
+       */
+      it.skip('should make a file public', async () => {
         await file.makePublic();
         const [aclObject] = await file.acl.get({entity: 'allUsers'});
         assert.deepStrictEqual(aclObject, {
@@ -449,7 +469,12 @@ describe('storage', function () {
         assert.strictEqual(encryptionAlgorithm, 'AES256');
       });
 
-      it('should make a file public during the upload', async () => {
+      /**
+       * TODO: Re-enable once the test environment allows public IAM roles.
+       * Currently disabled to avoid 403 errors when adding 'allUsers' or
+       * 'allAuthenticatedUsers' permissions.
+       */
+      it.skip('should make a file public during the upload', async () => {
         const [file] = await bucket.upload(FILES.big.path, {
           resumable: false,
           public: true,
@@ -462,7 +487,12 @@ describe('storage', function () {
         });
       });
 
-      it('should make a file public from a resumable upload', async () => {
+      /**
+       * TODO: Re-enable once the test environment allows public IAM roles.
+       * Currently disabled to avoid 403 errors when adding 'allUsers' or
+       * 'allAuthenticatedUsers' permissions.
+       */
+      it.skip('should make a file public from a resumable upload', async () => {
         const [file] = await bucket.upload(FILES.big.path, {
           resumable: true,
           public: true,
@@ -526,7 +556,12 @@ describe('storage', function () {
         ]);
       });
 
-      it('should set a policy', async () => {
+      /**
+       * TODO: Re-enable once the test environment allows public IAM roles.
+       * Currently disabled to avoid 403 errors when adding 'allUsers' or
+       * 'allAuthenticatedUsers' permissions.
+       */
+      it.skip('should set a policy', async () => {
         const [policy] = await bucket.iam.getPolicy();
         policy!.bindings.push({
           role: 'roles/storage.legacyBucketReader',
@@ -3106,7 +3141,12 @@ describe('storage', function () {
       await Promise.all([file.delete, copiedFile.delete()]);
     });
 
-    it('should respect predefined Acl at file#copy', async () => {
+    /**
+     * TODO: Re-enable once the test environment allows public IAM roles.
+     * Currently disabled to avoid 403 errors when adding 'allUsers' or
+     * 'allAuthenticatedUsers' permissions.
+     */
+    it.skip('should respect predefined Acl at file#copy', async () => {
       const opts = {destination: 'CloudLogo'};
       const [file] = await bucket.upload(FILES.logo.path, opts);
       const copyOpts = {predefinedAcl: 'publicRead'};

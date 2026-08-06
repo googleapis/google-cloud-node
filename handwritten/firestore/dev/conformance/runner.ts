@@ -312,8 +312,6 @@ function getHandler(spec: ConformanceProto) {
 }
 
 function runTest(spec: ConformanceProto) {
-  console.log(`Running Spec:\n${JSON.stringify(spec, null, 2)}\n`);
-
   const updateTest = (spec: ConformanceProto) => {
     const overrides = {commit: commitHandler(spec)};
     return createInstance(overrides).then(() => {
