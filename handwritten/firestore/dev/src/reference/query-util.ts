@@ -20,6 +20,7 @@ import {Duplex, Transform} from 'stream';
 
 import {Serializer} from '../serializer';
 import {Timestamp} from '../timestamp';
+import {normalizeBytes} from '../convert';
 import {DocumentSnapshotBuilder, QueryDocumentSnapshot} from '../document';
 import {
   Deferred,
@@ -205,7 +206,7 @@ export class QueryUtil<
 
         // Proto comes with zero-length buffer by default
         if (proto.transaction?.length) {
-          output.transaction = proto.transaction as any;
+          output.transaction = normalizeBytes(proto.transaction);
         }
 
         if (proto.readTime) {

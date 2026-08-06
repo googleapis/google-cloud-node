@@ -50,6 +50,7 @@ import * as protos from "@google-cloud/firestore-api/build/protos/protos";
 import api = protos.google.firestore.v1;
 import IStage = google.firestore.v1.Pipeline.IStage;
 import {isOptionalEqual, isPlainObject} from '../util';
+import {normalizeBytes} from '../convert';
 
 import {
   AggregateFunction,
@@ -2005,8 +2006,9 @@ export class ExplainStats implements firestore.Pipelines.ExplainStats {
 
     const messageType = reflectionObject as MessageType;
 
-    return messageType.toObject(messageType.decode(this.explainStatsData.value as any))
-      .value;
+    return messageType.toObject(
+      messageType.decode(normalizeBytes(this.explainStatsData.value)!),
+    ).value;
   }
 
   /**
@@ -2035,7 +2037,15 @@ export class ExplainStats implements firestore.Pipelines.ExplainStats {
     type_url?: string | null;
     value?: Uint8Array | null;
   } {
-    return this.explainStatsData as any;
+    if (!this.explainStatsData) {
+      return {};
+    }
+    return {
+      type_url:
+        this.explainStatsData.type_url ??
+        (this.explainStatsData as {typeUrl?: string | null}).typeUrl,
+      value: normalizeBytes(this.explainStatsData.value) ?? null,
+    };
   }
 }
 

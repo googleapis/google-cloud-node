@@ -25,6 +25,7 @@ import {Aggregate, AggregateSpec} from '../aggregate';
 import {average, count, countAll, field, sum} from '../pipelines';
 import {Pipeline} from '../pipelines';
 import {Timestamp} from '../timestamp';
+import {normalizeBytes} from '../convert';
 import {mapToArray, requestTag, wrapError} from '../util';
 import {ExplainMetrics, ExplainResults} from '../query-profile';
 import {logger} from '../logger';
@@ -204,7 +205,7 @@ export class AggregateQuery<
 
         // Proto comes with zero-length buffer by default
         if (proto.transaction?.length) {
-          output.transaction = proto.transaction as any;
+          output.transaction = normalizeBytes(proto.transaction);
         }
 
         if (proto.explainMetrics) {
