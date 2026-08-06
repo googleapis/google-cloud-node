@@ -28,13 +28,20 @@ type CoreClient struct {
 	cancel      context.CancelFunc
 }
 
+func init() {
+	// Force-disable gRPC DirectPath at module initialization time
+	_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
+	_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
+}
+
 // NewCoreClient initializes the Go Spanner Core client.
 // It explicitly disables gRPC DirectPath to maintain an apples-to-apples network comparison
 // with the Rust prototype and the Node.js baseline.
 func NewCoreClient(channelCount int) (*CoreClient, error) {
 	// 1. Explicitly disable gRPC DirectPath in Go Spanner / gRPC client
 	// to enforce standard Google Frontend (GFE) network routing.
-	os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
+	_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
+	_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
 
 	ctx, cancel := context.WithCancel(context.Background())
 
