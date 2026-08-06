@@ -15,9 +15,9 @@
 import type * as firestore from '@google-cloud/firestore';
 import {GoogleError} from 'google-gax';
 import {Duplex, Transform} from 'stream';
-import {google} from "@google-cloud/firestore-api/build/protos/protos";
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
 
-import * as protos from "@google-cloud/firestore-api/build/protos/protos";
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 import './expression';
 import Firestore, {
   CollectionReference,

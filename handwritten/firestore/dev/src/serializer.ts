@@ -17,7 +17,7 @@
 import * as firestore from '@google-cloud/firestore';
 import Long = require('long');
 
-import * as proto from "@google-cloud/firestore-api/build/protos/protos";
+import * as proto from '@google-cloud/firestore-api/build/protos/protos';
 
 import {DeleteTransform, FieldTransform, VectorValue} from './field-value';
 import {detectGoogleProtobufValueType, detectValueType} from './convert';
@@ -36,7 +36,7 @@ import {
   RESERVED_MAP_KEY_VECTOR_VALUE,
   VECTOR_MAP_VECTORS_KEY,
 } from './map-type';
-import {google} from "@google-cloud/firestore-api/build/protos/protos";
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
 import IMapValue = google.firestore.v1.IMapValue;
 import IValue = google.firestore.v1.IValue;
 import Value = google.firestore.v1.Value;

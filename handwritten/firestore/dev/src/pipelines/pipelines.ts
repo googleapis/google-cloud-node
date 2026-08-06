@@ -14,7 +14,7 @@
 
 import * as firestore from '@google-cloud/firestore';
 import * as deepEqual from 'fast-deep-equal';
-import {google} from "@google-cloud/firestore-api/build/protos/protos";
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
 import Firestore, {
   CollectionReference,
   FieldPath,
@@ -46,7 +46,7 @@ import {DocumentReference} from '../reference/document-reference';
 import {PipelineResponse} from '../reference/types';
 import {Serializer} from '../serializer';
 import {ApiMapValue} from '../types';
-import * as protos from "@google-cloud/firestore-api/build/protos/protos";
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 import api = protos.google.firestore.v1;
 import IStage = google.firestore.v1.Pipeline.IStage;
 import {isOptionalEqual, isPlainObject} from '../util';

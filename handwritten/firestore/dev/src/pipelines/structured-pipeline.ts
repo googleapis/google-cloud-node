@@ -16,7 +16,7 @@
  */
 
 import {ProtoSerializable, Serializer} from '../serializer';
-import {google} from "@google-cloud/firestore-api/build/protos/protos";
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
 import IStructuredPipeline = google.firestore.v1.IStructuredPipeline;
 import IPipeline = google.firestore.v1.IPipeline;
 import {OptionsUtil} from './options-util';

@@ -16,7 +16,7 @@
 
 import * as deepEqual from 'fast-deep-equal';
 
-import * as protos from "@google-cloud/firestore-api/build/protos/protos";
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 import api = protos.google.firestore.v1;
 import {FilterInternal} from './filter-internal';
 import {Serializer} from '../serializer';

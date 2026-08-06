@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {google} from "@google-cloud/firestore-api/build/protos/protos";
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
 
 import {ApiMapValue, ProtobufJsValue} from './types';
 import {validateObject} from './validate';

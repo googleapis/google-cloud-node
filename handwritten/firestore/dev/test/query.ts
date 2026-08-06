@@ -20,8 +20,8 @@ import * as chaiAsPromised from 'chai-as-promised';
 import * as extend from 'extend';
 import * as assert from 'assert';
 
-import {google} from "@google-cloud/firestore-api/build/protos/protos";
-import {firestore} from "../src/bundle-proto";
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
+import {firestore} from '../src/bundle-proto';
 import {
   DocumentReference,
   FieldPath,
