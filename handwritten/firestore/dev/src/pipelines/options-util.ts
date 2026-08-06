@@ -16,7 +16,7 @@ import {ObjectValue, Serializer} from '../serializer';
 import {ObjectValueFieldPath} from '../path';
 import {ApiMapValue} from '../types';
 import {isPlainObject, mapToArray} from '../util';
-import {google} from "@google-cloud/firestore-api/build/protos/protos";
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
 import IValue = google.firestore.v1.IValue;
 export type OptionsDefinitions = Record<string, OptionDefinition>;
 export type OptionDefinition = {

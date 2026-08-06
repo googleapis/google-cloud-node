@@ -21,7 +21,7 @@ import * as rbtree from 'functional-red-black-tree';
 import {GoogleError, Status} from 'google-gax';
 import {Duplex} from 'stream';
 
-import {google} from "@google-cloud/firestore-api/build/protos/protos";
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
 import {delayExecution, ExponentialBackoff} from './backoff';
 import {DocumentSnapshotBuilder, QueryDocumentSnapshot} from './document';
 import {DocumentChange, DocumentChangeType} from './document-change';

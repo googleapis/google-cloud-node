@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as protos from "@google-cloud/firestore-api/build/protos/protos";
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 import api = protos.google.firestore.v1;
 
 import {FilterInternal} from './filter-internal';
@@ -27,7 +27,8 @@ export class CompositeFilterInternal extends FilterInternal {
     private filters: FilterInternal[],
     _operator:
       | api.StructuredQuery.CompositeFilter.Operator
-      | keyof typeof api.StructuredQuery.CompositeFilter.Operator = api.StructuredQuery.CompositeFilter.Operator.AND,
+      | keyof typeof api.StructuredQuery.CompositeFilter.Operator = api
+      .StructuredQuery.CompositeFilter.Operator.AND,
   ) {
     super();
     this.operator =

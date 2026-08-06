@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as protos from "@google-cloud/firestore-api/build/protos/protos";
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 import api = protos.google.firestore.v1;
 
 import {FieldPath} from '../path';
@@ -39,7 +39,8 @@ export class FieldOrder {
     readonly field: FieldPath,
     _direction:
       | api.StructuredQuery.Direction
-      | keyof typeof api.StructuredQuery.Direction = api.StructuredQuery.Direction.ASCENDING,
+      | keyof typeof api.StructuredQuery.Direction = api.StructuredQuery
+      .Direction.ASCENDING,
   ) {
     this.direction =
       typeof _direction === 'string'

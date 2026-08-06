@@ -15,8 +15,8 @@
  */
 
 import Long = require('long');
-import {google} from "@google-cloud/firestore-api/build/protos/protos";
-import {detectValueType, normalizeBytes} from './convert';
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
+import {detectValueType} from './convert';
 import {QualifiedResourcePath} from './path';
 import {ApiMapValue} from './types';
 

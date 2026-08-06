@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import * as protos from "@google-cloud/firestore-api/build/protos/protos";
-import {firestore as bundleProtos} from "../bundle-proto";
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
+import {firestore as bundleProtos} from '../bundle-proto';
 import api = protos.google.firestore.v1;
 import * as firestore from '@google-cloud/firestore';
 import {GoogleError} from 'google-gax';
@@ -356,7 +356,9 @@ export class Query<
     }
     return new CompositeFilterInternal(
       parsedFilters,
-      (compositeFilterData._getOperator() === 'AND' ? api.StructuredQuery.CompositeFilter.Operator.AND : api.StructuredQuery.CompositeFilter.Operator.OR),
+      compositeFilterData._getOperator() === 'AND'
+        ? api.StructuredQuery.CompositeFilter.Operator.AND
+        : api.StructuredQuery.CompositeFilter.Operator.OR,
     );
   }
 
