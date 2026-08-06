@@ -3342,8 +3342,9 @@ describe('storage', function () {
       // reaching the right endpoint with the API request.
       const channel = storage.channel('id', 'resource-id');
       await assert.rejects(channel.stop(), (err: GaxiosError) => {
-        assert.strictEqual((err as GaxiosError).code, 404);
-        assert.strictEqual(err!.message.indexOf("Channel 'id' not found"), 0);
+        assert.strictEqual((err as GaxiosError).code, 403);
+        assert.strictEqual(err!.message, 'Object change notifications is deprecated.');
+        return true;
       });
     });
   });
