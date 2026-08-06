@@ -283,16 +283,29 @@ export class Gaxios implements FetchCompliance {
     }
 
     switch (opts.responseType) {
-      case 'stream':
-        if (usingInternalFetch && res.body && !(res.body instanceof Readable)) {
-          // Native `fetch` resolves a `ReadableStream`, so convert it to retain
-          // the `stream.Readable` contract. A caller-provided
-          // `fetchImplementation` keeps its own body type.
+      case 'stream': {
+        // Native `fetch` resolves a `ReadableStream`, so convert it to retain
+        // the `stream.Readable` contract. Browser bundles stub or polyfill
+        // `stream` without `fromWeb` and have always resolved a
+        // `ReadableStream`, so the conversion is skipped there. A
+        // caller-provided `fetchImplementation` keeps its own body type.
+        const body = res.body as
+          | (ReadableStream & {getReader?: unknown})
+          | null;
+        const isWebStream = typeof body?.getReader === 'function';
+
+        if (
+          usingInternalFetch &&
+          isWebStream &&
+          typeof Readable?.fromWeb === 'function'
+        ) {
           return Readable.fromWeb(
-            res.body as unknown as import('stream/web').ReadableStream,
+            body as unknown as import('stream/web').ReadableStream,
           );
         }
+
         return res.body;
+      }
       case 'json': {
         const data = await res.text();
         try {
