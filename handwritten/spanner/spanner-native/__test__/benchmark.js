@@ -268,7 +268,7 @@ async function runFixedCountBenchmark(executeFn, concurrency, totalRequests) {
 /**
  * Runs advanced verification plan tests (Test 1 to Test 4) under multiplexed sessions.
  */
-async function runVerificationPlanTests(db) {
+async function runVerificationPlanTests(db, rustClients, goClients) {
   console.log('\n' + '='.repeat(100));
   console.log('STARTING ADVANCED SYSTEMS VERIFICATION PLAN SUITE (JS vs RUST vs GO)');
   console.log('='.repeat(100));
@@ -288,11 +288,8 @@ async function runVerificationPlanTests(db) {
   for (const q of t1Queries) {
     console.log(`  Executing: ${q.label}...`);
     const js = await runBenchmark(() => db.executeSqlJs(q.sql), 16, 5000);
-    const testDbRust16 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'rust');
-    const testDbGo16 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'go');
-
-    const rust = await runBenchmark(() => testDbRust16.executeSqlNative(q.sql), 16, 5000);
-    const go = await runBenchmark(() => testDbGo16.executeSqlNative(q.sql), 16, 5000);
+    const rust = await runBenchmark(() => rustClients[16].executeSqlNative(q.sql), 16, 5000);
+    const go = await runBenchmark(() => goClients[16].executeSqlNative(q.sql), 16, 5000);
 
     console.log(`    JavaScript QPS / Lag : ${js.qps.toFixed(1)} QPS / ${js.avgLagMs.toFixed(2)}ms`);
     console.log(`    Rust (16 Ch) QPS / Lag: ${rust.qps.toFixed(1)} QPS / ${rust.avgLagMs.toFixed(2)}ms`);
@@ -328,11 +325,8 @@ async function runVerificationPlanTests(db) {
     return Object.values(json).map(v => String(v ?? 'null'));
   });
 
-  const testDbRust4 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 4, 'rust');
-  const testDbGo4 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 4, 'go');
-
-  const rustMapped = await testDbRust4.executeSqlNative(typeQuery);
-  const goMapped = await testDbGo4.executeSqlNative(typeQuery);
+  const rustMapped = await rustClients[4].executeSqlNative(typeQuery);
+  const goMapped = await goClients[4].executeSqlNative(typeQuery);
   
   console.log('    JavaScript returned :', JSON.stringify(jsMapped[0]));
   console.log('    Rust Native returned:', JSON.stringify(rustMapped[0]));
@@ -365,17 +359,16 @@ async function runVerificationPlanTests(db) {
   const standardDb = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16);
   await runBenchmark(() => standardDb.executeSqlJs(SQL), 4, 3000);
   const poolJs = await runBenchmark(() => standardDb.executeSqlJs(SQL), stressConcurrency, 5000);
-  const poolRust = await runBenchmark(() => new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'rust').executeSqlNative(SQL), stressConcurrency, 5000);
-  const poolGo = await runBenchmark(() => new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'go').executeSqlNative(SQL), stressConcurrency, 5000);
-  await standardDb.database.close();
+  const poolRust = await runBenchmark(() => rustClients[16].executeSqlNative(SQL), stressConcurrency, 5000);
+  const poolGo = await runBenchmark(() => goClients[16].executeSqlNative(SQL), stressConcurrency, 5000);
+  await standardDb.close();
 
   // Scenario 4b: Multiplexed Session (Enabled Multiplexing)
   console.log('  Running Scenario 4b: Multiplexed Session (Multiplexing: ON)...');
   process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
-  const multiDb = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16);
-  const multiJs = await runBenchmark(() => multiDb.executeSqlJs(SQL), stressConcurrency, 5000);
-  const multiRust = await runBenchmark(() => new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'rust').executeSqlNative(SQL), stressConcurrency, 5000);
-  const multiGo = await runBenchmark(() => new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'go').executeSqlNative(SQL), stressConcurrency, 5000);
+  const multiJs = await runBenchmark(() => db.executeSqlJs(SQL), stressConcurrency, 5000);
+  const multiRust = await runBenchmark(() => rustClients[16].executeSqlNative(SQL), stressConcurrency, 5000);
+  const multiGo = await runBenchmark(() => goClients[16].executeSqlNative(SQL), stressConcurrency, 5000);
 
   console.log('\n  [Test 4 Results Comparison]');
   console.log(`    Standard Pool (OFF) QPS: JS ${poolJs.qps.toFixed(1)} / Rust ${poolRust.qps.toFixed(1)} / Go ${poolGo.qps.toFixed(1)}`);
@@ -432,7 +425,7 @@ async function main() {
   console.log('Warmup complete.');
 
   // Run Advanced Systems Verification Plan tests (Test 1 to 4)
-  await runVerificationPlanTests(db);
+  await runVerificationPlanTests(db, rustClients, goClients);
 
   console.log('Executing customer replication benchmark cases (110 Concurrency, 1000 Total Requests)...');
   console.log('='.repeat(100));

@@ -29,6 +29,8 @@ class NativeSpannerDatabase {
     this.spanner = new Spanner({ projectId });
     this.instance = this.spanner.instance(instanceId);
     this.database = this.instance.database(databaseId);
+    // Prevent unhandled background session-pool error events from crashing the Node.js process
+    this.database.on('error', () => {});
     this._cachedSessionName = null;
     this._authClient = null;
 
