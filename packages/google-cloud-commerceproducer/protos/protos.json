@@ -13,6 +13,7 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "StandardOfferProto",
                     "java_package": "com.google.cloud.commerceproducer.v1beta",
+                    "php_namespace": "Google\\Cloud\\CommerceProducer\\V1beta",
                     "ruby_package": "Google::Cloud::CommerceProducer::V1beta"
                   },
                   "nested": {
@@ -1432,6 +1433,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "additionalContractValue": {
+                              "type": "AdditionalContractValue",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -1679,6 +1687,26 @@
                                   "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "AdditionalContractValue": {
+                              "fields": {
+                                "contractValue": {
+                                  "type": "google.type.Money",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "eligibleSkus": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "(google.api.resource_reference).type": "commerceproducer.googleapis.com/Sku"
                                   }
                                 }
                               }

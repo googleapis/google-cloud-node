@@ -4764,6 +4764,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "exaAiSearch": {
+                          "type": "ExaAiSearch",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "codeExecution": {
                           "type": "CodeExecution",
                           "id": 4,
@@ -4847,6 +4854,24 @@
                             "customConfigs": {
                               "type": "google.protobuf.Struct",
                               "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ExaAiSearch": {
+                          "fields": {
+                            "apiKey": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "customConfigs": {
+                              "type": "google.protobuf.Struct",
+                              "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -46117,6 +46142,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "exaAiSearch": {
+                          "type": "ExaAiSearch",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "codeExecution": {
                           "type": "CodeExecution",
                           "id": 4,
@@ -46200,6 +46232,24 @@
                             "customConfigs": {
                               "type": "google.protobuf.Struct",
                               "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ExaAiSearch": {
+                          "fields": {
+                            "apiKey": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "customConfigs": {
+                              "type": "google.protobuf.Struct",
+                              "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
