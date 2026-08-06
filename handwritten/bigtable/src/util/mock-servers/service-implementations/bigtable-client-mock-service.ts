@@ -17,9 +17,14 @@
 // ** All changes to this file may be overwritten. **
 
 import grpc = require('@grpc/grpc-js');
-import jsonProtos = require('../../../../protos/protos.json');
 import protoLoader = require('@grpc/proto-loader');
 import {MockService} from '../mock-service';
+import * as fs from 'node:fs';
+import {getProtoPath} from '../../../utils/protos';
+
+const protoPath = getProtoPath('protos.json');
+const jsonProtosString = fs.readFileSync(protoPath);
+const jsonProtos = JSON.parse(jsonProtosString.toString());
 
 const packageDefinition = protoLoader.fromJSON(jsonProtos, {
   keepCase: true,

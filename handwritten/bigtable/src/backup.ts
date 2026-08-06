@@ -15,7 +15,8 @@
 import {PreciseDate} from '@google-cloud/precise-date';
 import {promisifyAll} from '@google-cloud/promisify';
 import snakeCase = require('lodash.snakecase');
-import {google} from '../protos/protos';
+import {protos} from '.';
+import google = protos.google;
 import {
   Bigtable,
   Cluster,
@@ -27,7 +28,7 @@ import {
   SetIamPolicyResponse,
   TestIamPermissionsCallback,
   TestIamPermissionsResponse,
-} from './';
+} from '.';
 import {Table} from '../src/table';
 import {
   CreateBackupConfig,
