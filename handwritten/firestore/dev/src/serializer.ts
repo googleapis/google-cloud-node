@@ -15,6 +15,7 @@
  */
 
 import * as firestore from '@google-cloud/firestore';
+import Long = require('long');
 
 import * as proto from "@google-cloud/firestore-api/build/protos/protos";
 
@@ -69,7 +70,7 @@ export interface Serializable {
 export class Serializer {
   private allowUndefined: boolean;
   private createDocumentReference: (path: string) => DocumentReference;
-  private createInteger: (n: number | string | any) => number | BigInt;
+  private createInteger: (n: number | string | Long) => number | BigInt;
 
   constructor(private firestore: Firestore) {
     // Instead of storing the `firestore` object, we store just a reference to
@@ -77,7 +78,7 @@ export class Serializer {
     // JSON.stringify().
     this.createDocumentReference = path => firestore.doc(path);
     this.createInteger = n =>
-      firestore._settings.useBigInt ? BigInt(n) : Number(n);
+      firestore._settings.useBigInt ? BigInt(n.toString()) : Number(n);
     this.allowUndefined = !!firestore._settings.ignoreUndefinedProperties;
   }
 
