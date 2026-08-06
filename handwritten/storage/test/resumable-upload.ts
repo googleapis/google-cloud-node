@@ -2301,7 +2301,7 @@ describe('resumable-upload', () => {
         up.destroy = (err: Error) => {
           assert.strictEqual(
             err.message,
-            `Retry limit exceeded - ${JSON.stringify(RESP.data)}`,
+            `Retry limit exceeded - status: ${RESP.status} - ${RESP.data}`,
           );
           done();
         };
@@ -2342,7 +2342,7 @@ describe('resumable-upload', () => {
             assert.strictEqual(up.numRetries, 3);
             assert.strictEqual(
               err.message,
-              `Retry limit exceeded - ${JSON.stringify(RESP.data)}`,
+              `Retry limit exceeded - status: ${RESP.status} - ${RESP.data}`,
             );
             done();
           });
@@ -2502,6 +2502,119 @@ describe('resumable-upload', () => {
       up.retryLimit = 3;
 
       up.attemptDelayedRetry({});
+    });
+
+    it('should include correct details for standard native Errors', done => {
+      up.numRetries = 3;
+      up.retryLimit = 3;
+      const nativeError = new Error('native connection issue');
+      
+      up.on('error', (err: Error) => {
+        assert.strictEqual(
+          err.message,
+          'Retry limit exceeded - native connection issue',
+        );
+        done();
+      });
+
+      up.attemptDelayedRetry({
+        status: NaN,
+        data: nativeError,
+      });
+    });
+
+    it('should include correct details for custom errors with empty messages', done => {
+      up.numRetries = 3;
+      up.retryLimit = 3;
+      const customError = new Error('');
+      (customError as any).code = 'ERR_SOMETHING_SPECIAL';
+
+      up.on('error', (err: Error) => {
+        assert.strictEqual(
+          err.message,
+          'Retry limit exceeded - code: ERR_SOMETHING_SPECIAL',
+        );
+        done();
+      });
+
+      up.attemptDelayedRetry({
+        status: NaN,
+        data: customError,
+      });
+    });
+
+    it('should include correct details for GaxiosErrors with empty/missing response bodies', done => {
+      up.numRetries = 3;
+      up.retryLimit = 3;
+
+      const gaxiosError = new GaxiosError(
+        'Request failed with status code 429',
+        {
+          method: 'POST',
+          url: 'https://example.com',
+        } as any,
+        {
+          status: 429,
+          statusText: 'Too Many Requests',
+          data: '',
+          config: {},
+          headers: {},
+        } as any
+      );
+
+      up.on('error', (err: Error) => {
+        // Assert that the formatted error message includes key HTTP details from the GaxiosError.
+        assert(err.message.includes('Retry limit exceeded'));
+        assert(err.message.includes('Request failed with status code 429'));
+        assert(err.message.includes('status: 429') || err.message.includes('code: 429'));
+        assert(err.message.includes('statusText: Too Many Requests'));
+        done();
+      });
+
+      up.attemptDelayedRetry({
+        status: NaN,
+        data: gaxiosError,
+      });
+    });
+
+    it('should include correct details for GaxiosErrors with populated error responses', done => {
+      up.numRetries = 3;
+      up.retryLimit = 3;
+
+      const gaxiosError = new GaxiosError(
+        'Request failed with status code 400',
+        {
+          method: 'POST',
+          url: 'https://example.com',
+        } as any,
+        {
+          status: 400,
+          statusText: 'Bad Request',
+          bodyUsed: true,
+          data: {
+            error: {
+              message: 'Invalid query parameter value',
+              code: 400,
+            },
+          },
+          config: {},
+          headers: {},
+        } as any
+      );
+
+      up.on('error', (err: Error) => {
+        // Assert that the formatted error message includes key HTTP details and the inner API error message.
+        assert(err.message.includes('Retry limit exceeded'));
+        assert(err.message.includes('Request failed with status code 400'));
+        assert(err.message.includes('status: 400') || err.message.includes('code: 400'));
+        assert(err.message.includes('Invalid query parameter value'));
+        done();
+      });
+
+      up.attemptDelayedRetry({
+        status: NaN,
+        data: gaxiosError,
+      });
     });
   });
 

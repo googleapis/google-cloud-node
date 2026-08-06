@@ -42,7 +42,7 @@ export async function reapBackups(instance: Instance) {
 
 export async function reapInstances(
   bigtable: Bigtable,
-  maxAgeMs = 15 * 60 * 1000,
+  maxAgeMs = 120 * 60 * 1000, // 2 hours
 ) {
   try {
     const [instances] = await bigtable.getInstances();
@@ -55,12 +55,18 @@ export async function reapInstances(
       )
       .filter(i => {
         const timeCreatedRaw = i.metadata?.labels?.time_created;
-        if (!timeCreatedRaw) {
-          return true;
+        let timeCreatedNum = Number(timeCreatedRaw);
+        if (!timeCreatedRaw || isNaN(timeCreatedNum)) {
+          const parts = i.id.split('-');
+          const possibleTimestamp = Number(parts[parts.length - 1]);
+          if (!isNaN(possibleTimestamp) && possibleTimestamp > 1000000000000) {
+            timeCreatedNum = possibleTimestamp;
+          } else {
+            return true;
+          }
         }
-        const timeCreatedNum = Number(timeCreatedRaw);
         const timeCreated = new Date(
-          isNaN(timeCreatedNum) ? timeCreatedRaw : timeCreatedNum,
+          isNaN(timeCreatedNum) ? (timeCreatedRaw || 0) : timeCreatedNum,
         );
         const staleThreshold = new Date(Date.now() - maxAgeMs);
         return timeCreated <= staleThreshold;

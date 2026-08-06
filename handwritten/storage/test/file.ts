@@ -3500,7 +3500,25 @@ describe('File', () => {
           contentType: config.contentType,
           cname: CNAME,
           virtualHostedStyle: true,
+          signingEndpoint: undefined,
         });
+      });
+    });
+
+    it('should pass signingEndpoint to URLSigner', () => {
+      const signingEndpoint = 'https://my-endpoint.com';
+      const config = {
+        ...SIGNED_URL_CONFIG,
+        signingEndpoint,
+      };
+
+      file.getSignedUrl(config, (err: Error | null) => {
+        assert.ifError(err);
+        const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
+        assert.strictEqual(
+          getSignedUrlArgs[0]['signingEndpoint'],
+          signingEndpoint
+        );
       });
     });
 

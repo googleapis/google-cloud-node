@@ -1384,9 +1384,7 @@ export class Upload extends Writable {
 
         if (retryDelay <= 0) {
           this.destroy(
-            new Error(
-              `Retry total time limit exceeded - ${JSON.stringify(resp.data)}`,
-            ),
+            buildRetryError('Retry total time limit exceeded', resp),
           );
           return;
         }
@@ -1407,9 +1405,7 @@ export class Upload extends Writable {
       }
       this.numRetries++;
     } else {
-      this.destroy(
-        new Error(`Retry limit exceeded - ${JSON.stringify(resp.data)}`),
-      );
+      this.destroy(buildRetryError('Retry limit exceeded', resp));
     }
   }
 
@@ -1452,6 +1448,69 @@ export class Upload extends Writable {
   public isSuccessfulResponse(status: number): boolean {
     return status >= 200 && status < 300;
   }
+}
+
+function buildRetryError(
+  prefix: string,
+  resp: Pick<GaxiosResponse, 'data' | 'status'>,
+): Error {
+  const parts: string[] = [];
+
+  if (typeof resp.status === 'number' && !isNaN(resp.status)) {
+    parts.push(`status: ${resp.status}`);
+  }
+
+  const err = resp.data;
+  if (err !== undefined && err !== null) {
+    if (typeof err === 'object') {
+      const gaxiosErrLike = err as any;
+      const errParts: string[] = [];
+      if (gaxiosErrLike.message) {
+        errParts.push(String(gaxiosErrLike.message));
+      }
+      const status = gaxiosErrLike.status ?? gaxiosErrLike.response?.status;
+      if (typeof status === 'number' && !isNaN(status) && status !== resp.status) {
+        errParts.push(`status: ${status}`);
+      }
+      const statusText = gaxiosErrLike.response?.statusText;
+      if (statusText) {
+        errParts.push(`statusText: ${statusText}`);
+      }
+      const responseData = gaxiosErrLike.response?.data;
+      if (responseData !== undefined && responseData !== null && responseData !== '') {
+        errParts.push(
+          `response: ${
+            typeof responseData === 'object'
+              ? JSON.stringify(responseData)
+              : responseData
+          }`,
+        );
+      }
+      if (gaxiosErrLike.code) {
+        errParts.push(`code: ${String(gaxiosErrLike.code)}`);
+      }
+
+      if (errParts.length > 0) {
+        parts.push(...errParts);
+      } else if (err instanceof Error) {
+        parts.push(err.toString() || err.name || 'Unknown Error');
+      } else {
+        const stringified = JSON.stringify(err);
+        if (stringified && stringified !== '{}') {
+          parts.push(stringified);
+        }
+      }
+    } else if (typeof err === 'string') {
+      if (err !== '') {
+        parts.push(err);
+      }
+    } else {
+      parts.push(String(err));
+    }
+  }
+
+  const suffix = parts.join(' - ');
+  return new Error(`${prefix} - ${suffix || 'Unknown Error'}`);
 }
 
 export function upload(cfg: UploadConfig) {

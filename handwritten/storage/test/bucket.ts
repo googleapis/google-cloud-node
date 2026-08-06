@@ -42,6 +42,7 @@ import {CreateWriteStreamOptionsInternal} from '../src/file.js';
 import {convertObjKeysToSnakeCase, getDirName} from '../src/util.js';
 import {util} from '../src/nodejs-common/index.js';
 import path from 'path';
+import fs from 'fs';
 import * as stream from 'stream';
 import {Transform} from 'stream';
 
@@ -3035,6 +3036,42 @@ describe('Bucket', () => {
           assert.strictEqual(retryCount, 2);
           done();
         });
+      });
+    });
+
+    it('should destroy the local read stream if write stream fails', done => {
+      const fakeFile = new File(bucket, 'file-name');
+      const options = {destination: fakeFile, resumable: false};
+      const originalCreateReadStream = fs.createReadStream;
+      let readStream: fs.ReadStream;
+      sandbox.stub(fs, 'createReadStream').callsFake((path, opts) => {
+        readStream = originalCreateReadStream(path, opts);
+        return readStream;
+      });
+
+      fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
+        const ws = new stream.Writable({
+          write(chunk, encoding, callback) {
+            callback(new Error('write error'));
+          },
+        });
+        return ws;
+      };
+
+      const textfilepath = path.join(
+        getDirName(),
+        '../../../test/testdata/textfile.txt'
+      );
+
+      bucket.upload(textfilepath, options, (err: Error | null) => {
+        try {
+          assert.strictEqual(err!.message, 'write error');
+          assert.ok(readStream);
+          assert.ok(readStream.destroyed);
+          done();
+        } catch (e) {
+          done(e);
+        }
       });
     });
 

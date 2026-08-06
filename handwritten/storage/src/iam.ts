@@ -350,12 +350,8 @@ class Iam {
       SetPolicyCallback
     >(optionsOrCallback, callback);
 
-    const policyToSet = {...policy};
-    delete (policyToSet as any).headers;
-    delete (policyToSet as any).status;
-
     let maxRetries;
-    if (policyToSet.etag === undefined) {
+    if (policy.etag === undefined) {
       maxRetries = 0;
     }
 
@@ -365,7 +361,7 @@ class Iam {
           method: 'PUT',
           url: `/storage/v1/b/${this.bucket.name}/iam`,
           maxRetries,
-          body: JSON.stringify(policyToSet),
+          body: JSON.stringify(policy),
           headers: {'Content-Type': 'application/json'},
           queryParameters: options as unknown as StorageQueryParameters,
         },
