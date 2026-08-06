@@ -1,76 +1,98 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
+	"strconv"
+
 	spannerpb "cloud.google.com/go/spanner/apiv1/spannerpb"
 	"google.golang.org/protobuf/types/known/structpb"
 )
 
-// decodeValue converts a protobuf Value to a strictly-typed native Spanner value
-// based on the column's field type metadata, exactly replicating Rust's decode_value.
-func decodeValue(val *structpb.Value, fieldType *spannerpb.Type) interface{} {
+// writeValueJson encodes a protobuf Value directly into a bytes.Buffer in valid JSON format
+// matching the strictly-typed Spanner specifications without reflection or intermediate heap boxing.
+func writeValueJson(buf *bytes.Buffer, val *structpb.Value, fieldType *spannerpb.Type) {
 	if val == nil {
-		return nil
+		buf.WriteString("null")
+		return
 	}
 
 	switch k := val.Kind.(type) {
 	case *structpb.Value_NullValue:
-		return nil
+		buf.WriteString("null")
 	case *structpb.Value_BoolValue:
-		return k.BoolValue
-	case *structpb.Value_NumberValue:
-		return k.NumberValue
-	case *structpb.Value_StringValue:
-		s := k.StringValue
-		if fieldType != nil {
-			switch fieldType.Code {
-			case spannerpb.TypeCode_INT64,
-				spannerpb.TypeCode_TIMESTAMP,
-				spannerpb.TypeCode_DATE,
-				spannerpb.TypeCode_NUMERIC,
-				spannerpb.TypeCode_BYTES,
-				spannerpb.TypeCode_JSON:
-				return s
-			default:
-				return s
-			}
+		if k.BoolValue {
+			buf.WriteString("true")
+		} else {
+			buf.WriteString("false")
 		}
-		return s
+	case *structpb.Value_NumberValue:
+		buf.WriteString(strconv.FormatFloat(k.NumberValue, 'f', -1, 64))
+	case *structpb.Value_StringValue:
+		// Spanner TypeCodes: INT64, NUMERIC, TIMESTAMP, DATE, BYTES, JSON, STRING
+		// All Spanner primitive strings/numbers are serialized as JSON strings matching Rust prototype
+		jsonEscapeString(buf, k.StringValue)
 	case *structpb.Value_ListValue:
 		if k.ListValue == nil {
-			return []interface{}{}
+			buf.WriteString("[]")
+			return
 		}
 		var elemType *spannerpb.Type
 		if fieldType != nil && fieldType.ArrayElementType != nil {
 			elemType = fieldType.ArrayElementType
 		}
-		arr := make([]interface{}, len(k.ListValue.Values))
+		buf.WriteByte('[')
 		for i, v := range k.ListValue.Values {
-			arr[i] = decodeValue(v, elemType)
+			if i > 0 {
+				buf.WriteByte(',')
+			}
+			writeValueJson(buf, v, elemType)
 		}
-		return arr
+		buf.WriteByte(']')
 	case *structpb.Value_StructValue:
 		if k.StructValue == nil {
-			return map[string]interface{}{}
+			buf.WriteString("{}")
+			return
 		}
-		st := make(map[string]interface{})
+		buf.WriteByte('{')
+		first := true
 		if fieldType != nil && fieldType.StructType != nil {
 			for _, f := range fieldType.StructType.Fields {
-				var fieldVal *structpb.Value
-				if v, ok := k.StructValue.Fields[f.Name]; ok {
-					fieldVal = v
-				} else {
-					fieldVal = structpb.NewNullValue()
+				if !first {
+					buf.WriteByte(',')
 				}
-				st[f.Name] = decodeValue(fieldVal, f.Type)
+				first = false
+				jsonEscapeString(buf, f.Name)
+				buf.WriteByte(':')
+				if v, ok := k.StructValue.Fields[f.Name]; ok {
+					writeValueJson(buf, v, f.Type)
+				} else {
+					buf.WriteString("null")
+				}
 			}
 		} else {
 			for fName, fVal := range k.StructValue.Fields {
-				st[fName] = decodeValue(fVal, nil)
+				if !first {
+					buf.WriteByte(',')
+				}
+				first = false
+				jsonEscapeString(buf, fName)
+				buf.WriteByte(':')
+				writeValueJson(buf, fVal, nil)
 			}
 		}
-		return st
+		buf.WriteByte('}')
 	default:
-		return nil
+		buf.WriteString("null")
+	}
+}
+
+func jsonEscapeString(buf *bytes.Buffer, s string) {
+	b, err := json.Marshal(s)
+	if err == nil {
+		buf.Write(b)
+	} else {
+		buf.WriteString(`""`)
 	}
 }
 

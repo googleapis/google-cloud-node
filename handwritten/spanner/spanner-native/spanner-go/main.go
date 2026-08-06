@@ -6,11 +6,11 @@ package main
 
 typedef void (*StreamDataCallback)(
     void* user_data,
-    const char* json_rows,
+    char* json_rows,
     int row_count,
-    const char* server_timing,
+    char* server_timing,
     int attempt_count,
-    const char* error_msg,
+    char* error_msg,
     int error_code,
     int is_last
 );
@@ -18,11 +18,11 @@ typedef void (*StreamDataCallback)(
 static void bridge_callback(
     StreamDataCallback cb,
     void* user_data,
-    const char* json_rows,
+    char* json_rows,
     int row_count,
-    const char* server_timing,
+    char* server_timing,
     int attempt_count,
-    const char* error_msg,
+    char* error_msg,
     int error_code,
     int is_last
 ) {
@@ -34,7 +34,7 @@ static void bridge_callback(
 import "C"
 
 import (
-	"encoding/json"
+	"bytes"
 	"fmt"
 	"io"
 	"sync"
@@ -95,37 +95,53 @@ func CloseGoCoreClient(handle C.uintptr_t) {
 	}
 }
 
+func writeBatchJson(batch [][]*structpb.Value, rowType []*spannerpb.StructType_Field) *C.char {
+	if len(batch) == 0 {
+		return nil
+	}
+	var buf bytes.Buffer
+	buf.WriteByte('[')
+	for i, row := range batch {
+		if i > 0 {
+			buf.WriteByte(',')
+		}
+		buf.WriteByte('[')
+		for j, cell := range row {
+			if j > 0 {
+				buf.WriteByte(',')
+			}
+			var fieldType *spannerpb.Type
+			if j < len(rowType) {
+				fieldType = rowType[j].Type
+			}
+			writeValueJson(&buf, cell, fieldType)
+		}
+		buf.WriteByte(']')
+	}
+	buf.WriteByte(']')
+	return C.CString(buf.String())
+}
+
 func sendCallback(
 	cb C.StreamDataCallback,
 	userData unsafe.Pointer,
-	rows [][]interface{},
+	cJson *C.char,
+	rowCount int,
 	serverTiming string,
 	attemptCount int,
 	errMsg string,
 	errCode int,
 	isLast bool,
 ) {
-	var cJson *C.char
 	var cServerTiming *C.char
 	var cErrMsg *C.char
 
-	rowCount := len(rows)
-	if rowCount > 0 {
-		jsonBytes, err := json.Marshal(rows)
-		if err == nil {
-			cJson = C.CString(string(jsonBytes))
-			defer C.free(unsafe.Pointer(cJson))
-		}
-	}
-
 	if serverTiming != "" {
 		cServerTiming = C.CString(serverTiming)
-		defer C.free(unsafe.Pointer(cServerTiming))
 	}
 
 	if errMsg != "" {
 		cErrMsg = C.CString(errMsg)
-		defer C.free(unsafe.Pointer(cErrMsg))
 	}
 
 	lastFlag := 0
@@ -160,7 +176,7 @@ func ExecuteStreamingSqlGo(
 ) {
 	client := getClient(uintptr(handle))
 	if client == nil {
-		sendCallback(cb, userData, nil, "", 1, "Invalid or closed CoreClient handle", int(codes.InvalidArgument), true)
+		sendCallback(cb, userData, nil, 0, "", 1, "Invalid or closed CoreClient handle", int(codes.InvalidArgument), true)
 		return
 	}
 
@@ -190,8 +206,8 @@ func ExecuteStreamingSqlGo(
 
 		var rowType []*spannerpb.StructType_Field
 		var pendingValue *structpb.Value
-		var currentRow []interface{}
-		batch := make([][]interface{}, 0, 100)
+		var currentRow []*structpb.Value
+		batch := make([][]*structpb.Value, 0, 100)
 
 		for {
 			attemptCount++
@@ -199,7 +215,7 @@ func ExecuteStreamingSqlGo(
 			// 1. Decode ExecuteSqlRequest protobuf bytes
 			var req spannerpb.ExecuteSqlRequest
 			if err := proto.Unmarshal(rawBytes, &req); err != nil {
-				sendCallback(cb, userData, nil, "", attemptCount, fmt.Sprintf("Failed to decode request bytes: %v", err), int(codes.InvalidArgument), true)
+				sendCallback(cb, userData, nil, 0, "", attemptCount, fmt.Sprintf("Failed to decode request bytes: %v", err), int(codes.InvalidArgument), true)
 				return
 			}
 
@@ -214,7 +230,7 @@ func ExecuteStreamingSqlGo(
 			// Fetch OAuth2 bearer token from memory cache
 			token, err := client.GetToken()
 			if err != nil {
-				sendCallback(cb, userData, nil, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
+				sendCallback(cb, userData, nil, 0, "", attemptCount, fmt.Sprintf("Failed to get GCP auth token: %v", err), int(codes.Unauthenticated), true)
 				return
 			}
 			if token != nil && token.AccessToken != "" {
@@ -226,7 +242,7 @@ func ExecuteStreamingSqlGo(
 			// 3. Select connection from pool via round-robin
 			conn := client.GetConn()
 			if conn == nil {
-				sendCallback(cb, userData, nil, "", attemptCount, "No active gRPC connection available", int(codes.Unavailable), true)
+				sendCallback(cb, userData, nil, 0, "", attemptCount, "No active gRPC connection available", int(codes.Unavailable), true)
 				return
 			}
 
@@ -237,7 +253,7 @@ func ExecuteStreamingSqlGo(
 				if (st.Code() == codes.Unavailable || st.Code() == codes.Internal) && len(lastResumeToken) > 0 {
 					continue // Retry loop
 				}
-				sendCallback(cb, userData, nil, "", attemptCount, st.Message(), int(st.Code()), true)
+				sendCallback(cb, userData, nil, 0, "", attemptCount, st.Message(), int(st.Code()), true)
 				return
 			}
 
@@ -263,7 +279,7 @@ func ExecuteStreamingSqlGo(
 						shouldRetry = true
 						break
 					}
-					sendCallback(cb, userData, nil, serverTiming, attemptCount, st.Message(), int(st.Code()), true)
+					sendCallback(cb, userData, nil, 0, serverTiming, attemptCount, st.Message(), int(st.Code()), true)
 					return
 				}
 
@@ -286,19 +302,15 @@ func ExecuteStreamingSqlGo(
 						merged := mergeProtoValues(pendingValue, first)
 						pendingValue = nil
 
-						fieldIdx := len(currentRow)
-						var fieldType *spannerpb.Type
-						if fieldIdx < numFields {
-							fieldType = rowType[fieldIdx].Type
-						}
-						currentRow = append(currentRow, decodeValue(merged, fieldType))
+						currentRow = append(currentRow, merged)
 
 						if numFields > 0 && len(currentRow) == numFields {
 							batch = append(batch, currentRow)
-							currentRow = make([]interface{}, 0, numFields)
+							currentRow = make([]*structpb.Value, 0, numFields)
 							if len(batch) >= 100 {
-								sendCallback(cb, userData, batch, serverTiming, attemptCount, "", 0, false)
-								batch = make([][]interface{}, 0, 100)
+								cJson := writeBatchJson(batch, rowType)
+								sendCallback(cb, userData, cJson, len(batch), serverTiming, attemptCount, "", 0, false)
+								batch = make([][]*structpb.Value, 0, 100)
 							}
 						}
 					}
@@ -311,19 +323,15 @@ func ExecuteStreamingSqlGo(
 				}
 
 				for _, val := range vals {
-					fieldIdx := len(currentRow)
-					var fieldType *spannerpb.Type
-					if fieldIdx < numFields {
-						fieldType = rowType[fieldIdx].Type
-					}
-					currentRow = append(currentRow, decodeValue(val, fieldType))
+					currentRow = append(currentRow, val)
 
 					if numFields > 0 && len(currentRow) == numFields {
 						batch = append(batch, currentRow)
-						currentRow = make([]interface{}, 0, numFields)
+						currentRow = make([]*structpb.Value, 0, numFields)
 						if len(batch) >= 100 {
-							sendCallback(cb, userData, batch, serverTiming, attemptCount, "", 0, false)
-							batch = make([][]interface{}, 0, 100)
+							cJson := writeBatchJson(batch, rowType)
+							sendCallback(cb, userData, cJson, len(batch), serverTiming, attemptCount, "", 0, false)
+							batch = make([][]*structpb.Value, 0, 100)
 						}
 					}
 				}
@@ -342,12 +350,7 @@ func ExecuteStreamingSqlGo(
 
 			// Flush any pending value / row
 			if pendingValue != nil {
-				fieldIdx := len(currentRow)
-				var fieldType *spannerpb.Type
-				if fieldIdx < len(rowType) {
-					fieldType = rowType[fieldIdx].Type
-				}
-				currentRow = append(currentRow, decodeValue(pendingValue, fieldType))
+				currentRow = append(currentRow, pendingValue)
 				pendingValue = nil
 			}
 			if len(currentRow) > 0 {
@@ -356,7 +359,8 @@ func ExecuteStreamingSqlGo(
 			}
 
 			// Send final batch and EOF signal
-			sendCallback(cb, userData, batch, serverTiming, attemptCount, "", 0, true)
+			cJson := writeBatchJson(batch, rowType)
+			sendCallback(cb, userData, cJson, len(batch), serverTiming, attemptCount, "", 0, true)
 			break
 		}
 	}()

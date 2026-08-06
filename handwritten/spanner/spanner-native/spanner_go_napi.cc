@@ -9,11 +9,11 @@
 // Callback signature matching Go exported C type
 typedef void (*StreamDataCallback)(
     void* user_data,
-    const char* json_rows,
+    char* json_rows,
     int row_count,
-    const char* server_timing,
+    char* server_timing,
     int attempt_count,
-    const char* error_msg,
+    char* error_msg,
     int error_code,
     int is_last
 );
@@ -52,23 +52,28 @@ struct StreamBatchData {
 // C callback called by Go on background goroutine
 extern "C" void OnGoStreamData(
     void* user_data,
-    const char* json_rows,
+    char* json_rows,
     int row_count,
-    const char* server_timing,
+    char* server_timing,
     int attempt_count,
-    const char* error_msg,
+    char* error_msg,
     int error_code,
     int is_last
 ) {
     StreamCallbackContext* ctx = static_cast<StreamCallbackContext*>(user_data);
-    if (!ctx || !ctx->tsfn) return;
+    if (!ctx || !ctx->tsfn) {
+        if (json_rows) free(json_rows);
+        if (server_timing) free(server_timing);
+        if (error_msg) free(error_msg);
+        return;
+    }
 
     StreamBatchData* data = new StreamBatchData();
-    data->json_rows = json_rows ? strdup(json_rows) : nullptr;
+    data->json_rows = json_rows; // Direct ownership transfer! No strdup!
     data->row_count = row_count;
-    data->server_timing = server_timing ? strdup(server_timing) : nullptr;
+    data->server_timing = server_timing;
     data->attempt_count = attempt_count;
-    data->error_msg = error_msg ? strdup(error_msg) : nullptr;
+    data->error_msg = error_msg;
     data->error_code = error_code;
     data->is_last = is_last;
 

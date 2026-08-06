@@ -65,6 +65,10 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 		grpc.WithTransportCredentials(creds),
 		// Disable service config / DirectPath resolution to ensure standard routing
 		grpc.WithDisableServiceConfig(),
+		// HTTP/2 Flow Control Windows: increase from default 64KB to 4MB/16MB
+		// to allow Spanner large result sets to stream at full line-rate without stalling
+		grpc.WithInitialWindowSize(4 * 1024 * 1024),      // 4MB per stream window
+		grpc.WithInitialConnWindowSize(16 * 1024 * 1024), // 16MB per connection window
 		grpc.WithDefaultCallOptions(
 			grpc.MaxCallRecvMsgSize(100 * 1024 * 1024), // 100MB
 			grpc.MaxCallSendMsgSize(100 * 1024 * 1024),
