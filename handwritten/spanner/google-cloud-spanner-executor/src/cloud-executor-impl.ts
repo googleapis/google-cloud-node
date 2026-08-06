@@ -15,7 +15,7 @@
  */
 
 import {ServerDuplexStream, status} from '@grpc/grpc-js';
-import {trace, context, Tracer} from '@opentelemetry/api';
+import {trace, context, Tracer, SpanStatusCode} from '@opentelemetry/api';
 import {CloudClientExecutor} from './cloud-client-executor';
 import * as protos from '../../protos/protos';
 import spanner = protos.google.spanner;
@@ -86,6 +86,7 @@ export class CloudExecutorImpl {
       context.with(streamContext, () => {
         console.error('Client ends the stream with error.', err);
         span.recordException(err);
+        span.setStatus({code: SpanStatusCode.ERROR, message: err.message});
         span.end();
         executionContext.cleanup();
       });
