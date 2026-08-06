@@ -33,12 +33,18 @@
       "types": "./build/protos/protos.d.ts",
       "default": "./build/protos/protos.js"
     },
+    "./protos/protos": {
+      "types": "./build/protos/protos.d.ts",
+      "default": "./build/protos/protos.js"
+    },
     "./protos/protos.json": "./build/protos/protos.json",
+    "./protos/*": "./build/protos/*",
     "./build/protos/protos": {
       "types": "./build/protos/protos.d.ts",
       "default": "./build/protos/protos.js"
     },
     "./build/protos/protos.json": "./build/protos/protos.json",
+    "./build/protos/*": "./build/protos/*",
     "./build/src/v1": {
       "types": "./build/src/v1/index.d.ts",
       "default": "./build/src/v1/index.js"
