@@ -792,11 +792,11 @@ export class Query<
     const orderings = this.createImplicitOrderBy().map(fieldOrder => {
       let dir: 'ascending' | 'descending' | undefined = undefined;
       switch (fieldOrder.direction) {
-        case 'ASCENDING': case api.StructuredQuery.Direction.ASCENDING: {
+        case api.StructuredQuery.Direction.ASCENDING: {
           dir = 'ascending';
           break;
         }
-        case 'DESCENDING': case api.StructuredQuery.Direction.DESCENDING: {
+        case api.StructuredQuery.Direction.DESCENDING: {
           dir = 'descending';
           break;
         }
@@ -941,7 +941,7 @@ export class Query<
     /** The order of the implicit ordering always matches the last explicit order by. */
     const lastDirection =
       fieldOrders.length === 0
-        ? directionOperators.ASC
+        ? api.StructuredQuery.Direction.ASCENDING
         : fieldOrders[fieldOrders.length - 1].direction;
 
     if (!ignoreInequalityFields) {
@@ -1499,7 +1499,9 @@ export class Query<
       structuredQuery.orderBy = fieldOrders.map(order => {
         // Flip the orderBy directions since we want the last results
         const dir =
-          (order.direction === 'DESCENDING' || order.direction === api.StructuredQuery.Direction.DESCENDING) ? api.StructuredQuery.Direction.ASCENDING : api.StructuredQuery.Direction.DESCENDING;
+          order.direction === api.StructuredQuery.Direction.DESCENDING
+            ? api.StructuredQuery.Direction.ASCENDING
+            : api.StructuredQuery.Direction.DESCENDING;
         return new FieldOrder(order.field, dir).toProto();
       });
 
@@ -1746,7 +1748,10 @@ export class Query<
         }
 
         if (comp !== 0) {
-          const direction = (orderBy.direction === 'ASCENDING' || orderBy.direction === api.StructuredQuery.Direction.ASCENDING) ? 1 : -1;
+          const direction =
+            orderBy.direction === api.StructuredQuery.Direction.ASCENDING
+              ? 1
+              : -1;
           return direction * comp;
         }
       }

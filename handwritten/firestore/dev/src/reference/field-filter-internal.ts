@@ -45,13 +45,28 @@ export class FieldFilterInternal extends FilterInternal {
    * @param value The value to which to compare the field for inclusion in a
    * query.
    */
+  readonly op: api.StructuredQuery.FieldFilter.Operator;
+
+  /**
+   * @param serializer The Firestore serializer
+   * @param field The path of the property value to compare.
+   * @param op A comparison operation.
+   * @param value The value to which to compare the field for inclusion in a
+   * query.
+   */
   constructor(
     private readonly serializer: Serializer,
     readonly field: FieldPath,
-    readonly op: api.StructuredQuery.FieldFilter.Operator | any,
+    _op:
+      | api.StructuredQuery.FieldFilter.Operator
+      | keyof typeof api.StructuredQuery.FieldFilter.Operator,
     readonly value: unknown,
   ) {
     super();
+    this.op =
+      typeof _op === 'string'
+        ? api.StructuredQuery.FieldFilter.Operator[_op]
+        : _op;
   }
 
   /**
@@ -62,12 +77,12 @@ export class FieldFilterInternal extends FilterInternal {
    */
   isInequalityFilter(): boolean {
     switch (this.op) {
-      case 'GREATER_THAN': case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN:
-      case 'GREATER_THAN_OR_EQUAL': case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN_OR_EQUAL:
-      case 'LESS_THAN': case api.StructuredQuery.FieldFilter.Operator.LESS_THAN:
-      case 'LESS_THAN_OR_EQUAL': case api.StructuredQuery.FieldFilter.Operator.LESS_THAN_OR_EQUAL:
-      case 'NOT_EQUAL': case api.StructuredQuery.FieldFilter.Operator.NOT_EQUAL:
-      case 'NOT_IN': case api.StructuredQuery.FieldFilter.Operator.NOT_IN:
+      case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN:
+      case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN_OR_EQUAL:
+      case api.StructuredQuery.FieldFilter.Operator.LESS_THAN:
+      case api.StructuredQuery.FieldFilter.Operator.LESS_THAN_OR_EQUAL:
+      case api.StructuredQuery.FieldFilter.Operator.NOT_EQUAL:
+      case api.StructuredQuery.FieldFilter.Operator.NOT_IN:
         return true;
       default:
         return false;
@@ -86,8 +101,10 @@ export class FieldFilterInternal extends FilterInternal {
    * @private
    * @internal
    */
-  nanOp(): 'IS_NAN' | 'IS_NOT_NAN' {
-    return (this.op === 'EQUAL' || this.op === api.StructuredQuery.FieldFilter.Operator.EQUAL) ? 'IS_NAN' : 'IS_NOT_NAN';
+  nanOp(): api.StructuredQuery.UnaryFilter.Operator {
+    return this.op === api.StructuredQuery.FieldFilter.Operator.EQUAL
+      ? api.StructuredQuery.UnaryFilter.Operator.IS_NAN
+      : api.StructuredQuery.UnaryFilter.Operator.IS_NOT_NAN;
   }
 
   /**
@@ -102,8 +119,10 @@ export class FieldFilterInternal extends FilterInternal {
    * @private
    * @internal
    */
-  nullOp(): 'IS_NULL' | 'IS_NOT_NULL' {
-    return (this.op === 'EQUAL' || this.op === api.StructuredQuery.FieldFilter.Operator.EQUAL) ? 'IS_NULL' : 'IS_NOT_NULL';
+  nullOp(): api.StructuredQuery.UnaryFilter.Operator {
+    return this.op === api.StructuredQuery.FieldFilter.Operator.EQUAL
+      ? api.StructuredQuery.UnaryFilter.Operator.IS_NULL
+      : api.StructuredQuery.UnaryFilter.Operator.IS_NOT_NULL;
   }
 
   /**
@@ -119,7 +138,7 @@ export class FieldFilterInternal extends FilterInternal {
           field: {
             fieldPath: this.field.formattedName,
           },
-          op: (api.StructuredQuery.UnaryFilter.Operator as any)[this.nanOp()] ?? this.nanOp(),
+          op: this.nanOp(),
         },
       };
     }
@@ -130,7 +149,7 @@ export class FieldFilterInternal extends FilterInternal {
           field: {
             fieldPath: this.field.formattedName,
           },
-          op: (api.StructuredQuery.UnaryFilter.Operator as any)[this.nullOp()] ?? this.nullOp(),
+          op: this.nullOp(),
         },
       };
     }
@@ -140,7 +159,7 @@ export class FieldFilterInternal extends FilterInternal {
         field: {
           fieldPath: this.field.formattedName,
         },
-        op: (typeof this.op === "string" ? (api.StructuredQuery.FieldFilter.Operator as any)[this.op] ?? this.op : this.op),
+        op: this.op,
         value: this.serializer.encodeValue(this.value),
       },
     };
