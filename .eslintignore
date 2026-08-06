@@ -13,3 +13,4 @@ build/
 docs/
 protos/
 packages/
+**/types.d.ts
