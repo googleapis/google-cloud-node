@@ -1,4 +1,7 @@
 target/
 node_modules/
 *.node
+*.so
+*.dylib
+*.dll
 benchmark_results.json

@@ -3,7 +3,7 @@ const { Readable } = require('stream');
 // Require the parent Spanner package relatively since we are running inside the repository
 const { Spanner } = require('../../');
 
-// The new JS Binding Wrapper
+// The JS Binding Wrapper (supports both Rust & Go shared cores)
 const { NativeBinding } = require('./native_binding.js');
 // The generated protobuf JS types
 const spannerProto = require('../../build/protos/protos.js').google.spanner.v1;
@@ -13,10 +13,19 @@ const { codec } = require('../../build/src/codec.js');
 // ==============================================================================
 // LAYER 1: NODE LIBRARY LAYER (JavaScript/TypeScript)
 // Simulates the handwritten client library structure and types.
+// Supports:
+// 1. Pure Node.js Baseline (@google-cloud/spanner)
+// 2. Node.js + Rust Shared Core
+// 3. Node.js + Go Shared Core
 // ==============================================================================
 class NativeSpannerDatabase {
-  constructor(projectId, instanceId, databaseId, channelCount = 1) {
+  constructor(projectId, instanceId, databaseId, channelCount = 1, engine = 'rust') {
     this.projectId = projectId;
+    this.instanceId = instanceId;
+    this.databaseId = databaseId;
+    this.channelCount = channelCount;
+    this.engine = (engine || 'rust').toLowerCase();
+
     this.spanner = new Spanner({ projectId });
     this.instance = this.spanner.instance(instanceId);
     this.database = this.instance.database(databaseId);
@@ -24,8 +33,7 @@ class NativeSpannerDatabase {
     this._authClient = null;
 
     // LAYER 1.5: The binding wrapper is instantiated here
-    // In production, we'd pass ADC credentials path to NativeBinding here
-    this._nativeBinding = new NativeBinding(channelCount);
+    this._nativeBinding = new NativeBinding(channelCount, this.engine);
   }
 
   async _getSessionName() {
@@ -34,7 +42,7 @@ class NativeSpannerDatabase {
     }
 
     if (process.env.LOCAL_MOCK_TEST) {
-      this._cachedSessionName = `projects/${this.projectId}/instances/mock/databases/mock/sessions/mux-123`;
+      this._cachedSessionName = `projects/${this.projectId}/instances/${this.instanceId}/databases/${this.databaseId}/sessions/mux-123`;
       return this._cachedSessionName;
     }
 
@@ -56,7 +64,7 @@ class NativeSpannerDatabase {
   }
 
   /**
-   * Exposes a runStream(query)-style entry point.
+   * Exposes a runStream(query)-style entry point for native shared core execution.
    */
   async runStream(query) {
     const sessionName = await this._getSessionName();
@@ -97,19 +105,19 @@ class NativeSpannerDatabase {
       requestMsg.paramTypes = paramTypes;
     }
 
-    // 3. Serialize that request to protobuf wire bytes.
+    // 3. Serialize request to protobuf wire bytes
     const requestProto = spannerProto.ExecuteSqlRequest.create(requestMsg);
     const requestBytes = spannerProto.ExecuteSqlRequest.encode(requestProto).finish();
 
-    // 4. Build metadata headers (Notice Auth is completely gone! Rust handles it)
+    // 4. Build metadata headers (Auth is managed inside native shared core)
     const metadata = [
       ['x-goog-request-params', `session=${encodeURIComponent(sessionName)}`],
       ['x-goog-spanner-route-to-leader', 'true'],
       ['x-goog-user-project', this.projectId],
-      ['x-goog-api-client', 'spanner-node-poc/1.0.0']
+      ['x-goog-api-client', `spanner-node-poc-${this.engine}/1.0.0`]
     ];
 
-    // 4.5 Define GAX Retry Options to pass to Rust
+    // 4.5 Define GAX Retry Options
     const gaxOptions = {
       retry: {
         retryCodes: [14, 13], // UNAVAILABLE, INTERNAL
@@ -122,7 +130,7 @@ class NativeSpannerDatabase {
       timeoutMillis: 30000
     };
 
-    // 5. Node Readable stream for receiving decoded rows back (simulating PartialResultStream)
+    // 5. Node Readable stream for receiving decoded rows back
     const partialResultStream = new Readable({
       objectMode: true,
       read() {
@@ -130,7 +138,7 @@ class NativeSpannerDatabase {
       }
     });
 
-    // 6. Call the binding layer
+    // 6. Call the native binding layer
     this._nativeBinding.executeStreamingSql(
       sessionName,
       metadata,
@@ -165,16 +173,13 @@ class NativeSpannerDatabase {
     return new Promise((resolve, reject) => {
       const rows = [];
       stream.on('data', row => rows.push(row));
-      // For demonstration, we could log telemetry here: stream.on('telemetry', t => console.log(t));
       stream.on('error', err => reject(err));
       stream.on('end', () => resolve(rows));
     });
   }
 
   /**
-   * Baseline execution path using official @google-cloud/spanner JS package.
-   * Note: does String(v) stringification which is fine for benchmark timing, 
-   * but not a strict correctness comparison.
+   * Baseline execution path using official pure @google-cloud/spanner JS package.
    */
   async executeSqlJs(query) {
     if (process.env.LOCAL_MOCK_TEST) {
@@ -187,13 +192,21 @@ class NativeSpannerDatabase {
       });
     }
 
-    // PRODUCTION: Lock-free cached token is not shown here
     const spannerQuery = typeof query === 'string' ? { sql: query } : query;
     const [rows] = await this.database.run(spannerQuery);
     return rows.map((row) => {
       const json = row.toJSON();
       return Object.values(json).map((v) => String(v ?? 'null'));
     });
+  }
+
+  close() {
+    if (this._nativeBinding) {
+      this._nativeBinding.close();
+    }
+    if (this.database) {
+      return this.database.close();
+    }
   }
 }
 

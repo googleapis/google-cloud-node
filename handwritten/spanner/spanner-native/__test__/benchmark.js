@@ -180,7 +180,7 @@ async function runBenchmark(executeFn, concurrency, durationMs) {
 }
 
 /**
- * Runs a fixed-request count benchmark (to replicate customer-specific Go/Node comparisons).
+ * Runs a fixed-request count benchmark (to replicate customer-specific comparative cases).
  */
 async function runFixedCountBenchmark(executeFn, concurrency, totalRequests) {
   const latencies = [];
@@ -270,14 +270,14 @@ async function runFixedCountBenchmark(executeFn, concurrency, totalRequests) {
  */
 async function runVerificationPlanTests(db) {
   console.log('\n' + '='.repeat(100));
-  console.log('STARTING ADVANCED SYSTEMS VERIFICATION PLAN SUITE');
+  console.log('STARTING ADVANCED SYSTEMS VERIFICATION PLAN SUITE (JS vs RUST vs GO)');
   console.log('='.repeat(100));
 
   // ------------------------------------------------------------------
   // TEST 1: Varying Result Set Size (Read Volume Scaling)
   // ------------------------------------------------------------------
   console.log('\n[TEST 1: Varying Result Set Size (Read Volume Scaling)]');
-  console.log('Goal: Profile V8 N-API object allocation limits under growing payloads.');
+  console.log('Goal: Profile V8 N-API object allocation limits under growing payloads across native cores.');
   
   const t1Queries = [
     { label: 'Small (LIMIT 1, ~100B)', sql: `SELECT * FROM ${TABLE} LIMIT 1` },
@@ -287,19 +287,25 @@ async function runVerificationPlanTests(db) {
 
   for (const q of t1Queries) {
     console.log(`  Executing: ${q.label}...`);
-    const js = await runBenchmark(() => db.executeSqlJs(q.sql), 16, 5000); // 16 concurrency, 5s duration
-    const testDb16 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16);
-    const rust = await runBenchmark(() => testDb16.executeSqlNative(q.sql), 16, 5000);
-    console.log(`    JavaScript QPS / Lag: ${js.qps.toFixed(1)} QPS / ${js.avgLagMs.toFixed(2)}ms`);
+    const js = await runBenchmark(() => db.executeSqlJs(q.sql), 16, 5000);
+    const testDbRust16 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'rust');
+    const testDbGo16 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'go');
+
+    const rust = await runBenchmark(() => testDbRust16.executeSqlNative(q.sql), 16, 5000);
+    const go = await runBenchmark(() => testDbGo16.executeSqlNative(q.sql), 16, 5000);
+
+    console.log(`    JavaScript QPS / Lag : ${js.qps.toFixed(1)} QPS / ${js.avgLagMs.toFixed(2)}ms`);
     console.log(`    Rust (16 Ch) QPS / Lag: ${rust.qps.toFixed(1)} QPS / ${rust.avgLagMs.toFixed(2)}ms`);
-    console.log(`    Speedup / Lat Imp   : ${(rust.qps / js.qps).toFixed(2)}x / ${(((js.p95 - rust.p95) / js.p95) * 100).toFixed(1)}%`);
+    console.log(`    Go   (16 Ch) QPS / Lag: ${go.qps.toFixed(1)} QPS / ${go.avgLagMs.toFixed(2)}ms`);
+    console.log(`    Rust Speedup / Lat Imp: ${(rust.qps / (js.qps || 1)).toFixed(2)}x / ${(((js.p95 - rust.p95) / (js.p95 || 1)) * 100).toFixed(1)}%`);
+    console.log(`    Go   Speedup / Lat Imp: ${(go.qps / (js.qps || 1)).toFixed(2)}x / ${(((js.p95 - go.p95) / (js.p95 || 1)) * 100).toFixed(1)}%`);
   }
 
   // ------------------------------------------------------------------
   // TEST 2: Wide Rows with Mixed Spanner Types
   // ------------------------------------------------------------------
   console.log('\n[TEST 2: Wide Rows with Mixed Spanner Types]');
-  console.log('Goal: Verify correctness and performance of Spanner-specific primitive types.');
+  console.log('Goal: Verify correctness and performance of Spanner-specific primitive types across all engines.');
   
   const typeQuery = `
     SELECT 
@@ -315,27 +321,34 @@ async function runVerificationPlanTests(db) {
       ['arr1', 'arr2', 'arr3'] AS array_col
   `;
 
-  console.log('  Verifying data type correctness...');
+  console.log('  Verifying data type correctness across JavaScript, Rust, and Go...');
   const [jsRows] = await db.database.run({ sql: typeQuery });
   const jsMapped = jsRows.map(row => {
     const json = row.toJSON({ wrapNumbers: true });
     return Object.values(json).map(v => String(v ?? 'null'));
   });
-  const testDb4 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 4);
-  const rustMapped = await testDb4.executeSqlNative(typeQuery);
+
+  const testDbRust4 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 4, 'rust');
+  const testDbGo4 = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 4, 'go');
+
+  const rustMapped = await testDbRust4.executeSqlNative(typeQuery);
+  const goMapped = await testDbGo4.executeSqlNative(typeQuery);
   
-  console.log('    JavaScript returned:', JSON.stringify(jsMapped[0]));
+  console.log('    JavaScript returned :', JSON.stringify(jsMapped[0]));
   console.log('    Rust Native returned:', JSON.stringify(rustMapped[0]));
+  console.log('    Go Native returned  :', JSON.stringify(goMapped[0]));
   
-  const isCorrect = JSON.stringify(jsMapped[0]) === JSON.stringify(rustMapped[0]);
-  console.log(`    Correctness Verification: ${isCorrect ? '\x1b[32mPASS (Identical Output)\x1b[0m' : '\x1b[31mFAIL (Type Mismatch)\x1b[0m'}`);
+  const isRustCorrect = JSON.stringify(jsMapped[0]) === JSON.stringify(rustMapped[0]);
+  const isGoCorrect = JSON.stringify(jsMapped[0]) === JSON.stringify(goMapped[0]);
+
+  console.log(`    Rust Correctness: ${isRustCorrect ? '\x1b[32mPASS (Identical Output)\x1b[0m' : '\x1b[31mFAIL (Type Mismatch)\x1b[0m'}`);
+  console.log(`    Go   Correctness: ${isGoCorrect ? '\x1b[32mPASS (Identical Output)\x1b[0m' : '\x1b[31mFAIL (Type Mismatch)\x1b[0m'}`);
 
   // ------------------------------------------------------------------
   // TEST 3: Read with Parameters (Parameterized Queries)
   // ------------------------------------------------------------------
   console.log('\n[TEST 3: Read with Parameters (Parameterized Queries)]');
   console.log('Goal: Profile request parameter encoding path.');
-  console.log('  Current Status: Bypassed. Parameter serialization requires a dedicated Rust napi layer.');
   console.log('  Verification Status: \x1b[33mSKIPPED (Planned for Production)\x1b[0m');
 
   // ------------------------------------------------------------------
@@ -349,30 +362,29 @@ async function runVerificationPlanTests(db) {
   // Scenario 4a: Standard Session Pool (Disabled Multiplexing)
   console.log('  Running Scenario 4a: Standard Session Pool (Multiplexing: OFF)...');
   process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
-  // Force connection/pool reset to recreate standard pool
   const standardDb = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16);
-  // Small warmup
   await runBenchmark(() => standardDb.executeSqlJs(SQL), 4, 3000);
   const poolJs = await runBenchmark(() => standardDb.executeSqlJs(SQL), stressConcurrency, 5000);
-  const poolRust = await runBenchmark(() => standardDb.executeSqlNative(SQL), stressConcurrency, 5000);
-  await standardDb.database.close(); // close the standard db
+  const poolRust = await runBenchmark(() => new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'rust').executeSqlNative(SQL), stressConcurrency, 5000);
+  const poolGo = await runBenchmark(() => new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'go').executeSqlNative(SQL), stressConcurrency, 5000);
+  await standardDb.database.close();
 
   // Scenario 4b: Multiplexed Session (Enabled Multiplexing)
   console.log('  Running Scenario 4b: Multiplexed Session (Multiplexing: ON)...');
   process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
   const multiDb = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16);
   const multiJs = await runBenchmark(() => multiDb.executeSqlJs(SQL), stressConcurrency, 5000);
-  const multiRust = await runBenchmark(() => multiDb.executeSqlNative(SQL), stressConcurrency, 5000);
+  const multiRust = await runBenchmark(() => new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'rust').executeSqlNative(SQL), stressConcurrency, 5000);
+  const multiGo = await runBenchmark(() => new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, 16, 'go').executeSqlNative(SQL), stressConcurrency, 5000);
 
   console.log('\n  [Test 4 Results Comparison]');
-  console.log(`    Standard Pool (OFF) QPS: JS ${poolJs.qps.toFixed(1)} / Rust ${poolRust.qps.toFixed(1)} (Error Rate: ${poolJs.errorRate * 100}%)`);
-  console.log(`    Multiplexed (ON) QPS   : JS ${multiJs.qps.toFixed(1)} / Rust ${multiRust.qps.toFixed(1)} (Error Rate: ${multiJs.errorRate * 100}%)`);
+  console.log(`    Standard Pool (OFF) QPS: JS ${poolJs.qps.toFixed(1)} / Rust ${poolRust.qps.toFixed(1)} / Go ${poolGo.qps.toFixed(1)}`);
+  console.log(`    Multiplexed (ON) QPS   : JS ${multiJs.qps.toFixed(1)} / Rust ${multiRust.qps.toFixed(1)} / Go ${multiGo.qps.toFixed(1)}`);
   
   console.log('='.repeat(100) + '\n');
 }
 
 async function main() {
-  // Validate placeholder values
   if (
     [PROJECT, INSTANCE, DATABASE, TABLE].some((v) =>
       ['your-project', 'your-instance', 'your-database', 'your-table'].includes(v)
@@ -382,9 +394,9 @@ async function main() {
     process.exit(1);
   }
 
-  console.log('=' * 120);
-  console.log('GOOGLE CLOUD SPANNER NODE.JS NATIVE EXTENSION CONCURRENCY & CHANNEL PERFORMANCE BENCHMARK');
-  console.log('=' * 120);
+  console.log('='.repeat(120));
+  console.log('GOOGLE CLOUD SPANNER: NODE.JS BASELINE vs RUST SHARED CORE vs GO SHARED CORE BENCHMARK');
+  console.log('='.repeat(120));
   console.log(`Node.js Version: ${process.version}`);
   console.log(`CPU Cores      : ${os.cpus().length}`);
   console.log(`System Platform: ${os.platform()} (${os.arch()})`);
@@ -396,20 +408,27 @@ async function main() {
   console.log('Initializing Spanner connections...');
   const db = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE);
 
-  // Pre-initialize matrix clients
+  // Pre-initialize matrix clients for Rust and Go
+  const channelList = [1, 4, 8, 10, 12, 16, 20, 32, 50];
   const rustClients = {};
-  for (const channels of [1, 4, 8, 10, 12, 16, 20, 32, 50]) {
-    rustClients[channels] = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, channels);
+  const goClients = {};
+
+  for (const channels of channelList) {
+    rustClients[channels] = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, channels, 'rust');
+    goClients[channels] = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, channels, 'go');
   }
 
   console.log('Warming up connection pools, auth tokens, and JIT compiler...');
   await runBenchmark(() => db.executeSqlJs(SQL), 4, WARMUP_MS);
-  await runBenchmark(() => rustClients[1].executeSqlNative(SQL), 4, WARMUP_MS);
-  await runBenchmark(() => rustClients[4].executeSqlNative(SQL), 4, WARMUP_MS);
-  await runBenchmark(() => rustClients[8].executeSqlNative(SQL), 4, WARMUP_MS);
-  await runBenchmark(() => rustClients[16].executeSqlNative(SQL), 4, WARMUP_MS);
-  await runBenchmark(() => rustClients[32].executeSqlNative(SQL), 4, WARMUP_MS);
-  await runBenchmark(() => rustClients[50].executeSqlNative(SQL), 4, WARMUP_MS);
+
+  // Warmup Rust clients
+  for (const ch of [1, 4, 8, 16, 32, 50]) {
+    if (rustClients[ch]) await runBenchmark(() => rustClients[ch].executeSqlNative(SQL), 4, WARMUP_MS);
+  }
+  // Warmup Go clients
+  for (const ch of [1, 4, 8, 16, 32, 50]) {
+    if (goClients[ch]) await runBenchmark(() => goClients[ch].executeSqlNative(SQL), 4, WARMUP_MS);
+  }
   console.log('Warmup complete.');
 
   // Run Advanced Systems Verification Plan tests (Test 1 to 4)
@@ -422,17 +441,21 @@ async function main() {
   console.log('Running JavaScript baseline...');
   const custJs = await runFixedCountBenchmark(() => db.executeSqlJs(SQL), 110, 1000);
 
-  // 3. Rust Multi-Channel (16 Channels) Customer Case
+  // 2. Rust Multi-Channel Customer Cases
   console.log('Running Rust (16 Channels) extension...');
   const custRust16 = await runFixedCountBenchmark(() => rustClients[16].executeSqlNative(SQL), 110, 1000);
-
-  // 4. Rust Multi-Channel (32 Channels) Customer Case
   console.log('Running Rust (32 Channels) extension...');
   const custRust32 = await runFixedCountBenchmark(() => rustClients[32].executeSqlNative(SQL), 110, 1000);
-
-  // 5. Rust Multi-Channel (50 Channels) Customer Case
   console.log('Running Rust (50 Channels) extension...');
   const custRust50 = await runFixedCountBenchmark(() => rustClients[50].executeSqlNative(SQL), 110, 1000);
+
+  // 3. Go Multi-Channel Customer Cases
+  console.log('Running Go (16 Channels) extension...');
+  const custGo16 = await runFixedCountBenchmark(() => goClients[16].executeSqlNative(SQL), 110, 1000);
+  console.log('Running Go (32 Channels) extension...');
+  const custGo32 = await runFixedCountBenchmark(() => goClients[32].executeSqlNative(SQL), 110, 1000);
+  console.log('Running Go (50 Channels) extension...');
+  const custGo50 = await runFixedCountBenchmark(() => goClients[50].executeSqlNative(SQL), 110, 1000);
 
   console.log('\n' + '='.repeat(100));
   console.log('CUSTOMER BENCHMARK REPLICATION SUMMARY');
@@ -452,35 +475,40 @@ async function main() {
     console.log(`  Event Loop Lag (Avg): ${r.avgLagMs.toFixed(2)}ms (Max: ${r.maxLagMs.toFixed(2)}ms)`);
     console.log(`  CPU Utilization     : ${r.cpuUtil.toFixed(1)}%`);
     if (base) {
-      const speedup = r.qps / base.qps;
-      const latImp = ((base.p95 - r.p95) / base.p95) * 100;
+      const speedup = r.qps / (base.qps || 1);
+      const latImp = ((base.p95 - r.p95) / (base.p95 || 1)) * 100;
       console.log(`  Throughput Speedup  : \x1b[32m${speedup.toFixed(2)}x\x1b[0m`);
       console.log(`  p95 Latency Imp. %  : \x1b[32m${latImp.toFixed(1)}%\x1b[0m`);
     }
   };
 
   printCustRes('JavaScript Baseline', custJs);
-  printCustRes('Rust 16 Channels', custRust16, custJs);
-  printCustRes('Rust 32 Channels', custRust32, custJs);
-  printCustRes('Rust 50 Channels', custRust50, custJs);
+  printCustRes('Rust (16 Channels)', custRust16, custJs);
+  printCustRes('Rust (32 Channels)', custRust32, custJs);
+  printCustRes('Rust (50 Channels)', custRust50, custJs);
+  printCustRes('Go   (16 Channels)', custGo16, custJs);
+  printCustRes('Go   (32 Channels)', custGo32, custJs);
+  printCustRes('Go   (50 Channels)', custGo50, custJs);
   console.log('='.repeat(100) + '\n');
 
-  const results = [];
-  results.push({
+  const customerResults = {
     concurrency: 110,
     total: 1000,
     javascript: custJs,
     rust_16ch: custRust16,
     rust_32ch: custRust32,
-    rust_50ch: custRust50
-  });
+    rust_50ch: custRust50,
+    go_16ch: custGo16,
+    go_32ch: custGo32,
+    go_50ch: custGo50
+  };
 
   console.log('Continuing to standard comparative matrix tests...\n');
 
-  // Beautiful comparative markdown table header
+  // Comparative table header
   const columns = [
     { text: 'Concurrency', width: 12 },
-    { text: 'Method', width: 16 },
+    { text: 'Method', width: 18 },
     { text: 'QPS / p95', width: 18 },
     { text: 'p50 (ms)', width: 10 },
     { text: 'p99 (ms)', width: 10 },
@@ -497,6 +525,8 @@ async function main() {
   console.log(formatHeader());
   console.log(formatDivider());
 
+  const matrixResults = [];
+
   for (const concurrency of CONCURRENCY_LEVELS) {
     // 1. JS Baseline Execution
     const jsRes = await runBenchmark(() => db.executeSqlJs(SQL), concurrency, DURATION_MS);
@@ -504,7 +534,7 @@ async function main() {
     
     console.log([
       String(concurrency).padEnd(12),
-      'JavaScript'.padEnd(16),
+      'JavaScript'.padEnd(18),
       jsQpsP95.padEnd(18),
       jsRes.p50.toFixed(1).padEnd(10),
       jsRes.p99.toFixed(1).padEnd(10),
@@ -515,7 +545,10 @@ async function main() {
       '-'.padEnd(10)
     ].join(' | '));
 
-    const rustRuns = {};
+    const levelResult = {
+      concurrency,
+      javascript: jsRes,
+    };
 
     // 2. Rust Native Dynamic Connection Channels Execution
     for (const channels of CHANNELS_TEST) {
@@ -529,7 +562,7 @@ async function main() {
 
       console.log([
         String(concurrency).padEnd(12),
-        `Rust (${channels} Ch)`.padEnd(16),
+        `Rust (${channels} Ch)`.padEnd(18),
         rustQpsP95.padEnd(18),
         rustRes.p50.toFixed(1).padEnd(10),
         rustRes.p99.toFixed(1).padEnd(10),
@@ -540,21 +573,44 @@ async function main() {
         latImpStr.padEnd(10)
       ].join(' | '));
 
-      rustRuns[`rust_${channels}ch`] = rustRes;
-      rustRuns[`speedup_${channels}ch`] = speedup;
-      rustRuns[`latImp_${channels}ch`] = latImp;
+      levelResult[`rust_${channels}ch`] = rustRes;
+      levelResult[`speedup_rust_${channels}ch`] = speedup;
+      levelResult[`latImp_rust_${channels}ch`] = latImp;
+    }
+
+    // 3. Go Native Dynamic Connection Channels Execution
+    for (const channels of CHANNELS_TEST) {
+      const goRes = await runBenchmark(() => goClients[channels].executeSqlNative(SQL), concurrency, DURATION_MS);
+      const speedup = jsRes.qps > 0 ? goRes.qps / jsRes.qps : 0.0;
+      const latImp = jsRes.p95 > 0 ? ((jsRes.p95 - goRes.p95) / jsRes.p95) * 100 : 0.0;
+      
+      const goQpsP95 = `${goRes.qps.toFixed(1)} / ${goRes.p95.toFixed(1)}`;
+      const speedupStr = `${speedup.toFixed(2)}x`;
+      const latImpStr = `${latImp.toFixed(1)}%`;
+
+      console.log([
+        String(concurrency).padEnd(12),
+        `Go (${channels} Ch)`.padEnd(18),
+        goQpsP95.padEnd(18),
+        goRes.p50.toFixed(1).padEnd(10),
+        goRes.p99.toFixed(1).padEnd(10),
+        `${goRes.avgLagMs.toFixed(1)}ms`.padEnd(12),
+        `${goRes.maxLagMs.toFixed(1)}ms`.padEnd(12),
+        `${goRes.cpuUtil.toFixed(1)}%`.padEnd(10),
+        speedupStr.padEnd(10),
+        latImpStr.padEnd(10)
+      ].join(' | '));
+
+      levelResult[`go_${channels}ch`] = goRes;
+      levelResult[`speedup_go_${channels}ch`] = speedup;
+      levelResult[`latImp_go_${channels}ch`] = latImp;
     }
 
     console.log('-'.repeat(160));
-
-    results.push({
-      concurrency,
-      javascript: jsRes,
-      ...rustRuns,
-    });
+    matrixResults.push(levelResult);
   }
 
-  // Write comparative data JSON to file
+  // Write full comparative data JSON to file
   fs.writeFileSync(
     'benchmark_results.json',
     JSON.stringify(
@@ -566,10 +622,13 @@ async function main() {
           arch: os.arch(),
         },
         config: {
-          sql: "DML INSERT INTO AsyncBenchmarkTable",
+          sql: SQL,
           durationMs: DURATION_MS,
+          channels: CHANNELS_TEST,
+          concurrency: CONCURRENCY_LEVELS,
         },
-        runs: results,
+        customerReplication: customerResults,
+        matrixRuns: matrixResults,
       },
       null,
       2

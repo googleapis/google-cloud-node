@@ -1,116 +1,128 @@
-# Spanner Native Node.js (napi-rs) Extension POC
+# Spanner Shared Native Core (Rust & Go) Benchmark POC
 
 ## 1. Executive Summary
 
-This Proof of Concept (POC) demonstrates how replacing the gRPC hotspot in the Node.js `@google-cloud/spanner` client library with a compiled Rust extension completely breaks through V8's single-threaded performance bottleneck. In standard JavaScript applications under high concurrency, a single V8 execution thread blocks during CPU-intensive Protobuf serialization/deserialization and gRPC stream coordination, saturating at ~3000-5000 QPS. By offloading all Protobuf processing, network I/O, and channel dispatch to a compiled native Rust extension (`napi-rs`) running asynchronous Tokio worker threads, V8 remains completely free from per-request blocking CPU overhead. The result is linear throughput scaling, ultra-low tail latencies, and near-zero Event Loop Lag under extreme concurrent workloads.
+This Proof of Concept (POC) evaluates a **shared native core architecture** for Google Cloud Spanner client libraries (Node.js and Python) to overcome single-thread CPU bottlenecks (V8 event loop / Python GIL). 
+
+In standard Node.js applications under high concurrency, the single V8 execution thread blocks during CPU-intensive Protobuf serialization/deserialization and gRPC stream coordination, saturating at ~3000–5000 QPS. By offloading Protobuf processing, background gRPC stream decoding, connection pooling, and network I/O to a compiled native shared core running on background OS threads, the main V8 thread remains completely free from per-request blocking CPU overhead.
+
+To provide design reviewers with an **apples-to-apples performance comparison**, this repository includes:
+1. **Node.js Baseline (Pure JS):** Official `@google-cloud/spanner` library using `grpc-js`.
+2. **Node.js + Rust Shared Core:** Compiled native Rust crate (`spanner-core`) using `tonic`, `prost`, and `tokio`, bound to Node.js via `napi-rs` ThreadsafeFunction.
+3. **Node.js + Go Shared Core:** Compiled native Go module (`spanner-go`) compiled with `-buildmode=c-shared`, using standard `google.golang.org/grpc` with disabled DirectPath and bound to Node.js via a high-performance Node-API C++ bridge.
 
 ---
 
-## 2. Prerequisites
+## 2. Shared Core Architecture & Apples-to-Apples Design
 
-Before executing the POC orchestrator, ensure your local environment meets the following requirements:
+### 🎯 Apples-to-Apples Network Alignment (Disabled DirectPath)
+By default in GCP Compute environments, the official Go gRPC stack enables DirectPath (bypassing Google Frontend load balancers to route directly to Spanner backends via IPv6). In contrast, Node.js (`grpc-js`) and standard Rust (`tonic`) route through the Google Frontend (GFE) endpoint `spanner.googleapis.com:443`.
+
+To guarantee an exact **apples-to-apples network comparison**:
+* **DirectPath is explicitly disabled** in the Go shared core via `os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")` and `grpc.WithDisableServiceConfig()`.
+* Both Rust and Go shared cores connect to the exact same GFE endpoint (`spanner.googleapis.com:443`) over standard TLS.
+* Both Rust and Go cores maintain identical **multiplexed gRPC connection pool architectures** with round-robin stream dispatch.
+* Both cores handle lock-free in-memory GCP OAuth2 token caching and automatic background refresh.
+
+```
+                  ┌───────────────────────────────────────────────────────────┐
+                  │                   Node.js Client Layer                    │
+                  │ (NativeSpannerDatabase / poc_bridge.js / benchmark.js)    │
+                  └───────────────┬───────────────────────────┬───────────────┘
+                                  │                           │
+                   ┌──────────────┴──────────┐ ┌──────────────┴──────────┐
+                   │    Rust Native Bridge   │ │     Go Native Bridge    │
+                   │ (napi-rs ThreadsafeFn)  │ │ (Node-API C++ Bridge)   │
+                   └──────────────┬──────────┘ └──────────────┬──────────┘
+                                  │                           │
+                   ┌──────────────┴──────────┐ ┌──────────────┴──────────┐
+                   │    Rust Core Engine     │ │     Go Core Engine      │
+                   │ (spanner-core / tonic)  │ │ (spanner-go / c-shared) │
+                   └──────────────┬──────────┘ └──────────────┬──────────┘
+                                  │                           │
+                                  │   Standard GFE Routing    │
+                                  │ (spanner.googleapis.com)  │
+                                  └─────────────┬─────────────┘
+                                                │
+                                  ┌─────────────┴─────────────┐
+                                  │    Cloud Spanner API      │
+                                  └───────────────────────────┘
+```
+
+---
+
+## 3. Directory & Module Structure
+
+```
+spanner-native/
+├── __test__/
+│   ├── benchmark.js       # Unified 3-way benchmark suite (JS vs Rust vs Go)
+│   ├── poc_bridge.js      # Client library bridge supporting 'rust' and 'go' engines
+│   └── native_binding.js  # Dynamic loader for Rust (.node) and Go (.node) bindings
+├── spanner-core/          # Rust Shared Core crate
+│   ├── Cargo.toml
+│   └── src/lib.rs         # Tonic gRPC streaming, prost decoding, channel pooling
+├── spanner-go/            # Go Shared Core module
+│   ├── go.mod             # Go module definition
+│   ├── client.go          # Go CoreClient, connection pool, Disabled DirectPath, GCP auth
+│   ├── decode.go          # Protobuf decoding, chunk stitching (mergeProtoValues)
+│   ├── main.go            # cgo exports: InitGoCoreClient, CloseGoCoreClient, ExecuteStreamingSqlGo
+│   ├── spanner_go_napi.cc # Node-API C++ wrapper linking libspanner_go.so/.dylib
+│   └── build.sh           # Build script compiling Go c-shared library & spanner_go.node
+├── src/
+│   └── lib.rs             # Rust napi-rs bridge layer
+├── Cargo.toml             # Rust workspace definition
+├── package.json           # Node.js package manifest
+└── setup_and_run.sh       # Unified build & benchmark runner
+```
+
+---
+
+## 4. Compilation & Execution
+
+### Prerequisites
 * **Node.js:** Version 18 or higher.
-* **System Utilities:** `git` and `curl` installed.
-* **Google Cloud Credentials:** Proper Application Default Credentials (ADC) configured (e.g., via `gcloud auth application-default login` or the `GOOGLE_APPLICATION_CREDENTIALS` environment variable).
-* **Target Database:** Access to a real, active Google Cloud Spanner instance. 
-  > [!IMPORTANT]
-  > Do NOT use the local Spanner emulator. Actual physical network latency is required to accurately demonstrate thread offloading and the resulting throughput speedups.
+* **Rust:** Rust 1.80+ (`rustc` & `cargo`).
+* **Go:** Go 1.21+ (`go`).
+* **C++ Compiler:** `clang++` (macOS) or `g++` (Linux).
+* **GCP Credentials:** Active Application Default Credentials (`gcloud auth application-default login` or `GOOGLE_APPLICATION_CREDENTIALS`).
+
+### Automated Setup and Benchmark Execution
+Run the automated orchestrator script:
+```bash
+chmod +x setup_and_run.sh
+./setup_and_run.sh
+```
+
+This orchestrator will automatically:
+1. Verify Node.js, Rust, and Go toolchain installations (installing them if missing).
+2. Clone Google APIs protobuf definitions to `/tmp/googleapis`.
+3. Install npm dependencies.
+4. Compile the Rust native extension in release mode (`npx napi build --platform --release`).
+5. Compile the Go shared core in `-buildmode=c-shared` and build `spanner_go.node`.
+6. Verify all compiled binary outputs (`index.js`, `*.node`, `libspanner_go.so`/`.dylib`).
+7. Launch the complete 3-way comparative performance benchmark.
 
 ---
 
-## 3. Configuration
+## 5. Benchmark Metrics & Output
 
-The benchmark is pre-configured with standard Google Cloud Spanner testing details. If you want to customize the database, project, or benchmark query:
+The benchmark runner executes and records metrics for:
+* **Node.js Baseline (Pure JS)**
+* **Node.js + Rust Core**
+* **Node.js + Go Core**
 
-Open [__test__/benchmark.js](file:///Users/suvham/workspace/cloudNode/google-cloud-node/handwritten/spanner/spanner-native/__test__/benchmark.js) and edit the configuration block at the top:
-
-```javascript
-const PROJECT  = 'span-cloud-testing';
-const INSTANCE = 'suvham-testing';
-const DATABASE = 'benchmark_db_async';
-const TABLE    = 'AsyncBenchmarkTable';
-```
-
----
-
-## 4. Running the POC
-
-The entire setup, dependency installation, proto compilation, native compilation, and benchmark execution are fully automated:
-
-1. Make the orchestrator script executable:
-   ```bash
-   chmod +x setup_and_run.sh
-   ```
-2. Execute the orchestrator:
-   ```bash
-   ./setup_and_run.sh
-   ```
-
-This script will:
-1. Verify Node.js version compatibility.
-2. Install the Rust toolchain (`rustup` & `rustc`) and `@napi-rs/cli` globally if not already installed.
-3. Clone the standard `googleapis/googleapis` definitions to `/tmp/googleapis`.
-4. Install local npm package dependencies.
-5. Compile the native Rust extension using `napi build --platform --release`.
-6. Run the comparative performance benchmark suite.
-
----
-
-## 5. Understanding the Results
-
-During execution, the benchmark outputs a live comparative markdown table:
-
-```
-Concurrency  | Method           | QPS / p95          | p50 (ms)   | p99 (ms)   | Avg EL Lag   | Max EL Lag   | Speedup    | Lat Imp   
------------- |------------------|--------------------|------------|------------|--------------|--------------|------------|----------
-1            | JavaScript       | 280.0 / 4.5        | 3.2        | 5.8        | 0.1ms        | 0.4ms        | -          | -         
-1            | Rust (1 Ch)      | 310.0 / 4.0        | 2.9        | 4.9        | 0.0ms        | 0.2ms        | 1.11x      | 11.1%     
-1            | Rust (4 Ch)      | 315.0 / 3.9        | 2.8        | 4.7        | 0.0ms        | 0.2ms        | 1.13x      | 13.3%     
-...
-32           | JavaScript       | 3900.0 / 34.0      | 6.8        | 44.0       | 28.4ms       | 85.2ms       | -          | -         
-32           | Rust (1 Ch)      | 6200.0 / 5.4       | 4.6        | 6.9        | 0.1ms        | 0.8ms        | 1.59x      | 84.1%     
-32           | Rust (16 Ch)     | 12400.0 / 4.1      | 3.1        | 5.2        | 0.1ms        | 0.5ms        | 3.18x      | 87.9%     
-```
-
-### 🔑 Key Performance Indicators (KPIs):
-* **QPS / p95:** Under high concurrency, the JavaScript client saturates quickly as the V8 thread reaches 100% CPU utilization, leading to a flat QPS plateau. The Rust client scales near-linearly.
-* **Avg / Max EL Lag:** This is the most critical metric. 
-  * In the **JavaScript** path, event loop lag climbs exponentially as concurrency grows. This indicates V8 is heavily saturated with Protobuf and gRPC JavaScript overhead.
-  * In the **Rust** path, event loop lag remains near **0.0ms** even at peak concurrency. This mathematically proves that V8 is completely free from blocking per-request overhead.
-* **Lat Imp (Latency Improvement %):** Measures the percentage decrease in p95 tail latency achieved by Rust. High concurrency scenarios often show a **>80% reduction in latency**.
-* **Speedup:** The multiplicative factor representing the throughput increase of the native extension over standard JavaScript.
-
----
-
-## 6. How It Works
-
-Node.js uses a single thread for executing application code. When doing high-throughput gRPC, the cost of serializing JS objects into binary Protobuf buffers, routing them, and deserializing them is extremely blocking:
-
-```
-JavaScript Single-Threaded Execution (Hot-Path):
-[V8 Thread] ===[ Serialize JS ] ===[ Coordinate gRPC-js ] ===[ libuv I/O Wait ] ===[ Deserialize JS ]
-```
-
-Our native extension delegates these CPU-bound operations to a highly efficient compiled binary:
-
-```
-napi-rs Asynchronous Worker Architecture:
-[V8 Thread]  --- (dispatched instantly via Promise) -------------------------> [Promise Resolved]
-[libuv Pool] ===[ napi-rs AsyncTask ] ===[ Route Channel ] ===[ Tokio block_on ] ===[ Rust Protobuf decode ]
-```
-
-1. **Promise Dispatch:** When `executeSqlNative` is invoked, the V8 thread immediately receives a JavaScript `Promise` and is free to process other events (yielding zero lag).
-2. **Thread Pool Offloading:** The request details are passed to `SpannerTask::compute` running on a background OS thread (from libuv's thread pool).
-3. **Tokio Multiplexing:** Inside the native task, gRPC queries are dispatched over pre-established HTTP/2 channels statically warmed in a `CHANNELS` static pool using a fast multi-threaded Tokio runtime (`RUNTIME`).
-4. **Dynamic Round-Robin Routing:** Requests are spread dynamically across the designated channel pool subset to prevent TCP socket buffer congestion.
-5. **Promise Resolution:** The results are decoded to native Rust vectors and translated back to JavaScript array structures on the main thread during `resolve`, completing the Promise lifecycle.
-
----
-
-## 7. Limitations of this POC vs Production
-
-This POC is designed to demonstrate raw performance scaling and contains architectural shortcuts:
-* **Session Pool Borrowing:** Borrows session identifiers from `@google-cloud/spanner`'s internal session pool via a temporary checkout and release, whereas a production client would manage session pools entirely inside Rust.
-* **Read-Only SQL:** Designed only to execute single read-only SQL queries. Lacks transaction support, writes, and parameterized bindings.
-* **Simplified Type Conversion:** Converts column values to simple string representation types rather than rich Node/JS type conversions.
-* **Standard Error Handling:** Returns basic status message errors, missing automatic gRPC retries.
+### Benchmark Phases:
+1. **Warmup Phase:** Pre-warms connection pools, JIT compiler, and OAuth2 token caches for all 3 engines.
+2. **Verification Plan Tests:**
+   * **Test 1 (Read Volume Scaling):** Evaluates payload sizes (Small 100B, Medium 10KB, Large 100KB) across JS, Rust, and Go.
+   * **Test 2 (Wide Rows & Data Types Correctness):** Verifies type decoding consistency across INT64, FLOAT64, STRING, BOOL, TIMESTAMP, DATE, BYTES, JSON, NUMERIC, and ARRAY.
+   * **Test 4 (Multiplexed Session Scaling):** Compares session pool pressure and scaling under high concurrency.
+3. **Customer Replication Benchmark:** Fixed-count benchmark (110 concurrency, 1000 requests) comparing JS baseline against Rust and Go across 16, 32, and 50 channels.
+4. **Concurrency & Channel Matrix:** Concurrency levels (1, 8, 12, 32) across channel configurations (1, 4, 8, 10, 12, 16, 20 channels), recording:
+   * Throughput (QPS)
+   * Latencies: p50, p90, p95, p99
+   * Event Loop Lag: Average and Maximum (ms)
+   * Host CPU Utilization (%)
+   * Throughput Speedup (x) and Latency Improvement (%) vs pure Node.js baseline.
+5. **Results File:** Saves full structured JSON report to `benchmark_results.json`.
