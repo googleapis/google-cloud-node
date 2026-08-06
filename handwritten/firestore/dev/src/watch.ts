@@ -29,6 +29,7 @@ import {DocumentReference, Firestore, Query} from './index';
 import {logger} from './logger';
 import {QualifiedResourcePath} from './path';
 import {Timestamp} from './timestamp';
+import {normalizeBytes} from './convert';
 import {defaultConverter, RBTree} from './types';
 import {requestTag} from './util';
 
@@ -551,7 +552,7 @@ abstract class Watch<
           // set of docs as a snapshot, if there were changes.
           this.pushSnapshot(
             Timestamp.fromProto(change.readTime),
-            change.resumeToken as any,
+            normalizeBytes(change.resumeToken),
           );
         }
       } else if (change.targetChangeType === 'ADD') {

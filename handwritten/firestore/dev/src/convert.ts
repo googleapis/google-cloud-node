@@ -298,3 +298,23 @@ export function fieldsFromJson(document: ApiMapValue): ApiMapValue {
   }
   return result;
 }
+
+/**
+ * Normalizes bytes received from GAPIC or REST fallback responses into a Uint8Array.
+ *
+ * @private
+ * @internal
+ * @param bytes The raw bytes representation (base64 string, Uint8Array, Buffer, or null/undefined).
+ * @returns The normalized Uint8Array or undefined if no input was provided.
+ */
+export function normalizeBytes(
+  bytes?: string | Uint8Array | null,
+): Uint8Array | undefined {
+  if (!bytes) {
+    return undefined;
+  }
+  if (typeof bytes === 'string') {
+    return Buffer.from(bytes, 'base64');
+  }
+  return bytes;
+}
