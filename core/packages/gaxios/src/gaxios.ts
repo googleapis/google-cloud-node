@@ -147,6 +147,8 @@ export class Gaxios implements FetchCompliance {
   private async _defaultAdapter<T>(
     config: GaxiosOptionsPrepared,
   ): Promise<GaxiosResponse<T>> {
+    const usingInternalFetch =
+      !config.fetchImplementation && !this.defaults.fetchImplementation;
     const fetchImpl =
       config.fetchImplementation ||
       this.defaults.fetchImplementation ||
@@ -158,7 +160,7 @@ export class Gaxios implements FetchCompliance {
     delete preparedOpts.data;
 
     const res = (await fetchImpl(config.url, preparedOpts as {})) as Response;
-    const data = await this.getResponseData(config, res);
+    const data = await this.getResponseData(config, res, usingInternalFetch);
 
     if (!Object.getOwnPropertyDescriptor(res, 'data')?.configurable) {
       // Work-around for `node-fetch` v3 as accessing `data` would otherwise throw
@@ -227,6 +229,10 @@ export class Gaxios implements FetchCompliance {
         err = e;
       } else if (e instanceof Error) {
         err = new GaxiosError(e.message, opts, undefined, e);
+      } else if (typeof e === 'string') {
+        // Native `fetch` rejects with the `AbortSignal`'s reason as-is, which
+        // is not necessarily an `Error`.
+        err = new GaxiosError(e, opts, undefined, e);
       } else {
         err = new GaxiosError('Unexpected Gaxios Error', opts, undefined, e);
       }
@@ -257,6 +263,7 @@ export class Gaxios implements FetchCompliance {
   private async getResponseData(
     opts: GaxiosOptionsPrepared,
     res: Response,
+    usingInternalFetch = false,
   ): Promise<ReturnType<JSON['parse']>> {
     if (res.status === HTTP_STATUS_NO_CONTENT) {
       return '';
@@ -277,6 +284,14 @@ export class Gaxios implements FetchCompliance {
 
     switch (opts.responseType) {
       case 'stream':
+        if (usingInternalFetch && res.body && !(res.body instanceof Readable)) {
+          // Native `fetch` resolves a `ReadableStream`, so convert it to retain
+          // the `stream.Readable` contract. A caller-provided
+          // `fetchImplementation` keeps its own body type.
+          return Readable.fromWeb(
+            res.body as unknown as import('stream/web').ReadableStream,
+          );
+        }
         return res.body;
       case 'json': {
         const data = await res.text();
@@ -671,10 +686,16 @@ export class Gaxios implements FetchCompliance {
 
   static async #getFetch() {
     const hasWindow = typeof window !== 'undefined' && !!window;
+    const hasGlobalFetch = typeof globalThis.fetch === 'function';
 
+    // Prefer native `fetch`, available since Node 18 - this package's minimum
+    // supported version. `node-fetch` can intermittently fail requests with
+    // `Premature close` errors and remains only as a fallback.
     this.#fetch ||= hasWindow
       ? window.fetch
-      : (await import('node-fetch')).default;
+      : hasGlobalFetch
+        ? globalThis.fetch
+        : (await import('node-fetch')).default;
 
     return this.#fetch;
   }
