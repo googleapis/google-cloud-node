@@ -1374,7 +1374,7 @@ export class Firestore implements firestore.Firestore {
         const tag = requestTag();
 
         // Capture the error stack to preserve stack tracing across async calls.
-        const stack = Error().stack!;
+        const callsiteError = Error();
 
         return this.initializeIfNeeded(tag)
           .then(() => {
@@ -1382,7 +1382,7 @@ export class Firestore implements firestore.Firestore {
             return reader.get(tag);
           })
           .catch(err => {
-            throw wrapError(err, stack);
+            throw wrapError(err, callsiteError.stack!);
           });
       },
     );
