@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
+
 /**
  * Type declarations for custom Firestore bundle persistence protocol (bundle.proto).
  * This specification is independent of the standard GAPIC client API.
@@ -21,30 +23,30 @@ export namespace firestore {
     metadata?: BundleMetadata | null;
     namedQuery?: NamedQuery | null;
     documentMetadata?: BundledDocumentMetadata | null;
-    document?: any | null;
+    document?: google.firestore.v1.IDocument | null;
   }
   export interface BundleMetadata {
     id?: string | null;
-    createTime?: any | null;
+    createTime?: google.protobuf.ITimestamp | null;
     version?: number | null;
     totalDocuments?: number | null;
-    totalBytes?: number | null;
+    totalBytes?: number | string | null;
   }
   export interface NamedQuery {
     name?: string | null;
     bundledQuery?: BundledQuery | null;
-    readTime?: any | null;
+    readTime?: google.protobuf.ITimestamp | null;
   }
   export interface BundledDocumentMetadata {
     name?: string | null;
-    readTime?: any | null;
+    readTime?: google.protobuf.ITimestamp | null;
     exists?: boolean | null;
     queries?: string[] | null;
   }
   export interface BundledQuery {
     parent?: string | null;
-    structuredQuery?: any | null;
-    limitType?: string | null;
+    structuredQuery?: google.firestore.v1.IStructuredQuery | null;
+    limitType?: 'FIRST' | 'LAST' | null;
   }
   export type IBundleElement = BundleElement;
   export type IBundleMetadata = BundleMetadata;
