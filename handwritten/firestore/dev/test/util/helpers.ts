@@ -27,7 +27,7 @@ import * as through2 from 'through2';
 import {firestore} from '../../protos/firestore_v1_proto_api';
 import type {grpc} from 'google-gax';
 import * as proto from '../../protos/firestore_v1_proto_api';
-import * as v1 from '../../src/v1';
+import * as v1 from '@google-cloud/firestore-api/build/src/v1';
 import {Firestore, QueryDocumentSnapshot} from '../../src';
 import {ClientPool} from '../../src/pool';
 import {GapicClient} from '../../src/types';
