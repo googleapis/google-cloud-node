@@ -37,6 +37,9 @@ tools:
       version: 7.5.8
     - name: protobufjs-cli
       version: 1.2.0
+  protoc:
+    version: "33.2"
+    sha256: b24b53f87c151bfd48b112fe4c3a6e6574e5198874f38036aff41df3456b8caf
 default:
   keep:
     - librarian.js
