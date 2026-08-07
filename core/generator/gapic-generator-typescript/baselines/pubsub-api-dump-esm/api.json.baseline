@@ -4825,6 +4825,7 @@
           ]
         }
       ],
+      "resumableUploads": [],
       "longRunning": [],
       "diregapicLRO": [],
       "streaming": [],
@@ -9692,6 +9693,7 @@
           ]
         }
       ],
+      "resumableUploads": [],
       "longRunning": [],
       "diregapicLRO": [],
       "streaming": [],
@@ -15858,6 +15860,7 @@
           ]
         }
       ],
+      "resumableUploads": [],
       "longRunning": [],
       "diregapicLRO": [],
       "streaming": [

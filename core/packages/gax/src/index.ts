@@ -36,6 +36,17 @@ export {
   PageDescriptor,
   StreamDescriptor,
 } from './descriptor';
+export {ResumableUploadDescriptor} from './resumableUpload';
+export {
+  ResumableUpload,
+  resumableUploadStub,
+  ResumableUploadState,
+} from './resumableUpload';
+export type {
+  ResumableUploadContext,
+  ResumableUploadProgress,
+  ResumableUploadStartParams,
+} from './resumableUpload';
 export {
   CallOptions,
   CallSettings,

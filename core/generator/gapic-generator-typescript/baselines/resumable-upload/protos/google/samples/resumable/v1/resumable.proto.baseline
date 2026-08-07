@@ -1,0 +1,78 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Synthetic fixture used by the baseline tests to exercise resumable upload
+// method generation. The google.api.media_upload annotation is defined by
+// the local copy of google/api/media_upload.proto.
+
+syntax = "proto3";
+
+package google.samples.resumable.v1;
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/api/media_upload.proto";
+
+option csharp_namespace = "Google.Samples.Resumable.V1";
+option go_package = "google.golang.org/genproto/googleapis/samples/resumable/v1;resumable";
+option java_multiple_files = true;
+option java_outer_classname = "ResumableProto";
+option java_package = "com.google.samples.resumable.v1";
+option php_namespace = "Google\\Samples\\Resumable\\V1";
+option ruby_package = "Google::Samples::Resumable::V1";
+
+service ResumableUploadService {
+  option (google.api.default_host) = "resumable.googleapis.com";
+  option (google.api.oauth_scopes) =
+      "https://www.googleapis.com/auth/cloud-platform";
+
+  // Creates a resumable upload session.
+  rpc CreateResumableUpload(CreateResumableUploadRequest)
+      returns (CreateResumableUploadResponse) {
+    option (google.api.http) = {
+      post: "/v1/uploads"
+      body: "*"
+    };
+    option (google.api.media_upload) = {
+      enabled: true
+      media_upload_paths: "/resumable/upload"
+    };
+  }
+
+  // Returns the status of a previously created upload session.
+  rpc GetUploadStatus(GetUploadStatusRequest)
+      returns (GetUploadStatusResponse) {
+    option (google.api.http) = {
+      get: "/v1/uploads/{upload_url}"
+    };
+  }
+}
+
+message CreateResumableUploadRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message CreateResumableUploadResponse {
+  string upload_url = 1;
+  string status = 2;
+}
+
+message GetUploadStatusRequest {
+  string upload_url = 1;
+}
+
+message GetUploadStatusResponse {
+  string status = 1;
+}

@@ -30,6 +30,12 @@ describe('Baseline tests', () => {
     useCommonProto: true,
   });
   runBaselineTest({
+    baselineName: 'resumable-upload',
+    outputDir: '.test-out-resumable-upload',
+    protoPath: 'google/samples/resumable/v1/resumable.proto',
+    useCommonProto: false,
+  });
+  runBaselineTest({
     baselineName: 'dlp',
     outputDir: '.test-out-dlp',
     protoPath: 'google/privacy/dlp/v2/*.proto',
