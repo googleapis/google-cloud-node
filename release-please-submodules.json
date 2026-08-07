@@ -2,41 +2,8 @@
   "commit-batch-size": 10,
   "include-component-in-tag": true,
   "packages": {
-    "handwritten/bigquery": {
-      "component": "bigquery"
-    },
-    "handwritten/bigquery-storage": {
-      "component": "bigquery-storage"
-    },
-    "handwritten/bigtable": {
-      "component": "bigtable"
-    },
-    "handwritten/cloud-profiler": {
-      "component": "cloud-profiler"
-    },
-    "handwritten/datastore": {
-      "component": "datastore"
-    },
-    "handwritten/error-reporting": {
-      "component": "error-reporting"
-    },
     "handwritten/firestore": {
       "component": "firestore"
-    },
-    "handwritten/google-cloud-dns": {
-      "component": "dns"
-    },
-    "handwritten/logging": {
-      "component": "logging"
-    },
-    "handwritten/logging-bunyan": {
-      "component": "logging-bunyan"
-    },
-    "handwritten/logging-winston": {
-      "component": "logging-winston"
-    },
-    "handwritten/pubsub": {
-      "component": "pubsub"
     },
     "handwritten/spanner": {
       "component": "spanner"

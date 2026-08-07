@@ -39,7 +39,8 @@ import {generateId, reapBackups, reapInstances} from './common';
 import {BigtableTableAdminClient} from '../src/v2';
 import {ServiceError} from 'google-gax';
 import {BigtableDate, QueryResultRow} from '../src/execute-query/values';
-import {google} from '../protos/protos';
+import {protos} from '../src';
+import google = protos.google;
 
 type IBackup = google.bigtable.admin.v2.IBackup;
 
@@ -1678,7 +1679,10 @@ describe('Bigtable', () => {
                   storage: 'ssd',
                 },
               ],
-              labels: {'prod-label': 'prod-label'},
+              labels: {
+                'prod-label': 'prod-label',
+                time_created: String(Date.now()),
+              },
               type: 'production',
             };
             const [, operation] = await instance.create(instanceOptions);
