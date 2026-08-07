@@ -828,6 +828,15 @@ export namespace google {
 
                     /** AddressInfo postalCode */
                     postalCode?: (string|null);
+
+                    /** AddressInfo addressLine */
+                    addressLine?: (string|null);
+
+                    /** AddressInfo city */
+                    city?: (string|null);
+
+                    /** AddressInfo administrativeArea */
+                    administrativeArea?: (string|null);
                 }
 
                 /** Represents an AddressInfo. */
@@ -850,6 +859,15 @@ export namespace google {
 
                     /** AddressInfo postalCode. */
                     public postalCode: string;
+
+                    /** AddressInfo addressLine. */
+                    public addressLine: string;
+
+                    /** AddressInfo city. */
+                    public city: string;
+
+                    /** AddressInfo administrativeArea. */
+                    public administrativeArea: string;
 
                     /**
                      * Creates a new AddressInfo instance using the specified properties.
@@ -1121,6 +1139,12 @@ export namespace google {
                     /** AudienceMember compositeData */
                     compositeData?: (google.ads.datamanager.v1.ICompositeData|null);
 
+                    /** AudienceMember googleUserIdData */
+                    googleUserIdData?: (google.ads.datamanager.v1.IGoogleUserIdData|null);
+
+                    /** AudienceMember partnerProvidedIdData */
+                    partnerProvidedIdData?: (google.ads.datamanager.v1.IPartnerProvidedIdData|null);
+
                     /** AudienceMember consent */
                     consent?: (google.ads.datamanager.v1.IConsent|null);
                 }
@@ -1155,11 +1179,17 @@ export namespace google {
                     /** AudienceMember compositeData. */
                     public compositeData?: (google.ads.datamanager.v1.ICompositeData|null);
 
+                    /** AudienceMember googleUserIdData. */
+                    public googleUserIdData?: (google.ads.datamanager.v1.IGoogleUserIdData|null);
+
+                    /** AudienceMember partnerProvidedIdData. */
+                    public partnerProvidedIdData?: (google.ads.datamanager.v1.IPartnerProvidedIdData|null);
+
                     /** AudienceMember consent. */
                     public consent?: (google.ads.datamanager.v1.IConsent|null);
 
                     /** AudienceMember data. */
-                    public data?: ("userData"|"pairData"|"mobileData"|"userIdData"|"ppidData"|"compositeData");
+                    public data?: ("userData"|"pairData"|"mobileData"|"userIdData"|"ppidData"|"compositeData"|"googleUserIdData"|"partnerProvidedIdData");
 
                     /**
                      * Creates a new AudienceMember instance using the specified properties.
@@ -1833,6 +1863,200 @@ export namespace google {
 
                     /**
                      * Gets the default type url for IpData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoogleUserIdData. */
+                interface IGoogleUserIdData {
+
+                    /** GoogleUserIdData googleUserIds */
+                    googleUserIds?: (string[]|null);
+                }
+
+                /** Represents a GoogleUserIdData. */
+                class GoogleUserIdData implements IGoogleUserIdData {
+
+                    /**
+                     * Constructs a new GoogleUserIdData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IGoogleUserIdData);
+
+                    /** GoogleUserIdData googleUserIds. */
+                    public googleUserIds: string[];
+
+                    /**
+                     * Creates a new GoogleUserIdData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleUserIdData instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IGoogleUserIdData): google.ads.datamanager.v1.GoogleUserIdData;
+
+                    /**
+                     * Encodes the specified GoogleUserIdData message. Does not implicitly {@link google.ads.datamanager.v1.GoogleUserIdData.verify|verify} messages.
+                     * @param message GoogleUserIdData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IGoogleUserIdData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleUserIdData message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.GoogleUserIdData.verify|verify} messages.
+                     * @param message GoogleUserIdData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IGoogleUserIdData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleUserIdData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleUserIdData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.GoogleUserIdData;
+
+                    /**
+                     * Decodes a GoogleUserIdData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleUserIdData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.GoogleUserIdData;
+
+                    /**
+                     * Verifies a GoogleUserIdData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleUserIdData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleUserIdData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.GoogleUserIdData;
+
+                    /**
+                     * Creates a plain object from a GoogleUserIdData message. Also converts values to other types if specified.
+                     * @param message GoogleUserIdData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.GoogleUserIdData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleUserIdData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleUserIdData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PartnerProvidedIdData. */
+                interface IPartnerProvidedIdData {
+
+                    /** PartnerProvidedIdData partnerProvidedIds */
+                    partnerProvidedIds?: (string[]|null);
+                }
+
+                /** Represents a PartnerProvidedIdData. */
+                class PartnerProvidedIdData implements IPartnerProvidedIdData {
+
+                    /**
+                     * Constructs a new PartnerProvidedIdData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IPartnerProvidedIdData);
+
+                    /** PartnerProvidedIdData partnerProvidedIds. */
+                    public partnerProvidedIds: string[];
+
+                    /**
+                     * Creates a new PartnerProvidedIdData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PartnerProvidedIdData instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IPartnerProvidedIdData): google.ads.datamanager.v1.PartnerProvidedIdData;
+
+                    /**
+                     * Encodes the specified PartnerProvidedIdData message. Does not implicitly {@link google.ads.datamanager.v1.PartnerProvidedIdData.verify|verify} messages.
+                     * @param message PartnerProvidedIdData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IPartnerProvidedIdData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PartnerProvidedIdData message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.PartnerProvidedIdData.verify|verify} messages.
+                     * @param message PartnerProvidedIdData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IPartnerProvidedIdData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PartnerProvidedIdData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PartnerProvidedIdData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.PartnerProvidedIdData;
+
+                    /**
+                     * Decodes a PartnerProvidedIdData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PartnerProvidedIdData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.PartnerProvidedIdData;
+
+                    /**
+                     * Verifies a PartnerProvidedIdData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PartnerProvidedIdData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PartnerProvidedIdData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.PartnerProvidedIdData;
+
+                    /**
+                     * Creates a plain object from a PartnerProvidedIdData message. Also converts values to other types if specified.
+                     * @param message PartnerProvidedIdData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.PartnerProvidedIdData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PartnerProvidedIdData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PartnerProvidedIdData
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3410,7 +3634,9 @@ export namespace google {
                     INVALID_CUSTOM_VARIABLE_VALUE = 119,
                     CUSTOM_VARIABLE_NOT_FOUND = 120,
                     BASELINE_LOCATION_AUTO_DETECTION_FAILED = 122,
-                    INSIGHTS_MISSING_FOR_DIMENSION = 123
+                    INSIGHTS_MISSING_FOR_DIMENSION = 123,
+                    REQUIRED_PREREQUISITE_LINK_MISSING = 124,
+                    INVALID_REMOVE_AS_OF_TIME = 125
                 }
 
                 /** Properties of an Event. */
@@ -4531,6 +4757,20 @@ export namespace google {
                     public removeAudienceMembers(request: google.ads.datamanager.v1.IRemoveAudienceMembersRequest): Promise<google.ads.datamanager.v1.RemoveAudienceMembersResponse>;
 
                     /**
+                     * Calls RemoveAllAudienceMembers.
+                     * @param request RemoveAllAudienceMembersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RemoveAllAudienceMembersResponse
+                     */
+                    public removeAllAudienceMembers(request: google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest, callback: google.ads.datamanager.v1.IngestionService.RemoveAllAudienceMembersCallback): void;
+
+                    /**
+                     * Calls RemoveAllAudienceMembers.
+                     * @param request RemoveAllAudienceMembersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public removeAllAudienceMembers(request: google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest): Promise<google.ads.datamanager.v1.RemoveAllAudienceMembersResponse>;
+
+                    /**
                      * Calls IngestEvents.
                      * @param request IngestEventsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and IngestEventsResponse
@@ -4588,6 +4828,13 @@ export namespace google {
                      * @param [response] RemoveAudienceMembersResponse
                      */
                     type RemoveAudienceMembersCallback = (error: (Error|null), response?: google.ads.datamanager.v1.RemoveAudienceMembersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.datamanager.v1.IngestionService|removeAllAudienceMembers}.
+                     * @param error Error, if any
+                     * @param [response] RemoveAllAudienceMembersResponse
+                     */
+                    type RemoveAllAudienceMembersCallback = (error: (Error|null), response?: google.ads.datamanager.v1.RemoveAllAudienceMembersResponse) => void;
 
                     /**
                      * Callback as used by {@link google.ads.datamanager.v1.IngestionService|ingestEvents}.
@@ -4749,6 +4996,9 @@ export namespace google {
 
                     /** IngestAudienceMembersResponse requestId */
                     requestId?: (string|null);
+
+                    /** IngestAudienceMembersResponse fieldWarnings */
+                    fieldWarnings?: (google.ads.datamanager.v1.IFieldWarning[]|null);
                 }
 
                 /** Represents an IngestAudienceMembersResponse. */
@@ -4762,6 +5012,9 @@ export namespace google {
 
                     /** IngestAudienceMembersResponse requestId. */
                     public requestId: string;
+
+                    /** IngestAudienceMembersResponse fieldWarnings. */
+                    public fieldWarnings: google.ads.datamanager.v1.IFieldWarning[];
 
                     /**
                      * Creates a new IngestAudienceMembersResponse instance using the specified properties.
@@ -5059,6 +5312,212 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RemoveAllAudienceMembersRequest. */
+                interface IRemoveAllAudienceMembersRequest {
+
+                    /** RemoveAllAudienceMembersRequest destinations */
+                    destinations?: (google.ads.datamanager.v1.IDestination[]|null);
+
+                    /** RemoveAllAudienceMembersRequest removeAsOfTime */
+                    removeAsOfTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RemoveAllAudienceMembersRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a RemoveAllAudienceMembersRequest. */
+                class RemoveAllAudienceMembersRequest implements IRemoveAllAudienceMembersRequest {
+
+                    /**
+                     * Constructs a new RemoveAllAudienceMembersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest);
+
+                    /** RemoveAllAudienceMembersRequest destinations. */
+                    public destinations: google.ads.datamanager.v1.IDestination[];
+
+                    /** RemoveAllAudienceMembersRequest removeAsOfTime. */
+                    public removeAsOfTime?: (google.protobuf.ITimestamp|null);
+
+                    /** RemoveAllAudienceMembersRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new RemoveAllAudienceMembersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveAllAudienceMembersRequest instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest): google.ads.datamanager.v1.RemoveAllAudienceMembersRequest;
+
+                    /**
+                     * Encodes the specified RemoveAllAudienceMembersRequest message. Does not implicitly {@link google.ads.datamanager.v1.RemoveAllAudienceMembersRequest.verify|verify} messages.
+                     * @param message RemoveAllAudienceMembersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveAllAudienceMembersRequest message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RemoveAllAudienceMembersRequest.verify|verify} messages.
+                     * @param message RemoveAllAudienceMembersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveAllAudienceMembersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveAllAudienceMembersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.RemoveAllAudienceMembersRequest;
+
+                    /**
+                     * Decodes a RemoveAllAudienceMembersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveAllAudienceMembersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.RemoveAllAudienceMembersRequest;
+
+                    /**
+                     * Verifies a RemoveAllAudienceMembersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveAllAudienceMembersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveAllAudienceMembersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.RemoveAllAudienceMembersRequest;
+
+                    /**
+                     * Creates a plain object from a RemoveAllAudienceMembersRequest message. Also converts values to other types if specified.
+                     * @param message RemoveAllAudienceMembersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.RemoveAllAudienceMembersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveAllAudienceMembersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveAllAudienceMembersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RemoveAllAudienceMembersResponse. */
+                interface IRemoveAllAudienceMembersResponse {
+
+                    /** RemoveAllAudienceMembersResponse requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a RemoveAllAudienceMembersResponse. */
+                class RemoveAllAudienceMembersResponse implements IRemoveAllAudienceMembersResponse {
+
+                    /**
+                     * Constructs a new RemoveAllAudienceMembersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse);
+
+                    /** RemoveAllAudienceMembersResponse requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new RemoveAllAudienceMembersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveAllAudienceMembersResponse instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse): google.ads.datamanager.v1.RemoveAllAudienceMembersResponse;
+
+                    /**
+                     * Encodes the specified RemoveAllAudienceMembersResponse message. Does not implicitly {@link google.ads.datamanager.v1.RemoveAllAudienceMembersResponse.verify|verify} messages.
+                     * @param message RemoveAllAudienceMembersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveAllAudienceMembersResponse message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RemoveAllAudienceMembersResponse.verify|verify} messages.
+                     * @param message RemoveAllAudienceMembersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveAllAudienceMembersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveAllAudienceMembersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.RemoveAllAudienceMembersResponse;
+
+                    /**
+                     * Decodes a RemoveAllAudienceMembersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveAllAudienceMembersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.RemoveAllAudienceMembersResponse;
+
+                    /**
+                     * Verifies a RemoveAllAudienceMembersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveAllAudienceMembersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveAllAudienceMembersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.RemoveAllAudienceMembersResponse;
+
+                    /**
+                     * Creates a plain object from a RemoveAllAudienceMembersResponse message. Also converts values to other types if specified.
+                     * @param message RemoveAllAudienceMembersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.RemoveAllAudienceMembersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveAllAudienceMembersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveAllAudienceMembersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an IngestEventsRequest. */
                 interface IIngestEventsRequest {
 
@@ -5191,6 +5650,9 @@ export namespace google {
 
                     /** IngestEventsResponse requestId */
                     requestId?: (string|null);
+
+                    /** IngestEventsResponse fieldWarnings */
+                    fieldWarnings?: (google.ads.datamanager.v1.IFieldWarning[]|null);
                 }
 
                 /** Represents an IngestEventsResponse. */
@@ -5204,6 +5666,9 @@ export namespace google {
 
                     /** IngestEventsResponse requestId. */
                     public requestId: string;
+
+                    /** IngestEventsResponse fieldWarnings. */
+                    public fieldWarnings: google.ads.datamanager.v1.IFieldWarning[];
 
                     /**
                      * Creates a new IngestEventsResponse instance using the specified properties.
@@ -5684,6 +6149,597 @@ export namespace google {
                     BASE64 = 2
                 }
 
+                /** Properties of an ErrorInfo. */
+                interface IErrorInfo {
+
+                    /** ErrorInfo errorCounts */
+                    errorCounts?: (google.ads.datamanager.v1.IErrorCount[]|null);
+                }
+
+                /** Represents an ErrorInfo. */
+                class ErrorInfo implements IErrorInfo {
+
+                    /**
+                     * Constructs a new ErrorInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IErrorInfo);
+
+                    /** ErrorInfo errorCounts. */
+                    public errorCounts: google.ads.datamanager.v1.IErrorCount[];
+
+                    /**
+                     * Creates a new ErrorInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ErrorInfo instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IErrorInfo): google.ads.datamanager.v1.ErrorInfo;
+
+                    /**
+                     * Encodes the specified ErrorInfo message. Does not implicitly {@link google.ads.datamanager.v1.ErrorInfo.verify|verify} messages.
+                     * @param message ErrorInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IErrorInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ErrorInfo message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.ErrorInfo.verify|verify} messages.
+                     * @param message ErrorInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IErrorInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ErrorInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ErrorInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.ErrorInfo;
+
+                    /**
+                     * Decodes an ErrorInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ErrorInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.ErrorInfo;
+
+                    /**
+                     * Verifies an ErrorInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ErrorInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ErrorInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.ErrorInfo;
+
+                    /**
+                     * Creates a plain object from an ErrorInfo message. Also converts values to other types if specified.
+                     * @param message ErrorInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.ErrorInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ErrorInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ErrorInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ErrorCount. */
+                interface IErrorCount {
+
+                    /** ErrorCount recordCount */
+                    recordCount?: (number|Long|string|null);
+
+                    /** ErrorCount reason */
+                    reason?: (google.ads.datamanager.v1.ProcessingErrorReason|keyof typeof google.ads.datamanager.v1.ProcessingErrorReason|null);
+                }
+
+                /** Represents an ErrorCount. */
+                class ErrorCount implements IErrorCount {
+
+                    /**
+                     * Constructs a new ErrorCount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IErrorCount);
+
+                    /** ErrorCount recordCount. */
+                    public recordCount: (number|Long|string);
+
+                    /** ErrorCount reason. */
+                    public reason: (google.ads.datamanager.v1.ProcessingErrorReason|keyof typeof google.ads.datamanager.v1.ProcessingErrorReason);
+
+                    /**
+                     * Creates a new ErrorCount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ErrorCount instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IErrorCount): google.ads.datamanager.v1.ErrorCount;
+
+                    /**
+                     * Encodes the specified ErrorCount message. Does not implicitly {@link google.ads.datamanager.v1.ErrorCount.verify|verify} messages.
+                     * @param message ErrorCount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IErrorCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ErrorCount message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.ErrorCount.verify|verify} messages.
+                     * @param message ErrorCount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IErrorCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ErrorCount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ErrorCount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.ErrorCount;
+
+                    /**
+                     * Decodes an ErrorCount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ErrorCount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.ErrorCount;
+
+                    /**
+                     * Verifies an ErrorCount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ErrorCount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ErrorCount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.ErrorCount;
+
+                    /**
+                     * Creates a plain object from an ErrorCount message. Also converts values to other types if specified.
+                     * @param message ErrorCount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.ErrorCount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ErrorCount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ErrorCount
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WarningInfo. */
+                interface IWarningInfo {
+
+                    /** WarningInfo warningCounts */
+                    warningCounts?: (google.ads.datamanager.v1.IWarningCount[]|null);
+                }
+
+                /** Represents a WarningInfo. */
+                class WarningInfo implements IWarningInfo {
+
+                    /**
+                     * Constructs a new WarningInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IWarningInfo);
+
+                    /** WarningInfo warningCounts. */
+                    public warningCounts: google.ads.datamanager.v1.IWarningCount[];
+
+                    /**
+                     * Creates a new WarningInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WarningInfo instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IWarningInfo): google.ads.datamanager.v1.WarningInfo;
+
+                    /**
+                     * Encodes the specified WarningInfo message. Does not implicitly {@link google.ads.datamanager.v1.WarningInfo.verify|verify} messages.
+                     * @param message WarningInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IWarningInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WarningInfo message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.WarningInfo.verify|verify} messages.
+                     * @param message WarningInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IWarningInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WarningInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WarningInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.WarningInfo;
+
+                    /**
+                     * Decodes a WarningInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WarningInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.WarningInfo;
+
+                    /**
+                     * Verifies a WarningInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WarningInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WarningInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.WarningInfo;
+
+                    /**
+                     * Creates a plain object from a WarningInfo message. Also converts values to other types if specified.
+                     * @param message WarningInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.WarningInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WarningInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WarningInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a WarningCount. */
+                interface IWarningCount {
+
+                    /** WarningCount recordCount */
+                    recordCount?: (number|Long|string|null);
+
+                    /** WarningCount reason */
+                    reason?: (google.ads.datamanager.v1.ProcessingWarningReason|keyof typeof google.ads.datamanager.v1.ProcessingWarningReason|null);
+                }
+
+                /** Represents a WarningCount. */
+                class WarningCount implements IWarningCount {
+
+                    /**
+                     * Constructs a new WarningCount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IWarningCount);
+
+                    /** WarningCount recordCount. */
+                    public recordCount: (number|Long|string);
+
+                    /** WarningCount reason. */
+                    public reason: (google.ads.datamanager.v1.ProcessingWarningReason|keyof typeof google.ads.datamanager.v1.ProcessingWarningReason);
+
+                    /**
+                     * Creates a new WarningCount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WarningCount instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IWarningCount): google.ads.datamanager.v1.WarningCount;
+
+                    /**
+                     * Encodes the specified WarningCount message. Does not implicitly {@link google.ads.datamanager.v1.WarningCount.verify|verify} messages.
+                     * @param message WarningCount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IWarningCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WarningCount message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.WarningCount.verify|verify} messages.
+                     * @param message WarningCount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IWarningCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WarningCount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WarningCount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.WarningCount;
+
+                    /**
+                     * Decodes a WarningCount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WarningCount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.WarningCount;
+
+                    /**
+                     * Verifies a WarningCount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WarningCount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WarningCount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.WarningCount;
+
+                    /**
+                     * Creates a plain object from a WarningCount message. Also converts values to other types if specified.
+                     * @param message WarningCount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.WarningCount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WarningCount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WarningCount
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** ProcessingErrorReason enum. */
+                enum ProcessingErrorReason {
+                    PROCESSING_ERROR_REASON_UNSPECIFIED = 0,
+                    PROCESSING_ERROR_REASON_INVALID_CUSTOM_VARIABLE = 1,
+                    PROCESSING_ERROR_REASON_CUSTOM_VARIABLE_NOT_ENABLED = 2,
+                    PROCESSING_ERROR_REASON_EVENT_TOO_OLD = 3,
+                    PROCESSING_ERROR_REASON_DENIED_CONSENT = 4,
+                    PROCESSING_ERROR_REASON_NO_CONSENT = 5,
+                    PROCESSING_ERROR_REASON_UNKNOWN_CONSENT = 6,
+                    PROCESSING_ERROR_REASON_DUPLICATE_GCLID = 7,
+                    PROCESSING_ERROR_REASON_DUPLICATE_TRANSACTION_ID = 8,
+                    PROCESSING_ERROR_REASON_INVALID_GBRAID = 9,
+                    PROCESSING_ERROR_REASON_INVALID_GCLID = 10,
+                    PROCESSING_ERROR_REASON_INVALID_MERCHANT_ID = 11,
+                    PROCESSING_ERROR_REASON_INVALID_WBRAID = 12,
+                    PROCESSING_ERROR_REASON_INTERNAL_ERROR = 13,
+                    PROCESSING_ERROR_REASON_DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED = 14,
+                    PROCESSING_ERROR_REASON_INVALID_EVENT = 15,
+                    PROCESSING_ERROR_REASON_INSUFFICIENT_MATCHED_TRANSACTIONS = 16,
+                    PROCESSING_ERROR_REASON_INSUFFICIENT_TRANSACTIONS = 17,
+                    PROCESSING_ERROR_REASON_INVALID_FORMAT = 18,
+                    PROCESSING_ERROR_REASON_DECRYPTION_ERROR = 19,
+                    PROCESSING_ERROR_REASON_DEK_DECRYPTION_ERROR = 20,
+                    PROCESSING_ERROR_REASON_INVALID_WIP = 21,
+                    PROCESSING_ERROR_REASON_INVALID_KEK = 22,
+                    PROCESSING_ERROR_REASON_WIP_AUTH_FAILED = 23,
+                    PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED = 24,
+                    PROCESSING_ERROR_REASON_AWS_AUTH_FAILED = 27,
+                    PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR = 25,
+                    PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER = 26,
+                    PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID = 28,
+                    PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND = 29,
+                    PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID = 30,
+                    PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID = 31,
+                    PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID = 32,
+                    PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS = 33,
+                    PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT = 34,
+                    PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND = 35,
+                    PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR = 36,
+                    PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID = 37,
+                    PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND = 38,
+                    PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK = 39,
+                    PROCESSING_ERROR_REASON_TOO_RECENT_CLICK = 40,
+                    PROCESSING_ERROR_REASON_INVALID_CLICK = 41,
+                    PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK = 42,
+                    PROCESSING_ERROR_REASON_CLICK_NOT_FOUND = 43,
+                    PROCESSING_ERROR_REASON_EXTERNAL_ATTRIBUTION_DATA_MISSING = 44
+                }
+
+                /** ProcessingWarningReason enum. */
+                enum ProcessingWarningReason {
+                    PROCESSING_WARNING_REASON_UNSPECIFIED = 0,
+                    PROCESSING_WARNING_REASON_KEK_PERMISSION_DENIED = 1,
+                    PROCESSING_WARNING_REASON_DEK_DECRYPTION_ERROR = 2,
+                    PROCESSING_WARNING_REASON_DECRYPTION_ERROR = 3,
+                    PROCESSING_WARNING_REASON_WIP_AUTH_FAILED = 4,
+                    PROCESSING_WARNING_REASON_INVALID_WIP = 5,
+                    PROCESSING_WARNING_REASON_INVALID_KEK = 6,
+                    PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR = 7,
+                    PROCESSING_WARNING_REASON_INTERNAL_ERROR = 8,
+                    PROCESSING_WARNING_REASON_AWS_AUTH_FAILED = 9
+                }
+
+                /** Properties of a FieldWarning. */
+                interface IFieldWarning {
+
+                    /** FieldWarning reason */
+                    reason?: (google.ads.datamanager.v1.WarningReason|keyof typeof google.ads.datamanager.v1.WarningReason|null);
+
+                    /** FieldWarning description */
+                    description?: (string|null);
+
+                    /** FieldWarning field */
+                    field?: (string|null);
+                }
+
+                /** Represents a FieldWarning. */
+                class FieldWarning implements IFieldWarning {
+
+                    /**
+                     * Constructs a new FieldWarning.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IFieldWarning);
+
+                    /** FieldWarning reason. */
+                    public reason: (google.ads.datamanager.v1.WarningReason|keyof typeof google.ads.datamanager.v1.WarningReason);
+
+                    /** FieldWarning description. */
+                    public description: string;
+
+                    /** FieldWarning field. */
+                    public field: string;
+
+                    /**
+                     * Creates a new FieldWarning instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FieldWarning instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IFieldWarning): google.ads.datamanager.v1.FieldWarning;
+
+                    /**
+                     * Encodes the specified FieldWarning message. Does not implicitly {@link google.ads.datamanager.v1.FieldWarning.verify|verify} messages.
+                     * @param message FieldWarning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IFieldWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FieldWarning message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.FieldWarning.verify|verify} messages.
+                     * @param message FieldWarning message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IFieldWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FieldWarning message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FieldWarning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.FieldWarning;
+
+                    /**
+                     * Decodes a FieldWarning message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FieldWarning
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.FieldWarning;
+
+                    /**
+                     * Verifies a FieldWarning message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FieldWarning message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FieldWarning
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.FieldWarning;
+
+                    /**
+                     * Creates a plain object from a FieldWarning message. Also converts values to other types if specified.
+                     * @param message FieldWarning
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.FieldWarning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FieldWarning to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FieldWarning
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** WarningReason enum. */
+                enum WarningReason {
+                    WARNING_REASON_UNSPECIFIED = 0,
+                    WARNING_REASON_CUSTOM_VARIABLE_NOT_ENABLED = 1,
+                    WARNING_REASON_CUSTOM_VARIABLE_NOT_PREDEFINED = 2,
+                    WARNING_REASON_CART_DATA_NOT_SUPPORTED_WITH_GBRAID_OR_WBRAID = 3,
+                    WARNING_REASON_CART_DATA_ITEM_MERCHANT_PRODUCT_ID_MISSING = 4,
+                    WARNING_REASON_CART_DATA_ITEM_UNIT_PRICE_MISSING = 5,
+                    WARNING_REASON_GENERIC = 6,
+                    WARNING_REASON_INVALID_CLIENT_ID = 7,
+                    WARNING_REASON_INVALID_SUBDIVISION_CODE = 8,
+                    WARNING_REASON_INVALID_REGION_CODE = 9,
+                    WARNING_REASON_INVALID_SUBCONTINENT_CODE = 10,
+                    WARNING_REASON_INVALID_CONTINENT_CODE = 11,
+                    WARNING_REASON_INVALID_DEVICE_CATEGORY = 12,
+                    WARNING_REASON_INVALID_DEVICE_SCREEN_RESOLUTION = 13,
+                    WARNING_REASON_INVALID_MERCHANT_ID = 14
+                }
+
                 /** Properties of a RequestStatusPerDestination. */
                 interface IRequestStatusPerDestination {
 
@@ -5707,6 +6763,9 @@ export namespace google {
 
                     /** RequestStatusPerDestination audienceMembersRemovalStatus */
                     audienceMembersRemovalStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveAudienceMembersStatus|null);
+
+                    /** RequestStatusPerDestination removeAllAudienceMembersStatus */
+                    removeAllAudienceMembersStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveAllAudienceMembersStatus|null);
                 }
 
                 /** Represents a RequestStatusPerDestination. */
@@ -5739,8 +6798,11 @@ export namespace google {
                     /** RequestStatusPerDestination audienceMembersRemovalStatus. */
                     public audienceMembersRemovalStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveAudienceMembersStatus|null);
 
+                    /** RequestStatusPerDestination removeAllAudienceMembersStatus. */
+                    public removeAllAudienceMembersStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveAllAudienceMembersStatus|null);
+
                     /** RequestStatusPerDestination status. */
-                    public status?: ("audienceMembersIngestionStatus"|"eventsIngestionStatus"|"audienceMembersRemovalStatus");
+                    public status?: ("audienceMembersIngestionStatus"|"eventsIngestionStatus"|"audienceMembersRemovalStatus"|"removeAllAudienceMembersStatus");
 
                     /**
                      * Creates a new RequestStatusPerDestination instance using the specified properties.
@@ -5851,6 +6913,12 @@ export namespace google {
 
                         /** IngestAudienceMembersStatus compositeDataIngestionStatus */
                         compositeDataIngestionStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IIngestCompositeDataStatus|null);
+
+                        /** IngestAudienceMembersStatus googleUserIdDataIngestionStatus */
+                        googleUserIdDataIngestionStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IIngestGoogleUserIdDataStatus|null);
+
+                        /** IngestAudienceMembersStatus partnerProvidedIdDataIngestionStatus */
+                        partnerProvidedIdDataIngestionStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IIngestPartnerProvidedIdDataStatus|null);
                     }
 
                     /** Represents an IngestAudienceMembersStatus. */
@@ -5880,8 +6948,14 @@ export namespace google {
                         /** IngestAudienceMembersStatus compositeDataIngestionStatus. */
                         public compositeDataIngestionStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IIngestCompositeDataStatus|null);
 
+                        /** IngestAudienceMembersStatus googleUserIdDataIngestionStatus. */
+                        public googleUserIdDataIngestionStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IIngestGoogleUserIdDataStatus|null);
+
+                        /** IngestAudienceMembersStatus partnerProvidedIdDataIngestionStatus. */
+                        public partnerProvidedIdDataIngestionStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IIngestPartnerProvidedIdDataStatus|null);
+
                         /** IngestAudienceMembersStatus status. */
-                        public status?: ("userDataIngestionStatus"|"mobileDataIngestionStatus"|"pairDataIngestionStatus"|"userIdDataIngestionStatus"|"ppidDataIngestionStatus"|"compositeDataIngestionStatus");
+                        public status?: ("userDataIngestionStatus"|"mobileDataIngestionStatus"|"pairDataIngestionStatus"|"userIdDataIngestionStatus"|"ppidDataIngestionStatus"|"compositeDataIngestionStatus"|"googleUserIdDataIngestionStatus"|"partnerProvidedIdDataIngestionStatus");
 
                         /**
                          * Creates a new IngestAudienceMembersStatus instance using the specified properties.
@@ -5981,6 +7055,12 @@ export namespace google {
 
                         /** RemoveAudienceMembersStatus compositeDataRemovalStatus */
                         compositeDataRemovalStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveCompositeDataStatus|null);
+
+                        /** RemoveAudienceMembersStatus googleUserIdDataRemovalStatus */
+                        googleUserIdDataRemovalStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveGoogleUserIdDataStatus|null);
+
+                        /** RemoveAudienceMembersStatus partnerProvidedIdDataRemovalStatus */
+                        partnerProvidedIdDataRemovalStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IRemovePartnerProvidedIdDataStatus|null);
                     }
 
                     /** Represents a RemoveAudienceMembersStatus. */
@@ -6010,8 +7090,14 @@ export namespace google {
                         /** RemoveAudienceMembersStatus compositeDataRemovalStatus. */
                         public compositeDataRemovalStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveCompositeDataStatus|null);
 
+                        /** RemoveAudienceMembersStatus googleUserIdDataRemovalStatus. */
+                        public googleUserIdDataRemovalStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveGoogleUserIdDataStatus|null);
+
+                        /** RemoveAudienceMembersStatus partnerProvidedIdDataRemovalStatus. */
+                        public partnerProvidedIdDataRemovalStatus?: (google.ads.datamanager.v1.RequestStatusPerDestination.IRemovePartnerProvidedIdDataStatus|null);
+
                         /** RemoveAudienceMembersStatus status. */
-                        public status?: ("userDataRemovalStatus"|"mobileDataRemovalStatus"|"pairDataRemovalStatus"|"userIdDataRemovalStatus"|"ppidDataRemovalStatus"|"compositeDataRemovalStatus");
+                        public status?: ("userDataRemovalStatus"|"mobileDataRemovalStatus"|"pairDataRemovalStatus"|"userIdDataRemovalStatus"|"ppidDataRemovalStatus"|"compositeDataRemovalStatus"|"googleUserIdDataRemovalStatus"|"partnerProvidedIdDataRemovalStatus");
 
                         /**
                          * Creates a new RemoveAudienceMembersStatus instance using the specified properties.
@@ -6085,6 +7171,97 @@ export namespace google {
 
                         /**
                          * Gets the default type url for RemoveAudienceMembersStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RemoveAllAudienceMembersStatus. */
+                    interface IRemoveAllAudienceMembersStatus {
+                    }
+
+                    /** Represents a RemoveAllAudienceMembersStatus. */
+                    class RemoveAllAudienceMembersStatus implements IRemoveAllAudienceMembersStatus {
+
+                        /**
+                         * Constructs a new RemoveAllAudienceMembersStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveAllAudienceMembersStatus);
+
+                        /**
+                         * Creates a new RemoveAllAudienceMembersStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RemoveAllAudienceMembersStatus instance
+                         */
+                        public static create(properties?: google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveAllAudienceMembersStatus): google.ads.datamanager.v1.RequestStatusPerDestination.RemoveAllAudienceMembersStatus;
+
+                        /**
+                         * Encodes the specified RemoveAllAudienceMembersStatus message. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.RemoveAllAudienceMembersStatus.verify|verify} messages.
+                         * @param message RemoveAllAudienceMembersStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveAllAudienceMembersStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RemoveAllAudienceMembersStatus message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.RemoveAllAudienceMembersStatus.verify|verify} messages.
+                         * @param message RemoveAllAudienceMembersStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveAllAudienceMembersStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RemoveAllAudienceMembersStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RemoveAllAudienceMembersStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.RequestStatusPerDestination.RemoveAllAudienceMembersStatus;
+
+                        /**
+                         * Decodes a RemoveAllAudienceMembersStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RemoveAllAudienceMembersStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.RequestStatusPerDestination.RemoveAllAudienceMembersStatus;
+
+                        /**
+                         * Verifies a RemoveAllAudienceMembersStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RemoveAllAudienceMembersStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RemoveAllAudienceMembersStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.RequestStatusPerDestination.RemoveAllAudienceMembersStatus;
+
+                        /**
+                         * Creates a plain object from a RemoveAllAudienceMembersStatus message. Also converts values to other types if specified.
+                         * @param message RemoveAllAudienceMembersStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ads.datamanager.v1.RequestStatusPerDestination.RemoveAllAudienceMembersStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RemoveAllAudienceMembersStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RemoveAllAudienceMembersStatus
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -7436,6 +8613,418 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of an IngestGoogleUserIdDataStatus. */
+                    interface IIngestGoogleUserIdDataStatus {
+
+                        /** IngestGoogleUserIdDataStatus recordCount */
+                        recordCount?: (number|Long|string|null);
+
+                        /** IngestGoogleUserIdDataStatus googleUserIdCount */
+                        googleUserIdCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents an IngestGoogleUserIdDataStatus. */
+                    class IngestGoogleUserIdDataStatus implements IIngestGoogleUserIdDataStatus {
+
+                        /**
+                         * Constructs a new IngestGoogleUserIdDataStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ads.datamanager.v1.RequestStatusPerDestination.IIngestGoogleUserIdDataStatus);
+
+                        /** IngestGoogleUserIdDataStatus recordCount. */
+                        public recordCount: (number|Long|string);
+
+                        /** IngestGoogleUserIdDataStatus googleUserIdCount. */
+                        public googleUserIdCount: (number|Long|string);
+
+                        /**
+                         * Creates a new IngestGoogleUserIdDataStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IngestGoogleUserIdDataStatus instance
+                         */
+                        public static create(properties?: google.ads.datamanager.v1.RequestStatusPerDestination.IIngestGoogleUserIdDataStatus): google.ads.datamanager.v1.RequestStatusPerDestination.IngestGoogleUserIdDataStatus;
+
+                        /**
+                         * Encodes the specified IngestGoogleUserIdDataStatus message. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.IngestGoogleUserIdDataStatus.verify|verify} messages.
+                         * @param message IngestGoogleUserIdDataStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ads.datamanager.v1.RequestStatusPerDestination.IIngestGoogleUserIdDataStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IngestGoogleUserIdDataStatus message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.IngestGoogleUserIdDataStatus.verify|verify} messages.
+                         * @param message IngestGoogleUserIdDataStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ads.datamanager.v1.RequestStatusPerDestination.IIngestGoogleUserIdDataStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IngestGoogleUserIdDataStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IngestGoogleUserIdDataStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.RequestStatusPerDestination.IngestGoogleUserIdDataStatus;
+
+                        /**
+                         * Decodes an IngestGoogleUserIdDataStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IngestGoogleUserIdDataStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.RequestStatusPerDestination.IngestGoogleUserIdDataStatus;
+
+                        /**
+                         * Verifies an IngestGoogleUserIdDataStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IngestGoogleUserIdDataStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IngestGoogleUserIdDataStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.RequestStatusPerDestination.IngestGoogleUserIdDataStatus;
+
+                        /**
+                         * Creates a plain object from an IngestGoogleUserIdDataStatus message. Also converts values to other types if specified.
+                         * @param message IngestGoogleUserIdDataStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ads.datamanager.v1.RequestStatusPerDestination.IngestGoogleUserIdDataStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IngestGoogleUserIdDataStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IngestGoogleUserIdDataStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RemoveGoogleUserIdDataStatus. */
+                    interface IRemoveGoogleUserIdDataStatus {
+
+                        /** RemoveGoogleUserIdDataStatus recordCount */
+                        recordCount?: (number|Long|string|null);
+
+                        /** RemoveGoogleUserIdDataStatus googleUserIdCount */
+                        googleUserIdCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a RemoveGoogleUserIdDataStatus. */
+                    class RemoveGoogleUserIdDataStatus implements IRemoveGoogleUserIdDataStatus {
+
+                        /**
+                         * Constructs a new RemoveGoogleUserIdDataStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveGoogleUserIdDataStatus);
+
+                        /** RemoveGoogleUserIdDataStatus recordCount. */
+                        public recordCount: (number|Long|string);
+
+                        /** RemoveGoogleUserIdDataStatus googleUserIdCount. */
+                        public googleUserIdCount: (number|Long|string);
+
+                        /**
+                         * Creates a new RemoveGoogleUserIdDataStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RemoveGoogleUserIdDataStatus instance
+                         */
+                        public static create(properties?: google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveGoogleUserIdDataStatus): google.ads.datamanager.v1.RequestStatusPerDestination.RemoveGoogleUserIdDataStatus;
+
+                        /**
+                         * Encodes the specified RemoveGoogleUserIdDataStatus message. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.RemoveGoogleUserIdDataStatus.verify|verify} messages.
+                         * @param message RemoveGoogleUserIdDataStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveGoogleUserIdDataStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RemoveGoogleUserIdDataStatus message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.RemoveGoogleUserIdDataStatus.verify|verify} messages.
+                         * @param message RemoveGoogleUserIdDataStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ads.datamanager.v1.RequestStatusPerDestination.IRemoveGoogleUserIdDataStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RemoveGoogleUserIdDataStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RemoveGoogleUserIdDataStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.RequestStatusPerDestination.RemoveGoogleUserIdDataStatus;
+
+                        /**
+                         * Decodes a RemoveGoogleUserIdDataStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RemoveGoogleUserIdDataStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.RequestStatusPerDestination.RemoveGoogleUserIdDataStatus;
+
+                        /**
+                         * Verifies a RemoveGoogleUserIdDataStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RemoveGoogleUserIdDataStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RemoveGoogleUserIdDataStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.RequestStatusPerDestination.RemoveGoogleUserIdDataStatus;
+
+                        /**
+                         * Creates a plain object from a RemoveGoogleUserIdDataStatus message. Also converts values to other types if specified.
+                         * @param message RemoveGoogleUserIdDataStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ads.datamanager.v1.RequestStatusPerDestination.RemoveGoogleUserIdDataStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RemoveGoogleUserIdDataStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RemoveGoogleUserIdDataStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an IngestPartnerProvidedIdDataStatus. */
+                    interface IIngestPartnerProvidedIdDataStatus {
+
+                        /** IngestPartnerProvidedIdDataStatus recordCount */
+                        recordCount?: (number|Long|string|null);
+
+                        /** IngestPartnerProvidedIdDataStatus partnerProvidedIdCount */
+                        partnerProvidedIdCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents an IngestPartnerProvidedIdDataStatus. */
+                    class IngestPartnerProvidedIdDataStatus implements IIngestPartnerProvidedIdDataStatus {
+
+                        /**
+                         * Constructs a new IngestPartnerProvidedIdDataStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ads.datamanager.v1.RequestStatusPerDestination.IIngestPartnerProvidedIdDataStatus);
+
+                        /** IngestPartnerProvidedIdDataStatus recordCount. */
+                        public recordCount: (number|Long|string);
+
+                        /** IngestPartnerProvidedIdDataStatus partnerProvidedIdCount. */
+                        public partnerProvidedIdCount: (number|Long|string);
+
+                        /**
+                         * Creates a new IngestPartnerProvidedIdDataStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns IngestPartnerProvidedIdDataStatus instance
+                         */
+                        public static create(properties?: google.ads.datamanager.v1.RequestStatusPerDestination.IIngestPartnerProvidedIdDataStatus): google.ads.datamanager.v1.RequestStatusPerDestination.IngestPartnerProvidedIdDataStatus;
+
+                        /**
+                         * Encodes the specified IngestPartnerProvidedIdDataStatus message. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.IngestPartnerProvidedIdDataStatus.verify|verify} messages.
+                         * @param message IngestPartnerProvidedIdDataStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ads.datamanager.v1.RequestStatusPerDestination.IIngestPartnerProvidedIdDataStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified IngestPartnerProvidedIdDataStatus message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.IngestPartnerProvidedIdDataStatus.verify|verify} messages.
+                         * @param message IngestPartnerProvidedIdDataStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ads.datamanager.v1.RequestStatusPerDestination.IIngestPartnerProvidedIdDataStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an IngestPartnerProvidedIdDataStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns IngestPartnerProvidedIdDataStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.RequestStatusPerDestination.IngestPartnerProvidedIdDataStatus;
+
+                        /**
+                         * Decodes an IngestPartnerProvidedIdDataStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns IngestPartnerProvidedIdDataStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.RequestStatusPerDestination.IngestPartnerProvidedIdDataStatus;
+
+                        /**
+                         * Verifies an IngestPartnerProvidedIdDataStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an IngestPartnerProvidedIdDataStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns IngestPartnerProvidedIdDataStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.RequestStatusPerDestination.IngestPartnerProvidedIdDataStatus;
+
+                        /**
+                         * Creates a plain object from an IngestPartnerProvidedIdDataStatus message. Also converts values to other types if specified.
+                         * @param message IngestPartnerProvidedIdDataStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ads.datamanager.v1.RequestStatusPerDestination.IngestPartnerProvidedIdDataStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this IngestPartnerProvidedIdDataStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for IngestPartnerProvidedIdDataStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RemovePartnerProvidedIdDataStatus. */
+                    interface IRemovePartnerProvidedIdDataStatus {
+
+                        /** RemovePartnerProvidedIdDataStatus recordCount */
+                        recordCount?: (number|Long|string|null);
+
+                        /** RemovePartnerProvidedIdDataStatus partnerProvidedIdCount */
+                        partnerProvidedIdCount?: (number|Long|string|null);
+                    }
+
+                    /** Represents a RemovePartnerProvidedIdDataStatus. */
+                    class RemovePartnerProvidedIdDataStatus implements IRemovePartnerProvidedIdDataStatus {
+
+                        /**
+                         * Constructs a new RemovePartnerProvidedIdDataStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ads.datamanager.v1.RequestStatusPerDestination.IRemovePartnerProvidedIdDataStatus);
+
+                        /** RemovePartnerProvidedIdDataStatus recordCount. */
+                        public recordCount: (number|Long|string);
+
+                        /** RemovePartnerProvidedIdDataStatus partnerProvidedIdCount. */
+                        public partnerProvidedIdCount: (number|Long|string);
+
+                        /**
+                         * Creates a new RemovePartnerProvidedIdDataStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RemovePartnerProvidedIdDataStatus instance
+                         */
+                        public static create(properties?: google.ads.datamanager.v1.RequestStatusPerDestination.IRemovePartnerProvidedIdDataStatus): google.ads.datamanager.v1.RequestStatusPerDestination.RemovePartnerProvidedIdDataStatus;
+
+                        /**
+                         * Encodes the specified RemovePartnerProvidedIdDataStatus message. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.RemovePartnerProvidedIdDataStatus.verify|verify} messages.
+                         * @param message RemovePartnerProvidedIdDataStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ads.datamanager.v1.RequestStatusPerDestination.IRemovePartnerProvidedIdDataStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RemovePartnerProvidedIdDataStatus message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RequestStatusPerDestination.RemovePartnerProvidedIdDataStatus.verify|verify} messages.
+                         * @param message RemovePartnerProvidedIdDataStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ads.datamanager.v1.RequestStatusPerDestination.IRemovePartnerProvidedIdDataStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RemovePartnerProvidedIdDataStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RemovePartnerProvidedIdDataStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.RequestStatusPerDestination.RemovePartnerProvidedIdDataStatus;
+
+                        /**
+                         * Decodes a RemovePartnerProvidedIdDataStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RemovePartnerProvidedIdDataStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.RequestStatusPerDestination.RemovePartnerProvidedIdDataStatus;
+
+                        /**
+                         * Verifies a RemovePartnerProvidedIdDataStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RemovePartnerProvidedIdDataStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RemovePartnerProvidedIdDataStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.RequestStatusPerDestination.RemovePartnerProvidedIdDataStatus;
+
+                        /**
+                         * Creates a plain object from a RemovePartnerProvidedIdDataStatus message. Also converts values to other types if specified.
+                         * @param message RemovePartnerProvidedIdDataStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ads.datamanager.v1.RequestStatusPerDestination.RemovePartnerProvidedIdDataStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RemovePartnerProvidedIdDataStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RemovePartnerProvidedIdDataStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a DataTypeCount. */
                     interface IDataTypeCount {
 
@@ -7562,468 +9151,6 @@ export namespace google {
                     MATCH_RATE_RANGE_71_TO_80 = 8,
                     MATCH_RATE_RANGE_81_TO_90 = 9,
                     MATCH_RATE_RANGE_91_TO_100 = 10
-                }
-
-                /** Properties of an ErrorInfo. */
-                interface IErrorInfo {
-
-                    /** ErrorInfo errorCounts */
-                    errorCounts?: (google.ads.datamanager.v1.IErrorCount[]|null);
-                }
-
-                /** Represents an ErrorInfo. */
-                class ErrorInfo implements IErrorInfo {
-
-                    /**
-                     * Constructs a new ErrorInfo.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.ads.datamanager.v1.IErrorInfo);
-
-                    /** ErrorInfo errorCounts. */
-                    public errorCounts: google.ads.datamanager.v1.IErrorCount[];
-
-                    /**
-                     * Creates a new ErrorInfo instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ErrorInfo instance
-                     */
-                    public static create(properties?: google.ads.datamanager.v1.IErrorInfo): google.ads.datamanager.v1.ErrorInfo;
-
-                    /**
-                     * Encodes the specified ErrorInfo message. Does not implicitly {@link google.ads.datamanager.v1.ErrorInfo.verify|verify} messages.
-                     * @param message ErrorInfo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.ads.datamanager.v1.IErrorInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ErrorInfo message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.ErrorInfo.verify|verify} messages.
-                     * @param message ErrorInfo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.ads.datamanager.v1.IErrorInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ErrorInfo message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ErrorInfo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.ErrorInfo;
-
-                    /**
-                     * Decodes an ErrorInfo message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ErrorInfo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.ErrorInfo;
-
-                    /**
-                     * Verifies an ErrorInfo message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ErrorInfo message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ErrorInfo
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.ErrorInfo;
-
-                    /**
-                     * Creates a plain object from an ErrorInfo message. Also converts values to other types if specified.
-                     * @param message ErrorInfo
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.ads.datamanager.v1.ErrorInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ErrorInfo to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ErrorInfo
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of an ErrorCount. */
-                interface IErrorCount {
-
-                    /** ErrorCount recordCount */
-                    recordCount?: (number|Long|string|null);
-
-                    /** ErrorCount reason */
-                    reason?: (google.ads.datamanager.v1.ProcessingErrorReason|keyof typeof google.ads.datamanager.v1.ProcessingErrorReason|null);
-                }
-
-                /** Represents an ErrorCount. */
-                class ErrorCount implements IErrorCount {
-
-                    /**
-                     * Constructs a new ErrorCount.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.ads.datamanager.v1.IErrorCount);
-
-                    /** ErrorCount recordCount. */
-                    public recordCount: (number|Long|string);
-
-                    /** ErrorCount reason. */
-                    public reason: (google.ads.datamanager.v1.ProcessingErrorReason|keyof typeof google.ads.datamanager.v1.ProcessingErrorReason);
-
-                    /**
-                     * Creates a new ErrorCount instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ErrorCount instance
-                     */
-                    public static create(properties?: google.ads.datamanager.v1.IErrorCount): google.ads.datamanager.v1.ErrorCount;
-
-                    /**
-                     * Encodes the specified ErrorCount message. Does not implicitly {@link google.ads.datamanager.v1.ErrorCount.verify|verify} messages.
-                     * @param message ErrorCount message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.ads.datamanager.v1.IErrorCount, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ErrorCount message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.ErrorCount.verify|verify} messages.
-                     * @param message ErrorCount message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.ads.datamanager.v1.IErrorCount, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ErrorCount message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ErrorCount
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.ErrorCount;
-
-                    /**
-                     * Decodes an ErrorCount message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ErrorCount
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.ErrorCount;
-
-                    /**
-                     * Verifies an ErrorCount message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ErrorCount message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ErrorCount
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.ErrorCount;
-
-                    /**
-                     * Creates a plain object from an ErrorCount message. Also converts values to other types if specified.
-                     * @param message ErrorCount
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.ads.datamanager.v1.ErrorCount, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ErrorCount to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ErrorCount
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a WarningInfo. */
-                interface IWarningInfo {
-
-                    /** WarningInfo warningCounts */
-                    warningCounts?: (google.ads.datamanager.v1.IWarningCount[]|null);
-                }
-
-                /** Represents a WarningInfo. */
-                class WarningInfo implements IWarningInfo {
-
-                    /**
-                     * Constructs a new WarningInfo.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.ads.datamanager.v1.IWarningInfo);
-
-                    /** WarningInfo warningCounts. */
-                    public warningCounts: google.ads.datamanager.v1.IWarningCount[];
-
-                    /**
-                     * Creates a new WarningInfo instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns WarningInfo instance
-                     */
-                    public static create(properties?: google.ads.datamanager.v1.IWarningInfo): google.ads.datamanager.v1.WarningInfo;
-
-                    /**
-                     * Encodes the specified WarningInfo message. Does not implicitly {@link google.ads.datamanager.v1.WarningInfo.verify|verify} messages.
-                     * @param message WarningInfo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.ads.datamanager.v1.IWarningInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified WarningInfo message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.WarningInfo.verify|verify} messages.
-                     * @param message WarningInfo message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.ads.datamanager.v1.IWarningInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a WarningInfo message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns WarningInfo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.WarningInfo;
-
-                    /**
-                     * Decodes a WarningInfo message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns WarningInfo
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.WarningInfo;
-
-                    /**
-                     * Verifies a WarningInfo message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a WarningInfo message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns WarningInfo
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.WarningInfo;
-
-                    /**
-                     * Creates a plain object from a WarningInfo message. Also converts values to other types if specified.
-                     * @param message WarningInfo
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.ads.datamanager.v1.WarningInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this WarningInfo to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for WarningInfo
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a WarningCount. */
-                interface IWarningCount {
-
-                    /** WarningCount recordCount */
-                    recordCount?: (number|Long|string|null);
-
-                    /** WarningCount reason */
-                    reason?: (google.ads.datamanager.v1.ProcessingWarningReason|keyof typeof google.ads.datamanager.v1.ProcessingWarningReason|null);
-                }
-
-                /** Represents a WarningCount. */
-                class WarningCount implements IWarningCount {
-
-                    /**
-                     * Constructs a new WarningCount.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.ads.datamanager.v1.IWarningCount);
-
-                    /** WarningCount recordCount. */
-                    public recordCount: (number|Long|string);
-
-                    /** WarningCount reason. */
-                    public reason: (google.ads.datamanager.v1.ProcessingWarningReason|keyof typeof google.ads.datamanager.v1.ProcessingWarningReason);
-
-                    /**
-                     * Creates a new WarningCount instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns WarningCount instance
-                     */
-                    public static create(properties?: google.ads.datamanager.v1.IWarningCount): google.ads.datamanager.v1.WarningCount;
-
-                    /**
-                     * Encodes the specified WarningCount message. Does not implicitly {@link google.ads.datamanager.v1.WarningCount.verify|verify} messages.
-                     * @param message WarningCount message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.ads.datamanager.v1.IWarningCount, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified WarningCount message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.WarningCount.verify|verify} messages.
-                     * @param message WarningCount message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.ads.datamanager.v1.IWarningCount, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a WarningCount message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns WarningCount
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.WarningCount;
-
-                    /**
-                     * Decodes a WarningCount message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns WarningCount
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.WarningCount;
-
-                    /**
-                     * Verifies a WarningCount message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a WarningCount message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns WarningCount
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.WarningCount;
-
-                    /**
-                     * Creates a plain object from a WarningCount message. Also converts values to other types if specified.
-                     * @param message WarningCount
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.ads.datamanager.v1.WarningCount, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this WarningCount to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for WarningCount
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** ProcessingErrorReason enum. */
-                enum ProcessingErrorReason {
-                    PROCESSING_ERROR_REASON_UNSPECIFIED = 0,
-                    PROCESSING_ERROR_REASON_INVALID_CUSTOM_VARIABLE = 1,
-                    PROCESSING_ERROR_REASON_CUSTOM_VARIABLE_NOT_ENABLED = 2,
-                    PROCESSING_ERROR_REASON_EVENT_TOO_OLD = 3,
-                    PROCESSING_ERROR_REASON_DENIED_CONSENT = 4,
-                    PROCESSING_ERROR_REASON_NO_CONSENT = 5,
-                    PROCESSING_ERROR_REASON_UNKNOWN_CONSENT = 6,
-                    PROCESSING_ERROR_REASON_DUPLICATE_GCLID = 7,
-                    PROCESSING_ERROR_REASON_DUPLICATE_TRANSACTION_ID = 8,
-                    PROCESSING_ERROR_REASON_INVALID_GBRAID = 9,
-                    PROCESSING_ERROR_REASON_INVALID_GCLID = 10,
-                    PROCESSING_ERROR_REASON_INVALID_MERCHANT_ID = 11,
-                    PROCESSING_ERROR_REASON_INVALID_WBRAID = 12,
-                    PROCESSING_ERROR_REASON_INTERNAL_ERROR = 13,
-                    PROCESSING_ERROR_REASON_DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED = 14,
-                    PROCESSING_ERROR_REASON_INVALID_EVENT = 15,
-                    PROCESSING_ERROR_REASON_INSUFFICIENT_MATCHED_TRANSACTIONS = 16,
-                    PROCESSING_ERROR_REASON_INSUFFICIENT_TRANSACTIONS = 17,
-                    PROCESSING_ERROR_REASON_INVALID_FORMAT = 18,
-                    PROCESSING_ERROR_REASON_DECRYPTION_ERROR = 19,
-                    PROCESSING_ERROR_REASON_DEK_DECRYPTION_ERROR = 20,
-                    PROCESSING_ERROR_REASON_INVALID_WIP = 21,
-                    PROCESSING_ERROR_REASON_INVALID_KEK = 22,
-                    PROCESSING_ERROR_REASON_WIP_AUTH_FAILED = 23,
-                    PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED = 24,
-                    PROCESSING_ERROR_REASON_AWS_AUTH_FAILED = 27,
-                    PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR = 25,
-                    PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER = 26,
-                    PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID = 28,
-                    PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND = 29,
-                    PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID = 30,
-                    PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID = 31,
-                    PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID = 32,
-                    PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS = 33,
-                    PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT = 34,
-                    PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND = 35,
-                    PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR = 36,
-                    PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID = 37,
-                    PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND = 38,
-                    PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK = 39,
-                    PROCESSING_ERROR_REASON_TOO_RECENT_CLICK = 40,
-                    PROCESSING_ERROR_REASON_INVALID_CLICK = 41,
-                    PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK = 42,
-                    PROCESSING_ERROR_REASON_CLICK_NOT_FOUND = 43
-                }
-
-                /** ProcessingWarningReason enum. */
-                enum ProcessingWarningReason {
-                    PROCESSING_WARNING_REASON_UNSPECIFIED = 0,
-                    PROCESSING_WARNING_REASON_KEK_PERMISSION_DENIED = 1,
-                    PROCESSING_WARNING_REASON_DEK_DECRYPTION_ERROR = 2,
-                    PROCESSING_WARNING_REASON_DECRYPTION_ERROR = 3,
-                    PROCESSING_WARNING_REASON_WIP_AUTH_FAILED = 4,
-                    PROCESSING_WARNING_REASON_INVALID_WIP = 5,
-                    PROCESSING_WARNING_REASON_INVALID_KEK = 6,
-                    PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR = 7,
-                    PROCESSING_WARNING_REASON_INTERNAL_ERROR = 8,
-                    PROCESSING_WARNING_REASON_AWS_AUTH_FAILED = 9
                 }
 
                 /** Properties of a TermsOfService. */

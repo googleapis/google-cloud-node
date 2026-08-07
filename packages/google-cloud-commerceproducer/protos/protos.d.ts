@@ -4385,6 +4385,9 @@ export namespace google {
 
                         /** SingleProductOffer revenueShare */
                         revenueShare?: (google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.IRevenueShare|null);
+
+                        /** SingleProductOffer additionalContractValue */
+                        additionalContractValue?: (google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.IAdditionalContractValue|null);
                     }
 
                     /** Represents a SingleProductOffer. */
@@ -4428,6 +4431,9 @@ export namespace google {
 
                         /** SingleProductOffer revenueShare. */
                         public revenueShare?: (google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.IRevenueShare|null);
+
+                        /** SingleProductOffer additionalContractValue. */
+                        public additionalContractValue?: (google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.IAdditionalContractValue|null);
 
                         /** SingleProductOffer amendedOffer. */
                         public amendedOffer?: ("amendedPrivateOffer"|"amendedStandardOffer");
@@ -5673,6 +5679,109 @@ export namespace google {
 
                             /**
                              * Gets the default type url for RevenueShare
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an AdditionalContractValue. */
+                        interface IAdditionalContractValue {
+
+                            /** AdditionalContractValue contractValue */
+                            contractValue?: (google.type.IMoney|null);
+
+                            /** AdditionalContractValue eligibleSkus */
+                            eligibleSkus?: (string[]|null);
+                        }
+
+                        /** Represents an AdditionalContractValue. */
+                        class AdditionalContractValue implements IAdditionalContractValue {
+
+                            /**
+                             * Constructs a new AdditionalContractValue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.IAdditionalContractValue);
+
+                            /** AdditionalContractValue contractValue. */
+                            public contractValue?: (google.type.IMoney|null);
+
+                            /** AdditionalContractValue eligibleSkus. */
+                            public eligibleSkus: string[];
+
+                            /**
+                             * Creates a new AdditionalContractValue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AdditionalContractValue instance
+                             */
+                            public static create(properties?: google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.IAdditionalContractValue): google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.AdditionalContractValue;
+
+                            /**
+                             * Encodes the specified AdditionalContractValue message. Does not implicitly {@link google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.AdditionalContractValue.verify|verify} messages.
+                             * @param message AdditionalContractValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.IAdditionalContractValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AdditionalContractValue message, length delimited. Does not implicitly {@link google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.AdditionalContractValue.verify|verify} messages.
+                             * @param message AdditionalContractValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.IAdditionalContractValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AdditionalContractValue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AdditionalContractValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.AdditionalContractValue;
+
+                            /**
+                             * Decodes an AdditionalContractValue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AdditionalContractValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.AdditionalContractValue;
+
+                            /**
+                             * Verifies an AdditionalContractValue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AdditionalContractValue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AdditionalContractValue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.AdditionalContractValue;
+
+                            /**
+                             * Creates a plain object from an AdditionalContractValue message. Also converts values to other types if specified.
+                             * @param message AdditionalContractValue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.commerceproducer.v1beta.PrivateOffer.SingleProductOffer.AdditionalContractValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AdditionalContractValue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AdditionalContractValue
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */

@@ -4053,6 +4053,26 @@
                         }
                       ]
                     },
+                    "SearchMessages": {
+                      "requestType": "SearchMessagesRequest",
+                      "responseType": "SearchMessagesResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/{parent=spaces/*}/messages:search",
+                        "(google.api.http).body": "*",
+                        "(google.api.method_signature)": "parent,filter"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{parent=spaces/*}/messages:search",
+                            "body": "*"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,filter"
+                        }
+                      ]
+                    },
                     "GetAttachment": {
                       "requestType": "GetAttachmentRequest",
                       "responseType": "Attachment",
@@ -5740,6 +5760,101 @@
                     }
                   }
                 },
+                "SearchMessagesRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Space"
+                      }
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "orderBy": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "view": {
+                      "type": "SearchMessagesView",
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "SearchMessagesView": {
+                      "values": {
+                        "SEARCH_MESSAGES_VIEW_UNSPECIFIED": 0,
+                        "SEARCH_MESSAGES_VIEW_BASIC": 1,
+                        "SEARCH_MESSAGES_VIEW_FULL": 2
+                      }
+                    }
+                  }
+                },
+                "SearchMessagesResponse": {
+                  "fields": {
+                    "results": {
+                      "rule": "repeated",
+                      "type": "SearchMessageResult",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "SearchMessageResult": {
+                  "oneofs": {
+                    "_read": {
+                      "oneof": [
+                        "read"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "message": {
+                      "type": "Message",
+                      "id": 1
+                    },
+                    "read": {
+                      "type": "bool",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "spaceMuteSetting": {
+                      "type": "SpaceNotificationSetting.MuteSetting",
+                      "id": 4
+                    }
+                  }
+                },
                 "ContextualAddOnMarkup": {
                   "fields": {},
                   "nested": {
@@ -6769,7 +6884,10 @@
                     "spaces": {
                       "rule": "repeated",
                       "type": "Space",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "nextPageToken": {
                       "type": "string",
@@ -6778,6 +6896,27 @@
                     "totalSize": {
                       "type": "int32",
                       "id": 3
+                    },
+                    "results": {
+                      "rule": "repeated",
+                      "type": "SearchSpaceResult",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "SearchSpaceResult": {
+                      "fields": {
+                        "space": {
+                          "type": "Space",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
                     }
                   }
                 },
@@ -6832,6 +6971,96 @@
                     "HISTORY_STATE_UNSPECIFIED": 0,
                     "HISTORY_OFF": 1,
                     "HISTORY_ON": 2
+                  }
+                },
+                "SpaceNotificationSetting": {
+                  "options": {
+                    "(google.api.resource).type": "chat.googleapis.com/SpaceNotificationSetting",
+                    "(google.api.resource).pattern": "users/{user}/spaces/{space}/spaceNotificationSetting",
+                    "(google.api.resource).singular": "spaceNotificationSetting"
+                  },
+                  "oneofs": {
+                    "_notificationSetting": {
+                      "oneof": [
+                        "notificationSetting"
+                      ]
+                    },
+                    "_muteSetting": {
+                      "oneof": [
+                        "muteSetting"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "IDENTIFIER"
+                      }
+                    },
+                    "notificationSetting": {
+                      "type": "NotificationSetting",
+                      "id": 2,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "muteSetting": {
+                      "type": "MuteSetting",
+                      "id": 3,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "NotificationSetting": {
+                      "values": {
+                        "NOTIFICATION_SETTING_UNSPECIFIED": 0,
+                        "ALL": 1,
+                        "MAIN_CONVERSATIONS": 2,
+                        "FOR_YOU": 3,
+                        "OFF": 4
+                      }
+                    },
+                    "MuteSetting": {
+                      "values": {
+                        "MUTE_SETTING_UNSPECIFIED": 0,
+                        "UNMUTED": 1,
+                        "MUTED": 2
+                      }
+                    }
+                  }
+                },
+                "GetSpaceNotificationSettingRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/SpaceNotificationSetting"
+                      }
+                    }
+                  }
+                },
+                "UpdateSpaceNotificationSettingRequest": {
+                  "fields": {
+                    "spaceNotificationSetting": {
+                      "type": "SpaceNotificationSetting",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "updateMask": {
+                      "type": "google.protobuf.FieldMask",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
                   }
                 },
                 "Section": {
@@ -7449,96 +7678,6 @@
                       "rule": "repeated",
                       "type": "ReactionDeletedEventData",
                       "id": 1
-                    }
-                  }
-                },
-                "SpaceNotificationSetting": {
-                  "options": {
-                    "(google.api.resource).type": "chat.googleapis.com/SpaceNotificationSetting",
-                    "(google.api.resource).pattern": "users/{user}/spaces/{space}/spaceNotificationSetting",
-                    "(google.api.resource).singular": "spaceNotificationSetting"
-                  },
-                  "oneofs": {
-                    "_notificationSetting": {
-                      "oneof": [
-                        "notificationSetting"
-                      ]
-                    },
-                    "_muteSetting": {
-                      "oneof": [
-                        "muteSetting"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1,
-                      "options": {
-                        "(google.api.field_behavior)": "IDENTIFIER"
-                      }
-                    },
-                    "notificationSetting": {
-                      "type": "NotificationSetting",
-                      "id": 2,
-                      "options": {
-                        "proto3_optional": true
-                      }
-                    },
-                    "muteSetting": {
-                      "type": "MuteSetting",
-                      "id": 3,
-                      "options": {
-                        "proto3_optional": true
-                      }
-                    }
-                  },
-                  "nested": {
-                    "NotificationSetting": {
-                      "values": {
-                        "NOTIFICATION_SETTING_UNSPECIFIED": 0,
-                        "ALL": 1,
-                        "MAIN_CONVERSATIONS": 2,
-                        "FOR_YOU": 3,
-                        "OFF": 4
-                      }
-                    },
-                    "MuteSetting": {
-                      "values": {
-                        "MUTE_SETTING_UNSPECIFIED": 0,
-                        "UNMUTED": 1,
-                        "MUTED": 2
-                      }
-                    }
-                  }
-                },
-                "GetSpaceNotificationSettingRequest": {
-                  "fields": {
-                    "name": {
-                      "type": "string",
-                      "id": 1,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED",
-                        "(google.api.resource_reference).type": "chat.googleapis.com/SpaceNotificationSetting"
-                      }
-                    }
-                  }
-                },
-                "UpdateSpaceNotificationSettingRequest": {
-                  "fields": {
-                    "spaceNotificationSetting": {
-                      "type": "SpaceNotificationSetting",
-                      "id": 1,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED"
-                      }
-                    },
-                    "updateMask": {
-                      "type": "google.protobuf.FieldMask",
-                      "id": 2,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED"
-                      }
                     }
                   }
                 },
