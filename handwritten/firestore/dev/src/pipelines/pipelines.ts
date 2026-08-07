@@ -14,7 +14,7 @@
 
 import * as firestore from '@google-cloud/firestore';
 import * as deepEqual from 'fast-deep-equal';
-import {google} from '../../protos/firestore_v1_proto_api';
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
 import Firestore, {
   CollectionReference,
   FieldPath,
@@ -46,10 +46,11 @@ import {DocumentReference} from '../reference/document-reference';
 import {PipelineResponse} from '../reference/types';
 import {Serializer} from '../serializer';
 import {ApiMapValue} from '../types';
-import * as protos from '../../protos/firestore_v1_proto_api';
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 import api = protos.google.firestore.v1;
 import IStage = google.firestore.v1.Pipeline.IStage;
 import {isOptionalEqual, isPlainObject} from '../util';
+import {normalizeBytes} from '../convert';
 
 import {
   AggregateFunction,
@@ -2005,8 +2006,9 @@ export class ExplainStats implements firestore.Pipelines.ExplainStats {
 
     const messageType = reflectionObject as MessageType;
 
-    return messageType.toObject(messageType.decode(this.explainStatsData.value))
-      .value;
+    return messageType.toObject(
+      messageType.decode(normalizeBytes(this.explainStatsData.value)!),
+    ).value;
   }
 
   /**
@@ -2035,7 +2037,15 @@ export class ExplainStats implements firestore.Pipelines.ExplainStats {
     type_url?: string | null;
     value?: Uint8Array | null;
   } {
-    return this.explainStatsData;
+    if (!this.explainStatsData) {
+      return {};
+    }
+    return {
+      type_url:
+        this.explainStatsData.type_url ??
+        (this.explainStatsData as {typeUrl?: string | null}).typeUrl,
+      value: normalizeBytes(this.explainStatsData.value) ?? null,
+    };
   }
 }
 

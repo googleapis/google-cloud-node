@@ -1,0 +1,9 @@
+{
+  "serverless_minimal_bundle": {
+    "entrypoint": "./build/src/index.js",
+    "target_minified_bytes": 2293760,
+    "max_minified_bytes_deduped": 2500000,
+    "max_minified_bytes_undeduped": 5000000,
+    "description": "2.19 MB minified target budget for standard serverless Cloud Function deployment"
+  }
+}

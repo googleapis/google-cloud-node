@@ -15,8 +15,9 @@
  */
 
 import * as firestore from '@google-cloud/firestore';
+import Long = require('long');
 
-import * as proto from '../protos/firestore_v1_proto_api';
+import * as proto from '@google-cloud/firestore-api/build/protos/protos';
 
 import {DeleteTransform, FieldTransform, VectorValue} from './field-value';
 import {detectGoogleProtobufValueType, detectValueType} from './convert';
@@ -35,7 +36,7 @@ import {
   RESERVED_MAP_KEY_VECTOR_VALUE,
   VECTOR_MAP_VECTORS_KEY,
 } from './map-type';
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
 import IMapValue = google.firestore.v1.IMapValue;
 import IValue = google.firestore.v1.IValue;
 import Value = google.firestore.v1.Value;
@@ -69,7 +70,7 @@ export interface Serializable {
 export class Serializer {
   private allowUndefined: boolean;
   private createDocumentReference: (path: string) => DocumentReference;
-  private createInteger: (n: number | string) => number | BigInt;
+  private createInteger: (n: number | string | Long) => number | BigInt;
 
   constructor(private firestore: Firestore) {
     // Instead of storing the `firestore` object, we store just a reference to
@@ -77,7 +78,7 @@ export class Serializer {
     // JSON.stringify().
     this.createDocumentReference = path => firestore.doc(path);
     this.createInteger = n =>
-      firestore._settings.useBigInt ? BigInt(n) : Number(n);
+      firestore._settings.useBigInt ? BigInt(n.toString()) : Number(n);
     this.allowUndefined = !!firestore._settings.ignoreUndefinedProperties;
   }
 

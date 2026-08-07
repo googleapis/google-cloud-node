@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as protos from '../../protos/firestore_v1_proto_api';
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 import api = protos.google.firestore.v1;
 
 import * as firestore from '@google-cloud/firestore';

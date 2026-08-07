@@ -21,7 +21,7 @@ import * as rbtree from 'functional-red-black-tree';
 import {GoogleError, Status} from 'google-gax';
 import {Duplex} from 'stream';
 
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
 import {delayExecution, ExponentialBackoff} from './backoff';
 import {DocumentSnapshotBuilder, QueryDocumentSnapshot} from './document';
 import {DocumentChange, DocumentChangeType} from './document-change';
@@ -29,6 +29,7 @@ import {DocumentReference, Firestore, Query} from './index';
 import {logger} from './logger';
 import {QualifiedResourcePath} from './path';
 import {Timestamp} from './timestamp';
+import {normalizeBytes} from './convert';
 import {defaultConverter, RBTree} from './types';
 import {requestTag} from './util';
 
@@ -551,7 +552,7 @@ abstract class Watch<
           // set of docs as a snapshot, if there were changes.
           this.pushSnapshot(
             Timestamp.fromProto(change.readTime),
-            change.resumeToken!,
+            normalizeBytes(change.resumeToken),
           );
         }
       } else if (change.targetChangeType === 'ADD') {

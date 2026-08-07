@@ -1,4 +1,4 @@
-import {protos} from '@google-cloud/firestore-api';
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 export {protos};
 /*!
  * Copyright 2017 Google Inc. All Rights Reserved.
@@ -25,7 +25,7 @@ import {Duplex, PassThrough, Transform} from 'stream';
 
 import {URL} from 'url';
 
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 import {ExponentialBackoff, ExponentialBackoffSetting} from './backoff';
 import {BulkWriter} from './bulk-writer';
 import {BundleBuilder} from './bundle';
@@ -2053,11 +2053,9 @@ Object.defineProperty(module.exports, 'v1beta1', {
  */
 let cachedV1: any;
 Object.defineProperty(module.exports, 'v1', {
-  // The v1 module is very large. To avoid pulling it in from static
-  // scope, we lazy-load the module and cache the evaluated wrapper.
   get: () => {
     if (!cachedV1) {
-      const api = require('@google-cloud/firestore-api').v1;
+      const api = require('@google-cloud/firestore-api/build/src/v1');
       const fn = function(this: any, ...args: any[]) {
         return new (api.FirestoreClient as any)(...args);
       };

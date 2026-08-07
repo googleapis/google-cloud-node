@@ -21,7 +21,7 @@ import {
 } from './util/helpers';
 import {Firestore, Query, Timestamp} from '../src';
 import {expect, use} from 'chai';
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 import api = google.firestore.v1;
 import * as chaiAsPromised from 'chai-as-promised';
 import {setTimeoutHandler} from '../src/backoff';
@@ -121,17 +121,17 @@ describe('aggregate query interface', () => {
           where: {
             fieldFilter: {
               field: {fieldPath: 'foo'},
-              op: 'GREATER_THAN' as api.StructuredQuery.FieldFilter.Operator,
+              op: api.StructuredQuery.FieldFilter.Operator.GREATER_THAN,
               value: {stringValue: 'bar'},
             },
           },
           orderBy: [
             {
-              direction: 'ASCENDING' as api.StructuredQuery.Direction,
+              direction: api.StructuredQuery.Direction.ASCENDING,
               field: {fieldPath: 'foo'},
             },
             {
-              direction: 'ASCENDING' as api.StructuredQuery.Direction,
+              direction: api.StructuredQuery.Direction.ASCENDING,
               field: {fieldPath: '__name__'},
             },
           ],

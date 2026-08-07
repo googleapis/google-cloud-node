@@ -20,7 +20,7 @@ import {GoogleError, Status} from 'google-gax';
 import {Duplex} from 'stream';
 import * as through2 from 'through2';
 
-import * as proto from '../protos/firestore_v1_proto_api';
+import * as proto from "@google-cloud/firestore-api/build/protos/protos";
 import * as Firestore from '../src';
 import {DocumentReference, FieldPath, Timestamp, Transaction} from '../src';
 import {setTimeoutHandler} from '../src/backoff';
@@ -266,7 +266,7 @@ function query(options?: {
           field: {
             fieldPath: 'foo',
           },
-          op: 'EQUAL',
+          op: api.StructuredQuery.FieldFilter.Operator.EQUAL,
           value: {
             stringValue: 'bar',
           },

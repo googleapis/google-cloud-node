@@ -22,7 +22,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as protobufjs from 'protobufjs';
 import * as through2 from 'through2';
-import * as proto from '../protos/firestore_v1_proto_api';
+import * as proto from "@google-cloud/firestore-api/build/protos/protos";
 
 import {
   DocumentChange,
@@ -63,9 +63,24 @@ const CONFORMANCE_TEST_PROJECT_ID = 'projectID';
 
 // Load Protobuf definition and types
 const protobufRoot = new protobufjs.Root();
+// The cross-language conformance schema (test-definition.proto) is dynamically parsed
+// at test runtime using protobufjs.Root.loadSync(). Because it imports foundational
+// Google common schemas (e.g., google/api/field_behavior.proto) as well as Firestore
+// service models, we direct resolvePath to discover .proto syntax files across both
+// our standalone service API package and our central GAPIC runtime extension library.
+const PROTO_ROOTS = [
+  path.dirname(require.resolve("@google-cloud/firestore-api/build/protos/protos.json")),
+  path.resolve(require.resolve("google-gax"), "../../../build/protos"),
+];
+
 protobufRoot.resolvePath = (origin, target) => {
   if (/^google\/.*/.test(target)) {
-    target = path.join(__dirname, '../protos', target);
+    for (const root of PROTO_ROOTS) {
+      const candidate = path.join(root, target);
+      if (fs.existsSync(candidate)) {
+        return candidate;
+      }
+    }
   }
   return target;
 };

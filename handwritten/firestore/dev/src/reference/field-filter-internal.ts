@@ -16,7 +16,7 @@
 
 import * as deepEqual from 'fast-deep-equal';
 
-import * as protos from '../../protos/firestore_v1_proto_api';
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 import api = protos.google.firestore.v1;
 import {FilterInternal} from './filter-internal';
 import {Serializer} from '../serializer';
@@ -45,13 +45,28 @@ export class FieldFilterInternal extends FilterInternal {
    * @param value The value to which to compare the field for inclusion in a
    * query.
    */
+  readonly op: api.StructuredQuery.FieldFilter.Operator;
+
+  /**
+   * @param serializer The Firestore serializer
+   * @param field The path of the property value to compare.
+   * @param op A comparison operation.
+   * @param value The value to which to compare the field for inclusion in a
+   * query.
+   */
   constructor(
     private readonly serializer: Serializer,
     readonly field: FieldPath,
-    readonly op: api.StructuredQuery.FieldFilter.Operator,
+    _op:
+      | api.StructuredQuery.FieldFilter.Operator
+      | keyof typeof api.StructuredQuery.FieldFilter.Operator,
     readonly value: unknown,
   ) {
     super();
+    this.op =
+      typeof _op === 'string'
+        ? api.StructuredQuery.FieldFilter.Operator[_op]
+        : _op;
   }
 
   /**
@@ -62,12 +77,12 @@ export class FieldFilterInternal extends FilterInternal {
    */
   isInequalityFilter(): boolean {
     switch (this.op) {
-      case 'GREATER_THAN':
-      case 'GREATER_THAN_OR_EQUAL':
-      case 'LESS_THAN':
-      case 'LESS_THAN_OR_EQUAL':
-      case 'NOT_EQUAL':
-      case 'NOT_IN':
+      case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN:
+      case api.StructuredQuery.FieldFilter.Operator.GREATER_THAN_OR_EQUAL:
+      case api.StructuredQuery.FieldFilter.Operator.LESS_THAN:
+      case api.StructuredQuery.FieldFilter.Operator.LESS_THAN_OR_EQUAL:
+      case api.StructuredQuery.FieldFilter.Operator.NOT_EQUAL:
+      case api.StructuredQuery.FieldFilter.Operator.NOT_IN:
         return true;
       default:
         return false;
@@ -86,8 +101,10 @@ export class FieldFilterInternal extends FilterInternal {
    * @private
    * @internal
    */
-  nanOp(): 'IS_NAN' | 'IS_NOT_NAN' {
-    return this.op === 'EQUAL' ? 'IS_NAN' : 'IS_NOT_NAN';
+  nanOp(): api.StructuredQuery.UnaryFilter.Operator {
+    return this.op === api.StructuredQuery.FieldFilter.Operator.EQUAL
+      ? api.StructuredQuery.UnaryFilter.Operator.IS_NAN
+      : api.StructuredQuery.UnaryFilter.Operator.IS_NOT_NAN;
   }
 
   /**
@@ -102,8 +119,10 @@ export class FieldFilterInternal extends FilterInternal {
    * @private
    * @internal
    */
-  nullOp(): 'IS_NULL' | 'IS_NOT_NULL' {
-    return this.op === 'EQUAL' ? 'IS_NULL' : 'IS_NOT_NULL';
+  nullOp(): api.StructuredQuery.UnaryFilter.Operator {
+    return this.op === api.StructuredQuery.FieldFilter.Operator.EQUAL
+      ? api.StructuredQuery.UnaryFilter.Operator.IS_NULL
+      : api.StructuredQuery.UnaryFilter.Operator.IS_NOT_NULL;
   }
 
   /**

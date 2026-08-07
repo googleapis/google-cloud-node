@@ -15,7 +15,8 @@
 import {expect} from 'chai';
 import * as extend from 'extend';
 import {afterEach, beforeEach, describe, it} from 'mocha';
-import {firestore, google} from '../protos/firestore_v1_proto_api';
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
+import {firestore} from '../src/bundle-proto';
 import {Firestore, QuerySnapshot, Timestamp} from '../src';
 import {
   bundleToElementArray,
@@ -183,7 +184,9 @@ describe('Bundle Builder', () => {
         {},
         {
           parent: query.toProto().parent,
-          structuredQuery: query.toProto().structuredQuery,
+          structuredQuery: google.firestore.v1.StructuredQuery.fromObject(
+            query.toProto().structuredQuery!,
+          ).toJSON(),
         },
       ),
     });
@@ -195,7 +198,9 @@ describe('Bundle Builder', () => {
         {},
         {
           parent: newQuery.toProto().parent,
-          structuredQuery: newQuery.toProto().structuredQuery,
+          structuredQuery: google.firestore.v1.StructuredQuery.fromObject(
+            newQuery.toProto().structuredQuery!,
+          ).toJSON(),
         },
       ),
     });

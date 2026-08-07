@@ -31,7 +31,7 @@ import {
   Timestamp,
 } from '../src';
 import {expect, use} from 'chai';
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 import api = google.firestore.v1;
 import * as chaiAsPromised from 'chai-as-promised';
 import {setTimeoutHandler} from '../src/backoff';
@@ -41,7 +41,7 @@ export function findNearestQuery(
   fieldPath: string,
   queryVector: Array<number>,
   limit: number,
-  measure: api.StructuredQuery.FindNearest.DistanceMeasure,
+  measure: api.StructuredQuery.FindNearest.DistanceMeasure | any,
 ): api.IStructuredQuery {
   return {
     findNearest: {
