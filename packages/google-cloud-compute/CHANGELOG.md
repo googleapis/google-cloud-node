@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.15.0...compute-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
 ## [6.15.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.14.0...compute-v6.15.0) (2026-07-29)
 
 

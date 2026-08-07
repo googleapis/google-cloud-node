@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/apphub",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "App Hub API client for Node.js",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/vmmigration",
-  "version": "4.3.3",
+  "version": "5.0.0",
   "description": "vmmigration client for Node.js",
   "repository": {
     "type": "git",

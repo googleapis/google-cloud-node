@@ -5,6 +5,23 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/logging-bunyan-v5.1.2...logging-bunyan-v6.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update logging-bunyan to minimum Node version of 22. ([#9049](https://github.com/googleapis/google-cloud-node/issues/9049))
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+* Update logging-bunyan to minimum Node version of 22. ([#9049](https://github.com/googleapis/google-cloud-node/issues/9049)) ([a57262a](https://github.com/googleapis/google-cloud-node/commit/a57262a47499f9f5fd78abee07126c2611d0dad5)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [5.1.2](https://github.com/googleapis/google-cloud-node/compare/logging-bunyan-v5.1.1...logging-bunyan-v5.1.2) (2026-05-11)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gdchardwaremanagement",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "description": "GDC Hardware Management API client for Node.js",
   "repository": {
     "type": "git",
