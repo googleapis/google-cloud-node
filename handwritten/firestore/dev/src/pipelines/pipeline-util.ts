@@ -199,7 +199,7 @@ export class ExecutionUtil {
           let output: PipelineStreamElement[] = proto.results.map(result => {
             const output: PipelineStreamElement = {};
             if (proto.transaction?.length) {
-              output.transaction = proto.transaction as any;
+             output.transaction = normalizeBytes(proto.transaction);
             }
             if (proto.executionTime) {
               output.executionTime = Timestamp.fromProto(proto.executionTime);
