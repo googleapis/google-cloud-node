@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import type {Client} from './client.js';
+
 /**
  * Configuration options for establishing a connection to Google Spanner.
  */
@@ -30,6 +32,32 @@ export interface ClientConfig {
   database?: string;
   /** Custom type parsers registry. */
   types?: unknown;
+}
+
+/**
+ * Configuration options for establishing a pooled connection manager (`Pool`).
+ */
+export interface PoolConfig extends ClientConfig {
+  /** Maximum number of clients in the pool. Defaults to 10. */
+  max?: number;
+  /** Minimum number of idle clients to maintain in the pool. Defaults to 0. */
+  min?: number;
+  /** How long a client can remain idle before being closed (in milliseconds). Defaults to 10000 (10s). */
+  idleTimeoutMillis?: number;
+  /** Maximum time to wait for a client from the pool (in milliseconds). Defaults to 0 (no timeout / wait indefinitely). */
+  connectionTimeoutMillis?: number;
+  /** Allows Node.js event loop to exit when all clients in the pool are idle. Defaults to false. */
+  allowExitOnIdle?: boolean;
+  /** Maximum number of times a client can be checked out before being closed and replaced. Defaults to Infinity. */
+  maxUses?: number;
+  /** Maximum lifespan of a client connection in seconds. Defaults to 0 (disabled). */
+  maxLifetimeSeconds?: number;
+  /**
+   * Async initialization callback executed once when a new client is connected, before it is made available to the pool.
+   * Use `onConnect` to run async setup commands (e.g. session configuration). Unlike the `pool.on('connect')` event listener,
+   * `onConnect` is awaited before the connection is placed in the pool or returned to callers.
+   */
+  onConnect?: (client: Client) => void | Promise<void>;
 }
 
 /**

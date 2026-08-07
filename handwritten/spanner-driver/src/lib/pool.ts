@@ -14,37 +14,108 @@
 
 import {EventEmitter} from 'events';
 import {Client} from './client.js';
-import {ClientConfig} from './config.js';
+import {PoolConfig, resolveDsn} from './config.js';
 import {Query, QueryCallback} from './query.js';
 import {QueryConfig, QueryResult} from './types.js';
 import {dispatchQueryError, normalizeQueryArgs} from './utilities.js';
 
 /**
- * Basic Pool class managing database connection instances.
+ * Connection Pool class managing reusable database connection instances.
  *
- * Facilitates client acquisition (`connect`), automatic query execution with connection
- * auto-release (`query`), and graceful pool shutdown (`end`).
- *
- * TODO(PR 4 - Connection Pooling): Full connection pooling features (max connections,
- * min idle connections, idle timeouts, connection queueing, and pool event emitters)
- * will be expanded in PR 4.
+ * Supports configurable pool limits (`max`, `min`), idle connection timeouts (`idleTimeoutMillis`),
+ * acquisition queueing and timeouts (`connectionTimeoutMillis`), client recycling (`release`),
+ * connection reuse limits (`maxUses`), connection lifespan limits (`maxLifetimeSeconds`),
+ * initialization hooks (`onConnect`), and lifecycle events (`connect`, `acquire`, `release`, `remove`, `error`).
  */
 export class Pool extends EventEmitter {
-  /** Resolved ClientConfig object used when instantiating connections. */
-  readonly config: ClientConfig;
+  /** Resolved PoolConfig object used when instantiating connections. */
+  readonly config: PoolConfig;
+
+  /** Fully formatted Spanner DSN resource string (e.g. `projects/p/instances/i/databases/d`). */
+  readonly dsn: string;
+
+  /** Calculated pool bounds and timeout settings. */
+  readonly options: {
+    max: number;
+    min: number;
+    idleTimeoutMillis: number;
+    connectionTimeoutMillis: number;
+    allowExitOnIdle: boolean;
+    maxUses: number;
+    maxLifetimeSeconds: number;
+    onConnect?: (client: Client) => void | Promise<void>;
+  };
 
   /** Boolean flag tracking whether pool shutdown has been initiated. */
   private isEnding = false;
 
+  /** Boolean flag tracking whether pool shutdown has completed. */
+  private isEnded = false;
+
+  /** Set of all active and idle Client instances managed by this pool. */
+  private allClients = new Set<Client>();
+
+  /** Queue of idle Client instances available for immediate checkout. */
+  private idleClients: Array<{client: Client; timer?: NodeJS.Timeout}> = [];
+
+  /** Internal metadata tracking client creation time and checkout count. */
+  private clientMeta = new WeakMap<
+    Client,
+    {checkoutCount: number; createdAt: number}
+  >();
+
+  /** Pending acquirers waiting for a client when totalCount >= max. */
+  private waitQueue: Array<{
+    resolve: (client: Client) => void;
+    reject: (err: Error) => void;
+    timer?: NodeJS.Timeout;
+  }> = [];
+
+  /**
+   * Resolvers array supporting graceful shutdown (`pool.end()`).
+   * When `pool.end()` is invoked while active queries are still running on checked-out clients,
+   * shutdown pauses by registering a Promise resolver here. Once the last in-flight query finishes
+   * and its client is released (reaching `allClients.size === 0`), `finishEnd()` iterates through
+   * `endResolvers` to notify all waiting `pool.end()` callers simultaneously.
+   */
+  private endResolvers: Array<() => void> = [];
+
   /**
    * Instantiates a new Spanner Pool.
    *
-   * @param config - Connection string (e.g. `projects/p/instances/i/databases/d`) or `ClientConfig` object.
+   * @param config - Connection string (e.g. `projects/p/instances/i/databases/d`) or `PoolConfig` object.
    */
-  constructor(config?: string | ClientConfig) {
+  constructor(config?: string | PoolConfig) {
     super();
     this.config =
       typeof config === 'string' ? {connectionString: config} : config || {};
+    this.dsn = resolveDsn(config);
+
+    this.options = {
+      max: this.config.max ?? 10,
+      min: this.config.min ?? 0,
+      idleTimeoutMillis: this.config.idleTimeoutMillis ?? 10000,
+      connectionTimeoutMillis: this.config.connectionTimeoutMillis ?? 0,
+      allowExitOnIdle: this.config.allowExitOnIdle ?? false,
+      maxUses: this.config.maxUses ?? Infinity,
+      maxLifetimeSeconds: this.config.maxLifetimeSeconds ?? 0,
+      onConnect: this.config.onConnect,
+    };
+  }
+
+  /** Total number of clients currently managed by the pool (active + idle). */
+  get totalCount(): number {
+    return this.allClients.size;
+  }
+
+  /** Total number of idle clients currently available in the pool. */
+  get idleCount(): number {
+    return this.idleClients.length;
+  }
+
+  /** Total number of pending requests waiting for a client connection. */
+  get waitingCount(): number {
+    return this.waitQueue.length;
   }
 
   /**
@@ -55,14 +126,26 @@ export class Pool extends EventEmitter {
    */
   async connect(): Promise<Client>;
   connect(
-    callback: (err: Error | null, client?: Client, done?: () => void) => void,
+    callback: (
+      err: Error | null,
+      client?: Client,
+      done?: (err?: boolean | Error) => void,
+    ) => void,
   ): void;
   connect(
-    callback?: (err: Error | null, client?: Client, done?: () => void) => void,
+    callback?: (
+      err: Error | null,
+      client?: Client,
+      done?: (err?: boolean | Error) => void,
+    ) => void,
   ): Promise<Client> | void {
     if (callback) {
       this._doConnect()
-        .then(client => callback(null, client, () => void client.release()))
+        .then(client =>
+          callback(null, client, (releaseErr?: boolean | Error) => {
+            void client.release(releaseErr);
+          }),
+        )
         .catch(err => callback(err));
       return;
     }
@@ -70,14 +153,282 @@ export class Pool extends EventEmitter {
   }
 
   private async _doConnect(): Promise<Client> {
-    if (this.isEnding) {
+    if (this.isEnding || this.isEnded) {
       throw new Error('Cannot acquire client from ending pool');
     }
-    const client = new Client(this.config);
-    await client.connect();
-    // TODO(PR 4 - Connection Pooling): Override client.release to return client to idle connection pool
-    client.release = client.end.bind(client);
-    return client;
+
+    // 1. Check if an idle client is already available
+    if (this.idleClients.length > 0) {
+      const item = this.idleClients.pop()!;
+      if (item.timer) {
+        clearTimeout(item.timer);
+      }
+      this.attachReleaseWrapper(item.client);
+      this.emit('acquire', item.client);
+      return item.client;
+    }
+
+    // 2. Create a new client if pool capacity allows
+    if (this.allClients.size < this.options.max) {
+      const clientConfig = this.dsn
+        ? {...this.config, connectionString: this.dsn}
+        : this.config;
+      const client = new Client(clientConfig);
+      this.allClients.add(client);
+      this.clientMeta.set(client, {checkoutCount: 0, createdAt: Date.now()});
+
+      // Forward background client errors to pool only if an error listener is attached
+      client.on('error', (err: Error) => {
+        if (this.listenerCount('error') > 0) {
+          this.emit('error', err, client);
+        }
+      });
+
+      try {
+        if (this.options.connectionTimeoutMillis > 0) {
+          await this.connectWithTimeout(
+            client,
+            this.options.connectionTimeoutMillis,
+          );
+        } else {
+          await client.connect();
+        }
+
+        // Execute async onConnect hook if configured (awaited before checkout)
+        if (typeof this.options.onConnect === 'function') {
+          await this.options.onConnect(client);
+        }
+      } catch (err) {
+        this.removeClient(client);
+        throw err;
+      }
+
+      // Emit 'connect' lifecycle event (synchronous / non-blocking EventEmitter notification)
+      this.emit('connect', client);
+      this.attachReleaseWrapper(client);
+      this.emit('acquire', client);
+      return client;
+    }
+
+    // 3. Queue acquisition request if max clients reached
+    return new Promise<Client>((resolve, reject) => {
+      let timeoutTimer: NodeJS.Timeout | undefined;
+
+      if (this.options.connectionTimeoutMillis > 0) {
+        timeoutTimer = setTimeout(() => {
+          const idx = this.waitQueue.findIndex(w => w.resolve === resolve);
+          if (idx !== -1) {
+            this.waitQueue.splice(idx, 1);
+            reject(new Error('timeout exceeded when trying to connect'));
+          }
+        }, this.options.connectionTimeoutMillis);
+
+        if (timeoutTimer.unref) {
+          timeoutTimer.unref();
+        }
+      }
+
+      this.waitQueue.push({resolve, reject, timer: timeoutTimer});
+    });
+  }
+
+  /**
+   * Connects a Client instance with a connection timeout.
+   */
+  private async connectWithTimeout(
+    client: Client,
+    timeoutMs: number,
+  ): Promise<void> {
+    let timer: NodeJS.Timeout | undefined;
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => {
+        void client.end();
+        reject(new Error('timeout exceeded when trying to connect'));
+      }, timeoutMs);
+      if (timer.unref) {
+        timer.unref();
+      }
+    });
+
+    try {
+      await Promise.race([client.connect(), timeoutPromise]);
+    } finally {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    }
+  }
+
+  /**
+   * Binds a pool release handler to `client.release` on checked-out Client instances.
+   *
+   * While a standalone Client delegates `release()` directly to `client.end()` to close
+   * its connection, a pooled Client must notify this Pool instance upon release so it can:
+   * 1. Check if the connection errored or reached maxUses / maxLifetimeSeconds limits.
+   * 2. Hand the client immediately to pending requesters in `waitQueue` (FIFO).
+   * 3. Or return the client to `idleClients` (LIFO) and schedule `idleTimeoutMillis` eviction.
+   * 4. Emit the pool `'release'` event.
+   *
+   */
+  private attachReleaseWrapper(client: Client): void {
+    let released = false;
+
+    client.release = ((
+      err?: boolean | Error | ((err: Error | null) => void),
+    ): Promise<void> | void => {
+      let callback: ((err: Error | null) => void) | undefined;
+      let isErrored = false;
+
+      if (typeof err === 'function') {
+        callback = err;
+      } else if (err === true || err instanceof Error) {
+        isErrored = true;
+      }
+
+      if (released) {
+        if (callback) {
+          callback(null);
+          return;
+        }
+        return Promise.resolve();
+      }
+      released = true;
+
+      const doRelease = async (): Promise<void> => {
+        if (!this.allClients.has(client)) {
+          return;
+        }
+
+        const meta = this.clientMeta.get(client);
+        if (meta) {
+          meta.checkoutCount++;
+        }
+
+        const isExpiredByUses =
+          this.options.maxUses > 0 &&
+          meta !== undefined &&
+          meta.checkoutCount >= this.options.maxUses;
+
+        const isExpiredByLifetime =
+          this.options.maxLifetimeSeconds > 0 &&
+          meta !== undefined &&
+          (Date.now() - meta.createdAt) / 1000 >=
+            this.options.maxLifetimeSeconds;
+
+        if (
+          isErrored ||
+          isExpiredByUses ||
+          isExpiredByLifetime ||
+          this.isEnding ||
+          this.isEnded ||
+          !client.isConnected
+        ) {
+          this.removeClient(client);
+          this.emit('release', isErrored ? err : null, client);
+          return;
+        }
+
+        this.emit('release', null, client);
+
+        // If callers are waiting in queue, hand client directly to next waiter
+        if (this.waitQueue.length > 0) {
+          const waiter = this.waitQueue.shift()!;
+          if (waiter.timer) {
+            clearTimeout(waiter.timer);
+          }
+          this.attachReleaseWrapper(client);
+          this.emit('acquire', client);
+          waiter.resolve(client);
+          return;
+        }
+
+        // Guard against duplicate insertion in idle queue
+        if (this.idleClients.some(item => item.client === client)) {
+          return;
+        }
+
+        // Otherwise, store client in idle queue with idle timeout
+        let idleTimer: NodeJS.Timeout | undefined;
+        if (this.options.idleTimeoutMillis > 0) {
+          idleTimer = setTimeout(() => {
+            this.onIdleTimeout(client);
+          }, this.options.idleTimeoutMillis);
+
+          if (this.options.allowExitOnIdle && typeof idleTimer.unref === 'function') {
+            idleTimer.unref();
+          }
+        }
+
+        this.idleClients.push({client, timer: idleTimer});
+      };
+
+      if (callback) {
+        doRelease()
+          .then(() => callback!(null))
+          .catch(e => callback!(e));
+        return;
+      }
+      return doRelease();
+    }) as typeof client.release;
+  }
+
+  /**
+   * Handles idle connection timeout expiration for a client.
+   */
+  private onIdleTimeout(client: Client): void {
+    const idx = this.idleClients.findIndex(item => item.client === client);
+    if (idx !== -1) {
+      const [{timer}] = this.idleClients.splice(idx, 1);
+      if (timer) {
+        clearTimeout(timer);
+      }
+
+      if (this.allClients.size > this.options.min) {
+        this.removeClient(client);
+      } else {
+        this.idleClients.push({client});
+      }
+    }
+  }
+
+  /**
+   * Permanently closes and removes a client from the pool.
+   */
+  private removeClient(client: Client): void {
+    this.allClients.delete(client);
+    const idx = this.idleClients.findIndex(item => item.client === client);
+    if (idx !== -1) {
+      const [{timer}] = this.idleClients.splice(idx, 1);
+      if (timer) {
+        clearTimeout(timer);
+      }
+    }
+
+    void client.end();
+    this.emit('remove', client);
+
+    if (this.isEnding && this.allClients.size === 0) {
+      this.finishEnd();
+    } else if (!this.isEnding && !this.isEnded && this.waitQueue.length > 0) {
+      const waiter = this.waitQueue.shift()!;
+      if (waiter.timer) {
+        clearTimeout(waiter.timer);
+      }
+      this._doConnect()
+        .then(newClient => waiter.resolve(newClient))
+        .catch(err => waiter.reject(err));
+    }
+  }
+
+  /**
+   * Completes graceful pool shutdown by resolving all pending `pool.end()` Promises.
+   * Invoked automatically when the last checked-out client is released and removed (`allClients.size === 0`).
+   */
+  private finishEnd(): void {
+    while (this.endResolvers.length > 0) {
+      const resolve = this.endResolvers.shift()!;
+      resolve();
+    }
   }
 
   /**
@@ -105,8 +456,6 @@ export class Pool extends EventEmitter {
       let client: Client;
 
       // 1. Connection acquisition stage:
-      // Catches connection failures from _doConnect() before client.query is invoked.
-      // Notifies actualCallback or error listeners so callback-based queries do not hang.
       try {
         client = await this._doConnect();
       } catch (err: unknown) {
@@ -116,8 +465,6 @@ export class Pool extends EventEmitter {
       }
 
       // 2. Query execution stage:
-      // Executed on the acquired client using an internal query instance without callback.
-      // This ensures client.query does not fire actualCallback prematurely before client.release() completes.
       const queryForClient = new Query<QueryResult<R>>(
         query.text ?? '',
         query.values,
@@ -168,11 +515,48 @@ export class Pool extends EventEmitter {
   async end(): Promise<void>;
   end(callback: () => void): void;
   end(callback?: () => void): Promise<void> | void {
-    this.isEnding = true;
     if (callback) {
-      process.nextTick(callback);
+      this._doEnd()
+        .then(() => callback())
+        .catch(() => callback());
       return;
     }
-    return Promise.resolve();
+    return this._doEnd();
+  }
+
+  private async _doEnd(): Promise<void> {
+    if (this.isEnded) {
+      return;
+    }
+    this.isEnding = true;
+
+    // 1. Drain and reject all pending waitQueue requests
+    while (this.waitQueue.length > 0) {
+      const waiter = this.waitQueue.shift()!;
+      if (waiter.timer) {
+        clearTimeout(waiter.timer);
+      }
+      waiter.reject(new Error('Cannot acquire client from ending pool'));
+    }
+
+    // 2. Close and remove all idle clients
+    const idleToClose = [...this.idleClients];
+    this.idleClients = [];
+    for (const {client, timer} of idleToClose) {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      this.removeClient(client);
+    }
+
+    // 3. Graceful shutdown: If active queries are still running on checked-out clients,
+    // pause and wait for all active clients to be released and removed (allClients.size === 0).
+    if (this.allClients.size > 0) {
+      await new Promise<void>(resolve => {
+        this.endResolvers.push(resolve);
+      });
+    }
+
+    this.isEnded = true;
   }
 }

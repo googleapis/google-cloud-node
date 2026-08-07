@@ -17,22 +17,24 @@ import {describe, it} from 'mocha';
 import {Client, Pool, Query, QueryResult} from '../../src/index.js';
 
 describe('Pool Class', () => {
-  it('should instantiate Pool with config object or connection string', () => {
+  it('should instantiate Pool with config object or connection string and resolve dsn', () => {
     const pool1 = new Pool({
       project: 'p',
       instance: 'i',
       database: 'd',
     });
     assert.strictEqual(pool1.config.project, 'p');
+    assert.strictEqual(pool1.dsn, 'projects/p/instances/i/databases/d');
 
     const pool2 = new Pool('projects/p/instances/i/databases/d');
     assert.strictEqual(
       pool2.config.connectionString,
       'projects/p/instances/i/databases/d',
     );
+    assert.strictEqual(pool2.dsn, 'projects/p/instances/i/databases/d');
   });
 
-  it('should acquire client via connect() promise and callback with release()', async () => {
+  it('should acquire client via connect() promise and return it to idle pool on release()', async () => {
     const pool = new Pool({
       project: 'p',
       instance: 'i',
@@ -41,8 +43,386 @@ describe('Pool Class', () => {
     const client = await pool.connect();
     assert.strictEqual(client.isConnected, true);
     assert.strictEqual(typeof client.release, 'function');
+    assert.strictEqual(pool.totalCount, 1);
+    assert.strictEqual(pool.idleCount, 0);
+
     await client.release();
-    assert.strictEqual(client.isConnected, false);
+    assert.strictEqual(client.isConnected, true, 'Client remains connected in idle pool');
+    assert.strictEqual(pool.idleCount, 1);
+    assert.strictEqual(pool.totalCount, 1);
+
+    await pool.end();
+    assert.strictEqual(pool.idleCount, 0);
+    assert.strictEqual(pool.totalCount, 0);
+    assert.strictEqual(client.isConnected, false, 'Client is closed when pool ends');
+  });
+
+  it('should reuse idle clients from the pool on subsequent connect() calls', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    const client1 = await pool.connect();
+    await client1.release();
+
+    const client2 = await pool.connect();
+    assert.strictEqual(client1, client2, 'Should reuse the same client instance');
+    await client2.release();
+    await pool.end();
+  });
+
+  it('should respect max pool limit and queue pending acquisitions', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      max: 2,
+    });
+
+    const c1 = await pool.connect();
+    const c2 = await pool.connect();
+    assert.strictEqual(pool.totalCount, 2);
+    assert.strictEqual(pool.idleCount, 0);
+
+    let c3Acquired = false;
+    let c3Client: Client | undefined;
+    const p3 = pool.connect().then(c => {
+      c3Acquired = true;
+      c3Client = c;
+      return c;
+    });
+
+    assert.strictEqual(pool.waitingCount, 1);
+    assert.strictEqual(c3Acquired, false);
+
+    await c1.release();
+    await p3;
+
+    assert.strictEqual(c3Acquired, true);
+    assert.strictEqual(c3Client, c1, 'Queued acquirer should receive released client');
+    assert.strictEqual(pool.waitingCount, 0);
+
+    await c2.release();
+    await c3Client!.release();
+    await pool.end();
+  });
+
+  it('should reject connection acquisition on connectionTimeoutMillis timeout', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      max: 1,
+      connectionTimeoutMillis: 50,
+    });
+
+    const c1 = await pool.connect();
+    assert.strictEqual(pool.totalCount, 1);
+
+    try {
+      await pool.connect();
+      assert.fail('Should have timed out waiting for connection');
+    } catch (err: unknown) {
+      assert.strictEqual((err as Error).message, 'timeout exceeded when trying to connect');
+    }
+
+    await c1.release();
+    await pool.end();
+  });
+
+  it('should timeout when client.connect() takes longer than connectionTimeoutMillis', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      connectionTimeoutMillis: 40,
+    });
+
+    const origConnect = Client.prototype.connect;
+    Client.prototype.connect = function () {
+      return new Promise(r => setTimeout(r, 100));
+    };
+
+    try {
+      await pool.connect();
+      assert.fail('Should have timed out establishing connection');
+    } catch (err: unknown) {
+      assert.strictEqual((err as Error).message, 'timeout exceeded when trying to connect');
+    } finally {
+      Client.prototype.connect = origConnect;
+    }
+
+    await pool.end();
+  });
+
+  it('should remove idle client after idleTimeoutMillis expires', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      idleTimeoutMillis: 50,
+    });
+
+    const c1 = await pool.connect();
+    await c1.release();
+    assert.strictEqual(pool.idleCount, 1);
+
+    await new Promise(r => setTimeout(r, 80));
+    assert.strictEqual(pool.idleCount, 0);
+    assert.strictEqual(pool.totalCount, 0);
+    assert.strictEqual(c1.isConnected, false);
+
+    await pool.end();
+  });
+
+  it('should maintain min idle clients even after idleTimeoutMillis expires', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      min: 1,
+      idleTimeoutMillis: 40,
+    });
+
+    const c1 = await pool.connect();
+    await c1.release();
+    assert.strictEqual(pool.idleCount, 1);
+
+    await new Promise(r => setTimeout(r, 70));
+    assert.strictEqual(pool.idleCount, 1, 'min idle client should be retained');
+    assert.strictEqual(pool.totalCount, 1);
+
+    await pool.end();
+  });
+
+  it('should emit pool lifecycle events (connect, acquire, release, remove)', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+
+    const events: string[] = [];
+    pool.on('connect', () => events.push('connect'));
+    pool.on('acquire', () => events.push('acquire'));
+    pool.on('release', () => events.push('release'));
+    pool.on('remove', () => events.push('remove'));
+
+    const c = await pool.connect();
+    await c.release();
+    await pool.end();
+
+    assert.deepStrictEqual(events, ['connect', 'acquire', 'release', 'remove']);
+  });
+
+  it('should destroy client when released with error parameter', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+
+    const c = await pool.connect();
+    assert.strictEqual(pool.totalCount, 1);
+
+    await c.release(new Error('Fatal error'));
+    assert.strictEqual(pool.idleCount, 0);
+    assert.strictEqual(pool.totalCount, 0);
+    assert.strictEqual(c.isConnected, false);
+
+    await pool.end();
+  });
+
+  it('should create a fresh replacement client for queued waiter when active client is removed with error', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      max: 1,
+    });
+
+    const c1 = await pool.connect();
+    assert.strictEqual(pool.totalCount, 1);
+
+    let waiterResolved = false;
+    let newClient: Client | undefined;
+    const p2 = pool.connect().then(c => {
+      waiterResolved = true;
+      newClient = c;
+      return c;
+    });
+
+    assert.strictEqual(pool.waitingCount, 1);
+
+    // Release c1 with fatal error -> removeClient destroys c1 and connects fresh replacement for waiter
+    await c1.release(new Error('Connection lost'));
+    await p2;
+
+    assert.strictEqual(waiterResolved, true);
+    assert.notStrictEqual(newClient, c1, 'Should instantiate a fresh new Client instance');
+    assert.strictEqual(newClient?.isConnected, true);
+    assert.strictEqual(pool.waitingCount, 0);
+    assert.strictEqual(pool.totalCount, 1);
+
+    await newClient!.release();
+    await pool.end();
+  });
+
+  it('should emit error event on pool when background client emits error and listener is attached', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+
+    let receivedErr: Error | null = null;
+    pool.on('error', err => {
+      receivedErr = err;
+    });
+
+    const c = await pool.connect();
+    c.emit('error', new Error('Background connection dropped'));
+
+    assert.ok(receivedErr);
+    assert.strictEqual((receivedErr as Error).message, 'Background connection dropped');
+
+    await c.release();
+    await pool.end();
+  });
+
+  it('should safely handle background client error when no pool error listener is attached without crashing', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+
+    const c = await pool.connect();
+    // Should not throw or crash uncaught exception
+    c.emit('error', new Error('Background silent drop'));
+
+    await c.release();
+    await pool.end();
+  });
+
+  it('should ignore duplicate client.release() calls on the same checkout', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+
+    const c = await pool.connect();
+    assert.strictEqual(pool.totalCount, 1);
+    assert.strictEqual(pool.idleCount, 0);
+
+    await c.release();
+    assert.strictEqual(pool.idleCount, 1);
+
+    // Second and third release calls should safely no-op
+    await c.release();
+    await c.release();
+    assert.strictEqual(pool.idleCount, 1, 'idleCount must not duplicate client');
+    assert.strictEqual(pool.totalCount, 1);
+
+    await pool.end();
+  });
+
+  it('should support allowExitOnIdle configuration', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      idleTimeoutMillis: 1000,
+      allowExitOnIdle: true,
+    });
+
+    const c = await pool.connect();
+    await c.release();
+    assert.strictEqual(pool.idleCount, 1);
+
+    await pool.end();
+  });
+
+  it('should destroy client after reaching maxUses limit', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      maxUses: 2,
+    });
+
+    const c1 = await pool.connect();
+    await c1.release();
+    assert.strictEqual(pool.idleCount, 1);
+
+    const c1Again = await pool.connect();
+    assert.strictEqual(c1, c1Again);
+
+    await c1Again.release();
+    assert.strictEqual(pool.idleCount, 0, 'Client should be destroyed after 2 uses');
+    assert.strictEqual(pool.totalCount, 0);
+    assert.strictEqual(c1.isConnected, false);
+
+    await pool.end();
+  });
+
+  it('should destroy client after maxLifetimeSeconds expires', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      maxLifetimeSeconds: 0.05, // 50ms
+    });
+
+    const c1 = await pool.connect();
+    await new Promise(r => setTimeout(r, 60));
+    await c1.release();
+
+    assert.strictEqual(pool.idleCount, 0, 'Client should be destroyed due to maxLifetimeSeconds');
+    assert.strictEqual(pool.totalCount, 0);
+    assert.strictEqual(c1.isConnected, false);
+
+    await pool.end();
+  });
+
+  it('should execute onConnect initialization hook when connecting new client', async () => {
+    let onConnectRan = false;
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      onConnect: async client => {
+        onConnectRan = true;
+        assert.strictEqual(client.isConnected, true);
+      },
+    });
+
+    const c1 = await pool.connect();
+    assert.strictEqual(onConnectRan, true);
+    await c1.release();
+    await pool.end();
+  });
+
+  it('should destroy client and propagate error when onConnect throws', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      onConnect: () => {
+        throw new Error('onConnect initialization failed');
+      },
+    });
+
+    try {
+      await pool.connect();
+      assert.fail('Should have thrown onConnect error');
+    } catch (err: unknown) {
+      assert.strictEqual((err as Error).message, 'onConnect initialization failed');
+    }
+
+    assert.strictEqual(pool.totalCount, 0);
     await pool.end();
   });
 
@@ -58,6 +438,24 @@ describe('Pool Class', () => {
       if (releaseDone) {
         releaseDone();
       }
+      void pool.end().then(() => done());
+    });
+  });
+
+  it('should destroy client when released with error via connect() done(err) callback', done => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+    pool.connect((err, client, releaseDone) => {
+      assert.strictEqual(err, null);
+      assert.strictEqual(pool.totalCount, 1);
+      if (releaseDone) {
+        releaseDone(new Error('Fatal connection issue'));
+      }
+      assert.strictEqual(pool.totalCount, 0);
+      assert.strictEqual(pool.idleCount, 0);
       void pool.end().then(() => done());
     });
   });
@@ -150,6 +548,28 @@ describe('Pool Class', () => {
       false,
       'error event should not be emitted when callback is provided',
     );
+    await pool.end();
+  });
+
+  it('should retain and return client to idle pool when pool.query() encounters a query error', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+
+    // Query fails due to empty query string validation
+    try {
+      await pool.query('');
+      assert.fail('Should have failed on empty query text');
+    } catch (err: unknown) {
+      assert.strictEqual(err instanceof Error, true);
+    }
+
+    // Client should NOT be destroyed; it should be returned to idle pool
+    assert.strictEqual(pool.idleCount, 1, 'Client should be returned to idle pool');
+    assert.strictEqual(pool.totalCount, 1);
+
     await pool.end();
   });
 
@@ -302,5 +722,80 @@ describe('Pool Class', () => {
       true,
       'client.release() should complete before end event is emitted on pool.query()',
     );
+  });
+
+  it('should handle concurrent pool.end() calls gracefully and notify all callers', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+
+    const c = await pool.connect();
+    setTimeout(() => {
+      void c.release();
+    }, 40);
+
+    // Call pool.end() concurrently 3 times
+    await Promise.all([pool.end(), pool.end(), pool.end()]);
+
+    assert.strictEqual(pool.totalCount, 0);
+    assert.strictEqual(pool.idleCount, 0);
+  });
+
+  it('should drain active in-flight queries before pool.end() resolves', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+
+    const c1 = await pool.connect();
+    let queryFinished = false;
+
+    // Simulate active query completing after 50ms
+    setTimeout(() => {
+      queryFinished = true;
+      void c1.release();
+    }, 50);
+
+    assert.strictEqual(pool.totalCount, 1);
+    await pool.end();
+
+    assert.strictEqual(queryFinished, true, 'pool.end() must wait for active in-flight client to finish');
+    assert.strictEqual(pool.totalCount, 0);
+  });
+
+  it('should reject queued waitQueue acquirers when pool.end() is called', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      max: 1,
+    });
+
+    const c1 = await pool.connect();
+
+    let waiterRejected = false;
+    let waiterErrorMsg = '';
+
+    const p2 = pool.connect().catch((err: Error) => {
+      waiterRejected = true;
+      waiterErrorMsg = err.message;
+    });
+
+    assert.strictEqual(pool.waitingCount, 1);
+
+    // Release c1 after a short delay so pool.end() rejects waitQueue before c1 release
+    setTimeout(() => {
+      void c1.release();
+    }, 20);
+
+    await pool.end();
+    await p2;
+
+    assert.strictEqual(waiterRejected, true);
+    assert.strictEqual(waiterErrorMsg, 'Cannot acquire client from ending pool');
+    assert.strictEqual(pool.waitingCount, 0);
   });
 });
