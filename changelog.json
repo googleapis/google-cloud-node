@@ -4,6 +4,56 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "61ea9c807dfb3eda4ddd377da9a496d17ba48389",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9104"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "1ed703f36743d61fb302b42a6cee53c07034b2fe",
+          "message": "Upgrade minimum Node.js version to 22",
+          "issues": [
+            "9026"
+          ],
+          "breakingChangeNote": "upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))"
+        },
+        {
+          "type": "feat",
+          "sha": "3391fd27d1c15e051293207a07c6db00e760d370",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "8672"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "f5b12cf10d9974c87e651e1182a5804030af8cdc",
+          "message": "[datamanager] add encrypted_user_id.proto and the EncryptedUserId resource",
+          "issues": [
+            "8378"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ecec52d9fa7e5a8557596f42407412b714c8bd3d",
+          "message": "[datamanager] add the coupon_codes field to CartData to track coupon redemptions for Google Ads and Google Analytics",
+          "issues": [
+            "8300"
+          ]
+        }
+      ],
+      "version": "1.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "8165672b-c417-4d69-8c58-0513f4f07015",
+      "createTime": "2026-08-07T23:06:25.949Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "23aee114a947a29f31977aab8de9c1c7ecd62188",
           "message": "Upgrade types sinon for databasecenter",
@@ -88789,5 +88839,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-05T21:09:31.314Z"
+  "updateTime": "2026-08-07T23:06:25.949Z"
 }
