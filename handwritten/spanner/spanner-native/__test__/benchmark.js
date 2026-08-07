@@ -287,13 +287,13 @@ async function runVerificationPlanTests(db, rustClients, goClients) {
 
   for (const q of t1Queries) {
     console.log(`  Executing: ${q.label}...`);
-    const js = await runBenchmark(() => db.executeSqlJs(q.sql), 16, 5000);
-    const rust = await runBenchmark(() => rustClients[16].executeSqlNative(q.sql), 16, 5000);
-    const go = await runBenchmark(() => goClients[16].executeSqlNative(q.sql), 16, 5000);
+    const js = await runBenchmark(() => db.executeSqlJs(q.sql), 1, 5000);
+    const rust = await runBenchmark(() => rustClients[1].executeSqlNative(q.sql), 1, 5000);
+    const go = await runBenchmark(() => goClients[1].executeSqlNative(q.sql), 1, 5000);
 
     console.log(`    JavaScript QPS / Lag : ${js.qps.toFixed(1)} QPS / ${js.avgLagMs.toFixed(2)}ms`);
-    console.log(`    Rust (16 Ch) QPS / Lag: ${rust.qps.toFixed(1)} QPS / ${rust.avgLagMs.toFixed(2)}ms`);
-    console.log(`    Go   (16 Ch) QPS / Lag: ${go.qps.toFixed(1)} QPS / ${go.avgLagMs.toFixed(2)}ms`);
+    console.log(`    Rust (1 Ch) QPS / Lag: ${rust.qps.toFixed(1)} QPS / ${rust.avgLagMs.toFixed(2)}ms`);
+    console.log(`    Go   (1 Ch) QPS / Lag: ${go.qps.toFixed(1)} QPS / ${go.avgLagMs.toFixed(2)}ms`);
     console.log(`    Rust Speedup / Lat Imp: ${(rust.qps / (js.qps || 1)).toFixed(2)}x / ${(((js.p95 - rust.p95) / (js.p95 || 1)) * 100).toFixed(1)}%`);
     console.log(`    Go   Speedup / Lat Imp: ${(go.qps / (js.qps || 1)).toFixed(2)}x / ${(((js.p95 - go.p95) / (js.p95 || 1)) * 100).toFixed(1)}%`);
   }
