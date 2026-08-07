@@ -4,6 +4,113 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "23aee114a947a29f31977aab8de9c1c7ecd62188",
+          "message": "Upgrade types sinon for databasecenter",
+          "issues": [
+            "9098"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/databasecenter",
+      "id": "c0b55b44-2b73-457b-9e25-8d86ece8b512",
+      "createTime": "2026-08-05T21:09:31.314Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f63f914e69106f581448837f5ee212ab71f85775",
+          "message": "Split gapic and proto usage from the handwritten library into bigtable-api",
+          "issues": [
+            "8934"
+          ],
+          "scope": "bigtable"
+        }
+      ],
+      "version": "7.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable",
+      "id": "dc784ab8-295a-4e02-8261-f7935abb2788",
+      "createTime": "2026-08-05T21:09:31.294Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "7f8e23c9652e34869c2fafe54f63cc63ac9acaa8",
+          "message": "Remove owlbot configs",
+          "issues": [
+            "8936"
+          ],
+          "scope": "bigquery"
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "de1dae99-d138-451f-a0db-e716e0003958",
+      "createTime": "2026-08-05T21:09:31.273Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "340364f8fab67adaf4e684fb3241de499394bf6b",
+          "message": "Discovery url handling, error code review helper, and pack-n-play test timeouts",
+          "issues": [
+            "9061"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "googleapis-common",
+      "id": "2d37b8dd-1417-4f37-ae57-18b166ea395a",
+      "createTime": "2026-08-05T21:09:31.248Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "340364f8fab67adaf4e684fb3241de499394bf6b",
+          "message": "Discovery url handling, error code review helper, and pack-n-play test timeouts",
+          "issues": [
+            "9061"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "9eda0e2d-73dd-410e-a223-df0621e697d6",
+      "createTime": "2026-08-05T21:09:31.228Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "340364f8fab67adaf4e684fb3241de499394bf6b",
+          "message": "Discovery url handling, error code review helper, and pack-n-play test timeouts",
+          "issues": [
+            "9061"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "pack-n-play",
+      "id": "80b6e996-31bf-482f-8d5c-02220564552f",
+      "createTime": "2026-08-05T21:09:31.200Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "1ed703f36743d61fb302b42a6cee53c07034b2fe",
           "message": "Upgrade minimum Node.js version to 22",
@@ -88682,5 +88789,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-08-04T23:49:33.509Z"
+  "updateTime": "2026-08-05T21:09:31.314Z"
 }
