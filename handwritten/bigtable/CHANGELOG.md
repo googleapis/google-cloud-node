@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigtable?activeTab=versions
 
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.0.0...bigtable-v7.1.0) (2026-08-05)
+
+
+### Features
+
+* **bigtable:** Split gapic and proto usage from the handwritten library into bigtable-api ([#8934](https://github.com/googleapis/google-cloud-node/issues/8934)) ([f63f914](https://github.com/googleapis/google-cloud-node/commit/f63f914e69106f581448837f5ee212ab71f85775))
+
 ## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v6.5.1...bigtable-v7.0.0) (2026-08-04)
 
 

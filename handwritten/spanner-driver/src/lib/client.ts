@@ -79,7 +79,7 @@ export class Client extends EventEmitter {
     super();
     this.config =
       typeof config === 'string' ? {connectionString: config} : config || {};
-    this.dsn = resolveDsn(config);
+    this.dsn = this.config.connectionString || resolveDsn(this.config);
   }
 
   /**
@@ -268,19 +268,28 @@ export class Client extends EventEmitter {
   }
 
   /**
-   * Releases the client connection.
+   * Releases the client connection handle.
    *
-   * TODO(PR 4 - Connection Pooling): Full connection pool recycling (returning active
-   * clients back to an idle connection queue instead of closing them) will be implemented in PR 4.
-   * Currently in PR 3 basic pool scaffolding, release() delegates to end() to close the connection.
+   * - **Standalone Client**: Delegates to `this.end()` to permanently close the connection handle.
+   * - **Pooled Client**: When checked out from a `Pool`, this method is intercepted by
+   *   the pool's release handler to return the connection back to the idle pool (or pass
+   *   it directly to queued queries) instead of closing the underlying connection.
    *
-   * @param callback - Optional Node callback function.
+   * TODO(PR 7 - Native CGO Bridge): Native connection handle closure (await this.connection?.close()) will be wired up in PR 7.
+   *
+   * @param err - Optional error flag/instance or Node callback function.
    * @returns Promise resolving when connection is released, or void if callback is passed.
    */
   public release(): Promise<void>;
+  public release(err: boolean | Error | undefined): void;
   public release(callback: (err: Error | null) => void): void;
-  public release(callback?: (err: Error | null) => void): Promise<void> | void {
-    return this.end(callback as (err: Error | null) => void);
+  public release(
+    err?: boolean | Error | ((err: Error | null) => void),
+  ): Promise<void> | void {
+    if (typeof err === 'function') {
+      return this.end(err);
+    }
+    return this.end();
   }
 
   /**
@@ -304,6 +313,7 @@ export class Client extends EventEmitter {
   private async _doEnd(): Promise<void> {
     this.isEnded = true;
     this.isConnected = false;
+    // TODO(PR 7 - Native CGO Bridge): Close native CGO Spanner connection handle (await this.connection?.close())
     // Cancel pending queries in queue to prevent execution after client close
     const pendingTasks = this.queryQueue;
     this.queryQueue = [];

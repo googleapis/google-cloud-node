@@ -33,8 +33,8 @@ import {
   TraceUtil,
 } from './trace-util';
 
-import {interfaces} from '../v1/firestore_client_config.json';
-import {FirestoreClient} from '../v1';
+import {interfaces} from '@google-cloud/firestore-api/build/src/v1/firestore_client_config.json';
+import {FirestoreClient} from '@google-cloud/firestore-api/build/src/v1';
 import {DEFAULT_DATABASE_ID} from '../path';
 import {DEFAULT_MAX_IDLE_CHANNELS} from '../index';
 const serviceConfig = interfaces['google.firestore.v1.Firestore'];
