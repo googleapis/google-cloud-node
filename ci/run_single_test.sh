@@ -42,8 +42,15 @@ else
 fi
 
 # Install dependencies
-echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
-pnpm install --ignore-scripts --engine-strict --prod; pnpm install
+# Normalize POSIX paths to Windows-compatible mixed paths (forward slashes) on Windows Git Bash
+# so native Node.js and pnpm processes can resolve .pnpmfile.cjs without segmentation faults.
+PNPMFILE_PATH="${PROJECT_ROOT}/.pnpmfile.cjs"
+if command -v cygpath >/dev/null 2>&1; then
+    PNPMFILE_PATH=$(cygpath -m "${PNPMFILE_PATH}")
+fi
+
+echo "pnpm install --engine-strict --pnpmfile \"${PNPMFILE_PATH}\""
+pnpm install --engine-strict --pnpmfile "${PNPMFILE_PATH}"
 
 
 retval=0
