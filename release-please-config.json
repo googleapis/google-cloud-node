@@ -103,7 +103,6 @@
       "component": "pubsub"
     },
     "packages/google-ads-admanager": {},
-    "packages/google-ads-datamanager": {},
     "packages/google-ai-generativelanguage": {},
     "packages/google-analytics-admin": {},
     "packages/google-analytics-data": {},
