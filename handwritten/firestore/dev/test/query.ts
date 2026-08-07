@@ -20,7 +20,8 @@ import * as chaiAsPromised from 'chai-as-promised';
 import * as extend from 'extend';
 import * as assert from 'assert';
 
-import {firestore, google} from '../protos/firestore_v1_proto_api';
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
+import {firestore} from '../src/bundle-proto';
 import {
   DocumentReference,
   FieldPath,
@@ -88,13 +89,27 @@ function where(filter: api.StructuredQuery.IFilter): api.IStructuredQuery {
   };
 }
 
+type FieldFilterOp =
+  | api.StructuredQuery.FieldFilter.Operator
+  | keyof typeof api.StructuredQuery.FieldFilter.Operator;
+
+type CompositeFilterOp =
+  | api.StructuredQuery.CompositeFilter.Operator
+  | keyof typeof api.StructuredQuery.CompositeFilter.Operator;
+
+type UnaryFilterOp =
+  | api.StructuredQuery.UnaryFilter.Operator
+  | keyof typeof api.StructuredQuery.UnaryFilter.Operator;
+
+type OrderByDirection =
+  | api.StructuredQuery.Direction
+  | keyof typeof api.StructuredQuery.Direction;
+
 export function fieldFiltersQuery(
   fieldPath: string,
-  op: api.StructuredQuery.FieldFilter.Operator,
+  op: FieldFilterOp,
   value: string | api.IValue,
-  ...fieldPathOpAndValues: Array<
-    string | api.StructuredQuery.FieldFilter.Operator | string | api.IValue
-  >
+  ...fieldPathOpAndValues: Array<string | FieldFilterOp | api.IValue>
 ): api.IStructuredQuery {
   return {
     where: fieldFilters(fieldPath, op, value, ...fieldPathOpAndValues),
@@ -103,11 +118,9 @@ export function fieldFiltersQuery(
 
 export function fieldFilters(
   fieldPath: string,
-  op: api.StructuredQuery.FieldFilter.Operator,
+  op: FieldFilterOp,
   value: string | api.IValue,
-  ...fieldPathOpAndValues: Array<
-    string | api.StructuredQuery.FieldFilter.Operator | string | api.IValue
-  >
+  ...fieldPathOpAndValues: Array<string | FieldFilterOp | api.IValue>
 ): api.StructuredQuery.IFilter {
   const filters: api.StructuredQuery.IFilter[] = [];
 
@@ -115,16 +128,17 @@ export function fieldFilters(
 
   for (let i = 0; i < fieldPathOpAndValues.length; i += 3) {
     fieldPath = fieldPathOpAndValues[i] as string;
-    op = fieldPathOpAndValues[
-      i + 1
-    ] as api.StructuredQuery.FieldFilter.Operator;
+    const currentOp = fieldPathOpAndValues[i + 1] as FieldFilterOp;
     value = fieldPathOpAndValues[i + 2] as string | api.IValue;
 
     const filter: api.StructuredQuery.IFieldFilter = {
       field: {
         fieldPath,
       },
-      op,
+      op:
+        typeof currentOp === 'string'
+          ? api.StructuredQuery.FieldFilter.Operator[currentOp]
+          : currentOp,
     };
 
     if (typeof value === 'string') {
@@ -143,7 +157,7 @@ export function fieldFilters(
   } else {
     return {
       compositeFilter: {
-        op: 'AND',
+        op: api.StructuredQuery.CompositeFilter.Operator.AND,
         filters,
       },
     };
@@ -152,33 +166,36 @@ export function fieldFilters(
 
 export function fieldFilter(
   fieldPath: string,
-  op: api.StructuredQuery.FieldFilter.Operator,
+  op: FieldFilterOp,
   value: string | api.IValue,
 ): api.StructuredQuery.IFilter {
   return fieldFilters(fieldPath, op, value);
 }
 
 export function compositeFilter(
-  op: api.StructuredQuery.CompositeFilter.Operator,
+  op: CompositeFilterOp,
   ...filters: api.StructuredQuery.IFilter[]
 ): api.StructuredQuery.IFilter {
   return {
     compositeFilter: {
-      op: op,
+      op:
+        typeof op === 'string'
+          ? api.StructuredQuery.CompositeFilter.Operator[op]
+          : op,
       filters,
     },
   };
 }
 
 export function orFilter(
-  op: api.StructuredQuery.CompositeFilter.Operator,
+  op: CompositeFilterOp,
   ...filters: api.StructuredQuery.IFilter[]
 ): api.StructuredQuery.IFilter {
   return compositeFilter('OR', ...filters);
 }
 
 export function andFilter(
-  op: api.StructuredQuery.CompositeFilter.Operator,
+  op: CompositeFilterOp,
   ...filters: api.StructuredQuery.IFilter[]
 ): api.StructuredQuery.IFilter {
   return compositeFilter('AND', ...filters);
@@ -196,30 +213,26 @@ function unaryFiltersQuery(
 
 function unaryFilters(
   fieldPath: string,
-  equals: 'IS_NAN' | 'IS_NULL' | 'IS_NOT_NAN' | 'IS_NOT_NULL',
-  ...fieldPathsAndEquals: string[]
+  equals: UnaryFilterOp,
+  ...fieldPathsAndEquals: Array<string | UnaryFilterOp>
 ): api.StructuredQuery.IFilter {
   const filters: api.StructuredQuery.IFilter[] = [];
 
   fieldPathsAndEquals.unshift(fieldPath, equals);
 
   for (let i = 0; i < fieldPathsAndEquals.length; i += 2) {
-    const fieldPath = fieldPathsAndEquals[i];
-    const equals = fieldPathsAndEquals[i + 1];
-
-    expect(equals).to.be.oneOf([
-      'IS_NAN',
-      'IS_NULL',
-      'IS_NOT_NAN',
-      'IS_NOT_NULL',
-    ]);
+    const currentFieldPath = fieldPathsAndEquals[i] as string;
+    const currentEquals = fieldPathsAndEquals[i + 1] as UnaryFilterOp;
 
     filters.push({
       unaryFilter: {
         field: {
-          fieldPath,
+          fieldPath: currentFieldPath,
         },
-        op: equals as 'IS_NAN' | 'IS_NULL' | 'IS_NOT_NAN' | 'IS_NOT_NULL',
+        op:
+          typeof currentEquals === 'string'
+            ? api.StructuredQuery.UnaryFilter.Operator[currentEquals]
+            : currentEquals,
       },
     });
   }
@@ -231,7 +244,7 @@ function unaryFilters(
   } else {
     return {
       compositeFilter: {
-        op: 'AND',
+        op: api.StructuredQuery.CompositeFilter.Operator.AND,
         filters,
       },
     };
@@ -240,27 +253,28 @@ function unaryFilters(
 
 export function orderBy(
   fieldPath: string,
-  direction: api.StructuredQuery.Direction,
-  ...fieldPathAndOrderBys: Array<string | api.StructuredQuery.Direction>
+  direction: OrderByDirection,
+  ...fieldPathAndOrderBys: Array<string | OrderByDirection>
 ): api.IStructuredQuery {
-  const orderBy: api.StructuredQuery.IOrder[] = [];
+  const orderByList: api.StructuredQuery.IOrder[] = [];
 
   fieldPathAndOrderBys.unshift(fieldPath, direction);
 
   for (let i = 0; i < fieldPathAndOrderBys.length; i += 2) {
-    const fieldPath = fieldPathAndOrderBys[i] as string;
-    const direction = fieldPathAndOrderBys[
-      i + 1
-    ] as api.StructuredQuery.Direction;
-    orderBy.push({
+    const currentFieldPath = fieldPathAndOrderBys[i] as string;
+    const currentDir = fieldPathAndOrderBys[i + 1] as OrderByDirection;
+    orderByList.push({
       field: {
-        fieldPath,
+        fieldPath: currentFieldPath,
       },
-      direction,
+      direction:
+        typeof currentDir === 'string'
+          ? api.StructuredQuery.Direction[currentDir]
+          : currentDir,
     });
   }
 
-  return {orderBy};
+  return {orderBy: orderByList};
 }
 
 export function limit(n: number): api.IStructuredQuery {
@@ -406,7 +420,7 @@ export function queryEquals(
 
 function bundledQueryEquals(
   actual: firestore.IBundledQuery | undefined,
-  limitType: firestore.BundledQuery.LimitType | undefined,
+  limitType: 'FIRST' | 'LAST' | undefined,
   ...protoComponents: api.IStructuredQuery[]
 ) {
   expect(actual).to.not.be.undefined;
@@ -619,11 +633,11 @@ describe('query interface', () => {
             orderBy: [
               {
                 field: {fieldPath: 'foo'},
-                direction: 'DESCENDING',
+                direction: api.StructuredQuery.Direction.DESCENDING,
               },
               {
                 field: {fieldPath: '__name__'},
-                direction: 'DESCENDING',
+                direction: api.StructuredQuery.Direction.DESCENDING,
               },
             ],
             limit: {value: 1},

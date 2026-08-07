@@ -23,7 +23,7 @@ import {expect, use} from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import * as extend from 'extend';
 
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 import {DocumentReference, Firestore} from '../src';
 import {setTimeoutHandler} from '../src/backoff';
 import {
@@ -60,7 +60,7 @@ export function partitionQueryEquals(
       ],
       orderBy: [
         {
-          direction: 'ASCENDING',
+          direction: api.StructuredQuery.Direction.ASCENDING,
           field: {
             fieldPath: '__name__',
           },

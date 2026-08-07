@@ -20,6 +20,7 @@ import {Duplex, Transform} from 'stream';
 
 import {Serializer} from '../serializer';
 import {Timestamp} from '../timestamp';
+import {normalizeBytes} from '../convert';
 import {DocumentSnapshotBuilder, QueryDocumentSnapshot} from '../document';
 import {
   Deferred,
@@ -38,7 +39,7 @@ import {QueryOptions} from './query-options';
 import {LimitType, QueryResponse, QueryStreamElement} from './types';
 import {NOOP_MESSAGE} from './constants';
 
-import * as protos from '../../protos/firestore_v1_proto_api';
+import * as protos from "@google-cloud/firestore-api/build/protos/protos";
 import api = protos.google.firestore.v1;
 import {
   ATTRIBUTE_KEY_IS_RETRY_WITH_CURSOR,
@@ -205,7 +206,7 @@ export class QueryUtil<
 
         // Proto comes with zero-length buffer by default
         if (proto.transaction?.length) {
-          output.transaction = proto.transaction;
+          output.transaction = normalizeBytes(proto.transaction);
         }
 
         if (proto.readTime) {

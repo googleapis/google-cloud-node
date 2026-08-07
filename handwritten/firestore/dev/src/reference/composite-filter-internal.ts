@@ -14,18 +14,27 @@
  * limitations under the License.
  */
 
-import * as protos from '../../protos/firestore_v1_proto_api';
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 import api = protos.google.firestore.v1;
 
 import {FilterInternal} from './filter-internal';
 import {FieldFilterInternal} from './field-filter-internal';
 
 export class CompositeFilterInternal extends FilterInternal {
+  readonly operator: api.StructuredQuery.CompositeFilter.Operator;
+
   constructor(
     private filters: FilterInternal[],
-    private operator: api.StructuredQuery.CompositeFilter.Operator,
+    _operator:
+      | api.StructuredQuery.CompositeFilter.Operator
+      | keyof typeof api.StructuredQuery.CompositeFilter.Operator = api
+      .StructuredQuery.CompositeFilter.Operator.AND,
   ) {
     super();
+    this.operator =
+      typeof _operator === 'string'
+        ? api.StructuredQuery.CompositeFilter.Operator[_operator]
+        : _operator;
   }
 
   // Memoized list of all field filters that can be found by traversing the tree of filters
@@ -37,7 +46,7 @@ export class CompositeFilterInternal extends FilterInternal {
   }
 
   public isConjunction(): boolean {
-    return this.operator === 'AND';
+    return this.operator === api.StructuredQuery.CompositeFilter.Operator.AND;
   }
 
   /**

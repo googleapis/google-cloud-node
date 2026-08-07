@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as protos from '../../protos/firestore_v1_proto_api';
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 import api = protos.google.firestore.v1;
 
 import {FieldPath} from '../path';
@@ -27,16 +27,26 @@ import {FieldPath} from '../path';
  * @class
  */
 export class FieldOrder {
+  readonly direction: api.StructuredQuery.Direction;
+
   /**
    * @param field The name of a document field (member) on which to order query
    * results.
-   * @param direction One of 'ASCENDING' (default) or 'DESCENDING' to
+   * @param _direction One of 'ASCENDING' (default) or 'DESCENDING' to
    * set the ordering direction to ascending or descending, respectively.
    */
   constructor(
     readonly field: FieldPath,
-    readonly direction: api.StructuredQuery.Direction = 'ASCENDING',
-  ) {}
+    _direction:
+      | api.StructuredQuery.Direction
+      | keyof typeof api.StructuredQuery.Direction = api.StructuredQuery
+      .Direction.ASCENDING,
+  ) {
+    this.direction =
+      typeof _direction === 'string'
+        ? api.StructuredQuery.Direction[_direction]
+        : _direction;
+  }
 
   /**
    * Generates the proto representation for this field order.

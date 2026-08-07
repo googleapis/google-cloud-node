@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import * as protos from '../../protos/firestore_v1_proto_api';
+import * as protos from '@google-cloud/firestore-api/build/protos/protos';
 import api = protos.google.firestore.v1;
 
 import * as assert from 'assert';
@@ -25,6 +25,7 @@ import {Aggregate, AggregateSpec} from '../aggregate';
 import {average, count, countAll, field, sum} from '../pipelines';
 import {Pipeline} from '../pipelines';
 import {Timestamp} from '../timestamp';
+import {normalizeBytes} from '../convert';
 import {mapToArray, requestTag, wrapError} from '../util';
 import {ExplainMetrics, ExplainResults} from '../query-profile';
 import {logger} from '../logger';
@@ -204,7 +205,7 @@ export class AggregateQuery<
 
         // Proto comes with zero-length buffer by default
         if (proto.transaction?.length) {
-          output.transaction = proto.transaction;
+          output.transaction = normalizeBytes(proto.transaction);
         }
 
         if (proto.explainMetrics) {

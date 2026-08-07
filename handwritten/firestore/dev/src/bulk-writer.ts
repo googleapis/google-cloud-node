@@ -18,7 +18,7 @@ import * as firestore from '@google-cloud/firestore';
 import * as assert from 'assert';
 import type {GoogleError} from 'google-gax';
 
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 import {FieldPath, Firestore} from '.';
 import {
   DEFAULT_BACKOFF_FACTOR,

@@ -18,7 +18,7 @@
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {ProtoSerializable, Serializer} from '../src/serializer';
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 import IPipeline = google.firestore.v1.IPipeline;
 import {StructuredPipeline} from '../src/pipelines/structured-pipeline';
 import {createInstance} from './util/helpers';

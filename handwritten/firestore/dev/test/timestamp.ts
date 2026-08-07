@@ -16,7 +16,7 @@ import {describe, it} from 'mocha';
 import {expect} from 'chai';
 import * as through2 from 'through2';
 
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 
 import * as Firestore from '../src/index';
 import {
