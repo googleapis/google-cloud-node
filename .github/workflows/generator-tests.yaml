@@ -85,6 +85,7 @@ jobs:
       run: |
         set -ex
         cp ../../../.mocharc.cjs .
+        cp ../../../.jsdoc.js .
         unzip ~/artifacts/outputs.zip -d library
         for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
           echo "--- Testing library $lib ---"
@@ -104,6 +105,7 @@ jobs:
       run: |
         set -ex
         cp ../../../.mocharc.cjs .
+        cp ../../../.jsdoc.js .
         for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
           echo "--- Testing ESM library $lib ---"
           cd library/.test-out-$lib-esm
