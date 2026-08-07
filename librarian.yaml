@@ -743,7 +743,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-databasecenter
-    version: 0.4.0
+    version: 0.4.1
     apis:
       - path: google/cloud/databasecenter/v1beta
     copyright_year: "2026"
