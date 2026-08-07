@@ -17,7 +17,7 @@ import {expect} from 'chai';
 import {GoogleError, Status} from 'google-gax';
 import sinon = require('sinon');
 
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 
 import * as Firestore from '../src';
 import {setTimeoutHandler} from '../src/backoff';

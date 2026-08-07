@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import {google} from '../protos/firestore_v1_proto_api';
+import Long = require('long');
+import {google} from '@google-cloud/firestore-api/build/protos/protos';
 import {detectValueType} from './convert';
 import {QualifiedResourcePath} from './path';
 import {ApiMapValue} from './types';
@@ -80,9 +81,18 @@ function typeOrder(val: api.IValue): TypeOrder {
  * @internal
  */
 export function primitiveComparator(
-  left: string | boolean | number,
-  right: string | boolean | number,
+  left: string | boolean | number | Long,
+  right: string | boolean | number | Long,
 ): number {
+  if (Long.isLong(left) || Long.isLong(right)) {
+    const leftLong = Long.isLong(left)
+      ? left
+      : Long.fromValue(typeof left === 'boolean' ? (left ? 1 : 0) : left);
+    const rightLong = Long.isLong(right)
+      ? right
+      : Long.fromValue(typeof right === 'boolean' ? (right ? 1 : 0) : right);
+    return leftLong.compare(rightLong);
+  }
   if (left < right) {
     return -1;
   }
@@ -342,7 +352,10 @@ export function compare(left: api.IValue, right: api.IValue): number {
     case TypeOrder.TIMESTAMP:
       return compareTimestamps(left.timestampValue!, right.timestampValue!);
     case TypeOrder.BLOB:
-      return compareBlobs(left.bytesValue!, right.bytesValue!);
+      return compareBlobs(
+        left.bytesValue as Uint8Array,
+        right.bytesValue as Uint8Array,
+      );
     case TypeOrder.REF:
       return compareReferenceProtos(left, right);
     case TypeOrder.GEO_POINT:

@@ -18,7 +18,7 @@
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {createInstance, stream} from '../util/helpers';
-import {google} from '../../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 import {Pipelines, Firestore} from '../../src';
 import Pipeline = Pipelines.Pipeline;
 import field = Pipelines.field;

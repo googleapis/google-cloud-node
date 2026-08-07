@@ -28,7 +28,7 @@ import '../test/util/mocha_extensions';
 import {expect, use} from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import * as extend from 'extend';
-import {firestore} from '../protos/firestore_v1_proto_api';
+import {firestore} from "../src/bundle-proto";
 
 import {
   AggregateField,

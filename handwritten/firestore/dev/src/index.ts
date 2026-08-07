@@ -25,7 +25,7 @@ import {Duplex, PassThrough, Transform} from 'stream';
 
 import {URL} from 'url';
 
-import {google} from '../protos/firestore_v1_proto_api';
+import {google} from "@google-cloud/firestore-api/build/protos/protos";
 import {ExponentialBackoff, ExponentialBackoffSetting} from './backoff';
 import {BulkWriter} from './bulk-writer';
 import {BundleBuilder} from './bundle';
