@@ -160,7 +160,7 @@ client.query('SELECT * FROM large_table')
 | `max` | `number` | `10` | Maximum number of active and idle connections in the pool. |
 | `min` | `number` | `0` | Minimum number of idle connections to retain without evicting. |
 | `idleTimeoutMillis` | `number` | `10000` (10s) | Time a connection can remain idle before being closed (set `0` to disable). |
-| `connectionTimeoutMillis` | `number` | `0` | Timeout in ms for connection acquisition or handshake (set `0` to wait indefinitely). |
+| `connectionTimeoutMillis` | `number` | `0` | Timeout in ms for connection acquisition, handshake, and onConnect initialization (set `0` to wait indefinitely). |
 | `allowExitOnIdle` | `boolean` | `false` | Unrefs idle timers so Node.js CLI / batch processes can exit cleanly. |
 | `maxUses` | `number` | `Infinity` | Number of times a client can be checked out before being closed and replaced. |
 | `maxLifetimeSeconds` | `number` | `0` | Maximum lifetime of a connection in seconds before retirement (set `0` to disable). |

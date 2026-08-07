@@ -156,6 +156,32 @@ describe('Pool Class', () => {
     await pool.end();
   });
 
+  it('should apply connectionTimeoutMillis to onConnect initialization hook', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      connectionTimeoutMillis: 40,
+      onConnect: async () => {
+        // Simulating slow onConnect hook taking 100ms
+        await new Promise(r => setTimeout(r, 100));
+      },
+    });
+
+    try {
+      await pool.connect();
+      assert.fail('Should have timed out during onConnect');
+    } catch (err: unknown) {
+      assert.strictEqual(
+        (err as Error).message,
+        'timeout exceeded when trying to connect',
+      );
+    }
+
+    assert.strictEqual(pool.totalCount, 0);
+    await pool.end();
+  });
+
   it('should remove idle client after idleTimeoutMillis expires', async () => {
     const pool = new Pool({
       project: 'p',
@@ -286,8 +312,8 @@ describe('Pool Class', () => {
 
     assert.ok(receivedErr);
     assert.strictEqual((receivedErr as Error).message, 'Background connection dropped');
+    assert.strictEqual(pool.totalCount, 0, 'Dead client should be removed from pool');
 
-    await c.release();
     await pool.end();
   });
 
@@ -299,10 +325,10 @@ describe('Pool Class', () => {
     });
 
     const c = await pool.connect();
-    // Should not throw or crash uncaught exception
+    // Should not throw or crash uncaught exception and should remove dead client
     c.emit('error', new Error('Background silent drop'));
+    assert.strictEqual(pool.totalCount, 0, 'Dead client should be removed from pool');
 
-    await c.release();
     await pool.end();
   });
 
@@ -384,6 +410,35 @@ describe('Pool Class', () => {
     assert.strictEqual(pool.totalCount, 0);
     assert.strictEqual(c1.isConnected, false);
 
+    await pool.end();
+  });
+
+  it('should evict expired idle client when connect() is called after maxLifetimeSeconds', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      maxLifetimeSeconds: 0.05, // 50ms
+      idleTimeoutMillis: 0, // do not evict on idle timeout
+    });
+
+    const c1 = await pool.connect();
+    // Released immediately while still young
+    await c1.release();
+    assert.strictEqual(pool.idleCount, 1);
+    assert.strictEqual(pool.totalCount, 1);
+
+    // Wait 60ms so client expires while sitting idle in pool
+    await new Promise(r => setTimeout(r, 60));
+
+    // Connect again -> should detect expired lifetime on checkout, evict c1, and create fresh c2
+    const c2 = await pool.connect();
+    assert.notStrictEqual(c1, c2, 'Should create a fresh client rather than reusing expired idle client');
+    assert.strictEqual(c1.isConnected, false, 'Expired client should have been closed');
+    assert.strictEqual(c2.isConnected, true);
+    assert.strictEqual(pool.totalCount, 1);
+
+    await c2.release();
     await pool.end();
   });
 
@@ -551,19 +606,25 @@ describe('Pool Class', () => {
     await pool.end();
   });
 
-  it('should retain and return client to idle pool when pool.query() encounters a query error', async () => {
+  it('should retain and return client to idle pool when pool.query() encounters a query execution error', async () => {
     const pool = new Pool({
       project: 'p',
       instance: 'i',
       database: 'd',
     });
 
-    // Query fails due to empty query string validation
+    const origQuery = Client.prototype.query;
+    (Client.prototype as unknown as {query: Function}).query = async () => {
+      throw new Error('Table not found: users');
+    };
+
     try {
-      await pool.query('');
-      assert.fail('Should have failed on empty query text');
+      await pool.query('SELECT * FROM users');
+      assert.fail('Should have failed on query execution');
     } catch (err: unknown) {
-      assert.strictEqual(err instanceof Error, true);
+      assert.strictEqual((err as Error).message, 'Table not found: users');
+    } finally {
+      Client.prototype.query = origQuery;
     }
 
     // Client should NOT be destroyed; it should be returned to idle pool
@@ -589,6 +650,37 @@ describe('Pool Class', () => {
         'Cannot acquire client from ending pool',
       );
     }
+  });
+
+  it('should reject connect() and destroy client if pool.end() is called during connection handshake', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+      onConnect: async () => {
+        // Wait 40ms during onConnect hook
+        await new Promise(r => setTimeout(r, 40));
+      },
+    });
+
+    const connectPromise = pool.connect();
+
+    // Call pool.end() while connect() / onConnect is in progress
+    await new Promise(r => setTimeout(r, 10));
+    const endPromise = pool.end();
+
+    try {
+      await connectPromise;
+      assert.fail('connect() should have been rejected');
+    } catch (err: unknown) {
+      assert.strictEqual(
+        (err as Error).message,
+        'Cannot acquire client from ending pool',
+      );
+    }
+
+    await endPromise;
+    assert.strictEqual(pool.totalCount, 0);
   });
 
   it('should reject pool.query() calls after pool.end() and invoke callback with error', done => {
@@ -797,5 +889,110 @@ describe('Pool Class', () => {
     assert.strictEqual(waiterRejected, true);
     assert.strictEqual(waiterErrorMsg, 'Cannot acquire client from ending pool');
     assert.strictEqual(pool.waitingCount, 0);
+  });
+
+  it('should remove idle client from pool when background error event occurs', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+
+    pool.on('error', () => {
+      // Prevent unhandled error throw in test harness
+    });
+
+    const idleClient = await pool.connect();
+    await idleClient.release();
+    assert.strictEqual(pool.idleCount, 1);
+    assert.strictEqual(pool.totalCount, 1);
+
+    // Emit a background connection error on the idle client handle
+    idleClient.emit('error', new Error('Connection reset by peer'));
+
+    // Broken client must be removed from the pool
+    assert.strictEqual(pool.idleCount, 0, 'Broken idle client should be purged');
+    assert.strictEqual(pool.totalCount, 0, 'Broken idle client should be removed from totalCount');
+    assert.strictEqual(idleClient.isConnected, false, 'Broken client should be closed');
+
+    await pool.end();
+  });
+
+  it('should reject in-flight connection attempt when pool.end() is called concurrently', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+
+    // Delay client connection to simulate slow handshake
+    const originalConnect = Client.prototype.connect;
+    Client.prototype.connect = function () {
+      return new Promise(resolve => setTimeout(resolve, 60));
+    };
+
+    try {
+      const connectPromise = pool.connect();
+      // Call pool.end() while connection handshake is in-flight
+      const endPromise = pool.end();
+
+      await endPromise;
+
+      try {
+        await connectPromise;
+        assert.fail('Should not allow client acquisition from an ending pool');
+      } catch (err: unknown) {
+        assert.strictEqual((err as Error).message, 'Cannot acquire client from ending pool');
+      }
+    } finally {
+      Client.prototype.connect = originalConnect;
+    }
+
+    assert.strictEqual(pool.totalCount, 0);
+  });
+
+  it('should forward streaming row and fields events from pool.query()', async () => {
+    const pool = new Pool({
+      project: 'p',
+      instance: 'i',
+      database: 'd',
+    });
+
+    const receivedFields: unknown[] = [];
+    const receivedRows: unknown[] = [];
+
+    // Mock query execution to emit row/fields events
+    const originalQuery = Client.prototype.query;
+    (Client.prototype as unknown as {query: Function}).query = function (
+      this: Client,
+      queryText: unknown,
+      values?: unknown,
+      callback?: unknown,
+    ) {
+      const q = queryText as Query<QueryResult>;
+      q.emit('fields', [{name: 'id', dataTypeID: 23}]);
+      q.emit('row', {id: 1});
+      return (originalQuery as Function).call(
+        this,
+        queryText,
+        values,
+        callback,
+      );
+    };
+
+    try {
+      const query = pool.query('SELECT 1');
+      query.on('fields', fields => receivedFields.push(fields));
+      query.on('row', row => receivedRows.push(row));
+
+      await query;
+
+      assert.strictEqual(receivedFields.length, 1, 'Should emit fields event');
+      assert.strictEqual(receivedRows.length, 1, 'Should emit row event');
+    } finally {
+      Client.prototype.query = originalQuery;
+    }
+
+    await pool.end();
   });
 });

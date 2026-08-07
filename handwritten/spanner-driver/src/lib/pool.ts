@@ -158,11 +158,24 @@ export class Pool extends EventEmitter {
     }
 
     // 1. Check if an idle client is already available
-    if (this.idleClients.length > 0) {
+    while (this.idleClients.length > 0) {
       const item = this.idleClients.pop()!;
       if (item.timer) {
         clearTimeout(item.timer);
       }
+
+      const meta = this.clientMeta.get(item.client);
+      const isExpiredByLifetime =
+        this.options.maxLifetimeSeconds > 0 &&
+        meta !== undefined &&
+        (Date.now() - meta.createdAt) / 1000 >=
+          this.options.maxLifetimeSeconds;
+
+      if (isExpiredByLifetime || !item.client.isConnected) {
+        this.removeClient(item.client);
+        continue;
+      }
+
       this.attachReleaseWrapper(item.client);
       this.emit('acquire', item.client);
       return item.client;
@@ -177,26 +190,23 @@ export class Pool extends EventEmitter {
       this.allClients.add(client);
       this.clientMeta.set(client, {checkoutCount: 0, createdAt: Date.now()});
 
-      // Forward background client errors to pool only if an error listener is attached
+      // Remove dead client on background error and forward to pool error listener if attached
       client.on('error', (err: Error) => {
+        this.removeClient(client);
         if (this.listenerCount('error') > 0) {
           this.emit('error', err, client);
         }
       });
 
       try {
-        if (this.options.connectionTimeoutMillis > 0) {
-          await this.connectWithTimeout(
-            client,
-            this.options.connectionTimeoutMillis,
-          );
-        } else {
-          await client.connect();
-        }
+        await this.connectAndInit(
+          client,
+          this.options.connectionTimeoutMillis,
+        );
 
-        // Execute async onConnect hook if configured (awaited before checkout)
-        if (typeof this.options.onConnect === 'function') {
-          await this.options.onConnect(client);
+        // Re-check if pool has been closed while waiting for connection or onConnect
+        if (this.isEnding || this.isEnded) {
+          throw new Error('Cannot acquire client from ending pool');
         }
       } catch (err) {
         this.removeClient(client);
@@ -233,12 +243,25 @@ export class Pool extends EventEmitter {
   }
 
   /**
-   * Connects a Client instance with a connection timeout.
+   * Connects a Client instance and executes onConnect initialization, optionally bounded by connectionTimeoutMillis.
    */
-  private async connectWithTimeout(
+  private async connectAndInit(
     client: Client,
     timeoutMs: number,
   ): Promise<void> {
+    const initPromise = (async () => {
+      await client.connect();
+      if (typeof this.options.onConnect === 'function') {
+        await this.options.onConnect(client);
+      }
+    })();
+    initPromise.catch(() => {});
+
+    if (timeoutMs <= 0) {
+      await initPromise;
+      return;
+    }
+
     let timer: NodeJS.Timeout | undefined;
     const timeoutPromise = new Promise<never>((_, reject) => {
       timer = setTimeout(() => {
@@ -251,7 +274,7 @@ export class Pool extends EventEmitter {
     });
 
     try {
-      await Promise.race([client.connect(), timeoutPromise]);
+      await Promise.race([initPromise, timeoutPromise]);
     } finally {
       if (timer) {
         clearTimeout(timer);

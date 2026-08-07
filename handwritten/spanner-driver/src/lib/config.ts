@@ -44,7 +44,10 @@ export interface PoolConfig extends ClientConfig {
   min?: number;
   /** How long a client can remain idle before being closed (in milliseconds). Defaults to 10000 (10s). */
   idleTimeoutMillis?: number;
-  /** Maximum time to wait for a client from the pool (in milliseconds). Defaults to 0 (no timeout / wait indefinitely). */
+  /**
+   * Maximum time to wait for connection acquisition, handshake, and onConnect initialization (in milliseconds).
+   * Defaults to 0 (no timeout / wait indefinitely).
+   */
   connectionTimeoutMillis?: number;
   /** Allows Node.js event loop to exit when all clients in the pool are idle. Defaults to false. */
   allowExitOnIdle?: boolean;
