@@ -20,7 +20,7 @@ import {describe, it, beforeEach} from 'mocha';
 import * as trace from '@opentelemetry/sdk-trace-base';
 import * as otel from '../src/telemetry-tracing';
 import {exporter} from './tracing';
-import {SpanKind} from '@opentelemetry/api';
+import {SpanKind, context, propagation} from '@opentelemetry/api';
 import sinon = require('sinon');
 import {PubsubMessage} from '../src/publisher';
 import {Duration} from '../src/temporal';
@@ -160,7 +160,7 @@ describe('OpenTelemetryTracer', () => {
       }
     });
 
-    it('should be able to determine if attributes are present', () => {
+    it('should be able to determine if propagation attributes are present', () => {
       let message: otel.MessageWithAttributes;
 
       message = {
@@ -168,10 +168,17 @@ describe('OpenTelemetryTracer', () => {
           [otel.modernAttributeName]: 'foobar',
         },
       };
-      assert.strictEqual(otel.containsSpanContext(message), true);
+      assert.strictEqual(otel.containsPropagationContext(message), true);
+
+      message = {
+        attributes: {
+          [otel.baggageAttributeName]: 'key=value',
+        },
+      };
+      assert.strictEqual(otel.containsPropagationContext(message), true);
 
       message = {};
-      assert.strictEqual(otel.containsSpanContext(message), false);
+      assert.strictEqual(otel.containsPropagationContext(message), false);
     });
 
     it('extracts a trace context', () => {
@@ -190,6 +197,111 @@ describe('OpenTelemetryTracer', () => {
         childSpan!.spanContext().traceId,
         'd4cda95b652f4a1592b449d5929fda1b',
       );
+    });
+
+    it('injects baggage from the active context into message attributes', () => {
+      const baggage = propagation.createBaggage({
+        'test-key': {value: 'test-value'},
+      });
+
+      const publishMessage: PubsubMessage = {
+        attributes: {},
+      };
+      const span = otel.PubsubSpans.createPublisherSpan(
+        publishMessage,
+        'projects/test/topics/topicfoo',
+        'tests',
+      );
+      assert.ok(span);
+
+      // Set the baggage on the active context.
+      const ctxWithBaggage = propagation.setBaggage(context.active(), baggage);
+
+      // Execute injectSpan within the scope of the active context.
+      context.with(ctxWithBaggage, () => {
+        otel.injectSpan(span, publishMessage);
+      });
+
+      // Verify baggage attribute was set on the message by the compositePropagator.
+      assert.strictEqual(
+        Object.getOwnPropertyNames(publishMessage.attributes).includes(
+          otel.baggageAttributeName,
+        ),
+        true,
+      );
+      assert.ok(
+        (
+          publishMessage.attributes![otel.baggageAttributeName] as string
+        ).includes('test-key=test-value'),
+      );
+    });
+
+    it('should issue a warning if baggage attribute key is set', () => {
+      const message: PubsubMessage = {
+        attributes: {
+          [otel.baggageAttributeName]: 'bazbar',
+        },
+      };
+      const span = otel.PubsubSpans.createPublisherSpan(
+        message,
+        'projects/test/topics/topicfoo',
+        'tests',
+      );
+      assert.ok(span);
+
+      const warnSpy = sinon.spy(console, 'warn');
+      try {
+        otel.injectSpan(span, message);
+        assert.strictEqual(warnSpy.callCount, 1);
+      } finally {
+        warnSpy.restore();
+      }
+    });
+
+    it('extracts baggage from message attributes', () => {
+      const message: otel.MessageWithAttributes = {
+        attributes: {
+          [otel.modernAttributeName]:
+            '00-d4cda95b652f4a1592b449d5929fda1b-553964cd9101a314-01',
+          [otel.baggageAttributeName]: 'test-key=test-value',
+        },
+      };
+
+      const childSpan = otel.extractSpan(
+        message,
+        'projects/test/subscriptions/subfoo',
+      );
+      assert.ok(childSpan);
+      assert.strictEqual(
+        childSpan.spanContext().traceId,
+        'd4cda95b652f4a1592b449d5929fda1b',
+      );
+
+      // Verify baggage is accessible on the extracted context.
+      assert.ok(message.parentContext);
+      const baggage = propagation.getBaggage(message.parentContext!);
+      assert.ok(baggage);
+      assert.strictEqual(baggage!.getEntry('test-key')?.value, 'test-value');
+    });
+
+    it('extracts span when only baggage is present', () => {
+      const message: otel.MessageWithAttributes = {
+        attributes: {
+          [otel.baggageAttributeName]: 'test-key=test-value',
+        },
+      };
+
+      const childSpan = otel.extractSpan(
+        message,
+        'projects/test/subscriptions/subfoo',
+      );
+      assert.ok(childSpan);
+
+      // Verify baggage is accessible even without a trace context.
+      assert.ok(message.parentContext);
+      const baggage = propagation.getBaggage(message.parentContext!);
+      assert.ok(baggage);
+      assert.strictEqual(baggage!.getEntry('test-key')?.value, 'test-value');
     });
   });
 

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import {Context} from '@opentelemetry/api';
 import {DateStruct, PreciseDate} from '@google-cloud/precise-date';
 import {replaceProjectIdToken} from '@google-cloud/projectify';
 import {promisify} from '@google-cloud/promisify';
@@ -290,6 +291,15 @@ export class Message implements tracing.MessageWithAttributes {
    * in unit tests.)
    */
   parentSpan?: tracing.Span;
+
+  /**
+   * @private
+   *
+   * Tracks the propagation context (including baggage) extracted from the
+   * incoming message. Used to set the active context when dispatching to
+   * user callbacks so that baggage is accessible.
+   */
+  parentContext?: Context;
 
   /**
    * We'll save the state of the subscription's exactly once delivery flag at the
