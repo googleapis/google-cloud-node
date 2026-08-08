@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
-	"os"
 	"sync/atomic"
 
 	"golang.org/x/oauth2"
@@ -14,7 +13,7 @@ import (
 )
 
 const (
-	spannerEndpoint = "spanner.googleapis.com:443"
+	spannerEndpoint = "dns:///spanner.googleapis.com:443"
 	spannerDomain   = "spanner.googleapis.com"
 	spannerScope    = "https://www.googleapis.com/auth/spanner.data"
 )
@@ -29,19 +28,13 @@ type CoreClient struct {
 }
 
 func init() {
-	// Force-disable gRPC DirectPath at module initialization time
-	_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
-	_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
 }
 
 // NewCoreClient initializes the Go Spanner Core client.
 // It explicitly disables gRPC DirectPath to maintain an apples-to-apples network comparison
 // with the Rust prototype and the Node.js baseline.
 func NewCoreClient(channelCount int) (*CoreClient, error) {
-	// 1. Explicitly disable gRPC DirectPath in Go Spanner / gRPC client
-	// to enforce standard Google Frontend (GFE) network routing.
-	_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
-	_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
+	// 1. We are now allowing DirectPath by not forcing these env variables to "true".
 
 	ctx, cancel := context.WithCancel(context.Background())
 
@@ -55,7 +48,7 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 		})
 	}
 
-	// 3. Configure TLS matching standard GFE endpoint
+	// 3. Configure TLS. DirectPath will be evaluated by gRPC because we removed WithDisableServiceConfig()
 	tlsConfig := &tls.Config{
 		ServerName: spannerDomain,
 	}
@@ -63,8 +56,7 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 
 	dialOpts := []grpc.DialOption{
 		grpc.WithTransportCredentials(creds),
-		// Disable service config / DirectPath resolution to ensure standard routing
-		grpc.WithDisableServiceConfig(),
+		// Allow service config / DirectPath resolution to ensure direct routing where possible
 		// HTTP/2 Flow Control Windows: increase from default 64KB to 4MB/16MB
 		// to allow Spanner large result sets to stream at full line-rate without stalling
 		grpc.WithInitialWindowSize(4 * 1024 * 1024),      // 4MB per stream window
