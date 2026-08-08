@@ -12,10 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as assert from 'assert';
-import {describe, it, beforeEach, afterEach} from 'mocha';
-import * as sinon from 'sinon';
-
 import {Service} from '../src';
 import {Operation} from '../src/operation';
 import {
@@ -31,14 +27,13 @@ const asAny = (o: {}) => o as any;
 describe('Operation', () => {
   const FAKE_SERVICE = {} as Service;
   const OPERATION_ID = '/a/b/c/d';
-  const sandbox = sinon.createSandbox();
   let operation: Operation;
   beforeEach(() => {
     operation = new Operation({parent: FAKE_SERVICE, id: OPERATION_ID});
   });
 
   afterEach(() => {
-    sandbox.restore();
+    jest.restoreAllMocks();
   });
 
   describe('instantiation', () => {
@@ -46,16 +41,16 @@ describe('Operation', () => {
 
     it('should extend ServiceObject and EventEmitter', () => {
       const svcObj = ServiceObject;
-      assert(operation instanceof Operation);
-      assert(operation instanceof svcObj);
-      assert(operation.on);
+      expect(operation).toBeInstanceOf(Operation);
+      expect(operation).toBeInstanceOf(svcObj);
+      expect(operation.on).toBeDefined();
     });
 
     it('should pass ServiceObject the correct config', () => {
-      assert.strictEqual(operation.baseUrl, '');
-      assert.strictEqual(operation.parent, FAKE_SERVICE);
-      assert.strictEqual(operation.id, OPERATION_ID);
-      assert.deepStrictEqual(asAny(operation).methods, {
+      expect(operation.baseUrl).toBe('');
+      expect(operation.parent).toBe(FAKE_SERVICE);
+      expect(operation.id).toBe(OPERATION_ID);
+      expect(asAny(operation).methods).toEqual({
         exists: true,
         get: true,
         getMetadata: {
@@ -69,19 +64,19 @@ describe('Operation', () => {
     it('should allow overriding baseUrl', () => {
       const baseUrl = 'baseUrl';
       const operation = new Operation({baseUrl, parent} as ServiceObjectConfig);
-      assert.strictEqual(operation.baseUrl, baseUrl);
+      expect(operation.baseUrl).toBe(baseUrl);
     });
 
     it('should localize listener variables', () => {
-      assert.strictEqual(operation.completeListeners, 0);
-      assert.strictEqual(operation.hasActiveListeners, false);
+      expect(operation.completeListeners).toBe(0);
+      expect(operation.hasActiveListeners).toBe(false);
     });
 
     it('should call listenForEvents_', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const stub = sandbox.stub(Operation.prototype as any, 'listenForEvents_');
+      const stub = jest.spyOn(Operation.prototype as any, 'listenForEvents_').mockImplementation(() => {});
       new Operation({parent} as ServiceObjectConfig);
-      assert.ok(stub.called);
+      expect(stub).toHaveBeenCalled();
     });
   });
 
@@ -100,7 +95,7 @@ describe('Operation', () => {
           throw new Error('Promise should have been rejected.');
         },
         (err: Error) => {
-          assert.strictEqual(err, error);
+          expect(err).toBe(error);
         },
       );
     });
@@ -113,7 +108,7 @@ describe('Operation', () => {
       });
 
       return operation.promise().then(data => {
-        assert.deepStrictEqual(data, [metadata]);
+        expect(data).toEqual([metadata]);
       });
     });
   });
@@ -129,11 +124,11 @@ describe('Operation', () => {
     });
 
     it('should track the number of listeners', () => {
-      assert.strictEqual(operation.completeListeners, 0);
+      expect(operation.completeListeners).toBe(0);
       operation.on('complete', util.noop);
-      assert.strictEqual(operation.completeListeners, 1);
+      expect(operation.completeListeners).toBe(1);
       operation.removeListener('complete', util.noop);
-      assert.strictEqual(operation.completeListeners, 0);
+      expect(operation.completeListeners).toBe(0);
     });
 
     it('should only run a single pulling loop', () => {
@@ -141,32 +136,34 @@ describe('Operation', () => {
       asAny(operation).startPolling_ = () => startPollingCallCount++;
       operation.on('complete', util.noop);
       operation.on('complete', util.noop);
-      assert.strictEqual(startPollingCallCount, 1);
+      expect(startPollingCallCount).toBe(1);
     });
 
     it('should close when no more message listeners are bound', () => {
       operation.on('complete', util.noop);
       operation.on('complete', util.noop);
-      assert.strictEqual(operation.hasActiveListeners, true);
+      expect(operation.hasActiveListeners).toBe(true);
       operation.removeListener('complete', util.noop);
-      assert.strictEqual(operation.hasActiveListeners, true);
+      expect(operation.hasActiveListeners).toBe(true);
       operation.removeListener('complete', util.noop);
-      assert.strictEqual(operation.hasActiveListeners, false);
+      expect(operation.hasActiveListeners).toBe(false);
     });
   });
 
   describe('poll_', () => {
-    it('should call getMetdata', done => {
+    it('should call getMetadata', done => {
       asAny(operation).getMetadata = () => done();
-      asAny(operation).poll_(assert.ifError);
+      asAny(operation).poll_((err: Error) => {
+        expect(err).toBeNull();
+      });
     });
 
     describe('could not get metadata', () => {
       it('should callback with an error', done => {
         const error = new Error('Error.');
-        sandbox.stub(operation, 'getMetadata').callsArgWith(0, error);
+        jest.spyOn(operation, 'getMetadata').mockImplementation((callback: any) => callback(error));
         asAny(operation).poll_((err: Error) => {
-          assert.strictEqual(err, error);
+          expect(err).toBe(error);
           done();
         });
       });
@@ -175,11 +172,9 @@ describe('Operation', () => {
         const apiResponse = {
           error: {},
         } as Metadata;
-        sandbox
-          .stub(operation, 'getMetadata')
-          .callsArgWith(0, null, apiResponse);
+        jest.spyOn(operation, 'getMetadata').mockImplementation((callback: any) => callback(null, apiResponse));
         asAny(operation).poll_((err: Error) => {
-          assert.strictEqual(err, apiResponse.error);
+          expect(err).toBe(apiResponse.error);
           done();
         });
       });
@@ -189,14 +184,12 @@ describe('Operation', () => {
       const apiResponse = {done: false};
 
       beforeEach(() => {
-        sandbox
-          .stub(operation, 'getMetadata')
-          .callsArgWith(0, null, apiResponse);
+        jest.spyOn(operation, 'getMetadata').mockImplementation((callback: any) => callback(null, apiResponse));
       });
 
       it('should callback with no arguments', done => {
         asAny(operation).poll_((err: Error, resp: {}) => {
-          assert.strictEqual(resp, undefined);
+          expect(resp).toBeUndefined();
           done();
         });
       });
@@ -205,14 +198,12 @@ describe('Operation', () => {
     describe('operation complete', () => {
       const apiResponse = {done: true};
       beforeEach(() => {
-        sandbox
-          .stub(operation, 'getMetadata')
-          .callsArgWith(0, null, apiResponse);
+        jest.spyOn(operation, 'getMetadata').mockImplementation((callback: any) => callback(null, apiResponse));
       });
 
       it('should emit complete with metadata', done => {
         asAny(operation).poll_((err: Error, resp: {}) => {
-          assert.strictEqual(resp, apiResponse);
+          expect(resp).toBe(apiResponse);
           done();
         });
       });
@@ -221,32 +212,32 @@ describe('Operation', () => {
 
   describe('startPolling_', () => {
     beforeEach(() => {
-      sandbox.stub(asAny(Operation).prototype, 'listenForEvents_');
+      jest.spyOn(Operation.prototype as any, 'listenForEvents_').mockImplementation(() => {});
       operation.hasActiveListeners = true;
     });
 
     it('should not call getMetadata if no listeners', done => {
       operation.hasActiveListeners = false;
-      sandbox.stub(operation, 'getMetadata').callsFake(done); // if called, test will fail.
+      jest.spyOn(operation, 'getMetadata').mockImplementation(done); // if called, test will fail.
       asAny(operation).startPolling_();
       done();
     });
 
     it('should call getMetadata if listeners are registered', done => {
       operation.hasActiveListeners = true;
-      sandbox.stub(operation, 'getMetadata').callsFake(() => done());
+      jest.spyOn(operation, 'getMetadata').mockImplementation(() => done());
       asAny(operation).startPolling_();
     });
 
     describe('API error', () => {
       const error = new Error('Error.');
       beforeEach(() => {
-        sandbox.stub(operation, 'getMetadata').callsArgWith(0, error);
+        jest.spyOn(operation, 'getMetadata').mockImplementation((callback: any) => callback(error));
       });
 
       it('should emit the error', done => {
         operation.on('error', (err: Error) => {
-          assert.strictEqual(err, error);
+          expect(err).toBe(error);
           done();
         });
         asAny(operation).startPolling_();
@@ -257,22 +248,20 @@ describe('Operation', () => {
       const apiResponse = {done: false};
 
       beforeEach(() => {
-        sandbox
-          .stub(operation, 'getMetadata')
-          .callsArgWith(0, null, apiResponse);
+        jest.spyOn(operation, 'getMetadata').mockImplementation((callback: any) => callback(null, apiResponse));
       });
 
       it('should call startPolling_ after 500 ms by default', done => {
         const startPolling_ = asAny(operation).startPolling_;
         let startPollingCalled = false;
 
-        sandbox.stub(global, 'setTimeout').callsFake((fn, timeoutMs) => {
+        jest.spyOn(global, 'setTimeout').mockImplementation((fn: any, timeoutMs: any) => {
           fn(); // should call startPolling_
-          assert.strictEqual(timeoutMs, 500);
-          return asAny({});
+          expect(timeoutMs).toBe(500);
+          return {} as any;
         });
 
-        asAny(operation).startPolling_ = function () {
+        asAny(operation).startPolling_ = function (this: any) {
           if (!startPollingCalled) {
             // Call #1.
             startPollingCalled = true;
@@ -281,7 +270,7 @@ describe('Operation', () => {
             return;
           }
           // This is from the setTimeout call.
-          assert.strictEqual(this, operation);
+          expect(this).toBe(operation);
           done();
         };
 
@@ -296,17 +285,17 @@ describe('Operation', () => {
           pollIntervalMs: 2000,
         });
         op.hasActiveListeners = true;
-        sandbox.stub(op, 'getMetadata').callsArgWith(0, null, apiResponse);
+        jest.spyOn(op, 'getMetadata').mockImplementation((callback: any) => callback(null, apiResponse));
         const startPolling_ = asAny(op).startPolling_;
         let startPollingCalled = false;
 
-        sandbox.stub(global, 'setTimeout').callsFake((fn, timeoutMs) => {
+        jest.spyOn(global, 'setTimeout').mockImplementation((fn: any, timeoutMs: any) => {
           fn(); // should call startPolling_
-          assert.strictEqual(timeoutMs, 2000);
-          return asAny({});
+          expect(timeoutMs).toBe(2000);
+          return {} as any;
         });
 
-        asAny(op).startPolling_ = function () {
+        asAny(op).startPolling_ = function (this: any) {
           if (!startPollingCalled) {
             // Call #1.
             startPollingCalled = true;
@@ -315,7 +304,7 @@ describe('Operation', () => {
             return;
           }
           // This is from the setTimeout call.
-          assert.strictEqual(this, op);
+          expect(this).toBe(op);
           done();
         };
 
@@ -327,14 +316,12 @@ describe('Operation', () => {
       const apiResponse = {done: true};
 
       beforeEach(() => {
-        sandbox
-          .stub(operation, 'getMetadata')
-          .callsArgWith(0, null, apiResponse);
+        jest.spyOn(operation, 'getMetadata').mockImplementation((callback: any) => callback(null, apiResponse));
       });
 
       it('should emit complete with metadata', async () => {
         operation.on('complete', (metadata: {}) => {
-          assert.strictEqual(metadata, apiResponse);
+          expect(metadata).toBe(apiResponse);
         });
         await asAny(operation).startPolling_();
       });

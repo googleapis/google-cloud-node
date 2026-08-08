@@ -18,7 +18,6 @@ import {ncp} from 'ncp';
 import * as os from 'os';
 import * as tmp from 'tmp';
 import {promisify} from 'util';
-import {describe, it, after} from 'mocha';
 
 const mvp = promisify(mv) as {} as (...args: string[]) => Promise<void>;
 const ncpp = promisify(ncp);
@@ -26,7 +25,7 @@ const keep = !!process.env.KEEP_TEMPDIRS;
 const stagingDir = tmp.dirSync({keep, unsafeCleanup: true});
 const stagingPath = stagingDir.name;
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require('../../package.json');
+const pkg = require('../package.json');
 const pkgName = 'google-cloud-common';
 const npm = os.platform() === 'win32' ? 'npm.cmd' : 'npm';
 
@@ -36,7 +35,12 @@ const spawnp = (
   options: cp.SpawnOptions = {},
 ) => {
   return new Promise<void>((resolve, reject) => {
-    cp.spawn(command, args, Object.assign(options, {stdio: 'inherit'}))
+    const spawnOptions = {
+      ...options,
+      stdio: 'inherit' as const,
+      shell: os.platform() === 'win32' ? true : options.shell,
+    };
+    cp.spawn(command, args, spawnOptions)
       .on('close', code => {
         if (code === 0) {
           resolve();
@@ -62,12 +66,12 @@ describe('install tests', () => {
     await mvp(tarball, `${stagingPath}/${pkgName}.tgz`);
     await ncpp('system-test/fixtures/kitchen', `${stagingPath}/`);
     await spawnp(npm, ['install'], {cwd: `${stagingPath}/`});
-  }).timeout(120000);
+  }, 120000);
 
   /**
    * CLEAN UP - remove the staging directory when done.
    */
-  after('cleanup staging', async () => {
+  afterAll(async () => {
     if (!keep) {
       stagingDir.removeCallback();
     }
