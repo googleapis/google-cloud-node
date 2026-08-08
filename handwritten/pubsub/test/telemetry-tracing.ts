@@ -361,7 +361,7 @@ describe('OpenTelemetryTracer', () => {
         'receive',
       );
       assert.strictEqual(childReadSpan.kind, SpanKind.CONSUMER);
-      assert.ok(childReadSpan.parentSpanId);
+      assert.ok(childReadSpan.parentSpanContext?.spanId);
     });
 
     it('creates publish RPC spans', () => {
@@ -373,14 +373,19 @@ describe('OpenTelemetryTracer', () => {
         'test',
       ) as trace.Span;
       message.parentSpan = span;
-      span.end();
 
+      // The publish RPC span adds a back-link onto the parent span, so it must
+      // be created while the parent is still open. This mirrors the real
+      // publish flow (Queue._publish), where parent spans are ended only after
+      // the RPC span is created. In @opentelemetry/sdk-trace-base v2,
+      // `addLink()` on an already-ended span is a no-op.
       const publishSpan = otel.PubsubSpans.createPublishRpcSpan(
         [message],
         topicName,
         'test',
       );
 
+      span.end();
       publishSpan?.end();
       const spans = exporter.getFinishedSpans();
       const publishReadSpan = spans.pop();

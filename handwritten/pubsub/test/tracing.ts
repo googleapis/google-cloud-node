@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import {trace} from '@opentelemetry/api';
 import {
   BasicTracerProvider,
   InMemorySpanExporter,
@@ -36,6 +37,9 @@ import {
  * its defined beforehand.
  */
 export const exporter: InMemorySpanExporter = new InMemorySpanExporter();
-export const provider: BasicTracerProvider = new BasicTracerProvider();
-provider.addSpanProcessor(new SimpleSpanProcessor(exporter));
-provider.register();
+export const provider: BasicTracerProvider = new BasicTracerProvider({
+  spanProcessors: [new SimpleSpanProcessor(exporter)],
+});
+// `BasicTracerProvider.register()` was removed in @opentelemetry/sdk-trace-base
+// v2; register the provider as the global one via the API instead.
+trace.setGlobalTracerProvider(provider);
