@@ -3,7 +3,7 @@ const path = require('path');
 
 const dirsToScan = ['packages', 'core', 'handwritten'];
 // Directories to exclude entirely from any modifications
-const excludeDirNames = ['gaxios', 'firestore', 'spanner', 'storage', 'google-cloud-firestore', 'google-cloud-spanner', 'google-cloud-storage', 'fixtures'];
+const excludeDirNames = ['gaxios', 'firestore', 'spanner', 'storage', 'google-cloud-firestore', 'google-cloud-spanner', 'google-cloud-storage', 'fixtures', 'baselines'];
 // Dependency names that should not be bumped anywhere
 const excludeDepNames = ['gaxios', '@google-cloud/firestore', '@google-cloud/spanner', '@google-cloud/storage'];
 
