@@ -10,6 +10,7 @@ The `@google-cloud/spanner-driver` package provides a high-performance, `node-po
 ## Key Features
 
 - **`node-postgres` Compatibility**: Drop-in compatible `Client` and `Pool` interfaces matching standard PostgreSQL drivers.
+- **Connection Pooling**: Full-featured connection pool (`Pool`) with idle eviction, connection recycling (`maxUses`, `maxLifetimeSeconds`), and backpressure wait queues.
 - **Dual ESM & CommonJS**: Full support for both `import` (ESM) and `require()` (CommonJS) modules.
 - **PostgreSQL Dialect Utilities**: Escaping tools (`escapeIdentifier`, `escapeLiteral`) and SQLSTATE error code enrichment (`DatabaseError`).
 - **Flexible Invocation Modes**: Supports Promises (`async`/`await`), Node callbacks, and streaming row event emitters.
@@ -69,28 +70,57 @@ const pool = new Pool({
   project: 'my-gcp-project',
   instance: 'my-spanner-instance',
   database: 'my-spanner-database',
+  max: 20, // Maximum pool connections (default: 10)
+  min: 2, // Minimum idle connections retained (default: 0)
+  idleTimeoutMillis: 30000, // Disconnect idle clients after 30s (default: 10000)
+  connectionTimeoutMillis: 5000, // Timeout if acquisition exceeds 5s (default: 0 / indefinite)
+  maxUses: 5000, // Automatically recycle client after 5000 checkouts (default: Infinity)
+  maxLifetimeSeconds: 3600, // Max connection lifespan in seconds (default: 0 / disabled)
+  allowExitOnIdle: false, // Unref timers to allow Node.js event loop to exit when idle (default: false)
+  onConnect: async (client) => {
+    // ⏳ Awaited initialization on each new connection before it is checked out
+    // (e.g. setting session variables or running setup queries)
+  },
 });
 
+// Pool Lifecycle Events (Fire-and-forget notifications)
+// Note: 'connect' event listeners do NOT wait for async functions; use onConnect option for async setup.
+pool.on('connect', client => console.log('New client connected to pool'));
+pool.on('acquire', client => console.log('Client checked out from pool'));
+pool.on('release', (err, client) => console.log('Client returned to pool'));
+pool.on('remove', client => console.log('Client removed and closed from pool'));
+pool.on('error', (err, client) => console.error('Unexpected pool error', err));
+
 async function runPoolQueries() {
-  // Query executed using auto-acquired and auto-released pool connection
+  // Option A: Auto-acquired and auto-released single query execution
   const res = await pool.query('SELECT current_timestamp()');
   console.log('Result:', res.rows);
 
-  // Manually checkout client from pool
+  // Option B: Manual checkout for sequential multi-statement operations
   const client = await pool.connect();
   try {
     const userRes = await client.query('SELECT * FROM users WHERE user_id = $1', [101]);
     console.log('User:', userRes.rows);
   } finally {
-    // Release client back to pool
+    // Returns client back to the pool
     client.release();
   }
 }
 
-// Drain pool on application shutdown
+// Gracefully drain pool on application shutdown
 async function shutdown() {
   await pool.end();
 }
+```
+
+#### Monitoring Pool Metrics
+
+You can inspect real-time connection metrics on the `Pool` instance:
+
+```typescript
+console.log(`Total Connections: ${pool.totalCount}`);   // Total clients in pool (active + idle)
+console.log(`Idle Connections:  ${pool.idleCount}`);    // Clients currently available for checkout
+console.log(`Waiting Requests:  ${pool.waitingCount}`); // Queued queries waiting for an available client
 ```
 
 ### 3. Streaming Rows & Callbacks
@@ -113,14 +143,40 @@ client.query('SELECT * FROM large_table')
 
 ---
 
+## Configuration Reference
+
+### `PoolConfig`
+
+`PoolConfig` extends `ClientConfig` with pool management parameters:
+
+| Property | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `project` | `string` | `process.env.GOOGLE_CLOUD_PROJECT` | GCP Project ID. |
+| `instance` | `string` | — | Cloud Spanner Instance ID. |
+| `database` | `string` | — | Cloud Spanner Database ID. |
+| `connectionString` | `string` | — | Full Spanner resource path or `postgresql://` DSN URL. |
+| `host` | `string` | — | Optional custom endpoint or emulator host. |
+| `port` | `number` | — | Optional custom endpoint port. |
+| `max` | `number` | `10` | Maximum number of active and idle connections in the pool. |
+| `min` | `number` | `0` | Minimum number of idle connections to retain without evicting. |
+| `idleTimeoutMillis` | `number` | `10000` (10s) | Time a connection can remain idle before being closed (set `0` to disable). |
+| `connectionTimeoutMillis` | `number` | `0` | Timeout in ms for connection acquisition, handshake, and onConnect initialization (set `0` to wait indefinitely). |
+| `allowExitOnIdle` | `boolean` | `false` | Unrefs idle timers so Node.js CLI / batch processes can exit cleanly. |
+| `maxUses` | `number` | `Infinity` | Number of times a client can be checked out before being closed and replaced. |
+| `maxLifetimeSeconds` | `number` | `0` | Maximum lifetime of a connection in seconds before retirement (set `0` to disable). |
+| `onConnect` | `function` | `undefined` | Async hook awaited once when a new connection is established, before it is checked out (`(client: Client) => void \| Promise<void>`). |
+
+---
+
 ## Public API Reference
 
 | Export | Type | Description |
 | :--- | :--- | :--- |
-| `Client` | Class | Database connection client (`connect()`, `query()`, `release()`, `end()`). |
-| `Pool` | Class | Connection pool (`connect()`, `query()`, `end()`). |
+| `Client` | Class | Single database connection client (`connect()`, `query()`, `release()`, `end()`). |
+| `Pool` | Class | Connection pool manager (`connect()`, `query()`, `end()`, getters: `totalCount`, `idleCount`, `waitingCount`). |
 | `DatabaseError` | Class | Enriched database error containing PostgreSQL SQLSTATE `.code` and `.severity`. |
-| `ClientConfig` | Interface | Client configuration options (`project`, `instance`, `database`, `host`, `port`, `connectionString`). |
+| `ClientConfig` | Interface | Client connection configuration options (`project`, `instance`, `database`, `connectionString`). |
+| `PoolConfig` | Interface | Pool management configuration options extending `ClientConfig`. |
 | `QueryResult` | Interface | Result set container (`rows`, `fields`, `rowCount`, `command`). |
 | `QueryConfig` | Interface | Query options object (`text`, `values`, `rowMode`). |
 | `escapeIdentifier` | Function | Escapes PostgreSQL identifiers with double quotes (`"my_table"`). |
