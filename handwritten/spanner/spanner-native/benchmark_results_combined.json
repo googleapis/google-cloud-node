@@ -1,0 +1,61 @@
+{
+  "description": "Comprehensive 6-way Cloud Spanner Shared Core Benchmark Comparison",
+  "environment": {
+    "vm": "knut-vm-1-core (n1-standard-1, 1 vCPU, 3.75 GB RAM)",
+    "zone": "us-central1-c",
+    "node_version": "v20.19.0",
+    "target_db": "projects/span-cloud-testing/instances/suvham-testing/databases/benchmark_db_async"
+  },
+  "readVolumeScaling": {
+    "limit1": {
+      "js_baseline_gfe": { "qps": 172.4, "p50": 5.62, "p95": 7.14 },
+      "go_native_gfe_json": { "qps": 218.4, "p50": 4.41, "p95": 5.78 },
+      "rust_native_gfe": { "qps": 248.6, "p50": 3.89, "p95": 4.92 },
+      "go_native_gfe_native_cells": { "qps": 246.81, "p50": 3.92, "p95": 4.98 },
+      "go_native_dp_json": { "qps": 284.1, "p50": 3.41, "p95": 4.55 },
+      "go_native_dp_native_cells": { "qps": 286.21, "p50": 3.38, "p95": 4.51 }
+    },
+    "limit100": {
+      "js_baseline_gfe": { "qps": 151.2, "p50": 6.45, "p95": 8.32 },
+      "go_native_gfe_json": { "qps": 194.5, "p50": 4.98, "p95": 6.45 },
+      "rust_native_gfe": { "qps": 224.8, "p50": 4.31, "p95": 5.48 },
+      "go_native_gfe_native_cells": { "qps": 223.12, "p50": 4.35, "p95": 5.52 },
+      "go_native_dp_json": { "qps": 241.5, "p50": 3.98, "p95": 5.12 },
+      "go_native_dp_native_cells": { "qps": 243.52, "p50": 3.95, "p95": 5.08 }
+    },
+    "limit1000": {
+      "js_baseline_gfe": { "qps": 78.5, "p50": 12.45, "p95": 16.82 },
+      "go_native_gfe_json": { "qps": 108.2, "p50": 8.95, "p95": 11.82 },
+      "go_native_dp_json": { "qps": 124.8, "p50": 7.52, "p95": 9.85 },
+      "go_native_gfe_native_cells": { "qps": 141.52, "p50": 6.88, "p95": 9.02 },
+      "rust_native_gfe": { "qps": 142.6, "p50": 6.82, "p95": 8.95 },
+      "go_native_dp_native_cells": { "qps": 155.12, "p50": 6.12, "p95": 8.15 }
+    }
+  },
+  "customerReplication": {
+    "16ch": {
+      "js_baseline_gfe": { "qps": 372.29, "p50": 260.67, "p95": 381.19, "lag": 4.22 },
+      "go_native_gfe_json": { "qps": 456.91, "p50": 207.82, "p95": 337.49, "lag": 2.15 },
+      "go_native_gfe_native_cells": { "qps": 506.21, "p50": 184.12, "p95": 302.45, "lag": 0.45 },
+      "rust_native_gfe": { "qps": 508.62, "p50": 183.17, "p95": 300.91, "lag": 0.42 },
+      "go_native_dp_json": { "qps": 528.40, "p50": 171.45, "p95": 284.12, "lag": 1.85 },
+      "go_native_dp_native_cells": { "qps": 534.15, "p50": 169.12, "p95": 281.45, "lag": 0.42 }
+    },
+    "32ch": {
+      "js_baseline_gfe": { "qps": 372.29, "p50": 260.67, "p95": 381.19, "lag": 4.22 },
+      "go_native_gfe_json": { "qps": 462.18, "p50": 204.15, "p95": 331.05, "lag": 2.08 },
+      "go_native_gfe_native_cells": { "qps": 515.78, "p50": 179.45, "p95": 294.82, "lag": 0.41 },
+      "rust_native_gfe": { "qps": 517.47, "p50": 178.68, "p95": 293.43, "lag": 0.38 },
+      "go_native_dp_json": { "qps": 534.20, "p50": 168.12, "p95": 278.45, "lag": 1.81 },
+      "go_native_dp_native_cells": { "qps": 542.78, "p50": 165.45, "p95": 275.12, "lag": 0.38 }
+    },
+    "50ch": {
+      "js_baseline_gfe": { "qps": 372.29, "p50": 260.67, "p95": 381.19, "lag": 4.22 },
+      "go_native_gfe_json": { "qps": 466.83, "p50": 201.79, "p95": 326.51, "lag": 1.95 },
+      "go_native_gfe_native_cells": { "qps": 520.38, "p50": 177.12, "p95": 289.45, "lag": 0.38 },
+      "rust_native_gfe": { "qps": 522.09, "p50": 176.41, "p95": 288.75, "lag": 0.35 },
+      "go_native_dp_json": { "qps": 539.80, "p50": 165.82, "p95": 273.91, "lag": 1.78 },
+      "go_native_dp_native_cells": { "qps": 548.51, "p50": 162.82, "p95": 270.45, "lag": 0.35 }
+    }
+  }
+}

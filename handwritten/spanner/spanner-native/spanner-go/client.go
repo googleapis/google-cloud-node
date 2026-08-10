@@ -7,8 +7,11 @@ import (
 	"os"
 	"sync/atomic"
 
+	gapic "cloud.google.com/go/spanner/apiv1"
+	spannerpb "cloud.google.com/go/spanner/apiv1/spannerpb"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
+	"google.golang.org/api/option"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
@@ -19,33 +22,42 @@ const (
 	spannerScope    = "https://www.googleapis.com/auth/spanner.data"
 )
 
+func isDirectPathEnabled() bool {
+	return os.Getenv("GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS") == "true" ||
+		os.Getenv("GOOGLE_CLOUD_ENABLE_DIRECT_PATH") == "true"
+}
+
+func init() {
+	if !isDirectPathEnabled() {
+		// Force-disable gRPC DirectPath at module initialization time unless explicitly enabled
+		_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
+		_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
+	}
+}
+
 // CoreClient manages multiplexed gRPC connections, authentication, and request routing.
 type CoreClient struct {
 	conns       []*grpc.ClientConn
+	gapicClient *gapic.Client
+	useGapic    bool
 	reqCounter  uint64
 	tokenSource oauth2.TokenSource
 	ctx         context.Context
 	cancel      context.CancelFunc
 }
 
-func init() {
-	// Force-disable gRPC DirectPath at module initialization time
-	_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
-	_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
-}
-
 // NewCoreClient initializes the Go Spanner Core client.
-// It explicitly disables gRPC DirectPath to maintain an apples-to-apples network comparison
-// with the Rust prototype and the Node.js baseline.
+// When GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS=true, it uses gapic.NewClient with a gRPC connection pool to enable DirectPath.
+// Otherwise, it explicitly disables gRPC DirectPath to maintain an apples-to-apples network comparison with the Rust prototype and Node.js baseline.
 func NewCoreClient(channelCount int) (*CoreClient, error) {
-	// 1. Explicitly disable gRPC DirectPath in Go Spanner / gRPC client
-	// to enforce standard Google Frontend (GFE) network routing.
-	_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
-	_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
-
 	ctx, cancel := context.WithCancel(context.Background())
 
-	// 2. Initialize GCP Application Default Credentials TokenSource (cached & thread-safe)
+	limit := channelCount
+	if limit <= 0 {
+		limit = 1
+	}
+
+	// 1. Initialize GCP Application Default Credentials TokenSource (cached & thread-safe)
 	tokenSource, err := google.DefaultTokenSource(ctx, spannerScope)
 	if err != nil {
 		// In mock/test environments without ADC, allow fallback
@@ -54,6 +66,32 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 			TokenType:   "Bearer",
 		})
 	}
+
+	if isDirectPathEnabled() {
+		// Enable gRPC DirectPath via GAPIC client with connection pooling matching channelCount
+		os.Unsetenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH")
+		os.Unsetenv("DISABLE_DIRECT_PATH")
+
+		gapicClient, err := gapic.NewClient(ctx, option.WithGRPCConnectionPool(limit))
+		if err != nil {
+			cancel()
+			return nil, fmt.Errorf("failed to initialize Spanner GAPIC client for DirectPath: %w", err)
+		}
+
+		return &CoreClient{
+			gapicClient: gapicClient,
+			useGapic:    true,
+			reqCounter:  0,
+			tokenSource: tokenSource,
+			ctx:         ctx,
+			cancel:      cancel,
+		}, nil
+	}
+
+	// 2. Explicitly disable gRPC DirectPath in Go Spanner / gRPC client
+	// to enforce standard Google Frontend (GFE) network routing.
+	_ = os.Setenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH", "true")
+	_ = os.Setenv("DISABLE_DIRECT_PATH", "true")
 
 	// 3. Configure TLS matching standard GFE endpoint
 	tlsConfig := &tls.Config{
@@ -76,11 +114,6 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 	}
 
 	// 4. Create multiplexed gRPC connection pool matching the requested channelCount
-	limit := channelCount
-	if limit <= 0 {
-		limit = 1
-	}
-
 	conns := make([]*grpc.ClientConn, limit)
 	for i := 0; i < limit; i++ {
 		conn, err := grpc.DialContext(ctx, spannerEndpoint, dialOpts...)
@@ -93,11 +126,25 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 
 	return &CoreClient{
 		conns:       conns,
+		useGapic:    false,
 		reqCounter:  0,
 		tokenSource: tokenSource,
 		ctx:         ctx,
 		cancel:      cancel,
 	}, nil
+}
+
+// ExecuteStreamingSql dispatches the streaming SQL call over DirectPath or the connection pool.
+func (c *CoreClient) ExecuteStreamingSql(ctx context.Context, req *spannerpb.ExecuteSqlRequest) (spannerpb.Spanner_ExecuteStreamingSqlClient, error) {
+	if c.useGapic && c.gapicClient != nil {
+		return c.gapicClient.ExecuteStreamingSql(ctx, req)
+	}
+	conn := c.GetConn()
+	if conn == nil {
+		return nil, fmt.Errorf("no active gRPC connection available")
+	}
+	spannerClient := spannerpb.NewSpannerClient(conn)
+	return spannerClient.ExecuteStreamingSql(ctx, req)
 }
 
 // GetConn returns a connection from the pool via round-robin distribution.
@@ -122,6 +169,9 @@ func (c *CoreClient) GetToken() (*oauth2.Token, error) {
 func (c *CoreClient) Close() {
 	if c.cancel != nil {
 		c.cancel()
+	}
+	if c.gapicClient != nil {
+		_ = c.gapicClient.Close()
 	}
 	for _, conn := range c.conns {
 		if conn != nil {

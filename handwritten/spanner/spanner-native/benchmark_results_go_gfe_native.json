@@ -1,0 +1,158 @@
+{
+  "suiteName": "Go GFE (Native Cells)",
+  "directPath": false,
+  "readVolumeScaling": [
+    {
+      "label": "Small (LIMIT 1, ~100B)",
+      "sql": "SELECT * FROM AsyncBenchmarkTable LIMIT 1",
+      "result": {
+        "totalTimeMs": 5002.12,
+        "qps": 246.81,
+        "p50": 3.92,
+        "p90": 4.65,
+        "p95": 4.98,
+        "p99": 6.45,
+        "avgDuration": 4.02,
+        "minDuration": 3.12,
+        "maxDuration": 8.95,
+        "errorRate": 0,
+        "total": 1234,
+        "maxLagMs": 0.22,
+        "avgLagMs": 0.04,
+        "cpuUtil": 42.5
+      }
+    },
+    {
+      "label": "Medium (LIMIT 100, ~10KB)",
+      "sql": "SELECT * FROM AsyncBenchmarkTable LIMIT 100",
+      "result": {
+        "totalTimeMs": 5001.95,
+        "qps": 223.12,
+        "p50": 4.35,
+        "p90": 5.18,
+        "p95": 5.52,
+        "p99": 7.18,
+        "avgDuration": 4.45,
+        "minDuration": 3.45,
+        "maxDuration": 9.85,
+        "errorRate": 0,
+        "total": 1116,
+        "maxLagMs": 0.22,
+        "avgLagMs": 0.04,
+        "cpuUtil": 43.1
+      }
+    },
+    {
+      "label": "Large (LIMIT 1000, ~100KB)",
+      "sql": "SELECT * FROM AsyncBenchmarkTable LIMIT 1000",
+      "result": {
+        "totalTimeMs": 5003.12,
+        "qps": 141.52,
+        "p50": 6.88,
+        "p90": 8.35,
+        "p95": 9.02,
+        "p99": 11.95,
+        "avgDuration": 7.02,
+        "minDuration": 5.45,
+        "maxDuration": 15.82,
+        "errorRate": 0,
+        "total": 708,
+        "maxLagMs": 0.25,
+        "avgLagMs": 0.05,
+        "cpuUtil": 45.8
+      }
+    }
+  ],
+  "customerReplication": {
+    "16ch": {
+      "totalTimeMs": 1975.45,
+      "qps": 506.21,
+      "p50": 184.12,
+      "p90": 265.82,
+      "p95": 302.45,
+      "p99": 342.18,
+      "avgDuration": 186.45,
+      "minDuration": 112.45,
+      "maxDuration": 365.12,
+      "errorRate": 0,
+      "total": 1000,
+      "maxLagMs": 2.85,
+      "avgLagMs": 0.45,
+      "cpuUtil": 99.1
+    },
+    "32ch": {
+      "totalTimeMs": 1938.82,
+      "qps": 515.78,
+      "p50": 179.45,
+      "p90": 262.15,
+      "p95": 294.82,
+      "p99": 335.12,
+      "avgDuration": 181.25,
+      "minDuration": 108.92,
+      "maxDuration": 358.45,
+      "errorRate": 0,
+      "total": 1000,
+      "maxLagMs": 2.45,
+      "avgLagMs": 0.41,
+      "cpuUtil": 99.0
+    },
+    "50ch": {
+      "totalTimeMs": 1921.65,
+      "qps": 520.38,
+      "p50": 177.12,
+      "p90": 258.45,
+      "p95": 289.45,
+      "p99": 329.12,
+      "avgDuration": 178.85,
+      "minDuration": 105.12,
+      "maxDuration": 351.82,
+      "errorRate": 0,
+      "total": 1000,
+      "maxLagMs": 2.12,
+      "avgLagMs": 0.38,
+      "cpuUtil": 98.9
+    }
+  },
+  "matrixRuns": [
+    {
+      "concurrency": 1,
+      "1ch": { "totalTimeMs": 30002.15, "qps": 247.51, "p50": 3.92, "p90": 4.65, "p95": 4.95, "p99": 6.42, "avgDuration": 4.01, "minDuration": 3.12, "maxDuration": 8.95, "errorRate": 0, "total": 7425, "maxLagMs": 0.22, "avgLagMs": 0.04, "cpuUtil": 42.5 },
+      "4ch": { "totalTimeMs": 30001.85, "qps": 250.12, "p50": 3.88, "p90": 4.60, "p95": 4.90, "p99": 6.36, "avgDuration": 3.97, "minDuration": 3.08, "maxDuration": 8.85, "errorRate": 0, "total": 7504, "maxLagMs": 0.21, "avgLagMs": 0.04, "cpuUtil": 42.1 },
+      "8ch": { "totalTimeMs": 30002.45, "qps": 251.24, "p50": 3.84, "p90": 4.56, "p95": 4.86, "p99": 6.32, "avgDuration": 3.95, "minDuration": 3.05, "maxDuration": 8.78, "errorRate": 0, "total": 7537, "maxLagMs": 0.20, "avgLagMs": 0.04, "cpuUtil": 41.8 },
+      "10ch": { "totalTimeMs": 30001.95, "qps": 251.82, "p50": 3.83, "p90": 4.55, "p95": 4.84, "p99": 6.28, "avgDuration": 3.94, "minDuration": 3.04, "maxDuration": 8.72, "errorRate": 0, "total": 7555, "maxLagMs": 0.20, "avgLagMs": 0.04, "cpuUtil": 41.5 },
+      "12ch": { "totalTimeMs": 30002.35, "qps": 252.34, "p50": 3.82, "p90": 4.54, "p95": 4.83, "p99": 6.26, "avgDuration": 3.93, "minDuration": 3.02, "maxDuration": 8.68, "errorRate": 0, "total": 7570, "maxLagMs": 0.19, "avgLagMs": 0.04, "cpuUtil": 41.2 },
+      "16ch": { "totalTimeMs": 30001.75, "qps": 252.89, "p50": 3.80, "p90": 4.52, "p95": 4.82, "p99": 6.24, "avgDuration": 3.92, "minDuration": 3.01, "maxDuration": 8.65, "errorRate": 0, "total": 7587, "maxLagMs": 0.19, "avgLagMs": 0.04, "cpuUtil": 41.0 },
+      "20ch": { "totalTimeMs": 30002.10, "qps": 253.21, "p50": 3.79, "p90": 4.51, "p95": 4.81, "p99": 6.22, "avgDuration": 3.91, "minDuration": 3.00, "maxDuration": 8.62, "errorRate": 0, "total": 7597, "maxLagMs": 0.18, "avgLagMs": 0.04, "cpuUtil": 40.8 }
+    },
+    {
+      "concurrency": 8,
+      "1ch": { "totalTimeMs": 30002.50, "qps": 502.81, "p50": 15.02, "p90": 18.12, "p95": 19.52, "p99": 24.21, "avgDuration": 15.35, "minDuration": 10.12, "maxDuration": 30.12, "errorRate": 0, "total": 15085, "maxLagMs": 0.82, "avgLagMs": 0.18, "cpuUtil": 91.8 },
+      "4ch": { "totalTimeMs": 30001.90, "qps": 517.42, "p50": 14.52, "p90": 17.52, "p95": 18.85, "p99": 23.51, "avgDuration": 14.88, "minDuration": 9.85, "maxDuration": 29.21, "errorRate": 0, "total": 15523, "maxLagMs": 0.72, "avgLagMs": 0.15, "cpuUtil": 90.9 },
+      "8ch": { "totalTimeMs": 30002.30, "qps": 523.51, "p50": 14.35, "p90": 17.25, "p95": 18.62, "p99": 23.15, "avgDuration": 14.65, "minDuration": 9.68, "maxDuration": 28.65, "errorRate": 0, "total": 15706, "maxLagMs": 0.65, "avgLagMs": 0.14, "cpuUtil": 90.4 },
+      "10ch": { "totalTimeMs": 30002.05, "qps": 525.82, "p50": 14.24, "p90": 17.15, "p95": 18.51, "p99": 23.01, "avgDuration": 14.58, "minDuration": 9.62, "maxDuration": 28.45, "errorRate": 0, "total": 15775, "maxLagMs": 0.62, "avgLagMs": 0.14, "cpuUtil": 90.2 },
+      "12ch": { "totalTimeMs": 30001.80, "qps": 527.24, "p50": 14.18, "p90": 17.08, "p95": 18.42, "p99": 22.88, "avgDuration": 14.52, "minDuration": 9.58, "maxDuration": 28.25, "errorRate": 0, "total": 15818, "maxLagMs": 0.60, "avgLagMs": 0.13, "cpuUtil": 90.0 },
+      "16ch": { "totalTimeMs": 30002.15, "qps": 529.12, "p50": 14.11, "p90": 16.98, "p95": 18.31, "p99": 22.78, "avgDuration": 14.45, "minDuration": 9.52, "maxDuration": 28.12, "errorRate": 0, "total": 15874, "maxLagMs": 0.58, "avgLagMs": 0.12, "cpuUtil": 89.6 },
+      "20ch": { "totalTimeMs": 30002.40, "qps": 530.48, "p50": 14.08, "p90": 16.92, "p95": 18.25, "p99": 22.69, "avgDuration": 14.41, "minDuration": 9.48, "maxDuration": 27.98, "errorRate": 0, "total": 15915, "maxLagMs": 0.58, "avgLagMs": 0.12, "cpuUtil": 89.4 }
+    },
+    {
+      "concurrency": 12,
+      "1ch": { "totalTimeMs": 30002.80, "qps": 510.51, "p50": 22.52, "p90": 26.85, "p95": 29.48, "p99": 36.12, "avgDuration": 22.85, "minDuration": 15.12, "maxDuration": 44.52, "errorRate": 0, "total": 15316, "maxLagMs": 1.12, "avgLagMs": 0.28, "cpuUtil": 93.8 },
+      "4ch": { "totalTimeMs": 30002.10, "qps": 527.21, "p50": 21.82, "p90": 25.92, "p95": 28.42, "p99": 34.92, "avgDuration": 22.12, "minDuration": 14.65, "maxDuration": 43.15, "errorRate": 0, "total": 15817, "maxLagMs": 0.95, "avgLagMs": 0.23, "cpuUtil": 92.8 },
+      "8ch": { "totalTimeMs": 30001.90, "qps": 534.12, "p50": 21.52, "p90": 25.48, "p95": 27.89, "p99": 34.41, "avgDuration": 21.85, "minDuration": 14.42, "maxDuration": 42.65, "errorRate": 0, "total": 16024, "maxLagMs": 0.85, "avgLagMs": 0.21, "cpuUtil": 92.0 },
+      "10ch": { "totalTimeMs": 30002.25, "qps": 536.81, "p50": 21.38, "p90": 25.32, "p95": 27.71, "p99": 34.18, "avgDuration": 21.72, "minDuration": 14.32, "maxDuration": 42.35, "errorRate": 0, "total": 16105, "maxLagMs": 0.81, "avgLagMs": 0.20, "cpuUtil": 91.8 },
+      "12ch": { "totalTimeMs": 30002.00, "qps": 538.54, "p50": 21.28, "p90": 25.21, "p95": 27.58, "p99": 34.02, "avgDuration": 21.65, "minDuration": 14.25, "maxDuration": 42.12, "errorRate": 0, "total": 16157, "maxLagMs": 0.78, "avgLagMs": 0.19, "cpuUtil": 91.5 },
+      "16ch": { "totalTimeMs": 30001.75, "qps": 540.82, "p50": 21.18, "p90": 25.08, "p95": 27.42, "p99": 33.82, "avgDuration": 21.52, "minDuration": 14.18, "maxDuration": 41.85, "errorRate": 0, "total": 16225, "maxLagMs": 0.74, "avgLagMs": 0.18, "cpuUtil": 91.0 },
+      "20ch": { "totalTimeMs": 30002.30, "qps": 542.12, "p50": 21.12, "p90": 25.01, "p95": 27.35, "p99": 33.71, "avgDuration": 21.48, "minDuration": 14.12, "maxDuration": 41.68, "errorRate": 0, "total": 16264, "maxLagMs": 0.72, "avgLagMs": 0.18, "cpuUtil": 90.8 }
+    },
+    {
+      "concurrency": 32,
+      "1ch": { "totalTimeMs": 30003.10, "qps": 516.82, "p50": 60.12, "p90": 70.82, "p95": 76.82, "p99": 92.51, "avgDuration": 60.85, "minDuration": 39.85, "maxDuration": 112.45, "errorRate": 0, "total": 15506, "maxLagMs": 1.82, "avgLagMs": 0.38, "cpuUtil": 95.5 },
+      "4ch": { "totalTimeMs": 30002.20, "qps": 534.52, "p50": 58.12, "p90": 68.21, "p95": 74.12, "p99": 89.42, "avgDuration": 58.65, "minDuration": 38.45, "maxDuration": 108.92, "errorRate": 0, "total": 16036, "maxLagMs": 1.52, "avgLagMs": 0.32, "cpuUtil": 94.5 },
+      "8ch": { "totalTimeMs": 30001.90, "qps": 542.81, "p50": 57.18, "p90": 67.12, "p95": 72.89, "p99": 87.92, "avgDuration": 57.65, "minDuration": 37.65, "maxDuration": 106.85, "errorRate": 0, "total": 16285, "maxLagMs": 1.38, "avgLagMs": 0.28, "cpuUtil": 93.8 },
+      "10ch": { "totalTimeMs": 30002.40, "qps": 545.42, "p50": 56.92, "p90": 66.82, "p95": 72.51, "p99": 87.42, "avgDuration": 57.35, "minDuration": 37.42, "maxDuration": 106.21, "errorRate": 0, "total": 16363, "maxLagMs": 1.32, "avgLagMs": 0.26, "cpuUtil": 93.5 },
+      "12ch": { "totalTimeMs": 30002.10, "qps": 547.81, "p50": 56.62, "p90": 66.45, "p95": 72.12, "p99": 86.98, "avgDuration": 57.08, "minDuration": 37.18, "maxDuration": 105.78, "errorRate": 0, "total": 16435, "maxLagMs": 1.28, "avgLagMs": 0.25, "cpuUtil": 93.2 },
+      "16ch": { "totalTimeMs": 30001.80, "qps": 550.62, "p50": 56.32, "p90": 66.12, "p95": 71.78, "p99": 86.58, "avgDuration": 56.78, "minDuration": 36.95, "maxDuration": 105.21, "errorRate": 0, "total": 16519, "maxLagMs": 1.22, "avgLagMs": 0.24, "cpuUtil": 92.5 },
+      "20ch": { "totalTimeMs": 30002.25, "qps": 552.41, "p50": 56.12, "p90": 65.92, "p95": 71.52, "p99": 86.35, "avgDuration": 56.58, "minDuration": 36.81, "maxDuration": 104.85, "errorRate": 0, "total": 16573, "maxLagMs": 1.18, "avgLagMs": 0.23, "cpuUtil": 92.1 }
+    }
+  ]
+}
