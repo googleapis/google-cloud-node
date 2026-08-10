@@ -26,7 +26,11 @@ class NativeSpannerDatabase {
     this.channelCount = channelCount;
     this.engine = (engine || 'rust').toLowerCase();
 
-    this.spanner = new Spanner({ projectId });
+    const spannerOptions = { projectId };
+    if (process.env.SPANNER_NODE_CREDENTIALS) {
+      spannerOptions.keyFilename = process.env.SPANNER_NODE_CREDENTIALS;
+    }
+    this.spanner = new Spanner(spannerOptions);
     this.instance = this.spanner.instance(instanceId);
     this.database = this.instance.database(databaseId);
     // Prevent unhandled background session-pool error events from crashing the Node.js process
