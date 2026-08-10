@@ -32,14 +32,14 @@
     "prepare": "npm run compile-protos && npm run compile"
   },
   "dependencies": {
-    "google-gax": "^6.0.0"
+    "google-gax": "./google-gax.tgz"
   },
   "devDependencies": {
     "@types/node": "^22.15.2",
-    "gapic-tools": "^2.0.0",
+    "gapic-tools": "./gapic-tools.tgz",
     "typescript": "5.8.3"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=18"
   }
 }

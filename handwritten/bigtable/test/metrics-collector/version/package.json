@@ -2,6 +2,6 @@
   "version": "fake-version-number",
   "private": true,
   "engines": {
-    "node": ">=22"
+    "node": ">=18"
   }
 }

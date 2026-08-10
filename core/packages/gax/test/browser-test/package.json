@@ -8,7 +8,7 @@
     "build/test"
   ],
   "engines": {
-    "node": ">=22"
+    "node": ">=18"
   },
   "license": "Apache-2.0",
   "keywords": [],
@@ -31,7 +31,7 @@
     "browserify-zlib": "^0.2.0",
     "core-js": "^3.40.0",
     "crypto-browserify": "^3.12.1",
-    "google-gax": "^6.0.0",
+    "google-gax": "./google-gax.tgz",
     "https-browserify": "^1.0.0",
     "is-docker": "^2.2.1",
     "karma": "^6.4.4",
@@ -46,8 +46,8 @@
     "process": "^0.11.10",
     "puppeteer": "^16.0.0",
     "querystring-es3": "^0.2.1",
-    "showcase-echo-client": "^0.0.1",
-    "showcase-server": "^0.0.1-security",
+    "showcase-echo-client": "./showcase-echo-client.tgz",
+    "showcase-server": "./showcase-server.tgz",
     "sinon": "^14.0.0",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",

@@ -14,7 +14,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "google-auth-library": "^11.0.0"
+    "google-auth-library": "file:./google-auth-library.tgz"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

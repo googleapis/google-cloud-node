@@ -13,7 +13,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@google-cloud/pubsub": "^6.0.0"
+    "@google-cloud/pubsub": "file:./pubsub.tgz"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
