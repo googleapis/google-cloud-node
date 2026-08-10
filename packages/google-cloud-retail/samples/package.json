@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@google-cloud/retail": "^5.0.0",
-    "@google-cloud/bigquery": "^9.0.1",
+    "@google-cloud/bigquery": "^8.0.0",
     "@google-cloud/storage": "^7.0.0"
   },
   "devDependencies": {

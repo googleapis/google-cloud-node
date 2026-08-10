@@ -3,7 +3,7 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=22"
+    "node": ">=18"
   },
   "repository": "googleapis/google-cloud-node",
   "private": true,
@@ -14,7 +14,7 @@
     "*.js"
   ],
   "dependencies": {
-    "google-proto-files": "^6.0.0",
+    "google-proto-files": "^5.0.0",
     "proto3-json-serializer": "^4.0.0",
     "protobufjs": "^7.0.0"
   },
