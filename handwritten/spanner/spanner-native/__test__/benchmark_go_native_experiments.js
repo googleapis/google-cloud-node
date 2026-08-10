@@ -1,332 +1,269 @@
 /**
- * Comprehensive Benchmark Suite for Go Native Deserialization
- * Runs:
- * 1. Go GFE + Native Cells (DirectPath = false, SPANNER_GO_DIRECT_DESERIALIZATION = true)
- * 2. Go DirectPath + Native Cells (DirectPath = true, SPANNER_GO_DIRECT_DESERIALIZATION = true)
+ * Apples-to-apples Spanner shared-core benchmark.
+ *
+ * Runs one native arm per process against a paired Node.js baseline at the
+ * exact design-document shapes: 1/100/1000 rows and concurrency 1/16.
  */
 
-const { NativeSpannerDatabase } = require('./poc_bridge.js');
-const { performance } = require('perf_hooks');
-const os = require('os');
-const fs = require('fs');
-
+const enableDirectPathVars = [
+  'GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS',
+  'GOOGLE_CLOUD_ENABLE_DIRECT_PATH',
+];
+const presentDirectPathVars = enableDirectPathVars.filter(name =>
+  Object.prototype.hasOwnProperty.call(process.env, name)
+);
+if (presentDirectPathVars.length > 0) {
+  throw new Error(
+    `DirectPath enable variables must be absent, found: ${presentDirectPathVars.join(', ')}`
+  );
+}
+process.env.GOOGLE_CLOUD_DISABLE_DIRECT_PATH = 'true';
+process.env.DISABLE_DIRECT_PATH = 'true';
 process.env.SPANNER_GO_DIRECT_DESERIALIZATION = 'true';
 process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
 
-const PROJECT = 'span-cloud-testing';
-const INSTANCE = 'suvham-testing';
-const DATABASE = 'benchmark_db_async';
-const TABLE = 'AsyncBenchmarkTable';
-const SQL = "SELECT 1 as col_int, 'CONSTANT' as col_const";
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const {execFileSync} = require('child_process');
+const {performance} = require('perf_hooks');
+const {NativeSpannerDatabase} = require('./poc_bridge.js');
+const {NativeBinding} = require('./native_binding.js');
 
-const DURATION_MS = 30000; // 30s per matrix test point
-const CHANNELS_TEST = [1, 4, 8, 10, 12, 16, 20];
-const CONCURRENCY_LEVELS = [1, 8, 12, 32];
+const PROJECT = process.env.SPANNER_BENCHMARK_PROJECT || 'span-cloud-testing';
+const INSTANCE = process.env.SPANNER_BENCHMARK_INSTANCE || 'irahul-load-test';
+const DATABASE = process.env.SPANNER_BENCHMARK_DATABASE;
+const TABLE = process.env.SPANNER_BENCHMARK_TABLE;
+const ENGINE = (process.env.BENCHMARK_ENGINE || 'go').toLowerCase();
+const ARM = process.env.BENCHMARK_ARM || ENGINE;
+const ROW_COUNTS = [1, 100, 1000];
+const CONCURRENCY_LEVELS = [1, 16];
+const DURATION_MS = Number(process.env.BENCHMARK_DURATION_MS || 30_000);
+const WARMUP_MS = Number(process.env.BENCHMARK_WARMUP_MS || 5_000);
+const REPETITIONS = Number(process.env.BENCHMARK_REPETITIONS || 3);
+const VERIFY_ONLY = process.env.BENCHMARK_VERIFY_BINDINGS === '1';
+const OUTPUT = process.env.BENCHMARK_OUTPUT || `benchmark_results_${ARM}.json`;
+const CAPTURE_DIR = process.env.BENCHMARK_CAPTURE_DIR;
 
-function measureEventLoopLag() {
-  let last = performance.now();
-  let maxLag = 0;
-  let totalLag = 0;
-  let checks = 0;
+function commandOutput(command, args, fallback = 'unknown') {
+  try {
+    return execFileSync(command, args, {encoding: 'utf8'}).trim();
+  } catch (_) {
+    return fallback;
+  }
+}
 
-  const timer = setInterval(() => {
-    const now = performance.now();
-    const lag = Math.max(0, now - last - 10);
-    if (lag > maxLag) maxLag = lag;
-    totalLag += lag;
-    checks++;
-    last = now;
-  }, 10);
+function percentile(sorted, fraction) {
+  if (sorted.length === 0) return 0;
+  const index = Math.min(sorted.length - 1, Math.ceil(sorted.length * fraction) - 1);
+  return sorted[Math.max(0, index)];
+}
+
+async function runBenchmark(execute, concurrency, durationMs) {
+  const latencies = [];
+  let errors = 0;
+  let stopping = false;
+  const start = performance.now();
+
+  async function worker() {
+    while (!stopping) {
+      const requestStart = performance.now();
+      try {
+        await execute();
+        latencies.push(performance.now() - requestStart);
+      } catch (error) {
+        errors++;
+        if (errors <= 3) console.error(`[${ARM}] request error:`, error.message);
+      }
+    }
+  }
+
+  const workers = Array.from({length: concurrency}, () => worker());
+  await new Promise(resolve => setTimeout(resolve, durationMs));
+  stopping = true;
+  await Promise.all(workers);
+  const elapsedMs = performance.now() - start;
+  latencies.sort((a, b) => a - b);
+  const totalLatency = latencies.reduce((sum, value) => sum + value, 0);
 
   return {
-    stop: () => {
-      clearInterval(timer);
-      return {
-        maxLagMs: maxLag,
-        avgLagMs: checks > 0 ? totalLag / checks : 0,
-      };
+    totalTimeMs: elapsedMs,
+    qps: latencies.length / (elapsedMs / 1000),
+    p50: percentile(latencies, 0.50),
+    p90: percentile(latencies, 0.90),
+    p95: percentile(latencies, 0.95),
+    p99: percentile(latencies, 0.99),
+    avgDuration: latencies.length ? totalLatency / latencies.length : 0,
+    minDuration: latencies[0] || 0,
+    maxDuration: latencies[latencies.length - 1] || 0,
+    errorRate: latencies.length + errors ? errors / (latencies.length + errors) : 0,
+    total: latencies.length,
+  };
+}
+
+function aggregate(values) {
+  const sorted = [...values].sort((a, b) => a - b);
+  return {
+    min: sorted[0],
+    median: percentile(sorted, 0.50),
+    max: sorted[sorted.length - 1],
+  };
+}
+
+function environmentMetadata() {
+  const gitSha = commandOutput('git', ['rev-parse', 'HEAD']);
+  const trackedStatus = commandOutput(
+    'git',
+    ['status', '--porcelain', '--untracked-files=no'],
+    'status-unavailable'
+  );
+  return {
+    hostname: os.hostname(),
+    machineShape: process.env.BENCHMARK_MACHINE_SHAPE || 'unspecified',
+    vcpuCount: os.cpus().length,
+    platform: `${os.platform()}-${os.arch()}`,
+    nodeVersion: process.version,
+    goVersion: process.env.BENCHMARK_GO_VERSION || commandOutput('go', ['version']),
+    armCommitSha: process.env.BENCHMARK_ARM_COMMIT || gitSha,
+    armTreeCleanAtBuild: process.env.BENCHMARK_ARM_TREE_CLEAN || 'unknown',
+    harnessCommitSha: gitSha,
+    harnessTrackedTreeClean: trackedStatus === '',
+    targetDatabase: `projects/${PROJECT}/instances/${INSTANCE}/databases/${DATABASE || '<unset>'}`,
+    directPath: {
+      enabled: false,
+      enableVariablesAbsentAtProcessStart: true,
+      googleCloudDisableDirectPath: process.env.GOOGLE_CLOUD_DISABLE_DIRECT_PATH,
+      disableDirectPath: process.env.DISABLE_DIRECT_PATH,
+      transport: ENGINE === 'rust' ? 'rust GFE-only implementation' : 'Go explicit GFE grpc.Dial path',
     },
   };
 }
 
-function getCpuUsage() {
-  const cpus = os.cpus();
-  let user = 0;
-  let sys = 0;
-  let idle = 0;
-  for (const cpu of cpus) {
-    user += cpu.times.user;
-    sys += cpu.times.sys;
-    idle += cpu.times.idle;
-  }
-  return { user, sys, idle, total: user + sys + idle };
+async function verifyBinding() {
+  const binding = new NativeBinding(1, ENGINE);
+  binding.close();
+  console.log(JSON.stringify({
+    verified: true,
+    arm: ARM,
+    engine: ENGINE,
+    environment: environmentMetadata(),
+  }, null, 2));
 }
 
-async function runBenchmark(queryFn, concurrency, durationMs) {
-  const latencies = [];
-  let errorCount = 0;
-  let isRunning = true;
-  let activeInFlight = 0;
-
-  const lagTracker = measureEventLoopLag();
-  const startCpu = getCpuUsage();
-  const startTime = performance.now();
-
-  const worker = async () => {
-    while (isRunning) {
-      activeInFlight++;
-      const reqStart = performance.now();
-      try {
-        await queryFn();
-        const reqDuration = performance.now() - reqStart;
-        latencies.push(reqDuration);
-      } catch (err) {
-        errorCount++;
-      } finally {
-        activeInFlight--;
-      }
-    }
-  };
-
-  const workers = [];
-  for (let i = 0; i < concurrency; i++) {
-    workers.push(worker());
-  }
-
-  await new Promise(r => setTimeout(r, durationMs));
-  isRunning = false;
-
-  await Promise.all(workers);
-  while (activeInFlight > 0) {
-    await new Promise(r => setTimeout(r, 10));
-  }
-
-  const totalTimeMs = performance.now() - startTime;
-  const lagStats = lagTracker.stop();
-  const endCpu = getCpuUsage();
-
-  const totalCpuDiff = endCpu.total - startCpu.total;
-  const busyCpuDiff = (endCpu.user + endCpu.sys) - (startCpu.user + startCpu.sys);
-  const cpuPercent = totalCpuDiff > 0 ? (busyCpuDiff / totalCpuDiff) * 100 : 0;
-
-  latencies.sort((a, b) => a - b);
-  const count = latencies.length;
-  const p50 = count > 0 ? latencies[Math.floor(count * 0.50)] : 0;
-  const p90 = count > 0 ? latencies[Math.floor(count * 0.90)] : 0;
-  const p95 = count > 0 ? latencies[Math.floor(count * 0.95)] : 0;
-  const p99 = count > 0 ? latencies[Math.floor(count * 0.99)] : 0;
-  const sum = latencies.reduce((acc, v) => acc + v, 0);
-  const avg = count > 0 ? sum / count : 0;
-
-  return {
-    totalTimeMs,
-    qps: (count / (totalTimeMs / 1000)),
-    p50,
-    p90,
-    p95,
-    p99,
-    avgDuration: avg,
-    minDuration: count > 0 ? latencies[0] : 0,
-    maxDuration: count > 0 ? latencies[count - 1] : 0,
-    errorRate: count + errorCount > 0 ? (errorCount / (count + errorCount)) * 100 : 0,
-    total: count,
-    maxLagMs: lagStats.maxLagMs,
-    avgLagMs: lagStats.avgLagMs,
-    cpuUtil: cpuPercent,
-  };
-}
-
-async function runCustomerReplication(queryFn, concurrency, targetCount) {
-  const latencies = [];
-  let errorCount = 0;
-  let remaining = targetCount;
-
-  const lagTracker = measureEventLoopLag();
-  const startCpu = getCpuUsage();
-  const startTime = performance.now();
-
-  const worker = async () => {
-    while (true) {
-      if (remaining <= 0) break;
-      remaining--;
-      const reqStart = performance.now();
-      try {
-        await queryFn();
-        latencies.push(performance.now() - reqStart);
-      } catch (err) {
-        errorCount++;
-      }
-    }
-  };
-
-  const workers = [];
-  for (let i = 0; i < concurrency; i++) {
-    workers.push(worker());
-  }
-
-  await Promise.all(workers);
-
-  const totalTimeMs = performance.now() - startTime;
-  const lagStats = lagTracker.stop();
-  const endCpu = getCpuUsage();
-
-  const totalCpuDiff = endCpu.total - startCpu.total;
-  const busyCpuDiff = (endCpu.user + endCpu.sys) - (startCpu.user + startCpu.sys);
-  const cpuPercent = totalCpuDiff > 0 ? (busyCpuDiff / totalCpuDiff) * 100 : 0;
-
-  latencies.sort((a, b) => a - b);
-  const count = latencies.length;
-  const p50 = count > 0 ? latencies[Math.floor(count * 0.50)] : 0;
-  const p90 = count > 0 ? latencies[Math.floor(count * 0.90)] : 0;
-  const p95 = count > 0 ? latencies[Math.floor(count * 0.95)] : 0;
-  const p99 = count > 0 ? latencies[Math.floor(count * 0.99)] : 0;
-  const sum = latencies.reduce((acc, v) => acc + v, 0);
-  const avg = count > 0 ? sum / count : 0;
-
-  return {
-    totalTimeMs,
-    qps: (count / (totalTimeMs / 1000)),
-    p50,
-    p90,
-    p95,
-    p99,
-    avgDuration: avg,
-    minDuration: count > 0 ? latencies[0] : 0,
-    maxDuration: count > 0 ? latencies[count - 1] : 0,
-    errorRate: count + errorCount > 0 ? (errorCount / (count + errorCount)) * 100 : 0,
-    total: count,
-    maxLagMs: lagStats.maxLagMs,
-    avgLagMs: lagStats.avgLagMs,
-    cpuUtil: cpuPercent,
-  };
-}
-
-async function runSuite(directPathEnabled, suiteName) {
-  process.env.GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS = directPathEnabled ? 'true' : 'false';
-  process.env.GOOGLE_CLOUD_ENABLE_DIRECT_PATH = directPathEnabled ? 'true' : 'false';
-
-  console.log('\n================================================================================');
-  console.log(`  STARTING SUITE: ${suiteName} (DirectPath = ${directPathEnabled})`);
-  console.log('================================================================================');
-
-  console.log('Initializing Go connection pools...');
-  const goClients = {};
-  for (const ch of [...CHANNELS_TEST, 32, 50]) {
-    goClients[ch] = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, ch, 'go');
-  }
-
-  // Warmup
-  console.log('Executing warmup queries (2s)...');
-  await runBenchmark(() => goClients[1].executeSqlNative('SELECT 1'), 2, 2000);
-  console.log('Warmup complete.\n');
-
-  // TEST 1: Read Volume Scaling
-  console.log('[TEST 1: Read Volume Scaling (LIMIT 1, 100, 1000 Rows)]');
-  const test1Queries = [
-    { label: 'Small (LIMIT 1, ~100B)', sql: `SELECT * FROM ${TABLE} LIMIT 1` },
-    { label: 'Medium (LIMIT 100, ~10KB)', sql: `SELECT * FROM ${TABLE} LIMIT 100` },
-    { label: 'Large (LIMIT 1000, ~100KB)', sql: `SELECT * FROM ${TABLE} LIMIT 1000` }
-  ];
-
-  const test1Results = [];
-  for (const q of test1Queries) {
-    console.log(`Executing: ${q.label}...`);
-    const res = await runBenchmark(() => goClients[1].executeSqlNative(q.sql), 1, 5000);
-    console.log(`  ${suiteName} (1 Ch): QPS=${res.qps.toFixed(1)} | p50=${res.p50.toFixed(2)}ms | p95=${res.p95.toFixed(2)}ms | p99=${res.p99.toFixed(2)}ms | Lag=${res.avgLagMs.toFixed(2)}ms`);
-    test1Results.push({ label: q.label, sql: q.sql, result: res });
-  }
-
-  // TEST 2: Customer Case Replication
-  console.log('\n[TEST 2: Customer Case Replication (110 Concurrency, 1000 Total Requests)]');
-  const customerResults = {};
-  for (const ch of [16, 32, 50]) {
-    console.log(`Executing Customer Replication (${suiteName}, ${ch} Channels)...`);
-    const res = await runCustomerReplication(() => goClients[ch].executeSqlNative(SQL), 110, 1000);
-    console.log(`  ${suiteName} (${ch} Ch): QPS=${res.qps.toFixed(1)} | p50=${res.p50.toFixed(2)}ms | p95=${res.p95.toFixed(2)}ms | p99=${res.p99.toFixed(2)}ms | avgLag=${res.avgLagMs.toFixed(2)}ms | CPU=${res.cpuUtil.toFixed(1)}%`);
-    customerResults[`${ch}ch`] = res;
-  }
-
-  // TEST 3: Concurrency & Channel Matrix
-  console.log('\n[TEST 3: Full Concurrency & Channel Matrix]');
-  console.log([
-    'Concurrency '.padEnd(12),
-    'Engine / Channels '.padEnd(30),
-    'QPS / p95 (ms)'.padEnd(18),
-    'p50 (ms)'.padEnd(10),
-    'p99 (ms)'.padEnd(10),
-    'Avg Lag'.padEnd(12),
-    'Max Lag'.padEnd(12),
-    'CPU %'.padEnd(10)
-  ].join(' | '));
-  console.log('-'.repeat(125));
-
-  const matrixResults = [];
-
-  for (const concurrency of CONCURRENCY_LEVELS) {
-    const levelResult = { concurrency };
-
-    for (const channels of CHANNELS_TEST) {
-      const res = await runBenchmark(() => goClients[channels].executeSqlNative(SQL), concurrency, DURATION_MS);
-      const qpsP95 = `${res.qps.toFixed(1)} / ${res.p95.toFixed(1)}`;
-
-      console.log([
-        String(concurrency).padEnd(12),
-        `${suiteName} (${channels} Ch)`.padEnd(30),
-        qpsP95.padEnd(18),
-        res.p50.toFixed(1).padEnd(10),
-        res.p99.toFixed(1).padEnd(10),
-        `${res.avgLagMs.toFixed(1)}ms`.padEnd(12),
-        `${res.maxLagMs.toFixed(1)}ms`.padEnd(12),
-        `${res.cpuUtil.toFixed(1)}%`.padEnd(10)
-      ].join(' | '));
-
-      levelResult[`${channels}ch`] = res;
-    }
-
-    console.log('-'.repeat(125));
-    matrixResults.push(levelResult);
-  }
-
-  for (const ch of Object.keys(goClients)) {
-    goClients[ch].close();
-  }
-
-  return {
-    suiteName,
-    directPath: directPathEnabled,
-    readVolumeScaling: test1Results,
-    customerReplication: customerResults,
-    matrixRuns: matrixResults
-  };
+async function captureRows(client, rows, concurrency) {
+  if (!CAPTURE_DIR) return;
+  fs.mkdirSync(CAPTURE_DIR, {recursive: true});
+  const query = `SELECT * FROM ${TABLE} LIMIT ${rows}`;
+  const results = await Promise.all(
+    Array.from({length: concurrency}, () => client.executeSqlNative(query))
+  );
+  const filename = path.join(CAPTURE_DIR, `${ARM}-rows${rows}-c${concurrency}.json`);
+  fs.writeFileSync(filename, JSON.stringify(results));
 }
 
 async function main() {
-  console.log('================================================================================');
-  console.log('  Cloud Spanner Benchmark: Go Native Deserialization Suite                       ');
-  console.log('================================================================================');
-  console.log(`Node.js Version: ${process.version}`);
-  console.log(`OS Platform    : ${process.platform} (${process.arch})`);
-  console.log(`CPU Cores      : ${os.cpus().length} core(s)`);
-  console.log(`SPANNER_GO_DIRECT_DESERIALIZATION = true (Zero JSON Mode)`);
-  console.log(`Target Database: projects/${PROJECT}/instances/${INSTANCE}/databases/${DATABASE}\n`);
+  if (!['go', 'rust'].includes(ENGINE)) {
+    throw new Error(`BENCHMARK_ENGINE must be go or rust, got ${ENGINE}`);
+  }
+  if (VERIFY_ONLY) {
+    await verifyBinding();
+    return;
+  }
+  if (!DATABASE || !TABLE) {
+    throw new Error('SPANNER_BENCHMARK_DATABASE and SPANNER_BENCHMARK_TABLE are required');
+  }
+  if (!Number.isInteger(REPETITIONS) || REPETITIONS < 3) {
+    throw new Error(`BENCHMARK_REPETITIONS must be at least 3, got ${REPETITIONS}`);
+  }
+  if (!Number.isFinite(DURATION_MS) || DURATION_MS < 1000) {
+    throw new Error(`BENCHMARK_DURATION_MS must be at least 1000, got ${DURATION_MS}`);
+  }
 
-  // 1. Run Go GFE + Native Cells
-  const gfeResults = await runSuite(false, 'Go GFE (Native Cells)');
-  fs.writeFileSync('benchmark_results_go_gfe_native.json', JSON.stringify(gfeResults, null, 2));
-  console.log('\nSaved Suite 1 to benchmark_results_go_gfe_native.json');
+  const environment = environmentMetadata();
+  console.log('='.repeat(100));
+  console.log(`Arm ${ARM}: ${ENGINE}; p95 latency improvement versus paired Node.js baseline`);
+  console.log(JSON.stringify(environment, null, 2));
+  console.log('='.repeat(100));
 
-  // 2. Run Go DirectPath + Native Cells
-  const dpResults = await runSuite(true, 'Go DirectPath (Native Cells)');
-  fs.writeFileSync('benchmark_results_go_dp_native.json', JSON.stringify(dpResults, null, 2));
-  console.log('\nSaved Suite 2 to benchmark_results_go_dp_native.json');
+  const clients = new Map();
+  for (const concurrency of CONCURRENCY_LEVELS) {
+    clients.set(
+      concurrency,
+      new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE, concurrency, ENGINE)
+    );
+  }
 
-  console.log('\n================================================================================');
-  console.log('  ALL GO NATIVE DESERIALIZATION BENCHMARKS COMPLETED SUCCESSFULLY!              ');
-  console.log('================================================================================');
-  process.exit(0);
+  const shapes = [];
+  try {
+    for (const rows of ROW_COUNTS) {
+      const query = `SELECT * FROM ${TABLE} LIMIT ${rows}`;
+      for (const concurrency of CONCURRENCY_LEVELS) {
+        const client = clients.get(concurrency);
+        await captureRows(client, rows, concurrency);
+        console.log(`\nrows=${rows} concurrency=${concurrency}: warmup`);
+        await Promise.all([
+          runBenchmark(() => client.executeSqlJs(query), concurrency, WARMUP_MS),
+          runBenchmark(() => client.executeSqlNative(query), concurrency, WARMUP_MS),
+        ]);
+
+        const runs = [];
+        for (let repetition = 1; repetition <= REPETITIONS; repetition++) {
+          let jsBaseline;
+          let native;
+          if ((repetition + rows + concurrency) % 2 === 0) {
+            jsBaseline = await runBenchmark(() => client.executeSqlJs(query), concurrency, DURATION_MS);
+            native = await runBenchmark(() => client.executeSqlNative(query), concurrency, DURATION_MS);
+          } else {
+            native = await runBenchmark(() => client.executeSqlNative(query), concurrency, DURATION_MS);
+            jsBaseline = await runBenchmark(() => client.executeSqlJs(query), concurrency, DURATION_MS);
+          }
+          if (jsBaseline.errorRate !== 0 || native.errorRate !== 0) {
+            throw new Error(`non-zero error rate at rows=${rows}, concurrency=${concurrency}, repetition=${repetition}`);
+          }
+          const latencyImprovementPercent =
+            ((jsBaseline.p95 - native.p95) / jsBaseline.p95) * 100;
+          runs.push({repetition, jsBaseline, native, latencyImprovementPercent});
+          console.log(
+            `run=${repetition} js.p95=${jsBaseline.p95.toFixed(2)}ms ` +
+            `native.p95=${native.p95.toFixed(2)}ms improvement=${latencyImprovementPercent.toFixed(2)}%`
+          );
+        }
+
+        shapes.push({
+          rows,
+          concurrency,
+          sql: query,
+          metric: 'p95 latency improvement percent versus paired Node.js baseline',
+          runs,
+          spread: {
+            jsP95Ms: aggregate(runs.map(run => run.jsBaseline.p95)),
+            nativeP95Ms: aggregate(runs.map(run => run.native.p95)),
+            latencyImprovementPercent: aggregate(runs.map(run => run.latencyImprovementPercent)),
+          },
+        });
+      }
+    }
+  } finally {
+    for (const client of clients.values()) await client.close();
+  }
+
+  const output = {
+    schemaVersion: 1,
+    suiteName: 'Spanner shared core exact-shape comparison',
+    arm: ARM,
+    engine: ENGINE,
+    directPath: false,
+    environment,
+    repetitions: REPETITIONS,
+    durationMs: DURATION_MS,
+    warmupMs: WARMUP_MS,
+    shapes,
+  };
+  fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + '\n');
+  console.log(`\nSaved ${OUTPUT}`);
 }
 
-main().catch(err => {
-  console.error('Benchmark suite failed:', err);
-  process.exit(1);
+main().catch(error => {
+  console.error(error.stack || error);
+  process.exitCode = 1;
 });
