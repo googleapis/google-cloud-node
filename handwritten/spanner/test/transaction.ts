@@ -826,14 +826,15 @@ describe('Transaction', () => {
       });
 
       it('should pass along `gaxOpts`', () => {
-        const fakeQuery = Object.assign({gaxOptions: {}}, QUERY);
+        const fakeQuery = Object.assign({gaxOptions: {timeout: 1000}}, QUERY);
 
         snapshot.runStream(fakeQuery);
 
         const {gaxOpts, reqOpts} = REQUEST_STREAM.lastCall.args[0];
 
         assert.strictEqual(reqOpts.gaxOptions, undefined);
-        assert.strictEqual(gaxOpts, fakeQuery.gaxOptions);
+        assert.strictEqual(gaxOpts.timeout, 1000);
+        assert.strictEqual(typeof gaxOpts.otherArgs?.options?.reqId, 'number');
       });
 
       it('should update the `seqno` for each call', () => {

@@ -1640,10 +1640,6 @@ export class Snapshot extends EventEmitter {
           }
         }
 
-        if (!resumeToken && attempt === 1) {
-          performance.mark(`M2_gax_start_${currentReqId}`);
-        }
-
         return this.requestStream({
           client: 'SpannerClient',
           method: 'executeStreamingSql',

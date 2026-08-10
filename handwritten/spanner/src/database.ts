@@ -2914,7 +2914,7 @@ class Database extends common.GrpcServiceObject {
     const reqId = ++globalReqId;
     const m1Name = `M1_sdk_start_${reqId}`;
     const m2Name = `M2_gax_start_${reqId}`;
-    const m3Name = `M3_gax_end_${reqId}`;
+    const m3Name = `M3_sdk_data_recv_${reqId}`;
     const m4Name = `M4_sdk_end_${reqId}`;
 
     let m3Marked = false;
@@ -2929,24 +2929,28 @@ class Database extends common.GrpcServiceObject {
         ...this._traceConfig,
       },
       span => {
-        // [MARK M2]: GAX Entry Point (Right before calling runStream)
-        performance.mark(m2Name);
         this.runStream(query, options, reqId)
           .on('error', err => {
-            // Clear all 7 marks
+            // Clear all marks
             performance.clearMarks(`M1_sdk_start_${reqId}`);
             performance.clearMarks(`M2_gax_start_${reqId}`);
             performance.clearMarks(`M2_gcp_start_${reqId}`);
             performance.clearMarks(`M2_gcp_end_${reqId}`);
             performance.clearMarks(`M2_socket_write_${reqId}`);
-            performance.clearMarks(`M3_gax_end_${reqId}`);
+            performance.clearMarks(`M3_gcp_header_recv_${reqId}`);
+            performance.clearMarks(`M3_grpc_header_recv_${reqId}`);
+            performance.clearMarks(`M3_gax_header_recv_${reqId}`);
+            performance.clearMarks(`M3_grpc_data_recv_${reqId}`);
+            performance.clearMarks(`M3_gcp_data_recv_${reqId}`);
+            performance.clearMarks(`M3_gax_data_recv_${reqId}`);
+            performance.clearMarks(`M3_sdk_data_recv_${reqId}`);
             performance.clearMarks(`M4_sdk_end_${reqId}`);
             setSpanError(span, err);
             span.end();
             callback!(err as grpc.ServiceError, rows, stats, metadata);
           })
           .on('response', response => {
-            // [MARK M3]: First HTTP/2 Response Header Received
+            // [MARK M3]: First Data Row Chunk Received at SDK layer
             if (!m3Marked) {
               m3Marked = true;
               performance.mark(m3Name);
@@ -2961,35 +2965,87 @@ class Database extends common.GrpcServiceObject {
           })
           .on('end', () => {
             performance.mark(m4Name);
-            safeMeasure(`1_SDK_PreProcessing_${reqId}`, m1Name, m2Name);
+            // Total End-to-End Latency (M1 -> M4):
+            safeMeasure(`0_Total_E2E_${reqId}`, m1Name, m4Name);
+
+            // Symmetrical Outbound (Pre-Processing):
+            safeMeasure(`1a_SDK_PreProcessing_${reqId}`, m1Name, m2Name);
             safeMeasure(
-              `2_GAX_Overhead_${reqId}`,
+              `2a_GAX_PreProcessing_${reqId}`,
               m2Name,
               `M2_gcp_start_${reqId}`,
             );
             safeMeasure(
-              `3_grpc_gcp_Overhead_${reqId}`,
+              `3a_grpc_gcp_PreProcessing_${reqId}`,
               `M2_gcp_start_${reqId}`,
               `M2_gcp_end_${reqId}`,
             );
             safeMeasure(
-              `4_grpc_js_Cpu_${reqId}`,
+              `4a_grpc_js_PreProcessing_${reqId}`,
               `M2_gcp_end_${reqId}`,
               `M2_socket_write_${reqId}`,
             );
+
+            // External Network & Server Times:
             safeMeasure(
-              `5_True_External_${reqId}`,
+              `5a_External_Time_To_First_Header_${reqId}`,
               `M2_socket_write_${reqId}`,
+              `M3_gcp_header_recv_${reqId}`,
+            );
+            safeMeasure(
+              `5b_Server_Execution_To_First_Data_${reqId}`,
+              `M3_gcp_header_recv_${reqId}`,
+              `M3_gcp_data_recv_${reqId}`,
+            );
+            safeMeasure(
+              `5_True_External_Flight_To_Data_${reqId}`,
+              `M2_socket_write_${reqId}`,
+              `M3_gcp_data_recv_${reqId}`,
+            );
+
+            // Inbound Post-Processing (Pure Client CPU):
+            // 1. grpc-gcp intercepts the message FIRST from the inner network layer
+            safeMeasure(
+              `3b_grpc_gcp_PostProcessing_${reqId}`,
+              `M3_gcp_data_recv_${reqId}`,
+              `M3_grpc_data_recv_${reqId}`,
+            );
+            // 2. grpc-js stream emits to GAX, and GAX wraps/emits to Spanner
+            safeMeasure(
+              `2b_GAX_PostProcessing_${reqId}`,
+              `M3_grpc_data_recv_${reqId}`,
+              `M3_gax_data_recv_${reqId}`,
+            );
+            // 3. Spanner SDK (PartialResultStream) decodes the raw chunk into native JS types.
+            // We measure from GAX emitting data to the SDK emitting 'response' to isolate pure synchronous CPU decoding.
+            safeMeasure(
+              `1b_SDK_PostProcessing_${reqId}`,
+              `M3_gax_data_recv_${reqId}`,
               m3Name,
             );
-            safeMeasure(`6_SDK_PostProcessing_${reqId}`, m3Name, m4Name);
+            // 4. grpc-js protobuf decode happens in native HTTP/2 before M3_gcp_data_recv.
+            // We set it to 0ms here so the benchmark script structure is maintained.
+            safeMeasure(
+              `4b_grpc_js_PostProcessing_${reqId}`,
+              `M3_gcp_data_recv_${reqId}`,
+              `M3_gcp_data_recv_${reqId}`, // 0ms
+            );
+
             // Backward-compatible coarse metric:
             safeMeasure(`2_External_${reqId}`, m2Name, m3Name);
+
+            // Clear all marks
             performance.clearMarks(m1Name);
             performance.clearMarks(m2Name);
             performance.clearMarks(`M2_gcp_start_${reqId}`);
             performance.clearMarks(`M2_gcp_end_${reqId}`);
             performance.clearMarks(`M2_socket_write_${reqId}`);
+            performance.clearMarks(`M3_gcp_header_recv_${reqId}`);
+            performance.clearMarks(`M3_grpc_header_recv_${reqId}`);
+            performance.clearMarks(`M3_gax_header_recv_${reqId}`);
+            performance.clearMarks(`M3_grpc_data_recv_${reqId}`);
+            performance.clearMarks(`M3_gcp_data_recv_${reqId}`);
+            performance.clearMarks(`M3_gax_data_recv_${reqId}`);
             performance.clearMarks(m3Name);
             performance.clearMarks(m4Name);
             span.end();
