@@ -1,0 +1,15 @@
+goos: linux
+goarch: amd64
+pkg: cloud.google.com/go/spanner-native-core
+cpu: Intel(R) Xeon(R) CPU @ 2.30GHz
+BenchmarkPartialResultSetDecode/reflection         	    2638	    464035 ns/op	  113640 B/op	    3012 allocs/op
+BenchmarkPartialResultSetDecode/reflection         	    2521	    465273 ns/op	  113640 B/op	    3012 allocs/op
+BenchmarkPartialResultSetDecode/reflection         	    2598	    460684 ns/op	  113640 B/op	    3012 allocs/op
+BenchmarkPartialResultSetDecode/vtprotobuf-safe    	    6066	    203936 ns/op	  113640 B/op	    3012 allocs/op
+BenchmarkPartialResultSetDecode/vtprotobuf-safe    	    5914	    203317 ns/op	  113640 B/op	    3012 allocs/op
+BenchmarkPartialResultSetDecode/vtprotobuf-safe    	    5918	    203845 ns/op	  113640 B/op	    3012 allocs/op
+BenchmarkPartialResultSetDecode/vtprotobuf-raw-values         	   39627	     30301 ns/op	   19072 B/op	       1 allocs/op
+BenchmarkPartialResultSetDecode/vtprotobuf-raw-values         	   39229	     30394 ns/op	   19072 B/op	       1 allocs/op
+BenchmarkPartialResultSetDecode/vtprotobuf-raw-values         	   39643	     30417 ns/op	   19072 B/op	       1 allocs/op
+PASS
+ok  	cloud.google.com/go/spanner-native-core	12.009s

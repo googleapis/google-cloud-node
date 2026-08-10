@@ -563,7 +563,7 @@
       "bytesPerOp": 19072,
       "allocsPerOp": 1
     },
-    "sourceFile": "decode_benchmark.log"
+    "sourceFile": "decode_benchmark.txt"
   },
   "correctness": {
     "method": "cmp --silent on JSON byte captures for A, safe VT, and raw VT",
@@ -612,7 +612,7 @@
         "byteIdentical": true
       }
     ],
-    "sourceFile": "correctness_byte_diff.log"
+    "sourceFile": "correctness_byte_diff.txt"
   },
   "conclusion": {
     "gapClosedAgainstCommittedRustReferenceAt1000RowsConcurrency16": true,

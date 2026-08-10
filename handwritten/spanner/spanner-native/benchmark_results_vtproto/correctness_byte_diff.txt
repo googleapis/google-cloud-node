@@ -1,0 +1,6 @@
+PASS rows=1 concurrency=1 arm-a==arm-safe==raw bytes=92 sha256=1f25fc96e0c67fd697822d2d8c491a3f5a53f431730bbc95f7f07dac4f925e4e
+PASS rows=1 concurrency=16 arm-a==arm-safe==raw bytes=1457 sha256=12550c44d57726bc2ff4df497211b80184657a91378ef2ddab976ded4aa8493c
+PASS rows=100 concurrency=1 arm-a==arm-safe==raw bytes=8993 sha256=642c12c025c33b96a9ad3faf2200f611540ccba0a77f6bfd450ea80ed43ba0f8
+PASS rows=100 concurrency=16 arm-a==arm-safe==raw bytes=143873 sha256=3cf444714b2adba90a9551ab53b4d9fe802e400345ac904817a6ebb415889823
+PASS rows=1000 concurrency=1 arm-a==arm-safe==raw bytes=90893 sha256=2cc04a5a783efb98658f395d2ab9be61c5c34d28e56066290173b8bb3c288250
+PASS rows=1000 concurrency=16 arm-a==arm-safe==raw bytes=1454273 sha256=73fab9bad057c5a9d10bba2cede4481cf0e5860c8ef8748f5fe84da2aa2fdc05

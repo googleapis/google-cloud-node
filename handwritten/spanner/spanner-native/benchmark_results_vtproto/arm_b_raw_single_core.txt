@@ -1,0 +1,58 @@
+fatal: not a git repository (or any of the parent directories): .git
+====================================================================================================
+Arm raw: go; p95 latency improvement versus paired Node.js baseline
+{
+  "hostname": "irahul-test",
+  "machineShape": "n1-standard-1",
+  "vcpuCount": 1,
+  "platform": "linux-x64",
+  "nodeVersion": "v20.20.2",
+  "goVersion": "go version go1.25.3 linux/amd64",
+  "armCommitSha": "d134e5f49c",
+  "armTreeCleanAtBuild": "true",
+  "harnessCommitSha": "d134e5f49c",
+  "harnessTrackedTreeClean": false,
+  "targetDatabase": "projects/span-cloud-testing/instances/irahul-load-test/databases/db",
+  "queryTemplate": "SELECT Key, SUBSTR(Value, 1, 80) AS Value FROM T ORDER BY Key LIMIT {rows}",
+  "directPath": {
+    "enabled": false,
+    "enableVariablesAbsentAtProcessStart": true,
+    "googleCloudDisableDirectPath": "true",
+    "disableDirectPath": "true",
+    "transport": "Go explicit GFE grpc.Dial path"
+  }
+}
+====================================================================================================
+SPANNER_GO_RUNTIME transport=gfe direct_path=false endpoint=spanner.googleapis.com:443 codec=vtprotobuf-raw-values disable_direct_path=true
+
+rows=1 concurrency=1: warmup
+run=1 js.p95=13.53ms native.p95=7.52ms improvement=44.38%
+run=2 js.p95=10.39ms native.p95=8.02ms improvement=22.82%
+run=3 js.p95=13.15ms native.p95=7.70ms improvement=41.46%
+
+rows=1 concurrency=16: warmup
+run=1 js.p95=40.14ms native.p95=9.40ms improvement=76.59%
+run=2 js.p95=39.08ms native.p95=9.46ms improvement=75.81%
+run=3 js.p95=38.49ms native.p95=9.14ms improvement=76.25%
+
+rows=100 concurrency=1: warmup
+run=1 js.p95=17.59ms native.p95=7.98ms improvement=54.65%
+run=2 js.p95=14.08ms native.p95=8.04ms improvement=42.92%
+run=3 js.p95=12.57ms native.p95=8.20ms improvement=34.74%
+
+rows=100 concurrency=16: warmup
+run=1 js.p95=60.51ms native.p95=12.12ms improvement=79.97%
+run=2 js.p95=58.70ms native.p95=11.62ms improvement=80.20%
+run=3 js.p95=59.01ms native.p95=11.91ms improvement=79.81%
+
+rows=1000 concurrency=1: warmup
+run=1 js.p95=29.44ms native.p95=12.06ms improvement=59.05%
+run=2 js.p95=29.44ms native.p95=12.51ms improvement=57.49%
+run=3 js.p95=29.64ms native.p95=12.88ms improvement=56.55%
+
+rows=1000 concurrency=16: warmup
+run=1 js.p95=404.49ms native.p95=34.59ms improvement=91.45%
+run=2 js.p95=403.29ms native.p95=34.72ms improvement=91.39%
+run=3 js.p95=403.18ms native.p95=34.35ms improvement=91.48%
+
+Saved /home/irahul/spanner-gocore-vtproto-q4/results/single-core/raw.json

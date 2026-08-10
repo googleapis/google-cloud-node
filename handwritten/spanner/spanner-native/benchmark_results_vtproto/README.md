@@ -64,7 +64,7 @@ Safe VT removes reflection work but preserves the `structpb.Value` graph, explai
 
 ## Correctness
 
-A, safe VT, and raw VT outputs were captured with the same deterministic query for all six row/concurrency shapes. `cmp --silent` passed for every pair. `correctness_byte_diff.log` records byte counts and SHA-256 hashes. The captured real `PartialResultSet` unit test also proves direct `UnmarshalVT` equals reflection decode and remains valid after its input buffer is overwritten.
+A, safe VT, and raw VT outputs were captured with the same deterministic query for all six row/concurrency shapes. `cmp --silent` passed for every pair. `correctness_byte_diff.txt` records byte counts and SHA-256 hashes. The captured real `PartialResultSet` unit test also proves direct `UnmarshalVT` equals reflection decode and remains valid after its input buffer is overwritten.
 
 ## Conclusion
 
