@@ -25,7 +25,7 @@ function scanDirForPackages(dirPath) {
     if (isExcluded(fullPath)) continue;
 
     if (entry.isDirectory()) {
-      if (entry.name !== 'node_modules') {
+      if (entry.name !== 'node_modules' && !entry.name.startsWith('.')) {
         scanDirForPackages(fullPath);
       }
     } else if (entry.name === 'package.json') {
