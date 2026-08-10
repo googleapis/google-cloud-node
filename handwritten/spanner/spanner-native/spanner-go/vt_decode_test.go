@@ -99,4 +99,23 @@ func BenchmarkPartialResultSetDecode(b *testing.B) {
 			}
 		}
 	})
+	b.Run("vtprotobuf-raw-values", func(b *testing.B) {
+		b.ReportAllocs()
+		for i := 0; i < b.N; i++ {
+			raw, err := decodePartialResultSetRaw(wire)
+			if err != nil {
+				b.Fatal(err)
+			}
+			count := 0
+			if err := raw.forEachValue(func([]byte) error {
+				count++
+				return nil
+			}); err != nil {
+				b.Fatal(err)
+			}
+			if count != len(values) {
+				b.Fatalf("value count = %d, want %d", count, len(values))
+			}
+		}
+	})
 }

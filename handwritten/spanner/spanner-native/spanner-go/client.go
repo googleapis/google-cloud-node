@@ -15,6 +15,7 @@ import (
 	"google.golang.org/api/option"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/metadata"
 )
 
 var transportDiagnosticOnce sync.Once
@@ -130,7 +131,7 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 
 	transportDiagnosticOnce.Do(func() {
 		fmt.Fprintf(os.Stderr,
-			"SPANNER_GO_RUNTIME transport=gfe direct_path=false endpoint=%s codec=vtprotobuf-safe disable_direct_path=%s\n",
+			"SPANNER_GO_RUNTIME transport=gfe direct_path=false endpoint=%s codec=vtprotobuf-raw-values disable_direct_path=%s\n",
 			spannerEndpoint, os.Getenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH"))
 	})
 
@@ -155,6 +156,51 @@ func (c *CoreClient) ExecuteStreamingSql(ctx context.Context, req *spannerpb.Exe
 	}
 	spannerClient := spannerpb.NewSpannerClient(conn)
 	return spannerClient.ExecuteStreamingSql(ctx, req)
+}
+
+type rawExecuteStreamingSQLClient interface {
+	Header() (metadata.MD, error)
+	Trailer() metadata.MD
+	RecvRaw() (rawPartialResultSet, error)
+}
+
+type rawExecuteStreamingSQLReceiver struct {
+	spannerpb.Spanner_ExecuteStreamingSqlClient
+	codec *rawVTCodec
+}
+
+func (r *rawExecuteStreamingSQLReceiver) RecvRaw() (rawPartialResultSet, error) {
+	if _, err := r.Spanner_ExecuteStreamingSqlClient.Recv(); err != nil {
+		_, _ = r.codec.take()
+		return rawPartialResultSet{}, err
+	}
+	raw, ok := r.codec.take()
+	if !ok {
+		return rawPartialResultSet{}, fmt.Errorf("raw PartialResultSet missing after successful gRPC receive")
+	}
+	return raw, nil
+}
+
+// ExecuteStreamingSqlRaw installs one raw codec per stream. DirectPath is
+// intentionally rejected: this experiment must use the explicit GFE path,
+// and the GAPIC-owned connection cannot carry the per-stream raw codec state.
+func (c *CoreClient) ExecuteStreamingSqlRaw(ctx context.Context, req *spannerpb.ExecuteSqlRequest) (rawExecuteStreamingSQLClient, error) {
+	if c.useGapic || c.gapicClient != nil {
+		return nil, fmt.Errorf("raw streaming decode requires DirectPath to be disabled")
+	}
+	conn := c.GetConn()
+	if conn == nil {
+		return nil, fmt.Errorf("no active gRPC connection available")
+	}
+	codec := new(rawVTCodec)
+	stream, err := spannerpb.NewSpannerClient(conn).ExecuteStreamingSql(ctx, req, grpc.ForceCodec(codec))
+	if err != nil {
+		return nil, err
+	}
+	return &rawExecuteStreamingSQLReceiver{
+		Spanner_ExecuteStreamingSqlClient: stream,
+		codec:                             codec,
+	}, nil
 }
 
 // GetConn returns a connection from the pool via round-robin distribution.

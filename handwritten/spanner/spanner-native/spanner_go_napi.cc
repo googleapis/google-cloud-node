@@ -24,12 +24,19 @@ typedef struct {
 } CSpannerCell;
 
 typedef struct {
+    const char* wire_val;
+    uint32_t wire_len;
+} CSpannerRawValue;
+
+typedef struct {
     int format; // 0 = JSON string, 1 = Direct Native Cells
     char* json_rows;
     CSpannerCell* cells;
     int row_count;
     int col_count;
     char* string_arena;
+    CSpannerRawValue* raw_values;
+    char* raw_arena;
     char* server_timing;
     int attempt_count;
     char* error_msg;
@@ -67,6 +74,8 @@ extern "C" void OnGoStreamData(void* user_data, CSpannerBatch* batch) {
         if (batch) {
             if (batch->cells) free(batch->cells);
             if (batch->string_arena) free(batch->string_arena);
+            if (batch->raw_values) free(batch->raw_values);
+            if (batch->raw_arena) free(batch->raw_arena);
             if (batch->json_rows) free(batch->json_rows);
             if (batch->server_timing) free(batch->server_timing);
             if (batch->error_msg) free(batch->error_msg);
@@ -76,6 +85,239 @@ extern "C" void OnGoStreamData(void* user_data, CSpannerBatch* batch) {
     }
 
     napi_call_threadsafe_function(ctx->tsfn, batch, napi_tsfn_nonblocking);
+}
+
+static bool ReadRawVarint(const uint8_t* data, size_t len, size_t* index, uint64_t* value) {
+    uint64_t result = 0;
+    for (unsigned shift = 0; shift < 64; shift += 7) {
+        if (*index >= len) return false;
+        uint8_t byte = data[(*index)++];
+        result |= static_cast<uint64_t>(byte & 0x7f) << shift;
+        if (byte < 0x80) {
+            *value = result;
+            return true;
+        }
+    }
+    return false;
+}
+
+static bool ReadRawBytes(
+    const uint8_t* data,
+    size_t len,
+    size_t* index,
+    const uint8_t** field,
+    size_t* field_len
+) {
+    uint64_t raw_len = 0;
+    if (!ReadRawVarint(data, len, index, &raw_len)) return false;
+    if (raw_len > len - *index) return false;
+    *field = data + *index;
+    *field_len = static_cast<size_t>(raw_len);
+    *index += *field_len;
+    return true;
+}
+
+static bool SkipRawField(const uint8_t* data, size_t len, size_t* index, unsigned wire_type) {
+    switch (wire_type) {
+        case 0: {
+            uint64_t ignored = 0;
+            return ReadRawVarint(data, len, index, &ignored);
+        }
+        case 1:
+            if (len - *index < 8) return false;
+            *index += 8;
+            return true;
+        case 2: {
+            const uint8_t* ignored = nullptr;
+            size_t ignored_len = 0;
+            return ReadRawBytes(data, len, index, &ignored, &ignored_len);
+        }
+        case 5:
+            if (len - *index < 4) return false;
+            *index += 4;
+            return true;
+        default:
+            return false;
+    }
+}
+
+static bool DecodeRawValue(
+    napi_env env,
+    const uint8_t* data,
+    size_t len,
+    napi_value* result,
+    unsigned depth
+);
+
+static bool DecodeRawList(
+    napi_env env,
+    const uint8_t* data,
+    size_t len,
+    napi_value* result,
+    unsigned depth
+) {
+    if (napi_create_array(env, result) != napi_ok) return false;
+    uint32_t output_index = 0;
+    for (size_t index = 0; index < len;) {
+        uint64_t tag = 0;
+        if (!ReadRawVarint(data, len, &index, &tag)) return false;
+        unsigned field_number = static_cast<unsigned>(tag >> 3);
+        unsigned wire_type = static_cast<unsigned>(tag & 7);
+        if (field_number == 1) {
+            if (wire_type != 2) return false;
+            const uint8_t* value_wire = nullptr;
+            size_t value_len = 0;
+            if (!ReadRawBytes(data, len, &index, &value_wire, &value_len)) return false;
+            napi_value value;
+            if (!DecodeRawValue(env, value_wire, value_len, &value, depth + 1)) return false;
+            if (napi_set_element(env, *result, output_index++, value) != napi_ok) return false;
+        } else if (!SkipRawField(data, len, &index, wire_type)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+static bool DecodeRawStructEntry(
+    napi_env env,
+    napi_value object,
+    const uint8_t* data,
+    size_t len,
+    unsigned depth
+) {
+    const uint8_t* key = nullptr;
+    size_t key_len = 0;
+    const uint8_t* value_wire = nullptr;
+    size_t value_len = 0;
+    for (size_t index = 0; index < len;) {
+        uint64_t tag = 0;
+        if (!ReadRawVarint(data, len, &index, &tag)) return false;
+        unsigned field_number = static_cast<unsigned>(tag >> 3);
+        unsigned wire_type = static_cast<unsigned>(tag & 7);
+        if (field_number == 1 || field_number == 2) {
+            if (wire_type != 2) return false;
+            const uint8_t* field = nullptr;
+            size_t field_len = 0;
+            if (!ReadRawBytes(data, len, &index, &field, &field_len)) return false;
+            if (field_number == 1) {
+                key = field;
+                key_len = field_len;
+            } else {
+                value_wire = field;
+                value_len = field_len;
+            }
+        } else if (!SkipRawField(data, len, &index, wire_type)) {
+            return false;
+        }
+    }
+
+    napi_value key_value;
+    const char* key_chars = key == nullptr ? "" : reinterpret_cast<const char*>(key);
+    if (napi_create_string_utf8(env, key_chars, key_len, &key_value) != napi_ok) return false;
+    napi_value value;
+    if (value_wire == nullptr) {
+        if (napi_get_null(env, &value) != napi_ok) return false;
+    } else if (!DecodeRawValue(env, value_wire, value_len, &value, depth + 1)) {
+        return false;
+    }
+    return napi_set_property(env, object, key_value, value) == napi_ok;
+}
+
+static bool DecodeRawStruct(
+    napi_env env,
+    const uint8_t* data,
+    size_t len,
+    napi_value* result,
+    unsigned depth
+) {
+    if (napi_create_object(env, result) != napi_ok) return false;
+    for (size_t index = 0; index < len;) {
+        uint64_t tag = 0;
+        if (!ReadRawVarint(data, len, &index, &tag)) return false;
+        unsigned field_number = static_cast<unsigned>(tag >> 3);
+        unsigned wire_type = static_cast<unsigned>(tag & 7);
+        if (field_number == 1) {
+            if (wire_type != 2) return false;
+            const uint8_t* entry = nullptr;
+            size_t entry_len = 0;
+            if (!ReadRawBytes(data, len, &index, &entry, &entry_len)) return false;
+            if (!DecodeRawStructEntry(env, *result, entry, entry_len, depth + 1)) return false;
+        } else if (!SkipRawField(data, len, &index, wire_type)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+static bool DecodeRawValue(
+    napi_env env,
+    const uint8_t* data,
+    size_t len,
+    napi_value* result,
+    unsigned depth
+) {
+    if (depth > 64) return false;
+    enum ValueKind { VALUE_UNSET, VALUE_NULL, VALUE_NUMBER, VALUE_STRING, VALUE_BOOL, VALUE_STRUCT, VALUE_LIST };
+    ValueKind kind = VALUE_UNSET;
+    uint64_t scalar = 0;
+    const uint8_t* nested = nullptr;
+    size_t nested_len = 0;
+
+    for (size_t index = 0; index < len;) {
+        uint64_t tag = 0;
+        if (!ReadRawVarint(data, len, &index, &tag)) return false;
+        unsigned field_number = static_cast<unsigned>(tag >> 3);
+        unsigned wire_type = static_cast<unsigned>(tag & 7);
+        switch (field_number) {
+            case 1:
+            case 4:
+                if (wire_type != 0 || !ReadRawVarint(data, len, &index, &scalar)) return false;
+                kind = field_number == 1 ? VALUE_NULL : VALUE_BOOL;
+                break;
+            case 2:
+                if (wire_type != 1 || len - index < 8) return false;
+                scalar = 0;
+                for (unsigned i = 0; i < 8; ++i) {
+                    scalar |= static_cast<uint64_t>(data[index + i]) << (8 * i);
+                }
+                index += 8;
+                kind = VALUE_NUMBER;
+                break;
+            case 3:
+            case 5:
+            case 6:
+                if (wire_type != 2 || !ReadRawBytes(data, len, &index, &nested, &nested_len)) return false;
+                kind = field_number == 3 ? VALUE_STRING : (field_number == 5 ? VALUE_STRUCT : VALUE_LIST);
+                break;
+            default:
+                if (!SkipRawField(data, len, &index, wire_type)) return false;
+                break;
+        }
+    }
+
+    switch (kind) {
+        case VALUE_NUMBER: {
+            double number = 0;
+            static_assert(sizeof(number) == sizeof(scalar), "double must be 64-bit");
+            std::memcpy(&number, &scalar, sizeof(number));
+            return napi_create_double(env, number, result) == napi_ok;
+        }
+        case VALUE_STRING: {
+            // N-API creates a V8-owned string; no raw wire pointer survives.
+            const char* chars = nested == nullptr ? "" : reinterpret_cast<const char*>(nested);
+            return napi_create_string_utf8(env, chars, nested_len, result) == napi_ok;
+        }
+        case VALUE_BOOL:
+            return napi_get_boolean(env, scalar != 0, result) == napi_ok;
+        case VALUE_STRUCT:
+            return DecodeRawStruct(env, nested, nested_len, result, depth + 1);
+        case VALUE_LIST:
+            return DecodeRawList(env, nested, nested_len, result, depth + 1);
+        case VALUE_NULL:
+        case VALUE_UNSET:
+        default:
+            return napi_get_null(env, result) == napi_ok;
+    }
 }
 
 // CallJsHandler runs on the V8 main event loop thread
@@ -146,6 +388,31 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
                     }
                     napi_set_element(env, rows_val, r, row_arr);
                 }
+            } else if (batch->format == 2 && batch->raw_values != nullptr && batch->row_count > 0 && batch->col_count > 0) {
+                // Raw protobuf Values are decoded on the V8 thread. Every
+                // N-API constructor copies scalar/string data into V8-owned
+                // values before the C arena is freed below.
+                const int row_count = batch->row_count;
+                const int col_count = batch->col_count;
+                napi_create_array_with_length(env, row_count, &rows_val);
+                for (int r = 0; r < row_count; ++r) {
+                    napi_value row_arr;
+                    napi_create_array_with_length(env, col_count, &row_arr);
+                    for (int c = 0; c < col_count; ++c) {
+                        const CSpannerRawValue& raw = batch->raw_values[r * col_count + c];
+                        napi_value js_cell;
+                        bool decoded = raw.wire_val != nullptr && DecodeRawValue(
+                            env,
+                            reinterpret_cast<const uint8_t*>(raw.wire_val),
+                            raw.wire_len,
+                            &js_cell,
+                            0
+                        );
+                        if (!decoded) napi_get_null(env, &js_cell);
+                        napi_set_element(env, row_arr, c, js_cell);
+                    }
+                    napi_set_element(env, rows_val, r, row_arr);
+                }
             } else if (batch->format == 0 && batch->json_rows != nullptr) {
                 // LEGACY JSON.PARSE ROUTE (OPT-IN VIA SPANNER_GO_DIRECT_DESERIALIZATION=false)
                 napi_value json_global, parse_fn, json_str;
@@ -180,6 +447,8 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
     if (batch != nullptr) {
         if (batch->cells != nullptr) free(batch->cells);
         if (batch->string_arena != nullptr) free(batch->string_arena);
+        if (batch->raw_values != nullptr) free(batch->raw_values);
+        if (batch->raw_arena != nullptr) free(batch->raw_arena);
         if (batch->json_rows != nullptr) free(batch->json_rows);
         if (batch->server_timing != nullptr) free(batch->server_timing);
         if (batch->error_msg != nullptr) free(batch->error_msg);
