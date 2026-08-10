@@ -18,12 +18,12 @@
 // needs to be propagated to all baselines.
 // Usage: node build/tools/update-baselines.js
 
-import {exec} from 'child_process';
+import { exec } from 'child_process';
 import * as path from 'path';
-import {promisify} from 'util';
-import {existsSync} from 'fs';
+import { promisify } from 'util';
+import { existsSync } from 'fs';
 import * as fsp from 'fs/promises';
-import {readdir, stat, symlink} from 'fs/promises';
+import { readdir, stat, symlink } from 'fs/promises';
 
 const execp = promisify(exec);
 
@@ -43,7 +43,7 @@ async function copyBaseline(library: string, root: string, directory = '.') {
   const start = path.join(root, directory);
   const targetDirectory = path.join(getBaselineDirectory(library), directory);
   if (!existsSync(targetDirectory)) {
-    await fsp.mkdir(targetDirectory, {recursive: true});
+    await fsp.mkdir(targetDirectory, { recursive: true });
   }
   const files = await readdir(start);
   for (const file of files) {
@@ -58,13 +58,13 @@ async function copyBaseline(library: string, root: string, directory = '.') {
       // (package.json.baseline is a symlink to package.json to make renovate bot happy)
       if (relativePath.endsWith(`${path.sep}package.json`)) {
         const packageJson = baseline.substring(0, baseline.lastIndexOf('.'));
-        await fsp.cp(absolutePath, packageJson, {recursive: true});
+        await fsp.cp(absolutePath, packageJson, { recursive: true });
         const dirname = path.dirname(packageJson);
         process.chdir(dirname);
         await symlink('package.json', 'package.json.baseline');
         process.chdir(cwd);
       } else {
-        await fsp.cp(absolutePath, baseline, {recursive: true});
+        await fsp.cp(absolutePath, baseline, { recursive: true });
       }
       console.log(`    - ${relativePath}`);
     }
@@ -77,7 +77,7 @@ async function main() {
     file.match(resultPrefix),
   );
   for (const oldFolder of oldFolders) {
-    await fsp.rm(oldFolder, {recursive: true});
+    await fsp.rm(oldFolder, { recursive: true });
   }
 
   // generate test output
@@ -89,6 +89,7 @@ async function main() {
   } catch (err) {
     console.log("Tests failed - that's OK, will update baselines.");
   }
+
 
   // get a list of baselines
   const files = await readdir(root);
@@ -106,7 +107,7 @@ async function main() {
     console.log(`Updating baseline for ${library}...`);
     console.log(`  - rm -rf "${baselineDir}"...`);
     try {
-      await fsp.rm(baselineDir, {recursive: true});
+      await fsp.rm(baselineDir, { recursive: true });
     } catch (err) {
       console.log(
         `Not removing baseline ${baselineDir} because it does not exist`,
