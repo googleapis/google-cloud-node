@@ -20,6 +20,7 @@ import (
 
 	spannerpb "cloud.google.com/go/spanner/apiv1/spannerpb"
 	vtstructpb "github.com/planetscale/vtprotobuf/types/known/structpb"
+	"google.golang.org/grpc/mem"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/structpb"
 )
@@ -113,7 +114,7 @@ func TestRawVTCodecTransfersPartialResultSetWithoutMaterializingValues(t *testin
 	}
 	codec := new(rawVTCodec)
 	destination := new(spannerpb.PartialResultSet)
-	if err := codec.Unmarshal(wire, destination); err != nil {
+	if err := codec.Unmarshal(mem.BufferSlice{mem.SliceBuffer(wire)}, destination); err != nil {
 		t.Fatal(err)
 	}
 	if len(destination.Values) != 0 {

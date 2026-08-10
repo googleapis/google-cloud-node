@@ -23,11 +23,12 @@ import (
 	"github.com/planetscale/vtprotobuf/protohelpers"
 	vtstructpb "github.com/planetscale/vtprotobuf/types/known/structpb"
 	"google.golang.org/grpc/encoding"
+	"google.golang.org/grpc/mem"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/structpb"
 )
 
-var _ encoding.Codec = (*rawVTCodec)(nil)
+var _ encoding.CodecV2 = (*rawVTCodec)(nil)
 
 // rawVTCodec is created per ExecuteStreamingSql stream. Recv calls are
 // serialized by gRPC, so pending needs no synchronization.
@@ -36,33 +37,38 @@ type rawVTCodec struct {
 	hasPending bool
 }
 
-func (*rawVTCodec) Marshal(v any) ([]byte, error) {
-	msg, ok := v.(proto.Message)
-	if !ok {
-		return nil, fmt.Errorf("spanner raw vt codec: cannot marshal %T", v)
-	}
-	return proto.Marshal(msg)
+func (*rawVTCodec) Marshal(v any) (mem.BufferSlice, error) {
+	return (vtSafeCodec{}).Marshal(v)
 }
 
-func (c *rawVTCodec) Unmarshal(data []byte, v any) error {
-	if msg, ok := v.(*spannerpb.PartialResultSet); ok {
+func (c *rawVTCodec) Unmarshal(data mem.BufferSlice, v any) error {
+	buf := data.MaterializeToBuffer(mem.DefaultBufferPool())
+	defer buf.Free()
+	wire := buf.ReadOnlyData()
+
+	switch msg := v.(type) {
+	case *spannerpb.PartialResultSet:
 		proto.Reset(msg)
-		raw, err := decodePartialResultSetRaw(data)
+		raw, err := decodePartialResultSetRaw(wire)
 		if err != nil {
 			return err
 		}
 		c.pending = raw
 		c.hasPending = true
 		return nil
-	}
-	msg, ok := v.(proto.Message)
-	if !ok {
+	case vtUnmarshaler:
+		if pm, ok := v.(proto.Message); ok {
+			proto.Reset(pm)
+		}
+		return msg.UnmarshalVT(wire)
+	case proto.Message:
+		return proto.Unmarshal(wire, msg)
+	default:
 		return fmt.Errorf("spanner raw vt codec: cannot unmarshal into %T", v)
 	}
-	return proto.Unmarshal(data, msg)
 }
 
-func (*rawVTCodec) Name() string { return "proto" }
+func (*rawVTCodec) Name() string { return "" }
 
 func (c *rawVTCodec) take() (rawPartialResultSet, bool) {
 	if !c.hasPending {

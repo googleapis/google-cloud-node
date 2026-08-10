@@ -15,14 +15,46 @@
 package main
 
 import (
+	"os"
 	"strings"
 	"testing"
 
 	spannerpb "cloud.google.com/go/spanner/apiv1/spannerpb"
+	"google.golang.org/grpc/mem"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/structpb"
 )
+
+func TestUnmarshalVTRealPartialResultSet(t *testing.T) {
+	wire, err := os.ReadFile("testdata/partial_result_set_real.bin")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	want := new(spannerpb.PartialResultSet)
+	if err := proto.Unmarshal(wire, want); err != nil {
+		t.Fatal(err)
+	}
+	got := new(spannerpb.PartialResultSet)
+	if err := got.UnmarshalVT(wire); err != nil {
+		t.Fatal(err)
+	}
+	if !proto.Equal(got, want) {
+		t.Fatalf("real response decoded differently:\nvt: %v\nreflection: %v", got, want)
+	}
+	if len(got.GetValues()) == 0 {
+		t.Fatal("captured real response has no values")
+	}
+
+	value := got.GetValues()[len(got.GetValues())-1].GetStringValue()
+	for i := range wire {
+		wire[i] = 0xff
+	}
+	if gotValue := got.GetValues()[len(got.GetValues())-1].GetStringValue(); gotValue != value {
+		t.Fatalf("safe decode retained receive buffer: got %q, want %q", gotValue, value)
+	}
+}
 
 func TestVTSafeCodecUsesGeneratedPartialResultSetDecoder(t *testing.T) {
 	if _, ok := any(new(spannerpb.PartialResultSet)).(interface {
@@ -40,7 +72,7 @@ func TestVTSafeCodecUsesGeneratedPartialResultSetDecoder(t *testing.T) {
 	}
 
 	got := new(spannerpb.PartialResultSet)
-	if err := (vtSafeCodec{}).Unmarshal(wire, got); err != nil {
+	if err := (vtSafeCodec{}).Unmarshal(mem.BufferSlice{mem.SliceBuffer(wire)}, got); err != nil {
 		t.Fatal(err)
 	}
 	for i := range wire {
@@ -65,8 +97,8 @@ func TestVTSafeCodecReflectionFallback(t *testing.T) {
 	if !proto.Equal(got, want) {
 		t.Fatalf("fallback round trip = %v, want %v", got, want)
 	}
-	if name := codec.Name(); name != "proto" {
-		t.Fatalf("codec name = %q, want %q", name, "proto")
+	if name := codec.Name(); name != "" {
+		t.Fatalf("codec name = %q, want empty", name)
 	}
 }
 
@@ -92,9 +124,10 @@ func BenchmarkPartialResultSetDecode(b *testing.B) {
 	b.Run("vtprotobuf-safe", func(b *testing.B) {
 		b.ReportAllocs()
 		codec := vtSafeCodec{}
+		buffers := mem.BufferSlice{mem.SliceBuffer(wire)}
 		for i := 0; i < b.N; i++ {
 			msg := new(spannerpb.PartialResultSet)
-			if err := codec.Unmarshal(wire, msg); err != nil {
+			if err := codec.Unmarshal(buffers, msg); err != nil {
 				b.Fatal(err)
 			}
 		}

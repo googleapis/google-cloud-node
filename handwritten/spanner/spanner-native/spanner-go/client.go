@@ -114,7 +114,6 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 		grpc.WithDefaultCallOptions(
 			grpc.MaxCallRecvMsgSize(100*1024*1024), // 100MB
 			grpc.MaxCallSendMsgSize(100*1024*1024),
-			grpc.ForceCodec(vtSafeCodec{}),
 		),
 	}
 
@@ -155,7 +154,7 @@ func (c *CoreClient) ExecuteStreamingSql(ctx context.Context, req *spannerpb.Exe
 		return nil, fmt.Errorf("no active gRPC connection available")
 	}
 	spannerClient := spannerpb.NewSpannerClient(conn)
-	return spannerClient.ExecuteStreamingSql(ctx, req)
+	return spannerClient.ExecuteStreamingSql(ctx, req, grpc.ForceCodecV2(vtSafeCodec{}))
 }
 
 type rawExecuteStreamingSQLClient interface {
@@ -193,7 +192,7 @@ func (c *CoreClient) ExecuteStreamingSqlRaw(ctx context.Context, req *spannerpb.
 		return nil, fmt.Errorf("no active gRPC connection available")
 	}
 	codec := new(rawVTCodec)
-	stream, err := spannerpb.NewSpannerClient(conn).ExecuteStreamingSql(ctx, req, grpc.ForceCodec(codec))
+	stream, err := spannerpb.NewSpannerClient(conn).ExecuteStreamingSql(ctx, req, grpc.ForceCodecV2(codec))
 	if err != nil {
 		return nil, err
 	}
