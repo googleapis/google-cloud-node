@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.17.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.16.0...reports-v0.17.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
 ## [0.16.0](https://github.com/googleapis/google-cloud-node/compare/reports-v0.15.0...reports-v0.16.0) (2026-07-07)
 
 

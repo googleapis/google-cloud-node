@@ -270,6 +270,7 @@ export class IngestionServiceClient {
     const ingestionServiceStubMethods = [
       'ingestAudienceMembers',
       'removeAudienceMembers',
+      'removeAllAudienceMembers',
       'ingestEvents',
       'ingestAdEvents',
       'retrieveRequestStatus',
@@ -711,6 +712,152 @@ export class IngestionServiceClient {
       });
   }
   /**
+   * Removes all audience members from the provided destinations.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number[]} request.destinations
+   *   Required. The list of destinations to remove the users from.
+   * @param {google.protobuf.Timestamp} [request.removeAsOfTime]
+   *   Optional. The remove as of time. If set, only audience members last added
+   *   before this time will be removed. If not set, it defaults to current time.
+   *   The remove as of time must not be in the future.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. For testing purposes. If `true`, the request is validated but not
+   *   executed. Only errors are returned, not results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.datamanager.v1.RemoveAllAudienceMembersResponse|RemoveAllAudienceMembersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/ingestion_service.remove_all_audience_members.js</caption>
+   * region_tag:datamanager_v1_generated_IngestionService_RemoveAllAudienceMembers_async
+   */
+  removeAllAudienceMembers(
+    request?: protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse,
+      (
+        | protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  removeAllAudienceMembers(
+    request: protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse,
+      | protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  removeAllAudienceMembers(
+    request: protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest,
+    callback: Callback<
+      protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse,
+      | protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  removeAllAudienceMembers(
+    request?: protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse,
+          | protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse,
+      | protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse,
+      (
+        | protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('removeAllAudienceMembers request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse,
+          | protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('removeAllAudienceMembers response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .removeAllAudienceMembers(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersResponse,
+          (
+            | protos.google.ads.datamanager.v1.IRemoveAllAudienceMembersRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('removeAllAudienceMembers response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
    * Uploads a list of
    * {@link protos.google.ads.datamanager.v1.Event|Event} resources from
    * the provided {@link protos.google.ads.datamanager.v1.Destination|Destination}.
@@ -871,8 +1018,8 @@ export class IngestionServiceClient {
    *   The request object that will be sent.
    * @param {number[]} request.adEvents
    *   Required. Required (at least 1). A list of ad events.
-   * @param {google.ads.datamanager.v1.EncryptionInfo} [request.encryptionInfo]
-   *   Optional. Information about encryption keys which are used to encrypt the
+   * @param {google.ads.datamanager.v1.EncryptionInfo} request.encryptionInfo
+   *   Required. Information about encryption keys which are used to encrypt the
    *   data.
    * @param {boolean} [request.validateOnly]
    *   Optional. If true, the request is validated, but not executed.

@@ -18282,6 +18282,9 @@ export namespace google {
 
                     /** DatabaseInstance dnsNames */
                     dnsNames?: (google.cloud.sql.v1.IDnsNameMapping[]|null);
+
+                    /** DatabaseInstance databaseCenterIntegrationEnabled */
+                    databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -18445,6 +18448,9 @@ export namespace google {
 
                     /** DatabaseInstance dnsNames. */
                     public dnsNames: google.cloud.sql.v1.IDnsNameMapping[];
+
+                    /** DatabaseInstance databaseCenterIntegrationEnabled. */
+                    public databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -20734,6 +20740,9 @@ export namespace google {
 
                     /** OnPremisesConfiguration sslOption */
                     sslOption?: (google.cloud.sql.v1.OnPremisesConfiguration.SslOption|keyof typeof google.cloud.sql.v1.OnPremisesConfiguration.SslOption|null);
+
+                    /** OnPremisesConfiguration dmsManaged */
+                    dmsManaged?: (boolean|null);
                 }
 
                 /** Represents an OnPremisesConfiguration. */
@@ -20777,6 +20786,9 @@ export namespace google {
 
                     /** OnPremisesConfiguration sslOption. */
                     public sslOption: (google.cloud.sql.v1.OnPremisesConfiguration.SslOption|keyof typeof google.cloud.sql.v1.OnPremisesConfiguration.SslOption);
+
+                    /** OnPremisesConfiguration dmsManaged. */
+                    public dmsManaged: boolean;
 
                     /**
                      * Creates a new OnPremisesConfiguration instance using the specified properties.
@@ -21103,6 +21115,9 @@ export namespace google {
                     /** ExecuteSqlPayload database */
                     database?: (string|null);
 
+                    /** ExecuteSqlPayload passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
                     /** ExecuteSqlPayload autoIamAuthn */
                     autoIamAuthn?: (boolean|null);
 
@@ -21134,6 +21149,9 @@ export namespace google {
                     /** ExecuteSqlPayload database. */
                     public database: string;
 
+                    /** ExecuteSqlPayload passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
                     /** ExecuteSqlPayload autoIamAuthn. */
                     public autoIamAuthn?: (boolean|null);
 
@@ -21147,7 +21165,7 @@ export namespace google {
                     public application: string;
 
                     /** ExecuteSqlPayload userPassword. */
-                    public userPassword?: "autoIamAuthn";
+                    public userPassword?: ("passwordSecretVersion"|"autoIamAuthn");
 
                     /**
                      * Creates a new ExecuteSqlPayload instance using the specified properties.
@@ -24762,6 +24780,9 @@ export namespace google {
 
                     /** SqlOperationsGetRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsGetRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsGetRequest. */
@@ -24778,6 +24799,9 @@ export namespace google {
 
                     /** SqlOperationsGetRequest project. */
                     public project: string;
+
+                    /** SqlOperationsGetRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsGetRequest instance using the specified properties.
@@ -24871,6 +24895,9 @@ export namespace google {
 
                     /** SqlOperationsListRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsListRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsListRequest. */
@@ -24893,6 +24920,9 @@ export namespace google {
 
                     /** SqlOperationsListRequest project. */
                     public project: string;
+
+                    /** SqlOperationsListRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsListRequest instance using the specified properties.
@@ -25089,6 +25119,9 @@ export namespace google {
 
                     /** SqlOperationsCancelRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsCancelRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsCancelRequest. */
@@ -25105,6 +25138,9 @@ export namespace google {
 
                     /** SqlOperationsCancelRequest project. */
                     public project: string;
+
+                    /** SqlOperationsCancelRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsCancelRequest instance using the specified properties.
@@ -27016,6 +27052,12 @@ export namespace google {
                     /** SqlUsersUpdateRequest revokeExistingRoles */
                     revokeExistingRoles?: (boolean|null);
 
+                    /** SqlUsersUpdateRequest serverRoles */
+                    serverRoles?: (string[]|null);
+
+                    /** SqlUsersUpdateRequest revokeExistingServerRoles */
+                    revokeExistingServerRoles?: (boolean|null);
+
                     /** SqlUsersUpdateRequest body */
                     body?: (google.cloud.sql.v1.IUser|null);
                 }
@@ -27046,6 +27088,12 @@ export namespace google {
 
                     /** SqlUsersUpdateRequest revokeExistingRoles. */
                     public revokeExistingRoles?: (boolean|null);
+
+                    /** SqlUsersUpdateRequest serverRoles. */
+                    public serverRoles: string[];
+
+                    /** SqlUsersUpdateRequest revokeExistingServerRoles. */
+                    public revokeExistingServerRoles?: (boolean|null);
 
                     /** SqlUsersUpdateRequest body. */
                     public body?: (google.cloud.sql.v1.IUser|null);
@@ -27396,6 +27444,9 @@ export namespace google {
 
                     /** User databaseRoles */
                     databaseRoles?: (string[]|null);
+
+                    /** User serverRoles */
+                    serverRoles?: (string[]|null);
                 }
 
                 /** Represents a User. */
@@ -27448,6 +27499,9 @@ export namespace google {
 
                     /** User databaseRoles. */
                     public databaseRoles: string[];
+
+                    /** User serverRoles. */
+                    public serverRoles: string[];
 
                     /** User userDetails. */
                     public userDetails?: "sqlserverUserDetails";
@@ -35248,6 +35302,9 @@ export namespace google {
 
                     /** SqlOperationsGetRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsGetRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsGetRequest. */
@@ -35264,6 +35321,9 @@ export namespace google {
 
                     /** SqlOperationsGetRequest project. */
                     public project: string;
+
+                    /** SqlOperationsGetRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsGetRequest instance using the specified properties.
@@ -35357,6 +35417,9 @@ export namespace google {
 
                     /** SqlOperationsListRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsListRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsListRequest. */
@@ -35379,6 +35442,9 @@ export namespace google {
 
                     /** SqlOperationsListRequest project. */
                     public project: string;
+
+                    /** SqlOperationsListRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsListRequest instance using the specified properties.
@@ -35466,6 +35532,9 @@ export namespace google {
 
                     /** SqlOperationsCancelRequest project */
                     project?: (string|null);
+
+                    /** SqlOperationsCancelRequest location */
+                    location?: (string|null);
                 }
 
                 /** Represents a SqlOperationsCancelRequest. */
@@ -35482,6 +35551,9 @@ export namespace google {
 
                     /** SqlOperationsCancelRequest project. */
                     public project: string;
+
+                    /** SqlOperationsCancelRequest location. */
+                    public location: string;
 
                     /**
                      * Creates a new SqlOperationsCancelRequest instance using the specified properties.
@@ -36742,6 +36814,9 @@ export namespace google {
                     /** ExecuteSqlPayload database */
                     database?: (string|null);
 
+                    /** ExecuteSqlPayload passwordSecretVersion */
+                    passwordSecretVersion?: (string|null);
+
                     /** ExecuteSqlPayload autoIamAuthn */
                     autoIamAuthn?: (boolean|null);
 
@@ -36773,6 +36848,9 @@ export namespace google {
                     /** ExecuteSqlPayload database. */
                     public database: string;
 
+                    /** ExecuteSqlPayload passwordSecretVersion. */
+                    public passwordSecretVersion?: (string|null);
+
                     /** ExecuteSqlPayload autoIamAuthn. */
                     public autoIamAuthn?: (boolean|null);
 
@@ -36786,7 +36864,7 @@ export namespace google {
                     public application: string;
 
                     /** ExecuteSqlPayload userPassword. */
-                    public userPassword?: "autoIamAuthn";
+                    public userPassword?: ("passwordSecretVersion"|"autoIamAuthn");
 
                     /**
                      * Creates a new ExecuteSqlPayload instance using the specified properties.
@@ -40231,6 +40309,9 @@ export namespace google {
 
                     /** DatabaseInstance dnsNames */
                     dnsNames?: (google.cloud.sql.v1beta4.IDnsNameMapping[]|null);
+
+                    /** DatabaseInstance databaseCenterIntegrationEnabled */
+                    databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -40394,6 +40475,9 @@ export namespace google {
 
                     /** DatabaseInstance dnsNames. */
                     public dnsNames: google.cloud.sql.v1beta4.IDnsNameMapping[];
+
+                    /** DatabaseInstance databaseCenterIntegrationEnabled. */
+                    public databaseCenterIntegrationEnabled?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -48145,6 +48229,9 @@ export namespace google {
 
                     /** OnPremisesConfiguration sslOption */
                     sslOption?: (google.cloud.sql.v1beta4.OnPremisesConfiguration.SslOption|keyof typeof google.cloud.sql.v1beta4.OnPremisesConfiguration.SslOption|null);
+
+                    /** OnPremisesConfiguration dmsManaged */
+                    dmsManaged?: (boolean|null);
                 }
 
                 /** Represents an OnPremisesConfiguration. */
@@ -48188,6 +48275,9 @@ export namespace google {
 
                     /** OnPremisesConfiguration sslOption. */
                     public sslOption: (google.cloud.sql.v1beta4.OnPremisesConfiguration.SslOption|keyof typeof google.cloud.sql.v1beta4.OnPremisesConfiguration.SslOption);
+
+                    /** OnPremisesConfiguration dmsManaged. */
+                    public dmsManaged: boolean;
 
                     /**
                      * Creates a new OnPremisesConfiguration instance using the specified properties.
@@ -55573,6 +55663,12 @@ export namespace google {
                     /** SqlUsersUpdateRequest revokeExistingRoles */
                     revokeExistingRoles?: (boolean|null);
 
+                    /** SqlUsersUpdateRequest serverRoles */
+                    serverRoles?: (string[]|null);
+
+                    /** SqlUsersUpdateRequest revokeExistingServerRoles */
+                    revokeExistingServerRoles?: (boolean|null);
+
                     /** SqlUsersUpdateRequest body */
                     body?: (google.cloud.sql.v1beta4.IUser|null);
                 }
@@ -55603,6 +55699,12 @@ export namespace google {
 
                     /** SqlUsersUpdateRequest revokeExistingRoles. */
                     public revokeExistingRoles?: (boolean|null);
+
+                    /** SqlUsersUpdateRequest serverRoles. */
+                    public serverRoles: string[];
+
+                    /** SqlUsersUpdateRequest revokeExistingServerRoles. */
+                    public revokeExistingServerRoles?: (boolean|null);
 
                     /** SqlUsersUpdateRequest body. */
                     public body?: (google.cloud.sql.v1beta4.IUser|null);
@@ -55953,6 +56055,9 @@ export namespace google {
 
                     /** User databaseRoles */
                     databaseRoles?: (string[]|null);
+
+                    /** User serverRoles */
+                    serverRoles?: (string[]|null);
                 }
 
                 /** Represents a User. */
@@ -56005,6 +56110,9 @@ export namespace google {
 
                     /** User databaseRoles. */
                     public databaseRoles: string[];
+
+                    /** User serverRoles. */
+                    public serverRoles: string[];
 
                     /** User userDetails. */
                     public userDetails?: "sqlserverUserDetails";
@@ -57329,6 +57437,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -57342,6 +57453,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -58071,6 +58185,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -58090,6 +58207,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -58403,6 +58523,365 @@ export namespace google {
 
             /**
              * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -59007,6 +59486,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -61381,6 +61862,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -61403,6 +61887,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -62342,6 +62829,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -62376,6 +62866,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -62504,7 +62997,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -62607,6 +63101,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }

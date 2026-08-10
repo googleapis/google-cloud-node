@@ -5,6 +5,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v7.0.1...cloud-profiler-v8.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update cloud-profiler to minimum Node version of 22. ([#9043](https://github.com/googleapis/google-cloud-node/issues/9043))
+
+### Features
+
+* Update cloud-profiler to minimum Node version of 22. ([#9043](https://github.com/googleapis/google-cloud-node/issues/9043)) ([e46dbc3](https://github.com/googleapis/google-cloud-node/commit/e46dbc3a95ee2c77b5a32cfe432fb39a1dc0adea)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v7.0.0...cloud-profiler-v7.0.1) (2026-07-22)
+
+
+### Bug Fixes
+
+* Remove owlbot template updater from cloud-profiler ([#8915](https://github.com/googleapis/google-cloud-node/issues/8915)) ([ecba5e3](https://github.com/googleapis/google-cloud-node/commit/ecba5e3d36eee9a6cdcf26d8fa7439b7b4244686))
+
 ## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v6.0.5...cloud-profiler-v7.0.0) (2026-07-08)
 
 

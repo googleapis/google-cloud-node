@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/bigquery-storage",
-  "version": "5.1.2",
+  "version": "6.0.0",
   "description": "Client for the BigQuery Storage API",
   "repository": {
     "type": "git",
@@ -10,19 +10,17 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "files": [
-    "build/src",
-    "build/protos"
+    "build/src"
   ],
   "main": "build/src/index.js",
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
-    "compile-protos": "compileProtos src",
+    "compile": "tsc -p .",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "prelint": "cd samples; npm link ../; npm install",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile",
     "system-test": "c8 mocha build/system-test",
     "test": "c8 mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
@@ -37,7 +35,8 @@
     "google-auth-library": "^10.0.0",
     "google-gax": "^5.0.0",
     "long": "^5.2.0",
-    "protobufjs": "^7.5.5"
+    "protobufjs": "^7.5.5",
+    "@google-cloud/bigquery-storage-api": "^0.2.0"
   },
   "peerDependencies": {
     "protobufjs": "~7.5.5"
@@ -67,7 +66,7 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/bigquery-storage"
 }

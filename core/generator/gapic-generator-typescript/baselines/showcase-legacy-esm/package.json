@@ -76,7 +76,7 @@
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test"
   },
   "dependencies": {
-    "google-gax": "^5.1.1-rc.1"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.28.3",
@@ -103,6 +103,6 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   }
 }

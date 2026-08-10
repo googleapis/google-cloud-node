@@ -23,7 +23,8 @@ import {
   ClientOptions,
 } from 'google-gax';
 import * as gax from 'google-gax';
-import * as protos from '../protos/protos';
+import {protos} from '@google-cloud/bigtable-api';
+import google = protos.google;
 import * as SqlTypes from './execute-query/types';
 
 import {AppProfile} from './app-profile';
@@ -36,7 +37,6 @@ import {
   IInstance,
   ClusterInfo,
 } from './instance';
-import {google} from '../protos/protos';
 import {ServiceError} from 'google-gax';
 import * as v2 from './v2';
 import * as admin from './admin';

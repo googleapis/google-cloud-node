@@ -955,14 +955,14 @@
                           "requestType": "CreateSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).post": "/v2/{parent=*/*}/supportEventSubscriptions",
+                            "(google.api.http).post": "/v2/{parent=organizations/*}/supportEventSubscriptions",
                             "(google.api.http).body": "support_event_subscription",
                             "(google.api.method_signature)": "parent,support_event_subscription"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v2/{parent=*/*}/supportEventSubscriptions",
+                                "post": "/v2/{parent=organizations/*}/supportEventSubscriptions",
                                 "body": "support_event_subscription"
                               }
                             },
@@ -975,13 +975,13 @@
                           "requestType": "GetSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).get": "/v2/{name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).get": "/v2/{name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=*/*/supportEventSubscriptions/*}"
+                                "get": "/v2/{name=organizations/*/supportEventSubscriptions/*}"
                               }
                             },
                             {
@@ -993,13 +993,13 @@
                           "requestType": "ListSupportEventSubscriptionsRequest",
                           "responseType": "ListSupportEventSubscriptionsResponse",
                           "options": {
-                            "(google.api.http).get": "/v2/{parent=*/*}/supportEventSubscriptions",
+                            "(google.api.http).get": "/v2/{parent=organizations/*}/supportEventSubscriptions",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=*/*}/supportEventSubscriptions"
+                                "get": "/v2/{parent=organizations/*}/supportEventSubscriptions"
                               }
                             },
                             {
@@ -1011,14 +1011,14 @@
                           "requestType": "UpdateSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).patch": "/v2/{support_event_subscription.name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).patch": "/v2/{support_event_subscription.name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.http).body": "support_event_subscription",
                             "(google.api.method_signature)": "support_event_subscription,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "patch": "/v2/{support_event_subscription.name=*/*/supportEventSubscriptions/*}",
+                                "patch": "/v2/{support_event_subscription.name=organizations/*/supportEventSubscriptions/*}",
                                 "body": "support_event_subscription"
                               }
                             },
@@ -1031,13 +1031,13 @@
                           "requestType": "DeleteSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).delete": "/v2/{name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).delete": "/v2/{name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2/{name=*/*/supportEventSubscriptions/*}"
+                                "delete": "/v2/{name=organizations/*/supportEventSubscriptions/*}"
                               }
                             },
                             {
@@ -1049,15 +1049,35 @@
                           "requestType": "UndeleteSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).post": "/v2/{name=*/*/supportEventSubscriptions/*}:undelete",
+                            "(google.api.http).post": "/v2/{name=organizations/*/supportEventSubscriptions/*}:undelete",
                             "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v2/{name=*/*/supportEventSubscriptions/*}:undelete",
+                                "post": "/v2/{name=organizations/*/supportEventSubscriptions/*}:undelete",
                                 "body": "*"
                               }
+                            }
+                          ]
+                        },
+                        "ExpungeSupportEventSubscription": {
+                          "requestType": "ExpungeSupportEventSubscriptionRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v2/{name=organizations/*/supportEventSubscriptions/*}:expunge",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{name=organizations/*/supportEventSubscriptions/*}:expunge",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         }
@@ -1178,6 +1198,18 @@
                       }
                     },
                     "UndeleteSupportEventSubscriptionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudsupport.googleapis.com/SupportEventSubscription"
+                          }
+                        }
+                      }
+                    },
+                    "ExpungeSupportEventSubscriptionRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2374,14 +2406,14 @@
                           "requestType": "CreateSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).post": "/v2beta/{parent=*/*}/supportEventSubscriptions",
+                            "(google.api.http).post": "/v2beta/{parent=organizations/*}/supportEventSubscriptions",
                             "(google.api.http).body": "support_event_subscription",
                             "(google.api.method_signature)": "parent,support_event_subscription"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v2beta/{parent=*/*}/supportEventSubscriptions",
+                                "post": "/v2beta/{parent=organizations/*}/supportEventSubscriptions",
                                 "body": "support_event_subscription"
                               }
                             },
@@ -2394,13 +2426,13 @@
                           "requestType": "GetSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).get": "/v2beta/{name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).get": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2beta/{name=*/*/supportEventSubscriptions/*}"
+                                "get": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}"
                               }
                             },
                             {
@@ -2412,13 +2444,13 @@
                           "requestType": "ListSupportEventSubscriptionsRequest",
                           "responseType": "ListSupportEventSubscriptionsResponse",
                           "options": {
-                            "(google.api.http).get": "/v2beta/{parent=*/*}/supportEventSubscriptions",
+                            "(google.api.http).get": "/v2beta/{parent=organizations/*}/supportEventSubscriptions",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2beta/{parent=*/*}/supportEventSubscriptions"
+                                "get": "/v2beta/{parent=organizations/*}/supportEventSubscriptions"
                               }
                             },
                             {
@@ -2430,14 +2462,14 @@
                           "requestType": "UpdateSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).patch": "/v2beta/{support_event_subscription.name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).patch": "/v2beta/{support_event_subscription.name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.http).body": "support_event_subscription",
                             "(google.api.method_signature)": "support_event_subscription,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "patch": "/v2beta/{support_event_subscription.name=*/*/supportEventSubscriptions/*}",
+                                "patch": "/v2beta/{support_event_subscription.name=organizations/*/supportEventSubscriptions/*}",
                                 "body": "support_event_subscription"
                               }
                             },
@@ -2450,13 +2482,13 @@
                           "requestType": "DeleteSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).delete": "/v2beta/{name=*/*/supportEventSubscriptions/*}",
+                            "(google.api.http).delete": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2beta/{name=*/*/supportEventSubscriptions/*}"
+                                "delete": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}"
                               }
                             },
                             {
@@ -2468,15 +2500,35 @@
                           "requestType": "UndeleteSupportEventSubscriptionRequest",
                           "responseType": "SupportEventSubscription",
                           "options": {
-                            "(google.api.http).post": "/v2beta/{name=*/*/supportEventSubscriptions/*}:undelete",
+                            "(google.api.http).post": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}:undelete",
                             "(google.api.http).body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v2beta/{name=*/*/supportEventSubscriptions/*}:undelete",
+                                "post": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}:undelete",
                                 "body": "*"
                               }
+                            }
+                          ]
+                        },
+                        "ExpungeSupportEventSubscription": {
+                          "requestType": "ExpungeSupportEventSubscriptionRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}:expunge",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2beta/{name=organizations/*/supportEventSubscriptions/*}:expunge",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         }
@@ -2597,6 +2649,18 @@
                       }
                     },
                     "UndeleteSupportEventSubscriptionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudsupport.googleapis.com/SupportEventSubscription"
+                          }
+                        }
+                      }
+                    },
+                    "ExpungeSupportEventSubscriptionRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2979,6 +3043,10 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -3088,6 +3156,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 3
+                },
+                "batching": {
+                  "type": "BatchingConfigProto",
+                  "id": 4
                 }
               },
               "nested": {
@@ -3145,6 +3217,79 @@
                 }
               }
             },
+            "BatchingConfigProto": {
+              "fields": {
+                "thresholds": {
+                  "type": "BatchingSettingsProto",
+                  "id": 1
+                },
+                "batchDescriptor": {
+                  "type": "BatchingDescriptorProto",
+                  "id": 2
+                }
+              }
+            },
+            "BatchingSettingsProto": {
+              "fields": {
+                "elementCountThreshold": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "requestByteThreshold": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "delayThreshold": {
+                  "type": "google.protobuf.Duration",
+                  "id": 3
+                },
+                "elementCountLimit": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "requestByteLimit": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "flowControlElementLimit": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "flowControlByteLimit": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "flowControlLimitExceededBehavior": {
+                  "type": "FlowControlLimitExceededBehaviorProto",
+                  "id": 8
+                }
+              }
+            },
+            "FlowControlLimitExceededBehaviorProto": {
+              "values": {
+                "UNSET_BEHAVIOR": 0,
+                "THROW_EXCEPTION": 1,
+                "BLOCK": 2,
+                "IGNORE": 3
+              }
+            },
+            "BatchingDescriptorProto": {
+              "fields": {
+                "batchedField": {
+                  "type": "string",
+                  "id": 1
+                },
+                "discriminatorFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "subresponseField": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -3195,6 +3340,8 @@
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
                 "EDITION_2024": 1001,
+                "EDITION_2026": 1002,
+                "EDITION_UNSTABLE": 9999,
                 "EDITION_1_TEST_ONLY": 1,
                 "EDITION_2_TEST_ONLY": 2,
                 "EDITION_99997_TEST_ONLY": 99997,
@@ -3389,6 +3536,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -3664,7 +3815,10 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "feature_support.edition_introduced": "EDITION_PROTO2",
+                    "feature_support.edition_removed": "EDITION_2024",
+                    "feature_support.removal_error": "This behavior is enabled by default in editions 2024 and above. To disable it, you can set `features.(pb.java).nest_in_file_class = YES` on individual messages, enums, or services."
                   }
                 },
                 "javaGenerateEqualsAndHash": {
@@ -3724,7 +3878,9 @@
                   "type": "bool",
                   "id": 31,
                   "options": {
-                    "default": true
+                    "default": true,
+                    "feature_support.edition_removed": "EDITION_2026",
+                    "feature_support.removal_error": "cc_enable_arenas is enabled by default in every edition and overrides are ignored.This option is removed in editions 2026 and above."
                   }
                 },
                 "objcClassPrefix": {
@@ -3766,6 +3922,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -3838,6 +3998,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -3953,6 +4117,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -4032,6 +4200,10 @@
                     "editionRemoved": {
                       "type": "Edition",
                       "id": 4
+                    },
+                    "removalError": {
+                      "type": "string",
+                      "id": 5
                     }
                   }
                 }
@@ -4051,6 +4223,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4089,6 +4265,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4134,6 +4314,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -4160,6 +4344,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4194,6 +4382,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4335,8 +4527,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_METHOD",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STYLE2026"
                   }
                 },
                 "defaultSymbolVisibility": {
@@ -4348,6 +4540,17 @@
                     "feature_support.edition_introduced": "EDITION_2024",
                     "edition_defaults.edition": "EDITION_2024",
                     "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                  }
+                },
+                "enforceProtoLimits": {
+                  "type": "ProtoLimitsFeature.EnforceProtoLimits",
+                  "id": 9,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_ONEOF",
+                    "feature_support.edition_introduced": "EDITION_2026",
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "PROTO_LIMITS2026"
                   }
                 }
               },
@@ -4425,7 +4628,8 @@
                   "values": {
                     "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
                     "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
+                    "STYLE_LEGACY": 2,
+                    "STYLE2026": 3
                   }
                 },
                 "VisibilityFeature": {
@@ -4444,6 +4648,18 @@
                         "EXPORT_TOP_LEVEL": 2,
                         "LOCAL_ALL": 3,
                         "STRICT": 4
+                      }
+                    }
+                  }
+                },
+                "ProtoLimitsFeature": {
+                  "fields": {},
+                  "nested": {
+                    "EnforceProtoLimits": {
+                      "values": {
+                        "PROTO_LIMITS_UNKNOWN": 0,
+                        "LEGACY_NO_EXPLICIT_LIMITS": 1,
+                        "PROTO_LIMITS2026": 2
                       }
                     }
                   }
@@ -4637,6 +4853,9 @@
                   "id": 1
                 }
               }
+            },
+            "Empty": {
+              "fields": {}
             }
           }
         }

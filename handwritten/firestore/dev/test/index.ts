@@ -810,9 +810,13 @@ describe('instantiation', () => {
     it('defaults flow_control_window to 256 KB', async () => {
       const firestore = new Firestore.Firestore(DEFAULT_SETTINGS);
       // Trigger client creation & initialize() which calls createStub
-      await firestore['_clientPool'].run('tag', /* requiresGrpc= */ true, async (client: any) => {
-        await client.initialize();
-      });
+      await firestore['_clientPool'].run(
+        'tag',
+        /* requiresGrpc= */ true,
+        async (client: any) => {
+          await client.initialize();
+        },
+      );
 
       expect(createStubSpy.calledOnce).to.be.true;
       const clientOpts = createStubSpy.firstCall.args[1];
@@ -830,9 +834,13 @@ describe('instantiation', () => {
         },
       });
       // Trigger client creation & initialize() which calls createStub
-      await firestore['_clientPool'].run('tag', /* requiresGrpc= */ true, async (client: any) => {
-        await client.initialize();
-      });
+      await firestore['_clientPool'].run(
+        'tag',
+        /* requiresGrpc= */ true,
+        async (client: any) => {
+          await client.initialize();
+        },
+      );
 
       expect(createStubSpy.calledOnce).to.be.true;
       const clientOpts = createStubSpy.firstCall.args[1];

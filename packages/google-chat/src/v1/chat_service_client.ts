@@ -206,6 +206,9 @@ export class ChatServiceClient {
       attachmentPathTemplate: new this._gaxModule.PathTemplate(
         'spaces/{space}/messages/{message}/attachments/{attachment}',
       ),
+      availabilityPathTemplate: new this._gaxModule.PathTemplate(
+        'users/{user}/availability',
+      ),
       customEmojiPathTemplate: new this._gaxModule.PathTemplate(
         'customEmojis/{custom_emoji}',
       ),
@@ -258,6 +261,11 @@ export class ChatServiceClient {
         'pageToken',
         'nextPageToken',
         'memberships',
+      ),
+      searchMessages: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'results',
       ),
       listSpaces: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -358,6 +366,7 @@ export class ChatServiceClient {
       'getMessage',
       'updateMessage',
       'deleteMessage',
+      'searchMessages',
       'getAttachment',
       'uploadAttachment',
       'listSpaces',
@@ -383,6 +392,11 @@ export class ChatServiceClient {
       'getSpaceReadState',
       'updateSpaceReadState',
       'getThreadReadState',
+      'getAvailability',
+      'markAsActive',
+      'markAsAway',
+      'markAsDoNotDisturb',
+      'updateAvailability',
       'getSpaceEvent',
       'listSpaceEvents',
       'getSpaceNotificationSetting',
@@ -516,6 +530,8 @@ export class ChatServiceClient {
       'https://www.googleapis.com/auth/chat.spaces',
       'https://www.googleapis.com/auth/chat.spaces.create',
       'https://www.googleapis.com/auth/chat.spaces.readonly',
+      'https://www.googleapis.com/auth/chat.users.availability',
+      'https://www.googleapis.com/auth/chat.users.availability.readonly',
       'https://www.googleapis.com/auth/chat.users.readstate',
       'https://www.googleapis.com/auth/chat.users.readstate.readonly',
       'https://www.googleapis.com/auth/chat.users.sections',
@@ -2362,6 +2378,24 @@ export class ChatServiceClient {
    *   To learn more, see [Make a space discoverable to specific
    *   users](https://developers.google.com/workspace/chat/space-target-audience).
    *   `access_settings.audience` is not supported with `useAdminAccess`.
+   *
+   *   `access_settings.access_permission_settings`: Updates the [access
+   *   permission
+   *   settings](https://support.google.com/chat/answer/11971020) of who can
+   *   discover and join the space where `spaceType` field is `SPACE`. Principals
+   *   allowed to join the space must also be allowed to discover it. To update
+   *   access permission settings for a space, the authenticating user must be a
+   *   space manager or assistant manager and omit all other field masks in the
+   *   request. You can't update this field if the space is in [import
+   *   mode](https://developers.google.com/workspace/chat/import-data-overview).
+   *   To learn more, see [Make a space discoverable to specific
+   *   users](https://developers.google.com/workspace/chat/space-target-audience).
+   *   `access_settings.access_permission_settings` is not supported with
+   *   `useAdminAccess`.
+   *   The supported field masks include:
+   *
+   *   - `access_settings.access_permission_settings.discoverSpaceSetting`
+   *   - `access_settings.access_permission_settings.joinSpaceSetting`
    *
    *   `permission_settings`: Supports changing the
    *   [permission settings](https://support.google.com/chat/answer/13340792)
@@ -4705,6 +4739,729 @@ export class ChatServiceClient {
       });
   }
   /**
+   * Returns availability information for a human user in Google Chat. For
+   * example, this can be used to check if a user is online or away, or to
+   * retrieve their custom status message.
+   *
+   * This method only retrieves the authenticated user's availability.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with one of the following [authorization
+   * scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.availability.readonly`
+   *   - `https://www.googleapis.com/auth/chat.users.availability`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the availability to retrieve.
+   *
+   *   Format: users/{user}/availability
+   *
+   *   `{user}` is the id for the Person in the People API or Admin SDK directory
+   *   API. For example, `users/123456789`.
+   *
+   *   The user's email address or `me` can also be used as an alias to refer to
+   *   the caller.  For example, `users/user@example.com` or `users/me`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Availability|Availability}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.get_availability.js</caption>
+   * region_tag:chat_v1_generated_ChatService_GetAvailability_async
+   */
+  getAvailability(
+    request?: protos.google.chat.v1.IGetAvailabilityRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IGetAvailabilityRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getAvailability(
+    request: protos.google.chat.v1.IGetAvailabilityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IGetAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAvailability(
+    request: protos.google.chat.v1.IGetAvailabilityRequest,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IGetAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAvailability(
+    request?: protos.google.chat.v1.IGetAvailabilityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IGetAvailabilityRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IGetAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IGetAvailabilityRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getAvailability request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IGetAvailabilityRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAvailability response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAvailability(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IGetAvailabilityRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAvailability response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Marks user as `ACTIVE` in Google Chat.
+   *
+   * Sets the user's availability state to `ACTIVE`. The `ACTIVE` state
+   * lasts until the specified expiration, at which point the user's state
+   * becomes `AWAY`. Note that if the user is actively using Chat, the `ACTIVE`
+   * state duration may extend beyond the provided expiration.
+   *
+   * This method only updates the authenticated user's availability.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with [authorization
+   * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.availability`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the availability to mark as active.
+   *   Format: users/{user}/availability
+   *
+   *   `{user}` is the id for the Person in the People API or Admin SDK directory
+   *   API. For example, `users/123456789`.
+   *
+   *   The user's email address or `me` can also be used as an alias to refer to
+   *   the caller.  For example, `users/user@example.com` or `users/me`.
+   * @param {google.protobuf.Timestamp} request.expireTime
+   *   The absolute timestamp when the ACTIVE state expires.
+   * @param {google.protobuf.Duration} request.ttl
+   *   The duration from the current time until the ACTIVE state expires.
+   *   Using a short TTL can effectively reset the user's state to be based
+   *   on activity after this brief duration.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Availability|Availability}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.mark_as_active.js</caption>
+   * region_tag:chat_v1_generated_ChatService_MarkAsActive_async
+   */
+  markAsActive(
+    request?: protos.google.chat.v1.IMarkAsActiveRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsActiveRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  markAsActive(
+    request: protos.google.chat.v1.IMarkAsActiveRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsActiveRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsActive(
+    request: protos.google.chat.v1.IMarkAsActiveRequest,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsActiveRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsActive(
+    request?: protos.google.chat.v1.IMarkAsActiveRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsActiveRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsActiveRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsActiveRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('markAsActive request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsActiveRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('markAsActive response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .markAsActive(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsActiveRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('markAsActive response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Marks user as `AWAY` in Google Chat.
+   *
+   * Sets the user's state to away and is not affected by the user's
+   * activity.
+   *
+   * This method only updates the authenticated user's availability.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with [authorization
+   * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.availability`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the availability to mark as away.
+   *   Format: users/{user}/availability
+   *
+   *   `{user}` is the id for the Person in the People API or Admin SDK directory
+   *   API. For example, `users/123456789`.
+   *
+   *   The user's email address or `me` can also be used as an alias to refer to
+   *   the caller.  For example, `users/user@example.com` or `users/me`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Availability|Availability}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.mark_as_away.js</caption>
+   * region_tag:chat_v1_generated_ChatService_MarkAsAway_async
+   */
+  markAsAway(
+    request?: protos.google.chat.v1.IMarkAsAwayRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsAwayRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  markAsAway(
+    request: protos.google.chat.v1.IMarkAsAwayRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsAwayRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsAway(
+    request: protos.google.chat.v1.IMarkAsAwayRequest,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsAwayRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsAway(
+    request?: protos.google.chat.v1.IMarkAsAwayRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsAwayRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsAwayRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsAwayRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('markAsAway request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsAwayRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('markAsAway response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .markAsAway(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsAwayRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('markAsAway response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Marks user as `DO_NOT_DISTURB` in Google Chat.
+   *
+   * Sets a user's availability state to `DO_NOT_DISTURB` until a specified
+   * expiration time.
+   * When in `DO_NOT_DISTURB`, users typically won't receive notifications.
+   *
+   * This method only updates the authenticated user's availability.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with [authorization
+   * scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.availability`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the availability to mark as Do Not Disturb.
+   *   Format: users/{user}/availability
+   *
+   *   `{user}` is the id for the Person in the People API or Admin SDK directory
+   *   API. For example, `users/123456789`.
+   *
+   *   The user's email address or `me` can also be used as an alias to refer to
+   *   the caller.  For example, `users/user@example.com` or `users/me`.
+   * @param {google.protobuf.Timestamp} request.expireTime
+   *   The absolute timestamp when the DND state expires.
+   * @param {google.protobuf.Duration} request.ttl
+   *   The duration from the current time until the DND state expires.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Availability|Availability}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.mark_as_do_not_disturb.js</caption>
+   * region_tag:chat_v1_generated_ChatService_MarkAsDoNotDisturb_async
+   */
+  markAsDoNotDisturb(
+    request?: protos.google.chat.v1.IMarkAsDoNotDisturbRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsDoNotDisturbRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  markAsDoNotDisturb(
+    request: protos.google.chat.v1.IMarkAsDoNotDisturbRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsDoNotDisturbRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsDoNotDisturb(
+    request: protos.google.chat.v1.IMarkAsDoNotDisturbRequest,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsDoNotDisturbRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  markAsDoNotDisturb(
+    request?: protos.google.chat.v1.IMarkAsDoNotDisturbRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsDoNotDisturbRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsDoNotDisturbRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IMarkAsDoNotDisturbRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('markAsDoNotDisturb request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsDoNotDisturbRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('markAsDoNotDisturb response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .markAsDoNotDisturb(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IMarkAsDoNotDisturbRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('markAsDoNotDisturb response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates availability information for a human user. Only the `custom_status`
+   * field can be updated through this method.
+   *
+   * This method only updates the authenticated user's availability.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with one of the following [authorization
+   * scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.availability`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.chat.v1.Availability} request.availability
+   *   Required. The availability to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update.
+   *   The only field that can be updated is `custom_status`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.Availability|Availability}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.update_availability.js</caption>
+   * region_tag:chat_v1_generated_ChatService_UpdateAvailability_async
+   */
+  updateAvailability(
+    request?: protos.google.chat.v1.IUpdateAvailabilityRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IUpdateAvailabilityRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateAvailability(
+    request: protos.google.chat.v1.IUpdateAvailabilityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IUpdateAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAvailability(
+    request: protos.google.chat.v1.IUpdateAvailabilityRequest,
+    callback: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IUpdateAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAvailability(
+    request?: protos.google.chat.v1.IUpdateAvailabilityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IUpdateAvailabilityRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IUpdateAvailabilityRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.IAvailability,
+      protos.google.chat.v1.IUpdateAvailabilityRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'availability.name': request.availability!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateAvailability request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IUpdateAvailabilityRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAvailability response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAvailability(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.chat.v1.IAvailability,
+          protos.google.chat.v1.IUpdateAvailabilityRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAvailability response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
    * Returns an event from a Google Chat space. The [event
    * payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload)
    * contains the most recent version of the resource that changed. For example,
@@ -6816,6 +7573,719 @@ export class ChatServiceClient {
     ) as AsyncIterable<protos.google.chat.v1.IMembership>;
   }
   /**
+   * Searches for messages in Google Chat that the calling user has access to.
+   * Returns a list of messages matching the search criteria.
+   *
+   * To search across all spaces the user has access to, set `parent` to
+   * `spaces/-`. Using any other value for `parent` results in an
+   * `INVALID_ARGUMENT` error. The returned messages have their `name` field
+   * populated with the full resource name, which includes the specific `space`
+   * in which the message resides.
+   *
+   * This API doesn't return all message types. The types of messages listed
+   * below aren't included in the response. Use
+   * {@link protos.google.chat.v1.ChatService.ListMessages|ListMessages} to list all
+   * messages.
+   *
+   * - Private Messages that are visible to the authenticated user.
+   * - Messages posted by Chat apps in spaces or group chats.
+   * - Messages in a Chat app DM.
+   * - Messages from blocked users.
+   * - Messages in spaces that the caller has muted.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with one of the following [authorization
+   * scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.messages.readonly`
+   *   - `https://www.googleapis.com/auth/chat.messages`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the space to search within.
+   *
+   *   To search across all spaces the user has access to, set this field to
+   *   `spaces/-`. Using any other value for `parent` results in an
+   *   `INVALID_ARGUMENT` error.
+   *
+   *   To limit the search to one or more spaces, use `space.name` or
+   *   `space.display_name` in the `filter`.
+   * @param {string} request.filter
+   *   Required. A search query.
+   *
+   *   The query can specify one or more search keywords, which are used to filter
+   *   the results,
+   *
+   *   You can also filter the results using the following message fields:
+   *
+   *   - `create_time`: Accepts a timestamp in
+   *     [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the
+   *     supported comparison operators are: `<` and `>=`.
+   *   - `sender.name`: The resource name of the sender (`users/{user}`). Only
+   *     supports `=`. You can use the e-mail as an alias for `{user}`. For
+   *     example, `users/example@gmail.com`, where `example@gmail.com` is the
+   *     e-mail of the Google Chat user.
+   *   - `space.name`: The resource name of the space where the message is posted.
+   *     (`spaces/{space}`). Only supports `=`. If this filter is not set, the
+   *     search is performed across all direct messages and spaces the user has
+   *     access to as a space member.
+   *   - `space.display_name`: Supports the operator `:` (has) and filters spaces
+   *     based on a partial match of their display name. Results are limited to
+   *     the top five space matches. For example, `space.display_name:Project`
+   *     searches for messages in the top five spaces that contain the word
+   *     "Project" in their display names.
+   *   - `attachment`: Supports the operator `:*` (has any) to check for the
+   *     presence of attachments. If `attachment:*` is specified, only messages
+   *     that have at least one attachment are returned.
+   *   - `annotations.user_mentions.user.name`: The resource name of the mentioned
+   *     user (`users/{user}`). Only supports `:` (has). For example:
+   *     `annotations.user_mentions.user.name:"users/1234567890"` returns only
+   *     messages that contain a mention to the specified user. Alternatively, the
+   *     alias `me` can be used to filter for messages that mention the caller
+   *     user, for example: `annotations.user_mentions.user.name:users/me`. You
+   *     can also use the e-mail as an alias for `{user}`, for example,
+   *     `users/example@gmail.com`.
+   *
+   *   For advanced filtering, the following functions are also available:
+   *
+   *   - `has_link()`: Returns only messages that have at least one hyperlink in
+   *     the message text.
+   *   - `is_unread()`: Filters out messages that have been read by the calling
+   *     user.
+   *
+   *   Using the `space.display_name` filter requires that the calling credentials
+   *   include one of the following [authorization
+   *   scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.spaces.readonly`
+   *   - `https://www.googleapis.com/auth/chat.spaces`
+   *
+   *   Using the `is_unread()` filter requires that the calling credentials
+   *   include one of the following [authorization
+   *   scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.readstate.readonly`
+   *   - `https://www.googleapis.com/auth/chat.users.readstate`
+   *
+   *
+   *   Across different fields, only `AND` operators are supported. A valid
+   *   example is `sender.name = "users/1234567890" AND is_unread()`. The word
+   *   `AND` is optional and is implied if omitted. For example, `sender.name =
+   *   "users/1234567890" is_unread()` is valid and is equivalent to the previous
+   *   example. An invalid example is `sender.name = "users/1234567890" OR
+   *   is_unread()` because `OR` is not supported between different fields.
+   *
+   *   Among the same field:
+   *
+   *   - `create_time` supports only `AND`, and can only be used to represent
+   *      an interval, such as `create_time >= "2022-01-01T00:00:00+00:00" AND
+   *      create_time < "2023-01-01T00:00:00+00:00"`.
+   *   - `sender.name` supports only the `OR` operator, for example:
+   *     `sender.name = "users/1234567890" OR sender.name = "users/0987654321"`.
+   *   - `space.name` supports only the `OR` operator, for example:
+   *     `space.name = "spaces/ABCDEFGH" OR space.name = "spaces/QWERTYUI"`.
+   *   - `space.display_name` supports the operators `AND` and `OR`, but not a
+   *     mix of both. For example:
+   *     `space.display_name:Project AND space.display_name:Tasks` returns
+   *     messages that are in spaces with display names containing both `Project`
+   *     and `Tasks`, whereas
+   *     `space.display_name:Project OR space.display_name:Tasks` returns messages
+   *     that are in spaces with display names containing either `Project` or
+   *     `Tasks` or both.
+   *   - `annotations.user_mentions.user.name` supports the operators `AND` and
+   *     `OR`, but not a mix of both. For example:
+   *     `annotations.user_mentions.user.name:"users/1234567890" AND
+   *     annotations.user_mentions.user.name:"users/0987654321"` returns only
+   *     messages that mentions both users, whereas
+   *     `annotations.user_mentions.user.name:"users/1234567890" OR
+   *     annotations.user_mentions.user.name:"users/0987654321"` returns messages
+   *     that mention either user or both.
+   *
+   *   Parentheses are required to disambiguate operator precedence when combining
+   *   `AND` and `OR` operators in the same query. For example:
+   *   `(sender.name="users/me" OR sender.name="users/123456") AND is_unread()`.
+   *   Otherwise, parentheses are optional.
+   *
+   *   The following example queries are valid:
+   *
+   *   ```
+   *   "Pending reports" AND create_time >= "2023-01-01T00:00:00Z"
+   *
+   *   sender.name = "users/example@gmail.com"
+   *
+   *   annotations.user_mentions.user.name:"users/0987654321"
+   *
+   *   attachment:* AND space.name = "spaces/ABCDEFGH"
+   *
+   *   tasks AND is_unread() AND sender.name = "users/1234567890"
+   *
+   *   "things to do" "urgent"
+   *
+   *   (sender.name = "users/1234567890")
+   *   AND (create_time < "2023-05-01T00:00:00Z")
+   *
+   *   tasks AND space.name = "spaces/ABCDEFGH" AND has_link()
+   *
+   *   "project one" is_unread()
+   *
+   *   space.display_name:Project tasks
+   *   ```
+   *
+   *   The maximum query length is 1,000 characters.
+   *
+   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+   *   error.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return. The service may return
+   *   fewer than this value.
+   *
+   *   If unspecified, at most 25 are returned.
+   *
+   *   The maximum value is 100. If you use a value more than 100, it's
+   *   automatically changed to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token, received from the previous search messages call. Provide
+   *   this parameter to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided should match the call that
+   *   provided the page token. Passing different values to the other parameters
+   *   might lead to unexpected results.
+   * @param {string} [request.orderBy]
+   *   Optional. How the results list is ordered.
+   *
+   *   Supported attributes to order by are:
+   *
+   *   - `create_time`: Sorts the results by the time of the message creation.
+   *     Default value.
+   *   - `relevance`: Sorts the results by relevance.
+   *     [Developer Preview](https://developers.google.com/workspace/preview).
+   *
+   *   The default ordering is `create_time desc`. Only a single order per query
+   *   (`create_time` or `relevance`) is supported. Only descending order (`desc`)
+   *   is supported, and it must be specified after the order attribute.
+   * @param {google.chat.v1.SearchMessagesRequest.SearchMessagesView} [request.view]
+   *   Optional. Specifies what kind of search results view to return. The default
+   *   is `SEARCH_MESSAGES_VIEW_BASIC`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.chat.v1.SearchMessageResult|SearchMessageResult}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchMessagesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  searchMessages(
+    request?: protos.google.chat.v1.ISearchMessagesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.chat.v1.ISearchMessageResult[],
+      protos.google.chat.v1.ISearchMessagesRequest | null,
+      protos.google.chat.v1.ISearchMessagesResponse,
+    ]
+  >;
+  searchMessages(
+    request: protos.google.chat.v1.ISearchMessagesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.chat.v1.ISearchMessagesRequest,
+      protos.google.chat.v1.ISearchMessagesResponse | null | undefined,
+      protos.google.chat.v1.ISearchMessageResult
+    >,
+  ): void;
+  searchMessages(
+    request: protos.google.chat.v1.ISearchMessagesRequest,
+    callback: PaginationCallback<
+      protos.google.chat.v1.ISearchMessagesRequest,
+      protos.google.chat.v1.ISearchMessagesResponse | null | undefined,
+      protos.google.chat.v1.ISearchMessageResult
+    >,
+  ): void;
+  searchMessages(
+    request?: protos.google.chat.v1.ISearchMessagesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.chat.v1.ISearchMessagesRequest,
+          protos.google.chat.v1.ISearchMessagesResponse | null | undefined,
+          protos.google.chat.v1.ISearchMessageResult
+        >,
+    callback?: PaginationCallback<
+      protos.google.chat.v1.ISearchMessagesRequest,
+      protos.google.chat.v1.ISearchMessagesResponse | null | undefined,
+      protos.google.chat.v1.ISearchMessageResult
+    >,
+  ): Promise<
+    [
+      protos.google.chat.v1.ISearchMessageResult[],
+      protos.google.chat.v1.ISearchMessagesRequest | null,
+      protos.google.chat.v1.ISearchMessagesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.chat.v1.ISearchMessagesRequest,
+          protos.google.chat.v1.ISearchMessagesResponse | null | undefined,
+          protos.google.chat.v1.ISearchMessageResult
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('searchMessages values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('searchMessages request %j', request);
+    return this.innerApiCalls
+      .searchMessages(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.chat.v1.ISearchMessageResult[],
+          protos.google.chat.v1.ISearchMessagesRequest | null,
+          protos.google.chat.v1.ISearchMessagesResponse,
+        ]) => {
+          this._log.info('searchMessages values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `searchMessages`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the space to search within.
+   *
+   *   To search across all spaces the user has access to, set this field to
+   *   `spaces/-`. Using any other value for `parent` results in an
+   *   `INVALID_ARGUMENT` error.
+   *
+   *   To limit the search to one or more spaces, use `space.name` or
+   *   `space.display_name` in the `filter`.
+   * @param {string} request.filter
+   *   Required. A search query.
+   *
+   *   The query can specify one or more search keywords, which are used to filter
+   *   the results,
+   *
+   *   You can also filter the results using the following message fields:
+   *
+   *   - `create_time`: Accepts a timestamp in
+   *     [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the
+   *     supported comparison operators are: `<` and `>=`.
+   *   - `sender.name`: The resource name of the sender (`users/{user}`). Only
+   *     supports `=`. You can use the e-mail as an alias for `{user}`. For
+   *     example, `users/example@gmail.com`, where `example@gmail.com` is the
+   *     e-mail of the Google Chat user.
+   *   - `space.name`: The resource name of the space where the message is posted.
+   *     (`spaces/{space}`). Only supports `=`. If this filter is not set, the
+   *     search is performed across all direct messages and spaces the user has
+   *     access to as a space member.
+   *   - `space.display_name`: Supports the operator `:` (has) and filters spaces
+   *     based on a partial match of their display name. Results are limited to
+   *     the top five space matches. For example, `space.display_name:Project`
+   *     searches for messages in the top five spaces that contain the word
+   *     "Project" in their display names.
+   *   - `attachment`: Supports the operator `:*` (has any) to check for the
+   *     presence of attachments. If `attachment:*` is specified, only messages
+   *     that have at least one attachment are returned.
+   *   - `annotations.user_mentions.user.name`: The resource name of the mentioned
+   *     user (`users/{user}`). Only supports `:` (has). For example:
+   *     `annotations.user_mentions.user.name:"users/1234567890"` returns only
+   *     messages that contain a mention to the specified user. Alternatively, the
+   *     alias `me` can be used to filter for messages that mention the caller
+   *     user, for example: `annotations.user_mentions.user.name:users/me`. You
+   *     can also use the e-mail as an alias for `{user}`, for example,
+   *     `users/example@gmail.com`.
+   *
+   *   For advanced filtering, the following functions are also available:
+   *
+   *   - `has_link()`: Returns only messages that have at least one hyperlink in
+   *     the message text.
+   *   - `is_unread()`: Filters out messages that have been read by the calling
+   *     user.
+   *
+   *   Using the `space.display_name` filter requires that the calling credentials
+   *   include one of the following [authorization
+   *   scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.spaces.readonly`
+   *   - `https://www.googleapis.com/auth/chat.spaces`
+   *
+   *   Using the `is_unread()` filter requires that the calling credentials
+   *   include one of the following [authorization
+   *   scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.readstate.readonly`
+   *   - `https://www.googleapis.com/auth/chat.users.readstate`
+   *
+   *
+   *   Across different fields, only `AND` operators are supported. A valid
+   *   example is `sender.name = "users/1234567890" AND is_unread()`. The word
+   *   `AND` is optional and is implied if omitted. For example, `sender.name =
+   *   "users/1234567890" is_unread()` is valid and is equivalent to the previous
+   *   example. An invalid example is `sender.name = "users/1234567890" OR
+   *   is_unread()` because `OR` is not supported between different fields.
+   *
+   *   Among the same field:
+   *
+   *   - `create_time` supports only `AND`, and can only be used to represent
+   *      an interval, such as `create_time >= "2022-01-01T00:00:00+00:00" AND
+   *      create_time < "2023-01-01T00:00:00+00:00"`.
+   *   - `sender.name` supports only the `OR` operator, for example:
+   *     `sender.name = "users/1234567890" OR sender.name = "users/0987654321"`.
+   *   - `space.name` supports only the `OR` operator, for example:
+   *     `space.name = "spaces/ABCDEFGH" OR space.name = "spaces/QWERTYUI"`.
+   *   - `space.display_name` supports the operators `AND` and `OR`, but not a
+   *     mix of both. For example:
+   *     `space.display_name:Project AND space.display_name:Tasks` returns
+   *     messages that are in spaces with display names containing both `Project`
+   *     and `Tasks`, whereas
+   *     `space.display_name:Project OR space.display_name:Tasks` returns messages
+   *     that are in spaces with display names containing either `Project` or
+   *     `Tasks` or both.
+   *   - `annotations.user_mentions.user.name` supports the operators `AND` and
+   *     `OR`, but not a mix of both. For example:
+   *     `annotations.user_mentions.user.name:"users/1234567890" AND
+   *     annotations.user_mentions.user.name:"users/0987654321"` returns only
+   *     messages that mentions both users, whereas
+   *     `annotations.user_mentions.user.name:"users/1234567890" OR
+   *     annotations.user_mentions.user.name:"users/0987654321"` returns messages
+   *     that mention either user or both.
+   *
+   *   Parentheses are required to disambiguate operator precedence when combining
+   *   `AND` and `OR` operators in the same query. For example:
+   *   `(sender.name="users/me" OR sender.name="users/123456") AND is_unread()`.
+   *   Otherwise, parentheses are optional.
+   *
+   *   The following example queries are valid:
+   *
+   *   ```
+   *   "Pending reports" AND create_time >= "2023-01-01T00:00:00Z"
+   *
+   *   sender.name = "users/example@gmail.com"
+   *
+   *   annotations.user_mentions.user.name:"users/0987654321"
+   *
+   *   attachment:* AND space.name = "spaces/ABCDEFGH"
+   *
+   *   tasks AND is_unread() AND sender.name = "users/1234567890"
+   *
+   *   "things to do" "urgent"
+   *
+   *   (sender.name = "users/1234567890")
+   *   AND (create_time < "2023-05-01T00:00:00Z")
+   *
+   *   tasks AND space.name = "spaces/ABCDEFGH" AND has_link()
+   *
+   *   "project one" is_unread()
+   *
+   *   space.display_name:Project tasks
+   *   ```
+   *
+   *   The maximum query length is 1,000 characters.
+   *
+   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+   *   error.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return. The service may return
+   *   fewer than this value.
+   *
+   *   If unspecified, at most 25 are returned.
+   *
+   *   The maximum value is 100. If you use a value more than 100, it's
+   *   automatically changed to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token, received from the previous search messages call. Provide
+   *   this parameter to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided should match the call that
+   *   provided the page token. Passing different values to the other parameters
+   *   might lead to unexpected results.
+   * @param {string} [request.orderBy]
+   *   Optional. How the results list is ordered.
+   *
+   *   Supported attributes to order by are:
+   *
+   *   - `create_time`: Sorts the results by the time of the message creation.
+   *     Default value.
+   *   - `relevance`: Sorts the results by relevance.
+   *     [Developer Preview](https://developers.google.com/workspace/preview).
+   *
+   *   The default ordering is `create_time desc`. Only a single order per query
+   *   (`create_time` or `relevance`) is supported. Only descending order (`desc`)
+   *   is supported, and it must be specified after the order attribute.
+   * @param {google.chat.v1.SearchMessagesRequest.SearchMessagesView} [request.view]
+   *   Optional. Specifies what kind of search results view to return. The default
+   *   is `SEARCH_MESSAGES_VIEW_BASIC`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.chat.v1.SearchMessageResult|SearchMessageResult} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchMessagesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  searchMessagesStream(
+    request?: protos.google.chat.v1.ISearchMessagesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['searchMessages'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('searchMessages stream %j', request);
+    return this.descriptors.page.searchMessages.createStream(
+      this.innerApiCalls.searchMessages as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `searchMessages`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the space to search within.
+   *
+   *   To search across all spaces the user has access to, set this field to
+   *   `spaces/-`. Using any other value for `parent` results in an
+   *   `INVALID_ARGUMENT` error.
+   *
+   *   To limit the search to one or more spaces, use `space.name` or
+   *   `space.display_name` in the `filter`.
+   * @param {string} request.filter
+   *   Required. A search query.
+   *
+   *   The query can specify one or more search keywords, which are used to filter
+   *   the results,
+   *
+   *   You can also filter the results using the following message fields:
+   *
+   *   - `create_time`: Accepts a timestamp in
+   *     [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the
+   *     supported comparison operators are: `<` and `>=`.
+   *   - `sender.name`: The resource name of the sender (`users/{user}`). Only
+   *     supports `=`. You can use the e-mail as an alias for `{user}`. For
+   *     example, `users/example@gmail.com`, where `example@gmail.com` is the
+   *     e-mail of the Google Chat user.
+   *   - `space.name`: The resource name of the space where the message is posted.
+   *     (`spaces/{space}`). Only supports `=`. If this filter is not set, the
+   *     search is performed across all direct messages and spaces the user has
+   *     access to as a space member.
+   *   - `space.display_name`: Supports the operator `:` (has) and filters spaces
+   *     based on a partial match of their display name. Results are limited to
+   *     the top five space matches. For example, `space.display_name:Project`
+   *     searches for messages in the top five spaces that contain the word
+   *     "Project" in their display names.
+   *   - `attachment`: Supports the operator `:*` (has any) to check for the
+   *     presence of attachments. If `attachment:*` is specified, only messages
+   *     that have at least one attachment are returned.
+   *   - `annotations.user_mentions.user.name`: The resource name of the mentioned
+   *     user (`users/{user}`). Only supports `:` (has). For example:
+   *     `annotations.user_mentions.user.name:"users/1234567890"` returns only
+   *     messages that contain a mention to the specified user. Alternatively, the
+   *     alias `me` can be used to filter for messages that mention the caller
+   *     user, for example: `annotations.user_mentions.user.name:users/me`. You
+   *     can also use the e-mail as an alias for `{user}`, for example,
+   *     `users/example@gmail.com`.
+   *
+   *   For advanced filtering, the following functions are also available:
+   *
+   *   - `has_link()`: Returns only messages that have at least one hyperlink in
+   *     the message text.
+   *   - `is_unread()`: Filters out messages that have been read by the calling
+   *     user.
+   *
+   *   Using the `space.display_name` filter requires that the calling credentials
+   *   include one of the following [authorization
+   *   scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.spaces.readonly`
+   *   - `https://www.googleapis.com/auth/chat.spaces`
+   *
+   *   Using the `is_unread()` filter requires that the calling credentials
+   *   include one of the following [authorization
+   *   scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
+   *
+   *   - `https://www.googleapis.com/auth/chat.users.readstate.readonly`
+   *   - `https://www.googleapis.com/auth/chat.users.readstate`
+   *
+   *
+   *   Across different fields, only `AND` operators are supported. A valid
+   *   example is `sender.name = "users/1234567890" AND is_unread()`. The word
+   *   `AND` is optional and is implied if omitted. For example, `sender.name =
+   *   "users/1234567890" is_unread()` is valid and is equivalent to the previous
+   *   example. An invalid example is `sender.name = "users/1234567890" OR
+   *   is_unread()` because `OR` is not supported between different fields.
+   *
+   *   Among the same field:
+   *
+   *   - `create_time` supports only `AND`, and can only be used to represent
+   *      an interval, such as `create_time >= "2022-01-01T00:00:00+00:00" AND
+   *      create_time < "2023-01-01T00:00:00+00:00"`.
+   *   - `sender.name` supports only the `OR` operator, for example:
+   *     `sender.name = "users/1234567890" OR sender.name = "users/0987654321"`.
+   *   - `space.name` supports only the `OR` operator, for example:
+   *     `space.name = "spaces/ABCDEFGH" OR space.name = "spaces/QWERTYUI"`.
+   *   - `space.display_name` supports the operators `AND` and `OR`, but not a
+   *     mix of both. For example:
+   *     `space.display_name:Project AND space.display_name:Tasks` returns
+   *     messages that are in spaces with display names containing both `Project`
+   *     and `Tasks`, whereas
+   *     `space.display_name:Project OR space.display_name:Tasks` returns messages
+   *     that are in spaces with display names containing either `Project` or
+   *     `Tasks` or both.
+   *   - `annotations.user_mentions.user.name` supports the operators `AND` and
+   *     `OR`, but not a mix of both. For example:
+   *     `annotations.user_mentions.user.name:"users/1234567890" AND
+   *     annotations.user_mentions.user.name:"users/0987654321"` returns only
+   *     messages that mentions both users, whereas
+   *     `annotations.user_mentions.user.name:"users/1234567890" OR
+   *     annotations.user_mentions.user.name:"users/0987654321"` returns messages
+   *     that mention either user or both.
+   *
+   *   Parentheses are required to disambiguate operator precedence when combining
+   *   `AND` and `OR` operators in the same query. For example:
+   *   `(sender.name="users/me" OR sender.name="users/123456") AND is_unread()`.
+   *   Otherwise, parentheses are optional.
+   *
+   *   The following example queries are valid:
+   *
+   *   ```
+   *   "Pending reports" AND create_time >= "2023-01-01T00:00:00Z"
+   *
+   *   sender.name = "users/example@gmail.com"
+   *
+   *   annotations.user_mentions.user.name:"users/0987654321"
+   *
+   *   attachment:* AND space.name = "spaces/ABCDEFGH"
+   *
+   *   tasks AND is_unread() AND sender.name = "users/1234567890"
+   *
+   *   "things to do" "urgent"
+   *
+   *   (sender.name = "users/1234567890")
+   *   AND (create_time < "2023-05-01T00:00:00Z")
+   *
+   *   tasks AND space.name = "spaces/ABCDEFGH" AND has_link()
+   *
+   *   "project one" is_unread()
+   *
+   *   space.display_name:Project tasks
+   *   ```
+   *
+   *   The maximum query length is 1,000 characters.
+   *
+   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+   *   error.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of results to return. The service may return
+   *   fewer than this value.
+   *
+   *   If unspecified, at most 25 are returned.
+   *
+   *   The maximum value is 100. If you use a value more than 100, it's
+   *   automatically changed to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token, received from the previous search messages call. Provide
+   *   this parameter to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided should match the call that
+   *   provided the page token. Passing different values to the other parameters
+   *   might lead to unexpected results.
+   * @param {string} [request.orderBy]
+   *   Optional. How the results list is ordered.
+   *
+   *   Supported attributes to order by are:
+   *
+   *   - `create_time`: Sorts the results by the time of the message creation.
+   *     Default value.
+   *   - `relevance`: Sorts the results by relevance.
+   *     [Developer Preview](https://developers.google.com/workspace/preview).
+   *
+   *   The default ordering is `create_time desc`. Only a single order per query
+   *   (`create_time` or `relevance`) is supported. Only descending order (`desc`)
+   *   is supported, and it must be specified after the order attribute.
+   * @param {google.chat.v1.SearchMessagesRequest.SearchMessagesView} [request.view]
+   *   Optional. Specifies what kind of search results view to return. The default
+   *   is `SEARCH_MESSAGES_VIEW_BASIC`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.chat.v1.SearchMessageResult|SearchMessageResult}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.search_messages.js</caption>
+   * region_tag:chat_v1_generated_ChatService_SearchMessages_async
+   */
+  searchMessagesAsync(
+    request?: protos.google.chat.v1.ISearchMessagesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.chat.v1.ISearchMessageResult> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['searchMessages'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('searchMessages iterate %j', request);
+    return this.descriptors.page.searchMessages.asyncIterate(
+      this.innerApiCalls['searchMessages'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.chat.v1.ISearchMessageResult>;
+  }
+  /**
    * Lists spaces the caller is a member of. Group chats and DMs aren't listed
    * until the first message is sent. For an example, see
    * [List
@@ -7125,19 +8595,30 @@ export class ChatServiceClient {
     ) as AsyncIterable<protos.google.chat.v1.ISpace>;
   }
   /**
-   * Returns a list of spaces in a Google Workspace organization based on an
-   * administrator's search. In the request, set `use_admin_access` to `true`.
-   * For an example, see [Search for and manage
+   * Returns a list of spaces in a Google Workspace organization. For an
+   * example, see [Search for and manage
    * spaces](https://developers.google.com/workspace/chat/search-manage-admin).
    *
-   * Requires [user
+   * When `use_admin_access` is set to `false`, the results are limited to
+   * spaces where the calling user is a joined member. To search with
+   * administrator privileges, set `use_admin_access` to `true`.
+   *
+   * Supports the following types of
+   * [authentication](https://developers.google.com/workspace/chat/authenticate-authorize):
+   *
+   * - [User
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+   * with one of the following authorization scopes:
+   *     - `https://www.googleapis.com/auth/chat.spaces.readonly`
+   *     - `https://www.googleapis.com/auth/chat.spaces`
+   *
+   * - [User
    * authentication with administrator
    * privileges](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user#admin-privileges)
    * and one of the following [authorization
    * scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes):
-   *
-   *   - `https://www.googleapis.com/auth/chat.admin.spaces.readonly`
-   *   - `https://www.googleapis.com/auth/chat.admin.spaces`
+   *     - `https://www.googleapis.com/auth/chat.admin.spaces.readonly`
+   *     - `https://www.googleapis.com/auth/chat.admin.spaces`
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -7152,9 +8633,6 @@ export class ChatServiceClient {
    *   Requires either the `chat.admin.spaces.readonly` or `chat.admin.spaces`
    *   [OAuth 2.0
    *   scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
-   *
-   *   This method currently only supports admin access, thus only `true` is
-   *   accepted for this field.
    * @param {number} request.pageSize
    *   The maximum number of spaces to return. The service may return fewer than
    *   this value.
@@ -7173,7 +8651,8 @@ export class ChatServiceClient {
    * @param {string} request.query
    *   Required. A search query.
    *
-   *   You can search by using the following parameters:
+   *   You can search by using the following parameters when `useAdminAccess`
+   *   is set to `true`:
    *
    *   - `create_time`
    *   - `customer`
@@ -7183,18 +8662,27 @@ export class ChatServiceClient {
    *   - `space_history_state`
    *   - `space_type`
    *
+   *   When `useAdminAccess` is set to `false`:
+   *
+   *   - `display_name`
+   *   - `external_user_allowed`
+   *   - `space_type`
+   *
    *   `create_time` and `last_active_time` accept a timestamp in
    *   [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the supported
    *   comparison operators are: `=`, `<`, `>`, `<=`, `>=`.
    *
-   *   `customer` is required and is used to indicate which customer
-   *   to fetch spaces from. `customers/my_customer` is the only supported value.
+   *   `customer` is required when `useAdminAccess` is set to `true`, and is
+   *   used to indicate which customer to fetch spaces from.
+   *   `customers/my_customer` is the only supported value.
    *
    *   `display_name` only accepts the `HAS` (`:`) operator. The text to
    *   match is first tokenized into tokens and each token is prefix-matched
    *   case-insensitively and independently as a substring anywhere in the space's
    *   `display_name`. For example, `Fun Eve` matches `Fun event` or `The
-   *   evening was fun`, but not `notFun event` or `even`.
+   *   evening was fun`, but not `notFun event` or `even`. When `useAdminAccess`
+   *   is set to `false`, `display_name` is required to retrieve meaningful
+   *   results. Otherwise, the default behavior is to return an empty response.
    *
    *   `external_user_allowed` accepts either `true` or `false`.
    *
@@ -7217,7 +8705,8 @@ export class ChatServiceClient {
    *   < "2022-01-01T00:00:00+00:00" AND last_active_time >
    *   "2023-01-01T00:00:00+00:00"`.
    *
-   *   The following example queries are valid:
+   *   The following example queries are valid when `useAdminAccess` is set to
+   *   `true`:
    *
    *   ```
    *   customer = "customers/my_customer" AND space_type = "SPACE"
@@ -7239,6 +8728,21 @@ export class ChatServiceClient {
    *   "2020-01-01T00:00:00+00:00") AND (external_user_allowed = "true") AND
    *   (space_history_state = "HISTORY_ON" OR space_history_state = "HISTORY_OFF")
    *   ```
+   *
+   *   The following example queries are valid when `useAdminAccess` is set to
+   *   `false`:
+   *
+   *   ```
+   *   display_name:"Hello World" AND space_type = "SPACE"
+   *
+   *   (display_name:"Hello" OR display_name:"Fun") AND space_type = "SPACE"
+   *
+   *   (external_user_allowed = "true" AND space_type = "SPACE") // Returns an
+   *   empty response.
+   *
+   *   (external_user_allowed = "true" AND display_name:"Hello" AND space_type =
+   *   "SPACE")
+   *   ```
    * @param {string} [request.orderBy]
    *   Optional. How the list of spaces is ordered.
    *
@@ -7250,13 +8754,17 @@ export class ChatServiceClient {
    *   any topic of this space.
    *   - `create_time` — Denotes the time of the space creation.
    *
+   *   When `useAdminAccess` is `false`, only `create_time` and `relevance` are
+   *   supported for ordering. Only `DESC` is supported for these fields in
+   *   non-admin searches.
+   *
    *   Valid ordering operation values are:
    *
    *   - `ASC` for ascending. Default value.
    *
    *   - `DESC` for descending.
    *
-   *   The supported syntax are:
+   *   The supported syntax are when `useAdminAccess` is set to `true`:
    *
    *   - `membership_count.joined_direct_human_user_count DESC`
    *   - `membership_count.joined_direct_human_user_count ASC`
@@ -7264,6 +8772,11 @@ export class ChatServiceClient {
    *   - `last_active_time ASC`
    *   - `create_time DESC`
    *   - `create_time ASC`
+   *
+   *   When `useAdminAccess` is set to `false`:
+   *
+   *   - `create_time DESC`
+   *   - `relevance DESC`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -7380,9 +8893,6 @@ export class ChatServiceClient {
    *   Requires either the `chat.admin.spaces.readonly` or `chat.admin.spaces`
    *   [OAuth 2.0
    *   scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
-   *
-   *   This method currently only supports admin access, thus only `true` is
-   *   accepted for this field.
    * @param {number} request.pageSize
    *   The maximum number of spaces to return. The service may return fewer than
    *   this value.
@@ -7401,7 +8911,8 @@ export class ChatServiceClient {
    * @param {string} request.query
    *   Required. A search query.
    *
-   *   You can search by using the following parameters:
+   *   You can search by using the following parameters when `useAdminAccess`
+   *   is set to `true`:
    *
    *   - `create_time`
    *   - `customer`
@@ -7411,18 +8922,27 @@ export class ChatServiceClient {
    *   - `space_history_state`
    *   - `space_type`
    *
+   *   When `useAdminAccess` is set to `false`:
+   *
+   *   - `display_name`
+   *   - `external_user_allowed`
+   *   - `space_type`
+   *
    *   `create_time` and `last_active_time` accept a timestamp in
    *   [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the supported
    *   comparison operators are: `=`, `<`, `>`, `<=`, `>=`.
    *
-   *   `customer` is required and is used to indicate which customer
-   *   to fetch spaces from. `customers/my_customer` is the only supported value.
+   *   `customer` is required when `useAdminAccess` is set to `true`, and is
+   *   used to indicate which customer to fetch spaces from.
+   *   `customers/my_customer` is the only supported value.
    *
    *   `display_name` only accepts the `HAS` (`:`) operator. The text to
    *   match is first tokenized into tokens and each token is prefix-matched
    *   case-insensitively and independently as a substring anywhere in the space's
    *   `display_name`. For example, `Fun Eve` matches `Fun event` or `The
-   *   evening was fun`, but not `notFun event` or `even`.
+   *   evening was fun`, but not `notFun event` or `even`. When `useAdminAccess`
+   *   is set to `false`, `display_name` is required to retrieve meaningful
+   *   results. Otherwise, the default behavior is to return an empty response.
    *
    *   `external_user_allowed` accepts either `true` or `false`.
    *
@@ -7445,7 +8965,8 @@ export class ChatServiceClient {
    *   < "2022-01-01T00:00:00+00:00" AND last_active_time >
    *   "2023-01-01T00:00:00+00:00"`.
    *
-   *   The following example queries are valid:
+   *   The following example queries are valid when `useAdminAccess` is set to
+   *   `true`:
    *
    *   ```
    *   customer = "customers/my_customer" AND space_type = "SPACE"
@@ -7467,6 +8988,21 @@ export class ChatServiceClient {
    *   "2020-01-01T00:00:00+00:00") AND (external_user_allowed = "true") AND
    *   (space_history_state = "HISTORY_ON" OR space_history_state = "HISTORY_OFF")
    *   ```
+   *
+   *   The following example queries are valid when `useAdminAccess` is set to
+   *   `false`:
+   *
+   *   ```
+   *   display_name:"Hello World" AND space_type = "SPACE"
+   *
+   *   (display_name:"Hello" OR display_name:"Fun") AND space_type = "SPACE"
+   *
+   *   (external_user_allowed = "true" AND space_type = "SPACE") // Returns an
+   *   empty response.
+   *
+   *   (external_user_allowed = "true" AND display_name:"Hello" AND space_type =
+   *   "SPACE")
+   *   ```
    * @param {string} [request.orderBy]
    *   Optional. How the list of spaces is ordered.
    *
@@ -7478,13 +9014,17 @@ export class ChatServiceClient {
    *   any topic of this space.
    *   - `create_time` — Denotes the time of the space creation.
    *
+   *   When `useAdminAccess` is `false`, only `create_time` and `relevance` are
+   *   supported for ordering. Only `DESC` is supported for these fields in
+   *   non-admin searches.
+   *
    *   Valid ordering operation values are:
    *
    *   - `ASC` for ascending. Default value.
    *
    *   - `DESC` for descending.
    *
-   *   The supported syntax are:
+   *   The supported syntax are when `useAdminAccess` is set to `true`:
    *
    *   - `membership_count.joined_direct_human_user_count DESC`
    *   - `membership_count.joined_direct_human_user_count ASC`
@@ -7492,6 +9032,11 @@ export class ChatServiceClient {
    *   - `last_active_time ASC`
    *   - `create_time DESC`
    *   - `create_time ASC`
+   *
+   *   When `useAdminAccess` is set to `false`:
+   *
+   *   - `create_time DESC`
+   *   - `relevance DESC`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -7541,9 +9086,6 @@ export class ChatServiceClient {
    *   Requires either the `chat.admin.spaces.readonly` or `chat.admin.spaces`
    *   [OAuth 2.0
    *   scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
-   *
-   *   This method currently only supports admin access, thus only `true` is
-   *   accepted for this field.
    * @param {number} request.pageSize
    *   The maximum number of spaces to return. The service may return fewer than
    *   this value.
@@ -7562,7 +9104,8 @@ export class ChatServiceClient {
    * @param {string} request.query
    *   Required. A search query.
    *
-   *   You can search by using the following parameters:
+   *   You can search by using the following parameters when `useAdminAccess`
+   *   is set to `true`:
    *
    *   - `create_time`
    *   - `customer`
@@ -7572,18 +9115,27 @@ export class ChatServiceClient {
    *   - `space_history_state`
    *   - `space_type`
    *
+   *   When `useAdminAccess` is set to `false`:
+   *
+   *   - `display_name`
+   *   - `external_user_allowed`
+   *   - `space_type`
+   *
    *   `create_time` and `last_active_time` accept a timestamp in
    *   [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the supported
    *   comparison operators are: `=`, `<`, `>`, `<=`, `>=`.
    *
-   *   `customer` is required and is used to indicate which customer
-   *   to fetch spaces from. `customers/my_customer` is the only supported value.
+   *   `customer` is required when `useAdminAccess` is set to `true`, and is
+   *   used to indicate which customer to fetch spaces from.
+   *   `customers/my_customer` is the only supported value.
    *
    *   `display_name` only accepts the `HAS` (`:`) operator. The text to
    *   match is first tokenized into tokens and each token is prefix-matched
    *   case-insensitively and independently as a substring anywhere in the space's
    *   `display_name`. For example, `Fun Eve` matches `Fun event` or `The
-   *   evening was fun`, but not `notFun event` or `even`.
+   *   evening was fun`, but not `notFun event` or `even`. When `useAdminAccess`
+   *   is set to `false`, `display_name` is required to retrieve meaningful
+   *   results. Otherwise, the default behavior is to return an empty response.
    *
    *   `external_user_allowed` accepts either `true` or `false`.
    *
@@ -7606,7 +9158,8 @@ export class ChatServiceClient {
    *   < "2022-01-01T00:00:00+00:00" AND last_active_time >
    *   "2023-01-01T00:00:00+00:00"`.
    *
-   *   The following example queries are valid:
+   *   The following example queries are valid when `useAdminAccess` is set to
+   *   `true`:
    *
    *   ```
    *   customer = "customers/my_customer" AND space_type = "SPACE"
@@ -7628,6 +9181,21 @@ export class ChatServiceClient {
    *   "2020-01-01T00:00:00+00:00") AND (external_user_allowed = "true") AND
    *   (space_history_state = "HISTORY_ON" OR space_history_state = "HISTORY_OFF")
    *   ```
+   *
+   *   The following example queries are valid when `useAdminAccess` is set to
+   *   `false`:
+   *
+   *   ```
+   *   display_name:"Hello World" AND space_type = "SPACE"
+   *
+   *   (display_name:"Hello" OR display_name:"Fun") AND space_type = "SPACE"
+   *
+   *   (external_user_allowed = "true" AND space_type = "SPACE") // Returns an
+   *   empty response.
+   *
+   *   (external_user_allowed = "true" AND display_name:"Hello" AND space_type =
+   *   "SPACE")
+   *   ```
    * @param {string} [request.orderBy]
    *   Optional. How the list of spaces is ordered.
    *
@@ -7639,13 +9207,17 @@ export class ChatServiceClient {
    *   any topic of this space.
    *   - `create_time` — Denotes the time of the space creation.
    *
+   *   When `useAdminAccess` is `false`, only `create_time` and `relevance` are
+   *   supported for ordering. Only `DESC` is supported for these fields in
+   *   non-admin searches.
+   *
    *   Valid ordering operation values are:
    *
    *   - `ASC` for ascending. Default value.
    *
    *   - `DESC` for descending.
    *
-   *   The supported syntax are:
+   *   The supported syntax are when `useAdminAccess` is set to `true`:
    *
    *   - `membership_count.joined_direct_human_user_count DESC`
    *   - `membership_count.joined_direct_human_user_count ASC`
@@ -7653,6 +9225,11 @@ export class ChatServiceClient {
    *   - `last_active_time ASC`
    *   - `create_time DESC`
    *   - `create_time ASC`
+   *
+   *   When `useAdminAccess` is set to `false`:
+   *
+   *   - `create_time DESC`
+   *   - `relevance DESC`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -9765,6 +11342,30 @@ export class ChatServiceClient {
   matchAttachmentFromAttachmentName(attachmentName: string) {
     return this.pathTemplates.attachmentPathTemplate.match(attachmentName)
       .attachment;
+  }
+
+  /**
+   * Return a fully-qualified availability resource name string.
+   *
+   * @param {string} user
+   * @returns {string} Resource name string.
+   */
+  availabilityPath(user: string) {
+    return this.pathTemplates.availabilityPathTemplate.render({
+      user: user,
+    });
+  }
+
+  /**
+   * Parse the user from Availability resource.
+   *
+   * @param {string} availabilityName
+   *   A fully-qualified path representing Availability resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromAvailabilityName(availabilityName: string) {
+    return this.pathTemplates.availabilityPathTemplate.match(availabilityName)
+      .user;
   }
 
   /**
