@@ -3,7 +3,7 @@
   "license": "MIT",
   "author": "Google LLC",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "files": [
     "*.js",
@@ -15,7 +15,7 @@
     "test": "echo \"There are no sample tests 👻\""
   },
   "dependencies": {
-    "googleapis-common": "^9.0.0"
+    "googleapis-common": "^9.0.1"
   },
   "devDependencies": {
     "mocha": "^8.0.0"
