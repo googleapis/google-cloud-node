@@ -845,15 +845,44 @@ describe('resumable upload', () => {
     });
 
     const helper = new gax.ResumableUpload(buildContext(auth));
+    const finished = helper.finished();
+    const rejection = assert.rejects(
+      finished,
+      (err: gax.GoogleError) => err.code === Status.DEADLINE_EXCEEDED,
+    );
     await helper.start({
       uploadStream: Readable.from([Buffer.alloc(10)]),
       globalDeadlineMs: 5,
       uploadSize: 10 * 1024 * 1024 * 1024,
     });
+    await rejection;
+  });
+
+  it('rejects with DEADLINE_EXCEEDED when the stream stalls past the deadline', async () => {
+    const auth = mockAuth(async opts => {
+      const command = commandOf(opts);
+      if (command === 'start') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+        });
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    const helper = new gax.ResumableUpload(buildContext(auth));
+    // The stream never yields data, so the transmission loop blocks on the
+    // stream read; only the session deadline can end the upload.
+    const stalled = new Readable({read() {}});
+    await helper.start({
+      uploadStream: stalled,
+      globalDeadlineMs: 50,
+    });
     await assert.rejects(
       helper.finished(),
       (err: gax.GoogleError) => err.code === Status.DEADLINE_EXCEEDED,
     );
+    assert.ok(stalled.destroyed);
   });
 
   it('cancels an in-flight upload and notifies the server', async () => {
@@ -891,6 +920,7 @@ describe('resumable upload', () => {
       requests.some(r => commandOf(r) === 'cancel'),
       'expected a cancel command to be sent',
     );
+    assert.ok(stream.destroyed);
   });
 
   it('resolves the GAPIC method call with a ResumableUpload helper', async () => {

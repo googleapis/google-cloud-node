@@ -125,7 +125,11 @@ export interface ResumableUploadStartParams {
    * deadline for large payloads.
    */
   uploadSize?: number;
-  /** Override for the global deadline, in milliseconds. */
+  /**
+   * Override for the global deadline, in milliseconds. The deadline bounds
+   * the entire upload session, including time spent waiting for data from
+   * the upload stream.
+   */
   globalDeadlineMs?: number;
   /**
    * Headers that must only be sent with the initial `start` request (for
@@ -343,6 +347,7 @@ export class ResumableUpload {
   private globalDeadlineMs = DEFAULT_GLOBAL_DEADLINE_MS;
   private effectiveChunkSize_ = DEFAULT_CHUNK_SIZE;
   private activeAbortController: AbortController | null = null;
+  private deadlineTimer: ReturnType<typeof setTimeout> | null = null;
   private canceled_ = false;
   private started_ = false;
   private done_ = false;
@@ -374,14 +379,16 @@ export class ResumableUpload {
   }
 
   /**
-   * Cancels the upload session, aborts any in-flight HTTP request, and
-   * rejects the promise returned by {@link ResumableUpload.finished}.
+   * Cancels the upload session, aborts any in-flight HTTP request, releases
+   * the upload stream, and rejects the promise returned by
+   * {@link ResumableUpload.finished}.
    */
   cancel(): void {
     if (this.canceled_ || this.done_) {
       return;
     }
     this.canceled_ = true;
+    this.clearDeadlineTimer();
     if (this.uploadUrl_) {
       // Best-effort server-side cancellation of the session.
       const controller = new AbortController();
@@ -401,6 +408,9 @@ export class ResumableUpload {
         .catch(() => {});
     }
     this.activeAbortController?.abort();
+    // Release the local upload stream so the transmission loop does not stay
+    // subscribed to it indefinitely (for example, when it is stalled).
+    this.releaseUploadStream();
     const err = createGoogleError(
       'The resumable upload was cancelled.',
       Status.CANCELLED,
@@ -432,6 +442,7 @@ export class ResumableUpload {
     this.started_ = true;
     this.startTimeMs = Date.now();
     this.globalDeadlineMs = this.computeGlobalDeadlineMs(params);
+    this.armDeadlineTimer();
 
     let sessionUrl: string;
     let granularity: number | null = null;
@@ -461,6 +472,7 @@ export class ResumableUpload {
       // Session setup failed before transmission began; make sure awaiting
       // `finished()` does not hang forever.
       this.done_ = true;
+      this.clearDeadlineTimer();
       this.rejectFinished_(err as Error);
       throw err;
     }
@@ -702,13 +714,61 @@ export class ResumableUpload {
       }
       this.response_ = response;
       this.done_ = true;
+      this.clearDeadlineTimer();
       this.resolveFinished_(response);
     } catch (err) {
       if (!this.canceled_) {
         this.done_ = true;
+        this.clearDeadlineTimer();
         this.rejectFinished_(err as Error);
       }
     }
+  }
+
+  /**
+   * Arms a watchdog timer that enforces the global deadline across the whole
+   * session, including time spent waiting for data from the upload stream
+   * (which the point-in-time {@link assertDeadline} checks cannot cover).
+   */
+  private armDeadlineTimer(): void {
+    this.clearDeadlineTimer();
+    this.deadlineTimer = setTimeout(() => {
+      if (this.canceled_ || this.done_) {
+        return;
+      }
+      // Abort any in-flight request and release the stream so the
+      // transmission loop terminates instead of remaining suspended.
+      this.activeAbortController?.abort();
+      this.releaseUploadStream();
+      this.done_ = true;
+      this.rejectFinished_(this.deadlineError());
+    }, this.globalDeadlineMs);
+  }
+
+  private clearDeadlineTimer(): void {
+    if (this.deadlineTimer) {
+      clearTimeout(this.deadlineTimer);
+      this.deadlineTimer = null;
+    }
+  }
+
+  /**
+   * Best-effort release of the caller's upload stream, so a transmission
+   * loop blocked waiting for stream data does not stay subscribed forever.
+   */
+  private releaseUploadStream(): void {
+    const stream = this.params?.uploadStream as
+      | {destroy?: (error?: Error) => void}
+      | undefined;
+    stream?.destroy?.();
+  }
+
+  private deadlineError(): GoogleError {
+    return createGoogleError(
+      'The resumable upload exceeded its global deadline of ' +
+        `${this.globalDeadlineMs} ms.`,
+      Status.DEADLINE_EXCEEDED,
+    );
   }
 
   /**
@@ -1267,11 +1327,7 @@ export class ResumableUpload {
 
   private assertDeadline(): void {
     if (Date.now() - this.startTimeMs >= this.globalDeadlineMs) {
-      throw createGoogleError(
-        'The resumable upload exceeded its global deadline of ' +
-          `${this.globalDeadlineMs} ms.`,
-        Status.DEADLINE_EXCEEDED,
-      );
+      throw this.deadlineError();
     }
   }
 }
