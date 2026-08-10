@@ -33,6 +33,10 @@
       "types": "./build/protos/protos.d.ts",
       "default": "./build/protos/protos.js"
     },
+    "./protos/protos": {
+      "types": "./build/protos/protos.d.ts",
+      "default": "./build/protos/protos.js"
+    },
     "./protos/protos.json": "./build/protos/protos.json",
     "./build/protos/protos": {
       "types": "./build/protos/protos.d.ts",

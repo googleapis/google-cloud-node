@@ -37,11 +37,10 @@ import {
 import {Backup} from './backup';
 import {BatchTransaction, TransactionIdentifier} from './batch-transaction';
 import {SessionFactory, SessionFactoryInterface} from './session-factory';
-import {
-  google as databaseAdmin,
-  google,
-  google as spannerClient,
-} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
+import databaseAdmin = protos.google;
+import spannerClient = protos.google;
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 import {

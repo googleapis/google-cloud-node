@@ -9,7 +9,7 @@
     "test": "mocha --timeout 60000"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "license": "Apache-2.0",
   "dependencies": {
