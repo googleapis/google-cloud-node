@@ -464,6 +464,70 @@ describe.skipClassic('Pipeline class', () => {
         const res = await promise;
         expectResults(res, {documents_modified: 0});
       });
+
+      it('can execute insert stage', async () => {
+        const newDocId = 'newBook_insert_1';
+        const res = await firestore
+          .pipeline()
+          .literals([{title: 'New Book', author: 'Author 1'}])
+          .insert({collection: dmlCol.path, documentId: newDocId})
+          .execute();
+
+        expectResults(res, {documents_modified: 1});
+
+        const snap = await dmlCol.doc(newDocId).get();
+        expect(snap.exists).to.be.true;
+        expect(snap.get('title')).to.equal('New Book');
+      });
+
+      it('can execute upsert stage with transforms', async () => {
+        const upsertDocId = 'upsertBook_1';
+        const res = await firestore
+          .pipeline()
+          .literals([{title: 'Upserted Book', count: 1}])
+          .upsert([add(field('count'), constant(1)).as('count')], {
+            collection: dmlCol.path,
+            documentId: upsertDocId,
+          })
+          .execute();
+
+        expectResults(res, {documents_modified: 1});
+
+        const snap = await dmlCol.doc(upsertDocId).get();
+        expect(snap.exists).to.be.true;
+        expect(snap.get('title')).to.equal('Upserted Book');
+      });
+
+      it('can execute DML with atomic option', async () => {
+        const atomicDocId = 'atomicBook_1';
+        const res = await firestore
+          .pipeline()
+          .literals([{title: 'Atomic Book'}])
+          .insert({collection: dmlCol.path, documentId: atomicDocId})
+          .execute({atomic: true});
+
+        expectResults(res, {documents_modified: 1});
+
+        const snap = await dmlCol.doc(atomicDocId).get();
+        expect(snap.exists).to.be.true;
+      });
+
+      it('can execute insert/upsert stages inside transaction runner', async () => {
+        const txDocId = 'txBook_1';
+        await firestore.runTransaction(async transaction => {
+          const insertPpl = firestore
+            .pipeline()
+            .literals([{title: 'Tx Book'}])
+            .insert({collection: dmlCol.path, documentId: txDocId});
+
+          const res = await transaction.execute(insertPpl);
+          expectResults(res, {documents_modified: 1});
+        });
+
+        const snap = await dmlCol.doc(txDocId).get();
+        expect(snap.exists).to.be.true;
+        expect(snap.get('title')).to.equal('Tx Book');
+      });
     });
 
     it('empty snapshot as expected', async () => {

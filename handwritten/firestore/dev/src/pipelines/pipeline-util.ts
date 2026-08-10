@@ -264,7 +264,10 @@ export class ExecutionUtil {
           structuredPipeline: structuredPipeline._toProto(this._serializer),
         };
 
-        if (transactionOrReadTime instanceof Uint8Array) {
+        if (structuredPipeline.options?.atomic) {
+          request.newTransaction = {readWrite: {}};
+          request.autoCommitTransaction = true;
+        } else if (transactionOrReadTime instanceof Uint8Array) {
           request.transaction = transactionOrReadTime;
         } else if (transactionOrReadTime instanceof Timestamp) {
           request.readTime = transactionOrReadTime.toProto().timestampValue;

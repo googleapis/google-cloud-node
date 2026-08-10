@@ -12279,6 +12279,14 @@ declare namespace FirebaseFirestore {
        * @throws {@FirestoreError} Thrown if any of the provided DocumentReferences target a different project or database than the pipeline.
        */
       createFrom(query: Query): Pipeline;
+      /**
+       * Set the pipeline's source to the in-memory documents specified by the given records.
+       */
+      literals(
+        documents: Array<Record<string, unknown>>,
+        options?: LiteralsStageOptions,
+      ): Pipeline;
+      literals(options: LiteralsStageOptions): Pipeline;
     }
 
     /**
@@ -12718,6 +12726,49 @@ declare namespace FirebaseFirestore {
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       update(transformedFields: AliasedExpression[]): Pipeline;
+      /**
+       * @beta
+       * Performs an update operation using documents from previous stages.
+       *
+       * @param fieldsMap - Map of field transformations to apply.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      update(
+        fieldsMap: Record<string, Expression> | Map<string, Expression>,
+      ): Pipeline;
+      /**
+       * @beta
+       * Performs an insert operation on documents from previous stages.
+       *
+       * @param options - Options defining how this Insert stage is evaluated.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      insert(options?: InsertStageOptions): Pipeline;
+      /**
+       * @beta
+       * Performs an upsert operation on documents from previous stages.
+       *
+       * @param transforms - Transformations to apply on upsert.
+       * @param options - Options defining how this Upsert stage is evaluated.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      upsert(
+        transforms?: AliasedExpression[],
+        options?: Omit<UpsertStageOptions, 'transforms'>,
+      ): Pipeline;
+      upsert(options?: UpsertStageOptions): Pipeline;
+      /**
+       * Appends a literals stage to the pipeline.
+       *
+       * @param documents An array of objects/records specifying in-memory documents.
+       * @param options Options defining how this LiteralsSource stage is evaluated.
+       * @return A new {@code Pipeline} object with this stage appended to the stage list.
+       */
+      literals(
+        documents: Array<Record<string, unknown>>,
+        options?: LiteralsStageOptions,
+      ): Pipeline;
+      literals(options: LiteralsStageOptions): Pipeline;
       /**
        * Filters the documents from previous stages to only include those matching the specified {@link
        * BooleanExpression}.
@@ -13419,6 +13470,10 @@ declare namespace FirebaseFirestore {
        */
       indexMode?: 'recommended';
       /**
+       * Indicates that the pipeline will be executed atomically.
+       */
+      atomic?: boolean;
+      /**
        * @beta Options used to configure explain queries. */
       explainOptions?: {
         /**
@@ -13894,6 +13949,30 @@ declare namespace FirebaseFirestore {
     //    */
     //   separator?: string;
     // };
+
+    /**
+     * Options defining how an Insert stage is evaluated.
+     */
+    export type InsertStageOptions = StageOptions & {
+      collection?: string | CollectionReference;
+      documentId?: string | Expression;
+    };
+
+    /**
+     * Options defining how an Upsert stage is evaluated.
+     */
+    export type UpsertStageOptions = StageOptions & {
+      transforms?: AliasedExpression[];
+      collection?: string | CollectionReference;
+      documentId?: string | Expression;
+    };
+
+    /**
+     * Options defining how a LiteralsSource stage is evaluated.
+     */
+    export type LiteralsStageOptions = StageOptions & {
+      documents?: Array<Record<string, unknown>>;
+    };
 
     /**
      * Represents a field value within the explain statistics, which can be a primitive type (null, string, number, boolean)
