@@ -34,13 +34,13 @@ pub struct CoreClient {
 }
 
 impl CoreClient {
-    pub fn new(channel_count: usize) -> Self {
+    pub fn new(channel_count: usize) -> Result<Self, String> {
         let runtime = std::sync::Arc::new(
             tokio::runtime::Builder::new_multi_thread()
                 .worker_threads(num_cpus::get())
                 .enable_all()
                 .build()
-                .expect("Failed to build Core Tokio runtime"),
+                .map_err(|error| format!("Failed to build Core Tokio runtime: {error}"))?,
         );
 
         let endpoint = "https://spanner.googleapis.com:443";
@@ -48,24 +48,26 @@ impl CoreClient {
         tls_config = tls_config.with_enabled_roots();
 
         let (channels, auth_manager) = runtime.block_on(async {
-            let auth_manager = gcp_auth::AuthenticationManager::new().await.expect("Failed to init GCP auth");
+            let auth_manager = gcp_auth::AuthenticationManager::new()
+                .await
+                .map_err(|error| format!("Failed to init GCP auth: {error}"))?;
             let mut channels = Vec::new();
             let limit = if channel_count == 0 { 1 } else { channel_count };
             for _ in 0..limit {
                 let ep = tonic::transport::Endpoint::from_static(endpoint)
                     .tls_config(tls_config.clone())
-                    .expect("TLS config error");
-                channels.push(ep.connect().await.expect("Connect error"));
+                    .map_err(|error| format!("TLS config error: {error}"))?;
+                channels.push(ep.connect().await.map_err(|error| format!("Connect error: {error}"))?);
             }
-            (channels, auth_manager)
-        });
+            Ok::<_, String>((channels, auth_manager))
+        })?;
 
-        Self {
+        Ok(Self {
             runtime,
             channels,
             request_counter: std::sync::Arc::new(AtomicUsize::new(0)),
             auth_manager: std::sync::Arc::new(auth_manager),
-        }
+        })
     }
 
     pub fn close(&self) {

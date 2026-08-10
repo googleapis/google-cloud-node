@@ -11,7 +11,8 @@
   },
   "scripts": {
     "build": "napi build --platform --release",
-    "build:debug": "napi build --platform"
+    "build:debug": "napi build --platform",
+    "test:rust-integration": "node --test __test__/rust_binding_test.js"
   },
   "devDependencies": {
     "@napi-rs/cli": "^2"

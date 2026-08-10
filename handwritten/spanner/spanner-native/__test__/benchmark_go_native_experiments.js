@@ -38,6 +38,7 @@ const QUERY_TEMPLATE = process.env.SPANNER_BENCHMARK_QUERY_TEMPLATE ||
   (TABLE ? `SELECT * FROM ${TABLE} LIMIT {rows}` : undefined);
 const ENGINE = (process.env.BENCHMARK_ENGINE || 'go').toLowerCase();
 const ARM = process.env.BENCHMARK_ARM || ENGINE;
+const CREDENTIAL_PROVIDER = process.env.SPANNER_BENCHMARK_CREDENTIAL_PROVIDER;
 const ROW_COUNTS = [1, 100, 1000];
 const CONCURRENCY_LEVELS = [1, 16];
 const DURATION_MS = Number(process.env.BENCHMARK_DURATION_MS || 30_000);
@@ -53,6 +54,48 @@ function commandOutput(command, args, fallback = 'unknown') {
     return execFileSync(command, args, {encoding: 'utf8'}).trim();
   } catch (_) {
     return fallback;
+  }
+}
+
+function validateCredentialProvider() {
+  if (CREDENTIAL_PROVIDER !== 'vm-metadata') {
+    throw new Error(
+      'SPANNER_BENCHMARK_CREDENTIAL_PROVIDER must be vm-metadata for this comparison'
+    );
+  }
+
+  const credentialVariables = [
+    'GOOGLE_APPLICATION_CREDENTIALS',
+    'CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE',
+    'SPANNER_NODE_CREDENTIALS',
+  ];
+  const presentVariables = credentialVariables.filter(name =>
+    Object.prototype.hasOwnProperty.call(process.env, name)
+  );
+  if (presentVariables.length > 0) {
+    throw new Error(
+      `VM metadata auth requires credential variables to be absent, found: ${presentVariables.join(', ')}`
+    );
+  }
+
+  const wellKnownAdc = path.join(
+    os.homedir(),
+    '.config',
+    'gcloud',
+    'application_default_credentials.json'
+  );
+  if (fs.existsSync(wellKnownAdc)) {
+    throw new Error(`VM metadata auth requires ${wellKnownAdc} to be absent`);
+  }
+
+  const gcloudOnPath = (process.env.PATH || '')
+    .split(path.delimiter)
+    .filter(Boolean)
+    .some(directory => fs.existsSync(path.join(directory, 'gcloud')));
+  if (gcloudOnPath) {
+    throw new Error(
+      'VM metadata auth requires gcloud to be absent from PATH because gcp_auth prefers it over metadata'
+    );
   }
 }
 
@@ -128,6 +171,8 @@ function environmentMetadata() {
     platform: `${os.platform()}-${os.arch()}`,
     nodeVersion: process.version,
     goVersion: process.env.BENCHMARK_GO_VERSION || commandOutput('go', ['version']),
+    rustVersion: process.env.BENCHMARK_RUST_VERSION || commandOutput('rustc', ['--version']),
+    credentialProvider: CREDENTIAL_PROVIDER,
     armCommitSha: process.env.BENCHMARK_ARM_COMMIT || gitSha,
     armTreeCleanAtBuild: process.env.BENCHMARK_ARM_TREE_CLEAN || 'unknown',
     harnessCommitSha: gitSha,
@@ -177,6 +222,7 @@ async function main() {
   if (!['go', 'rust'].includes(ENGINE)) {
     throw new Error(`BENCHMARK_ENGINE must be go or rust, got ${ENGINE}`);
   }
+  validateCredentialProvider();
   if (VERIFY_ONLY) {
     await verifyBinding();
     return;

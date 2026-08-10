@@ -23,10 +23,11 @@ pub struct CoreClientHandle {
 #[napi]
 impl CoreClientHandle {
     #[napi(constructor)]
-    pub fn new(channel_count: i32) -> Self {
-        Self {
-            client: Arc::new(CoreClient::new(channel_count as usize)),
-        }
+    pub fn new(channel_count: i32) -> Result<Self> {
+        let client = CoreClient::new(channel_count as usize).map_err(Error::from_reason)?;
+        Ok(Self {
+            client: Arc::new(client),
+        })
     }
 
     #[napi]
@@ -118,12 +119,12 @@ pub fn execute_streaming_sql_native(
                     }
                     js_telemetry.set_named_property("attemptCount", ctx.env.create_uint32(res.telemetry.attempt_count)?)?;
                     
-                    // We return (err, batch, telemetry)
-                    Ok(vec![ctx.env.get_null()?.into_unknown(), outer.into_unknown(), js_telemetry.into_unknown()])
+                    // CalleeHandled prepends the error argument for us.
+                    Ok(vec![outer.into_unknown(), js_telemetry.into_unknown()])
                 }
                 None => {
-                    // End of stream, pass null
-                    Ok(vec![ctx.env.get_null()?.into_unknown(), ctx.env.get_null()?.into_unknown(), ctx.env.get_null()?.into_unknown()])
+                    // CalleeHandled prepends the error argument for us.
+                    Ok(vec![ctx.env.get_null()?.into_unknown(), ctx.env.get_null()?.into_unknown()])
                 }
             }
         }
