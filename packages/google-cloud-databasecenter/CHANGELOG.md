@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/databasecenter-v0.4.0...databasecenter-v0.4.1) (2026-08-05)
+
+
+### Bug Fixes
+
+* Upgrade types sinon for databasecenter ([#9098](https://github.com/googleapis/google-cloud-node/issues/9098)) ([23aee11](https://github.com/googleapis/google-cloud-node/commit/23aee114a947a29f31977aab8de9c1c7ecd62188))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/databasecenter-v0.3.0...databasecenter-v0.4.0) (2026-08-04)
 
 

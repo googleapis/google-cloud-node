@@ -2894,6 +2894,13 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "dataform.googleapis.com/Workspace"
                           }
+                        },
+                        "pipelineConfig": {
+                          "type": "PipelineConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3236,6 +3243,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "gcsRepositorySnapshotMetadata": {
+                          "type": "GcsRepositorySnapshotMetadata",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3345,6 +3359,49 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "pipelineConfig": {
+                          "type": "PipelineConfig",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GcsRepositorySnapshotMetadata": {
+                      "fields": {
+                        "repositorySnapshotUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "crc32cChecksum": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "generation": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GcsRepositorySnapshotDestination": {
+                      "fields": {
+                        "repositorySnapshotUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3353,6 +3410,11 @@
                         "executionSink": {
                           "oneof": [
                             "gcsOutputBucket"
+                          ]
+                        },
+                        "repositorySnapshotStorage": {
+                          "oneof": [
+                            "gcsRepositorySnapshotDestination"
                           ]
                         }
                       },
@@ -3364,12 +3426,47 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "gcsRepositorySnapshotDestination": {
+                          "type": "GcsRepositorySnapshotDestination",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "aiPlatformNotebookRuntimeTemplate": {
                           "type": "string",
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/NotebookRuntimeTemplate"
+                          }
+                        }
+                      }
+                    },
+                    "PipelineConfig": {
+                      "fields": {
+                        "pipelineType": {
+                          "type": "PipelineType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "path": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PipelineType": {
+                          "values": {
+                            "PIPELINE_TYPE_UNSPECIFIED": 0,
+                            "DATAFORM": 1,
+                            "SQL": 3,
+                            "NOTEBOOK": 4
                           }
                         }
                       }
@@ -4383,6 +4480,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "pipelineConfig": {
+                          "type": "PipelineConfig",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -4626,6 +4730,13 @@
                             "jobId": {
                               "type": "string",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "filePath": {
+                              "type": "string",
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -8568,6 +8679,13 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "dataform.googleapis.com/Workspace"
                           }
+                        },
+                        "pipelineConfig": {
+                          "type": "PipelineConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8910,6 +9028,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "gcsRepositorySnapshotMetadata": {
+                          "type": "GcsRepositorySnapshotMetadata",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -8943,6 +9068,111 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "WorkflowTriggerConfig": {
+                      "fields": {
+                        "condition": {
+                          "type": "Condition",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "workflowTriggers": {
+                          "rule": "repeated",
+                          "type": "WorkflowTrigger",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "minExecutionDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxWaitDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "recentTriggerEvaluationRecords": {
+                          "rule": "repeated",
+                          "type": "TriggerEvaluationRecord",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastSuccessfulEvaluationTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Condition": {
+                          "values": {
+                            "CONDITION_UNSPECIFIED": 0,
+                            "ALL": 1,
+                            "ANY": 2
+                          }
+                        }
+                      }
+                    },
+                    "TriggerEvaluationRecord": {
+                      "fields": {
+                        "evaluationTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "WorkflowTrigger": {
+                      "oneofs": {
+                        "trigger": {
+                          "oneof": [
+                            "tableUpdateTrigger"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "tableUpdateTrigger": {
+                          "type": "TableUpdateTrigger",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TableUpdateTrigger": {
+                      "fields": {
+                        "table": {
+                          "type": "Target",
+                          "id": 1
+                        },
+                        "triggerUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -9019,6 +9249,49 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "pipelineConfig": {
+                          "type": "PipelineConfig",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GcsRepositorySnapshotMetadata": {
+                      "fields": {
+                        "repositorySnapshotUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "crc32cChecksum": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "generation": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GcsRepositorySnapshotDestination": {
+                      "fields": {
+                        "repositorySnapshotUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9027,6 +9300,11 @@
                         "executionSink": {
                           "oneof": [
                             "gcsOutputBucket"
+                          ]
+                        },
+                        "repositorySnapshotStorage": {
+                          "oneof": [
+                            "gcsRepositorySnapshotDestination"
                           ]
                         }
                       },
@@ -9038,12 +9316,47 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "gcsRepositorySnapshotDestination": {
+                          "type": "GcsRepositorySnapshotDestination",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "aiPlatformNotebookRuntimeTemplate": {
                           "type": "string",
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/NotebookRuntimeTemplate"
+                          }
+                        }
+                      }
+                    },
+                    "PipelineConfig": {
+                      "fields": {
+                        "pipelineType": {
+                          "type": "PipelineType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "path": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PipelineType": {
+                          "values": {
+                            "PIPELINE_TYPE_UNSPECIFIED": 0,
+                            "DATAFORM": 1,
+                            "SQL": 3,
+                            "NOTEBOOK": 4
                           }
                         }
                       }
@@ -9744,6 +10057,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
                           }
+                        },
+                        "workflowTriggerConfig": {
+                          "type": "WorkflowTriggerConfig",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -10057,6 +10377,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "pipelineConfig": {
+                          "type": "PipelineConfig",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -10300,6 +10627,13 @@
                             "jobId": {
                               "type": "string",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "filePath": {
+                              "type": "string",
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
