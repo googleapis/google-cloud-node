@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"os"
+	"sync"
 	"sync/atomic"
 
 	gapic "cloud.google.com/go/spanner/apiv1"
@@ -15,6 +16,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
+
+var transportDiagnosticOnce sync.Once
 
 const (
 	spannerEndpoint = "spanner.googleapis.com:443"
@@ -108,8 +111,9 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 		grpc.WithInitialWindowSize(4 * 1024 * 1024),      // 4MB per stream window
 		grpc.WithInitialConnWindowSize(16 * 1024 * 1024), // 16MB per connection window
 		grpc.WithDefaultCallOptions(
-			grpc.MaxCallRecvMsgSize(100 * 1024 * 1024), // 100MB
-			grpc.MaxCallSendMsgSize(100 * 1024 * 1024),
+			grpc.MaxCallRecvMsgSize(100*1024*1024), // 100MB
+			grpc.MaxCallSendMsgSize(100*1024*1024),
+			grpc.ForceCodec(vtSafeCodec{}),
 		),
 	}
 
@@ -123,6 +127,12 @@ func NewCoreClient(channelCount int) (*CoreClient, error) {
 		}
 		conns[i] = conn
 	}
+
+	transportDiagnosticOnce.Do(func() {
+		fmt.Fprintf(os.Stderr,
+			"SPANNER_GO_RUNTIME transport=gfe direct_path=false endpoint=%s codec=vtprotobuf-safe disable_direct_path=%s\n",
+			spannerEndpoint, os.Getenv("GOOGLE_CLOUD_DISABLE_DIRECT_PATH"))
+	})
 
 	return &CoreClient{
 		conns:       conns,
