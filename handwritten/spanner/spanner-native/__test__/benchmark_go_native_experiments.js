@@ -34,6 +34,8 @@ const PROJECT = process.env.SPANNER_BENCHMARK_PROJECT || 'span-cloud-testing';
 const INSTANCE = process.env.SPANNER_BENCHMARK_INSTANCE || 'irahul-load-test';
 const DATABASE = process.env.SPANNER_BENCHMARK_DATABASE;
 const TABLE = process.env.SPANNER_BENCHMARK_TABLE;
+const QUERY_TEMPLATE = process.env.SPANNER_BENCHMARK_QUERY_TEMPLATE ||
+  (TABLE ? `SELECT * FROM ${TABLE} LIMIT {rows}` : undefined);
 const ENGINE = (process.env.BENCHMARK_ENGINE || 'go').toLowerCase();
 const ARM = process.env.BENCHMARK_ARM || ENGINE;
 const ROW_COUNTS = [1, 100, 1000];
@@ -111,7 +113,8 @@ function aggregate(values) {
 }
 
 function environmentMetadata() {
-  const gitSha = commandOutput('git', ['rev-parse', 'HEAD']);
+	const gitSha = process.env.BENCHMARK_HARNESS_COMMIT ||
+	  commandOutput('git', ['rev-parse', 'HEAD']);
   const trackedStatus = commandOutput(
     'git',
     ['status', '--porcelain', '--untracked-files=no'],
@@ -129,6 +132,7 @@ function environmentMetadata() {
     harnessCommitSha: gitSha,
     harnessTrackedTreeClean: trackedStatus === '',
     targetDatabase: `projects/${PROJECT}/instances/${INSTANCE}/databases/${DATABASE || '<unset>'}`,
+	queryTemplate: QUERY_TEMPLATE || '<unset>',
     directPath: {
       enabled: false,
       enableVariablesAbsentAtProcessStart: true,
@@ -153,12 +157,19 @@ async function verifyBinding() {
 async function captureRows(client, rows, concurrency) {
   if (!CAPTURE_DIR) return;
   fs.mkdirSync(CAPTURE_DIR, {recursive: true});
-  const query = `SELECT * FROM ${TABLE} LIMIT ${rows}`;
+	const query = queryForRows(rows);
   const results = await Promise.all(
     Array.from({length: concurrency}, () => client.executeSqlNative(query))
   );
   const filename = path.join(CAPTURE_DIR, `${ARM}-rows${rows}-c${concurrency}.json`);
   fs.writeFileSync(filename, JSON.stringify(results));
+}
+
+function queryForRows(rows) {
+	if (!QUERY_TEMPLATE || !QUERY_TEMPLATE.includes('{rows}')) {
+	  throw new Error('SPANNER_BENCHMARK_QUERY_TEMPLATE must contain {rows}');
+	}
+	return QUERY_TEMPLATE.replaceAll('{rows}', String(rows));
 }
 
 async function main() {
@@ -169,8 +180,8 @@ async function main() {
     await verifyBinding();
     return;
   }
-  if (!DATABASE || !TABLE) {
-    throw new Error('SPANNER_BENCHMARK_DATABASE and SPANNER_BENCHMARK_TABLE are required');
+	if (!DATABASE || !QUERY_TEMPLATE) {
+	  throw new Error('SPANNER_BENCHMARK_DATABASE and a table or query template are required');
   }
   if (!Number.isInteger(REPETITIONS) || REPETITIONS < 3) {
     throw new Error(`BENCHMARK_REPETITIONS must be at least 3, got ${REPETITIONS}`);
@@ -194,9 +205,9 @@ async function main() {
   }
 
   const shapes = [];
-  try {
-    for (const rows of ROW_COUNTS) {
-      const query = `SELECT * FROM ${TABLE} LIMIT ${rows}`;
+	try {
+	  for (const rows of ROW_COUNTS) {
+		const query = queryForRows(rows);
       for (const concurrency of CONCURRENCY_LEVELS) {
         const client = clients.get(concurrency);
         await captureRows(client, rows, concurrency);
