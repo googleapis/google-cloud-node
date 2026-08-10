@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.0.0...gcp-metadata-v9.0.1) (2026-08-05)
+
+
+### Bug Fixes
+
+* **core:** Discovery url handling, error code review helper, and pack-n-play test timeouts ([#9061](https://github.com/googleapis/google-cloud-node/issues/9061)) ([340364f](https://github.com/googleapis/google-cloud-node/commit/340364f8fab67adaf4e684fb3241de499394bf6b))
+
 ## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v8.1.4...gcp-metadata-v9.0.0) (2026-07-29)
 
 

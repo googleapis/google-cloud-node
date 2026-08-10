@@ -61,6 +61,10 @@ function main(database) {
    *  `new_transaction`.
    */
   // const autoCommitTransaction = true
+  /**
+   *  Optional. Any additional options for the request.
+   */
+  // const requestOptions = {}
 
   // Imports the Firestore library
   const {FirestoreClient} = require('@google-cloud/firestore-api').v1;
