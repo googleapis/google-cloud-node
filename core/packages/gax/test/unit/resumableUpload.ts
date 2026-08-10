@@ -633,6 +633,12 @@ describe('resumable upload', () => {
     const auth = mockAuth(async opts => {
       requests.push(opts);
       const command = commandOf(opts);
+      if (command === 'start') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+        });
+      }
       if (command === 'query') {
         return resumableUploadResponse(200, {
           'x-goog-upload-status': 'active',
@@ -681,6 +687,148 @@ describe('resumable upload', () => {
     assert.strictEqual(bodyLength(requests[1]), GRANULARITY);
     assert.strictEqual(offsetOf(requests[2]), 3 * GRANULARITY);
     assert.strictEqual(helper.uploadUrl, SESSION_URL);
+  });
+
+  it('resumes from a committed offset that does not align with the chunk boundary', async () => {
+    const requests: MockRequestOptions[] = [];
+    const auth = mockAuth(async opts => {
+      requests.push(opts);
+      const command = commandOf(opts);
+      if (command === 'query') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-status': 'active',
+          'x-goog-upload-size-received': '6',
+        });
+      }
+      if (command === 'upload') {
+        return resumableUploadResponse(200, {'x-goog-upload-status': 'active'});
+      }
+      if (command === 'upload, finalize') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      if (command === 'finalize') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    // The committed offset (6) splits the second stream chunk, so the bytes
+    // past the boundary must be preserved and transmitted.
+    const payload = Buffer.from([...Array(20).keys()]);
+    const helper = new gax.ResumableUpload(buildContext(auth));
+    const stream = Readable.from([
+      payload.subarray(0, 4),
+      payload.subarray(4, 12),
+      payload.subarray(12, 20),
+    ]);
+    await helper.start({
+      uploadStream: stream,
+      chunkSize: 8,
+      resumeUrl: SESSION_URL,
+    });
+    const response = await helper.finished();
+
+    assert.deepStrictEqual(response, {name: 'complete'});
+    assert.deepStrictEqual(
+      requests.map(r => commandOf(r)),
+      ['query', 'upload', 'upload, finalize'],
+    );
+    const uploads = requests.filter(
+      r => commandOf(r) === 'upload' || commandOf(r) === 'upload, finalize',
+    );
+    assert.deepStrictEqual(
+      uploads.map(r => offsetOf(r)),
+      [6, 14],
+    );
+    const transmitted = Buffer.concat(
+      uploads.map(r => Buffer.from(r.body as Buffer)),
+    );
+    assert.ok(transmitted.equals(payload.subarray(6)));
+  });
+
+  it('skips ahead to the server offset without dropping buffered bytes', async () => {
+    const requests: MockRequestOptions[] = [];
+    const auth = mockAuth(async opts => {
+      requests.push(opts);
+      const command = commandOf(opts);
+      if (command === 'start') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-url': SESSION_URL,
+          'x-goog-upload-status': 'active',
+        });
+      }
+      if (command === 'query') {
+        return resumableUploadResponse(200, {
+          'x-goog-upload-status': 'active',
+          'x-goog-upload-size-received': '12',
+        });
+      }
+      if (command === 'upload') {
+        if (offsetOf(opts) === 0) {
+          return resumableUploadResponse(416, {
+            'x-goog-upload-status': 'active',
+          });
+        }
+        return resumableUploadResponse(200, {'x-goog-upload-status': 'active'});
+      }
+      if (command === 'upload, finalize') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      if (command === 'finalize') {
+        return resumableUploadResponse(
+          200,
+          {'x-goog-upload-status': 'final'},
+          JSON.stringify({name: 'complete'}),
+        );
+      }
+      throw new Error(`Unexpected command: ${command}`);
+    });
+
+    // The first 12-byte stream chunk overflows the 8-byte chunk size, so the
+    // remainder (bytes 8-12) sits in the buffer when the server reports it
+    // committed 12 bytes; the skip must consume the buffer head, not the
+    // next stream chunk.
+    const payload = Buffer.from([...Array(20).keys()]);
+    const helper = new gax.ResumableUpload(buildContext(auth));
+    const stream = Readable.from([
+      payload.subarray(0, 12),
+      payload.subarray(12, 20),
+    ]);
+    await helper.start({uploadStream: stream, chunkSize: 8});
+    const response = await helper.finished();
+
+    assert.deepStrictEqual(response, {name: 'complete'});
+    assert.deepStrictEqual(
+      requests.map(r => commandOf(r)),
+      ['start', 'upload', 'query', 'upload', 'finalize'],
+    );
+    const uploads = requests.filter(
+      r =>
+        (commandOf(r) === 'upload' && offsetOf(r) !== 0) ||
+        commandOf(r) === 'finalize',
+    );
+    assert.deepStrictEqual(
+      uploads.map(r => offsetOf(r)),
+      [12, 20],
+    );
+    const transmitted = Buffer.concat(
+      uploads.map(r =>
+        r.body === undefined ? Buffer.alloc(0) : Buffer.from(r.body as Buffer),
+      ),
+    );
+    assert.ok(transmitted.equals(payload.subarray(12)));
   });
 
   it('aborts when the global deadline is exceeded', async () => {

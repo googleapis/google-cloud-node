@@ -41,7 +41,7 @@ import {OngoingCall, OngoingCallPromise} from './call';
 import {Descriptor} from './descriptor';
 import {decodeResponse} from './fallbackRest';
 import {CallSettings, createDefaultBackoffSettings, RetryOptions} from './gax';
-import type {GoogleError} from './googleError';
+import {GoogleError} from './googleError';
 import {Status, rpcCodeFromHttpStatusCode} from './status';
 import {transcode} from './transcoding';
 
@@ -196,16 +196,8 @@ class Category3Error extends Error {
   code?: Status;
 }
 
-/**
- * Constructs a {@link GoogleError} lazily. `googleError.ts` imports the
- * fallback module, which transitively imports this module; a top-level
- * import would create a module-load cycle.
- */
 function createGoogleError(message: string, code?: Status): GoogleError {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const {GoogleError: GoogleErrorClass} =
-    require('./googleError') as typeof import('./googleError');
-  const err = new GoogleErrorClass(message);
+  const err = new GoogleError(message);
   if (code !== undefined) {
     err.code = code;
   }
@@ -402,7 +394,7 @@ export class ResumableUpload {
             [UPLOAD_COMMAND_HEADER]: COMMAND_CANCEL,
           },
           signal: controller.signal,
-          responseType: 'stream',
+          responseType: 'text',
           timeout: this.params?.timeout ?? DEFAULT_PER_REQUEST_TIMEOUT_MS,
           validateStatus: () => true,
         })
@@ -447,6 +439,7 @@ export class ResumableUpload {
     // and the transmission loop.
     const stream = params.uploadStream as Readable;
     const iterator = stream[Symbol.asyncIterator]();
+    let initialBuffer = Buffer.alloc(0);
 
     try {
       if (params.resumeUrl) {
@@ -455,7 +448,7 @@ export class ResumableUpload {
         this.uploadUrl_ = params.resumeUrl;
         this.committedBytes_ = committedOffset;
         this.reportProgress();
-        await this.fastForward(iterator, committedOffset);
+        initialBuffer = await this.fastForward(iterator, committedOffset);
         sessionUrl = params.resumeUrl;
       } else {
         this.state_ = ResumableUploadState.STARTING;
@@ -480,7 +473,7 @@ export class ResumableUpload {
 
     // The transmission loop runs in the background; `start()` resolves once
     // the session is established so the user can inspect `uploadUrl`.
-    void this.runTransmission(sessionUrl, iterator);
+    void this.runTransmission(sessionUrl, iterator, initialBuffer);
   }
 
   /**
@@ -642,9 +635,10 @@ export class ResumableUpload {
   private async runTransmission(
     sessionUrl: string,
     iterator: AsyncIterator<unknown>,
+    initialBuffer: Buffer = Buffer.alloc(0),
   ): Promise<void> {
     try {
-      let buffer: Buffer = Buffer.alloc(0);
+      let buffer: Buffer = initialBuffer;
       let offset = this.committedBytes_;
       let previousChunk: Buffer | null = null;
       let response: {} | null = null;
@@ -683,7 +677,14 @@ export class ResumableUpload {
         this.reportProgress();
 
         if (transmit.skipAhead > 0) {
-          await this.skipBytes(iterator, transmit.skipAhead);
+          if (buffer.length >= transmit.skipAhead) {
+            buffer = buffer.subarray(transmit.skipAhead);
+          } else {
+            buffer = await this.skipBytes(
+              iterator,
+              transmit.skipAhead - buffer.length,
+            );
+          }
         }
         if (transmit.finalized) {
           response = transmit.response;
@@ -967,11 +968,15 @@ export class ResumableUpload {
     }
   }
 
-  /** Fast-forwards the stream by discarding `bytes` bytes. */
+  /**
+   * Fast-forwards the stream by discarding `bytes` bytes, returning any
+   * leftover bytes from the chunk that crossed the boundary so they can be
+   * prepended to the transmission buffer.
+   */
   private async fastForward(
     iterator: AsyncIterator<unknown>,
     bytes: number,
-  ): Promise<void> {
+  ): Promise<Buffer> {
     let remaining = bytes;
     while (remaining > 0) {
       const next = await iterator.next();
@@ -981,15 +986,24 @@ export class ResumableUpload {
             `offset of ${bytes} bytes. Provide a stream with the full payload.`,
         );
       }
-      remaining -= asBuffer(next.value).length;
+      const chunk = asBuffer(next.value);
+      if (chunk.length >= remaining) {
+        return chunk.subarray(remaining);
+      }
+      remaining -= chunk.length;
     }
+    return Buffer.alloc(0);
   }
 
-  /** Skips (discards) `bytes` bytes from the stream. */
+  /**
+   * Skips (discards) `bytes` bytes from the stream, returning any leftover
+   * bytes from the chunk that crossed the boundary so they can be prepended
+   * to the transmission buffer.
+   */
   private async skipBytes(
     iterator: AsyncIterator<unknown>,
     bytes: number,
-  ): Promise<void> {
+  ): Promise<Buffer> {
     let remaining = bytes;
     while (remaining > 0) {
       const next = await iterator.next();
@@ -999,8 +1013,13 @@ export class ResumableUpload {
             'provided stream; the payload appears shorter than expected.',
         );
       }
-      remaining -= asBuffer(next.value).length;
+      const chunk = asBuffer(next.value);
+      if (chunk.length >= remaining) {
+        return chunk.subarray(remaining);
+      }
+      remaining -= chunk.length;
     }
+    return Buffer.alloc(0);
   }
 
   /**
