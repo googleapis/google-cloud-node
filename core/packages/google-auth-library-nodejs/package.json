@@ -1,6 +1,6 @@
 {
   "name": "google-auth-library",
-  "version": "11.0.0",
+  "version": "11.0.1",
   "author": "Google Inc.",
   "description": "Google APIs Authentication Client Library for Node.js",
   "engines": {
