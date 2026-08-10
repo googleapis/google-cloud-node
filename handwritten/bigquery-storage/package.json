@@ -57,7 +57,7 @@
     "mocha": "^11.1.0",
     "nise": "^6.1.1",
     "null-loader": "^4.0.1",
-    "pack-n-play": "^5.0.1",
+    "pack-n-play": "^5.0.0",
     "path-to-regexp": "^8.2.0",
     "sinon": "21.0.3",
     "ts-loader": "^9.5.2",

@@ -102,7 +102,7 @@
     "long": "^5.3.2",
     "mocha": "^11.7.4",
     "typescript": "5.8.3",
-    "pack-n-play": "^5.0.1",
+    "pack-n-play": "^5.0.0",
     "sinon": "^20.0.0",
     "ts-loader": "^8.4.0",
     "webpack": "^5.102.1",
