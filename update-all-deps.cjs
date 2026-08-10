@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const cp = require('child_process');
 
 const dirsToScan = ['packages', 'core', 'handwritten'];
 // Directories to exclude entirely from any modifications
@@ -34,7 +33,7 @@ function scanDirForPackages(dirPath) {
         const pkg = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
         packageFilesToUpdate.push(fullPath);
         if (pkg.name && !excludeDepNames.includes(pkg.name)) {
-          targetLibraries[pkg.name] = fullPath;
+          targetLibraries[pkg.name] = pkg.version;
         }
       } catch (err) {
         console.error(`Error parsing ${fullPath}`);
@@ -48,15 +47,8 @@ for (const dir of dirsToScan) {
 }
 
 const latestVersions = {};
-for (const lib of Object.keys(targetLibraries)) {
-  try {
-    const version = cp.execSync(`npm show ${lib} version`, { encoding: 'utf8', stdio: 'pipe' }).trim();
-    if (version) {
-      latestVersions[lib] = `^${version}`;
-    }
-  } catch (err) {
-    // Ignore packages not on npm
-  }
+for (const [lib, version] of Object.entries(targetLibraries)) {
+  latestVersions[lib] = `^${version}`;
 }
 
 let count = 0;
