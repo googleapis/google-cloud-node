@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {GkeHubClient} from './gke_hub_client';
+export { GkeHubClient } from './gke_hub_client';

@@ -1,6 +1,24 @@
 # Changelog
 
 
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/retry-request-v8.0.4...retry-request-v9.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update retry-request to minimum Node version of 22. ([#9002](https://github.com/googleapis/google-cloud-node/issues/9002))
+
+### Features
+
+* Update retry-request to minimum Node version of 22. ([#9002](https://github.com/googleapis/google-cloud-node/issues/9002)) ([8a36d40](https://github.com/googleapis/google-cloud-node/commit/8a36d40b93f194fe4ea554aa70af1d087c053633)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [8.0.4](https://github.com/googleapis/google-cloud-node/compare/retry-request-v8.0.3...retry-request-v8.0.4) (2026-07-23)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+
 ## [8.0.3](https://github.com/googleapis/google-cloud-node/compare/retry-request-v8.0.2...retry-request-v8.0.3) (2026-05-11)
 
 

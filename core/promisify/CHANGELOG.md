@@ -5,6 +5,24 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/promisify-v5.1.0...promisify-v6.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update promisify to minimum Node version of 22. ([#9009](https://github.com/googleapis/google-cloud-node/issues/9009))
+
+### Features
+
+* Update promisify to minimum Node version of 22. ([#9009](https://github.com/googleapis/google-cloud-node/issues/9009)) ([212868e](https://github.com/googleapis/google-cloud-node/commit/212868e75ebddbdb07ff4d478acb1a858130fd1d)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/promisify-v5.0.1...promisify-v5.1.0) (2026-06-24)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/promisify-v5.0.0...promisify-v5.0.1) (2026-05-11)
 
 

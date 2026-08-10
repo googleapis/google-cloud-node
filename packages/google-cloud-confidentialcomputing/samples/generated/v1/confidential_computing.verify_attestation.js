@@ -70,6 +70,12 @@ function main(challenge, tpmAttestation) {
    *  products.
    */
   // const attester = 'abc123'
+  /**
+   *  Optional. Optional resource link of the Compute Engine instance.
+   *  Format:
+   *  `projects/{project_number}/zones/{zone}/instances/{instance_id}`
+   */
+  // const instance = 'abc123'
 
   // Imports the Confidentialcomputing library
   const {ConfidentialComputingClient} = require('@google-cloud/confidentialcomputing').v1;

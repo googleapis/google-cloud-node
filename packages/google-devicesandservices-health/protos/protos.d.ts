@@ -604,6 +604,94 @@ export namespace google {
                     PEAK = 4
                 }
 
+                /** FoodAccessLevel enum. */
+                enum FoodAccessLevel {
+                    FOOD_ACCESS_LEVEL_UNSPECIFIED = 0,
+                    FOOD_ACCESS_LEVEL_PUBLIC = 1,
+                    FOOD_ACCESS_LEVEL_PRIVATE = 2
+                }
+
+                /** MealType enum. */
+                enum MealType {
+                    MEAL_TYPE_UNSPECIFIED = 0,
+                    BEFORE_BREAKFAST = 1,
+                    BREAKFAST = 2,
+                    BEFORE_LUNCH = 3,
+                    LUNCH = 4,
+                    BEFORE_DINNER = 5,
+                    DINNER = 6,
+                    AFTER_DINNER = 7,
+                    SNACK = 8,
+                    ANYTIME = 9
+                }
+
+                /** EnergyUnit enum. */
+                enum EnergyUnit {
+                    ENERGY_UNIT_UNSPECIFIED = 0,
+                    JOULE = 1,
+                    KILOJOULE = 2,
+                    KILOCALORIE = 3,
+                    SMALL_CALORIE = 4,
+                    CALORIE = 5
+                }
+
+                /** Nutrient enum. */
+                enum Nutrient {
+                    NUTRIENT_UNSPECIFIED = 0,
+                    BIOTIN = 1,
+                    CAFFEINE = 2,
+                    CALCIUM = 3,
+                    CHLORIDE = 4,
+                    CARBOHYDRATES = 5,
+                    CHOLESTEROL = 6,
+                    CHROMIUM = 7,
+                    COPPER = 8,
+                    DIETARY_FIBER = 9,
+                    FOLIC_ACID = 10,
+                    IODINE = 11,
+                    IRON = 12,
+                    MAGNESIUM = 13,
+                    MANGANESE = 14,
+                    MOLYBDENUM = 15,
+                    MONOUNSATURATED_FAT = 16,
+                    NIACIN = 17,
+                    PANTOTHENIC_ACID = 18,
+                    PHOSPHORUS = 19,
+                    POLYUNSATURATED_FAT = 20,
+                    POTASSIUM = 21,
+                    PROTEIN = 22,
+                    RIBOFLAVIN = 23,
+                    SATURATED_FAT = 24,
+                    SELENIUM = 25,
+                    SODIUM = 26,
+                    SUGAR = 27,
+                    THIAMIN = 28,
+                    TRANS_FAT = 29,
+                    UNSATURATED_FAT = 30,
+                    VITAMIN_A = 31,
+                    VITAMIN_B12 = 32,
+                    VITAMIN_B6 = 33,
+                    VITAMIN_C = 34,
+                    VITAMIN_D = 35,
+                    VITAMIN_E = 36,
+                    VITAMIN_K = 37,
+                    ZINC = 38,
+                    FOLATE = 39
+                }
+
+                /** WeightUnit enum. */
+                enum WeightUnit {
+                    WEIGHT_UNIT_UNSPECIFIED = 0,
+                    GRAM = 1,
+                    KILOGRAM = 2,
+                    OUNCE = 3,
+                    POUND = 4,
+                    STONE = 5,
+                    MILLIGRAM = 6,
+                    MICROGRAM = 7,
+                    NANOGRAM = 8
+                }
+
                 /** VolumeUnit enum. */
                 enum VolumeUnit {
                     VOLUME_UNIT_UNSPECIFIED = 0,
@@ -646,7 +734,7 @@ export namespace google {
                     public heartRateZone: (google.devicesandservices.health.v4.ActiveZoneMinutes.HeartRateZone|keyof typeof google.devicesandservices.health.v4.ActiveZoneMinutes.HeartRateZone);
 
                     /** ActiveZoneMinutes activeZoneMinutes. */
-                    public activeZoneMinutes: (number|Long|string);
+                    public activeZoneMinutes?: (number|Long|string|null);
 
                     /**
                      * Creates a new ActiveZoneMinutes instance using the specified properties.
@@ -760,13 +848,13 @@ export namespace google {
                     constructor(properties?: google.devicesandservices.health.v4.IActiveZoneMinutesRollupValue);
 
                     /** ActiveZoneMinutesRollupValue sumInCardioHeartZone. */
-                    public sumInCardioHeartZone: (number|Long|string);
+                    public sumInCardioHeartZone?: (number|Long|string|null);
 
                     /** ActiveZoneMinutesRollupValue sumInPeakHeartZone. */
-                    public sumInPeakHeartZone: (number|Long|string);
+                    public sumInPeakHeartZone?: (number|Long|string|null);
 
                     /** ActiveZoneMinutesRollupValue sumInFatBurnHeartZone. */
-                    public sumInFatBurnHeartZone: (number|Long|string);
+                    public sumInFatBurnHeartZone?: (number|Long|string|null);
 
                     /**
                      * Creates a new ActiveZoneMinutesRollupValue instance using the specified properties.
@@ -974,7 +1062,7 @@ export namespace google {
                         public activityLevel: (google.devicesandservices.health.v4.ActiveMinutes.ActivityLevel|keyof typeof google.devicesandservices.health.v4.ActiveMinutes.ActivityLevel);
 
                         /** ActiveMinutesByActivityLevel activeMinutes. */
-                        public activeMinutes: (number|Long|string);
+                        public activeMinutes?: (number|Long|string|null);
 
                         /**
                          * Creates a new ActiveMinutesByActivityLevel instance using the specified properties.
@@ -1185,7 +1273,7 @@ export namespace google {
                         public activityLevel: (google.devicesandservices.health.v4.ActiveMinutes.ActivityLevel|keyof typeof google.devicesandservices.health.v4.ActiveMinutes.ActivityLevel);
 
                         /** ActiveMinutesRollupByActivityLevel activeMinutesSum. */
-                        public activeMinutesSum: (number|Long|string);
+                        public activeMinutesSum?: (number|Long|string|null);
 
                         /**
                          * Creates a new ActiveMinutesRollupByActivityLevel instance using the specified properties.
@@ -1607,7 +1695,7 @@ export namespace google {
                     public interval?: (google.devicesandservices.health.v4.IObservationTimeInterval|null);
 
                     /** Altitude gainMillimeters. */
-                    public gainMillimeters: (number|Long|string);
+                    public gainMillimeters?: (number|Long|string|null);
 
                     /**
                      * Creates a new Altitude instance using the specified properties.
@@ -1710,7 +1798,7 @@ export namespace google {
                     public interval?: (google.devicesandservices.health.v4.IObservationTimeInterval|null);
 
                     /** BasalEnergyBurned kcal. */
-                    public kcal: number;
+                    public kcal?: (number|null);
 
                     /**
                      * Creates a new BasalEnergyBurned instance using the specified properties.
@@ -1813,7 +1901,7 @@ export namespace google {
                     public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
 
                     /** BodyFat percentage. */
-                    public percentage: number;
+                    public percentage?: (number|null);
 
                     /**
                      * Creates a new BodyFat instance using the specified properties.
@@ -1910,7 +1998,7 @@ export namespace google {
                     constructor(properties?: google.devicesandservices.health.v4.IBodyFatRollupValue);
 
                     /** BodyFatRollupValue bodyFatPercentageAvg. */
-                    public bodyFatPercentageAvg: number;
+                    public bodyFatPercentageAvg?: (number|null);
 
                     /**
                      * Creates a new BodyFatRollupValue instance using the specified properties.
@@ -1984,6 +2072,255 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BodyFatRollupValue
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CoreBodyTemperature. */
+                interface ICoreBodyTemperature {
+
+                    /** CoreBodyTemperature sampleTime */
+                    sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
+
+                    /** CoreBodyTemperature temperatureCelsius */
+                    temperatureCelsius?: (number|null);
+
+                    /** CoreBodyTemperature measurementLocation */
+                    measurementLocation?: (google.devicesandservices.health.v4.CoreBodyTemperature.MeasurementLocation|keyof typeof google.devicesandservices.health.v4.CoreBodyTemperature.MeasurementLocation|null);
+
+                    /** CoreBodyTemperature id */
+                    id?: (string|null);
+                }
+
+                /** Represents a CoreBodyTemperature. */
+                class CoreBodyTemperature implements ICoreBodyTemperature {
+
+                    /**
+                     * Constructs a new CoreBodyTemperature.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.ICoreBodyTemperature);
+
+                    /** CoreBodyTemperature sampleTime. */
+                    public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
+
+                    /** CoreBodyTemperature temperatureCelsius. */
+                    public temperatureCelsius?: (number|null);
+
+                    /** CoreBodyTemperature measurementLocation. */
+                    public measurementLocation: (google.devicesandservices.health.v4.CoreBodyTemperature.MeasurementLocation|keyof typeof google.devicesandservices.health.v4.CoreBodyTemperature.MeasurementLocation);
+
+                    /** CoreBodyTemperature id. */
+                    public id: string;
+
+                    /**
+                     * Creates a new CoreBodyTemperature instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CoreBodyTemperature instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.ICoreBodyTemperature): google.devicesandservices.health.v4.CoreBodyTemperature;
+
+                    /**
+                     * Encodes the specified CoreBodyTemperature message. Does not implicitly {@link google.devicesandservices.health.v4.CoreBodyTemperature.verify|verify} messages.
+                     * @param message CoreBodyTemperature message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.ICoreBodyTemperature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CoreBodyTemperature message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CoreBodyTemperature.verify|verify} messages.
+                     * @param message CoreBodyTemperature message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.ICoreBodyTemperature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CoreBodyTemperature message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CoreBodyTemperature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.CoreBodyTemperature;
+
+                    /**
+                     * Decodes a CoreBodyTemperature message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CoreBodyTemperature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.CoreBodyTemperature;
+
+                    /**
+                     * Verifies a CoreBodyTemperature message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CoreBodyTemperature message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CoreBodyTemperature
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.CoreBodyTemperature;
+
+                    /**
+                     * Creates a plain object from a CoreBodyTemperature message. Also converts values to other types if specified.
+                     * @param message CoreBodyTemperature
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.CoreBodyTemperature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CoreBodyTemperature to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CoreBodyTemperature
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CoreBodyTemperature {
+
+                    /** MeasurementLocation enum. */
+                    enum MeasurementLocation {
+                        MEASUREMENT_LOCATION_UNSPECIFIED = 0,
+                        OTHER = 1,
+                        ARMPIT = 2,
+                        BODY = 3,
+                        EAR = 4,
+                        FINGER = 5,
+                        GASTRO_INTESTINAL = 6,
+                        MOUTH = 7,
+                        RECTUM = 8,
+                        TOE = 9,
+                        EAR_DRUM = 10,
+                        TEMPORAL_ARTERY = 11,
+                        FOREHEAD = 12,
+                        URINARY_BLADDER = 13,
+                        NASAL = 14,
+                        NASOPHARYNGEAL = 15,
+                        WRIST = 16,
+                        VAGINA = 17
+                    }
+                }
+
+                /** Properties of a CoreBodyTemperatureRollupValue. */
+                interface ICoreBodyTemperatureRollupValue {
+
+                    /** CoreBodyTemperatureRollupValue temperatureCelsiusAvg */
+                    temperatureCelsiusAvg?: (number|null);
+
+                    /** CoreBodyTemperatureRollupValue temperatureCelsiusMax */
+                    temperatureCelsiusMax?: (number|null);
+
+                    /** CoreBodyTemperatureRollupValue temperatureCelsiusMin */
+                    temperatureCelsiusMin?: (number|null);
+                }
+
+                /** Represents a CoreBodyTemperatureRollupValue. */
+                class CoreBodyTemperatureRollupValue implements ICoreBodyTemperatureRollupValue {
+
+                    /**
+                     * Constructs a new CoreBodyTemperatureRollupValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue);
+
+                    /** CoreBodyTemperatureRollupValue temperatureCelsiusAvg. */
+                    public temperatureCelsiusAvg?: (number|null);
+
+                    /** CoreBodyTemperatureRollupValue temperatureCelsiusMax. */
+                    public temperatureCelsiusMax?: (number|null);
+
+                    /** CoreBodyTemperatureRollupValue temperatureCelsiusMin. */
+                    public temperatureCelsiusMin?: (number|null);
+
+                    /**
+                     * Creates a new CoreBodyTemperatureRollupValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CoreBodyTemperatureRollupValue instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue): google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue;
+
+                    /**
+                     * Encodes the specified CoreBodyTemperatureRollupValue message. Does not implicitly {@link google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.verify|verify} messages.
+                     * @param message CoreBodyTemperatureRollupValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CoreBodyTemperatureRollupValue message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue.verify|verify} messages.
+                     * @param message CoreBodyTemperatureRollupValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CoreBodyTemperatureRollupValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CoreBodyTemperatureRollupValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue;
+
+                    /**
+                     * Decodes a CoreBodyTemperatureRollupValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CoreBodyTemperatureRollupValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue;
+
+                    /**
+                     * Verifies a CoreBodyTemperatureRollupValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CoreBodyTemperatureRollupValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CoreBodyTemperatureRollupValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue;
+
+                    /**
+                     * Creates a plain object from a CoreBodyTemperatureRollupValue message. Also converts values to other types if specified.
+                     * @param message CoreBodyTemperatureRollupValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.CoreBodyTemperatureRollupValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CoreBodyTemperatureRollupValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CoreBodyTemperatureRollupValue
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2112,7 +2449,7 @@ export namespace google {
                         public heartRateZone: (google.devicesandservices.health.v4.HeartRateZoneType|keyof typeof google.devicesandservices.health.v4.HeartRateZoneType);
 
                         /** CaloriesInHeartRateZoneValue kcal. */
-                        public kcal: number;
+                        public kcal?: (number|null);
 
                         /**
                          * Creates a new CaloriesInHeartRateZoneValue instance using the specified properties.
@@ -2324,10 +2661,10 @@ export namespace google {
                         public heartRateZoneType: (google.devicesandservices.health.v4.HeartRateZoneType|keyof typeof google.devicesandservices.health.v4.HeartRateZoneType);
 
                         /** HeartRateZone minBeatsPerMinute. */
-                        public minBeatsPerMinute: (number|Long|string);
+                        public minBeatsPerMinute?: (number|Long|string|null);
 
                         /** HeartRateZone maxBeatsPerMinute. */
-                        public maxBeatsPerMinute: (number|Long|string);
+                        public maxBeatsPerMinute?: (number|Long|string|null);
 
                         /**
                          * Creates a new HeartRateZone instance using the specified properties.
@@ -2552,7 +2889,7 @@ export namespace google {
                     public date?: (google.type.IDate|null);
 
                     /** DailyRespiratoryRate breathsPerMinute. */
-                    public breathsPerMinute: number;
+                    public breathsPerMinute?: (number|null);
 
                     /**
                      * Creates a new DailyRespiratoryRate instance using the specified properties.
@@ -2664,16 +3001,16 @@ export namespace google {
                     public date?: (google.type.IDate|null);
 
                     /** DailyOxygenSaturation averagePercentage. */
-                    public averagePercentage: number;
+                    public averagePercentage?: (number|null);
 
                     /** DailyOxygenSaturation lowerBoundPercentage. */
-                    public lowerBoundPercentage: number;
+                    public lowerBoundPercentage?: (number|null);
 
                     /** DailyOxygenSaturation upperBoundPercentage. */
-                    public upperBoundPercentage: number;
+                    public upperBoundPercentage?: (number|null);
 
                     /** DailyOxygenSaturation standardDeviationPercentage. */
-                    public standardDeviationPercentage: number;
+                    public standardDeviationPercentage?: (number|null);
 
                     /**
                      * Creates a new DailyOxygenSaturation instance using the specified properties.
@@ -2779,7 +3116,7 @@ export namespace google {
                     public date?: (google.type.IDate|null);
 
                     /** DailyRestingHeartRate beatsPerMinute. */
-                    public beatsPerMinute: (number|Long|string);
+                    public beatsPerMinute?: (number|Long|string|null);
 
                     /** DailyRestingHeartRate dailyRestingHeartRateMetadata. */
                     public dailyRestingHeartRateMetadata?: (google.devicesandservices.health.v4.DailyRestingHeartRate.IDailyRestingHeartRateMetadata|null);
@@ -3001,13 +3338,13 @@ export namespace google {
                     public date?: (google.type.IDate|null);
 
                     /** DailySleepTemperatureDerivations nightlyTemperatureCelsius. */
-                    public nightlyTemperatureCelsius: number;
+                    public nightlyTemperatureCelsius?: (number|null);
 
                     /** DailySleepTemperatureDerivations baselineTemperatureCelsius. */
-                    public baselineTemperatureCelsius: number;
+                    public baselineTemperatureCelsius?: (number|null);
 
                     /** DailySleepTemperatureDerivations relativeNightlyStddev_30dCelsius. */
-                    public relativeNightlyStddev_30dCelsius: number;
+                    public relativeNightlyStddev_30dCelsius?: (number|null);
 
                     /**
                      * Creates a new DailySleepTemperatureDerivations instance using the specified properties.
@@ -3119,7 +3456,7 @@ export namespace google {
                     public date?: (google.type.IDate|null);
 
                     /** DailyVO2Max vo2Max. */
-                    public vo2Max: number;
+                    public vo2Max?: (number|null);
 
                     /** DailyVO2Max estimated. */
                     public estimated: boolean;
@@ -3128,7 +3465,7 @@ export namespace google {
                     public cardioFitnessLevel: (google.devicesandservices.health.v4.DailyVO2Max.CardioFitnessLevel|keyof typeof google.devicesandservices.health.v4.DailyVO2Max.CardioFitnessLevel);
 
                     /** DailyVO2Max vo2MaxCovariance. */
-                    public vo2MaxCovariance: number;
+                    public vo2MaxCovariance?: (number|null);
 
                     /**
                      * Creates a new DailyVO2Max instance using the specified properties.
@@ -3245,7 +3582,7 @@ export namespace google {
                     public interval?: (google.devicesandservices.health.v4.IObservationTimeInterval|null);
 
                     /** Distance millimeters. */
-                    public millimeters: (number|Long|string);
+                    public millimeters?: (number|Long|string|null);
 
                     /**
                      * Creates a new Distance instance using the specified properties.
@@ -3342,7 +3679,7 @@ export namespace google {
                     constructor(properties?: google.devicesandservices.health.v4.IDistanceRollupValue);
 
                     /** DistanceRollupValue millimetersSum. */
-                    public millimetersSum: (number|Long|string);
+                    public millimetersSum?: (number|Long|string|null);
 
                     /**
                      * Creates a new DistanceRollupValue instance using the specified properties.
@@ -3420,6 +3757,160 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Electrocardiogram. */
+                interface IElectrocardiogram {
+
+                    /** Electrocardiogram interval */
+                    interval?: (google.devicesandservices.health.v4.ISessionTimeInterval|null);
+
+                    /** Electrocardiogram beatsPerMinuteAvg */
+                    beatsPerMinuteAvg?: (number|Long|string|null);
+
+                    /** Electrocardiogram resultClassification */
+                    resultClassification?: (google.devicesandservices.health.v4.Electrocardiogram.ResultClassification|keyof typeof google.devicesandservices.health.v4.Electrocardiogram.ResultClassification|null);
+
+                    /** Electrocardiogram waveformSamples */
+                    waveformSamples?: (number[]|null);
+
+                    /** Electrocardiogram samplingFrequencyHertz */
+                    samplingFrequencyHertz?: (number|null);
+
+                    /** Electrocardiogram millivoltsScalingFactor */
+                    millivoltsScalingFactor?: (number|null);
+
+                    /** Electrocardiogram leadNumber */
+                    leadNumber?: (number|null);
+
+                    /** Electrocardiogram medicalDeviceInfo */
+                    medicalDeviceInfo?: (google.devicesandservices.health.v4.IMedicalDeviceInfo|null);
+                }
+
+                /** Represents an Electrocardiogram. */
+                class Electrocardiogram implements IElectrocardiogram {
+
+                    /**
+                     * Constructs a new Electrocardiogram.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IElectrocardiogram);
+
+                    /** Electrocardiogram interval. */
+                    public interval?: (google.devicesandservices.health.v4.ISessionTimeInterval|null);
+
+                    /** Electrocardiogram beatsPerMinuteAvg. */
+                    public beatsPerMinuteAvg?: (number|Long|string|null);
+
+                    /** Electrocardiogram resultClassification. */
+                    public resultClassification: (google.devicesandservices.health.v4.Electrocardiogram.ResultClassification|keyof typeof google.devicesandservices.health.v4.Electrocardiogram.ResultClassification);
+
+                    /** Electrocardiogram waveformSamples. */
+                    public waveformSamples: number[];
+
+                    /** Electrocardiogram samplingFrequencyHertz. */
+                    public samplingFrequencyHertz?: (number|null);
+
+                    /** Electrocardiogram millivoltsScalingFactor. */
+                    public millivoltsScalingFactor?: (number|null);
+
+                    /** Electrocardiogram leadNumber. */
+                    public leadNumber?: (number|null);
+
+                    /** Electrocardiogram medicalDeviceInfo. */
+                    public medicalDeviceInfo?: (google.devicesandservices.health.v4.IMedicalDeviceInfo|null);
+
+                    /**
+                     * Creates a new Electrocardiogram instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Electrocardiogram instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IElectrocardiogram): google.devicesandservices.health.v4.Electrocardiogram;
+
+                    /**
+                     * Encodes the specified Electrocardiogram message. Does not implicitly {@link google.devicesandservices.health.v4.Electrocardiogram.verify|verify} messages.
+                     * @param message Electrocardiogram message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IElectrocardiogram, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Electrocardiogram message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Electrocardiogram.verify|verify} messages.
+                     * @param message Electrocardiogram message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IElectrocardiogram, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Electrocardiogram message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Electrocardiogram
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.Electrocardiogram;
+
+                    /**
+                     * Decodes an Electrocardiogram message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Electrocardiogram
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.Electrocardiogram;
+
+                    /**
+                     * Verifies an Electrocardiogram message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Electrocardiogram message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Electrocardiogram
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.Electrocardiogram;
+
+                    /**
+                     * Creates a plain object from an Electrocardiogram message. Also converts values to other types if specified.
+                     * @param message Electrocardiogram
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.Electrocardiogram, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Electrocardiogram to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Electrocardiogram
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Electrocardiogram {
+
+                    /** ResultClassification enum. */
+                    enum ResultClassification {
+                        RESULT_CLASSIFICATION_UNSPECIFIED = 0,
+                        NORMAL_SINUS_RHYTHM = 1,
+                        ATRIAL_FIBRILLATION = 2,
+                        INCONCLUSIVE = 3,
+                        INCONCLUSIVE_HIGH_HEART_RATE = 4,
+                        INCONCLUSIVE_LOW_HEART_RATE = 5,
+                        UNREADABLE = 6,
+                        NOT_ANALYZED = 7
+                    }
                 }
 
                 /** Properties of an Exercise. */
@@ -3875,7 +4366,7 @@ export namespace google {
                         constructor(properties?: google.devicesandservices.health.v4.Exercise.IExerciseMetadata);
 
                         /** ExerciseMetadata poolLengthMillimeters. */
-                        public poolLengthMillimeters: (number|Long|string);
+                        public poolLengthMillimeters?: (number|Long|string|null);
 
                         /** ExerciseMetadata hasGps. */
                         public hasGps: boolean;
@@ -3999,7 +4490,7 @@ export namespace google {
                     public interval?: (google.devicesandservices.health.v4.IObservationTimeInterval|null);
 
                     /** Floors count. */
-                    public count: (number|Long|string);
+                    public count?: (number|Long|string|null);
 
                     /**
                      * Creates a new Floors instance using the specified properties.
@@ -4096,7 +4587,7 @@ export namespace google {
                     constructor(properties?: google.devicesandservices.health.v4.IFloorsRollupValue);
 
                     /** FloorsRollupValue countSum. */
-                    public countSum: (number|Long|string);
+                    public countSum?: (number|Long|string|null);
 
                     /**
                      * Creates a new FloorsRollupValue instance using the specified properties.
@@ -4193,7 +4684,7 @@ export namespace google {
                     constructor(properties?: google.devicesandservices.health.v4.IAltitudeRollupValue);
 
                     /** AltitudeRollupValue gainMillimetersSum. */
-                    public gainMillimetersSum: (number|Long|string);
+                    public gainMillimetersSum?: (number|Long|string|null);
 
                     /**
                      * Creates a new AltitudeRollupValue instance using the specified properties.
@@ -4299,7 +4790,7 @@ export namespace google {
                     public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
 
                     /** HeartRate beatsPerMinute. */
-                    public beatsPerMinute: (number|Long|string);
+                    public beatsPerMinute?: (number|Long|string|null);
 
                     /** HeartRate metadata. */
                     public metadata?: (google.devicesandservices.health.v4.HeartRate.IHeartRateMetadata|null);
@@ -4641,13 +5132,13 @@ export namespace google {
                     constructor(properties?: google.devicesandservices.health.v4.IRunVO2MaxRollupValue);
 
                     /** RunVO2MaxRollupValue rateMin. */
-                    public rateMin: number;
+                    public rateMin?: (number|null);
 
                     /** RunVO2MaxRollupValue rateMax. */
-                    public rateMax: number;
+                    public rateMax?: (number|null);
 
                     /** RunVO2MaxRollupValue rateAvg. */
-                    public rateAvg: number;
+                    public rateAvg?: (number|null);
 
                     /**
                      * Creates a new RunVO2MaxRollupValue instance using the specified properties.
@@ -4750,7 +5241,7 @@ export namespace google {
                     public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
 
                     /** RunVO2Max runVo2Max. */
-                    public runVo2Max: number;
+                    public runVo2Max?: (number|null);
 
                     /**
                      * Creates a new RunVO2Max instance using the specified properties.
@@ -4956,7 +5447,7 @@ export namespace google {
                     public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
 
                     /** Height heightMillimeters. */
-                    public heightMillimeters: (number|Long|string);
+                    public heightMillimeters?: (number|Long|string|null);
 
                     /**
                      * Creates a new Height instance using the specified properties.
@@ -5062,10 +5553,10 @@ export namespace google {
                     public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
 
                     /** HeartRateVariability rootMeanSquareOfSuccessiveDifferencesMilliseconds. */
-                    public rootMeanSquareOfSuccessiveDifferencesMilliseconds: number;
+                    public rootMeanSquareOfSuccessiveDifferencesMilliseconds?: (number|null);
 
                     /** HeartRateVariability standardDeviationMilliseconds. */
-                    public standardDeviationMilliseconds: number;
+                    public standardDeviationMilliseconds?: (number|null);
 
                     /**
                      * Creates a new HeartRateVariability instance using the specified properties.
@@ -5165,7 +5656,7 @@ export namespace google {
                     constructor(properties?: google.devicesandservices.health.v4.IVolumeQuantity);
 
                     /** VolumeQuantity milliliters. */
-                    public milliliters: number;
+                    public milliliters?: (number|null);
 
                     /** VolumeQuantity userProvidedUnit. */
                     public userProvidedUnit: (google.devicesandservices.health.v4.VolumeUnit|keyof typeof google.devicesandservices.health.v4.VolumeUnit);
@@ -5470,7 +5961,7 @@ export namespace google {
                         constructor(properties?: google.devicesandservices.health.v4.HydrationLogRollupValue.IVolumeQuantityRollup);
 
                         /** VolumeQuantityRollup millilitersSum. */
-                        public millilitersSum: number;
+                        public millilitersSum?: (number|null);
 
                         /** VolumeQuantityRollup userProvidedUnitLast. */
                         public userProvidedUnitLast: (google.devicesandservices.health.v4.VolumeUnit|keyof typeof google.devicesandservices.health.v4.VolumeUnit);
@@ -5547,6 +6038,372 @@ export namespace google {
 
                         /**
                          * Gets the default type url for VolumeQuantityRollup
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an IrregularRhythmNotification. */
+                interface IIrregularRhythmNotification {
+
+                    /** IrregularRhythmNotification interval */
+                    interval?: (google.devicesandservices.health.v4.ISessionTimeInterval|null);
+
+                    /** IrregularRhythmNotification alertWindows */
+                    alertWindows?: (google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow[]|null);
+
+                    /** IrregularRhythmNotification medicalDeviceInfo */
+                    medicalDeviceInfo?: (google.devicesandservices.health.v4.IMedicalDeviceInfo|null);
+                }
+
+                /** Represents an IrregularRhythmNotification. */
+                class IrregularRhythmNotification implements IIrregularRhythmNotification {
+
+                    /**
+                     * Constructs a new IrregularRhythmNotification.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IIrregularRhythmNotification);
+
+                    /** IrregularRhythmNotification interval. */
+                    public interval?: (google.devicesandservices.health.v4.ISessionTimeInterval|null);
+
+                    /** IrregularRhythmNotification alertWindows. */
+                    public alertWindows: google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow[];
+
+                    /** IrregularRhythmNotification medicalDeviceInfo. */
+                    public medicalDeviceInfo?: (google.devicesandservices.health.v4.IMedicalDeviceInfo|null);
+
+                    /**
+                     * Creates a new IrregularRhythmNotification instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IrregularRhythmNotification instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IIrregularRhythmNotification): google.devicesandservices.health.v4.IrregularRhythmNotification;
+
+                    /**
+                     * Encodes the specified IrregularRhythmNotification message. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.verify|verify} messages.
+                     * @param message IrregularRhythmNotification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IIrregularRhythmNotification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IrregularRhythmNotification message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.verify|verify} messages.
+                     * @param message IrregularRhythmNotification message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IIrregularRhythmNotification, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IrregularRhythmNotification message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IrregularRhythmNotification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.IrregularRhythmNotification;
+
+                    /**
+                     * Decodes an IrregularRhythmNotification message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IrregularRhythmNotification
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.IrregularRhythmNotification;
+
+                    /**
+                     * Verifies an IrregularRhythmNotification message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IrregularRhythmNotification message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IrregularRhythmNotification
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.IrregularRhythmNotification;
+
+                    /**
+                     * Creates a plain object from an IrregularRhythmNotification message. Also converts values to other types if specified.
+                     * @param message IrregularRhythmNotification
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.IrregularRhythmNotification, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IrregularRhythmNotification to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IrregularRhythmNotification
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IrregularRhythmNotification {
+
+                    /** Properties of a HeartBeat. */
+                    interface IHeartBeat {
+
+                        /** HeartBeat physicalTime */
+                        physicalTime?: (google.protobuf.ITimestamp|null);
+
+                        /** HeartBeat utcOffset */
+                        utcOffset?: (google.protobuf.IDuration|null);
+
+                        /** HeartBeat civilTime */
+                        civilTime?: (google.devicesandservices.health.v4.ICivilDateTime|null);
+
+                        /** HeartBeat beatsPerMinute */
+                        beatsPerMinute?: (number|null);
+                    }
+
+                    /** Represents a HeartBeat. */
+                    class HeartBeat implements IHeartBeat {
+
+                        /**
+                         * Constructs a new HeartBeat.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat);
+
+                        /** HeartBeat physicalTime. */
+                        public physicalTime?: (google.protobuf.ITimestamp|null);
+
+                        /** HeartBeat utcOffset. */
+                        public utcOffset?: (google.protobuf.IDuration|null);
+
+                        /** HeartBeat civilTime. */
+                        public civilTime?: (google.devicesandservices.health.v4.ICivilDateTime|null);
+
+                        /** HeartBeat beatsPerMinute. */
+                        public beatsPerMinute?: (number|null);
+
+                        /**
+                         * Creates a new HeartBeat instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HeartBeat instance
+                         */
+                        public static create(properties?: google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat): google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat;
+
+                        /**
+                         * Encodes the specified HeartBeat message. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.verify|verify} messages.
+                         * @param message HeartBeat message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HeartBeat message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat.verify|verify} messages.
+                         * @param message HeartBeat message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HeartBeat message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HeartBeat
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat;
+
+                        /**
+                         * Decodes a HeartBeat message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HeartBeat
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat;
+
+                        /**
+                         * Verifies a HeartBeat message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HeartBeat message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HeartBeat
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat;
+
+                        /**
+                         * Creates a plain object from a HeartBeat message. Also converts values to other types if specified.
+                         * @param message HeartBeat
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devicesandservices.health.v4.IrregularRhythmNotification.HeartBeat, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HeartBeat to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HeartBeat
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AlertWindow. */
+                    interface IAlertWindow {
+
+                        /** AlertWindow startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AlertWindow startUtcOffset */
+                        startUtcOffset?: (google.protobuf.IDuration|null);
+
+                        /** AlertWindow endTime */
+                        endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AlertWindow endUtcOffset */
+                        endUtcOffset?: (google.protobuf.IDuration|null);
+
+                        /** AlertWindow civilStartTime */
+                        civilStartTime?: (google.devicesandservices.health.v4.ICivilDateTime|null);
+
+                        /** AlertWindow civilEndTime */
+                        civilEndTime?: (google.devicesandservices.health.v4.ICivilDateTime|null);
+
+                        /** AlertWindow positive */
+                        positive?: (boolean|null);
+
+                        /** AlertWindow heartBeats */
+                        heartBeats?: (google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat[]|null);
+                    }
+
+                    /** Represents an AlertWindow. */
+                    class AlertWindow implements IAlertWindow {
+
+                        /**
+                         * Constructs a new AlertWindow.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow);
+
+                        /** AlertWindow startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AlertWindow startUtcOffset. */
+                        public startUtcOffset?: (google.protobuf.IDuration|null);
+
+                        /** AlertWindow endTime. */
+                        public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AlertWindow endUtcOffset. */
+                        public endUtcOffset?: (google.protobuf.IDuration|null);
+
+                        /** AlertWindow civilStartTime. */
+                        public civilStartTime?: (google.devicesandservices.health.v4.ICivilDateTime|null);
+
+                        /** AlertWindow civilEndTime. */
+                        public civilEndTime?: (google.devicesandservices.health.v4.ICivilDateTime|null);
+
+                        /** AlertWindow positive. */
+                        public positive: boolean;
+
+                        /** AlertWindow heartBeats. */
+                        public heartBeats: google.devicesandservices.health.v4.IrregularRhythmNotification.IHeartBeat[];
+
+                        /**
+                         * Creates a new AlertWindow instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AlertWindow instance
+                         */
+                        public static create(properties?: google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow): google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow;
+
+                        /**
+                         * Encodes the specified AlertWindow message. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.verify|verify} messages.
+                         * @param message AlertWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AlertWindow message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow.verify|verify} messages.
+                         * @param message AlertWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devicesandservices.health.v4.IrregularRhythmNotification.IAlertWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AlertWindow message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AlertWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow;
+
+                        /**
+                         * Decodes an AlertWindow message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AlertWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow;
+
+                        /**
+                         * Verifies an AlertWindow message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AlertWindow message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AlertWindow
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow;
+
+                        /**
+                         * Creates a plain object from an AlertWindow message. Also converts values to other types if specified.
+                         * @param message AlertWindow
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devicesandservices.health.v4.IrregularRhythmNotification.AlertWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AlertWindow to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AlertWindow
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -5956,6 +6813,1316 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a WeightQuantity. */
+                interface IWeightQuantity {
+
+                    /** WeightQuantity grams */
+                    grams?: (number|null);
+
+                    /** WeightQuantity userProvidedUnit */
+                    userProvidedUnit?: (google.devicesandservices.health.v4.WeightUnit|keyof typeof google.devicesandservices.health.v4.WeightUnit|null);
+                }
+
+                /** Represents a WeightQuantity. */
+                class WeightQuantity implements IWeightQuantity {
+
+                    /**
+                     * Constructs a new WeightQuantity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IWeightQuantity);
+
+                    /** WeightQuantity grams. */
+                    public grams?: (number|null);
+
+                    /** WeightQuantity userProvidedUnit. */
+                    public userProvidedUnit: (google.devicesandservices.health.v4.WeightUnit|keyof typeof google.devicesandservices.health.v4.WeightUnit);
+
+                    /**
+                     * Creates a new WeightQuantity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WeightQuantity instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IWeightQuantity): google.devicesandservices.health.v4.WeightQuantity;
+
+                    /**
+                     * Encodes the specified WeightQuantity message. Does not implicitly {@link google.devicesandservices.health.v4.WeightQuantity.verify|verify} messages.
+                     * @param message WeightQuantity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IWeightQuantity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WeightQuantity message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.WeightQuantity.verify|verify} messages.
+                     * @param message WeightQuantity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IWeightQuantity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WeightQuantity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WeightQuantity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.WeightQuantity;
+
+                    /**
+                     * Decodes a WeightQuantity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WeightQuantity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.WeightQuantity;
+
+                    /**
+                     * Verifies a WeightQuantity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WeightQuantity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WeightQuantity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.WeightQuantity;
+
+                    /**
+                     * Creates a plain object from a WeightQuantity message. Also converts values to other types if specified.
+                     * @param message WeightQuantity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.WeightQuantity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WeightQuantity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for WeightQuantity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EnergyQuantity. */
+                interface IEnergyQuantity {
+
+                    /** EnergyQuantity kcal */
+                    kcal?: (number|null);
+
+                    /** EnergyQuantity userProvidedUnit */
+                    userProvidedUnit?: (google.devicesandservices.health.v4.EnergyUnit|keyof typeof google.devicesandservices.health.v4.EnergyUnit|null);
+                }
+
+                /** Represents an EnergyQuantity. */
+                class EnergyQuantity implements IEnergyQuantity {
+
+                    /**
+                     * Constructs a new EnergyQuantity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IEnergyQuantity);
+
+                    /** EnergyQuantity kcal. */
+                    public kcal?: (number|null);
+
+                    /** EnergyQuantity userProvidedUnit. */
+                    public userProvidedUnit: (google.devicesandservices.health.v4.EnergyUnit|keyof typeof google.devicesandservices.health.v4.EnergyUnit);
+
+                    /**
+                     * Creates a new EnergyQuantity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnergyQuantity instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IEnergyQuantity): google.devicesandservices.health.v4.EnergyQuantity;
+
+                    /**
+                     * Encodes the specified EnergyQuantity message. Does not implicitly {@link google.devicesandservices.health.v4.EnergyQuantity.verify|verify} messages.
+                     * @param message EnergyQuantity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IEnergyQuantity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnergyQuantity message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.EnergyQuantity.verify|verify} messages.
+                     * @param message EnergyQuantity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IEnergyQuantity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnergyQuantity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnergyQuantity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.EnergyQuantity;
+
+                    /**
+                     * Decodes an EnergyQuantity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnergyQuantity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.EnergyQuantity;
+
+                    /**
+                     * Verifies an EnergyQuantity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnergyQuantity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnergyQuantity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.EnergyQuantity;
+
+                    /**
+                     * Creates a plain object from an EnergyQuantity message. Also converts values to other types if specified.
+                     * @param message EnergyQuantity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.EnergyQuantity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnergyQuantity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EnergyQuantity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NutrientQuantity. */
+                interface INutrientQuantity {
+
+                    /** NutrientQuantity quantity */
+                    quantity?: (google.devicesandservices.health.v4.IWeightQuantity|null);
+
+                    /** NutrientQuantity nutrient */
+                    nutrient?: (google.devicesandservices.health.v4.Nutrient|keyof typeof google.devicesandservices.health.v4.Nutrient|null);
+                }
+
+                /** Represents a NutrientQuantity. */
+                class NutrientQuantity implements INutrientQuantity {
+
+                    /**
+                     * Constructs a new NutrientQuantity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.INutrientQuantity);
+
+                    /** NutrientQuantity quantity. */
+                    public quantity?: (google.devicesandservices.health.v4.IWeightQuantity|null);
+
+                    /** NutrientQuantity nutrient. */
+                    public nutrient: (google.devicesandservices.health.v4.Nutrient|keyof typeof google.devicesandservices.health.v4.Nutrient);
+
+                    /**
+                     * Creates a new NutrientQuantity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NutrientQuantity instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.INutrientQuantity): google.devicesandservices.health.v4.NutrientQuantity;
+
+                    /**
+                     * Encodes the specified NutrientQuantity message. Does not implicitly {@link google.devicesandservices.health.v4.NutrientQuantity.verify|verify} messages.
+                     * @param message NutrientQuantity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.INutrientQuantity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NutrientQuantity message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutrientQuantity.verify|verify} messages.
+                     * @param message NutrientQuantity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.INutrientQuantity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NutrientQuantity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NutrientQuantity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.NutrientQuantity;
+
+                    /**
+                     * Decodes a NutrientQuantity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NutrientQuantity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.NutrientQuantity;
+
+                    /**
+                     * Verifies a NutrientQuantity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NutrientQuantity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NutrientQuantity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.NutrientQuantity;
+
+                    /**
+                     * Creates a plain object from a NutrientQuantity message. Also converts values to other types if specified.
+                     * @param message NutrientQuantity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.NutrientQuantity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NutrientQuantity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NutrientQuantity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a NutritionLog. */
+                interface INutritionLog {
+
+                    /** NutritionLog interval */
+                    interval?: (google.devicesandservices.health.v4.ISessionTimeInterval|null);
+
+                    /** NutritionLog nutrients */
+                    nutrients?: (google.devicesandservices.health.v4.INutrientQuantity[]|null);
+
+                    /** NutritionLog energy */
+                    energy?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** NutritionLog energyFromFat */
+                    energyFromFat?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** NutritionLog totalCarbohydrate */
+                    totalCarbohydrate?: (google.devicesandservices.health.v4.IWeightQuantity|null);
+
+                    /** NutritionLog totalFat */
+                    totalFat?: (google.devicesandservices.health.v4.IWeightQuantity|null);
+
+                    /** NutritionLog mealType */
+                    mealType?: (google.devicesandservices.health.v4.MealType|keyof typeof google.devicesandservices.health.v4.MealType|null);
+
+                    /** NutritionLog serving */
+                    serving?: (google.devicesandservices.health.v4.NutritionLog.IServing|null);
+
+                    /** NutritionLog food */
+                    food?: (string|null);
+
+                    /** NutritionLog foodDisplayName */
+                    foodDisplayName?: (string|null);
+                }
+
+                /** Represents a NutritionLog. */
+                class NutritionLog implements INutritionLog {
+
+                    /**
+                     * Constructs a new NutritionLog.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.INutritionLog);
+
+                    /** NutritionLog interval. */
+                    public interval?: (google.devicesandservices.health.v4.ISessionTimeInterval|null);
+
+                    /** NutritionLog nutrients. */
+                    public nutrients: google.devicesandservices.health.v4.INutrientQuantity[];
+
+                    /** NutritionLog energy. */
+                    public energy?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** NutritionLog energyFromFat. */
+                    public energyFromFat?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** NutritionLog totalCarbohydrate. */
+                    public totalCarbohydrate?: (google.devicesandservices.health.v4.IWeightQuantity|null);
+
+                    /** NutritionLog totalFat. */
+                    public totalFat?: (google.devicesandservices.health.v4.IWeightQuantity|null);
+
+                    /** NutritionLog mealType. */
+                    public mealType: (google.devicesandservices.health.v4.MealType|keyof typeof google.devicesandservices.health.v4.MealType);
+
+                    /** NutritionLog serving. */
+                    public serving?: (google.devicesandservices.health.v4.NutritionLog.IServing|null);
+
+                    /** NutritionLog food. */
+                    public food: string;
+
+                    /** NutritionLog foodDisplayName. */
+                    public foodDisplayName: string;
+
+                    /**
+                     * Creates a new NutritionLog instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NutritionLog instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.INutritionLog): google.devicesandservices.health.v4.NutritionLog;
+
+                    /**
+                     * Encodes the specified NutritionLog message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLog.verify|verify} messages.
+                     * @param message NutritionLog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.INutritionLog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NutritionLog message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLog.verify|verify} messages.
+                     * @param message NutritionLog message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.INutritionLog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NutritionLog message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NutritionLog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.NutritionLog;
+
+                    /**
+                     * Decodes a NutritionLog message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NutritionLog
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.NutritionLog;
+
+                    /**
+                     * Verifies a NutritionLog message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NutritionLog message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NutritionLog
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.NutritionLog;
+
+                    /**
+                     * Creates a plain object from a NutritionLog message. Also converts values to other types if specified.
+                     * @param message NutritionLog
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.NutritionLog, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NutritionLog to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NutritionLog
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NutritionLog {
+
+                    /** Properties of a Serving. */
+                    interface IServing {
+
+                        /** Serving amount */
+                        amount?: (number|null);
+
+                        /** Serving foodMeasurementUnit */
+                        foodMeasurementUnit?: (string|null);
+
+                        /** Serving foodMeasurementUnitDisplayName */
+                        foodMeasurementUnitDisplayName?: (string|null);
+                    }
+
+                    /** Represents a Serving. */
+                    class Serving implements IServing {
+
+                        /**
+                         * Constructs a new Serving.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devicesandservices.health.v4.NutritionLog.IServing);
+
+                        /** Serving amount. */
+                        public amount?: (number|null);
+
+                        /** Serving foodMeasurementUnit. */
+                        public foodMeasurementUnit: string;
+
+                        /** Serving foodMeasurementUnitDisplayName. */
+                        public foodMeasurementUnitDisplayName: string;
+
+                        /**
+                         * Creates a new Serving instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Serving instance
+                         */
+                        public static create(properties?: google.devicesandservices.health.v4.NutritionLog.IServing): google.devicesandservices.health.v4.NutritionLog.Serving;
+
+                        /**
+                         * Encodes the specified Serving message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLog.Serving.verify|verify} messages.
+                         * @param message Serving message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devicesandservices.health.v4.NutritionLog.IServing, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Serving message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLog.Serving.verify|verify} messages.
+                         * @param message Serving message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devicesandservices.health.v4.NutritionLog.IServing, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Serving message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Serving
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.NutritionLog.Serving;
+
+                        /**
+                         * Decodes a Serving message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Serving
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.NutritionLog.Serving;
+
+                        /**
+                         * Verifies a Serving message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Serving message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Serving
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.NutritionLog.Serving;
+
+                        /**
+                         * Creates a plain object from a Serving message. Also converts values to other types if specified.
+                         * @param message Serving
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devicesandservices.health.v4.NutritionLog.Serving, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Serving to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Serving
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Food. */
+                interface IFood {
+
+                    /** Food displayName */
+                    displayName?: (string|null);
+
+                    /** Food brand */
+                    brand?: (string|null);
+
+                    /** Food accessLevel */
+                    accessLevel?: (google.devicesandservices.health.v4.FoodAccessLevel|keyof typeof google.devicesandservices.health.v4.FoodAccessLevel|null);
+
+                    /** Food description */
+                    description?: (string|null);
+
+                    /** Food languageCode */
+                    languageCode?: (string|null);
+
+                    /** Food mealType */
+                    mealType?: (google.devicesandservices.health.v4.MealType|keyof typeof google.devicesandservices.health.v4.MealType|null);
+
+                    /** Food nutrients */
+                    nutrients?: (google.devicesandservices.health.v4.INutrientQuantity[]|null);
+
+                    /** Food energyFromFat */
+                    energyFromFat?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** Food totalCarbohydrate */
+                    totalCarbohydrate?: (google.devicesandservices.health.v4.IWeightQuantity|null);
+
+                    /** Food totalFat */
+                    totalFat?: (google.devicesandservices.health.v4.IWeightQuantity|null);
+
+                    /** Food energyMin */
+                    energyMin?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** Food energyAvg */
+                    energyAvg?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** Food energyMax */
+                    energyMax?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** Food defaultServing */
+                    defaultServing?: (google.devicesandservices.health.v4.Food.IFoodServing|null);
+
+                    /** Food servings */
+                    servings?: (google.devicesandservices.health.v4.Food.IFoodServing[]|null);
+                }
+
+                /** Represents a Food. */
+                class Food implements IFood {
+
+                    /**
+                     * Constructs a new Food.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IFood);
+
+                    /** Food displayName. */
+                    public displayName: string;
+
+                    /** Food brand. */
+                    public brand: string;
+
+                    /** Food accessLevel. */
+                    public accessLevel: (google.devicesandservices.health.v4.FoodAccessLevel|keyof typeof google.devicesandservices.health.v4.FoodAccessLevel);
+
+                    /** Food description. */
+                    public description: string;
+
+                    /** Food languageCode. */
+                    public languageCode: string;
+
+                    /** Food mealType. */
+                    public mealType: (google.devicesandservices.health.v4.MealType|keyof typeof google.devicesandservices.health.v4.MealType);
+
+                    /** Food nutrients. */
+                    public nutrients: google.devicesandservices.health.v4.INutrientQuantity[];
+
+                    /** Food energyFromFat. */
+                    public energyFromFat?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** Food totalCarbohydrate. */
+                    public totalCarbohydrate?: (google.devicesandservices.health.v4.IWeightQuantity|null);
+
+                    /** Food totalFat. */
+                    public totalFat?: (google.devicesandservices.health.v4.IWeightQuantity|null);
+
+                    /** Food energyMin. */
+                    public energyMin?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** Food energyAvg. */
+                    public energyAvg?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** Food energyMax. */
+                    public energyMax?: (google.devicesandservices.health.v4.IEnergyQuantity|null);
+
+                    /** Food defaultServing. */
+                    public defaultServing?: (google.devicesandservices.health.v4.Food.IFoodServing|null);
+
+                    /** Food servings. */
+                    public servings: google.devicesandservices.health.v4.Food.IFoodServing[];
+
+                    /**
+                     * Creates a new Food instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Food instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IFood): google.devicesandservices.health.v4.Food;
+
+                    /**
+                     * Encodes the specified Food message. Does not implicitly {@link google.devicesandservices.health.v4.Food.verify|verify} messages.
+                     * @param message Food message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IFood, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Food message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Food.verify|verify} messages.
+                     * @param message Food message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IFood, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Food message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Food
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.Food;
+
+                    /**
+                     * Decodes a Food message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Food
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.Food;
+
+                    /**
+                     * Verifies a Food message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Food message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Food
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.Food;
+
+                    /**
+                     * Creates a plain object from a Food message. Also converts values to other types if specified.
+                     * @param message Food
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.Food, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Food to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Food
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Food {
+
+                    /** Properties of a FoodServing. */
+                    interface IFoodServing {
+
+                        /** FoodServing amount */
+                        amount?: (number|null);
+
+                        /** FoodServing foodMeasurementUnit */
+                        foodMeasurementUnit?: (string|null);
+
+                        /** FoodServing foodMeasurementUnitDisplayName */
+                        foodMeasurementUnitDisplayName?: (string|null);
+
+                        /** FoodServing foodMeasurementUnitDisplayNamePlural */
+                        foodMeasurementUnitDisplayNamePlural?: (string|null);
+
+                        /** FoodServing multiplier */
+                        multiplier?: (number|null);
+                    }
+
+                    /** Represents a FoodServing. */
+                    class FoodServing implements IFoodServing {
+
+                        /**
+                         * Constructs a new FoodServing.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devicesandservices.health.v4.Food.IFoodServing);
+
+                        /** FoodServing amount. */
+                        public amount?: (number|null);
+
+                        /** FoodServing foodMeasurementUnit. */
+                        public foodMeasurementUnit: string;
+
+                        /** FoodServing foodMeasurementUnitDisplayName. */
+                        public foodMeasurementUnitDisplayName: string;
+
+                        /** FoodServing foodMeasurementUnitDisplayNamePlural. */
+                        public foodMeasurementUnitDisplayNamePlural: string;
+
+                        /** FoodServing multiplier. */
+                        public multiplier: number;
+
+                        /**
+                         * Creates a new FoodServing instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FoodServing instance
+                         */
+                        public static create(properties?: google.devicesandservices.health.v4.Food.IFoodServing): google.devicesandservices.health.v4.Food.FoodServing;
+
+                        /**
+                         * Encodes the specified FoodServing message. Does not implicitly {@link google.devicesandservices.health.v4.Food.FoodServing.verify|verify} messages.
+                         * @param message FoodServing message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devicesandservices.health.v4.Food.IFoodServing, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FoodServing message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Food.FoodServing.verify|verify} messages.
+                         * @param message FoodServing message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devicesandservices.health.v4.Food.IFoodServing, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FoodServing message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FoodServing
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.Food.FoodServing;
+
+                        /**
+                         * Decodes a FoodServing message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FoodServing
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.Food.FoodServing;
+
+                        /**
+                         * Verifies a FoodServing message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FoodServing message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FoodServing
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.Food.FoodServing;
+
+                        /**
+                         * Creates a plain object from a FoodServing message. Also converts values to other types if specified.
+                         * @param message FoodServing
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devicesandservices.health.v4.Food.FoodServing, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FoodServing to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FoodServing
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a NutritionLogRollupValue. */
+                interface INutritionLogRollupValue {
+
+                    /** NutritionLogRollupValue nutrients */
+                    nutrients?: (google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup[]|null);
+
+                    /** NutritionLogRollupValue energy */
+                    energy?: (google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup|null);
+
+                    /** NutritionLogRollupValue energyFromFat */
+                    energyFromFat?: (google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup|null);
+
+                    /** NutritionLogRollupValue totalCarbohydrate */
+                    totalCarbohydrate?: (google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null);
+
+                    /** NutritionLogRollupValue totalFat */
+                    totalFat?: (google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null);
+                }
+
+                /** Represents a NutritionLogRollupValue. */
+                class NutritionLogRollupValue implements INutritionLogRollupValue {
+
+                    /**
+                     * Constructs a new NutritionLogRollupValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.INutritionLogRollupValue);
+
+                    /** NutritionLogRollupValue nutrients. */
+                    public nutrients: google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup[];
+
+                    /** NutritionLogRollupValue energy. */
+                    public energy?: (google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup|null);
+
+                    /** NutritionLogRollupValue energyFromFat. */
+                    public energyFromFat?: (google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup|null);
+
+                    /** NutritionLogRollupValue totalCarbohydrate. */
+                    public totalCarbohydrate?: (google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null);
+
+                    /** NutritionLogRollupValue totalFat. */
+                    public totalFat?: (google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null);
+
+                    /**
+                     * Creates a new NutritionLogRollupValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NutritionLogRollupValue instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.INutritionLogRollupValue): google.devicesandservices.health.v4.NutritionLogRollupValue;
+
+                    /**
+                     * Encodes the specified NutritionLogRollupValue message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.verify|verify} messages.
+                     * @param message NutritionLogRollupValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.INutritionLogRollupValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NutritionLogRollupValue message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.verify|verify} messages.
+                     * @param message NutritionLogRollupValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.INutritionLogRollupValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NutritionLogRollupValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NutritionLogRollupValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.NutritionLogRollupValue;
+
+                    /**
+                     * Decodes a NutritionLogRollupValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NutritionLogRollupValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.NutritionLogRollupValue;
+
+                    /**
+                     * Verifies a NutritionLogRollupValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NutritionLogRollupValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NutritionLogRollupValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.NutritionLogRollupValue;
+
+                    /**
+                     * Creates a plain object from a NutritionLogRollupValue message. Also converts values to other types if specified.
+                     * @param message NutritionLogRollupValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.NutritionLogRollupValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NutritionLogRollupValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NutritionLogRollupValue
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace NutritionLogRollupValue {
+
+                    /** Properties of a WeightQuantityRollup. */
+                    interface IWeightQuantityRollup {
+
+                        /** WeightQuantityRollup gramsSum */
+                        gramsSum?: (number|null);
+
+                        /** WeightQuantityRollup userProvidedUnitLast */
+                        userProvidedUnitLast?: (google.devicesandservices.health.v4.WeightUnit|keyof typeof google.devicesandservices.health.v4.WeightUnit|null);
+                    }
+
+                    /** Represents a WeightQuantityRollup. */
+                    class WeightQuantityRollup implements IWeightQuantityRollup {
+
+                        /**
+                         * Constructs a new WeightQuantityRollup.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup);
+
+                        /** WeightQuantityRollup gramsSum. */
+                        public gramsSum?: (number|null);
+
+                        /** WeightQuantityRollup userProvidedUnitLast. */
+                        public userProvidedUnitLast: (google.devicesandservices.health.v4.WeightUnit|keyof typeof google.devicesandservices.health.v4.WeightUnit);
+
+                        /**
+                         * Creates a new WeightQuantityRollup instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WeightQuantityRollup instance
+                         */
+                        public static create(properties?: google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup): google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup;
+
+                        /**
+                         * Encodes the specified WeightQuantityRollup message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.verify|verify} messages.
+                         * @param message WeightQuantityRollup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WeightQuantityRollup message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup.verify|verify} messages.
+                         * @param message WeightQuantityRollup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WeightQuantityRollup message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WeightQuantityRollup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup;
+
+                        /**
+                         * Decodes a WeightQuantityRollup message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WeightQuantityRollup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup;
+
+                        /**
+                         * Verifies a WeightQuantityRollup message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WeightQuantityRollup message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WeightQuantityRollup
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup;
+
+                        /**
+                         * Creates a plain object from a WeightQuantityRollup message. Also converts values to other types if specified.
+                         * @param message WeightQuantityRollup
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devicesandservices.health.v4.NutritionLogRollupValue.WeightQuantityRollup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WeightQuantityRollup to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for WeightQuantityRollup
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an EnergyQuantityRollup. */
+                    interface IEnergyQuantityRollup {
+
+                        /** EnergyQuantityRollup kcalSum */
+                        kcalSum?: (number|null);
+
+                        /** EnergyQuantityRollup userProvidedUnitLast */
+                        userProvidedUnitLast?: (google.devicesandservices.health.v4.EnergyUnit|keyof typeof google.devicesandservices.health.v4.EnergyUnit|null);
+                    }
+
+                    /** Represents an EnergyQuantityRollup. */
+                    class EnergyQuantityRollup implements IEnergyQuantityRollup {
+
+                        /**
+                         * Constructs a new EnergyQuantityRollup.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup);
+
+                        /** EnergyQuantityRollup kcalSum. */
+                        public kcalSum?: (number|null);
+
+                        /** EnergyQuantityRollup userProvidedUnitLast. */
+                        public userProvidedUnitLast: (google.devicesandservices.health.v4.EnergyUnit|keyof typeof google.devicesandservices.health.v4.EnergyUnit);
+
+                        /**
+                         * Creates a new EnergyQuantityRollup instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EnergyQuantityRollup instance
+                         */
+                        public static create(properties?: google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup): google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup;
+
+                        /**
+                         * Encodes the specified EnergyQuantityRollup message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.verify|verify} messages.
+                         * @param message EnergyQuantityRollup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EnergyQuantityRollup message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup.verify|verify} messages.
+                         * @param message EnergyQuantityRollup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devicesandservices.health.v4.NutritionLogRollupValue.IEnergyQuantityRollup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EnergyQuantityRollup message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EnergyQuantityRollup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup;
+
+                        /**
+                         * Decodes an EnergyQuantityRollup message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EnergyQuantityRollup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup;
+
+                        /**
+                         * Verifies an EnergyQuantityRollup message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EnergyQuantityRollup message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EnergyQuantityRollup
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup;
+
+                        /**
+                         * Creates a plain object from an EnergyQuantityRollup message. Also converts values to other types if specified.
+                         * @param message EnergyQuantityRollup
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devicesandservices.health.v4.NutritionLogRollupValue.EnergyQuantityRollup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EnergyQuantityRollup to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EnergyQuantityRollup
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a NutrientQuantityRollup. */
+                    interface INutrientQuantityRollup {
+
+                        /** NutrientQuantityRollup quantity */
+                        quantity?: (google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null);
+
+                        /** NutrientQuantityRollup nutrient */
+                        nutrient?: (google.devicesandservices.health.v4.Nutrient|keyof typeof google.devicesandservices.health.v4.Nutrient|null);
+                    }
+
+                    /** Represents a NutrientQuantityRollup. */
+                    class NutrientQuantityRollup implements INutrientQuantityRollup {
+
+                        /**
+                         * Constructs a new NutrientQuantityRollup.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup);
+
+                        /** NutrientQuantityRollup quantity. */
+                        public quantity?: (google.devicesandservices.health.v4.NutritionLogRollupValue.IWeightQuantityRollup|null);
+
+                        /** NutrientQuantityRollup nutrient. */
+                        public nutrient: (google.devicesandservices.health.v4.Nutrient|keyof typeof google.devicesandservices.health.v4.Nutrient);
+
+                        /**
+                         * Creates a new NutrientQuantityRollup instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns NutrientQuantityRollup instance
+                         */
+                        public static create(properties?: google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup): google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup;
+
+                        /**
+                         * Encodes the specified NutrientQuantityRollup message. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup.verify|verify} messages.
+                         * @param message NutrientQuantityRollup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified NutrientQuantityRollup message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup.verify|verify} messages.
+                         * @param message NutrientQuantityRollup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devicesandservices.health.v4.NutritionLogRollupValue.INutrientQuantityRollup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a NutrientQuantityRollup message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns NutrientQuantityRollup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup;
+
+                        /**
+                         * Decodes a NutrientQuantityRollup message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns NutrientQuantityRollup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup;
+
+                        /**
+                         * Verifies a NutrientQuantityRollup message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a NutrientQuantityRollup message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns NutrientQuantityRollup
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup;
+
+                        /**
+                         * Creates a plain object from a NutrientQuantityRollup message. Also converts values to other types if specified.
+                         * @param message NutrientQuantityRollup
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devicesandservices.health.v4.NutritionLogRollupValue.NutrientQuantityRollup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this NutrientQuantityRollup to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for NutrientQuantityRollup
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of an OxygenSaturation. */
                 interface IOxygenSaturation {
 
@@ -5979,7 +8146,7 @@ export namespace google {
                     public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
 
                     /** OxygenSaturation percentage. */
-                    public percentage: number;
+                    public percentage?: (number|null);
 
                     /**
                      * Creates a new OxygenSaturation instance using the specified properties.
@@ -6162,6 +8329,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a FoodMeasurementUnit. */
+                interface IFoodMeasurementUnit {
+
+                    /** FoodMeasurementUnit displayName */
+                    displayName?: (string|null);
+
+                    /** FoodMeasurementUnit pluralDisplayName */
+                    pluralDisplayName?: (string|null);
+                }
+
+                /** Represents a FoodMeasurementUnit. */
+                class FoodMeasurementUnit implements IFoodMeasurementUnit {
+
+                    /**
+                     * Constructs a new FoodMeasurementUnit.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IFoodMeasurementUnit);
+
+                    /** FoodMeasurementUnit displayName. */
+                    public displayName: string;
+
+                    /** FoodMeasurementUnit pluralDisplayName. */
+                    public pluralDisplayName: string;
+
+                    /**
+                     * Creates a new FoodMeasurementUnit instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FoodMeasurementUnit instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IFoodMeasurementUnit): google.devicesandservices.health.v4.FoodMeasurementUnit;
+
+                    /**
+                     * Encodes the specified FoodMeasurementUnit message. Does not implicitly {@link google.devicesandservices.health.v4.FoodMeasurementUnit.verify|verify} messages.
+                     * @param message FoodMeasurementUnit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IFoodMeasurementUnit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FoodMeasurementUnit message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.FoodMeasurementUnit.verify|verify} messages.
+                     * @param message FoodMeasurementUnit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IFoodMeasurementUnit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FoodMeasurementUnit message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FoodMeasurementUnit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.FoodMeasurementUnit;
+
+                    /**
+                     * Decodes a FoodMeasurementUnit message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FoodMeasurementUnit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.FoodMeasurementUnit;
+
+                    /**
+                     * Verifies a FoodMeasurementUnit message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FoodMeasurementUnit message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FoodMeasurementUnit
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.FoodMeasurementUnit;
+
+                    /**
+                     * Creates a plain object from a FoodMeasurementUnit message. Also converts values to other types if specified.
+                     * @param message FoodMeasurementUnit
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.FoodMeasurementUnit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FoodMeasurementUnit to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FoodMeasurementUnit
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a RespiratoryRateSleepSummary. */
                 interface IRespiratoryRateSleepSummary {
 
@@ -6308,13 +8578,13 @@ export namespace google {
                         constructor(properties?: google.devicesandservices.health.v4.RespiratoryRateSleepSummary.IRespiratoryRateSleepSummaryStatistics);
 
                         /** RespiratoryRateSleepSummaryStatistics breathsPerMinute. */
-                        public breathsPerMinute: number;
+                        public breathsPerMinute?: (number|null);
 
                         /** RespiratoryRateSleepSummaryStatistics standardDeviation. */
-                        public standardDeviation: number;
+                        public standardDeviation?: (number|null);
 
                         /** RespiratoryRateSleepSummaryStatistics signalToNoise. */
-                        public signalToNoise: number;
+                        public signalToNoise?: (number|null);
 
                         /**
                          * Creates a new RespiratoryRateSleepSummaryStatistics instance using the specified properties.
@@ -7077,10 +9347,10 @@ export namespace google {
                             public type: (google.devicesandservices.health.v4.Sleep.SleepStageType|keyof typeof google.devicesandservices.health.v4.Sleep.SleepStageType);
 
                             /** StageSummary minutes. */
-                            public minutes: (number|Long|string);
+                            public minutes?: (number|Long|string|null);
 
                             /** StageSummary count. */
-                            public count: (number|Long|string);
+                            public count?: (number|Long|string|null);
 
                             /**
                              * Creates a new StageSummary instance using the specified properties.
@@ -7203,7 +9473,7 @@ export namespace google {
                     public interval?: (google.devicesandservices.health.v4.IObservationTimeInterval|null);
 
                     /** Steps count. */
-                    public count: (number|Long|string);
+                    public count?: (number|Long|string|null);
 
                     /**
                      * Creates a new Steps instance using the specified properties.
@@ -7300,7 +9570,7 @@ export namespace google {
                     constructor(properties?: google.devicesandservices.health.v4.IStepsRollupValue);
 
                     /** StepsRollupValue countSum. */
-                    public countSum: (number|Long|string);
+                    public countSum?: (number|Long|string|null);
 
                     /**
                      * Creates a new StepsRollupValue instance using the specified properties.
@@ -7409,7 +9679,7 @@ export namespace google {
                     public swimStrokeType: (google.devicesandservices.health.v4.SwimLengthsData.SwimStrokeType|keyof typeof google.devicesandservices.health.v4.SwimLengthsData.SwimStrokeType);
 
                     /** SwimLengthsData strokeCount. */
-                    public strokeCount: (number|Long|string);
+                    public strokeCount?: (number|Long|string|null);
 
                     /**
                      * Creates a new SwimLengthsData instance using the specified properties.
@@ -7518,7 +9788,7 @@ export namespace google {
                     constructor(properties?: google.devicesandservices.health.v4.ISwimLengthsDataRollupValue);
 
                     /** SwimLengthsDataRollupValue strokeCountSum. */
-                    public strokeCountSum: (number|Long|string);
+                    public strokeCountSum?: (number|Long|string|null);
 
                     /**
                      * Creates a new SwimLengthsDataRollupValue instance using the specified properties.
@@ -7921,7 +10191,7 @@ export namespace google {
                     constructor(properties?: google.devicesandservices.health.v4.ITotalCaloriesRollupValue);
 
                     /** TotalCaloriesRollupValue kcalSum. */
-                    public kcalSum: number;
+                    public kcalSum?: (number|null);
 
                     /**
                      * Creates a new TotalCaloriesRollupValue instance using the specified properties.
@@ -8027,7 +10297,7 @@ export namespace google {
                     public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
 
                     /** VO2Max vo2Max. */
-                    public vo2Max: number;
+                    public vo2Max?: (number|null);
 
                     /** VO2Max measurementMethod. */
                     public measurementMethod: (google.devicesandservices.health.v4.VO2Max.MeasurementMethod|keyof typeof google.devicesandservices.health.v4.VO2Max.MeasurementMethod);
@@ -8155,7 +10425,7 @@ export namespace google {
                     public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
 
                     /** Weight weightGrams. */
-                    public weightGrams: number;
+                    public weightGrams?: (number|null);
 
                     /** Weight notes. */
                     public notes: string;
@@ -8255,7 +10525,7 @@ export namespace google {
                     constructor(properties?: google.devicesandservices.health.v4.IWeightRollupValue);
 
                     /** WeightRollupValue weightGramsAvg. */
-                    public weightGramsAvg: number;
+                    public weightGramsAvg?: (number|null);
 
                     /**
                      * Creates a new WeightRollupValue instance using the specified properties.
@@ -8329,6 +10599,278 @@ export namespace google {
 
                     /**
                      * Gets the default type url for WeightRollupValue
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BloodGlucose. */
+                interface IBloodGlucose {
+
+                    /** BloodGlucose sampleTime */
+                    sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
+
+                    /** BloodGlucose bloodGlucoseMilligramsPerDeciliter */
+                    bloodGlucoseMilligramsPerDeciliter?: (number|null);
+
+                    /** BloodGlucose measurementSource */
+                    measurementSource?: (google.devicesandservices.health.v4.BloodGlucose.MeasurementSource|keyof typeof google.devicesandservices.health.v4.BloodGlucose.MeasurementSource|null);
+
+                    /** BloodGlucose mealType */
+                    mealType?: (google.devicesandservices.health.v4.BloodGlucose.MealType|keyof typeof google.devicesandservices.health.v4.BloodGlucose.MealType|null);
+
+                    /** BloodGlucose measurementTiming */
+                    measurementTiming?: (google.devicesandservices.health.v4.BloodGlucose.MeasurementTiming|keyof typeof google.devicesandservices.health.v4.BloodGlucose.MeasurementTiming|null);
+
+                    /** BloodGlucose specimen */
+                    specimen?: (google.devicesandservices.health.v4.BloodGlucose.Specimen|keyof typeof google.devicesandservices.health.v4.BloodGlucose.Specimen|null);
+
+                    /** BloodGlucose notes */
+                    notes?: (string|null);
+                }
+
+                /** Represents a BloodGlucose. */
+                class BloodGlucose implements IBloodGlucose {
+
+                    /**
+                     * Constructs a new BloodGlucose.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IBloodGlucose);
+
+                    /** BloodGlucose sampleTime. */
+                    public sampleTime?: (google.devicesandservices.health.v4.IObservationSampleTime|null);
+
+                    /** BloodGlucose bloodGlucoseMilligramsPerDeciliter. */
+                    public bloodGlucoseMilligramsPerDeciliter?: (number|null);
+
+                    /** BloodGlucose measurementSource. */
+                    public measurementSource: (google.devicesandservices.health.v4.BloodGlucose.MeasurementSource|keyof typeof google.devicesandservices.health.v4.BloodGlucose.MeasurementSource);
+
+                    /** BloodGlucose mealType. */
+                    public mealType: (google.devicesandservices.health.v4.BloodGlucose.MealType|keyof typeof google.devicesandservices.health.v4.BloodGlucose.MealType);
+
+                    /** BloodGlucose measurementTiming. */
+                    public measurementTiming: (google.devicesandservices.health.v4.BloodGlucose.MeasurementTiming|keyof typeof google.devicesandservices.health.v4.BloodGlucose.MeasurementTiming);
+
+                    /** BloodGlucose specimen. */
+                    public specimen: (google.devicesandservices.health.v4.BloodGlucose.Specimen|keyof typeof google.devicesandservices.health.v4.BloodGlucose.Specimen);
+
+                    /** BloodGlucose notes. */
+                    public notes: string;
+
+                    /**
+                     * Creates a new BloodGlucose instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BloodGlucose instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IBloodGlucose): google.devicesandservices.health.v4.BloodGlucose;
+
+                    /**
+                     * Encodes the specified BloodGlucose message. Does not implicitly {@link google.devicesandservices.health.v4.BloodGlucose.verify|verify} messages.
+                     * @param message BloodGlucose message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IBloodGlucose, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BloodGlucose message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.BloodGlucose.verify|verify} messages.
+                     * @param message BloodGlucose message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IBloodGlucose, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BloodGlucose message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BloodGlucose
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.BloodGlucose;
+
+                    /**
+                     * Decodes a BloodGlucose message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BloodGlucose
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.BloodGlucose;
+
+                    /**
+                     * Verifies a BloodGlucose message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BloodGlucose message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BloodGlucose
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.BloodGlucose;
+
+                    /**
+                     * Creates a plain object from a BloodGlucose message. Also converts values to other types if specified.
+                     * @param message BloodGlucose
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.BloodGlucose, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BloodGlucose to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BloodGlucose
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BloodGlucose {
+
+                    /** MeasurementSource enum. */
+                    enum MeasurementSource {
+                        MEASUREMENT_SOURCE_UNSPECIFIED = 0,
+                        SELF_MONITORING_BLOOD_GLUCOSE = 1,
+                        CONTINUOUS_GLUCOSE_MONITORING = 2,
+                        LAB_TEST = 3
+                    }
+
+                    /** MealType enum. */
+                    enum MealType {
+                        MEAL_TYPE_UNSPECIFIED = 0,
+                        BREAKFAST = 1,
+                        LUNCH = 2,
+                        DINNER = 3,
+                        SNACK = 4
+                    }
+
+                    /** MeasurementTiming enum. */
+                    enum MeasurementTiming {
+                        MEASUREMENT_TIMING_UNSPECIFIED = 0,
+                        AFTER_MEAL = 1,
+                        BEFORE_MEAL = 2,
+                        FASTING = 3,
+                        GENERAL = 4,
+                        BEFORE_BED = 5,
+                        OVER_NIGHT = 6
+                    }
+
+                    /** Specimen enum. */
+                    enum Specimen {
+                        SPECIMEN_UNSPECIFIED = 0,
+                        CAPILLARY_BLOOD = 1,
+                        INTERSTITIAL_FLUID = 2,
+                        PLASMA = 3,
+                        SERUM = 4,
+                        TEARS = 5,
+                        WHOLE_BLOOD = 6
+                    }
+                }
+
+                /** Properties of a BloodGlucoseRollupValue. */
+                interface IBloodGlucoseRollupValue {
+
+                    /** BloodGlucoseRollupValue bloodGlucoseMilligramsPerDeciliterAvg */
+                    bloodGlucoseMilligramsPerDeciliterAvg?: (number|null);
+                }
+
+                /** Represents a BloodGlucoseRollupValue. */
+                class BloodGlucoseRollupValue implements IBloodGlucoseRollupValue {
+
+                    /**
+                     * Constructs a new BloodGlucoseRollupValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IBloodGlucoseRollupValue);
+
+                    /** BloodGlucoseRollupValue bloodGlucoseMilligramsPerDeciliterAvg. */
+                    public bloodGlucoseMilligramsPerDeciliterAvg?: (number|null);
+
+                    /**
+                     * Creates a new BloodGlucoseRollupValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BloodGlucoseRollupValue instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IBloodGlucoseRollupValue): google.devicesandservices.health.v4.BloodGlucoseRollupValue;
+
+                    /**
+                     * Encodes the specified BloodGlucoseRollupValue message. Does not implicitly {@link google.devicesandservices.health.v4.BloodGlucoseRollupValue.verify|verify} messages.
+                     * @param message BloodGlucoseRollupValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IBloodGlucoseRollupValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BloodGlucoseRollupValue message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.BloodGlucoseRollupValue.verify|verify} messages.
+                     * @param message BloodGlucoseRollupValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IBloodGlucoseRollupValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BloodGlucoseRollupValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BloodGlucoseRollupValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.BloodGlucoseRollupValue;
+
+                    /**
+                     * Decodes a BloodGlucoseRollupValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BloodGlucoseRollupValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.BloodGlucoseRollupValue;
+
+                    /**
+                     * Verifies a BloodGlucoseRollupValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BloodGlucoseRollupValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BloodGlucoseRollupValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.BloodGlucoseRollupValue;
+
+                    /**
+                     * Creates a plain object from a BloodGlucoseRollupValue message. Also converts values to other types if specified.
+                     * @param message BloodGlucoseRollupValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.BloodGlucoseRollupValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BloodGlucoseRollupValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BloodGlucoseRollupValue
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -8523,6 +11065,327 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SedentaryPeriodRollupValue
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ActiveEnergyBurned. */
+                interface IActiveEnergyBurned {
+
+                    /** ActiveEnergyBurned interval */
+                    interval?: (google.devicesandservices.health.v4.IObservationTimeInterval|null);
+
+                    /** ActiveEnergyBurned kcal */
+                    kcal?: (number|null);
+                }
+
+                /** Represents an ActiveEnergyBurned. */
+                class ActiveEnergyBurned implements IActiveEnergyBurned {
+
+                    /**
+                     * Constructs a new ActiveEnergyBurned.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IActiveEnergyBurned);
+
+                    /** ActiveEnergyBurned interval. */
+                    public interval?: (google.devicesandservices.health.v4.IObservationTimeInterval|null);
+
+                    /** ActiveEnergyBurned kcal. */
+                    public kcal?: (number|null);
+
+                    /**
+                     * Creates a new ActiveEnergyBurned instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ActiveEnergyBurned instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IActiveEnergyBurned): google.devicesandservices.health.v4.ActiveEnergyBurned;
+
+                    /**
+                     * Encodes the specified ActiveEnergyBurned message. Does not implicitly {@link google.devicesandservices.health.v4.ActiveEnergyBurned.verify|verify} messages.
+                     * @param message ActiveEnergyBurned message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IActiveEnergyBurned, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ActiveEnergyBurned message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ActiveEnergyBurned.verify|verify} messages.
+                     * @param message ActiveEnergyBurned message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IActiveEnergyBurned, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ActiveEnergyBurned message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ActiveEnergyBurned
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.ActiveEnergyBurned;
+
+                    /**
+                     * Decodes an ActiveEnergyBurned message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ActiveEnergyBurned
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.ActiveEnergyBurned;
+
+                    /**
+                     * Verifies an ActiveEnergyBurned message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ActiveEnergyBurned message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ActiveEnergyBurned
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.ActiveEnergyBurned;
+
+                    /**
+                     * Creates a plain object from an ActiveEnergyBurned message. Also converts values to other types if specified.
+                     * @param message ActiveEnergyBurned
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.ActiveEnergyBurned, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ActiveEnergyBurned to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ActiveEnergyBurned
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ActiveEnergyBurnedRollupValue. */
+                interface IActiveEnergyBurnedRollupValue {
+
+                    /** ActiveEnergyBurnedRollupValue kcalSum */
+                    kcalSum?: (number|null);
+                }
+
+                /** Represents an ActiveEnergyBurnedRollupValue. */
+                class ActiveEnergyBurnedRollupValue implements IActiveEnergyBurnedRollupValue {
+
+                    /**
+                     * Constructs a new ActiveEnergyBurnedRollupValue.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue);
+
+                    /** ActiveEnergyBurnedRollupValue kcalSum. */
+                    public kcalSum?: (number|null);
+
+                    /**
+                     * Creates a new ActiveEnergyBurnedRollupValue instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ActiveEnergyBurnedRollupValue instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue): google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue;
+
+                    /**
+                     * Encodes the specified ActiveEnergyBurnedRollupValue message. Does not implicitly {@link google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.verify|verify} messages.
+                     * @param message ActiveEnergyBurnedRollupValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ActiveEnergyBurnedRollupValue message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue.verify|verify} messages.
+                     * @param message ActiveEnergyBurnedRollupValue message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ActiveEnergyBurnedRollupValue message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ActiveEnergyBurnedRollupValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue;
+
+                    /**
+                     * Decodes an ActiveEnergyBurnedRollupValue message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ActiveEnergyBurnedRollupValue
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue;
+
+                    /**
+                     * Verifies an ActiveEnergyBurnedRollupValue message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ActiveEnergyBurnedRollupValue message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ActiveEnergyBurnedRollupValue
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue;
+
+                    /**
+                     * Creates a plain object from an ActiveEnergyBurnedRollupValue message. Also converts values to other types if specified.
+                     * @param message ActiveEnergyBurnedRollupValue
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.ActiveEnergyBurnedRollupValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ActiveEnergyBurnedRollupValue to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ActiveEnergyBurnedRollupValue
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MedicalDeviceInfo. */
+                interface IMedicalDeviceInfo {
+
+                    /** MedicalDeviceInfo algorithmVersion */
+                    algorithmVersion?: (string|null);
+
+                    /** MedicalDeviceInfo serviceVersion */
+                    serviceVersion?: (string|null);
+
+                    /** MedicalDeviceInfo firmwareVersion */
+                    firmwareVersion?: (string|null);
+
+                    /** MedicalDeviceInfo featureVersion */
+                    featureVersion?: (string|null);
+
+                    /** MedicalDeviceInfo deviceModel */
+                    deviceModel?: (string|null);
+                }
+
+                /** Represents a MedicalDeviceInfo. */
+                class MedicalDeviceInfo implements IMedicalDeviceInfo {
+
+                    /**
+                     * Constructs a new MedicalDeviceInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IMedicalDeviceInfo);
+
+                    /** MedicalDeviceInfo algorithmVersion. */
+                    public algorithmVersion: string;
+
+                    /** MedicalDeviceInfo serviceVersion. */
+                    public serviceVersion: string;
+
+                    /** MedicalDeviceInfo firmwareVersion. */
+                    public firmwareVersion: string;
+
+                    /** MedicalDeviceInfo featureVersion. */
+                    public featureVersion: string;
+
+                    /** MedicalDeviceInfo deviceModel. */
+                    public deviceModel: string;
+
+                    /**
+                     * Creates a new MedicalDeviceInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MedicalDeviceInfo instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IMedicalDeviceInfo): google.devicesandservices.health.v4.MedicalDeviceInfo;
+
+                    /**
+                     * Encodes the specified MedicalDeviceInfo message. Does not implicitly {@link google.devicesandservices.health.v4.MedicalDeviceInfo.verify|verify} messages.
+                     * @param message MedicalDeviceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IMedicalDeviceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MedicalDeviceInfo message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.MedicalDeviceInfo.verify|verify} messages.
+                     * @param message MedicalDeviceInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IMedicalDeviceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MedicalDeviceInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MedicalDeviceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.MedicalDeviceInfo;
+
+                    /**
+                     * Decodes a MedicalDeviceInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MedicalDeviceInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.MedicalDeviceInfo;
+
+                    /**
+                     * Verifies a MedicalDeviceInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MedicalDeviceInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MedicalDeviceInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.MedicalDeviceInfo;
+
+                    /**
+                     * Creates a plain object from a MedicalDeviceInfo message. Also converts values to other types if specified.
+                     * @param message MedicalDeviceInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.MedicalDeviceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MedicalDeviceInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MedicalDeviceInfo
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -8808,11 +11671,23 @@ export namespace google {
                     /** DataPoint dailyVo2Max */
                     dailyVo2Max?: (google.devicesandservices.health.v4.IDailyVO2Max|null);
 
+                    /** DataPoint nutritionLog */
+                    nutritionLog?: (google.devicesandservices.health.v4.INutritionLog|null);
+
+                    /** DataPoint irregularRhythmNotification */
+                    irregularRhythmNotification?: (google.devicesandservices.health.v4.IIrregularRhythmNotification|null);
+
+                    /** DataPoint electrocardiogram */
+                    electrocardiogram?: (google.devicesandservices.health.v4.IElectrocardiogram|null);
+
                     /** DataPoint dailyHeartRateZones */
                     dailyHeartRateZones?: (google.devicesandservices.health.v4.IDailyHeartRateZones|null);
 
                     /** DataPoint hydrationLog */
                     hydrationLog?: (google.devicesandservices.health.v4.IHydrationLog|null);
+
+                    /** DataPoint food */
+                    food?: (google.devicesandservices.health.v4.IFood|null);
 
                     /** DataPoint timeInHeartRateZone */
                     timeInHeartRateZone?: (google.devicesandservices.health.v4.ITimeInHeartRateZone|null);
@@ -8834,6 +11709,18 @@ export namespace google {
 
                     /** DataPoint basalEnergyBurned */
                     basalEnergyBurned?: (google.devicesandservices.health.v4.IBasalEnergyBurned|null);
+
+                    /** DataPoint coreBodyTemperature */
+                    coreBodyTemperature?: (google.devicesandservices.health.v4.ICoreBodyTemperature|null);
+
+                    /** DataPoint activeEnergyBurned */
+                    activeEnergyBurned?: (google.devicesandservices.health.v4.IActiveEnergyBurned|null);
+
+                    /** DataPoint foodMeasurementUnit */
+                    foodMeasurementUnit?: (google.devicesandservices.health.v4.IFoodMeasurementUnit|null);
+
+                    /** DataPoint bloodGlucose */
+                    bloodGlucose?: (google.devicesandservices.health.v4.IBloodGlucose|null);
 
                     /** DataPoint name */
                     name?: (string|null);
@@ -8914,11 +11801,23 @@ export namespace google {
                     /** DataPoint dailyVo2Max. */
                     public dailyVo2Max?: (google.devicesandservices.health.v4.IDailyVO2Max|null);
 
+                    /** DataPoint nutritionLog. */
+                    public nutritionLog?: (google.devicesandservices.health.v4.INutritionLog|null);
+
+                    /** DataPoint irregularRhythmNotification. */
+                    public irregularRhythmNotification?: (google.devicesandservices.health.v4.IIrregularRhythmNotification|null);
+
+                    /** DataPoint electrocardiogram. */
+                    public electrocardiogram?: (google.devicesandservices.health.v4.IElectrocardiogram|null);
+
                     /** DataPoint dailyHeartRateZones. */
                     public dailyHeartRateZones?: (google.devicesandservices.health.v4.IDailyHeartRateZones|null);
 
                     /** DataPoint hydrationLog. */
                     public hydrationLog?: (google.devicesandservices.health.v4.IHydrationLog|null);
+
+                    /** DataPoint food. */
+                    public food?: (google.devicesandservices.health.v4.IFood|null);
 
                     /** DataPoint timeInHeartRateZone. */
                     public timeInHeartRateZone?: (google.devicesandservices.health.v4.ITimeInHeartRateZone|null);
@@ -8941,6 +11840,18 @@ export namespace google {
                     /** DataPoint basalEnergyBurned. */
                     public basalEnergyBurned?: (google.devicesandservices.health.v4.IBasalEnergyBurned|null);
 
+                    /** DataPoint coreBodyTemperature. */
+                    public coreBodyTemperature?: (google.devicesandservices.health.v4.ICoreBodyTemperature|null);
+
+                    /** DataPoint activeEnergyBurned. */
+                    public activeEnergyBurned?: (google.devicesandservices.health.v4.IActiveEnergyBurned|null);
+
+                    /** DataPoint foodMeasurementUnit. */
+                    public foodMeasurementUnit?: (google.devicesandservices.health.v4.IFoodMeasurementUnit|null);
+
+                    /** DataPoint bloodGlucose. */
+                    public bloodGlucose?: (google.devicesandservices.health.v4.IBloodGlucose|null);
+
                     /** DataPoint name. */
                     public name: string;
 
@@ -8948,7 +11859,7 @@ export namespace google {
                     public dataSource?: (google.devicesandservices.health.v4.IDataSource|null);
 
                     /** DataPoint data. */
-                    public data?: ("steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"dailyHeartRateZones"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned");
+                    public data?: ("steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"nutritionLog"|"irregularRhythmNotification"|"electrocardiogram"|"dailyHeartRateZones"|"hydrationLog"|"food"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|"coreBodyTemperature"|"activeEnergyBurned"|"foodMeasurementUnit"|"bloodGlucose");
 
                     /**
                      * Creates a new DataPoint instance using the specified properties.
@@ -9094,6 +12005,9 @@ export namespace google {
                     /** ReconciledDataPoint dailyVo2Max */
                     dailyVo2Max?: (google.devicesandservices.health.v4.IDailyVO2Max|null);
 
+                    /** ReconciledDataPoint nutritionLog */
+                    nutritionLog?: (google.devicesandservices.health.v4.INutritionLog|null);
+
                     /** ReconciledDataPoint dailyHeartRateZones */
                     dailyHeartRateZones?: (google.devicesandservices.health.v4.IDailyHeartRateZones|null);
 
@@ -9120,6 +12034,15 @@ export namespace google {
 
                     /** ReconciledDataPoint basalEnergyBurned */
                     basalEnergyBurned?: (google.devicesandservices.health.v4.IBasalEnergyBurned|null);
+
+                    /** ReconciledDataPoint coreBodyTemperature */
+                    coreBodyTemperature?: (google.devicesandservices.health.v4.ICoreBodyTemperature|null);
+
+                    /** ReconciledDataPoint activeEnergyBurned */
+                    activeEnergyBurned?: (google.devicesandservices.health.v4.IActiveEnergyBurned|null);
+
+                    /** ReconciledDataPoint bloodGlucose */
+                    bloodGlucose?: (google.devicesandservices.health.v4.IBloodGlucose|null);
 
                     /** ReconciledDataPoint dataPointName */
                     dataPointName?: (string|null);
@@ -9197,6 +12120,9 @@ export namespace google {
                     /** ReconciledDataPoint dailyVo2Max. */
                     public dailyVo2Max?: (google.devicesandservices.health.v4.IDailyVO2Max|null);
 
+                    /** ReconciledDataPoint nutritionLog. */
+                    public nutritionLog?: (google.devicesandservices.health.v4.INutritionLog|null);
+
                     /** ReconciledDataPoint dailyHeartRateZones. */
                     public dailyHeartRateZones?: (google.devicesandservices.health.v4.IDailyHeartRateZones|null);
 
@@ -9224,11 +12150,20 @@ export namespace google {
                     /** ReconciledDataPoint basalEnergyBurned. */
                     public basalEnergyBurned?: (google.devicesandservices.health.v4.IBasalEnergyBurned|null);
 
+                    /** ReconciledDataPoint coreBodyTemperature. */
+                    public coreBodyTemperature?: (google.devicesandservices.health.v4.ICoreBodyTemperature|null);
+
+                    /** ReconciledDataPoint activeEnergyBurned. */
+                    public activeEnergyBurned?: (google.devicesandservices.health.v4.IActiveEnergyBurned|null);
+
+                    /** ReconciledDataPoint bloodGlucose. */
+                    public bloodGlucose?: (google.devicesandservices.health.v4.IBloodGlucose|null);
+
                     /** ReconciledDataPoint dataPointName. */
                     public dataPointName: string;
 
                     /** ReconciledDataPoint data. */
-                    public data?: ("steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"dailyHeartRateZones"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned");
+                    public data?: ("steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"nutritionLog"|"dailyHeartRateZones"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose");
 
                     /**
                      * Creates a new ReconciledDataPoint instance using the specified properties.
@@ -9350,6 +12285,9 @@ export namespace google {
                     /** RollupDataPoint activityLevel */
                     activityLevel?: (google.devicesandservices.health.v4.IActivityLevelRollupValue|null);
 
+                    /** RollupDataPoint nutritionLog */
+                    nutritionLog?: (google.devicesandservices.health.v4.INutritionLogRollupValue|null);
+
                     /** RollupDataPoint hydrationLog */
                     hydrationLog?: (google.devicesandservices.health.v4.IHydrationLogRollupValue|null);
 
@@ -9361,6 +12299,15 @@ export namespace google {
 
                     /** RollupDataPoint swimLengthsData */
                     swimLengthsData?: (google.devicesandservices.health.v4.ISwimLengthsDataRollupValue|null);
+
+                    /** RollupDataPoint coreBodyTemperature */
+                    coreBodyTemperature?: (google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue|null);
+
+                    /** RollupDataPoint activeEnergyBurned */
+                    activeEnergyBurned?: (google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue|null);
+
+                    /** RollupDataPoint bloodGlucose */
+                    bloodGlucose?: (google.devicesandservices.health.v4.IBloodGlucoseRollupValue|null);
 
                     /** RollupDataPoint startTime */
                     startTime?: (google.protobuf.ITimestamp|null);
@@ -9417,6 +12364,9 @@ export namespace google {
                     /** RollupDataPoint activityLevel. */
                     public activityLevel?: (google.devicesandservices.health.v4.IActivityLevelRollupValue|null);
 
+                    /** RollupDataPoint nutritionLog. */
+                    public nutritionLog?: (google.devicesandservices.health.v4.INutritionLogRollupValue|null);
+
                     /** RollupDataPoint hydrationLog. */
                     public hydrationLog?: (google.devicesandservices.health.v4.IHydrationLogRollupValue|null);
 
@@ -9429,6 +12379,15 @@ export namespace google {
                     /** RollupDataPoint swimLengthsData. */
                     public swimLengthsData?: (google.devicesandservices.health.v4.ISwimLengthsDataRollupValue|null);
 
+                    /** RollupDataPoint coreBodyTemperature. */
+                    public coreBodyTemperature?: (google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue|null);
+
+                    /** RollupDataPoint activeEnergyBurned. */
+                    public activeEnergyBurned?: (google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue|null);
+
+                    /** RollupDataPoint bloodGlucose. */
+                    public bloodGlucose?: (google.devicesandservices.health.v4.IBloodGlucoseRollupValue|null);
+
                     /** RollupDataPoint startTime. */
                     public startTime?: (google.protobuf.ITimestamp|null);
 
@@ -9436,7 +12395,7 @@ export namespace google {
                     public endTime?: (google.protobuf.ITimestamp|null);
 
                     /** RollupDataPoint value. */
-                    public value?: ("steps"|"floors"|"heartRate"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData");
+                    public value?: ("steps"|"floors"|"heartRate"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"nutritionLog"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose");
 
                     /**
                      * Creates a new RollupDataPoint instance using the specified properties.
@@ -9564,6 +12523,9 @@ export namespace google {
                     /** DailyRollupDataPoint activityLevel */
                     activityLevel?: (google.devicesandservices.health.v4.IActivityLevelRollupValue|null);
 
+                    /** DailyRollupDataPoint nutritionLog */
+                    nutritionLog?: (google.devicesandservices.health.v4.INutritionLogRollupValue|null);
+
                     /** DailyRollupDataPoint hydrationLog */
                     hydrationLog?: (google.devicesandservices.health.v4.IHydrationLogRollupValue|null);
 
@@ -9575,6 +12537,15 @@ export namespace google {
 
                     /** DailyRollupDataPoint swimLengthsData */
                     swimLengthsData?: (google.devicesandservices.health.v4.ISwimLengthsDataRollupValue|null);
+
+                    /** DailyRollupDataPoint coreBodyTemperature */
+                    coreBodyTemperature?: (google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue|null);
+
+                    /** DailyRollupDataPoint activeEnergyBurned */
+                    activeEnergyBurned?: (google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue|null);
+
+                    /** DailyRollupDataPoint bloodGlucose */
+                    bloodGlucose?: (google.devicesandservices.health.v4.IBloodGlucoseRollupValue|null);
 
                     /** DailyRollupDataPoint civilStartTime */
                     civilStartTime?: (google.devicesandservices.health.v4.ICivilDateTime|null);
@@ -9637,6 +12608,9 @@ export namespace google {
                     /** DailyRollupDataPoint activityLevel. */
                     public activityLevel?: (google.devicesandservices.health.v4.IActivityLevelRollupValue|null);
 
+                    /** DailyRollupDataPoint nutritionLog. */
+                    public nutritionLog?: (google.devicesandservices.health.v4.INutritionLogRollupValue|null);
+
                     /** DailyRollupDataPoint hydrationLog. */
                     public hydrationLog?: (google.devicesandservices.health.v4.IHydrationLogRollupValue|null);
 
@@ -9649,6 +12623,15 @@ export namespace google {
                     /** DailyRollupDataPoint swimLengthsData. */
                     public swimLengthsData?: (google.devicesandservices.health.v4.ISwimLengthsDataRollupValue|null);
 
+                    /** DailyRollupDataPoint coreBodyTemperature. */
+                    public coreBodyTemperature?: (google.devicesandservices.health.v4.ICoreBodyTemperatureRollupValue|null);
+
+                    /** DailyRollupDataPoint activeEnergyBurned. */
+                    public activeEnergyBurned?: (google.devicesandservices.health.v4.IActiveEnergyBurnedRollupValue|null);
+
+                    /** DailyRollupDataPoint bloodGlucose. */
+                    public bloodGlucose?: (google.devicesandservices.health.v4.IBloodGlucoseRollupValue|null);
+
                     /** DailyRollupDataPoint civilStartTime. */
                     public civilStartTime?: (google.devicesandservices.health.v4.ICivilDateTime|null);
 
@@ -9656,7 +12639,7 @@ export namespace google {
                     public civilEndTime?: (google.devicesandservices.health.v4.ICivilDateTime|null);
 
                     /** DailyRollupDataPoint value. */
-                    public value?: ("steps"|"floors"|"heartRate"|"restingHeartRatePersonalRange"|"heartRateVariabilityPersonalRange"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData");
+                    public value?: ("steps"|"floors"|"heartRate"|"restingHeartRatePersonalRange"|"heartRateVariabilityPersonalRange"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"nutritionLog"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose");
 
                     /**
                      * Creates a new DailyRollupDataPoint instance using the specified properties.
@@ -12081,6 +15064,2212 @@ export namespace google {
                     }
                 }
 
+                /** Represents a DataSubscriptionService */
+                class DataSubscriptionService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DataSubscriptionService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DataSubscriptionService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DataSubscriptionService;
+
+                    /**
+                     * Calls CreateSubscriber.
+                     * @param request CreateSubscriberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSubscriber(request: google.devicesandservices.health.v4.ICreateSubscriberRequest, callback: google.devicesandservices.health.v4.DataSubscriptionService.CreateSubscriberCallback): void;
+
+                    /**
+                     * Calls CreateSubscriber.
+                     * @param request CreateSubscriberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSubscriber(request: google.devicesandservices.health.v4.ICreateSubscriberRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListSubscribers.
+                     * @param request ListSubscribersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSubscribersResponse
+                     */
+                    public listSubscribers(request: google.devicesandservices.health.v4.IListSubscribersRequest, callback: google.devicesandservices.health.v4.DataSubscriptionService.ListSubscribersCallback): void;
+
+                    /**
+                     * Calls ListSubscribers.
+                     * @param request ListSubscribersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSubscribers(request: google.devicesandservices.health.v4.IListSubscribersRequest): Promise<google.devicesandservices.health.v4.ListSubscribersResponse>;
+
+                    /**
+                     * Calls UpdateSubscriber.
+                     * @param request UpdateSubscriberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateSubscriber(request: google.devicesandservices.health.v4.IUpdateSubscriberRequest, callback: google.devicesandservices.health.v4.DataSubscriptionService.UpdateSubscriberCallback): void;
+
+                    /**
+                     * Calls UpdateSubscriber.
+                     * @param request UpdateSubscriberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSubscriber(request: google.devicesandservices.health.v4.IUpdateSubscriberRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteSubscriber.
+                     * @param request DeleteSubscriberRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteSubscriber(request: google.devicesandservices.health.v4.IDeleteSubscriberRequest, callback: google.devicesandservices.health.v4.DataSubscriptionService.DeleteSubscriberCallback): void;
+
+                    /**
+                     * Calls DeleteSubscriber.
+                     * @param request DeleteSubscriberRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSubscriber(request: google.devicesandservices.health.v4.IDeleteSubscriberRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateSubscription.
+                     * @param request CreateSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Subscription
+                     */
+                    public createSubscription(request: google.devicesandservices.health.v4.ICreateSubscriptionRequest, callback: google.devicesandservices.health.v4.DataSubscriptionService.CreateSubscriptionCallback): void;
+
+                    /**
+                     * Calls CreateSubscription.
+                     * @param request CreateSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSubscription(request: google.devicesandservices.health.v4.ICreateSubscriptionRequest): Promise<google.devicesandservices.health.v4.Subscription>;
+
+                    /**
+                     * Calls ListSubscriptions.
+                     * @param request ListSubscriptionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSubscriptionsResponse
+                     */
+                    public listSubscriptions(request: google.devicesandservices.health.v4.IListSubscriptionsRequest, callback: google.devicesandservices.health.v4.DataSubscriptionService.ListSubscriptionsCallback): void;
+
+                    /**
+                     * Calls ListSubscriptions.
+                     * @param request ListSubscriptionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSubscriptions(request: google.devicesandservices.health.v4.IListSubscriptionsRequest): Promise<google.devicesandservices.health.v4.ListSubscriptionsResponse>;
+
+                    /**
+                     * Calls UpdateSubscription.
+                     * @param request UpdateSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Subscription
+                     */
+                    public updateSubscription(request: google.devicesandservices.health.v4.IUpdateSubscriptionRequest, callback: google.devicesandservices.health.v4.DataSubscriptionService.UpdateSubscriptionCallback): void;
+
+                    /**
+                     * Calls UpdateSubscription.
+                     * @param request UpdateSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSubscription(request: google.devicesandservices.health.v4.IUpdateSubscriptionRequest): Promise<google.devicesandservices.health.v4.Subscription>;
+
+                    /**
+                     * Calls DeleteSubscription.
+                     * @param request DeleteSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteSubscription(request: google.devicesandservices.health.v4.IDeleteSubscriptionRequest, callback: google.devicesandservices.health.v4.DataSubscriptionService.DeleteSubscriptionCallback): void;
+
+                    /**
+                     * Calls DeleteSubscription.
+                     * @param request DeleteSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSubscription(request: google.devicesandservices.health.v4.IDeleteSubscriptionRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace DataSubscriptionService {
+
+                    /**
+                     * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|createSubscriber}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSubscriberCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|listSubscribers}.
+                     * @param error Error, if any
+                     * @param [response] ListSubscribersResponse
+                     */
+                    type ListSubscribersCallback = (error: (Error|null), response?: google.devicesandservices.health.v4.ListSubscribersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|updateSubscriber}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateSubscriberCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|deleteSubscriber}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteSubscriberCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|createSubscription}.
+                     * @param error Error, if any
+                     * @param [response] Subscription
+                     */
+                    type CreateSubscriptionCallback = (error: (Error|null), response?: google.devicesandservices.health.v4.Subscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|listSubscriptions}.
+                     * @param error Error, if any
+                     * @param [response] ListSubscriptionsResponse
+                     */
+                    type ListSubscriptionsCallback = (error: (Error|null), response?: google.devicesandservices.health.v4.ListSubscriptionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|updateSubscription}.
+                     * @param error Error, if any
+                     * @param [response] Subscription
+                     */
+                    type UpdateSubscriptionCallback = (error: (Error|null), response?: google.devicesandservices.health.v4.Subscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|deleteSubscription}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteSubscriptionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a CreateSubscriberRequest. */
+                interface ICreateSubscriberRequest {
+
+                    /** CreateSubscriberRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSubscriberRequest subscriber */
+                    subscriber?: (google.devicesandservices.health.v4.ICreateSubscriberPayload|null);
+
+                    /** CreateSubscriberRequest subscriberId */
+                    subscriberId?: (string|null);
+                }
+
+                /** Represents a CreateSubscriberRequest. */
+                class CreateSubscriberRequest implements ICreateSubscriberRequest {
+
+                    /**
+                     * Constructs a new CreateSubscriberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.ICreateSubscriberRequest);
+
+                    /** CreateSubscriberRequest parent. */
+                    public parent: string;
+
+                    /** CreateSubscriberRequest subscriber. */
+                    public subscriber?: (google.devicesandservices.health.v4.ICreateSubscriberPayload|null);
+
+                    /** CreateSubscriberRequest subscriberId. */
+                    public subscriberId: string;
+
+                    /**
+                     * Creates a new CreateSubscriberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSubscriberRequest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.ICreateSubscriberRequest): google.devicesandservices.health.v4.CreateSubscriberRequest;
+
+                    /**
+                     * Encodes the specified CreateSubscriberRequest message. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberRequest.verify|verify} messages.
+                     * @param message CreateSubscriberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.ICreateSubscriberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSubscriberRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberRequest.verify|verify} messages.
+                     * @param message CreateSubscriberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.ICreateSubscriberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSubscriberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSubscriberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.CreateSubscriberRequest;
+
+                    /**
+                     * Decodes a CreateSubscriberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSubscriberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.CreateSubscriberRequest;
+
+                    /**
+                     * Verifies a CreateSubscriberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSubscriberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSubscriberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.CreateSubscriberRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSubscriberRequest message. Also converts values to other types if specified.
+                     * @param message CreateSubscriberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.CreateSubscriberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSubscriberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSubscriberRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSubscribersRequest. */
+                interface IListSubscribersRequest {
+
+                    /** ListSubscribersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSubscribersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSubscribersRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSubscribersRequest. */
+                class ListSubscribersRequest implements IListSubscribersRequest {
+
+                    /**
+                     * Constructs a new ListSubscribersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IListSubscribersRequest);
+
+                    /** ListSubscribersRequest parent. */
+                    public parent: string;
+
+                    /** ListSubscribersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSubscribersRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSubscribersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSubscribersRequest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IListSubscribersRequest): google.devicesandservices.health.v4.ListSubscribersRequest;
+
+                    /**
+                     * Encodes the specified ListSubscribersRequest message. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscribersRequest.verify|verify} messages.
+                     * @param message ListSubscribersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IListSubscribersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSubscribersRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscribersRequest.verify|verify} messages.
+                     * @param message ListSubscribersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IListSubscribersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSubscribersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSubscribersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.ListSubscribersRequest;
+
+                    /**
+                     * Decodes a ListSubscribersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSubscribersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.ListSubscribersRequest;
+
+                    /**
+                     * Verifies a ListSubscribersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSubscribersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSubscribersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.ListSubscribersRequest;
+
+                    /**
+                     * Creates a plain object from a ListSubscribersRequest message. Also converts values to other types if specified.
+                     * @param message ListSubscribersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.ListSubscribersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSubscribersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSubscribersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSubscribersResponse. */
+                interface IListSubscribersResponse {
+
+                    /** ListSubscribersResponse subscribers */
+                    subscribers?: (google.devicesandservices.health.v4.ISubscriber[]|null);
+
+                    /** ListSubscribersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListSubscribersResponse totalSize */
+                    totalSize?: (number|null);
+                }
+
+                /** Represents a ListSubscribersResponse. */
+                class ListSubscribersResponse implements IListSubscribersResponse {
+
+                    /**
+                     * Constructs a new ListSubscribersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IListSubscribersResponse);
+
+                    /** ListSubscribersResponse subscribers. */
+                    public subscribers: google.devicesandservices.health.v4.ISubscriber[];
+
+                    /** ListSubscribersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListSubscribersResponse totalSize. */
+                    public totalSize: number;
+
+                    /**
+                     * Creates a new ListSubscribersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSubscribersResponse instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IListSubscribersResponse): google.devicesandservices.health.v4.ListSubscribersResponse;
+
+                    /**
+                     * Encodes the specified ListSubscribersResponse message. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscribersResponse.verify|verify} messages.
+                     * @param message ListSubscribersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IListSubscribersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSubscribersResponse message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscribersResponse.verify|verify} messages.
+                     * @param message ListSubscribersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IListSubscribersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSubscribersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSubscribersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.ListSubscribersResponse;
+
+                    /**
+                     * Decodes a ListSubscribersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSubscribersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.ListSubscribersResponse;
+
+                    /**
+                     * Verifies a ListSubscribersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSubscribersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSubscribersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.ListSubscribersResponse;
+
+                    /**
+                     * Creates a plain object from a ListSubscribersResponse message. Also converts values to other types if specified.
+                     * @param message ListSubscribersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.ListSubscribersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSubscribersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSubscribersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSubscriberRequest. */
+                interface IUpdateSubscriberRequest {
+
+                    /** UpdateSubscriberRequest subscriber */
+                    subscriber?: (google.devicesandservices.health.v4.ISubscriber|null);
+
+                    /** UpdateSubscriberRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateSubscriberRequest. */
+                class UpdateSubscriberRequest implements IUpdateSubscriberRequest {
+
+                    /**
+                     * Constructs a new UpdateSubscriberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IUpdateSubscriberRequest);
+
+                    /** UpdateSubscriberRequest subscriber. */
+                    public subscriber?: (google.devicesandservices.health.v4.ISubscriber|null);
+
+                    /** UpdateSubscriberRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateSubscriberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSubscriberRequest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IUpdateSubscriberRequest): google.devicesandservices.health.v4.UpdateSubscriberRequest;
+
+                    /**
+                     * Encodes the specified UpdateSubscriberRequest message. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriberRequest.verify|verify} messages.
+                     * @param message UpdateSubscriberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IUpdateSubscriberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSubscriberRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriberRequest.verify|verify} messages.
+                     * @param message UpdateSubscriberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IUpdateSubscriberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSubscriberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSubscriberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.UpdateSubscriberRequest;
+
+                    /**
+                     * Decodes an UpdateSubscriberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSubscriberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.UpdateSubscriberRequest;
+
+                    /**
+                     * Verifies an UpdateSubscriberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSubscriberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSubscriberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.UpdateSubscriberRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSubscriberRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSubscriberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.UpdateSubscriberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSubscriberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSubscriberRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSubscriberRequest. */
+                interface IDeleteSubscriberRequest {
+
+                    /** DeleteSubscriberRequest name */
+                    name?: (string|null);
+
+                    /** DeleteSubscriberRequest force */
+                    force?: (boolean|null);
+                }
+
+                /** Represents a DeleteSubscriberRequest. */
+                class DeleteSubscriberRequest implements IDeleteSubscriberRequest {
+
+                    /**
+                     * Constructs a new DeleteSubscriberRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IDeleteSubscriberRequest);
+
+                    /** DeleteSubscriberRequest name. */
+                    public name: string;
+
+                    /** DeleteSubscriberRequest force. */
+                    public force: boolean;
+
+                    /**
+                     * Creates a new DeleteSubscriberRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSubscriberRequest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IDeleteSubscriberRequest): google.devicesandservices.health.v4.DeleteSubscriberRequest;
+
+                    /**
+                     * Encodes the specified DeleteSubscriberRequest message. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriberRequest.verify|verify} messages.
+                     * @param message DeleteSubscriberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IDeleteSubscriberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSubscriberRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriberRequest.verify|verify} messages.
+                     * @param message DeleteSubscriberRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IDeleteSubscriberRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSubscriberRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSubscriberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.DeleteSubscriberRequest;
+
+                    /**
+                     * Decodes a DeleteSubscriberRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSubscriberRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.DeleteSubscriberRequest;
+
+                    /**
+                     * Verifies a DeleteSubscriberRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSubscriberRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSubscriberRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.DeleteSubscriberRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSubscriberRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSubscriberRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.DeleteSubscriberRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSubscriberRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSubscriberRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSubscriptionRequest. */
+                interface ICreateSubscriptionRequest {
+
+                    /** CreateSubscriptionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSubscriptionRequest subscriptionId */
+                    subscriptionId?: (string|null);
+
+                    /** CreateSubscriptionRequest subscription */
+                    subscription?: (google.devicesandservices.health.v4.ICreateSubscriptionPayload|null);
+                }
+
+                /** Represents a CreateSubscriptionRequest. */
+                class CreateSubscriptionRequest implements ICreateSubscriptionRequest {
+
+                    /**
+                     * Constructs a new CreateSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.ICreateSubscriptionRequest);
+
+                    /** CreateSubscriptionRequest parent. */
+                    public parent: string;
+
+                    /** CreateSubscriptionRequest subscriptionId. */
+                    public subscriptionId: string;
+
+                    /** CreateSubscriptionRequest subscription. */
+                    public subscription?: (google.devicesandservices.health.v4.ICreateSubscriptionPayload|null);
+
+                    /**
+                     * Creates a new CreateSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.ICreateSubscriptionRequest): google.devicesandservices.health.v4.CreateSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified CreateSubscriptionRequest message. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriptionRequest.verify|verify} messages.
+                     * @param message CreateSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.ICreateSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSubscriptionRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriptionRequest.verify|verify} messages.
+                     * @param message CreateSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.ICreateSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.CreateSubscriptionRequest;
+
+                    /**
+                     * Decodes a CreateSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.CreateSubscriptionRequest;
+
+                    /**
+                     * Verifies a CreateSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.CreateSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message CreateSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.CreateSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSubscriptionsRequest. */
+                interface IListSubscriptionsRequest {
+
+                    /** ListSubscriptionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSubscriptionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListSubscriptionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSubscriptionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSubscriptionsRequest. */
+                class ListSubscriptionsRequest implements IListSubscriptionsRequest {
+
+                    /**
+                     * Constructs a new ListSubscriptionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IListSubscriptionsRequest);
+
+                    /** ListSubscriptionsRequest parent. */
+                    public parent: string;
+
+                    /** ListSubscriptionsRequest filter. */
+                    public filter: string;
+
+                    /** ListSubscriptionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSubscriptionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSubscriptionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSubscriptionsRequest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IListSubscriptionsRequest): google.devicesandservices.health.v4.ListSubscriptionsRequest;
+
+                    /**
+                     * Encodes the specified ListSubscriptionsRequest message. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscriptionsRequest.verify|verify} messages.
+                     * @param message ListSubscriptionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IListSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSubscriptionsRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscriptionsRequest.verify|verify} messages.
+                     * @param message ListSubscriptionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IListSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSubscriptionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSubscriptionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.ListSubscriptionsRequest;
+
+                    /**
+                     * Decodes a ListSubscriptionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSubscriptionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.ListSubscriptionsRequest;
+
+                    /**
+                     * Verifies a ListSubscriptionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSubscriptionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSubscriptionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.ListSubscriptionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSubscriptionsRequest message. Also converts values to other types if specified.
+                     * @param message ListSubscriptionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.ListSubscriptionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSubscriptionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSubscriptionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSubscriptionsResponse. */
+                interface IListSubscriptionsResponse {
+
+                    /** ListSubscriptionsResponse subscriptions */
+                    subscriptions?: (google.devicesandservices.health.v4.ISubscription[]|null);
+
+                    /** ListSubscriptionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSubscriptionsResponse. */
+                class ListSubscriptionsResponse implements IListSubscriptionsResponse {
+
+                    /**
+                     * Constructs a new ListSubscriptionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IListSubscriptionsResponse);
+
+                    /** ListSubscriptionsResponse subscriptions. */
+                    public subscriptions: google.devicesandservices.health.v4.ISubscription[];
+
+                    /** ListSubscriptionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSubscriptionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSubscriptionsResponse instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IListSubscriptionsResponse): google.devicesandservices.health.v4.ListSubscriptionsResponse;
+
+                    /**
+                     * Encodes the specified ListSubscriptionsResponse message. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscriptionsResponse.verify|verify} messages.
+                     * @param message ListSubscriptionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IListSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSubscriptionsResponse message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscriptionsResponse.verify|verify} messages.
+                     * @param message ListSubscriptionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IListSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSubscriptionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSubscriptionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.ListSubscriptionsResponse;
+
+                    /**
+                     * Decodes a ListSubscriptionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSubscriptionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.ListSubscriptionsResponse;
+
+                    /**
+                     * Verifies a ListSubscriptionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSubscriptionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSubscriptionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.ListSubscriptionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSubscriptionsResponse message. Also converts values to other types if specified.
+                     * @param message ListSubscriptionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.ListSubscriptionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSubscriptionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSubscriptionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSubscriptionRequest. */
+                interface IUpdateSubscriptionRequest {
+
+                    /** UpdateSubscriptionRequest subscription */
+                    subscription?: (google.devicesandservices.health.v4.ISubscription|null);
+
+                    /** UpdateSubscriptionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateSubscriptionRequest. */
+                class UpdateSubscriptionRequest implements IUpdateSubscriptionRequest {
+
+                    /**
+                     * Constructs a new UpdateSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IUpdateSubscriptionRequest);
+
+                    /** UpdateSubscriptionRequest subscription. */
+                    public subscription?: (google.devicesandservices.health.v4.ISubscription|null);
+
+                    /** UpdateSubscriptionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IUpdateSubscriptionRequest): google.devicesandservices.health.v4.UpdateSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified UpdateSubscriptionRequest message. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriptionRequest.verify|verify} messages.
+                     * @param message UpdateSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IUpdateSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSubscriptionRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriptionRequest.verify|verify} messages.
+                     * @param message UpdateSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IUpdateSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.UpdateSubscriptionRequest;
+
+                    /**
+                     * Decodes an UpdateSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.UpdateSubscriptionRequest;
+
+                    /**
+                     * Verifies an UpdateSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.UpdateSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.UpdateSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSubscriptionRequest. */
+                interface IDeleteSubscriptionRequest {
+
+                    /** DeleteSubscriptionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteSubscriptionRequest. */
+                class DeleteSubscriptionRequest implements IDeleteSubscriptionRequest {
+
+                    /**
+                     * Constructs a new DeleteSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IDeleteSubscriptionRequest);
+
+                    /** DeleteSubscriptionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IDeleteSubscriptionRequest): google.devicesandservices.health.v4.DeleteSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified DeleteSubscriptionRequest message. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriptionRequest.verify|verify} messages.
+                     * @param message DeleteSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IDeleteSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSubscriptionRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriptionRequest.verify|verify} messages.
+                     * @param message DeleteSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IDeleteSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.DeleteSubscriptionRequest;
+
+                    /**
+                     * Decodes a DeleteSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.DeleteSubscriptionRequest;
+
+                    /**
+                     * Verifies a DeleteSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.DeleteSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.DeleteSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Subscriber. */
+                interface ISubscriber {
+
+                    /** Subscriber name */
+                    name?: (string|null);
+
+                    /** Subscriber endpointUri */
+                    endpointUri?: (string|null);
+
+                    /** Subscriber createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Subscriber updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Subscriber subscriberConfigs */
+                    subscriberConfigs?: (google.devicesandservices.health.v4.ISubscriberConfig[]|null);
+
+                    /** Subscriber endpointAuthorization */
+                    endpointAuthorization?: (google.devicesandservices.health.v4.IEndpointAuthorization|null);
+
+                    /** Subscriber state */
+                    state?: (google.devicesandservices.health.v4.Subscriber.State|keyof typeof google.devicesandservices.health.v4.Subscriber.State|null);
+                }
+
+                /** Represents a Subscriber. */
+                class Subscriber implements ISubscriber {
+
+                    /**
+                     * Constructs a new Subscriber.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.ISubscriber);
+
+                    /** Subscriber name. */
+                    public name: string;
+
+                    /** Subscriber endpointUri. */
+                    public endpointUri: string;
+
+                    /** Subscriber createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Subscriber updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Subscriber subscriberConfigs. */
+                    public subscriberConfigs: google.devicesandservices.health.v4.ISubscriberConfig[];
+
+                    /** Subscriber endpointAuthorization. */
+                    public endpointAuthorization?: (google.devicesandservices.health.v4.IEndpointAuthorization|null);
+
+                    /** Subscriber state. */
+                    public state: (google.devicesandservices.health.v4.Subscriber.State|keyof typeof google.devicesandservices.health.v4.Subscriber.State);
+
+                    /**
+                     * Creates a new Subscriber instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Subscriber instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.ISubscriber): google.devicesandservices.health.v4.Subscriber;
+
+                    /**
+                     * Encodes the specified Subscriber message. Does not implicitly {@link google.devicesandservices.health.v4.Subscriber.verify|verify} messages.
+                     * @param message Subscriber message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.ISubscriber, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Subscriber message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Subscriber.verify|verify} messages.
+                     * @param message Subscriber message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.ISubscriber, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Subscriber message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Subscriber
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.Subscriber;
+
+                    /**
+                     * Decodes a Subscriber message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Subscriber
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.Subscriber;
+
+                    /**
+                     * Verifies a Subscriber message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Subscriber message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Subscriber
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.Subscriber;
+
+                    /**
+                     * Creates a plain object from a Subscriber message. Also converts values to other types if specified.
+                     * @param message Subscriber
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.Subscriber, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Subscriber to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Subscriber
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Subscriber {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        UNVERIFIED = 1,
+                        ACTIVE = 2,
+                        INACTIVE = 3
+                    }
+                }
+
+                /** Properties of a Subscription. */
+                interface ISubscription {
+
+                    /** Subscription name */
+                    name?: (string|null);
+
+                    /** Subscription dataTypes */
+                    dataTypes?: (string[]|null);
+
+                    /** Subscription user */
+                    user?: (string|null);
+                }
+
+                /** Represents a Subscription. */
+                class Subscription implements ISubscription {
+
+                    /**
+                     * Constructs a new Subscription.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.ISubscription);
+
+                    /** Subscription name. */
+                    public name: string;
+
+                    /** Subscription dataTypes. */
+                    public dataTypes: string[];
+
+                    /** Subscription user. */
+                    public user: string;
+
+                    /**
+                     * Creates a new Subscription instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Subscription instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.ISubscription): google.devicesandservices.health.v4.Subscription;
+
+                    /**
+                     * Encodes the specified Subscription message. Does not implicitly {@link google.devicesandservices.health.v4.Subscription.verify|verify} messages.
+                     * @param message Subscription message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.ISubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Subscription message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Subscription.verify|verify} messages.
+                     * @param message Subscription message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.ISubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Subscription message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Subscription
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.Subscription;
+
+                    /**
+                     * Decodes a Subscription message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Subscription
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.Subscription;
+
+                    /**
+                     * Verifies a Subscription message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Subscription message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Subscription
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.Subscription;
+
+                    /**
+                     * Creates a plain object from a Subscription message. Also converts values to other types if specified.
+                     * @param message Subscription
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.Subscription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Subscription to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Subscription
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SubscriberConfig. */
+                interface ISubscriberConfig {
+
+                    /** SubscriberConfig dataTypes */
+                    dataTypes?: (string[]|null);
+
+                    /** SubscriberConfig subscriptionCreatePolicy */
+                    subscriptionCreatePolicy?: (google.devicesandservices.health.v4.SubscriberConfig.SubscriptionCreatePolicy|keyof typeof google.devicesandservices.health.v4.SubscriberConfig.SubscriptionCreatePolicy|null);
+                }
+
+                /** Represents a SubscriberConfig. */
+                class SubscriberConfig implements ISubscriberConfig {
+
+                    /**
+                     * Constructs a new SubscriberConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.ISubscriberConfig);
+
+                    /** SubscriberConfig dataTypes. */
+                    public dataTypes: string[];
+
+                    /** SubscriberConfig subscriptionCreatePolicy. */
+                    public subscriptionCreatePolicy: (google.devicesandservices.health.v4.SubscriberConfig.SubscriptionCreatePolicy|keyof typeof google.devicesandservices.health.v4.SubscriberConfig.SubscriptionCreatePolicy);
+
+                    /**
+                     * Creates a new SubscriberConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubscriberConfig instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.ISubscriberConfig): google.devicesandservices.health.v4.SubscriberConfig;
+
+                    /**
+                     * Encodes the specified SubscriberConfig message. Does not implicitly {@link google.devicesandservices.health.v4.SubscriberConfig.verify|verify} messages.
+                     * @param message SubscriberConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.ISubscriberConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubscriberConfig message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.SubscriberConfig.verify|verify} messages.
+                     * @param message SubscriberConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.ISubscriberConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubscriberConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubscriberConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.SubscriberConfig;
+
+                    /**
+                     * Decodes a SubscriberConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubscriberConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.SubscriberConfig;
+
+                    /**
+                     * Verifies a SubscriberConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubscriberConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubscriberConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.SubscriberConfig;
+
+                    /**
+                     * Creates a plain object from a SubscriberConfig message. Also converts values to other types if specified.
+                     * @param message SubscriberConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.SubscriberConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubscriberConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubscriberConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SubscriberConfig {
+
+                    /** SubscriptionCreatePolicy enum. */
+                    enum SubscriptionCreatePolicy {
+                        SUBSCRIPTION_CREATE_POLICY_UNSPECIFIED = 0,
+                        AUTOMATIC = 1,
+                        MANUAL = 2
+                    }
+                }
+
+                /** Properties of an EndpointAuthorization. */
+                interface IEndpointAuthorization {
+
+                    /** EndpointAuthorization secret */
+                    secret?: (string|null);
+
+                    /** EndpointAuthorization secretSet */
+                    secretSet?: (boolean|null);
+                }
+
+                /** Represents an EndpointAuthorization. */
+                class EndpointAuthorization implements IEndpointAuthorization {
+
+                    /**
+                     * Constructs a new EndpointAuthorization.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IEndpointAuthorization);
+
+                    /** EndpointAuthorization secret. */
+                    public secret: string;
+
+                    /** EndpointAuthorization secretSet. */
+                    public secretSet: boolean;
+
+                    /**
+                     * Creates a new EndpointAuthorization instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EndpointAuthorization instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IEndpointAuthorization): google.devicesandservices.health.v4.EndpointAuthorization;
+
+                    /**
+                     * Encodes the specified EndpointAuthorization message. Does not implicitly {@link google.devicesandservices.health.v4.EndpointAuthorization.verify|verify} messages.
+                     * @param message EndpointAuthorization message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IEndpointAuthorization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EndpointAuthorization message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.EndpointAuthorization.verify|verify} messages.
+                     * @param message EndpointAuthorization message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IEndpointAuthorization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EndpointAuthorization message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EndpointAuthorization
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.EndpointAuthorization;
+
+                    /**
+                     * Decodes an EndpointAuthorization message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EndpointAuthorization
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.EndpointAuthorization;
+
+                    /**
+                     * Verifies an EndpointAuthorization message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EndpointAuthorization message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EndpointAuthorization
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.EndpointAuthorization;
+
+                    /**
+                     * Creates a plain object from an EndpointAuthorization message. Also converts values to other types if specified.
+                     * @param message EndpointAuthorization
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.EndpointAuthorization, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EndpointAuthorization to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EndpointAuthorization
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSubscriberPayload. */
+                interface ICreateSubscriberPayload {
+
+                    /** CreateSubscriberPayload endpointUri */
+                    endpointUri?: (string|null);
+
+                    /** CreateSubscriberPayload subscriberConfigs */
+                    subscriberConfigs?: (google.devicesandservices.health.v4.ISubscriberConfig[]|null);
+
+                    /** CreateSubscriberPayload endpointAuthorization */
+                    endpointAuthorization?: (google.devicesandservices.health.v4.IEndpointAuthorization|null);
+                }
+
+                /** Represents a CreateSubscriberPayload. */
+                class CreateSubscriberPayload implements ICreateSubscriberPayload {
+
+                    /**
+                     * Constructs a new CreateSubscriberPayload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.ICreateSubscriberPayload);
+
+                    /** CreateSubscriberPayload endpointUri. */
+                    public endpointUri: string;
+
+                    /** CreateSubscriberPayload subscriberConfigs. */
+                    public subscriberConfigs: google.devicesandservices.health.v4.ISubscriberConfig[];
+
+                    /** CreateSubscriberPayload endpointAuthorization. */
+                    public endpointAuthorization?: (google.devicesandservices.health.v4.IEndpointAuthorization|null);
+
+                    /**
+                     * Creates a new CreateSubscriberPayload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSubscriberPayload instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.ICreateSubscriberPayload): google.devicesandservices.health.v4.CreateSubscriberPayload;
+
+                    /**
+                     * Encodes the specified CreateSubscriberPayload message. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberPayload.verify|verify} messages.
+                     * @param message CreateSubscriberPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.ICreateSubscriberPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSubscriberPayload message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberPayload.verify|verify} messages.
+                     * @param message CreateSubscriberPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.ICreateSubscriberPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSubscriberPayload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSubscriberPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.CreateSubscriberPayload;
+
+                    /**
+                     * Decodes a CreateSubscriberPayload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSubscriberPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.CreateSubscriberPayload;
+
+                    /**
+                     * Verifies a CreateSubscriberPayload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSubscriberPayload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSubscriberPayload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.CreateSubscriberPayload;
+
+                    /**
+                     * Creates a plain object from a CreateSubscriberPayload message. Also converts values to other types if specified.
+                     * @param message CreateSubscriberPayload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.CreateSubscriberPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSubscriberPayload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSubscriberPayload
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSubscriptionPayload. */
+                interface ICreateSubscriptionPayload {
+
+                    /** CreateSubscriptionPayload dataTypes */
+                    dataTypes?: (string[]|null);
+
+                    /** CreateSubscriptionPayload user */
+                    user?: (string|null);
+                }
+
+                /** Represents a CreateSubscriptionPayload. */
+                class CreateSubscriptionPayload implements ICreateSubscriptionPayload {
+
+                    /**
+                     * Constructs a new CreateSubscriptionPayload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.ICreateSubscriptionPayload);
+
+                    /** CreateSubscriptionPayload dataTypes. */
+                    public dataTypes: string[];
+
+                    /** CreateSubscriptionPayload user. */
+                    public user: string;
+
+                    /**
+                     * Creates a new CreateSubscriptionPayload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSubscriptionPayload instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.ICreateSubscriptionPayload): google.devicesandservices.health.v4.CreateSubscriptionPayload;
+
+                    /**
+                     * Encodes the specified CreateSubscriptionPayload message. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriptionPayload.verify|verify} messages.
+                     * @param message CreateSubscriptionPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.ICreateSubscriptionPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSubscriptionPayload message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriptionPayload.verify|verify} messages.
+                     * @param message CreateSubscriptionPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.ICreateSubscriptionPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSubscriptionPayload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSubscriptionPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.CreateSubscriptionPayload;
+
+                    /**
+                     * Decodes a CreateSubscriptionPayload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSubscriptionPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.CreateSubscriptionPayload;
+
+                    /**
+                     * Verifies a CreateSubscriptionPayload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSubscriptionPayload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSubscriptionPayload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.CreateSubscriptionPayload;
+
+                    /**
+                     * Creates a plain object from a CreateSubscriptionPayload message. Also converts values to other types if specified.
+                     * @param message CreateSubscriptionPayload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.CreateSubscriptionPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSubscriptionPayload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSubscriptionPayload
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateSubscriberMetadata. */
+                interface ICreateSubscriberMetadata {
+                }
+
+                /** Represents a CreateSubscriberMetadata. */
+                class CreateSubscriberMetadata implements ICreateSubscriberMetadata {
+
+                    /**
+                     * Constructs a new CreateSubscriberMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.ICreateSubscriberMetadata);
+
+                    /**
+                     * Creates a new CreateSubscriberMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSubscriberMetadata instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.ICreateSubscriberMetadata): google.devicesandservices.health.v4.CreateSubscriberMetadata;
+
+                    /**
+                     * Encodes the specified CreateSubscriberMetadata message. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberMetadata.verify|verify} messages.
+                     * @param message CreateSubscriberMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.ICreateSubscriberMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSubscriberMetadata message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberMetadata.verify|verify} messages.
+                     * @param message CreateSubscriberMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.ICreateSubscriberMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSubscriberMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSubscriberMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.CreateSubscriberMetadata;
+
+                    /**
+                     * Decodes a CreateSubscriberMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSubscriberMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.CreateSubscriberMetadata;
+
+                    /**
+                     * Verifies a CreateSubscriberMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSubscriberMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSubscriberMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.CreateSubscriberMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateSubscriberMetadata message. Also converts values to other types if specified.
+                     * @param message CreateSubscriberMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.CreateSubscriberMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSubscriberMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSubscriberMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSubscriberMetadata. */
+                interface IUpdateSubscriberMetadata {
+                }
+
+                /** Represents an UpdateSubscriberMetadata. */
+                class UpdateSubscriberMetadata implements IUpdateSubscriberMetadata {
+
+                    /**
+                     * Constructs a new UpdateSubscriberMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IUpdateSubscriberMetadata);
+
+                    /**
+                     * Creates a new UpdateSubscriberMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSubscriberMetadata instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IUpdateSubscriberMetadata): google.devicesandservices.health.v4.UpdateSubscriberMetadata;
+
+                    /**
+                     * Encodes the specified UpdateSubscriberMetadata message. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriberMetadata.verify|verify} messages.
+                     * @param message UpdateSubscriberMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IUpdateSubscriberMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSubscriberMetadata message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriberMetadata.verify|verify} messages.
+                     * @param message UpdateSubscriberMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IUpdateSubscriberMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSubscriberMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSubscriberMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.UpdateSubscriberMetadata;
+
+                    /**
+                     * Decodes an UpdateSubscriberMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSubscriberMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.UpdateSubscriberMetadata;
+
+                    /**
+                     * Verifies an UpdateSubscriberMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSubscriberMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSubscriberMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.UpdateSubscriberMetadata;
+
+                    /**
+                     * Creates a plain object from an UpdateSubscriberMetadata message. Also converts values to other types if specified.
+                     * @param message UpdateSubscriberMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.UpdateSubscriberMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSubscriberMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSubscriberMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSubscriberMetadata. */
+                interface IDeleteSubscriberMetadata {
+                }
+
+                /** Represents a DeleteSubscriberMetadata. */
+                class DeleteSubscriberMetadata implements IDeleteSubscriberMetadata {
+
+                    /**
+                     * Constructs a new DeleteSubscriberMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IDeleteSubscriberMetadata);
+
+                    /**
+                     * Creates a new DeleteSubscriberMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSubscriberMetadata instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IDeleteSubscriberMetadata): google.devicesandservices.health.v4.DeleteSubscriberMetadata;
+
+                    /**
+                     * Encodes the specified DeleteSubscriberMetadata message. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriberMetadata.verify|verify} messages.
+                     * @param message DeleteSubscriberMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IDeleteSubscriberMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSubscriberMetadata message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriberMetadata.verify|verify} messages.
+                     * @param message DeleteSubscriberMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IDeleteSubscriberMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSubscriberMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSubscriberMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.DeleteSubscriberMetadata;
+
+                    /**
+                     * Decodes a DeleteSubscriberMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSubscriberMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.DeleteSubscriberMetadata;
+
+                    /**
+                     * Verifies a DeleteSubscriberMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSubscriberMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSubscriberMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.DeleteSubscriberMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteSubscriberMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteSubscriberMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.DeleteSubscriberMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSubscriberMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSubscriberMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a HealthProfileService */
                 class HealthProfileService extends $protobuf.rpc.Service {
 
@@ -12170,6 +17359,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public getIdentity(request: google.devicesandservices.health.v4.IGetIdentityRequest): Promise<google.devicesandservices.health.v4.Identity>;
+
+                    /**
+                     * Calls GetIrnProfile.
+                     * @param request GetIrnProfileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IrnProfile
+                     */
+                    public getIrnProfile(request: google.devicesandservices.health.v4.IGetIrnProfileRequest, callback: google.devicesandservices.health.v4.HealthProfileService.GetIrnProfileCallback): void;
+
+                    /**
+                     * Calls GetIrnProfile.
+                     * @param request GetIrnProfileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getIrnProfile(request: google.devicesandservices.health.v4.IGetIrnProfileRequest): Promise<google.devicesandservices.health.v4.IrnProfile>;
+
+                    /**
+                     * Calls GetPairedDevice.
+                     * @param request GetPairedDeviceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PairedDevice
+                     */
+                    public getPairedDevice(request: google.devicesandservices.health.v4.IGetPairedDeviceRequest, callback: google.devicesandservices.health.v4.HealthProfileService.GetPairedDeviceCallback): void;
+
+                    /**
+                     * Calls GetPairedDevice.
+                     * @param request GetPairedDeviceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPairedDevice(request: google.devicesandservices.health.v4.IGetPairedDeviceRequest): Promise<google.devicesandservices.health.v4.PairedDevice>;
+
+                    /**
+                     * Calls ListPairedDevices.
+                     * @param request ListPairedDevicesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPairedDevicesResponse
+                     */
+                    public listPairedDevices(request: google.devicesandservices.health.v4.IListPairedDevicesRequest, callback: google.devicesandservices.health.v4.HealthProfileService.ListPairedDevicesCallback): void;
+
+                    /**
+                     * Calls ListPairedDevices.
+                     * @param request ListPairedDevicesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPairedDevices(request: google.devicesandservices.health.v4.IListPairedDevicesRequest): Promise<google.devicesandservices.health.v4.ListPairedDevicesResponse>;
                 }
 
                 namespace HealthProfileService {
@@ -12208,6 +17439,124 @@ export namespace google {
                      * @param [response] Identity
                      */
                     type GetIdentityCallback = (error: (Error|null), response?: google.devicesandservices.health.v4.Identity) => void;
+
+                    /**
+                     * Callback as used by {@link google.devicesandservices.health.v4.HealthProfileService|getIrnProfile}.
+                     * @param error Error, if any
+                     * @param [response] IrnProfile
+                     */
+                    type GetIrnProfileCallback = (error: (Error|null), response?: google.devicesandservices.health.v4.IrnProfile) => void;
+
+                    /**
+                     * Callback as used by {@link google.devicesandservices.health.v4.HealthProfileService|getPairedDevice}.
+                     * @param error Error, if any
+                     * @param [response] PairedDevice
+                     */
+                    type GetPairedDeviceCallback = (error: (Error|null), response?: google.devicesandservices.health.v4.PairedDevice) => void;
+
+                    /**
+                     * Callback as used by {@link google.devicesandservices.health.v4.HealthProfileService|listPairedDevices}.
+                     * @param error Error, if any
+                     * @param [response] ListPairedDevicesResponse
+                     */
+                    type ListPairedDevicesCallback = (error: (Error|null), response?: google.devicesandservices.health.v4.ListPairedDevicesResponse) => void;
+                }
+
+                /** Properties of a User. */
+                interface IUser {
+
+                    /** User name */
+                    name?: (string|null);
+                }
+
+                /** Represents a User. */
+                class User implements IUser {
+
+                    /**
+                     * Constructs a new User.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IUser);
+
+                    /** User name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new User instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns User instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IUser): google.devicesandservices.health.v4.User;
+
+                    /**
+                     * Encodes the specified User message. Does not implicitly {@link google.devicesandservices.health.v4.User.verify|verify} messages.
+                     * @param message User message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified User message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.User.verify|verify} messages.
+                     * @param message User message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a User message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns User
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.User;
+
+                    /**
+                     * Decodes a User message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns User
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.User;
+
+                    /**
+                     * Verifies a User message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a User message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns User
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.User;
+
+                    /**
+                     * Creates a plain object from a User message. Also converts values to other types if specified.
+                     * @param message User
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this User to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for User
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Profile. */
@@ -12343,6 +17692,270 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a PairedDevice. */
+                interface IPairedDevice {
+
+                    /** PairedDevice name */
+                    name?: (string|null);
+
+                    /** PairedDevice deviceType */
+                    deviceType?: (google.devicesandservices.health.v4.PairedDevice.DeviceType|keyof typeof google.devicesandservices.health.v4.PairedDevice.DeviceType|null);
+
+                    /** PairedDevice batteryStatus */
+                    batteryStatus?: (string|null);
+
+                    /** PairedDevice batteryLevel */
+                    batteryLevel?: (number|null);
+
+                    /** PairedDevice lastSyncTime */
+                    lastSyncTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PairedDevice deviceVersion */
+                    deviceVersion?: (string|null);
+
+                    /** PairedDevice macAddress */
+                    macAddress?: (string|null);
+
+                    /** PairedDevice features */
+                    features?: (string[]|null);
+                }
+
+                /** Represents a PairedDevice. */
+                class PairedDevice implements IPairedDevice {
+
+                    /**
+                     * Constructs a new PairedDevice.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IPairedDevice);
+
+                    /** PairedDevice name. */
+                    public name: string;
+
+                    /** PairedDevice deviceType. */
+                    public deviceType: (google.devicesandservices.health.v4.PairedDevice.DeviceType|keyof typeof google.devicesandservices.health.v4.PairedDevice.DeviceType);
+
+                    /** PairedDevice batteryStatus. */
+                    public batteryStatus: string;
+
+                    /** PairedDevice batteryLevel. */
+                    public batteryLevel: number;
+
+                    /** PairedDevice lastSyncTime. */
+                    public lastSyncTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PairedDevice deviceVersion. */
+                    public deviceVersion: string;
+
+                    /** PairedDevice macAddress. */
+                    public macAddress: string;
+
+                    /** PairedDevice features. */
+                    public features: string[];
+
+                    /**
+                     * Creates a new PairedDevice instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PairedDevice instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IPairedDevice): google.devicesandservices.health.v4.PairedDevice;
+
+                    /**
+                     * Encodes the specified PairedDevice message. Does not implicitly {@link google.devicesandservices.health.v4.PairedDevice.verify|verify} messages.
+                     * @param message PairedDevice message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IPairedDevice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PairedDevice message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.PairedDevice.verify|verify} messages.
+                     * @param message PairedDevice message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IPairedDevice, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PairedDevice message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PairedDevice
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.PairedDevice;
+
+                    /**
+                     * Decodes a PairedDevice message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PairedDevice
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.PairedDevice;
+
+                    /**
+                     * Verifies a PairedDevice message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PairedDevice message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PairedDevice
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.PairedDevice;
+
+                    /**
+                     * Creates a plain object from a PairedDevice message. Also converts values to other types if specified.
+                     * @param message PairedDevice
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.PairedDevice, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PairedDevice to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PairedDevice
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PairedDevice {
+
+                    /** DeviceType enum. */
+                    enum DeviceType {
+                        DEVICE_TYPE_UNSPECIFIED = 0,
+                        TRACKER = 1,
+                        SCALE = 2
+                    }
+                }
+
+                /** Properties of an IrnProfile. */
+                interface IIrnProfile {
+
+                    /** IrnProfile name */
+                    name?: (string|null);
+
+                    /** IrnProfile onboardingStatus */
+                    onboardingStatus?: (boolean|null);
+
+                    /** IrnProfile enrollmentStatus */
+                    enrollmentStatus?: (boolean|null);
+
+                    /** IrnProfile updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an IrnProfile. */
+                class IrnProfile implements IIrnProfile {
+
+                    /**
+                     * Constructs a new IrnProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IIrnProfile);
+
+                    /** IrnProfile name. */
+                    public name: string;
+
+                    /** IrnProfile onboardingStatus. */
+                    public onboardingStatus: boolean;
+
+                    /** IrnProfile enrollmentStatus. */
+                    public enrollmentStatus: boolean;
+
+                    /** IrnProfile updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new IrnProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IrnProfile instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IIrnProfile): google.devicesandservices.health.v4.IrnProfile;
+
+                    /**
+                     * Encodes the specified IrnProfile message. Does not implicitly {@link google.devicesandservices.health.v4.IrnProfile.verify|verify} messages.
+                     * @param message IrnProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IIrnProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IrnProfile message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.IrnProfile.verify|verify} messages.
+                     * @param message IrnProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IIrnProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IrnProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IrnProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.IrnProfile;
+
+                    /**
+                     * Decodes an IrnProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IrnProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.IrnProfile;
+
+                    /**
+                     * Verifies an IrnProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IrnProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IrnProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.IrnProfile;
+
+                    /**
+                     * Creates a plain object from an IrnProfile message. Also converts values to other types if specified.
+                     * @param message IrnProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.IrnProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IrnProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IrnProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Settings. */
                 interface ISettings {
 
@@ -12387,6 +18000,9 @@ export namespace google {
 
                     /** Settings waterUnit */
                     waterUnit?: (google.devicesandservices.health.v4.Settings.WaterUnit|keyof typeof google.devicesandservices.health.v4.Settings.WaterUnit|null);
+
+                    /** Settings foodLanguageCode */
+                    foodLanguageCode?: (string|null);
                 }
 
                 /** Represents a Settings. */
@@ -12439,6 +18055,9 @@ export namespace google {
 
                     /** Settings waterUnit. */
                     public waterUnit: (google.devicesandservices.health.v4.Settings.WaterUnit|keyof typeof google.devicesandservices.health.v4.Settings.WaterUnit);
+
+                    /** Settings foodLanguageCode. */
+                    public foodLanguageCode: string;
 
                     /**
                      * Creates a new Settings instance using the specified properties.
@@ -12780,6 +18399,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetProfileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetIrnProfileRequest. */
+                interface IGetIrnProfileRequest {
+
+                    /** GetIrnProfileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetIrnProfileRequest. */
+                class GetIrnProfileRequest implements IGetIrnProfileRequest {
+
+                    /**
+                     * Constructs a new GetIrnProfileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IGetIrnProfileRequest);
+
+                    /** GetIrnProfileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetIrnProfileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetIrnProfileRequest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IGetIrnProfileRequest): google.devicesandservices.health.v4.GetIrnProfileRequest;
+
+                    /**
+                     * Encodes the specified GetIrnProfileRequest message. Does not implicitly {@link google.devicesandservices.health.v4.GetIrnProfileRequest.verify|verify} messages.
+                     * @param message GetIrnProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IGetIrnProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetIrnProfileRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.GetIrnProfileRequest.verify|verify} messages.
+                     * @param message GetIrnProfileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IGetIrnProfileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetIrnProfileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetIrnProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.GetIrnProfileRequest;
+
+                    /**
+                     * Decodes a GetIrnProfileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetIrnProfileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.GetIrnProfileRequest;
+
+                    /**
+                     * Verifies a GetIrnProfileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetIrnProfileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetIrnProfileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.GetIrnProfileRequest;
+
+                    /**
+                     * Creates a plain object from a GetIrnProfileRequest message. Also converts values to other types if specified.
+                     * @param message GetIrnProfileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.GetIrnProfileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetIrnProfileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetIrnProfileRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -13180,6 +18896,315 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetIdentityRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetPairedDeviceRequest. */
+                interface IGetPairedDeviceRequest {
+
+                    /** GetPairedDeviceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPairedDeviceRequest. */
+                class GetPairedDeviceRequest implements IGetPairedDeviceRequest {
+
+                    /**
+                     * Constructs a new GetPairedDeviceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IGetPairedDeviceRequest);
+
+                    /** GetPairedDeviceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPairedDeviceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPairedDeviceRequest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IGetPairedDeviceRequest): google.devicesandservices.health.v4.GetPairedDeviceRequest;
+
+                    /**
+                     * Encodes the specified GetPairedDeviceRequest message. Does not implicitly {@link google.devicesandservices.health.v4.GetPairedDeviceRequest.verify|verify} messages.
+                     * @param message GetPairedDeviceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IGetPairedDeviceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPairedDeviceRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.GetPairedDeviceRequest.verify|verify} messages.
+                     * @param message GetPairedDeviceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IGetPairedDeviceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPairedDeviceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPairedDeviceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.GetPairedDeviceRequest;
+
+                    /**
+                     * Decodes a GetPairedDeviceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPairedDeviceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.GetPairedDeviceRequest;
+
+                    /**
+                     * Verifies a GetPairedDeviceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPairedDeviceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPairedDeviceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.GetPairedDeviceRequest;
+
+                    /**
+                     * Creates a plain object from a GetPairedDeviceRequest message. Also converts values to other types if specified.
+                     * @param message GetPairedDeviceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.GetPairedDeviceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPairedDeviceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPairedDeviceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPairedDevicesRequest. */
+                interface IListPairedDevicesRequest {
+
+                    /** ListPairedDevicesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPairedDevicesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPairedDevicesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListPairedDevicesRequest. */
+                class ListPairedDevicesRequest implements IListPairedDevicesRequest {
+
+                    /**
+                     * Constructs a new ListPairedDevicesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IListPairedDevicesRequest);
+
+                    /** ListPairedDevicesRequest parent. */
+                    public parent: string;
+
+                    /** ListPairedDevicesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPairedDevicesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListPairedDevicesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPairedDevicesRequest instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IListPairedDevicesRequest): google.devicesandservices.health.v4.ListPairedDevicesRequest;
+
+                    /**
+                     * Encodes the specified ListPairedDevicesRequest message. Does not implicitly {@link google.devicesandservices.health.v4.ListPairedDevicesRequest.verify|verify} messages.
+                     * @param message ListPairedDevicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IListPairedDevicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPairedDevicesRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListPairedDevicesRequest.verify|verify} messages.
+                     * @param message ListPairedDevicesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IListPairedDevicesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPairedDevicesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPairedDevicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.ListPairedDevicesRequest;
+
+                    /**
+                     * Decodes a ListPairedDevicesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPairedDevicesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.ListPairedDevicesRequest;
+
+                    /**
+                     * Verifies a ListPairedDevicesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPairedDevicesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPairedDevicesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.ListPairedDevicesRequest;
+
+                    /**
+                     * Creates a plain object from a ListPairedDevicesRequest message. Also converts values to other types if specified.
+                     * @param message ListPairedDevicesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.ListPairedDevicesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPairedDevicesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPairedDevicesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPairedDevicesResponse. */
+                interface IListPairedDevicesResponse {
+
+                    /** ListPairedDevicesResponse pairedDevices */
+                    pairedDevices?: (google.devicesandservices.health.v4.IPairedDevice[]|null);
+
+                    /** ListPairedDevicesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPairedDevicesResponse. */
+                class ListPairedDevicesResponse implements IListPairedDevicesResponse {
+
+                    /**
+                     * Constructs a new ListPairedDevicesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devicesandservices.health.v4.IListPairedDevicesResponse);
+
+                    /** ListPairedDevicesResponse pairedDevices. */
+                    public pairedDevices: google.devicesandservices.health.v4.IPairedDevice[];
+
+                    /** ListPairedDevicesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPairedDevicesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPairedDevicesResponse instance
+                     */
+                    public static create(properties?: google.devicesandservices.health.v4.IListPairedDevicesResponse): google.devicesandservices.health.v4.ListPairedDevicesResponse;
+
+                    /**
+                     * Encodes the specified ListPairedDevicesResponse message. Does not implicitly {@link google.devicesandservices.health.v4.ListPairedDevicesResponse.verify|verify} messages.
+                     * @param message ListPairedDevicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devicesandservices.health.v4.IListPairedDevicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPairedDevicesResponse message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListPairedDevicesResponse.verify|verify} messages.
+                     * @param message ListPairedDevicesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devicesandservices.health.v4.IListPairedDevicesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPairedDevicesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPairedDevicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4.ListPairedDevicesResponse;
+
+                    /**
+                     * Decodes a ListPairedDevicesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPairedDevicesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4.ListPairedDevicesResponse;
+
+                    /**
+                     * Verifies a ListPairedDevicesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPairedDevicesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPairedDevicesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4.ListPairedDevicesResponse;
+
+                    /**
+                     * Creates a plain object from a ListPairedDevicesResponse message. Also converts values to other types if specified.
+                     * @param message ListPairedDevicesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devicesandservices.health.v4.ListPairedDevicesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPairedDevicesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPairedDevicesResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -13922,6 +19947,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -13938,6 +19966,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -14542,6 +20573,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -14555,6 +20589,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -14639,6 +20676,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -14652,6 +20692,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -14729,6 +20772,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -15057,6 +21212,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -15070,6 +21228,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -15160,6 +21321,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -15179,6 +21343,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -15395,6 +21562,468 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -15511,10 +22140,13 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -15540,6 +22172,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -15589,6 +22224,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -15724,6 +22362,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -15764,6 +22405,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -16612,6 +23256,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -16637,6 +23284,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -17572,6 +24222,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -17626,6 +24279,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -17842,6 +24498,127 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -18085,6 +24862,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -18106,6 +24886,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -18699,6 +25482,15 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -18727,6 +25519,15 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -18850,6 +25651,218 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -18969,8 +25982,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -18985,8 +26001,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -19517,6 +26536,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */
@@ -20715,6 +27741,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOperationsRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOperationsRequest. */
@@ -20737,6 +27766,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken. */
             public pageToken: string;
+
+            /** ListOperationsRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOperationsRequest instance using the specified properties.
@@ -20824,6 +27856,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOperationsResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOperationsResponse. */
@@ -20840,6 +27875,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOperationsResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOperationsResponse instance using the specified properties.

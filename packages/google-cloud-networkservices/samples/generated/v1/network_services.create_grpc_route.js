@@ -30,7 +30,7 @@ function main(parent, grpcRouteId, grpcRoute) {
    */
   /**
    *  Required. The parent resource of the GrpcRoute. Must be in the
-   *  format `projects/* /locations/global`.
+   *  format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**

@@ -1,5 +1,101 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.8.0...admanager-v0.9.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.7.0...admanager-v0.8.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.6.0...admanager-v0.7.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.5.1...admanager-v0.6.0) (2026-05-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* An existing value `DEMAND_SUBCHANNEL_ALL` is removed from enum `Dimension`
+* Changed field behavior for an existing field `display_name` in message `.google.ads.admanager.v1.Application`
+* Removed UNIFIED_PRICING_RULE_ID dimension
+* Removed UNIFIED_PRICING_RULE_NAME dimension
+* Remove unused AdManagerError type
+* New REQUIRED field `display_name` in message `.google.ads.admanager.v1.Label`
+* New REQUIRED field `types` in message `.google.ads.admanager.v1.Label`
+
+### Features
+
+* [admanager] added new API dimension: CREATIVE_SSL_COMPLIANCE_OVERRIDE ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new field `app_store_display_name` is added to message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new field `app_store_id` is added to message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new field `app_stores` is added to message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new field `application_code` is added to message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new field `approval_status` is added to message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new field `archived` is added to message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new field `developer` is added to message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new field `download_url` is added to message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new field `free` is added to message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new field `platform` is added to message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new field `webview_claiming_status` is added to message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `ApplicationApprovalStatusEnum` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `ApplicationPlatformEnum` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `ApplicationStoreEnum` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `BatchArchiveApplicationsRequest` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `BatchArchiveApplicationsResponse` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `BatchCreateApplicationsRequest` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `BatchCreateApplicationsResponse` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `BatchUnarchiveApplicationsRequest` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `BatchUnarchiveApplicationsResponse` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `BatchUpdateApplicationsRequest` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `BatchUpdateApplicationsResponse` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `CreateApplicationRequest` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `UpdateApplicationRequest` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new message `WebviewClaimingStatusEnum` is added ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new method `BatchArchiveApplications` is added to service `ApplicationService` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new method `BatchCreateApplications` is added to service `ApplicationService` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new method `BatchUnarchiveApplications` is added to service `ApplicationService` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new method `BatchUpdateApplications` is added to service `ApplicationService` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new method `CreateApplication` is added to service `ApplicationService` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* A new method `UpdateApplication` is added to service `ApplicationService` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Add readonly OAuth scope ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Added new API dimension: CREATIVE_SSL_SCAN_RESULT ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Added new PUBLIC dimension: CREATIVE_SSL_COMPLIANCE_OVERRIDE_NAME ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Added new PUBLIC dimension: CREATIVE_SSL_SCAN_RESULT_NAME ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Added new PUBLIC dimension: LINE_ITEM_AVERAGE_NUMBER_OF_VIEWERS ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Added new PUBLIC dimension: TARGETS_CUSTOMER_MATCHING_LIST ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Added new PUBLIC metric: AD_SERVER_ACTIVE_VIEW_REVENUE ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* **child_publisher:** Added child publisher resource. ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* **deals:** Add ProposalLineItem service and messages to the API. ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* **DelegationTypeEnum:** This is referenced for delegation_type in mcm_earnings ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Expose both `get` and `list` methods for RichMediaAdsCompanies to external clients. ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* **mcm_earnings:** Added McmEarnings service ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* New REQUIRED field `display_name` in message `.google.ads.admanager.v1.Label` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* New REQUIRED field `types` in message `.google.ads.admanager.v1.Label` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+
+
+### Bug Fixes
+
+* An existing value `DEMAND_SUBCHANNEL_ALL` is removed from enum `Dimension` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Changed field behavior for an existing field `display_name` in message `.google.ads.admanager.v1.Application` ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Remove unused AdManagerError type ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Removed UNIFIED_PRICING_RULE_ID dimension ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+* Removed UNIFIED_PRICING_RULE_NAME dimension ([dfd3f1e](https://github.com/googleapis/google-cloud-node/commit/dfd3f1eb39ed1839f4d25729dd6143a97707c87c))
+
 ## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.5.0...admanager-v0.5.1) (2026-05-01)
 
 

@@ -46,12 +46,10 @@ async function main(
 
   const fs = require('fs');
   const util = require('util');
-  // Assumes uuid module has been installed from npm,
-  // npm i uuid:
-  const {v4} = require('uuid');
+  const crypto = require('crypto');
 
   async function detectIntentAudio() {
-    const sessionId = v4();
+    const sessionId = crypto.randomUUID();
     const sessionPath = client.projectLocationAgentSessionPath(
       projectId,
       location,

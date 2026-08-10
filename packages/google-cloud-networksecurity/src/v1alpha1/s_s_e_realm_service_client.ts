@@ -18,11 +18,24 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +57,7 @@ export class SSERealmServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('network-security');
@@ -57,12 +70,12 @@ export class SSERealmServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  sSERealmServiceStub?: Promise<{[name: string]: Function}>;
+  sSERealmServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of SSERealmServiceClient.
@@ -103,21 +116,42 @@ export class SSERealmServiceClient {
    *     const client = new SSERealmServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SSERealmServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'networksecurity.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -142,7 +176,7 @@ export class SSERealmServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,18 +189,14 @@ export class SSERealmServiceClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -188,100 +218,108 @@ export class SSERealmServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       authorizationPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}'
+        'projects/{project}/locations/{location}/authorizationPolicies/{authorization_policy}',
       ),
       authzPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}'
+        'projects/{project}/locations/{location}/authzPolicies/{authz_policy}',
       ),
       backendAuthenticationConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}'
+        'projects/{project}/locations/{location}/backendAuthenticationConfigs/{backend_authentication_config}',
       ),
       clientTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}'
+        'projects/{project}/locations/{location}/clientTlsPolicies/{client_tls_policy}',
       ),
       dnsThreatDetectorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}'
+        'projects/{project}/locations/{location}/dnsThreatDetectors/{dns_threat_detector}',
       ),
       firewallEndpointAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}'
+        'projects/{project}/locations/{location}/firewallEndpointAssociations/{firewall_endpoint_association}',
       ),
       gatewaySecurityPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}'
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}',
       ),
       gatewaySecurityPolicyRulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}'
+        'projects/{project}/locations/{location}/gatewaySecurityPolicies/{gateway_security_policy}/rules/{rule}',
       ),
       interceptDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}'
+        'projects/{project}/locations/{location}/interceptDeployments/{intercept_deployment}',
       ),
       interceptDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}'
+        'projects/{project}/locations/{location}/interceptDeploymentGroups/{intercept_deployment_group}',
       ),
       interceptEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}'
+        'projects/{project}/locations/{location}/interceptEndpointGroups/{intercept_endpoint_group}',
       ),
-      interceptEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}'
-      ),
+      interceptEndpointGroupAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/interceptEndpointGroupAssociations/{intercept_endpoint_group_association}',
+        ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       mirroringDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}'
+        'projects/{project}/locations/{location}/mirroringDeployments/{mirroring_deployment}',
       ),
       mirroringDeploymentGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}'
+        'projects/{project}/locations/{location}/mirroringDeploymentGroups/{mirroring_deployment_group}',
       ),
       mirroringEndpointGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}'
+        'projects/{project}/locations/{location}/mirroringEndpointGroups/{mirroring_endpoint_group}',
       ),
-      mirroringEndpointGroupAssociationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}'
-      ),
-      organizationLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
-      ),
-      organizationLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}'
-      ),
-      organizationLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}'
-      ),
+      mirroringEndpointGroupAssociationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/mirroringEndpointGroupAssociations/{mirroring_endpoint_group_association}',
+        ),
+      organizationLocationFirewallEndpointsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/firewallEndpoints/{firewall_endpoint}',
+        ),
+      organizationLocationSecurityProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityProfiles/{security_profile}',
+        ),
+      organizationLocationSecurityProfileGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/securityProfileGroups/{security_profile_group}',
+        ),
       partnerSSEGatewayPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/partnerSSEGateways/{partner_sse_gateway}'
+        'projects/{project}/locations/{location}/partnerSSEGateways/{partner_sse_gateway}',
       ),
       partnerSSERealmPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/partnerSSERealms/{partner_sse_realm}'
+        'projects/{project}/locations/{location}/partnerSSERealms/{partner_sse_realm}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
-      projectLocationFirewallEndpointsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}'
-      ),
-      projectLocationSecurityProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityProfiles/{security_profile}'
-      ),
-      projectLocationSecurityProfileGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}'
-      ),
+      projectLocationFirewallEndpointsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/firewallEndpoints/{firewall_endpoint}',
+        ),
+      projectLocationSecurityProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityProfiles/{security_profile}',
+        ),
+      projectLocationSecurityProfileGroupPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/securityProfileGroups/{security_profile_group}',
+        ),
       sACAttachmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sacAttachments/{sac_attachment}'
+        'projects/{project}/locations/{location}/sacAttachments/{sac_attachment}',
       ),
       sACRealmPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sacRealms/{sac_realm}'
+        'projects/{project}/locations/{location}/sacRealms/{sac_realm}',
       ),
       sSEGatewayReferencePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sseGatewayReferences/{sse_gateway_reference}'
+        'projects/{project}/locations/{location}/sseGatewayReferences/{sse_gateway_reference}',
       ),
       serverTlsPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}'
+        'projects/{project}/locations/{location}/serverTlsPolicies/{server_tls_policy}',
       ),
       tlsInspectionPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}'
+        'projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy}',
       ),
       urlListPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/urlLists/{url_list}'
+        'projects/{project}/locations/{location}/urlLists/{url_list}',
       ),
     };
 
@@ -289,12 +327,21 @@ export class SSERealmServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listSACRealms:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sacRealms'),
-      listSACAttachments:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sacAttachments'),
-      listPartnerSSERealms:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'partnerSseRealms')
+      listSACRealms: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'sacRealms',
+      ),
+      listSACAttachments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'sacAttachments',
+      ),
+      listPartnerSSERealms: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'partnerSseRealms',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -303,76 +350,210 @@ export class SSERealmServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1alpha1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1alpha1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',additional_bindings: [{get: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',},{get: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',},{get: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',},{get: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',body: '*',},{post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:testIamPermissions',body: '*',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1alpha1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1alpha1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1alpha1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1alpha1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1alpha1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1alpha1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1alpha1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1alpha1/{name=organizations/*/locations/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1alpha1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1alpha1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:getIamPolicy',
+            },
+            {
+              get: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1alpha1/{resource=projects/*/locations/*/authorizationPolicies/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/serverTlsPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/clientTlsPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/addressGroups/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1alpha1/{resource=projects/*/locations/*/authzPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1alpha1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {
+              delete:
+                '/v1alpha1/{name=organizations/*/locations/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1alpha1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {
+              get: '/v1alpha1/{name=organizations/*/locations/*/operations/*}',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1alpha1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            { get: '/v1alpha1/{name=organizations/*/locations/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createSACRealmResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.SACRealm') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.SACRealm',
+    ) as gax.protobuf.Type;
     const createSACRealmMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteSACRealmResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteSACRealmMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createSACAttachmentResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.SACAttachment') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.SACAttachment',
+    ) as gax.protobuf.Type;
     const createSACAttachmentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteSACAttachmentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteSACAttachmentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createPartnerSSERealmResponse = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.PartnerSSERealm') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.PartnerSSERealm',
+    ) as gax.protobuf.Type;
     const createPartnerSSERealmMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deletePartnerSSERealmResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deletePartnerSSERealmMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networksecurity.v1alpha1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networksecurity.v1alpha1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createSACRealm: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createSACRealmResponse.decode.bind(createSACRealmResponse),
-        createSACRealmMetadata.decode.bind(createSACRealmMetadata)),
+        createSACRealmMetadata.decode.bind(createSACRealmMetadata),
+      ),
       deleteSACRealm: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteSACRealmResponse.decode.bind(deleteSACRealmResponse),
-        deleteSACRealmMetadata.decode.bind(deleteSACRealmMetadata)),
+        deleteSACRealmMetadata.decode.bind(deleteSACRealmMetadata),
+      ),
       createSACAttachment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createSACAttachmentResponse.decode.bind(createSACAttachmentResponse),
-        createSACAttachmentMetadata.decode.bind(createSACAttachmentMetadata)),
+        createSACAttachmentMetadata.decode.bind(createSACAttachmentMetadata),
+      ),
       deleteSACAttachment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteSACAttachmentResponse.decode.bind(deleteSACAttachmentResponse),
-        deleteSACAttachmentMetadata.decode.bind(deleteSACAttachmentMetadata)),
+        deleteSACAttachmentMetadata.decode.bind(deleteSACAttachmentMetadata),
+      ),
       createPartnerSSERealm: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createPartnerSSERealmResponse.decode.bind(createPartnerSSERealmResponse),
-        createPartnerSSERealmMetadata.decode.bind(createPartnerSSERealmMetadata)),
+        createPartnerSSERealmResponse.decode.bind(
+          createPartnerSSERealmResponse,
+        ),
+        createPartnerSSERealmMetadata.decode.bind(
+          createPartnerSSERealmMetadata,
+        ),
+      ),
       deletePartnerSSERealm: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deletePartnerSSERealmResponse.decode.bind(deletePartnerSSERealmResponse),
-        deletePartnerSSERealmMetadata.decode.bind(deletePartnerSSERealmMetadata))
+        deletePartnerSSERealmResponse.decode.bind(
+          deletePartnerSSERealmResponse,
+        ),
+        deletePartnerSSERealmMetadata.decode.bind(
+          deletePartnerSSERealmMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.networksecurity.v1alpha1.SSERealmService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.networksecurity.v1alpha1.SSERealmService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -403,28 +584,47 @@ export class SSERealmServiceClient {
     // Put together the "service stub" for
     // google.cloud.networksecurity.v1alpha1.SSERealmService.
     this.sSERealmServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.networksecurity.v1alpha1.SSERealmService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.networksecurity.v1alpha1.SSERealmService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.networksecurity.v1alpha1.SSERealmService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.networksecurity.v1alpha1
+            .SSERealmService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const sSERealmServiceStubMethods =
-        ['listSacRealms', 'getSacRealm', 'createSacRealm', 'deleteSacRealm', 'listSacAttachments', 'getSacAttachment', 'createSacAttachment', 'deleteSacAttachment', 'listPartnerSseRealms', 'getPartnerSseRealm', 'createPartnerSseRealm', 'deletePartnerSseRealm'];
+    const sSERealmServiceStubMethods = [
+      'listSacRealms',
+      'getSacRealm',
+      'createSacRealm',
+      'deleteSacRealm',
+      'listSacAttachments',
+      'getSacAttachment',
+      'createSacAttachment',
+      'deleteSacAttachment',
+      'listPartnerSseRealms',
+      'getPartnerSseRealm',
+      'createPartnerSseRealm',
+      'deletePartnerSseRealm',
+    ];
     for (const methodName of sSERealmServiceStubMethods) {
       const callPromise = this.sSERealmServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -434,7 +634,7 @@ export class SSERealmServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -449,8 +649,14 @@ export class SSERealmServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -461,8 +667,14 @@ export class SSERealmServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networksecurity.googleapis.com';
   }
@@ -493,9 +705,7 @@ export class SSERealmServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -504,8 +714,9 @@ export class SSERealmServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -516,1134 +727,1678 @@ export class SSERealmServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Returns the specified realm.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource, in the form
- *   `projects/{project}/locations/global/sacRealms/{sacRealm}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.SACRealm|SACRealm}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.get_s_a_c_realm.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_GetSACRealm_async
- */
+  /**
+   * Returns the specified realm.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource, in the form
+   *   `projects/{project}/locations/global/sacRealms/{sacRealm}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.SACRealm|SACRealm}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.get_s_a_c_realm.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_GetSACRealm_async
+   */
   getSACRealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
-        protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getSACRealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
-          protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSACRealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
-          protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSACRealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
-          protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
-          protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
-        protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSACRealm request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
-        protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+          | protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSACRealm response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSacRealm(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
-        protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSACRealm response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSacRealm(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+          (
+            | protos.google.cloud.networksecurity.v1alpha1.IGetSACRealmRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSACRealm response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Returns the specified attachment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource, in the form
- *   `projects/{project}/locations/{location}/sacAttachments/{sac_attachment}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.SACAttachment|SACAttachment}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.get_s_a_c_attachment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_GetSACAttachment_async
- */
+  /**
+   * Returns the specified attachment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource, in the form
+   *   `projects/{project}/locations/{location}/sacAttachments/{sac_attachment}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.SACAttachment|SACAttachment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.get_s_a_c_attachment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_GetSACAttachment_async
+   */
   getSACAttachment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getSACAttachment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSACAttachment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSACAttachment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
-          protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSACAttachment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+          | protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSACAttachment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSacAttachment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
-        protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSACAttachment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSacAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+          (
+            | protos.google.cloud.networksecurity.v1alpha1.IGetSACAttachmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSACAttachment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single PartnerSSERealm.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm|PartnerSSERealm}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.get_partner_s_s_e_realm.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_GetPartnerSSERealm_async
- */
+  /**
+   * Gets details of a single PartnerSSERealm.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm|PartnerSSERealm}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.get_partner_s_s_e_realm.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_GetPartnerSSERealm_async
+   */
   getPartnerSSERealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
-        protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getPartnerSSERealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
-          protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPartnerSSERealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest,
-      callback: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
-          protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest,
+    callback: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPartnerSSERealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
-          protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
-          protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
-        protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+      | protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+      (
+        | protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getPartnerSSERealm request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
-        protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+          | protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPartnerSSERealm response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getPartnerSseRealm(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
-        protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getPartnerSSERealm response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getPartnerSseRealm(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+          (
+            | protos.google.cloud.networksecurity.v1alpha1.IGetPartnerSSERealmRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPartnerSSERealm response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new SACRealm in a given project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, in the form `projects/{project}/locations/global`.
- * @param {string} request.sacRealmId
- *   Required. ID of the created realm.
- *   The ID must be 1-63 characters long, and comply with
- *   <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
- *   Specifically, it must be 1-63 characters long and match the regular
- *   expression `[a-z]([-a-z0-9]*[a-z0-9])?`
- *   which means the first character must be a lowercase letter, and all
- *   following characters must be a dash, lowercase letter, or digit, except
- *   the last character, which cannot be a dash.
- * @param {google.cloud.networksecurity.v1alpha1.SACRealm} request.sacRealm
- *   Required. The resource being created.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_s_a_c_realm.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreateSACRealm_async
- */
+  /**
+   * Creates a new SACRealm in a given project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, in the form `projects/{project}/locations/global`.
+   * @param {string} request.sacRealmId
+   *   Required. ID of the created realm.
+   *   The ID must be 1-63 characters long, and comply with
+   *   <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
+   *   Specifically, it must be 1-63 characters long and match the regular
+   *   expression `[a-z]([-a-z0-9]*[a-z0-9])?`
+   *   which means the first character must be a lowercase letter, and all
+   *   following characters must be a dash, lowercase letter, or digit, except
+   *   the last character, which cannot be a dash.
+   * @param {google.cloud.networksecurity.v1alpha1.SACRealm} request.sacRealm
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_s_a_c_realm.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreateSACRealm_async
+   */
   createSACRealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateSACRealmRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACRealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateSACRealmRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createSACRealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateSACRealmRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACRealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateSACRealmRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSACRealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateSACRealmRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACRealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateSACRealmRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSACRealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateSACRealmRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACRealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACRealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACRealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateSACRealmRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACRealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createSACRealm response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createSACRealm request %j', request);
-    return this.innerApiCalls.createSacRealm(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACRealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createSACRealm response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createSacRealm(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.ISACRealm,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSACRealm response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createSACRealm()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_s_a_c_realm.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreateSACRealm_async
- */
-  async checkCreateSACRealmProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.SACRealm, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createSACRealm()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_s_a_c_realm.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreateSACRealm_async
+   */
+  async checkCreateSACRealmProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.SACRealm,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('createSACRealm long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createSACRealm, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.SACRealm, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createSACRealm,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.SACRealm,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Deletes the specified realm.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource, in the form
- *   `projects/{project}/locations/global/sacRealms/{sacRealm}`.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_s_a_c_realm.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeleteSACRealm_async
- */
+  /**
+   * Deletes the specified realm.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource, in the form
+   *   `projects/{project}/locations/global/sacRealms/{sacRealm}`.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_s_a_c_realm.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeleteSACRealm_async
+   */
   deleteSACRealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACRealmRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACRealmRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteSACRealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACRealmRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACRealmRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSACRealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACRealmRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACRealmRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSACRealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACRealmRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACRealmRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteSACRealm response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteSACRealm request %j', request);
-    return this.innerApiCalls.deleteSacRealm(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteSACRealm response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteSacRealm(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSACRealm response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteSACRealm()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_s_a_c_realm.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeleteSACRealm_async
- */
-  async checkDeleteSACRealmProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteSACRealm()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_s_a_c_realm.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeleteSACRealm_async
+   */
+  async checkDeleteSACRealmProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('deleteSACRealm long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteSACRealm, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSACRealm,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Creates a new SACAttachment in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, in the form
- *   `projects/{project}/locations/{location}`.
- * @param {string} request.sacAttachmentId
- *   Required. ID of the created attachment.
- *   The ID must be 1-63 characters long, and comply with
- *   <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
- *   Specifically, it must be 1-63 characters long and match the regular
- *   expression `[a-z]([-a-z0-9]*[a-z0-9])?`
- *   which means the first character must be a lowercase letter, and all
- *   following characters must be a dash, lowercase letter, or digit, except
- *   the last character, which cannot be a dash.
- * @param {google.cloud.networksecurity.v1alpha1.SACAttachment} request.sacAttachment
- *   Required. The resource being created.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_s_a_c_attachment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreateSACAttachment_async
- */
+  /**
+   * Creates a new SACAttachment in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, in the form
+   *   `projects/{project}/locations/{location}`.
+   * @param {string} request.sacAttachmentId
+   *   Required. ID of the created attachment.
+   *   The ID must be 1-63 characters long, and comply with
+   *   <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
+   *   Specifically, it must be 1-63 characters long and match the regular
+   *   expression `[a-z]([-a-z0-9]*[a-z0-9])?`
+   *   which means the first character must be a lowercase letter, and all
+   *   following characters must be a dash, lowercase letter, or digit, except
+   *   the last character, which cannot be a dash.
+   * @param {google.cloud.networksecurity.v1alpha1.SACAttachment} request.sacAttachment
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_s_a_c_attachment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreateSACAttachment_async
+   */
   createSACAttachment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateSACAttachmentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACAttachment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateSACAttachmentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createSACAttachment(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateSACAttachmentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACAttachment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateSACAttachmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSACAttachment(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreateSACAttachmentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACAttachment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreateSACAttachmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSACAttachment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreateSACAttachmentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACAttachment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACAttachment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACAttachment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreateSACAttachmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACAttachment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createSACAttachment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createSACAttachment request %j', request);
-    return this.innerApiCalls.createSacAttachment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.ISACAttachment, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createSACAttachment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createSacAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.ISACAttachment,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSACAttachment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createSACAttachment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_s_a_c_attachment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreateSACAttachment_async
- */
-  async checkCreateSACAttachmentProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.SACAttachment, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createSACAttachment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_s_a_c_attachment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreateSACAttachment_async
+   */
+  async checkCreateSACAttachmentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.SACAttachment,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('createSACAttachment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createSACAttachment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.SACAttachment, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createSACAttachment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.SACAttachment,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Deletes the specified attachment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource, in the form
- *   `projects/{project}/locations/{location}/sacAttachments/{sac_attachment}`.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_s_a_c_attachment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeleteSACAttachment_async
- */
+  /**
+   * Deletes the specified attachment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource, in the form
+   *   `projects/{project}/locations/{location}/sacAttachments/{sac_attachment}`.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_s_a_c_attachment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeleteSACAttachment_async
+   */
   deleteSACAttachment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACAttachmentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACAttachmentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteSACAttachment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACAttachmentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACAttachmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSACAttachment(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACAttachmentRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACAttachmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSACAttachment(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACAttachmentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeleteSACAttachmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteSACAttachment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteSACAttachment request %j', request);
-    return this.innerApiCalls.deleteSacAttachment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteSACAttachment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteSacAttachment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSACAttachment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteSACAttachment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_s_a_c_attachment.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeleteSACAttachment_async
- */
-  async checkDeleteSACAttachmentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteSACAttachment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_s_a_c_attachment.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeleteSACAttachment_async
+   */
+  async checkDeleteSACAttachmentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('deleteSACAttachment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteSACAttachment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSACAttachment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Creates a new PartnerSSERealm in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Value for parent.
- * @param {string} request.partnerSseRealmId
- *   Required. Id of the requesting object
- *   If auto-generating Id server-side, remove this field and
- *   partner_sse_realm_id from the method_signature of Create RPC
- * @param {google.cloud.networksecurity.v1alpha1.PartnerSSERealm} request.partnerSseRealm
- *   Required. The resource being created
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_partner_s_s_e_realm.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreatePartnerSSERealm_async
- */
+  /**
+   * Creates a new PartnerSSERealm in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent.
+   * @param {string} request.partnerSseRealmId
+   *   Required. Id of the requesting object
+   *   If auto-generating Id server-side, remove this field and
+   *   partner_sse_realm_id from the method_signature of Create RPC
+   * @param {google.cloud.networksecurity.v1alpha1.PartnerSSERealm} request.partnerSseRealm
+   *   Required. The resource being created
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_partner_s_s_e_realm.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreatePartnerSSERealm_async
+   */
   createPartnerSSERealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreatePartnerSSERealmRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreatePartnerSSERealmRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createPartnerSSERealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreatePartnerSSERealmRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreatePartnerSSERealmRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createPartnerSSERealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.ICreatePartnerSSERealmRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.ICreatePartnerSSERealmRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createPartnerSSERealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.ICreatePartnerSSERealmRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.ICreatePartnerSSERealmRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createPartnerSSERealm response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createPartnerSSERealm request %j', request);
-    return this.innerApiCalls.createPartnerSseRealm(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createPartnerSSERealm response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createPartnerSseRealm(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPartnerSSERealm response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createPartnerSSERealm()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_partner_s_s_e_realm.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreatePartnerSSERealm_async
- */
-  async checkCreatePartnerSSERealmProgress(name: string): Promise<LROperation<protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createPartnerSSERealm()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.create_partner_s_s_e_realm.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_CreatePartnerSSERealm_async
+   */
+  async checkCreatePartnerSSERealmProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('createPartnerSSERealm long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createPartnerSSERealm, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createPartnerSSERealm,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single PartnerSSERealm.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_partner_s_s_e_realm.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeletePartnerSSERealm_async
- */
+  /**
+   * Deletes a single PartnerSSERealm.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_partner_s_s_e_realm.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeletePartnerSSERealm_async
+   */
   deletePartnerSSERealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeletePartnerSSERealmRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeletePartnerSSERealmRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deletePartnerSSERealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeletePartnerSSERealmRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeletePartnerSSERealmRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deletePartnerSSERealm(
-      request: protos.google.cloud.networksecurity.v1alpha1.IDeletePartnerSSERealmRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IDeletePartnerSSERealmRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deletePartnerSSERealm(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IDeletePartnerSSERealmRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networksecurity.v1alpha1.IDeletePartnerSSERealmRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deletePartnerSSERealm response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deletePartnerSSERealm request %j', request);
-    return this.innerApiCalls.deletePartnerSseRealm(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deletePartnerSSERealm response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deletePartnerSseRealm(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networksecurity.v1alpha1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePartnerSSERealm response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deletePartnerSSERealm()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_partner_s_s_e_realm.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeletePartnerSSERealm_async
- */
-  async checkDeletePartnerSSERealmProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deletePartnerSSERealm()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.delete_partner_s_s_e_realm.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_DeletePartnerSSERealm_async
+   */
+  async checkDeletePartnerSSERealmProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >
+  > {
     this._log.info('deletePartnerSSERealm long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePartnerSSERealm, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networksecurity.v1alpha1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deletePartnerSSERealm,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networksecurity.v1alpha1.OperationMetadata
+    >;
   }
- /**
- * Lists SACRealms in a given project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, in the form `projects/{project}/locations/global`.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of results.
- * @param {string} [request.orderBy]
- *   Optional. Sort the results by a certain order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.SACRealm|SACRealm}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listSACRealmsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists SACRealms in a given project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, in the form `projects/{project}/locations/global`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort the results by a certain order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.SACRealm|SACRealm}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSACRealmsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSACRealms(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.ISACRealm[],
-        protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.ISACRealm[],
+      protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse,
+    ]
+  >;
   listSACRealms(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.ISACRealm>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.ISACRealm
+    >,
+  ): void;
   listSACRealms(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.ISACRealm>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.ISACRealm
+    >,
+  ): void;
   listSACRealms(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.ISACRealm>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.ISACRealm>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.ISACRealm[],
-        protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.ISACRealm
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.ISACRealm
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.ISACRealm[],
+      protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
-      protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1alpha1.ISACRealm>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
+          | protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.ISACRealm
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSACRealms values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1652,205 +2407,234 @@ export class SSERealmServiceClient {
     this._log.info('listSACRealms request %j', request);
     return this.innerApiCalls
       .listSacRealms(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1alpha1.ISACRealm[],
-        protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse
-      ]) => {
-        this._log.info('listSACRealms values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1alpha1.ISACRealm[],
+          protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest | null,
+          protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsResponse,
+        ]) => {
+          this._log.info('listSACRealms values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listSACRealms`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, in the form `projects/{project}/locations/global`.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of results.
- * @param {string} [request.orderBy]
- *   Optional. Sort the results by a certain order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.SACRealm|SACRealm} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listSACRealmsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listSACRealms`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, in the form `projects/{project}/locations/global`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort the results by a certain order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.SACRealm|SACRealm} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSACRealmsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSACRealmsStream(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSacRealms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSACRealms stream %j', request);
     return this.descriptors.page.listSACRealms.createStream(
       this.innerApiCalls.listSacRealms as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listSACRealms`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, in the form `projects/{project}/locations/global`.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of results.
- * @param {string} [request.orderBy]
- *   Optional. Sort the results by a certain order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1alpha1.SACRealm|SACRealm}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.list_s_a_c_realms.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_ListSACRealms_async
- */
+  /**
+   * Equivalent to `listSACRealms`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, in the form `projects/{project}/locations/global`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort the results by a certain order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1alpha1.SACRealm|SACRealm}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.list_s_a_c_realms.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_ListSACRealms_async
+   */
   listSACRealmsAsync(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.ISACRealm>{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListSACRealmsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.ISACRealm> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSacRealms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSACRealms iterate %j', request);
     return this.descriptors.page.listSACRealms.asyncIterate(
       this.innerApiCalls['listSacRealms'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.ISACRealm>;
   }
- /**
- * Lists SACAttachments in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, in the form
- *   `projects/{project}/locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of results.
- * @param {string} [request.orderBy]
- *   Optional. Sort the results by a certain order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.SACAttachment|SACAttachment}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listSACAttachmentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists SACAttachments in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, in the form
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort the results by a certain order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.SACAttachment|SACAttachment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSACAttachmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSACAttachments(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment[],
-        protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.ISACAttachment[],
+      protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse,
+    ]
+  >;
   listSACAttachments(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.ISACAttachment
+    >,
+  ): void;
   listSACAttachments(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.ISACAttachment
+    >,
+  ): void;
   listSACAttachments(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment[],
-        protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.ISACAttachment
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.ISACAttachment[],
+      protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
-      protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1alpha1.ISACAttachment>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
+          | protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSACAttachments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1859,206 +2643,235 @@ export class SSERealmServiceClient {
     this._log.info('listSACAttachments request %j', request);
     return this.innerApiCalls
       .listSacAttachments(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1alpha1.ISACAttachment[],
-        protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse
-      ]) => {
-        this._log.info('listSACAttachments values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1alpha1.ISACAttachment[],
+          protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest | null,
+          protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsResponse,
+        ]) => {
+          this._log.info('listSACAttachments values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listSACAttachments`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, in the form
- *   `projects/{project}/locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of results.
- * @param {string} [request.orderBy]
- *   Optional. Sort the results by a certain order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.SACAttachment|SACAttachment} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listSACAttachmentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listSACAttachments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, in the form
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort the results by a certain order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.SACAttachment|SACAttachment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSACAttachmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSACAttachmentsStream(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSacAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSACAttachments stream %j', request);
     return this.descriptors.page.listSACAttachments.createStream(
       this.innerApiCalls.listSacAttachments as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listSACAttachments`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, in the form
- *   `projects/{project}/locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of results.
- * @param {string} [request.orderBy]
- *   Optional. Sort the results by a certain order.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1alpha1.SACAttachment|SACAttachment}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.list_s_a_c_attachments.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_ListSACAttachments_async
- */
+  /**
+   * Equivalent to `listSACAttachments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, in the form
+   *   `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of results.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort the results by a certain order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1alpha1.SACAttachment|SACAttachment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.list_s_a_c_attachments.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_ListSACAttachments_async
+   */
   listSACAttachmentsAsync(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.ISACAttachment>{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListSACAttachmentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.ISACAttachment> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSacAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSACAttachments iterate %j', request);
     return this.descriptors.page.listSACAttachments.asyncIterate(
       this.innerApiCalls['listSacAttachments'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.ISACAttachment>;
   }
- /**
- * Lists PartnerSSERealms in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListPartnerSSERealmsRequest
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results
- * @param {string} request.orderBy
- *   Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm|PartnerSSERealm}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listPartnerSSERealmsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists PartnerSSERealms in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListPartnerSSERealmsRequest
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results
+   * @param {string} request.orderBy
+   *   Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm|PartnerSSERealm}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPartnerSSERealmsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPartnerSSERealms(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm[],
-        protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse
-      ]>;
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm[],
+      protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse,
+    ]
+  >;
   listPartnerSSERealms(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm
+    >,
+  ): void;
   listPartnerSSERealms(
-      request: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm>): void;
+    request: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm
+    >,
+  ): void;
   listPartnerSSERealms(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
-          protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse|null|undefined,
-          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm>):
-      Promise<[
-        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm[],
-        protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse
-      ]>|void {
+          | protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
+      | protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse
+      | null
+      | undefined,
+      protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm[],
+      protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest | null,
+      protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
-      protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse|null|undefined,
-      protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
+          | protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse
+          | null
+          | undefined,
+          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPartnerSSERealms values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2067,143 +2880,147 @@ export class SSERealmServiceClient {
     this._log.info('listPartnerSSERealms request %j', request);
     return this.innerApiCalls
       .listPartnerSseRealms(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm[],
-        protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest|null,
-        protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse
-      ]) => {
-        this._log.info('listPartnerSSERealms values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm[],
+          protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest | null,
+          protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsResponse,
+        ]) => {
+          this._log.info('listPartnerSSERealms values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listPartnerSSERealms`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListPartnerSSERealmsRequest
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results
- * @param {string} request.orderBy
- *   Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm|PartnerSSERealm} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listPartnerSSERealmsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listPartnerSSERealms`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListPartnerSSERealmsRequest
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results
+   * @param {string} request.orderBy
+   *   Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm|PartnerSSERealm} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPartnerSSERealmsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPartnerSSERealmsStream(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPartnerSseRealms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPartnerSSERealms stream %j', request);
     return this.descriptors.page.listPartnerSSERealms.createStream(
       this.innerApiCalls.listPartnerSseRealms as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listPartnerSSERealms`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListPartnerSSERealmsRequest
- * @param {number} request.pageSize
- *   Requested page size. Server may return fewer items than requested.
- *   If unspecified, server will pick an appropriate default.
- * @param {string} request.pageToken
- *   A token identifying a page of results the server should return.
- * @param {string} request.filter
- *   Filtering results
- * @param {string} request.orderBy
- *   Hint for how to order the results
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm|PartnerSSERealm}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.list_partner_s_s_e_realms.js</caption>
- * region_tag:networksecurity_v1alpha1_generated_SSERealmService_ListPartnerSSERealms_async
- */
+  /**
+   * Equivalent to `listPartnerSSERealms`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListPartnerSSERealmsRequest
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer items than requested.
+   *   If unspecified, server will pick an appropriate default.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results the server should return.
+   * @param {string} request.filter
+   *   Filtering results
+   * @param {string} request.orderBy
+   *   Hint for how to order the results
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networksecurity.v1alpha1.PartnerSSERealm|PartnerSSERealm}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha1/s_s_e_realm_service.list_partner_s_s_e_realms.js</caption>
+   * region_tag:networksecurity_v1alpha1_generated_SSERealmService_ListPartnerSSERealms_async
+   */
   listPartnerSSERealmsAsync(
-      request?: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm>{
+    request?: protos.google.cloud.networksecurity.v1alpha1.IListPartnerSSERealmsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPartnerSseRealms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPartnerSSERealms iterate %j', request);
     return this.descriptors.page.listPartnerSSERealms.asyncIterate(
       this.innerApiCalls['listPartnerSseRealms'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networksecurity.v1alpha1.IPartnerSSERealm>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -2217,40 +3034,40 @@ export class SSERealmServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -2264,41 +3081,41 @@ export class SSERealmServiceClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -2312,12 +3129,12 @@ export class SSERealmServiceClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -2352,12 +3169,11 @@ export class SSERealmServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -2390,12 +3206,12 @@ export class SSERealmServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -2438,22 +3254,22 @@ export class SSERealmServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -2488,15 +3304,15 @@ export class SSERealmServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -2530,7 +3346,7 @@ export class SSERealmServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -2543,25 +3359,24 @@ export class SSERealmServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -2600,22 +3415,22 @@ export class SSERealmServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2631,7 +3446,11 @@ export class SSERealmServiceClient {
    * @param {string} authorization_policy
    * @returns {string} Resource name string.
    */
-  authorizationPolicyPath(project:string,location:string,authorizationPolicy:string) {
+  authorizationPolicyPath(
+    project: string,
+    location: string,
+    authorizationPolicy: string,
+  ) {
     return this.pathTemplates.authorizationPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2647,7 +3466,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).project;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).project;
   }
 
   /**
@@ -2658,7 +3479,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).location;
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).location;
   }
 
   /**
@@ -2668,8 +3491,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing AuthorizationPolicy resource.
    * @returns {string} A string representing the authorization_policy.
    */
-  matchAuthorizationPolicyFromAuthorizationPolicyName(authorizationPolicyName: string) {
-    return this.pathTemplates.authorizationPolicyPathTemplate.match(authorizationPolicyName).authorization_policy;
+  matchAuthorizationPolicyFromAuthorizationPolicyName(
+    authorizationPolicyName: string,
+  ) {
+    return this.pathTemplates.authorizationPolicyPathTemplate.match(
+      authorizationPolicyName,
+    ).authorization_policy;
   }
 
   /**
@@ -2680,7 +3507,7 @@ export class SSERealmServiceClient {
    * @param {string} authz_policy
    * @returns {string} Resource name string.
    */
-  authzPolicyPath(project:string,location:string,authzPolicy:string) {
+  authzPolicyPath(project: string, location: string, authzPolicy: string) {
     return this.pathTemplates.authzPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2696,7 +3523,8 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).project;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .project;
   }
 
   /**
@@ -2707,7 +3535,8 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).location;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .location;
   }
 
   /**
@@ -2718,7 +3547,8 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the authz_policy.
    */
   matchAuthzPolicyFromAuthzPolicyName(authzPolicyName: string) {
-    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName).authz_policy;
+    return this.pathTemplates.authzPolicyPathTemplate.match(authzPolicyName)
+      .authz_policy;
   }
 
   /**
@@ -2729,7 +3559,11 @@ export class SSERealmServiceClient {
    * @param {string} backend_authentication_config
    * @returns {string} Resource name string.
    */
-  backendAuthenticationConfigPath(project:string,location:string,backendAuthenticationConfig:string) {
+  backendAuthenticationConfigPath(
+    project: string,
+    location: string,
+    backendAuthenticationConfig: string,
+  ) {
     return this.pathTemplates.backendAuthenticationConfigPathTemplate.render({
       project: project,
       location: location,
@@ -2744,8 +3578,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).project;
+  matchProjectFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).project;
   }
 
   /**
@@ -2755,8 +3593,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).location;
+  matchLocationFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).location;
   }
 
   /**
@@ -2766,8 +3608,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing BackendAuthenticationConfig resource.
    * @returns {string} A string representing the backend_authentication_config.
    */
-  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(backendAuthenticationConfigName: string) {
-    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(backendAuthenticationConfigName).backend_authentication_config;
+  matchBackendAuthenticationConfigFromBackendAuthenticationConfigName(
+    backendAuthenticationConfigName: string,
+  ) {
+    return this.pathTemplates.backendAuthenticationConfigPathTemplate.match(
+      backendAuthenticationConfigName,
+    ).backend_authentication_config;
   }
 
   /**
@@ -2778,7 +3624,11 @@ export class SSERealmServiceClient {
    * @param {string} client_tls_policy
    * @returns {string} Resource name string.
    */
-  clientTlsPolicyPath(project:string,location:string,clientTlsPolicy:string) {
+  clientTlsPolicyPath(
+    project: string,
+    location: string,
+    clientTlsPolicy: string,
+  ) {
     return this.pathTemplates.clientTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2794,7 +3644,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).project;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -2805,7 +3657,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).location;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -2816,7 +3670,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the client_tls_policy.
    */
   matchClientTlsPolicyFromClientTlsPolicyName(clientTlsPolicyName: string) {
-    return this.pathTemplates.clientTlsPolicyPathTemplate.match(clientTlsPolicyName).client_tls_policy;
+    return this.pathTemplates.clientTlsPolicyPathTemplate.match(
+      clientTlsPolicyName,
+    ).client_tls_policy;
   }
 
   /**
@@ -2827,7 +3683,11 @@ export class SSERealmServiceClient {
    * @param {string} dns_threat_detector
    * @returns {string} Resource name string.
    */
-  dnsThreatDetectorPath(project:string,location:string,dnsThreatDetector:string) {
+  dnsThreatDetectorPath(
+    project: string,
+    location: string,
+    dnsThreatDetector: string,
+  ) {
     return this.pathTemplates.dnsThreatDetectorPathTemplate.render({
       project: project,
       location: location,
@@ -2843,7 +3703,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).project;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).project;
   }
 
   /**
@@ -2854,7 +3716,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).location;
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).location;
   }
 
   /**
@@ -2864,8 +3728,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing DnsThreatDetector resource.
    * @returns {string} A string representing the dns_threat_detector.
    */
-  matchDnsThreatDetectorFromDnsThreatDetectorName(dnsThreatDetectorName: string) {
-    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(dnsThreatDetectorName).dns_threat_detector;
+  matchDnsThreatDetectorFromDnsThreatDetectorName(
+    dnsThreatDetectorName: string,
+  ) {
+    return this.pathTemplates.dnsThreatDetectorPathTemplate.match(
+      dnsThreatDetectorName,
+    ).dns_threat_detector;
   }
 
   /**
@@ -2876,7 +3744,11 @@ export class SSERealmServiceClient {
    * @param {string} firewall_endpoint_association
    * @returns {string} Resource name string.
    */
-  firewallEndpointAssociationPath(project:string,location:string,firewallEndpointAssociation:string) {
+  firewallEndpointAssociationPath(
+    project: string,
+    location: string,
+    firewallEndpointAssociation: string,
+  ) {
     return this.pathTemplates.firewallEndpointAssociationPathTemplate.render({
       project: project,
       location: location,
@@ -2891,8 +3763,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).project;
+  matchProjectFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).project;
   }
 
   /**
@@ -2902,8 +3778,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).location;
+  matchLocationFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).location;
   }
 
   /**
@@ -2913,8 +3793,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing FirewallEndpointAssociation resource.
    * @returns {string} A string representing the firewall_endpoint_association.
    */
-  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(firewallEndpointAssociationName: string) {
-    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(firewallEndpointAssociationName).firewall_endpoint_association;
+  matchFirewallEndpointAssociationFromFirewallEndpointAssociationName(
+    firewallEndpointAssociationName: string,
+  ) {
+    return this.pathTemplates.firewallEndpointAssociationPathTemplate.match(
+      firewallEndpointAssociationName,
+    ).firewall_endpoint_association;
   }
 
   /**
@@ -2925,7 +3809,11 @@ export class SSERealmServiceClient {
    * @param {string} gateway_security_policy
    * @returns {string} Resource name string.
    */
-  gatewaySecurityPolicyPath(project:string,location:string,gatewaySecurityPolicy:string) {
+  gatewaySecurityPolicyPath(
+    project: string,
+    location: string,
+    gatewaySecurityPolicy: string,
+  ) {
     return this.pathTemplates.gatewaySecurityPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -2941,7 +3829,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).project;
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).project;
   }
 
   /**
@@ -2951,8 +3841,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).location;
+  matchLocationFromGatewaySecurityPolicyName(
+    gatewaySecurityPolicyName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).location;
   }
 
   /**
@@ -2962,8 +3856,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicy resource.
    * @returns {string} A string representing the gateway_security_policy.
    */
-  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(gatewaySecurityPolicyName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(gatewaySecurityPolicyName).gateway_security_policy;
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyName(
+    gatewaySecurityPolicyName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyPathTemplate.match(
+      gatewaySecurityPolicyName,
+    ).gateway_security_policy;
   }
 
   /**
@@ -2975,7 +3873,12 @@ export class SSERealmServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  gatewaySecurityPolicyRulePath(project:string,location:string,gatewaySecurityPolicy:string,rule:string) {
+  gatewaySecurityPolicyRulePath(
+    project: string,
+    location: string,
+    gatewaySecurityPolicy: string,
+    rule: string,
+  ) {
     return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.render({
       project: project,
       location: location,
@@ -2991,8 +3894,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).project;
+  matchProjectFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).project;
   }
 
   /**
@@ -3002,8 +3909,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).location;
+  matchLocationFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).location;
   }
 
   /**
@@ -3013,8 +3924,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the gateway_security_policy.
    */
-  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).gateway_security_policy;
+  matchGatewaySecurityPolicyFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).gateway_security_policy;
   }
 
   /**
@@ -3024,8 +3939,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing GatewaySecurityPolicyRule resource.
    * @returns {string} A string representing the rule.
    */
-  matchRuleFromGatewaySecurityPolicyRuleName(gatewaySecurityPolicyRuleName: string) {
-    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(gatewaySecurityPolicyRuleName).rule;
+  matchRuleFromGatewaySecurityPolicyRuleName(
+    gatewaySecurityPolicyRuleName: string,
+  ) {
+    return this.pathTemplates.gatewaySecurityPolicyRulePathTemplate.match(
+      gatewaySecurityPolicyRuleName,
+    ).rule;
   }
 
   /**
@@ -3036,7 +3955,11 @@ export class SSERealmServiceClient {
    * @param {string} intercept_deployment
    * @returns {string} Resource name string.
    */
-  interceptDeploymentPath(project:string,location:string,interceptDeployment:string) {
+  interceptDeploymentPath(
+    project: string,
+    location: string,
+    interceptDeployment: string,
+  ) {
     return this.pathTemplates.interceptDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -3052,7 +3975,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).project;
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).project;
   }
 
   /**
@@ -3063,7 +3988,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).location;
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).location;
   }
 
   /**
@@ -3073,8 +4000,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing InterceptDeployment resource.
    * @returns {string} A string representing the intercept_deployment.
    */
-  matchInterceptDeploymentFromInterceptDeploymentName(interceptDeploymentName: string) {
-    return this.pathTemplates.interceptDeploymentPathTemplate.match(interceptDeploymentName).intercept_deployment;
+  matchInterceptDeploymentFromInterceptDeploymentName(
+    interceptDeploymentName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentPathTemplate.match(
+      interceptDeploymentName,
+    ).intercept_deployment;
   }
 
   /**
@@ -3085,7 +4016,11 @@ export class SSERealmServiceClient {
    * @param {string} intercept_deployment_group
    * @returns {string} Resource name string.
    */
-  interceptDeploymentGroupPath(project:string,location:string,interceptDeploymentGroup:string) {
+  interceptDeploymentGroupPath(
+    project: string,
+    location: string,
+    interceptDeploymentGroup: string,
+  ) {
     return this.pathTemplates.interceptDeploymentGroupPathTemplate.render({
       project: project,
       location: location,
@@ -3100,8 +4035,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).project;
+  matchProjectFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).project;
   }
 
   /**
@@ -3111,8 +4050,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).location;
+  matchLocationFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).location;
   }
 
   /**
@@ -3122,8 +4065,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing InterceptDeploymentGroup resource.
    * @returns {string} A string representing the intercept_deployment_group.
    */
-  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(interceptDeploymentGroupName: string) {
-    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(interceptDeploymentGroupName).intercept_deployment_group;
+  matchInterceptDeploymentGroupFromInterceptDeploymentGroupName(
+    interceptDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.interceptDeploymentGroupPathTemplate.match(
+      interceptDeploymentGroupName,
+    ).intercept_deployment_group;
   }
 
   /**
@@ -3134,7 +4081,11 @@ export class SSERealmServiceClient {
    * @param {string} intercept_endpoint_group
    * @returns {string} Resource name string.
    */
-  interceptEndpointGroupPath(project:string,location:string,interceptEndpointGroup:string) {
+  interceptEndpointGroupPath(
+    project: string,
+    location: string,
+    interceptEndpointGroup: string,
+  ) {
     return this.pathTemplates.interceptEndpointGroupPathTemplate.render({
       project: project,
       location: location,
@@ -3149,8 +4100,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).project;
+  matchProjectFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).project;
   }
 
   /**
@@ -3160,8 +4115,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).location;
+  matchLocationFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).location;
   }
 
   /**
@@ -3171,8 +4130,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroup resource.
    * @returns {string} A string representing the intercept_endpoint_group.
    */
-  matchInterceptEndpointGroupFromInterceptEndpointGroupName(interceptEndpointGroupName: string) {
-    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(interceptEndpointGroupName).intercept_endpoint_group;
+  matchInterceptEndpointGroupFromInterceptEndpointGroupName(
+    interceptEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupPathTemplate.match(
+      interceptEndpointGroupName,
+    ).intercept_endpoint_group;
   }
 
   /**
@@ -3183,12 +4146,18 @@ export class SSERealmServiceClient {
    * @param {string} intercept_endpoint_group_association
    * @returns {string} Resource name string.
    */
-  interceptEndpointGroupAssociationPath(project:string,location:string,interceptEndpointGroupAssociation:string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render({
-      project: project,
-      location: location,
-      intercept_endpoint_group_association: interceptEndpointGroupAssociation,
-    });
+  interceptEndpointGroupAssociationPath(
+    project: string,
+    location: string,
+    interceptEndpointGroupAssociation: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        intercept_endpoint_group_association: interceptEndpointGroupAssociation,
+      },
+    );
   }
 
   /**
@@ -3198,8 +4167,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).project;
+  matchProjectFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).project;
   }
 
   /**
@@ -3209,8 +4182,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).location;
+  matchLocationFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).location;
   }
 
   /**
@@ -3220,8 +4197,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing InterceptEndpointGroupAssociation resource.
    * @returns {string} A string representing the intercept_endpoint_group_association.
    */
-  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(interceptEndpointGroupAssociationName: string) {
-    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(interceptEndpointGroupAssociationName).intercept_endpoint_group_association;
+  matchInterceptEndpointGroupAssociationFromInterceptEndpointGroupAssociationName(
+    interceptEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.interceptEndpointGroupAssociationPathTemplate.match(
+      interceptEndpointGroupAssociationName,
+    ).intercept_endpoint_group_association;
   }
 
   /**
@@ -3231,7 +4212,7 @@ export class SSERealmServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3268,7 +4249,11 @@ export class SSERealmServiceClient {
    * @param {string} mirroring_deployment
    * @returns {string} Resource name string.
    */
-  mirroringDeploymentPath(project:string,location:string,mirroringDeployment:string) {
+  mirroringDeploymentPath(
+    project: string,
+    location: string,
+    mirroringDeployment: string,
+  ) {
     return this.pathTemplates.mirroringDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -3284,7 +4269,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).project;
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).project;
   }
 
   /**
@@ -3295,7 +4282,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).location;
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).location;
   }
 
   /**
@@ -3305,8 +4294,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing MirroringDeployment resource.
    * @returns {string} A string representing the mirroring_deployment.
    */
-  matchMirroringDeploymentFromMirroringDeploymentName(mirroringDeploymentName: string) {
-    return this.pathTemplates.mirroringDeploymentPathTemplate.match(mirroringDeploymentName).mirroring_deployment;
+  matchMirroringDeploymentFromMirroringDeploymentName(
+    mirroringDeploymentName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentPathTemplate.match(
+      mirroringDeploymentName,
+    ).mirroring_deployment;
   }
 
   /**
@@ -3317,7 +4310,11 @@ export class SSERealmServiceClient {
    * @param {string} mirroring_deployment_group
    * @returns {string} Resource name string.
    */
-  mirroringDeploymentGroupPath(project:string,location:string,mirroringDeploymentGroup:string) {
+  mirroringDeploymentGroupPath(
+    project: string,
+    location: string,
+    mirroringDeploymentGroup: string,
+  ) {
     return this.pathTemplates.mirroringDeploymentGroupPathTemplate.render({
       project: project,
       location: location,
@@ -3332,8 +4329,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).project;
+  matchProjectFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).project;
   }
 
   /**
@@ -3343,8 +4344,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).location;
+  matchLocationFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).location;
   }
 
   /**
@@ -3354,8 +4359,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing MirroringDeploymentGroup resource.
    * @returns {string} A string representing the mirroring_deployment_group.
    */
-  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(mirroringDeploymentGroupName: string) {
-    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(mirroringDeploymentGroupName).mirroring_deployment_group;
+  matchMirroringDeploymentGroupFromMirroringDeploymentGroupName(
+    mirroringDeploymentGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringDeploymentGroupPathTemplate.match(
+      mirroringDeploymentGroupName,
+    ).mirroring_deployment_group;
   }
 
   /**
@@ -3366,7 +4375,11 @@ export class SSERealmServiceClient {
    * @param {string} mirroring_endpoint_group
    * @returns {string} Resource name string.
    */
-  mirroringEndpointGroupPath(project:string,location:string,mirroringEndpointGroup:string) {
+  mirroringEndpointGroupPath(
+    project: string,
+    location: string,
+    mirroringEndpointGroup: string,
+  ) {
     return this.pathTemplates.mirroringEndpointGroupPathTemplate.render({
       project: project,
       location: location,
@@ -3381,8 +4394,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).project;
+  matchProjectFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).project;
   }
 
   /**
@@ -3392,8 +4409,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).location;
+  matchLocationFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).location;
   }
 
   /**
@@ -3403,8 +4424,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroup resource.
    * @returns {string} A string representing the mirroring_endpoint_group.
    */
-  matchMirroringEndpointGroupFromMirroringEndpointGroupName(mirroringEndpointGroupName: string) {
-    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(mirroringEndpointGroupName).mirroring_endpoint_group;
+  matchMirroringEndpointGroupFromMirroringEndpointGroupName(
+    mirroringEndpointGroupName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupPathTemplate.match(
+      mirroringEndpointGroupName,
+    ).mirroring_endpoint_group;
   }
 
   /**
@@ -3415,12 +4440,18 @@ export class SSERealmServiceClient {
    * @param {string} mirroring_endpoint_group_association
    * @returns {string} Resource name string.
    */
-  mirroringEndpointGroupAssociationPath(project:string,location:string,mirroringEndpointGroupAssociation:string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render({
-      project: project,
-      location: location,
-      mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
-    });
+  mirroringEndpointGroupAssociationPath(
+    project: string,
+    location: string,
+    mirroringEndpointGroupAssociation: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        mirroring_endpoint_group_association: mirroringEndpointGroupAssociation,
+      },
+    );
   }
 
   /**
@@ -3430,8 +4461,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).project;
+  matchProjectFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).project;
   }
 
   /**
@@ -3441,8 +4476,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).location;
+  matchLocationFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).location;
   }
 
   /**
@@ -3452,8 +4491,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing MirroringEndpointGroupAssociation resource.
    * @returns {string} A string representing the mirroring_endpoint_group_association.
    */
-  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(mirroringEndpointGroupAssociationName: string) {
-    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(mirroringEndpointGroupAssociationName).mirroring_endpoint_group_association;
+  matchMirroringEndpointGroupAssociationFromMirroringEndpointGroupAssociationName(
+    mirroringEndpointGroupAssociationName: string,
+  ) {
+    return this.pathTemplates.mirroringEndpointGroupAssociationPathTemplate.match(
+      mirroringEndpointGroupAssociationName,
+    ).mirroring_endpoint_group_association;
   }
 
   /**
@@ -3464,12 +4507,18 @@ export class SSERealmServiceClient {
    * @param {string} firewall_endpoint
    * @returns {string} Resource name string.
    */
-  organizationLocationFirewallEndpointsPath(organization:string,location:string,firewallEndpoint:string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render({
-      organization: organization,
-      location: location,
-      firewall_endpoint: firewallEndpoint,
-    });
+  organizationLocationFirewallEndpointsPath(
+    organization: string,
+    location: string,
+    firewallEndpoint: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        firewall_endpoint: firewallEndpoint,
+      },
+    );
   }
 
   /**
@@ -3479,8 +4528,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).organization;
+  matchOrganizationFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).organization;
   }
 
   /**
@@ -3490,8 +4543,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).location;
+  matchLocationFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).location;
   }
 
   /**
@@ -3501,8 +4558,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing organization_location_firewallEndpoints resource.
    * @returns {string} A string representing the firewall_endpoint.
    */
-  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(organizationLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(organizationLocationFirewallEndpointsName).firewall_endpoint;
+  matchFirewallEndpointFromOrganizationLocationFirewallEndpointsName(
+    organizationLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFirewallEndpointsPathTemplate.match(
+      organizationLocationFirewallEndpointsName,
+    ).firewall_endpoint;
   }
 
   /**
@@ -3513,12 +4574,18 @@ export class SSERealmServiceClient {
    * @param {string} security_profile
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityProfilePath(organization:string,location:string,securityProfile:string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render({
-      organization: organization,
-      location: location,
-      security_profile: securityProfile,
-    });
+  organizationLocationSecurityProfilePath(
+    organization: string,
+    location: string,
+    securityProfile: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        security_profile: securityProfile,
+      },
+    );
   }
 
   /**
@@ -3528,8 +4595,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).organization;
+  matchOrganizationFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).organization;
   }
 
   /**
@@ -3539,8 +4610,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).location;
+  matchLocationFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).location;
   }
 
   /**
@@ -3550,8 +4625,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing organization_location_security_profile resource.
    * @returns {string} A string representing the security_profile.
    */
-  matchSecurityProfileFromOrganizationLocationSecurityProfileName(organizationLocationSecurityProfileName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(organizationLocationSecurityProfileName).security_profile;
+  matchSecurityProfileFromOrganizationLocationSecurityProfileName(
+    organizationLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfilePathTemplate.match(
+      organizationLocationSecurityProfileName,
+    ).security_profile;
   }
 
   /**
@@ -3562,12 +4641,18 @@ export class SSERealmServiceClient {
    * @param {string} security_profile_group
    * @returns {string} Resource name string.
    */
-  organizationLocationSecurityProfileGroupPath(organization:string,location:string,securityProfileGroup:string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render({
-      organization: organization,
-      location: location,
-      security_profile_group: securityProfileGroup,
-    });
+  organizationLocationSecurityProfileGroupPath(
+    organization: string,
+    location: string,
+    securityProfileGroup: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        security_profile_group: securityProfileGroup,
+      },
+    );
   }
 
   /**
@@ -3577,8 +4662,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).organization;
+  matchOrganizationFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).organization;
   }
 
   /**
@@ -3588,8 +4677,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).location;
+  matchLocationFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).location;
   }
 
   /**
@@ -3599,8 +4692,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing organization_location_security_profile_group resource.
    * @returns {string} A string representing the security_profile_group.
    */
-  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(organizationLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(organizationLocationSecurityProfileGroupName).security_profile_group;
+  matchSecurityProfileGroupFromOrganizationLocationSecurityProfileGroupName(
+    organizationLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.organizationLocationSecurityProfileGroupPathTemplate.match(
+      organizationLocationSecurityProfileGroupName,
+    ).security_profile_group;
   }
 
   /**
@@ -3611,7 +4708,11 @@ export class SSERealmServiceClient {
    * @param {string} partner_sse_gateway
    * @returns {string} Resource name string.
    */
-  partnerSSEGatewayPath(project:string,location:string,partnerSseGateway:string) {
+  partnerSSEGatewayPath(
+    project: string,
+    location: string,
+    partnerSseGateway: string,
+  ) {
     return this.pathTemplates.partnerSSEGatewayPathTemplate.render({
       project: project,
       location: location,
@@ -3627,7 +4728,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
-    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).project;
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(
+      partnerSSEGatewayName,
+    ).project;
   }
 
   /**
@@ -3638,7 +4741,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
-    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).location;
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(
+      partnerSSEGatewayName,
+    ).location;
   }
 
   /**
@@ -3648,8 +4753,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing PartnerSSEGateway resource.
    * @returns {string} A string representing the partner_sse_gateway.
    */
-  matchPartnerSseGatewayFromPartnerSSEGatewayName(partnerSSEGatewayName: string) {
-    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(partnerSSEGatewayName).partner_sse_gateway;
+  matchPartnerSseGatewayFromPartnerSSEGatewayName(
+    partnerSSEGatewayName: string,
+  ) {
+    return this.pathTemplates.partnerSSEGatewayPathTemplate.match(
+      partnerSSEGatewayName,
+    ).partner_sse_gateway;
   }
 
   /**
@@ -3660,7 +4769,11 @@ export class SSERealmServiceClient {
    * @param {string} partner_sse_realm
    * @returns {string} Resource name string.
    */
-  partnerSSERealmPath(project:string,location:string,partnerSseRealm:string) {
+  partnerSSERealmPath(
+    project: string,
+    location: string,
+    partnerSseRealm: string,
+  ) {
     return this.pathTemplates.partnerSSERealmPathTemplate.render({
       project: project,
       location: location,
@@ -3676,7 +4789,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartnerSSERealmName(partnerSSERealmName: string) {
-    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).project;
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(
+      partnerSSERealmName,
+    ).project;
   }
 
   /**
@@ -3687,7 +4802,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartnerSSERealmName(partnerSSERealmName: string) {
-    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).location;
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(
+      partnerSSERealmName,
+    ).location;
   }
 
   /**
@@ -3698,7 +4815,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the partner_sse_realm.
    */
   matchPartnerSseRealmFromPartnerSSERealmName(partnerSSERealmName: string) {
-    return this.pathTemplates.partnerSSERealmPathTemplate.match(partnerSSERealmName).partner_sse_realm;
+    return this.pathTemplates.partnerSSERealmPathTemplate.match(
+      partnerSSERealmName,
+    ).partner_sse_realm;
   }
 
   /**
@@ -3707,7 +4826,7 @@ export class SSERealmServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -3732,12 +4851,18 @@ export class SSERealmServiceClient {
    * @param {string} firewall_endpoint
    * @returns {string} Resource name string.
    */
-  projectLocationFirewallEndpointsPath(project:string,location:string,firewallEndpoint:string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render({
-      project: project,
-      location: location,
-      firewall_endpoint: firewallEndpoint,
-    });
+  projectLocationFirewallEndpointsPath(
+    project: string,
+    location: string,
+    firewallEndpoint: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        firewall_endpoint: firewallEndpoint,
+      },
+    );
   }
 
   /**
@@ -3747,8 +4872,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).project;
+  matchProjectFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).project;
   }
 
   /**
@@ -3758,8 +4887,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).location;
+  matchLocationFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).location;
   }
 
   /**
@@ -3769,8 +4902,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing project_location_firewallEndpoints resource.
    * @returns {string} A string representing the firewall_endpoint.
    */
-  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(projectLocationFirewallEndpointsName: string) {
-    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(projectLocationFirewallEndpointsName).firewall_endpoint;
+  matchFirewallEndpointFromProjectLocationFirewallEndpointsName(
+    projectLocationFirewallEndpointsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFirewallEndpointsPathTemplate.match(
+      projectLocationFirewallEndpointsName,
+    ).firewall_endpoint;
   }
 
   /**
@@ -3781,12 +4918,18 @@ export class SSERealmServiceClient {
    * @param {string} security_profile
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityProfilePath(project:string,location:string,securityProfile:string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render({
-      project: project,
-      location: location,
-      security_profile: securityProfile,
-    });
+  projectLocationSecurityProfilePath(
+    project: string,
+    location: string,
+    securityProfile: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        security_profile: securityProfile,
+      },
+    );
   }
 
   /**
@@ -3796,8 +4939,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).project;
+  matchProjectFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).project;
   }
 
   /**
@@ -3807,8 +4954,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).location;
+  matchLocationFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).location;
   }
 
   /**
@@ -3818,8 +4969,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing project_location_security_profile resource.
    * @returns {string} A string representing the security_profile.
    */
-  matchSecurityProfileFromProjectLocationSecurityProfileName(projectLocationSecurityProfileName: string) {
-    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(projectLocationSecurityProfileName).security_profile;
+  matchSecurityProfileFromProjectLocationSecurityProfileName(
+    projectLocationSecurityProfileName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfilePathTemplate.match(
+      projectLocationSecurityProfileName,
+    ).security_profile;
   }
 
   /**
@@ -3830,12 +4985,18 @@ export class SSERealmServiceClient {
    * @param {string} security_profile_group
    * @returns {string} Resource name string.
    */
-  projectLocationSecurityProfileGroupPath(project:string,location:string,securityProfileGroup:string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render({
-      project: project,
-      location: location,
-      security_profile_group: securityProfileGroup,
-    });
+  projectLocationSecurityProfileGroupPath(
+    project: string,
+    location: string,
+    securityProfileGroup: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        security_profile_group: securityProfileGroup,
+      },
+    );
   }
 
   /**
@@ -3845,8 +5006,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).project;
+  matchProjectFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).project;
   }
 
   /**
@@ -3856,8 +5021,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).location;
+  matchLocationFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).location;
   }
 
   /**
@@ -3867,8 +5036,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing project_location_security_profile_group resource.
    * @returns {string} A string representing the security_profile_group.
    */
-  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(projectLocationSecurityProfileGroupName: string) {
-    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(projectLocationSecurityProfileGroupName).security_profile_group;
+  matchSecurityProfileGroupFromProjectLocationSecurityProfileGroupName(
+    projectLocationSecurityProfileGroupName: string,
+  ) {
+    return this.pathTemplates.projectLocationSecurityProfileGroupPathTemplate.match(
+      projectLocationSecurityProfileGroupName,
+    ).security_profile_group;
   }
 
   /**
@@ -3879,7 +5052,7 @@ export class SSERealmServiceClient {
    * @param {string} sac_attachment
    * @returns {string} Resource name string.
    */
-  sACAttachmentPath(project:string,location:string,sacAttachment:string) {
+  sACAttachmentPath(project: string, location: string, sacAttachment: string) {
     return this.pathTemplates.sACAttachmentPathTemplate.render({
       project: project,
       location: location,
@@ -3895,7 +5068,8 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSACAttachmentName(sACAttachmentName: string) {
-    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).project;
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .project;
   }
 
   /**
@@ -3906,7 +5080,8 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSACAttachmentName(sACAttachmentName: string) {
-    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).location;
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .location;
   }
 
   /**
@@ -3917,7 +5092,8 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the sac_attachment.
    */
   matchSacAttachmentFromSACAttachmentName(sACAttachmentName: string) {
-    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName).sac_attachment;
+    return this.pathTemplates.sACAttachmentPathTemplate.match(sACAttachmentName)
+      .sac_attachment;
   }
 
   /**
@@ -3928,7 +5104,7 @@ export class SSERealmServiceClient {
    * @param {string} sac_realm
    * @returns {string} Resource name string.
    */
-  sACRealmPath(project:string,location:string,sacRealm:string) {
+  sACRealmPath(project: string, location: string, sacRealm: string) {
     return this.pathTemplates.sACRealmPathTemplate.render({
       project: project,
       location: location,
@@ -3966,7 +5142,8 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the sac_realm.
    */
   matchSacRealmFromSACRealmName(sACRealmName: string) {
-    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName).sac_realm;
+    return this.pathTemplates.sACRealmPathTemplate.match(sACRealmName)
+      .sac_realm;
   }
 
   /**
@@ -3977,7 +5154,11 @@ export class SSERealmServiceClient {
    * @param {string} sse_gateway_reference
    * @returns {string} Resource name string.
    */
-  sSEGatewayReferencePath(project:string,location:string,sseGatewayReference:string) {
+  sSEGatewayReferencePath(
+    project: string,
+    location: string,
+    sseGatewayReference: string,
+  ) {
     return this.pathTemplates.sSEGatewayReferencePathTemplate.render({
       project: project,
       location: location,
@@ -3993,7 +5174,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
-    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).project;
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(
+      sSEGatewayReferenceName,
+    ).project;
   }
 
   /**
@@ -4004,7 +5187,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
-    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).location;
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(
+      sSEGatewayReferenceName,
+    ).location;
   }
 
   /**
@@ -4014,8 +5199,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing SSEGatewayReference resource.
    * @returns {string} A string representing the sse_gateway_reference.
    */
-  matchSseGatewayReferenceFromSSEGatewayReferenceName(sSEGatewayReferenceName: string) {
-    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(sSEGatewayReferenceName).sse_gateway_reference;
+  matchSseGatewayReferenceFromSSEGatewayReferenceName(
+    sSEGatewayReferenceName: string,
+  ) {
+    return this.pathTemplates.sSEGatewayReferencePathTemplate.match(
+      sSEGatewayReferenceName,
+    ).sse_gateway_reference;
   }
 
   /**
@@ -4026,7 +5215,11 @@ export class SSERealmServiceClient {
    * @param {string} server_tls_policy
    * @returns {string} Resource name string.
    */
-  serverTlsPolicyPath(project:string,location:string,serverTlsPolicy:string) {
+  serverTlsPolicyPath(
+    project: string,
+    location: string,
+    serverTlsPolicy: string,
+  ) {
     return this.pathTemplates.serverTlsPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -4042,7 +5235,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).project;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).project;
   }
 
   /**
@@ -4053,7 +5248,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).location;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).location;
   }
 
   /**
@@ -4064,7 +5261,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the server_tls_policy.
    */
   matchServerTlsPolicyFromServerTlsPolicyName(serverTlsPolicyName: string) {
-    return this.pathTemplates.serverTlsPolicyPathTemplate.match(serverTlsPolicyName).server_tls_policy;
+    return this.pathTemplates.serverTlsPolicyPathTemplate.match(
+      serverTlsPolicyName,
+    ).server_tls_policy;
   }
 
   /**
@@ -4075,7 +5274,11 @@ export class SSERealmServiceClient {
    * @param {string} tls_inspection_policy
    * @returns {string} Resource name string.
    */
-  tlsInspectionPolicyPath(project:string,location:string,tlsInspectionPolicy:string) {
+  tlsInspectionPolicyPath(
+    project: string,
+    location: string,
+    tlsInspectionPolicy: string,
+  ) {
     return this.pathTemplates.tlsInspectionPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -4091,7 +5294,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).project;
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).project;
   }
 
   /**
@@ -4102,7 +5307,9 @@ export class SSERealmServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).location;
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).location;
   }
 
   /**
@@ -4112,8 +5319,12 @@ export class SSERealmServiceClient {
    *   A fully-qualified path representing TlsInspectionPolicy resource.
    * @returns {string} A string representing the tls_inspection_policy.
    */
-  matchTlsInspectionPolicyFromTlsInspectionPolicyName(tlsInspectionPolicyName: string) {
-    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(tlsInspectionPolicyName).tls_inspection_policy;
+  matchTlsInspectionPolicyFromTlsInspectionPolicyName(
+    tlsInspectionPolicyName: string,
+  ) {
+    return this.pathTemplates.tlsInspectionPolicyPathTemplate.match(
+      tlsInspectionPolicyName,
+    ).tls_inspection_policy;
   }
 
   /**
@@ -4124,7 +5335,7 @@ export class SSERealmServiceClient {
    * @param {string} url_list
    * @returns {string} Resource name string.
    */
-  urlListPath(project:string,location:string,urlList:string) {
+  urlListPath(project: string, location: string, urlList: string) {
     return this.pathTemplates.urlListPathTemplate.render({
       project: project,
       location: location,
@@ -4173,12 +5384,16 @@ export class SSERealmServiceClient {
    */
   close(): Promise<void> {
     if (this.sSERealmServiceStub && !this._terminated) {
-      return this.sSERealmServiceStub.then(stub => {
+      return this.sSERealmServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

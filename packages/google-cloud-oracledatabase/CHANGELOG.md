@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.8.0...oracledatabase-v0.9.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.7.1...oracledatabase-v0.8.0) (2026-06-25)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
 ## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.7.0...oracledatabase-v0.7.1) (2026-05-01)
 
 

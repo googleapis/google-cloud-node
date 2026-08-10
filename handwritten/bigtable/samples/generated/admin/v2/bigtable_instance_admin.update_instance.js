@@ -1,4 +1,4 @@
-// Copyright 2026 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,11 +47,6 @@ function main(displayName, state, createTime, satisfiesPzs, satisfiesPzi, tags) 
    *  The type of the instance. Defaults to `PRODUCTION`.
    */
   // const type = {}
-  /**
-   *  Optional. The edition of the instance. See
-   *  Edition google.bigtable.admin.v2.Instance.Edition  for details.
-   */
-  // const edition = {}
   /**
    *  Labels are a flexible and lightweight mechanism for organizing cloud
    *  resources into groups that reflect a customer's organizational needs and

@@ -50,6 +50,8 @@
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
                 "EDITION_2024": 1001,
+                "EDITION_2026": 1002,
+                "EDITION_UNSTABLE": 9999,
                 "EDITION_1_TEST_ONLY": 1,
                 "EDITION_2_TEST_ONLY": 2,
                 "EDITION_99997_TEST_ONLY": 99997,
@@ -244,6 +246,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -460,7 +466,14 @@
                   "type": "ServiceOptions",
                   "id": 3
                 }
-              }
+              },
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                "stream"
+              ]
             },
             "MethodDescriptorProto": {
               "edition": "proto2",
@@ -512,7 +525,10 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "feature_support.edition_introduced": "EDITION_PROTO2",
+                    "feature_support.edition_removed": "EDITION_2024",
+                    "feature_support.removal_error": "This behavior is enabled by default in editions 2024 and above. To disable it, you can set `features.(pb.java).nest_in_file_class = YES` on individual messages, enums, or services."
                   }
                 },
                 "javaGenerateEqualsAndHash": {
@@ -572,7 +588,9 @@
                   "type": "bool",
                   "id": 31,
                   "options": {
-                    "default": true
+                    "default": true,
+                    "feature_support.edition_removed": "EDITION_2026",
+                    "feature_support.removal_error": "cc_enable_arenas is enabled by default in every edition and overrides are ignored.This option is removed in editions 2026 and above."
                   }
                 },
                 "objcClassPrefix": {
@@ -614,6 +632,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -686,6 +708,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -801,6 +827,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -880,6 +910,10 @@
                     "editionRemoved": {
                       "type": "Edition",
                       "id": 4
+                    },
+                    "removalError": {
+                      "type": "string",
+                      "id": 5
                     }
                   }
                 }
@@ -899,6 +933,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -937,6 +975,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -982,6 +1024,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -1008,6 +1054,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -1042,6 +1092,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -1183,8 +1237,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_METHOD",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STYLE2026"
                   }
                 },
                 "defaultSymbolVisibility": {
@@ -1196,6 +1250,17 @@
                     "feature_support.edition_introduced": "EDITION_2024",
                     "edition_defaults.edition": "EDITION_2024",
                     "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                  }
+                },
+                "enforceProtoLimits": {
+                  "type": "ProtoLimitsFeature.EnforceProtoLimits",
+                  "id": 9,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_ONEOF",
+                    "feature_support.edition_introduced": "EDITION_2026",
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "PROTO_LIMITS2026"
                   }
                 }
               },
@@ -1273,7 +1338,8 @@
                   "values": {
                     "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
                     "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
+                    "STYLE_LEGACY": 2,
+                    "STYLE2026": 3
                   }
                 },
                 "VisibilityFeature": {
@@ -1292,6 +1358,18 @@
                         "EXPORT_TOP_LEVEL": 2,
                         "LOCAL_ALL": 3,
                         "STRICT": 4
+                      }
+                    }
+                  }
+                },
+                "ProtoLimitsFeature": {
+                  "fields": {},
+                  "nested": {
+                    "EnforceProtoLimits": {
+                      "values": {
+                        "PROTO_LIMITS_UNKNOWN": 0,
+                        "LEGACY_NO_EXPLICIT_LIMITS": 1,
+                        "PROTO_LIMITS2026": 2
                       }
                     }
                   }
@@ -1665,583 +1743,131 @@
                         }
                       }
                     },
-                    "CapacityPlanningService": {
-                      "options": {
-                        "(google.api.default_host)": "capacityplanner.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.full_control"
-                      },
-                      "methods": {
-                        "GetCapacityPlan": {
-                          "requestType": "GetCapacityPlanRequest",
-                          "responseType": "CapacityPlan",
-                          "options": {
-                            "(google.api.http).get": "/v1beta/{name=projects/*/capacityPlans/*}",
-                            "(google.api.method_signature)": "name"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta/{name=projects/*/capacityPlans/*}"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            }
-                          ]
-                        },
-                        "QueryCapacityPlans": {
-                          "requestType": "QueryCapacityPlansRequest",
-                          "responseType": "QueryCapacityPlansResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1beta/{parent=organizations/*}/capacityPlans:query",
-                            "(google.api.http).additional_bindings.get": "/v1beta/{parent=projects/*}/capacityPlans:query",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1beta/{parent=organizations/*}/capacityPlans:query",
-                                "additional_bindings": [
-                                  {
-                                    "get": "/v1beta/{parent=folders/*}/capacityPlans:query"
-                                  },
-                                  {
-                                    "get": "/v1beta/{parent=projects/*}/capacityPlans:query"
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
-                        "QueryCapacityPlanInsights": {
-                          "requestType": "QueryCapacityPlanInsightsRequest",
-                          "responseType": "QueryCapacityPlanInsightsResponse",
-                          "options": {
-                            "(google.api.http).post": "/v1beta/{parent=projects/*}/capacityPlanInsights:query",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "parent,capacity_plan_filters"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1beta/{parent=projects/*}/capacityPlanInsights:query",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent,capacity_plan_filters"
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "State": {
-                      "values": {
-                        "STATE_UNSPECIFIED": 0,
-                        "PENDING_REVIEW": 1,
-                        "IN_REVIEW": 3,
-                        "APPROVED_PROVISIONAL": 8,
-                        "OBSOLETE": 5,
-                        "CANNOT_BE_FULFILLED": 7,
-                        "ON_HOLD_CONTACT_SALES": 9,
-                        "IN_FULFILLMENT": 10
-                      }
-                    },
-                    "CapacityType": {
-                      "values": {
-                        "CAPACITY_TYPE_UNKNOWN": 0,
-                        "CAPACITY_TYPE_INORGANIC_DRAFT": 1,
-                        "CAPACITY_TYPE_INORGANIC_PENDING": 2,
-                        "CAPACITY_TYPE_INORGANIC_APPROVED": 3
-                      }
-                    },
-                    "GetCapacityPlanRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "capacityplanner.googleapis.com/CapacityPlan"
-                          }
-                        }
-                      }
-                    },
-                    "QueryCapacityPlansRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).child_type": "capacityplanner.googleapis.com/CapacityPlan"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "location": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "QueryCapacityPlansResponse": {
-                      "fields": {
-                        "capacityPlans": {
-                          "rule": "repeated",
-                          "type": "CapacityPlan",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "QueryCapacityPlanInsightsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "capacityPlanFilters": {
-                          "type": "CapacityPlanFilters",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "QueryCapacityPlanInsightsResponse": {
-                      "fields": {
-                        "aggregatedCapacityPlanView": {
-                          "type": "CapacityPlanView",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "CapacityPlanFilters": {
-                      "fields": {
-                        "keys": {
-                          "rule": "repeated",
-                          "type": "CapacityPlanKey",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "capacityTypes": {
-                          "rule": "repeated",
-                          "type": "CapacityType",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "capacityPlanId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "CapacityPlanKey": {
-                      "fields": {
-                        "resourceContainer": {
-                          "type": "ResourceContainer",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "resourceIdKey": {
-                          "type": "ResourceIdKey",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "locationId": {
-                          "type": "LocationIdentifier",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "CapacityPlanView": {
-                      "fields": {
-                        "key": {
-                          "type": "CapacityPlanKey",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "timeSeriesViews": {
-                          "rule": "repeated",
-                          "type": "TimeSeriesView",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "TimeSeriesView": {
-                      "fields": {
+                    "FutureReservation": {
+                      "oneofs": {
                         "type": {
-                          "type": "CapacityType",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "capacityValue": {
-                          "type": "DemandValue",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "oneof": [
+                            "specificSkuProperties"
+                          ]
                         }
-                      }
-                    },
-                    "CapacityPlan": {
-                      "options": {
-                        "(google.api.resource).type": "capacityplanner.googleapis.com/CapacityPlan",
-                        "(google.api.resource).pattern": "projects/{project}/capacityPlans/{capacity_plan}",
-                        "(google.api.resource).plural": "capacityPlans",
-                        "(google.api.resource).singular": "capacityPlan"
                       },
                       "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IDENTIFIER"
-                          }
+                        "specificSkuProperties": {
+                          "type": "SpecificSKUProperties",
+                          "id": 8
                         },
-                        "capacityDemandMetadata": {
-                          "type": "DemandMetadata",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "serviceDemands": {
-                          "rule": "repeated",
-                          "type": "ServiceDemand",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "reporter": {
-                          "type": "User",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                        "id": {
+                          "type": "int64",
+                          "id": 1
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 2
                         },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                        "zone": {
+                          "type": "string",
+                          "id": 5
                         },
                         "description": {
                           "type": "string",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 6
                         },
-                        "title": {
+                        "futureReservation": {
                           "type": "string",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DemandMetadata": {
-                      "fields": {
-                        "demandPreferences": {
-                          "rule": "repeated",
-                          "type": "DemandPreference",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DemandPreference": {
-                      "fields": {
-                        "preferenceId": {
+                          "id": 7
+                        },
+                        "ownerProjectId": {
                           "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 15
                         },
-                        "value": {
-                          "type": "Value",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "ServiceDemand": {
-                      "fields": {
-                        "service": {
+                        "timeWindow": {
+                          "type": "TimeWindow",
+                          "id": 9
+                        },
+                        "shareSettings": {
+                          "type": "Allocation.ShareSettings",
+                          "id": 10
+                        },
+                        "namePrefix": {
                           "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 11
                         },
-                        "demandMetadata": {
-                          "type": "DemandMetadata",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                        "status": {
+                          "type": "Status",
+                          "id": 12
                         },
-                        "resourceDemands": {
-                          "rule": "repeated",
-                          "type": "ResourceDemand",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "ResourceDemand": {
-                      "fields": {
-                        "id": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "resourceContainer": {
-                          "type": "ResourceContainer",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "resourceId": {
-                          "type": "ResourceIdentifier",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "locationId": {
-                          "type": "LocationIdentifier",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "state": {
-                          "type": "State",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "reporter": {
-                          "type": "User",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "createTime": {
+                        "autoCreatedReservationsDeleteTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 7,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
+                          "id": 13
                         },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 8,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "demandValues": {
-                          "type": "DemandValues",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "demandMetadata": {
-                          "type": "DemandMetadata",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "childResourceDemands": {
-                          "rule": "repeated",
-                          "type": "ChildResourceDemand",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "User": {
-                      "fields": {
-                        "email": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "DemandValues": {
-                      "fields": {
-                        "values": {
-                          "rule": "repeated",
-                          "type": "DemandValue",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "DemandValue": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "timeValues": {
-                          "rule": "repeated",
-                          "type": "TimeValue",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "unit": {
-                          "type": "Unit",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "TimeValue": {
-                      "oneofs": {
-                        "_value": {
-                          "oneof": [
-                            "value"
-                          ]
+                        "autoDeleteAutoCreatedReservations": {
+                          "type": "bool",
+                          "id": 14
                         }
                       },
-                      "fields": {
-                        "time": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                      "nested": {
+                        "SpecificSKUProperties": {
+                          "fields": {
+                            "instanceProperties": {
+                              "type": "Allocation.SpecificSKUAllocation.AllocatedInstanceProperties",
+                              "id": 1
+                            },
+                            "totalCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
                           }
                         },
-                        "value": {
-                          "type": "double",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "proto3_optional": true
-                          }
-                        }
-                      }
-                    },
-                    "ChildResourceDemand": {
-                      "fields": {
-                        "resourceId": {
-                          "type": "ResourceIdentifier",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                        "TimeWindow": {
+                          "fields": {
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "endTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            }
                           }
                         },
-                        "demandValues": {
-                          "type": "DemandValues",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "demandMetadata": {
-                          "type": "DemandMetadata",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                        "Status": {
+                          "fields": {
+                            "procurementStatus": {
+                              "type": "ProcurementStatus",
+                              "id": 1
+                            },
+                            "lockTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2
+                            },
+                            "autoCreatedReservations": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "fulfilledCount": {
+                              "type": "int64",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "ProcurementStatus": {
+                              "values": {
+                                "PROCUREMENT_STATUS_UNSPECIFIED": 0,
+                                "PENDING_APPROVAL": 1,
+                                "APPROVED": 2,
+                                "COMMITTED": 3,
+                                "DECLINED": 4,
+                                "CANCELLED": 5,
+                                "PROCURING": 6,
+                                "PROVISIONING": 7,
+                                "FULFILLED": 8,
+                                "FAILED": 9,
+                                "FAILED_PARTIALLY_FULFILLED": 10,
+                                "DRAFTING": 11,
+                                "PENDING_AMENDMENT_APPROVAL": 12
+                              }
+                            }
                           }
                         }
                       }
@@ -2447,135 +2073,6 @@
                         "boolValue": {
                           "type": "bool",
                           "id": 4
-                        }
-                      }
-                    },
-                    "FutureReservation": {
-                      "oneofs": {
-                        "type": {
-                          "oneof": [
-                            "specificSkuProperties"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "specificSkuProperties": {
-                          "type": "SpecificSKUProperties",
-                          "id": 8
-                        },
-                        "id": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 2
-                        },
-                        "zone": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 6
-                        },
-                        "futureReservation": {
-                          "type": "string",
-                          "id": 7
-                        },
-                        "ownerProjectId": {
-                          "type": "string",
-                          "id": 15
-                        },
-                        "timeWindow": {
-                          "type": "TimeWindow",
-                          "id": 9
-                        },
-                        "shareSettings": {
-                          "type": "Allocation.ShareSettings",
-                          "id": 10
-                        },
-                        "namePrefix": {
-                          "type": "string",
-                          "id": 11
-                        },
-                        "status": {
-                          "type": "Status",
-                          "id": 12
-                        },
-                        "autoCreatedReservationsDeleteTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 13
-                        },
-                        "autoDeleteAutoCreatedReservations": {
-                          "type": "bool",
-                          "id": 14
-                        }
-                      },
-                      "nested": {
-                        "SpecificSKUProperties": {
-                          "fields": {
-                            "instanceProperties": {
-                              "type": "Allocation.SpecificSKUAllocation.AllocatedInstanceProperties",
-                              "id": 1
-                            },
-                            "totalCount": {
-                              "type": "int64",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "TimeWindow": {
-                          "fields": {
-                            "startTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 1
-                            },
-                            "endTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "Status": {
-                          "fields": {
-                            "procurementStatus": {
-                              "type": "ProcurementStatus",
-                              "id": 1
-                            },
-                            "lockTime": {
-                              "type": "google.protobuf.Timestamp",
-                              "id": 2
-                            },
-                            "autoCreatedReservations": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 3
-                            },
-                            "fulfilledCount": {
-                              "type": "int64",
-                              "id": 4
-                            }
-                          },
-                          "nested": {
-                            "ProcurementStatus": {
-                              "values": {
-                                "PROCUREMENT_STATUS_UNSPECIFIED": 0,
-                                "PENDING_APPROVAL": 1,
-                                "APPROVED": 2,
-                                "COMMITTED": 3,
-                                "DECLINED": 4,
-                                "CANCELLED": 5,
-                                "PROCURING": 6,
-                                "PROVISIONING": 7,
-                                "FULFILLED": 8,
-                                "FAILED": 9,
-                                "FAILED_PARTIALLY_FULFILLED": 10,
-                                "DRAFTING": 11,
-                                "PENDING_AMENDMENT_APPROVAL": 12
-                              }
-                            }
-                          }
                         }
                       }
                     },
@@ -2843,7 +2340,10 @@
                         },
                         "cloudResourceType": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "usageAggregationMethod": {
                           "type": "UsageHistory.AggregationMethod",
@@ -2925,7 +2425,10 @@
                         },
                         "cloudResourceType": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "forecastType": {
                           "type": "Forecast.ForecastType",
@@ -2992,14 +2495,14 @@
                           "type": "string",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "reservationType": {
                           "type": "ReservationType",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "shareType": {
@@ -3020,7 +2523,7 @@
                           "type": "ReservationDataLevel",
                           "id": 8,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "includeUnapprovedReservations": {
@@ -3841,6 +3344,28 @@
             "objc_class_prefix": "GAPI"
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
+              }
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -4098,6 +3623,10 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -4207,6 +3736,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 3
+                },
+                "batching": {
+                  "type": "BatchingConfigProto",
+                  "id": 4
                 }
               },
               "nested": {
@@ -4264,6 +3797,79 @@
                 }
               }
             },
+            "BatchingConfigProto": {
+              "fields": {
+                "thresholds": {
+                  "type": "BatchingSettingsProto",
+                  "id": 1
+                },
+                "batchDescriptor": {
+                  "type": "BatchingDescriptorProto",
+                  "id": 2
+                }
+              }
+            },
+            "BatchingSettingsProto": {
+              "fields": {
+                "elementCountThreshold": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "requestByteThreshold": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "delayThreshold": {
+                  "type": "google.protobuf.Duration",
+                  "id": 3
+                },
+                "elementCountLimit": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "requestByteLimit": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "flowControlElementLimit": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "flowControlByteLimit": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "flowControlLimitExceededBehavior": {
+                  "type": "FlowControlLimitExceededBehaviorProto",
+                  "id": 8
+                }
+              }
+            },
+            "FlowControlLimitExceededBehaviorProto": {
+              "values": {
+                "UNSET_BEHAVIOR": 0,
+                "THROW_EXCEPTION": 1,
+                "BLOCK": 2,
+                "IGNORE": 3
+              }
+            },
+            "BatchingDescriptorProto": {
+              "fields": {
+                "batchedField": {
+                  "type": "string",
+                  "id": 1
+                },
+                "discriminatorFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "subresponseField": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -4274,28 +3880,6 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
-              }
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions",
-              "options": {
-                "packed": false
-              }
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7,
-                "IDENTIFIER": 8
               }
             },
             "resourceReference": {
@@ -4379,7 +3963,6 @@
         },
         "longrunning": {
           "options": {
-            "cc_enable_arenas": true,
             "csharp_namespace": "Google.LongRunning",
             "go_package": "cloud.google.com/go/longrunning/autogen/longrunningpb;longrunningpb",
             "java_multiple_files": true,
@@ -4536,6 +4119,10 @@
                 "pageToken": {
                   "type": "string",
                   "id": 3
+                },
+                "returnPartialSuccess": {
+                  "type": "bool",
+                  "id": 5
                 }
               }
             },
@@ -4549,6 +4136,14 @@
                 "nextPageToken": {
                   "type": "string",
                   "id": 2
+                },
+                "unreachable": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3,
+                  "options": {
+                    "(google.api.field_behavior)": "UNORDERED_LIST"
+                  }
                 }
               }
             },
@@ -4596,7 +4191,6 @@
         },
         "rpc": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
             "java_multiple_files": true,
             "java_outer_classname": "StatusProto",
@@ -4625,7 +4219,6 @@
         },
         "type": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/type/date;date",
             "java_multiple_files": true,
             "java_outer_classname": "DateProto",

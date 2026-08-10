@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudMemcacheClient} from './cloud_memcache_client';
+export { CloudMemcacheClient } from './cloud_memcache_client';

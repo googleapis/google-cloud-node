@@ -47,7 +47,7 @@ function main(parent, tableId) {
   // const backup = 'abc123'
 
   // Imports the Admin library
-  const {TableAdminClient} = require('@google-cloud/bigtable').admin;
+  const {BigtableTableAdminClient} = require('admin').v2;
 
   // Instantiates a client
   const adminClient = new TableAdminClient();

@@ -138,6 +138,10 @@
           "retry_codes_name": "resource_exhausted_unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
+        "ModifyEntry": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "SearchEntries": {
           "timeout_millis": 60000,
           "retry_codes_name": "resource_exhausted_unavailable",
@@ -160,28 +164,33 @@
           "retry_params_name": "default"
         },
         "CreateEntryLink": {
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateEntryLink": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "resource_exhausted_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "DeleteEntryLink": {
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "LookupEntryLinks": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 20000,
+          "retry_codes_name": "resource_exhausted_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "LookupContext": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetEntryLink": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 20000,
+          "retry_codes_name": "resource_exhausted_unavailable",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "CreateMetadataFeed": {
           "retry_codes_name": "non_idempotent",

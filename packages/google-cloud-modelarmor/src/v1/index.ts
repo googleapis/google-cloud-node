@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ModelArmorClient} from './model_armor_client';
+export { ModelArmorClient } from './model_armor_client';

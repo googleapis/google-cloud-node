@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +54,7 @@ export class ApiHubDependenciesClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('apihub');
@@ -58,10 +67,10 @@ export class ApiHubDependenciesClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  apiHubDependenciesStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  apiHubDependenciesStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ApiHubDependenciesClient.
@@ -102,27 +111,48 @@ export class ApiHubDependenciesClient {
    *     const client = new ApiHubDependenciesClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ApiHubDependenciesClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'apihub.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = {fallback: true};
+      opts = { fallback: true };
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -147,7 +177,7 @@ export class ApiHubDependenciesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -161,15 +191,11 @@ export class ApiHubDependenciesClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -191,64 +217,64 @@ export class ApiHubDependenciesClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       apiPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}'
+        'projects/{project}/locations/{location}/apis/{api}',
       ),
       apiHubInstancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apiHubInstances/{api_hub_instance}'
+        'projects/{project}/locations/{location}/apiHubInstances/{api_hub_instance}',
       ),
       apiOperationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}',
       ),
       attributePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/attributes/{attribute}'
+        'projects/{project}/locations/{location}/attributes/{attribute}',
       ),
       curationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/curations/{curation}'
+        'projects/{project}/locations/{location}/curations/{curation}',
       ),
       definitionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/definitions/{definition}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/definitions/{definition}',
       ),
       dependencyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dependencies/{dependency}'
+        'projects/{project}/locations/{location}/dependencies/{dependency}',
       ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/deployments/{deployment}'
+        'projects/{project}/locations/{location}/deployments/{deployment}',
       ),
       discoveredApiObservationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}'
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}',
       ),
       discoveredApiOperationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}'
+        'projects/{project}/locations/{location}/discoveredApiObservations/{discovered_api_observation}/discoveredApiOperations/{discovered_api_operation}',
       ),
       externalApiPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/externalApis/{external_api}'
+        'projects/{project}/locations/{location}/externalApis/{external_api}',
       ),
       hostProjectRegistrationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/hostProjectRegistrations/{host_project_registration}'
+        'projects/{project}/locations/{location}/hostProjectRegistrations/{host_project_registration}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       pluginPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/plugins/{plugin}'
+        'projects/{project}/locations/{location}/plugins/{plugin}',
       ),
       pluginInstancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}'
+        'projects/{project}/locations/{location}/plugins/{plugin}/instances/{instance}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       runtimeProjectAttachmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/runtimeProjectAttachments/{runtime_project_attachment}'
+        'projects/{project}/locations/{location}/runtimeProjectAttachments/{runtime_project_attachment}',
       ),
       specPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}/specs/{spec}',
       ),
       styleGuidePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/plugins/{plugin}/styleGuide'
+        'projects/{project}/locations/{location}/plugins/{plugin}/styleGuide',
       ),
       versionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apis/{api}/versions/{version}'
+        'projects/{project}/locations/{location}/apis/{api}/versions/{version}',
       ),
     };
 
@@ -256,14 +282,20 @@ export class ApiHubDependenciesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDependencies:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dependencies')
+      listDependencies: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dependencies',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.apihub.v1.ApiHubDependencies', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.apihub.v1.ApiHubDependencies',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -294,37 +326,46 @@ export class ApiHubDependenciesClient {
     // Put together the "service stub" for
     // google.cloud.apihub.v1.ApiHubDependencies.
     this.apiHubDependenciesStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.apihub.v1.ApiHubDependencies') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.apihub.v1.ApiHubDependencies',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.apihub.v1.ApiHubDependencies,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const apiHubDependenciesStubMethods =
-        ['createDependency', 'getDependency', 'updateDependency', 'deleteDependency', 'listDependencies'];
+    const apiHubDependenciesStubMethods = [
+      'createDependency',
+      'getDependency',
+      'updateDependency',
+      'deleteDependency',
+      'listDependencies',
+    ];
     for (const methodName of apiHubDependenciesStubMethods) {
       const callPromise = this.apiHubDependenciesStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -339,8 +380,14 @@ export class ApiHubDependenciesClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'apihub.googleapis.com';
   }
@@ -351,8 +398,14 @@ export class ApiHubDependenciesClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'apihub.googleapis.com';
   }
@@ -383,9 +436,7 @@ export class ApiHubDependenciesClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -394,8 +445,9 @@ export class ApiHubDependenciesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -406,532 +458,693 @@ export class ApiHubDependenciesClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Create a dependency between two entities in the API hub.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource for the dependency resource.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} [request.dependencyId]
- *   Optional. The ID to use for the dependency resource, which will become the
- *   final component of the dependency's resource name. This field is optional.
- *   * If provided, the same will be used. The service will throw an error if
- *   duplicate id is provided by the client.
- *   * If not provided, a system generated id will be used.
- *
- *   This value should be 4-500 characters, and valid characters
- *   are `{@link protos.A-Z|a-z}[0-9]-_`.
- * @param {google.cloud.apihub.v1.Dependency} request.dependency
- *   Required. The dependency resource to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Dependency|Dependency}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_dependencies.create_dependency.js</caption>
- * region_tag:apihub_v1_generated_ApiHubDependencies_CreateDependency_async
- */
+  /**
+   * Create a dependency between two entities in the API hub.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource for the dependency resource.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.dependencyId]
+   *   Optional. The ID to use for the dependency resource, which will become the
+   *   final component of the dependency's resource name. This field is optional.
+   *   * If provided, the same will be used. The service will throw an error if
+   *   duplicate id is provided by the client.
+   *   * If not provided, a system generated id will be used.
+   *
+   *   This value should be 4-500 characters, and valid characters
+   *   are `{@link protos.A-Z|a-z}[0-9]-_`.
+   * @param {google.cloud.apihub.v1.Dependency} request.dependency
+   *   Required. The dependency resource to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Dependency|Dependency}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_dependencies.create_dependency.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubDependencies_CreateDependency_async
+   */
   createDependency(
-      request?: protos.google.cloud.apihub.v1.ICreateDependencyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.ICreateDependencyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apihub.v1.ICreateDependencyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.ICreateDependencyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createDependency(
-      request: protos.google.cloud.apihub.v1.ICreateDependencyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.ICreateDependencyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.ICreateDependencyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.ICreateDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDependency(
-      request: protos.google.cloud.apihub.v1.ICreateDependencyRequest,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.ICreateDependencyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.ICreateDependencyRequest,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.ICreateDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDependency(
-      request?: protos.google.cloud.apihub.v1.ICreateDependencyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apihub.v1.ICreateDependencyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.ICreateDependencyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.ICreateDependencyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.ICreateDependencyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.apihub.v1.ICreateDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.ICreateDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.ICreateDependencyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createDependency request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.ICreateDependencyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDependency,
+          | protos.google.cloud.apihub.v1.ICreateDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDependency response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createDependency(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.ICreateDependencyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createDependency response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createDependency(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDependency,
+          protos.google.cloud.apihub.v1.ICreateDependencyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDependency response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get details about a dependency resource in the API hub.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the dependency resource to retrieve.
- *   Format: `projects/{project}/locations/{location}/dependencies/{dependency}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Dependency|Dependency}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_dependencies.get_dependency.js</caption>
- * region_tag:apihub_v1_generated_ApiHubDependencies_GetDependency_async
- */
+  /**
+   * Get details about a dependency resource in the API hub.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the dependency resource to retrieve.
+   *   Format: `projects/{project}/locations/{location}/dependencies/{dependency}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Dependency|Dependency}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_dependencies.get_dependency.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubDependencies_GetDependency_async
+   */
   getDependency(
-      request?: protos.google.cloud.apihub.v1.IGetDependencyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.IGetDependencyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IGetDependencyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.IGetDependencyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getDependency(
-      request: protos.google.cloud.apihub.v1.IGetDependencyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.IGetDependencyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IGetDependencyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.IGetDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDependency(
-      request: protos.google.cloud.apihub.v1.IGetDependencyRequest,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.IGetDependencyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IGetDependencyRequest,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.IGetDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDependency(
-      request?: protos.google.cloud.apihub.v1.IGetDependencyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apihub.v1.IGetDependencyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.IGetDependencyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.IGetDependencyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.IGetDependencyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.apihub.v1.IGetDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.IGetDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.IGetDependencyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDependency request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.IGetDependencyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDependency,
+          | protos.google.cloud.apihub.v1.IGetDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDependency response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDependency(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.IGetDependencyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDependency response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDependency(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDependency,
+          protos.google.cloud.apihub.v1.IGetDependencyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDependency response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update a dependency based on the
- * {@link protos.google.cloud.apihub.v1.UpdateDependencyRequest.update_mask|update_mask}
- * provided in the request.
- *
- * The following fields in the {@link protos.google.cloud.apihub.v1.Dependency|dependency}
- * can be updated:
- * * {@link protos.google.cloud.apihub.v1.Dependency.description|description}
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.apihub.v1.Dependency} request.dependency
- *   Required. The dependency resource to update.
- *
- *   The dependency's `name` field is used to identify the dependency to update.
- *   Format: `projects/{project}/locations/{location}/dependencies/{dependency}`
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. The list of fields to update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Dependency|Dependency}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_dependencies.update_dependency.js</caption>
- * region_tag:apihub_v1_generated_ApiHubDependencies_UpdateDependency_async
- */
+  /**
+   * Update a dependency based on the
+   * {@link protos.google.cloud.apihub.v1.UpdateDependencyRequest.update_mask|update_mask}
+   * provided in the request.
+   *
+   * The following fields in the {@link protos.google.cloud.apihub.v1.Dependency|dependency}
+   * can be updated:
+   * * {@link protos.google.cloud.apihub.v1.Dependency.description|description}
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.apihub.v1.Dependency} request.dependency
+   *   Required. The dependency resource to update.
+   *
+   *   The dependency's `name` field is used to identify the dependency to update.
+   *   Format: `projects/{project}/locations/{location}/dependencies/{dependency}`
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apihub.v1.Dependency|Dependency}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_dependencies.update_dependency.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubDependencies_UpdateDependency_async
+   */
   updateDependency(
-      request?: protos.google.cloud.apihub.v1.IUpdateDependencyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.IUpdateDependencyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IUpdateDependencyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.IUpdateDependencyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateDependency(
-      request: protos.google.cloud.apihub.v1.IUpdateDependencyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.IUpdateDependencyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IUpdateDependencyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.IUpdateDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDependency(
-      request: protos.google.cloud.apihub.v1.IUpdateDependencyRequest,
-      callback: Callback<
-          protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.IUpdateDependencyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IUpdateDependencyRequest,
+    callback: Callback<
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.IUpdateDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDependency(
-      request?: protos.google.cloud.apihub.v1.IUpdateDependencyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apihub.v1.IUpdateDependencyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.IUpdateDependencyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.apihub.v1.IDependency,
-          protos.google.cloud.apihub.v1.IUpdateDependencyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.IUpdateDependencyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.apihub.v1.IUpdateDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.IUpdateDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDependency,
+      protos.google.cloud.apihub.v1.IUpdateDependencyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'dependency.name': request.dependency!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'dependency.name': request.dependency!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateDependency request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.IUpdateDependencyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apihub.v1.IDependency,
+          | protos.google.cloud.apihub.v1.IUpdateDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDependency response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateDependency(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.apihub.v1.IDependency,
-        protos.google.cloud.apihub.v1.IUpdateDependencyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateDependency response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateDependency(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apihub.v1.IDependency,
+          protos.google.cloud.apihub.v1.IUpdateDependencyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDependency response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete the dependency resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the dependency resource to delete.
- *   Format: `projects/{project}/locations/{location}/dependencies/{dependency}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_dependencies.delete_dependency.js</caption>
- * region_tag:apihub_v1_generated_ApiHubDependencies_DeleteDependency_async
- */
+  /**
+   * Delete the dependency resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the dependency resource to delete.
+   *   Format: `projects/{project}/locations/{location}/dependencies/{dependency}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_dependencies.delete_dependency.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubDependencies_DeleteDependency_async
+   */
   deleteDependency(
-      request?: protos.google.cloud.apihub.v1.IDeleteDependencyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apihub.v1.IDeleteDependencyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IDeleteDependencyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.apihub.v1.IDeleteDependencyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteDependency(
-      request: protos.google.cloud.apihub.v1.IDeleteDependencyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.apihub.v1.IDeleteDependencyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IDeleteDependencyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.apihub.v1.IDeleteDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDependency(
-      request: protos.google.cloud.apihub.v1.IDeleteDependencyRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.apihub.v1.IDeleteDependencyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.apihub.v1.IDeleteDependencyRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.apihub.v1.IDeleteDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDependency(
-      request?: protos.google.cloud.apihub.v1.IDeleteDependencyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.apihub.v1.IDeleteDependencyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.apihub.v1.IDeleteDependencyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.apihub.v1.IDeleteDependencyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apihub.v1.IDeleteDependencyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.apihub.v1.IDeleteDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.apihub.v1.IDeleteDependencyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.apihub.v1.IDeleteDependencyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteDependency request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apihub.v1.IDeleteDependencyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.apihub.v1.IDeleteDependencyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDependency response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteDependency(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.apihub.v1.IDeleteDependencyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteDependency response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteDependency(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.apihub.v1.IDeleteDependencyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDependency response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * List dependencies based on the provided filter and pagination parameters.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent which owns this collection of dependency resources.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of Dependencies.
- *
- *   A filter expression consists of a field name, a comparison operator, and
- *   a value for filtering. The value must be a string. Allowed comparison
- *   operator is `=`. Filters are not case sensitive.
- *
- *   The following fields in the `Dependency` are eligible for filtering:
- *
- *     * `consumer.operation_resource_name` - The operation resource name for
- *     the consumer entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *     * `consumer.external_api_resource_name` - The external api resource name
- *     for the consumer entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *     * `supplier.operation_resource_name` - The operation resource name for
- *     the supplier entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *     * `supplier.external_api_resource_name` - The external api resource name
- *     for the supplier entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *
- *   Expressions are combined with either `AND` logic operator or `OR` logical
- *   operator but not both of them together i.e. only one of the `AND` or `OR`
- *   operator can be used throughout the filter string and both the operators
- *   cannot be used together. No other logical operators are supported. At most
- *   three filter fields are allowed in the filter string and if provided
- *   more than that then `INVALID_ARGUMENT` error is returned by the API.
- *
- *   For example, `consumer.operation_resource_name =
- *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\" OR
- *   supplier.operation_resource_name =
- *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\"` - The
- *   dependencies with either consumer or supplier operation resource name as
- *   _projects/p1/locations/global/apis/a1/versions/v1/operations/o1_.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of dependency resources to return. The service
- *   may return fewer than this value. If unspecified, at most 50 dependencies
- *   will be returned. The maximum value is 1000; values above 1000 will be
- *   coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDependencies` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDependencies` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.apihub.v1.Dependency|Dependency}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDependenciesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * List dependencies based on the provided filter and pagination parameters.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent which owns this collection of dependency resources.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of Dependencies.
+   *
+   *   A filter expression consists of a field name, a comparison operator, and
+   *   a value for filtering. The value must be a string. Allowed comparison
+   *   operator is `=`. Filters are not case sensitive.
+   *
+   *   The following fields in the `Dependency` are eligible for filtering:
+   *
+   *     * `consumer.operation_resource_name` - The operation resource name for
+   *     the consumer entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *     * `consumer.external_api_resource_name` - The external api resource name
+   *     for the consumer entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *     * `supplier.operation_resource_name` - The operation resource name for
+   *     the supplier entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *     * `supplier.external_api_resource_name` - The external api resource name
+   *     for the supplier entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *
+   *   Expressions are combined with either `AND` logic operator or `OR` logical
+   *   operator but not both of them together i.e. only one of the `AND` or `OR`
+   *   operator can be used throughout the filter string and both the operators
+   *   cannot be used together. No other logical operators are supported. At most
+   *   three filter fields are allowed in the filter string and if provided
+   *   more than that then `INVALID_ARGUMENT` error is returned by the API.
+   *
+   *   For example, `consumer.operation_resource_name =
+   *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\" OR
+   *   supplier.operation_resource_name =
+   *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\"` - The
+   *   dependencies with either consumer or supplier operation resource name as
+   *   _projects/p1/locations/global/apis/a1/versions/v1/operations/o1_.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of dependency resources to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 dependencies
+   *   will be returned. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDependencies` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDependencies` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.apihub.v1.Dependency|Dependency}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDependenciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDependencies(
-      request?: protos.google.cloud.apihub.v1.IListDependenciesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDependency[],
-        protos.google.cloud.apihub.v1.IListDependenciesRequest|null,
-        protos.google.cloud.apihub.v1.IListDependenciesResponse
-      ]>;
+    request?: protos.google.cloud.apihub.v1.IListDependenciesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDependency[],
+      protos.google.cloud.apihub.v1.IListDependenciesRequest | null,
+      protos.google.cloud.apihub.v1.IListDependenciesResponse,
+    ]
+  >;
   listDependencies(
-      request: protos.google.cloud.apihub.v1.IListDependenciesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListDependenciesRequest,
-          protos.google.cloud.apihub.v1.IListDependenciesResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDependency>): void;
+    request: protos.google.cloud.apihub.v1.IListDependenciesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListDependenciesRequest,
+      | protos.google.cloud.apihub.v1.IListDependenciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.apihub.v1.IDependency
+    >,
+  ): void;
   listDependencies(
-      request: protos.google.cloud.apihub.v1.IListDependenciesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListDependenciesRequest,
-          protos.google.cloud.apihub.v1.IListDependenciesResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDependency>): void;
+    request: protos.google.cloud.apihub.v1.IListDependenciesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListDependenciesRequest,
+      | protos.google.cloud.apihub.v1.IListDependenciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.apihub.v1.IDependency
+    >,
+  ): void;
   listDependencies(
-      request?: protos.google.cloud.apihub.v1.IListDependenciesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.apihub.v1.IListDependenciesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.apihub.v1.IListDependenciesRequest,
-          protos.google.cloud.apihub.v1.IListDependenciesResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDependency>,
-      callback?: PaginationCallback<
-          protos.google.cloud.apihub.v1.IListDependenciesRequest,
-          protos.google.cloud.apihub.v1.IListDependenciesResponse|null|undefined,
-          protos.google.cloud.apihub.v1.IDependency>):
-      Promise<[
-        protos.google.cloud.apihub.v1.IDependency[],
-        protos.google.cloud.apihub.v1.IListDependenciesRequest|null,
-        protos.google.cloud.apihub.v1.IListDependenciesResponse
-      ]>|void {
+          | protos.google.cloud.apihub.v1.IListDependenciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IDependency
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.apihub.v1.IListDependenciesRequest,
+      | protos.google.cloud.apihub.v1.IListDependenciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.apihub.v1.IDependency
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apihub.v1.IDependency[],
+      protos.google.cloud.apihub.v1.IListDependenciesRequest | null,
+      protos.google.cloud.apihub.v1.IListDependenciesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.apihub.v1.IListDependenciesRequest,
-      protos.google.cloud.apihub.v1.IListDependenciesResponse|null|undefined,
-      protos.google.cloud.apihub.v1.IDependency>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apihub.v1.IListDependenciesRequest,
+          | protos.google.cloud.apihub.v1.IListDependenciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.apihub.v1.IDependency
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDependencies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -940,195 +1153,200 @@ export class ApiHubDependenciesClient {
     this._log.info('listDependencies request %j', request);
     return this.innerApiCalls
       .listDependencies(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.apihub.v1.IDependency[],
-        protos.google.cloud.apihub.v1.IListDependenciesRequest|null,
-        protos.google.cloud.apihub.v1.IListDependenciesResponse
-      ]) => {
-        this._log.info('listDependencies values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apihub.v1.IDependency[],
+          protos.google.cloud.apihub.v1.IListDependenciesRequest | null,
+          protos.google.cloud.apihub.v1.IListDependenciesResponse,
+        ]) => {
+          this._log.info('listDependencies values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDependencies`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent which owns this collection of dependency resources.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of Dependencies.
- *
- *   A filter expression consists of a field name, a comparison operator, and
- *   a value for filtering. The value must be a string. Allowed comparison
- *   operator is `=`. Filters are not case sensitive.
- *
- *   The following fields in the `Dependency` are eligible for filtering:
- *
- *     * `consumer.operation_resource_name` - The operation resource name for
- *     the consumer entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *     * `consumer.external_api_resource_name` - The external api resource name
- *     for the consumer entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *     * `supplier.operation_resource_name` - The operation resource name for
- *     the supplier entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *     * `supplier.external_api_resource_name` - The external api resource name
- *     for the supplier entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *
- *   Expressions are combined with either `AND` logic operator or `OR` logical
- *   operator but not both of them together i.e. only one of the `AND` or `OR`
- *   operator can be used throughout the filter string and both the operators
- *   cannot be used together. No other logical operators are supported. At most
- *   three filter fields are allowed in the filter string and if provided
- *   more than that then `INVALID_ARGUMENT` error is returned by the API.
- *
- *   For example, `consumer.operation_resource_name =
- *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\" OR
- *   supplier.operation_resource_name =
- *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\"` - The
- *   dependencies with either consumer or supplier operation resource name as
- *   _projects/p1/locations/global/apis/a1/versions/v1/operations/o1_.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of dependency resources to return. The service
- *   may return fewer than this value. If unspecified, at most 50 dependencies
- *   will be returned. The maximum value is 1000; values above 1000 will be
- *   coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDependencies` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDependencies` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.apihub.v1.Dependency|Dependency} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDependenciesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDependencies`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent which owns this collection of dependency resources.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of Dependencies.
+   *
+   *   A filter expression consists of a field name, a comparison operator, and
+   *   a value for filtering. The value must be a string. Allowed comparison
+   *   operator is `=`. Filters are not case sensitive.
+   *
+   *   The following fields in the `Dependency` are eligible for filtering:
+   *
+   *     * `consumer.operation_resource_name` - The operation resource name for
+   *     the consumer entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *     * `consumer.external_api_resource_name` - The external api resource name
+   *     for the consumer entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *     * `supplier.operation_resource_name` - The operation resource name for
+   *     the supplier entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *     * `supplier.external_api_resource_name` - The external api resource name
+   *     for the supplier entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *
+   *   Expressions are combined with either `AND` logic operator or `OR` logical
+   *   operator but not both of them together i.e. only one of the `AND` or `OR`
+   *   operator can be used throughout the filter string and both the operators
+   *   cannot be used together. No other logical operators are supported. At most
+   *   three filter fields are allowed in the filter string and if provided
+   *   more than that then `INVALID_ARGUMENT` error is returned by the API.
+   *
+   *   For example, `consumer.operation_resource_name =
+   *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\" OR
+   *   supplier.operation_resource_name =
+   *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\"` - The
+   *   dependencies with either consumer or supplier operation resource name as
+   *   _projects/p1/locations/global/apis/a1/versions/v1/operations/o1_.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of dependency resources to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 dependencies
+   *   will be returned. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDependencies` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDependencies` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.apihub.v1.Dependency|Dependency} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDependenciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDependenciesStream(
-      request?: protos.google.cloud.apihub.v1.IListDependenciesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.apihub.v1.IListDependenciesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDependencies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDependencies stream %j', request);
     return this.descriptors.page.listDependencies.createStream(
       this.innerApiCalls.listDependencies as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDependencies`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent which owns this collection of dependency resources.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} [request.filter]
- *   Optional. An expression that filters the list of Dependencies.
- *
- *   A filter expression consists of a field name, a comparison operator, and
- *   a value for filtering. The value must be a string. Allowed comparison
- *   operator is `=`. Filters are not case sensitive.
- *
- *   The following fields in the `Dependency` are eligible for filtering:
- *
- *     * `consumer.operation_resource_name` - The operation resource name for
- *     the consumer entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *     * `consumer.external_api_resource_name` - The external api resource name
- *     for the consumer entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *     * `supplier.operation_resource_name` - The operation resource name for
- *     the supplier entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *     * `supplier.external_api_resource_name` - The external api resource name
- *     for the supplier entity involved in a dependency. Allowed comparison
- *     operators: `=`.
- *
- *   Expressions are combined with either `AND` logic operator or `OR` logical
- *   operator but not both of them together i.e. only one of the `AND` or `OR`
- *   operator can be used throughout the filter string and both the operators
- *   cannot be used together. No other logical operators are supported. At most
- *   three filter fields are allowed in the filter string and if provided
- *   more than that then `INVALID_ARGUMENT` error is returned by the API.
- *
- *   For example, `consumer.operation_resource_name =
- *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\" OR
- *   supplier.operation_resource_name =
- *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\"` - The
- *   dependencies with either consumer or supplier operation resource name as
- *   _projects/p1/locations/global/apis/a1/versions/v1/operations/o1_.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of dependency resources to return. The service
- *   may return fewer than this value. If unspecified, at most 50 dependencies
- *   will be returned. The maximum value is 1000; values above 1000 will be
- *   coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDependencies` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDependencies` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.apihub.v1.Dependency|Dependency}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/api_hub_dependencies.list_dependencies.js</caption>
- * region_tag:apihub_v1_generated_ApiHubDependencies_ListDependencies_async
- */
+  /**
+   * Equivalent to `listDependencies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent which owns this collection of dependency resources.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.filter]
+   *   Optional. An expression that filters the list of Dependencies.
+   *
+   *   A filter expression consists of a field name, a comparison operator, and
+   *   a value for filtering. The value must be a string. Allowed comparison
+   *   operator is `=`. Filters are not case sensitive.
+   *
+   *   The following fields in the `Dependency` are eligible for filtering:
+   *
+   *     * `consumer.operation_resource_name` - The operation resource name for
+   *     the consumer entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *     * `consumer.external_api_resource_name` - The external api resource name
+   *     for the consumer entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *     * `supplier.operation_resource_name` - The operation resource name for
+   *     the supplier entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *     * `supplier.external_api_resource_name` - The external api resource name
+   *     for the supplier entity involved in a dependency. Allowed comparison
+   *     operators: `=`.
+   *
+   *   Expressions are combined with either `AND` logic operator or `OR` logical
+   *   operator but not both of them together i.e. only one of the `AND` or `OR`
+   *   operator can be used throughout the filter string and both the operators
+   *   cannot be used together. No other logical operators are supported. At most
+   *   three filter fields are allowed in the filter string and if provided
+   *   more than that then `INVALID_ARGUMENT` error is returned by the API.
+   *
+   *   For example, `consumer.operation_resource_name =
+   *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\" OR
+   *   supplier.operation_resource_name =
+   *   \"projects/p1/locations/global/apis/a1/versions/v1/operations/o1\"` - The
+   *   dependencies with either consumer or supplier operation resource name as
+   *   _projects/p1/locations/global/apis/a1/versions/v1/operations/o1_.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of dependency resources to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 dependencies
+   *   will be returned. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDependencies` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDependencies` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.apihub.v1.Dependency|Dependency}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/api_hub_dependencies.list_dependencies.js</caption>
+   * region_tag:apihub_v1_generated_ApiHubDependencies_ListDependencies_async
+   */
   listDependenciesAsync(
-      request?: protos.google.cloud.apihub.v1.IListDependenciesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.apihub.v1.IDependency>{
+    request?: protos.google.cloud.apihub.v1.IListDependenciesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.apihub.v1.IDependency> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDependencies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDependencies iterate %j', request);
     return this.descriptors.page.listDependencies.asyncIterate(
       this.innerApiCalls['listDependencies'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.apihub.v1.IDependency>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1163,12 +1381,11 @@ export class ApiHubDependenciesClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1201,7 +1418,7 @@ export class ApiHubDependenciesClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1218,7 +1435,7 @@ export class ApiHubDependenciesClient {
    * @param {string} api
    * @returns {string} Resource name string.
    */
-  apiPath(project:string,location:string,api:string) {
+  apiPath(project: string, location: string, api: string) {
     return this.pathTemplates.apiPathTemplate.render({
       project: project,
       location: location,
@@ -1267,7 +1484,11 @@ export class ApiHubDependenciesClient {
    * @param {string} api_hub_instance
    * @returns {string} Resource name string.
    */
-  apiHubInstancePath(project:string,location:string,apiHubInstance:string) {
+  apiHubInstancePath(
+    project: string,
+    location: string,
+    apiHubInstance: string,
+  ) {
     return this.pathTemplates.apiHubInstancePathTemplate.render({
       project: project,
       location: location,
@@ -1283,7 +1504,9 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).project;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(
+      apiHubInstanceName,
+    ).project;
   }
 
   /**
@@ -1294,7 +1517,9 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).location;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(
+      apiHubInstanceName,
+    ).location;
   }
 
   /**
@@ -1305,7 +1530,9 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the api_hub_instance.
    */
   matchApiHubInstanceFromApiHubInstanceName(apiHubInstanceName: string) {
-    return this.pathTemplates.apiHubInstancePathTemplate.match(apiHubInstanceName).api_hub_instance;
+    return this.pathTemplates.apiHubInstancePathTemplate.match(
+      apiHubInstanceName,
+    ).api_hub_instance;
   }
 
   /**
@@ -1318,7 +1545,13 @@ export class ApiHubDependenciesClient {
    * @param {string} operation
    * @returns {string} Resource name string.
    */
-  apiOperationPath(project:string,location:string,api:string,version:string,operation:string) {
+  apiOperationPath(
+    project: string,
+    location: string,
+    api: string,
+    version: string,
+    operation: string,
+  ) {
     return this.pathTemplates.apiOperationPathTemplate.render({
       project: project,
       location: location,
@@ -1336,7 +1569,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).project;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .project;
   }
 
   /**
@@ -1347,7 +1581,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).location;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .location;
   }
 
   /**
@@ -1358,7 +1593,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the api.
    */
   matchApiFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).api;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .api;
   }
 
   /**
@@ -1369,7 +1605,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).version;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .version;
   }
 
   /**
@@ -1380,7 +1617,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the operation.
    */
   matchOperationFromApiOperationName(apiOperationName: string) {
-    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName).operation;
+    return this.pathTemplates.apiOperationPathTemplate.match(apiOperationName)
+      .operation;
   }
 
   /**
@@ -1391,7 +1629,7 @@ export class ApiHubDependenciesClient {
    * @param {string} attribute
    * @returns {string} Resource name string.
    */
-  attributePath(project:string,location:string,attribute:string) {
+  attributePath(project: string, location: string, attribute: string) {
     return this.pathTemplates.attributePathTemplate.render({
       project: project,
       location: location,
@@ -1407,7 +1645,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName).project;
+    return this.pathTemplates.attributePathTemplate.match(attributeName)
+      .project;
   }
 
   /**
@@ -1418,7 +1657,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName).location;
+    return this.pathTemplates.attributePathTemplate.match(attributeName)
+      .location;
   }
 
   /**
@@ -1429,7 +1669,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the attribute.
    */
   matchAttributeFromAttributeName(attributeName: string) {
-    return this.pathTemplates.attributePathTemplate.match(attributeName).attribute;
+    return this.pathTemplates.attributePathTemplate.match(attributeName)
+      .attribute;
   }
 
   /**
@@ -1440,7 +1681,7 @@ export class ApiHubDependenciesClient {
    * @param {string} curation
    * @returns {string} Resource name string.
    */
-  curationPath(project:string,location:string,curation:string) {
+  curationPath(project: string, location: string, curation: string) {
     return this.pathTemplates.curationPathTemplate.render({
       project: project,
       location: location,
@@ -1491,7 +1732,13 @@ export class ApiHubDependenciesClient {
    * @param {string} definition
    * @returns {string} Resource name string.
    */
-  definitionPath(project:string,location:string,api:string,version:string,definition:string) {
+  definitionPath(
+    project: string,
+    location: string,
+    api: string,
+    version: string,
+    definition: string,
+  ) {
     return this.pathTemplates.definitionPathTemplate.render({
       project: project,
       location: location,
@@ -1509,7 +1756,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).project;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .project;
   }
 
   /**
@@ -1520,7 +1768,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).location;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .location;
   }
 
   /**
@@ -1542,7 +1791,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).version;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .version;
   }
 
   /**
@@ -1553,7 +1803,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the definition.
    */
   matchDefinitionFromDefinitionName(definitionName: string) {
-    return this.pathTemplates.definitionPathTemplate.match(definitionName).definition;
+    return this.pathTemplates.definitionPathTemplate.match(definitionName)
+      .definition;
   }
 
   /**
@@ -1564,7 +1815,7 @@ export class ApiHubDependenciesClient {
    * @param {string} dependency
    * @returns {string} Resource name string.
    */
-  dependencyPath(project:string,location:string,dependency:string) {
+  dependencyPath(project: string, location: string, dependency: string) {
     return this.pathTemplates.dependencyPathTemplate.render({
       project: project,
       location: location,
@@ -1580,7 +1831,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).project;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
+      .project;
   }
 
   /**
@@ -1591,7 +1843,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).location;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
+      .location;
   }
 
   /**
@@ -1602,7 +1855,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the dependency.
    */
   matchDependencyFromDependencyName(dependencyName: string) {
-    return this.pathTemplates.dependencyPathTemplate.match(dependencyName).dependency;
+    return this.pathTemplates.dependencyPathTemplate.match(dependencyName)
+      .dependency;
   }
 
   /**
@@ -1613,7 +1867,7 @@ export class ApiHubDependenciesClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project:string,location:string,deployment:string) {
+  deploymentPath(project: string, location: string, deployment: string) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1629,7 +1883,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .project;
   }
 
   /**
@@ -1640,7 +1895,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .location;
   }
 
   /**
@@ -1651,7 +1907,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .deployment;
   }
 
   /**
@@ -1662,7 +1919,11 @@ export class ApiHubDependenciesClient {
    * @param {string} discovered_api_observation
    * @returns {string} Resource name string.
    */
-  discoveredApiObservationPath(project:string,location:string,discoveredApiObservation:string) {
+  discoveredApiObservationPath(
+    project: string,
+    location: string,
+    discoveredApiObservation: string,
+  ) {
     return this.pathTemplates.discoveredApiObservationPathTemplate.render({
       project: project,
       location: location,
@@ -1677,8 +1938,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing DiscoveredApiObservation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
-    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).project;
+  matchProjectFromDiscoveredApiObservationName(
+    discoveredApiObservationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(
+      discoveredApiObservationName,
+    ).project;
   }
 
   /**
@@ -1688,8 +1953,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing DiscoveredApiObservation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
-    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).location;
+  matchLocationFromDiscoveredApiObservationName(
+    discoveredApiObservationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(
+      discoveredApiObservationName,
+    ).location;
   }
 
   /**
@@ -1699,8 +1968,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing DiscoveredApiObservation resource.
    * @returns {string} A string representing the discovered_api_observation.
    */
-  matchDiscoveredApiObservationFromDiscoveredApiObservationName(discoveredApiObservationName: string) {
-    return this.pathTemplates.discoveredApiObservationPathTemplate.match(discoveredApiObservationName).discovered_api_observation;
+  matchDiscoveredApiObservationFromDiscoveredApiObservationName(
+    discoveredApiObservationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiObservationPathTemplate.match(
+      discoveredApiObservationName,
+    ).discovered_api_observation;
   }
 
   /**
@@ -1712,7 +1985,12 @@ export class ApiHubDependenciesClient {
    * @param {string} discovered_api_operation
    * @returns {string} Resource name string.
    */
-  discoveredApiOperationPath(project:string,location:string,discoveredApiObservation:string,discoveredApiOperation:string) {
+  discoveredApiOperationPath(
+    project: string,
+    location: string,
+    discoveredApiObservation: string,
+    discoveredApiOperation: string,
+  ) {
     return this.pathTemplates.discoveredApiOperationPathTemplate.render({
       project: project,
       location: location,
@@ -1728,8 +2006,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).project;
+  matchProjectFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).project;
   }
 
   /**
@@ -1739,8 +2021,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).location;
+  matchLocationFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).location;
   }
 
   /**
@@ -1750,8 +2036,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the discovered_api_observation.
    */
-  matchDiscoveredApiObservationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_observation;
+  matchDiscoveredApiObservationFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).discovered_api_observation;
   }
 
   /**
@@ -1761,8 +2051,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing DiscoveredApiOperation resource.
    * @returns {string} A string representing the discovered_api_operation.
    */
-  matchDiscoveredApiOperationFromDiscoveredApiOperationName(discoveredApiOperationName: string) {
-    return this.pathTemplates.discoveredApiOperationPathTemplate.match(discoveredApiOperationName).discovered_api_operation;
+  matchDiscoveredApiOperationFromDiscoveredApiOperationName(
+    discoveredApiOperationName: string,
+  ) {
+    return this.pathTemplates.discoveredApiOperationPathTemplate.match(
+      discoveredApiOperationName,
+    ).discovered_api_operation;
   }
 
   /**
@@ -1773,7 +2067,7 @@ export class ApiHubDependenciesClient {
    * @param {string} external_api
    * @returns {string} Resource name string.
    */
-  externalApiPath(project:string,location:string,externalApi:string) {
+  externalApiPath(project: string, location: string, externalApi: string) {
     return this.pathTemplates.externalApiPathTemplate.render({
       project: project,
       location: location,
@@ -1789,7 +2083,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).project;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
+      .project;
   }
 
   /**
@@ -1800,7 +2095,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).location;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
+      .location;
   }
 
   /**
@@ -1811,7 +2107,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the external_api.
    */
   matchExternalApiFromExternalApiName(externalApiName: string) {
-    return this.pathTemplates.externalApiPathTemplate.match(externalApiName).external_api;
+    return this.pathTemplates.externalApiPathTemplate.match(externalApiName)
+      .external_api;
   }
 
   /**
@@ -1822,7 +2119,11 @@ export class ApiHubDependenciesClient {
    * @param {string} host_project_registration
    * @returns {string} Resource name string.
    */
-  hostProjectRegistrationPath(project:string,location:string,hostProjectRegistration:string) {
+  hostProjectRegistrationPath(
+    project: string,
+    location: string,
+    hostProjectRegistration: string,
+  ) {
     return this.pathTemplates.hostProjectRegistrationPathTemplate.render({
       project: project,
       location: location,
@@ -1837,8 +2138,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).project;
+  matchProjectFromHostProjectRegistrationName(
+    hostProjectRegistrationName: string,
+  ) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
+      hostProjectRegistrationName,
+    ).project;
   }
 
   /**
@@ -1848,8 +2153,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).location;
+  matchLocationFromHostProjectRegistrationName(
+    hostProjectRegistrationName: string,
+  ) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
+      hostProjectRegistrationName,
+    ).location;
   }
 
   /**
@@ -1859,8 +2168,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing HostProjectRegistration resource.
    * @returns {string} A string representing the host_project_registration.
    */
-  matchHostProjectRegistrationFromHostProjectRegistrationName(hostProjectRegistrationName: string) {
-    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(hostProjectRegistrationName).host_project_registration;
+  matchHostProjectRegistrationFromHostProjectRegistrationName(
+    hostProjectRegistrationName: string,
+  ) {
+    return this.pathTemplates.hostProjectRegistrationPathTemplate.match(
+      hostProjectRegistrationName,
+    ).host_project_registration;
   }
 
   /**
@@ -1870,7 +2183,7 @@ export class ApiHubDependenciesClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1907,7 +2220,7 @@ export class ApiHubDependenciesClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  pluginPath(project:string,location:string,plugin:string) {
+  pluginPath(project: string, location: string, plugin: string) {
     return this.pathTemplates.pluginPathTemplate.render({
       project: project,
       location: location,
@@ -1957,7 +2270,12 @@ export class ApiHubDependenciesClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  pluginInstancePath(project:string,location:string,plugin:string,instance:string) {
+  pluginInstancePath(
+    project: string,
+    location: string,
+    plugin: string,
+    instance: string,
+  ) {
     return this.pathTemplates.pluginInstancePathTemplate.render({
       project: project,
       location: location,
@@ -1974,7 +2292,9 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).project;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).project;
   }
 
   /**
@@ -1985,7 +2305,9 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).location;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).location;
   }
 
   /**
@@ -1996,7 +2318,9 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the plugin.
    */
   matchPluginFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).plugin;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).plugin;
   }
 
   /**
@@ -2007,7 +2331,9 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromPluginInstanceName(pluginInstanceName: string) {
-    return this.pathTemplates.pluginInstancePathTemplate.match(pluginInstanceName).instance;
+    return this.pathTemplates.pluginInstancePathTemplate.match(
+      pluginInstanceName,
+    ).instance;
   }
 
   /**
@@ -2016,7 +2342,7 @@ export class ApiHubDependenciesClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2041,7 +2367,11 @@ export class ApiHubDependenciesClient {
    * @param {string} runtime_project_attachment
    * @returns {string} Resource name string.
    */
-  runtimeProjectAttachmentPath(project:string,location:string,runtimeProjectAttachment:string) {
+  runtimeProjectAttachmentPath(
+    project: string,
+    location: string,
+    runtimeProjectAttachment: string,
+  ) {
     return this.pathTemplates.runtimeProjectAttachmentPathTemplate.render({
       project: project,
       location: location,
@@ -2056,8 +2386,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).project;
+  matchProjectFromRuntimeProjectAttachmentName(
+    runtimeProjectAttachmentName: string,
+  ) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
+      runtimeProjectAttachmentName,
+    ).project;
   }
 
   /**
@@ -2067,8 +2401,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).location;
+  matchLocationFromRuntimeProjectAttachmentName(
+    runtimeProjectAttachmentName: string,
+  ) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
+      runtimeProjectAttachmentName,
+    ).location;
   }
 
   /**
@@ -2078,8 +2416,12 @@ export class ApiHubDependenciesClient {
    *   A fully-qualified path representing RuntimeProjectAttachment resource.
    * @returns {string} A string representing the runtime_project_attachment.
    */
-  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(runtimeProjectAttachmentName: string) {
-    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(runtimeProjectAttachmentName).runtime_project_attachment;
+  matchRuntimeProjectAttachmentFromRuntimeProjectAttachmentName(
+    runtimeProjectAttachmentName: string,
+  ) {
+    return this.pathTemplates.runtimeProjectAttachmentPathTemplate.match(
+      runtimeProjectAttachmentName,
+    ).runtime_project_attachment;
   }
 
   /**
@@ -2092,7 +2434,13 @@ export class ApiHubDependenciesClient {
    * @param {string} spec
    * @returns {string} Resource name string.
    */
-  specPath(project:string,location:string,api:string,version:string,spec:string) {
+  specPath(
+    project: string,
+    location: string,
+    api: string,
+    version: string,
+    spec: string,
+  ) {
     return this.pathTemplates.specPathTemplate.render({
       project: project,
       location: location,
@@ -2165,7 +2513,7 @@ export class ApiHubDependenciesClient {
    * @param {string} plugin
    * @returns {string} Resource name string.
    */
-  styleGuidePath(project:string,location:string,plugin:string) {
+  styleGuidePath(project: string, location: string, plugin: string) {
     return this.pathTemplates.styleGuidePathTemplate.render({
       project: project,
       location: location,
@@ -2181,7 +2529,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).project;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
+      .project;
   }
 
   /**
@@ -2192,7 +2541,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).location;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
+      .location;
   }
 
   /**
@@ -2203,7 +2553,8 @@ export class ApiHubDependenciesClient {
    * @returns {string} A string representing the plugin.
    */
   matchPluginFromStyleGuideName(styleGuideName: string) {
-    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName).plugin;
+    return this.pathTemplates.styleGuidePathTemplate.match(styleGuideName)
+      .plugin;
   }
 
   /**
@@ -2215,7 +2566,7 @@ export class ApiHubDependenciesClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  versionPath(project:string,location:string,api:string,version:string) {
+  versionPath(project: string, location: string, api: string, version: string) {
     return this.pathTemplates.versionPathTemplate.render({
       project: project,
       location: location,
@@ -2276,11 +2627,13 @@ export class ApiHubDependenciesClient {
    */
   close(): Promise<void> {
     if (this.apiHubDependenciesStub && !this._terminated) {
-      return this.apiHubDependenciesStub.then(stub => {
+      return this.apiHubDependenciesStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

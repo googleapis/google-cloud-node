@@ -58,12 +58,10 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/snippet_metadata_google.cloud.texttospeech.v1.json) |
 | list voices | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.list_voices.js) |
 | streaming synthesize | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.streaming_synthesize.js) |
 | synthesize speech | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech.synthesize_speech.js) |
 | synthesize long audio | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1/text_to_speech_long_audio_synthesize.synthesize_long_audio.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/snippet_metadata_google.cloud.texttospeech.v1beta1.json) |
 | list voices | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.list_voices.js) |
 | streaming synthesize | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.streaming_synthesize.js) |
 | synthesize speech | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/samples/generated/v1beta1/text_to_speech.synthesize_speech.js) |
@@ -101,7 +99,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -111,7 +109,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-texttospeech/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

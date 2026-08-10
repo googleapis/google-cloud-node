@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/spanner",
   "description": "Cloud Spanner Client Library for Node.js",
-  "version": "8.7.1",
+  "version": "8.10.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -34,8 +34,6 @@
     "docs": "jsdoc -c .jsdoc.js",
     "predocs": "npm run compile",
     "lint": "gts check",
-    "samples-test-with-archived": "cd samples/ && npm link ../ && npm test-with-archived && cd ../",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "system-test": "mocha build/system-test --timeout 1600000",
     "observability-test": "mocha build/observability-test --timeout 1600000",
     "cleanup": "mocha scripts/cleanup.js --timeout 30000",
@@ -44,17 +42,12 @@
     "fix": "gts fix",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build && cp -r test/data build/test",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "cp -r protos build && npm run compile",
     "pretest": "npm run compile",
     "presystem-test": "npm run compile",
     "preobservability-test": "npm run compile",
-    "proto": "compileProtos src",
-    "docs-test": "linkinator docs",
-    "predocs-test": "npm run docs",
     "benchwrapper": "node bin/benchwrapper.js",
-    "prelint": "cd samples; npm link ../; npm install",
     "precompile": "gts clean",
-    "compile-protos": "compileProtos src",
     "coverage": "c8 mocha build/test build/test/common && c8 report --check-coverage"
   },
   "dependencies": {
@@ -65,8 +58,8 @@
     "@google-cloud/monitoring": "^5.0.0",
     "@google-cloud/opentelemetry-resource-util": "^2.4.0",
     "@google-cloud/precise-date": "^5.0.0",
-    "@google-cloud/projectify": "^5.0.0",
     "@google-cloud/promisify": "^5.0.0",
+    "@google-cloud/spanner-api": "^0.2.0",
     "@grpc/grpc-js": "^1.13.2",
     "@grpc/proto-loader": "^0.8.0",
     "@opentelemetry/api": "^1.9.0",
@@ -94,8 +87,7 @@
     "stack-trace": "0.0.10",
     "stream-events": "^1.0.5",
     "teeny-request": "^10.0.0",
-    "through2": "^4.0.2",
-    "uuid": "^11.1.0"
+    "through2": "^4.0.2"
   },
   "devDependencies": {
     "@grpc/reflection": "^1.0.4",
@@ -128,7 +120,6 @@
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^5.0.0",
     "jsdoc-region-tag": "^4.0.0",
-    "linkinator": "^6.1.2",
     "lodash.random": "^3.2.0",
     "long": "^5.3.2",
     "mocha": "^11.1.0",
@@ -147,12 +138,15 @@
   },
   "overrides": {
     "gcp-metadata": "^7.0.1",
-    "@sinonjs/fake-timers": "15.2.1"
+    "@sinonjs/fake-timers": "15.2.1",
+    "brace-expansion": "5.0.7",
+    "@eslint-community/eslint-utils": "<4.10.0"
   },
   "pnpm": {
     "overrides": {
       "gcp-metadata": "^7.0.1",
-      "@sinonjs/fake-timers": "15.2.1"
+      "@sinonjs/fake-timers": "15.2.1",
+      "@eslint-community/eslint-utils": "<4.10.0"
     }
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/spanner"

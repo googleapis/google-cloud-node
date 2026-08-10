@@ -22,6 +22,8 @@ const randIdForProcess = randomBytes(8)
   .readUint32LE(0)
   .toString(16)
   .padStart(8, '0');
+const REQUEST_HEADER_VERSION = 1;
+const PROCESS_PREFIX = `${REQUEST_HEADER_VERSION}.${randIdForProcess}.`;
 const X_GOOG_SPANNER_REQUEST_ID_HEADER = 'x-goog-spanner-request-id';
 
 class AtomicCounter {
@@ -57,15 +59,13 @@ class AtomicCounter {
   }
 }
 
-const REQUEST_HEADER_VERSION = 1;
-
 function craftRequestId(
   nthClientId: number,
   channelId: number,
   nthRequest: number,
   attempt: number,
 ) {
-  return `${REQUEST_HEADER_VERSION}.${randIdForProcess}.${nthClientId}.${channelId}.${nthRequest}.${attempt}`;
+  return `${PROCESS_PREFIX}${nthClientId}.${channelId}.${nthRequest}.${attempt}`;
 }
 
 const nthClientId = new AtomicCounter();
@@ -118,15 +118,6 @@ function injectRequestIDIntoError(config: any, err: Error) {
   }
 }
 
-interface withNextNthRequest {
-  _nextNthRequest: Function;
-}
-
-interface withMetadataWithRequestId {
-  _nthClientId: number;
-  _channelId: number;
-}
-
 function injectRequestIDIntoHeaders(
   headers: {[k: string]: string},
   session: any,
@@ -136,52 +127,31 @@ function injectRequestIDIntoHeaders(
   if (!session) {
     return headers;
   }
-
+  const database = session.parent;
   if (!nthRequest) {
-    const database = session.parent as withNextNthRequest;
-    if (!(database && typeof database._nextNthRequest === 'function')) {
+    if (!database || typeof database._nextNthRequest !== 'function') {
       return headers;
     }
     nthRequest = database._nextNthRequest();
   }
+  const clientId = database ? database._nthClientId || 1 : 1;
+  const channelId = database ? database._channelId || 1 : 1;
 
-  attempt = attempt || 1;
-  return _metadataWithRequestId(session, nthRequest!, attempt, headers);
-}
-
-function _metadataWithRequestId(
-  session: any,
-  nthRequest: number,
-  attempt: number,
-  priorMetadata?: {[k: string]: string},
-): {[k: string]: string} {
-  if (!priorMetadata) {
-    priorMetadata = {};
-  }
-  const withReqId = {
-    ...priorMetadata,
-  };
-  const database = session.parent as withMetadataWithRequestId;
-  let clientId = 1;
-  let channelId = 1;
-  if (database) {
-    clientId = database._nthClientId || 1;
-    channelId = database._channelId || 1;
-  }
+  const withReqId = {...headers};
   withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = craftRequestId(
     clientId,
     channelId,
-    nthRequest,
-    attempt,
+    nthRequest || 1,
+    attempt || 1,
   );
   return withReqId;
 }
 
 function nextNthRequest(database): number {
-  if (!(database && typeof database._nextNthRequest === 'function')) {
-    return 1;
+  if (database && typeof database._nextNthRequest === 'function') {
+    return database._nextNthRequest();
   }
-  return database._nextNthRequest();
+  return 1;
 }
 
 export interface RequestIDError extends grpc.ServiceError {

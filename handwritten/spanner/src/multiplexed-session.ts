@@ -15,6 +15,7 @@
  */
 
 import {EventEmitter} from 'events';
+import {context, ROOT_CONTEXT} from '@opentelemetry/api';
 import {Database} from './database';
 import {Session} from './session';
 import {GetSessionCallback} from './session-factory';
@@ -123,25 +124,29 @@ export class MultiplexedSession
         opts: this._observabilityOptions,
         dbName: this.database.formattedName_,
       };
-      return startTrace(
-        'MultiplexedSession.createSession',
-        traceConfig,
-        async span => {
-          span.addEvent('Requesting a multiplexed session');
-          try {
-            const [createSessionResponse] = await this.database.createSession({
-              multiplexed: true,
-            });
-            this._multiplexedSession = createSessionResponse;
-            span.addEvent('Created a multiplexed session');
-          } catch (e) {
-            setSpanError(span, e as Error);
-            throw e;
-          } finally {
-            span.end();
-          }
-        },
-      );
+      return context.with(ROOT_CONTEXT, () => {
+        return startTrace(
+          'MultiplexedSession.createSession',
+          traceConfig,
+          async span => {
+            span.addEvent('Requesting a multiplexed session');
+            try {
+              const [createSessionResponse] = await this.database.createSession(
+                {
+                  multiplexed: true,
+                },
+              );
+              this._multiplexedSession = createSessionResponse;
+              span.addEvent('Created a multiplexed session');
+            } catch (e) {
+              setSpanError(span, e as Error);
+              throw e;
+            } finally {
+              span.end();
+            }
+          },
+        );
+      });
     };
 
     // Assign the running task to the shared promise variable, and ensure
@@ -177,9 +182,11 @@ export class MultiplexedSession
       clearInterval(this._refreshHandle);
     }
     const refreshRate = this.refreshRate! * 24 * 60 * 60000;
-    this._refreshHandle = setInterval(async () => {
-      await this._createSession().catch(() => {});
-    }, refreshRate);
+    this._refreshHandle = context.with(ROOT_CONTEXT, () =>
+      setInterval(() => {
+        this._createSession().catch(() => {});
+      }, refreshRate),
+    );
 
     // Unreference the timer so it does not prevent the Node.js process from exiting.
     // If the application has finished all other work, this background timer shouldn't

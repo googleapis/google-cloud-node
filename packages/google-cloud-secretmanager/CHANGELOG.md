@@ -1,5 +1,42 @@
 # Changelog
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.3.0...secret-manager-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.2.0...secret-manager-v6.3.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.1.3...secret-manager-v6.2.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 2 ([#8613](https://github.com/googleapis/google-cloud-node/issues/8613)) ([243fb1a](https://github.com/googleapis/google-cloud-node/commit/243fb1a66876934bd68ca96e420937ae8adeb77d))
+
+
+### Bug Fixes
+
+* **google-cloud-secretmanager:** Improve librarian.js script an re-add missing functions ([#8424](https://github.com/googleapis/google-cloud-node/issues/8424)) ([13d03c1](https://github.com/googleapis/google-cloud-node/commit/13d03c1f0f07f92770d44490050ab65498b4a8ff))
+
+## [6.1.3](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.1.2...secret-manager-v6.1.3) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [6.1.2](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.1.1...secret-manager-v6.1.2) (2026-05-01)
 
 

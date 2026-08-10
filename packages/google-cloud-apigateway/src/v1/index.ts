@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ApiGatewayServiceClient} from './api_gateway_service_client';
+export { ApiGatewayServiceClient } from './api_gateway_service_client';

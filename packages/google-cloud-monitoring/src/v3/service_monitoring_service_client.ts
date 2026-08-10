@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -47,7 +54,7 @@ export class ServiceMonitoringServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('monitoring');
@@ -60,9 +67,9 @@ export class ServiceMonitoringServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  serviceMonitoringServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  serviceMonitoringServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ServiceMonitoringServiceClient.
@@ -103,21 +110,43 @@ export class ServiceMonitoringServiceClient {
    *     const client = new ServiceMonitoringServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof ServiceMonitoringServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof ServiceMonitoringServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'monitoring.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -142,7 +171,7 @@ export class ServiceMonitoringServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -156,10 +185,7 @@ export class ServiceMonitoringServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -181,82 +207,89 @@ export class ServiceMonitoringServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       folderAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/alertPolicies/{alert_policy}'
+        'folders/{folder}/alertPolicies/{alert_policy}',
       ),
       folderAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/alertPolicies/{alert_policy}/conditions/{condition}'
+        'folders/{folder}/alertPolicies/{alert_policy}/conditions/{condition}',
       ),
       folderChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/notificationChannelDescriptors/{channel_descriptor}'
+        'folders/{folder}/notificationChannelDescriptors/{channel_descriptor}',
       ),
       folderGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/groups/{group}'
+        'folders/{folder}/groups/{group}',
       ),
       folderNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/notificationChannels/{notification_channel}'
+        'folders/{folder}/notificationChannels/{notification_channel}',
       ),
       folderServicePathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/services/{service}'
+        'folders/{folder}/services/{service}',
       ),
-      folderServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      folderServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/services/{service}/serviceLevelObjectives/{service_level_objective}',
+        ),
       folderUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}'
+        'folders/{folder}/uptimeCheckConfigs/{uptime_check_config}',
       ),
       organizationAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/alertPolicies/{alert_policy}'
+        'organizations/{organization}/alertPolicies/{alert_policy}',
       ),
-      organizationAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}'
-      ),
-      organizationChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}'
-      ),
+      organizationAlertPolicyConditionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/alertPolicies/{alert_policy}/conditions/{condition}',
+        ),
+      organizationChannelDescriptorPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannelDescriptors/{channel_descriptor}',
+        ),
       organizationGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/groups/{group}'
+        'organizations/{organization}/groups/{group}',
       ),
-      organizationNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/notificationChannels/{notification_channel}'
-      ),
+      organizationNotificationChannelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/notificationChannels/{notification_channel}',
+        ),
       organizationServicePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/services/{service}'
+        'organizations/{organization}/services/{service}',
       ),
-      organizationServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
-      organizationUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}'
-      ),
+      organizationServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/services/{service}/serviceLevelObjectives/{service_level_objective}',
+        ),
+      organizationUptimeCheckConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/uptimeCheckConfigs/{uptime_check_config}',
+        ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       projectAlertPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/alertPolicies/{alert_policy}'
+        'projects/{project}/alertPolicies/{alert_policy}',
       ),
       projectAlertPolicyConditionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/alertPolicies/{alert_policy}/conditions/{condition}'
+        'projects/{project}/alertPolicies/{alert_policy}/conditions/{condition}',
       ),
       projectChannelDescriptorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/notificationChannelDescriptors/{channel_descriptor}'
+        'projects/{project}/notificationChannelDescriptors/{channel_descriptor}',
       ),
       projectGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/groups/{group}'
+        'projects/{project}/groups/{group}',
       ),
       projectNotificationChannelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/notificationChannels/{notification_channel}'
+        'projects/{project}/notificationChannels/{notification_channel}',
       ),
       projectServicePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/services/{service}'
+        'projects/{project}/services/{service}',
       ),
-      projectServiceServiceLevelObjectivePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}'
-      ),
+      projectServiceServiceLevelObjectivePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/services/{service}/serviceLevelObjectives/{service_level_objective}',
+        ),
       projectUptimeCheckConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/uptimeCheckConfigs/{uptime_check_config}'
+        'projects/{project}/uptimeCheckConfigs/{uptime_check_config}',
       ),
       snoozePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/snoozes/{snooze}'
+        'projects/{project}/snoozes/{snooze}',
       ),
     };
 
@@ -264,16 +297,25 @@ export class ServiceMonitoringServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listServices:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'services'),
-      listServiceLevelObjectives:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'serviceLevelObjectives')
+      listServices: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'services',
+      ),
+      listServiceLevelObjectives: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'serviceLevelObjectives',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.monitoring.v3.ServiceMonitoringService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.monitoring.v3.ServiceMonitoringService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -304,37 +346,51 @@ export class ServiceMonitoringServiceClient {
     // Put together the "service stub" for
     // google.monitoring.v3.ServiceMonitoringService.
     this.serviceMonitoringServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.monitoring.v3.ServiceMonitoringService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.monitoring.v3.ServiceMonitoringService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.monitoring.v3.ServiceMonitoringService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const serviceMonitoringServiceStubMethods =
-        ['createService', 'getService', 'listServices', 'updateService', 'deleteService', 'createServiceLevelObjective', 'getServiceLevelObjective', 'listServiceLevelObjectives', 'updateServiceLevelObjective', 'deleteServiceLevelObjective'];
+    const serviceMonitoringServiceStubMethods = [
+      'createService',
+      'getService',
+      'listServices',
+      'updateService',
+      'deleteService',
+      'createServiceLevelObjective',
+      'getServiceLevelObjective',
+      'listServiceLevelObjectives',
+      'updateServiceLevelObjective',
+      'deleteServiceLevelObjective',
+    ];
     for (const methodName of serviceMonitoringServiceStubMethods) {
       const callPromise = this.serviceMonitoringServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -349,8 +405,14 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'monitoring.googleapis.com';
   }
@@ -361,8 +423,14 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'monitoring.googleapis.com';
   }
@@ -396,7 +464,7 @@ export class ServiceMonitoringServiceClient {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/monitoring',
-      'https://www.googleapis.com/auth/monitoring.read'
+      'https://www.googleapis.com/auth/monitoring.read',
     ];
   }
 
@@ -406,8 +474,9 @@ export class ServiceMonitoringServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -418,907 +487,1233 @@ export class ServiceMonitoringServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Create a `Service`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Resource
- *   [name](https://cloud.google.com/monitoring/api/v3#project_name) of the
- *   parent Metrics Scope. The format is:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]
- * @param {string} request.serviceId
- *   Optional. The Service id to use for this Service. If omitted, an id will be
- *   generated instead. Must match the pattern `[a-z0-9\-]+`
- * @param {google.monitoring.v3.Service} request.service
- *   Required. The `Service` to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Service|Service}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/service_monitoring_service.create_service.js</caption>
- * region_tag:monitoring_v3_generated_ServiceMonitoringService_CreateService_async
- */
+  /**
+   * Create a `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource
+   *   [name](https://cloud.google.com/monitoring/api/v3#project_name) of the
+   *   parent Metrics Scope. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   * @param {string} request.serviceId
+   *   Optional. The Service id to use for this Service. If omitted, an id will be
+   *   generated instead. Must match the pattern `[a-z0-9\-]+`
+   * @param {google.monitoring.v3.Service} request.service
+   *   Required. The `Service` to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Service|Service}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.create_service.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_CreateService_async
+   */
   createService(
-      request?: protos.google.monitoring.v3.ICreateServiceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.ICreateServiceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.monitoring.v3.ICreateServiceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.ICreateServiceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createService(
-      request: protos.google.monitoring.v3.ICreateServiceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.ICreateServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.ICreateServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.ICreateServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createService(
-      request: protos.google.monitoring.v3.ICreateServiceRequest,
-      callback: Callback<
-          protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.ICreateServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.ICreateServiceRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.ICreateServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createService(
-      request?: protos.google.monitoring.v3.ICreateServiceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.monitoring.v3.ICreateServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.ICreateServiceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.ICreateServiceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.ICreateServiceRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.monitoring.v3.ICreateServiceRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.ICreateServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.ICreateServiceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createService request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.ICreateServiceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.ICreateServiceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createService(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.ICreateServiceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createService response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.ICreateServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createService response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get the named `Service`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the `Service`. The format is:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Service|Service}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/service_monitoring_service.get_service.js</caption>
- * region_tag:monitoring_v3_generated_ServiceMonitoringService_GetService_async
- */
+  /**
+   * Get the named `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the `Service`. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Service|Service}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.get_service.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_GetService_async
+   */
   getService(
-      request?: protos.google.monitoring.v3.IGetServiceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.IGetServiceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.monitoring.v3.IGetServiceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IGetServiceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getService(
-      request: protos.google.monitoring.v3.IGetServiceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.IGetServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IGetServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IGetServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getService(
-      request: protos.google.monitoring.v3.IGetServiceRequest,
-      callback: Callback<
-          protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.IGetServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IGetServiceRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IGetServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getService(
-      request?: protos.google.monitoring.v3.IGetServiceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.monitoring.v3.IGetServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.IGetServiceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.IGetServiceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.IGetServiceRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.monitoring.v3.IGetServiceRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IGetServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IGetServiceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getService request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.IGetServiceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.IGetServiceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getService(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.IGetServiceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getService response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.IGetServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getService response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update this `Service`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.monitoring.v3.Service} request.service
- *   Required. The `Service` to draw updates from.
- *   The given `name` specifies the resource to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   A set of field paths defining which fields to use for the update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Service|Service}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/service_monitoring_service.update_service.js</caption>
- * region_tag:monitoring_v3_generated_ServiceMonitoringService_UpdateService_async
- */
+  /**
+   * Update this `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.monitoring.v3.Service} request.service
+   *   Required. The `Service` to draw updates from.
+   *   The given `name` specifies the resource to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   A set of field paths defining which fields to use for the update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.Service|Service}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.update_service.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_UpdateService_async
+   */
   updateService(
-      request?: protos.google.monitoring.v3.IUpdateServiceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.IUpdateServiceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.monitoring.v3.IUpdateServiceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IUpdateServiceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateService(
-      request: protos.google.monitoring.v3.IUpdateServiceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.IUpdateServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IUpdateServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IUpdateServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateService(
-      request: protos.google.monitoring.v3.IUpdateServiceRequest,
-      callback: Callback<
-          protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.IUpdateServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IUpdateServiceRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IUpdateServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateService(
-      request?: protos.google.monitoring.v3.IUpdateServiceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.monitoring.v3.IUpdateServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.IUpdateServiceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.monitoring.v3.IService,
-          protos.google.monitoring.v3.IUpdateServiceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.IUpdateServiceRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.monitoring.v3.IUpdateServiceRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IUpdateServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IService,
+      protos.google.monitoring.v3.IUpdateServiceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'service.name': request.service!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'service.name': request.service!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateService request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.IUpdateServiceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.IUpdateServiceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateService(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.monitoring.v3.IService,
-        protos.google.monitoring.v3.IUpdateServiceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateService response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IService,
+          protos.google.monitoring.v3.IUpdateServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateService response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Soft delete this `Service`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the `Service` to delete. The format is:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/service_monitoring_service.delete_service.js</caption>
- * region_tag:monitoring_v3_generated_ServiceMonitoringService_DeleteService_async
- */
+  /**
+   * Soft delete this `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the `Service` to delete. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.delete_service.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_DeleteService_async
+   */
   deleteService(
-      request?: protos.google.monitoring.v3.IDeleteServiceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.monitoring.v3.IDeleteServiceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.monitoring.v3.IDeleteServiceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteServiceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteService(
-      request: protos.google.monitoring.v3.IDeleteServiceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.monitoring.v3.IDeleteServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IDeleteServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteService(
-      request: protos.google.monitoring.v3.IDeleteServiceRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.monitoring.v3.IDeleteServiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IDeleteServiceRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteService(
-      request?: protos.google.monitoring.v3.IDeleteServiceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.monitoring.v3.IDeleteServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.monitoring.v3.IDeleteServiceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.monitoring.v3.IDeleteServiceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.monitoring.v3.IDeleteServiceRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.monitoring.v3.IDeleteServiceRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteServiceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.monitoring.v3.IDeleteServiceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteService request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.monitoring.v3.IDeleteServiceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.IDeleteServiceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteService response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteService(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.monitoring.v3.IDeleteServiceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteService response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteService(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.monitoring.v3.IDeleteServiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteService response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Create a `ServiceLevelObjective` for the given `Service`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Resource name of the parent `Service`. The format is:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
- * @param {string} request.serviceLevelObjectiveId
- *   Optional. The ServiceLevelObjective id to use for this
- *   ServiceLevelObjective. If omitted, an id will be generated instead. Must
- *   match the pattern `^[a-zA-Z0-9-_:.]+$`
- * @param {google.monitoring.v3.ServiceLevelObjective} request.serviceLevelObjective
- *   Required. The `ServiceLevelObjective` to create.
- *   The provided `name` will be respected if no `ServiceLevelObjective` exists
- *   with this name.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/service_monitoring_service.create_service_level_objective.js</caption>
- * region_tag:monitoring_v3_generated_ServiceMonitoringService_CreateServiceLevelObjective_async
- */
+  /**
+   * Create a `ServiceLevelObjective` for the given `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent `Service`. The format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   * @param {string} request.serviceLevelObjectiveId
+   *   Optional. The ServiceLevelObjective id to use for this
+   *   ServiceLevelObjective. If omitted, an id will be generated instead. Must
+   *   match the pattern `^[a-zA-Z0-9-_:.]+$`
+   * @param {google.monitoring.v3.ServiceLevelObjective} request.serviceLevelObjective
+   *   Required. The `ServiceLevelObjective` to create.
+   *   The provided `name` will be respected if no `ServiceLevelObjective` exists
+   *   with this name.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.create_service_level_objective.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_CreateServiceLevelObjective_async
+   */
   createServiceLevelObjective(
-      request?: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      (
+        | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createServiceLevelObjective(
-      request: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createServiceLevelObjective(
-      request: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
-      callback: Callback<
-          protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createServiceLevelObjective(
-      request?: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      (
+        | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createServiceLevelObjective request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createServiceLevelObjective response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createServiceLevelObjective(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createServiceLevelObjective response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createServiceLevelObjective(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          (
+            | protos.google.monitoring.v3.ICreateServiceLevelObjectiveRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createServiceLevelObjective response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get a `ServiceLevelObjective` by name.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the `ServiceLevelObjective` to get. The format
- *   is:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
- * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
- *   View of the `ServiceLevelObjective` to return. If `DEFAULT`, return the
- *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
- *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
- *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/service_monitoring_service.get_service_level_objective.js</caption>
- * region_tag:monitoring_v3_generated_ServiceMonitoringService_GetServiceLevelObjective_async
- */
+  /**
+   * Get a `ServiceLevelObjective` by name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the `ServiceLevelObjective` to get. The format
+   *   is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
+   * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
+   *   View of the `ServiceLevelObjective` to return. If `DEFAULT`, return the
+   *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
+   *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
+   *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.get_service_level_objective.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_GetServiceLevelObjective_async
+   */
   getServiceLevelObjective(
-      request?: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getServiceLevelObjective(
-      request: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getServiceLevelObjective(
-      request: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
-      callback: Callback<
-          protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getServiceLevelObjective(
-      request?: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getServiceLevelObjective request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getServiceLevelObjective response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getServiceLevelObjective(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getServiceLevelObjective response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getServiceLevelObjective(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          (
+            | protos.google.monitoring.v3.IGetServiceLevelObjectiveRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getServiceLevelObjective response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update the given `ServiceLevelObjective`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.monitoring.v3.ServiceLevelObjective} request.serviceLevelObjective
- *   Required. The `ServiceLevelObjective` to draw updates from.
- *   The given `name` specifies the resource to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   A set of field paths defining which fields to use for the update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/service_monitoring_service.update_service_level_objective.js</caption>
- * region_tag:monitoring_v3_generated_ServiceMonitoringService_UpdateServiceLevelObjective_async
- */
+  /**
+   * Update the given `ServiceLevelObjective`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.monitoring.v3.ServiceLevelObjective} request.serviceLevelObjective
+   *   Required. The `ServiceLevelObjective` to draw updates from.
+   *   The given `name` specifies the resource to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   A set of field paths defining which fields to use for the update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.update_service_level_objective.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_UpdateServiceLevelObjective_async
+   */
   updateServiceLevelObjective(
-      request?: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      (
+        | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateServiceLevelObjective(
-      request: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateServiceLevelObjective(
-      request: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
-      callback: Callback<
-          protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
+    callback: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateServiceLevelObjective(
-      request?: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.monitoring.v3.IServiceLevelObjective,
-          protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IServiceLevelObjective,
+      (
+        | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'service_level_objective.name': request.serviceLevelObjective!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'service_level_objective.name':
+          request.serviceLevelObjective!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateServiceLevelObjective request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateServiceLevelObjective response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateServiceLevelObjective(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.monitoring.v3.IServiceLevelObjective,
-        protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateServiceLevelObjective response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateServiceLevelObjective(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.monitoring.v3.IServiceLevelObjective,
+          (
+            | protos.google.monitoring.v3.IUpdateServiceLevelObjectiveRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateServiceLevelObjective response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete the given `ServiceLevelObjective`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the `ServiceLevelObjective` to delete. The
- *   format is:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/service_monitoring_service.delete_service_level_objective.js</caption>
- * region_tag:monitoring_v3_generated_ServiceMonitoringService_DeleteServiceLevelObjective_async
- */
+  /**
+   * Delete the given `ServiceLevelObjective`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the `ServiceLevelObjective` to delete. The
+   *   format is:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.delete_service_level_objective.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_DeleteServiceLevelObjective_async
+   */
   deleteServiceLevelObjective(
-      request?: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteServiceLevelObjective(
-      request: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteServiceLevelObjective(
-      request: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteServiceLevelObjective(
-      request?: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteServiceLevelObjective request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteServiceLevelObjective response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteServiceLevelObjective(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteServiceLevelObjective response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteServiceLevelObjective(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.monitoring.v3.IDeleteServiceLevelObjectiveRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteServiceLevelObjective response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * List `Service`s for this Metrics Scope.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Resource name of the parent containing the listed services,
- *   either a [project](https://cloud.google.com/monitoring/api/v3#project_name)
- *   or a Monitoring Metrics Scope. The formats are:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]
- *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
- * @param {string} request.filter
- *   A filter specifying what `Service`s to return. The filter supports
- *   filtering on a particular service-identifier type or one of its attributes.
- *
- *   To filter on a particular service-identifier type, the `identifier_case`
- *   refers to which option in the `identifier` field is populated. For example,
- *   the filter `identifier_case = "CUSTOM"` would match all services with a
- *   value for the `custom` field. Valid options include "CUSTOM", "APP_ENGINE",
- *   "MESH_ISTIO", and the other options listed at
- *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
- *
- *   To filter on an attribute of a service-identifier type, apply the filter
- *   name by using the snake case of the service-identifier type and the
- *   attribute of that service-identifier type, and join the two with a period.
- *   For example, to filter by the `meshUid` field of the `MeshIstio`
- *   service-identifier type, you must filter on `mesh_istio.mesh_uid =
- *   "123"` to match all services with mesh UID "123". Service-identifier types
- *   and their attributes are described at
- *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
- * @param {number} request.pageSize
- *   A non-negative number that is the maximum number of results to return.
- *   When 0, use default page size.
- * @param {string} request.pageToken
- *   If this field is not empty then it must contain the `nextPageToken` value
- *   returned by a previous call to this method.  Using this field causes the
- *   method to return additional results from the previous method call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.monitoring.v3.Service|Service}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listServicesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * List `Service`s for this Metrics Scope.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent containing the listed services,
+   *   either a [project](https://cloud.google.com/monitoring/api/v3#project_name)
+   *   or a Monitoring Metrics Scope. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
+   * @param {string} request.filter
+   *   A filter specifying what `Service`s to return. The filter supports
+   *   filtering on a particular service-identifier type or one of its attributes.
+   *
+   *   To filter on a particular service-identifier type, the `identifier_case`
+   *   refers to which option in the `identifier` field is populated. For example,
+   *   the filter `identifier_case = "CUSTOM"` would match all services with a
+   *   value for the `custom` field. Valid options include "CUSTOM", "APP_ENGINE",
+   *   "MESH_ISTIO", and the other options listed at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
+   *
+   *   To filter on an attribute of a service-identifier type, apply the filter
+   *   name by using the snake case of the service-identifier type and the
+   *   attribute of that service-identifier type, and join the two with a period.
+   *   For example, to filter by the `meshUid` field of the `MeshIstio`
+   *   service-identifier type, you must filter on `mesh_istio.mesh_uid =
+   *   "123"` to match all services with mesh UID "123". Service-identifier types
+   *   and their attributes are described at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
+   * @param {number} request.pageSize
+   *   A non-negative number that is the maximum number of results to return.
+   *   When 0, use default page size.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.monitoring.v3.Service|Service}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listServicesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listServices(
-      request?: protos.google.monitoring.v3.IListServicesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.IService[],
-        protos.google.monitoring.v3.IListServicesRequest|null,
-        protos.google.monitoring.v3.IListServicesResponse
-      ]>;
+    request?: protos.google.monitoring.v3.IListServicesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IService[],
+      protos.google.monitoring.v3.IListServicesRequest | null,
+      protos.google.monitoring.v3.IListServicesResponse,
+    ]
+  >;
   listServices(
-      request: protos.google.monitoring.v3.IListServicesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.monitoring.v3.IListServicesRequest,
-          protos.google.monitoring.v3.IListServicesResponse|null|undefined,
-          protos.google.monitoring.v3.IService>): void;
+    request: protos.google.monitoring.v3.IListServicesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListServicesRequest,
+      protos.google.monitoring.v3.IListServicesResponse | null | undefined,
+      protos.google.monitoring.v3.IService
+    >,
+  ): void;
   listServices(
-      request: protos.google.monitoring.v3.IListServicesRequest,
-      callback: PaginationCallback<
-          protos.google.monitoring.v3.IListServicesRequest,
-          protos.google.monitoring.v3.IListServicesResponse|null|undefined,
-          protos.google.monitoring.v3.IService>): void;
+    request: protos.google.monitoring.v3.IListServicesRequest,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListServicesRequest,
+      protos.google.monitoring.v3.IListServicesResponse | null | undefined,
+      protos.google.monitoring.v3.IService
+    >,
+  ): void;
   listServices(
-      request?: protos.google.monitoring.v3.IListServicesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.monitoring.v3.IListServicesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.monitoring.v3.IListServicesRequest,
-          protos.google.monitoring.v3.IListServicesResponse|null|undefined,
-          protos.google.monitoring.v3.IService>,
-      callback?: PaginationCallback<
-          protos.google.monitoring.v3.IListServicesRequest,
-          protos.google.monitoring.v3.IListServicesResponse|null|undefined,
-          protos.google.monitoring.v3.IService>):
-      Promise<[
-        protos.google.monitoring.v3.IService[],
-        protos.google.monitoring.v3.IListServicesRequest|null,
-        protos.google.monitoring.v3.IListServicesResponse
-      ]>|void {
+          protos.google.monitoring.v3.IListServicesResponse | null | undefined,
+          protos.google.monitoring.v3.IService
+        >,
+    callback?: PaginationCallback<
+      protos.google.monitoring.v3.IListServicesRequest,
+      protos.google.monitoring.v3.IListServicesResponse | null | undefined,
+      protos.google.monitoring.v3.IService
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IService[],
+      protos.google.monitoring.v3.IListServicesRequest | null,
+      protos.google.monitoring.v3.IListServicesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.monitoring.v3.IListServicesRequest,
-      protos.google.monitoring.v3.IListServicesResponse|null|undefined,
-      protos.google.monitoring.v3.IService>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListServicesRequest,
+          protos.google.monitoring.v3.IListServicesResponse | null | undefined,
+          protos.google.monitoring.v3.IService
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServices values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1327,257 +1722,286 @@ export class ServiceMonitoringServiceClient {
     this._log.info('listServices request %j', request);
     return this.innerApiCalls
       .listServices(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.monitoring.v3.IService[],
-        protos.google.monitoring.v3.IListServicesRequest|null,
-        protos.google.monitoring.v3.IListServicesResponse
-      ]) => {
-        this._log.info('listServices values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.monitoring.v3.IService[],
+          protos.google.monitoring.v3.IListServicesRequest | null,
+          protos.google.monitoring.v3.IListServicesResponse,
+        ]) => {
+          this._log.info('listServices values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listServices`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Resource name of the parent containing the listed services,
- *   either a [project](https://cloud.google.com/monitoring/api/v3#project_name)
- *   or a Monitoring Metrics Scope. The formats are:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]
- *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
- * @param {string} request.filter
- *   A filter specifying what `Service`s to return. The filter supports
- *   filtering on a particular service-identifier type or one of its attributes.
- *
- *   To filter on a particular service-identifier type, the `identifier_case`
- *   refers to which option in the `identifier` field is populated. For example,
- *   the filter `identifier_case = "CUSTOM"` would match all services with a
- *   value for the `custom` field. Valid options include "CUSTOM", "APP_ENGINE",
- *   "MESH_ISTIO", and the other options listed at
- *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
- *
- *   To filter on an attribute of a service-identifier type, apply the filter
- *   name by using the snake case of the service-identifier type and the
- *   attribute of that service-identifier type, and join the two with a period.
- *   For example, to filter by the `meshUid` field of the `MeshIstio`
- *   service-identifier type, you must filter on `mesh_istio.mesh_uid =
- *   "123"` to match all services with mesh UID "123". Service-identifier types
- *   and their attributes are described at
- *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
- * @param {number} request.pageSize
- *   A non-negative number that is the maximum number of results to return.
- *   When 0, use default page size.
- * @param {string} request.pageToken
- *   If this field is not empty then it must contain the `nextPageToken` value
- *   returned by a previous call to this method.  Using this field causes the
- *   method to return additional results from the previous method call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.monitoring.v3.Service|Service} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listServicesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listServices`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent containing the listed services,
+   *   either a [project](https://cloud.google.com/monitoring/api/v3#project_name)
+   *   or a Monitoring Metrics Scope. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
+   * @param {string} request.filter
+   *   A filter specifying what `Service`s to return. The filter supports
+   *   filtering on a particular service-identifier type or one of its attributes.
+   *
+   *   To filter on a particular service-identifier type, the `identifier_case`
+   *   refers to which option in the `identifier` field is populated. For example,
+   *   the filter `identifier_case = "CUSTOM"` would match all services with a
+   *   value for the `custom` field. Valid options include "CUSTOM", "APP_ENGINE",
+   *   "MESH_ISTIO", and the other options listed at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
+   *
+   *   To filter on an attribute of a service-identifier type, apply the filter
+   *   name by using the snake case of the service-identifier type and the
+   *   attribute of that service-identifier type, and join the two with a period.
+   *   For example, to filter by the `meshUid` field of the `MeshIstio`
+   *   service-identifier type, you must filter on `mesh_istio.mesh_uid =
+   *   "123"` to match all services with mesh UID "123". Service-identifier types
+   *   and their attributes are described at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
+   * @param {number} request.pageSize
+   *   A non-negative number that is the maximum number of results to return.
+   *   When 0, use default page size.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.monitoring.v3.Service|Service} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listServicesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listServicesStream(
-      request?: protos.google.monitoring.v3.IListServicesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.monitoring.v3.IListServicesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listServices`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Resource name of the parent containing the listed services,
- *   either a [project](https://cloud.google.com/monitoring/api/v3#project_name)
- *   or a Monitoring Metrics Scope. The formats are:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]
- *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
- * @param {string} request.filter
- *   A filter specifying what `Service`s to return. The filter supports
- *   filtering on a particular service-identifier type or one of its attributes.
- *
- *   To filter on a particular service-identifier type, the `identifier_case`
- *   refers to which option in the `identifier` field is populated. For example,
- *   the filter `identifier_case = "CUSTOM"` would match all services with a
- *   value for the `custom` field. Valid options include "CUSTOM", "APP_ENGINE",
- *   "MESH_ISTIO", and the other options listed at
- *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
- *
- *   To filter on an attribute of a service-identifier type, apply the filter
- *   name by using the snake case of the service-identifier type and the
- *   attribute of that service-identifier type, and join the two with a period.
- *   For example, to filter by the `meshUid` field of the `MeshIstio`
- *   service-identifier type, you must filter on `mesh_istio.mesh_uid =
- *   "123"` to match all services with mesh UID "123". Service-identifier types
- *   and their attributes are described at
- *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
- * @param {number} request.pageSize
- *   A non-negative number that is the maximum number of results to return.
- *   When 0, use default page size.
- * @param {string} request.pageToken
- *   If this field is not empty then it must contain the `nextPageToken` value
- *   returned by a previous call to this method.  Using this field causes the
- *   method to return additional results from the previous method call.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.monitoring.v3.Service|Service}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/service_monitoring_service.list_services.js</caption>
- * region_tag:monitoring_v3_generated_ServiceMonitoringService_ListServices_async
- */
+  /**
+   * Equivalent to `listServices`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent containing the listed services,
+   *   either a [project](https://cloud.google.com/monitoring/api/v3#project_name)
+   *   or a Monitoring Metrics Scope. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]
+   * @param {string} request.filter
+   *   A filter specifying what `Service`s to return. The filter supports
+   *   filtering on a particular service-identifier type or one of its attributes.
+   *
+   *   To filter on a particular service-identifier type, the `identifier_case`
+   *   refers to which option in the `identifier` field is populated. For example,
+   *   the filter `identifier_case = "CUSTOM"` would match all services with a
+   *   value for the `custom` field. Valid options include "CUSTOM", "APP_ENGINE",
+   *   "MESH_ISTIO", and the other options listed at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
+   *
+   *   To filter on an attribute of a service-identifier type, apply the filter
+   *   name by using the snake case of the service-identifier type and the
+   *   attribute of that service-identifier type, and join the two with a period.
+   *   For example, to filter by the `meshUid` field of the `MeshIstio`
+   *   service-identifier type, you must filter on `mesh_istio.mesh_uid =
+   *   "123"` to match all services with mesh UID "123". Service-identifier types
+   *   and their attributes are described at
+   *   https://cloud.google.com/monitoring/api/ref_v3/rest/v3/services#Service
+   * @param {number} request.pageSize
+   *   A non-negative number that is the maximum number of results to return.
+   *   When 0, use default page size.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.monitoring.v3.Service|Service}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.list_services.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_ListServices_async
+   */
   listServicesAsync(
-      request?: protos.google.monitoring.v3.IListServicesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.monitoring.v3.IService>{
+    request?: protos.google.monitoring.v3.IListServicesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.monitoring.v3.IService> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.monitoring.v3.IService>;
   }
- /**
- * List the `ServiceLevelObjective`s for the given `Service`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Resource name of the parent containing the listed SLOs, either a
- *   project or a Monitoring Metrics Scope. The formats are:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
- *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
- * @param {string} request.filter
- *   A filter specifying what `ServiceLevelObjective`s to return.
- * @param {number} request.pageSize
- *   A non-negative number that is the maximum number of results to return.
- *   When 0, use default page size.
- * @param {string} request.pageToken
- *   If this field is not empty then it must contain the `nextPageToken` value
- *   returned by a previous call to this method.  Using this field causes the
- *   method to return additional results from the previous method call.
- * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
- *   View of the `ServiceLevelObjective`s to return. If `DEFAULT`, return each
- *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
- *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
- *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listServiceLevelObjectivesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * List the `ServiceLevelObjective`s for the given `Service`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent containing the listed SLOs, either a
+   *   project or a Monitoring Metrics Scope. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
+   * @param {string} request.filter
+   *   A filter specifying what `ServiceLevelObjective`s to return.
+   * @param {number} request.pageSize
+   *   A non-negative number that is the maximum number of results to return.
+   *   When 0, use default page size.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
+   *   View of the `ServiceLevelObjective`s to return. If `DEFAULT`, return each
+   *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
+   *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
+   *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listServiceLevelObjectivesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listServiceLevelObjectives(
-      request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.monitoring.v3.IServiceLevelObjective[],
-        protos.google.monitoring.v3.IListServiceLevelObjectivesRequest|null,
-        protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
-      ]>;
+    request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IServiceLevelObjective[],
+      protos.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
+      protos.google.monitoring.v3.IListServiceLevelObjectivesResponse,
+    ]
+  >;
   listServiceLevelObjectives(
-      request: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
-          protos.google.monitoring.v3.IListServiceLevelObjectivesResponse|null|undefined,
-          protos.google.monitoring.v3.IServiceLevelObjective>): void;
+    request: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+      | protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+      | null
+      | undefined,
+      protos.google.monitoring.v3.IServiceLevelObjective
+    >,
+  ): void;
   listServiceLevelObjectives(
-      request: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
-      callback: PaginationCallback<
-          protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
-          protos.google.monitoring.v3.IListServiceLevelObjectivesResponse|null|undefined,
-          protos.google.monitoring.v3.IServiceLevelObjective>): void;
+    request: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    callback: PaginationCallback<
+      protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+      | protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+      | null
+      | undefined,
+      protos.google.monitoring.v3.IServiceLevelObjective
+    >,
+  ): void;
   listServiceLevelObjectives(
-      request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
-          protos.google.monitoring.v3.IListServiceLevelObjectivesResponse|null|undefined,
-          protos.google.monitoring.v3.IServiceLevelObjective>,
-      callback?: PaginationCallback<
-          protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
-          protos.google.monitoring.v3.IListServiceLevelObjectivesResponse|null|undefined,
-          protos.google.monitoring.v3.IServiceLevelObjective>):
-      Promise<[
-        protos.google.monitoring.v3.IServiceLevelObjective[],
-        protos.google.monitoring.v3.IListServiceLevelObjectivesRequest|null,
-        protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
-      ]>|void {
+          | protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+          | null
+          | undefined,
+          protos.google.monitoring.v3.IServiceLevelObjective
+        >,
+    callback?: PaginationCallback<
+      protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+      | protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+      | null
+      | undefined,
+      protos.google.monitoring.v3.IServiceLevelObjective
+    >,
+  ): Promise<
+    [
+      protos.google.monitoring.v3.IServiceLevelObjective[],
+      protos.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
+      protos.google.monitoring.v3.IListServiceLevelObjectivesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
-      protos.google.monitoring.v3.IListServiceLevelObjectivesResponse|null|undefined,
-      protos.google.monitoring.v3.IServiceLevelObjective>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+          | protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
+          | null
+          | undefined,
+          protos.google.monitoring.v3.IServiceLevelObjective
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServiceLevelObjectives values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1586,134 +2010,138 @@ export class ServiceMonitoringServiceClient {
     this._log.info('listServiceLevelObjectives request %j', request);
     return this.innerApiCalls
       .listServiceLevelObjectives(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.monitoring.v3.IServiceLevelObjective[],
-        protos.google.monitoring.v3.IListServiceLevelObjectivesRequest|null,
-        protos.google.monitoring.v3.IListServiceLevelObjectivesResponse
-      ]) => {
-        this._log.info('listServiceLevelObjectives values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.monitoring.v3.IServiceLevelObjective[],
+          protos.google.monitoring.v3.IListServiceLevelObjectivesRequest | null,
+          protos.google.monitoring.v3.IListServiceLevelObjectivesResponse,
+        ]) => {
+          this._log.info('listServiceLevelObjectives values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listServiceLevelObjectives`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Resource name of the parent containing the listed SLOs, either a
- *   project or a Monitoring Metrics Scope. The formats are:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
- *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
- * @param {string} request.filter
- *   A filter specifying what `ServiceLevelObjective`s to return.
- * @param {number} request.pageSize
- *   A non-negative number that is the maximum number of results to return.
- *   When 0, use default page size.
- * @param {string} request.pageToken
- *   If this field is not empty then it must contain the `nextPageToken` value
- *   returned by a previous call to this method.  Using this field causes the
- *   method to return additional results from the previous method call.
- * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
- *   View of the `ServiceLevelObjective`s to return. If `DEFAULT`, return each
- *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
- *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
- *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listServiceLevelObjectivesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listServiceLevelObjectives`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent containing the listed SLOs, either a
+   *   project or a Monitoring Metrics Scope. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
+   * @param {string} request.filter
+   *   A filter specifying what `ServiceLevelObjective`s to return.
+   * @param {number} request.pageSize
+   *   A non-negative number that is the maximum number of results to return.
+   *   When 0, use default page size.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
+   *   View of the `ServiceLevelObjective`s to return. If `DEFAULT`, return each
+   *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
+   *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
+   *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listServiceLevelObjectivesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listServiceLevelObjectivesStream(
-      request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listServiceLevelObjectives'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listServiceLevelObjectives stream %j', request);
     return this.descriptors.page.listServiceLevelObjectives.createStream(
       this.innerApiCalls.listServiceLevelObjectives as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listServiceLevelObjectives`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Resource name of the parent containing the listed SLOs, either a
- *   project or a Monitoring Metrics Scope. The formats are:
- *
- *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
- *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
- * @param {string} request.filter
- *   A filter specifying what `ServiceLevelObjective`s to return.
- * @param {number} request.pageSize
- *   A non-negative number that is the maximum number of results to return.
- *   When 0, use default page size.
- * @param {string} request.pageToken
- *   If this field is not empty then it must contain the `nextPageToken` value
- *   returned by a previous call to this method.  Using this field causes the
- *   method to return additional results from the previous method call.
- * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
- *   View of the `ServiceLevelObjective`s to return. If `DEFAULT`, return each
- *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
- *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
- *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v3/service_monitoring_service.list_service_level_objectives.js</caption>
- * region_tag:monitoring_v3_generated_ServiceMonitoringService_ListServiceLevelObjectives_async
- */
+  /**
+   * Equivalent to `listServiceLevelObjectives`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the parent containing the listed SLOs, either a
+   *   project or a Monitoring Metrics Scope. The formats are:
+   *
+   *       projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+   *       workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
+   * @param {string} request.filter
+   *   A filter specifying what `ServiceLevelObjective`s to return.
+   * @param {number} request.pageSize
+   *   A non-negative number that is the maximum number of results to return.
+   *   When 0, use default page size.
+   * @param {string} request.pageToken
+   *   If this field is not empty then it must contain the `nextPageToken` value
+   *   returned by a previous call to this method.  Using this field causes the
+   *   method to return additional results from the previous method call.
+   * @param {google.monitoring.v3.ServiceLevelObjective.View} request.view
+   *   View of the `ServiceLevelObjective`s to return. If `DEFAULT`, return each
+   *   `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
+   *   `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
+   *   `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.monitoring.v3.ServiceLevelObjective|ServiceLevelObjective}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/service_monitoring_service.list_service_level_objectives.js</caption>
+   * region_tag:monitoring_v3_generated_ServiceMonitoringService_ListServiceLevelObjectives_async
+   */
   listServiceLevelObjectivesAsync(
-      request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.monitoring.v3.IServiceLevelObjective>{
+    request?: protos.google.monitoring.v3.IListServiceLevelObjectivesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.monitoring.v3.IServiceLevelObjective> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listServiceLevelObjectives'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listServiceLevelObjectives iterate %j', request);
     return this.descriptors.page.listServiceLevelObjectives.asyncIterate(
       this.innerApiCalls['listServiceLevelObjectives'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.monitoring.v3.IServiceLevelObjective>;
   }
   // --------------------
@@ -1727,7 +2155,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  folderAlertPolicyPath(folder:string,alertPolicy:string) {
+  folderAlertPolicyPath(folder: string, alertPolicy: string) {
     return this.pathTemplates.folderAlertPolicyPathTemplate.render({
       folder: folder,
       alert_policy: alertPolicy,
@@ -1742,7 +2170,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this.pathTemplates.folderAlertPolicyPathTemplate.match(folderAlertPolicyName).folder;
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
+      folderAlertPolicyName,
+    ).folder;
   }
 
   /**
@@ -1753,7 +2183,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromFolderAlertPolicyName(folderAlertPolicyName: string) {
-    return this.pathTemplates.folderAlertPolicyPathTemplate.match(folderAlertPolicyName).alert_policy;
+    return this.pathTemplates.folderAlertPolicyPathTemplate.match(
+      folderAlertPolicyName,
+    ).alert_policy;
   }
 
   /**
@@ -1764,7 +2196,11 @@ export class ServiceMonitoringServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  folderAlertPolicyConditionPath(folder:string,alertPolicy:string,condition:string) {
+  folderAlertPolicyConditionPath(
+    folder: string,
+    alertPolicy: string,
+    condition: string,
+  ) {
     return this.pathTemplates.folderAlertPolicyConditionPathTemplate.render({
       folder: folder,
       alert_policy: alertPolicy,
@@ -1779,8 +2215,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).folder;
+  matchFolderFromFolderAlertPolicyConditionName(
+    folderAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+      folderAlertPolicyConditionName,
+    ).folder;
   }
 
   /**
@@ -1790,8 +2230,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).alert_policy;
+  matchAlertPolicyFromFolderAlertPolicyConditionName(
+    folderAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+      folderAlertPolicyConditionName,
+    ).alert_policy;
   }
 
   /**
@@ -1801,8 +2245,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromFolderAlertPolicyConditionName(folderAlertPolicyConditionName: string) {
-    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(folderAlertPolicyConditionName).condition;
+  matchConditionFromFolderAlertPolicyConditionName(
+    folderAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.folderAlertPolicyConditionPathTemplate.match(
+      folderAlertPolicyConditionName,
+    ).condition;
   }
 
   /**
@@ -1812,7 +2260,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  folderChannelDescriptorPath(folder:string,channelDescriptor:string) {
+  folderChannelDescriptorPath(folder: string, channelDescriptor: string) {
     return this.pathTemplates.folderChannelDescriptorPathTemplate.render({
       folder: folder,
       channel_descriptor: channelDescriptor,
@@ -1826,8 +2274,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_channel_descriptor resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderChannelDescriptorName(folderChannelDescriptorName: string) {
-    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(folderChannelDescriptorName).folder;
+  matchFolderFromFolderChannelDescriptorName(
+    folderChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
+      folderChannelDescriptorName,
+    ).folder;
   }
 
   /**
@@ -1837,8 +2289,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromFolderChannelDescriptorName(folderChannelDescriptorName: string) {
-    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(folderChannelDescriptorName).channel_descriptor;
+  matchChannelDescriptorFromFolderChannelDescriptorName(
+    folderChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.folderChannelDescriptorPathTemplate.match(
+      folderChannelDescriptorName,
+    ).channel_descriptor;
   }
 
   /**
@@ -1848,7 +2304,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  folderGroupPath(folder:string,group:string) {
+  folderGroupPath(folder: string, group: string) {
     return this.pathTemplates.folderGroupPathTemplate.render({
       folder: folder,
       group: group,
@@ -1863,7 +2319,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderGroupName(folderGroupName: string) {
-    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName).folder;
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
+      .folder;
   }
 
   /**
@@ -1874,7 +2331,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromFolderGroupName(folderGroupName: string) {
-    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName).group;
+    return this.pathTemplates.folderGroupPathTemplate.match(folderGroupName)
+      .group;
   }
 
   /**
@@ -1884,7 +2342,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  folderNotificationChannelPath(folder:string,notificationChannel:string) {
+  folderNotificationChannelPath(folder: string, notificationChannel: string) {
     return this.pathTemplates.folderNotificationChannelPathTemplate.render({
       folder: folder,
       notification_channel: notificationChannel,
@@ -1898,8 +2356,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_notification_channel resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderNotificationChannelName(folderNotificationChannelName: string) {
-    return this.pathTemplates.folderNotificationChannelPathTemplate.match(folderNotificationChannelName).folder;
+  matchFolderFromFolderNotificationChannelName(
+    folderNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
+      folderNotificationChannelName,
+    ).folder;
   }
 
   /**
@@ -1909,8 +2371,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromFolderNotificationChannelName(folderNotificationChannelName: string) {
-    return this.pathTemplates.folderNotificationChannelPathTemplate.match(folderNotificationChannelName).notification_channel;
+  matchNotificationChannelFromFolderNotificationChannelName(
+    folderNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.folderNotificationChannelPathTemplate.match(
+      folderNotificationChannelName,
+    ).notification_channel;
   }
 
   /**
@@ -1920,7 +2386,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  folderServicePath(folder:string,service:string) {
+  folderServicePath(folder: string, service: string) {
     return this.pathTemplates.folderServicePathTemplate.render({
       folder: folder,
       service: service,
@@ -1935,7 +2401,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the folder.
    */
   matchFolderFromFolderServiceName(folderServiceName: string) {
-    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName).folder;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
+      .folder;
   }
 
   /**
@@ -1946,7 +2413,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromFolderServiceName(folderServiceName: string) {
-    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName).service;
+    return this.pathTemplates.folderServicePathTemplate.match(folderServiceName)
+      .service;
   }
 
   /**
@@ -1957,12 +2425,18 @@ export class ServiceMonitoringServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  folderServiceServiceLevelObjectivePath(folder:string,service:string,serviceLevelObjective:string) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render({
-      folder: folder,
-      service: service,
-      service_level_objective: serviceLevelObjective,
-    });
+  folderServiceServiceLevelObjectivePath(
+    folder: string,
+    service: string,
+    serviceLevelObjective: string,
+  ) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render(
+      {
+        folder: folder,
+        service: service,
+        service_level_objective: serviceLevelObjective,
+      },
+    );
   }
 
   /**
@@ -1972,8 +2446,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).folder;
+  matchFolderFromFolderServiceServiceLevelObjectiveName(
+    folderServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+      folderServiceServiceLevelObjectiveName,
+    ).folder;
   }
 
   /**
@@ -1983,8 +2461,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).service;
+  matchServiceFromFolderServiceServiceLevelObjectiveName(
+    folderServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+      folderServiceServiceLevelObjectiveName,
+    ).service;
   }
 
   /**
@@ -1994,8 +2476,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(folderServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(folderServiceServiceLevelObjectiveName).service_level_objective;
+  matchServiceLevelObjectiveFromFolderServiceServiceLevelObjectiveName(
+    folderServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.match(
+      folderServiceServiceLevelObjectiveName,
+    ).service_level_objective;
   }
 
   /**
@@ -2005,7 +2491,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  folderUptimeCheckConfigPath(folder:string,uptimeCheckConfig:string) {
+  folderUptimeCheckConfigPath(folder: string, uptimeCheckConfig: string) {
     return this.pathTemplates.folderUptimeCheckConfigPathTemplate.render({
       folder: folder,
       uptime_check_config: uptimeCheckConfig,
@@ -2019,8 +2505,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_uptime_check_config resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderUptimeCheckConfigName(folderUptimeCheckConfigName: string) {
-    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(folderUptimeCheckConfigName).folder;
+  matchFolderFromFolderUptimeCheckConfigName(
+    folderUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
+      folderUptimeCheckConfigName,
+    ).folder;
   }
 
   /**
@@ -2030,8 +2520,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing folder_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromFolderUptimeCheckConfigName(folderUptimeCheckConfigName: string) {
-    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(folderUptimeCheckConfigName).uptime_check_config;
+  matchUptimeCheckConfigFromFolderUptimeCheckConfigName(
+    folderUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.folderUptimeCheckConfigPathTemplate.match(
+      folderUptimeCheckConfigName,
+    ).uptime_check_config;
   }
 
   /**
@@ -2041,7 +2535,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  organizationAlertPolicyPath(organization:string,alertPolicy:string) {
+  organizationAlertPolicyPath(organization: string, alertPolicy: string) {
     return this.pathTemplates.organizationAlertPolicyPathTemplate.render({
       organization: organization,
       alert_policy: alertPolicy,
@@ -2055,8 +2549,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_alert_policy resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAlertPolicyName(organizationAlertPolicyName: string) {
-    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(organizationAlertPolicyName).organization;
+  matchOrganizationFromOrganizationAlertPolicyName(
+    organizationAlertPolicyName: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
+      organizationAlertPolicyName,
+    ).organization;
   }
 
   /**
@@ -2066,8 +2564,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_alert_policy resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromOrganizationAlertPolicyName(organizationAlertPolicyName: string) {
-    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(organizationAlertPolicyName).alert_policy;
+  matchAlertPolicyFromOrganizationAlertPolicyName(
+    organizationAlertPolicyName: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyPathTemplate.match(
+      organizationAlertPolicyName,
+    ).alert_policy;
   }
 
   /**
@@ -2078,12 +2580,18 @@ export class ServiceMonitoringServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  organizationAlertPolicyConditionPath(organization:string,alertPolicy:string,condition:string) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render({
-      organization: organization,
-      alert_policy: alertPolicy,
-      condition: condition,
-    });
+  organizationAlertPolicyConditionPath(
+    organization: string,
+    alertPolicy: string,
+    condition: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.render(
+      {
+        organization: organization,
+        alert_policy: alertPolicy,
+        condition: condition,
+      },
+    );
   }
 
   /**
@@ -2093,8 +2601,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).organization;
+  matchOrganizationFromOrganizationAlertPolicyConditionName(
+    organizationAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+      organizationAlertPolicyConditionName,
+    ).organization;
   }
 
   /**
@@ -2104,8 +2616,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).alert_policy;
+  matchAlertPolicyFromOrganizationAlertPolicyConditionName(
+    organizationAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+      organizationAlertPolicyConditionName,
+    ).alert_policy;
   }
 
   /**
@@ -2115,8 +2631,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromOrganizationAlertPolicyConditionName(organizationAlertPolicyConditionName: string) {
-    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(organizationAlertPolicyConditionName).condition;
+  matchConditionFromOrganizationAlertPolicyConditionName(
+    organizationAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.organizationAlertPolicyConditionPathTemplate.match(
+      organizationAlertPolicyConditionName,
+    ).condition;
   }
 
   /**
@@ -2126,7 +2646,10 @@ export class ServiceMonitoringServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  organizationChannelDescriptorPath(organization:string,channelDescriptor:string) {
+  organizationChannelDescriptorPath(
+    organization: string,
+    channelDescriptor: string,
+  ) {
     return this.pathTemplates.organizationChannelDescriptorPathTemplate.render({
       organization: organization,
       channel_descriptor: channelDescriptor,
@@ -2140,8 +2663,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_channel_descriptor resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationChannelDescriptorName(organizationChannelDescriptorName: string) {
-    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(organizationChannelDescriptorName).organization;
+  matchOrganizationFromOrganizationChannelDescriptorName(
+    organizationChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
+      organizationChannelDescriptorName,
+    ).organization;
   }
 
   /**
@@ -2151,8 +2678,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromOrganizationChannelDescriptorName(organizationChannelDescriptorName: string) {
-    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(organizationChannelDescriptorName).channel_descriptor;
+  matchChannelDescriptorFromOrganizationChannelDescriptorName(
+    organizationChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.organizationChannelDescriptorPathTemplate.match(
+      organizationChannelDescriptorName,
+    ).channel_descriptor;
   }
 
   /**
@@ -2162,7 +2693,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  organizationGroupPath(organization:string,group:string) {
+  organizationGroupPath(organization: string, group: string) {
     return this.pathTemplates.organizationGroupPathTemplate.render({
       organization: organization,
       group: group,
@@ -2177,7 +2708,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationGroupName(organizationGroupName: string) {
-    return this.pathTemplates.organizationGroupPathTemplate.match(organizationGroupName).organization;
+    return this.pathTemplates.organizationGroupPathTemplate.match(
+      organizationGroupName,
+    ).organization;
   }
 
   /**
@@ -2188,7 +2721,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromOrganizationGroupName(organizationGroupName: string) {
-    return this.pathTemplates.organizationGroupPathTemplate.match(organizationGroupName).group;
+    return this.pathTemplates.organizationGroupPathTemplate.match(
+      organizationGroupName,
+    ).group;
   }
 
   /**
@@ -2198,11 +2733,16 @@ export class ServiceMonitoringServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  organizationNotificationChannelPath(organization:string,notificationChannel:string) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.render({
-      organization: organization,
-      notification_channel: notificationChannel,
-    });
+  organizationNotificationChannelPath(
+    organization: string,
+    notificationChannel: string,
+  ) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.render(
+      {
+        organization: organization,
+        notification_channel: notificationChannel,
+      },
+    );
   }
 
   /**
@@ -2212,8 +2752,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_notification_channel resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationNotificationChannelName(organizationNotificationChannelName: string) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(organizationNotificationChannelName).organization;
+  matchOrganizationFromOrganizationNotificationChannelName(
+    organizationNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
+      organizationNotificationChannelName,
+    ).organization;
   }
 
   /**
@@ -2223,8 +2767,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromOrganizationNotificationChannelName(organizationNotificationChannelName: string) {
-    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(organizationNotificationChannelName).notification_channel;
+  matchNotificationChannelFromOrganizationNotificationChannelName(
+    organizationNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.organizationNotificationChannelPathTemplate.match(
+      organizationNotificationChannelName,
+    ).notification_channel;
   }
 
   /**
@@ -2234,7 +2782,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  organizationServicePath(organization:string,service:string) {
+  organizationServicePath(organization: string, service: string) {
     return this.pathTemplates.organizationServicePathTemplate.render({
       organization: organization,
       service: service,
@@ -2248,8 +2796,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_service resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationServiceName(organizationServiceName: string) {
-    return this.pathTemplates.organizationServicePathTemplate.match(organizationServiceName).organization;
+  matchOrganizationFromOrganizationServiceName(
+    organizationServiceName: string,
+  ) {
+    return this.pathTemplates.organizationServicePathTemplate.match(
+      organizationServiceName,
+    ).organization;
   }
 
   /**
@@ -2260,7 +2812,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromOrganizationServiceName(organizationServiceName: string) {
-    return this.pathTemplates.organizationServicePathTemplate.match(organizationServiceName).service;
+    return this.pathTemplates.organizationServicePathTemplate.match(
+      organizationServiceName,
+    ).service;
   }
 
   /**
@@ -2271,12 +2825,18 @@ export class ServiceMonitoringServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  organizationServiceServiceLevelObjectivePath(organization:string,service:string,serviceLevelObjective:string) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render({
-      organization: organization,
-      service: service,
-      service_level_objective: serviceLevelObjective,
-    });
+  organizationServiceServiceLevelObjectivePath(
+    organization: string,
+    service: string,
+    serviceLevelObjective: string,
+  ) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render(
+      {
+        organization: organization,
+        service: service,
+        service_level_objective: serviceLevelObjective,
+      },
+    );
   }
 
   /**
@@ -2286,8 +2846,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).organization;
+  matchOrganizationFromOrganizationServiceServiceLevelObjectiveName(
+    organizationServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+      organizationServiceServiceLevelObjectiveName,
+    ).organization;
   }
 
   /**
@@ -2297,8 +2861,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).service;
+  matchServiceFromOrganizationServiceServiceLevelObjectiveName(
+    organizationServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+      organizationServiceServiceLevelObjectiveName,
+    ).service;
   }
 
   /**
@@ -2308,8 +2876,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(organizationServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(organizationServiceServiceLevelObjectiveName).service_level_objective;
+  matchServiceLevelObjectiveFromOrganizationServiceServiceLevelObjectiveName(
+    organizationServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.match(
+      organizationServiceServiceLevelObjectiveName,
+    ).service_level_objective;
   }
 
   /**
@@ -2319,7 +2891,10 @@ export class ServiceMonitoringServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  organizationUptimeCheckConfigPath(organization:string,uptimeCheckConfig:string) {
+  organizationUptimeCheckConfigPath(
+    organization: string,
+    uptimeCheckConfig: string,
+  ) {
     return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.render({
       organization: organization,
       uptime_check_config: uptimeCheckConfig,
@@ -2333,8 +2908,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_uptime_check_config resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationUptimeCheckConfigName(organizationUptimeCheckConfigName: string) {
-    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(organizationUptimeCheckConfigName).organization;
+  matchOrganizationFromOrganizationUptimeCheckConfigName(
+    organizationUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
+      organizationUptimeCheckConfigName,
+    ).organization;
   }
 
   /**
@@ -2344,8 +2923,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing organization_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(organizationUptimeCheckConfigName: string) {
-    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(organizationUptimeCheckConfigName).uptime_check_config;
+  matchUptimeCheckConfigFromOrganizationUptimeCheckConfigName(
+    organizationUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.organizationUptimeCheckConfigPathTemplate.match(
+      organizationUptimeCheckConfigName,
+    ).uptime_check_config;
   }
 
   /**
@@ -2354,7 +2937,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2378,7 +2961,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} alert_policy
    * @returns {string} Resource name string.
    */
-  projectAlertPolicyPath(project:string,alertPolicy:string) {
+  projectAlertPolicyPath(project: string, alertPolicy: string) {
     return this.pathTemplates.projectAlertPolicyPathTemplate.render({
       project: project,
       alert_policy: alertPolicy,
@@ -2393,7 +2976,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this.pathTemplates.projectAlertPolicyPathTemplate.match(projectAlertPolicyName).project;
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
+      projectAlertPolicyName,
+    ).project;
   }
 
   /**
@@ -2404,7 +2989,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the alert_policy.
    */
   matchAlertPolicyFromProjectAlertPolicyName(projectAlertPolicyName: string) {
-    return this.pathTemplates.projectAlertPolicyPathTemplate.match(projectAlertPolicyName).alert_policy;
+    return this.pathTemplates.projectAlertPolicyPathTemplate.match(
+      projectAlertPolicyName,
+    ).alert_policy;
   }
 
   /**
@@ -2415,7 +3002,11 @@ export class ServiceMonitoringServiceClient {
    * @param {string} condition
    * @returns {string} Resource name string.
    */
-  projectAlertPolicyConditionPath(project:string,alertPolicy:string,condition:string) {
+  projectAlertPolicyConditionPath(
+    project: string,
+    alertPolicy: string,
+    condition: string,
+  ) {
     return this.pathTemplates.projectAlertPolicyConditionPathTemplate.render({
       project: project,
       alert_policy: alertPolicy,
@@ -2430,8 +3021,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).project;
+  matchProjectFromProjectAlertPolicyConditionName(
+    projectAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+      projectAlertPolicyConditionName,
+    ).project;
   }
 
   /**
@@ -2441,8 +3036,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the alert_policy.
    */
-  matchAlertPolicyFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).alert_policy;
+  matchAlertPolicyFromProjectAlertPolicyConditionName(
+    projectAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+      projectAlertPolicyConditionName,
+    ).alert_policy;
   }
 
   /**
@@ -2452,8 +3051,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_alert_policy_condition resource.
    * @returns {string} A string representing the condition.
    */
-  matchConditionFromProjectAlertPolicyConditionName(projectAlertPolicyConditionName: string) {
-    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(projectAlertPolicyConditionName).condition;
+  matchConditionFromProjectAlertPolicyConditionName(
+    projectAlertPolicyConditionName: string,
+  ) {
+    return this.pathTemplates.projectAlertPolicyConditionPathTemplate.match(
+      projectAlertPolicyConditionName,
+    ).condition;
   }
 
   /**
@@ -2463,7 +3066,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} channel_descriptor
    * @returns {string} Resource name string.
    */
-  projectChannelDescriptorPath(project:string,channelDescriptor:string) {
+  projectChannelDescriptorPath(project: string, channelDescriptor: string) {
     return this.pathTemplates.projectChannelDescriptorPathTemplate.render({
       project: project,
       channel_descriptor: channelDescriptor,
@@ -2477,8 +3080,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_channel_descriptor resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectChannelDescriptorName(projectChannelDescriptorName: string) {
-    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(projectChannelDescriptorName).project;
+  matchProjectFromProjectChannelDescriptorName(
+    projectChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
+      projectChannelDescriptorName,
+    ).project;
   }
 
   /**
@@ -2488,8 +3095,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_channel_descriptor resource.
    * @returns {string} A string representing the channel_descriptor.
    */
-  matchChannelDescriptorFromProjectChannelDescriptorName(projectChannelDescriptorName: string) {
-    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(projectChannelDescriptorName).channel_descriptor;
+  matchChannelDescriptorFromProjectChannelDescriptorName(
+    projectChannelDescriptorName: string,
+  ) {
+    return this.pathTemplates.projectChannelDescriptorPathTemplate.match(
+      projectChannelDescriptorName,
+    ).channel_descriptor;
   }
 
   /**
@@ -2499,7 +3110,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} group
    * @returns {string} Resource name string.
    */
-  projectGroupPath(project:string,group:string) {
+  projectGroupPath(project: string, group: string) {
     return this.pathTemplates.projectGroupPathTemplate.render({
       project: project,
       group: group,
@@ -2514,7 +3125,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectGroupName(projectGroupName: string) {
-    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName).project;
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
+      .project;
   }
 
   /**
@@ -2525,7 +3137,8 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the group.
    */
   matchGroupFromProjectGroupName(projectGroupName: string) {
-    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName).group;
+    return this.pathTemplates.projectGroupPathTemplate.match(projectGroupName)
+      .group;
   }
 
   /**
@@ -2535,7 +3148,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} notification_channel
    * @returns {string} Resource name string.
    */
-  projectNotificationChannelPath(project:string,notificationChannel:string) {
+  projectNotificationChannelPath(project: string, notificationChannel: string) {
     return this.pathTemplates.projectNotificationChannelPathTemplate.render({
       project: project,
       notification_channel: notificationChannel,
@@ -2549,8 +3162,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_notification_channel resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectNotificationChannelName(projectNotificationChannelName: string) {
-    return this.pathTemplates.projectNotificationChannelPathTemplate.match(projectNotificationChannelName).project;
+  matchProjectFromProjectNotificationChannelName(
+    projectNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
+      projectNotificationChannelName,
+    ).project;
   }
 
   /**
@@ -2560,8 +3177,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_notification_channel resource.
    * @returns {string} A string representing the notification_channel.
    */
-  matchNotificationChannelFromProjectNotificationChannelName(projectNotificationChannelName: string) {
-    return this.pathTemplates.projectNotificationChannelPathTemplate.match(projectNotificationChannelName).notification_channel;
+  matchNotificationChannelFromProjectNotificationChannelName(
+    projectNotificationChannelName: string,
+  ) {
+    return this.pathTemplates.projectNotificationChannelPathTemplate.match(
+      projectNotificationChannelName,
+    ).notification_channel;
   }
 
   /**
@@ -2571,7 +3192,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  projectServicePath(project:string,service:string) {
+  projectServicePath(project: string, service: string) {
     return this.pathTemplates.projectServicePathTemplate.render({
       project: project,
       service: service,
@@ -2586,7 +3207,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromProjectServiceName(projectServiceName: string) {
-    return this.pathTemplates.projectServicePathTemplate.match(projectServiceName).project;
+    return this.pathTemplates.projectServicePathTemplate.match(
+      projectServiceName,
+    ).project;
   }
 
   /**
@@ -2597,7 +3220,9 @@ export class ServiceMonitoringServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromProjectServiceName(projectServiceName: string) {
-    return this.pathTemplates.projectServicePathTemplate.match(projectServiceName).service;
+    return this.pathTemplates.projectServicePathTemplate.match(
+      projectServiceName,
+    ).service;
   }
 
   /**
@@ -2608,12 +3233,18 @@ export class ServiceMonitoringServiceClient {
    * @param {string} service_level_objective
    * @returns {string} Resource name string.
    */
-  projectServiceServiceLevelObjectivePath(project:string,service:string,serviceLevelObjective:string) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render({
-      project: project,
-      service: service,
-      service_level_objective: serviceLevelObjective,
-    });
+  projectServiceServiceLevelObjectivePath(
+    project: string,
+    service: string,
+    serviceLevelObjective: string,
+  ) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render(
+      {
+        project: project,
+        service: service,
+        service_level_objective: serviceLevelObjective,
+      },
+    );
   }
 
   /**
@@ -2623,8 +3254,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).project;
+  matchProjectFromProjectServiceServiceLevelObjectiveName(
+    projectServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+      projectServiceServiceLevelObjectiveName,
+    ).project;
   }
 
   /**
@@ -2634,8 +3269,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the service.
    */
-  matchServiceFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).service;
+  matchServiceFromProjectServiceServiceLevelObjectiveName(
+    projectServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+      projectServiceServiceLevelObjectiveName,
+    ).service;
   }
 
   /**
@@ -2645,8 +3284,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_service_service_level_objective resource.
    * @returns {string} A string representing the service_level_objective.
    */
-  matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(projectServiceServiceLevelObjectiveName: string) {
-    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(projectServiceServiceLevelObjectiveName).service_level_objective;
+  matchServiceLevelObjectiveFromProjectServiceServiceLevelObjectiveName(
+    projectServiceServiceLevelObjectiveName: string,
+  ) {
+    return this.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.match(
+      projectServiceServiceLevelObjectiveName,
+    ).service_level_objective;
   }
 
   /**
@@ -2656,7 +3299,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} uptime_check_config
    * @returns {string} Resource name string.
    */
-  projectUptimeCheckConfigPath(project:string,uptimeCheckConfig:string) {
+  projectUptimeCheckConfigPath(project: string, uptimeCheckConfig: string) {
     return this.pathTemplates.projectUptimeCheckConfigPathTemplate.render({
       project: project,
       uptime_check_config: uptimeCheckConfig,
@@ -2670,8 +3313,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_uptime_check_config resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectUptimeCheckConfigName(projectUptimeCheckConfigName: string) {
-    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(projectUptimeCheckConfigName).project;
+  matchProjectFromProjectUptimeCheckConfigName(
+    projectUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
+      projectUptimeCheckConfigName,
+    ).project;
   }
 
   /**
@@ -2681,8 +3328,12 @@ export class ServiceMonitoringServiceClient {
    *   A fully-qualified path representing project_uptime_check_config resource.
    * @returns {string} A string representing the uptime_check_config.
    */
-  matchUptimeCheckConfigFromProjectUptimeCheckConfigName(projectUptimeCheckConfigName: string) {
-    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(projectUptimeCheckConfigName).uptime_check_config;
+  matchUptimeCheckConfigFromProjectUptimeCheckConfigName(
+    projectUptimeCheckConfigName: string,
+  ) {
+    return this.pathTemplates.projectUptimeCheckConfigPathTemplate.match(
+      projectUptimeCheckConfigName,
+    ).uptime_check_config;
   }
 
   /**
@@ -2692,7 +3343,7 @@ export class ServiceMonitoringServiceClient {
    * @param {string} snooze
    * @returns {string} Resource name string.
    */
-  snoozePath(project:string,snooze:string) {
+  snoozePath(project: string, snooze: string) {
     return this.pathTemplates.snoozePathTemplate.render({
       project: project,
       snooze: snooze,
@@ -2729,7 +3380,7 @@ export class ServiceMonitoringServiceClient {
    */
   close(): Promise<void> {
     if (this.serviceMonitoringServiceStub && !this._terminated) {
-      return this.serviceMonitoringServiceStub.then(stub => {
+      return this.serviceMonitoringServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

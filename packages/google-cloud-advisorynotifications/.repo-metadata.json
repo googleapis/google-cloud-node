@@ -1,17 +1,16 @@
 {
-  "name": "advisorynotifications",
-  "name_pretty": "Advisory Notifications API",
-  "product_documentation": "https://cloud.google.com/advisory-notifications/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/advisorynotifications/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/advisorynotifications",
-  "api_id": "advisorynotifications.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "advisorynotifications"
+    "api_description": "An API for accessing Advisory Notifications in Google Cloud",
+    "api_id": "advisorynotifications.googleapis.com",
+    "api_shortname": "advisorynotifications",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/advisorynotifications/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/advisorynotifications",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1009495",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "advisorynotifications",
+    "name_pretty": "Advisory Notifications",
+    "product_documentation": "https://cloud.google.com/advisory-notifications/docs",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node"
 }
-

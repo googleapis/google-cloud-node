@@ -5,6 +5,25 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [8.7.1](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.7.0...firestore-v8.7.1) (2026-08-04)
+
+
+### Bug Fixes
+
+* **firestore:** Prevent adding telemetry events to ended spans ([#8847](https://github.com/googleapis/google-cloud-node/issues/8847)) ([#8939](https://github.com/googleapis/google-cloud-node/issues/8939)) ([1d3c655](https://github.com/googleapis/google-cloud-node/commit/1d3c655992216e4e79a86480f84ff7eae9a5e6c5))
+
+## [8.7.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.6.0...firestore-v8.7.0) (2026-07-21)
+
+
+### Features
+
+* **firestore:** Add support for 16MB documents ([#8649](https://github.com/googleapis/google-cloud-node/issues/8649)) ([ecf348b](https://github.com/googleapis/google-cloud-node/commit/ecf348bed2cc5678d78e4950f6aa417e73ab26b4))
+
+
+### Bug Fixes
+
+* **firestore:** Eager evict idle REST clients on gRPC transition ([#8817](https://github.com/googleapis/google-cloud-node/issues/8817)) ([506b8b6](https://github.com/googleapis/google-cloud-node/commit/506b8b69952b7baf6bd04235598e58932ccec57f))
+
 ## [8.6.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v8.5.0...firestore-v8.6.0) (2026-05-11)
 
 

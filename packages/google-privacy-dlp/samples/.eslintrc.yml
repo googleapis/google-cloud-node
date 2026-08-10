@@ -1,5 +1,0 @@
----
-rules:
-  no-console: off
-  no-warning-comments: off
-  node/no-missing-require: off

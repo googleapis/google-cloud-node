@@ -3,6 +3,8 @@
   "../../protos/google/devicesandservices/health/v4/data_model.proto",
   "../../protos/google/devicesandservices/health/v4/data_points.proto",
   "../../protos/google/devicesandservices/health/v4/data_source.proto",
+  "../../protos/google/devicesandservices/health/v4/data_subscription_service.proto",
   "../../protos/google/devicesandservices/health/v4/health_profile.proto",
+  "../../protos/google/devicesandservices/health/v4/medical_device_info.proto",
   "../../protos/google/devicesandservices/health/v4/webhook_notification_cloud_log.proto"
 ]

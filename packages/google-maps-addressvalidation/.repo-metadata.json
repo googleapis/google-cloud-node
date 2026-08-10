@@ -1,17 +1,15 @@
 {
-  "name": "addressvalidation",
-  "name_pretty": "Address Validation API",
-  "product_documentation": "https://mapsplatform.google.com/maps-products/address-validation/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/addressvalidation/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/addressvalidation",
-  "api_id": "addressvalidation.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "addressvalidation"
+    "api_description": "The Address Validation API allows developers to verify the accuracy of\naddresses. Given an address, it returns information about the correctness\nof the components of the parsed address, a geocode, and a verdict on the\ndeliverability of the parsed address.",
+    "api_id": "addressvalidation.googleapis.com",
+    "api_shortname": "addressvalidation",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/addressvalidation/latest",
+    "default_version": "v1",
+    "distribution_name": "@googlemaps/addressvalidation",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "addressvalidation",
+    "name_pretty": "Address Validation",
+    "product_documentation": "https://mapsplatform.google.com/maps-products/address-validation/",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node"
 }
-

@@ -15,10 +15,10 @@
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import * as gax from 'google-gax';
-import * as uuid from 'uuid';
+import * as crypto from 'crypto';
 import * as sinon from 'sinon';
 import {BigQuery, TableRow, TableSchema} from '@google-cloud/bigquery';
-import * as protos from '../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 import * as protobuf from 'protobufjs';
 import {ClientOptions} from 'google-gax';
 import * as customerRecordProtoJson from './fixtures/customer_record.json';
@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'DEBUG') {
 const GCLOUD_TESTS_PREFIX = 'nodejs_bqstorage_system_test';
 const bigquery = new BigQuery();
 const generateUuid = () =>
-  `${GCLOUD_TESTS_PREFIX}_${uuid.v4()}`.replace(/-/gi, '_');
+  `${GCLOUD_TESTS_PREFIX}_${crypto.randomUUID()}`.replace(/-/gi, '_');
 const datasetId = generateUuid();
 
 const sleep = (ms: number) =>

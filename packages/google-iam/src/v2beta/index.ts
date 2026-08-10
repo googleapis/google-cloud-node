@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {PoliciesClient} from './policies_client';
+export { PoliciesClient } from './policies_client';

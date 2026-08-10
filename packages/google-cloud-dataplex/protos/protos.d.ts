@@ -3482,7 +3482,7 @@ export namespace google {
                     description?: (string|null);
 
                     /** Asset state */
-                    state?: (google.cloud.dataplex.v1.Asset.DiscoveryStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.DiscoveryStatus.State|null);
+                    state?: (google.cloud.dataplex.v1.Asset.SecurityStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.SecurityStatus.State|null);
 
                     /** Asset resourceSpec */
                     resourceSpec?: (google.cloud.dataplex.v1.Asset.IResourceSpec|null);
@@ -3531,7 +3531,7 @@ export namespace google {
                     public description: string;
 
                     /** Asset state. */
-                    public state: (google.cloud.dataplex.v1.Asset.DiscoveryStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.DiscoveryStatus.State);
+                    public state: (google.cloud.dataplex.v1.Asset.SecurityStatus.State|keyof typeof google.cloud.dataplex.v1.Asset.SecurityStatus.State);
 
                     /** Asset resourceSpec. */
                     public resourceSpec?: (google.cloud.dataplex.v1.Asset.IResourceSpec|null);
@@ -4612,6 +4612,416 @@ export namespace google {
                     CREATING = 2,
                     DELETING = 3,
                     ACTION_REQUIRED = 4
+                }
+
+                /** Properties of a ChangeRequest. */
+                interface IChangeRequest {
+
+                    /** ChangeRequest name */
+                    name?: (string|null);
+
+                    /** ChangeRequest uid */
+                    uid?: (string|null);
+
+                    /** ChangeRequest createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ChangeRequest updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ChangeRequest justification */
+                    justification?: (string|null);
+
+                    /** ChangeRequest labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** ChangeRequest author */
+                    author?: (string|null);
+
+                    /** ChangeRequest state */
+                    state?: (google.cloud.dataplex.v1.ChangeRequest.State|keyof typeof google.cloud.dataplex.v1.ChangeRequest.State|null);
+
+                    /** ChangeRequest resource */
+                    resource?: (string|null);
+
+                    /** ChangeRequest createEntry */
+                    createEntry?: (google.cloud.dataplex.v1.ICreateEntryRequest|null);
+
+                    /** ChangeRequest updateEntry */
+                    updateEntry?: (google.cloud.dataplex.v1.IUpdateEntryRequest|null);
+
+                    /** ChangeRequest deleteEntry */
+                    deleteEntry?: (google.cloud.dataplex.v1.IDeleteEntryRequest|null);
+
+                    /** ChangeRequest createEntryLink */
+                    createEntryLink?: (google.cloud.dataplex.v1.ICreateEntryLinkRequest|null);
+
+                    /** ChangeRequest deleteEntryLink */
+                    deleteEntryLink?: (google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null);
+
+                    /** ChangeRequest createGlossary */
+                    createGlossary?: (google.cloud.dataplex.v1.ICreateGlossaryRequest|null);
+
+                    /** ChangeRequest updateGlossary */
+                    updateGlossary?: (google.cloud.dataplex.v1.IUpdateGlossaryRequest|null);
+
+                    /** ChangeRequest deleteGlossary */
+                    deleteGlossary?: (google.cloud.dataplex.v1.IDeleteGlossaryRequest|null);
+
+                    /** ChangeRequest createGlossaryCategory */
+                    createGlossaryCategory?: (google.cloud.dataplex.v1.ICreateGlossaryCategoryRequest|null);
+
+                    /** ChangeRequest updateGlossaryCategory */
+                    updateGlossaryCategory?: (google.cloud.dataplex.v1.IUpdateGlossaryCategoryRequest|null);
+
+                    /** ChangeRequest deleteGlossaryCategory */
+                    deleteGlossaryCategory?: (google.cloud.dataplex.v1.IDeleteGlossaryCategoryRequest|null);
+
+                    /** ChangeRequest createGlossaryTerm */
+                    createGlossaryTerm?: (google.cloud.dataplex.v1.ICreateGlossaryTermRequest|null);
+
+                    /** ChangeRequest updateGlossaryTerm */
+                    updateGlossaryTerm?: (google.cloud.dataplex.v1.IUpdateGlossaryTermRequest|null);
+
+                    /** ChangeRequest deleteGlossaryTerm */
+                    deleteGlossaryTerm?: (google.cloud.dataplex.v1.IDeleteGlossaryTermRequest|null);
+
+                    /** ChangeRequest dataProductAccessRequest */
+                    dataProductAccessRequest?: (google.cloud.dataplex.v1.IDataProductAccessRequest|null);
+
+                    /** ChangeRequest changeType */
+                    changeType?: (google.cloud.dataplex.v1.ChangeRequest.ChangeType|keyof typeof google.cloud.dataplex.v1.ChangeRequest.ChangeType|null);
+
+                    /** ChangeRequest rejectionComment */
+                    rejectionComment?: (string|null);
+
+                    /** ChangeRequest approver */
+                    approver?: (string|null);
+
+                    /** ChangeRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a ChangeRequest. */
+                class ChangeRequest implements IChangeRequest {
+
+                    /**
+                     * Constructs a new ChangeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IChangeRequest);
+
+                    /** ChangeRequest name. */
+                    public name: string;
+
+                    /** ChangeRequest uid. */
+                    public uid: string;
+
+                    /** ChangeRequest createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ChangeRequest updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ChangeRequest justification. */
+                    public justification: string;
+
+                    /** ChangeRequest labels. */
+                    public labels: { [k: string]: string };
+
+                    /** ChangeRequest author. */
+                    public author: string;
+
+                    /** ChangeRequest state. */
+                    public state: (google.cloud.dataplex.v1.ChangeRequest.State|keyof typeof google.cloud.dataplex.v1.ChangeRequest.State);
+
+                    /** ChangeRequest resource. */
+                    public resource: string;
+
+                    /** ChangeRequest createEntry. */
+                    public createEntry?: (google.cloud.dataplex.v1.ICreateEntryRequest|null);
+
+                    /** ChangeRequest updateEntry. */
+                    public updateEntry?: (google.cloud.dataplex.v1.IUpdateEntryRequest|null);
+
+                    /** ChangeRequest deleteEntry. */
+                    public deleteEntry?: (google.cloud.dataplex.v1.IDeleteEntryRequest|null);
+
+                    /** ChangeRequest createEntryLink. */
+                    public createEntryLink?: (google.cloud.dataplex.v1.ICreateEntryLinkRequest|null);
+
+                    /** ChangeRequest deleteEntryLink. */
+                    public deleteEntryLink?: (google.cloud.dataplex.v1.IDeleteEntryLinkRequest|null);
+
+                    /** ChangeRequest createGlossary. */
+                    public createGlossary?: (google.cloud.dataplex.v1.ICreateGlossaryRequest|null);
+
+                    /** ChangeRequest updateGlossary. */
+                    public updateGlossary?: (google.cloud.dataplex.v1.IUpdateGlossaryRequest|null);
+
+                    /** ChangeRequest deleteGlossary. */
+                    public deleteGlossary?: (google.cloud.dataplex.v1.IDeleteGlossaryRequest|null);
+
+                    /** ChangeRequest createGlossaryCategory. */
+                    public createGlossaryCategory?: (google.cloud.dataplex.v1.ICreateGlossaryCategoryRequest|null);
+
+                    /** ChangeRequest updateGlossaryCategory. */
+                    public updateGlossaryCategory?: (google.cloud.dataplex.v1.IUpdateGlossaryCategoryRequest|null);
+
+                    /** ChangeRequest deleteGlossaryCategory. */
+                    public deleteGlossaryCategory?: (google.cloud.dataplex.v1.IDeleteGlossaryCategoryRequest|null);
+
+                    /** ChangeRequest createGlossaryTerm. */
+                    public createGlossaryTerm?: (google.cloud.dataplex.v1.ICreateGlossaryTermRequest|null);
+
+                    /** ChangeRequest updateGlossaryTerm. */
+                    public updateGlossaryTerm?: (google.cloud.dataplex.v1.IUpdateGlossaryTermRequest|null);
+
+                    /** ChangeRequest deleteGlossaryTerm. */
+                    public deleteGlossaryTerm?: (google.cloud.dataplex.v1.IDeleteGlossaryTermRequest|null);
+
+                    /** ChangeRequest dataProductAccessRequest. */
+                    public dataProductAccessRequest?: (google.cloud.dataplex.v1.IDataProductAccessRequest|null);
+
+                    /** ChangeRequest changeType. */
+                    public changeType: (google.cloud.dataplex.v1.ChangeRequest.ChangeType|keyof typeof google.cloud.dataplex.v1.ChangeRequest.ChangeType);
+
+                    /** ChangeRequest rejectionComment. */
+                    public rejectionComment: string;
+
+                    /** ChangeRequest approver. */
+                    public approver: string;
+
+                    /** ChangeRequest etag. */
+                    public etag: string;
+
+                    /** ChangeRequest changePayload. */
+                    public changePayload?: ("createEntry"|"updateEntry"|"deleteEntry"|"createEntryLink"|"deleteEntryLink"|"createGlossary"|"updateGlossary"|"deleteGlossary"|"createGlossaryCategory"|"updateGlossaryCategory"|"deleteGlossaryCategory"|"createGlossaryTerm"|"updateGlossaryTerm"|"deleteGlossaryTerm"|"dataProductAccessRequest");
+
+                    /**
+                     * Creates a new ChangeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChangeRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IChangeRequest): google.cloud.dataplex.v1.ChangeRequest;
+
+                    /**
+                     * Encodes the specified ChangeRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ChangeRequest.verify|verify} messages.
+                     * @param message ChangeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IChangeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChangeRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ChangeRequest.verify|verify} messages.
+                     * @param message ChangeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IChangeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChangeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChangeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ChangeRequest;
+
+                    /**
+                     * Decodes a ChangeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChangeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ChangeRequest;
+
+                    /**
+                     * Verifies a ChangeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChangeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChangeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ChangeRequest;
+
+                    /**
+                     * Creates a plain object from a ChangeRequest message. Also converts values to other types if specified.
+                     * @param message ChangeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ChangeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChangeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ChangeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ChangeRequest {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        NEW = 1,
+                        APPROVED = 2,
+                        REJECTED = 3,
+                        EXPIRED = 4,
+                        REVOKED = 5
+                    }
+
+                    /** ChangeType enum. */
+                    enum ChangeType {
+                        CHANGE_TYPE_UNSPECIFIED = 0,
+                        CREATE_ENTRY = 1,
+                        UPDATE_ENTRY = 2,
+                        DELETE_ENTRY = 3,
+                        CREATE_ENTRY_LINK = 4,
+                        DELETE_ENTRY_LINK = 5,
+                        CREATE_GLOSSARY = 7,
+                        UPDATE_GLOSSARY = 8,
+                        DELETE_GLOSSARY = 9,
+                        CREATE_GLOSSARY_CATEGORY = 10,
+                        UPDATE_GLOSSARY_CATEGORY = 11,
+                        DELETE_GLOSSARY_CATEGORY = 13,
+                        CREATE_GLOSSARY_TERM = 14,
+                        UPDATE_GLOSSARY_TERM = 15,
+                        DELETE_GLOSSARY_TERM = 17,
+                        REQUEST_DATA_PRODUCT_ACCESS = 33
+                    }
+                }
+
+                /** Properties of a DataProductAccessRequest. */
+                interface IDataProductAccessRequest {
+
+                    /** DataProductAccessRequest parent */
+                    parent?: (string|null);
+
+                    /** DataProductAccessRequest accessGroupId */
+                    accessGroupId?: (string|null);
+
+                    /** DataProductAccessRequest accessGroupDisplayName */
+                    accessGroupDisplayName?: (string|null);
+
+                    /** DataProductAccessRequest requestedPrincipal */
+                    requestedPrincipal?: (string|null);
+                }
+
+                /** Represents a DataProductAccessRequest. */
+                class DataProductAccessRequest implements IDataProductAccessRequest {
+
+                    /**
+                     * Constructs a new DataProductAccessRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDataProductAccessRequest);
+
+                    /** DataProductAccessRequest parent. */
+                    public parent: string;
+
+                    /** DataProductAccessRequest accessGroupId. */
+                    public accessGroupId: string;
+
+                    /** DataProductAccessRequest accessGroupDisplayName. */
+                    public accessGroupDisplayName: string;
+
+                    /** DataProductAccessRequest requestedPrincipal. */
+                    public requestedPrincipal?: (string|null);
+
+                    /**
+                     * Creates a new DataProductAccessRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataProductAccessRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDataProductAccessRequest): google.cloud.dataplex.v1.DataProductAccessRequest;
+
+                    /**
+                     * Encodes the specified DataProductAccessRequest message. Does not implicitly {@link google.cloud.dataplex.v1.DataProductAccessRequest.verify|verify} messages.
+                     * @param message DataProductAccessRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDataProductAccessRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataProductAccessRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataProductAccessRequest.verify|verify} messages.
+                     * @param message DataProductAccessRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDataProductAccessRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataProductAccessRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataProductAccessRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataProductAccessRequest;
+
+                    /**
+                     * Decodes a DataProductAccessRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataProductAccessRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataProductAccessRequest;
+
+                    /**
+                     * Verifies a DataProductAccessRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataProductAccessRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataProductAccessRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataProductAccessRequest;
+
+                    /**
+                     * Creates a plain object from a DataProductAccessRequest message. Also converts values to other types if specified.
+                     * @param message DataProductAccessRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DataProductAccessRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataProductAccessRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataProductAccessRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a BusinessGlossaryService */
@@ -13400,6 +13810,20 @@ export namespace google {
                     public lookupEntry(request: google.cloud.dataplex.v1.ILookupEntryRequest): Promise<google.cloud.dataplex.v1.Entry>;
 
                     /**
+                     * Calls ModifyEntry.
+                     * @param request ModifyEntryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Entry
+                     */
+                    public modifyEntry(request: google.cloud.dataplex.v1.IModifyEntryRequest, callback: google.cloud.dataplex.v1.CatalogService.ModifyEntryCallback): void;
+
+                    /**
+                     * Calls ModifyEntry.
+                     * @param request ModifyEntryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public modifyEntry(request: google.cloud.dataplex.v1.IModifyEntryRequest): Promise<google.cloud.dataplex.v1.Entry>;
+
+                    /**
                      * Calls SearchEntries.
                      * @param request SearchEntriesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and SearchEntriesResponse
@@ -13772,6 +14196,13 @@ export namespace google {
                      * @param [response] Entry
                      */
                     type LookupEntryCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Entry) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.CatalogService|modifyEntry}.
+                     * @param error Error, if any
+                     * @param [response] Entry
+                     */
+                    type ModifyEntryCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.Entry) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.dataplex.v1.CatalogService|searchEntries}.
@@ -18543,6 +18974,9 @@ export namespace google {
                     /** LookupContextRequest resources */
                     resources?: (string[]|null);
 
+                    /** LookupContextRequest context */
+                    context?: (string|null);
+
                     /** LookupContextRequest options */
                     options?: ({ [k: string]: string }|null);
                 }
@@ -18561,6 +18995,9 @@ export namespace google {
 
                     /** LookupContextRequest resources. */
                     public resources: string[];
+
+                    /** LookupContextRequest context. */
+                    public context: string;
 
                     /** LookupContextRequest options. */
                     public options: { [k: string]: string };
@@ -18637,6 +19074,127 @@ export namespace google {
 
                     /**
                      * Gets the default type url for LookupContextRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ModifyEntryRequest. */
+                interface IModifyEntryRequest {
+
+                    /** ModifyEntryRequest name */
+                    name?: (string|null);
+
+                    /** ModifyEntryRequest entry */
+                    entry?: (google.cloud.dataplex.v1.IEntry|null);
+
+                    /** ModifyEntryRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** ModifyEntryRequest deleteMissingAspects */
+                    deleteMissingAspects?: (boolean|null);
+
+                    /** ModifyEntryRequest aspectKeys */
+                    aspectKeys?: (string[]|null);
+                }
+
+                /** Represents a ModifyEntryRequest. */
+                class ModifyEntryRequest implements IModifyEntryRequest {
+
+                    /**
+                     * Constructs a new ModifyEntryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IModifyEntryRequest);
+
+                    /** ModifyEntryRequest name. */
+                    public name: string;
+
+                    /** ModifyEntryRequest entry. */
+                    public entry?: (google.cloud.dataplex.v1.IEntry|null);
+
+                    /** ModifyEntryRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** ModifyEntryRequest deleteMissingAspects. */
+                    public deleteMissingAspects: boolean;
+
+                    /** ModifyEntryRequest aspectKeys. */
+                    public aspectKeys: string[];
+
+                    /**
+                     * Creates a new ModifyEntryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ModifyEntryRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IModifyEntryRequest): google.cloud.dataplex.v1.ModifyEntryRequest;
+
+                    /**
+                     * Encodes the specified ModifyEntryRequest message. Does not implicitly {@link google.cloud.dataplex.v1.ModifyEntryRequest.verify|verify} messages.
+                     * @param message ModifyEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IModifyEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ModifyEntryRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ModifyEntryRequest.verify|verify} messages.
+                     * @param message ModifyEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IModifyEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ModifyEntryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ModifyEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ModifyEntryRequest;
+
+                    /**
+                     * Decodes a ModifyEntryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ModifyEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ModifyEntryRequest;
+
+                    /**
+                     * Verifies a ModifyEntryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ModifyEntryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ModifyEntryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ModifyEntryRequest;
+
+                    /**
+                     * Creates a plain object from a ModifyEntryRequest message. Also converts values to other types if specified.
+                     * @param message ModifyEntryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ModifyEntryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ModifyEntryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ModifyEntryRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -24142,6 +24700,9 @@ export namespace google {
 
                         /** StorageConfig jsonOptions */
                         jsonOptions?: (google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IJsonOptions|null);
+
+                        /** StorageConfig unstructuredDataOptions */
+                        unstructuredDataOptions?: (google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions|null);
                     }
 
                     /** Represents a StorageConfig. */
@@ -24164,6 +24725,9 @@ export namespace google {
 
                         /** StorageConfig jsonOptions. */
                         public jsonOptions?: (google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IJsonOptions|null);
+
+                        /** StorageConfig unstructuredDataOptions. */
+                        public unstructuredDataOptions?: (google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions|null);
 
                         /**
                          * Creates a new StorageConfig instance using the specified properties.
@@ -24463,6 +25027,103 @@ export namespace google {
 
                             /**
                              * Gets the default type url for JsonOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an UnstructuredDataOptions. */
+                        interface IUnstructuredDataOptions {
+
+                            /** UnstructuredDataOptions semanticInferenceEnabled */
+                            semanticInferenceEnabled?: (boolean|null);
+                        }
+
+                        /** Represents an UnstructuredDataOptions. */
+                        class UnstructuredDataOptions implements IUnstructuredDataOptions {
+
+                            /**
+                             * Constructs a new UnstructuredDataOptions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions);
+
+                            /** UnstructuredDataOptions semanticInferenceEnabled. */
+                            public semanticInferenceEnabled: boolean;
+
+                            /**
+                             * Creates a new UnstructuredDataOptions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UnstructuredDataOptions instance
+                             */
+                            public static create(properties?: google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions): google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions;
+
+                            /**
+                             * Encodes the specified UnstructuredDataOptions message. Does not implicitly {@link google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions.verify|verify} messages.
+                             * @param message UnstructuredDataOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UnstructuredDataOptions message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions.verify|verify} messages.
+                             * @param message UnstructuredDataOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.IUnstructuredDataOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an UnstructuredDataOptions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UnstructuredDataOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions;
+
+                            /**
+                             * Decodes an UnstructuredDataOptions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UnstructuredDataOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions;
+
+                            /**
+                             * Verifies an UnstructuredDataOptions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an UnstructuredDataOptions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UnstructuredDataOptions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions;
+
+                            /**
+                             * Creates a plain object from an UnstructuredDataOptions message. Also converts values to other types if specified.
+                             * @param message UnstructuredDataOptions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dataplex.v1.DataDiscoverySpec.StorageConfig.UnstructuredDataOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UnstructuredDataOptions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UnstructuredDataOptions
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -25907,6 +26568,20 @@ export namespace google {
                     public updateDataProduct(request: google.cloud.dataplex.v1.IUpdateDataProductRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls RequestDataProductAccess.
+                     * @param request RequestDataProductAccessRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RequestDataProductAccessResponse
+                     */
+                    public requestDataProductAccess(request: google.cloud.dataplex.v1.IRequestDataProductAccessRequest, callback: google.cloud.dataplex.v1.DataProductService.RequestDataProductAccessCallback): void;
+
+                    /**
+                     * Calls RequestDataProductAccess.
+                     * @param request RequestDataProductAccessRequest message or plain object
+                     * @returns Promise
+                     */
+                    public requestDataProductAccess(request: google.cloud.dataplex.v1.IRequestDataProductAccessRequest): Promise<google.cloud.dataplex.v1.RequestDataProductAccessResponse>;
+
+                    /**
                      * Calls CreateDataAsset.
                      * @param request CreateDataAssetRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -26015,6 +26690,13 @@ export namespace google {
                     type UpdateDataProductCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.DataProductService|requestDataProductAccess}.
+                     * @param error Error, if any
+                     * @param [response] RequestDataProductAccessResponse
+                     */
+                    type RequestDataProductAccessCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.RequestDataProductAccessResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.dataplex.v1.DataProductService|createDataAsset}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -26088,6 +26770,9 @@ export namespace google {
 
                     /** DataProduct accessGroups */
                     accessGroups?: ({ [k: string]: google.cloud.dataplex.v1.DataProduct.IAccessGroup }|null);
+
+                    /** DataProduct accessApprovalConfig */
+                    accessApprovalConfig?: (google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig|null);
                 }
 
                 /** Represents a DataProduct. */
@@ -26134,6 +26819,9 @@ export namespace google {
 
                     /** DataProduct accessGroups. */
                     public accessGroups: { [k: string]: google.cloud.dataplex.v1.DataProduct.IAccessGroup };
+
+                    /** DataProduct accessApprovalConfig. */
+                    public accessApprovalConfig?: (google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig|null);
 
                     /**
                      * Creates a new DataProduct instance using the specified properties.
@@ -26220,6 +26908,9 @@ export namespace google {
 
                         /** Principal googleGroup */
                         googleGroup?: (string|null);
+
+                        /** Principal serviceAccount */
+                        serviceAccount?: (string|null);
                     }
 
                     /** Represents a Principal. */
@@ -26233,6 +26924,9 @@ export namespace google {
 
                         /** Principal googleGroup. */
                         public googleGroup?: (string|null);
+
+                        /** Principal serviceAccount. */
+                        public serviceAccount?: (string|null);
 
                         /** Principal type. */
                         public type?: "googleGroup";
@@ -26424,6 +27118,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for AccessGroup
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AccessApprovalConfig. */
+                    interface IAccessApprovalConfig {
+
+                        /** AccessApprovalConfig approverEmails */
+                        approverEmails?: (string[]|null);
+                    }
+
+                    /** Represents an AccessApprovalConfig. */
+                    class AccessApprovalConfig implements IAccessApprovalConfig {
+
+                        /**
+                         * Constructs a new AccessApprovalConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig);
+
+                        /** AccessApprovalConfig approverEmails. */
+                        public approverEmails: string[];
+
+                        /**
+                         * Creates a new AccessApprovalConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AccessApprovalConfig instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig): google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig;
+
+                        /**
+                         * Encodes the specified AccessApprovalConfig message. Does not implicitly {@link google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig.verify|verify} messages.
+                         * @param message AccessApprovalConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AccessApprovalConfig message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig.verify|verify} messages.
+                         * @param message AccessApprovalConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DataProduct.IAccessApprovalConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AccessApprovalConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AccessApprovalConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig;
+
+                        /**
+                         * Decodes an AccessApprovalConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AccessApprovalConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig;
+
+                        /**
+                         * Verifies an AccessApprovalConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AccessApprovalConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AccessApprovalConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig;
+
+                        /**
+                         * Creates a plain object from an AccessApprovalConfig message. Also converts values to other types if specified.
+                         * @param message AccessApprovalConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AccessApprovalConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AccessApprovalConfig
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -27330,6 +28121,212 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RequestDataProductAccessRequest. */
+                interface IRequestDataProductAccessRequest {
+
+                    /** RequestDataProductAccessRequest parent */
+                    parent?: (string|null);
+
+                    /** RequestDataProductAccessRequest changeRequest */
+                    changeRequest?: (google.cloud.dataplex.v1.IChangeRequest|null);
+
+                    /** RequestDataProductAccessRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a RequestDataProductAccessRequest. */
+                class RequestDataProductAccessRequest implements IRequestDataProductAccessRequest {
+
+                    /**
+                     * Constructs a new RequestDataProductAccessRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IRequestDataProductAccessRequest);
+
+                    /** RequestDataProductAccessRequest parent. */
+                    public parent: string;
+
+                    /** RequestDataProductAccessRequest changeRequest. */
+                    public changeRequest?: (google.cloud.dataplex.v1.IChangeRequest|null);
+
+                    /** RequestDataProductAccessRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new RequestDataProductAccessRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RequestDataProductAccessRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IRequestDataProductAccessRequest): google.cloud.dataplex.v1.RequestDataProductAccessRequest;
+
+                    /**
+                     * Encodes the specified RequestDataProductAccessRequest message. Does not implicitly {@link google.cloud.dataplex.v1.RequestDataProductAccessRequest.verify|verify} messages.
+                     * @param message RequestDataProductAccessRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IRequestDataProductAccessRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RequestDataProductAccessRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.RequestDataProductAccessRequest.verify|verify} messages.
+                     * @param message RequestDataProductAccessRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IRequestDataProductAccessRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RequestDataProductAccessRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RequestDataProductAccessRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.RequestDataProductAccessRequest;
+
+                    /**
+                     * Decodes a RequestDataProductAccessRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RequestDataProductAccessRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.RequestDataProductAccessRequest;
+
+                    /**
+                     * Verifies a RequestDataProductAccessRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RequestDataProductAccessRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RequestDataProductAccessRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.RequestDataProductAccessRequest;
+
+                    /**
+                     * Creates a plain object from a RequestDataProductAccessRequest message. Also converts values to other types if specified.
+                     * @param message RequestDataProductAccessRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.RequestDataProductAccessRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RequestDataProductAccessRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RequestDataProductAccessRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RequestDataProductAccessResponse. */
+                interface IRequestDataProductAccessResponse {
+
+                    /** RequestDataProductAccessResponse changeRequestName */
+                    changeRequestName?: (string|null);
+                }
+
+                /** Represents a RequestDataProductAccessResponse. */
+                class RequestDataProductAccessResponse implements IRequestDataProductAccessResponse {
+
+                    /**
+                     * Constructs a new RequestDataProductAccessResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IRequestDataProductAccessResponse);
+
+                    /** RequestDataProductAccessResponse changeRequestName. */
+                    public changeRequestName: string;
+
+                    /**
+                     * Creates a new RequestDataProductAccessResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RequestDataProductAccessResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IRequestDataProductAccessResponse): google.cloud.dataplex.v1.RequestDataProductAccessResponse;
+
+                    /**
+                     * Encodes the specified RequestDataProductAccessResponse message. Does not implicitly {@link google.cloud.dataplex.v1.RequestDataProductAccessResponse.verify|verify} messages.
+                     * @param message RequestDataProductAccessResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IRequestDataProductAccessResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RequestDataProductAccessResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.RequestDataProductAccessResponse.verify|verify} messages.
+                     * @param message RequestDataProductAccessResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IRequestDataProductAccessResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RequestDataProductAccessResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RequestDataProductAccessResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.RequestDataProductAccessResponse;
+
+                    /**
+                     * Decodes a RequestDataProductAccessResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RequestDataProductAccessResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.RequestDataProductAccessResponse;
+
+                    /**
+                     * Verifies a RequestDataProductAccessResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RequestDataProductAccessResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RequestDataProductAccessResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.RequestDataProductAccessResponse;
+
+                    /**
+                     * Creates a plain object from a RequestDataProductAccessResponse message. Also converts values to other types if specified.
+                     * @param message RequestDataProductAccessResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.RequestDataProductAccessResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RequestDataProductAccessResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RequestDataProductAccessResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateDataAssetRequest. */
                 interface ICreateDataAssetRequest {
 
@@ -28004,6 +29001,9 @@ export namespace google {
 
                     /** DataProfileSpec catalogPublishingEnabled */
                     catalogPublishingEnabled?: (boolean|null);
+
+                    /** DataProfileSpec mode */
+                    mode?: (google.cloud.dataplex.v1.DataProfileSpec.Mode|keyof typeof google.cloud.dataplex.v1.DataProfileSpec.Mode|null);
                 }
 
                 /** Represents a DataProfileSpec. */
@@ -28032,6 +29032,9 @@ export namespace google {
 
                     /** DataProfileSpec catalogPublishingEnabled. */
                     public catalogPublishingEnabled: boolean;
+
+                    /** DataProfileSpec mode. */
+                    public mode: (google.cloud.dataplex.v1.DataProfileSpec.Mode|keyof typeof google.cloud.dataplex.v1.DataProfileSpec.Mode);
 
                     /**
                      * Creates a new DataProfileSpec instance using the specified properties.
@@ -28405,6 +29408,13 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        STANDARD = 1,
+                        LIGHTWEIGHT = 2
                     }
                 }
 
@@ -30400,6 +31410,12 @@ export namespace google {
 
                     /** DataQualitySpec catalogPublishingEnabled */
                     catalogPublishingEnabled?: (boolean|null);
+
+                    /** DataQualitySpec enableCatalogBasedRules */
+                    enableCatalogBasedRules?: (boolean|null);
+
+                    /** DataQualitySpec filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a DataQualitySpec. */
@@ -30425,6 +31441,12 @@ export namespace google {
 
                     /** DataQualitySpec catalogPublishingEnabled. */
                     public catalogPublishingEnabled: boolean;
+
+                    /** DataQualitySpec enableCatalogBasedRules. */
+                    public enableCatalogBasedRules: boolean;
+
+                    /** DataQualitySpec filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new DataQualitySpec instance using the specified properties.
@@ -32274,6 +33296,9 @@ export namespace google {
                     /** DataQualityRule sqlAssertion */
                     sqlAssertion?: (google.cloud.dataplex.v1.DataQualityRule.ISqlAssertion|null);
 
+                    /** DataQualityRule templateReference */
+                    templateReference?: (google.cloud.dataplex.v1.DataQualityRule.ITemplateReference|null);
+
                     /** DataQualityRule column */
                     column?: (string|null);
 
@@ -32294,6 +33319,12 @@ export namespace google {
 
                     /** DataQualityRule suspended */
                     suspended?: (boolean|null);
+
+                    /** DataQualityRule attributes */
+                    attributes?: ({ [k: string]: string }|null);
+
+                    /** DataQualityRule ruleSource */
+                    ruleSource?: (google.cloud.dataplex.v1.DataQualityRule.IRuleSource|null);
 
                     /** DataQualityRule debugQueries */
                     debugQueries?: (google.cloud.dataplex.v1.DataQualityRule.IDebugQuery[]|null);
@@ -32335,6 +33366,9 @@ export namespace google {
                     /** DataQualityRule sqlAssertion. */
                     public sqlAssertion?: (google.cloud.dataplex.v1.DataQualityRule.ISqlAssertion|null);
 
+                    /** DataQualityRule templateReference. */
+                    public templateReference?: (google.cloud.dataplex.v1.DataQualityRule.ITemplateReference|null);
+
                     /** DataQualityRule column. */
                     public column: string;
 
@@ -32356,11 +33390,17 @@ export namespace google {
                     /** DataQualityRule suspended. */
                     public suspended: boolean;
 
+                    /** DataQualityRule attributes. */
+                    public attributes: { [k: string]: string };
+
+                    /** DataQualityRule ruleSource. */
+                    public ruleSource?: (google.cloud.dataplex.v1.DataQualityRule.IRuleSource|null);
+
                     /** DataQualityRule debugQueries. */
                     public debugQueries: google.cloud.dataplex.v1.DataQualityRule.IDebugQuery[];
 
                     /** DataQualityRule ruleType. */
-                    public ruleType?: ("rangeExpectation"|"nonNullExpectation"|"setExpectation"|"regexExpectation"|"uniquenessExpectation"|"statisticRangeExpectation"|"rowConditionExpectation"|"tableConditionExpectation"|"sqlAssertion");
+                    public ruleType?: ("rangeExpectation"|"nonNullExpectation"|"setExpectation"|"regexExpectation"|"uniquenessExpectation"|"statisticRangeExpectation"|"rowConditionExpectation"|"tableConditionExpectation"|"sqlAssertion"|"templateReference");
 
                     /**
                      * Creates a new DataQualityRule instance using the specified properties.
@@ -33356,6 +34396,642 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a TemplateReference. */
+                    interface ITemplateReference {
+
+                        /** TemplateReference name */
+                        name?: (string|null);
+
+                        /** TemplateReference values */
+                        values?: ({ [k: string]: google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue }|null);
+
+                        /** TemplateReference resolvedSql */
+                        resolvedSql?: (string|null);
+
+                        /** TemplateReference ruleTemplate */
+                        ruleTemplate?: (google.cloud.dataplex.v1.IDataQualityRuleTemplate|null);
+                    }
+
+                    /** Represents a TemplateReference. */
+                    class TemplateReference implements ITemplateReference {
+
+                        /**
+                         * Constructs a new TemplateReference.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DataQualityRule.ITemplateReference);
+
+                        /** TemplateReference name. */
+                        public name: string;
+
+                        /** TemplateReference values. */
+                        public values: { [k: string]: google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue };
+
+                        /** TemplateReference resolvedSql. */
+                        public resolvedSql: string;
+
+                        /** TemplateReference ruleTemplate. */
+                        public ruleTemplate?: (google.cloud.dataplex.v1.IDataQualityRuleTemplate|null);
+
+                        /**
+                         * Creates a new TemplateReference instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TemplateReference instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DataQualityRule.ITemplateReference): google.cloud.dataplex.v1.DataQualityRule.TemplateReference;
+
+                        /**
+                         * Encodes the specified TemplateReference message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.TemplateReference.verify|verify} messages.
+                         * @param message TemplateReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DataQualityRule.ITemplateReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TemplateReference message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.TemplateReference.verify|verify} messages.
+                         * @param message TemplateReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DataQualityRule.ITemplateReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TemplateReference message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TemplateReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityRule.TemplateReference;
+
+                        /**
+                         * Decodes a TemplateReference message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TemplateReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityRule.TemplateReference;
+
+                        /**
+                         * Verifies a TemplateReference message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TemplateReference message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TemplateReference
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityRule.TemplateReference;
+
+                        /**
+                         * Creates a plain object from a TemplateReference message. Also converts values to other types if specified.
+                         * @param message TemplateReference
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DataQualityRule.TemplateReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TemplateReference to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TemplateReference
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TemplateReference {
+
+                        /** Properties of a ParameterValue. */
+                        interface IParameterValue {
+
+                            /** ParameterValue value */
+                            value?: (string|null);
+                        }
+
+                        /** Represents a ParameterValue. */
+                        class ParameterValue implements IParameterValue {
+
+                            /**
+                             * Constructs a new ParameterValue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue);
+
+                            /** ParameterValue value. */
+                            public value: string;
+
+                            /**
+                             * Creates a new ParameterValue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ParameterValue instance
+                             */
+                            public static create(properties?: google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue): google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue;
+
+                            /**
+                             * Encodes the specified ParameterValue message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue.verify|verify} messages.
+                             * @param message ParameterValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ParameterValue message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue.verify|verify} messages.
+                             * @param message ParameterValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dataplex.v1.DataQualityRule.TemplateReference.IParameterValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ParameterValue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ParameterValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue;
+
+                            /**
+                             * Decodes a ParameterValue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ParameterValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue;
+
+                            /**
+                             * Verifies a ParameterValue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ParameterValue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ParameterValue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue;
+
+                            /**
+                             * Creates a plain object from a ParameterValue message. Also converts values to other types if specified.
+                             * @param message ParameterValue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dataplex.v1.DataQualityRule.TemplateReference.ParameterValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ParameterValue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ParameterValue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a RuleSource. */
+                    interface IRuleSource {
+
+                        /** RuleSource rulePathElements */
+                        rulePathElements?: (google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement[]|null);
+                    }
+
+                    /** Represents a RuleSource. */
+                    class RuleSource implements IRuleSource {
+
+                        /**
+                         * Constructs a new RuleSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DataQualityRule.IRuleSource);
+
+                        /** RuleSource rulePathElements. */
+                        public rulePathElements: google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement[];
+
+                        /**
+                         * Creates a new RuleSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RuleSource instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DataQualityRule.IRuleSource): google.cloud.dataplex.v1.DataQualityRule.RuleSource;
+
+                        /**
+                         * Encodes the specified RuleSource message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.verify|verify} messages.
+                         * @param message RuleSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DataQualityRule.IRuleSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RuleSource message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.verify|verify} messages.
+                         * @param message RuleSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DataQualityRule.IRuleSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RuleSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RuleSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityRule.RuleSource;
+
+                        /**
+                         * Decodes a RuleSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RuleSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityRule.RuleSource;
+
+                        /**
+                         * Verifies a RuleSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RuleSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RuleSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityRule.RuleSource;
+
+                        /**
+                         * Creates a plain object from a RuleSource message. Also converts values to other types if specified.
+                         * @param message RuleSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DataQualityRule.RuleSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RuleSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RuleSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace RuleSource {
+
+                        /** Properties of a RulePathElement. */
+                        interface IRulePathElement {
+
+                            /** RulePathElement entrySource */
+                            entrySource?: (google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource|null);
+
+                            /** RulePathElement entryLinkSource */
+                            entryLinkSource?: (google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource|null);
+                        }
+
+                        /** Represents a RulePathElement. */
+                        class RulePathElement implements IRulePathElement {
+
+                            /**
+                             * Constructs a new RulePathElement.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement);
+
+                            /** RulePathElement entrySource. */
+                            public entrySource?: (google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource|null);
+
+                            /** RulePathElement entryLinkSource. */
+                            public entryLinkSource?: (google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource|null);
+
+                            /** RulePathElement sourceType. */
+                            public sourceType?: ("entrySource"|"entryLinkSource");
+
+                            /**
+                             * Creates a new RulePathElement instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RulePathElement instance
+                             */
+                            public static create(properties?: google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement;
+
+                            /**
+                             * Encodes the specified RulePathElement message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.verify|verify} messages.
+                             * @param message RulePathElement message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RulePathElement message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.verify|verify} messages.
+                             * @param message RulePathElement message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dataplex.v1.DataQualityRule.RuleSource.IRulePathElement, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RulePathElement message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RulePathElement
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement;
+
+                            /**
+                             * Decodes a RulePathElement message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RulePathElement
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement;
+
+                            /**
+                             * Verifies a RulePathElement message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RulePathElement message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RulePathElement
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement;
+
+                            /**
+                             * Creates a plain object from a RulePathElement message. Also converts values to other types if specified.
+                             * @param message RulePathElement
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RulePathElement to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RulePathElement
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RulePathElement {
+
+                            /** Properties of an EntrySource. */
+                            interface IEntrySource {
+
+                                /** EntrySource entryType */
+                                entryType?: (string|null);
+
+                                /** EntrySource entry */
+                                entry?: (string|null);
+
+                                /** EntrySource displayName */
+                                displayName?: (string|null);
+                            }
+
+                            /** Represents an EntrySource. */
+                            class EntrySource implements IEntrySource {
+
+                                /**
+                                 * Constructs a new EntrySource.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource);
+
+                                /** EntrySource entryType. */
+                                public entryType: string;
+
+                                /** EntrySource entry. */
+                                public entry: string;
+
+                                /** EntrySource displayName. */
+                                public displayName: string;
+
+                                /**
+                                 * Creates a new EntrySource instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns EntrySource instance
+                                 */
+                                public static create(properties?: google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource;
+
+                                /**
+                                 * Encodes the specified EntrySource message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource.verify|verify} messages.
+                                 * @param message EntrySource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified EntrySource message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource.verify|verify} messages.
+                                 * @param message EntrySource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntrySource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an EntrySource message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns EntrySource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource;
+
+                                /**
+                                 * Decodes an EntrySource message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns EntrySource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource;
+
+                                /**
+                                 * Verifies an EntrySource message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an EntrySource message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns EntrySource
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource;
+
+                                /**
+                                 * Creates a plain object from an EntrySource message. Also converts values to other types if specified.
+                                 * @param message EntrySource
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntrySource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this EntrySource to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for EntrySource
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of an EntryLinkSource. */
+                            interface IEntryLinkSource {
+
+                                /** EntryLinkSource entryLinkType */
+                                entryLinkType?: (string|null);
+
+                                /** EntryLinkSource entryLink */
+                                entryLink?: (string|null);
+                            }
+
+                            /** Represents an EntryLinkSource. */
+                            class EntryLinkSource implements IEntryLinkSource {
+
+                                /**
+                                 * Constructs a new EntryLinkSource.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource);
+
+                                /** EntryLinkSource entryLinkType. */
+                                public entryLinkType: string;
+
+                                /** EntryLinkSource entryLink. */
+                                public entryLink: string;
+
+                                /**
+                                 * Creates a new EntryLinkSource instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns EntryLinkSource instance
+                                 */
+                                public static create(properties?: google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource;
+
+                                /**
+                                 * Encodes the specified EntryLinkSource message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource.verify|verify} messages.
+                                 * @param message EntryLinkSource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified EntryLinkSource message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource.verify|verify} messages.
+                                 * @param message EntryLinkSource message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.IEntryLinkSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes an EntryLinkSource message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns EntryLinkSource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource;
+
+                                /**
+                                 * Decodes an EntryLinkSource message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns EntryLinkSource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource;
+
+                                /**
+                                 * Verifies an EntryLinkSource message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates an EntryLinkSource message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns EntryLinkSource
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource;
+
+                                /**
+                                 * Creates a plain object from an EntryLinkSource message. Also converts values to other types if specified.
+                                 * @param message EntryLinkSource
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.dataplex.v1.DataQualityRule.RuleSource.RulePathElement.EntryLinkSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this EntryLinkSource to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for EntryLinkSource
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
+                    }
+
                     /** Properties of a DebugQuery. */
                     interface IDebugQuery {
 
@@ -33573,6 +35249,330 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataQualityRuleTemplate. */
+                interface IDataQualityRuleTemplate {
+
+                    /** DataQualityRuleTemplate name */
+                    name?: (string|null);
+
+                    /** DataQualityRuleTemplate dimension */
+                    dimension?: (string|null);
+
+                    /** DataQualityRuleTemplate sqlCollection */
+                    sqlCollection?: (google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql[]|null);
+
+                    /** DataQualityRuleTemplate inputParameters */
+                    inputParameters?: ({ [k: string]: google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription }|null);
+
+                    /** DataQualityRuleTemplate capabilities */
+                    capabilities?: (string[]|null);
+                }
+
+                /** Represents a DataQualityRuleTemplate. */
+                class DataQualityRuleTemplate implements IDataQualityRuleTemplate {
+
+                    /**
+                     * Constructs a new DataQualityRuleTemplate.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDataQualityRuleTemplate);
+
+                    /** DataQualityRuleTemplate name. */
+                    public name: string;
+
+                    /** DataQualityRuleTemplate dimension. */
+                    public dimension: string;
+
+                    /** DataQualityRuleTemplate sqlCollection. */
+                    public sqlCollection: google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql[];
+
+                    /** DataQualityRuleTemplate inputParameters. */
+                    public inputParameters: { [k: string]: google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription };
+
+                    /** DataQualityRuleTemplate capabilities. */
+                    public capabilities: string[];
+
+                    /**
+                     * Creates a new DataQualityRuleTemplate instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataQualityRuleTemplate instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDataQualityRuleTemplate): google.cloud.dataplex.v1.DataQualityRuleTemplate;
+
+                    /**
+                     * Encodes the specified DataQualityRuleTemplate message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.verify|verify} messages.
+                     * @param message DataQualityRuleTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDataQualityRuleTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataQualityRuleTemplate message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.verify|verify} messages.
+                     * @param message DataQualityRuleTemplate message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDataQualityRuleTemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataQualityRuleTemplate message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataQualityRuleTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityRuleTemplate;
+
+                    /**
+                     * Decodes a DataQualityRuleTemplate message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataQualityRuleTemplate
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityRuleTemplate;
+
+                    /**
+                     * Verifies a DataQualityRuleTemplate message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataQualityRuleTemplate message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataQualityRuleTemplate
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityRuleTemplate;
+
+                    /**
+                     * Creates a plain object from a DataQualityRuleTemplate message. Also converts values to other types if specified.
+                     * @param message DataQualityRuleTemplate
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DataQualityRuleTemplate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataQualityRuleTemplate to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataQualityRuleTemplate
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DataQualityRuleTemplate {
+
+                    /** Properties of a Sql. */
+                    interface ISql {
+
+                        /** Sql query */
+                        query?: (string|null);
+                    }
+
+                    /** Represents a Sql. */
+                    class Sql implements ISql {
+
+                        /**
+                         * Constructs a new Sql.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql);
+
+                        /** Sql query. */
+                        public query: string;
+
+                        /**
+                         * Creates a new Sql instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Sql instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql): google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql;
+
+                        /**
+                         * Encodes the specified Sql message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql.verify|verify} messages.
+                         * @param message Sql message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Sql message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql.verify|verify} messages.
+                         * @param message Sql message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DataQualityRuleTemplate.ISql, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Sql message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Sql
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql;
+
+                        /**
+                         * Decodes a Sql message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Sql
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql;
+
+                        /**
+                         * Verifies a Sql message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Sql message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Sql
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql;
+
+                        /**
+                         * Creates a plain object from a Sql message. Also converts values to other types if specified.
+                         * @param message Sql
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Sql to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Sql
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ParameterDescription. */
+                    interface IParameterDescription {
+
+                        /** ParameterDescription description */
+                        description?: (string|null);
+
+                        /** ParameterDescription defaultValue */
+                        defaultValue?: (string|null);
+                    }
+
+                    /** Represents a ParameterDescription. */
+                    class ParameterDescription implements IParameterDescription {
+
+                        /**
+                         * Constructs a new ParameterDescription.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription);
+
+                        /** ParameterDescription description. */
+                        public description: string;
+
+                        /** ParameterDescription defaultValue. */
+                        public defaultValue: string;
+
+                        /**
+                         * Creates a new ParameterDescription instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ParameterDescription instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription): google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription;
+
+                        /**
+                         * Encodes the specified ParameterDescription message. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription.verify|verify} messages.
+                         * @param message ParameterDescription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ParameterDescription message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription.verify|verify} messages.
+                         * @param message ParameterDescription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.DataQualityRuleTemplate.IParameterDescription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ParameterDescription message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ParameterDescription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription;
+
+                        /**
+                         * Decodes a ParameterDescription message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ParameterDescription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription;
+
+                        /**
+                         * Verifies a ParameterDescription message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ParameterDescription message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ParameterDescription
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription;
+
+                        /**
+                         * Creates a plain object from a ParameterDescription message. Also converts values to other types if specified.
+                         * @param message ParameterDescription
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ParameterDescription to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ParameterDescription
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Represents a DataTaxonomyService */
@@ -36795,6 +38795,20 @@ export namespace google {
                     public listDataScanJobs(request: google.cloud.dataplex.v1.IListDataScanJobsRequest): Promise<google.cloud.dataplex.v1.ListDataScanJobsResponse>;
 
                     /**
+                     * Calls CancelDataScanJob.
+                     * @param request CancelDataScanJobRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CancelDataScanJobResponse
+                     */
+                    public cancelDataScanJob(request: google.cloud.dataplex.v1.ICancelDataScanJobRequest, callback: google.cloud.dataplex.v1.DataScanService.CancelDataScanJobCallback): void;
+
+                    /**
+                     * Calls CancelDataScanJob.
+                     * @param request CancelDataScanJobRequest message or plain object
+                     * @returns Promise
+                     */
+                    public cancelDataScanJob(request: google.cloud.dataplex.v1.ICancelDataScanJobRequest): Promise<google.cloud.dataplex.v1.CancelDataScanJobResponse>;
+
+                    /**
                      * Calls GenerateDataQualityRules.
                      * @param request GenerateDataQualityRulesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and GenerateDataQualityRulesResponse
@@ -36866,6 +38880,13 @@ export namespace google {
                      * @param [response] ListDataScanJobsResponse
                      */
                     type ListDataScanJobsCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.ListDataScanJobsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.dataplex.v1.DataScanService|cancelDataScanJob}.
+                     * @param error Error, if any
+                     * @param [response] CancelDataScanJobResponse
+                     */
+                    type CancelDataScanJobCallback = (error: (Error|null), response?: google.cloud.dataplex.v1.CancelDataScanJobResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.dataplex.v1.DataScanService|generateDataQualityRules}.
@@ -38070,6 +40091,194 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CancelDataScanJobRequest. */
+                interface ICancelDataScanJobRequest {
+
+                    /** CancelDataScanJobRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a CancelDataScanJobRequest. */
+                class CancelDataScanJobRequest implements ICancelDataScanJobRequest {
+
+                    /**
+                     * Constructs a new CancelDataScanJobRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.ICancelDataScanJobRequest);
+
+                    /** CancelDataScanJobRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new CancelDataScanJobRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelDataScanJobRequest instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.ICancelDataScanJobRequest): google.cloud.dataplex.v1.CancelDataScanJobRequest;
+
+                    /**
+                     * Encodes the specified CancelDataScanJobRequest message. Does not implicitly {@link google.cloud.dataplex.v1.CancelDataScanJobRequest.verify|verify} messages.
+                     * @param message CancelDataScanJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.ICancelDataScanJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelDataScanJobRequest message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.CancelDataScanJobRequest.verify|verify} messages.
+                     * @param message CancelDataScanJobRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.ICancelDataScanJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelDataScanJobRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelDataScanJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.CancelDataScanJobRequest;
+
+                    /**
+                     * Decodes a CancelDataScanJobRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelDataScanJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.CancelDataScanJobRequest;
+
+                    /**
+                     * Verifies a CancelDataScanJobRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelDataScanJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelDataScanJobRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.CancelDataScanJobRequest;
+
+                    /**
+                     * Creates a plain object from a CancelDataScanJobRequest message. Also converts values to other types if specified.
+                     * @param message CancelDataScanJobRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.CancelDataScanJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelDataScanJobRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelDataScanJobRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CancelDataScanJobResponse. */
+                interface ICancelDataScanJobResponse {
+                }
+
+                /** Represents a CancelDataScanJobResponse. */
+                class CancelDataScanJobResponse implements ICancelDataScanJobResponse {
+
+                    /**
+                     * Constructs a new CancelDataScanJobResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.ICancelDataScanJobResponse);
+
+                    /**
+                     * Creates a new CancelDataScanJobResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CancelDataScanJobResponse instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.ICancelDataScanJobResponse): google.cloud.dataplex.v1.CancelDataScanJobResponse;
+
+                    /**
+                     * Encodes the specified CancelDataScanJobResponse message. Does not implicitly {@link google.cloud.dataplex.v1.CancelDataScanJobResponse.verify|verify} messages.
+                     * @param message CancelDataScanJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.ICancelDataScanJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CancelDataScanJobResponse message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.CancelDataScanJobResponse.verify|verify} messages.
+                     * @param message CancelDataScanJobResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.ICancelDataScanJobResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CancelDataScanJobResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CancelDataScanJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.CancelDataScanJobResponse;
+
+                    /**
+                     * Decodes a CancelDataScanJobResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CancelDataScanJobResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.CancelDataScanJobResponse;
+
+                    /**
+                     * Verifies a CancelDataScanJobResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CancelDataScanJobResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CancelDataScanJobResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.CancelDataScanJobResponse;
+
+                    /**
+                     * Creates a plain object from a CancelDataScanJobResponse message. Also converts values to other types if specified.
+                     * @param message CancelDataScanJobResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.CancelDataScanJobResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CancelDataScanJobResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CancelDataScanJobResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GenerateDataQualityRulesRequest. */
                 interface IGenerateDataQualityRulesRequest {
 
@@ -38326,6 +40535,9 @@ export namespace google {
 
                     /** DataScan dataDocumentationResult */
                     dataDocumentationResult?: (google.cloud.dataplex.v1.IDataDocumentationResult|null);
+
+                    /** DataScan executionIdentity */
+                    executionIdentity?: (google.cloud.dataplex.v1.IExecutionIdentity|null);
                 }
 
                 /** Represents a DataScan. */
@@ -38396,6 +40608,9 @@ export namespace google {
 
                     /** DataScan dataDocumentationResult. */
                     public dataDocumentationResult?: (google.cloud.dataplex.v1.IDataDocumentationResult|null);
+
+                    /** DataScan executionIdentity. */
+                    public executionIdentity?: (google.cloud.dataplex.v1.IExecutionIdentity|null);
 
                     /** DataScan spec. */
                     public spec?: ("dataQualitySpec"|"dataProfileSpec"|"dataDiscoverySpec"|"dataDocumentationSpec");
@@ -38699,6 +40914,400 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an ExecutionIdentity. */
+                interface IExecutionIdentity {
+
+                    /** ExecutionIdentity dataplexServiceAgent */
+                    dataplexServiceAgent?: (google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent|null);
+
+                    /** ExecutionIdentity userCredential */
+                    userCredential?: (google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential|null);
+
+                    /** ExecutionIdentity serviceAccount */
+                    serviceAccount?: (google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount|null);
+                }
+
+                /** Represents an ExecutionIdentity. */
+                class ExecutionIdentity implements IExecutionIdentity {
+
+                    /**
+                     * Constructs a new ExecutionIdentity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IExecutionIdentity);
+
+                    /** ExecutionIdentity dataplexServiceAgent. */
+                    public dataplexServiceAgent?: (google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent|null);
+
+                    /** ExecutionIdentity userCredential. */
+                    public userCredential?: (google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential|null);
+
+                    /** ExecutionIdentity serviceAccount. */
+                    public serviceAccount?: (google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount|null);
+
+                    /** ExecutionIdentity identity. */
+                    public identity?: ("dataplexServiceAgent"|"userCredential"|"serviceAccount");
+
+                    /**
+                     * Creates a new ExecutionIdentity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecutionIdentity instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IExecutionIdentity): google.cloud.dataplex.v1.ExecutionIdentity;
+
+                    /**
+                     * Encodes the specified ExecutionIdentity message. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.verify|verify} messages.
+                     * @param message ExecutionIdentity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IExecutionIdentity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecutionIdentity message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.verify|verify} messages.
+                     * @param message ExecutionIdentity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IExecutionIdentity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecutionIdentity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecutionIdentity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ExecutionIdentity;
+
+                    /**
+                     * Decodes an ExecutionIdentity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecutionIdentity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ExecutionIdentity;
+
+                    /**
+                     * Verifies an ExecutionIdentity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecutionIdentity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecutionIdentity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ExecutionIdentity;
+
+                    /**
+                     * Creates a plain object from an ExecutionIdentity message. Also converts values to other types if specified.
+                     * @param message ExecutionIdentity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.ExecutionIdentity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecutionIdentity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecutionIdentity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExecutionIdentity {
+
+                    /** Properties of a DataplexServiceAgent. */
+                    interface IDataplexServiceAgent {
+                    }
+
+                    /** Represents a DataplexServiceAgent. */
+                    class DataplexServiceAgent implements IDataplexServiceAgent {
+
+                        /**
+                         * Constructs a new DataplexServiceAgent.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent);
+
+                        /**
+                         * Creates a new DataplexServiceAgent instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataplexServiceAgent instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent): google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent;
+
+                        /**
+                         * Encodes the specified DataplexServiceAgent message. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent.verify|verify} messages.
+                         * @param message DataplexServiceAgent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataplexServiceAgent message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent.verify|verify} messages.
+                         * @param message DataplexServiceAgent message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.ExecutionIdentity.IDataplexServiceAgent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataplexServiceAgent message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataplexServiceAgent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent;
+
+                        /**
+                         * Decodes a DataplexServiceAgent message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataplexServiceAgent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent;
+
+                        /**
+                         * Verifies a DataplexServiceAgent message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataplexServiceAgent message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataplexServiceAgent
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent;
+
+                        /**
+                         * Creates a plain object from a DataplexServiceAgent message. Also converts values to other types if specified.
+                         * @param message DataplexServiceAgent
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.ExecutionIdentity.DataplexServiceAgent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataplexServiceAgent to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataplexServiceAgent
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a UserCredential. */
+                    interface IUserCredential {
+                    }
+
+                    /** Represents a UserCredential. */
+                    class UserCredential implements IUserCredential {
+
+                        /**
+                         * Constructs a new UserCredential.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential);
+
+                        /**
+                         * Creates a new UserCredential instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserCredential instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential): google.cloud.dataplex.v1.ExecutionIdentity.UserCredential;
+
+                        /**
+                         * Encodes the specified UserCredential message. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.UserCredential.verify|verify} messages.
+                         * @param message UserCredential message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserCredential message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.UserCredential.verify|verify} messages.
+                         * @param message UserCredential message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.ExecutionIdentity.IUserCredential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserCredential message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ExecutionIdentity.UserCredential;
+
+                        /**
+                         * Decodes a UserCredential message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserCredential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ExecutionIdentity.UserCredential;
+
+                        /**
+                         * Verifies a UserCredential message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserCredential message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserCredential
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ExecutionIdentity.UserCredential;
+
+                        /**
+                         * Creates a plain object from a UserCredential message. Also converts values to other types if specified.
+                         * @param message UserCredential
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.ExecutionIdentity.UserCredential, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserCredential to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserCredential
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ServiceAccount. */
+                    interface IServiceAccount {
+
+                        /** ServiceAccount email */
+                        email?: (string|null);
+                    }
+
+                    /** Represents a ServiceAccount. */
+                    class ServiceAccount implements IServiceAccount {
+
+                        /**
+                         * Constructs a new ServiceAccount.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount);
+
+                        /** ServiceAccount email. */
+                        public email: string;
+
+                        /**
+                         * Creates a new ServiceAccount instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ServiceAccount instance
+                         */
+                        public static create(properties?: google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount): google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount;
+
+                        /**
+                         * Encodes the specified ServiceAccount message. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount.verify|verify} messages.
+                         * @param message ServiceAccount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ServiceAccount message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount.verify|verify} messages.
+                         * @param message ServiceAccount message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataplex.v1.ExecutionIdentity.IServiceAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ServiceAccount message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ServiceAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount;
+
+                        /**
+                         * Decodes a ServiceAccount message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ServiceAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount;
+
+                        /**
+                         * Verifies a ServiceAccount message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ServiceAccount message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ServiceAccount
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount;
+
+                        /**
+                         * Creates a plain object from a ServiceAccount message. Also converts values to other types if specified.
+                         * @param message ServiceAccount
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataplex.v1.ExecutionIdentity.ServiceAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ServiceAccount to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ServiceAccount
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Properties of a DataScanJob. */
                 interface IDataScanJob {
 
@@ -38710,6 +41319,9 @@ export namespace google {
 
                     /** DataScanJob createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataScanJob partialFailureMessage */
+                    partialFailureMessage?: (string|null);
 
                     /** DataScanJob startTime */
                     startTime?: (google.protobuf.ITimestamp|null);
@@ -38768,6 +41380,9 @@ export namespace google {
 
                     /** DataScanJob createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DataScanJob partialFailureMessage. */
+                    public partialFailureMessage: string;
 
                     /** DataScanJob startTime. */
                     public startTime?: (google.protobuf.ITimestamp|null);
@@ -38902,7 +41517,8 @@ export namespace google {
                         CANCELLED = 3,
                         SUCCEEDED = 4,
                         FAILED = 5,
-                        PENDING = 7
+                        PENDING = 7,
+                        SUCCEEDED_WITH_ERRORS = 8
                     }
                 }
 
@@ -41423,7 +44039,8 @@ export namespace google {
                         STATISTIC_RANGE_EXPECTATION = 6,
                         TABLE_CONDITION_EXPECTATION = 7,
                         UNIQUENESS_EXPECTATION = 8,
-                        SQL_ASSERTION = 9
+                        SQL_ASSERTION = 9,
+                        TEMPLATE_REFERENCE = 10
                     }
 
                     /** EvaluationType enum. */
@@ -45843,6 +48460,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -45856,6 +48476,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -46585,6 +49208,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -46604,6 +49230,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -46917,6 +49546,365 @@ export namespace google {
 
             /**
              * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -47256,6 +50244,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -49630,6 +52620,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -49652,6 +52645,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -50594,6 +53590,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -50628,6 +53627,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -50756,7 +53758,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -50859,6 +53862,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }
@@ -52737,6 +55841,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOperationsRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOperationsRequest. */
@@ -52759,6 +55866,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken. */
             public pageToken: string;
+
+            /** ListOperationsRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOperationsRequest instance using the specified properties.
@@ -52846,6 +55956,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOperationsResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOperationsResponse. */
@@ -52862,6 +55975,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOperationsResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOperationsResponse instance using the specified properties.

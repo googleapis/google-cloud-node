@@ -19,138 +19,441 @@
                     "(google.api.resource_definition).pattern": "accountTypes/{account_type}/accounts/{account}"
                   },
                   "nested": {
-                    "AgeRange": {
-                      "values": {
-                        "AGE_RANGE_UNSPECIFIED": 0,
-                        "AGE_RANGE_UNKNOWN": 1,
-                        "AGE_RANGE_18_24": 2,
-                        "AGE_RANGE_25_34": 3,
-                        "AGE_RANGE_35_44": 4,
-                        "AGE_RANGE_45_54": 5,
-                        "AGE_RANGE_55_64": 6,
-                        "AGE_RANGE_65_UP": 7
-                      }
-                    },
-                    "AudienceMember": {
+                    "AdEvent": {
                       "oneofs": {
-                        "data": {
+                        "eventSubtypeOneof": {
                           "oneof": [
-                            "userData",
-                            "pairData",
-                            "mobileData",
-                            "userIdData",
-                            "ppidData"
+                            "eventSubtype",
+                            "eventSubtypeString"
+                          ]
+                        },
+                        "adTypeOneof": {
+                          "oneof": [
+                            "adType",
+                            "adTypeString"
+                          ]
+                        },
+                        "adFormatOneof": {
+                          "oneof": [
+                            "adFormat",
+                            "adFormatString"
+                          ]
+                        },
+                        "adPlacementOneof": {
+                          "oneof": [
+                            "adPlacement",
+                            "adPlacementString"
+                          ]
+                        },
+                        "targetingTypeOneof": {
+                          "oneof": [
+                            "targetingType",
+                            "targetingTypeString"
+                          ]
+                        },
+                        "platformTypeOneof": {
+                          "oneof": [
+                            "platformType",
+                            "platformTypeString"
+                          ]
+                        },
+                        "platformOneof": {
+                          "oneof": [
+                            "platform",
+                            "platformString"
+                          ]
+                        },
+                        "_measurementAllowed": {
+                          "oneof": [
+                            "measurementAllowed"
                           ]
                         }
                       },
                       "fields": {
-                        "destinationReferences": {
-                          "rule": "repeated",
+                        "advertiserId": {
                           "type": "string",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "eventType": {
+                          "type": "EventType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "eventSubtype": {
+                          "type": "EventSubtype",
+                          "id": 3
+                        },
+                        "eventSubtypeString": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "timestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "eventId": {
+                          "type": "string",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "userData": {
                           "type": "UserData",
-                          "id": 2
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
-                        "pairData": {
-                          "type": "PairData",
-                          "id": 4
+                        "deviceInfo": {
+                          "type": "DeviceInfo",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
-                        "mobileData": {
-                          "type": "MobileData",
-                          "id": 5
+                        "mobileDeviceId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
-                        "userIdData": {
-                          "type": "UserIdData",
-                          "id": 6
+                        "campaignId": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
-                        "ppidData": {
-                          "type": "PpidData",
-                          "id": 7
+                        "campaignName": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
-                        "consent": {
-                          "type": "Consent",
+                        "adGroupId": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adId": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adType": {
+                          "type": "AdType",
+                          "id": 14
+                        },
+                        "adTypeString": {
+                          "type": "string",
+                          "id": 15
+                        },
+                        "adFormat": {
+                          "type": "AdFormat",
+                          "id": 16
+                        },
+                        "adFormatString": {
+                          "type": "string",
+                          "id": 17
+                        },
+                        "adPlacement": {
+                          "type": "AdPlacement",
+                          "id": 18
+                        },
+                        "adPlacementString": {
+                          "type": "string",
+                          "id": 19
+                        },
+                        "adHeight": {
+                          "type": "int32",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adWidth": {
+                          "type": "int32",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "source": {
+                          "type": "string",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "medium": {
+                          "type": "string",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetingType": {
+                          "type": "TargetingType",
+                          "id": 25
+                        },
+                        "targetingTypeString": {
+                          "type": "string",
+                          "id": 26
+                        },
+                        "platformType": {
+                          "type": "PlatformType",
+                          "id": 27
+                        },
+                        "platformTypeString": {
+                          "type": "string",
+                          "id": 28
+                        },
+                        "platform": {
+                          "type": "Platform",
+                          "id": 29
+                        },
+                        "platformString": {
+                          "type": "string",
+                          "id": 30
+                        },
+                        "attributionHint": {
+                          "type": "AttributionHint",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "viewabilityInfo": {
+                          "type": "ViewabilityInfo",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "measurementAllowed": {
+                          "type": "bool",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EventType": {
+                          "values": {
+                            "EVENT_TYPE_UNSPECIFIED": 0,
+                            "EVENT_TYPE_VIEW": 1,
+                            "EVENT_TYPE_CLICK": 2
+                          }
+                        },
+                        "EventSubtype": {
+                          "values": {
+                            "EVENT_SUBTYPE_UNSPECIFIED": 0,
+                            "EVENT_SUBTYPE_IMPRESSION": 1,
+                            "EVENT_SUBTYPE_ENGAGED_VIEW": 2,
+                            "EVENT_SUBTYPE_ONSITE_CLICK": 3,
+                            "EVENT_SUBTYPE_OUTBOUND_CLICK": 4
+                          }
+                        }
+                      }
+                    },
+                    "AdType": {
+                      "values": {
+                        "AD_TYPE_UNSPECIFIED": 0,
+                        "AD_TYPE_DISPLAY": 1,
+                        "AD_TYPE_TEXT": 2,
+                        "AD_TYPE_IMAGE": 3,
+                        "AD_TYPE_RICH_MEDIA": 4,
+                        "AD_TYPE_HTML": 5,
+                        "AD_TYPE_AUDIO": 6,
+                        "AD_TYPE_VIDEO": 7
+                      }
+                    },
+                    "AdFormat": {
+                      "values": {
+                        "AD_FORMAT_UNSPECIFIED": 0,
+                        "AD_FORMAT_AR": 1,
+                        "AD_FORMAT_AUDIO": 2,
+                        "AD_FORMAT_BANNER": 3,
+                        "AD_FORMAT_BUMPER": 4,
+                        "AD_FORMAT_CAROUSEL": 5,
+                        "AD_FORMAT_COLLECTION": 6,
+                        "AD_FORMAT_IMAGE": 7,
+                        "AD_FORMAT_INTERACTIVE": 8,
+                        "AD_FORMAT_INTERSTITIAL": 9,
+                        "AD_FORMAT_IN_FEED": 10,
+                        "AD_FORMAT_IN_STREAM": 11,
+                        "AD_FORMAT_IN_STREAM_SKIPPABLE": 12,
+                        "AD_FORMAT_IN_STREAM_NON_SKIPPABLE": 13,
+                        "AD_FORMAT_NATIVE": 14,
+                        "AD_FORMAT_SHORTS": 15,
+                        "AD_FORMAT_STORY": 16,
+                        "AD_FORMAT_SPONSORED": 17,
+                        "AD_FORMAT_VIDEO": 18
+                      }
+                    },
+                    "AdPlacement": {
+                      "values": {
+                        "AD_PLACEMENT_UNSPECIFIED": 0,
+                        "AD_PLACEMENT_DISCOVER": 1,
+                        "AD_PLACEMENT_FEED": 2,
+                        "AD_PLACEMENT_FOOTER": 3,
+                        "AD_PLACEMENT_HEADER": 4,
+                        "AD_PLACEMENT_HOME": 5,
+                        "AD_PLACEMENT_IN_CONTENT": 6,
+                        "AD_PLACEMENT_PROMOTED": 7,
+                        "AD_PLACEMENT_SEARCH": 8,
+                        "AD_PLACEMENT_STORY": 9
+                      }
+                    },
+                    "TargetingType": {
+                      "values": {
+                        "TARGETING_TYPE_UNSPECIFIED": 0,
+                        "TARGETING_TYPE_AUDIENCE": 1,
+                        "TARGETING_TYPE_CONTEXTUAL": 2,
+                        "TARGETING_TYPE_DEMOGRAPHIC": 3,
+                        "TARGETING_TYPE_DEVICE": 4,
+                        "TARGETING_TYPE_GEO": 5,
+                        "TARGETING_TYPE_INTEREST": 6,
+                        "TARGETING_TYPE_PURCHASE_INTENT": 7,
+                        "TARGETING_TYPE_REMARKETING": 8
+                      }
+                    },
+                    "PlatformType": {
+                      "values": {
+                        "PLATFORM_TYPE_UNSPECIFIED": 0,
+                        "PLATFORM_TYPE_MOBILE": 1,
+                        "PLATFORM_TYPE_DESKTOP": 2,
+                        "PLATFORM_TYPE_CTV": 3,
+                        "PLATFORM_TYPE_PHONE": 4,
+                        "PLATFORM_TYPE_TABLET": 5
+                      }
+                    },
+                    "Platform": {
+                      "values": {
+                        "PLATFORM_UNSPECIFIED": 0,
+                        "PLATFORM_IOS": 1,
+                        "PLATFORM_ANDROID": 2,
+                        "PLATFORM_WEB": 3
+                      }
+                    },
+                    "AttributionHint": {
+                      "values": {
+                        "ATTRIBUTION_HINT_UNSPECIFIED": 0,
+                        "ATTRIBUTION_HINT_CONVERTED": 1,
+                        "ATTRIBUTION_HINT_NOT_CONVERTED": 2
+                      }
+                    },
+                    "DeviceInfo": {
+                      "fields": {
+                        "userAgent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "category": {
+                          "type": "string",
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
-                        }
-                      }
-                    },
-                    "PairData": {
-                      "fields": {
-                        "pairIds": {
-                          "rule": "repeated",
+                        },
+                        "languageCode": {
                           "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "MobileData": {
-                      "fields": {
-                        "mobileIds": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "UserIdData": {
-                      "fields": {
-                        "userId": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "PpidData": {
-                      "fields": {
-                        "ppids": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "Consent": {
-                      "fields": {
-                        "adUserData": {
-                          "type": "ConsentStatus",
-                          "id": 1,
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "adPersonalization": {
-                          "type": "ConsentStatus",
-                          "id": 2,
+                        "screenHeight": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "screenWidth": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "operatingSystem": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "operatingSystemVersion": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "brand": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "browser": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "browserVersion": {
+                          "type": "string",
+                          "id": 12,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
-                      }
-                    },
-                    "ConsentStatus": {
-                      "values": {
-                        "CONSENT_STATUS_UNSPECIFIED": 0,
-                        "CONSENT_GRANTED": 1,
-                        "CONSENT_DENIED": 2
                       }
                     },
                     "UserData": {
@@ -219,7 +522,323 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "addressLine": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "city": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "administrativeArea": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
+                      }
+                    },
+                    "ViewabilityInfo": {
+                      "fields": {
+                        "viewType": {
+                          "type": "ViewType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "viewablePercent": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "viewableDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mediaSkippable": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mediaQuartile": {
+                          "type": "MediaQuartile",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mediaDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mediaVolumePercent": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "playbackDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ViewType": {
+                      "values": {
+                        "VIEW_TYPE_UNSPECIFIED": 0,
+                        "VIEW_TYPE_MRC_VIEWED": 1,
+                        "VIEW_TYPE_MRC_RENDERED": 2
+                      }
+                    },
+                    "MediaQuartile": {
+                      "values": {
+                        "MEDIA_QUARTILE_UNSPECIFIED": 0,
+                        "MEDIA_QUARTILE_START": 1,
+                        "MEDIA_QUARTILE_FIRST_QUARTILE": 2,
+                        "MEDIA_QUARTILE_MIDPOINT": 3,
+                        "MEDIA_QUARTILE_THIRD_QUARTILE": 4,
+                        "MEDIA_QUARTILE_COMPLETE": 5
+                      }
+                    },
+                    "AgeRange": {
+                      "values": {
+                        "AGE_RANGE_UNSPECIFIED": 0,
+                        "AGE_RANGE_UNKNOWN": 1,
+                        "AGE_RANGE_18_24": 2,
+                        "AGE_RANGE_25_34": 3,
+                        "AGE_RANGE_35_44": 4,
+                        "AGE_RANGE_45_54": 5,
+                        "AGE_RANGE_55_64": 6,
+                        "AGE_RANGE_65_UP": 7
+                      }
+                    },
+                    "AudienceMember": {
+                      "oneofs": {
+                        "data": {
+                          "oneof": [
+                            "userData",
+                            "pairData",
+                            "mobileData",
+                            "userIdData",
+                            "ppidData",
+                            "compositeData",
+                            "googleUserIdData",
+                            "partnerProvidedIdData"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "destinationReferences": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userData": {
+                          "type": "UserData",
+                          "id": 2
+                        },
+                        "pairData": {
+                          "type": "PairData",
+                          "id": 4
+                        },
+                        "mobileData": {
+                          "type": "MobileData",
+                          "id": 5
+                        },
+                        "userIdData": {
+                          "type": "UserIdData",
+                          "id": 6
+                        },
+                        "ppidData": {
+                          "type": "PpidData",
+                          "id": 7
+                        },
+                        "compositeData": {
+                          "type": "CompositeData",
+                          "id": 8
+                        },
+                        "googleUserIdData": {
+                          "type": "GoogleUserIdData",
+                          "id": 9
+                        },
+                        "partnerProvidedIdData": {
+                          "type": "PartnerProvidedIdData",
+                          "id": 10
+                        },
+                        "consent": {
+                          "type": "Consent",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PairData": {
+                      "fields": {
+                        "pairIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MobileData": {
+                      "fields": {
+                        "mobileIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UserIdData": {
+                      "fields": {
+                        "userId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PpidData": {
+                      "fields": {
+                        "ppids": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CompositeData": {
+                      "fields": {
+                        "userData": {
+                          "type": "UserData",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ipData": {
+                          "rule": "repeated",
+                          "type": "IpData",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "IpData": {
+                      "fields": {
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6",
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "observeStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "observeEndTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GoogleUserIdData": {
+                      "fields": {
+                        "googleUserIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PartnerProvidedIdData": {
+                      "fields": {
+                        "partnerProvidedIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Consent": {
+                      "fields": {
+                        "adUserData": {
+                          "type": "ConsentStatus",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adPersonalization": {
+                          "type": "ConsentStatus",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ConsentStatus": {
+                      "values": {
+                        "CONSENT_STATUS_UNSPECIFIED": 0,
+                        "CONSENT_GRANTED": 1,
+                        "CONSENT_DENIED": 2
                       }
                     },
                     "CartData": {
@@ -259,10 +878,25 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "couponCodes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
                     "Item": {
+                      "oneofs": {
+                        "_conversionValue": {
+                          "oneof": [
+                            "conversionValue"
+                          ]
+                        }
+                      },
                       "fields": {
                         "merchantProductId": {
                           "type": "string",
@@ -296,6 +930,69 @@
                           "rule": "repeated",
                           "type": "ItemParameter",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "merchantId": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "merchantFeedLabel": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "merchantFeedLanguageCode": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "conversionValue": {
+                          "type": "double",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "customVariables": {
+                          "rule": "repeated",
+                          "type": "ItemCustomVariable",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ItemCustomVariable": {
+                      "fields": {
+                        "variable": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "destinationReferences": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -379,7 +1076,7 @@
                           "type": "AccountType",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       },
@@ -392,7 +1089,8 @@
                             "DISPLAY_VIDEO_ADVERTISER": 3,
                             "DATA_PARTNER": 4,
                             "GOOGLE_ANALYTICS_PROPERTY": 5,
-                            "GOOGLE_AD_MANAGER_AUDIENCE_LINK": 6
+                            "GOOGLE_AD_MANAGER_AUDIENCE_LINK": 6,
+                            "FLOODLIGHT_CONFIG": 7
                           }
                         }
                       }
@@ -409,20 +1107,54 @@
                         "DATA_PARTNER": 4
                       }
                     },
-                    "DeviceInfo": {
+                    "EncryptedUserId": {
                       "fields": {
-                        "userAgent": {
+                        "encryptedId": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
-                        "ipAddress": {
-                          "type": "string",
+                        "entityType": {
+                          "type": "EncryptionEntityType",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "entityId": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "source": {
+                          "type": "EncryptionSource",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EncryptionEntityType": {
+                          "values": {
+                            "ENCRYPTION_ENTITY_TYPE_UNSPECIFIED": 0,
+                            "CAMPAIGN_MANAGER_ACCOUNT": 1,
+                            "CAMPAIGN_MANAGER_ADVERTISER": 2,
+                            "DISPLAY_VIDEO_PARTNER": 3,
+                            "DISPLAY_VIDEO_ADVERTISER": 4,
+                            "GOOGLE_ADS_CUSTOMER": 5,
+                            "GOOGLE_AD_MANAGER_NETWORK_CODE": 6
+                          }
+                        },
+                        "EncryptionSource": {
+                          "values": {
+                            "ENCRYPTION_SOURCE_UNSPECIFIED": 0,
+                            "AD_SERVING": 1,
+                            "DATA_TRANSFER": 2
                           }
                         }
                       }
@@ -432,7 +1164,8 @@
                         "wrappedKey": {
                           "oneof": [
                             "gcpWrappedKeyInfo",
-                            "awsWrappedKeyInfo"
+                            "awsWrappedKeyInfo",
+                            "coordinatorKeyInfo"
                           ]
                         }
                       },
@@ -444,6 +1177,10 @@
                         "awsWrappedKeyInfo": {
                           "type": "AwsWrappedKeyInfo",
                           "id": 2
+                        },
+                        "coordinatorKeyInfo": {
+                          "type": "CoordinatorKeyInfo",
+                          "id": 3
                         }
                       }
                     },
@@ -527,6 +1264,17 @@
                         }
                       }
                     },
+                    "CoordinatorKeyInfo": {
+                      "fields": {
+                        "keyId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "ErrorReason": {
                       "valuesOptions": {
                         "INVALID_COUNTRY_CODE": {
@@ -585,7 +1333,9 @@
                         "INVALID_REQUEST_ID": 48,
                         "MULTIPLE_DESTINATIONS_FOR_GOOGLE_ANALYTICS_EVENT": 49,
                         "FIELD_VALUE_TOO_LONG": 50,
+                        "FIELD_VALUE_TOO_SHORT": 106,
                         "TOO_MANY_ELEMENTS": 51,
+                        "TOO_FEW_ELEMENTS": 105,
                         "ALREADY_EXISTS": 52,
                         "IMMUTABLE_FIELD_FOR_UPDATE": 53,
                         "INVALID_RESOURCE_NAME": 54,
@@ -635,7 +1385,28 @@
                         "UNSUPPORTED_ACCOUNT_TYPE_FOR_PARTNER_LINK": 98,
                         "MEMBERSHIP_DURATION_TOO_LONG": 99,
                         "INVALID_MERCHANT_ID": 100,
-                        "EU_POLITICAL_ADVERTISING_DECLARATION_REQUIRED": 101
+                        "EU_POLITICAL_ADVERTISING_DECLARATION_REQUIRED": 101,
+                        "ACCOUNT_INELIGIBLE_FOR_STORE_SALES": 102,
+                        "INVALID_MERCHANT_FEED_LANGUAGE_CODE": 103,
+                        "INVALID_REGION_CODE": 104,
+                        "INVALID_SUBDIVISION_CODE": 107,
+                        "INVALID_SUBCONTINENT_CODE": 108,
+                        "INVALID_CONTINENT_CODE": 109,
+                        "INVALID_DEVICE_CATEGORY": 110,
+                        "BOTH_CLIENT_ID_AND_APP_INSTANCE_ID_NOT_ALLOWED": 111,
+                        "GOOGLE_ANALYTICS_SUBPROPERTY_OR_ROLLUP_PROPERTY_NOT_ALLOWED": 112,
+                        "THIRD_PARTY_USER_DATA_NOT_ALLOWED": 113,
+                        "INVALID_COUPON_CODE": 114,
+                        "EVENT_SOURCE_AND_DESTINATION_MISMATCH": 115,
+                        "DESTINATION_ACCOUNT_TYPE_MISMATCH": 116,
+                        "CUSTOM_VARIABLE_VALUE_CONTAINS_PII": 117,
+                        "CUSTOM_VARIABLE_NOT_ENABLED": 118,
+                        "INVALID_CUSTOM_VARIABLE_VALUE": 119,
+                        "CUSTOM_VARIABLE_NOT_FOUND": 120,
+                        "BASELINE_LOCATION_AUTO_DETECTION_FAILED": 122,
+                        "INSIGHTS_MISSING_FOR_DIMENSION": 123,
+                        "REQUIRED_PREREQUISITE_LINK_MISSING": 124,
+                        "INVALID_REMOVE_AS_OF_TIME": 125
                       }
                     },
                     "Event": {
@@ -643,6 +1414,11 @@
                         "_conversionValue": {
                           "oneof": [
                             "conversionValue"
+                          ]
+                        },
+                        "_conversionCount": {
+                          "oneof": [
+                            "conversionCount"
                           ]
                         }
                       },
@@ -707,6 +1483,14 @@
                         "conversionValue": {
                           "type": "double",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "conversionCount": {
+                          "type": "double",
+                          "id": 23,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -784,6 +1568,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "thirdPartyUserData": {
+                          "type": "UserData",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "eventLocation": {
+                          "type": "EventLocation",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "appInstanceId": {
+                          "type": "string",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -820,6 +1625,42 @@
                         "landingPageDeviceInfo": {
                           "type": "DeviceInfo",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mobileDeviceId": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dclid": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "impressionId": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "matchId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptedUserIds": {
+                          "rule": "repeated",
+                          "type": "EncryptedUserId",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -870,6 +1711,52 @@
                         }
                       }
                     },
+                    "EventLocation": {
+                      "fields": {
+                        "storeId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "city": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "subdivisionCode": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "subcontinentCode": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "continentCode": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "EventSource": {
                       "values": {
                         "EVENT_SOURCE_UNSPECIFIED": 0,
@@ -877,6 +1764,7 @@
                         "APP": 2,
                         "IN_STORE": 3,
                         "PHONE": 4,
+                        "MESSAGE": 6,
                         "OTHER": 5
                       }
                     },
@@ -1004,6 +1892,22 @@
                             }
                           ]
                         },
+                        "RemoveAllAudienceMembers": {
+                          "requestType": "RemoveAllAudienceMembersRequest",
+                          "responseType": "RemoveAllAudienceMembersResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/audienceMembers:removeAll",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/audienceMembers:removeAll",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "IngestEvents": {
                           "requestType": "IngestEventsRequest",
                           "responseType": "IngestEventsResponse",
@@ -1015,6 +1919,22 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1/events:ingest",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "IngestAdEvents": {
+                          "requestType": "IngestAdEventsRequest",
+                          "responseType": "IngestAdEventsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/adEvents:ingest",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/adEvents:ingest",
                                 "body": "*"
                               }
                             }
@@ -1096,6 +2016,11 @@
                         "requestId": {
                           "type": "string",
                           "id": 1
+                        },
+                        "fieldWarnings": {
+                          "rule": "repeated",
+                          "type": "FieldWarning",
+                          "id": 2
                         }
                       }
                     },
@@ -1141,6 +2066,40 @@
                       }
                     },
                     "RemoveAudienceMembersResponse": {
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RemoveAllAudienceMembersRequest": {
+                      "fields": {
+                        "destinations": {
+                          "rule": "repeated",
+                          "type": "Destination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "removeAsOfTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveAllAudienceMembersResponse": {
                       "fields": {
                         "requestId": {
                           "type": "string",
@@ -1201,8 +2160,43 @@
                         "requestId": {
                           "type": "string",
                           "id": 1
+                        },
+                        "fieldWarnings": {
+                          "rule": "repeated",
+                          "type": "FieldWarning",
+                          "id": 2
                         }
                       }
+                    },
+                    "IngestAdEventsRequest": {
+                      "fields": {
+                        "adEvents": {
+                          "rule": "repeated",
+                          "type": "AdEvent",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "encryptionInfo": {
+                          "type": "EncryptionInfo",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "IngestAdEventsResponse": {
+                      "fields": {}
                     },
                     "RetrieveRequestStatusRequest": {
                       "fields": {
@@ -1231,13 +2225,154 @@
                         "BASE64": 2
                       }
                     },
+                    "ErrorInfo": {
+                      "fields": {
+                        "errorCounts": {
+                          "rule": "repeated",
+                          "type": "ErrorCount",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ErrorCount": {
+                      "fields": {
+                        "recordCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "reason": {
+                          "type": "ProcessingErrorReason",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "WarningInfo": {
+                      "fields": {
+                        "warningCounts": {
+                          "rule": "repeated",
+                          "type": "WarningCount",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "WarningCount": {
+                      "fields": {
+                        "recordCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "reason": {
+                          "type": "ProcessingWarningReason",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ProcessingErrorReason": {
+                      "values": {
+                        "PROCESSING_ERROR_REASON_UNSPECIFIED": 0,
+                        "PROCESSING_ERROR_REASON_INVALID_CUSTOM_VARIABLE": 1,
+                        "PROCESSING_ERROR_REASON_CUSTOM_VARIABLE_NOT_ENABLED": 2,
+                        "PROCESSING_ERROR_REASON_EVENT_TOO_OLD": 3,
+                        "PROCESSING_ERROR_REASON_DENIED_CONSENT": 4,
+                        "PROCESSING_ERROR_REASON_NO_CONSENT": 5,
+                        "PROCESSING_ERROR_REASON_UNKNOWN_CONSENT": 6,
+                        "PROCESSING_ERROR_REASON_DUPLICATE_GCLID": 7,
+                        "PROCESSING_ERROR_REASON_DUPLICATE_TRANSACTION_ID": 8,
+                        "PROCESSING_ERROR_REASON_INVALID_GBRAID": 9,
+                        "PROCESSING_ERROR_REASON_INVALID_GCLID": 10,
+                        "PROCESSING_ERROR_REASON_INVALID_MERCHANT_ID": 11,
+                        "PROCESSING_ERROR_REASON_INVALID_WBRAID": 12,
+                        "PROCESSING_ERROR_REASON_INTERNAL_ERROR": 13,
+                        "PROCESSING_ERROR_REASON_DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED": 14,
+                        "PROCESSING_ERROR_REASON_INVALID_EVENT": 15,
+                        "PROCESSING_ERROR_REASON_INSUFFICIENT_MATCHED_TRANSACTIONS": 16,
+                        "PROCESSING_ERROR_REASON_INSUFFICIENT_TRANSACTIONS": 17,
+                        "PROCESSING_ERROR_REASON_INVALID_FORMAT": 18,
+                        "PROCESSING_ERROR_REASON_DECRYPTION_ERROR": 19,
+                        "PROCESSING_ERROR_REASON_DEK_DECRYPTION_ERROR": 20,
+                        "PROCESSING_ERROR_REASON_INVALID_WIP": 21,
+                        "PROCESSING_ERROR_REASON_INVALID_KEK": 22,
+                        "PROCESSING_ERROR_REASON_WIP_AUTH_FAILED": 23,
+                        "PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED": 24,
+                        "PROCESSING_ERROR_REASON_AWS_AUTH_FAILED": 27,
+                        "PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 25,
+                        "PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER": 26,
+                        "PROCESSING_ERROR_REASON_ONE_PER_CLICK_CONVERSION_ACTION_NOT_PERMITTED_WITH_BRAID": 28,
+                        "PROCESSING_ERROR_REASON_MATCH_ID_NOT_FOUND": 29,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_MATCH_ID": 30,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_GCLID": 31,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_DCLID": 32,
+                        "PROCESSING_ERROR_REASON_INVALID_AD_IDENTIFIERS": 33,
+                        "PROCESSING_ERROR_REASON_INVALID_MOBILE_ID_FORMAT": 34,
+                        "PROCESSING_ERROR_REASON_ORIGINAL_CONVERSIONS_NOT_FOUND": 35,
+                        "PROCESSING_ERROR_REASON_EVENT_ID_DECODE_ERROR": 36,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND_FOR_IMPRESSION_ID": 37,
+                        "PROCESSING_ERROR_REASON_USER_ID_NOT_FOUND": 38,
+                        "PROCESSING_ERROR_REASON_CONVERSION_PRECEDES_CLICK": 39,
+                        "PROCESSING_ERROR_REASON_TOO_RECENT_CLICK": 40,
+                        "PROCESSING_ERROR_REASON_INVALID_CLICK": 41,
+                        "PROCESSING_ERROR_REASON_INVALID_OPERATING_ACCOUNT_FOR_CLICK": 42,
+                        "PROCESSING_ERROR_REASON_CLICK_NOT_FOUND": 43,
+                        "PROCESSING_ERROR_REASON_EXTERNAL_ATTRIBUTION_DATA_MISSING": 44
+                      }
+                    },
+                    "ProcessingWarningReason": {
+                      "values": {
+                        "PROCESSING_WARNING_REASON_UNSPECIFIED": 0,
+                        "PROCESSING_WARNING_REASON_KEK_PERMISSION_DENIED": 1,
+                        "PROCESSING_WARNING_REASON_DEK_DECRYPTION_ERROR": 2,
+                        "PROCESSING_WARNING_REASON_DECRYPTION_ERROR": 3,
+                        "PROCESSING_WARNING_REASON_WIP_AUTH_FAILED": 4,
+                        "PROCESSING_WARNING_REASON_INVALID_WIP": 5,
+                        "PROCESSING_WARNING_REASON_INVALID_KEK": 6,
+                        "PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 7,
+                        "PROCESSING_WARNING_REASON_INTERNAL_ERROR": 8,
+                        "PROCESSING_WARNING_REASON_AWS_AUTH_FAILED": 9
+                      }
+                    },
+                    "FieldWarning": {
+                      "fields": {
+                        "reason": {
+                          "type": "WarningReason",
+                          "id": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "field": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "WarningReason": {
+                      "values": {
+                        "WARNING_REASON_UNSPECIFIED": 0,
+                        "WARNING_REASON_CUSTOM_VARIABLE_NOT_ENABLED": 1,
+                        "WARNING_REASON_CUSTOM_VARIABLE_NOT_PREDEFINED": 2,
+                        "WARNING_REASON_CART_DATA_NOT_SUPPORTED_WITH_GBRAID_OR_WBRAID": 3,
+                        "WARNING_REASON_CART_DATA_ITEM_MERCHANT_PRODUCT_ID_MISSING": 4,
+                        "WARNING_REASON_CART_DATA_ITEM_UNIT_PRICE_MISSING": 5,
+                        "WARNING_REASON_GENERIC": 6,
+                        "WARNING_REASON_INVALID_CLIENT_ID": 7,
+                        "WARNING_REASON_INVALID_SUBDIVISION_CODE": 8,
+                        "WARNING_REASON_INVALID_REGION_CODE": 9,
+                        "WARNING_REASON_INVALID_SUBCONTINENT_CODE": 10,
+                        "WARNING_REASON_INVALID_CONTINENT_CODE": 11,
+                        "WARNING_REASON_INVALID_DEVICE_CATEGORY": 12,
+                        "WARNING_REASON_INVALID_DEVICE_SCREEN_RESOLUTION": 13,
+                        "WARNING_REASON_INVALID_MERCHANT_ID": 14
+                      }
+                    },
                     "RequestStatusPerDestination": {
                       "oneofs": {
                         "status": {
                           "oneof": [
                             "audienceMembersIngestionStatus",
                             "eventsIngestionStatus",
-                            "audienceMembersRemovalStatus"
+                            "audienceMembersRemovalStatus",
+                            "removeAllAudienceMembersStatus"
                           ]
                         }
                       },
@@ -1269,6 +2404,10 @@
                         "audienceMembersRemovalStatus": {
                           "type": "RemoveAudienceMembersStatus",
                           "id": 6
+                        },
+                        "removeAllAudienceMembersStatus": {
+                          "type": "RemoveAllAudienceMembersStatus",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -1289,7 +2428,10 @@
                                 "mobileDataIngestionStatus",
                                 "pairDataIngestionStatus",
                                 "userIdDataIngestionStatus",
-                                "ppidDataIngestionStatus"
+                                "ppidDataIngestionStatus",
+                                "compositeDataIngestionStatus",
+                                "googleUserIdDataIngestionStatus",
+                                "partnerProvidedIdDataIngestionStatus"
                               ]
                             }
                           },
@@ -1313,6 +2455,18 @@
                             "ppidDataIngestionStatus": {
                               "type": "IngestPpidDataStatus",
                               "id": 5
+                            },
+                            "compositeDataIngestionStatus": {
+                              "type": "IngestCompositeDataStatus",
+                              "id": 6
+                            },
+                            "googleUserIdDataIngestionStatus": {
+                              "type": "IngestGoogleUserIdDataStatus",
+                              "id": 7
+                            },
+                            "partnerProvidedIdDataIngestionStatus": {
+                              "type": "IngestPartnerProvidedIdDataStatus",
+                              "id": 8
                             }
                           }
                         },
@@ -1324,7 +2478,10 @@
                                 "mobileDataRemovalStatus",
                                 "pairDataRemovalStatus",
                                 "userIdDataRemovalStatus",
-                                "ppidDataRemovalStatus"
+                                "ppidDataRemovalStatus",
+                                "compositeDataRemovalStatus",
+                                "googleUserIdDataRemovalStatus",
+                                "partnerProvidedIdDataRemovalStatus"
                               ]
                             }
                           },
@@ -1348,8 +2505,23 @@
                             "ppidDataRemovalStatus": {
                               "type": "RemovePpidDataStatus",
                               "id": 5
+                            },
+                            "compositeDataRemovalStatus": {
+                              "type": "RemoveCompositeDataStatus",
+                              "id": 6
+                            },
+                            "googleUserIdDataRemovalStatus": {
+                              "type": "RemoveGoogleUserIdDataStatus",
+                              "id": 7
+                            },
+                            "partnerProvidedIdDataRemovalStatus": {
+                              "type": "RemovePartnerProvidedIdDataStatus",
+                              "id": 8
                             }
                           }
+                        },
+                        "RemoveAllAudienceMembersStatus": {
+                          "fields": {}
                         },
                         "IngestEventsStatus": {
                           "fields": {
@@ -1482,6 +2654,105 @@
                               "id": 2
                             }
                           }
+                        },
+                        "IngestCompositeDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "dataTypeCounts": {
+                              "rule": "repeated",
+                              "type": "DataTypeCount",
+                              "id": 2
+                            },
+                            "uploadMatchRateRange": {
+                              "type": "MatchRateRange",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "RemoveCompositeDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "dataTypeCounts": {
+                              "rule": "repeated",
+                              "type": "DataTypeCount",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IngestGoogleUserIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "googleUserIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RemoveGoogleUserIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "googleUserIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IngestPartnerProvidedIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "partnerProvidedIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RemovePartnerProvidedIdDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "partnerProvidedIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DataTypeCount": {
+                          "fields": {
+                            "type": {
+                              "type": "DataType",
+                              "id": 1
+                            },
+                            "count": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DataType": {
+                          "values": {
+                            "DATA_TYPE_UNSPECIFIED": 0,
+                            "EMAIL": 1,
+                            "PHONE_NUMBER": 2,
+                            "ADDRESS": 3,
+                            "IP_ADDRESS": 4
+                          }
                         }
                       }
                     },
@@ -1498,94 +2769,6 @@
                         "MATCH_RATE_RANGE_71_TO_80": 8,
                         "MATCH_RATE_RANGE_81_TO_90": 9,
                         "MATCH_RATE_RANGE_91_TO_100": 10
-                      }
-                    },
-                    "ErrorInfo": {
-                      "fields": {
-                        "errorCounts": {
-                          "rule": "repeated",
-                          "type": "ErrorCount",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "ErrorCount": {
-                      "fields": {
-                        "recordCount": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "reason": {
-                          "type": "ProcessingErrorReason",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "WarningInfo": {
-                      "fields": {
-                        "warningCounts": {
-                          "rule": "repeated",
-                          "type": "WarningCount",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "WarningCount": {
-                      "fields": {
-                        "recordCount": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "reason": {
-                          "type": "ProcessingWarningReason",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "ProcessingErrorReason": {
-                      "values": {
-                        "PROCESSING_ERROR_REASON_UNSPECIFIED": 0,
-                        "PROCESSING_ERROR_REASON_INVALID_CUSTOM_VARIABLE": 1,
-                        "PROCESSING_ERROR_REASON_CUSTOM_VARIABLE_NOT_ENABLED": 2,
-                        "PROCESSING_ERROR_REASON_EVENT_TOO_OLD": 3,
-                        "PROCESSING_ERROR_REASON_DENIED_CONSENT": 4,
-                        "PROCESSING_ERROR_REASON_NO_CONSENT": 5,
-                        "PROCESSING_ERROR_REASON_UNKNOWN_CONSENT": 6,
-                        "PROCESSING_ERROR_REASON_DUPLICATE_GCLID": 7,
-                        "PROCESSING_ERROR_REASON_DUPLICATE_TRANSACTION_ID": 8,
-                        "PROCESSING_ERROR_REASON_INVALID_GBRAID": 9,
-                        "PROCESSING_ERROR_REASON_INVALID_GCLID": 10,
-                        "PROCESSING_ERROR_REASON_INVALID_MERCHANT_ID": 11,
-                        "PROCESSING_ERROR_REASON_INVALID_WBRAID": 12,
-                        "PROCESSING_ERROR_REASON_INTERNAL_ERROR": 13,
-                        "PROCESSING_ERROR_REASON_DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED": 14,
-                        "PROCESSING_ERROR_REASON_INVALID_EVENT": 15,
-                        "PROCESSING_ERROR_REASON_INSUFFICIENT_MATCHED_TRANSACTIONS": 16,
-                        "PROCESSING_ERROR_REASON_INSUFFICIENT_TRANSACTIONS": 17,
-                        "PROCESSING_ERROR_REASON_INVALID_FORMAT": 18,
-                        "PROCESSING_ERROR_REASON_DECRYPTION_ERROR": 19,
-                        "PROCESSING_ERROR_REASON_DEK_DECRYPTION_ERROR": 20,
-                        "PROCESSING_ERROR_REASON_INVALID_WIP": 21,
-                        "PROCESSING_ERROR_REASON_INVALID_KEK": 22,
-                        "PROCESSING_ERROR_REASON_WIP_AUTH_FAILED": 23,
-                        "PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED": 24,
-                        "PROCESSING_ERROR_REASON_AWS_AUTH_FAILED": 27,
-                        "PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 25,
-                        "PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER": 26
-                      }
-                    },
-                    "ProcessingWarningReason": {
-                      "values": {
-                        "PROCESSING_WARNING_REASON_UNSPECIFIED": 0,
-                        "PROCESSING_WARNING_REASON_KEK_PERMISSION_DENIED": 1,
-                        "PROCESSING_WARNING_REASON_DEK_DECRYPTION_ERROR": 2,
-                        "PROCESSING_WARNING_REASON_DECRYPTION_ERROR": 3,
-                        "PROCESSING_WARNING_REASON_WIP_AUTH_FAILED": 4,
-                        "PROCESSING_WARNING_REASON_INVALID_WIP": 5,
-                        "PROCESSING_WARNING_REASON_INVALID_KEK": 6,
-                        "PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 7,
-                        "PROCESSING_WARNING_REASON_INTERNAL_ERROR": 8,
-                        "PROCESSING_WARNING_REASON_AWS_AUTH_FAILED": 9
                       }
                     },
                     "TermsOfService": {
@@ -1779,7 +2962,7 @@
                     "PartnerLinkService": {
                       "options": {
                         "(google.api.default_host)": "datamanager.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/datamanager"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/datamanager,https://www.googleapis.com/auth/datamanager.partnerlink"
                       },
                       "methods": {
                         "CreatePartnerLink": {
@@ -1946,7 +3129,72 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "featureSet": {
+                          "type": "FeatureSet",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "partnerCustomerAccount": {
+                          "type": "PartnerCustomerAccount",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "partnerLinkMetadata": {
+                          "type": "PartnerLinkMetadata",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
+                      }
+                    },
+                    "PartnerCustomerAccount": {
+                      "fields": {
+                        "accountId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "accountName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "accountType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PartnerLinkMetadata": {
+                      "fields": {
+                        "implicitAccounts": {
+                          "rule": "repeated",
+                          "type": "PartnerCustomerAccount",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FeatureSet": {
+                      "values": {
+                        "FEATURE_SET_UNSPECIFIED": 0,
+                        "FEATURE_SET_AUDIENCE_AND_EVENT_MANAGEMENT": 1,
+                        "FEATURE_SET_AD_EVENT_MANAGEMENT": 2
                       }
                     },
                     "UserList": {
@@ -2144,6 +3392,20 @@
                         "searchNetworkMembersCount": {
                           "type": "int64",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "youtubeMembersCount": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "gmailMembersCount": {
+                          "type": "int64",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3625,8 +4887,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "LaunchStageProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "fieldBehavior": {
@@ -3649,6 +4910,43 @@
                 "UNORDERED_LIST": 6,
                 "NON_EMPTY_DEFAULT": 7,
                 "IDENTIFIER": 8
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                },
+                "referencedTypes": {
+                  "rule": "repeated",
+                  "type": "TypeReference",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
+              }
+            },
+            "TypeReference": {
+              "fields": {
+                "typeName": {
+                  "type": "string",
+                  "id": 1
+                }
               }
             },
             "resourceReference": {
@@ -3849,6 +5147,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -3981,6 +5283,10 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -3989,6 +5295,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -4046,6 +5374,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -4063,6 +5396,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 3
+                },
+                "batching": {
+                  "type": "BatchingConfigProto",
+                  "id": 4
                 }
               },
               "nested": {
@@ -4107,6 +5444,92 @@
                 "PACKAGE_MANAGER": 20
               }
             },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "BatchingConfigProto": {
+              "fields": {
+                "thresholds": {
+                  "type": "BatchingSettingsProto",
+                  "id": 1
+                },
+                "batchDescriptor": {
+                  "type": "BatchingDescriptorProto",
+                  "id": 2
+                }
+              }
+            },
+            "BatchingSettingsProto": {
+              "fields": {
+                "elementCountThreshold": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "requestByteThreshold": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "delayThreshold": {
+                  "type": "google.protobuf.Duration",
+                  "id": 3
+                },
+                "elementCountLimit": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "requestByteLimit": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "flowControlElementLimit": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "flowControlByteLimit": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "flowControlLimitExceededBehavior": {
+                  "type": "FlowControlLimitExceededBehaviorProto",
+                  "id": 8
+                }
+              }
+            },
+            "FlowControlLimitExceededBehaviorProto": {
+              "values": {
+                "UNSET_BEHAVIOR": 0,
+                "THROW_EXCEPTION": 1,
+                "BLOCK": 2,
+                "IGNORE": 3
+              }
+            },
+            "BatchingDescriptorProto": {
+              "fields": {
+                "batchedField": {
+                  "type": "string",
+                  "id": 1
+                },
+                "discriminatorFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "subresponseField": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -4140,16 +5563,25 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
                 "EDITION_2024": 1001,
+                "EDITION_2026": 1002,
+                "EDITION_UNSTABLE": 9999,
                 "EDITION_1_TEST_ONLY": 1,
                 "EDITION_2_TEST_ONLY": 2,
                 "EDITION_99997_TEST_ONLY": 99997,
@@ -4183,6 +5615,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -4272,6 +5709,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -4335,6 +5776,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4497,6 +5942,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -4547,7 +5996,14 @@
                   "type": "ServiceOptions",
                   "id": 3
                 }
-              }
+              },
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                "stream"
+              ]
             },
             "MethodDescriptorProto": {
               "edition": "proto2",
@@ -4599,7 +6055,10 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "feature_support.edition_introduced": "EDITION_PROTO2",
+                    "feature_support.edition_removed": "EDITION_2024",
+                    "feature_support.removal_error": "This behavior is enabled by default in editions 2024 and above. To disable it, you can set `features.(pb.java).nest_in_file_class = YES` on individual messages, enums, or services."
                   }
                 },
                 "javaGenerateEqualsAndHash": {
@@ -4659,7 +6118,9 @@
                   "type": "bool",
                   "id": 31,
                   "options": {
-                    "default": true
+                    "default": true,
+                    "feature_support.edition_removed": "EDITION_2026",
+                    "feature_support.removal_error": "cc_enable_arenas is enabled by default in every edition and overrides are ignored.This option is removed in editions 2026 and above."
                   }
                 },
                 "objcClassPrefix": {
@@ -4702,6 +6163,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -4711,6 +6176,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -4772,6 +6238,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4846,7 +6316,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -4874,6 +6345,10 @@
                   "type": "FeatureSet",
                   "id": 21
                 },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -4881,6 +6356,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4943,6 +6422,30 @@
                       "id": 2
                     }
                   }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
+                    },
+                    "removalError": {
+                      "type": "string",
+                      "id": 5
+                    }
+                  }
                 }
               }
             },
@@ -4960,6 +6463,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -4999,6 +6506,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -5031,6 +6542,10 @@
                     "default": false
                   }
                 },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
+                },
                 "uninterpretedOption": {
                   "rule": "repeated",
                   "type": "UninterpretedOption",
@@ -5038,6 +6553,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -5065,6 +6584,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -5099,6 +6622,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -5173,6 +6700,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -5183,6 +6711,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -5193,6 +6722,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -5203,6 +6733,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -5213,7 +6744,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -5223,27 +6755,49 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STYLE2026"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                  }
+                },
+                "enforceProtoLimits": {
+                  "type": "ProtoLimitsFeature.EnforceProtoLimits",
+                  "id": 9,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_ONEOF",
+                    "feature_support.edition_introduced": "EDITION_2026",
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "PROTO_LIMITS2026"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -5288,7 +6842,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -5302,6 +6862,46 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2,
+                    "STYLE2026": 3
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
+                  }
+                },
+                "ProtoLimitsFeature": {
+                  "fields": {},
+                  "nested": {
+                    "EnforceProtoLimits": {
+                      "values": {
+                        "PROTO_LIMITS_UNKNOWN": 0,
+                        "LEGACY_NO_EXPLICIT_LIMITS": 1,
+                        "PROTO_LIMITS2026": 2
+                      }
+                    }
                   }
                 }
               }
@@ -5330,11 +6930,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -5347,6 +6962,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -5432,7 +7053,15 @@
                 }
               }
             },
-            "Timestamp": {
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
+              }
+            },
+            "Duration": {
               "fields": {
                 "seconds": {
                   "type": "int64",
@@ -5444,7 +7073,7 @@
                 }
               }
             },
-            "Duration": {
+            "Timestamp": {
               "fields": {
                 "seconds": {
                   "type": "int64",

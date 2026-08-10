@@ -118,7 +118,15 @@ const fakePromisify = {
 };
 
 const fsCached = fs;
-const fakeFs = {...fsCached};
+const safeFs: any = {};
+const descriptors = Object.getOwnPropertyDescriptors(fsCached);
+for (const key of Object.keys(descriptors)) {
+  const desc = descriptors[key];
+  if (desc && !desc.get) {
+    Object.defineProperty(safeFs, key, desc);
+  }
+}
+const fakeFs = {...safeFs} as typeof fs;
 
 const zlibCached = zlib;
 let createGunzipOverride: Function | null;
@@ -223,7 +231,7 @@ describe('File', () => {
   });
 
   beforeEach(() => {
-    Object.assign(fakeFs, fsCached);
+    Object.assign(fakeFs, safeFs);
     Object.assign(fakeOs, osCached);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     FakeServiceObject.prototype.request = util.noop as any;
@@ -3786,7 +3794,26 @@ describe('File', () => {
           contentType: config.contentType,
           cname: CNAME,
           virtualHostedStyle: true,
+          signingEndpoint: undefined,
         });
+        done();
+      });
+    });
+
+    it('should pass signingEndpoint to URLSigner', done => {
+      const signingEndpoint = 'https://my-endpoint.com';
+      const config = {
+        ...SIGNED_URL_CONFIG,
+        signingEndpoint,
+      };
+
+      file.getSignedUrl(config, (err: Error | null) => {
+        assert.ifError(err);
+        const getSignedUrlArgs = signerGetSignedUrlStub.getCall(0).args;
+        assert.strictEqual(
+          getSignedUrlArgs[0]['signingEndpoint'],
+          signingEndpoint
+        );
         done();
       });
     });

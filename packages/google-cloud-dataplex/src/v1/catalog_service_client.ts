@@ -222,6 +222,9 @@ export class CatalogServiceClient {
       assetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}',
       ),
+      changeRequestPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/changeRequests/{change_request}',
+      ),
       contentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lakes/{lake}/content/{content}',
       ),
@@ -395,9 +398,6 @@ export class CatalogServiceClient {
               get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',
             },
             {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
-            },
-            {
               get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
             },
             {
@@ -442,6 +442,9 @@ export class CatalogServiceClient {
             {
               get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataDomains/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -459,10 +462,6 @@ export class CatalogServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
               body: '*',
             },
             {
@@ -525,6 +524,10 @@ export class CatalogServiceClient {
               post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataDomains/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -542,10 +545,6 @@ export class CatalogServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
               body: '*',
             },
             {
@@ -606,6 +605,10 @@ export class CatalogServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataDomains/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -865,6 +868,7 @@ export class CatalogServiceClient {
       'listEntries',
       'getEntry',
       'lookupEntry',
+      'modifyEntry',
       'searchEntries',
       'createMetadataJob',
       'getMetadataJob',
@@ -1842,6 +1846,9 @@ export class CatalogServiceClient {
    * @param {google.cloud.dataplex.v1.EntryView} [request.view]
    *   Optional. View to control which parts of an entry the service should
    *   return.
+   *   **Please check the limitations on returned aspects in the Entry view
+   *   documentation. Amount of returned aspects depends on the selected Entry
+   *   View.**
    * @param {string[]} [request.aspectTypes]
    *   Optional. Limits the aspects returned to the provided aspect types.
    *   It only works for CUSTOM view.
@@ -1976,6 +1983,9 @@ export class CatalogServiceClient {
    * @param {google.cloud.dataplex.v1.EntryView} [request.view]
    *   Optional. View to control which parts of an entry the service should
    *   return.
+   *   **Please check the limitations on returned aspects in the Entry view
+   *   documentation. Amount of returned aspects depends on the selected Entry
+   *   View.**
    * @param {string[]} [request.aspectTypes]
    *   Optional. Limits the aspects returned to the provided aspect types.
    *   It only works for CUSTOM view.
@@ -2086,6 +2096,165 @@ export class CatalogServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('lookupEntry response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Modifies an entry using the permission on the source system.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The project to which the request should be attributed in the
+   *   following form: `projects/{project}/locations/{location}`.
+   * @param {google.cloud.dataplex.v1.Entry} request.entry
+   *   Required. The entry to modify.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Mask of fields to update. To update Aspects, the update_mask must
+   *   contain the value "aspects".
+   *
+   *   If the update_mask is empty, the service will update all modifiable fields
+   *   present in the request.
+   * @param {boolean} [request.deleteMissingAspects]
+   *   Optional. If set to true, any aspects not specified in the request will be
+   *   deleted. The default is false.
+   * @param {string[]} [request.aspectKeys]
+   *   Optional. The aspect keys which the service should modify. It supports
+   *   the following syntaxes:
+   *
+   *   * `<aspect_type_reference>` - matches an aspect of the given type and empty
+   *   path.
+   *   * `<aspect_type_reference>@path` - matches an aspect of the given type and
+   *   specified path. For example, to attach an aspect to a field that is
+   *   specified by the `schema` aspect, the path should have the format
+   *   `Schema.<field_name>`.
+   *   * `<aspect_type_reference>@*` - matches aspects of the given type for all
+   *   paths.
+   *   * `*@path` - matches aspects of all types on the given path.
+   *
+   *   The service will not remove existing aspects matching the syntax unless
+   *   `delete_missing_aspects` is set to true.
+   *
+   *   If this field is left empty, the service treats it as specifying
+   *   exactly those Aspects present in the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Entry|Entry}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/catalog_service.modify_entry.js</caption>
+   * region_tag:dataplex_v1_generated_CatalogService_ModifyEntry_async
+   */
+  modifyEntry(
+    request?: protos.google.cloud.dataplex.v1.IModifyEntryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IEntry,
+      protos.google.cloud.dataplex.v1.IModifyEntryRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  modifyEntry(
+    request: protos.google.cloud.dataplex.v1.IModifyEntryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IEntry,
+      protos.google.cloud.dataplex.v1.IModifyEntryRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  modifyEntry(
+    request: protos.google.cloud.dataplex.v1.IModifyEntryRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IEntry,
+      protos.google.cloud.dataplex.v1.IModifyEntryRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  modifyEntry(
+    request?: protos.google.cloud.dataplex.v1.IModifyEntryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          | protos.google.cloud.dataplex.v1.IModifyEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IEntry,
+      protos.google.cloud.dataplex.v1.IModifyEntryRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IEntry,
+      protos.google.cloud.dataplex.v1.IModifyEntryRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('modifyEntry request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IEntry,
+          | protos.google.cloud.dataplex.v1.IModifyEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('modifyEntry response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .modifyEntry(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IEntry,
+          protos.google.cloud.dataplex.v1.IModifyEntryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('modifyEntry response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2807,14 +2976,25 @@ export class CatalogServiceClient {
    *   Required. The project to which the request should be attributed in the
    *   following form: `projects/{project}/locations/{location}`.
    * @param {string[]} request.resources
-   *   Required. The entry names to lookup context for. The request should have
-   *   max 10 of those.
+   *   Required. The entry names to look up the context for. The maximum number of
+   *   resources for a request is limited to 10.
    *
    *   ## Examples:
    *
-   *   projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}
+   *   `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`
+   * @param {string} [request.context]
+   *   Optional. The text representing contextual information for which metadata
+   *   context is being requested.
    * @param {number[]} [request.options]
    *   Optional. Allows to configure the context.
+   *
+   *   Supported options:
+   *
+   *   - `format` - The format of the context (one of `yaml`,
+   *   `xml`, `json`, default is `yaml`).
+   *   - `context_budget` - If provided, the output will be intelligently
+   *   truncated on a best-effort basis to contain approximately the desired
+   *   amount of characters. There is no guarantee to achieve the specific amount.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -8144,6 +8324,58 @@ export class CatalogServiceClient {
    */
   matchAssetFromAssetName(assetName: string) {
     return this.pathTemplates.assetPathTemplate.match(assetName).asset;
+  }
+
+  /**
+   * Return a fully-qualified changeRequest resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} change_request
+   * @returns {string} Resource name string.
+   */
+  changeRequestPath(project: string, location: string, changeRequest: string) {
+    return this.pathTemplates.changeRequestPathTemplate.render({
+      project: project,
+      location: location,
+      change_request: changeRequest,
+    });
+  }
+
+  /**
+   * Parse the project from ChangeRequest resource.
+   *
+   * @param {string} changeRequestName
+   *   A fully-qualified path representing ChangeRequest resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromChangeRequestName(changeRequestName: string) {
+    return this.pathTemplates.changeRequestPathTemplate.match(changeRequestName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ChangeRequest resource.
+   *
+   * @param {string} changeRequestName
+   *   A fully-qualified path representing ChangeRequest resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromChangeRequestName(changeRequestName: string) {
+    return this.pathTemplates.changeRequestPathTemplate.match(changeRequestName)
+      .location;
+  }
+
+  /**
+   * Parse the change_request from ChangeRequest resource.
+   *
+   * @param {string} changeRequestName
+   *   A fully-qualified path representing ChangeRequest resource.
+   * @returns {string} A string representing the change_request.
+   */
+  matchChangeRequestFromChangeRequestName(changeRequestName: string) {
+    return this.pathTemplates.changeRequestPathTemplate.match(changeRequestName)
+      .change_request;
   }
 
   /**

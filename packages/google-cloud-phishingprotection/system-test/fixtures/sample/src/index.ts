@@ -16,17 +16,22 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {PhishingProtectionServiceV1Beta1Client} from '@google-cloud/phishing-protection';
+import { PhishingProtectionServiceV1Beta1Client } from '@google-cloud/phishing-protection';
 
 // check that the client class type name can be used
-function doStuffWithPhishingProtectionServiceV1Beta1Client(client: PhishingProtectionServiceV1Beta1Client) {
+function doStuffWithPhishingProtectionServiceV1Beta1Client(
+  client: PhishingProtectionServiceV1Beta1Client,
+) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const phishingProtectionServiceV1Beta1Client = new PhishingProtectionServiceV1Beta1Client();
-  doStuffWithPhishingProtectionServiceV1Beta1Client(phishingProtectionServiceV1Beta1Client);
+  const phishingProtectionServiceV1Beta1Client =
+    new PhishingProtectionServiceV1Beta1Client();
+  doStuffWithPhishingProtectionServiceV1Beta1Client(
+    phishingProtectionServiceV1Beta1Client,
+  );
 }
 
 main();
