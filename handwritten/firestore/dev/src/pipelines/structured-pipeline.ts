@@ -27,6 +27,7 @@ import {OptionsUtil} from './options-util';
  */
 export type StructuredPipelineOptions = {
   indexMode?: 'recommended';
+  atomic?: boolean;
   explainOptions?: {
     mode?: 'execute' | 'explain' | 'analyze';
     outputFormat?: 'text';
@@ -72,7 +73,7 @@ export class StructuredPipeline
    */
   constructor(
     private pipeline: ProtoSerializable<IPipeline>,
-    private options: StructuredPipelineOptions,
+    public options: StructuredPipelineOptions,
     private optionsOverride: Record<string, unknown>,
   ) {}
 
