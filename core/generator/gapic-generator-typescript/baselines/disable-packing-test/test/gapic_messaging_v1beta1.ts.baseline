@@ -2252,9 +2252,9 @@ describe('v1beta1.MessagingClient', () => {
       assert(
         (client.descriptors.page.listBlurbs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams,
-          ),
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -2300,9 +2300,9 @@ describe('v1beta1.MessagingClient', () => {
       assert(
         (client.descriptors.page.listBlurbs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams,
-          ),
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -2343,9 +2343,9 @@ describe('v1beta1.MessagingClient', () => {
       assert(
         (client.descriptors.page.listBlurbs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams,
-          ),
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
       );
     });
 
@@ -2385,9 +2385,9 @@ describe('v1beta1.MessagingClient', () => {
       assert(
         (client.descriptors.page.listBlurbs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams,
-          ),
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
       );
     });
   });

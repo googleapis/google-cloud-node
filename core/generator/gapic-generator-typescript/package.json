@@ -52,7 +52,7 @@
     "proto3-json-serializer": "^4.0.0",
     "protobufjs": "^7.6.5",
     "protobufjs-cli": "^1.2.0",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.3",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
