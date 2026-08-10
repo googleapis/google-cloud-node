@@ -44,6 +44,7 @@ const DURATION_MS = Number(process.env.BENCHMARK_DURATION_MS || 30_000);
 const WARMUP_MS = Number(process.env.BENCHMARK_WARMUP_MS || 5_000);
 const REPETITIONS = Number(process.env.BENCHMARK_REPETITIONS || 3);
 const VERIFY_ONLY = process.env.BENCHMARK_VERIFY_BINDINGS === '1';
+const CAPTURE_ONLY = process.env.BENCHMARK_CAPTURE_ONLY === '1';
 const OUTPUT = process.env.BENCHMARK_OUTPUT || `benchmark_results_${ARM}.json`;
 const CAPTURE_DIR = process.env.BENCHMARK_CAPTURE_DIR;
 
@@ -182,6 +183,9 @@ async function main() {
   }
 	if (!DATABASE || !QUERY_TEMPLATE) {
 	  throw new Error('SPANNER_BENCHMARK_DATABASE and a table or query template are required');
+	}
+  if (CAPTURE_ONLY && !CAPTURE_DIR) {
+    throw new Error('BENCHMARK_CAPTURE_DIR is required with BENCHMARK_CAPTURE_ONLY=1');
   }
   if (!Number.isInteger(REPETITIONS) || REPETITIONS < 3) {
     throw new Error(`BENCHMARK_REPETITIONS must be at least 3, got ${REPETITIONS}`);
@@ -211,6 +215,10 @@ async function main() {
       for (const concurrency of CONCURRENCY_LEVELS) {
         const client = clients.get(concurrency);
         await captureRows(client, rows, concurrency);
+        if (CAPTURE_ONLY) {
+          console.log(`captured rows=${rows} concurrency=${concurrency}`);
+          continue;
+        }
         console.log(`\nrows=${rows} concurrency=${concurrency}: warmup`);
         await Promise.all([
           runBenchmark(() => client.executeSqlJs(query), concurrency, WARMUP_MS),
@@ -256,6 +264,11 @@ async function main() {
     }
   } finally {
     for (const client of clients.values()) await client.close();
+  }
+
+  if (CAPTURE_ONLY) {
+    console.log(`Captured all correctness shapes under ${CAPTURE_DIR}`);
+    return;
   }
 
   const output = {
