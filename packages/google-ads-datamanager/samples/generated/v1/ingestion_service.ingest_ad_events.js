@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(adEvents) {
+function main(adEvents, encryptionInfo) {
   // [START datamanager_v1_generated_IngestionService_IngestAdEvents_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -33,7 +33,7 @@ function main(adEvents) {
    */
   // const adEvents = [1,2,3,4]
   /**
-   *  Optional. Information about encryption keys which are used to encrypt the
+   *  Required. Information about encryption keys which are used to encrypt the
    *  data.
    */
   // const encryptionInfo = {}
@@ -52,6 +52,7 @@ function main(adEvents) {
     // Construct request
     const request = {
       adEvents,
+      encryptionInfo,
     };
 
     // Run request

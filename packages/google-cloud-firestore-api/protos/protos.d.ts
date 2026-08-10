@@ -11421,6 +11421,103 @@ export namespace google {
                 }
             }
 
+            /** Properties of a RequestOptions. */
+            interface IRequestOptions {
+
+                /** RequestOptions requestTags */
+                requestTags?: (string[]|null);
+            }
+
+            /** Represents a RequestOptions. */
+            class RequestOptions implements IRequestOptions {
+
+                /**
+                 * Constructs a new RequestOptions.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.firestore.v1.IRequestOptions);
+
+                /** RequestOptions requestTags. */
+                public requestTags: string[];
+
+                /**
+                 * Creates a new RequestOptions instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RequestOptions instance
+                 */
+                public static create(properties?: google.firestore.v1.IRequestOptions): google.firestore.v1.RequestOptions;
+
+                /**
+                 * Encodes the specified RequestOptions message. Does not implicitly {@link google.firestore.v1.RequestOptions.verify|verify} messages.
+                 * @param message RequestOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.firestore.v1.IRequestOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RequestOptions message, length delimited. Does not implicitly {@link google.firestore.v1.RequestOptions.verify|verify} messages.
+                 * @param message RequestOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.firestore.v1.IRequestOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RequestOptions message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RequestOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.firestore.v1.RequestOptions;
+
+                /**
+                 * Decodes a RequestOptions message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RequestOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.firestore.v1.RequestOptions;
+
+                /**
+                 * Verifies a RequestOptions message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RequestOptions message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RequestOptions
+                 */
+                public static fromObject(object: { [k: string]: any }): google.firestore.v1.RequestOptions;
+
+                /**
+                 * Creates a plain object from a RequestOptions message. Also converts values to other types if specified.
+                 * @param message RequestOptions
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.firestore.v1.RequestOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RequestOptions to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RequestOptions
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of an ExplainStats. */
             interface IExplainStats {
 
@@ -11913,6 +12010,9 @@ export namespace google {
 
                 /** GetDocumentRequest readTime */
                 readTime?: (google.protobuf.ITimestamp|null);
+
+                /** GetDocumentRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a GetDocumentRequest. */
@@ -11935,6 +12035,9 @@ export namespace google {
 
                 /** GetDocumentRequest readTime. */
                 public readTime?: (google.protobuf.ITimestamp|null);
+
+                /** GetDocumentRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** GetDocumentRequest consistencySelector. */
                 public consistencySelector?: ("transaction"|"readTime");
@@ -12046,6 +12149,9 @@ export namespace google {
 
                 /** ListDocumentsRequest showMissing */
                 showMissing?: (boolean|null);
+
+                /** ListDocumentsRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a ListDocumentsRequest. */
@@ -12083,6 +12189,9 @@ export namespace google {
 
                 /** ListDocumentsRequest showMissing. */
                 public showMissing: boolean;
+
+                /** ListDocumentsRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** ListDocumentsRequest consistencySelector. */
                 public consistencySelector?: ("transaction"|"readTime");
@@ -12285,6 +12394,9 @@ export namespace google {
 
                 /** CreateDocumentRequest mask */
                 mask?: (google.firestore.v1.IDocumentMask|null);
+
+                /** CreateDocumentRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a CreateDocumentRequest. */
@@ -12310,6 +12422,9 @@ export namespace google {
 
                 /** CreateDocumentRequest mask. */
                 public mask?: (google.firestore.v1.IDocumentMask|null);
+
+                /** CreateDocumentRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new CreateDocumentRequest instance using the specified properties.
@@ -12403,6 +12518,9 @@ export namespace google {
 
                 /** UpdateDocumentRequest currentDocument */
                 currentDocument?: (google.firestore.v1.IPrecondition|null);
+
+                /** UpdateDocumentRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents an UpdateDocumentRequest. */
@@ -12425,6 +12543,9 @@ export namespace google {
 
                 /** UpdateDocumentRequest currentDocument. */
                 public currentDocument?: (google.firestore.v1.IPrecondition|null);
+
+                /** UpdateDocumentRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new UpdateDocumentRequest instance using the specified properties.
@@ -12512,6 +12633,9 @@ export namespace google {
 
                 /** DeleteDocumentRequest currentDocument */
                 currentDocument?: (google.firestore.v1.IPrecondition|null);
+
+                /** DeleteDocumentRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a DeleteDocumentRequest. */
@@ -12528,6 +12652,9 @@ export namespace google {
 
                 /** DeleteDocumentRequest currentDocument. */
                 public currentDocument?: (google.firestore.v1.IPrecondition|null);
+
+                /** DeleteDocumentRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new DeleteDocumentRequest instance using the specified properties.
@@ -12627,6 +12754,9 @@ export namespace google {
 
                 /** BatchGetDocumentsRequest readTime */
                 readTime?: (google.protobuf.ITimestamp|null);
+
+                /** BatchGetDocumentsRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a BatchGetDocumentsRequest. */
@@ -12655,6 +12785,9 @@ export namespace google {
 
                 /** BatchGetDocumentsRequest readTime. */
                 public readTime?: (google.protobuf.ITimestamp|null);
+
+                /** BatchGetDocumentsRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** BatchGetDocumentsRequest consistencySelector. */
                 public consistencySelector?: ("transaction"|"newTransaction"|"readTime");
@@ -12863,6 +12996,9 @@ export namespace google {
 
                 /** BeginTransactionRequest options */
                 options?: (google.firestore.v1.ITransactionOptions|null);
+
+                /** BeginTransactionRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a BeginTransactionRequest. */
@@ -12879,6 +13015,9 @@ export namespace google {
 
                 /** BeginTransactionRequest options. */
                 public options?: (google.firestore.v1.ITransactionOptions|null);
+
+                /** BeginTransactionRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new BeginTransactionRequest instance using the specified properties.
@@ -13066,6 +13205,9 @@ export namespace google {
 
                 /** CommitRequest transaction */
                 transaction?: (Uint8Array|Buffer|string|null);
+
+                /** CommitRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a CommitRequest. */
@@ -13085,6 +13227,9 @@ export namespace google {
 
                 /** CommitRequest transaction. */
                 public transaction: (Uint8Array|Buffer|string);
+
+                /** CommitRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new CommitRequest instance using the specified properties.
@@ -13275,6 +13420,9 @@ export namespace google {
 
                 /** RollbackRequest transaction */
                 transaction?: (Uint8Array|Buffer|string|null);
+
+                /** RollbackRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a RollbackRequest. */
@@ -13291,6 +13439,9 @@ export namespace google {
 
                 /** RollbackRequest transaction. */
                 public transaction: (Uint8Array|Buffer|string);
+
+                /** RollbackRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new RollbackRequest instance using the specified properties.
@@ -13390,6 +13541,9 @@ export namespace google {
 
                 /** RunQueryRequest explainOptions */
                 explainOptions?: (google.firestore.v1.IExplainOptions|null);
+
+                /** RunQueryRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a RunQueryRequest. */
@@ -13418,6 +13572,9 @@ export namespace google {
 
                 /** RunQueryRequest explainOptions. */
                 public explainOptions?: (google.firestore.v1.IExplainOptions|null);
+
+                /** RunQueryRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** RunQueryRequest queryType. */
                 public queryType?: "structuredQuery";
@@ -13653,6 +13810,9 @@ export namespace google {
 
                 /** ExecutePipelineRequest autoCommitTransaction */
                 autoCommitTransaction?: (boolean|null);
+
+                /** ExecutePipelineRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents an ExecutePipelineRequest. */
@@ -13681,6 +13841,9 @@ export namespace google {
 
                 /** ExecutePipelineRequest autoCommitTransaction. */
                 public autoCommitTransaction: boolean;
+
+                /** ExecutePipelineRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** ExecutePipelineRequest pipelineType. */
                 public pipelineType?: "structuredPipeline";
@@ -13901,6 +14064,9 @@ export namespace google {
 
                 /** RunAggregationQueryRequest explainOptions */
                 explainOptions?: (google.firestore.v1.IExplainOptions|null);
+
+                /** RunAggregationQueryRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a RunAggregationQueryRequest. */
@@ -13929,6 +14095,9 @@ export namespace google {
 
                 /** RunAggregationQueryRequest explainOptions. */
                 public explainOptions?: (google.firestore.v1.IExplainOptions|null);
+
+                /** RunAggregationQueryRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** RunAggregationQueryRequest queryType. */
                 public queryType?: "structuredAggregationQuery";
@@ -14149,6 +14318,9 @@ export namespace google {
 
                 /** PartitionQueryRequest readTime */
                 readTime?: (google.protobuf.ITimestamp|null);
+
+                /** PartitionQueryRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a PartitionQueryRequest. */
@@ -14177,6 +14349,9 @@ export namespace google {
 
                 /** PartitionQueryRequest readTime. */
                 public readTime?: (google.protobuf.ITimestamp|null);
+
+                /** PartitionQueryRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** PartitionQueryRequest queryType. */
                 public queryType?: "structuredQuery";
@@ -14382,6 +14557,9 @@ export namespace google {
 
                 /** WriteRequest labels */
                 labels?: ({ [k: string]: string }|null);
+
+                /** WriteRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a WriteRequest. */
@@ -14407,6 +14585,9 @@ export namespace google {
 
                 /** WriteRequest labels. */
                 public labels: { [k: string]: string };
+
+                /** WriteRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new WriteRequest instance using the specified properties.
@@ -14615,6 +14796,9 @@ export namespace google {
 
                 /** ListenRequest labels */
                 labels?: ({ [k: string]: string }|null);
+
+                /** ListenRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a ListenRequest. */
@@ -14637,6 +14821,9 @@ export namespace google {
 
                 /** ListenRequest labels. */
                 public labels: { [k: string]: string };
+
+                /** ListenRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** ListenRequest targetChange. */
                 public targetChange?: ("addTarget"|"removeTarget");
@@ -15335,6 +15522,9 @@ export namespace google {
 
                 /** ListCollectionIdsRequest readTime */
                 readTime?: (google.protobuf.ITimestamp|null);
+
+                /** ListCollectionIdsRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a ListCollectionIdsRequest. */
@@ -15357,6 +15547,9 @@ export namespace google {
 
                 /** ListCollectionIdsRequest readTime. */
                 public readTime?: (google.protobuf.ITimestamp|null);
+
+                /** ListCollectionIdsRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /** ListCollectionIdsRequest consistencySelector. */
                 public consistencySelector?: "readTime";
@@ -15553,6 +15746,9 @@ export namespace google {
 
                 /** BatchWriteRequest labels */
                 labels?: ({ [k: string]: string }|null);
+
+                /** BatchWriteRequest requestOptions */
+                requestOptions?: (google.firestore.v1.IRequestOptions|null);
             }
 
             /** Represents a BatchWriteRequest. */
@@ -15572,6 +15768,9 @@ export namespace google {
 
                 /** BatchWriteRequest labels. */
                 public labels: { [k: string]: string };
+
+                /** BatchWriteRequest requestOptions. */
+                public requestOptions?: (google.firestore.v1.IRequestOptions|null);
 
                 /**
                  * Creates a new BatchWriteRequest instance using the specified properties.
