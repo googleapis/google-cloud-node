@@ -7,16 +7,37 @@
 #include <iostream>
 
 // Callback signature matching Go exported C type
-typedef void (*StreamDataCallback)(
-    void* user_data,
-    char* json_rows,
-    int row_count,
-    char* server_timing,
-    int attempt_count,
-    char* error_msg,
-    int error_code,
-    int is_last
-);
+typedef enum {
+    CELL_KIND_NULL = 0,
+    CELL_KIND_BOOL = 1,
+    CELL_KIND_NUMBER = 2,
+    CELL_KIND_STRING = 3
+} CellKind;
+
+typedef struct {
+    uint8_t kind;
+    uint8_t bool_val;
+    uint16_t _pad;
+    uint32_t str_len;
+    double number_val;
+    const char* str_val;
+} CSpannerCell;
+
+typedef struct {
+    int format; // 0 = JSON string, 1 = Direct Native Cells
+    char* json_rows;
+    CSpannerCell* cells;
+    int row_count;
+    int col_count;
+    char* string_arena;
+    char* server_timing;
+    int attempt_count;
+    char* error_msg;
+    int error_code;
+    int is_last;
+} CSpannerBatch;
+
+typedef void (*StreamDataCallback)(void* user_data, CSpannerBatch* batch);
 
 // Declarations of Go C-shared exported functions
 extern "C" {
@@ -39,50 +60,27 @@ struct StreamCallbackContext {
     napi_threadsafe_function tsfn;
 };
 
-struct StreamBatchData {
-    char* json_rows;
-    int row_count;
-    char* server_timing;
-    int attempt_count;
-    char* error_msg;
-    int error_code;
-    int is_last;
-};
-
 // C callback called by Go on background goroutine
-extern "C" void OnGoStreamData(
-    void* user_data,
-    char* json_rows,
-    int row_count,
-    char* server_timing,
-    int attempt_count,
-    char* error_msg,
-    int error_code,
-    int is_last
-) {
+extern "C" void OnGoStreamData(void* user_data, CSpannerBatch* batch) {
     StreamCallbackContext* ctx = static_cast<StreamCallbackContext*>(user_data);
     if (!ctx || !ctx->tsfn) {
-        if (json_rows) free(json_rows);
-        if (server_timing) free(server_timing);
-        if (error_msg) free(error_msg);
+        if (batch) {
+            if (batch->cells) free(batch->cells);
+            if (batch->string_arena) free(batch->string_arena);
+            if (batch->json_rows) free(batch->json_rows);
+            if (batch->server_timing) free(batch->server_timing);
+            if (batch->error_msg) free(batch->error_msg);
+            free(batch);
+        }
         return;
     }
 
-    StreamBatchData* data = new StreamBatchData();
-    data->json_rows = json_rows; // Direct ownership transfer! No strdup!
-    data->row_count = row_count;
-    data->server_timing = server_timing;
-    data->attempt_count = attempt_count;
-    data->error_msg = error_msg;
-    data->error_code = error_code;
-    data->is_last = is_last;
-
-    napi_call_threadsafe_function(ctx->tsfn, data, napi_tsfn_nonblocking);
+    napi_call_threadsafe_function(ctx->tsfn, batch, napi_tsfn_nonblocking);
 }
 
 // CallJsHandler runs on the V8 main event loop thread
 void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
-    StreamBatchData* batch = static_cast<StreamBatchData*>(data);
+    CSpannerBatch* batch = static_cast<CSpannerBatch*>(data);
     StreamCallbackContext* ctx = static_cast<StreamCallbackContext*>(context);
 
     if (env != nullptr && js_cb != nullptr && batch != nullptr) {
@@ -105,9 +103,51 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
             napi_value argv[3] = { null_val, null_val, null_val };
             napi_call_function(env, global, js_cb, 3, argv, nullptr);
         } else {
-            // Parse JSON rows into JS array
             napi_value rows_val = null_val;
-            if (batch->json_rows != nullptr) {
+
+            if (batch->format == 1 && batch->cells != nullptr && batch->row_count > 0 && batch->col_count > 0) {
+                // DIRECT N-API NATIVE CELLS INSTANTIATION (ZERO JSON.PARSE)
+                const int row_count = batch->row_count;
+                const int col_count = batch->col_count;
+                const CSpannerCell* cells = batch->cells;
+
+                napi_create_array_with_length(env, row_count, &rows_val);
+
+                for (int r = 0; r < row_count; ++r) {
+                    napi_value row_arr;
+                    napi_create_array_with_length(env, col_count, &row_arr);
+
+                    for (int c = 0; c < col_count; ++c) {
+                        const CSpannerCell& cell = cells[r * col_count + c];
+                        napi_value js_cell = nullptr;
+
+                        switch (cell.kind) {
+                            case CELL_KIND_NULL:
+                                napi_get_null(env, &js_cell);
+                                break;
+                            case CELL_KIND_BOOL:
+                                napi_get_boolean(env, cell.bool_val != 0, &js_cell);
+                                break;
+                            case CELL_KIND_NUMBER:
+                                napi_create_double(env, cell.number_val, &js_cell);
+                                break;
+                            case CELL_KIND_STRING:
+                                if (cell.str_len > 0 && cell.str_val != nullptr) {
+                                    napi_create_string_utf8(env, cell.str_val, cell.str_len, &js_cell);
+                                } else {
+                                    napi_create_string_utf8(env, "", 0, &js_cell);
+                                }
+                                break;
+                            default:
+                                napi_get_null(env, &js_cell);
+                                break;
+                        }
+                        napi_set_element(env, row_arr, c, js_cell);
+                    }
+                    napi_set_element(env, rows_val, r, row_arr);
+                }
+            } else if (batch->format == 0 && batch->json_rows != nullptr) {
+                // LEGACY JSON.PARSE ROUTE (OPT-IN VIA SPANNER_GO_DIRECT_DESERIALIZATION=false)
                 napi_value json_global, parse_fn, json_str;
                 napi_get_named_property(env, global, "JSON", &json_global);
                 napi_get_named_property(env, json_global, "parse", &parse_fn);
@@ -138,11 +178,13 @@ void CallJsHandler(napi_env env, napi_value js_cb, void* context, void* data) {
     }
 
     if (batch != nullptr) {
-        if (batch->json_rows) free(batch->json_rows);
-        if (batch->server_timing) free(batch->server_timing);
-        if (batch->error_msg) free(batch->error_msg);
+        if (batch->cells != nullptr) free(batch->cells);
+        if (batch->string_arena != nullptr) free(batch->string_arena);
+        if (batch->json_rows != nullptr) free(batch->json_rows);
+        if (batch->server_timing != nullptr) free(batch->server_timing);
+        if (batch->error_msg != nullptr) free(batch->error_msg);
         bool is_final = (batch->is_last != 0) || (batch->error_msg != nullptr);
-        delete batch;
+        free(batch);
 
         if (is_final && ctx != nullptr) {
             if (ctx->tsfn != nullptr) {
