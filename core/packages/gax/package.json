@@ -19,7 +19,7 @@
     "object-hash": "^3.0.0",
     "proto3-json-serializer": "3.0.4",
     "protobufjs": "^7.5.4",
-    "retry-request": "^9.0.0"
+    "retry-request": "^8.0.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-methods": "^7.18.6",
@@ -39,8 +39,8 @@
     "gts": "^6.0.2",
     "jackspeak": "^3.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^6.0.0",
-    "jsdoc-region-tag": "^5.0.0",
+    "jsdoc-fresh": "^5.0.0",
+    "jsdoc-region-tag": "^4.0.0",
     "long": "^5.2.4",
     "lru-cache": "^10.0.0",
     "mkdirp": "^3.0.1",

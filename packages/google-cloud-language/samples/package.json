@@ -15,9 +15,9 @@
     "test": "mocha --timeout 60000"
   },
   "dependencies": {
-    "@google-cloud/automl": "^6.0.0",
+    "@google-cloud/automl": "^5.0.0",
     "mathjs": "^15.2.0",
-    "@google-cloud/language": "^7.2.3",
+    "@google-cloud/language": "^8.0.0",
     "@google-cloud/storage": "^7.0.0",
     "yargs": "^17.0.0"
   },
