@@ -1,0 +1,625 @@
+{
+  "schemaVersion": 1,
+  "suiteName": "Spanner Go vtprotobuf single-core comparison",
+  "metric": "p95 latency improvement percent versus paired Node.js baseline",
+  "measurementEnvironment": {
+    "host": "irahul-test",
+    "machineShape": "n1-standard-1",
+    "vcpuCount": 1,
+    "zone": "us-central1-f",
+    "platform": "linux-x64",
+    "nodeVersion": "v20.20.2",
+    "goVersion": "go version go1.25.3 linux/amd64",
+    "directPath": false,
+    "enableVariablesAbsentAtProcessStart": true,
+    "queryTemplate": "SELECT Key, SUBSTR(Value, 1, 80) AS Value FROM T ORDER BY Key LIMIT {rows}",
+    "database": "projects/span-cloud-testing/instances/irahul-load-test/databases/db",
+    "repetitions": 3,
+    "durationMs": 30000,
+    "warmupMs": 5000
+  },
+  "arms": {
+    "A-native-cells-reflection": {
+      "measured": true,
+      "commitSha": "cacdec97d0",
+      "treeCleanAtBuild": true,
+      "resultFile": "arm_a_single_core.json",
+      "shapes": [
+        {
+          "rows": 1,
+          "concurrency": 1,
+          "latencyImprovementPercent": {
+            "min": 32.801448626490746,
+            "median": 43.900261500284685,
+            "max": 46.17368324293593
+          },
+          "nativeP95Ms": {
+            "min": 7.7852140000031795,
+            "median": 7.834708000009414,
+            "max": 8.040596000000733
+          },
+          "nodeP95Ms": {
+            "min": 11.65904299999238,
+            "median": 14.332679999999527,
+            "max": 14.463583000004292
+          }
+        },
+        {
+          "rows": 1,
+          "concurrency": 16,
+          "latencyImprovementPercent": {
+            "min": 78.05945873170342,
+            "median": 79.12161231080746,
+            "max": 80.67071654502236
+          },
+          "nativeP95Ms": {
+            "min": 8.105986000038683,
+            "median": 8.486344000033569,
+            "max": 8.82740000000922
+          },
+          "nodeP95Ms": {
+            "min": 38.678827000025194,
+            "median": 38.82477000000654,
+            "max": 45.6685320000106
+          }
+        },
+        {
+          "rows": 100,
+          "concurrency": 1,
+          "latencyImprovementPercent": {
+            "min": 43.506224235594715,
+            "median": 43.95640542235243,
+            "max": 47.555742236962764
+          },
+          "nativeP95Ms": {
+            "min": 8.51064100000076,
+            "median": 8.58370700001251,
+            "max": 8.618897000036668
+          },
+          "nodeP95Ms": {
+            "min": 15.064740999951027,
+            "median": 15.316125000012107,
+            "max": 16.434395999996923
+          }
+        },
+        {
+          "rows": 100,
+          "concurrency": 16,
+          "latencyImprovementPercent": {
+            "min": 74.0409151464889,
+            "median": 75.64478071344467,
+            "max": 77.47087550174933
+          },
+          "nativeP95Ms": {
+            "min": 14.446792000089772,
+            "median": 14.511965000070632,
+            "max": 14.91184999991674
+          },
+          "nodeP95Ms": {
+            "min": 57.44366600003559,
+            "median": 59.31702699989546,
+            "max": 64.41424299997743
+          }
+        },
+        {
+          "rows": 1000,
+          "concurrency": 1,
+          "latencyImprovementPercent": {
+            "min": 51.27162949750008,
+            "median": 52.0914840749959,
+            "max": 52.263035914658175
+          },
+          "nativeP95Ms": {
+            "min": 14.448829999892041,
+            "median": 14.668443999951705,
+            "max": 15.040531000006013
+          },
+          "nodeP95Ms": {
+            "min": 30.267592999967746,
+            "median": 30.617612999980338,
+            "max": 30.866065999958664
+          }
+        },
+        {
+          "rows": 1000,
+          "concurrency": 16,
+          "latencyImprovementPercent": {
+            "min": 81.20380616954317,
+            "median": 81.24000859370139,
+            "max": 81.79898081645673
+          },
+          "nativeP95Ms": {
+            "min": 75.64481500000693,
+            "median": 75.90724500000942,
+            "max": 75.99965999997221
+          },
+          "nodeP95Ms": {
+            "min": 403.84370199998375,
+            "median": 405.115644000005,
+            "max": 415.60757799982093
+          }
+        }
+      ]
+    },
+    "B-native-cells-vtprotobuf-safe": {
+      "measured": true,
+      "commitSha": "a976113b75",
+      "treeCleanAtBuild": true,
+      "resultFile": "arm_b_safe_single_core.json",
+      "shapes": [
+        {
+          "rows": 1,
+          "concurrency": 1,
+          "latencyImprovementPercent": {
+            "min": 31.000276643003883,
+            "median": 39.60481921364742,
+            "max": 40.43221885007704
+          },
+          "nativeP95Ms": {
+            "min": 7.578505000012228,
+            "median": 7.674586000008276,
+            "max": 7.981385000000955
+          },
+          "nodeP95Ms": {
+            "min": 11.122632999991765,
+            "median": 12.722489999985555,
+            "max": 13.215267999999924
+          }
+        },
+        {
+          "rows": 1,
+          "concurrency": 16,
+          "latencyImprovementPercent": {
+            "min": 77.54155807750914,
+            "median": 77.5926866149911,
+            "max": 78.89937753327715
+          },
+          "nativeP95Ms": {
+            "min": 8.465548000007402,
+            "median": 8.693346999993082,
+            "max": 8.865010000008624
+          },
+          "nodeP95Ms": {
+            "min": 38.796918000036385,
+            "median": 39.47295199998189,
+            "max": 40.119896999996854
+          }
+        },
+        {
+          "rows": 100,
+          "concurrency": 1,
+          "latencyImprovementPercent": {
+            "min": 35.574952426234354,
+            "median": 38.979409800044614,
+            "max": 45.17456205281221
+          },
+          "nativeP95Ms": {
+            "min": 8.158579999988433,
+            "median": 8.287221000005957,
+            "max": 8.468868999974802
+          },
+          "nodeP95Ms": {
+            "min": 13.14530500001274,
+            "median": 13.581024000013713,
+            "max": 14.881012000027113
+          }
+        },
+        {
+          "rows": 100,
+          "concurrency": 16,
+          "latencyImprovementPercent": {
+            "min": 77.17231707573507,
+            "median": 78.11580271096956,
+            "max": 78.49841920849316
+          },
+          "nativeP95Ms": {
+            "min": 13.244660000083968,
+            "median": 13.436996000004001,
+            "max": 13.477175000007264
+          },
+          "nodeP95Ms": {
+            "min": 59.03873399994336,
+            "median": 60.52157100010663,
+            "max": 62.49306100001559
+          }
+        },
+        {
+          "rows": 1000,
+          "concurrency": 1,
+          "latencyImprovementPercent": {
+            "min": 50.62074928455063,
+            "median": 55.51110814358542,
+            "max": 55.7581967621382
+          },
+          "nativeP95Ms": {
+            "min": 13.870237999944948,
+            "median": 14.291991999954917,
+            "max": 14.772149000084028
+          },
+          "nodeP95Ms": {
+            "min": 29.915701000019908,
+            "median": 31.350978000089526,
+            "max": 32.124854999943636
+          }
+        },
+        {
+          "rows": 1000,
+          "concurrency": 16,
+          "latencyImprovementPercent": {
+            "min": 84.45123978918137,
+            "median": 84.63506958833771,
+            "max": 84.90219965341606
+          },
+          "nativeP95Ms": {
+            "min": 62.544152999995276,
+            "median": 62.88771599996835,
+            "max": 64.13691399991512
+          },
+          "nodeP95Ms": {
+            "min": 409.29385500005446,
+            "median": 412.4889259999618,
+            "max": 414.260035000043
+          }
+        }
+      ]
+    },
+    "B2-native-cells-vtprotobuf-raw-values": {
+      "measured": true,
+      "commitSha": "d134e5f49c",
+      "treeCleanAtBuild": true,
+      "resultFile": "arm_b_raw_single_core.json",
+      "shapes": [
+        {
+          "rows": 1,
+          "concurrency": 1,
+          "latencyImprovementPercent": {
+            "min": 22.823487792385823,
+            "median": 41.46399144152576,
+            "max": 44.37883454518507
+          },
+          "nativeP95Ms": {
+            "min": 7.522984000001088,
+            "median": 7.700313000008464,
+            "max": 8.015125000005355
+          },
+          "nodeP95Ms": {
+            "min": 10.385446000000229,
+            "median": 13.154830999992555,
+            "max": 13.52539799999795
+          }
+        },
+        {
+          "rows": 1,
+          "concurrency": 16,
+          "latencyImprovementPercent": {
+            "min": 75.8075201971751,
+            "median": 76.24554709905624,
+            "max": 76.58798960926741
+          },
+          "nativeP95Ms": {
+            "min": 9.143773999996483,
+            "median": 9.397668999998132,
+            "max": 9.455016000021715
+          },
+          "nodeP95Ms": {
+            "min": 38.4928840000066,
+            "median": 39.08245899999747,
+            "max": 40.14037599999574
+          }
+        },
+        {
+          "rows": 100,
+          "concurrency": 1,
+          "latencyImprovementPercent": {
+            "min": 34.74450685675619,
+            "median": 42.917703264982684,
+            "max": 54.64626807311036
+          },
+          "nativeP95Ms": {
+            "min": 7.97714500001166,
+            "median": 8.038623000029474,
+            "max": 8.201035000034608
+          },
+          "nodeP95Ms": {
+            "min": 12.567577999958303,
+            "median": 14.08251499995822,
+            "max": 17.588729000010062
+          }
+        },
+        {
+          "rows": 100,
+          "concurrency": 16,
+          "latencyImprovementPercent": {
+            "min": 79.81315371404763,
+            "median": 79.96546267779757,
+            "max": 80.2042496082715
+          },
+          "nativeP95Ms": {
+            "min": 11.619900000048801,
+            "median": 11.911415999988094,
+            "max": 12.123052999959327
+          },
+          "nodeP95Ms": {
+            "min": 58.69896199996583,
+            "median": 59.005829000030644,
+            "max": 60.51077100005932
+          }
+        },
+        {
+          "rows": 1000,
+          "concurrency": 1,
+          "latencyImprovementPercent": {
+            "min": 56.548758062046254,
+            "median": 57.48896694678023,
+            "max": 59.04892269790194
+          },
+          "nativeP95Ms": {
+            "min": 12.05646400002297,
+            "median": 12.513298999983817,
+            "max": 12.87975500000175
+          },
+          "nodeP95Ms": {
+            "min": 29.435414999956265,
+            "median": 29.44114000000991,
+            "max": 29.64185700006783
+          }
+        },
+        {
+          "rows": 1000,
+          "concurrency": 16,
+          "latencyImprovementPercent": {
+            "min": 91.39131302856394,
+            "median": 91.4489349862423,
+            "max": 91.47998407938978
+          },
+          "nativeP95Ms": {
+            "min": 34.3510219999589,
+            "median": 34.58830599999055,
+            "max": 34.71824399987236
+          },
+          "nodeP95Ms": {
+            "min": 403.1802560000215,
+            "median": 403.2931399999652,
+            "max": 404.49120599997696
+          }
+        }
+      ]
+    },
+    "C-rust-reference": {
+      "measured": false,
+      "commitSha": "cacdec97d0",
+      "resultFile": "arm_c_rust_reference_not_rerun.json",
+      "shapes": [
+        {
+          "rows": 1,
+          "concurrency": 1,
+          "latencyImprovementPercent": 31.092436974789916,
+          "nodeP95Ms": 7.14,
+          "nativeP95Ms": 4.92,
+          "approximate": false,
+          "source": "../benchmark_results_combined.json",
+          "sourceEnvironment": {
+            "vm": "knut-vm-1-core (n1-standard-1, 1 vCPU, 3.75 GB RAM)",
+            "zone": "us-central1-c",
+            "node_version": "v20.19.0",
+            "target_db": "projects/span-cloud-testing/instances/suvham-testing/databases/benchmark_db_async"
+          }
+        },
+        {
+          "rows": 1,
+          "concurrency": 16,
+          "latencyImprovementPercent": 89.0,
+          "nodeP95Ms": null,
+          "nativeP95Ms": null,
+          "approximate": true,
+          "source": "go/spanner-client-shared-core-design chart values supplied in experiment brief",
+          "sourceEnvironment": {
+            "machineShape": "single-core machine",
+            "directPath": false
+          }
+        },
+        {
+          "rows": 100,
+          "concurrency": 1,
+          "latencyImprovementPercent": 34.13461538461538,
+          "nodeP95Ms": 8.32,
+          "nativeP95Ms": 5.48,
+          "approximate": false,
+          "source": "../benchmark_results_combined.json",
+          "sourceEnvironment": {
+            "vm": "knut-vm-1-core (n1-standard-1, 1 vCPU, 3.75 GB RAM)",
+            "zone": "us-central1-c",
+            "node_version": "v20.19.0",
+            "target_db": "projects/span-cloud-testing/instances/suvham-testing/databases/benchmark_db_async"
+          }
+        },
+        {
+          "rows": 100,
+          "concurrency": 16,
+          "latencyImprovementPercent": 83.0,
+          "nodeP95Ms": null,
+          "nativeP95Ms": null,
+          "approximate": true,
+          "source": "go/spanner-client-shared-core-design chart values supplied in experiment brief",
+          "sourceEnvironment": {
+            "machineShape": "single-core machine",
+            "directPath": false
+          }
+        },
+        {
+          "rows": 1000,
+          "concurrency": 1,
+          "latencyImprovementPercent": 46.78953626634959,
+          "nodeP95Ms": 16.82,
+          "nativeP95Ms": 8.95,
+          "approximate": false,
+          "source": "../benchmark_results_combined.json",
+          "sourceEnvironment": {
+            "vm": "knut-vm-1-core (n1-standard-1, 1 vCPU, 3.75 GB RAM)",
+            "zone": "us-central1-c",
+            "node_version": "v20.19.0",
+            "target_db": "projects/span-cloud-testing/instances/suvham-testing/databases/benchmark_db_async"
+          }
+        },
+        {
+          "rows": 1000,
+          "concurrency": 16,
+          "latencyImprovementPercent": 60.0,
+          "nodeP95Ms": null,
+          "nativeP95Ms": null,
+          "approximate": true,
+          "source": "go/spanner-client-shared-core-design chart values supplied in experiment brief",
+          "sourceEnvironment": {
+            "machineShape": "single-core machine",
+            "directPath": false
+          }
+        }
+      ]
+    }
+  },
+  "nativeP95IncrementalComparison": [
+    {
+      "rows": 1,
+      "concurrency": 1,
+      "armANativeP95Ms": 7.834708000009414,
+      "armBSafeNativeP95Ms": 7.674586000008276,
+      "armBRawNativeP95Ms": 7.700313000008464,
+      "safeReductionVsArmAPercent": 2.0437519815792204,
+      "rawReductionVsArmAPercent": 1.7153798201641781,
+      "rawReductionVsSafePercent": -0.3352232941315712
+    },
+    {
+      "rows": 1,
+      "concurrency": 16,
+      "armANativeP95Ms": 8.486344000033569,
+      "armBSafeNativeP95Ms": 8.693346999993082,
+      "armBRawNativeP95Ms": 9.397668999998132,
+      "safeReductionVsArmAPercent": -2.43924827886655,
+      "rawReductionVsArmAPercent": -10.738723294282654,
+      "rawReductionVsSafePercent": -8.10185076019179
+    },
+    {
+      "rows": 100,
+      "concurrency": 1,
+      "armANativeP95Ms": 8.58370700001251,
+      "armBSafeNativeP95Ms": 8.287221000005957,
+      "armBRawNativeP95Ms": 8.038623000029474,
+      "safeReductionVsArmAPercent": 3.4540554565308526,
+      "rawReductionVsArmAPercent": 6.35021675346375,
+      "rawReductionVsSafePercent": 2.9997751957659093
+    },
+    {
+      "rows": 100,
+      "concurrency": 16,
+      "armANativeP95Ms": 14.511965000070632,
+      "armBSafeNativeP95Ms": 13.436996000004001,
+      "armBRawNativeP95Ms": 11.911415999988094,
+      "safeReductionVsArmAPercent": 7.407466873448209,
+      "rawReductionVsArmAPercent": 17.9200335727786,
+      "rawReductionVsSafePercent": 11.353579326922867
+    },
+    {
+      "rows": 1000,
+      "concurrency": 1,
+      "armANativeP95Ms": 14.668443999951705,
+      "armBSafeNativeP95Ms": 14.291991999954917,
+      "armBRawNativeP95Ms": 12.513298999983817,
+      "safeReductionVsArmAPercent": 2.5664071799164807,
+      "rawReductionVsArmAPercent": 14.692390003840785,
+      "rawReductionVsSafePercent": 12.445382001170376
+    },
+    {
+      "rows": 1000,
+      "concurrency": 16,
+      "armANativeP95Ms": 75.90724500000942,
+      "armBSafeNativeP95Ms": 62.88771599996835,
+      "armBRawNativeP95Ms": 34.58830599999055,
+      "safeReductionVsArmAPercent": 17.151892418226293,
+      "rawReductionVsArmAPercent": 54.4334588879016,
+      "rawReductionVsSafePercent": 44.99990109354908
+    }
+  ],
+  "decodeMicrobenchmark": {
+    "environment": {
+      "machineShape": "n1-standard-1",
+      "vcpuCount": 1,
+      "cpu": "Intel Xeon 2.30GHz",
+      "GOMAXPROCS": 1
+    },
+    "inputValues": 1000,
+    "runs": 3,
+    "reflection": {
+      "medianNsPerOp": 464035,
+      "bytesPerOp": 113640,
+      "allocsPerOp": 3012
+    },
+    "vtprotobufSafe": {
+      "medianNsPerOp": 203845,
+      "bytesPerOp": 113640,
+      "allocsPerOp": 3012
+    },
+    "vtprotobufRawValues": {
+      "medianNsPerOp": 30394,
+      "bytesPerOp": 19072,
+      "allocsPerOp": 1
+    },
+    "sourceFile": "decode_benchmark.log"
+  },
+  "correctness": {
+    "method": "cmp --silent on JSON byte captures for A, safe VT, and raw VT",
+    "allShapesByteIdentical": true,
+    "shapes": [
+      {
+        "rows": 1,
+        "concurrency": 1,
+        "bytes": 92,
+        "sha256": "1f25fc96e0c67fd697822d2d8c491a3f5a53f431730bbc95f7f07dac4f925e4e",
+        "byteIdentical": true
+      },
+      {
+        "rows": 1,
+        "concurrency": 16,
+        "bytes": 1457,
+        "sha256": "12550c44d57726bc2ff4df497211b80184657a91378ef2ddab976ded4aa8493c",
+        "byteIdentical": true
+      },
+      {
+        "rows": 100,
+        "concurrency": 1,
+        "bytes": 8993,
+        "sha256": "642c12c025c33b96a9ad3faf2200f611540ccba0a77f6bfd450ea80ed43ba0f8",
+        "byteIdentical": true
+      },
+      {
+        "rows": 100,
+        "concurrency": 16,
+        "bytes": 143873,
+        "sha256": "3cf444714b2adba90a9551ab53b4d9fe802e400345ac904817a6ebb415889823",
+        "byteIdentical": true
+      },
+      {
+        "rows": 1000,
+        "concurrency": 1,
+        "bytes": 90893,
+        "sha256": "2cc04a5a783efb98658f395d2ab9be61c5c34d28e56066290173b8bb3c288250",
+        "byteIdentical": true
+      },
+      {
+        "rows": 1000,
+        "concurrency": 16,
+        "bytes": 1454273,
+        "sha256": "73fab9bad057c5a9d10bba2cede4481cf0e5860c8ef8748f5fe84da2aa2fdc05",
+        "byteIdentical": true
+      }
+    ],
+    "sourceFile": "correctness_byte_diff.log"
+  },
+  "conclusion": {
+    "gapClosedAgainstCommittedRustReferenceAt1000RowsConcurrency16": true,
+    "armASpreadMedianPercent": 81.24000859370139,
+    "armBSafeSpreadMedianPercent": 84.63506958833771,
+    "armBRawSpreadMedianPercent": 91.4489349862423,
+    "rustReferenceApproximatePercent": 60.0,
+    "freshRustComparisonAvailable": false
+  }
+}

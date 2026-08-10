@@ -90,10 +90,10 @@ type rawPartialResultSet struct {
 	valueCount   int
 }
 
-// decodePartialResultSetRaw copies the borrowed encoding.Codec input once,
-// then decodes only fields needed by stream assembly. gRPC v1.63 does not
-// expose ref-counted receive buffers through encoding.Codec, so retaining its
-// input without this copy would violate the codec lifetime contract.
+// decodePartialResultSetRaw copies the borrowed CodecV2 input once, then
+// decodes only fields needed by stream assembly. Raw value slices can span
+// Recv calls while a 100-row batch is assembled, so they must not retain the
+// BufferSlice that gRPC frees after Unmarshal returns.
 func decodePartialResultSetRaw(data []byte) (rawPartialResultSet, error) {
 	raw := rawPartialResultSet{data: bytes.Clone(data)}
 	if err := raw.scan(func([]byte) error {

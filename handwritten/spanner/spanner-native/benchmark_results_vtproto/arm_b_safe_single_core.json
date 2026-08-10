@@ -1,0 +1,723 @@
+{
+  "schemaVersion": 1,
+  "suiteName": "Spanner shared core exact-shape comparison",
+  "arm": "arm-safe",
+  "engine": "go",
+  "directPath": false,
+  "environment": {
+    "hostname": "irahul-test",
+    "machineShape": "n1-standard-1",
+    "vcpuCount": 1,
+    "platform": "linux-x64",
+    "nodeVersion": "v20.20.2",
+    "goVersion": "go version go1.25.3 linux/amd64",
+    "armCommitSha": "a976113b75",
+    "armTreeCleanAtBuild": "true",
+    "harnessCommitSha": "d134e5f49c",
+    "harnessTrackedTreeClean": false,
+    "targetDatabase": "projects/span-cloud-testing/instances/irahul-load-test/databases/db",
+    "queryTemplate": "SELECT Key, SUBSTR(Value, 1, 80) AS Value FROM T ORDER BY Key LIMIT {rows}",
+    "directPath": {
+      "enabled": false,
+      "enableVariablesAbsentAtProcessStart": true,
+      "googleCloudDisableDirectPath": "true",
+      "disableDirectPath": "true",
+      "transport": "Go explicit GFE grpc.Dial path"
+    }
+  },
+  "repetitions": 3,
+  "durationMs": 30000,
+  "warmupMs": 5000,
+  "shapes": [
+    {
+      "rows": 1,
+      "concurrency": 1,
+      "sql": "SELECT Key, SUBSTR(Value, 1, 80) AS Value FROM T ORDER BY Key LIMIT 1",
+      "metric": "p95 latency improvement percent versus paired Node.js baseline",
+      "runs": [
+        {
+          "repetition": 1,
+          "jsBaseline": {
+            "totalTimeMs": 30008.239066999995,
+            "qps": 118.43414043939444,
+            "p50": 7.753940000002331,
+            "p90": 10.771748999999545,
+            "p95": 13.215267999999924,
+            "p99": 22.887536999995064,
+            "avgDuration": 8.442758122678743,
+            "minDuration": 4.89904600000591,
+            "maxDuration": 41.79074199999741,
+            "errorRate": 0,
+            "total": 3554
+          },
+          "native": {
+            "totalTimeMs": 30000.753550999998,
+            "qps": 165.09585306182765,
+            "p50": 5.937984000000142,
+            "p90": 7.421001000002434,
+            "p95": 7.981385000000955,
+            "p99": 10.635341999997763,
+            "avgDuration": 6.0564089614375565,
+            "minDuration": 3.810016999999789,
+            "maxDuration": 21.10865300000296,
+            "errorRate": 0,
+            "total": 4953
+          },
+          "latencyImprovementPercent": 39.60481921364742
+        },
+        {
+          "repetition": 2,
+          "jsBaseline": {
+            "totalTimeMs": 30003.121635000003,
+            "qps": 124.55370629303519,
+            "p50": 7.569967000003089,
+            "p90": 9.960821999993641,
+            "p95": 11.122632999991765,
+            "p99": 20.655715999993845,
+            "avgDuration": 8.027905620016039,
+            "minDuration": 4.744613000002573,
+            "maxDuration": 49.96494299999904,
+            "errorRate": 0,
+            "total": 3737
+          },
+          "native": {
+            "totalTimeMs": 30003.321157,
+            "qps": 166.84819569823065,
+            "p50": 5.970673999996507,
+            "p90": 7.2694440000050236,
+            "p95": 7.674586000008276,
+            "p99": 9.200898000010056,
+            "avgDuration": 5.992505314822199,
+            "minDuration": 3.75322500000766,
+            "maxDuration": 22.667230000006384,
+            "errorRate": 0,
+            "total": 5006
+          },
+          "latencyImprovementPercent": 31.000276643003883
+        },
+        {
+          "repetition": 3,
+          "jsBaseline": {
+            "totalTimeMs": 30012.279472999973,
+            "qps": 120.68393549575164,
+            "p50": 7.698511000024155,
+            "p90": 9.923047000018414,
+            "p95": 12.722489999985555,
+            "p99": 22.48359899999923,
+            "avgDuration": 8.2852964011596,
+            "minDuration": 4.911418999981834,
+            "maxDuration": 54.38049099998898,
+            "errorRate": 0,
+            "total": 3622
+          },
+          "native": {
+            "totalTimeMs": 30005.115689000013,
+            "qps": 169.07116948260193,
+            "p50": 5.801600000006147,
+            "p90": 7.154198000003817,
+            "p95": 7.578505000012228,
+            "p99": 9.781346000003396,
+            "avgDuration": 5.913666264143559,
+            "minDuration": 3.4188760000106413,
+            "maxDuration": 51.76102499998524,
+            "errorRate": 0,
+            "total": 5073
+          },
+          "latencyImprovementPercent": 40.43221885007704
+        }
+      ],
+      "spread": {
+        "jsP95Ms": {
+          "min": 11.122632999991765,
+          "median": 12.722489999985555,
+          "max": 13.215267999999924
+        },
+        "nativeP95Ms": {
+          "min": 7.578505000012228,
+          "median": 7.674586000008276,
+          "max": 7.981385000000955
+        },
+        "latencyImprovementPercent": {
+          "min": 31.000276643003883,
+          "median": 39.60481921364742,
+          "max": 40.43221885007704
+        }
+      }
+    },
+    {
+      "rows": 1,
+      "concurrency": 16,
+      "sql": "SELECT Key, SUBSTR(Value, 1, 80) AS Value FROM T ORDER BY Key LIMIT 1",
+      "metric": "p95 latency improvement percent versus paired Node.js baseline",
+      "runs": [
+        {
+          "repetition": 1,
+          "jsBaseline": {
+            "totalTimeMs": 30020.919559,
+            "qps": 565.1392512030413,
+            "p50": 21.970908000017516,
+            "p90": 37.442184999992605,
+            "p95": 40.119896999996854,
+            "p99": 136.32249500000034,
+            "avgDuration": 28.303525382647706,
+            "minDuration": 13.223250999988522,
+            "maxDuration": 183.69840199997998,
+            "errorRate": 0,
+            "total": 16966
+          },
+          "native": {
+            "totalTimeMs": 30004.70936400001,
+            "qps": 2840.420780820997,
+            "p50": 5.293245999986539,
+            "p90": 7.4437659999821335,
+            "p95": 8.465548000007402,
+            "p99": 11.756683000014164,
+            "avgDuration": 5.632050372632807,
+            "minDuration": 2.6207700000086334,
+            "maxDuration": 45.03892300001462,
+            "errorRate": 0,
+            "total": 85226
+          },
+          "latencyImprovementPercent": 78.89937753327715
+        },
+        {
+          "repetition": 2,
+          "jsBaseline": {
+            "totalTimeMs": 30025.504441000056,
+            "qps": 566.5183755172058,
+            "p50": 22.168141000031028,
+            "p90": 37.15452499996172,
+            "p95": 39.47295199998189,
+            "p99": 133.42789200000698,
+            "avgDuration": 28.238593205290844,
+            "minDuration": 14.446051999984775,
+            "maxDuration": 192.09791399998358,
+            "errorRate": 0,
+            "total": 17010
+          },
+          "native": {
+            "totalTimeMs": 30077.869438999973,
+            "qps": 2780.1171279630435,
+            "p50": 5.331664000026649,
+            "p90": 7.732308000035118,
+            "p95": 8.865010000008624,
+            "p99": 12.373115000023972,
+            "avgDuration": 5.743689644367298,
+            "minDuration": 2.593946999986656,
+            "maxDuration": 103.25473300000886,
+            "errorRate": 0,
+            "total": 83620
+          },
+          "latencyImprovementPercent": 77.54155807750914
+        },
+        {
+          "repetition": 3,
+          "jsBaseline": {
+            "totalTimeMs": 30018.807189000014,
+            "qps": 573.2073193869367,
+            "p50": 21.695984999998473,
+            "p90": 36.63643199997023,
+            "p95": 38.796918000036385,
+            "p99": 145.1563309999765,
+            "avgDuration": 27.907427588714036,
+            "minDuration": 12.438262999989092,
+            "maxDuration": 376.8468490000232,
+            "errorRate": 0,
+            "total": 17207
+          },
+          "native": {
+            "totalTimeMs": 30005.363580000005,
+            "qps": 2770.8379463002657,
+            "p50": 5.390514000027906,
+            "p90": 7.630379999987781,
+            "p95": 8.693346999993082,
+            "p99": 12.095398999983445,
+            "avgDuration": 5.773193451587678,
+            "minDuration": 2.655207000032533,
+            "maxDuration": 200.461604000011,
+            "errorRate": 0,
+            "total": 83140
+          },
+          "latencyImprovementPercent": 77.5926866149911
+        }
+      ],
+      "spread": {
+        "jsP95Ms": {
+          "min": 38.796918000036385,
+          "median": 39.47295199998189,
+          "max": 40.119896999996854
+        },
+        "nativeP95Ms": {
+          "min": 8.465548000007402,
+          "median": 8.693346999993082,
+          "max": 8.865010000008624
+        },
+        "latencyImprovementPercent": {
+          "min": 77.54155807750914,
+          "median": 77.5926866149911,
+          "max": 78.89937753327715
+        }
+      }
+    },
+    {
+      "rows": 100,
+      "concurrency": 1,
+      "sql": "SELECT Key, SUBSTR(Value, 1, 80) AS Value FROM T ORDER BY Key LIMIT 100",
+      "metric": "p95 latency improvement percent versus paired Node.js baseline",
+      "runs": [
+        {
+          "repetition": 1,
+          "jsBaseline": {
+            "totalTimeMs": 30000.597316999978,
+            "qps": 115.76436173262485,
+            "p50": 7.9208599999547005,
+            "p90": 9.567708999966271,
+            "p95": 14.881012000027113,
+            "p99": 23.164486999972723,
+            "avgDuration": 8.637509073998606,
+            "minDuration": 5.554363999981433,
+            "maxDuration": 69.02840700000525,
+            "errorRate": 0,
+            "total": 3473
+          },
+          "native": {
+            "totalTimeMs": 30003.452564000036,
+            "qps": 156.68196818257329,
+            "p50": 6.311026999959722,
+            "p90": 7.697927000001073,
+            "p95": 8.158579999988433,
+            "p99": 9.666207000031136,
+            "avgDuration": 6.38139685939193,
+            "minDuration": 4.283668000018224,
+            "maxDuration": 29.082914000027813,
+            "errorRate": 0,
+            "total": 4701
+          },
+          "latencyImprovementPercent": 45.17456205281221
+        },
+        {
+          "repetition": 2,
+          "jsBaseline": {
+            "totalTimeMs": 30001.609387999983,
+            "qps": 113.76056383712297,
+            "p50": 8.0147059999872,
+            "p90": 9.878268000029493,
+            "p95": 13.581024000013713,
+            "p99": 23.610513999999966,
+            "avgDuration": 8.78967724142955,
+            "minDuration": 5.719733999983873,
+            "maxDuration": 54.57223399996292,
+            "errorRate": 0,
+            "total": 3413
+          },
+          "native": {
+            "totalTimeMs": 30003.218654999975,
+            "qps": 154.21678764551214,
+            "p50": 6.428252000012435,
+            "p90": 7.788498999958392,
+            "p95": 8.287221000005957,
+            "p99": 9.953065999958199,
+            "avgDuration": 6.483457377999252,
+            "minDuration": 4.104522000008728,
+            "maxDuration": 20.998454999993555,
+            "errorRate": 0,
+            "total": 4627
+          },
+          "latencyImprovementPercent": 38.979409800044614
+        },
+        {
+          "repetition": 3,
+          "jsBaseline": {
+            "totalTimeMs": 30033.930355999968,
+            "qps": 113.70473193222196,
+            "p50": 8.14786499994807,
+            "p90": 9.756185000005644,
+            "p95": 13.14530500001274,
+            "p99": 23.20895699999528,
+            "avgDuration": 8.794014066471316,
+            "minDuration": 5.720369999995455,
+            "maxDuration": 56.23663299996406,
+            "errorRate": 0,
+            "total": 3415
+          },
+          "native": {
+            "totalTimeMs": 30002.3467750001,
+            "qps": 151.1215117271434,
+            "p50": 6.548535999958403,
+            "p90": 7.9825040000723675,
+            "p95": 8.468868999974802,
+            "p99": 10.28588199999649,
+            "avgDuration": 6.616303187030709,
+            "minDuration": 4.179569000029005,
+            "maxDuration": 26.565357999992557,
+            "errorRate": 0,
+            "total": 4534
+          },
+          "latencyImprovementPercent": 35.574952426234354
+        }
+      ],
+      "spread": {
+        "jsP95Ms": {
+          "min": 13.14530500001274,
+          "median": 13.581024000013713,
+          "max": 14.881012000027113
+        },
+        "nativeP95Ms": {
+          "min": 8.158579999988433,
+          "median": 8.287221000005957,
+          "max": 8.468868999974802
+        },
+        "latencyImprovementPercent": {
+          "min": 35.574952426234354,
+          "median": 38.979409800044614,
+          "max": 45.17456205281221
+        }
+      }
+    },
+    {
+      "rows": 100,
+      "concurrency": 16,
+      "sql": "SELECT Key, SUBSTR(Value, 1, 80) AS Value FROM T ORDER BY Key LIMIT 100",
+      "metric": "p95 latency improvement percent versus paired Node.js baseline",
+      "runs": [
+        {
+          "repetition": 1,
+          "jsBaseline": {
+            "totalTimeMs": 30077.715668000048,
+            "qps": 375.6601772793905,
+            "p50": 39.46970300003886,
+            "p90": 50.54474899999332,
+            "p95": 62.49306100001559,
+            "p99": 225.75086999998894,
+            "avgDuration": 42.56866574953504,
+            "minDuration": 11.126713000005111,
+            "maxDuration": 284.63439499994274,
+            "errorRate": 0,
+            "total": 11299
+          },
+          "native": {
+            "totalTimeMs": 30009.63451100001,
+            "qps": 1907.3874418236821,
+            "p50": 7.687379999901168,
+            "p90": 11.915747999912128,
+            "p95": 13.436996000004001,
+            "p99": 16.978317000088282,
+            "avgDuration": 8.38622495377337,
+            "minDuration": 3.57515000004787,
+            "maxDuration": 39.60117700009141,
+            "errorRate": 0,
+            "total": 57240
+          },
+          "latencyImprovementPercent": 78.49841920849316
+        },
+        {
+          "repetition": 2,
+          "jsBaseline": {
+            "totalTimeMs": 30023.900370999938,
+            "qps": 377.765708647076,
+            "p50": 39.271944000036456,
+            "p90": 50.4554520000238,
+            "p95": 60.52157100010663,
+            "p99": 233.86505699995905,
+            "avgDuration": 42.344404606154505,
+            "minDuration": 11.736918000038713,
+            "maxDuration": 306.60100899997633,
+            "errorRate": 0,
+            "total": 11342
+          },
+          "native": {
+            "totalTimeMs": 30009.090883999947,
+            "qps": 1924.483491460644,
+            "p50": 7.62800399994012,
+            "p90": 11.836570000043139,
+            "p95": 13.244660000083968,
+            "p99": 16.67269999999553,
+            "avgDuration": 8.311564626714302,
+            "minDuration": 3.7328640000196174,
+            "maxDuration": 67.26267099997494,
+            "errorRate": 0,
+            "total": 57752
+          },
+          "latencyImprovementPercent": 78.11580271096956
+        },
+        {
+          "repetition": 3,
+          "jsBaseline": {
+            "totalTimeMs": 30016.94954400009,
+            "qps": 375.52116958044104,
+            "p50": 39.57568899996113,
+            "p90": 50.724217000068165,
+            "p95": 59.03873399994336,
+            "p99": 236.26883100008126,
+            "avgDuration": 42.5979932035129,
+            "minDuration": 12.05311099998653,
+            "maxDuration": 326.4260319999885,
+            "errorRate": 0,
+            "total": 11272
+          },
+          "native": {
+            "totalTimeMs": 30012.749068000005,
+            "qps": 1902.7247344325142,
+            "p50": 7.7103220000863075,
+            "p90": 11.963560000061989,
+            "p95": 13.477175000007264,
+            "p99": 17.194561999989673,
+            "avgDuration": 8.405950546912914,
+            "minDuration": 3.6094349999912083,
+            "maxDuration": 58.51478800002951,
+            "errorRate": 0,
+            "total": 57106
+          },
+          "latencyImprovementPercent": 77.17231707573507
+        }
+      ],
+      "spread": {
+        "jsP95Ms": {
+          "min": 59.03873399994336,
+          "median": 60.52157100010663,
+          "max": 62.49306100001559
+        },
+        "nativeP95Ms": {
+          "min": 13.244660000083968,
+          "median": 13.436996000004001,
+          "max": 13.477175000007264
+        },
+        "latencyImprovementPercent": {
+          "min": 77.17231707573507,
+          "median": 78.11580271096956,
+          "max": 78.49841920849316
+        }
+      }
+    },
+    {
+      "rows": 1000,
+      "concurrency": 1,
+      "sql": "SELECT Key, SUBSTR(Value, 1, 80) AS Value FROM T ORDER BY Key LIMIT 1000",
+      "metric": "p95 latency improvement percent versus paired Node.js baseline",
+      "runs": [
+        {
+          "repetition": 1,
+          "jsBaseline": {
+            "totalTimeMs": 30015.184764000005,
+            "qps": 53.2730353843375,
+            "p50": 15.138679999974556,
+            "p90": 28.50895299995318,
+            "p95": 29.915701000019908,
+            "p99": 70.05480100004934,
+            "avgDuration": 18.770267602250435,
+            "minDuration": 12.160615999950096,
+            "maxDuration": 95.47400799999014,
+            "errorRate": 0,
+            "total": 1599
+          },
+          "native": {
+            "totalTimeMs": 30017.709663999965,
+            "qps": 84.6833428817057,
+            "p50": 11.6249039999675,
+            "p90": 13.869695999892429,
+            "p95": 14.772149000084028,
+            "p99": 16.97782599995844,
+            "avgDuration": 11.807401245869338,
+            "minDuration": 8.121826000045985,
+            "maxDuration": 30.80782799993176,
+            "errorRate": 0,
+            "total": 2542
+          },
+          "latencyImprovementPercent": 50.62074928455063
+        },
+        {
+          "repetition": 2,
+          "jsBaseline": {
+            "totalTimeMs": 30018.02204900002,
+            "qps": 50.10323456838497,
+            "p50": 16.175992000033148,
+            "p90": 29.525543999974616,
+            "p95": 32.124854999943636,
+            "p99": 70.30677499994636,
+            "avgDuration": 19.957839559175092,
+            "minDuration": 11.91040900000371,
+            "maxDuration": 131.82166700006928,
+            "errorRate": 0,
+            "total": 1504
+          },
+          "native": {
+            "totalTimeMs": 30002.607900999952,
+            "qps": 87.32574210366154,
+            "p50": 11.079649000079371,
+            "p90": 13.472815999994054,
+            "p95": 14.291991999954917,
+            "p99": 16.311553000006825,
+            "avgDuration": 11.450084468319911,
+            "minDuration": 8.11122299998533,
+            "maxDuration": 418.44164700002875,
+            "errorRate": 0,
+            "total": 2620
+          },
+          "latencyImprovementPercent": 55.51110814358542
+        },
+        {
+          "repetition": 3,
+          "jsBaseline": {
+            "totalTimeMs": 30006.602213999955,
+            "qps": 51.48866869302386,
+            "p50": 15.955716000054963,
+            "p90": 29.226626999909058,
+            "p95": 31.350978000089526,
+            "p99": 67.4462460000068,
+            "avgDuration": 19.42074814757195,
+            "minDuration": 11.94468999991659,
+            "maxDuration": 107.98819699999876,
+            "errorRate": 0,
+            "total": 1545
+          },
+          "native": {
+            "totalTimeMs": 30007.813441999955,
+            "qps": 90.90965608916372,
+            "p50": 10.839174000080675,
+            "p90": 12.894292000099085,
+            "p95": 13.870237999944948,
+            "p99": 16.10524299996905,
+            "avgDuration": 10.998843792156762,
+            "minDuration": 7.81952999997884,
+            "maxDuration": 37.02002499997616,
+            "errorRate": 0,
+            "total": 2728
+          },
+          "latencyImprovementPercent": 55.7581967621382
+        }
+      ],
+      "spread": {
+        "jsP95Ms": {
+          "min": 29.915701000019908,
+          "median": 31.350978000089526,
+          "max": 32.124854999943636
+        },
+        "nativeP95Ms": {
+          "min": 13.870237999944948,
+          "median": 14.291991999954917,
+          "max": 14.772149000084028
+        },
+        "latencyImprovementPercent": {
+          "min": 50.62074928455063,
+          "median": 55.51110814358542,
+          "max": 55.7581967621382
+        }
+      }
+    },
+    {
+      "rows": 1000,
+      "concurrency": 16,
+      "sql": "SELECT Key, SUBSTR(Value, 1, 80) AS Value FROM T ORDER BY Key LIMIT 1000",
+      "metric": "p95 latency improvement percent versus paired Node.js baseline",
+      "runs": [
+        {
+          "repetition": 1,
+          "jsBaseline": {
+            "totalTimeMs": 30104.104371999972,
+            "qps": 87.7621193227506,
+            "p50": 144.48556399997324,
+            "p90": 387.64020600006916,
+            "p95": 409.29385500005446,
+            "p99": 426.4632579999743,
+            "avgDuration": 182.04194473580506,
+            "minDuration": 36.335525000002235,
+            "maxDuration": 482.30187699990347,
+            "errorRate": 0,
+            "total": 2642
+          },
+          "native": {
+            "totalTimeMs": 30053.58671599999,
+            "qps": 394.22915181342853,
+            "p50": 37.81789300008677,
+            "p90": 56.73516199993901,
+            "p95": 62.88771599996835,
+            "p99": 74.61128000007011,
+            "avgDuration": 40.56774636866984,
+            "minDuration": 12.081331999972463,
+            "maxDuration": 111.13587100000586,
+            "errorRate": 0,
+            "total": 11848
+          },
+          "latencyImprovementPercent": 84.63506958833771
+        },
+        {
+          "repetition": 2,
+          "jsBaseline": {
+            "totalTimeMs": 30116.20169300004,
+            "qps": 88.78941731292504,
+            "p50": 142.88642199989408,
+            "p90": 393.6084489999339,
+            "p95": 412.4889259999618,
+            "p99": 431.7628329999279,
+            "avgDuration": 179.88037419334378,
+            "minDuration": 42.246235999977216,
+            "maxDuration": 453.28310799994506,
+            "errorRate": 0,
+            "total": 2674
+          },
+          "native": {
+            "totalTimeMs": 30046.651389000122,
+            "qps": 391.4579314587445,
+            "p50": 38.0018230000278,
+            "p90": 57.7570640000049,
+            "p95": 64.13691399991512,
+            "p99": 76.16457000002265,
+            "avgDuration": 40.86028838513937,
+            "minDuration": 11.449029000010341,
+            "maxDuration": 115.62529100000393,
+            "errorRate": 0,
+            "total": 11762
+          },
+          "latencyImprovementPercent": 84.45123978918137
+        },
+        {
+          "repetition": 3,
+          "jsBaseline": {
+            "totalTimeMs": 30102.10997300013,
+            "qps": 89.66148892621975,
+            "p50": 140.55186900007538,
+            "p90": 392.2132309998851,
+            "p95": 414.260035000043,
+            "p99": 435.29283799999394,
+            "avgDuration": 178.18210799148184,
+            "minDuration": 30.036067999899387,
+            "maxDuration": 594.7649939998519,
+            "errorRate": 0,
+            "total": 2699
+          },
+          "native": {
+            "totalTimeMs": 30039.07555499999,
+            "qps": 393.65392514656577,
+            "p50": 38.27506699995138,
+            "p90": 56.33881299989298,
+            "p95": 62.544152999995276,
+            "p99": 73.57881600013934,
+            "avgDuration": 40.62867445598315,
+            "minDuration": 9.919685000088066,
+            "maxDuration": 109.65070500015281,
+            "errorRate": 0,
+            "total": 11825
+          },
+          "latencyImprovementPercent": 84.90219965341606
+        }
+      ],
+      "spread": {
+        "jsP95Ms": {
+          "min": 409.29385500005446,
+          "median": 412.4889259999618,
+          "max": 414.260035000043
+        },
+        "nativeP95Ms": {
+          "min": 62.544152999995276,
+          "median": 62.88771599996835,
+          "max": 64.13691399991512
+        },
+        "latencyImprovementPercent": {
+          "min": 84.45123978918137,
+          "median": 84.63506958833771,
+          "max": 84.90219965341606
+        }
+      }
+    }
+  ]
+}

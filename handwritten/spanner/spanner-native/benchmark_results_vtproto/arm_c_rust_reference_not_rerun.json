@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "suiteName": "Rust shared-core reference; not rerun",
+  "arm": "arm-c-rust-reference",
+  "engine": "rust",
+  "directPath": false,
+  "rerun": false,
+  "sourceCommitSha": "cacdec97d0",
+  "reasonNotRerun": "Built Rust binary loaded but returned zero rows for SELECT 1 and real table queries; using it would benchmark a wrong result.",
+  "threeRunSpreadAvailable": false,
+  "comparabilityWarning": "Reference values use earlier targets/baselines and are not a contemporaneous paired run against this experiment database.",
+  "shapes": [
+    {
+      "rows": 1,
+      "concurrency": 1,
+      "latencyImprovementPercent": 31.092436974789916,
+      "nodeP95Ms": 7.14,
+      "nativeP95Ms": 4.92,
+      "approximate": false,
+      "source": "../benchmark_results_combined.json",
+      "sourceEnvironment": {
+        "vm": "knut-vm-1-core (n1-standard-1, 1 vCPU, 3.75 GB RAM)",
+        "zone": "us-central1-c",
+        "node_version": "v20.19.0",
+        "target_db": "projects/span-cloud-testing/instances/suvham-testing/databases/benchmark_db_async"
+      }
+    },
+    {
+      "rows": 1,
+      "concurrency": 16,
+      "latencyImprovementPercent": 89.0,
+      "nodeP95Ms": null,
+      "nativeP95Ms": null,
+      "approximate": true,
+      "source": "go/spanner-client-shared-core-design chart values supplied in experiment brief",
+      "sourceEnvironment": {
+        "machineShape": "single-core machine",
+        "directPath": false
+      }
+    },
+    {
+      "rows": 100,
+      "concurrency": 1,
+      "latencyImprovementPercent": 34.13461538461538,
+      "nodeP95Ms": 8.32,
+      "nativeP95Ms": 5.48,
+      "approximate": false,
+      "source": "../benchmark_results_combined.json",
+      "sourceEnvironment": {
+        "vm": "knut-vm-1-core (n1-standard-1, 1 vCPU, 3.75 GB RAM)",
+        "zone": "us-central1-c",
+        "node_version": "v20.19.0",
+        "target_db": "projects/span-cloud-testing/instances/suvham-testing/databases/benchmark_db_async"
+      }
+    },
+    {
+      "rows": 100,
+      "concurrency": 16,
+      "latencyImprovementPercent": 83.0,
+      "nodeP95Ms": null,
+      "nativeP95Ms": null,
+      "approximate": true,
+      "source": "go/spanner-client-shared-core-design chart values supplied in experiment brief",
+      "sourceEnvironment": {
+        "machineShape": "single-core machine",
+        "directPath": false
+      }
+    },
+    {
+      "rows": 1000,
+      "concurrency": 1,
+      "latencyImprovementPercent": 46.78953626634959,
+      "nodeP95Ms": 16.82,
+      "nativeP95Ms": 8.95,
+      "approximate": false,
+      "source": "../benchmark_results_combined.json",
+      "sourceEnvironment": {
+        "vm": "knut-vm-1-core (n1-standard-1, 1 vCPU, 3.75 GB RAM)",
+        "zone": "us-central1-c",
+        "node_version": "v20.19.0",
+        "target_db": "projects/span-cloud-testing/instances/suvham-testing/databases/benchmark_db_async"
+      }
+    },
+    {
+      "rows": 1000,
+      "concurrency": 16,
+      "latencyImprovementPercent": 60.0,
+      "nodeP95Ms": null,
+      "nativeP95Ms": null,
+      "approximate": true,
+      "source": "go/spanner-client-shared-core-design chart values supplied in experiment brief",
+      "sourceEnvironment": {
+        "machineShape": "single-core machine",
+        "directPath": false
+      }
+    }
+  ]
+}
