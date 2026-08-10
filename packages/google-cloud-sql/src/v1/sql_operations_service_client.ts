@@ -387,6 +387,8 @@ export class SqlOperationsServiceClient {
    *   Required. Instance operation ID.
    * @param {string} request.project
    *   Required. Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -524,6 +526,8 @@ export class SqlOperationsServiceClient {
    *   results to view.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -654,6 +658,8 @@ export class SqlOperationsServiceClient {
    *   Instance operation ID.
    * @param {string} request.project
    *   Project ID of the project that contains the instance.
+   * @param {string} [request.location]
+   *   Optional. Region of the Cloud SQL instance.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

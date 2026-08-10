@@ -8,13 +8,13 @@
   "author": "Google LLC",
   "repository": "googleapis/nodejs-secret-manager",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "scripts": {
     "test": "c8 mocha --recursive test/ --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/certificate-manager": "^2.1.3"
+    "@google-cloud/certificate-manager": "^3.0.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",

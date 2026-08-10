@@ -1,11 +1,11 @@
 {
   "name": "@google-cloud/typeless-sample-bot",
   "description": "Google Cloud GitHub bot that converts TypeScript snippets into JavaScript",
-  "version": "3.2.0",
+  "version": "4.0.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "repository": "googleapis/google-cloud-node",
   "bin": "./build/src/bin/typeless-sample-bot.js",

@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'FirestoreApi',
-    filename: './firestore-api.js',
+    library: 'Firestore',
+    filename: './firestore.js',
   },
   node: {
     child_process: 'empty',

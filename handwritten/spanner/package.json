@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/spanner",
   "description": "Cloud Spanner Client Library for Node.js",
-  "version": "8.9.0",
+  "version": "8.10.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -42,14 +42,12 @@
     "fix": "gts fix",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build && cp -r test/data build/test",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "cp -r protos build && npm run compile",
     "pretest": "npm run compile",
     "presystem-test": "npm run compile",
     "preobservability-test": "npm run compile",
-    "proto": "compileProtos src",
     "benchwrapper": "node bin/benchwrapper.js",
     "precompile": "gts clean",
-    "compile-protos": "compileProtos src",
     "coverage": "c8 mocha build/test build/test/common && c8 report --check-coverage"
   },
   "dependencies": {
@@ -61,6 +59,7 @@
     "@google-cloud/opentelemetry-resource-util": "^2.4.0",
     "@google-cloud/precise-date": "^5.0.0",
     "@google-cloud/promisify": "^5.0.0",
+    "@google-cloud/spanner-api": "^0.2.0",
     "@grpc/grpc-js": "^1.13.2",
     "@grpc/proto-loader": "^0.8.0",
     "@opentelemetry/api": "^1.9.0",
@@ -140,6 +139,7 @@
   "overrides": {
     "gcp-metadata": "^7.0.1",
     "@sinonjs/fake-timers": "15.2.1",
+    "brace-expansion": "5.0.7",
     "@eslint-community/eslint-utils": "<4.10.0"
   },
   "pnpm": {
